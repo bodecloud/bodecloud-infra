@@ -1,0 +1,217 @@
+lang: "en-us"
+checkrr:
+  checkpath:
+    - "/media/anime"
+    - "/media/books"
+    - "/media/comics"
+    - "/media/manga"
+    - "/media/movies"
+    - "/media/music"
+    - "/media/music/videos"
+    - "/media/tv"
+    - "/media/xxx"
+  database: /checkrr.db
+  debug: false
+  csvfile: /badfiles.csv
+  cron: "@daily"
+  ignorehidden: true
+  ignorepaths:
+    - '/media/xxx'
+#  removevideo:
+#    - "avi"
+#    - "avc"
+#    - "h265"
+  removelang:
+    - unknown
+#  removeaudio:
+#    - "DTS - 5.1"
+  ignoreexts:
+    - .nfo
+    - .nfo-orig
+    - .nzb
+    - .txt
+    - .url
+logs:
+  stdout:
+    out: stdout
+    formatter: default
+  file:
+    out: file
+    path: /logs/checkrr.log
+    formatter: default
+  jsonfile:
+    out: file
+    path: /logs/checkrr.json
+    formatter: json
+#  syslog:
+#    out: syslog
+#    formatter: default
+#    protocol: udp
+#    addr: "localhost:514"
+arr:
+  lidarr:
+    process: false
+    service: lidarr
+    address: "http://lidarr:8686"
+    apikey: "c47f31fc9f934800aa3023668e999923"
+    baseurl: /
+    port: 8686
+    ssl: false
+    mappings:
+      "/media/music/": "/music/"
+  radarr:
+    process: false
+    service: radarr # should be one of: sonarr radarr lidarr
+    address: "http://radarr:7878"
+    apikey: "fc44a10e3c7c4c0582cf99f1d7ff0f18"
+    baseurl: /
+    port: 7878
+    ssl: false
+    mappings: # maps directories between docker and arr services
+      "/media/movies/": "/movies/" # what radarr sees: what checkrr sees
+  readarr:
+    process: false
+    service: readarr
+    address: "http://readarr:8787"
+    apikey: "e5ae49d7512a41548588c9b5456d7010"
+    baseurl: /
+    port: 8787
+    ssl: false
+    mappings:
+      "/media/books/": "/books/"
+  sonarr:
+    process: false
+    service: sonarr
+    address: "http://sonarr:8989"
+    apikey: "5fa91e23f1ce4bfda1159fb0d717b70e"
+    baseurl: /
+    port: 8989
+    ssl: false
+    mappings:
+      "/media/anime/": "/anime/"
+      "/media/tv/": "/tv/"
+  whisparr:
+    process: false
+    service: whisparr
+    address: "http://whisparr:6969"
+    apikey: "6106f2a1c6604cbbac336b58835f2d41"
+    baseurl: /
+    port: 6969
+    ssl: false
+    mappings:
+      "/media/xxx/": "/xxx/"
+# notifications:
+#  discord:
+#    url: "https://discord.com/api/webhooks/1234567890/abcdefghijklmnopqrstuvwxyz"
+#    notificationtypes: 
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+#  healthchecks:
+#    url: "https://hc-ping.com/1234567890/abcdefghijklmnopqrstuvwxyz"
+#    notificationtypes: # start and end are required
+#      - startrun
+#      - endrun
+#      - reacquire
+#  telegram:
+#    apitoken: "1234567890:abcdefghijklmnopqrstuvwxyz"
+#    username: "@username" # This must start with an @ to send to a user, otherwise, list the channel name
+#    chatid: 0 # Start checkrr, DM the bot, and then trigger a run. Checkrr will log the chatid to the console. Place the chatid value here.
+#    notificationtypes:
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+#  webhook:
+#    url: "https://webhook.site/1234567890/abcdefghijklmnopqrstuvwxyz"
+#    notificationtypes:
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+#  pushbullet:
+#    apitoken: "1234567890:abcdefghijklmnopqrstuvwxyz"
+#    devices: 
+#      - myDevice1
+#      - iPhone14
+#    notificationtypes:
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+#  pushover:
+#    apitoken: "1234567890:abcdefghijklmnopqrstuvwxyz"
+#    recipient: "1234567890"
+#    notificationtypes:
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+#  gotify:
+#    url: "https://gotify.site/message?token=1234567890:abcdefghijklmnopqrstuvwxyz"
+#    authtoken: "1234567890:abcdefghijklmnopqrstuvwxyz"
+#    notificationtypes:
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+#  splunk:
+#    url: "https://splunk.site/message?token=1234567890:abcdefghijklmnopqrstuvwxyz"
+#    token: "1234567890:abcdefghijklmnopqrstuvwxyz"
+#    notificationtypes:
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+#  ntfy:
+#    host: "https://ntfy.bolabaden.duckdns.org"
+#    topic: "checkrr"
+#    token: "1234567890:abcdefghijklmnopqrstuvwxyz" # either use a token or a user and pass, not both.
+#    user: "username"
+#    pass: "password"
+#    notificationtypes:
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+#  smtp:
+#    host: "smtp.gmail.com"
+#    port: 587
+#    auth:
+#      pass: "password"
+#      enabled: true
+#    starttls: true
+#    ssl: false
+#    from: "checkrr@gmail.com"
+#    to: "checkrr@gmail.com"
+#    notificationtypes:
+#      - reacquire
+#      - unknowndetected
+#      - startrun
+#      - endrun
+# stats: # These will slow down the runtime substantially, but... DATA
+#  influxdb1:
+#    url: "http://influxdb:8086"
+#    user: "checkrr" # leave this and pass blank if your server requires no authentication
+#    pass: "password"
+#    bucket: "checkrr" # this database must exist already. Use influx command to create the database.
+#  influxdb2:
+#    url: "http://influxdb:8086"
+#    token: "1234567890:abcdefghijklmnopqrstuvwxyz"
+#    org: "default"
+#    bucket: "checkrr"
+#  splunk:
+#    address: "https://splunk.bolabaden.duckdns.org/services/collector" # You must have HTTP Event Collection enabled and configured
+#    token: "HEC Token" # this is the HEC token for your input. Configure it to force ingestion into a metrics index
+webserver:
+  port: 8585
+  tls: false
+#  tls: true
+#  certs:
+#    cert: "/certs/cert.pem"
+#    key: "/certs/privkey.pem"
+  baseurl: "/"
+  trustedproxies:
+    - 127.0.0.1
+    - ::1

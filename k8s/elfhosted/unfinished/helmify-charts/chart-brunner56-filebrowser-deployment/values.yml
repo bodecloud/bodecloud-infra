@@ -1,0 +1,91 @@
+brunner56Filebrowser:
+  brunner56Filebrowser:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: false
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      tz: UTC
+    image:
+      repository: ghcr.io/elfhosted/filebrowser
+      tag: 2.23.0@sha256:296e3a3d08c5ca07a26350358fa2e58a597a41adb253a65bba27b557f36383e5
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 6Mi
+  copyRecyclarrExampleConfig:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  elfbot:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+  revisionHistoryLimit: 3
+  setup:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/filebrowser
+      tag: 2.23.0@sha256:296e3a3d08c5ca07a26350358fa2e58a597a41adb253a65bba27b557f36383e5
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  strategy:
+    type: Recreate
+kubernetesClusterDomain: cluster.local

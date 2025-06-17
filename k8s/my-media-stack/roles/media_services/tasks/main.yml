@@ -1,0 +1,43 @@
+---
+- name: Create my-media-stack namespace
+  kubernetes.core.k8s:
+    name: my-media-stack
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: Deploy Stremio addons
+  include_tasks: stremio_addons.yml
+  when: media_stack.services.comet or media_stack.services.aiostreams or media_stack.services.mediafusion or media_stack.services.stremio_jackett
+
+- name: Deploy indexers
+  include_tasks: indexers.yml
+  when: media_stack.services.prowlarr or media_stack.services.jackett
+
+- name: Deploy utilities
+  include_tasks: utilities.yml
+  when: media_stack.services.homepage or media_stack.services.dozzle or media_stack.services.watchtower or media_stack.services.speedtest
+
+- name: Deploy development tools
+  include_tasks: development.yml
+  when: media_stack.services.code_server
+
+- name: Deploy AI/LLM services
+  include_tasks: ai_services.yml
+  when: media_stack.services.lobechat
+
+- name: Deploy search services
+  include_tasks: search.yml
+  when: media_stack.services.searxng
+
+- name: Wait for all media services to be ready
+  kubernetes.core.k8s_info:
+    api_version: apps/v1
+    kind: Deployment
+    namespace: my-media-stack
+    wait: true
+    wait_condition:
+      type: Available
+      status: "True"
+    wait_timeout: 300
+  ignore_errors: true

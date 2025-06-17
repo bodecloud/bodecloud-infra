@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: stremio
+    pod-template-hash: 5b9c64df64
+  name: stremio-5b9c64df64
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: stremio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stremio
+      pod-template-hash: 5b9c64df64
+  template:
+    metadata:
+      labels:
+        app: stremio
+        pod-template-hash: 5b9c64df64
+    spec:
+      containers:
+      - env:
+        - name: CASTING_DISABLED
+          value: "1"
+        - name: IPADDRESS
+          value: 149.130.221.93
+        - name: NO_CORS
+          value: "0"
+        - name: SERVER_URL
+          value: https://stremio.my-media-stack.org
+        - name: WEBUI_LOCATION
+          value: https://stremio-web.my-media-stack.org/
+        image: th3w1zard1/stremio-docker:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -fs http://127.0.0.1:11470 || curl -fs http://127.0.0.1:12470
+          failureThreshold: 3
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: stremio
+        ports:
+        - containerPort: 11470
+          name: stremio-11470
+          protocol: TCP
+        - containerPort: 12470
+          name: stremio-12470
+          protocol: TCP
+        - containerPort: 8080
+          name: stremio-8080
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /root/.stremio-server
+          name: root--stremio-server
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/stremio/root/.stremio-server
+          type: ""
+        name: root--stremio-server
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

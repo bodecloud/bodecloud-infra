@@ -1,0 +1,46 @@
+2025-03-30 21:28:11,816 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:28:11,857 - Config               - WARNING - /app/config/config_files/config.yaml not found. Creating a new one with default values.
+2025-03-30 21:28:11,874 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *
+2025-03-30 21:34:08,624 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:34:08,671 - Config               - WARNING - /app/config/config_files/config.yaml not found. Creating a new one with default values.
+2025-03-30 21:34:08,687 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *
+2025-03-30 21:37:29,179 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:37:31,298 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:37:33,357 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:37:35,403 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:37:37,633 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:37:40,856 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:37:45,734 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:37:53,677 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:38:08,159 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:38:35,357 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:39:28,189 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:40:30,580 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:41:32,855 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:41:32,880 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *
+2025-03-30 21:43:38,722 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:43:38,785 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *
+2025-03-30 21:49:27,358 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:49:27,404 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *
+2025-03-30 21:52:32,553 - APP                  - INFO  - Current log level: INFO
+2025-03-30 21:52:32,613 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *
+2025-03-30 22:11:38,562 - APP                  - INFO  - Current log level: INFO
+2025-03-30 22:11:38,654 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *
+2025-03-31 00:00:00,002 - CronJobs             - INFO  - Cron job started
+2025-03-31 00:00:00,126 - SeerClient           - ERROR - Client error during request to https://seer.bolabaden.org/api/v1/request/count: Cannot connect to host seer.bolabaden.org:443 ssl:default [Name has no usable address]
+2025-03-31 00:00:02,131 - SeerClient           - ERROR - Client error during request to https://seer.bolabaden.org/api/v1/request/count: Cannot connect to host seer.bolabaden.org:443 ssl:default [Name has no usable address]
+2025-03-31 00:00:04,144 - SeerClient           - ERROR - Client error during request to https://seer.bolabaden.org/api/v1/request/count: Cannot connect to host seer.bolabaden.org:443 ssl:default [Name has no usable address]
+2025-03-31 00:00:06,151 - SeerClient           - INFO  - Fetched all requests and saved to database.
+2025-03-31 00:00:06,152 - AutomationRoute      - ERROR - Unexpected error: 'ContentAutomation' object has no attribute 'media_handler'
+2025-03-31 00:00:06,165 - CronJobs             - INFO  - Cron job executed successfully
+2025-04-01 00:00:00,004 - CronJobs             - INFO  - Cron job started
+2025-04-01 00:00:00,049 - SeerClient           - ERROR - Client error during request to https://seer.bolabaden.org/api/v1/request/count: Cannot connect to host seer.bolabaden.org:443 ssl:default [Name has no usable address]
+2025-04-01 00:00:02,054 - SeerClient           - ERROR - Client error during request to https://seer.bolabaden.org/api/v1/request/count: Cannot connect to host seer.bolabaden.org:443 ssl:default [Name has no usable address]
+2025-04-01 00:00:04,057 - SeerClient           - ERROR - Client error during request to https://seer.bolabaden.org/api/v1/request/count: Cannot connect to host seer.bolabaden.org:443 ssl:default [Name has no usable address]
+2025-04-01 00:00:06,059 - SeerClient           - INFO  - Fetched all requests and saved to database.
+2025-04-01 00:00:06,060 - AutomationRoute      - ERROR - Unexpected error: 'ContentAutomation' object has no attribute 'media_handler'
+2025-04-01 00:00:06,072 - CronJobs             - INFO  - Cron job executed successfully
+2025-04-01 16:01:31,937 - APP                  - INFO  - Current log level: INFO
+2025-04-01 16:01:32,201 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *
+2025-04-01 19:39:57,397 - APP                  - INFO  - Current log level: INFO
+2025-04-01 19:39:57,582 - CronJobs             - INFO  - Cron job 'auto_content_fetcher' set with expression: 0 0 * * *

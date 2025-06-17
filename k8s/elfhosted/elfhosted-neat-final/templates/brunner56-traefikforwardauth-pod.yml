@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-brunner56-traefikforwardauth-7db49dfc96-9vwjd
+  labels:
+    pod-template-hash: 7db49dfc96
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.elfhosted.com/role
+            operator: In
+            values:
+            - nodefinder
+        topologyKey: kubernetes.io/hostname
+  automountServiceAccountToken: false
+  containers:
+  - env:
+    - name: SECRET
+      valueFrom:
+        secretKeyRef:
+          key: secret
+          name: brunner56-traefikforwardauth
+    - name: TZ
+      value: UTC
+    envFrom:
+    - configMapRef:
+        name: traefik-forward-auth-config
+    image: ghcr.io/elfhosted/traefik-forward-auth:3.1.0@sha256:19cd990fae90c544100676bc049f944becc8c454639e57d20f6f48e27de90776
+    livenessProbe:
+      tcpSocket:
+        port: 4181
+    name: brunner56-traefikforwardauth
+    ports:
+    - containerPort: 4181
+      name: http
+    readinessProbe:
+      tcpSocket:
+        port: 4181
+    resources:
+      limits:
+        cpu: "1"
+        memory: 32Mi
+      requests:
+        cpu: "0"
+        memory: 6Mi
+    securityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    startupProbe:
+      failureThreshold: 30
+      periodSeconds: 5
+      tcpSocket:
+        port: 4181
+  enableServiceLinks: false
+  preemptionPolicy: PreemptLowerPriority
+  priority: 4000
+  priorityClassName: tenant-normal
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: default
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300

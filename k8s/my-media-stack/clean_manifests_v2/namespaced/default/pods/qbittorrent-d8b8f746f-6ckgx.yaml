@@ -1,0 +1,142 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-06-12T01:11:04Z"
+  generateName: qbittorrent-d8b8f746f-
+  labels:
+    app.elfhosted.com/name: qbittorrent
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: qbittorrent
+    pod-template-hash: d8b8f746f
+  name: qbittorrent-d8b8f746f-6ckgx
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: qbittorrent-d8b8f746f
+spec:
+  containers:
+  - image: linuxserver/qbittorrent:latest
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: qbittorrent
+    ports:
+    - containerPort: 8080
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "2"
+        memory: 2Gi
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+      subPath: qbittorrent
+    - mountPath: /storage/symlinks
+      name: symlinks
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - name: symlinks
+    persistentVolumeClaim:
+      claimName: symlinks
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:22:03Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:19Z"
+    message: 'containers with unready status: [qbittorrent]'
+    reason: ContainersNotReady
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:19Z"
+    message: 'containers with unready status: [qbittorrent]'
+    reason: ContainersNotReady
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://231035ae4ddd1d1ff3e760c76619b17778769987b7e8936bf6e68a9a73f03871
+    image: docker.io/linuxserver/qbittorrent:latest
+    imageID: docker.io/linuxserver/qbittorrent@sha256:22dc2f60b6253356005b6cbb77ea282c788aa9ffb828ca61c43479735913e02c
+    lastState:
+      terminated:
+        containerID: containerd://2e67c1068400b12f533622795d8ceafeea6720ef0acd0b2b34bf247e559738bc
+        exitCode: 137
+        finishedAt: "2025-06-14T22:52:16Z"
+        reason: Error
+        startedAt: "2025-06-14T22:50:16Z"
+    name: qbittorrent
+    ready: false
+    restartCount: 92
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:57:22Z"
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /storage/symlinks
+      name: symlinks
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.12
+  podIPs:
+  - ip: 10.42.0.12
+  qosClass: Burstable
+  startTime: "2025-06-14T15:09:43Z"

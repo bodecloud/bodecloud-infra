@@ -1,0 +1,728 @@
+# VPN Deployments with Sidecar Pattern
+# This file contains deployments where containers share network stack with Gluetun VPN containers
+# This replicates the Docker Compose "network_mode: service:gluetun-*" behavior
+
+---
+# Gluetun AirVPN with Tailscale sidecar
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-airvpn
+  namespace: vpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gluetun-airvpn
+  template:
+    metadata:
+      labels:
+        app: gluetun-airvpn
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "1"
+      containers:
+      # Gluetun VPN container
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        env:
+        - name: TZ
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: TZ
+        - name: VPN_SERVICE_PROVIDER
+          value: "airvpn"
+        - name: OPENVPN_CIPHERS
+          value: "aes-256-gcm"
+        - name: FIREWALL_VPN_INPUT_PORTS
+          value: "20027,23936,36175,42162,52065"
+        - name: STORAGE_FILEPATH
+          value: "/gluetun/servers/servers.json"
+        - name: SERVER_COUNTRIES
+          value: "Austria,Belgium,Brazil,Bulgaria,Canada,Czech Republic,Estonia,Germany,Ireland,Japan,Latvia,Netherlands,New Zealand,Norway,Romania,Serbia,Singapore,Spain,Sweden,Switzerland,United Kingdom,United States,China,Isle of Man"
+        ports:
+        - containerPort: 8000
+          name: control
+        - containerPort: 9999
+          name: health
+        - containerPort: 1055
+          name: tailscale-socks5
+        - containerPort: 8885
+          name: tailscale-http
+        - containerPort: 41641
+          name: tailscale-health
+        volumeMounts:
+        - name: gluetun-data
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+      
+      # Tailscale sidecar container sharing network with Gluetun
+      - name: tailscale
+        image: tailscale/tailscale:latest
+        env:
+        - name: TZ
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: TZ
+        - name: TS_ACCEPT_DNS
+          value: "false"
+        - name: TS_AUTH_ONCE
+          value: "true"
+        - name: TS_AUTHKEY
+          valueFrom:
+            secretKeyRef:
+              name: tailscale-auth
+              key: TS_AUTHKEY
+        - name: TS_ENABLE_HEALTH_CHECK
+          value: "true"
+        - name: TS_ENABLE_METRICS
+          value: "true"
+        - name: TS_HOSTNAME
+          value: "tailscale-airvpn-bolabaden-docker"
+        - name: TS_LOCAL_ADDR_PORT
+          value: "0.0.0.0:41641"
+        - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
+          value: "0.0.0.0:8885"
+        - name: TS_ROUTES
+          value: "10.76.0.0/16,172.17.0.0/16"
+        - name: TS_SOCKET
+          value: "/tmp/tailscaled.sock"
+        - name: TS_SOCKS5_SERVER
+          value: ":1055"
+        - name: TS_STATE_DIR
+          value: "/var/lib/tailscale"
+        - name: TS_EXTRA_ARGS
+          value: "--accept-routes --advertise-exit-node"
+        - name: TS_USERSPACE
+          value: "true"
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        volumeMounts:
+        - name: tailscale-state
+          mountPath: /var/lib/tailscale
+        - name: tailscale-tmp
+          mountPath: /tmp
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 41641
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 41641
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+      
+      volumes:
+      - name: gluetun-data
+        persistentVolumeClaim:
+          claimName: gluetun-airvpn-pvc
+      - name: tailscale-state
+        persistentVolumeClaim:
+          claimName: tailscale-airvpn-pvc
+      - name: tailscale-tmp
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-airvpn
+  namespace: vpn
+spec:
+  selector:
+    app: gluetun-airvpn
+  ports:
+  - name: control
+    port: 8000
+    targetPort: 8000
+  - name: health
+    port: 9999
+    targetPort: 9999
+  - name: tailscale-socks5
+    port: 1055
+    targetPort: 1055
+  - name: tailscale-http
+    port: 8885
+    targetPort: 8885
+  - name: tailscale-health
+    port: 41641
+    targetPort: 41641
+
+---
+# Gluetun Premiumize NL with Tailscale sidecar
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-nl
+  namespace: vpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-nl
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-nl
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "1"
+      containers:
+      # Gluetun VPN container
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        env:
+        - name: TZ
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: TZ
+        - name: VPN_SERVICE_PROVIDER
+          value: "custom"
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: "/gluetun/vpn-nl.premiumize.me.ovpn"
+        - name: OPENVPN_CIPHERS
+          value: "AES-256-CBC"
+        - name: OPENVPN_FLAGS
+          value: "--auth-user-pass /etc/openvpn/auth.conf"
+        ports:
+        - containerPort: 8000
+          name: control
+        - containerPort: 9999
+          name: health
+        - containerPort: 1057
+          name: tailscale-socks5
+        - containerPort: 8887
+          name: tailscale-http
+        - containerPort: 41643
+          name: tailscale-health
+        - containerPort: 9117
+          name: jackett
+        - containerPort: 9696
+          name: prowlarr
+        volumeMounts:
+        - name: gluetun-data
+          mountPath: /gluetun
+        - name: gluetun-auth
+          mountPath: /gluetun/auth
+        - name: openvpn-config
+          mountPath: /etc/openvpn
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+      
+      # Tailscale sidecar
+      - name: tailscale
+        image: tailscale/tailscale:latest
+        env:
+        - name: TZ
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: TZ
+        - name: TS_ACCEPT_DNS
+          value: "false"
+        - name: TS_AUTH_ONCE
+          value: "true"
+        - name: TS_AUTHKEY
+          valueFrom:
+            secretKeyRef:
+              name: tailscale-auth
+              key: TS_AUTHKEY
+        - name: TS_ENABLE_HEALTH_CHECK
+          value: "true"
+        - name: TS_ENABLE_METRICS
+          value: "true"
+        - name: TS_HOSTNAME
+          value: "tailscale-premiumize-nl-bolabaden-docker"
+        - name: TS_LOCAL_ADDR_PORT
+          value: "0.0.0.0:41643"
+        - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
+          value: "0.0.0.0:8887"
+        - name: TS_ROUTES
+          value: "10.76.0.0/16,172.17.0.0/16"
+        - name: TS_SOCKET
+          value: "/tmp/tailscaled.sock"
+        - name: TS_SOCKS5_SERVER
+          value: ":1057"
+        - name: TS_STATE_DIR
+          value: "/var/lib/tailscale"
+        - name: TS_EXTRA_ARGS
+          value: "--accept-routes --advertise-exit-node"
+        - name: TS_USERSPACE
+          value: "true"
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        volumeMounts:
+        - name: tailscale-state
+          mountPath: /var/lib/tailscale
+        - name: tailscale-tmp
+          mountPath: /tmp
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 41643
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 41643
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+      
+      # Prowlarr sidecar
+      - name: prowlarr
+        image: lscr.io/linuxserver/prowlarr:latest
+        env:
+        - name: PUID
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: PUID
+        - name: PGID
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: PGID
+        - name: TZ
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: TZ
+        volumeMounts:
+        - name: prowlarr-config
+          mountPath: /config
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9696
+          initialDelaySeconds: 120
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9696
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      
+      # Jackett sidecar
+      - name: jackett
+        image: lscr.io/linuxserver/jackett:latest
+        env:
+        - name: PUID
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: PUID
+        - name: PGID
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: PGID
+        - name: TZ
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: TZ
+        - name: AUTO_UPDATE
+          value: "true"
+        - name: RUN_OPTS
+          value: ""
+        volumeMounts:
+        - name: jackett-config
+          mountPath: /config
+        - name: jackett-blackhole
+          mountPath: /downloads
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9117
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9117
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      
+      volumes:
+      - name: gluetun-data
+        persistentVolumeClaim:
+          claimName: gluetun-premiumize-nl-pvc
+      - name: gluetun-auth
+        emptyDir: {}
+      - name: openvpn-config
+        emptyDir: {}
+      - name: tailscale-state
+        persistentVolumeClaim:
+          claimName: tailscale-premiumize-nl-pvc
+      - name: tailscale-tmp
+        emptyDir: {}
+      - name: prowlarr-config
+        persistentVolumeClaim:
+          claimName: prowlarr-config-pvc
+      - name: jackett-config
+        persistentVolumeClaim:
+          claimName: jackett-config-pvc
+      - name: jackett-blackhole
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-nl
+  namespace: vpn
+spec:
+  selector:
+    app: gluetun-premiumize-nl
+  ports:
+  - name: control
+    port: 8000
+    targetPort: 8000
+  - name: health
+    port: 9999
+    targetPort: 9999
+  - name: tailscale-socks5
+    port: 1057
+    targetPort: 1057
+  - name: tailscale-http
+    port: 8887
+    targetPort: 8887
+  - name: tailscale-health
+    port: 41643
+    targetPort: 41643
+  - name: jackett
+    port: 9117
+    targetPort: 9117
+  - name: prowlarr
+    port: 9696
+    targetPort: 9696
+
+---
+# Gluetun Premiumize US with Tailscale sidecar
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-us
+  namespace: vpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-us
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-us
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "1"
+      containers:
+      # Gluetun VPN container
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        env:
+        - name: TZ
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: TZ
+        - name: VPN_SERVICE_PROVIDER
+          value: "custom"
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: "/gluetun/vpn-us.premiumize.me.ovpn"
+        - name: OPENVPN_CIPHERS
+          value: "AES-256-CBC"
+        - name: OPENVPN_FLAGS
+          value: "--auth-user-pass /etc/openvpn/auth.conf"
+        ports:
+        - containerPort: 8000
+          name: control
+        - containerPort: 9999
+          name: health
+        - containerPort: 1056
+          name: tailscale-socks5
+        - containerPort: 8886
+          name: tailscale-http
+        - containerPort: 41642
+          name: tailscale-health
+        - containerPort: 8080
+          name: stremio-webui
+        - containerPort: 11470
+          name: stremio-http
+        - containerPort: 12470
+          name: stremio-https
+        volumeMounts:
+        - name: gluetun-data
+          mountPath: /gluetun
+        - name: gluetun-auth
+          mountPath: /gluetun/auth
+        - name: openvpn-config
+          mountPath: /etc/openvpn
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+      
+      # Tailscale sidecar
+      - name: tailscale
+        image: tailscale/tailscale:latest
+        env:
+        - name: TZ
+          valueFrom:
+            secretKeyRef:
+              name: media-stack-secrets
+              key: TZ
+        - name: TS_ACCEPT_DNS
+          value: "false"
+        - name: TS_AUTH_ONCE
+          value: "true"
+        - name: TS_AUTHKEY
+          valueFrom:
+            secretKeyRef:
+              name: tailscale-auth
+              key: TS_AUTHKEY
+        - name: TS_ENABLE_HEALTH_CHECK
+          value: "true"
+        - name: TS_ENABLE_METRICS
+          value: "true"
+        - name: TS_HOSTNAME
+          value: "tailscale-premiumize-us-bolabaden-docker"
+        - name: TS_LOCAL_ADDR_PORT
+          value: "0.0.0.0:41642"
+        - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
+          value: "0.0.0.0:8886"
+        - name: TS_ROUTES
+          value: "10.76.0.0/16,172.17.0.0/16"
+        - name: TS_SOCKET
+          value: "/tmp/tailscaled.sock"
+        - name: TS_SOCKS5_SERVER
+          value: ":1056"
+        - name: TS_STATE_DIR
+          value: "/var/lib/tailscale"
+        - name: TS_EXTRA_ARGS
+          value: "--accept-routes --advertise-exit-node"
+        - name: TS_USERSPACE
+          value: "true"
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        volumeMounts:
+        - name: tailscale-state
+          mountPath: /var/lib/tailscale
+        - name: tailscale-tmp
+          mountPath: /tmp
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 41642
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 41642
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+      
+      # Stremio sidecar
+      - name: stremio
+        image: th3w1zard1/stremio-docker:latest
+        env:
+        - name: IPADDRESS
+          value: "149.130.221.93"
+        - name: SERVER_URL
+          value: "https://stremio.bolabaden.org"
+        - name: WEBUI_LOCATION
+          value: "https://stremio-web.bolabaden.org/"
+        - name: NO_CORS
+          value: "0"
+        - name: CASTING_DISABLED
+          value: "1"
+        volumeMounts:
+        - name: stremio-config
+          mountPath: /root/.stremio-server
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 11470
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 11470
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+      
+      volumes:
+      - name: gluetun-data
+        persistentVolumeClaim:
+          claimName: gluetun-premiumize-us-pvc
+      - name: gluetun-auth
+        emptyDir: {}
+      - name: openvpn-config
+        emptyDir: {}
+      - name: tailscale-state
+        persistentVolumeClaim:
+          claimName: tailscale-premiumize-us-pvc
+      - name: tailscale-tmp
+        emptyDir: {}
+      - name: stremio-config
+        persistentVolumeClaim:
+          claimName: stremio-config-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-us
+  namespace: vpn
+spec:
+  selector:
+    app: gluetun-premiumize-us
+  ports:
+  - name: control
+    port: 8000
+    targetPort: 8000
+  - name: health
+    port: 9999
+    targetPort: 9999
+  - name: tailscale-socks5
+    port: 1056
+    targetPort: 1056
+  - name: tailscale-http
+    port: 8886
+    targetPort: 8886
+  - name: tailscale-health
+    port: 41642
+    targetPort: 41642
+  - name: stremio-webui
+    port: 8080
+    targetPort: 8080
+  - name: stremio-http
+    port: 11470
+    targetPort: 11470
+  - name: stremio-https
+    port: 12470
+    targetPort: 12470
+  - name: tailscale-health
+    port: 41642
+    targetPort: 41642
+  type: LoadBalancer 

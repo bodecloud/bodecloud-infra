@@ -1,0 +1,21 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: cert-manager-cainjector
+  usage:
+    cpu: 728891n
+    memory: 46560Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: cainjector
+    app.kubernetes.io/component: cainjector
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cainjector
+    app.kubernetes.io/version: v1.14.0
+    helm.sh/chart: cert-manager-v1.14.0
+    pod-template-hash: 86db5d9886
+  name: cert-manager-cainjector-86db5d9886-qkwdm
+  namespace: cert-manager
+timestamp: "2025-06-14T22:57:21Z"
+window: 17.635s

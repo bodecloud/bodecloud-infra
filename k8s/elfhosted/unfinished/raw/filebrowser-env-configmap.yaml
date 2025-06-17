@@ -1,0 +1,21 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: filebrowser-env
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  FB_ADDRESS: 0.0.0.0
+  FB_CONFIG: /etc/filebrowser/.filebrowser.json
+  FB_DATABASE: /tmp/filebrowser.db
+  RADARR4K_API_KEY: 7da5d4ba79804527b78a78b68c7a0781
+  RADARR_API_KEY: 041776c8d5f74bf295aa486d9d51c33a
+  S6_READ_ONLY_ROOT: '1'
+  SONARR4K_API_KEY: e4f93c115169484bbed19821f7ac8e49
+  SONARR_API_KEY: a6f1c7d07fab4be49c5c1cb545f85a76

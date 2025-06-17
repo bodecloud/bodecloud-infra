@@ -1,0 +1,5263 @@
+# Generated VPN Gateway Deployments for Pod-Gateway System
+# This file contains all VPN gateway deployments and services
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-at
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-at
+    component: vpn-gateway
+    priority: '19'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-at
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-at
+        component: vpn-gateway
+    spec:
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command: 
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          
+          COUNTRY="at"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          
+          echo "=== Resolving $HOSTNAME ==="
+          
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✓ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          
+          if [ -z "$IP" ]; then
+            echo "✖ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          
+          echo "✔ Configuration complete for AT"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-at.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/at
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-at
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-at
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-at
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-au
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-au
+    component: vpn-gateway
+    priority: '18'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-au
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-au
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="au"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+              echo "❌ Resolution attempt $i failed, retrying in 2s..."
+              sleep 2
+            fi
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          MIIFqzCCA5OgAwIBAgIJAKZ7D5Kv2XSUMA0GCSqGSIb3DQEBCwUAMGwxCzAJBgNV
+          BAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMQ8wDQYDVQQHDAZNdW5pY2gxEzARBgNV
+          BAoMClByZW1pdW1pemUxJTAjBgNVBAMMHFByZW1pdW1pemUgQ2VydGlmaWNhdGUg
+          QXV0aG9yaXR5MB4
+          A1UEBhMCREUxEDAOBgNVBAgMB0JhdmFyaWExDzANBgNVBAcMBk11bmljaDETMBEG
+          A1UECgwKUHJlbWl1bWl6ZTElMCMGA1UEAwwcUHJlbWl1bWl6ZSBDZXJ0aWZpY2F0
+          ZSBBdXRob3JpdHkwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDMsJwI
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for AU"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-au.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/au
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-au
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-au
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-au
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-be
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-be
+    component: vpn-gateway
+    priority: '17'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-be
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-be
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          
+          COUNTRY="be"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          
+          echo "=== Resolving $HOSTNAME ==="
+          
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✓ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          
+          if [ -z "$IP" ]; then
+            echo "✗ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+
+          echo "✅ Configuration complete for BE"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-be.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/be
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-be
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-be
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-be
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-ca
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-ca
+    component: vpn-gateway
+    priority: '16'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-ca
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-ca
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          
+          COUNTRY="ca"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          
+          echo "=== Resolving $HOSTNAME ==="
+          
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✓ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          
+          if [ -z "$IP" ]; then
+            echo "✗ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          BAoMClByZW1pdW1pemUxJTAjBgNVBAMMHFByZW1pdW1pemUgQ2VydGlmaWNhdGUg
+          QXV0aG9yaXR5MB4XDTE5MDkxOTE0NDUwNFoXDTI5MDkxNjE0NDUwNFowbDELMAkG
+          A1UEBhMCREUxEDAOBgNVBAgMB0JhdmFyaWExDzANBgNVBAcMBk11bmljaDETMBEG
+          A1UECgwKUHJlbWl1bWl6ZTElMCMGA1UEAwwcUHJlbWl1bWl6ZSBDZXJ0aWZpY2F0
+          ZSBBdXRob3JpdHkwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDMsJwI
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          
+          echo "✅ Configuration complete for CA"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-ca.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/ca
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-ca
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-ca
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-ca
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-ch
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-ch
+    component: vpn-gateway
+    priority: '15'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-ch
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-ch
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          
+          COUNTRY="ch"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          
+          echo "=== Resolving $HOSTNAME ==="
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✓ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          
+          if [ -z "$IP" ]; then
+            echo "✗ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          MIIFqzCCA5OgAwIBAgIJAKZ7D5Kv2XSUMA0GCSqGSIb3DQEBCwUAMGwxCzAJBgNV
+          </ca>
+          EOF
+          
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          
+          echo "✅ Configuration complete for CH"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-ch.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/ch
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-ch
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-ch
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-ch
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-cz
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-cz
+    component: vpn-gateway
+    priority: '14'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-cz
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-cz
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          
+          COUNTRY="cz"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          
+          echo "=== Resolving $HOSTNAME ==="
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✓ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          
+          if [ -z "$IP" ]; then
+            echo "✗ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for CZ"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-cz.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/cz
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-cz
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-cz
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-cz
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-de
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-de
+    component: vpn-gateway
+    priority: '13'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-de
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-de
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="de"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name
+          CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for DE"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-de.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/de
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-de
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-de
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-de
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-es
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-es
+    component: vpn-gateway
+    priority: '12'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-es
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-es
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="es"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name
+          CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for ES"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-es.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+                fi
+              else
+                echo "$(date): VPN Gateway unhealthy - tun0 not found"
+              fi
+              sleep 30
+            done
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/es
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-es
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-es
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-es
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-fi
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-fi
+    component: vpn-gateway
+    priority: '11'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-fi
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-fi
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="fi"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name
+          CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for FI"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID\
+          dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-fi.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+              fi
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/fi
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-fi
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-fi
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-fi
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-fr
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-fr
+    component: vpn-gateway
+    priority: '10'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-fr
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-fr
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="fr"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          MIIFqzCCA5OgAwIBAgIJAKZ7D5Kv2XSUMA0GCSqGSIb3DQEBCwUAMGwxCzAJBgNV
+          BAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMQ8wDQYDVQQHDAZNdW5pY2gxEzARBgNV
+          QXV0aG9yaXR5MB4XDTE5MDkxOTE0NDUwNFoXDTI5MDkxNjE0NDUwNFowbDELMAkG
+          BAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMQ8wDQYDVQQHDAZNdW5pY2gxEzARBgNV
+          BAoMClByZW1pdW1pemUxJTAjBgNVBAMMHFByZW1pdW1pemUgQ2VydGlmaWNhdGUg
+          QXV0aG9yaXR5MB4XDTE5MDkxOTE0NDUwNFoXDTI5MDkxNjE0NDUwNFowbDELMAkG
+          A1UEBhMCREUxEDAOBgNVBAgMB0JhdmFyaWExDzANBgNVBAcMBk11bmljaDETMBEG
+          A1UECgwKUHJlbWl1bWl6ZTElMCMGA1UEAwwcUHJlbWl1bWl6ZSBDZXJ0aWZpY2F0
+          ZSBBdXRob3JpdHkwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDMsJwI
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for FR"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-fr.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/fr
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-fr
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-fr
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-fr
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-gb
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-gb
+    component: vpn-gateway
+    priority: '9'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-gb
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-gb
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="gb"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>  
+          -----BEGIN CERTIFICATE-----
+          MIIFqzCCA5OgAwIBAgIJAKZ7D5Kv2XSUMA0GCSqGSIb3DQEBCwUAMGwxCzAJBgNV
+          BAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMQ8wDQYDVQQHDAZNdW5pY2gxEzARBgNV
+          BXV0aG9yaXR5MB4XDTE5MDkxOTE0NDUwNFoXDTI5MDkxNjE0NDUwNFowbDELMAkG
+          A1UEBhMCREUxEDAOBgNVBAgMB0JhdmFyaWExDzANBgNVBAcMBk11bmljaDETMBEG
+          A1UECgwKUHJlbWl1bWl6ZTElMCMGA1UEAwwcUHJlbWl1bWl6ZSBDZXJ0aWZpY2F0
+          ZSBBdXRob3JpdHkwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDMsJwI
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for GB"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+          - /bin/bash
+          - -c
+          - |
+            source /config/settings.sh
+            # Enable IP forwarding
+            echo 1 > /proc/sys/net/ipv4/ip_forward
+            # Create VXLAN interface
+            VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+            ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+            ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+            ip link set up dev vxlan0
+            ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+            # Set routing rules
+            ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+            # Configure iptables for NAT and forwarding
+            iptables -t nat -A POSTROUTING -j MASQUERADE || true
+            iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+            iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+            echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-gb.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/gb
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-gb
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-gb
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-gb
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-gr
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-gr
+    component: vpn-gateway
+    priority: '8'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-gr
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-gr
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="gr"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          echo "=== Resolving $HOSTNAME ==="
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          nobind
+          persist-key
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          MIIFJTCCAw2gAwIBAgIRAPAmbQRNE+PBqvFyFG8GOSIwDQYJKoZIhvcNAQELBQAw
+          LDEYMBYGA1UECgwPU2VjdXJlIFNlcnZpY2VzMRAwDgYDVQQDDAdSb290IFgxMB4X
+          DTIxMDEwNDE1MjEwM1oXDTQwMTIzMDE1MjEwM1owLDEYMBYGA1UECgwPU2VjdXJl
+          IFNlcnZpY2VzMRAwDgYDVQQDDAdSb290IFgxMIICIjANBgkqhkiG9w0BAQEFAAOC
+          Ag8AMIICCgKCAgEAvuhFcbO0Y5SXBr+h/XU1sPXo/OSjN4W32jzVZ3jmkqA2nH5D
+          dI5XYHYB9JkW23K37zOlvOWj9J3HiV6WYk0uqQ3cpqDMnIpi1MJCtSRxiaD7LTNO
+          XrvLpsREq9Vf+lN+zxFxhINv3W4jUyfx5zIjPyjY+vFgH5G56b12EeLKFLYUWwgF
+          9vTicXJvlV1h+TJVF8wZ5DugrgNZhSZ6QZzda0Zdu1dCwZOafd1GGDWPubgZ8enF
+          b9gWPGZmS59ZvlLsLQmtLvCEegELzRR5G/OI1CIntcImcKO9ZDdWP+HmqJ4Ss7Ng
+          0g5xQVx9VgMxwpHw4h/tMV8q1vQQZJXJHdoDRQr5RzVnMjq90FFMd3nfX1B6cheH
+          cBq31J84ifxcO2vIz/eK/6zNyynuj2+99Yz7MsYI+sfGznngglpYo9u3xNkRfRPP
+          TA/tXAzrGRqlHmJmMStfutIfHxea4jJCGOeb5eUETQ1kXf5sMSdf0+Ya64h9Kcxw
+          afMzU8qUAMk4ei+jTEAuUQ25Jq0orFc5D2Pv7RbU9CCzIML2KqqWTThKSSVQbW0x
+          ufQDxcFZKSKL03484zVPBDMQ65enBUC+9Or9YKT0S0F1IdOX4EUGpqzQAocHFF3u
+          G1zYz5cjYq2xHRBZAYs6SQH6f16bPrk66uA2B/vZJm5L9Kzni5q46IGsCUsCAwEA
+          AaNCMEAwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYE
+          FETGtuYkU3IlxCvmtkAzpP5Xuf+DMA0GCSqGSIb3DQEBCwUAA4ICAQBdTlQtxa6a
+          PXaZpzsi5gLGrDUhnoTF5cVvt9vYa6c7IaAuYIUMGN1WiwHUL0g1udxi7iC3oBzM
+          Mc6shYMijEMG9SvC0RJOky1BCPbKdlsRDQbYLgjN5X1fEDDu1cR/vInt/K6vTcLf
+          1ud6VFgDv8uYG1X9GVs6foAqjYTLt1A99cwHtyCZRxrBLyjgE8S2U07FDpakqlMo
+          j4S1lgvw4EuEN54Yo55wLv9J0pZ1w9LEpZ4VdEVzLmwYMPG25Ow7HFZDK7j0TZkA
+          ByvxUvNGWDk5MS71BtWzhrmmPh9kN3HobkfOllqUsE03QaLggg+pe+OYNdIlCBRz
+          9QJeMtGP7afdBZ5UUL8df0fWL0adUzk1N/1kvAmbvccNu7tej/4LLVv9j1aQtI76
+          iEXh0WIWTAOz9IsQyP21PhxG01Y3ScIrbOsP+IX+RL/VK4yfTZ2jICj7js8vm6ut
+          qw3FPyZgeZuBe0gk0cF4vPuFacS23PkEFXbVnt4h40xKwR5ezGshS5I36nXowTdh
+          uJPLnZaLGjsiFpprztwwDZkDLu5uT6YhT/M6Kb0V3s3a2W1N90eNjo5WEe/poCgr
+          1+NVJNJQ71s3kodfghA/t1iivJEl58scVLxxJXyhCK+k5IPAB0syq2cR4AKnr/fe
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for GR"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-gr.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          EOF
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "✅ $(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "❌ $(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "❌ $(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/gr
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-gr
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-gr
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-gr
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-it
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-it
+    component: vpn-gateway
+    priority: '7'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-it
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-it
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="it"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          echo "=== Resolving $HOSTNAME ==="
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for IT"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-it.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "✅ $(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "❌ $(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "❌ $(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+          echo "✅ Gateway sidecar complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/it
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-it
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-it
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-it
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-jp
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-jp
+    component: vpn-gateway
+    priority: '6'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-jp
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-jp
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="jp"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          echo "=== Resolving $HOSTNAME ==="
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for JP"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-jp.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+          echo "✅ Gateway sidecar complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+          echo "✅ Gateway sidecar complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/jp
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-jp
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-jp
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-jp
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-nl
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-nl
+    component: vpn-gateway
+    priority: '3'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-nl
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-nl
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="nl"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name
+          CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "
+          s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "
+          s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for NL"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-nl.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "✅ $(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "❌ $(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "❌ $(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+          echo "✅ Gateway sidecar complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/nl
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-nl
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-nl
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-nl
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-pl
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-pl
+    component: vpn-gateway
+    priority: '5'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-pl
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-pl
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="pl"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name
+          CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          MIIFJTCCAw2gAwIBAgIRAPAmbQRNE+PBqvFyFG8GOSIwDQYJKoZIhvcNAQELBQAw
+          LDEYMBYGA1UECgwPU2VjdXJlIFNlcnZpY2VzMRAwDgYDVQQDDAdSb290IFgxMB4X
+          DTIxMDEwNDE1MjEwM1oXDTQwMTIzMDE1MjEwM1owLDEYMBYGA1UECgwPU2VjdXJl
+          IFNlcnZpY2VzMRAwDgYDVQQDDAdSb290IFgxMIICIjANBgkqhkiG9w0BAQEFAAOC
+          Ag8AMIICCgKCAgEAvuhFcbO0Y5SXBr+h/XU1sPXo/OSjN4W32jzVZ3jmkqA2nH5D
+          dI5XYHYB9JkW23K37zOlvOWj9J3HiV6WYk0uqQ3cpqDMnIpi1MJCtSRxiaD7LTNO
+          XrvLpsREq9Vf+lN+zxFxhINv3W4jUyfx5zIjPyjY+vFgH5G56b12EeLKFLYUWwgF
+          9vTicXJvlV1h+TJVF8wZ5DugrgNZhSZ6QZzda0Zdu1dCwZOafd1GGDWPubgZ8enF
+          b9gWPGZmS59ZvlLsLQmtLvCEegELzRR5G/OI1CIntcImcKO9ZDdWP+HmqJ4Ss7Ng
+          0g5xQVx9VgMxwpHw4h/tMV8q1vQQZJXJHdoDRQr5RzVnMjq90FFMd3nfX1B6cheH
+          cBq31J84ifxcO2vIz/eK/6zNyynuj2+99Yz7MsYI+sfGznngglpYo9u3xNkRfRPP
+          TA/tXAzrGRqlHmJmMStfutIfHxea4jJCGOeb5eUETQ1kXf5sMSdf0+Ya64h9Kcxw
+          afMzU8qUAMk4ei+jTEAuUQ25Jq0orFc5D2Pv7RbU9CCzIML2KqqWTThKSSVQbW0x
+          ufQDxcFZKSKL03484zVPBDMQ65enBUC+9Or9YKT0S0F1IdOX4EUGpqzQAocHFF3u
+          G1zYz5cjYq2xHRBZAYs6SQH6f16bPrk66uA2B/vZJm5L9Kzni5q46IGsCUsCAwEA
+          AaNCMEAwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYE
+          FETGtuYkU3IlxCvmtkAzpP5Xuf+DMA0GCSqGSIb3DQEBCwUAA4ICAQBdTlQtxa6a
+          PXaZpzsi5gLGrDUhnoTF5cVvt9vYa6c7IaAuYIUMGN1WiwHUL0g1udxi7iC3oBzM
+          Mc6shYMijEMG9SvC0RJOky1BCPbKdlsRDQbYLgjN5X1fEDDu1cR/vInt/K6vTcLf
+          1ud6VFgDv8uYG1X9GVs6foAqjYTLt1A99cwHtyCZRxrBLyjgE8S2U07FDpakqlMo
+          j4S1lgvw4EuEN54Yo55wLv9J0pZ1w9LEpZ4VdEVzLmwYMPG25Ow7HFZDK7j0TZkA
+          ByvxUvNGWDk5MS71BtWzhrmmPh9kN3HobkfOllqUsE03QaLggg+pe+OYNdIlCBRz
+          9QJeMtGP7afdBZ5UUL8df0fWL0adUzk1N/1kvAmbvccNu7tej/4LLVv9j1aQtI76
+          iEXh0WIWTAOz9IsQyP21PhxG01Y3ScIrbOsP+IX+RL/VK4yfTZ2jICj7js8vm6ut
+          qw3FPyZgeZuBe0gk0cF4vPuFacS23PkEFXbVnt4h40xKwR5ezGshS5I36nXowTdh
+          uJPLnZaLGjsiFpprztwwDZkDLu5uT6YhT/M6Kb0V3s3a2W1N90eNjo5WEe/poCgr
+          1+NVJNJQ71s3kodfghA/t1iivJEl58scVLxxJXyhCK+k5IPAB0syq2cR4AKnr/fe
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "
+            s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "
+            s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for PL"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-pl.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "✅ $(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "❌ $(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "❌ $(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+          echo "✅ Gateway sidecar complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/pl
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-pl
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-pl
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-pl
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-sg
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-sg
+    component: vpn-gateway
+    priority: '4'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-sg
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-sg
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="sg"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name
+          CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "
+            s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "
+            s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for SG"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-sg.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+            else
+              echo "$(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+          echo "✅ Gateway sidecar complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/sg
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-sg
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-sg
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-sg
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-us
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-us
+    component: vpn-gateway
+    priority: '1'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-us
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-us
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: hostname-resolver
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bind-tools
+          COUNTRY="us"
+          HOSTNAME="vpn-${COUNTRY}.premiumize.me"
+          CONFIG_FILE="/gluetun/premiumize-${COUNTRY}.ovpn"
+          AUTH_FILE="/gluetun/auth.conf"
+          echo "=== Resolving $HOSTNAME ==="
+          # Resolve hostname with retries
+          IP=""
+          for i in $(seq 1 10); do
+            if IP=$(dig +short $HOSTNAME | head -1); then
+              if echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "✅ Resolved $HOSTNAME -> $IP (attempt $i)"
+                break
+              fi
+            fi
+            echo "Resolution attempt $i failed, retrying in 2s..."
+            sleep 2
+          done
+          if [ -z "$IP" ]; then
+            echo "❌ Failed to resolve $HOSTNAME after 10 attempts"
+            exit 1
+          fi
+          # Create OpenVPN config
+          cat > "$CONFIG_FILE" << 'EOF'
+          remote $IP 1194
+          verify-x509-name
+          CN=$HOSTNAME
+          client
+          dev tun
+          proto udp
+          cipher AES-256-CBC
+          resolv-retry infinite
+          nobind
+          persist-key
+          persist-tun
+          auth-user-pass /gluetun/auth.conf
+          verb 3
+          auth SHA256
+          key-direction 1
+          <ca>
+          -----BEGIN CERTIFICATE-----
+          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
+          9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+          -----END CERTIFICATE-----
+          </ca>
+          EOF
+          # Replace placeholders
+          sed -i "
+            s/\$IP/$IP/g" "$CONFIG_FILE"
+          sed -i "
+            s/\$HOSTNAME/$HOSTNAME/g" "$CONFIG_FILE"
+          # Create auth file
+          echo "117274388" > "$AUTH_FILE"
+          echo "6i6zgswm35baj3ur" >> "$AUTH_FILE"
+          echo "✅ Configuration complete for US"
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: openvpn
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: /gluetun/premiumize-us.ovpn
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "✅ $(date): VPN Gateway healthy - tun0 connected"
+              elif timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "❌ $(date): VPN Gateway unhealthy - no external connectivity"
+              else
+                echo "❌ $(date): VPN Gateway unhealthy - tun0 not found"
+              fi
+            else
+              echo "❌ $(date): VPN Gateway unhealthy - tun0 not found"
+            fi
+            sleep 30
+          done
+          echo "✅ Gateway sidecar complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/us
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-us
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-us
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-us
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-airvpn
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-airvpn
+    component: vpn-gateway
+    priority: '2'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: gluetun-airvpn
+  template:
+    metadata:
+      labels:
+        app: gluetun-airvpn
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+      initContainers:
+      - name: gateway-init
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Enable IP forwarding
+          echo 1 > /proc/sys/net/ipv4/ip_forward
+          # Create VXLAN interface
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+          ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+          ip link set up dev vxlan0
+          ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+          # Set routing rules
+          ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+          # Configure iptables for NAT and forwarding
+          iptables -t nat -A POSTROUTING -j MASQUERADE || true
+          iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+          iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+          echo "✅ Gateway init complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      containers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: airvpn
+        - name: OPENVPN_CIPHERS
+          value: aes-256-gcm
+        - name: SERVER_COUNTRIES
+          value: United States
+        - name: HTTP_PROXY
+          value: 'on'
+        - name: HTTP_PROXY_ADDRESS
+          value: 0.0.0.0:8888
+        - name: SHADOWSOCKS
+          value: 'on'
+        - name: SHADOWSOCKS_ADDRESS
+          value: 0.0.0.0:8388
+        - name: HEALTH_SERVER_ADDRESS
+          value: 0.0.0.0:9999
+        ports:
+        - containerPort: 8888
+          name: http-proxy
+        - containerPort: 8388
+          name: shadowsocks
+        - containerPort: 9999
+          name: health
+        volumeMounts:
+        - name: gluetun-config
+          mountPath: /gluetun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9999
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      - name: gateway-sidecar
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          source /config/settings.sh
+          # Start DHCP server for VXLAN clients
+          cat > /tmp/dnsmasq.conf << EOF
+          interface=vxlan0
+          bind-interfaces
+          dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+          dhcp-option=3,${VXLAN_IP_NETWORK}.1
+          dhcp-option=6,${VXLAN_IP_NETWORK}.1
+          server=10.96.0.10
+          # Start dnsmasq for DHCP and DNS
+          dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+          # Health monitoring
+          while true; do
+            if ip link show tun0 >/dev/null 2>&1; then
+              if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - tun0 connected"
+              elif timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              else
+                echo "$(date): VPN Gateway unhealthy - tun0 not found"
+              fi
+            fi
+            sleep 30
+          done
+          echo "✅ Gateway sidecar complete"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+      volumes:
+      - name: config
+        configMap:
+          name: pod-gateway-config
+          defaultMode: 493
+      - name: gluetun-config
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/gluetun/airvpn
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-airvpn
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-airvpn
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-airvpn
+  ports:
+  - name: http-proxy
+    port: 8888
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    targetPort: 8388
+  - name: health
+    port: 9999
+    targetPort: 9999
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warp-gateway
+  namespace: vpn-gateway
+  labels:
+    app: warp-gateway
+    component: vpn-gateway
+    priority: '20'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: warp-gateway
+  template:
+    metadata:
+      labels:
+        app: warp-gateway
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: '1'
+        - name: net.ipv4.conf.all.src_valid_mark
+          value: '1'
+      containers:
+      - name: warp
+        image: caomingjun/warp:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - MKNOD
+            - AUDIT_WRITE
+          privileged: true
+        env:
+        - name: WARP_SLEEP
+          value: '2'
+        - name: WARP_LICENSE_KEY
+          value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+        ports:
+        - containerPort: 1080
+          name: socks5-proxy
+        - containerPort: 3128
+          name: http-proxy
+        volumeMounts:
+        - name: warp-data
+          mountPath: /var/lib/cloudflare-warp
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -s --max-time 5 --proxy socks5://127.0.0.1:1080 http://httpbin.org/ip >/dev/null
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -s --max-time 5 --proxy socks5://127.0.0.1:1080 http://httpbin.org/ip >/dev/null
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 300m
+      volumes:
+      - name: warp-data
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: warp-gateway
+  namespace: vpn-gateway
+  labels:
+    app: warp-gateway
+    component: vpn-gateway
+spec:
+  selector:
+    app: warp-gateway
+  ports:
+  - name: socks5-proxy
+    port: 1080
+    targetPort: 1080
+  - name: http-proxy
+    port: 3128
+    targetPort: 3128

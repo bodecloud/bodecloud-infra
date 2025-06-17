@@ -1,0 +1,82 @@
+#! ddns-updater-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ddns-updater
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ddns-updater
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ddns-updater
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: ddns-updater
+          image: qmcgaw/ddns-updater
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "988"
+            - name: BACKUP_DIRECTORY
+              value: "/updater/data"
+            - name: BACKUP_PERIOD
+              value: "1h"
+            - name: CONFIG_FILEPATH
+              value: "/updater/data/config.json"
+            - name: HTTP_TIMEOUT
+              value: "10s"
+            - name: LISTENING_ADDRESS
+              value: "0.0.0.0:7998"
+            - name: LOG_CALLER
+              value: "hidden"
+            - name: LOG_LEVEL
+              value: "info"
+            - name: PERIOD
+              value: "5m"
+            - name: PUBLICIPV4_HTTP_PROVIDERS
+              value: "all"
+            - name: PUBLICIPV6_HTTP_PROVIDERS
+              value: "all"
+            - name: PUBLICIP_DNS_PROVIDERS
+              value: "all"
+            - name: PUBLICIP_DNS_TIMEOUT
+              value: "3s"
+            - name: PUBLICIP_FETCHERS
+              value: "all"
+            - name: PUBLICIP_HTTP_PROVIDERS
+              value: "all"
+            - name: ROOT_URL
+              value: "/"
+            - name: SHOUTRRR_ADDRESSES
+              value: ""
+            - name: UPDATE_COOLDOWN_PERIOD
+              value: "5m"
+          ports:
+            - name: ddns-8000
+              containerPort: 8000
+            - name: ddns-7998
+              containerPort: 7998
+          volumeMounts:
+            - name: updater-data
+              mountPath: /updater/data
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "200m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      volumes:
+        - name: updater-data
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/ddns-updater/updater/data

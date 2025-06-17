@@ -1,0 +1,811 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: brunner56-riven-868c95c48c
+  namespace: my-media-stack
+  uid: e5b7646b-bc6c-4c57-8399-29009260f6a1
+  resourceVersion: '2389386934'
+  generation: 1
+  creationTimestamp: '2025-05-29T16:29:06Z'
+  labels:
+    app.elfhosted.com/name: riven
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: riven
+    pod-template-hash: 868c95c48c
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-riven,riven-env,riven-setup
+    deployment.kubernetes.io/desired-replicas: '1'
+    deployment.kubernetes.io/max-replicas: '1'
+    deployment.kubernetes.io/revision: '1'
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: brunner56-riven
+      uid: 9f8844f5-e021-4a22-aad7-a8893026fc5b
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: k3s
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-05-29T16:29:06Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:configmap.reloader.stakater.com/reload: {}
+            f:deployment.kubernetes.io/desired-replicas: {}
+            f:deployment.kubernetes.io/max-replicas: {}
+            f:deployment.kubernetes.io/revision: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.elfhosted.com/name: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"9f8844f5-e021-4a22-aad7-a8893026fc5b"}: {}
+        f:spec:
+          f:replicas: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app.elfhosted.com/name: {}
+                f:app.kubernetes.io/instance: {}
+                f:app.kubernetes.io/name: {}
+                f:pod-template-hash: {}
+            f:spec:
+              f:affinity:
+                .: {}
+                f:podAffinity:
+                  .: {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution: {}
+              f:automountServiceAccountToken: {}
+              f:containers:
+                k:{"name":"brunner56-riven"}:
+                  .: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":3001,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:startupProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/backup"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/dev-shm"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/riven/data"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/riven/data/logs"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/setup"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/rclone"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/realdebrid-zurg"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/symlinks"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                k:{"name":"database"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"POSTGRES_DB"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POSTGRES_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POSTGRES_USER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/dev/shm"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/lib/postgresql/data"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:initContainers:
+                .: {}
+                k:{"name":"bootstrap"}:
+                  .: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"AWS_ACCESS_KEY_ID"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                    k:{"name":"AWS_SECRET_ACCESS_KEY"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                    k:{"name":"ELF_APP_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"K8S_APP_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"S3_ENDPOINT_URL"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsGroup: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/etc/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/backup"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                k:{"name":"setup"}:
+                  .: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/setup/"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/symlinks"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                k:{"name":"setup-postgres"}:
+                  .: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:fsGroup: {}
+                f:fsGroupChangePolicy: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"backup"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"config"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"dev-shm"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"elfbot"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"logs"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"rclone"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"rclonemountrealdebridzurg"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"setup"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"symlinks"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+    - manager: k3s
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-05-29T16:42:55Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:fullyLabeledReplicas: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+      subresource: status
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: riven
+      pod-template-hash: 868c95c48c
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.elfhosted.com/name: riven
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: riven
+        pod-template-hash: 868c95c48c
+    spec:
+      volumes:
+        - name: backup
+          persistentVolumeClaim:
+            claimName: backup
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: dev-shm
+          emptyDir: {}
+        - name: elfbot
+          configMap:
+            name: elfbot-riven
+            defaultMode: 420
+            optional: true
+        - name: logs
+          persistentVolumeClaim:
+            claimName: logs
+        - name: rclone
+          persistentVolumeClaim:
+            claimName: rclone
+        - name: rclonemountrealdebridzurg
+          persistentVolumeClaim:
+            claimName: realdebrid-zurg
+        - name: setup
+          configMap:
+            name: riven-setup
+            defaultMode: 420
+        - name: symlinks
+          persistentVolumeClaim:
+            claimName: symlinks
+        - name: tmp
+          emptyDir: {}
+      initContainers:
+        - name: bootstrap
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /bin/bash
+            - '-c'
+            - >
+              set -e
+
+
+              # Allows us to use app.elfhosted.com/name, but fall back to
+              app.kubernetes.io/name if the former doesn't exist
+
+              if [[ -z "$ELF_APP_NAME" ]]; then
+                ELF_APP_NAME=$K8S_APP_NAME
+              fi
+
+
+              # look for commands - we match specific names in order of
+              least-destructive
+
+              TIMESTAMP_NOW=$(date +%s)
+
+              if [[ -f /etc/elfbot/pause ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=pause
+                fi
+              fi
+
+
+              # If no command is set, then move onto the next possibility
+
+              if [[ -f /etc/elfbot/backup && -z "$COMMAND" ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=backup
+                fi
+              fi
+
+
+              # If no command is set, then move onto the next possibility
+
+              if [[ -f /etc/elfbot/reset && -z "$COMMAND" ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=reset
+                fi
+              fi
+
+
+              case $COMMAND in
+
+                "pause")
+                  echo "Recent pause command found, sleeping 5m.."
+                  sleep 300
+                  ;;
+
+                "reset")
+
+                  # Safety check - if /config/homer exists, we've not mounted /config properly and are about to wipe out EVERYTHING
+                  if [ -e "/config/homer" ]; then
+                      echo "The path /config/homer exists. Exiting."
+                      exit 1
+                  fi      
+                  echo "Recent reset command found, resetting"
+                  rm -rf /config/*
+                  ;;
+
+                "backup")
+                  echo "Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}"
+                  TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\n' -1)
+                  cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP
+                  ;;
+
+              esac
+
+
+              if [[ ! -f /config/i-am-bootstrapped ]]
+
+              then
+                echo "Bootstrapping from goldilocks config..."
+                s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/
+                touch /config/i-am-bootstrapped
+              fi
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: b2-elfhosted-config-ro
+                  key: access-key-id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: b2-elfhosted-config-ro
+                  key: secret-key
+            - name: S3_ENDPOINT_URL
+              value: https://s3.us-west-000.backblazeb2.com
+            - name: K8S_APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.kubernetes.io/name']
+            - name: ELF_APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.elfhosted.com/name']
+          resources:
+            limits:
+              cpu: '1'
+              memory: 4Gi
+            requests:
+              cpu: '0'
+              memory: 1Mi
+          volumeMounts:
+            - name: elfbot
+              mountPath: /etc/elfbot
+            - name: backup
+              mountPath: /storage/backup
+            - name: config
+              mountPath: /config
+              subPath: riven
+            - name: tmp
+              mountPath: /tmp
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+        - name: setup
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /bin/bash
+            - '-c'
+            - >
+              # run the setup script from the configmap, so that we can make
+              templated changes
+
+              bash /setup/setup.sh
+          resources: {}
+          volumeMounts:
+            - name: symlinks
+              mountPath: /storage/symlinks
+            - name: config
+              mountPath: /config
+              subPath: riven
+            - name: setup
+              mountPath: /setup/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+        - name: setup-postgres
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              set -x
+              set -e
+
+              mkdir -p /config/postgresql/database
+              mkdir -p /config/postgresql/backups
+              chown elfie:elfie /config -R
+          resources: {}
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: riven
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 0
+            seccompProfile:
+              type: RuntimeDefault
+      containers:
+        - name: brunner56-riven
+          image: >-
+            ghcr.io/elfhosted/riven:v0.21.21@sha256:bf1a9cab579d5eaac0ed72e20584b139547db7c38753a03b3756151af5e0ac13
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: riven-env
+            - configMapRef:
+                name: elfbot-riven
+                optional: true
+          resources:
+            limits:
+              cpu: '2'
+              memory: 4Gi
+            requests:
+              cpu: '0'
+              memory: 20Mi
+          volumeMounts:
+            - name: backup
+              mountPath: /backup
+            - name: config
+              mountPath: /riven/data
+              subPath: riven
+            - name: dev-shm
+              mountPath: /dev-shm
+            - name: elfbot
+              mountPath: /elfbot
+            - name: logs
+              mountPath: /riven/data/logs
+              subPath: riven
+            - name: rclone
+              mountPath: /storage/rclone
+            - name: rclonemountrealdebridzurg
+              mountPath: /storage/realdebrid-zurg
+            - name: setup
+              mountPath: /setup
+            - name: symlinks
+              mountPath: /storage/symlinks
+            - name: tmp
+              mountPath: /tmp
+          livenessProbe:
+            tcpSocket:
+              port: 3001
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: 3001
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            tcpSocket:
+              port: 3001
+            timeoutSeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: false
+            seccompProfile:
+              type: RuntimeDefault
+        - name: database
+          image: postgres:17-alpine
+          args:
+            - '-c'
+            - shared_buffers=500MB
+            - '-c'
+            - work_mem=4MB
+            - '-c'
+            - effective_cache_size=1GB
+            - '-c'
+            - max_connections=310
+          env:
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_DB
+              value: riven
+            - name: POSTGRES_USER
+              value: postgres
+          resources:
+            limits:
+              cpu: 500m
+              memory: 8Gi
+            requests:
+              cpu: '0'
+              memory: 1Mi
+          volumeMounts:
+            - name: config
+              mountPath: /var/lib/postgresql/data
+              subPath: riven/postgresql/database
+            - name: dev-shm
+              mountPath: /dev/shm
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.elfhosted.com/role
+                    operator: In
+                    values:
+                      - nodefinder
+              topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      priorityClassName: tenant-normal
+      enableServiceLinks: false
+status:
+  replicas: 1
+  fullyLabeledReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  observedGeneration: 1

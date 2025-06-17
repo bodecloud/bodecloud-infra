@@ -1,0 +1,40 @@
+{
+  "CurrentVersion": "0.8.5.11",
+  "UpdateVersion": "0.8.5.11",
+  "UpdateBody": "\u003Cp\u003EI decided to do one more hotfix as there was an annoying bug for multi-root libraries that causes flip-flopping (the same issue as covers disappearing). This also contains some fixes around scrobbling and misc other bugs reported that are a good fit. \u003C/p\u003E\n\u003Cp\u003Ev0.8.6 is still planned to focus on the Scanner and finishing off the Kavita\u002B Polish. \u003C/p\u003E\n\u003Ch1\u003EChanged\u003C/h1\u003E\n\u003Cul\u003E\n\u003Cli\u003EChanged: Locale selection now shows the total percentage of completion of the locale.\u003C/li\u003E\n\u003Cli\u003EChanged: Cleaned up some code around localization as a way to hopefully fight the keys showing in the UI on new versions.\u003C/li\u003E\n\u003Cli\u003EChanged: (Kavita\u002B) When a user removes the Kavita\u002B license from their instance, stop doing all K\u002B Background tasks instead of waiting for the next restart.\u003C/li\u003E\n\u003Cli\u003EChanged: (Kavita\u002B) Kavita will now clean up old scrobble events for users that don\u0027t have an anilist token on their account, so that events that will never get processed get cleaned up.\u003C/li\u003E\n\u003Cli\u003EChanged: (Kavita\u002B) When sourcing descriptions from Kavita\u002B, remove the (Source: X).\u003C/li\u003E\n\u003C/ul\u003E\n\u003Ch1\u003EFixed\u003C/h1\u003E\n\u003Cul\u003E\n\u003Cli\u003EFixed: Fixed a bug where a signature on an API was wrong \u003C/li\u003E\n\u003Cli\u003EFixed: (Kavita\u002B) Fixed a length issue for reviews from Kavita\u002B that could break metadata matching \u003C/li\u003E\n\u003Cli\u003EFixed: (Kavita\u002B) Fixed some edge case handling of want to read scrobbling and potentially some issues around events that never get processed.\u003C/li\u003E\n\u003Cli\u003EFixed: Fixed unable to start Kavita for the first time on DD/MM/YYYY locales (Thanks @Fesaa )\u003C/li\u003E\n\u003Cli\u003EFixed: Fixed a bug where multi-root libraries would delete and recreate series in one of non-first folders\u003C/li\u003E\n\u003Cli\u003EFixed: Fixed reading list not respecting age restrictions (Thanks @Fesaa )\u003C/li\u003E\n\u003C/ul\u003E\n\u003Ch1\u003EAPI\u003C/h1\u003E\n\u003Cul\u003E\n\u003Cli\u003EUpdated the ReadHistoryEvent to expose ReadDateUtc instead of just the server timezone date. (Thanks @0xGingi)\u003C/li\u003E\n\u003C/ul\u003E\n\u003Ch1\u003EKnown Issues\u003C/h1\u003E\n\u003Cul\u003E\n\u003Cli\u003EDocker images aren\u0027t showing Locale names correctly (this will be fixed v0.8.6)\u003C/li\u003E\n\u003C/ul\u003E\n",
+  "UpdateTitle": "v0.8.5.11 - Hotfix 2",
+  "UpdateUrl": "https://github.com/Kareadita/Kavita/releases/tag/v0.8.5.11",
+  "IsDocker": true,
+  "IsPrerelease": false,
+  "PublishDate": "2025-03-17T19:25:25Z",
+  "IsOnNightlyInRelease": false,
+  "IsReleaseNewer": false,
+  "IsReleaseEqual": true,
+  "Added": [],
+  "Removed": [],
+  "Changed": [
+    "Locale selection now shows the total percentage of completion of the locale.",
+    "Cleaned up some code around localization as a way to hopefully fight the keys showing in the UI on new versions.",
+    "(Kavita\u002B) When a user removes the Kavita\u002B license from their instance, stop doing all K\u002B Background tasks instead of waiting for the next restart.",
+    "(Kavita\u002B) Kavita will now clean up old scrobble events for users that don\u0027t have an anilist token on their account, so that events that will never get processed get cleaned up.",
+    "(Kavita\u002B) When sourcing descriptions from Kavita\u002B, remove the (Source: X)."
+  ],
+  "Fixed": [
+    "Fixed a bug where a signature on an API was wrong",
+    "(Kavita\u002B) Fixed a length issue for reviews from Kavita\u002B that could break metadata matching",
+    "(Kavita\u002B) Fixed some edge case handling of want to read scrobbling and potentially some issues around events that never get processed.",
+    "Fixed unable to start Kavita for the first time on DD/MM/YYYY locales (Thanks @Fesaa )",
+    "Fixed a bug where multi-root libraries would delete and recreate series in one of non-first folders",
+    "Fixed reading list not respecting age restrictions (Thanks @Fesaa )"
+  ],
+  "Theme": [],
+  "Developer": [],
+  "Api": [
+    "- Updated the ReadHistoryEvent to expose ReadDateUtc instead of just the server timezone date. (Thanks @0xGingi)"
+  ],
+  "FeatureRequests": [],
+  "KnownIssues": [
+    "- Docker images aren\u0027t showing Locale names correctly (this will be fixed v0.8.6)"
+  ],
+  "BlogPart": "\u003Cp\u003EI decided to do one more hotfix as there was an annoying bug for multi-root libraries that causes flip-flopping (the same issue as covers disappearing). This also contains some fixes around scrobbling and misc other bugs reported that are a good fit. \u003C/p\u003E\n\u003Cp\u003Ev0.8.6 is still planned to focus on the Scanner and finishing off the Kavita\u002B Polish.\u003C/p\u003E\n"
+}

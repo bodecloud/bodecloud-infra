@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: netalertx
+    pod-template-hash: 669d97f7bf
+  name: netalertx-669d97f7bf
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: netalertx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netalertx
+      pod-template-hash: 669d97f7bf
+  template:
+    metadata:
+      labels:
+        app: netalertx
+        pod-template-hash: 669d97f7bf
+    spec:
+      containers:
+      - env:
+        - name: PGID
+          value: "988"
+        - name: PORT
+          value: "20211"
+        - name: PUID
+          value: "1002"
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "022"
+        image: ghcr.io/jokob-sk/netalertx:latest
+        imagePullPolicy: IfNotPresent
+        name: netalertx
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /app/config
+          name: app-config
+        - mountPath: /app/db
+          name: app-db
+        - mountPath: /app/api
+          name: app-api
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/netalertx/config
+          type: ""
+        name: app-config
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/netalertx/db
+          type: ""
+        name: app-db
+      - emptyDir: {}
+        name: app-api
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

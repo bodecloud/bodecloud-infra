@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  error-pages:
+    build:
+      context: ./error-pages
+      dockerfile: Dockerfile
+    container_name: rate-limit-page
+    restart: unless-stopped
+    networks:
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      # Just to register the container in Traefik, actual routing is handled by middlewares
+      - "traefik.http.routers.error-pages.rule=Host(`error-pages.localhost`)"
+      - "traefik.http.routers.error-pages.service=error-pages"
+      - "traefik.http.services.error-pages.loadbalancer.server.port=80"
+
+networks:
+  traefik_proxy:
+    external: true 

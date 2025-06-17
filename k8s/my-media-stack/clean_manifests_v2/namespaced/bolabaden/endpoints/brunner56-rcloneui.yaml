@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:07:25Z"
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rcloneui
+    app.kubernetes.io/service: brunner56-rcloneui
+    helm.sh/chart: rcloneui-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: brunner56-rcloneui
+  namespace: bolabaden

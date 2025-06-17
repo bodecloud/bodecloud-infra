@@ -1,0 +1,16 @@
+#! speedtest-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: speedtest
+  namespace: my-media-stack
+spec:
+  selector: {}
+  ports:
+    - name: speedtest-443
+      port: 443
+      targetPort: speedtest-443
+    - name: speedtest-80
+      port: 80
+      targetPort: speedtest-80

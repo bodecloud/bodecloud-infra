@@ -1,0 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: volsync-rd-config-cache
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/created-by: volsync
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: local-path
+  volumeMode: Filesystem

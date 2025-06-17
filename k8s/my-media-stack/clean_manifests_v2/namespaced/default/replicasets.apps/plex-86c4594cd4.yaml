@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "2"
+  labels:
+    app.elfhosted.com/name: plex
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: plex
+    pod-template-hash: 86c4594cd4
+  name: plex-86c4594cd4
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: plex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: plex
+      pod-template-hash: 86c4594cd4
+  template:
+    metadata:
+      labels:
+        app.elfhosted.com/name: plex
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: plex
+        pod-template-hash: 86c4594cd4
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: UTC
+        - name: PLEX_UID
+          value: "568"
+        - name: PLEX_GID
+          value: "568"
+        image: plexinc/pms-docker:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 32400
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: plex
+        ports:
+        - containerPort: 32400
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 32400
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: "4"
+            memory: 8Gi
+          requests:
+            cpu: 100m
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: plex
+        - mountPath: /transcode
+          name: transcode
+        - mountPath: /plex-config
+          name: plex-config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: transcode
+        persistentVolumeClaim:
+          claimName: transcode-1g
+      - configMap:
+          defaultMode: 420
+          name: plex-config
+        name: plex-config
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

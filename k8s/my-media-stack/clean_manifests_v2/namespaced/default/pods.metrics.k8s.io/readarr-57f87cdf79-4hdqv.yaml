@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: readarr
+  usage:
+    cpu: 2485082n
+    memory: 122756Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: readarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: readarr
+    pod-template-hash: 57f87cdf79
+  name: readarr-57f87cdf79-4hdqv
+  namespace: default
+timestamp: "2025-06-14T23:00:54Z"
+window: 19.842s

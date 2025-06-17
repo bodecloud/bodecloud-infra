@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"NetworkPolicy","metadata":{"annotations":{},"name":"allow-traefik","namespace":"default"},"spec":{"ingress":[{"from":[{"namespaceSelector":{"matchLabels":{"name":"traefik"}}}]}],"podSelector":{},"policyTypes":["Ingress"]}}
+  name: allow-traefik
+  namespace: default
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: traefik
+  podSelector: {}
+  policyTypes:
+  - Ingress

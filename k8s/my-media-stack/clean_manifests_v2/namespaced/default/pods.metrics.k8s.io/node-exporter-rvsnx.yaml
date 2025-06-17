@@ -1,0 +1,18 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: node-exporter
+  usage:
+    cpu: 6393n
+    memory: 2560Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: node-exporter
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: node-exporter
+    controller-revision-hash: 5c595f64f4
+    pod-template-generation: "1"
+  name: node-exporter-rvsnx
+  namespace: default
+timestamp: "2025-06-14T23:00:37Z"
+window: 24.712s

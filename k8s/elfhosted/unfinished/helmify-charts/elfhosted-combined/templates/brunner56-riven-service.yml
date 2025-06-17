@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "elfhosted-combined.fullname" . }}-brunner56-riven
+  labels:
+    app.kubernetes.io/service: brunner56-riven
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "elfhosted-combined.labels" . | nindent 4 }}
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  type: {{ .Values.brunner56Riven.type }}
+  selector:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: riven
+    {{- include "elfhosted-combined.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.brunner56Riven.ports | toYaml | nindent 2 }}

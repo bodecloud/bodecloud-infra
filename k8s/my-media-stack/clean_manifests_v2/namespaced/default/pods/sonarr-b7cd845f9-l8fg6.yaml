@@ -1,0 +1,130 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: sonarr-b7cd845f9-
+  labels:
+    app.elfhosted.com/name: sonarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: sonarr
+    pod-template-hash: b7cd845f9
+  name: sonarr-b7cd845f9-l8fg6
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: sonarr-b7cd845f9
+spec:
+  containers:
+  - image: linuxserver/sonarr:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8989
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: sonarr
+    ports:
+    - containerPort: 8989
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8989
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+      subPath: sonarr
+    - mountPath: /storage/symlinks
+      name: symlinks
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - name: symlinks
+    persistentVolumeClaim:
+      claimName: symlinks
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:22:02Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:27Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:27Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://90271907b7fe1706e74456c7530fa7e4b9324aa209e530dd31be2a8067b9278d
+    image: docker.io/linuxserver/sonarr:latest
+    imageID: docker.io/linuxserver/sonarr@sha256:de67e5b682fedcc4ac34f28a5697931c680c959ea65f8111b0cce17bc698c0b2
+    lastState: {}
+    name: sonarr
+    ready: true
+    restartCount: 2
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:22:01Z"
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /storage/symlinks
+      name: symlinks
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.252
+  podIPs:
+  - ip: 10.42.0.252
+  qosClass: Burstable
+  startTime: "2025-06-14T15:09:43Z"

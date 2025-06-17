@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: crowdsec
+  usage:
+    cpu: 575106n
+    memory: 61060Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: crowdsec
+    pod-template-hash: cb4599c
+  name: crowdsec-cb4599c-9x8gt
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:59Z"
+window: 16.936s

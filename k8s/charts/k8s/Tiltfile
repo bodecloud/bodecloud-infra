@@ -1,0 +1,122 @@
+# Tiltfile to deploy the media stack Kubernetes manifests
+
+# --- Environment Setup ---
+# Detect K8s context (optional, Tilt usually finds it)
+# print(str(config.detect_endpoint()))
+
+# --- Helper Functions ---
+# def create_namespace(name):
+#     """Creates a namespace if it doesn't exist."""
+#     k8s_yaml(f"""
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: {name}
+# """)
+#     # Optional: set default namespace for subsequent resources
+#     # config.set_default_namespace(name)
+
+# --- Configuration ---
+# Set namespace if desired, e.g., create_namespace('media-stack')
+NAMESPACE = 'default' # Change if deploying to a specific namespace
+
+# --- Load Manifests ---
+
+# Load secrets, pvcs, configmaps first
+k8s_yaml('k8s/01-secrets.yaml')
+k8s_yaml('k8s/02-pvcs.yaml')
+k8s_yaml('k8s/03-configmaps.yaml')
+
+# Load Traefik (ensure CRDs are applied first if not bundled)
+# Assuming Traefik CRDs are already installed or will be by Traefik Helm/Manifest
+k8s_yaml('k8s/services/traefik/')
+
+# Load Core Services (Databases, Monitoring etc.)
+k8s_yaml('k8s/services/cadvisor/')
+k8s_yaml('k8s/services/crowdsec/')
+k8s_yaml('k8s/services/keycloak-postgres/')
+k8s_yaml('k8s/services/midarr-postgres/')
+# k8s_yaml('k8s/services/cloud-postgres/') # Only if using in-cluster DB for Nextcloud
+k8s_yaml('k8s/services/prometheus/')
+k8s_yaml('k8s/services/redis/')
+k8s_yaml('k8s/services/gotify/')
+
+# Load Gluetun Services (Needed before dependent apps)
+k8s_yaml('k8s/services/gluetun-airvpn/')
+k8s_yaml('k8s/services/gluetun-premiumize/')
+
+# Load Media Management Apps (*arrs, Bazarr, etc.)
+k8s_yaml('k8s/services/autobrr/') # Runs behind gluetun-airvpn
+k8s_yaml('k8s/services/bazarr/')
+k8s_yaml('k8s/services/lidarr/')
+k8s_yaml('k8s/services/midarr/')
+k8s_yaml('k8s/services/prowlarr/') # Runs behind gluetun-airvpn
+k8s_yaml('k8s/services/radarr/')
+k8s_yaml('k8s/services/readarr/')
+k8s_yaml('k8s/services/recyclarr/')
+k8s_yaml('k8s/services/sonarr/')
+k8s_yaml('k8s/services/whisparr/')
+
+# Load Download Clients (Run behind gluetun-airvpn)
+k8s_yaml('k8s/services/deluge/')
+k8s_yaml('k8s/services/jackett/')
+k8s_yaml('k8s/services/qbittorrent/')
+# k8s_yaml('k8s/services/sabnzbd/') # Add if Sabnzbd manifests are created
+
+# Load Media Servers & Request Apps
+k8s_yaml('k8s/services/jellyfin/')
+k8s_yaml('k8s/services/jellyseerr/')
+k8s_yaml('k8s/services/komga/')
+k8s_yaml('k8s/services/navidrome/')
+k8s_yaml('k8s/services/overseerr/') # Add if Overseerr manifests are created
+k8s_yaml('k8s/services/plex/') # Add if Plex manifests are created
+k8s_yaml('k8s/services/tautulli/') # Add if Tautulli manifests are created
+k8s_yaml('k8s/services/wizarr/')
+
+# Load Streaming Apps (Run behind gluetun-premiumize)
+k8s_yaml('k8s/services/aiostreams/')
+k8s_yaml('k8s/services/mediaflow-proxy/')
+k8s_yaml('k8s/services/stremio/')
+
+# Load Utility / Monitoring / Dev Tools
+k8s_yaml('k8s/services/checkrr/')
+k8s_yaml('k8s/services/code-demo/')
+k8s_yaml('k8s/services/code-user/')
+k8s_yaml('k8s/services/code-dev/')
+k8s_yaml('k8s/services/ddns-updater/')
+k8s_yaml('k8s/services/decluttarr/')
+k8s_yaml('k8s/services/deunhealth/')
+k8s_yaml('k8s/services/dozzle/')
+k8s_yaml('k8s/services/flaresolverr/') # Runs behind gluetun-airvpn
+k8s_yaml('k8s/services/homepage/')
+k8s_yaml('k8s/services/keycloak/')
+k8s_yaml('k8s/services/lidarr-exporter/')
+k8s_yaml('k8s/services/myspeed/')
+k8s_yaml('k8s/services/netalertx/')
+k8s_yaml('k8s/services/nextcloud/')
+k8s_yaml('k8s/services/prowlarr-exporter/')
+k8s_yaml('k8s/services/radarr-exporter/')
+k8s_yaml('k8s/services/readarr-exporter/')
+k8s_yaml('k8s/services/remoteit/')
+k8s_yaml('k8s/services/sonarr-exporter/')
+k8s_yaml('k8s/services/speedtest/')
+k8s_yaml('k8s/services/zerotier/')
+
+# --- Port Forwarding (Optional - for dev access) ---
+# Example: Forward Homepage UI to localhost:3000
+# k8s_resource('homepage', namespace=NAMESPACE, port_forwards='3000:3000')
+
+# Example: Forward Traefik Dashboard to localhost:9000 (using internal API port 8080)
+# k8s_resource('traefik', namespace=NAMESPACE, port_forwards='9000:8080')
+
+# Example: Forward Jellyfin UI to localhost:8096
+# k8s_resource('jellyfin', namespace=NAMESPACE, port_forwards='8096:8096')
+
+# --- UI Resources ---
+# Example: Link to Homepage
+# ui_resource(name='Homepage', url='http://localhost:3000') # Adjust port if forwarded differently
+
+# Example: Link to Traefik Dashboard
+# ui_resource(name='Traefik Dashboard', url='http://localhost:9000/dashboard/') # Adjust port
+
+print("Tiltfile configured. Run 'tilt up' to deploy.") 

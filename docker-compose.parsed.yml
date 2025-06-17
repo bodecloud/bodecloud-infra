@@ -1,0 +1,3180 @@
+name: my-media-stack
+services:
+  aiostreams:
+    container_name: aiostreams
+    depends_on:
+      warp:
+        condition: service_started
+        required: true
+    environment:
+      ADDON_ID: aiostreams.bolabaden.org
+      ADDON_NAME: Bolabaden
+      API_KEY: sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9
+      COMET_URL: http://comet:2020/
+      DEBRIDIO_URL: https://debridio.adobotec.com/
+      DEFAULT_JACKETTIO_INDEXERS: '["bitsearch", "eztv", "thepiratebay", "therarbg", "yts"]'
+      DEFAULT_JACKETTIO_STREMTHRU_URL: https://stremthru.bolabaden.org
+      DEFAULT_STREMIO_JACKETT_TMDB_API_KEY: cec876f852b9c15d2c1b436b1117dff7
+      DEFAULT_STREMTHRU_CREDENTIAL: bolabaden.duckdns@gmail.com:Hilogirl80!
+      DEFAULT_STREMTHRU_URL: https://stremthru.bolabaden.org/
+      DEFAULT_TIMEOUT: "15000"
+      DETERMINISTIC_ADDON_ID: "true"
+      DISABLE_TORRENTIO_MESSAGE: ""
+      EASYNEWS_PLUS_PLUS_URL: https://easynews-cloudflare-worker.jqrw92fchz.workers.dev/
+      EASYNEWS_PLUS_URL: https://b89262c192b0-stremio-easynews-addon.baby-beamup.club/
+      EASYNEWS_URL: https://ea627ddf0ee7-easynews.baby-beamup.club/
+      ENCRYPT_MEDIAFLOW_URLS: "true"
+      ENCRYPT_STREMTHRU_URLS: "true"
+      FORCE_COMET_HOSTNAME: comet.bolabaden.org
+      FORCE_COMET_PORT: "443"
+      FORCE_COMET_PROTOCOL: https
+      FORCE_JACKETTIO_HOSTNAME: jackettio.bolabaden.org
+      FORCE_JACKETTIO_PORT: "443"
+      FORCE_JACKETTIO_PROTOCOL: https
+      JACKETTIO_URL: http://jackettio:4000/
+      LOG_FORMAT: text
+      LOG_LEVEL: debug
+      LOG_SENSITIVE_INFO: "true"
+      MAX_ADDONS: "50"
+      MAX_EPISODE_SIZE: "161061273600"
+      MAX_KEYWORD_FILTERS: "30"
+      MAX_MOVIE_SIZE: "161061273600"
+      MAX_REGEX_SORT_PATTERNS: "30"
+      MAX_TIMEOUT: "50000"
+      MEDIAFLOW_IP_TIMEOUT: "30000"
+      MEDIAFUSION_API_PASSWORD: h4L0m4St3R327
+      MEDIAFUSION_CONFIG_TIMEOUT: "5000"
+      MEDIAFUSION_URL: http://mediafusion:8000/
+      MIN_TIMEOUT: "1000"
+      ORION_STREMIO_ADDON_URL: https://5a0d1888fa64-orion.baby-beamup.club/
+      PEERFLIX_URL: https://peerflix-addon.onrender.com/
+      PORT: "3005"
+      SECRET_KEY: 1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82
+      SHOW_DIE: "false"
+      STREMIO_JACKETT_CACHE_ENABLED: "true"
+      STREMIO_JACKETT_URL: https://stremio-jackett.elfhosted.com/
+      STREMTHRU_STORE_URL: https://stremthru.13377001.xyz/stremio/store/
+      STREMTHRU_TIMEOUT: "30000"
+      TORBOX_STREMIO_URL: https://stremio.torbox.app/
+      TORRENTIO_URL: https://torrentio.strem.fun/
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:3005/health || exit 1
+      timeout: 10s
+      interval: 1m0s
+      retries: 5
+      start_period: 10s
+    image: ghcr.io/viren070/aiostreams:dev
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: AIOStreams is a stremio addon that combines multiple stremio addons into one, providing additional functionality that can be used for all these addons that may not natively otherwise support them.
+      homepage.group: Stremio Addons
+      homepage.href: https://aiostreams.bolabaden.org/
+      homepage.icon: aiostreams.png
+      homepage.name: AIOStreams
+    network_mode: service:warp
+    restart: always
+  code-demo:
+    container_name: code
+    deploy:
+      resources:
+        limits:
+          cpus: 0.2
+          memory: "536870912"
+    environment:
+      CODESERVER_PASSWORD: ubuntu
+      CODESERVER_SUDO_PASSWORD: h4L0m4St3R327
+      DEFAULT_WORKSPACE: /workspace
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    hostname: code
+    image: linuxserver/code-server:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: A web-based IDE for coding, editing, and debugging code, with support for multiple languages and frameworks.
+      homepage.group: Development
+      homepage.href: https://code.bolabaden.org/
+      homepage.icon: code-server.png
+      homepage.name: Code Server
+      traefik.enable: "true"
+      traefik.http.routers.code.rule: Host(`code.bolabaden.org`) || Host(`code.bolabaden.duckdns.org`) || Host(`code.micklethefickle.duckdns.org`)
+      traefik.http.services.code.loadbalancer.server.port: "8443"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.80
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/code-server/demo/config
+        target: /config
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/code-server/demo/workspace
+        target: /workspace
+        bind:
+          create_host_path: true
+  code-dev:
+    container_name: code-dev
+    environment:
+      CODESERVER_PASSWORD: ubuntu
+      CODESERVER_SUDO_PASSWORD: h4L0m4St3R327
+      DEFAULT_WORKSPACE: /workspace
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    expose:
+      - "8443"
+    hostname: code-dev
+    image: linuxserver/code-server:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.code-dev.rule: Host(`code-dev.bolabaden.org`) || Host(`code-dev.bolabaden.duckdns.org`) || Host(`code-dev.localhost`)
+      traefik.http.routers.streamystats_frontend.middlewares: tinyauth@docker
+      traefik.http.services.code-dev.loadbalancer.server.port: "8443"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.92
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/code-server/dev/config
+        target: /config
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack
+        target: /workspace
+        bind:
+          create_host_path: true
+  comet:
+    container_name: comet
+    depends_on:
+      prowlarr:
+        condition: service_started
+        required: true
+      warp:
+        condition: service_started
+        required: true
+    environment:
+      ADDON_ID: comet.bolabaden.org
+      ADDON_NAME: Comet
+      COMET_URL: https://comet.elfhosted.com
+      DASHBOARD_ADMIN_PASSWORD: brunner56
+      DATABASE_PATH: data/comet.db
+      DATABASE_TYPE: sqlite
+      DATABASE_URL: koyeb-adm:npg_4oYmMx6HjDcV@ep-cool-flower-a4f00lxk.us-east-1.pg.koyeb.app/koyebdb
+      DEBRID_CACHE_TTL: "86400"
+      DOWNLOAD_TORRENT_FILES: "True"
+      FASTAPI_HOST: 0.0.0.0
+      FASTAPI_PORT: "2020"
+      FASTAPI_WORKERS: "1"
+      GET_TORRENT_TIMEOUT: "5"
+      INDEXER_MANAGER_API_KEY: e6352949607b467e9e48b4bca32f55f1
+      INDEXER_MANAGER_INDEXERS: '["1337x", "animetosho", "anirena", "bitsearch", "eztv", "internetarchive", "limetorrents", "nyaasi", "thepiratebay", "torlock", "yts"]'
+      INDEXER_MANAGER_TIMEOUT: "60"
+      INDEXER_MANAGER_TYPE: prowlarr
+      INDEXER_MANAGER_URL: http://prowlarr:9696
+      MEDIAFUSION_URL: https://mediafusion.elfhosted.com
+      METADATA_CACHE_TTL: "2592000"
+      PROXY_DEBRID_STREAM: "False"
+      PROXY_DEBRID_STREAM_DEBRID_DEFAULT_APIKEY: 6i6zgswm35baj3ur
+      PROXY_DEBRID_STREAM_DEBRID_DEFAULT_SERVICE: premiumize
+      PROXY_DEBRID_STREAM_MAX_CONNECTIONS: "-1"
+      PROXY_DEBRID_STREAM_PASSWORD: brunner56
+      REMOVE_ADULT_CONTENT: "True"
+      SCRAPE_COMET: "false"
+      SCRAPE_MEDIAFUSION: "false"
+      SCRAPE_TORRENTIO: "false"
+      SCRAPE_ZILEAN: "true"
+      STREMTHRU_URL: https://stremthru.13377001.xyz
+      TORRENT_CACHE_TTL: "1296000"
+      TORRENTIO_URL: https://torrentio.strem.fun
+      USE_GUNICORN: "True"
+      ZILEAN_URL: https://zilean.elfhosted.com
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:2020/health > /dev/null 2>&1 || exit 1
+      timeout: 10s
+      interval: 1m0s
+      retries: 5
+      start_period: 10s
+    image: g0ldyy/comet
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.group: Stremio Addons
+      homepage.href: https://comet.bolabaden.org/
+      homepage.icon: comet.png
+      homepage.name: Comet
+    logging:
+      driver: local
+      options:
+        max-file: "5"
+        max-size: 10m
+    network_mode: service:warp
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/stremio/addons/comet/data
+        target: /data
+        bind:
+          create_host_path: true
+  dash:
+    container_name: dash
+    environment:
+      ACME_JSON_PATH: acme.json
+      ACME_RESOLVER_EMAIL: boden.crouch@gmail.com
+      AI21_API_KEY: x2hpN1aqmtoLS0iGwyhrSeKK0inLBV5y
+      AIOSTREAMS_API_KEY: sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9
+      AIOSTREAMS_DEFAULT_MEDIAFLOW_API_PASSWORD: h4L0m4St3R327
+      AIOSTREAMS_DEFAULT_MEDIAFLOW_URL: https://mediaflow-proxy.bolabaden.org/
+      AIOSTREAMS_SECRET_KEY: 1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82
+      ANTHROPIC_API_KEY: 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
+      APIFY_API_TOKEN: apify_api_caQfKkFnMaLn3649k0ohRimlTKbHUt3jAbbW
+      APIPIE_API_KEY: sk-pie90283f87e2e39167b141dabd5e02da1b4868991043b52315c30b501094c3398f
+      ARLIAI_API_KEY: 7ae85d1b-2d75-45e9-957f-cdc8b2a19592
+      AUTH_SECRET: eFIz6MdCDPp9N39VWBPrfdtieLr9EFzFgOilb2iGZRfVStb0fihzFk2f6Io9NM8
+      AUTOBRR_API_KEY: 74d290518e91075a37dca845c588b56a
+      AUTOBRR_URL: https://autobrr.bolabaden.org
+      AWANLLM_API_KEY: 95a7ece0-87bd-462c-8e8a-29263b918e96
+      BASETEN_API_KEY: WiaBmPzD.7amFyXTjAaRVBmmAFospjIwNdQhFp2iq
+      BAZARR_API_KEY: f1ededf2d38845756de95c135c917369
+      BAZARR_URL: https://bazarr.bolabaden.org
+      BITO_ACCESS_KEY: eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjFfMTU1MDNfMTQ1NTQ1Ml84MzQ4NThfU2F0IEphbiAwNCAwODoyNzoxNCBVVEMgMjAyNSJ9.qS7IXThxkewXaMIEiCqW_6TNknvlyWLTBWjoM6qQdmU
+      BRAVE_API_KEY: BQYQ53Y34895489548954895489548954895489
+      CEREBRIUMAI_API_KEY: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0SWQiOiJwLTVjYmUzNTE0IiwiaWF0IjoxNzM3NjUwMDg3LCJleHAiOjIwNTMyMjYwODd9.p6fJZ2wymmJrnkyKdWWsKzumINn-tHG70P44ELYTqygzSHCEJKzXjthjS50WfBiFn9AwnNJTu0ZTGDGGWg_UQz3IkGu4y0h1fx1Oc9mITa2mEgG_osz2IJjCTltd3CrgwvwYvjRe2JggtYtzdKkLN8RhL8GU_RVXXQ63xRiC3JqoM2iUb383-bC60maNpPKRS1sh4OBMI5t60RCt5s18uH6_-85RZx5BrShJHsMlsr8yf2xDZpjPx7HYzrUWddj2-BK433mn7EK7JIrTnZVTaQfJ_xsxRTWFY51n0Y_o_FrSGSqJch0wlvtAaH5kwE6-60KPp9M_IrhS8_rabFYoYQ
+      CF_API_EMAIL: boden.crouch@gmail.com
+      CF_API_KEY: 34a4d9943975b89dd2430870ce146f26aa5bf
+      CF_DNS_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CF_EMAIL: boden.crouch@gmail.com
+      CF_ORIGIN_API_KEY: v1.0-c45e4ce88d5055a4f264a0ef-49d8c705f6c7bcc1cac5cdeb3a897120c90feabb03c86038b495f3bda19dbd271f711483ff11c8186e1e5ede7b672c408f5ab89003169fb9c216d2e6c44796357a7a70c20ee0b3380e
+      CF_ZONE_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CF_ZONE_ID: 164c8d72507295b51851d9b05f0e37a1
+      CLOUDFLARE_API_KEY: 34a4d9943975b89dd2430870ce146f26aa5bf
+      CLOUDFLARE_API_TOKEN: InPh1B7EmFCqAUbG2STUs5sGRyzIY266-sRK0CWy
+      CLOUDFLARE_DNS_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CLOUDFLARE_EMAIL: boden.crouch@gmail.com
+      CLOUDFLARE_HTTP_TIMEOUT: "100"
+      CLOUDFLARE_ORIGIN_API_KEY: v1.0-c45e4ce88d5055a4f264a0ef-49d8c705f6c7bcc1cac5cdeb3a897120c90feabb03c86038b495f3bda19dbd271f711483ff11c8186e1e5ede7b672c408f5ab89003169fb9c216d2e6c44796357a7a70c20ee0b3380e
+      CLOUDFLARE_POLLING_INTERVAL: "2"
+      CLOUDFLARE_PROPAGATION_TIMEOUT: "120"
+      CLOUDFLARE_TTL: "120"
+      CLOUDFLARE_ZONE_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CLOUDFLARE_ZONE_ID: 164c8d72507295b51851d9b05f0e37a1
+      CODESERVER_DEFAULT_WORKSPACE: /workspace
+      CODESERVER_PASSWORD: ubuntu
+      CODESERVER_SUDO_PASSWORD: h4L0m4St3R327
+      COMET_ADDON_ID: comet.bolabaden.org
+      COMET_ADDON_NAME: Comet
+      COMET_CUSTOM_HEADER_HTML: None
+      COMET_DASHBOARD_ADMIN_PASSWORD: ubuntu
+      COMET_DATABASE_PATH: data/comet.db
+      COMET_DATABASE_TYPE: sqlite
+      COMET_DATABASE_URL: koyeb-adm:npg_4oYmMx6HjDcV@ep-cool-flower-a4f00lxk.us-east-1.pg.koyeb.app/koyebdb
+      COMET_DEBRID_CACHE_TTL: "86400"
+      COMET_DEBRID_PROXY_URL: '# Bypass Debrid Services and Torrentio IP blacklist (e.g. http://warp:1080)'
+      COMET_DOWNLOAD_TORRENT_FILES: "True"
+      COMET_FASTAPI_HOST: 0.0.0.0
+      COMET_FASTAPI_PORT: "2020"
+      COMET_FASTAPI_WORKERS: "1"
+      COMET_GET_TORRENT_TIMEOUT: "5"
+      COMET_INDEXER_MANAGER_API_KEY: e6352949607b467e9e48b4bca32f55f1
+      COMET_INDEXER_MANAGER_INDEXERS: '["1337x", "animetosho", "anirena", "anisource", "bitsearch", "eztv", "internetarchive", "kickasstorrents-to", "kickasstorrents-ws", "limetorrents", "nyaasi", "thepiratebay", "therarbg", "torlock", "torrentcore", "yts"]'
+      COMET_INDEXER_MANAGER_TIMEOUT: "60"
+      COMET_INDEXER_MANAGER_TYPE: prowlarr
+      COMET_INDEXER_MANAGER_URL: https://prowlarr.bolabaden.org
+      COMET_MEDIAFUSION_URL: https://mediafusion.bolabaden.org
+      COMET_METADATA_CACHE_TTL: "2592000"
+      COMET_PROXY_DEBRID_STREAM: "True"
+      COMET_PROXY_DEBRID_STREAM_DEBRID_DEFAULT_APIKEY: 6i6zgswm35baj3ur
+      COMET_PROXY_DEBRID_STREAM_DEBRID_DEFAULT_SERVICE: premiumize
+      COMET_PROXY_DEBRID_STREAM_MAX_CONNECTIONS: "-1"
+      COMET_PROXY_DEBRID_STREAM_PASSWORD: ubuntu
+      COMET_REMOVE_ADULT_CONTENT: "False"
+      COMET_SCRAPE_COMET: "true"
+      COMET_SCRAPE_MEDIAFUSION: "true"
+      COMET_SCRAPE_TORRENTIO: "true"
+      COMET_SCRAPE_ZILEAN: "true"
+      COMET_STREMTHRU_URL: https://stremthru.13377001.xyz
+      COMET_TORRENT_CACHE_TTL: "1296000"
+      COMET_TORRENTIO_URL: https://torrentio.elfhosted.com
+      COMET_URL: https://comet.bolabaden.org
+      COMET_USE_GUNICORN: "True"
+      COMET_ZILEAN_URL: https://zilean.elfhosted.com
+      COMPOSE_BAKE: "true"
+      CONFIG_PATH: /home/ubuntu/my-media-stack/configs
+      CREDS_IV: ba5c7efba28ba5184ae70d77ae97fe35
+      CREDS_KEY: 37326fd91e653cc2732774b8fca52e9c09052f4ea9d2c2f34b1dc3071fb1622d
+      CROWDSEC_BOUNCER_API_KEY: usvi2urbIG5obProVWwcf2ImTrtB93x668jWDvrH
+      CROWDSEC_ENROLL_KEY: cm91pb2bz0011e35iltz9k6ra
+      DASHY_PORT: "4002"
+      DATA_DIR: /home/ubuntu/my-media-stack/data
+      DATA_PATH: /home/ubuntu/my-media-stack/data
+      DATABASE_URL: postgresql://neondb_owner:npg_xAJ0mqdWFY7c@ep-dawn-tooth-a8audu8m-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
+      DEEPINFRA_API_KEY: ULCIZTPN6NciFwLAAisihehO5pymrMHf
+      DEEPSEEK_API_KEY: sk-d6c4fe1d5db945ba8547fc348df03833
+      DEFAULT_VERTEXAI_LOCATION: us-central1
+      DEFAULT_VERTEXAI_PROJECT: home-assistant-c2f87
+      DELUGE_PASSWORD: h4L0m4St3R327
+      DOMAIN: bolabaden.org
+      DUCKDNS_TOKEN: 2c18769a-2889-4648-a70c-2fe44dd10f20
+      DUPLICATI__WEBSERVICE_PASSWORD: h4L0m4St3R327
+      DUPLICATI_SETTINGS_ENCRYPTION_KEY: mdwiFQyvlDgV9cQC5995Jx4XM9sXiqST23ryNBjIKl4n4HxcgvnJU4fF55wrvNQ
+      EMAIL: boden.crouch@gmail.com
+      ETCD_VERSION: 3.5.21
+      EVERART_API_KEY: everart-H0b1-Cg-LIRg6dQf6nNANwtnybsyfOnf-qa9hm0YtEg
+      EXA_API_KEY: 4f304bea-22a0-4473-bc38-21114d0f8aaf
+      FANART_API_KEY: 7a38941365b707a56080cf130f3fcec7
+      FIRE_CRAWL_API_KEY: fc-e0e316bead3d497fb24d42ea21d5daf6
+      FIRECRAWL_API_KEY: fc-e0e316bead3d497fb24d42ea21d5daf6
+      FIREFLYIII_STATIC_CRON_TOKEN: 49d4152056a00f38308c39c643cc3c5b
+      FLANNEL_IFACE: enp0s6
+      FLANNEL_IPMASQ: "true"
+      FLANNEL_VERSION: 0.21.1
+      FOREFRONTAI_API_KEY: sk-3MBO9gvVuRYaqmAzkyJoy8ho1X6uDO7w
+      GEMINI_API_KEY: AIzaSyB-1aUePBQbb7_rpIDz5kY7AMWxguMq7Y8
+      GITHUB_CLIENT_ID: Ov23li1ijiBeH6cBV9bJ
+      GITHUB_CLIENT_SECRET: 99adef0dd47be1f9fb76885b0ac6722fd9730d08
+      GITHUB_PERSONAL_ACCESS_TOKEN: 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
+      GITHUB_TOKEN: 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
+      GITLAB_API_KEY: glpat-grYxUyvaSakXzznsnzN2
+      GITLAB_PERSONAL_ACCESS_TOKEN: glpat-grYxUyvaSakXzznsnzN2
+      GITLAB_TOKEN: glpat-grYxUyvaSakXzznsnzN2
+      GLAMA_API_KEY: glama_eyJhcGlLZXkiOiI4YTc1MWRkYi0xNGNjLTQyNTctOTgzMS05OTMyNDQyNGY4NDQifQ
+      GLAUTHUI_DB_PASSWORD: h4L0m4St3R327
+      GLAUTHUI_DB_ROOT_PASSWORD: h4L0m4St3R327
+      GLAUTHUI_SECRET_KEY: AlxMwPK40qlW2hpatItdGXK6zJPLzLHX0ZBm8Xn23v7RlzoVa9u9nkY3ptoxG
+      GLUETUN_BLOCK_ADS: "true"
+      GLUETUN_BLOCK_MALICIOUS: "true"
+      GLUETUN_BLOCK_SURVEILLANCE: "true"
+      GOOGLE_AI_API_KEY: AIzaSyALkZYa_l0toa-mj68TfbsnIMnIO6wZcbw
+      GOOGLE_API_KEY: AIzaSyD-PbwLW-kTPQ_PqUnv3uH5TEy1evHHUKs
+      GOOGLE_APPLICATION_CREDENTIALS: /mnt/c/Users/boden/AppData/Roaming/gcloud/application_default_credentials.json
+      GOOGLE_CLIENT_ID: 324816055390-dftm6jq2d3ifs37miivj3nj09piv0df9.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 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
+      GOOGLE_CLOUD_API_KEY: AIzaSyBbaogYUDy6RK-H5gFahiMtERE7ZH7jlDw
+      GOOGLE_CLOUD_PROJECT: home-assistant-c2f87
+      GRAFANA_PASSWORD: h4L0m4St3R327
+      GRAFANA_USERNAME: ubuntu
+      GROQ_API_KEY: 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
+      HF_TOKEN: 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
+      HUGGINGFACE_ACCESS_TOKEN: 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
+      HUGGINGFACE_API_TOKEN: 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
+      IMGUR_CLIENT_ID: f127f082324e962
+      IMGUR_CLIENT_SECRET: 57936866cadd55ade2e1f5eea1baef2e86a569f1
+      JACKETT_API_KEY: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+      JACKETT_URL: https://jackett.bolabaden.org
+      JELLYFIN_API_KEY: 48963bb342c14be4abccfdced3f8c927
+      JELLYFIN_URL: https://jellyfin.bolabaden.org
+      JELLYSEERR_API_KEY: MTc0MDcxNDk2MTY5MDRmMDcxYmM1LTI5ODktNGJiMy05NzExLTdhYjYyMWQxMDAyOQ==
+      JELLYSEERR_URL: https://overseerr.bolabaden.org
+      JELLYSTAT_JWT_SECRET: iub7WxHJGJ6jFnUw4m0xadNR2Azah6F0ZT9gifhaiaYfo88Tn5DksngJNtrV2
+      JELLYSTAT_POSTGRES_PASSWORD: h4L0m4St3R327
+      JELLYSTAT_URL: https://jellystat.bolabaden.org
+      JINA_API_KEY: PdTZrVTXaPwdlHNa9URo:532f7a4ddedd7a9472993caab3105aeb3bafab810a61421a6e4c76d4480053ae
+      K8S_VERSION: 1.33.0
+      KAGI_API_KEY: DwDAXyEafQc.8vYWUqPid9R9i8_W1kUxNSS19eGkEnk8z31fjivSSSU
+      KAVITA_API_KEY: 3e263495-10c1-4963-b003-9beb4a3dc553
+      KAVITA_OPDS_URL: https://kavita.bolabaden.org/api/opds/3e263495-10c1-4963-b003-9beb4a3dc553
+      KAVITA_TOKEN: 7bAgcPhmVK7Es39XGd6g1pLBJbUPNVe4Fu5\u002BsqnuMxX\u002BUXdAgXKuWYEAegWPJbOdNpfamem0wh70tVHyk9XfW35BU3GGquAdfgQZkokLKDD1sXX6sFnd9S4Zx0ITmVpoH4Gx7yPY9kV0yLgU7gbIr8BAhlGd2sNvpsWJppjqnk1vKXB\u002BGEBhgsaH95pgnoE5LShyuD2kVofXvy8NdDKouTlRp9uOdTp0CIyI5263Lx6wtW5ts5m3J0ZTynacw0Dlq80IJe0qjooH8JxhFNbVJDjGRiFcykyUyhrUaQgIL4xn4DjjDuDqg9KWnCMp0tJs8oryqqK3Ix8\u002Bxb1dBmQ==
+      KAVITA_URL: https://kavita.bolabaden.org
+      KEYCLOAK_ADMIN: ubuntu
+      KEYCLOAK_ADMIN_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_DB_ADDR: bolabaden-postgres-bolabaden.g.aivencloud.com
+      KEYCLOAK_DB_PARAMS: ?ssl=require&user=avnadmin&password=AVNS_OrdE6tbtbMbWuZ_N0N4
+      KEYCLOAK_LOGLEVEL: DEBUG
+      KEYCLOAK_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_PORT: "23610"
+      KEYCLOAK_POSTGRES_DB: defaultdb
+      KEYCLOAK_POSTGRES_PASSWORD: ubuntu
+      KEYCLOAK_POSTGRES_ROOT_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_USER: ubuntu
+      KHOJ_ADMIN_EMAIL: boden.crouch@gmail.com
+      KHOJ_ADMIN_PASSWORD: h4L0m4St3R327
+      KHOJ_DJANGO_SECRET_KEY: SGCHIOh6yzvrW9Rb6T6RgKAXO4BzVikNykgLdj8GzM9RI55tRFTopX81ZmFnaKZ
+      KHOJ_POSTGRES_HOST: host.docker.internal
+      KHOJ_URL: https://khoj.bolabaden.org
+      KLUSTER_API_KEY: efab81e0-d6a1-44a8-b70c-c1a7cedf35b9
+      LANGCHAIN_API_KEY: lsv2_0123456789012345678901234567890123456789
+      LETS_ENCRYPT_EMAIL: boden.crouch@gmail.com
+      LIDARR_API_KEY: 5cbcba61d75444d6a97c07df768a26e4
+      LIDARR_URL: https://lidarr.bolabaden.org
+      LISTRR_API_KEY: d962d6e9fd4e4db790711128ed6013b236e86b1bea534c7f9f0c17a3c4c72982
+      LITELLM_MASTER_KEY: sk-0c460ace5f24fcf76e8d8f5631fdc97cd84d1c03f3
+      LITELLM_PROXY_URL: https://litellm-proxy-923458466949.us-central1.run.app
+      LLDAP_JWT_SECRET: lhTCXQ3bH7hGoAuRBqP6ODk8ErJjdbbr15VBUC3dYEQ
+      LLDAP_KEY_SEED: EQMsFpHi3l9ZnTIgBPqHU75WtP4sH2arobHUPKqpsg
+      LLDAP_LDAP_BASE_DN: ""
+      LM_STUDIO_API_BASE: http://127.0.0.1:1234/v1
+      LM_STUDIO_URL: https://lmstudio.bolabaden.org
+      LMSTUDIO_API_BASE: http://127.0.0.1:1234/v1
+      LMSTUDIO_URL: https://lmstudio.bolabaden.org
+      MARIADB_DB_PASSWORD: ubuntu
+      MARIADB_DB_ROOT_PASSWORD: h4L0m4St3R327
+      MASTER_IP: ""
+      MEDIAFLOW_PROXY_API_PASSWORD: d468d92139047f1df5ba0fae9d998957c30834a386cd63d0472a7b044d42a96a
+      MEDIAFUSION_API_PASSWORD: h4L0m4St3R327
+      MEDIAFUSION_ENABLE_RATE_LIMIT: "false"
+      MEDIAFUSION_HOST_URL: https://mediafusion.bolabaden.org
+      MEDIAFUSION_IS_SCRAP_FROM_MEDIAFUSION: "true"
+      MEDIAFUSION_IS_SCRAP_FROM_TORRENTIO: "true"
+      MEDIAFUSION_IS_SCRAP_FROM_ZILEAN: "true"
+      MEDIAFUSION_MONGO_URI: mongodb://mongodb:27017/mediafusion
+      MEDIAFUSION_POSTER_HOST_URL: https://mediafusion.bolabaden.org
+      MEDIAFUSION_PREMIUMIZE_OAUTH_CLIENT_ID: "117274388"
+      MEDIAFUSION_PREMIUMIZE_OAUTH_CLIENT_SECRET: 6i6zgswm35baj3ur
+      MEDIAFUSION_PROWLARR_IMMEDIATE_MAX_PROCESS: "30"
+      MEDIAFUSION_PROWLARR_IMMEDIATE_MAX_PROCESS_TIME: "30"
+      MEDIAFUSION_PROWLARR_LIVE_TITLE_SEARCH: "true"
+      MEDIAFUSION_PROWLARR_SEARCH_INTERVAL_HOUR: "24"
+      MEDIAFUSION_SECRET_KEY: c75ac92df70c4383c8d1bb37f65454f9
+      MEDIAFUSION_STORE_STREMTHRU_MAGNET_CACHE: "false"
+      MEILI_HTTP_ADDR: https://meili.bolabaden.org
+      MEILI_MASTER_KEY: w9y6ZXi812GH1HEGMLMcrcS6AxuHiQ2jktizLd4ezcgoMW3S2Vyegm4l2DpRB
+      MISTRAL_API_KEY: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+      MISTRALAI_API_KEY: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+      MY_ARTIFACT_REPOSITORY: llm-tools
+      MY_CLOUD_BUILD_ACCOUNT_ID: "111935689254107110811"
+      MY_PROJECT_ID: home-assistant-c2f87
+      MY_REGION: us-central1
+      NEON_TECH_API_KEY: napi_qdtsm5hm6lm6jv80yquizic0by5jnlfdqduajpxx88ceh3qo23x7ej744et664o0
+      NEXT_PUBLIC_STACK_PROJECT_ID: c7ed5968-5d72-4a6b-908e-747b1fee813e
+      NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: pck_f6y5hkb2qb0ppk31qq5px9cgsehwtft25f52n9z7vvvz8
+      NEXTCLOUD_ADMIN_PASSWORD: h4L0m4St3R327
+      NEXTCLOUD_ADMIN_USER: ubuntu
+      NILE_API_KEY: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3RoZW5pbGUuZGV2IiwiYXVkIjpbIm5pbGUiLCJ3b3Jrc3BhY2U6MDE5NWZmMTItZDAyMi03ZGFiLThhZjAtODdkZWI5Mzg2NDYwIl0sImlhdCI6MTc0Mzc0MTI3MywiZXhwIjoyMDU5MTcxMTk5LCJzdWIiOiIwMTk1ZmYxNC00NDFlLTcwNjMtYWE2OS02MWFhYTlhNzFkODMiLCJqdGkiOiIwYjhlMTU1Zi03YWVjLTQzMTktYThhMC1hNTgyZmNiMjg1MDkiLCJzY29wZSI6ImFwaSIsImF1dGhvcml6ZWRfc2NvcGVzIjoiYWxsIn0.hZvxQ7uowOobsXTmdCY3qQ-rEhNDWOJsuiPTMwdlbImazdjZ80AQwCcSCwUmEQabHng34wkQETLEYwcNsnoM0jtxG21KU0AMliy-Lp2yGfGUgNecC5k23rdzRbqskgT30ZVnYolAZxKmd3jfMAigRoTXCQ8VYWS6vaWh4Odx6URNgWO2NJUyWkwzTCZLDzGA0df5kxBwqFsnW0ljdpJdn6s0BQZNVm7Wzc5uprcM3FkNxRclr6FKryIb1BdDFObjPyu3ceVnbDKqwWd32bHND2T_odyRthgcpm21YF-PKlrTzeUdigEBYFlaFukuEoW2mgGyM5jLt2JtWKCapUtaWA
+      OAUTH_SECRET: tu0IOEyZhYCrZy2hobgQyID1YsFjwVnPxAmXeYl3sN1huW18p5OPaUQ3IubHTLa
+      OPENAI_API_KEY: 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
+      OPENROUTER_API_KEY: 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
+      OPENSUBTITLES_API_KEY: XzkTEC85VNh8YYNMFezChYr52hnrZNW5
+      ORION_API_KEY: LXBVEGR6DBKLBSBNLPARQHQRH8DGD7PT
+      ORIONOID_API_KEY: LXBVEGR6DBKLBSBNLPARQHQRH8DGD7PT
+      OVERSEERR_API_KEY: MTc0MDcxNDk2MTY5MDRmMDcxYmM1LTI5ODktNGJiMy05NzExLTdhYjYyMWQxMDAyOQ==
+      OVERSEERR_URL: https://overseerr.bolabaden.org
+      PERPLEXITY_API_KEY: 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
+      PERPLEXITYAI_API_KEY: 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
+      PGID: "988"
+      PLAYWRIGHT_PROXY_PASSWORD: h4L0m4St3R327
+      PLAYWRIGHT_PROXY_USERNAME: ubuntu
+      PLEX_CLAIM: claim-RmAd7Q1DfvybLKDY8zmQ
+      PLEX_DLNA_PORT: "1902"
+      PLEX_TOKEN: 18rS6gM-Wec22uq5Gw-U
+      PLEX_URL: https://plex.bolabaden.org
+      POMERIUM_COOKIE_SECRET: c25a4ffacaacfb33cc1ceda45835cfedea97660ee7b2faa74d1413b2b9ede40e
+      POMERIUM_SHARED_SECRET: 70e62ef6ca2933075c08ef8ac64afe340e21e44f0663f454d36d2ccb3938a871
+      POSTGRES_ROOT_PASSWORD: h4L0m4St3R327
+      PREMIUMIZE_API_KEY: 6i6zgswm35baj3ur
+      PREMIUMIZE_CUSTOMER_ID: "117274388"
+      PROVIDERS_GOOGLE_CLIENT_ID: 644514655858-tgvhmbohi34bq8sgl227r81ikqukihl2.apps.googleusercontent.com
+      PROVIDERS_GOOGLE_CLIENT_SECRET: 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
+      PROVIDERS_GOOGLE_COOKIE_SECRET: cRC0MywXNz6HVIA4qpe3FY2OONY5t2upgKeARwL2CRPLIVAviXVwk4oKwAXBLyz
+      PROWLARR_API_KEY: e6352949607b467e9e48b4bca32f55f1
+      PROWLARR_URL: https://prowlarr.bolabaden.org
+      PUID: "1001"
+      QBITTORRENT_PASSWORD: h4L0m4St3R327
+      QBITTORRENT_USERNAME: ubuntu
+      QDIRSTAT_VNC_PASSWORD: h4L0m4St3R327
+      QDRANT_API_KEY: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+      RADARR_API_KEY: fc44a10e3c7c4c0582cf99f1d7ff0f18
+      RADARR_URL: https://radarr.bolabaden.org
+      READARR_API_KEY: e5ae49d7512a41548588c9b5456d7010
+      READARR_URL: https://readarr.bolabaden.org
+      REAL_DEBRID_API_KEY: FA5NDX4HOAQROKATB6WD7JTZLBZPWYLQSQE6UNBZ7XTUPAKG3YPQ
+      REALDEBRID_API_KEY: FA5NDX4HOAQROKATB6WD7JTZLBZPWYLQSQE6UNBZ7XTUPAKG3YPQ
+      REDIS_URL: redis://redis:6379
+      REMOTEIT_R3_REGISTRATION_CODE: D7F7DC54-0993-5E52-906B-38F08C7D957A
+      REPLICATE_API_KEY: r8_8ktlYwwthNrp8pPSLZF1DD7507tku082y7ptd
+      RESEND_API_KEY: re_Ns9xDLUJ_JxnRW8m9hpUgyjecDgNVmSzS
+      RESEND_EMAIL: halomastar@gmail.com
+      REVID_API_KEY: 9a9884c5-6cb6-4ea9-aadc-91b31de76653
+      RIVEN_API_KEY: 3e0be750b16ff363727d05d18ba364fd
+      RIVEN_SCRAPING_PARSE_DEBUG: "true"
+      ROOT_DIR: /home/ubuntu/my-media-stack
+      SABNZBD_API_KEY: f639219a19284f64926aba59d2fbd14d
+      SABNZBD_URL: https://sabnzbd.bolabaden.org
+      SAMBANOVA_API_KEY: f3f47213-2123-4408-8247-816319bc1e84
+      SCRAPEGRAPH_API_KEY: sgai-468f97f2-a24b-4dbf-81a3-017100faea73
+      SEARCH1API_KEY: DE721F1D-498C-4DBF-843C-B72A75DAFD14
+      SECRETS_DIR: /home/ubuntu/my-media-stack/secrets
+      SERPAPI_API_KEY: dfc64bfdf77ccdde0196b0fde7848a8ebc04e520
+      SETTINGS_ENCRYPTION_KEY: mdwiFQyvlDgV9cQC5995Jx4XM9sXiqST23ryNBjIKl4n4HxcgvnJU4fF55wrvNQ
+      SMITHERY_API_KEY: 477db9a9-92dc-47f5-8011-e717c251bc5a
+      SNYK_AUTH_KEY: f21ad06c-e922-420a-be40-6e5ca09a9514
+      SOCKS5_PROXY_PASS: h4L0m4St3R327
+      SOCKS5_PROXY_USER: ubuntu
+      SONARR_API_KEY: 5fa91e23f1ce4bfda1159fb0d717b70e
+      SONARR_URL: https://sonarr.bolabaden.org
+      SPEEDTEST_TRACKER_ADMIN_EMAIL: boden.crouch@gmail.com
+      SPEEDTEST_TRACKER_ADMIN_NAME: ubuntu
+      SPEEDTEST_TRACKER_ADMIN_PASSWORD: h4L0m4St3R327
+      SPEEDTEST_TRACKER_API_TOKEN: r2SHU2FL1jIQ5aQ5xVsk6T19HjRAGQQsUl0dB7ji140db905
+      SPEEDTEST_TRACKER_APP_KEY: base64:OZVnVd3/7lJTtOTtVZ0YqxXJKtle2R48NIrfFv11CkM=
+      SRC_DIR: /home/ubuntu/my-media-stack/src
+      SRC_PATH: /home/ubuntu/my-media-stack/src
+      STACK_SECRET_SERVER_KEY: ssk_npnvdmcd8jp56mycfw11ffefbhcb1wzyjt4a3j2crtn60
+      STREMIO_JACKETT_URL: https://stremio-jackett.bolabaden.org/
+      DUCKDNS_SUBDOMAIN: bolabaden
+      SUDO_PASSWORD: h4L0m4St3R327
+      TANDOOR_SECRET_KEY: bNAub47Ni8YH5CXgPU9bz6pqBIP3jCTUVFkZc1PTicA
+      TAUTULLI_API_KEY: f86827c56ae740e6bff77c386e726ab8
+      TAVILY_API_KEY: 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
+      TINYAUTH_SECRET: b9a4ZxFNBbyR9KdTAf2kSciI5jUCQLzE
+      TINYAUTH_USERS: brunner56:$$2y$$05$$CEXtGy1XS4BlkTXEgSG64eSQlrGn.55Xm2HbiSgVSgO./WoVXXLAa,bolabaden.duckdns@gmail.com:$$2y$$05$$BbVWsqh2XkzaxvLGwd.0euD/PkkoaeFNDIhB0tTEBn4tAjGckKRzq
+      TMDB_ACCESS_TOKEN: cec876f852b9c15d2c1b436b1117dff7
+      TMDB_API_KEY: cec876f852b9c15d2c1b436b1117dff7
+      TMDB_READ_API_KEY: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZWM4NzZmODUyYjljMTVkMmMxYjQzNmIxMTE3ZGZmNyIsIm5iZiI6MTczNjQzOTU1NC43NzUsInN1YiI6IjY3N2ZmNzAyMjE4ZmQ1N2FjZjRlOGQ2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yK5N4wwBXNKwauenlWmuEv_5jpoTiK8Bs2rit6HO1E
+      TODOIST_API_KEY: d9f0ebcdff604bd11c0944f52360758f7587f907
+      TOGETHERAI_API_KEY: 3bf6c62c61e9dbfbe4e947bd7e0ec876188e41916fbd622877018188f84ab2f2
+      TORBOX_API_KEY: d490b7b1-1f6d-44e8-9cc8-3e735c87874b
+      TORRENTIO_URL: https://torrentio.bolabaden.org
+      TRAEFIK_ACME_EAB_HMAC_ENCODED: x9XmIc15tqVMZSIM-u4n3wy5ETgaJiUzHnqv62YjsTQaaS0bbQjSvK6aB1t-eSVus_FsbiTiwvVhag30eK1qYw
+      TRAEFIK_ACME_EAB_KID: 05i_d9YSFgtMYF_Bc-G8TA
+      TRAKT_CLIENT_ID: 052d735c61c723ed670991aee9d6322822ed6766702d66910be63a1e1a511fd0
+      TRAKT_CLIENT_SECRET: 1d5701574cae67023c25a3743f07669bb84ee74628fd8f0a3fc0c9cca51535c3
+      TS_AUTHKEY: tskey-auth-kQKGfRkbkK11CNTRL-qSFbfpn4ayYrvCtaHzcXyY3YG6gLE29WP
+      TS_BASE_DOMAIN: noodlefish-pound.ts.net
+      TS_CLIENT_ID: ktiyDxLa7E11CNTRL
+      TS_CLIENT_SECRET: tskey-client-ktiyDxLa7E11CNTRL-XXWsoK3AqZKkdynpvFMjZKVMDqqf8bBM
+      TS_DOMAIN: micklethefickle.noodlefish-pound.ts.net
+      TS_OAUTH_CLIENT_ID: k3t5uiTTvf11CNTRL
+      TS_OAUTH_CLIENT_SECRET: tskey-client-k3t5uiTTvf11CNTRL-w53skr3PYzdCyRU8tTZdzdg8Q77WPn65
+      TS_HOSTNAME: micklethefickle
+      TZ: America/Chicago
+      UMAMI_APP_SECRET: Cg2OAmj7fK1jBCmqT4kHx1gpIWp7tluJEWN5CDkjzBPQJ5LdepoYkSKMLNv6jquS
+      UMASK: "002"
+      UNIFY_API_KEY: XeFNQpisNryyS6NrlnDEAK7D-aE0mAq4JCkwsfeDa90=
+      UPSTAGE_API_KEY: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+      UPSTAGEAI_API_KEY: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+      VECTORDB_PORT: "6333"
+      VECTORDB_POSTGRES_PASSWORD: h4L0m4St3R327
+      VECTORDB_POSTGRES_USER: ubuntu
+      VERTEX_LOCATION: us-central1
+      VERTEX_PROJECT: home-assistant-c2f87
+      VEYRAX_API_KEY: vrx-a983dd2b4e8cde0df415b977d8eb3034b44c3fa5
+      WHISPARR_API_KEY: fb6df473cfe14fda8498b8b881902985
+      WHISPARR_URL: https://whisparr.bolabaden.org
+      YANDEX_API_KEY: t1.9euelZqQx8_Hmc-Xx46XjZqYlJGXle3rnpWay5yWnYyak4-ZzY2NnIuOjMvl8_dzBzZD-e8JfEoT_d3z9zM2M0P57wl8ShP9zef1656VmpnLx8qNj8-RmY7IjsjLi4qb7_zF656VmpnLx8qNj8-RmY7IjsjLi4qb.nyEXfAFKqh4NzEUUxDOpY-dArQwO__1KeMHbGS7u4apss2NPU3lY_5qLWPTEDqtNWzIFZZTGyuR0QJt42V4ACQ
+      YOU_API_KEY: cbee3356-84ed-40ea-9d09-ce3d0afcb340<__>1QKC7nETU8N2v5f46hH6l6ax
+      ZEROSSL_API_KEY: c04746f32a98d6915aea626941916bd7
+      ZILEAN_URL: https://zilean.bolabaden.org
+    expose:
+      - "3001"
+    image: mauricenino/dashdot:latest
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.dash.entrypoints: websecure
+      traefik.http.routers.dash.rule: Host(`dash.bolabaden.org`) || Host(`dash.bolabaden.duckdns.org`) || Host(`dash.micklethefickle.duckdns.org`) || Host(`dash.localhost`)
+      traefik.http.routers.dash.tls.certresolver: letsencrypt
+      traefik.http.routers.streamystats_frontend.middlewares: tinyauth@docker
+      traefik.http.services.dash.loadbalancer.server.port: "3001"
+    networks:
+      default: null
+    privileged: true
+    restart: always
+    volumes:
+      - type: bind
+        source: /
+        target: /mnt/host
+        read_only: true
+        bind:
+          create_host_path: true
+  deunhealth:
+    container_name: deunhealth
+    environment:
+      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
+      LOG_LEVEL: debug
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    image: qmcgaw/deunhealth
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+    network_mode: none
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          selinux: z
+          create_host_path: true
+  dozzle:
+    container_name: dozzle
+    expose:
+      - "8080"
+    hostname: dozzle
+    image: amir20/dozzle
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: Real-time log viewer for Docker containers, providing an easy way to monitor application logs and troubleshoot issues.
+      homepage.group: System Monitoring
+      homepage.href: https://dozzle.bolabaden.org/
+      homepage.icon: dozzle.png
+      homepage.name: Dozzle
+      traefik.enable: "true"
+      traefik.http.routers.dozzle.rule: Host(`dozzle.bolabaden.org`) || Host(`dozzle.bolabaden.duckdns.org`) || Host(`dozzle.localhost`)
+      traefik.http.routers.streamystats_frontend.middlewares: tinyauth@docker
+      traefik.http.services.dozzle.loadbalancer.server.port: "8080"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.89
+    restart: always
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          selinux: z
+          create_host_path: true
+  error-pages:
+    container_name: error-pages
+    hostname: error-pages
+    image: httpd:alpine
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.84
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/traefik/error-pages
+        target: /usr/local/apache2/htdocs
+        read_only: true
+        bind:
+          create_host_path: true
+  flaresolverr:
+    container_name: flaresolverr
+    environment:
+      BROWSER_TIMEOUT: "120000"
+      CAPTCHA_SOLVER: none
+      HEADLESS: "true"
+      HOST: 0.0.0.0
+      LOG_HTML: "false"
+      LOG_LEVEL: info
+      PGID: "988"
+      PORT: "8191"
+      PROMETHEUS_ENABLED: "false"
+      PROMETHEUS_PORT: "9090"
+      PUID: "1001"
+      TEST_URL: https://www.google.com
+      TZ: America/Chicago
+      UMASK: "002"
+    expose:
+      - "8191"
+    hostname: flaresolverr
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -f http://127.0.0.1:8191/health > /dev/null 2>&1 || exit 1
+      timeout: 15s
+      interval: 30s
+      retries: 3
+      start_period: 1m0s
+    image: ghcr.io/thephaseless/byparr:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.flaresolverr.rule: Host(`flaresolverr.bolabaden.org`) || Host( `flaresolverr.bolabaden.duckdns.org`) || Host(`flaresolverr.localhost`)
+      traefik.http.services.flaresolverr.loadbalancer.server.port: "8191"
+    logging:
+      driver: local
+      options:
+        max-file: "5"
+        max-size: 10m
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.93
+    restart: always
+  gluetun-airvpn:
+    cap_add:
+      - NET_ADMIN
+    container_name: gluetun-airvpn
+    devices:
+      - source: /dev/net/tun
+        target: /dev/net/tun
+        permissions: rwm
+    environment:
+      BLOCK_ADS: "on"
+      BLOCK_MALICIOUS: "on"
+      BLOCK_SURVEILLANCE: "on"
+      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
+      FIREWALL_VPN_INPUT_PORTS: 20027,23936,36175,42162,52065
+      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
+      HEALTH_SUCCESS_WAIT_DURATION: 5s
+      HEALTH_TARGET_ADDRESS: cloudflare.com:443
+      HEALTH_VPN_DURATION_ADDITION: 5s
+      HEALTH_VPN_DURATION_INITIAL: 6s
+      OPENVPN_CIPHERS: aes-256-gcm
+      OPENVPN_IPV6: "off"
+      PGID: "988"
+      PUID: "1001"
+      SERVER_COUNTRIES: Austria,Belgium,Brazil,Bulgaria,Canada,Czech Republic,Estonia,Germany,Ireland,Japan,Latvia,Netherlands,New Zealand,Norway,Romania,Serbia,Singapore,Spain,Sweden,Switzerland,United Kingdom,United States,China,Isle of Man
+      STORAGE_FILEPATH: /gluetun/servers/servers.json
+      TZ: America/Chicago
+      UMASK: "002"
+      VERSION_INFORMATION: "on"
+      VPN_SERVICE_PROVIDER: airvpn
+      VPN_TYPE: openvpn
+    expose:
+      - "8000"
+      - "9999"
+      - "1055"
+      - "8885"
+      - "41641"
+    extra_hosts:
+      - aiostreams=10.76.128.97
+      - beatapostapita=100.99.45.35
+      - boden-iphone=100.97.148.14
+      - byparr=10.76.128.93
+      - code-demo=10.76.128.80
+      - code-dev=10.76.128.92
+      - comet=10.76.128.97
+      - crowdsec=10.76.128.91
+      - dozzle=10.76.128.89
+      - flaresolverr=10.76.128.93
+      - gluetun-airvpn=10.76.89.128
+      - gluetun-premiumize-nl=10.76.128.99
+      - gluetun-premiumize-us=10.76.128.98
+      - gpt-researcher=10.76.128.43
+      - homepage=10.76.128.88
+      - host.docker.internal=host-gateway
+      - jackett=10.76.128.99
+      - jackettio=10.76.128.97
+      - khoj-database=10.76.128.42
+      - khoj-sandbox=10.76.128.49
+      - khoj=10.76.128.29
+      - litellm-database=10.76.128.45
+      - lobechat=10.76.128.46
+      - mediaflow-proxy=10.76.128.97
+      - mediafusion=10.76.128.97
+      - micklethefickle3=100.72.149.123
+      - micklethefickle=100.72.149.123
+      - mongodb=10.76.0.50
+      - prowlarr=10.76.128.99
+      - redis=10.76.128.87
+      - riven-core=10.76.0.55
+      - riven-db=10.76.0.54
+      - riven=10.76.0.59
+      - speedtest=10.76.128.86
+      - stremio-jackett=10.76.128.98
+      - stremio-web=10.76.128.98
+      - stremio=10.76.128.98
+      - tailscale-airvpn=10.76.89.128
+      - tailscale-premiumize-nl=10.76.128.99
+      - tailscale-premiumize-us=10.76.128.98
+      - tailscale-warp=10.76.128.97
+      - tinyauth=10.76.128.82
+      - torrentio-postgres=10.76.128.101
+      - torrentio=10.76.128.97
+      - traefik-error-pages=10.76.128.84
+      - traefik=10.76.128.85
+      - vpn-nl.premiumize.me=185.107.94.249
+      - vpn-us.premiumize.me=199.58.86.204
+      - warp=10.76.128.97
+      - watchtower=10.76.128.83
+      - whoami=10.76.128.81
+      - wizard-pc=100.119.187.62
+      - wizard=100.119.187.62
+      - zilean-postgres=10.76.128.100
+      - zilean=10.76.128.32
+    hostname: gluetun-airvpn
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:9999 > /dev/null 2>&1 || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 40s
+    image: ghcr.io/qdm12/gluetun
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.89.128
+    restart: always
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: "1"
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/gluetun/auth
+        target: /gluetun/auth
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/gluetun/airvpn
+        target: /gluetun
+        bind:
+          create_host_path: true
+  gluetun-premiumize-nl:
+    cap_add:
+      - NET_ADMIN
+    container_name: gluetun-premiumize-nl
+    devices:
+      - source: /dev/net/tun
+        target: /dev/net/tun
+        permissions: rwm
+    environment:
+      BLOCK_ADS: "on"
+      BLOCK_MALICIOUS: "on"
+      BLOCK_SURVEILLANCE: "on"
+      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
+      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
+      HEALTH_SUCCESS_WAIT_DURATION: 5s
+      HEALTH_TARGET_ADDRESS: cloudflare.com:443
+      HEALTH_VPN_DURATION_ADDITION: 5s
+      HEALTH_VPN_DURATION_INITIAL: 6s
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_CUSTOM_CONFIG: /gluetun/vpn-nl.premiumize.me.ovpn
+      OPENVPN_FLAGS: --auth-user-pass /etc/openvpn/auth.conf
+      OPENVPN_IPV6: "off"
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+      VERSION_INFORMATION: "on"
+      VPN_SERVICE_PROVIDER: custom
+      VPN_TYPE: openvpn
+    expose:
+      - "8000"
+      - "9999"
+      - "1057"
+      - "8887"
+      - "41643"
+      - "9117"
+      - "9696"
+      - "8080"
+      - "11470"
+      - "12470"
+    extra_hosts:
+      - aiostreams=10.76.128.97
+      - beatapostapita=100.99.45.35
+      - boden-iphone=100.97.148.14
+      - byparr=10.76.128.93
+      - code-demo=10.76.128.80
+      - code-dev=10.76.128.92
+      - comet=10.76.128.97
+      - crowdsec=10.76.128.91
+      - dozzle=10.76.128.89
+      - flaresolverr=10.76.128.93
+      - gluetun-airvpn=10.76.89.128
+      - gluetun-premiumize-nl=10.76.128.99
+      - gluetun-premiumize-us=10.76.128.98
+      - gpt-researcher=10.76.128.43
+      - homepage=10.76.128.88
+      - host.docker.internal=host-gateway
+      - jackett=10.76.128.99
+      - jackettio=10.76.128.97
+      - khoj-database=10.76.128.42
+      - khoj-sandbox=10.76.128.49
+      - khoj=10.76.128.29
+      - litellm-database=10.76.128.45
+      - lobechat=10.76.128.46
+      - mediaflow-proxy=10.76.128.97
+      - mediafusion=10.76.128.97
+      - micklethefickle3=100.72.149.123
+      - micklethefickle=100.72.149.123
+      - mongodb=10.76.0.50
+      - prowlarr=10.76.128.99
+      - redis=10.76.128.87
+      - riven-core=10.76.0.55
+      - riven-db=10.76.0.54
+      - riven=10.76.0.59
+      - speedtest=10.76.128.86
+      - stremio-jackett=10.76.128.98
+      - stremio-web=10.76.128.98
+      - stremio=10.76.128.98
+      - tailscale-airvpn=10.76.89.128
+      - tailscale-premiumize-nl=10.76.128.99
+      - tailscale-premiumize-us=10.76.128.98
+      - tailscale-warp=10.76.128.97
+      - tinyauth=10.76.128.82
+      - torrentio-postgres=10.76.128.101
+      - torrentio=10.76.128.97
+      - traefik-error-pages=10.76.128.84
+      - traefik=10.76.128.85
+      - vpn-nl.premiumize.me=185.107.94.249
+      - vpn-us.premiumize.me=199.58.86.204
+      - warp=10.76.128.97
+      - watchtower=10.76.128.83
+      - whoami=10.76.128.81
+      - wizard-pc=100.119.187.62
+      - wizard=100.119.187.62
+      - zilean-postgres=10.76.128.100
+      - zilean=10.76.128.32
+    hostname: gluetun-premiumize-nl
+    image: ghcr.io/qdm12/gluetun
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.jackett.rule: Host(`jackett.bolabaden.org`) || Host(`jackett.bolabaden.duckdns.org`) || Host(`jackett.localhost`)
+      traefik.http.routers.jackett.service: jackett
+      traefik.http.routers.prowlarr.rule: Host(`prowlarr.bolabaden.org`) || Host(`prowlarr.bolabaden.duckdns.org`) || Host(`prowlarr.localhost`)
+      traefik.http.routers.prowlarr.service: prowlarr
+      traefik.http.routers.stremio-http-server.entrypoints: web
+      traefik.http.routers.stremio-http-server.priority: "2"
+      traefik.http.routers.stremio-http-server.rule: (Host(`stremio-fallback.bolabaden.org`) || Host(`stremio-fallback.bolabaden.duckdns.org`) || Host(`stremio-fallback.localhost`))
+      traefik.http.routers.stremio-http-server.service: stremio-http-server
+      traefik.http.routers.stremio-https-server.entrypoints: websecure
+      traefik.http.routers.stremio-https-server.priority: "4"
+      traefik.http.routers.stremio-https-server.rule: (Host(`stremio.bolabaden.org`) || Host(`stremio.bolabaden.duckdns.org`) || Host(`stremio.localhost`))
+      traefik.http.routers.stremio-https-server.service: stremio-https-server
+      traefik.http.routers.stremio-web.priority: "3"
+      traefik.http.routers.stremio-web.rule: (Host(`stremio-web.bolabaden.org`) || Host(`stremio-web.bolabaden.duckdns.org`) || Host(`stremio-web.localhost`))
+      traefik.http.routers.stremio-web.service: stremio-web
+      traefik.http.services.jackett.loadbalancer.server.port: "9117"
+      traefik.http.services.prowlarr.loadbalancer.server.port: "9696"
+      traefik.http.services.stremio-http-server.loadbalancer.server.port: "11470"
+      traefik.http.services.stremio-http-server.loadbalancer.server.scheme: http
+      traefik.http.services.stremio-https-server.loadbalancer.server.port: "12470"
+      traefik.http.services.stremio-https-server.loadbalancer.server.scheme: https
+      traefik.http.services.stremio-web.loadbalancer.server.port: "8080"
+      traefik.http.services.stremio-web.loadbalancer.server.scheme: https
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.99
+    restart: always
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: "1"
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/gluetun/auth
+        target: /gluetun/auth
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/config
+        target: /gluetun
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/nl/etc/openvpn
+        target: /etc/openvpn
+        bind:
+          create_host_path: true
+  gluetun-premiumize-us:
+    cap_add:
+      - NET_ADMIN
+    container_name: gluetun-premiumize-us
+    devices:
+      - source: /dev/net/tun
+        target: /dev/net/tun
+        permissions: rwm
+    environment:
+      BLOCK_ADS: "on"
+      BLOCK_MALICIOUS: "on"
+      BLOCK_SURVEILLANCE: "on"
+      DNS_ADDRESS: 127.0.0.1
+      DNS_KEEP_NAMESERVER: "off"
+      DNS_UPDATE_PERIOD: 24h
+      DOT: "on"
+      DOT_CACHING: "on"
+      DOT_IPV6: "off"
+      DOT_PRIVATE_ADDRESS: ""
+      DOT_PROVIDERS: cloudflare
+      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.17.0.0/16,100.72.149.123/32
+      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
+      HEALTH_SUCCESS_WAIT_DURATION: 5s
+      HEALTH_TARGET_ADDRESS: cloudflare.com:443
+      HEALTH_VPN_DURATION_ADDITION: 5s
+      HEALTH_VPN_DURATION_INITIAL: 6s
+      HTTP_CONTROL_SERVER_ADDRESS: :8000
+      HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: ""
+      HTTP_CONTROL_SERVER_LOG: "on"
+      HTTPPROXY: "on"
+      HTTPPROXY_LISTENING_ADDRESS: :8888
+      HTTPPROXY_LOG: "off"
+      HTTPPROXY_PASSWORD: proxypassword
+      HTTPPROXY_STEALTH: "on"
+      HTTPPROXY_USER: proxyuser
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_CUSTOM_CONFIG: /gluetun/vpn-us.premiumize.me.ovpn
+      OPENVPN_FLAGS: --auth-user-pass /etc/openvpn/auth.conf
+      OPENVPN_IPV6: "off"
+      OPENVPN_MSSFIX: "0"
+      OPENVPN_PROCESS_USER: root
+      OPENVPN_PROTOCOL: tcp
+      OPENVPN_ROOT: "no"
+      OPENVPN_VERBOSITY: "1"
+      OPENVPN_VERSION: "2.6"
+      PGID: "988"
+      PUID: "1001"
+      SHADOWSOCKS: "on"
+      SHADOWSOCKS_ADDRESS: :8388
+      SHADOWSOCKS_CIPHER: chacha20-ietf-poly1305
+      SHADOWSOCKS_LISTENING_ADDRESS: :8388
+      SHADOWSOCKS_LOG: "off"
+      SHADOWSOCKS_PASSWORD: b00tstrap_premiumize
+      STORAGE_FILEPATH: /gluetun/servers/servers.json
+      TZ: America/Chicago
+      UMASK: "002"
+      UNBLOCK: "off"
+      UPDATER_MIN_RATIO: "0"
+      UPDATER_PERIOD: 24h
+      VERSION_INFORMATION: "on"
+      VPN_SERVICE_PROVIDER: custom
+      VPN_TYPE: openvpn
+    expose:
+      - "3000"
+      - "8000"
+      - "9999"
+      - "1056"
+      - "8886"
+      - "41642"
+    extra_hosts:
+      - aiostreams=10.76.128.97
+      - beatapostapita=100.99.45.35
+      - boden-iphone=100.97.148.14
+      - byparr=10.76.128.93
+      - code-demo=10.76.128.80
+      - code-dev=10.76.128.92
+      - comet=10.76.128.97
+      - crowdsec=10.76.128.91
+      - dozzle=10.76.128.89
+      - flaresolverr=10.76.128.93
+      - gluetun-airvpn=10.76.89.128
+      - gluetun-premiumize-nl=10.76.128.99
+      - gluetun-premiumize-us=10.76.128.98
+      - gpt-researcher=10.76.128.43
+      - homepage=10.76.128.88
+      - host.docker.internal=host-gateway
+      - jackett=10.76.128.99
+      - jackettio=10.76.128.97
+      - khoj-database=10.76.128.42
+      - khoj-sandbox=10.76.128.49
+      - khoj=10.76.128.29
+      - litellm-database=10.76.128.45
+      - lobechat=10.76.128.46
+      - mediaflow-proxy=10.76.128.97
+      - mediafusion=10.76.128.97
+      - micklethefickle3=100.72.149.123
+      - micklethefickle=100.72.149.123
+      - mongodb=10.76.0.50
+      - prowlarr=10.76.128.99
+      - redis=10.76.128.87
+      - riven-core=10.76.0.55
+      - riven-db=10.76.0.54
+      - riven=10.76.0.59
+      - speedtest=10.76.128.86
+      - stremio-jackett=10.76.128.98
+      - stremio-web=10.76.128.98
+      - stremio=10.76.128.98
+      - tailscale-airvpn=10.76.89.128
+      - tailscale-premiumize-nl=10.76.128.99
+      - tailscale-premiumize-us=10.76.128.98
+      - tailscale-warp=10.76.128.97
+      - tinyauth=10.76.128.82
+      - torrentio-postgres=10.76.128.101
+      - torrentio=10.76.128.97
+      - traefik-error-pages=10.76.128.84
+      - traefik=10.76.128.85
+      - vpn-nl.premiumize.me=185.107.94.249
+      - vpn-us.premiumize.me=199.58.86.204
+      - warp=10.76.128.97
+      - watchtower=10.76.128.83
+      - whoami=10.76.128.81
+      - wizard-pc=100.119.187.62
+      - wizard=100.119.187.62
+      - zilean-postgres=10.76.128.100
+      - zilean=10.76.128.32
+    hostname: gluetun-premiumize-us
+    image: ghcr.io/qdm12/gluetun
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.stremio-jackett.rule: Host(`stremio-jackett.bolabaden.org`) || Host(`stremio-jackett.bolabaden.duckdns.org`) || Host(`stremio-jackett.localhost`)
+      traefik.http.routers.stremio-jackett.service: stremio-jackett
+      traefik.http.services.stremio-jackett.loadbalancer.server.port: "3000"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.98
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+      - mode: ingress
+        target: 11470
+        published: "11470"
+        protocol: tcp
+      - mode: ingress
+        target: 12470
+        published: "12470"
+        protocol: tcp
+    restart: always
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: "1"
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/gluetun/auth
+        target: /gluetun/auth
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/config
+        target: /gluetun
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/us/etc/openvpn
+        target: /etc/openvpn
+        bind:
+          create_host_path: true
+  gptr:
+    container_name: gptr
+    environment:
+      ANTHROPIC_API_KEY: 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
+      BRAVE_API_KEY: BQYQ53Y34895489548954895489548954895489
+      DEEPSEEK_API_KEY: sk-d6c4fe1d5db945ba8547fc348df03833
+      EXA_API_KEY: 4f304bea-22a0-4473-bc38-21114d0f8aaf
+      FIRE_CRAWL_API_KEY: fc-e0e316bead3d497fb24d42ea21d5daf6
+      FIRECRAWL_API_KEY: fc-e0e316bead3d497fb24d42ea21d5daf6
+      GEMINI_API_KEY: AIzaSyB-1aUePBQbb7_rpIDz5kY7AMWxguMq7Y8
+      GLAMA_API_KEY: glama_eyJhcGlLZXkiOiI4YTc1MWRkYi0xNGNjLTQyNTctOTgzMS05OTMyNDQyNGY4NDQifQ
+      GROQ_API_KEY: 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
+      HF_TOKEN: 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
+      HUGGINGFACE_ACCESS_TOKEN: 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
+      HUGGINGFACE_API_TOKEN: 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
+      LANGCHAIN_API_KEY: lsv2_0123456789012345678901234567890123456789
+      MISTRAL_API_KEY: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+      MISTRALAI_API_KEY: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+      OPENAI_API_KEY: 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
+      OPENROUTER_API_KEY: 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
+      PERPLEXITY_API_KEY: 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
+      PERPLEXITYAI_API_KEY: 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
+      REPLICATE_API_KEY: r8_8ktlYwwthNrp8pPSLZF1DD7507tku082y7ptd
+      REVID_API_KEY: 9a9884c5-6cb6-4ea9-aadc-91b31de76653
+      SAMBANOVA_API_KEY: f3f47213-2123-4408-8247-816319bc1e84
+      SEARCH1API_KEY: DE721F1D-498C-4DBF-843C-B72A75DAFD14
+      SERPAPI_API_KEY: dfc64bfdf77ccdde0196b0fde7848a8ebc04e520
+      TAVILY_API_KEY: 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
+      TOGETHERAI_API_KEY: 3bf6c62c61e9dbfbe4e947bd7e0ec876188e41916fbd622877018188f84ab2f2
+      UNIFY_API_KEY: XeFNQpisNryyS6NrlnDEAK7D-aE0mAq4JCkwsfeDa90=
+      UPSTAGE_API_KEY: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+      UPSTAGEAI_API_KEY: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+      YOU_API_KEY: cbee3356-84ed-40ea-9d09-ce3d0afcb340<__>1QKC7nETU8N2v5f46hH6l6ax
+    expose:
+      - "8000"
+    hostname: gptr
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:8000 > /dev/null || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 2m0s
+    image: th3w1zard1/ai-researchwizard:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.gptr.rule: Host(`gptr.bolabaden.org`) || Host(`gptr.bolabaden.duckdns.org`) || Host(`gptr.micklethefickle.duckdns.org`) || Host(`gptr.localhost`)
+      traefik.http.services.gptr.loadbalancer.server.port: "8000"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.43
+    restart: always
+  homepage:
+    container_name: homepage
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: '*'
+      HOMEPAGE_VAR_HEADER_STYLE: ""
+      HOMEPAGE_VAR_SEARCH_PROVIDER: google
+      HOMEPAGE_VAR_TITLE: Bolabaden
+      HOMEPAGE_VAR_WEATHER_CITY: Chicago
+      HOMEPAGE_VAR_WEATHER_LAT: "41.8781"
+      HOMEPAGE_VAR_WEATHER_LONG: "-87.6298"
+      HOMEPAGE_VAR_WEATHER_UNIT: fahrenheit
+      TZ: America/Chicago
+    hostname: homepage
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:3000 > /dev/null 2>&1 || exit 1
+      timeout: 15s
+      interval: 30s
+      retries: 3
+    image: ghcr.io/gethomepage/homepage
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.homepage.rule: Host(`homepage.bolabaden.org`) || Host(`homepage.bolabaden.duckdns.org`) || Host(`homepage.localhost`)
+      traefik.http.routers.streamystats_frontend.middlewares: tinyauth@docker
+      traefik.http.services.homepage.loadbalancer.server.port: "3000"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.88
+    restart: always
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          selinux: z
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/homepage
+        target: /app/config
+        bind:
+          create_host_path: true
+  jackett:
+    container_name: jackett
+    depends_on:
+      flaresolverr:
+        condition: service_healthy
+        required: true
+      warp:
+        condition: service_healthy
+        required: true
+    environment:
+      AUTO_UPDATE: "true"
+      PGID: "988"
+      PUID: "1001"
+      RUN_OPTS: ""
+      TZ: America/Chicago
+      UMASK: "002"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fs http://127.0.0.1:9117/api/v2.0/indexers/all/results/torznab?t=indexers&apikey=nnx0n84pcj7umynyd2pbid2nl1zzuemz || exit 1
+      timeout: 10s
+      interval: 30s
+      start_period: 1m0s
+    image: linuxserver/jackett
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: Connects your download applications with various source providers and indexers, making it easier to find and download content through your download clients.
+      homepage.group: Source Aggregator
+      homepage.href: https://jackett.bolabaden.org/
+      homepage.icon: jackett.png
+      homepage.name: Jackett Indexer
+      homepage.weight: "1"
+      homepage.widget.key: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+      homepage.widget.type: jackett
+      homepage.widget.url: http://warp:9117
+    logging:
+      driver: local
+      options:
+        max-file: "5"
+        max-size: 10m
+    network_mode: service:warp
+    restart: always
+    user: 1001:988
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/jackett/config
+        target: /config
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/jackett/blackhole
+        target: /downloads
+        bind:
+          create_host_path: true
+  jackettio:
+    container_name: jackettio
+    depends_on:
+      jackett:
+        condition: service_started
+        required: true
+      warp:
+        condition: service_started
+        required: true
+    environment:
+      DATA_FOLDER: /data
+      JACKETT_API_KEY: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+      JACKETT_URL: https://jackett.bolabaden.org
+      NODE_ENV: production
+      PGID: "988"
+      PUID: "1001"
+      TMDB_ACCESS_TOKEN: cec876f852b9c15d2c1b436b1117dff7
+      TZ: America/Chicago
+      UMASK: "002"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'node -e "const http = require(''http''); const req = http.request({hostname: ''127.0.0.1'', port: 4000, path: ''/'', method: ''GET'', timeout: 5000 }, (res) => { process.exit(res.statusCode >= 200 && res.statusCode < 400 ? 0 : 1); }); req.on(''error'', () => { process.exit(1); }); req.on(''timeout'', () => { process.exit(1); }); req.end();"'
+      timeout: 10s
+      interval: 1m0s
+      retries: 5
+      start_period: 10s
+    image: arvida42/jackettio:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.group: Stremio Addons
+      homepage.href: https://jackettio.bolabaden.org/
+      homepage.icon: jackettio.png
+      homepage.name: Jackettio
+    logging:
+      driver: local
+      options:
+        max-file: "5"
+        max-size: 10m
+    network_mode: service:warp
+    restart: always
+    user: 1001:988
+    volumes:
+      - ${CONFIG_PATH:-./configs}/stremio/addons/jackettio/data:/data
+  khoj:
+    command:
+      - --host=0.0.0.0
+      - --port=42110
+      - -vv
+      - --non-interactive
+      - --anonymous-mode
+    container_name: khoj
+    depends_on:
+      khoj-database:
+        condition: service_healthy
+        required: true
+    environment:
+      ACME_JSON_PATH: acme.json
+      ACME_RESOLVER_EMAIL: boden.crouch@gmail.com
+      AI21_API_KEY: x2hpN1aqmtoLS0iGwyhrSeKK0inLBV5y
+      AIOSTREAMS_API_KEY: sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9
+      AIOSTREAMS_DEFAULT_MEDIAFLOW_API_PASSWORD: h4L0m4St3R327
+      AIOSTREAMS_DEFAULT_MEDIAFLOW_URL: https://mediaflow-proxy.bolabaden.org/
+      AIOSTREAMS_SECRET_KEY: 1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82
+      ANTHROPIC_API_KEY: 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
+      APIFY_API_TOKEN: apify_api_caQfKkFnMaLn3649k0ohRimlTKbHUt3jAbbW
+      APIPIE_API_KEY: sk-pie90283f87e2e39167b141dabd5e02da1b4868991043b52315c30b501094c3398f
+      ARLIAI_API_KEY: 7ae85d1b-2d75-45e9-957f-cdc8b2a19592
+      AUTH_SECRET: eFIz6MdCDPp9N39VWBPrfdtieLr9EFzFgOilb2iGZRfVStb0fihzFk2f6Io9NM8
+      AUTOBRR_API_KEY: 74d290518e91075a37dca845c588b56a
+      AUTOBRR_URL: https://autobrr.bolabaden.org
+      AWANLLM_API_KEY: 95a7ece0-87bd-462c-8e8a-29263b918e96
+      BASETEN_API_KEY: WiaBmPzD.7amFyXTjAaRVBmmAFospjIwNdQhFp2iq
+      BAZARR_API_KEY: f1ededf2d38845756de95c135c917369
+      BAZARR_URL: https://bazarr.bolabaden.org
+      BITO_ACCESS_KEY: eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjFfMTU1MDNfMTQ1NTQ1Ml84MzQ4NThfU2F0IEphbiAwNCAwODoyNzoxNCBVVEMgMjAyNSJ9.qS7IXThxkewXaMIEiCqW_6TNknvlyWLTBWjoM6qQdmU
+      BRAVE_API_KEY: BQYQ53Y34895489548954895489548954895489
+      CEREBRIUMAI_API_KEY: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0SWQiOiJwLTVjYmUzNTE0IiwiaWF0IjoxNzM3NjUwMDg3LCJleHAiOjIwNTMyMjYwODd9.p6fJZ2wymmJrnkyKdWWsKzumINn-tHG70P44ELYTqygzSHCEJKzXjthjS50WfBiFn9AwnNJTu0ZTGDGGWg_UQz3IkGu4y0h1fx1Oc9mITa2mEgG_osz2IJjCTltd3CrgwvwYvjRe2JggtYtzdKkLN8RhL8GU_RVXXQ63xRiC3JqoM2iUb383-bC60maNpPKRS1sh4OBMI5t60RCt5s18uH6_-85RZx5BrShJHsMlsr8yf2xDZpjPx7HYzrUWddj2-BK433mn7EK7JIrTnZVTaQfJ_xsxRTWFY51n0Y_o_FrSGSqJch0wlvtAaH5kwE6-60KPp9M_IrhS8_rabFYoYQ
+      CF_API_EMAIL: boden.crouch@gmail.com
+      CF_API_KEY: 34a4d9943975b89dd2430870ce146f26aa5bf
+      CF_DNS_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CF_EMAIL: boden.crouch@gmail.com
+      CF_ORIGIN_API_KEY: v1.0-c45e4ce88d5055a4f264a0ef-49d8c705f6c7bcc1cac5cdeb3a897120c90feabb03c86038b495f3bda19dbd271f711483ff11c8186e1e5ede7b672c408f5ab89003169fb9c216d2e6c44796357a7a70c20ee0b3380e
+      CF_ZONE_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CF_ZONE_ID: 164c8d72507295b51851d9b05f0e37a1
+      CLOUDFLARE_API_KEY: 34a4d9943975b89dd2430870ce146f26aa5bf
+      CLOUDFLARE_API_TOKEN: InPh1B7EmFCqAUbG2STUs5sGRyzIY266-sRK0CWy
+      CLOUDFLARE_DNS_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CLOUDFLARE_EMAIL: boden.crouch@gmail.com
+      CLOUDFLARE_HTTP_TIMEOUT: "100"
+      CLOUDFLARE_ORIGIN_API_KEY: v1.0-c45e4ce88d5055a4f264a0ef-49d8c705f6c7bcc1cac5cdeb3a897120c90feabb03c86038b495f3bda19dbd271f711483ff11c8186e1e5ede7b672c408f5ab89003169fb9c216d2e6c44796357a7a70c20ee0b3380e
+      CLOUDFLARE_POLLING_INTERVAL: "2"
+      CLOUDFLARE_PROPAGATION_TIMEOUT: "120"
+      CLOUDFLARE_TTL: "120"
+      CLOUDFLARE_ZONE_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CLOUDFLARE_ZONE_ID: 164c8d72507295b51851d9b05f0e37a1
+      CODESERVER_DEFAULT_WORKSPACE: /workspace
+      CODESERVER_PASSWORD: ubuntu
+      CODESERVER_SUDO_PASSWORD: h4L0m4St3R327
+      COMET_ADDON_ID: comet.bolabaden.org
+      COMET_ADDON_NAME: Comet
+      COMET_CUSTOM_HEADER_HTML: None
+      COMET_DASHBOARD_ADMIN_PASSWORD: ubuntu
+      COMET_DATABASE_PATH: data/comet.db
+      COMET_DATABASE_TYPE: sqlite
+      COMET_DATABASE_URL: koyeb-adm:npg_4oYmMx6HjDcV@ep-cool-flower-a4f00lxk.us-east-1.pg.koyeb.app/koyebdb
+      COMET_DEBRID_CACHE_TTL: "86400"
+      COMET_DEBRID_PROXY_URL: '# Bypass Debrid Services and Torrentio IP blacklist (e.g. http://warp:1080)'
+      COMET_DOWNLOAD_TORRENT_FILES: "True"
+      COMET_FASTAPI_HOST: 0.0.0.0
+      COMET_FASTAPI_PORT: "2020"
+      COMET_FASTAPI_WORKERS: "1"
+      COMET_GET_TORRENT_TIMEOUT: "5"
+      COMET_INDEXER_MANAGER_API_KEY: e6352949607b467e9e48b4bca32f55f1
+      COMET_INDEXER_MANAGER_INDEXERS: '["1337x", "animetosho", "anirena", "anisource", "bitsearch", "eztv", "internetarchive", "kickasstorrents-to", "kickasstorrents-ws", "limetorrents", "nyaasi", "thepiratebay", "therarbg", "torlock", "torrentcore", "yts"]'
+      COMET_INDEXER_MANAGER_TIMEOUT: "60"
+      COMET_INDEXER_MANAGER_TYPE: prowlarr
+      COMET_INDEXER_MANAGER_URL: https://prowlarr.bolabaden.org
+      COMET_MEDIAFUSION_URL: https://mediafusion.bolabaden.org
+      COMET_METADATA_CACHE_TTL: "2592000"
+      COMET_PROXY_DEBRID_STREAM: "True"
+      COMET_PROXY_DEBRID_STREAM_DEBRID_DEFAULT_APIKEY: 6i6zgswm35baj3ur
+      COMET_PROXY_DEBRID_STREAM_DEBRID_DEFAULT_SERVICE: premiumize
+      COMET_PROXY_DEBRID_STREAM_MAX_CONNECTIONS: "-1"
+      COMET_PROXY_DEBRID_STREAM_PASSWORD: ubuntu
+      COMET_REMOVE_ADULT_CONTENT: "False"
+      COMET_SCRAPE_COMET: "true"
+      COMET_SCRAPE_MEDIAFUSION: "true"
+      COMET_SCRAPE_TORRENTIO: "true"
+      COMET_SCRAPE_ZILEAN: "true"
+      COMET_STREMTHRU_URL: https://stremthru.13377001.xyz
+      COMET_TORRENT_CACHE_TTL: "1296000"
+      COMET_TORRENTIO_URL: https://torrentio.elfhosted.com
+      COMET_URL: https://comet.bolabaden.org
+      COMET_USE_GUNICORN: "True"
+      COMET_ZILEAN_URL: https://zilean.elfhosted.com
+      COMPOSE_BAKE: "true"
+      CONFIG_PATH: /home/ubuntu/my-media-stack/configs
+      CREDS_IV: ba5c7efba28ba5184ae70d77ae97fe35
+      CREDS_KEY: 37326fd91e653cc2732774b8fca52e9c09052f4ea9d2c2f34b1dc3071fb1622d
+      CROWDSEC_BOUNCER_API_KEY: usvi2urbIG5obProVWwcf2ImTrtB93x668jWDvrH
+      CROWDSEC_ENROLL_KEY: cm91pb2bz0011e35iltz9k6ra
+      DASHY_PORT: "4002"
+      DATA_DIR: /home/ubuntu/my-media-stack/data
+      DATA_PATH: /home/ubuntu/my-media-stack/data
+      DATABASE_URL: postgresql://neondb_owner:npg_xAJ0mqdWFY7c@ep-dawn-tooth-a8audu8m-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
+      DEEPINFRA_API_KEY: ULCIZTPN6NciFwLAAisihehO5pymrMHf
+      DEEPSEEK_API_KEY: sk-d6c4fe1d5db945ba8547fc348df03833
+      DEFAULT_VERTEXAI_LOCATION: us-central1
+      DEFAULT_VERTEXAI_PROJECT: home-assistant-c2f87
+      DELUGE_PASSWORD: h4L0m4St3R327
+      DOMAIN: bolabaden.org
+      DUCKDNS_TOKEN: 2c18769a-2889-4648-a70c-2fe44dd10f20
+      DUPLICATI__WEBSERVICE_PASSWORD: h4L0m4St3R327
+      DUPLICATI_SETTINGS_ENCRYPTION_KEY: mdwiFQyvlDgV9cQC5995Jx4XM9sXiqST23ryNBjIKl4n4HxcgvnJU4fF55wrvNQ
+      EMAIL: boden.crouch@gmail.com
+      ETCD_VERSION: 3.5.21
+      EVERART_API_KEY: everart-H0b1-Cg-LIRg6dQf6nNANwtnybsyfOnf-qa9hm0YtEg
+      EXA_API_KEY: 4f304bea-22a0-4473-bc38-21114d0f8aaf
+      FANART_API_KEY: 7a38941365b707a56080cf130f3fcec7
+      FIRE_CRAWL_API_KEY: fc-e0e316bead3d497fb24d42ea21d5daf6
+      FIRECRAWL_API_KEY: fc-e0e316bead3d497fb24d42ea21d5daf6
+      FIREFLYIII_STATIC_CRON_TOKEN: 49d4152056a00f38308c39c643cc3c5b
+      FLANNEL_IFACE: enp0s6
+      FLANNEL_IPMASQ: "true"
+      FLANNEL_VERSION: 0.21.1
+      FOREFRONTAI_API_KEY: sk-3MBO9gvVuRYaqmAzkyJoy8ho1X6uDO7w
+      GEMINI_API_KEY: AIzaSyB-1aUePBQbb7_rpIDz5kY7AMWxguMq7Y8
+      GITHUB_CLIENT_ID: Ov23li1ijiBeH6cBV9bJ
+      GITHUB_CLIENT_SECRET: 99adef0dd47be1f9fb76885b0ac6722fd9730d08
+      GITHUB_PERSONAL_ACCESS_TOKEN: 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
+      GITHUB_TOKEN: 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
+      GITLAB_API_KEY: glpat-grYxUyvaSakXzznsnzN2
+      GITLAB_PERSONAL_ACCESS_TOKEN: glpat-grYxUyvaSakXzznsnzN2
+      GITLAB_TOKEN: glpat-grYxUyvaSakXzznsnzN2
+      GLAMA_API_KEY: glama_eyJhcGlLZXkiOiI4YTc1MWRkYi0xNGNjLTQyNTctOTgzMS05OTMyNDQyNGY4NDQifQ
+      GLAUTHUI_DB_PASSWORD: h4L0m4St3R327
+      GLAUTHUI_DB_ROOT_PASSWORD: h4L0m4St3R327
+      GLAUTHUI_SECRET_KEY: AlxMwPK40qlW2hpatItdGXK6zJPLzLHX0ZBm8Xn23v7RlzoVa9u9nkY3ptoxG
+      GLUETUN_BLOCK_ADS: "true"
+      GLUETUN_BLOCK_MALICIOUS: "true"
+      GLUETUN_BLOCK_SURVEILLANCE: "true"
+      GOOGLE_AI_API_KEY: AIzaSyALkZYa_l0toa-mj68TfbsnIMnIO6wZcbw
+      GOOGLE_API_KEY: AIzaSyD-PbwLW-kTPQ_PqUnv3uH5TEy1evHHUKs
+      GOOGLE_APPLICATION_CREDENTIALS: /mnt/c/Users/boden/AppData/Roaming/gcloud/application_default_credentials.json
+      GOOGLE_CLIENT_ID: 324816055390-dftm6jq2d3ifs37miivj3nj09piv0df9.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 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
+      GOOGLE_CLOUD_API_KEY: AIzaSyBbaogYUDy6RK-H5gFahiMtERE7ZH7jlDw
+      GOOGLE_CLOUD_PROJECT: home-assistant-c2f87
+      GRAFANA_PASSWORD: h4L0m4St3R327
+      GRAFANA_USERNAME: ubuntu
+      GROQ_API_KEY: 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
+      HF_TOKEN: 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
+      HUGGINGFACE_ACCESS_TOKEN: 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
+      HUGGINGFACE_API_TOKEN: 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
+      IMGUR_CLIENT_ID: f127f082324e962
+      IMGUR_CLIENT_SECRET: 57936866cadd55ade2e1f5eea1baef2e86a569f1
+      JACKETT_API_KEY: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+      JACKETT_URL: https://jackett.bolabaden.org
+      JELLYFIN_API_KEY: 48963bb342c14be4abccfdced3f8c927
+      JELLYFIN_URL: https://jellyfin.bolabaden.org
+      JELLYSEERR_API_KEY: MTc0MDcxNDk2MTY5MDRmMDcxYmM1LTI5ODktNGJiMy05NzExLTdhYjYyMWQxMDAyOQ==
+      JELLYSEERR_URL: https://overseerr.bolabaden.org
+      JELLYSTAT_JWT_SECRET: iub7WxHJGJ6jFnUw4m0xadNR2Azah6F0ZT9gifhaiaYfo88Tn5DksngJNtrV2
+      JELLYSTAT_POSTGRES_PASSWORD: h4L0m4St3R327
+      JELLYSTAT_URL: https://jellystat.bolabaden.org
+      JINA_API_KEY: PdTZrVTXaPwdlHNa9URo:532f7a4ddedd7a9472993caab3105aeb3bafab810a61421a6e4c76d4480053ae
+      K8S_VERSION: 1.33.0
+      KAGI_API_KEY: DwDAXyEafQc.8vYWUqPid9R9i8_W1kUxNSS19eGkEnk8z31fjivSSSU
+      KAVITA_API_KEY: 3e263495-10c1-4963-b003-9beb4a3dc553
+      KAVITA_OPDS_URL: https://kavita.bolabaden.org/api/opds/3e263495-10c1-4963-b003-9beb4a3dc553
+      KAVITA_TOKEN: 7bAgcPhmVK7Es39XGd6g1pLBJbUPNVe4Fu5\u002BsqnuMxX\u002BUXdAgXKuWYEAegWPJbOdNpfamem0wh70tVHyk9XfW35BU3GGquAdfgQZkokLKDD1sXX6sFnd9S4Zx0ITmVpoH4Gx7yPY9kV0yLgU7gbIr8BAhlGd2sNvpsWJppjqnk1vKXB\u002BGEBhgsaH95pgnoE5LShyuD2kVofXvy8NdDKouTlRp9uOdTp0CIyI5263Lx6wtW5ts5m3J0ZTynacw0Dlq80IJe0qjooH8JxhFNbVJDjGRiFcykyUyhrUaQgIL4xn4DjjDuDqg9KWnCMp0tJs8oryqqK3Ix8\u002Bxb1dBmQ==
+      KAVITA_URL: https://kavita.bolabaden.org
+      KEYCLOAK_ADMIN: ubuntu
+      KEYCLOAK_ADMIN_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_DB_ADDR: bolabaden-postgres-bolabaden.g.aivencloud.com
+      KEYCLOAK_DB_PARAMS: ?ssl=require&user=avnadmin&password=AVNS_OrdE6tbtbMbWuZ_N0N4
+      KEYCLOAK_LOGLEVEL: DEBUG
+      KEYCLOAK_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_PORT: "23610"
+      KEYCLOAK_POSTGRES_DB: defaultdb
+      KEYCLOAK_POSTGRES_PASSWORD: ubuntu
+      KEYCLOAK_POSTGRES_ROOT_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_USER: ubuntu
+      KHOJ_ADMIN_EMAIL: boden.crouch@gmail.com
+      KHOJ_ADMIN_PASSWORD: h4L0m4St3R327
+      KHOJ_DEBUG: "True"
+      KHOJ_DJANGO_SECRET_KEY: SGCHIOh6yzvrW9Rb6T6RgKAXO4BzVikNykgLdj8GzM9RI55tRFTopX81ZmFnaKZ
+      KHOJ_DOMAIN: khoj.bolabaden.org
+      KHOJ_POSTGRES_HOST: host.docker.internal
+      KHOJ_SEARXNG_URL: http://searxng:8080
+      KHOJ_TELEMETRY_DISABLE: "False"
+      KHOJ_TERRARIUM_URL: http://khoj-sandbox:8080
+      KHOJ_URL: https://khoj.bolabaden.org
+      KLUSTER_API_KEY: efab81e0-d6a1-44a8-b70c-c1a7cedf35b9
+      LANGCHAIN_API_KEY: lsv2_0123456789012345678901234567890123456789
+      LETS_ENCRYPT_EMAIL: boden.crouch@gmail.com
+      LIDARR_API_KEY: 5cbcba61d75444d6a97c07df768a26e4
+      LIDARR_URL: https://lidarr.bolabaden.org
+      LISTRR_API_KEY: d962d6e9fd4e4db790711128ed6013b236e86b1bea534c7f9f0c17a3c4c72982
+      LITELLM_MASTER_KEY: sk-0c460ace5f24fcf76e8d8f5631fdc97cd84d1c03f3
+      LITELLM_PROXY_URL: https://litellm-proxy-923458466949.us-central1.run.app
+      LLDAP_JWT_SECRET: lhTCXQ3bH7hGoAuRBqP6ODk8ErJjdbbr15VBUC3dYEQ
+      LLDAP_KEY_SEED: EQMsFpHi3l9ZnTIgBPqHU75WtP4sH2arobHUPKqpsg
+      LLDAP_LDAP_BASE_DN: ""
+      LM_STUDIO_API_BASE: http://127.0.0.1:1234/v1
+      LM_STUDIO_URL: https://lmstudio.bolabaden.org
+      LMSTUDIO_API_BASE: http://127.0.0.1:1234/v1
+      LMSTUDIO_URL: https://lmstudio.bolabaden.org
+      MARIADB_DB_PASSWORD: ubuntu
+      MARIADB_DB_ROOT_PASSWORD: h4L0m4St3R327
+      MASTER_IP: ""
+      MEDIAFLOW_PROXY_API_PASSWORD: d468d92139047f1df5ba0fae9d998957c30834a386cd63d0472a7b044d42a96a
+      MEDIAFUSION_API_PASSWORD: h4L0m4St3R327
+      MEDIAFUSION_ENABLE_RATE_LIMIT: "false"
+      MEDIAFUSION_HOST_URL: https://mediafusion.bolabaden.org
+      MEDIAFUSION_IS_SCRAP_FROM_MEDIAFUSION: "true"
+      MEDIAFUSION_IS_SCRAP_FROM_TORRENTIO: "true"
+      MEDIAFUSION_IS_SCRAP_FROM_ZILEAN: "true"
+      MEDIAFUSION_MONGO_URI: mongodb://mongodb:27017/mediafusion
+      MEDIAFUSION_POSTER_HOST_URL: https://mediafusion.bolabaden.org
+      MEDIAFUSION_PREMIUMIZE_OAUTH_CLIENT_ID: "117274388"
+      MEDIAFUSION_PREMIUMIZE_OAUTH_CLIENT_SECRET: 6i6zgswm35baj3ur
+      MEDIAFUSION_PROWLARR_IMMEDIATE_MAX_PROCESS: "30"
+      MEDIAFUSION_PROWLARR_IMMEDIATE_MAX_PROCESS_TIME: "30"
+      MEDIAFUSION_PROWLARR_LIVE_TITLE_SEARCH: "true"
+      MEDIAFUSION_PROWLARR_SEARCH_INTERVAL_HOUR: "24"
+      MEDIAFUSION_SECRET_KEY: c75ac92df70c4383c8d1bb37f65454f9
+      MEDIAFUSION_STORE_STREMTHRU_MAGNET_CACHE: "false"
+      MEILI_HTTP_ADDR: https://meili.bolabaden.org
+      MEILI_MASTER_KEY: w9y6ZXi812GH1HEGMLMcrcS6AxuHiQ2jktizLd4ezcgoMW3S2Vyegm4l2DpRB
+      MISTRAL_API_KEY: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+      MISTRALAI_API_KEY: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+      MY_ARTIFACT_REPOSITORY: llm-tools
+      MY_CLOUD_BUILD_ACCOUNT_ID: "111935689254107110811"
+      MY_PROJECT_ID: home-assistant-c2f87
+      MY_REGION: us-central1
+      NEON_TECH_API_KEY: napi_qdtsm5hm6lm6jv80yquizic0by5jnlfdqduajpxx88ceh3qo23x7ej744et664o0
+      NEXT_PUBLIC_STACK_PROJECT_ID: c7ed5968-5d72-4a6b-908e-747b1fee813e
+      NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: pck_f6y5hkb2qb0ppk31qq5px9cgsehwtft25f52n9z7vvvz8
+      NEXTCLOUD_ADMIN_PASSWORD: h4L0m4St3R327
+      NEXTCLOUD_ADMIN_USER: ubuntu
+      NILE_API_KEY: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3RoZW5pbGUuZGV2IiwiYXVkIjpbIm5pbGUiLCJ3b3Jrc3BhY2U6MDE5NWZmMTItZDAyMi03ZGFiLThhZjAtODdkZWI5Mzg2NDYwIl0sImlhdCI6MTc0Mzc0MTI3MywiZXhwIjoyMDU5MTcxMTk5LCJzdWIiOiIwMTk1ZmYxNC00NDFlLTcwNjMtYWE2OS02MWFhYTlhNzFkODMiLCJqdGkiOiIwYjhlMTU1Zi03YWVjLTQzMTktYThhMC1hNTgyZmNiMjg1MDkiLCJzY29wZSI6ImFwaSIsImF1dGhvcml6ZWRfc2NvcGVzIjoiYWxsIn0.hZvxQ7uowOobsXTmdCY3qQ-rEhNDWOJsuiPTMwdlbImazdjZ80AQwCcSCwUmEQabHng34wkQETLEYwcNsnoM0jtxG21KU0AMliy-Lp2yGfGUgNecC5k23rdzRbqskgT30ZVnYolAZxKmd3jfMAigRoTXCQ8VYWS6vaWh4Odx6URNgWO2NJUyWkwzTCZLDzGA0df5kxBwqFsnW0ljdpJdn6s0BQZNVm7Wzc5uprcM3FkNxRclr6FKryIb1BdDFObjPyu3ceVnbDKqwWd32bHND2T_odyRthgcpm21YF-PKlrTzeUdigEBYFlaFukuEoW2mgGyM5jLt2JtWKCapUtaWA
+      OAUTH_SECRET: tu0IOEyZhYCrZy2hobgQyID1YsFjwVnPxAmXeYl3sN1huW18p5OPaUQ3IubHTLa
+      OPENAI_API_KEY: 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
+      OPENROUTER_API_KEY: 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
+      OPENSUBTITLES_API_KEY: XzkTEC85VNh8YYNMFezChYr52hnrZNW5
+      ORION_API_KEY: LXBVEGR6DBKLBSBNLPARQHQRH8DGD7PT
+      ORIONOID_API_KEY: LXBVEGR6DBKLBSBNLPARQHQRH8DGD7PT
+      OVERSEERR_API_KEY: MTc0MDcxNDk2MTY5MDRmMDcxYmM1LTI5ODktNGJiMy05NzExLTdhYjYyMWQxMDAyOQ==
+      OVERSEERR_URL: https://overseerr.bolabaden.org
+      PERPLEXITY_API_KEY: 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
+      PERPLEXITYAI_API_KEY: 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
+      PGID: "988"
+      PLAYWRIGHT_PROXY_PASSWORD: h4L0m4St3R327
+      PLAYWRIGHT_PROXY_USERNAME: ubuntu
+      PLEX_CLAIM: claim-RmAd7Q1DfvybLKDY8zmQ
+      PLEX_DLNA_PORT: "1902"
+      PLEX_TOKEN: 18rS6gM-Wec22uq5Gw-U
+      PLEX_URL: https://plex.bolabaden.org
+      POMERIUM_COOKIE_SECRET: c25a4ffacaacfb33cc1ceda45835cfedea97660ee7b2faa74d1413b2b9ede40e
+      POMERIUM_SHARED_SECRET: 70e62ef6ca2933075c08ef8ac64afe340e21e44f0663f454d36d2ccb3938a871
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: 10.76.128.42
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_ROOT_PASSWORD: h4L0m4St3R327
+      POSTGRES_USER: postgres
+      PREMIUMIZE_API_KEY: 6i6zgswm35baj3ur
+      PREMIUMIZE_CUSTOMER_ID: "117274388"
+      PROVIDERS_GOOGLE_CLIENT_ID: 644514655858-tgvhmbohi34bq8sgl227r81ikqukihl2.apps.googleusercontent.com
+      PROVIDERS_GOOGLE_CLIENT_SECRET: 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
+      PROVIDERS_GOOGLE_COOKIE_SECRET: cRC0MywXNz6HVIA4qpe3FY2OONY5t2upgKeARwL2CRPLIVAviXVwk4oKwAXBLyz
+      PROWLARR_API_KEY: e6352949607b467e9e48b4bca32f55f1
+      PROWLARR_URL: https://prowlarr.bolabaden.org
+      PUID: "1001"
+      QBITTORRENT_PASSWORD: h4L0m4St3R327
+      QBITTORRENT_USERNAME: ubuntu
+      QDIRSTAT_VNC_PASSWORD: h4L0m4St3R327
+      QDRANT_API_KEY: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+      RADARR_API_KEY: fc44a10e3c7c4c0582cf99f1d7ff0f18
+      RADARR_URL: https://radarr.bolabaden.org
+      READARR_API_KEY: e5ae49d7512a41548588c9b5456d7010
+      READARR_URL: https://readarr.bolabaden.org
+      REAL_DEBRID_API_KEY: FA5NDX4HOAQROKATB6WD7JTZLBZPWYLQSQE6UNBZ7XTUPAKG3YPQ
+      REALDEBRID_API_KEY: FA5NDX4HOAQROKATB6WD7JTZLBZPWYLQSQE6UNBZ7XTUPAKG3YPQ
+      REDIS_URL: redis://redis:6379
+      REMOTEIT_R3_REGISTRATION_CODE: D7F7DC54-0993-5E52-906B-38F08C7D957A
+      REPLICATE_API_KEY: r8_8ktlYwwthNrp8pPSLZF1DD7507tku082y7ptd
+      RESEND_API_KEY: re_Ns9xDLUJ_JxnRW8m9hpUgyjecDgNVmSzS
+      RESEND_EMAIL: halomastar@gmail.com
+      REVID_API_KEY: 9a9884c5-6cb6-4ea9-aadc-91b31de76653
+      RIVEN_API_KEY: 3e0be750b16ff363727d05d18ba364fd
+      RIVEN_SCRAPING_PARSE_DEBUG: "true"
+      ROOT_DIR: /home/ubuntu/my-media-stack
+      SABNZBD_API_KEY: f639219a19284f64926aba59d2fbd14d
+      SABNZBD_URL: https://sabnzbd.bolabaden.org
+      SAMBANOVA_API_KEY: f3f47213-2123-4408-8247-816319bc1e84
+      SCRAPEGRAPH_API_KEY: sgai-468f97f2-a24b-4dbf-81a3-017100faea73
+      SEARCH1API_KEY: DE721F1D-498C-4DBF-843C-B72A75DAFD14
+      SECRETS_DIR: /home/ubuntu/my-media-stack/secrets
+      SERPAPI_API_KEY: dfc64bfdf77ccdde0196b0fde7848a8ebc04e520
+      SETTINGS_ENCRYPTION_KEY: mdwiFQyvlDgV9cQC5995Jx4XM9sXiqST23ryNBjIKl4n4HxcgvnJU4fF55wrvNQ
+      SMITHERY_API_KEY: 477db9a9-92dc-47f5-8011-e717c251bc5a
+      SNYK_AUTH_KEY: f21ad06c-e922-420a-be40-6e5ca09a9514
+      SOCKS5_PROXY_PASS: h4L0m4St3R327
+      SOCKS5_PROXY_USER: ubuntu
+      SONARR_API_KEY: 5fa91e23f1ce4bfda1159fb0d717b70e
+      SONARR_URL: https://sonarr.bolabaden.org
+      SPEEDTEST_TRACKER_ADMIN_EMAIL: boden.crouch@gmail.com
+      SPEEDTEST_TRACKER_ADMIN_NAME: ubuntu
+      SPEEDTEST_TRACKER_ADMIN_PASSWORD: h4L0m4St3R327
+      SPEEDTEST_TRACKER_API_TOKEN: r2SHU2FL1jIQ5aQ5xVsk6T19HjRAGQQsUl0dB7ji140db905
+      SPEEDTEST_TRACKER_APP_KEY: base64:OZVnVd3/7lJTtOTtVZ0YqxXJKtle2R48NIrfFv11CkM=
+      SRC_DIR: /home/ubuntu/my-media-stack/src
+      SRC_PATH: /home/ubuntu/my-media-stack/src
+      STACK_SECRET_SERVER_KEY: ssk_npnvdmcd8jp56mycfw11ffefbhcb1wzyjt4a3j2crtn60
+      STREMIO_JACKETT_URL: https://stremio-jackett.bolabaden.org/
+      DUCKDNS_SUBDOMAIN: bolabaden
+      SUDO_PASSWORD: h4L0m4St3R327
+      TANDOOR_SECRET_KEY: bNAub47Ni8YH5CXgPU9bz6pqBIP3jCTUVFkZc1PTicA
+      TAUTULLI_API_KEY: f86827c56ae740e6bff77c386e726ab8
+      TAVILY_API_KEY: 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
+      TINYAUTH_SECRET: b9a4ZxFNBbyR9KdTAf2kSciI5jUCQLzE
+      TINYAUTH_USERS: brunner56:$$2y$$05$$CEXtGy1XS4BlkTXEgSG64eSQlrGn.55Xm2HbiSgVSgO./WoVXXLAa,bolabaden.duckdns@gmail.com:$$2y$$05$$BbVWsqh2XkzaxvLGwd.0euD/PkkoaeFNDIhB0tTEBn4tAjGckKRzq
+      TMDB_ACCESS_TOKEN: cec876f852b9c15d2c1b436b1117dff7
+      TMDB_API_KEY: cec876f852b9c15d2c1b436b1117dff7
+      TMDB_READ_API_KEY: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZWM4NzZmODUyYjljMTVkMmMxYjQzNmIxMTE3ZGZmNyIsIm5iZiI6MTczNjQzOTU1NC43NzUsInN1YiI6IjY3N2ZmNzAyMjE4ZmQ1N2FjZjRlOGQ2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yK5N4wwBXNKwauenlWmuEv_5jpoTiK8Bs2rit6HO1E
+      TODOIST_API_KEY: d9f0ebcdff604bd11c0944f52360758f7587f907
+      TOGETHERAI_API_KEY: 3bf6c62c61e9dbfbe4e947bd7e0ec876188e41916fbd622877018188f84ab2f2
+      TORBOX_API_KEY: d490b7b1-1f6d-44e8-9cc8-3e735c87874b
+      TORRENTIO_URL: https://torrentio.bolabaden.org
+      TRAEFIK_ACME_EAB_HMAC_ENCODED: x9XmIc15tqVMZSIM-u4n3wy5ETgaJiUzHnqv62YjsTQaaS0bbQjSvK6aB1t-eSVus_FsbiTiwvVhag30eK1qYw
+      TRAEFIK_ACME_EAB_KID: 05i_d9YSFgtMYF_Bc-G8TA
+      TRAKT_CLIENT_ID: 052d735c61c723ed670991aee9d6322822ed6766702d66910be63a1e1a511fd0
+      TRAKT_CLIENT_SECRET: 1d5701574cae67023c25a3743f07669bb84ee74628fd8f0a3fc0c9cca51535c3
+      TS_AUTHKEY: tskey-auth-kQKGfRkbkK11CNTRL-qSFbfpn4ayYrvCtaHzcXyY3YG6gLE29WP
+      TS_BASE_DOMAIN: noodlefish-pound.ts.net
+      TS_CLIENT_ID: ktiyDxLa7E11CNTRL
+      TS_CLIENT_SECRET: tskey-client-ktiyDxLa7E11CNTRL-XXWsoK3AqZKkdynpvFMjZKVMDqqf8bBM
+      TS_DOMAIN: micklethefickle.noodlefish-pound.ts.net
+      TS_HOSTNAME: micklethefickle
+      TS_OAUTH_CLIENT_ID: k3t5uiTTvf11CNTRL
+      TS_OAUTH_CLIENT_SECRET: tskey-client-k3t5uiTTvf11CNTRL-w53skr3PYzdCyRU8tTZdzdg8Q77WPn65
+      TZ: America/Chicago
+      UMAMI_APP_SECRET: Cg2OAmj7fK1jBCmqT4kHx1gpIWp7tluJEWN5CDkjzBPQJ5LdepoYkSKMLNv6jquS
+      UMASK: "002"
+      UNIFY_API_KEY: XeFNQpisNryyS6NrlnDEAK7D-aE0mAq4JCkwsfeDa90=
+      UPSTAGE_API_KEY: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+      UPSTAGEAI_API_KEY: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+      VECTORDB_PORT: "6333"
+      VECTORDB_POSTGRES_PASSWORD: h4L0m4St3R327
+      VECTORDB_POSTGRES_USER: ubuntu
+      VERTEX_LOCATION: us-central1
+      VERTEX_PROJECT: home-assistant-c2f87
+      VEYRAX_API_KEY: vrx-a983dd2b4e8cde0df415b977d8eb3034b44c3fa5
+      WHISPARR_API_KEY: fb6df473cfe14fda8498b8b881902985
+      WHISPARR_URL: https://whisparr.bolabaden.org
+      YANDEX_API_KEY: t1.9euelZqQx8_Hmc-Xx46XjZqYlJGXle3rnpWay5yWnYyak4-ZzY2NnIuOjMvl8_dzBzZD-e8JfEoT_d3z9zM2M0P57wl8ShP9zef1656VmpnLx8qNj8-RmY7IjsjLi4qb7_zF656VmpnLx8qNj8-RmY7IjsjLi4qb.nyEXfAFKqh4NzEUUxDOpY-dArQwO__1KeMHbGS7u4apss2NPU3lY_5qLWPTEDqtNWzIFZZTGyuR0QJt42V4ACQ
+      YOU_API_KEY: cbee3356-84ed-40ea-9d09-ce3d0afcb340<__>1QKC7nETU8N2v5f46hH6l6ax
+      ZEROSSL_API_KEY: c04746f32a98d6915aea626941916bd7
+      ZILEAN_URL: https://zilean.bolabaden.org
+    expose:
+      - "42110"
+    hostname: khoj
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -f http://127.0.0.1:42110 || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 40s
+    image: ghcr.io/khoj-ai/khoj
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: Your AI second brain.
+      homepage.group: AI
+      homepage.href: https://khoj.bolabaden.org/
+      homepage.icon: khoj.png
+      homepage.name: Khoj
+      traefik.enable: "true"
+      traefik.http.routers.khoj.middlewares: tinyauth@docker
+      traefik.http.routers.khoj.rule: Host(`khoj.bolabaden.org`) || Host(`khoj.bolabaden.duckdns.org`) || Host(`khoj.micklethefickle.duckdns.org`) || Host(`khoj.localhost`)
+      traefik.http.services.khoj.loadbalancer.server.port: "42110"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.29
+    ports:
+      - mode: ingress
+        target: 42110
+        published: "42110"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/khoj/config
+        target: /root/.khoj
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/khoj/models
+        target: /root/.cache/torch/sentence_transformers
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/khoj/models
+        target: /root/.cache/huggingface
+        bind:
+          create_host_path: true
+    working_dir: /app
+  khoj-database:
+    container_name: khoj-database
+    environment:
+      KHOJ_DJANGO_SECRET_KEY: SGCHIOh6yzvrW9Rb6T6RgKAXO4BzVikNykgLdj8GzM9RI55tRFTopX81ZmFnaKZ
+      PGID: "988"
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: host.docker.internal
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: postgres
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    hostname: khoj-database
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER} -p $${POSTGRES_PORT}
+      timeout: 5s
+      interval: 30s
+      retries: 5
+    image: ankane/pgvector
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.khoj-database.rule: Host(`khoj-database.bolabaden.org`) || Host(`khoj-database.bolabaden.duckdns.org`) || Host(`khoj-database.micklethefickle.duckdns.org`) || Host(`khoj-database.localhost`)
+      traefik.http.services.khoj-database.loadbalancer.server.port: "5432"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.42
+    restart: always
+  khoj-sandbox:
+    container_name: khoj-sandbox
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    expose:
+      - "8080"
+    hostname: khoj-sandbox
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -f http://127.0.0.1:8080/health
+      timeout: 10s
+      interval: 30s
+      retries: 2
+    image: ghcr.io/khoj-ai/terrarium
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.khoj-sandbox.rule: Host(`khoj-sandbox.bolabaden.org`) || Host(`khoj-sandbox.bolabaden.duckdns.org`) || Host(`khoj-sandbox.micklethefickle.duckdns.org`) || Host(`khoj-sandbox.localhost`)
+      traefik.http.services.khoj-sandbox.loadbalancer.server.port: "8080"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.49
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/khoj/terrarium
+        target: /root/.khoj
+        bind:
+          create_host_path: true
+  lobechat:
+    container_name: lobechat
+    environment:
+      ACCESS_CODE: brunner56
+      ACME_JSON_PATH: acme.json
+      ACME_RESOLVER_EMAIL: boden.crouch@gmail.com
+      AI21_API_KEY: x2hpN1aqmtoLS0iGwyhrSeKK0inLBV5y
+      AIOSTREAMS_API_KEY: sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9
+      AIOSTREAMS_DEFAULT_MEDIAFLOW_API_PASSWORD: h4L0m4St3R327
+      AIOSTREAMS_DEFAULT_MEDIAFLOW_URL: https://mediaflow-proxy.bolabaden.org/
+      AIOSTREAMS_SECRET_KEY: 1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82
+      ANTHROPIC_API_KEY: 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
+      APIFY_API_TOKEN: apify_api_caQfKkFnMaLn3649k0ohRimlTKbHUt3jAbbW
+      APIPIE_API_KEY: sk-pie90283f87e2e39167b141dabd5e02da1b4868991043b52315c30b501094c3398f
+      ARLIAI_API_KEY: 7ae85d1b-2d75-45e9-957f-cdc8b2a19592
+      AUTH_SECRET: eFIz6MdCDPp9N39VWBPrfdtieLr9EFzFgOilb2iGZRfVStb0fihzFk2f6Io9NM8
+      AUTOBRR_API_KEY: 74d290518e91075a37dca845c588b56a
+      AUTOBRR_URL: https://autobrr.bolabaden.org
+      AWANLLM_API_KEY: 95a7ece0-87bd-462c-8e8a-29263b918e96
+      BASETEN_API_KEY: WiaBmPzD.7amFyXTjAaRVBmmAFospjIwNdQhFp2iq
+      BAZARR_API_KEY: f1ededf2d38845756de95c135c917369
+      BAZARR_URL: https://bazarr.bolabaden.org
+      BITO_ACCESS_KEY: eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjFfMTU1MDNfMTQ1NTQ1Ml84MzQ4NThfU2F0IEphbiAwNCAwODoyNzoxNCBVVEMgMjAyNSJ9.qS7IXThxkewXaMIEiCqW_6TNknvlyWLTBWjoM6qQdmU
+      BRAVE_API_KEY: BQYQ53Y34895489548954895489548954895489
+      CEREBRIUMAI_API_KEY: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0SWQiOiJwLTVjYmUzNTE0IiwiaWF0IjoxNzM3NjUwMDg3LCJleHAiOjIwNTMyMjYwODd9.p6fJZ2wymmJrnkyKdWWsKzumINn-tHG70P44ELYTqygzSHCEJKzXjthjS50WfBiFn9AwnNJTu0ZTGDGGWg_UQz3IkGu4y0h1fx1Oc9mITa2mEgG_osz2IJjCTltd3CrgwvwYvjRe2JggtYtzdKkLN8RhL8GU_RVXXQ63xRiC3JqoM2iUb383-bC60maNpPKRS1sh4OBMI5t60RCt5s18uH6_-85RZx5BrShJHsMlsr8yf2xDZpjPx7HYzrUWddj2-BK433mn7EK7JIrTnZVTaQfJ_xsxRTWFY51n0Y_o_FrSGSqJch0wlvtAaH5kwE6-60KPp9M_IrhS8_rabFYoYQ
+      CF_API_EMAIL: boden.crouch@gmail.com
+      CF_API_KEY: 34a4d9943975b89dd2430870ce146f26aa5bf
+      CF_DNS_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CF_EMAIL: boden.crouch@gmail.com
+      CF_ORIGIN_API_KEY: v1.0-c45e4ce88d5055a4f264a0ef-49d8c705f6c7bcc1cac5cdeb3a897120c90feabb03c86038b495f3bda19dbd271f711483ff11c8186e1e5ede7b672c408f5ab89003169fb9c216d2e6c44796357a7a70c20ee0b3380e
+      CF_ZONE_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CF_ZONE_ID: 164c8d72507295b51851d9b05f0e37a1
+      CLOUDFLARE_API_KEY: 34a4d9943975b89dd2430870ce146f26aa5bf
+      CLOUDFLARE_API_TOKEN: InPh1B7EmFCqAUbG2STUs5sGRyzIY266-sRK0CWy
+      CLOUDFLARE_DNS_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CLOUDFLARE_EMAIL: boden.crouch@gmail.com
+      CLOUDFLARE_HTTP_TIMEOUT: "100"
+      CLOUDFLARE_ORIGIN_API_KEY: v1.0-c45e4ce88d5055a4f264a0ef-49d8c705f6c7bcc1cac5cdeb3a897120c90feabb03c86038b495f3bda19dbd271f711483ff11c8186e1e5ede7b672c408f5ab89003169fb9c216d2e6c44796357a7a70c20ee0b3380e
+      CLOUDFLARE_POLLING_INTERVAL: "2"
+      CLOUDFLARE_PROPAGATION_TIMEOUT: "120"
+      CLOUDFLARE_TTL: "120"
+      CLOUDFLARE_ZONE_API_TOKEN: fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I
+      CLOUDFLARE_ZONE_ID: 164c8d72507295b51851d9b05f0e37a1
+      CODESERVER_DEFAULT_WORKSPACE: /workspace
+      CODESERVER_PASSWORD: ubuntu
+      CODESERVER_SUDO_PASSWORD: h4L0m4St3R327
+      COMET_ADDON_ID: comet.bolabaden.org
+      COMET_ADDON_NAME: Comet
+      COMET_CUSTOM_HEADER_HTML: None
+      COMET_DASHBOARD_ADMIN_PASSWORD: ubuntu
+      COMET_DATABASE_PATH: data/comet.db
+      COMET_DATABASE_TYPE: sqlite
+      COMET_DATABASE_URL: koyeb-adm:npg_4oYmMx6HjDcV@ep-cool-flower-a4f00lxk.us-east-1.pg.koyeb.app/koyebdb
+      COMET_DEBRID_CACHE_TTL: "86400"
+      COMET_DEBRID_PROXY_URL: '# Bypass Debrid Services and Torrentio IP blacklist (e.g. http://warp:1080)'
+      COMET_DOWNLOAD_TORRENT_FILES: "True"
+      COMET_FASTAPI_HOST: 0.0.0.0
+      COMET_FASTAPI_PORT: "2020"
+      COMET_FASTAPI_WORKERS: "1"
+      COMET_GET_TORRENT_TIMEOUT: "5"
+      COMET_INDEXER_MANAGER_API_KEY: e6352949607b467e9e48b4bca32f55f1
+      COMET_INDEXER_MANAGER_INDEXERS: '["1337x", "animetosho", "anirena", "anisource", "bitsearch", "eztv", "internetarchive", "kickasstorrents-to", "kickasstorrents-ws", "limetorrents", "nyaasi", "thepiratebay", "therarbg", "torlock", "torrentcore", "yts"]'
+      COMET_INDEXER_MANAGER_TIMEOUT: "60"
+      COMET_INDEXER_MANAGER_TYPE: prowlarr
+      COMET_INDEXER_MANAGER_URL: https://prowlarr.bolabaden.org
+      COMET_MEDIAFUSION_URL: https://mediafusion.bolabaden.org
+      COMET_METADATA_CACHE_TTL: "2592000"
+      COMET_PROXY_DEBRID_STREAM: "True"
+      COMET_PROXY_DEBRID_STREAM_DEBRID_DEFAULT_APIKEY: 6i6zgswm35baj3ur
+      COMET_PROXY_DEBRID_STREAM_DEBRID_DEFAULT_SERVICE: premiumize
+      COMET_PROXY_DEBRID_STREAM_MAX_CONNECTIONS: "-1"
+      COMET_PROXY_DEBRID_STREAM_PASSWORD: ubuntu
+      COMET_REMOVE_ADULT_CONTENT: "False"
+      COMET_SCRAPE_COMET: "true"
+      COMET_SCRAPE_MEDIAFUSION: "true"
+      COMET_SCRAPE_TORRENTIO: "true"
+      COMET_SCRAPE_ZILEAN: "true"
+      COMET_STREMTHRU_URL: https://stremthru.13377001.xyz
+      COMET_TORRENT_CACHE_TTL: "1296000"
+      COMET_TORRENTIO_URL: https://torrentio.elfhosted.com
+      COMET_URL: https://comet.bolabaden.org
+      COMET_USE_GUNICORN: "True"
+      COMET_ZILEAN_URL: https://zilean.elfhosted.com
+      COMPOSE_BAKE: "true"
+      CONFIG_PATH: /home/ubuntu/my-media-stack/configs
+      CREDS_IV: ba5c7efba28ba5184ae70d77ae97fe35
+      CREDS_KEY: 37326fd91e653cc2732774b8fca52e9c09052f4ea9d2c2f34b1dc3071fb1622d
+      CROWDSEC_BOUNCER_API_KEY: usvi2urbIG5obProVWwcf2ImTrtB93x668jWDvrH
+      CROWDSEC_ENROLL_KEY: cm91pb2bz0011e35iltz9k6ra
+      DASHY_PORT: "4002"
+      DATA_DIR: /home/ubuntu/my-media-stack/data
+      DATA_PATH: /home/ubuntu/my-media-stack/data
+      DATABASE_URL: postgresql://neondb_owner:npg_xAJ0mqdWFY7c@ep-dawn-tooth-a8audu8m-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
+      DEEPINFRA_API_KEY: ULCIZTPN6NciFwLAAisihehO5pymrMHf
+      DEEPSEEK_API_KEY: sk-d6c4fe1d5db945ba8547fc348df03833
+      DEFAULT_VERTEXAI_LOCATION: us-central1
+      DEFAULT_VERTEXAI_PROJECT: home-assistant-c2f87
+      DELUGE_PASSWORD: h4L0m4St3R327
+      DOMAIN: bolabaden.org
+      DUCKDNS_TOKEN: 2c18769a-2889-4648-a70c-2fe44dd10f20
+      DUPLICATI__WEBSERVICE_PASSWORD: h4L0m4St3R327
+      DUPLICATI_SETTINGS_ENCRYPTION_KEY: mdwiFQyvlDgV9cQC5995Jx4XM9sXiqST23ryNBjIKl4n4HxcgvnJU4fF55wrvNQ
+      EMAIL: boden.crouch@gmail.com
+      ETCD_VERSION: 3.5.21
+      EVERART_API_KEY: everart-H0b1-Cg-LIRg6dQf6nNANwtnybsyfOnf-qa9hm0YtEg
+      EXA_API_KEY: 4f304bea-22a0-4473-bc38-21114d0f8aaf
+      FANART_API_KEY: 7a38941365b707a56080cf130f3fcec7
+      FIRE_CRAWL_API_KEY: fc-e0e316bead3d497fb24d42ea21d5daf6
+      FIRECRAWL_API_KEY: fc-e0e316bead3d497fb24d42ea21d5daf6
+      FIREFLYIII_STATIC_CRON_TOKEN: 49d4152056a00f38308c39c643cc3c5b
+      FLANNEL_IFACE: enp0s6
+      FLANNEL_IPMASQ: "true"
+      FLANNEL_VERSION: 0.21.1
+      FOREFRONTAI_API_KEY: sk-3MBO9gvVuRYaqmAzkyJoy8ho1X6uDO7w
+      GEMINI_API_KEY: AIzaSyB-1aUePBQbb7_rpIDz5kY7AMWxguMq7Y8
+      GITHUB_CLIENT_ID: Ov23li1ijiBeH6cBV9bJ
+      GITHUB_CLIENT_SECRET: 99adef0dd47be1f9fb76885b0ac6722fd9730d08
+      GITHUB_PERSONAL_ACCESS_TOKEN: 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
+      GITHUB_TOKEN: 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
+      GITLAB_API_KEY: glpat-grYxUyvaSakXzznsnzN2
+      GITLAB_PERSONAL_ACCESS_TOKEN: glpat-grYxUyvaSakXzznsnzN2
+      GITLAB_TOKEN: glpat-grYxUyvaSakXzznsnzN2
+      GLAMA_API_KEY: glama_eyJhcGlLZXkiOiI4YTc1MWRkYi0xNGNjLTQyNTctOTgzMS05OTMyNDQyNGY4NDQifQ
+      GLAUTHUI_DB_PASSWORD: h4L0m4St3R327
+      GLAUTHUI_DB_ROOT_PASSWORD: h4L0m4St3R327
+      GLAUTHUI_SECRET_KEY: AlxMwPK40qlW2hpatItdGXK6zJPLzLHX0ZBm8Xn23v7RlzoVa9u9nkY3ptoxG
+      GLUETUN_BLOCK_ADS: "true"
+      GLUETUN_BLOCK_MALICIOUS: "true"
+      GLUETUN_BLOCK_SURVEILLANCE: "true"
+      GOOGLE_AI_API_KEY: AIzaSyALkZYa_l0toa-mj68TfbsnIMnIO6wZcbw
+      GOOGLE_API_KEY: AIzaSyD-PbwLW-kTPQ_PqUnv3uH5TEy1evHHUKs
+      GOOGLE_APPLICATION_CREDENTIALS: /mnt/c/Users/boden/AppData/Roaming/gcloud/application_default_credentials.json
+      GOOGLE_CLIENT_ID: 324816055390-dftm6jq2d3ifs37miivj3nj09piv0df9.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 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
+      GOOGLE_CLOUD_API_KEY: AIzaSyBbaogYUDy6RK-H5gFahiMtERE7ZH7jlDw
+      GOOGLE_CLOUD_PROJECT: home-assistant-c2f87
+      GRAFANA_PASSWORD: h4L0m4St3R327
+      GRAFANA_USERNAME: ubuntu
+      GROQ_API_KEY: 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
+      HF_TOKEN: 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
+      HUGGINGFACE_ACCESS_TOKEN: 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
+      HUGGINGFACE_API_TOKEN: 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
+      IMGUR_CLIENT_ID: f127f082324e962
+      IMGUR_CLIENT_SECRET: 57936866cadd55ade2e1f5eea1baef2e86a569f1
+      JACKETT_API_KEY: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+      JACKETT_URL: https://jackett.bolabaden.org
+      JELLYFIN_API_KEY: 48963bb342c14be4abccfdced3f8c927
+      JELLYFIN_URL: https://jellyfin.bolabaden.org
+      JELLYSEERR_API_KEY: MTc0MDcxNDk2MTY5MDRmMDcxYmM1LTI5ODktNGJiMy05NzExLTdhYjYyMWQxMDAyOQ==
+      JELLYSEERR_URL: https://overseerr.bolabaden.org
+      JELLYSTAT_JWT_SECRET: iub7WxHJGJ6jFnUw4m0xadNR2Azah6F0ZT9gifhaiaYfo88Tn5DksngJNtrV2
+      JELLYSTAT_POSTGRES_PASSWORD: h4L0m4St3R327
+      JELLYSTAT_URL: https://jellystat.bolabaden.org
+      JINA_API_KEY: PdTZrVTXaPwdlHNa9URo:532f7a4ddedd7a9472993caab3105aeb3bafab810a61421a6e4c76d4480053ae
+      K8S_VERSION: 1.33.0
+      KAGI_API_KEY: DwDAXyEafQc.8vYWUqPid9R9i8_W1kUxNSS19eGkEnk8z31fjivSSSU
+      KAVITA_API_KEY: 3e263495-10c1-4963-b003-9beb4a3dc553
+      KAVITA_OPDS_URL: https://kavita.bolabaden.org/api/opds/3e263495-10c1-4963-b003-9beb4a3dc553
+      KAVITA_TOKEN: 7bAgcPhmVK7Es39XGd6g1pLBJbUPNVe4Fu5\u002BsqnuMxX\u002BUXdAgXKuWYEAegWPJbOdNpfamem0wh70tVHyk9XfW35BU3GGquAdfgQZkokLKDD1sXX6sFnd9S4Zx0ITmVpoH4Gx7yPY9kV0yLgU7gbIr8BAhlGd2sNvpsWJppjqnk1vKXB\u002BGEBhgsaH95pgnoE5LShyuD2kVofXvy8NdDKouTlRp9uOdTp0CIyI5263Lx6wtW5ts5m3J0ZTynacw0Dlq80IJe0qjooH8JxhFNbVJDjGRiFcykyUyhrUaQgIL4xn4DjjDuDqg9KWnCMp0tJs8oryqqK3Ix8\u002Bxb1dBmQ==
+      KAVITA_URL: https://kavita.bolabaden.org
+      KEYCLOAK_ADMIN: ubuntu
+      KEYCLOAK_ADMIN_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_DB_ADDR: bolabaden-postgres-bolabaden.g.aivencloud.com
+      KEYCLOAK_DB_PARAMS: ?ssl=require&user=avnadmin&password=AVNS_OrdE6tbtbMbWuZ_N0N4
+      KEYCLOAK_LOGLEVEL: DEBUG
+      KEYCLOAK_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_PORT: "23610"
+      KEYCLOAK_POSTGRES_DB: defaultdb
+      KEYCLOAK_POSTGRES_PASSWORD: ubuntu
+      KEYCLOAK_POSTGRES_ROOT_PASSWORD: h4L0m4St3R327
+      KEYCLOAK_USER: ubuntu
+      KHOJ_ADMIN_EMAIL: boden.crouch@gmail.com
+      KHOJ_ADMIN_PASSWORD: h4L0m4St3R327
+      KHOJ_DJANGO_SECRET_KEY: SGCHIOh6yzvrW9Rb6T6RgKAXO4BzVikNykgLdj8GzM9RI55tRFTopX81ZmFnaKZ
+      KHOJ_POSTGRES_HOST: host.docker.internal
+      KHOJ_URL: https://khoj.bolabaden.org
+      KLUSTER_API_KEY: efab81e0-d6a1-44a8-b70c-c1a7cedf35b9
+      LANGCHAIN_API_KEY: lsv2_0123456789012345678901234567890123456789
+      LETS_ENCRYPT_EMAIL: boden.crouch@gmail.com
+      LIDARR_API_KEY: 5cbcba61d75444d6a97c07df768a26e4
+      LIDARR_URL: https://lidarr.bolabaden.org
+      LISTRR_API_KEY: d962d6e9fd4e4db790711128ed6013b236e86b1bea534c7f9f0c17a3c4c72982
+      LITELLM_MASTER_KEY: sk-0c460ace5f24fcf76e8d8f5631fdc97cd84d1c03f3
+      LITELLM_PROXY_URL: https://litellm-proxy-923458466949.us-central1.run.app
+      LLDAP_JWT_SECRET: lhTCXQ3bH7hGoAuRBqP6ODk8ErJjdbbr15VBUC3dYEQ
+      LLDAP_KEY_SEED: EQMsFpHi3l9ZnTIgBPqHU75WtP4sH2arobHUPKqpsg
+      LLDAP_LDAP_BASE_DN: ""
+      LM_STUDIO_API_BASE: http://127.0.0.1:1234/v1
+      LM_STUDIO_URL: https://lmstudio.bolabaden.org
+      LMSTUDIO_API_BASE: http://127.0.0.1:1234/v1
+      LMSTUDIO_URL: https://lmstudio.bolabaden.org
+      MARIADB_DB_PASSWORD: ubuntu
+      MARIADB_DB_ROOT_PASSWORD: h4L0m4St3R327
+      MASTER_IP: ""
+      MEDIAFLOW_PROXY_API_PASSWORD: d468d92139047f1df5ba0fae9d998957c30834a386cd63d0472a7b044d42a96a
+      MEDIAFUSION_API_PASSWORD: h4L0m4St3R327
+      MEDIAFUSION_ENABLE_RATE_LIMIT: "false"
+      MEDIAFUSION_HOST_URL: https://mediafusion.bolabaden.org
+      MEDIAFUSION_IS_SCRAP_FROM_MEDIAFUSION: "true"
+      MEDIAFUSION_IS_SCRAP_FROM_TORRENTIO: "true"
+      MEDIAFUSION_IS_SCRAP_FROM_ZILEAN: "true"
+      MEDIAFUSION_MONGO_URI: mongodb://mongodb:27017/mediafusion
+      MEDIAFUSION_POSTER_HOST_URL: https://mediafusion.bolabaden.org
+      MEDIAFUSION_PREMIUMIZE_OAUTH_CLIENT_ID: "117274388"
+      MEDIAFUSION_PREMIUMIZE_OAUTH_CLIENT_SECRET: 6i6zgswm35baj3ur
+      MEDIAFUSION_PROWLARR_IMMEDIATE_MAX_PROCESS: "30"
+      MEDIAFUSION_PROWLARR_IMMEDIATE_MAX_PROCESS_TIME: "30"
+      MEDIAFUSION_PROWLARR_LIVE_TITLE_SEARCH: "true"
+      MEDIAFUSION_PROWLARR_SEARCH_INTERVAL_HOUR: "24"
+      MEDIAFUSION_SECRET_KEY: c75ac92df70c4383c8d1bb37f65454f9
+      MEDIAFUSION_STORE_STREMTHRU_MAGNET_CACHE: "false"
+      MEILI_HTTP_ADDR: https://meili.bolabaden.org
+      MEILI_MASTER_KEY: w9y6ZXi812GH1HEGMLMcrcS6AxuHiQ2jktizLd4ezcgoMW3S2Vyegm4l2DpRB
+      MISTRAL_API_KEY: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+      MISTRALAI_API_KEY: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+      MY_ARTIFACT_REPOSITORY: llm-tools
+      MY_CLOUD_BUILD_ACCOUNT_ID: "111935689254107110811"
+      MY_PROJECT_ID: home-assistant-c2f87
+      MY_REGION: us-central1
+      NEON_TECH_API_KEY: napi_qdtsm5hm6lm6jv80yquizic0by5jnlfdqduajpxx88ceh3qo23x7ej744et664o0
+      NEXT_PUBLIC_STACK_PROJECT_ID: c7ed5968-5d72-4a6b-908e-747b1fee813e
+      NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: pck_f6y5hkb2qb0ppk31qq5px9cgsehwtft25f52n9z7vvvz8
+      NEXTCLOUD_ADMIN_PASSWORD: h4L0m4St3R327
+      NEXTCLOUD_ADMIN_USER: ubuntu
+      NILE_API_KEY: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3RoZW5pbGUuZGV2IiwiYXVkIjpbIm5pbGUiLCJ3b3Jrc3BhY2U6MDE5NWZmMTItZDAyMi03ZGFiLThhZjAtODdkZWI5Mzg2NDYwIl0sImlhdCI6MTc0Mzc0MTI3MywiZXhwIjoyMDU5MTcxMTk5LCJzdWIiOiIwMTk1ZmYxNC00NDFlLTcwNjMtYWE2OS02MWFhYTlhNzFkODMiLCJqdGkiOiIwYjhlMTU1Zi03YWVjLTQzMTktYThhMC1hNTgyZmNiMjg1MDkiLCJzY29wZSI6ImFwaSIsImF1dGhvcml6ZWRfc2NvcGVzIjoiYWxsIn0.hZvxQ7uowOobsXTmdCY3qQ-rEhNDWOJsuiPTMwdlbImazdjZ80AQwCcSCwUmEQabHng34wkQETLEYwcNsnoM0jtxG21KU0AMliy-Lp2yGfGUgNecC5k23rdzRbqskgT30ZVnYolAZxKmd3jfMAigRoTXCQ8VYWS6vaWh4Odx6URNgWO2NJUyWkwzTCZLDzGA0df5kxBwqFsnW0ljdpJdn6s0BQZNVm7Wzc5uprcM3FkNxRclr6FKryIb1BdDFObjPyu3ceVnbDKqwWd32bHND2T_odyRthgcpm21YF-PKlrTzeUdigEBYFlaFukuEoW2mgGyM5jLt2JtWKCapUtaWA
+      OAUTH_SECRET: tu0IOEyZhYCrZy2hobgQyID1YsFjwVnPxAmXeYl3sN1huW18p5OPaUQ3IubHTLa
+      OPENAI_API_KEY: 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
+      OPENROUTER_API_KEY: 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
+      OPENSUBTITLES_API_KEY: XzkTEC85VNh8YYNMFezChYr52hnrZNW5
+      ORION_API_KEY: LXBVEGR6DBKLBSBNLPARQHQRH8DGD7PT
+      ORIONOID_API_KEY: LXBVEGR6DBKLBSBNLPARQHQRH8DGD7PT
+      OVERSEERR_API_KEY: MTc0MDcxNDk2MTY5MDRmMDcxYmM1LTI5ODktNGJiMy05NzExLTdhYjYyMWQxMDAyOQ==
+      OVERSEERR_URL: https://overseerr.bolabaden.org
+      PERPLEXITY_API_KEY: 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
+      PERPLEXITYAI_API_KEY: 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
+      PGID: "988"
+      PLAYWRIGHT_PROXY_PASSWORD: h4L0m4St3R327
+      PLAYWRIGHT_PROXY_USERNAME: ubuntu
+      PLEX_CLAIM: claim-RmAd7Q1DfvybLKDY8zmQ
+      PLEX_DLNA_PORT: "1902"
+      PLEX_TOKEN: 18rS6gM-Wec22uq5Gw-U
+      PLEX_URL: https://plex.bolabaden.org
+      POMERIUM_COOKIE_SECRET: c25a4ffacaacfb33cc1ceda45835cfedea97660ee7b2faa74d1413b2b9ede40e
+      POMERIUM_SHARED_SECRET: 70e62ef6ca2933075c08ef8ac64afe340e21e44f0663f454d36d2ccb3938a871
+      POSTGRES_ROOT_PASSWORD: h4L0m4St3R327
+      PREMIUMIZE_API_KEY: 6i6zgswm35baj3ur
+      PREMIUMIZE_CUSTOMER_ID: "117274388"
+      PROVIDERS_GOOGLE_CLIENT_ID: 644514655858-tgvhmbohi34bq8sgl227r81ikqukihl2.apps.googleusercontent.com
+      PROVIDERS_GOOGLE_CLIENT_SECRET: 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
+      PROVIDERS_GOOGLE_COOKIE_SECRET: cRC0MywXNz6HVIA4qpe3FY2OONY5t2upgKeARwL2CRPLIVAviXVwk4oKwAXBLyz
+      PROWLARR_API_KEY: e6352949607b467e9e48b4bca32f55f1
+      PROWLARR_URL: https://prowlarr.bolabaden.org
+      PUID: "1001"
+      QBITTORRENT_PASSWORD: h4L0m4St3R327
+      QBITTORRENT_USERNAME: ubuntu
+      QDIRSTAT_VNC_PASSWORD: h4L0m4St3R327
+      QDRANT_API_KEY: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+      RADARR_API_KEY: fc44a10e3c7c4c0582cf99f1d7ff0f18
+      RADARR_URL: https://radarr.bolabaden.org
+      READARR_API_KEY: e5ae49d7512a41548588c9b5456d7010
+      READARR_URL: https://readarr.bolabaden.org
+      REAL_DEBRID_API_KEY: FA5NDX4HOAQROKATB6WD7JTZLBZPWYLQSQE6UNBZ7XTUPAKG3YPQ
+      REALDEBRID_API_KEY: FA5NDX4HOAQROKATB6WD7JTZLBZPWYLQSQE6UNBZ7XTUPAKG3YPQ
+      REDIS_URL: redis://redis:6379
+      REMOTEIT_R3_REGISTRATION_CODE: D7F7DC54-0993-5E52-906B-38F08C7D957A
+      REPLICATE_API_KEY: r8_8ktlYwwthNrp8pPSLZF1DD7507tku082y7ptd
+      RESEND_API_KEY: re_Ns9xDLUJ_JxnRW8m9hpUgyjecDgNVmSzS
+      RESEND_EMAIL: halomastar@gmail.com
+      REVID_API_KEY: 9a9884c5-6cb6-4ea9-aadc-91b31de76653
+      RIVEN_API_KEY: 3e0be750b16ff363727d05d18ba364fd
+      RIVEN_SCRAPING_PARSE_DEBUG: "true"
+      ROOT_DIR: /home/ubuntu/my-media-stack
+      SABNZBD_API_KEY: f639219a19284f64926aba59d2fbd14d
+      SABNZBD_URL: https://sabnzbd.bolabaden.org
+      SAMBANOVA_API_KEY: f3f47213-2123-4408-8247-816319bc1e84
+      SCRAPEGRAPH_API_KEY: sgai-468f97f2-a24b-4dbf-81a3-017100faea73
+      SEARCH1API_KEY: DE721F1D-498C-4DBF-843C-B72A75DAFD14
+      SECRETS_DIR: /home/ubuntu/my-media-stack/secrets
+      SERPAPI_API_KEY: dfc64bfdf77ccdde0196b0fde7848a8ebc04e520
+      SETTINGS_ENCRYPTION_KEY: mdwiFQyvlDgV9cQC5995Jx4XM9sXiqST23ryNBjIKl4n4HxcgvnJU4fF55wrvNQ
+      SMITHERY_API_KEY: 477db9a9-92dc-47f5-8011-e717c251bc5a
+      SNYK_AUTH_KEY: f21ad06c-e922-420a-be40-6e5ca09a9514
+      SOCKS5_PROXY_PASS: h4L0m4St3R327
+      SOCKS5_PROXY_USER: ubuntu
+      SONARR_API_KEY: 5fa91e23f1ce4bfda1159fb0d717b70e
+      SONARR_URL: https://sonarr.bolabaden.org
+      SPEEDTEST_TRACKER_ADMIN_EMAIL: boden.crouch@gmail.com
+      SPEEDTEST_TRACKER_ADMIN_NAME: ubuntu
+      SPEEDTEST_TRACKER_ADMIN_PASSWORD: h4L0m4St3R327
+      SPEEDTEST_TRACKER_API_TOKEN: r2SHU2FL1jIQ5aQ5xVsk6T19HjRAGQQsUl0dB7ji140db905
+      SPEEDTEST_TRACKER_APP_KEY: base64:OZVnVd3/7lJTtOTtVZ0YqxXJKtle2R48NIrfFv11CkM=
+      SRC_DIR: /home/ubuntu/my-media-stack/src
+      SRC_PATH: /home/ubuntu/my-media-stack/src
+      STACK_SECRET_SERVER_KEY: ssk_npnvdmcd8jp56mycfw11ffefbhcb1wzyjt4a3j2crtn60
+      STREMIO_JACKETT_URL: https://stremio-jackett.bolabaden.org/
+      DUCKDNS_SUBDOMAIN: bolabaden
+      SUDO_PASSWORD: h4L0m4St3R327
+      TANDOOR_SECRET_KEY: bNAub47Ni8YH5CXgPU9bz6pqBIP3jCTUVFkZc1PTicA
+      TAUTULLI_API_KEY: f86827c56ae740e6bff77c386e726ab8
+      TAVILY_API_KEY: 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
+      TINYAUTH_SECRET: b9a4ZxFNBbyR9KdTAf2kSciI5jUCQLzE
+      TINYAUTH_USERS: brunner56:$$2y$$05$$CEXtGy1XS4BlkTXEgSG64eSQlrGn.55Xm2HbiSgVSgO./WoVXXLAa,bolabaden.duckdns@gmail.com:$$2y$$05$$BbVWsqh2XkzaxvLGwd.0euD/PkkoaeFNDIhB0tTEBn4tAjGckKRzq
+      TMDB_ACCESS_TOKEN: cec876f852b9c15d2c1b436b1117dff7
+      TMDB_API_KEY: cec876f852b9c15d2c1b436b1117dff7
+      TMDB_READ_API_KEY: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZWM4NzZmODUyYjljMTVkMmMxYjQzNmIxMTE3ZGZmNyIsIm5iZiI6MTczNjQzOTU1NC43NzUsInN1YiI6IjY3N2ZmNzAyMjE4ZmQ1N2FjZjRlOGQ2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yK5N4wwBXNKwauenlWmuEv_5jpoTiK8Bs2rit6HO1E
+      TODOIST_API_KEY: d9f0ebcdff604bd11c0944f52360758f7587f907
+      TOGETHERAI_API_KEY: 3bf6c62c61e9dbfbe4e947bd7e0ec876188e41916fbd622877018188f84ab2f2
+      TORBOX_API_KEY: d490b7b1-1f6d-44e8-9cc8-3e735c87874b
+      TORRENTIO_URL: https://torrentio.bolabaden.org
+      TRAEFIK_ACME_EAB_HMAC_ENCODED: x9XmIc15tqVMZSIM-u4n3wy5ETgaJiUzHnqv62YjsTQaaS0bbQjSvK6aB1t-eSVus_FsbiTiwvVhag30eK1qYw
+      TRAEFIK_ACME_EAB_KID: 05i_d9YSFgtMYF_Bc-G8TA
+      TRAKT_CLIENT_ID: 052d735c61c723ed670991aee9d6322822ed6766702d66910be63a1e1a511fd0
+      TRAKT_CLIENT_SECRET: 1d5701574cae67023c25a3743f07669bb84ee74628fd8f0a3fc0c9cca51535c3
+      TS_AUTHKEY: tskey-auth-kQKGfRkbkK11CNTRL-qSFbfpn4ayYrvCtaHzcXyY3YG6gLE29WP
+      TS_BASE_DOMAIN: noodlefish-pound.ts.net
+      TS_CLIENT_ID: ktiyDxLa7E11CNTRL
+      TS_CLIENT_SECRET: tskey-client-ktiyDxLa7E11CNTRL-XXWsoK3AqZKkdynpvFMjZKVMDqqf8bBM
+      TS_DOMAIN: micklethefickle.noodlefish-pound.ts.net
+      TS_HOSTNAME: micklethefickle
+      TS_OAUTH_CLIENT_ID: k3t5uiTTvf11CNTRL
+      TS_OAUTH_CLIENT_SECRET: tskey-client-k3t5uiTTvf11CNTRL-w53skr3PYzdCyRU8tTZdzdg8Q77WPn65
+      TZ: America/Chicago
+      UMAMI_APP_SECRET: Cg2OAmj7fK1jBCmqT4kHx1gpIWp7tluJEWN5CDkjzBPQJ5LdepoYkSKMLNv6jquS
+      UMASK: "002"
+      UNIFY_API_KEY: XeFNQpisNryyS6NrlnDEAK7D-aE0mAq4JCkwsfeDa90=
+      UPSTAGE_API_KEY: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+      UPSTAGEAI_API_KEY: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+      VECTORDB_PORT: "6333"
+      VECTORDB_POSTGRES_PASSWORD: h4L0m4St3R327
+      VECTORDB_POSTGRES_USER: ubuntu
+      VERTEX_LOCATION: us-central1
+      VERTEX_PROJECT: home-assistant-c2f87
+      VEYRAX_API_KEY: vrx-a983dd2b4e8cde0df415b977d8eb3034b44c3fa5
+      WHISPARR_API_KEY: fb6df473cfe14fda8498b8b881902985
+      WHISPARR_URL: https://whisparr.bolabaden.org
+      YANDEX_API_KEY: t1.9euelZqQx8_Hmc-Xx46XjZqYlJGXle3rnpWay5yWnYyak4-ZzY2NnIuOjMvl8_dzBzZD-e8JfEoT_d3z9zM2M0P57wl8ShP9zef1656VmpnLx8qNj8-RmY7IjsjLi4qb7_zF656VmpnLx8qNj8-RmY7IjsjLi4qb.nyEXfAFKqh4NzEUUxDOpY-dArQwO__1KeMHbGS7u4apss2NPU3lY_5qLWPTEDqtNWzIFZZTGyuR0QJt42V4ACQ
+      YOU_API_KEY: cbee3356-84ed-40ea-9d09-ce3d0afcb340<__>1QKC7nETU8N2v5f46hH6l6ax
+      ZEROSSL_API_KEY: c04746f32a98d6915aea626941916bd7
+      ZILEAN_URL: https://zilean.bolabaden.org
+    expose:
+      - "3210"
+    hostname: lobechat
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:3210 || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: lobehub/lobe-chat:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: A chatbot for your applications.
+      homepage.group: AI
+      homepage.href: https://lobechat.bolabaden.org/
+      homepage.icon: lobechat.png
+      homepage.name: Lobe Chat
+      traefik.enable: "true"
+      traefik.http.routers.lobechat.middlewares: tinyauth@docker
+      traefik.http.routers.lobechat.rule: Host(`lobechat.bolabaden.org`) || Host(`lobechat.bolabaden.duckdns.org`) || Host(`lobechat.micklethefickle.duckdns.org`) || Host(`lobechat.localhost`)
+      traefik.http.services.lobechat.loadbalancer.server.port: "3210"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.46
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/lobechat/host_config
+        target: /configs/lobechat/host_config
+        bind:
+          create_host_path: true
+  mediafusion:
+    container_name: mediafusion
+    depends_on:
+      mongodb:
+        condition: service_healthy
+        required: true
+      redis:
+        condition: service_healthy
+        required: true
+      warp:
+        condition: service_started
+        required: true
+    environment:
+      API_PASSWORD: h4L0m4St3R327
+      BACKGROUND_SEARCH_INTERVAL_HOURS: "24"
+      BT4G_IMMEDIATE_MAX_PROCESS: "30"
+      BT4G_IMMEDIATE_MAX_PROCESS_TIME: "30"
+      BT4G_SEARCH_INTERVAL_HOUR: "18"
+      BT4G_SEARCH_TIMEOUT: "30"
+      BT4G_URL: https://bt4gprx.com
+      ENABLE_RATE_LIMIT: "False"
+      FLARESOLVERR_URL: http://flaresolverr:8191
+      HOST_URL: https://mediafusion.bolabaden.org
+      IS_SCRAP_FROM_BT4G: "true"
+      IS_SCRAP_FROM_JACKETT: "True"
+      IS_SCRAP_FROM_MEDIAFUSION: "false"
+      IS_SCRAP_FROM_PROWLARR: "True"
+      IS_SCRAP_FROM_TORRENTIO: "false"
+      IS_SCRAP_FROM_YTS: "True"
+      IS_SCRAP_FROM_ZILEAN: "True"
+      JACKETT_API_KEY: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+      JACKETT_FEED_SCRAPE_INTERVAL_HOUR: "1"
+      JACKETT_IMMEDIATE_MAX_PROCESS: "30"
+      JACKETT_IMMEDIATE_MAX_PROCESS_TIME: "120"
+      JACKETT_LIVE_TITLE_SEARCH: "true"
+      JACKETT_SEARCH_INTERVAL_HOUR: "24"
+      JACKETT_URL: http://jackett:9117
+      MEDIAFUSION_SEARCH_INTERVAL_DAYS: "1"
+      MEDIAFUSION_URL: https://mediafusion.elfhosted.com
+      METADATA_PRIMARY_SOURCE: tmdb
+      MONGO_URI: mongodb://mongodb:27017/mediafusion
+      PGID: "988"
+      POSTER_HOST_URL: https://mediafusion.bolabaden.org
+      PROWLARR_API_KEY: e6352949607b467e9e48b4bca32f55f1
+      PROWLARR_FEED_SCRAPE_INTERVAL_HOUR: "2"
+      PROWLARR_IMMEDIATE_MAX_PROCESS: "30"
+      PROWLARR_IMMEDIATE_MAX_PROCESS_TIME: "120"
+      PROWLARR_LIVE_TITLE_SEARCH: "true"
+      PROWLARR_SEARCH_INTERVAL_HOUR: "24"
+      PROWLARR_URL: http://prowlarr:9696
+      PUID: "1001"
+      REDIS_URL: redis://redis:6379
+      SCRAPE_WITH_AKA_TITLES: "False"
+      SECRET_KEY: c75ac92df70c4383c8d1bb37f65454f9
+      STORE_STREMTHRU_MAGNET_CACHE: "True"
+      TAMIL_BLASTERS_SCHEDULER_CRONTAB: 20 */8 * * *
+      TAMILMV_SCHEDULER_CRONTAB: 13 */8 * * *
+      TAMILULTRA_SCHEDULER_CRONTAB: 33 */8 * * *
+      TMDB_API_KEY: cec876f852b9c15d2c1b436b1117dff7
+      TORRENTIO_SEARCH_INTERVAL_DAYS: "1"
+      TORRENTIO_URL: https://torrentio.strem.fun
+      TZ: America/Chicago
+      UMASK: "002"
+      ZILEAN_SEARCH_INTERVAL_HOUR: "1"
+      ZILEAN_URL: https://zilean.elfhosted.com
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -f http://localhost:8000/health > /dev/null 2>&1 || exit 1
+      timeout: 10s
+      interval: 1m0s
+      retries: 5
+      start_period: 10s
+    image: mhdzumair/mediafusion:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.group: Stremio Addons
+      homepage.href: https://mediafusion.bolabaden.org/
+      homepage.icon: mediafusion.png
+      homepage.name: MediaFusion
+    network_mode: service:warp
+    restart: always
+  mongodb:
+    container_name: mongodb
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    expose:
+      - "27017"
+    hostname: mongodb
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - mongosh 127.0.0.1:27017/test --quiet --eval 'db.runCommand("ping").ok' > /dev/null 2>&1 || exit 1
+      timeout: 10s
+      interval: 10s
+      retries: 5
+      start_period: 40s
+    image: mongo:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.mongodb.rule: Host(`mongodb.bolabaden.org`) || Host(`mongodb.bolabaden.duckdns.org`) || Host(`mongodb.localhost`)
+      traefik.http.services.mongodb.loadbalancer.server.port: "27017"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.0.50
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/mongodb/data
+        target: /data/db
+        bind:
+          create_host_path: true
+  prowlarr:
+    container_name: prowlarr
+    depends_on:
+      warp:
+        condition: service_healthy
+        required: true
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'curl -fs -H "Authorization: Bearer e6352949607b467e9e48b4bca32f55f1" http://127.0.0.1:9696/api/v1/system/status || exit 1'
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 2m0s
+    image: linuxserver/prowlarr
+    labels:
+      homepage.description: An indexer manager/proxy for your Usenet and Torrent downloaders, integrating with PVR apps like Sonarr and Radarr.
+      homepage.group: Indexers
+      homepage.href: https://prowlarr.bolabaden.org/
+      homepage.icon: prowlarr.png
+      homepage.name: Prowlarr
+      homepage.weight: "1"
+      homepage.widget.key: e6352949607b467e9e48b4bca32f55f1
+      homepage.widget.type: prowlarr
+      homepage.widget.url: http://127.0.0.1:9696
+    network_mode: service:warp
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/prowlarr/config
+        target: /config
+        bind:
+          create_host_path: true
+  redis:
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --save
+      - "60"
+      - "1"
+    container_name: redis
+    expose:
+      - "6379"
+    hostname: redis
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - redis-cli ping > /dev/null 2>&1 || exit 1
+      timeout: 5s
+      interval: 10s
+      retries: 5
+    image: redis:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.redis.rule: Host(`redis.bolabaden.org`) || Host(`redis.bolabaden.duckdns.org`) || Host(`redis.localhost`)
+      traefik.http.services.redis.loadbalancer.server.port: "6379"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.87
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/redis
+        target: /data
+        bind:
+          create_host_path: true
+  searxng:
+    container_name: searxng
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      SEARXNG_BASE_URL: http://searxng:8080
+      TZ: America/Chicago
+      UMASK: "002"
+    hostname: searxng
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget --no-verbose --tries=1 --spider http://127.0.0.1:8080/ || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+    image: searxng/searxng:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.group: Search
+      homepage.href: https://searxng.bolabaden.org/
+      homepage.icon: searxng.png
+      homepage.name: SearxNG
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.90
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/searxng
+        target: /etc/searxng
+        bind:
+          create_host_path: true
+  speedtest:
+    container_name: speedtest
+    environment:
+      ADMIN_EMAIL: boden.crouch@gmail.com
+      ADMIN_NAME: ubuntu
+      ADMIN_PASSWORD: h4L0m4St3R327
+      API_RATE_LIMIT: "60"
+      APP_KEY: base64:OZVnVd3/7lJTtOTtVZ0YqxXJKtle2R48NIrfFv11CkM=
+      APP_NAME: Speedtest Tracker
+      APP_TIMEZONE: America/Chicago
+      APP_URL: ""
+      ASSET_URL: ""
+      CHART_BEGIN_AT_ZERO: "true"
+      CHART_DATETIME_FORMAT: j/m G:i
+      CONTENT_WIDTH: 7xl
+      DATETIME_FORMAT: j M Y, G:i:s
+      DB_CONNECTION: sqlite
+      DISPLAY_TIMEZONE: America/Chicago
+      PGID: "988"
+      PRUNE_RESULTS_OLDER_THAN: "0"
+      PUBLIC_DASHBOARD: "true"
+      PUID: "1001"
+      SPEEDTEST_BLOCKED_SERVERS: ""
+      SPEEDTEST_INTERFACE: ""
+      SPEEDTEST_SCHEDULE: 0 * * * *
+      SPEEDTEST_SERVERS: ""
+      SPEEDTEST_SKIP_IPS: ""
+      THRESHOLD_DOWNLOAD: "900"
+      THRESHOLD_ENABLED: "true"
+      THRESHOLD_PING: "25"
+      THRESHOLD_UPLOAD: "900"
+      TZ: America/Chicago
+      UMASK: "002"
+    hostname: speedtest
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fs http://127.0.0.1:80 > /dev/null || exit 1
+      timeout: 15s
+      interval: 30s
+      start_period: 20s
+    image: linuxserver/speedtest-tracker
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: Regularly tests your internet speed and tracks performance over time, helping you monitor your connection quality.
+      homepage.group: Network Monitoring
+      homepage.href: https://speedtest.bolabaden.org/
+      homepage.icon: speedtest.png
+      homepage.name: Speedtest
+      homepage.widget.fields: '["download", "upload", "ping", "speedtest"]'
+      homepage.widget.type: speedtest
+      homepage.widget.url: https://speedtest.bolabaden.org
+      traefik.enable: "true"
+      traefik.http.routers.speedtest.rule: Host(`speedtest.bolabaden.org`) || Host(`speedtest.bolabaden.duckdns.org`) || Host(`speedtest.localhost`)
+      traefik.http.services.speedtest.loadbalancer.server.port: "80"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.86
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/speedtest-tracker/config
+        target: /config
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/certs/speedtest-tracker/keys
+        target: /config/keys
+        bind:
+          create_host_path: true
+  stremio:
+    container_name: stremio
+    depends_on:
+      gluetun-premiumize-nl:
+        condition: service_healthy
+        required: true
+    environment:
+      CASTING_DISABLED: "1"
+      IPADDRESS: 149.130.221.93
+      NO_CORS: "0"
+      SERVER_URL: https://stremio.bolabaden.org
+      WEBUI_LOCATION: https://stremio-web.bolabaden.org/
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fs http://127.0.0.1:11470 || curl -fs http://127.0.0.1:12470
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 40s
+    image: th3w1zard1/stremio-docker:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: A one-stop hub for video content aggregation, allowing you to stream movies, series, and more from various sources.
+      homepage.group: Media Streaming Platforms
+      homepage.href: https://stremio.bolabaden.org/
+      homepage.icon: stremio.png
+      homepage.name: Stremio
+    network_mode: service:gluetun-premiumize-nl
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/stremio/root/.stremio-server
+        target: /root/.stremio-server
+        bind:
+          create_host_path: true
+  stremio-jackett:
+    container_name: stremio-jackett
+    depends_on:
+      gluetun-premiumize-us:
+        condition: service_started
+        restart: true
+        required: true
+      jackett:
+        condition: service_started
+        required: true
+      warp:
+        condition: service_started
+        required: true
+    environment:
+      ADDON_NAME: stremio_jackett
+      JACKETT_API_KEY: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+      JACKETT_URL: https://jackett.bolabaden.org
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fs http://127.0.0.1:3000 || exit 1
+      timeout: 10s
+      interval: 1m0s
+      retries: 5
+      start_period: 10s
+    image: belmeg/stremio-addon-jackett:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.group: Stremio Addons
+      homepage.href: https://stremio-jackett.bolabaden.org/
+      homepage.icon: stremio-jackett.png
+      homepage.name: Stremio Jackett
+    network_mode: service:gluetun-premiumize-us
+    restart: always
+  tailscale-airvpn:
+    container_name: tailscale-airvpn
+    depends_on:
+      gluetun-airvpn:
+        condition: service_healthy
+        required: true
+    devices:
+      - source: /dev/net/tun
+        target: /dev/net/tun
+        permissions: rwm
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      TS_ACCEPT_DNS: "false"
+      TS_AUTH_ONCE: "true"
+      TS_AUTHKEY: tskey-auth-kQKGfRkbkK11CNTRL-qSFbfpn4ayYrvCtaHzcXyY3YG6gLE29WP
+      TS_ENABLE_HEALTH_CHECK: "true"
+      TS_ENABLE_METRICS: "true"
+      TS_EXTRA_ARGS: --accept-routes --advertise-exit-node
+      TS_HOSTNAME: tailscale-airvpn-micklethefickle-docker
+      TS_LOCAL_ADDR_PORT: 0.0.0.0:41641
+      TS_OUTBOUND_HTTP_PROXY_LISTEN: 0.0.0.0:8885
+      TS_ROUTES: 10.76.0.0/16,172.17.0.0/16,100.64.0.0/10
+      TS_SOCKET: /tmp/tailscaled.sock
+      TS_SOCKS5_SERVER: :1055
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: "true"
+      TZ: America/Chicago
+      UMASK: "002"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:41641/healthz > /dev/null 2>&1 || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 40s
+    image: tailscale/tailscale
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+    network_mode: service:gluetun-airvpn
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tailscale/airvpn/volumes/var/lib/tailscale
+        target: /var/lib/tailscale
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tailscale/airvpn/volumes/tmp
+        target: /tmp
+        bind:
+          create_host_path: true
+  tailscale-premiumize-nl:
+    container_name: tailscale-premiumize-nl
+    depends_on:
+      gluetun-premiumize-nl:
+        condition: service_healthy
+        required: true
+    devices:
+      - source: /dev/net/tun
+        target: /dev/net/tun
+        permissions: rwm
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      TS_ACCEPT_DNS: "false"
+      TS_AUTH_ONCE: "true"
+      TS_AUTHKEY: tskey-auth-kQKGfRkbkK11CNTRL-qSFbfpn4ayYrvCtaHzcXyY3YG6gLE29WP
+      TS_ENABLE_HEALTH_CHECK: "true"
+      TS_ENABLE_METRICS: "true"
+      TS_EXTRA_ARGS: --accept-routes --advertise-exit-node
+      TS_HOSTNAME: tailscale-premiumize-nl-micklethefickle-docker
+      TS_LOCAL_ADDR_PORT: 0.0.0.0:41643
+      TS_OUTBOUND_HTTP_PROXY_LISTEN: 0.0.0.0:8887
+      TS_ROUTES: 10.76.0.0/16,172.17.0.0/16,100.64.0.0/10
+      TS_SOCKET: /tmp/tailscaled.sock
+      TS_SOCKS5_SERVER: :1057
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: "true"
+      TZ: America/Chicago
+      UMASK: "002"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:41643/healthz > /dev/null 2>&1 || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 40s
+    image: tailscale/tailscale
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+    network_mode: service:gluetun-premiumize-nl
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tailscale/premiumize/nl/volumes/var/lib/tailscale
+        target: /var/lib/tailscale
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tailscale/premiumize/nl/volumes/tmp
+        target: /tmp
+        bind:
+          create_host_path: true
+  tailscale-premiumize-us:
+    container_name: tailscale-premiumize-us
+    depends_on:
+      gluetun-premiumize-us:
+        condition: service_healthy
+        required: true
+    devices:
+      - source: /dev/net/tun
+        target: /dev/net/tun
+        permissions: rwm
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      TS_ACCEPT_DNS: "false"
+      TS_AUTH_ONCE: "true"
+      TS_AUTHKEY: tskey-auth-kQKGfRkbkK11CNTRL-qSFbfpn4ayYrvCtaHzcXyY3YG6gLE29WP
+      TS_ENABLE_HEALTH_CHECK: "true"
+      TS_ENABLE_METRICS: "true"
+      TS_EXTRA_ARGS: --accept-routes --advertise-exit-node
+      TS_HOSTNAME: tailscale-premiumize-us-micklethefickle-docker
+      TS_LOCAL_ADDR_PORT: 0.0.0.0:41642
+      TS_OUTBOUND_HTTP_PROXY_LISTEN: 0.0.0.0:8886
+      TS_ROUTES: 10.76.0.0/16,172.17.0.0/16,100.64.0.0/10
+      TS_SOCKET: /tmp/tailscaled.sock
+      TS_SOCKS5_SERVER: :1056
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: "true"
+      TZ: America/Chicago
+      UMASK: "002"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:41642/healthz > /dev/null 2>&1 || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 40s
+    image: tailscale/tailscale
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+    network_mode: service:gluetun-premiumize-us
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tailscale/premiumize/us/volumes/var/lib/tailscale
+        target: /var/lib/tailscale
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tailscale/premiumize/us/volumes/tmp
+        target: /tmp
+        bind:
+          create_host_path: true
+  tailscale-warp:
+    container_name: tailscale-warp
+    depends_on:
+      warp:
+        condition: service_healthy
+        required: true
+    devices:
+      - source: /dev/net/tun
+        target: /dev/net/tun
+        permissions: rwm
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      TS_ACCEPT_DNS: "false"
+      TS_AUTH_ONCE: "true"
+      TS_AUTHKEY: tskey-auth-kQKGfRkbkK11CNTRL-qSFbfpn4ayYrvCtaHzcXyY3YG6gLE29WP
+      TS_ENABLE_HEALTH_CHECK: "true"
+      TS_ENABLE_METRICS: "true"
+      TS_EXTRA_ARGS: --accept-routes --advertise-exit-node
+      TS_HOSTNAME: tailscale-premiumize-us-micklethefickle-docker
+      TS_LOCAL_ADDR_PORT: 0.0.0.0:41642
+      TS_OUTBOUND_HTTP_PROXY_LISTEN: 0.0.0.0:8886
+      TS_ROUTES: 10.76.0.0/16,172.17.0.0/16,100.64.0.0/10
+      TS_SOCKET: /tmp/tailscaled.sock
+      TS_SOCKS5_SERVER: :1056
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: "true"
+      TZ: America/Chicago
+      UMASK: "002"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:41642/healthz > /dev/null 2>&1 || exit 1
+      timeout: 10s
+      interval: 30s
+      retries: 3
+      start_period: 40s
+    image: tailscale/tailscale
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+    network_mode: service:warp
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tailscale/warp/volumes/var/lib/tailscale
+        target: /var/lib/tailscale
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tailscale/warp/volumes/tmp
+        target: /tmp
+        bind:
+          create_host_path: true
+  tinyauth:
+    container_name: tinyauth
+    environment:
+      APP_TITLE: Bolabaden
+      APP_URL: https://auth.bolabaden.org
+      COOKIE_SECURE: "true"
+      GITHUB_CLIENT_ID: Ov23li1ijiBeH6cBV9bJ
+      GITHUB_CLIENT_SECRET: 99adef0dd47be1f9fb76885b0ac6722fd9730d08
+      GOOGLE_CLIENT_ID: 324816055390-dftm6jq2d3ifs37miivj3nj09piv0df9.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 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
+      LOGIN_MAX_RETRIES: "5"
+      LOGIN_TIMEOUT: "300"
+      OAUTH_AUTO_REDIRECT: none
+      OAUTH_WHITELIST: ""
+      SECRET: b9a4ZxFNBbyR9KdTAf2kSciI5jUCQLzE
+      SESSION_EXPIRY: "604800"
+      USERS: brunner56:$$2y$$05$$CEXtGy1XS4BlkTXEgSG64eSQlrGn.55Xm2HbiSgVSgO./WoVXXLAa,bolabaden.duckdns@gmail.com:$$2y$$05$$BbVWsqh2XkzaxvLGwd.0euD/PkkoaeFNDIhB0tTEBn4tAjGckKRzq
+    hostname: auth
+    image: ghcr.io/steveiliop56/tinyauth:v3
+    labels:
+      homepage.description: Authentication service for securing your applications
+      homepage.group: Security
+      homepage.href: https://auth.bolabaden.org/
+      homepage.icon: shield-lock.png
+      homepage.name: TinyAuth
+      traefik.enable: "true"
+      traefik.http.middlewares.tinyauth.forwardauth.address: http://auth:3000/api/auth/traefik
+      traefik.http.routers.tinyauth.rule: Host(`auth.bolabaden.org`) || Host(`auth.bolabaden.duckdns.org`) || Host(`auth.micklethefickle.duckdns.org`)
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.82
+    ports:
+      - mode: ingress
+        target: 3000
+        published: "3000"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/tinyauth
+        target: /data
+        bind:
+          create_host_path: true
+  traefik:
+    cap_add:
+      - NET_ADMIN
+    command:
+      - --accesslog=true
+      - --api.dashboard=true
+      - --api.debug=true
+      - --api.insecure=true
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.asdefault=false
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.observability.accesslogs=true
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.websecure.asdefault=true
+      - --entrypoints.websecure.http.tls=true
+      - --entrypoints.websecure.http.tls.domains[0].main=bolabaden.org
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.bolabaden.org
+      - --entrypoints.websecure.http.tls.certresolver=letsencrypt
+      - --entrypoints.websecure.observability.accesslogs=true
+      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
+      - --certificatesresolvers.letsencrypt.acme.dnsChallenge.provider=cloudflare
+      - --certificatesresolvers.letsencrypt.acme.dnsChallenge=true
+      - --certificatesresolvers.letsencrypt.acme.httpChallenge.entryPoint=web
+      - --certificatesresolvers.letsencrypt.acme.httpChallenge=true
+      - --certificatesresolvers.letsencrypt.acme.tlsChallenge=true
+      - --log.level=INFO
+      - --providers.docker.defaultrule=Host(`{{ .ContainerName }}.bolabaden.org`) || Host(`{{ .ContainerName }}.bolabaden.duckdns.org`) || Host(`{{ .ContainerName }}.micklethefickle.duckdns.org`) || Host(`{{ .ContainerName }}.localhost`)
+      - --providers.docker=true
+    container_name: traefik
+    depends_on:
+      error-pages:
+        condition: service_started
+        required: true
+      tinyauth:
+        condition: service_started
+        required: true
+    environment:
+      CLOUDFLARE_API_KEY: 34a4d9943975b89dd2430870ce146f26aa5bf
+      CLOUDFLARE_EMAIL: boden.crouch@gmail.com
+      DUCKDNS_TOKEN: 2c18769a-2889-4648-a70c-2fe44dd10f20
+      LETS_ENCRYPT_EMAIL: boden.crouch@gmail.com
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    hostname: traefik
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -qO- http://127.0.0.1:8080 > /dev/null 2>&1 || exit 1
+      timeout: 15s
+      interval: 30s
+      retries: 3
+    image: traefik:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.traefik.middlewares: tinyauth@docker
+      traefik.http.services.traefik.loadbalancer.server.port: "8080"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.85
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+      - mode: ingress
+        target: 443
+        published: "443"
+        protocol: tcp
+    restart: always
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: "1"
+    volumes:
+      - type: bind
+        source: /var/run/tailscale/tailscaled.sock
+        target: /var/run/tailscale/tailscaled.sock
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/certs
+        target: /certs
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/traefik/config
+        target: /config
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/traefik/plugins-local
+        target: /plugins-local
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          create_host_path: true
+  warp:
+    cap_add:
+      - MKNOD
+      - AUDIT_WRITE
+      - NET_ADMIN
+    container_name: warp
+    device_cgroup_rules:
+      - c 10:200 rwm
+    environment:
+      TUNNEL_TOKEN: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+      WARP_LICENSE_KEY: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+      WARP_SLEEP: "2"
+    expose:
+      - "443"
+      - "1080"
+      - "3005"
+      - "8000"
+      - "8181"
+      - "8469"
+      - "8888"
+      - "4000"
+      - "3185"
+      - "3232"
+    extra_hosts:
+      - aiostreams=10.76.128.97
+      - beatapostapita=100.99.45.35
+      - boden-iphone=100.97.148.14
+      - byparr=10.76.128.93
+      - code-demo=10.76.128.80
+      - code-dev=10.76.128.92
+      - comet=10.76.128.97
+      - crowdsec=10.76.128.91
+      - dozzle=10.76.128.89
+      - flaresolverr=10.76.128.93
+      - gluetun-airvpn=10.76.89.128
+      - gluetun-premiumize-nl=10.76.128.99
+      - gluetun-premiumize-us=10.76.128.98
+      - gpt-researcher=10.76.128.43
+      - homepage=10.76.128.88
+      - host.docker.internal=host-gateway
+      - jackett=10.76.128.99
+      - jackettio=10.76.128.97
+      - khoj-database=10.76.128.42
+      - khoj-sandbox=10.76.128.49
+      - khoj=10.76.128.29
+      - litellm-database=10.76.128.45
+      - lobechat=10.76.128.46
+      - mediaflow-proxy=10.76.128.97
+      - mediafusion=10.76.128.97
+      - micklethefickle3=100.72.149.123
+      - micklethefickle=100.72.149.123
+      - mongodb=10.76.0.50
+      - prowlarr=10.76.128.99
+      - redis=10.76.128.87
+      - riven-core=10.76.0.55
+      - riven-db=10.76.0.54
+      - riven=10.76.0.59
+      - speedtest=10.76.128.86
+      - stremio-jackett=10.76.128.98
+      - stremio-web=10.76.128.98
+      - stremio=10.76.128.98
+      - tailscale-airvpn=10.76.89.128
+      - tailscale-premiumize-nl=10.76.128.99
+      - tailscale-premiumize-us=10.76.128.98
+      - tailscale-warp=10.76.128.97
+      - tinyauth=10.76.128.82
+      - torrentio-postgres=10.76.128.101
+      - torrentio=10.76.128.97
+      - traefik-error-pages=10.76.128.84
+      - traefik=10.76.128.85
+      - vpn-nl.premiumize.me=185.107.94.249
+      - vpn-us.premiumize.me=199.58.86.204
+      - warp=10.76.128.97
+      - watchtower=10.76.128.83
+      - whoami=10.76.128.81
+      - wizard-pc=100.119.187.62
+      - wizard=100.119.187.62
+      - zilean-postgres=10.76.128.100
+      - zilean=10.76.128.32
+    image: caomingjun/warp:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.aiostreams.rule: Host(`aiostreams.bolabaden.org`) || Host(`aiostreams.bolabaden.duckdns.org`) || Host(`aiostreams.localhost`)
+      traefik.http.routers.aiostreams.service: aiostreams
+      traefik.http.routers.aiostremio.rule: Host(`aiostremio.bolabaden.org`) || Host(`aiostremio.bolabaden.duckdns.org`) || Host(`aiostremio.localhost`)
+      traefik.http.routers.aiostremio.service: aiostremio
+      traefik.http.routers.comet.rule: Host(`comet.bolabaden.org`) || Host(`comet.bolabaden.duckdns.org`) || Host(`comet.localhost`)
+      traefik.http.routers.comet.service: comet
+      traefik.http.routers.jackettio.rule: Host(`jackettio.bolabaden.org`) || Host(`jackettio.bolabaden.duckdns.org`) || Host(`jackettio.localhost`)
+      traefik.http.routers.jackettio.service: jackettio
+      traefik.http.routers.mediaflow-proxy.rule: Host(`mediaflow-proxy.bolabaden.org`) || Host(`mediaflow-proxy.bolabaden.duckdns.org`) || Host(`mediaflow-proxy.localhost`)
+      traefik.http.routers.mediaflow-proxy.service: mediaflow-proxy
+      traefik.http.routers.mediafusion.rule: Host(`mediafusion.bolabaden.org`) || Host(`mediafusion.bolabaden.duckdns.org`) || Host(`mediafusion.localhost`)
+      traefik.http.routers.mediafusion.service: mediafusion
+      traefik.http.routers.stremio-trakt-addon.rule: Host(`stremio-trakt-addon.bolabaden.org`) || Host(`stremio-trakt-addon.bolabaden.duckdns.org`) || Host(`stremio-trakt-addon.micklethefickle.duckdns.org`) || Host(`stremio-trakt-addon.localhost`)
+      traefik.http.routers.zilean.rule: Host(`zilean.bolabaden.org`) || Host(`zilean.bolabaden.duckdns.org`) || Host(`zilean.localhost`)
+      traefik.http.routers.zilean.service: zilean
+      traefik.http.services.aiostreams.loadbalancer.server.port: "3005"
+      traefik.http.services.aiostremio.loadbalancer.server.port: "8469"
+      traefik.http.services.comet.loadbalancer.server.port: "2020"
+      traefik.http.services.jackettio.loadbalancer.server.port: "4000"
+      traefik.http.services.mediaflow-proxy.loadbalancer.server.port: "8888"
+      traefik.http.services.mediafusion.loadbalancer.server.port: "8000"
+      traefik.http.services.stremio-trakt-addon.loadbalancer.server.port: "7000"
+      traefik.http.services.zilean.loadbalancer.server.port: "8181"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.97
+    ports:
+      - mode: ingress
+        target: 443
+        published: "443"
+        protocol: udp
+      - mode: ingress
+        target: 1080
+        published: "1080"
+        protocol: tcp
+      - mode: ingress
+        target: 3232
+        published: "3232"
+        protocol: tcp
+    restart: always
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: "1"
+      net.ipv6.conf.all.disable_ipv6: "1"
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/data
+        target: /var/lib/cloudflare-warp
+        bind:
+          create_host_path: true
+  watchtower:
+    container_name: watchtower
+    environment:
+      PGID: "988"
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_NOTIFICATION_REPORT: "true"
+      WATCHTOWER_NOTIFICATION_TEMPLATE: |
+        {{- if .Report -}}
+          {{- with .Report -}}
+            {{- if ( or .Updated .Failed ) -}}
+        {{len .Scanned}} Scanned, {{len .Updated}} Updated, {{len .Failed}} Failed
+              {{- range .Updated}}
+        - {{.Name}} ({{.ImageName}}): {{.CurrentImageID.ShortID}} updated to {{.LatestImageID.ShortID}}
+              {{- end -}}
+              {{- range .Skipped}}
+        - {{.Name}} ({{.ImageName}}): {{.State}}: {{.Error}}
+              {{- end -}}
+              {{- range .Failed}}
+        - {{.Name}} ({{.ImageName}}): {{.State}}: {{.Error}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- else -}}
+          {{range .Entries -}}{{.Message}}{{"\n"}}{{- end -}}
+        {{- end -}}
+      WATCHTOWER_NOTIFICATION_URL: ""
+      WATCHTOWER_SCHEDULE: 0 0 6 * * *
+    hostname: watchtower
+    image: containrrr/watchtower:latest
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.83
+    restart: always
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          create_host_path: true
+  whoami:
+    container_name: whoami
+    depends_on:
+      tinyauth:
+        condition: service_started
+        required: true
+    hostname: whoami
+    image: traefik/whoami:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.description: Whoami is a simple web service that returns the client's IP address and hostname.
+      homepage.group: Web Services
+      homepage.href: https://whoami.bolabaden.org
+      homepage.icon: whoami.png
+      homepage.name: Whoami
+      traefik.enable: "true"
+      traefik.http.routers.whoami.middlewares: tinyauth
+      traefik.http.routers.whoami.rule: Host(`whoami.bolabaden.org`) || Host(`whoami.bolabaden.duckdns.org`) || Host(`whoami.micklethefickle.duckdns.org`)
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.81
+    restart: always
+  zilean:
+    container_name: zilean
+    depends_on:
+      zilean-postgres:
+        condition: service_healthy
+        required: true
+    environment:
+      Zilean__Database__ConnectionString: Host=zilean-postgres;Port=5432;Database=zilean;Username=postgres;Password=postgres;Include Error Detail=true;Timeout=30;CommandTimeout=3600
+      Zilean__Dmm_ScrapeSchedule: 32 * * * *
+      Zilean__EnableDashboard: "true"
+      Zilean__Imdb__UseAllCores: "true"
+      Zilean__Imdb__UseLucene: "true"
+      Zilean__Parsing__BatchSize: "100000"
+    expose:
+      - "8181"
+    hostname: zilean
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl --connect-timeout 10 --silent --show-error --fail http://127.0.0.1:8181/healthchecks/ping || exit 1
+      timeout: 1m0s
+      interval: 30s
+      retries: 10
+    image: ipromknight/zilean:latest
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.group: Media Management
+      homepage.href: https://zilean.bolabaden.org/
+      homepage.icon: zilean.png
+      homepage.name: Zilean
+      traefik.enable: "true"
+      traefik.http.routers.zilean.rule: Host(`zilean.bolabaden.org`) || Host(`zilean.bolabaden.duckdns.org`) || Host(`zilean.micklethefickle.duckdns.org`) || Host(`zilean.localhost`)
+      traefik.http.services.zilean.loadbalancer.server.port: "8181"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.32
+    restart: always
+    tty: true
+    volumes:
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/zilean/data
+        target: /app/data
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/zilean/tmp
+        target: /app/tmp
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /home/ubuntu/my-media-stack/configs/zilean/tmp2
+        target: /tmp
+        bind:
+          create_host_path: true
+  zilean-postgres:
+    container_name: zilean-postgres
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      PGID: "988"
+      POSTGRES_DB: zilean
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: postgres
+      PUID: "1001"
+      TZ: America/Chicago
+      UMASK: "002"
+    expose:
+      - "5432"
+    hostname: zilean-postgres
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      timeout: 5s
+      interval: 30s
+      retries: 5
+    image: postgres:17.4-alpine
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+    networks:
+      publicnet:
+        ipv4_address: 10.76.128.100
+    restart: always
+    shm_size: "2147483648"
+networks:
+  default:
+    name: my-media-stack_default
+  publicnet:
+    name: publicnet
+    ipam:
+      config:
+        - subnet: 10.76.0.0/16
+          gateway: 10.76.0.1
+          ip_range: 10.76.0.0/16
+    attachable: true

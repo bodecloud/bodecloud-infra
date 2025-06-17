@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"cronjob","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"cleanup-logs"},"name":"cleanup-logs","namespace":"default"},"spec":{"jobTemplate":{"spec":{"template":{"spec":{"containers":[{"args":["-c","find /logs -name \"*.log\" -mtime +7 -delete \u0026\u0026 echo \"Log cleanup completed\""],"command":["/bin/bash"],"image":"filebrowser/filebrowser:v2.31.2","name":"cleanup-logs","resources":{"limits":{"cpu":"200m","memory":"512Mi"},"requests":{"cpu":"50m","memory":"128Mi"}}}],"restartPolicy":"OnFailure"}}}},"schedule":"0 4 * * 0"}}
+  labels:
+    app.kubernetes.io/component: cronjob
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: cleanup-logs
+  name: cleanup-logs
+  namespace: default
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - args:
+            - -c
+            - find /logs -name "*.log" -mtime +7 -delete && echo "Log cleanup completed"
+            command:
+            - /bin/bash
+            image: filebrowser/filebrowser:v2.31.2
+            imagePullPolicy: IfNotPresent
+            name: cleanup-logs
+            resources:
+              limits:
+                cpu: 200m
+                memory: 512Mi
+              requests:
+                cpu: 50m
+                memory: 128Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: 0 4 * * 0
+  successfulJobsHistoryLimit: 3
+  suspend: false

@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"app.elfhosted.com/name":"node-exporter","app.kubernetes.io/component":"monitoring","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"node-exporter"},"name":"node-exporter","namespace":"default"},"spec":{"selector":{"matchLabels":{"app.elfhosted.com/name":"node-exporter"}},"template":{"metadata":{"labels":{"app.elfhosted.com/name":"node-exporter","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"node-exporter"}},"spec":{"containers":[{"image":"prom/node-exporter:latest","name":"node-exporter","resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"10m","memory":"32Mi"}},"volumeMounts":[{"mountPath":"/host/proc","name":"proc","readOnly":true},{"mountPath":"/host/sys","name":"sys","readOnly":true},{"mountPath":"/rootfs","name":"root","readOnly":true}]}],"hostNetwork":true,"tolerations":[{"effect":"NoSchedule","operator":"Exists"}],"volumes":[{"hostPath":{"path":"/proc"},"name":"proc"},{"hostPath":{"path":"/sys"},"name":"sys"},{"hostPath":{"path":"/"},"name":"root"}]}}}}
+  labels:
+    app.elfhosted.com/name: node-exporter
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: node-exporter
+  name: node-exporter
+  namespace: default
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: node-exporter
+  template:
+    metadata:
+      labels:
+        app.elfhosted.com/name: node-exporter
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: node-exporter
+    spec:
+      containers:
+      - image: prom/node-exporter:latest
+        imagePullPolicy: Always
+        name: node-exporter
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /host/proc
+          name: proc
+          readOnly: true
+        - mountPath: /host/sys
+          name: sys
+          readOnly: true
+        - mountPath: /rootfs
+          name: root
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+      volumes:
+      - hostPath:
+          path: /proc
+          type: ""
+        name: proc
+      - hostPath:
+          path: /sys
+          type: ""
+        name: sys
+      - hostPath:
+          path: /
+          type: ""
+        name: root
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  currentNumberScheduled: 3
+  desiredNumberScheduled: 3
+  numberAvailable: 3
+  numberMisscheduled: 0
+  numberReady: 3
+  observedGeneration: 1
+  updatedNumberScheduled: 3

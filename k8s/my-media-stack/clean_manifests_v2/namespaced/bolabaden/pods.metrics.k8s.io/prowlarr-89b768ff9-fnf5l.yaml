@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: prowlarr
+  usage:
+    cpu: 29461287n
+    memory: 78560Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: prowlarr
+    pod-template-hash: 89b768ff9
+  name: prowlarr-89b768ff9-fnf5l
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:56Z"
+window: 26.012s

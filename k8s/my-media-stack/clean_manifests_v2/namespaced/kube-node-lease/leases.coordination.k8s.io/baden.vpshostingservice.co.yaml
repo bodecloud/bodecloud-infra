@@ -1,0 +1,13 @@
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  name: baden.vpshostingservice.co
+  namespace: kube-node-lease
+  ownerReferences:
+  - apiVersion: v1
+    kind: Node
+    name: baden.vpshostingservice.co
+spec:
+  holderIdentity: baden.vpshostingservice.co
+  leaseDurationSeconds: 40
+  renewTime: "2025-06-14T23:01:19.934495Z"

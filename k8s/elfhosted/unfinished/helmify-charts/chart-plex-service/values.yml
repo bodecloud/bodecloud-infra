@@ -1,0 +1,13 @@
+kubernetesClusterDomain: cluster.local
+plex:
+  ports:
+  - name: http
+    port: 32400
+    targetPort: 0
+  - name: speed
+    port: 3002
+    targetPort: 0
+  - name: tinyproxy
+    port: 8888
+    targetPort: 0
+  type: ClusterIP

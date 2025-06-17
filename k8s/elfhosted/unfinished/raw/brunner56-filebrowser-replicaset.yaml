@@ -1,0 +1,771 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: brunner56-filebrowser-797b7cd568
+  namespace: my-media-stack
+  uid: 5dc74006-86e2-4042-8431-985fcd99aca6
+  resourceVersion: '2389386877'
+  generation: 1
+  creationTimestamp: '2025-05-29T16:29:05Z'
+  labels:
+    app.elfhosted.com/name: filebrowser
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: filebrowser
+    pod-template-hash: 797b7cd568
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,filebrowser-elfbot-script,elfbot-filebrowser
+    deployment.kubernetes.io/desired-replicas: '1'
+    deployment.kubernetes.io/max-replicas: '1'
+    deployment.kubernetes.io/revision: '1'
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: brunner56-filebrowser
+      uid: 41cd5463-1da7-4cbd-9094-6d02892e7dda
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: k3s
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-05-29T16:29:05Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:configmap.reloader.stakater.com/reload: {}
+            f:deployment.kubernetes.io/desired-replicas: {}
+            f:deployment.kubernetes.io/max-replicas: {}
+            f:deployment.kubernetes.io/revision: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.elfhosted.com/name: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"41cd5463-1da7-4cbd-9094-6d02892e7dda"}: {}
+        f:spec:
+          f:replicas: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubernetes.io/egress-bandwidth: {}
+              f:labels:
+                .: {}
+                f:app.elfhosted.com/name: {}
+                f:app.kubernetes.io/instance: {}
+                f:app.kubernetes.io/name: {}
+                f:pod-template-hash: {}
+            f:spec:
+              f:affinity:
+                .: {}
+                f:podAffinity:
+                  .: {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution: {}
+              f:automountServiceAccountToken: {}
+              f:containers:
+                k:{"name":"brunner56-filebrowser"}:
+                  .: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"TZ"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":8080,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsGroup: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:startupProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/dummy-storage"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/home/elfie/.local/state"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/recyclarr-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/backup"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/logs"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/rclone"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/realdebrid-zurg"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/symlinks"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/usr/local/bin/Elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/usr/local/bin/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                k:{"name":"elfbot"}:
+                  .: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsGroup: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:hostname: {}
+              f:initContainers:
+                .: {}
+                k:{"name":"copy-recyclarr-example-config"}:
+                  .: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsGroup: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/bootstrap/"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/config/"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                k:{"name":"setup"}:
+                  .: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsGroup: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/storage"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:fsGroup: {}
+                f:fsGroupChangePolicy: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"backup"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"config"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"dummy-storage"}:
+                  .: {}
+                  f:emptyDir:
+                    .: {}
+                    f:sizeLimit: {}
+                  f:name: {}
+                k:{"name":"elfbot"}:
+                  .: {}
+                  f:emptyDir:
+                    .: {}
+                    f:sizeLimit: {}
+                  f:name: {}
+                k:{"name":"elfbot-script"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"elfbot-script-ucfirst"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"elfterm-state"}:
+                  .: {}
+                  f:emptyDir:
+                    .: {}
+                    f:sizeLimit: {}
+                  f:name: {}
+                k:{"name":"logs"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"rclone"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"rclonemountrealdebridzurg"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"recyclarr-config"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"symlinks"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+    - manager: k3s
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-05-29T16:42:54Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:fullyLabeledReplicas: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+      subresource: status
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: filebrowser
+      pod-template-hash: 797b7cd568
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.elfhosted.com/name: filebrowser
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: filebrowser
+        pod-template-hash: 797b7cd568
+      annotations:
+        kubernetes.io/egress-bandwidth: 5M
+    spec:
+      volumes:
+        - name: backup
+          persistentVolumeClaim:
+            claimName: backup
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: dummy-storage
+          emptyDir:
+            sizeLimit: 1Gi
+        - name: elfbot
+          emptyDir:
+            sizeLimit: 1Gi
+        - name: elfbot-script
+          configMap:
+            name: filebrowser-elfbot-script
+            defaultMode: 493
+        - name: elfbot-script-ucfirst
+          configMap:
+            name: filebrowser-elfbot-script
+            defaultMode: 493
+        - name: elfterm-state
+          emptyDir:
+            sizeLimit: 1Gi
+        - name: logs
+          persistentVolumeClaim:
+            claimName: logs
+        - name: rclone
+          persistentVolumeClaim:
+            claimName: rclone
+        - name: rclonemountrealdebridzurg
+          persistentVolumeClaim:
+            claimName: realdebrid-zurg
+        - name: recyclarr-config
+          configMap:
+            name: recyclarr-config
+            defaultMode: 420
+        - name: symlinks
+          persistentVolumeClaim:
+            claimName: symlinks
+        - name: tmp
+          emptyDir: {}
+      initContainers:
+        - name: copy-recyclarr-example-config
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              set -x
+              set -e
+              # If we don't already have an example config, create one
+              if [ ! -f /config/recyclarr.yaml ];
+              then
+                cp /bootstrap/recyclarr.yaml /config/
+              fi
+          resources: {}
+          volumeMounts:
+            - name: config
+              mountPath: /config/
+              subPath: recyclarr
+            - name: recyclarr-config
+              mountPath: /bootstrap/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+        - name: setup
+          image: >-
+            ghcr.io/elfhosted/filebrowser:2.23.0@sha256:296e3a3d08c5ca07a26350358fa2e58a597a41adb253a65bba27b557f36383e5
+          command:
+            - /bin/bash
+            - '-c'
+            - >
+              set -x
+
+              set -e
+
+
+              # Delete tmp db if necessary
+
+              if [ -f /tmp/filebrowser.db ]
+
+              then
+                rm /tmp/filebrowser.db
+              fi
+
+
+
+              /filebrowser config init \
+                --disable-preview-resize \
+                --disable-thumbnails \
+                --disable-type-detection-by-header \
+                --branding.name="brunner56, by ElfHosted 🧝 " \
+                --branding.files=/branding \
+                --branding.disableExternal \
+                --auth.method=noauth \
+                --lockPassword \
+                --database /tmp/filebrowser.db \
+                --root /storage \
+                --cache-dir /tmp
+
+              # allow zip, unzip, rar, unrar, ls, pwd, cd, mv
+
+              /filebrowser config set --database /tmp/filebrowser.db --commands
+              zip,unzip,rar,unrar,ls,pwd,cd,mv,cp,ln,find,echo,grep,cat,touch,tar,gzip,rm,tree,du,mlocate,updatedb,locate,elfbot,Elfbot
+
+              # /filebrowser config set --database /tmp/filebrowser.db --shell
+              'vstat -c'
+
+
+              # now tell filebrowser about the user (who gets authenticated via
+              the proxy)
+
+              /filebrowser users add 1 bogus --database /tmp/filebrowser.db
+          resources:
+            limits:
+              cpu: '1'
+              memory: 4Gi
+            requests:
+              cpu: '0'
+              memory: 1Mi
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: dummy-storage
+              mountPath: /storage
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+      containers:
+        - name: brunner56-filebrowser
+          image: >-
+            ghcr.io/elfhosted/filebrowser:2.23.0@sha256:296e3a3d08c5ca07a26350358fa2e58a597a41adb253a65bba27b557f36383e5
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: filebrowser-env
+          env:
+            - name: TZ
+              value: UTC
+          resources:
+            limits:
+              cpu: '1'
+              memory: 1Gi
+            requests:
+              cpu: '0'
+              memory: 6Mi
+          volumeMounts:
+            - name: backup
+              mountPath: /storage/backup
+            - name: config
+              mountPath: /storage/config
+            - name: dummy-storage
+              mountPath: /dummy-storage
+            - name: elfbot
+              mountPath: /elfbot
+            - name: elfbot-script
+              mountPath: /usr/local/bin/elfbot
+              subPath: elfbot
+            - name: elfbot-script-ucfirst
+              mountPath: /usr/local/bin/Elfbot
+              subPath: elfbot
+            - name: elfterm-state
+              mountPath: /home/elfie/.local/state
+            - name: logs
+              mountPath: /storage/logs
+            - name: rclone
+              mountPath: /storage/rclone
+            - name: rclonemountrealdebridzurg
+              mountPath: /storage/realdebrid-zurg
+            - name: recyclarr-config
+              mountPath: /recyclarr-config
+            - name: symlinks
+              mountPath: /storage/symlinks
+            - name: tmp
+              mountPath: /tmp
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+        - name: elfbot
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /usr/bin/dumb-init
+            - /bin/bash
+            - '-c'
+            - |
+              # respond to creation or modification, but not deletion
+              inotifywait -m -e create -e modify --format "%f" /elfbot \
+                | while read APP
+                  do
+                    # if we are force-killing the pod, then don't bother with the configmap
+                    if (cat /elfbot/$APP | grep -q forcerestart); then
+                      echo "forcerestart requested, deleting $APP pod with --force.."
+                      kubectl delete pod -l app.kubernetes.io/name=$APP --force
+                      kubectl delete pod -l app.elfhosted.com/name=$APP --force
+                    else
+
+                      # put the contents of the file into the configmap which will trigger the restart
+                      echo command received for ${APP} : [$(cat /elfbot/$APP)]
+                      # create the configmap if it doesn't exist, since reloader only looks at _changes_ to configmaps
+                      if ! $(kubectl get configmap -n bolabaden elfbot-${APP} 2>&1 >/dev/null); then
+                          kubectl create configmap -n bolabaden elfbot-${APP} --from-literal=elfbot_last_action=$(date +%s)
+                          sleep 10s
+                      fi
+
+                      # If we were passed a key=value string in /etc/elfbot, then split it
+                      COMMAND=$(cat /elfbot/$APP)
+
+                      # We separate key and value with an '=', but sometimes the value may contain __another__ '=' (like Plex preferences)
+                      sep='='
+                      case $COMMAND in
+                        # If we are separated by an =
+                        (*"$sep"*)
+                          KEY=${COMMAND%%"$sep"*}
+                          VALUE=${COMMAND#*"$sep"}
+                          ;;
+                        # if not, we are a simple command like "backup"
+                        (*)
+                          KEY=$COMMAND
+                          VALUE=$(date +%s)
+                          ;;
+                      esac
+
+
+                      # patch the configmap with the latest key/value
+                      kubectl patch configmap -n bolabaden elfbot-${APP} -p "{\"data\":{\"${KEY}\":\"${VALUE}\"}}"
+                    fi
+                  done
+          resources:
+            limits:
+              cpu: '1'
+              memory: 4Gi
+            requests:
+              cpu: '0'
+              memory: 1Mi
+          volumeMounts:
+            - name: elfbot
+              mountPath: /elfbot
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: filebrowser
+      serviceAccount: filebrowser
+      automountServiceAccountToken: true
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      hostname: elfhosted
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.elfhosted.com/role
+                    operator: In
+                    values:
+                      - nodefinder
+              topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      priorityClassName: tenant-normal
+      enableServiceLinks: false
+status:
+  replicas: 1
+  fullyLabeledReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  observedGeneration: 1

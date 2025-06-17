@@ -1,0 +1,5 @@
+kubernetesClusterDomain: cluster.local
+pvc:
+  volsyncRdConfigCache:
+    storageClass: local-path
+    storageRequest: 100Gi

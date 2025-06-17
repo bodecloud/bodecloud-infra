@@ -1,0 +1,36 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.43
+  conditions:
+    ready: false
+    serving: false
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: zurg-7cf85665db-d86gz
+    namespace: default
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T17:44:21Z"
+  generateName: zurg-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: zurg
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: zurg
+  name: zurg-l6rz2
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: zurg
+ports:
+- name: http
+  port: 9999
+  protocol: TCP

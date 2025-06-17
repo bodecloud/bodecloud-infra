@@ -1,0 +1,88 @@
+apiVersion: v1
+data:
+  config.yml: |-
+    ---
+    title: "ElfHosted Dashboard"
+    subtitle: "Your Personal Media Stack"
+    logo: "logo.png"
+    header: true
+    footer: '<p>Created with <span class="has-text-danger">❤️</span> by ElfHosted</p>'
+
+    defaults:
+      layout: columns
+      colorTheme: auto
+
+    theme: default
+    colors:
+      light:
+        highlight-primary: "#3367d6"
+        highlight-secondary: "#4285f4"
+        highlight-hover: "#5a95f5"
+        background: "#f5f5f5"
+        card-background: "#ffffff"
+        text: "#363636"
+        text-header: "#ffffff"
+        text-title: "#303030"
+        text-subtitle: "#424242"
+        card-shadow: rgba(0, 0, 0, 0.1)
+        link: "#3273dc"
+        link-hover: "#363636"
+      dark:
+        highlight-primary: "#3367d6"
+        highlight-secondary: "#4285f4"
+        highlight-hover: "#5a95f5"
+        background: "#131313"
+        card-background: "#2b2b2b"
+        text: "#eaeaea"
+        text-header: "#ffffff"
+        text-title: "#fafafa"
+        text-subtitle: "#f5f5f5"
+        card-shadow: rgba(0, 0, 0, 0.4)
+        link: "#3273dc"
+        link-hover: "#ffdd57"
+
+    services:
+      - name: "Media"
+        icon: "fas fa-play"
+        items:
+          - name: "Plex"
+            logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/plex.svg"
+            subtitle: "Media Server"
+            url: "https://plex.elfhosted.com"
+            target: "_blank"
+          - name: "Jellyfin"
+            logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/jellyfin.svg"
+            subtitle: "Media Server"
+            url: "https://jellyfin.elfhosted.com"
+            target: "_blank"
+          - name: "Overseerr"
+            logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/overseerr.svg"
+            subtitle: "Request Management"
+            url: "https://overseerr.elfhosted.com"
+            target: "_blank"
+
+      - name: "Downloads"
+        icon: "fas fa-download"
+        items:
+          - name: "Radarr"
+            logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/radarr.svg"
+            subtitle: "Movie Management"
+            url: "https://radarr.elfhosted.com"
+            target: "_blank"
+          - name: "Sonarr"
+            logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/sonarr.svg"
+            subtitle: "TV Management"
+            url: "https://sonarr.elfhosted.com"
+            target: "_blank"
+          - name: "Prowlarr"
+            logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/prowlarr.svg"
+            subtitle: "Indexer Management"
+            url: "https://prowlarr.elfhosted.com"
+            target: "_blank"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"config.yml":"---\ntitle: \"ElfHosted Dashboard\"\nsubtitle: \"Your Personal Media Stack\"\nlogo: \"logo.png\"\nheader: true\nfooter: '\u003cp\u003eCreated with \u003cspan class=\"has-text-danger\"\u003e❤️\u003c/span\u003e by ElfHosted\u003c/p\u003e'\n\ndefaults:\n  layout: columns\n  colorTheme: auto\n\ntheme: default\ncolors:\n  light:\n    highlight-primary: \"#3367d6\"\n    highlight-secondary: \"#4285f4\"\n    highlight-hover: \"#5a95f5\"\n    background: \"#f5f5f5\"\n    card-background: \"#ffffff\"\n    text: \"#363636\"\n    text-header: \"#ffffff\"\n    text-title: \"#303030\"\n    text-subtitle: \"#424242\"\n    card-shadow: rgba(0, 0, 0, 0.1)\n    link: \"#3273dc\"\n    link-hover: \"#363636\"\n  dark:\n    highlight-primary: \"#3367d6\"\n    highlight-secondary: \"#4285f4\"\n    highlight-hover: \"#5a95f5\"\n    background: \"#131313\"\n    card-background: \"#2b2b2b\"\n    text: \"#eaeaea\"\n    text-header: \"#ffffff\"\n    text-title: \"#fafafa\"\n    text-subtitle: \"#f5f5f5\"\n    card-shadow: rgba(0, 0, 0, 0.4)\n    link: \"#3273dc\"\n    link-hover: \"#ffdd57\"\n\nservices:\n  - name: \"Media\"\n    icon: \"fas fa-play\"\n    items:\n      - name: \"Plex\"\n        logo: \"https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/plex.svg\"\n        subtitle: \"Media Server\"\n        url: \"https://plex.elfhosted.com\"\n        target: \"_blank\"\n      - name: \"Jellyfin\"\n        logo: \"https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/jellyfin.svg\"\n        subtitle: \"Media Server\"\n        url: \"https://jellyfin.elfhosted.com\"\n        target: \"_blank\"\n      - name: \"Overseerr\"\n        logo: \"https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/overseerr.svg\"\n        subtitle: \"Request Management\"\n        url: \"https://overseerr.elfhosted.com\"\n        target: \"_blank\"\n\n  - name: \"Downloads\"\n    icon: \"fas fa-download\"\n    items:\n      - name: \"Radarr\"\n        logo: \"https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/radarr.svg\"\n        subtitle: \"Movie Management\"\n        url: \"https://radarr.elfhosted.com\"\n        target: \"_blank\"\n      - name: \"Sonarr\"\n        logo: \"https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/sonarr.svg\"\n        subtitle: \"TV Management\"\n        url: \"https://sonarr.elfhosted.com\"\n        target: \"_blank\"\n      - name: \"Prowlarr\"\n        logo: \"https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/prowlarr.svg\"\n        subtitle: \"Indexer Management\"\n        url: \"https://prowlarr.elfhosted.com\"\n        target: \"_blank\""},"kind":"ConfigMap","metadata":{"annotations":{},"name":"homer-config","namespace":"default"}}
+  name: homer-config
+  namespace: default

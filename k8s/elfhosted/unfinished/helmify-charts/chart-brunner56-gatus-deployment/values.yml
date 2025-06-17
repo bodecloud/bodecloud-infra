@@ -1,0 +1,30 @@
+brunner56Gatus:
+  brunner56Gatus:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      gatusConfigPath: /config/config.yaml
+      smtpFrom: health@elfhosted.com
+      smtpPort: "587"
+    image:
+      repository: ghcr.io/elfhosted/gatus
+      tag: 5.17.0@sha256:e2752cf7e1781478b12e0ca48159a40549905195afe39fe0a5e39ac2c7256dac
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 128Mi
+      requests:
+        cpu: "0"
+        memory: 20Mi
+  podSecurityContext:
+    fsGroup: 568
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+kubernetesClusterDomain: cluster.local

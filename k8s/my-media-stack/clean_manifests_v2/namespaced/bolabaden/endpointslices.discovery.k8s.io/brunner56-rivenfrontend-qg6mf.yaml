@@ -1,0 +1,27 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints: null
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:07:25Z"
+  generateName: brunner56-rivenfrontend-
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rivenfrontend
+    app.kubernetes.io/service: brunner56-rivenfrontend
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    helm.sh/chart: rivenfrontend-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+    kubernetes.io/service-name: brunner56-rivenfrontend
+  name: brunner56-rivenfrontend-qg6mf
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: brunner56-rivenfrontend
+ports: null

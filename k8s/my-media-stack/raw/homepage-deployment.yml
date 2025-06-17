@@ -1,0 +1,74 @@
+#! homepage-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homepage
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homepage
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: homepage
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: homepage
+          image: ghcr.io/gethomepage/homepage
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: HOMEPAGE_ALLOWED_HOSTS
+              value: "*"
+            - name: HOMEPAGE_VAR_HEADER_STYLE
+              value: ""
+            - name: HOMEPAGE_VAR_SEARCH_PROVIDER
+              value: "google"
+            - name: HOMEPAGE_VAR_TITLE
+              value: "my-media-stack"
+            - name: HOMEPAGE_VAR_WEATHER_CITY
+              value: "Chicago"
+            - name: HOMEPAGE_VAR_WEATHER_LAT
+              value: "41.8781"
+            - name: HOMEPAGE_VAR_WEATHER_LONG
+              value: "-87.6298"
+            - name: HOMEPAGE_VAR_WEATHER_UNIT
+              value: "fahrenheit"
+            - name: TZ
+              value: "America/Chicago"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - wget -qO- http://127.0.0.1:3000 > /dev/null 2>&1 || exit 1
+            periodSeconds: 30
+            timeoutSeconds: 15
+            failureThreshold: 3
+          ports:
+            - name: homepage-3000
+              containerPort: 3000
+          volumeMounts:
+            - name: var-run-docker-sock
+              mountPath: /var/run/docker.sock
+            - name: app-config
+              mountPath: /app/config
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: var-run-docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: app-config
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/homepage

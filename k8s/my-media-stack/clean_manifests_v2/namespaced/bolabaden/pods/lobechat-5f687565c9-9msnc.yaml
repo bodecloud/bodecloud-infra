@@ -1,0 +1,148 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: lobechat-5f687565c9-
+  labels:
+    app: lobechat
+    pod-template-hash: 5f687565c9
+  name: lobechat-5f687565c9-9msnc
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: lobechat-5f687565c9
+spec:
+  containers:
+  - env:
+    - name: ACCESS_CODE
+      value: brunner56
+    - name: PGID
+      value: "988"
+    - name: PUID
+      value: "1002"
+    - name: TZ
+      value: America/Chicago
+    - name: UMASK
+      value: "002"
+    image: lobehub/lobe-chat:latest
+    imagePullPolicy: Always
+    name: lobechat
+    ports:
+    - containerPort: 3210
+      name: lobechat-3210
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /configs/lobechat/host_config
+      name: host-config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rqmff
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/lobechat/host_config
+      type: DirectoryOrCreate
+    name: host-config
+  - name: kube-api-access-rqmff
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:36:00Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:35:58Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:49:45Z"
+    message: 'containers with unready status: [lobechat]'
+    reason: ContainersNotReady
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:49:45Z"
+    message: 'containers with unready status: [lobechat]'
+    reason: ContainersNotReady
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:35:56Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://41c763b34c35242dda4f63fd212542c2247f7c6c969498b1bc233120c0ea73e9
+    image: docker.io/lobehub/lobe-chat:latest
+    imageID: docker.io/lobehub/lobe-chat@sha256:23e3bfe2e27adcff0e4b929503b355d4a561d95e3efa0a6afbbb316052469cb4
+    lastState:
+      terminated:
+        containerID: containerd://41c763b34c35242dda4f63fd212542c2247f7c6c969498b1bc233120c0ea73e9
+        exitCode: 1
+        finishedAt: "2025-06-14T22:49:44Z"
+        reason: Error
+        startedAt: "2025-06-14T22:49:23Z"
+    name: lobechat
+    ready: false
+    restartCount: 7
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=lobechat pod=lobechat-5f687565c9-9msnc_bolabaden(09b7a5f8-4933-4a76-98c2-3b2a71fb54d2)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /configs/lobechat/host_config
+      name: host-config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rqmff
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.80
+  podIPs:
+  - ip: 10.42.0.80
+  qosClass: Burstable
+  startTime: "2025-06-14T22:35:58Z"

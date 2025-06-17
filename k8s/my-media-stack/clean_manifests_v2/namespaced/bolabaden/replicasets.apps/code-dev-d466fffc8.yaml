@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: code-dev
+    pod-template-hash: d466fffc8
+  name: code-dev-d466fffc8
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: code-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-dev
+      pod-template-hash: d466fffc8
+  template:
+    metadata:
+      labels:
+        app: code-dev
+        pod-template-hash: d466fffc8
+    spec:
+      containers:
+      - env:
+        - name: CODESERVER_PASSWORD
+          value: ubuntu
+        - name: CODESERVER_SUDO_PASSWORD
+          value: h4L0m4St3R327
+        - name: DEFAULT_WORKSPACE
+          value: /workspace
+        - name: PGID
+          value: "988"
+        - name: PUID
+          value: "1001"
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "002"
+        image: linuxserver/code-server:latest
+        imagePullPolicy: IfNotPresent
+        name: code-dev
+        ports:
+        - containerPort: 8443
+          name: code-dev-8443
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - mountPath: /workspace
+          name: workspace
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/code-server/dev/config
+          type: ""
+        name: config
+      - hostPath:
+          path: /home/ubuntu/my-media-stack
+          type: ""
+        name: workspace
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

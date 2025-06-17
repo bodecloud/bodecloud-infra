@@ -1,0 +1,138 @@
+---
+- name: Deploy Prowlarr
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: prowlarr
+        namespace: my-media-stack
+        labels:
+          app: prowlarr
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: prowlarr
+        template:
+          metadata:
+            labels:
+              app: prowlarr
+          spec:
+            containers:
+              - name: prowlarr
+                image: lscr.io/linuxserver/prowlarr:latest
+                ports:
+                  - containerPort: 9696
+                env:
+                  - name: PUID
+                    value: "{{ media_stack.puid }}"
+                  - name: PGID
+                    value: "{{ media_stack.pgid }}"
+                  - name: TZ
+                    value: "{{ media_stack.timezone }}"
+                volumeMounts:
+                  - name: config
+                    mountPath: /config
+                resources:
+                  requests:
+                    memory: 256Mi
+                    cpu: 100m
+                  limits:
+                    memory: 512Mi
+                    cpu: 500m
+            volumes:
+              - name: config
+                hostPath:
+                  path: "{{ media_stack.config_path }}/prowlarr"
+                  type: DirectoryOrCreate
+  when: media_stack.services.prowlarr
+
+- name: Create Prowlarr service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: prowlarr
+        namespace: my-media-stack
+      spec:
+        selector:
+          app: prowlarr
+        ports:
+          - port: 9696
+            targetPort: 9696
+  when: media_stack.services.prowlarr
+
+- name: Deploy Jackett
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: jackett
+        namespace: my-media-stack
+        labels:
+          app: jackett
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: jackett
+        template:
+          metadata:
+            labels:
+              app: jackett
+          spec:
+            containers:
+              - name: jackett
+                image: lscr.io/linuxserver/jackett:latest
+                ports:
+                  - containerPort: 9117
+                env:
+                  - name: PUID
+                    value: "{{ media_stack.puid }}"
+                  - name: PGID
+                    value: "{{ media_stack.pgid }}"
+                  - name: TZ
+                    value: "{{ media_stack.timezone }}"
+                  - name: AUTO_UPDATE
+                    value: "true"
+                volumeMounts:
+                  - name: config
+                    mountPath: /config
+                  - name: downloads
+                    mountPath: /downloads
+                resources:
+                  requests:
+                    memory: 256Mi
+                    cpu: 100m
+                  limits:
+                    memory: 512Mi
+                    cpu: 500m
+            volumes:
+              - name: config
+                hostPath:
+                  path: "{{ media_stack.config_path }}/jackett"
+                  type: DirectoryOrCreate
+              - name: downloads
+                hostPath:
+                  path: "{{ media_stack.data_path }}/downloads"
+                  type: DirectoryOrCreate
+  when: media_stack.services.jackett
+
+- name: Create Jackett service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: jackett
+        namespace: my-media-stack
+      spec:
+        selector:
+          app: jackett
+        ports:
+          - port: 9117
+            targetPort: 9117
+  when: media_stack.services.jackett

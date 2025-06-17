@@ -1,0 +1,61 @@
+#! searxng-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searxng
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: searxng
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: searxng
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: searxng
+          image: searxng/searxng:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1001"
+            - name: SEARXNG_BASE_URL
+              value: "http://searxng:8080"
+            - name: TZ
+              value: "America/Chicago"
+            - name: UMASK
+              value: "002"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - wget --no-verbose --tries=1 --spider http://127.0.0.1:8080/ || exit 1
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          ports:
+            - name: searxng-8080
+              containerPort: 8080
+          volumeMounts:
+            - name: etc-searxng
+              mountPath: /etc/searxng
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "50m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
+      volumes:
+        - name: etc-searxng
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/searxng

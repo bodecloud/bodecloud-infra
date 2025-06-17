@@ -1,0 +1,228 @@
+---
+- name: Deploy Homepage
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: homepage
+        namespace: my-media-stack
+        labels:
+          app: homepage
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: homepage
+        template:
+          metadata:
+            labels:
+              app: homepage
+          spec:
+            containers:
+              - name: homepage
+                image: ghcr.io/gethomepage/homepage:latest
+                ports:
+                  - containerPort: 3000
+                env:
+                  - name: PUID
+                    value: "{{ media_stack.puid }}"
+                  - name: PGID
+                    value: "{{ media_stack.pgid }}"
+                volumeMounts:
+                  - name: config
+                    mountPath: /app/config
+                resources:
+                  requests:
+                    memory: 128Mi
+                    cpu: 50m
+                  limits:
+                    memory: 256Mi
+                    cpu: 200m
+            volumes:
+              - name: config
+                hostPath:
+                  path: "{{ media_stack.config_path }}/homepage"
+                  type: DirectoryOrCreate
+  when: media_stack.services.homepage
+
+- name: Create Homepage service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: homepage
+        namespace: my-media-stack
+      spec:
+        selector:
+          app: homepage
+        ports:
+          - port: 3000
+            targetPort: 3000
+  when: media_stack.services.homepage
+
+- name: Deploy Dozzle
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: dozzle
+        namespace: my-media-stack
+        labels:
+          app: dozzle
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: dozzle
+        template:
+          metadata:
+            labels:
+              app: dozzle
+          spec:
+            containers:
+              - name: dozzle
+                image: amir20/dozzle:latest
+                ports:
+                  - containerPort: 8080
+                env:
+                  - name: DOZZLE_LEVEL
+                    value: info
+                  - name: DOZZLE_TAILSIZE
+                    value: "300"
+                resources:
+                  requests:
+                    memory: 64Mi
+                    cpu: 25m
+                  limits:
+                    memory: 128Mi
+                    cpu: 100m
+  when: media_stack.services.dozzle
+
+- name: Create Dozzle service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: dozzle
+        namespace: my-media-stack
+      spec:
+        selector:
+          app: dozzle
+        ports:
+          - port: 8080
+            targetPort: 8080
+  when: media_stack.services.dozzle
+
+- name: Deploy Watchtower
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: watchtower
+        namespace: my-media-stack
+        labels:
+          app: watchtower
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: watchtower
+        template:
+          metadata:
+            labels:
+              app: watchtower
+          spec:
+            containers:
+              - name: watchtower
+                image: containrrr/watchtower:latest
+                env:
+                  - name: WATCHTOWER_CLEANUP
+                    value: "true"
+                  - name: WATCHTOWER_POLL_INTERVAL
+                    value: "3600"
+                  - name: WATCHTOWER_INCLUDE_STOPPED
+                    value: "true"
+                  - name: WATCHTOWER_REVIVE_STOPPED
+                    value: "false"
+                resources:
+                  requests:
+                    memory: 64Mi
+                    cpu: 25m
+                  limits:
+                    memory: 128Mi
+                    cpu: 100m
+  when: media_stack.services.watchtower
+
+- name: Deploy Speedtest Tracker
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: speedtest-tracker
+        namespace: my-media-stack
+        labels:
+          app: speedtest-tracker
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: speedtest-tracker
+        template:
+          metadata:
+            labels:
+              app: speedtest-tracker
+          spec:
+            containers:
+              - name: speedtest-tracker
+                image: lscr.io/linuxserver/speedtest-tracker:latest
+                ports:
+                  - containerPort: 80
+                env:
+                  - name: PUID
+                    value: "{{ media_stack.puid }}"
+                  - name: PGID
+                    value: "{{ media_stack.pgid }}"
+                  - name: TZ
+                    value: "{{ media_stack.timezone }}"
+                  - name: APP_KEY
+                    value: "base64:your-app-key-here"
+                  - name: DB_CONNECTION
+                    value: "sqlite"
+                volumeMounts:
+                  - name: config
+                    mountPath: /config
+                resources:
+                  requests:
+                    memory: 256Mi
+                    cpu: 100m
+                  limits:
+                    memory: 512Mi
+                    cpu: 500m
+            volumes:
+              - name: config
+                hostPath:
+                  path: "{{ media_stack.config_path }}/speedtest-tracker"
+                  type: DirectoryOrCreate
+  when: media_stack.services.speedtest
+
+- name: Create Speedtest Tracker service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: speedtest-tracker
+        namespace: my-media-stack
+      spec:
+        selector:
+          app: speedtest-tracker
+        ports:
+          - port: 80
+            targetPort: 80
+  when: media_stack.services.speedtest

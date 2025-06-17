@@ -1,0 +1,23 @@
+{
+    "lidarr": {
+        "save_path": "music"
+    },
+    "movies": {
+        "save_path": "movies"
+    },
+    "prowlarr": {
+        "save_path": ""
+    },
+    "radarr": {
+        "save_path": "movies"
+    },
+    "readarr": {
+        "save_path": "books"
+    },
+    "tv-sonarr": {
+        "save_path": "tv"
+    },
+    "tv-whisparr": {
+        "save_path": "xxx"
+    }
+}

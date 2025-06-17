@@ -1,0 +1,10 @@
+apiVersion: k3s.cattle.io/v1
+kind: Addon
+metadata:
+  annotations:
+    addon.k3s.cattle.io/gvks: /v1, Kind=ServiceAccount;apps/v1, Kind=Deployment
+  name: metrics-server-deployment
+  namespace: kube-system
+spec:
+  checksum: ba9c558aad213754bfb7b14491a091d21891aa22b54343697186eb5db48ee2bd
+  source: /var/lib/rancher/k3s/server/manifests/metrics-server/metrics-server-deployment.yaml

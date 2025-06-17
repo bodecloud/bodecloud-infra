@@ -1,0 +1,123 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: gatus-66789cb9c-
+  labels:
+    app.elfhosted.com/name: gatus
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: gatus
+    pod-template-hash: 66789cb9c
+  name: gatus-66789cb9c-2dcvs
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: gatus-66789cb9c
+spec:
+  containers:
+  - image: twinproduction/gatus:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: gatus
+    ports:
+    - containerPort: 8080
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: gatus-config
+    name: config
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:44:22Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:44:21Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:23Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:23Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:44:21Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://fb8ddbda94eb9b355d5c96234cb482fbe2fbe1234a334d054b1dc418c356c392
+    image: docker.io/twinproduction/gatus:latest
+    imageID: docker.io/twinproduction/gatus@sha256:3b9a4bf49e4222783d49caa8745e601a2446de78a4336580bd9ee0820d0508da
+    lastState: {}
+    name: gatus
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:44:22Z"
+    volumeMounts:
+    - mountPath: /config
+      name: config
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.42
+  podIPs:
+  - ip: 10.42.0.42
+  qosClass: Burstable
+  startTime: "2025-06-14T17:44:21Z"

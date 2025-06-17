@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-volsync-rd-config-dest
+  labels:
+    app.kubernetes.io/created-by: volsync
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.pvc.volsyncRdConfigDest.storageRequest | quote }}
+  storageClassName: {{ .Values.pvc.volsyncRdConfigDest.storageClass | quote }}

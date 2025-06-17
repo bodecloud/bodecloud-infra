@@ -1,0 +1,6 @@
+model_list:
+  - model_name: mistral/mistral-tiny
+    litellm_params:
+      model: mistral/mistral-tiny
+      api_base: https://api.mistral.ai/v1
+      api_key: os.environ/MISTRAL_API_KEY 

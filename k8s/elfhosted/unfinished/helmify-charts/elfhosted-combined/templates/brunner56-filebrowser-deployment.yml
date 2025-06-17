@@ -1,0 +1,297 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "elfhosted-combined.fullname" . }}-brunner56-filebrowser
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "elfhosted-combined.labels" . | nindent 4 }}
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,filebrowser-elfbot-script,elfbot-filebrowser
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: {{ .Values.brunner56Filebrowser.replicas }}
+  revisionHistoryLimit: {{ .Values.brunner56Filebrowser.revisionHistoryLimit }}
+  strategy:
+    type: {{ .Values.brunner56Filebrowser.strategy.type | quote }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: filebrowser
+    {{- include "elfhosted-combined.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app.elfhosted.com/name: filebrowser
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: filebrowser
+      {{- include "elfhosted-combined.selectorLabels" . | nindent 8 }}
+      annotations:
+        kubernetes.io/egress-bandwidth: 5M
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: true
+      containers:
+      - env:
+        - name: TZ
+          value: {{ quote .Values.brunner56Filebrowser.brunner56Filebrowser.env.tz }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        envFrom:
+        - configMapRef:
+            name: {{ include "elfhosted-combined.fullname" . }}-filebrowser-env
+        image: '{{ .Values.brunner56Filebrowser.brunner56Filebrowser.image.repository }}:{{
+          .Values.brunner56Filebrowser.brunner56Filebrowser.image.tag | default .Chart.AppVersion
+          }}'
+        imagePullPolicy: {{ .Values.brunner56Filebrowser.brunner56Filebrowser.imagePullPolicy
+          }}
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        name: brunner56-filebrowser
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        resources: {{- toYaml .Values.brunner56Filebrowser.brunner56Filebrowser.resources
+          | nindent 10 }}
+        securityContext: {{- toYaml .Values.brunner56Filebrowser.brunner56Filebrowser.containerSecurityContext
+          | nindent 10 }}
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /storage/backup
+          name: backup
+        - mountPath: /storage/config
+          name: config
+        - mountPath: /dummy-storage
+          name: dummy-storage
+        - mountPath: /elfbot
+          name: elfbot
+        - mountPath: /usr/local/bin/elfbot
+          name: elfbot-script
+          subPath: elfbot
+        - mountPath: /usr/local/bin/Elfbot
+          name: elfbot-script-ucfirst
+          subPath: elfbot
+        - mountPath: /home/elfie/.local/state
+          name: elfterm-state
+        - mountPath: /storage/logs
+          name: logs
+        - mountPath: /storage/rclone
+          name: rclone
+        - mountPath: /storage/realdebrid-zurg
+          name: rclonemountrealdebridzurg
+        - mountPath: /recyclarr-config
+          name: recyclarr-config
+        - mountPath: /storage/symlinks
+          name: symlinks
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - /usr/bin/dumb-init
+        - /bin/bash
+        - -c
+        - |
+          # respond to creation or modification, but not deletion
+          inotifywait -m -e create -e modify --format "%f" /elfbot \
+            | while read APP
+              do
+                # if we are force-killing the pod, then don't bother with the configmap
+                if (cat /elfbot/$APP | grep -q forcerestart); then
+                  echo "forcerestart requested, deleting $APP pod with --force.."
+                  kubectl delete pod -l app.kubernetes.io/name=$APP --force
+                  kubectl delete pod -l app.elfhosted.com/name=$APP --force
+                else
+      
+                  # put the contents of the file into the configmap which will trigger the restart
+                  echo command received for ${APP} : [$(cat /elfbot/$APP)]
+                  # create the configmap if it doesn't exist, since reloader only looks at _changes_ to configmaps
+                  if ! $(kubectl get configmap -n bolabaden elfbot-${APP} 2>&1 >/dev/null); then
+                      kubectl create configmap -n bolabaden elfbot-${APP} --from-literal=elfbot_last_action=$(date +%s)
+                      sleep 10s
+                  fi
+      
+                  # If we were passed a key=value string in /etc/elfbot, then split it
+                  COMMAND=$(cat /elfbot/$APP)
+      
+                  # We separate key and value with an '=', but sometimes the value may contain __another__ '=' (like Plex preferences)
+                  sep='='
+                  case $COMMAND in
+                    # If we are separated by an =
+                    (*"$sep"*)
+                      KEY=${COMMAND%%"$sep"*}
+                      VALUE=${COMMAND#*"$sep"}
+                      ;;
+                    # if not, we are a simple command like "backup"
+                    (*)
+                      KEY=$COMMAND
+                      VALUE=$(date +%s)
+                      ;;
+                  esac
+      
+      
+                  # patch the configmap with the latest key/value
+                  kubectl patch configmap -n bolabaden elfbot-${APP} -p "{\"data\":{\"${KEY}\":\"${VALUE}\"}}"
+                fi
+              done
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Filebrowser.elfbot.image.repository }}:{{ .Values.brunner56Filebrowser.elfbot.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Filebrowser.elfbot.imagePullPolicy }}
+        name: elfbot
+        resources: {{- toYaml .Values.brunner56Filebrowser.elfbot.resources | nindent 10
+          }}
+        securityContext: {{- toYaml .Values.brunner56Filebrowser.elfbot.containerSecurityContext
+          | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /elfbot
+          name: elfbot
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      hostname: elfhosted
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+          # If we don't already have an example config, create one
+          if [ ! -f /config/recyclarr.yaml ];
+          then
+            cp /bootstrap/recyclarr.yaml /config/
+          fi
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: '{{ .Values.brunner56Filebrowser.copyRecyclarrExampleConfig.image.repository
+          }}:{{ .Values.brunner56Filebrowser.copyRecyclarrExampleConfig.image.tag | default
+          .Chart.AppVersion }}'
+        imagePullPolicy: {{ .Values.brunner56Filebrowser.copyRecyclarrExampleConfig.imagePullPolicy
+          }}
+        name: copy-recyclarr-example-config
+        resources: {}
+        securityContext: {{- toYaml .Values.brunner56Filebrowser.copyRecyclarrExampleConfig.containerSecurityContext
+          | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config/
+          name: config
+          subPath: recyclarr
+        - mountPath: /bootstrap/
+          name: recyclarr-config
+      - command:
+        - /bin/bash
+        - -c
+        - "set -x\nset -e\n\n# Delete tmp db if necessary\nif [ -f /tmp/filebrowser.db ]\nthen\n
+          \ rm /tmp/filebrowser.db\nfi\n\n\n/filebrowser config init \\\n  --disable-preview-resize
+          \\\n  --disable-thumbnails \\\n  --disable-type-detection-by-header \\\n  --branding.name=\"brunner56,
+          by ElfHosted \U0001F9DD \" \\\n  --branding.files=/branding \\\n  --branding.disableExternal
+          \\\n  --auth.method=noauth \\\n  --lockPassword \\\n  --database /tmp/filebrowser.db
+          \\\n  --root /storage \\\n  --cache-dir /tmp\n\n# allow zip, unzip, rar, unrar,
+          ls, pwd, cd, mv\n/filebrowser config set --database /tmp/filebrowser.db --commands
+          zip,unzip,rar,unrar,ls,pwd,cd,mv,cp,ln,find,echo,grep,cat,touch,tar,gzip,rm,tree,du,mlocate,updatedb,locate,elfbot,Elfbot\n#
+          /filebrowser config set --database /tmp/filebrowser.db --shell 'vstat -c'\n\n#
+          now tell filebrowser about the user (who gets authenticated via the proxy)\n/filebrowser
+          users add 1 bogus --database /tmp/filebrowser.db\n"
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Filebrowser.setup.image.repository }}:{{ .Values.brunner56Filebrowser.setup.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Filebrowser.setup.imagePullPolicy }}
+        name: setup
+        resources: {{- toYaml .Values.brunner56Filebrowser.setup.resources | nindent 10
+          }}
+        securityContext: {{- toYaml .Values.brunner56Filebrowser.setup.containerSecurityContext
+          | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /storage
+          name: dummy-storage
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {{- toYaml .Values.brunner56Filebrowser.podSecurityContext | nindent
+        8 }}
+      serviceAccount: filebrowser
+      serviceAccountName: {{ include "elfhosted-combined.fullname" . }}-filebrowser
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-combined.fullname" . }}-backup
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-combined.fullname" . }}-config
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: dummy-storage
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: elfbot
+      - configMap:
+          defaultMode: 493
+          name: {{ include "elfhosted-combined.fullname" . }}-filebrowser-elfbot-script
+        name: elfbot-script
+      - configMap:
+          defaultMode: 493
+          name: {{ include "elfhosted-combined.fullname" . }}-filebrowser-elfbot-script
+        name: elfbot-script-ucfirst
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: elfterm-state
+      - name: logs
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-combined.fullname" . }}-logs
+      - name: rclone
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-combined.fullname" . }}-rclone
+      - name: rclonemountrealdebridzurg
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-combined.fullname" . }}-realdebrid-zurg
+      - configMap:
+          defaultMode: 420
+          name: {{ include "elfhosted-combined.fullname" . }}-recyclarr-config
+        name: recyclarr-config
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-combined.fullname" . }}-symlinks
+      - name: tmp

@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: homer
+  usage:
+    cpu: 92274n
+    memory: 868Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: homer
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: homer
+    pod-template-hash: 6d5977c66d
+  name: homer-6d5977c66d-z7x28
+  namespace: default
+timestamp: "2025-06-14T23:00:26Z"
+window: 19.908s

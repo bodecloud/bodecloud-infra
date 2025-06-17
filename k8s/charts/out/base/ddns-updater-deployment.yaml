@@ -1,0 +1,77 @@
+#! ddns-updater-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: ddns-updater
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: ddns-updater
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: ddns-updater
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: ddns-updater
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: ddns-updater
+                  image: qmcgaw/ddns-updater
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: BACKUP_DIRECTORY
+                      value: "/updater/data"
+                    - name: BACKUP_PERIOD
+                      value: "1h"
+                    - name: CONFIG_FILEPATH
+                      value: "/updater/data/config.json"
+                    - name: HTTP_TIMEOUT
+                      value: "10s"
+                    - name: LISTENING_ADDRESS
+                      value: "0.0.0.0:7998"
+                    - name: LOG_CALLER
+                      value: "hidden"
+                    - name: LOG_LEVEL
+                      value: "info"
+                    - name: PERIOD
+                      value: "5m"
+                    - name: PUBLICIPV4_HTTP_PROVIDERS
+                      value: "all"
+                    - name: PUBLICIPV6_HTTP_PROVIDERS
+                      value: "all"
+                    - name: PUBLICIP_DNS_PROVIDERS
+                      value: "all"
+                    - name: PUBLICIP_DNS_TIMEOUT
+                      value: "3s"
+                    - name: PUBLICIP_FETCHERS
+                      value: "all"
+                    - name: PUBLICIP_HTTP_PROVIDERS
+                      value: "all"
+                    - name: ROOT_URL
+                      value: "/"
+                    - name: SHOUTRRR_ADDRESSES
+                      value: ""
+                    - name: UPDATE_COOLDOWN_PERIOD
+                      value: "5m"
+                  ports:
+                    - name: ddns-updat-8000
+                      containerPort: 8000
+                    - name: ddns-updat-7998
+                      containerPort: 7998
+                  volumeMounts:
+                    - name: updater-data
+                      mountPath: /updater/data
+            volumes:
+                - name: updater-data
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/ddns-updater/updater/data

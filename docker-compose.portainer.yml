@@ -1,0 +1,50 @@
+
+x-resource-limits: &resource-limits
+  labels:
+    autoheal: "true"
+
+x-portainer-labels: &portainer-labels
+  traefik.enable: "true"
+  traefik.http.services.portainer.loadbalancer.server.port: 9443
+  homepage.group: System Monitoring
+  homepage.name: Portainer
+  homepage.icon: portainer.png
+  homepage.href: https://portainer.${DOMAIN}/
+  homepage.description: Portainer is a tool that allows you to manage your Docker containers and images.
+
+services:
+  portainer:  # docker run --net infranet --name portainer -h portainer --add-host host.docker.internal:172.17.0.1 -p ${PORTAINER_HTTP_PORT:-9000}:9000 -p ${PORTAINER_HTTPS_PORT:-9443}:9443 -p ${PORTAINER_API_PORT:-7999}:8000 -v ${CONFIG_DIR:-./configs}/portainer/data:/data -v ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock -l autoheal=true -l traefik.enable=true -l traefik.http.services.portainer.loadbalancer.server.port=9443 -l homepage.group="System Monitoring" -l homepage.name=Portainer -l homepage.icon=portainer.png -l homepage.href=https://portainer.${DOMAIN}/ -l homepage.description="Portainer is a tool that allows you to manage your Docker containers and images." portainer/portainer-ce:lts
+    image: portainer/portainer-ce:lts
+    container_name: portainer
+    hostname: portainer
+    networks:
+      - infranet
+    ports:
+      - ${PORTAINER_HTTP_PORT:-9000}:9000    # serve http frontend
+      - ${PORTAINER_HTTPS_PORT:-9443}:9443   # serve https frontend
+      - ${PORTAINER_API_PORT:-7999}:8000     # serve api
+    volumes:
+      - ${CONFIG_DIR:-./configs}/portainer/data:/data
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
+    <<: *resource-limits
+    labels:
+      <<: *portainer-labels
+
+networks:
+  infranet:
+    name: infranet
+    driver: bridge
+    external: true
+#    driver_opts:
+#      parent: tailscale0
+#    ipam:
+#      config:
+#        - subnet: 172.21.0.0/16
+#          gateway: 172.21.0.1
+#          ip_range: 172.21.0.0/16
+  # if you prefer an external network, use the following command:
+  # docker network create -d bridge -o parent=${TS_INTERFACE_NAME:-tailscale0} --attachable --subnet ${TS_SUBNET:-172.21.0.0/16} --ip-range ${TS_IP_RANGE:-172.21.0.0/16} --gateway ${TS_HOST_IP:-172.21.0.1} infranet
+
+# docker run --net infranet --name portainer -h portainer --add-host host.docker.internal:172.17.0.1 -p ${PORTAINER_HTTP_PORT:-9000}:9000 -p ${PORTAINER_HTTPS_PORT:-9443}:9443 -p ${PORTAINER_API_PORT:-7999}:8000 -v ${CONFIG_DIR:-./configs}/portainer/data:/data -v ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock -l autoheal=true -l traefik.enable=true -l traefik.http.services.portainer.loadbalancer.server.port=9443 -l homepage.group="System Monitoring" -l homepage.name=Portainer -l homepage.icon=portainer.png -l homepage.href=https://portainer.${DOMAIN}/ -l homepage.description="Portainer is a tool that allows you to manage your Docker containers and images." portainer/portainer-ce:lts
+# docker compose --env-file=${ROOT_DIR:-.}/.env -f docker-compose.portainer.yml up -d --remove-orphans
+# docker stack deploy portainer -c docker-compose.portainer.yml -d --prune

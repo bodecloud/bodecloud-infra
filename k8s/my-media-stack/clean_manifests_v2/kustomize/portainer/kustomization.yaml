@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../namespaced/portainer/configmaps/kube-root-ca.crt.yaml
+- ../../namespaced/portainer/deployments.apps/portainer-agent.yaml
+- ../../namespaced/portainer/endpoints/portainer-agent-headless.yaml
+- ../../namespaced/portainer/endpoints/portainer-agent.yaml
+- ../../namespaced/portainer/endpointslices.discovery.k8s.io/portainer-agent-headless-8gbtl.yaml
+- ../../namespaced/portainer/endpointslices.discovery.k8s.io/portainer-agent-x5s57.yaml
+- ../../namespaced/portainer/pods.metrics.k8s.io/portainer-agent-7b6cd68b7b-zrhnc.yaml
+- ../../namespaced/portainer/pods/portainer-agent-7b6cd68b7b-zrhnc.yaml
+- ../../namespaced/portainer/replicasets.apps/portainer-agent-7b6cd68b7b.yaml
+- ../../namespaced/portainer/serviceaccounts/default.yaml
+- ../../namespaced/portainer/serviceaccounts/portainer-sa-clusteradmin.yaml
+- ../../namespaced/portainer/services/portainer-agent-headless.yaml
+- ../../namespaced/portainer/services/portainer-agent.yaml

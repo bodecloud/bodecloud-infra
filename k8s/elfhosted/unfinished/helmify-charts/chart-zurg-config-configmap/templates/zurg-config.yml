@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "chart-zurg-config-configmap.fullname" . }}-zurg-config
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "chart-zurg-config-configmap.labels" . | nindent 4 }}
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  cli_debrid_update.sh: {{ .Values.zurgConfig.cliDebridUpdateSh | toYaml | indent
+    1 }}
+  config.yml: {{ .Values.zurgConfig.configYml | toYaml | indent 1 }}
+  plex_update.sh: {{ .Values.zurgConfig.plexUpdateSh | toYaml | indent 1 }}
+  setup.sh: {{ .Values.zurgConfig.setupSh | toYaml | indent 1 }}

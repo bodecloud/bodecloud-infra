@@ -1,0 +1,135 @@
+# yaml-language-server: $schema=https://json.schemastore.org/traefik-v3-file-provider.json
+
+http:
+  routers:
+    # Catch-all router with lowest priority for unmatched hosts
+    catchall-404:
+      rule: "Host(`*`)"
+      entryPoints:
+        - websecure
+      # Use the lowest priority
+      priority: 1
+      # Use the error pages middleware defined below
+      middlewares:
+        - error-pages@file
+      # The service here doesn't strictly matter as the middleware intercepts,
+      # but Traefik requires one. We can point it to the error-pages service itself
+      # or use the built-in noop service (noop@internal) if preferred.
+      service: noop@internal
+      tls: {}
+  services:
+    error-pages:
+      loadBalancer:
+        servers:
+          - url: "http://error-pages:80"
+    # Nginx authentication service
+    nginx-auth:
+      loadBalancer:
+        servers:
+          - url: "http://nginx-auth:80"
+  middlewares:
+    # ========================================
+    # NGINX AUTHENTICATION MIDDLEWARES
+    # ========================================
+    # Main Auth: API key OR IP whitelist OR tinyauth (original logic)
+    nginx-auth:
+      forwardAuth:
+        address: "http://nginx-auth:80/auth"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "X-Auth-Method"
+          - "X-Auth-Passed"
+          - "X-Middleware-Name"
+
+    # Rate Limiting Only: Just rate limiting, no authentication
+    nginx-ratelimit:
+      forwardAuth:
+        address: "http://nginx-auth:80/ratelimit"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "X-Auth-Method"
+          - "X-Auth-Passed"
+          - "X-Middleware-Name"
+
+    # Combined Auth + Rate Limiting: Main auth with rate limiting
+    nginx-auth-with-ratelimit:
+      forwardAuth:
+        address: "http://nginx-auth:80/auth-with-ratelimit"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "X-Auth-Method"
+          - "X-Auth-Passed"
+          - "X-Middleware-Name"
+
+    # ========================================
+    # LEGACY TRAEFIK MIDDLEWARES (kept for compatibility)
+    # ========================================
+    ipallowlist-private:
+      ipAllowList:
+        sourceRange:
+          - "127.0.0.1/32"     # localhost (ipv4)
+          - "::1/128"          # localhost (ipv6)
+          - "172.17.0.0/12"    # docker network
+          - "10.76.0.0/16"     # docker 'publicnet' network
+          - "100.64.0.0/10"    # tailscale network
+#          - "149.130.221.93"   # micklethefickle oracle cloud vps
+#          - "207.211.189.95"   # beatapostapita oracle cloud vps
+#          - "152.117.108.32"   # wizard-pc
+    api-key-auth:
+      headers:
+        customRequestHeaders:
+          X-API-Key: "sk_IQys9kpENSiYY8lFuCslok3PauKBRSzeGprmvPfiMWAM9neeXoSqCZW7pMlWKbqPrwtF33kh1F73vf7D4PBpVfZJ1reHEL8d6ny6J03Ho"
+    compress:
+      compress: {}     # Use default compression settings
+    error-pages:
+      errors:
+        status:
+          - "400-599"
+        service: error-pages
+        query: "/{status}.html"
+    error-pages-ratelimit:
+      errors:
+        status:
+          - "429"
+        service: error-pages
+        query: "/rate-limit-explanation.html"
+    rate-limit-unauthenticated:
+      rateLimit:
+        average: 30    # 30 requests per period
+        period: 1m     # per minute
+        burst: 20      # allow 20 requests burst
+        sourceCriterion:
+          ipStrategy:
+            depth: 1   # Use the first IP in X-Forwarded-For
+    rate-limit-unauthenticated-with-redirect:
+      chain:
+        middlewares:
+          - rate-limit-unauthenticated
+          - rate-limit-error-page
+    rate-limit-authenticated:
+      rateLimit:
+        average: 100   # 100 requests per period
+        period: 1m     # per minute
+        burst: 50      # allow 50 requests burst
+        sourceCriterion:
+          ipStrategy:
+            depth: 1   # Use the first IP in X-Forwarded-For
+    rate-limit-api:
+      rateLimit:
+        average: 300   # 300 requests per period
+        period: 1m     # per minute
+        burst: 100     # allow 100 requests burst
+        sourceCriterion:
+          ipStrategy:
+            depth: 1   # Use the first IP in X-Forwarded-For
+    rate-limit-error-page:
+      errors:
+        status:
+          - "429"
+        service: error-pages
+        query: "/rate-limit-explanation.html"
+    return-code-override-ratelimit:
+      plugin:
+        return-code-override:
+          codes:
+            429: 200

@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-brunner56-kubernetesdashboard-7c7d46f5f4-wvxlx
+  labels:
+    app.kubernetes.io/component: kubernetes-dashboard
+    pod-template-hash: 7c7d46f5f4
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+spec:
+  containers:
+  - args:
+    - --namespace=bolabaden
+    - --sidecar-host=http://127.0.0.1:8000
+    - --enable-skip-login
+    - --enable-insecure-login
+    - --system-banner=Built</A> with ❤️ by <A HREF="https://funkypenguin.co.nz">@funkypenguin</A>
+      and friends (<I><A HREF="https://chat.funkypenguin.co.nz">join us!</A></I>)
+    image: kubernetesui/dashboard:v2.6.1
+    livenessProbe:
+      httpGet:
+        port: 9090
+      initialDelaySeconds: 30
+      timeoutSeconds: 30
+    name: kubernetesdashboard
+    ports:
+    - containerPort: 9090
+      name: http
+    resources:
+      limits:
+        cpu: "1"
+        memory: 256Mi
+      requests:
+        cpu: "0"
+        memory: 64Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsGroup: 2001
+      runAsUser: 1001
+    volumeMounts:
+    - mountPath: /certs
+      name: kubernetes-dashboard-certs
+    - mountPath: /tmp
+      name: tmp-volume
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-md9ph
+      readOnly: true
+  - image: kubernetesui/metrics-scraper:v1.0.9
+    livenessProbe:
+      httpGet:
+        port: 8000
+      initialDelaySeconds: 30
+      timeoutSeconds: 30
+    name: dashboard-metrics-scraper
+    ports:
+    - containerPort: 8000
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsGroup: 2001
+      runAsUser: 1001
+    volumeMounts:
+    - mountPath: /tmp
+      name: tmp-volume
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-md9ph
+      readOnly: true
+  preemptionPolicy: PreemptLowerPriority
+  priority: 4000
+  priorityClassName: tenant-normal
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: kubernetes-dashboard
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kubernetes-dashboard-certs
+    secret:
+      secretName: brunner56-kubernetesdashboard-certs
+  - name: tmp-volume
+  - name: kube-api-access-md9ph
+    projected:
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              fieldPath: metadata.namespace
+            path: namespace

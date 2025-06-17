@@ -1,0 +1,28 @@
+lidarr:
+  - host: lidarr
+    port: 8686
+    api_token: ${LIDARR_API_KEY}
+prowlarr:
+  - host: prowlarr
+    port: 9696
+    api_token: ${PROWLARR_API_KEY}
+radarr:
+  - host: radarr
+    port: 7878
+    api_token: ${RADARR_API_KEY}
+readarr:
+  - host: readarr
+    port: 8787
+    api_token_file: ${READARR_API_KEY}
+sonarr:
+  - host: sonarr
+    port: 8989
+    api_token: ${SONARR_API_KEY}
+tautulli:
+  - host: tautulli
+    port: 8181
+    api_token: ${TAUTULLI_API_KEY}
+whisparr:
+  - host: whisparr
+    port: 6969
+    api_token: ${WHISPARR_API_KEY}

@@ -1,0 +1,66 @@
+#! stremio-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stremio
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stremio
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: stremio
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: stremio
+          image: th3w1zard1/stremio-docker:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: CASTING_DISABLED
+              value: "1"
+            - name: IPADDRESS
+              value: "149.130.221.93"
+            - name: NO_CORS
+              value: "0"
+            - name: SERVER_URL
+              value: "https://stremio.my-media-stack.org"
+            - name: WEBUI_LOCATION
+              value: "https://stremio-web.my-media-stack.org/"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - curl -fs http://127.0.0.1:11470 || curl -fs http://127.0.0.1:12470
+            periodSeconds: 30
+            initialDelaySeconds: 40
+            timeoutSeconds: 10
+            failureThreshold: 3
+          ports:
+            - name: stremio-11470
+              containerPort: 11470
+            - name: stremio-12470
+              containerPort: 12470
+            - name: stremio-8080
+              containerPort: 8080
+          volumeMounts:
+            - name: root--stremio-server
+              mountPath: /root/.stremio-server
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: root--stremio-server
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/stremio/root/.stremio-server

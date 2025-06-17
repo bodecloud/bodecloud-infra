@@ -1,0 +1,151 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: mongodb-dd5d49f55-
+  labels:
+    app: mongodb
+    pod-template-hash: dd5d49f55
+  name: mongodb-dd5d49f55-hzm7v
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: mongodb-dd5d49f55
+spec:
+  containers:
+  - args:
+    - --bind_ip_all
+    command:
+    - mongod
+    env:
+    - name: PGID
+      value: "988"
+    - name: PUID
+      value: "1001"
+    - name: TZ
+      value: America/Chicago
+    - name: UMASK
+      value: "002"
+    image: mongo:latest
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - mongosh 127.0.0.1:27017/test --quiet --eval 'db.runCommand("ping").ok' >
+          /dev/null 2>&1 || exit 1
+      failureThreshold: 5
+      initialDelaySeconds: 40
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: mongodb
+    ports:
+    - containerPort: 27017
+      name: mongodb-27017
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data/db
+      name: data-db
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-qngtm
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/mongodb/data
+      type: ""
+    name: data-db
+  - name: kube-api-access-qngtm
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:34:31Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:34:29Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:34:31Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:34:31Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:34:28Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://94f537ed86457114dffb84dcc27dedf45664d082044ac06b108e9b501ae346c2
+    image: docker.io/library/mongo:latest
+    imageID: docker.io/library/mongo@sha256:98028cf281bb5d49ace5e1ddbd4509e8f1382fe80ef1cf101eeefdc106d76cd4
+    lastState: {}
+    name: mongodb
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:34:30Z"
+    volumeMounts:
+    - mountPath: /data/db
+      name: data-db
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-qngtm
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.77
+  podIPs:
+  - ip: 10.42.0.77
+  qosClass: Burstable
+  startTime: "2025-06-14T22:34:29Z"

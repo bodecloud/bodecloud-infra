@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  notifiarr.conf: "##     Notifiarr Client Configuration File     ##\n#\n# This file
+    is used to configure the Notifiarr client.\n# \napi_key = \"your-notifiarr-api-key\"\n\n#
+    Application URLs and API Keys\n[radarr]\n  url = \"http://radarr:7878\"\n  api_key
+    = \"your-radarr-api-key\"\n\n[sonarr]\n  url = \"http://sonarr:8989\"\n  api_key
+    = \"your-sonarr-api-key\"\n\n[prowlarr]\n  url = \"http://prowlarr:9696\"\n  api_key
+    = \"your-prowlarr-api-key\"\n\n[lidarr]\n  url = \"http://lidarr:8686\"\n  api_key
+    = \"your-lidarr-api-key\"\n\n[readarr]\n  url = \"http://readarr:8787\"\n  api_key
+    = \"your-readarr-api-key\"\n\n[plex]\n  url = \"http://plex:32400\"\n  token =
+    \"your-plex-token\"\n\n[tautulli]\n  url = \"http://tautulli:8181\"\n  api_key
+    = \"your-tautulli-api-key\""
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"notifiarr.conf":"##     Notifiarr Client Configuration File     ##\n#\n# This file is used to configure the Notifiarr client.\n# \napi_key = \"your-notifiarr-api-key\"\n\n# Application URLs and API Keys\n[radarr]\n  url = \"http://radarr:7878\"\n  api_key = \"your-radarr-api-key\"\n\n[sonarr]\n  url = \"http://sonarr:8989\"\n  api_key = \"your-sonarr-api-key\"\n\n[prowlarr]\n  url = \"http://prowlarr:9696\"\n  api_key = \"your-prowlarr-api-key\"\n\n[lidarr]\n  url = \"http://lidarr:8686\"\n  api_key = \"your-lidarr-api-key\"\n\n[readarr]\n  url = \"http://readarr:8787\"\n  api_key = \"your-readarr-api-key\"\n\n[plex]\n  url = \"http://plex:32400\"\n  token = \"your-plex-token\"\n\n[tautulli]\n  url = \"http://tautulli:8181\"\n  api_key = \"your-tautulli-api-key\""},"kind":"ConfigMap","metadata":{"annotations":{},"name":"notifiarr-config","namespace":"default"}}
+  name: notifiarr-config
+  namespace: default

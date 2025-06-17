@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: jellyseerr
+  usage:
+    cpu: 20714194n
+    memory: 214844Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: jellyseerr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: jellyseerr
+    pod-template-hash: 8574d6486d
+  name: jellyseerr-8574d6486d-4nl2l
+  namespace: default
+timestamp: "2025-06-14T23:00:39Z"
+window: 18.838s

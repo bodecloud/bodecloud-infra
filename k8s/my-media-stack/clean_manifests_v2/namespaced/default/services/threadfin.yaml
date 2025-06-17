@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"threadfin"},"name":"threadfin","namespace":"default"},"spec":{"ports":[{"name":"http","port":34400,"protocol":"TCP","targetPort":34400}],"selector":{"app.elfhosted.com/name":"threadfin"},"type":"ClusterIP"}}
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: threadfin
+  name: threadfin
+  namespace: default
+spec:
+  clusterIP: 10.43.57.26
+  clusterIPs:
+  - 10.43.57.26
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 34400
+    protocol: TCP
+    targetPort: 34400
+  selector:
+    app.elfhosted.com/name: threadfin
+  sessionAffinity: None
+  type: ClusterIP
+  loadBalancer: {}

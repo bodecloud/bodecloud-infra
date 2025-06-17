@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "chart-traefik-forward-auth-config-configmap.fullname" . }}-traefik-forward-auth-config
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "chart-traefik-forward-auth-config-configmap.labels" . | nindent 4 }}
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  AUTH_HOST: {{ .Values.traefikForwardAuthConfig.authHost | quote }}
+  CLIENT_ID: {{ .Values.traefikForwardAuthConfig.clientId | quote }}
+  CLIENT_SECRET: {{ .Values.traefikForwardAuthConfig.clientSecret | quote }}
+  COOKIE_DOMAIN: {{ .Values.traefikForwardAuthConfig.cookieDomain | quote }}
+  COOKIE_NAME: {{ .Values.traefikForwardAuthConfig.cookieName | quote }}
+  ENCRYPTION_KEY: {{ .Values.traefikForwardAuthConfig.encryptionKey | quote }}
+  LIFETIME: {{ .Values.traefikForwardAuthConfig.lifetime | quote }}
+  LOGOUT_REDIRECT: {{ .Values.traefikForwardAuthConfig.logoutRedirect | quote }}
+  PROVIDER_URI: {{ .Values.traefikForwardAuthConfig.providerUri | quote }}
+  SCOPE: {{ .Values.traefikForwardAuthConfig.scope | quote }}
+  WHITELIST: {{ .Values.traefikForwardAuthConfig.whitelist | quote }}

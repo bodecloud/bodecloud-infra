@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: gatus
+  usage:
+    cpu: 508198n
+    memory: 25260Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: gatus
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: gatus
+    pod-template-hash: 66789cb9c
+  name: gatus-66789cb9c-2dcvs
+  namespace: default
+timestamp: "2025-06-14T23:00:44Z"
+window: 14.575s

@@ -1,0 +1,19 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: redis
+  usage:
+    cpu: 4723287n
+    memory: 4548Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: redis
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: redis
+    apps.kubernetes.io/pod-index: "0"
+    controller-revision-hash: redis-7544695867
+    statefulset.kubernetes.io/pod-name: redis-0
+  name: redis-0
+  namespace: default
+timestamp: "2025-06-14T23:00:54Z"
+window: 16.537s

@@ -1,0 +1,145 @@
+brunner56Plex:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Plex:
+    containerSecurityContext:
+      privileged: true
+      runAsGroup: 568
+      runAsUser: 568
+    image:
+      repository: ghcr.io/elfhosted/plex
+      tag: 1.41.7.9823-59f304c16@sha256:04b14748f9a3e5d23e1431ab2d4c5c07aca14a1fe5541b62481f0064eea8420e
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: 100m
+        memory: 1Gi
+  gluetun:
+    containerSecurityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+        - SYS_MODULE
+      privileged: true
+      runAsUser: 0
+    env:
+      dnsKeepNameserver: "on"
+      dot: "off"
+      firewallInputPorts: 32400,3000,8888,3001,3002
+      firewallOutboundSubnets: 10.0.0.0/8
+      httpControlServerAddress: :8000
+      httpControlServerPort: "8000"
+      vpnEndpointPort: "2408"
+      vpnServiceProvider: custom
+      vpnType: wireguard
+      wireguardMtu: "1280"
+    image:
+      repository: ghcr.io/elfhosted/gluetun
+      tag: 3.40.0@sha256:59b0cc8a9412b9a4645d1f12dff0daba80b8be88acd1b5d1a0fb6dfa625eb9a5
+    imagePullPolicy: IfNotPresent
+  podSecurityContext:
+    fsGroup: 568
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+    supplementalGroups:
+    - 993
+  podinfo:
+    image:
+      repository: stefanprodan/podinfo
+      tag: latest
+    imagePullPolicy: Always
+  replicas: 1
+  restartWithDebridav:
+    image:
+      repository: ghcr.io/elfhosted/debridav
+      tag: 0.9.5@sha256:1e596ddb97a7e6a4827b1dfc0718992b0c432416841a8a4c3dd3cd7491850c3c
+    imagePullPolicy: IfNotPresent
+  restartWithDecypharr:
+    image:
+      repository: ghcr.io/elfhosted/decypharr-beta
+      tag: rolling@sha256:b310afa9976f950ab62d7ec20801b46cb9a28176121d1c275424d780825ca4ee
+    imagePullPolicy: IfNotPresent
+  restartWithZurg:
+    image:
+      repository: ghcr.io/elfhosted/zurg-rc
+      tag: 2025.05.14.0031-nightly@sha256:513bcc2be2a9fb8b8df7fc458f76747bebcc884776bfbfd4393e16d61b2c1227
+    imagePullPolicy: IfNotPresent
+  revisionHistoryLimit: 3
+  setup:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  setupWarp:
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  speedtest:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: false
+      runAsGroup: 101
+      runAsUser: 101
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      changeContainerPorts: "True"
+      httpPort: "3002"
+      httpsPort: "3003"
+    image:
+      repository: openspeedtest/latest
+      tag: latest@sha256:1745e913f596fe98882b286a67751efdae74774e9caa742a4934bb056e8748d2
+    imagePullPolicy: Always
+  strategy:
+    type: Recreate
+  tinyproxy:
+    image:
+      repository: ghcr.io/elfhosted/tinyproxy
+      tag: v1.4.3@sha256:262bbdc0e468ee97c049203becc52b9ad7bf4c21405d58c82766d1aebb2e27e5
+    imagePullPolicy: IfNotPresent
+kubernetesClusterDomain: cluster.local

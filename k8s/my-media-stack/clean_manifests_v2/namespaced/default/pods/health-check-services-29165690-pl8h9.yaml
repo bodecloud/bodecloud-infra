@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: health-check-services-29165690-
+  labels:
+    batch.kubernetes.io/controller-uid: 412f3473-c005-4c8d-9f06-26ffb8aa1e87
+    batch.kubernetes.io/job-name: health-check-services-29165690
+    controller-uid: 412f3473-c005-4c8d-9f06-26ffb8aa1e87
+    job-name: health-check-services-29165690
+  name: health-check-services-29165690-pl8h9
+  namespace: default
+  ownerReferences:
+  - apiVersion: batch/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Job
+    name: health-check-services-29165690
+spec:
+  containers:
+  - args:
+    - -c
+    - "\n      services=\"plex:32400 radarr:7878 sonarr:8989 prowlarr:9696\"\n      for
+      service in $services; do\n        host=$(echo $service | cut -d: -f1)\n        port=$(echo
+      $service | cut -d: -f2)\n        if curl -f -s http://$host:$port/ping > /dev/null;
+      then\n          echo \"$service is healthy\"\n        else\n          echo \"$service
+      is unhealthy\"\n        fi\n      done\n    "
+    command:
+    - /bin/sh
+    image: curlimages/curl:latest
+    imagePullPolicy: Always
+    name: health-check-services
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: regcred
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: OnFailure
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:50:05Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:50:01Z"
+    reason: PodCompleted
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:50:01Z"
+    reason: PodCompleted
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:50:01Z"
+    reason: PodCompleted
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:50:00Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://200b02695ab313f96626b8bdaf92457bd221fdee74078d149d2fc285e388431a
+    image: docker.io/curlimages/curl:latest
+    imageID: docker.io/curlimages/curl@sha256:d43bdb28bae0be0998f3be83199bfb2b81e0a30b034b6d7586ce7e05de34c3fd
+    lastState: {}
+    name: health-check-services
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://200b02695ab313f96626b8bdaf92457bd221fdee74078d149d2fc285e388431a
+        exitCode: 0
+        finishedAt: "2025-06-14T22:50:03Z"
+        reason: Completed
+        startedAt: "2025-06-14T22:50:02Z"
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Succeeded
+  podIP: 10.42.0.95
+  podIPs:
+  - ip: 10.42.0.95
+  qosClass: Burstable
+  startTime: "2025-06-14T22:50:01Z"

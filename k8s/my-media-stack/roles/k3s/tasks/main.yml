@@ -1,0 +1,28 @@
+---
+- name: Include master tasks
+  include_tasks: master.yml
+  when: k3s_node_role == "master"
+
+- name: Include agent tasks
+  include_tasks: agent.yml
+  when: k3s_node_role == "agent"
+
+- name: Wait for K3s to be ready
+  wait_for:
+    port: 6443
+    host: "{{ ansible_host }}"
+    timeout: 300
+  when: k3s_node_role == "master"
+
+- name: Verify K3s installation
+  command: kubectl get nodes
+  register: k3s_nodes
+  when: k3s_node_role == "master"
+  changed_when: false
+
+- name: Display cluster status
+  debug:
+    msg: |
+      K3s Cluster Status:
+      {{ k3s_nodes.stdout }}
+  when: k3s_node_role == "master"

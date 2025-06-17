@@ -1,0 +1,132 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: fluent-bit-
+  labels:
+    app.elfhosted.com/name: fluent-bit
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: fluent-bit
+    controller-revision-hash: 66fd7cfc8
+    pod-template-generation: "1"
+  name: fluent-bit-vrdj7
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: DaemonSet
+    name: fluent-bit
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchFields:
+          - key: metadata.name
+            operator: In
+            values:
+            - beatapostapita
+  containers:
+  - image: fluent/fluent-bit:latest
+    imagePullPolicy: Always
+    name: fluent-bit
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/log
+      name: varlog
+      readOnly: true
+    - mountPath: /fluent-bit/etc/fluent-bit.conf
+      name: fluent-bit-config
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/disk-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/pid-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/unschedulable
+    operator: Exists
+  volumes:
+  - hostPath:
+      path: /var/log
+      type: ""
+    name: varlog
+  - configMap:
+      defaultMode: 420
+      name: fluent-bit-config
+    name: fluent-bit-config
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:11:40Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:11:40Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:11:40Z"
+    message: 'containers with unready status: [fluent-bit]'
+    reason: ContainersNotReady
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:11:40Z"
+    message: 'containers with unready status: [fluent-bit]'
+    reason: ContainersNotReady
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:11:40Z"
+    type: PodScheduled
+  containerStatuses:
+  - image: fluent/fluent-bit:latest
+    imageID: ""
+    lastState: {}
+    name: fluent-bit
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      waiting:
+        reason: ContainerCreating
+    volumeMounts:
+    - mountPath: /var/log
+      name: varlog
+      readOnly: true
+      recursiveReadOnly: Disabled
+    - mountPath: /fluent-bit/etc/fluent-bit.conf
+      name: fluent-bit-config
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Pending
+  qosClass: Burstable
+  startTime: "2025-06-14T15:11:40Z"

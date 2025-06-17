@@ -1,0 +1,28 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4yRwY6bMBCGX6WasyEhSQkg9VD10ENvPfRScRjsSXABG80Yom7Eu69MotVKq93syRr/+j7711wBR/uHWKx3UAE3qFOcQuvZPmGw3qVdIan1mzkDBZ11Bir40U8SiH/7nkDBQAENBoTqCuicDysncfTNP9JBKKRsfaoxhJ6izEYLqHdzf3HEyXnuoIJuL6+SOVNffllnvn03xruHCocDxVokfmJNCRMa4k9hMqKObDc1lMh/CTTAoqDHhvoPy7UoLVRQYn46FEX2dat3h7LIsqY0p+2RsizfFdtjUea7osz3FKX3b95eqQYKbLUkQjwTx5ynngSqv+u2frKfxjgB1Oql2nrhvCHZ3PmYzsTNmpwpQL2oR4LRGwF187zhFfRW4nHBoFuol3p5DgAA//+4iIrQPwIAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: resource-reader
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: 9a6f488150c249811b9df07e116280789628963e
+  name: system:metrics-server
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes/metrics
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch

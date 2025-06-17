@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: portainer-agent
+  usage:
+    cpu: 652822n
+    memory: 11444Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: portainer-agent
+    pod-template-hash: 7b6cd68b7b
+  name: portainer-agent-7b6cd68b7b-zrhnc
+  namespace: portainer
+timestamp: "2025-06-14T23:02:36Z"
+window: 19.84s

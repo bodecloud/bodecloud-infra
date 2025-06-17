@@ -1,0 +1,19 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: mongodb
+  usage:
+    cpu: 12207880n
+    memory: 103568Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: mongodb
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: mongodb
+    apps.kubernetes.io/pod-index: "0"
+    controller-revision-hash: mongodb-65f99cff65
+    statefulset.kubernetes.io/pod-name: mongodb-0
+  name: mongodb-0
+  namespace: default
+timestamp: "2025-06-14T23:00:36Z"
+window: 10.126s

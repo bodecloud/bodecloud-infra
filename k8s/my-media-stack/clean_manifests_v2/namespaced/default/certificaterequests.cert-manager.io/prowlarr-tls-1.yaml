@@ -1,0 +1,37 @@
+apiVersion: cert-manager.io/v1
+kind: CertificateRequest
+metadata:
+  annotations:
+    cert-manager.io/certificate-name: prowlarr-tls
+    cert-manager.io/certificate-revision: "1"
+    cert-manager.io/private-key-secret-name: prowlarr-tls-4g6vg
+  labels:
+    app.kubernetes.io/component: ingress
+    app.kubernetes.io/instance: myprecious
+  name: prowlarr-tls-1
+  namespace: default
+  ownerReferences:
+  - apiVersion: cert-manager.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Certificate
+    name: prowlarr-tls
+spec:
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  request: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ2pEQ0NBWFFDQVFBd0FEQ0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQUxQWAowNlZZVWJlZkgrbjBjcWo5WFVFTmg5dzZlbS8wWGUvczlwcllCeVBidHFQY3ZvZVVnMXh0YkdZZHZaUC9CZE9hCkd4WFZqVkprZkRXaERQUi9sd2hhVThVQVFXM3A0bDhCREFQVi9EYk1uZFYrdXpEaTRYQnJXVFdtTjJUYkx6NlEKM09wSXo4UXo4SENCeGI0R0x3aHk3ZzNzQ0pXMTZCejF1Qm9mRWNERmU0dnlmM25zM1lDWnB2OEFKUGNCR29FLwpCMUx5ODhQcUZPYUsvMGJlV0V0ZEpJNGtaeWswWFlPNWprV1R3RTJodHB3MkV5WUlpZHFrU1VvOTBqaHN1cW4wCnBXRk4zL3c1UndKVFhPRkZCU1FnUzNsSEVjTFRTUVBueWF6dEZEemFHc09ZZ1VTbU1lYS8rd05LWnNxRDREQkgKcWk4MDAycllRYS85YURDVmhtOENBd0VBQWFCSE1FVUdDU3FHU0liM0RRRUpEakU0TURZd0pBWURWUjBSQVFILwpCQm93R0lJV2NISnZkMnhoY25JdVpXeG1hRzl6ZEdWa0xtTnZiVEFPQmdOVkhROEJBZjhFQkFNQ0JhQXdEUVlKCktvWklodmNOQVFFTEJRQURnZ0VCQUlmem9Rd3ZHdVhSYnB0VUNJSGNSTDV2TmprYjdvK2F1cnREZURJZVJlWloKWkxnekQ5L2VXRUdHRng3ZXFjU0Y5Q0dHQnZHbVNuS1VzdFRiRDI0Si9oaXMrOExlczBIT3FoTlRNTnJiWm5WZQp6dVl6T25oeWVaWWFxalExNFc4S1hxd0crMGlFejNiWXFZNWIvdWJBS255b2F5LzY5U2NBdDVpb21ZTS9ic1RRClZRSzNNelNxRFlnTlZadG1CSG5oa1ZUUWwzdlFkNThhU0ZwY21rNHdIU1N0cG43RkhQc1Q3RkxhcGRwTEw0cksKbU5RT3hBZHRCaGcwelk3Um1heFpHZFhBRndlOXJGZ25Qb2U1VWlTSkR5YytsVnJVQ2ZkRUFXcnVkazhCWUpvMwpTWHoycUg4ZHNTM3h6SFdqN0lkdU1pNC9zelBjUVpNN0V1ZU1vejRTanVJPQotLS0tLUVORCBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0K
+  usages:
+  - digital signature
+  - key encipherment
+  conditions:
+  - lastTransitionTime: "2025-06-14T14:49:07Z"
+    message: Certificate request has been approved by cert-manager.io
+    reason: cert-manager.io
+    type: Approved
+  - lastTransitionTime: "2025-06-14T14:49:08Z"
+    message: 'Referenced "ClusterIssuer" not found: clusterissuer.cert-manager.io
+      "letsencrypt-prod" not found'
+    reason: Pending
+    type: Ready

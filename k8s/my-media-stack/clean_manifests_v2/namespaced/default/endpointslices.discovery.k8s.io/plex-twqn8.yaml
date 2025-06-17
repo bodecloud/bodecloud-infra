@@ -1,0 +1,40 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.250
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: plex-86c4594cd4-lvhf9
+    namespace: default
+kind: EndpointSlice
+metadata:
+  generateName: plex-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: plex
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: plex
+  name: plex-twqn8
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: plex
+ports:
+- name: speed
+  port: 3002
+  protocol: TCP
+- name: http
+  port: 32400
+  protocol: TCP
+- name: tinyproxy
+  port: 8888
+  protocol: TCP

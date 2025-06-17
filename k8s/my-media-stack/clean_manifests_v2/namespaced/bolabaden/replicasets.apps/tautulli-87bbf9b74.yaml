@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "0"
+    deployment.kubernetes.io/max-replicas: "0"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: tautulli
+    pod-template-hash: 87bbf9b74
+  name: tautulli-87bbf9b74
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: tautulli
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: tautulli
+      pod-template-hash: 87bbf9b74
+  template:
+    metadata:
+      labels:
+        app: tautulli
+        pod-template-hash: 87bbf9b74
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: America/Chicago
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        image: ghcr.io/tautulli/tautulli:latest
+        imagePullPolicy: Always
+        name: tautulli
+        ports:
+        - containerPort: 8181
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  observedGeneration: 1
+  replicas: 0

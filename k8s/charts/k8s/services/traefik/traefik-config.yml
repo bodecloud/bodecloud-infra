@@ -1,0 +1,107 @@
+# yaml-language-server: $schema=https://json.schemastore.org/traefik-v3.json
+
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+providers:
+  file:
+    directory: /config  # /config/traefik.yaml (this file)
+    watch: true
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    defaultRule: "Host(`bolabaden.org`) || Host(`bolabaden.duckdns.org`) || Host(`micklethefickle.duckdns.org`)"
+    exposedByDefault: false
+    watch: true
+
+  kubernetesIngress: {}
+
+log:
+  level: DEBUG
+
+api:
+  dashboard: true
+  debug: true # Enable additional endpoints for debugging and profiling (default: false)
+  disableDashboardAd: true # Disable the advertisement from the dashboard (default: false)
+  insecure: true # Enable the API and the dashboard on the entryPoint named traefik (default: false)
+
+ping:
+  terminatingStatusCode: 503 # Terminating status code (Default: 503)
+serversTransport:
+  insecureSkipVerify: true
+
+accessLog: {}
+
+entryPoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+    observability:
+      accessLogs: true
+      metrics: true
+      tracing: true
+  websecure:
+    address: :443
+    forwardedHeaders:
+      insecure: true
+    http:
+      middlewares:
+        - error-pages@file
+#        - secure-headers@file
+      tls:
+        certResolver: myresolver
+        domains:
+          - main: "bolabaden.org"
+            sans:
+              - "*.bolabaden.org"
+          - main: "bolabaden.duckdns.org"
+            sans:
+              - "*.bolabaden.duckdns.org"
+          - main: "micklethefickle.duckdns.org"
+            sans:
+              - "*.micklethefickle.duckdns.org"
+    observability:
+      accessLogs: true
+      metrics: true
+      tracing: true
+
+forwardedHeaders:
+  insecure: true
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: boden.crouch@gmail.com # Email address used for registration.
+      storage: /certs/acme.json
+      dnsChallenge:
+        provider: cloudflare
+        propagation:
+          delayBeforeChecks: "10"
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
+      httpChallenge:
+        entryPoint: web
+      tlsChallenge: {}
+#      caServer: https://acme-v02.api.letsencrypt.org/directory
+      caServer: https://acme.zerossl.com/v2/DV90 # Use staging when breaking things (specifically https://acme-staging-v02.api.letsencrypt.org/directory). see https://doc.traefik.io/traefik/https/acme/#caserver
+      eab:
+        hmacEncoded: x9XmIc15tqVMZSIM-u4n3wy5ETgaJiUzHnqv62YjsTQaaS0bbQjSvK6aB1t-eSVus_FsbiTiwvVhag30eK1qYw
+        kid: 05i_d9YSFgtMYF_Bc-G8TA
+  athena_duckdns_letsencrypt:
+    acme:
+      email: boden.crouch@gmail.com # Email address used for registration.
+      storage: /certs/acme_athena_duckdns_letsencrypt.json
+      dnsChallenge:
+        provider: duckdns
+        resolvers:
+          - "8.8.8.8:53"
+          - "8.8.4.4:53"
+      httpChallenge:
+        entryPoint: web
+      tlsChallenge: {}
+      caServer: https://acme-v02.api.letsencrypt.org/directory # Using standard Let's Encrypt production server
+

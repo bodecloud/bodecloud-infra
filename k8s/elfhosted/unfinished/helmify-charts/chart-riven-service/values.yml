@@ -1,0 +1,13 @@
+kubernetesClusterDomain: cluster.local
+riven:
+  ports:
+  - name: http
+    port: 3001
+    targetPort: 0
+  - name: postgres
+    port: 5432
+    targetPort: 0
+  - name: backend
+    port: 8080
+    targetPort: 0
+  type: ClusterIP

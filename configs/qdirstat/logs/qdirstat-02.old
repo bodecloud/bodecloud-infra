@@ -1,0 +1,31 @@
+
+
+2025-03-19 11:27:45.323 [753] <Info>    Logger.cpp:143 openLogFile():  -- Log Start --
+2025-03-19 11:27:45.323 [753] <Info>    main.cpp:60 logVersion():  QDirStat-1.9 built with Qt 5.15.4
+2025-03-19 11:27:48.215 [753] <Info>    ExcludeRules.cpp:282 addDefaultRules():  Adding default exclude rules
+2025-03-19 11:27:48.215 [753] <Info>    ExcludeRules.cpp:290 addDefaultRules():  Added <ExcludeRule ".snapshot">
+2025-03-19 11:27:48.215 [753] <Debug>   DebugHelpers.cpp:134 dumpExcludeRules():  <ExcludeRule ".snapshot">
+2025-03-19 11:27:48.217 [753] <WARNING> Cleanup.cpp:389 desktopSpecificApps():  $XDG_CURRENT_DESKTOP is not set - using fallback apps
+2025-03-19 11:27:48.217 [753] <Info>    Cleanup.cpp:451 desktopSpecificApps():  %filemanager => "xdg-open"
+2025-03-19 11:27:48.217 [753] <Info>    Cleanup.cpp:451 desktopSpecificApps():  %terminal => "xterm"
+2025-03-19 11:27:48.218 [753] <Debug>   HeaderTweaker.cpp:521 fixupLayout():  Falling back to default visible columns
+2025-03-19 11:27:48.218 [753] <Debug>   HeaderTweaker.cpp:521 fixupLayout():  Falling back to default visible columns
+2025-03-19 11:27:48.218 [753] <Debug>   HeaderTweaker.cpp:521 fixupLayout():  Falling back to default visible columns
+2025-03-19 11:27:48.218 [753] <Info>    BookmarksManager.cpp:193 read():  Bookmarks file ~/.config/QDirStat/bookmarks.txt does not exist
+2025-03-19 11:27:48.219 [753] <Debug>   MainWindowLayout.cpp:78 changeLayout():  Changing to layout L2
+2025-03-19 11:27:48.220 [753] <Info>    PkgQuery.cpp:66 checkPkgManagers():  Checking available supported package managers...
+2025-03-19 11:27:48.220 [753] <Info>    SysUtil.cpp:89 runCommand():  Command not found: /usr/bin/dpkg
+2025-03-19 11:27:48.220 [753] <Info>    SysUtil.cpp:89 runCommand():  Command not found: /bin/rpm
+2025-03-19 11:27:48.220 [753] <Info>    SysUtil.cpp:89 runCommand():  Command not found: /usr/bin/pacman
+2025-03-19 11:27:48.311 [753] <Info>    PkgQuery.cpp:76 checkPkgManagers():  No supported package manager found.
+2025-03-19 11:27:48.311 [753] <Info>    MainWindow.cpp:194 checkPkgManagerSupport():  No package manager support for getting installed packages or file lists
+2025-03-19 11:27:48.311 [753] <Info>    MainWindow.cpp:205 checkPkgManagerSupport():  No package manager support for getting a file lists cache
+2025-03-19 11:27:48.311 [753] <Info>    MainWindow.cpp:1351 toggleVerboseSelection():  Verbose selection is now off. Change this with Shift-F7.
+2025-03-19 11:27:49.115 [753] <Info>    MountPoints.cpp:509 findNtfsDevices():  No lsblk command available
+2025-03-19 11:27:49.115 [753] <Debug>   MountPoints.cpp:348 read():  Reading /proc/mounts
+2025-03-19 11:27:49.115 [753] <Info>    MountPoints.cpp:420 postProcess():  Found duplicate mount of /dev/sda1 at /config
+2025-03-19 11:27:49.115 [753] <Info>    MountPoints.cpp:420 postProcess():  Found duplicate mount of /dev/sda1 at /config/log
+2025-03-19 11:27:49.115 [753] <Info>    MountPoints.cpp:420 postProcess():  Found duplicate mount of /dev/sda1 at /etc/resolv.conf
+2025-03-19 11:27:49.115 [753] <Info>    MountPoints.cpp:420 postProcess():  Found duplicate mount of /dev/sda1 at /etc/hostname
+2025-03-19 11:27:49.115 [753] <Info>    MountPoints.cpp:420 postProcess():  Found duplicate mount of /dev/sda1 at /etc/hosts
+2025-03-19 11:27:49.419 [753] <Debug>   OpenDirDialog.cpp:339 askOpenDir():  Waiting for user selection

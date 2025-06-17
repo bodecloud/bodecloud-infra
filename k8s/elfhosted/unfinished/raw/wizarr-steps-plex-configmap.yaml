@@ -1,0 +1,87 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: wizarr-steps-plex
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  01_download.md: |
+    ---
+    title: "Join & download Plex"
+    require: true
+    ---
+
+    You're in! 🎉
+
+    Great news! You've been granted access to brunner56's **ElfHosted Plex Server**! 🥳
+  02_about.md: |
+    ---
+    title: "What is Plex?"
+    ---
+
+    ## ℹ️ What's Plex?
+
+    Plex lets people share their film and TV libraries with friends.
+
+    You're here because brunner56's invited you to theirs! 📺
+
+    ## 🍺 How do I watch stuff?
+
+    Search your phone, tablet, computer or smart-TV's app store for "Plex", or [download on this device](https://www.plex.tv/en-gb/media-server-downloads/#plex-app){target=_blank .btn}.
+
+    Sign in, search, push play. That’s it!
+  03_requests.md: |
+    ---
+    title:  "Automatic requests"
+    requires: [overseerr_url]
+    ---
+
+    #"Request mooar content 🙋‍♀️
+
+    Can’t find what you want to watch? Make a request — robots will grab the film or episode automatically and add it to the library.
+
+    [Make a request]({{ overseerr_url }}){:target=_blank .btn}
+  04_discord.md: |
+    ---
+    title:  "Discord community"
+    requires: [discord_id]
+    ---
+
+    <iframe src="https://discord.com/widget?id={{ discord_id }}&theme=dark"
+            width="350" height="500"
+            allowtransparency="true" frameborder="0"
+            sandbox="allow-popups allow-same-origin allow-scripts"></iframe>
+  05_tips.md: |
+    ---
+    title: "Tips for the best experience"
+    ---
+
+    ## 🍿 Get the best quality
+
+    Plex sometimes defaults to low quality or shows its own adverts first. "
+    "Here’s how to fix that:
+
+    1. **Disable trailers & extras** – Settings → Experience → untick *Show cinematic trailers*  
+    2. **Force original quality** – Settings → Playback → set *Automatic* to *Original*  
+    3. **Use a wired connection** if you’re on a smart-TV for stutter-free 4K.
+    4. **Read the [Plex Guide](https://plexguide.com/){target=_blank .btn}** to learn more
+
+    *Happy viewing!* 🍺
+  06_elfhosted.md: |
+    ---
+    title: "Get ElfHosted!"
+    ---
+
+    ## 🍿 Want your **own** Plex?
+
+    Ready to take it to the next level?
+
+    Get your **own** Plex Server with a [ElfHosted bundle](https://store.elfhosted.com/product-category/streaming-bundles/){target=_blank .btn}, $1 7-day trials available!
+
+    Rock on! 🤘

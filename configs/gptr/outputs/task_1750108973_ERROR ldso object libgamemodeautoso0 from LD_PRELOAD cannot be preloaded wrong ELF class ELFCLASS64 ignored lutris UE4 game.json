@@ -1,0 +1,740 @@
+{
+  "timestamp": "2025-06-16T21:22:53.181854",
+  "events": [
+    {
+      "timestamp": "2025-06-16T21:22:58.558366",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "starting_research",
+        "output": "\ud83d\udd0d Starting the research task for '```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game.'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:22:58.559315",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "agent_generated",
+        "output": "",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:22:58.560539",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83c\udf10 Browsing the web to learn more about the task: ```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game....",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:01.025633",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83e\udd14 Planning the research strategy and subtasks...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:03.498183",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subqueries",
+        "output": "\ud83d\uddc2\ufe0f I will conduct my research based on the following queries: ['\"ld.so: object \\'libgamemodeauto.so.0\\' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)\" lutris UE4 solution', 'lutris libgamemodeauto.so.0 ELFCLASS64 error fix', 'disable or configure gamemode for lutris UE4 games', '\"wrong ELF class: ELFCLASS64\" LD_PRELOAD troubleshooting linux', \"```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game.\"]...",
+        "metadata": [
+          "\"ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)\" lutris UE4 solution",
+          "lutris libgamemodeauto.so.0 ELFCLASS64 error fix",
+          "disable or configure gamemode for lutris UE4 games",
+          "\"wrong ELF class: ELFCLASS64\" LD_PRELOAD troubleshooting linux",
+          "```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game."
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:03.499177",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for '\"ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)\" lutris UE4 solution'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:09.399549",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/FeralInteractive/gamemode/issues/254\n",
+        "metadata": "https://github.com/FeralInteractive/gamemode/issues/254"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:09.400529",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/Lutris/comments/1dm2v71/issue_with_libgamemodeauto/\n",
+        "metadata": "https://www.reddit.com/r/Lutris/comments/1dm2v71/issue_with_libgamemodeauto/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:09.401683",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.lutris.net/t/league-of-legends-gamemode-error/11071\n",
+        "metadata": "https://forums.lutris.net/t/league-of-legends-gamemode-error/11071"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:09.402873",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\n",
+        "metadata": "https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:09.403979",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/FeralInteractive/gamemode/issues/92\n",
+        "metadata": "https://github.com/FeralInteractive/gamemode/issues/92"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:09.405214",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:09.406391",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:10.258566",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:10.259307",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:10.260819",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:10.262161",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: \"ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)\" lutris UE4 solution (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:10.291416",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'lutris libgamemodeauto.so.0 ELFCLASS64 error fix'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:12.721860",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.endeavouros.com/t/cant-launch-games-through-lutris-since-update/8126\n",
+        "metadata": "https://forum.endeavouros.com/t/cant-launch-games-through-lutris-since-update/8126"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:12.722682",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.lutris.net/t/oblivion-gstreamer-libgamemodeauto-errors-and-more/14868\n",
+        "metadata": "https://forums.lutris.net/t/oblivion-gstreamer-libgamemodeauto-errors-and-more/14868"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:12.724195",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/lutris/lutris/issues/3251\n",
+        "metadata": "https://github.com/lutris/lutris/issues/3251"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:12.725333",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux_gaming/comments/16m4gpf/gamemode_error_when_launching_games_in_lutris/\n",
+        "metadata": "https://www.reddit.com/r/linux_gaming/comments/16m4gpf/gamemode_error_when_launching_games_in_lutris/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:12.726670",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:12.728030",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 4 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:13.425947",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 4 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:13.427110",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:13.428590",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:13.429839",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: lutris libgamemodeauto.so.0 ELFCLASS64 error fix (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:13.478375",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'disable or configure gamemode for lutris UE4 games'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.137242",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.plutonium.pw/topic/33576/plutonium-linux-optimization-guide\n",
+        "metadata": "https://forum.plutonium.pw/topic/33576/plutonium-linux-optimization-guide"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.138421",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/Lutris/comments/farvwt/how_to_get_feral_gamemode_to_work_with_lutris_on/\n",
+        "metadata": "https://www.reddit.com/r/Lutris/comments/farvwt/how_to_get_feral_gamemode_to_work_with_lutris_on/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.139913",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.linuxmint.com/viewtopic.php?t=429177\n",
+        "metadata": "https://forums.linuxmint.com/viewtopic.php?t=429177"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.152244",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux_gaming/comments/ff9yn4/lutris_performance_tweaks/\n",
+        "metadata": "https://www.reddit.com/r/linux_gaming/comments/ff9yn4/lutris_performance_tweaks/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.153203",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://askubuntu.com/questions/1217646/problem-configuring-gamemode-on-lutris-kubuntu-19-10\n",
+        "metadata": "https://askubuntu.com/questions/1217646/problem-configuring-gamemode-on-lutris-kubuntu-19-10"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.154571",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/lutris/lutris/issues/2172\n",
+        "metadata": "https://github.com/lutris/lutris/issues/2172"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.155916",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.lutris.net/t/solved-gamemode-feral-gamemode/21749\n",
+        "metadata": "https://forums.lutris.net/t/solved-gamemode-feral-gamemode/21749"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.157300",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:16.158696",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:17.072877",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:17.074477",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:17.076349",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:17.077744",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: disable or configure gamemode for lutris UE4 games (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:17.103446",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for '\"wrong ELF class: ELFCLASS64\" LD_PRELOAD troubleshooting linux'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:20.851762",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://steamcommunity.com/app/221410/discussions/0/2243300286303664808/\n",
+        "metadata": "https://steamcommunity.com/app/221410/discussions/0/2243300286303664808/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:20.853061",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/NixOS/nixpkgs/issues/353731\n",
+        "metadata": "https://github.com/NixOS/nixpkgs/issues/353731"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:20.854986",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://community.blackduck.com/s/question/0D53400003hxKALCA2/trying-to-understand-ldpreload-cannot-be-preloaded-wrong-elf-class-elfclass64-ignored\n",
+        "metadata": "https://community.blackduck.com/s/question/0D53400003hxKALCA2/trying-to-understand-ldpreload-cannot-be-preloaded-wrong-elf-class-elfclass64-ignored"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:20.856664",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.cnblogs.com/sakura-yuki/p/13341520.html\n",
+        "metadata": "https://www.cnblogs.com/sakura-yuki/p/13341520.html"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:20.858293",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://access.redhat.com/solutions/7032746\n",
+        "metadata": "https://access.redhat.com/solutions/7032746"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:20.859861",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:20.861208",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:22.182848",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 4 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:22.184703",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:22.186149",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:22.187733",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: \"wrong ELF class: ELFCLASS64\" LD_PRELOAD troubleshooting linux (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:22.222752",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for '```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game.'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.151275",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://askubuntu.com/questions/1352334/error-ld-so-object-usr-lib-libgamemodeauto-so-0\n",
+        "metadata": "https://askubuntu.com/questions/1352334/error-ld-so-object-usr-lib-libgamemodeauto-so-0"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.152666",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://stackoverflow.com/questions/17723666/error-ld-so-object-ld-preload-cannot-be-preloaded-ignored\n",
+        "metadata": "https://stackoverflow.com/questions/17723666/error-ld-so-object-ld-preload-cannot-be-preloaded-ignored"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.154764",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.156509",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 2 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.196366",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 2 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.197761",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.199561",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.201536",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: ```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game. (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.206883",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.\n\nSource: https://github.com/FeralInteractive/gamemode/issues/254\nTitle: ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. \u00b7 Issue #254 \u00b7 FeralInteractive/gamemode \u00b7 GitHub\nContent: ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #254New issueCopy linkNew issueCopy link\nERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #254New issueCopy linkNew issueCopy link\nERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #254New issueCopy linkNew issueCopy link\nERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #254\nERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #254\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\n\nSource: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. I am using mx linux. I want a better gaming experience. I could not find the solution for the errors. Is there anyone have an idea?\n\nSource: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. 000000.079| OKAY| Running from cwd \u2018C:\\Riot Games\\League of Legends\u2019. 000000.079| ALWAYS| Application Version:10.24.345.8390 - CL:3458390 - Build Date:Nov 20 2020 - Build Time:12:43:29 000000.080| OKAY| Initial working directory: \u201cC:\\Riot Games\\League of Legends\u201d 000000.080| OKAY| Current\n\nSource: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. 000000.079| OKAY| Running from cwd \u2018C:\\Riot Games\\League of Legends\u2019. 000000.079| ALWAYS| Application Version:10.24.345.8390 - CL:3458390 - Build Date:Nov 20 2020 - Build Time:12:43:29 000000.080| OKAY| Initial working directory: \u201cC:\\Riot Games\\League of Legends\u201d 000000.080| OKAY| Current\n\nSource: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. I am using mx linux. I want a better gaming experience. I could not find the solution for the errors. Is there anyone have an idea? legluondunet December 2, 2020, 11:34am 2 hello Abraham, lol works on Linux, please first reinstall lol with Lutris script from this page that was recently updated: Lutris League of Legends League of Legends - Lutris If it still doesn\u2019t work for you, verify you installed all needed wine dependencies: github.com lutris/docs/blob/master/WineDependencies.md Although Lutris provides and uses its own Wine\n\nSource: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. 000000.079| OKAY| Running from cwd \u2018C:\\Riot Games\\League of Legends\u2019. 000000.079| ALWAYS| Application Version:10.24.345.8390 - CL:3458390 - Build Date:Nov 20 2020 - Build Time:12:43:29 000000.080| OKAY| Initial working directory: \u201cC:\\Riot Games\\League of Legends\u201d 000000.080| OKAY| Current process: \u201cC:\\Riot Games\\League of\n\nSource: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. 000000.079| OKAY| Running from cwd \u2018C:\\Riot Games\\League of Legends\u2019. 000000.079| ALWAYS| Application Version:10.24.345.8390 - CL:3458390 - Build Date:Nov 20 2020 - Build Time:12:43:29 000000.080| OKAY| Initial working directory: \u201cC:\\Riot Games\\League of Legends\u201d 000000.080| OKAY| Current process: \u201cC:\\Riot Games\\League of\n\nSource: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. I am using mx linux. I want a better gaming experience. I could not find the solution for the errors. Is there anyone have an idea? legluondunet December 2, 2020, 11:34am 2 hello Abraham, lol works on Linux, please first reinstall lol with Lutris script from this page that was recently updated: Lutris League of Legends League of Legends - Lutris If it still doesn\u2019t work for you, verify you installed all needed wine dependencies: github.com lutris/docs/blob/master/WineDependencies.md Although Lutris provides and uses its own Wine builds, we still recommend you install all of Wine's\n\nSource: https://forums.lutris.net/t/is-there-any-solution-to-the-error-in-league-of-legends/11132\nTitle: Is there any solution to the error in League of legends? - Support - Lutris Forums\nContent: ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. ERROR: ld.so: object \u2018libgamemodeauto.so.0\u2019 from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored. I am using mx linux. I want a better gaming experience. I could not find the solution for the errors. Is there anyone have an idea?\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.209401",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://github.com/lutris/lutris/issues/3251\nTitle: ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. \u00b7 Issue #3251 \u00b7 lutris/lutris \u00b7 GitHub\nContent: lutris / lutris Public Uh oh! There was an error while loading. Please reload this page. Notifications You must be signed in to change notification settings Fork 750 Star 8.7k Code Issues 421 Pull requests 35 Discussions Actions Projects 0 Wiki Security Uh oh! There was an error while loading. Please reload this page. Insights Additional navigation options Code Issues Pull requests Discussions Actions Projects Wiki Security Insights ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #3251New issueCopy linkNew issueCopy linkClosedClosedERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.#3251Copy linkDescriptionlegluondunetopened on Nov 3, 2020Issue body actionsHello Lutris dev team, I use Ubuntu 20.04 with gamemode installed: $ dpkg -l gamemode Souhait=inconnU/Install\u00e9/suppRim\u00e9/Purg\u00e9/H=\u00e0 garder |\n\nSource: https://github.com/lutris/lutris/issues/3251\nTitle: ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. \u00b7 Issue #3251 \u00b7 lutris/lutris \u00b7 GitHub\nContent: lutris / lutris Public Uh oh! There was an error while loading. Please reload this page. Notifications You must be signed in to change notification settings Fork 750 Star 8.7k Code Issues 421 Pull requests 35 Discussions Actions Projects 0 Wiki Security Uh oh! There was an error while loading. Please reload this page. Insights Additional navigation options Code Issues Pull requests Discussions Actions Projects Wiki Security Insights ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #3251New issueCopy linkNew issueCopy linkClosedClosedERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.#3251Copy linkDescriptionlegluondunetopened on Nov 3, 2020Issue body actionsHello Lutris dev team, I use Ubuntu 20.04 with gamemode installed: $ dpkg -l gamemode Souhait=inconnU/Install\u00e9/suppRim\u00e9/Purg\u00e9/H=\u00e0 garder |\n\nSource: https://forums.lutris.net/t/oblivion-gstreamer-libgamemodeauto-errors-and-more/14868\nTitle: Oblivion GStreamer, libgamemodeauto errors and more - Support - Lutris Forums\nContent: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstautoconvert.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstautoconvert.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstcolormanagement.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstcolormanagement.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstrealmedia.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstrealmedia.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **:\n\nSource: https://forums.lutris.net/t/oblivion-gstreamer-libgamemodeauto-errors-and-more/14868\nTitle: Oblivion GStreamer, libgamemodeauto errors and more - Support - Lutris Forums\nContent: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstautoconvert.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstautoconvert.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstcolormanagement.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstcolormanagement.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstrealmedia.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstrealmedia.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **:\n\nSource: https://forums.lutris.net/t/oblivion-gstreamer-libgamemodeauto-errors-and-more/14868\nTitle: Oblivion GStreamer, libgamemodeauto errors and more - Support - Lutris Forums\nContent: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstautoconvert.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstautoconvert.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstcolormanagement.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstcolormanagement.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstrealmedia.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstrealmedia.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **:\n\nSource: https://forums.lutris.net/t/oblivion-gstreamer-libgamemodeauto-errors-and-more/14868\nTitle: Oblivion GStreamer, libgamemodeauto errors and more - Support - Lutris Forums\nContent: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstautoconvert.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstautoconvert.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstcolormanagement.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstcolormanagement.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **: 07:24:47.372: Failed to load plugin '/home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstrealmedia.so': /home/mark/.local/share/lutris/runners/wine/wine-lutris-7.2/lib64/gstreamer-1.0/libgstrealmedia.so: wrong ELF class: ELFCLASS64 (wine:254528): GStreamer-WARNING **:\n\nSource: https://forums.lutris.net/t/oblivion-gstreamer-libgamemodeauto-errors-and-more/14868\nTitle: Oblivion GStreamer, libgamemodeauto errors and more - Support - Lutris Forums\nContent: wrong ELF class: ELFCLASS64 (wine:628617): GStreamer-WARNING **: 22:14:13.612: Failed to load plugin '/home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstogg.so': /home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstogg.so: wrong ELF class: ELFCLASS64 (wine:628617): GStreamer-WARNING **: 22:14:13.613: Failed to load plugin '/home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstflxdec.so': /home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstflxdec.so: wrong ELF class: ELFCLASS64 (wine:628617): GStreamer-WARNING **: 22:14:13.614: Failed to load plugin '/home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstautoconvert.so': /home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstautoconvert.so: wrong ELF class: ELFCLASS64\n\nSource: https://forums.lutris.net/t/oblivion-gstreamer-libgamemodeauto-errors-and-more/14868\nTitle: Oblivion GStreamer, libgamemodeauto errors and more - Support - Lutris Forums\nContent: wrong ELF class: ELFCLASS64 (wine:628617): GStreamer-WARNING **: 22:14:13.612: Failed to load plugin '/home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstogg.so': /home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstogg.so: wrong ELF class: ELFCLASS64 (wine:628617): GStreamer-WARNING **: 22:14:13.613: Failed to load plugin '/home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstflxdec.so': /home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstflxdec.so: wrong ELF class: ELFCLASS64 (wine:628617): GStreamer-WARNING **: 22:14:13.614: Failed to load plugin '/home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstautoconvert.so': /home/charlie/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/lib64/gstreamer-1.0/libgstautoconvert.so: wrong ELF class: ELFCLASS64\n\nSource: https://github.com/lutris/lutris/issues/3251\nTitle: ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. \u00b7 Issue #3251 \u00b7 lutris/lutris \u00b7 GitHub\nContent: ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #3251New issueCopy linkNew issueCopy link\nERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #3251New issueCopy linkNew issueCopy link\nERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #3251New issueCopy linkNew issueCopy link\nERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #3251\nERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #3251\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\n\nSource: https://github.com/lutris/lutris/issues/3251\nTitle: ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. \u00b7 Issue #3251 \u00b7 lutris/lutris \u00b7 GitHub\nContent: tab or window. Reload to refresh your session. You signed out in another tab or window. Reload to refresh your session. You switched accounts on another tab or window. Reload to refresh your session. Dismiss alert lutris / lutris Public Uh oh! There was an error while loading. Please reload this page. Notifications You must be signed in to change notification settings Fork 750 Star 8.7k Code Issues 421 Pull requests 35 Discussions Actions Projects 0 Wiki Security Uh oh! There was an error while loading. Please reload this page. Insights Additional navigation options Code Issues Pull requests Discussions Actions Projects Wiki Security Insights ERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored. #3251New issueCopy linkNew issueCopy linkClosedClosedERROR: ld.so: object '/usr/$LIB/libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.#3251Copy\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.212307",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current behavior The gamemode setting is greyed out even though Lutris has detected it (see the attached JSON). Steps to reproduce Install gamemode using bootstrap.sh Install Lutris Navigate to the Lutris settings and see that Enable Feral gamemode is greyed out. Steps 1 and 2 are performable in any order. Lutris debugging output INFO 2019-06-01 00:16:28,440 [application.do_command_line:225]:Running Lutris 0.5.2 INFO 2019-06-01 00:16:28,441 [startup.check_driver:54]:Using NVIDIA drivers 418.56 for x86_64 INFO 2019-06-01 00:16:28,441 [startup.check_driver:58]:GPU: GeForce GT 650M INFO 2019-06-01 00:16:28,441 [startup.check_driver:75]:GPU: 10DE:0FD1 1028:0578 using nvidia drivers INFO 2019-06-01 00:16:28,441 [startup.check_driver:75]:GPU: 8086:0166 1028:0578 using i915 drivers INFO 2019-06-01 00:16:28,472 [startup.check_vulkan:129]:Vulkan is supported INFO 2019-06-01 00:16:28,473\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current behavior The gamemode setting is greyed out even though Lutris has detected it (see the attached JSON). Steps to reproduce Install gamemode using bootstrap.sh Install Lutris Navigate to the Lutris settings and see that Enable Feral gamemode is greyed out. Steps 1 and 2 are performable in any order. Lutris debugging output INFO 2019-06-01 00:16:28,440 [application.do_command_line:225]:Running Lutris 0.5.2 INFO 2019-06-01 00:16:28,441 [startup.check_driver:54]:Using NVIDIA drivers 418.56 for x86_64 INFO 2019-06-01 00:16:28,441 [startup.check_driver:58]:GPU: GeForce GT 650M INFO 2019-06-01 00:16:28,441 [startup.check_driver:75]:GPU: 10DE:0FD1 1028:0578 using nvidia drivers INFO 2019-06-01 00:16:28,441 [startup.check_driver:75]:GPU: 8086:0166 1028:0578 using i915 drivers INFO 2019-06-01 00:16:28,472 [startup.check_vulkan:129]:Vulkan is supported INFO 2019-06-01 00:16:28,473\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: lutris / lutris Public Uh oh! There was an error while loading. Please reload this page. Notifications You must be signed in to change notification settings Fork 750 Star 8.7k Code Issues 421 Pull requests 35 Discussions Actions Projects 0 Wiki Security Uh oh! There was an error while loading. Please reload this page. Insights Additional navigation options Code Issues Pull requests Discussions Actions Projects Wiki Security Insights \"Enable Feral gamemmode\" Greyed Out #2172New issueCopy linkNew issueCopy linkClosedClosed\"Enable Feral gamemmode\" Greyed Out#2172Copy linkMilestone 0.5.6DescriptionIron-Eopened on Jun 1, 2019Issue body actionsDescribe the bug I have installed gamemode using their bootstrap.sh file. To ensure that it was installed, gamemoded and gamemoderun were tested (both yield output from the console). Lutris greys out the option to enable gamemode, however. Expected behavior Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: lutris / lutris Public Uh oh! There was an error while loading. Please reload this page. Notifications You must be signed in to change notification settings Fork 750 Star 8.7k Code Issues 421 Pull requests 35 Discussions Actions Projects 0 Wiki Security Uh oh! There was an error while loading. Please reload this page. Insights Additional navigation options Code Issues Pull requests Discussions Actions Projects Wiki Security Insights \"Enable Feral gamemmode\" Greyed Out #2172New issueCopy linkNew issueCopy linkClosedClosed\"Enable Feral gamemmode\" Greyed Out#2172Copy linkMilestone 0.5.6DescriptionIron-Eopened on Jun 1, 2019Issue body actionsDescribe the bug I have installed gamemode using their bootstrap.sh file. To ensure that it was installed, gamemoded and gamemoderun were tested (both yield output from the console). Lutris greys out the option to enable gamemode, however. Expected behavior Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: using their bootstrap.sh file. To ensure that it was installed, gamemoded and gamemoderun were tested (both yield output from the console). Lutris greys out the option to enable gamemode, however. Expected behavior Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current behavior The gamemode setting is greyed out even though Lutris has detected it (see the attached JSON). Steps to reproduce Install gamemode using bootstrap.sh Install Lutris Navigate to the Lutris settings and see that Enable Feral gamemode is greyed out. Steps 1 and 2 are performable in any order. Lutris debugging output INFO 2019-06-01 00:16:28,440 [application.do_command_line:225]:Running Lutris 0.5.2 INFO 2019-06-01 00:16:28,441 [startup.check_driver:54]:Using NVIDIA drivers 418.56 for x86_64 INFO 2019-06-01 00:16:28,441 [startup.check_driver:58]:GPU: GeForce GT 650M INFO 2019-06-01 00:16:28,441 [startup.check_driver:75]:GPU: 10DE:0FD1 1028:0578 using nvidia drivers INFO\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: Describe the bug I have installed gamemode using their bootstrap.sh file. To ensure that it was installed, gamemoded and gamemoderun were tested (both yield output from the console). Lutris greys out the option to enable gamemode, however. Expected behavior Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current behavior The gamemode setting is greyed out even though Lutris has detected it (see the attached JSON). Steps to reproduce Install gamemode using bootstrap.sh Install Lutris Navigate to the Lutris settings and see that Enable Feral gamemode is greyed out. Steps 1 and 2 are performable in any order. Lutris debugging output INFO 2019-06-01 00:16:28,440 [application.do_command_line:225]:Running Lutris 0.5.2 INFO 2019-06-01 00:16:28,441 [startup.check_driver:54]:Using NVIDIA drivers 418.56 for x86_64 INFO 2019-06-01 00:16:28,441 [startup.check_driver:58]:GPU: GeForce GT 650M INFO 2019-06-01 00:16:28,441 [startup.check_driver:75]:GPU: 10DE:0FD1\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: Describe the bug I have installed gamemode using their bootstrap.sh file. To ensure that it was installed, gamemoded and gamemoderun were tested (both yield output from the console). Lutris greys out the option to enable gamemode, however. Expected behavior Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current behavior The gamemode setting is greyed out even though Lutris has detected it (see the attached JSON). Steps to reproduce Install gamemode using bootstrap.sh Install Lutris Navigate to the Lutris settings and see that Enable Feral gamemode is greyed out. Steps 1 and 2 are performable in any order. Lutris debugging output INFO 2019-06-01 00:16:28,440 [application.do_command_line:225]:Running Lutris 0.5.2 INFO 2019-06-01 00:16:28,441 [startup.check_driver:54]:Using NVIDIA drivers 418.56 for x86_64 INFO 2019-06-01 00:16:28,441 [startup.check_driver:58]:GPU: GeForce GT 650M INFO 2019-06-01 00:16:28,441 [startup.check_driver:75]:GPU: 10DE:0FD1\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: Describe the bug I have installed gamemode using their bootstrap.sh file. To ensure that it was installed, gamemoded and gamemoderun were tested (both yield output from the console). Lutris greys out the option to enable gamemode, however. Expected behavior Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current behavior The gamemode setting is greyed out even though Lutris has detected it (see the attached JSON). Steps to reproduce Install gamemode using bootstrap.sh Install Lutris Navigate to the Lutris settings and see that Enable Feral gamemode is greyed out. Steps 1 and 2 are performable in any order. Lutris debugging output INFO 2019-06-01 00:16:28,440 [application.do_command_line:225]:Running Lutris 0.5.2 INFO 2019-06-01 00:16:28,441 [startup.check_driver:54]:Using NVIDIA drivers 418.56 for x86_64 INFO 2019-06-01 00:16:28,441 [startup.check_driver:58]:GPU: GeForce GT 650M INFO 2019-06-01 00:16:28,441 [startup.check_driver:75]:GPU: 10DE:0FD1\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: Iron-Eopened on Jun 1, 2019Issue body actionsDescribe the bug I have installed gamemode using their bootstrap.sh file. To ensure that it was installed, gamemoded and gamemoderun were tested (both yield output from the console). Lutris greys out the option to enable gamemode, however. Expected behavior Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current behavior The gamemode setting is greyed out even though Lutris has detected it (see the attached JSON). Steps to reproduce Install gamemode using bootstrap.sh Install Lutris Navigate to the Lutris settings and see that Enable Feral gamemode is greyed out. Steps 1 and 2 are performable in any order. Lutris debugging output INFO 2019-06-01 00:16:28,440 [application.do_command_line:225]:Running Lutris 0.5.2 INFO 2019-06-01 00:16:28,441 [startup.check_driver:54]:Using NVIDIA drivers 418.56 for x86_64 INFO 2019-06-01 00:16:28,441 [startup.check_driver:58]:GPU: GeForce GT 650M INFO 2019-06-01\n\nSource: https://github.com/lutris/lutris/issues/2172\nTitle: \"Enable Feral gamemmode\" Greyed Out \u00b7 Issue #2172 \u00b7 lutris/lutris \u00b7 GitHub\nContent: Iron-Eopened on Jun 1, 2019Issue body actionsDescribe the bug I have installed gamemode using their bootstrap.sh file. To ensure that it was installed, gamemoded and gamemoderun were tested (both yield output from the console). Lutris greys out the option to enable gamemode, however. Expected behavior Lutris will detect gamemode and allow me to toggle the gamemode setting on and off. Current behavior The gamemode setting is greyed out even though Lutris has detected it (see the attached JSON). Steps to reproduce Install gamemode using bootstrap.sh Install Lutris Navigate to the Lutris settings and see that Enable Feral gamemode is greyed out. Steps 1 and 2 are performable in any order. Lutris debugging output INFO 2019-06-01 00:16:28,440 [application.do_command_line:225]:Running Lutris 0.5.2 INFO 2019-06-01 00:16:28,441 [startup.check_driver:54]:Using NVIDIA drivers 418.56 for x86_64 INFO 2019-06-01 00:16:28,441 [startup.check_driver:58]:GPU: GeForce GT 650M INFO 2019-06-01\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.214891",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://github.com/NixOS/nixpkgs/issues/353731\nTitle: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) \u00b7 Issue #353731 \u00b7 NixOS/nixpkgs \u00b7 GitHub\nContent: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731New issueCopy linkNew issueCopy link\nvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731New issueCopy linkNew issueCopy link\nvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731New issueCopy linkNew issueCopy link\nvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731\nvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nClosedvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731Copy link\nClosedvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731Copy link\nClosedvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731Copy link\nvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731\n\nSource: https://steamcommunity.com/app/221410/discussions/0/2243300286303664808/\nTitle: Wrong ELF class and a library can't be preloaded...any help? :: Steam for Linux General Discussions\nContent: thesun_ray View Profile View Posts May 11, 2020 @ 6:52pm\nthesun_ray View Profile View Posts May 11, 2020 @ 6:52pm\nView Profile View Posts\nView Profile View Posts\nMay 11, 2020 @ 6:52pm\nWrong ELF class and a library can't be preloaded...any help?\n\nSource: https://github.com/NixOS/nixpkgs/issues/353731\nTitle: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) \u00b7 Issue #353731 \u00b7 NixOS/nixpkgs \u00b7 GitHub\nContent: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731\nvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731\nLabels0.kind: bugSomething is brokenSomething is broken\nLabels0.kind: bugSomething is brokenSomething is broken\n0.kind: bugSomething is brokenSomething is broken\n0.kind: bugSomething is brokenSomething is broken\nSomething is broken\nSomething is broken\n\nSource: https://steamcommunity.com/app/221410/discussions/0/2243300286303664808/\nTitle: Wrong ELF class and a library can't be preloaded...any help? :: Steam for Linux General Discussions\nContent: (Dutch) Norsk (Norwegian) Polski (Polish) Portugu\u00eas (Portuguese - Portugal) Portugu\u00eas - Brasil (Portuguese - Brazil) Rom\u00e2n\u0103 (Romanian) \u0420\u0443\u0441\u0441\u043a\u0438\u0439 (Russian) Suomi (Finnish) Svenska (Swedish) T\u00fcrk\u00e7e (Turkish) Ti\u1ebfng Vi\u1ec7t (Vietnamese) \u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430 (Ukrainian) Report a translation problem Steam for Linux All Discussions Artwork Videos News Guides All Discussions Artwork Videos News Guides Steam for Linux Steam for Linux > General Discussions > Topic Details thesun_ray View Profile View Posts May 11, 2020 @ 6:52pm Wrong ELF class and a library can't be preloaded...any help? ERROR: ld.so: object 'libgtk3-nocsd.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.This is the error I'm getting when running Steam in a terminal. I am on an old Dell Studio XPS 8100, with 16GB Ram, Ubuntu 18.04LTS, and a brand-spanking \"new\" Nvidia GeForce GT 1030 card. What's frustrating me is that PRIOR to installing this (my goal is to play Tomb Raider), I could run Steam just fine on my\n\nSource: https://steamcommunity.com/app/221410/discussions/0/2243300286303664808/\nTitle: Wrong ELF class and a library can't be preloaded...any help? :: Steam for Linux General Discussions\nContent: thesun_ray View Profile View Posts May 11, 2020 @ 6:52pm Wrong ELF class and a library can't be preloaded...any help? ERROR: ld.so: object 'libgtk3-nocsd.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.This is the error I'm getting when running Steam in a terminal. I am on an old Dell Studio XPS 8100, with 16GB Ram, Ubuntu 18.04LTS, and a brand-spanking \"new\" Nvidia GeForce GT 1030 card. What's frustrating me is that PRIOR to installing this (my goal is to play Tomb Raider), I could run Steam just fine on my ancient Nvidia GeForce GTX 570. This new card is world's faster, better, and has 2GB of Ram...yet...\"Elf error.\"I am wondering if perhaps, by some chance, STEAM is trying to run on my second (and temporarily non-functional 2nd monitor??) I seemed unable to choose which monitor it should run on and it often picked the ancient 1024x768 one, rather than my 1920x1080. Nothing else has changed other than this graphics card. Once I have a DVI to HDMI\n\nSource: https://github.com/NixOS/nixpkgs/issues/353731\nTitle: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) \u00b7 Issue #353731 \u00b7 NixOS/nixpkgs \u00b7 GitHub\nContent: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731New issueCopy linkNew issueCopy linkClosedClosedvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731Copy linkLabels0.kind: bugSomething is brokenSomething is brokenDescriptioncorbinwunderlichopened on Nov 5, 2024Issue body actionsDescribe the bug vglrun does not work, as it fails to preload libdlfaker.so and libvglfaker.so Steps To Reproduce Steps to reproduce the behavior: Install virtualgl Setup an xpra session (not necessary, just what I am trying to do) Try to run anything with vglrun Expected behavior It does not error out, and it uses the correct renderer, and not llvmpipe. Screenshots Notify maintainers @abbradar Metadata system: \"x86_64-linux\" host os: Linux 6.6.53, NixOS, 24.11 (Vicuna), 24.11.20241004.bc947f5 multi-user?: yes sandbox: yes version: nix-env (Nix) 2.18.8 channels(root): \"nixos-24.05, nixpkgs\" nixpkgs: /nix/store/sdzpqjwx7pdx6lsq6llyfqqf7hspp83c-source Add a\n\nSource: https://github.com/NixOS/nixpkgs/issues/353731\nTitle: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) \u00b7 Issue #353731 \u00b7 NixOS/nixpkgs \u00b7 GitHub\nContent: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731New issueCopy linkNew issueCopy linkClosedClosedvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731Copy linkLabels0.kind: bugSomething is brokenSomething is brokenDescriptioncorbinwunderlichopened on Nov 5, 2024Issue body actionsDescribe the bug vglrun does not work, as it fails to preload libdlfaker.so and libvglfaker.so Steps To Reproduce Steps to reproduce the behavior: Install virtualgl Setup an xpra session (not necessary, just what I am trying to do) Try to run anything with vglrun Expected behavior It does not error out, and it uses the correct renderer, and not llvmpipe. Screenshots Notify maintainers @abbradar Metadata system: \"x86_64-linux\" host os: Linux 6.6.53, NixOS, 24.11 (Vicuna), 24.11.20241004.bc947f5 multi-user?: yes sandbox: yes version: nix-env (Nix) 2.18.8 channels(root): \"nixos-24.05, nixpkgs\" nixpkgs: /nix/store/sdzpqjwx7pdx6lsq6llyfqqf7hspp83c-source Add a\n\nSource: https://github.com/NixOS/nixpkgs/issues/353731\nTitle: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) \u00b7 Issue #353731 \u00b7 NixOS/nixpkgs \u00b7 GitHub\nContent: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731New issueCopy linkNew issueCopy linkClosedClosedvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731Copy linkLabels0.kind: bugSomething is brokenSomething is brokenDescriptioncorbinwunderlichopened on Nov 5, 2024Issue body actionsDescribe the bug vglrun does not work, as it fails to preload libdlfaker.so and libvglfaker.so Steps To Reproduce Steps to reproduce the behavior: Install virtualgl Setup an xpra session (not necessary, just what I am trying to do) Try to run anything with vglrun Expected behavior It does not error out, and it uses the correct renderer, and not llvmpipe. Screenshots Notify maintainers @abbradar Metadata system: \"x86_64-linux\" host os: Linux 6.6.53, NixOS, 24.11 (Vicuna), 24.11.20241004.bc947f5 multi-user?: yes sandbox: yes version: nix-env (Nix) 2.18.8 channels(root): \"nixos-24.05, nixpkgs\" nixpkgs: /nix/store/sdzpqjwx7pdx6lsq6llyfqqf7hspp83c-source Add a\n\nSource: https://github.com/NixOS/nixpkgs/issues/353731\nTitle: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) \u00b7 Issue #353731 \u00b7 NixOS/nixpkgs \u00b7 GitHub\nContent: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731New issueCopy linkNew issueCopy linkClosedClosedvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731Copy linkLabels0.kind: bugSomething is brokenSomething is brokenDescriptioncorbinwunderlichopened on Nov 5, 2024Issue body actionsDescribe the bug vglrun does not work, as it fails to preload libdlfaker.so and libvglfaker.so Steps To Reproduce Steps to reproduce the behavior: Install virtualgl Setup an xpra session (not necessary, just what I am trying to do) Try to run anything with vglrun Expected behavior It does not error out, and it uses the correct renderer, and not llvmpipe. Screenshots Notify maintainers @abbradar Metadata system: \"x86_64-linux\" host os: Linux 6.6.53, NixOS, 24.11 (Vicuna), 24.11.20241004.bc947f5 multi-user?: yes sandbox: yes version: nix-env (Nix) 2.18.8 channels(root): \"nixos-24.05, nixpkgs\" nixpkgs: /nix/store/sdzpqjwx7pdx6lsq6llyfqqf7hspp83c-source Add a\n\nSource: https://github.com/NixOS/nixpkgs/issues/353731\nTitle: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) \u00b7 Issue #353731 \u00b7 NixOS/nixpkgs \u00b7 GitHub\nContent: virtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64) #353731New issueCopy linkNew issueCopy linkClosedClosedvirtualgl: LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64)#353731Copy linkLabels0.kind: bugSomething is brokenSomething is brokenDescriptioncorbinwunderlichopened on Nov 5, 2024Issue body actionsDescribe the bug vglrun does not work, as it fails to preload libdlfaker.so and libvglfaker.so Steps To Reproduce Steps to reproduce the behavior: Install virtualgl Setup an xpra session (not necessary, just what I am trying to do) Try to run anything with vglrun Expected behavior It does not error out, and it uses the correct renderer, and not llvmpipe. Screenshots Notify maintainers @abbradar Metadata system: \"x86_64-linux\" host os: Linux 6.6.53, NixOS, 24.11 (Vicuna), 24.11.20241004.bc947f5 multi-user?: yes sandbox: yes version: nix-env (Nix) 2.18.8 channels(root): \"nixos-24.05, nixpkgs\" nixpkgs: /nix/store/sdzpqjwx7pdx6lsq6llyfqqf7hspp83c-source Add a\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.800028",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_not_found",
+        "output": "\ud83e\udd37 No content found for '```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game.'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.806378",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "research_step_finalized",
+        "output": "Finalized research step.\n\ud83d\udcb8 Total Research Costs: $0.014215940000000002",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:24.809342",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "writing_report",
+        "output": "\u270d\ufe0f Writing report for '```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game.'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:45.731117",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "report_written",
+        "output": "\ud83d\udcdd Report written for '```ERROR: ld.so: object 'libgamemodeauto.so.0' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS64): ignored.``` lutris UE4 game.' (11371 characters)",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T21:23:45.733240",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "llm_flow_diagram",
+        "output": "\ud83c\udfa8 LLM Interaction Flow:\ngraph TB\n    classDef startEnd fill:#e1f5fe,stroke:#0277bd,stroke-width:2px\n    classDef success fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px\n    classDef failure fill:#ffebee,stroke:#c62828,stroke-width:2px\n    classDef retry fill:#fff3e0,stroke:#ef6c00,stroke-width:2px\n    classDef decision fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px\n    Start[\"\ud83c\udfac Report Generation<br/>```ERROR: ld.so: object 'libgamemodeauto.so.0' fro...<br/>\ud83d\udccb research_report\"]\n    Step1[\"\u2705 LLM Interaction<br/>chat_completion<br/>\ud83e\udd16 google/gemini-2.5-pro-exp-03-25<br/>\u23f1\ufe0f 20.9s<br/>\ud83d\udd22 16517 tokens<br/>\ud83d\udccd #1\"]\n    Start --> Step1\n    Step2[\"\u2705 Generate Main Report<br/>Main Report (research_report)<br/>\ud83e\udd16 google/gemini-2.5-pro-exp-03-25<br/>\u23f1\ufe0f 20.9s<br/>\ud83d\udd22 16518 tokens<br/>\ud83d\udccd #2\"]\n    Step1 --> Step2\n    End[\"\ud83c\udfc1 Report Complete<br/>\u2705 2/2 Success<br/>\ud83d\udcc8 100% Rate\"]\n    Step2 --> End\n    class Start,End startEnd\n    class Step1,Step2 success",
+        "metadata": null
+      }
+    }
+  ],
+  "content": {
+    "query": "",
+    "sources": [],
+    "context": [],
+    "report": "",
+    "costs": 0.0,
+    "type": "report",
+    "output": "221410/discussions/0/2243300286303664808/)\n[WineDependencies.md](https://github.com/lutris/docs/blob/master/WineDependencies.md)\n"
+  }
+}

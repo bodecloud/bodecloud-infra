@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "21"
+  labels:
+    app: warp-gateway
+    component: vpn-gateway
+  name: warp-gateway
+  namespace: vpn-gateway
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: warp-gateway
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: warp-gateway
+        component: vpn-gateway
+    spec:
+      containers:
+      - env:
+        - name: WARP_SLEEP
+          value: "2"
+        - name: WARP_LICENSE_KEY
+          value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+        - name: TUNNEL_TOKEN
+          value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+        image: caomingjun/warp:latest
+        imagePullPolicy: Always
+        name: warp-gateway
+        ports:
+        - containerPort: 1080
+          name: socks5-proxy
+          protocol: TCP
+        - containerPort: 3128
+          name: http-proxy
+          protocol: TCP
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -s --max-time 5 --proxy socks5://127.0.0.1:1080 http://httpbin.org/ip
+              >/dev/null
+          failureThreshold: 3
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -s --max-time 5 --proxy socks5://127.0.0.1:1080 http://httpbin.org/ip
+              >/dev/null
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - MKNOD
+            - AUDIT_WRITE
+          privileged: true
+        volumeMounts:
+        - mountPath: /var/lib/cloudflare-warp
+          name: warp-data
+      securityContext:
+        sysctls:
+        - name: net.ipv4.ip_forward
+          value: "1"
+        - name: net.ipv4.conf.all.forwarding
+          value: "1"
+        - name: net.ipv6.conf.all.forwarding
+          value: "1"
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "0"
+        - name: net.ipv4.conf.all.src_valid_mark
+          value: "1"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: warp-data
+        hostPath:
+          path: /home/ubuntu/my-media-stack/configs/warp/data
+          type: DirectoryOrCreate 

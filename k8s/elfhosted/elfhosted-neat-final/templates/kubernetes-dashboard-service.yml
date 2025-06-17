@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-kubernetes-dashboard
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  type: {{ .Values.kubernetesDashboard.type }}
+  selector:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: kubernetesdashboard
+    {{- include "elfhosted-neat-final.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.kubernetesDashboard.ports | toYaml | nindent 2 }}

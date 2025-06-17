@@ -1,0 +1,14 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "type": 2,
+      "title": "Main Stack",
+      "description": "Main application stack",
+      "note": "Deploys the main application stack",
+      "platform": "linux",
+      "categories": ["infrastructure"],
+      "stackfile": "../../../docker-compose.yml"
+    }
+  ]
+}

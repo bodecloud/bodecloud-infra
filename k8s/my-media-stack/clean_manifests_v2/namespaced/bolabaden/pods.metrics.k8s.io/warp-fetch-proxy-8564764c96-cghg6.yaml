@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: warp-fetch-proxy
+  usage:
+    cpu: "0"
+    memory: 2572Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: warp-fetch-proxy
+    pod-template-hash: 8564764c96
+  name: warp-fetch-proxy-8564764c96-cghg6
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:46Z"
+window: 16.197s

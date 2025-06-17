@@ -1,0 +1,49 @@
+#! deunhealth-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: deunhealth
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: deunhealth
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: deunhealth
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: deunhealth
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: deunhealth
+                  image: qmcgaw/deunhealth
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: HEALTH_SERVER_ADDRESS
+                      value: "127.0.0.1:9999"
+                    - name: LOG_LEVEL
+                      value: "debug"
+                    - name: PGID
+                      value: "988"
+                    - name: PUID
+                      value: "1002"
+                    - name: TZ
+                      value: "America/Chicago"
+                    - name: UMASK
+                      value: "022"
+                  volumeMounts:
+                    - name: var-run-docker-sock
+                      mountPath: /var/run/docker.sock
+            volumes:
+                - name: var-run-docker-sock
+                  hostPath:
+                    path: /var/run/docker.sock

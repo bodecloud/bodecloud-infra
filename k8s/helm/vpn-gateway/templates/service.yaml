@@ -1,0 +1,24 @@
+{{- range .Values.premiumize.countries }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "vpn-gateway.fullname" $ }}-premiumize-{{ . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "vpn-gateway.labels" $ | nindent 4 }}
+    app: gluetun-premiumize-{{ . }}
+spec:
+  type: {{ $.Values.service.type }}
+  ports:
+    - port: {{ $.Values.service.port }}
+      targetPort: http-proxy
+      protocol: TCP
+      name: http-proxy
+    - port: 8388
+      targetPort: shadowsocks
+      protocol: TCP
+      name: shadowsocks
+  selector:
+    app: gluetun-premiumize-{{ . }}
+{{- end }}

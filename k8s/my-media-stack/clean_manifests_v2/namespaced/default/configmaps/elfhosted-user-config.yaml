@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  PGID: "1000"
+  PUID: "1000"
+  TZ: UTC
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"PGID":"1000","PUID":"1000","TZ":"UTC"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"elfhosted-user-config","namespace":"default"}}
+  name: elfhosted-user-config
+  namespace: default

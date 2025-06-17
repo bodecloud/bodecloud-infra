@@ -1,0 +1,13 @@
+#! error-pages-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: error-pages
+    namespace: my-media-stack
+spec:
+    selector: {}
+    ports:
+        - name: error-pages-80
+          port: 80
+          targetPort: error-pages-80

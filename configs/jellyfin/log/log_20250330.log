@@ -1,0 +1,1241 @@
+[2025-03-30 05:08:33.392 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 05:08:33.992 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_CACHE_DIR, /config/cache]", "[JELLYFIN_DATA_DIR, /config/data]"]
+[2025-03-30 05:08:34.091 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 05:08:34.092 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 05:09:05.796 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 05:09:06.293 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_DATA_DIR, /config/data]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_CACHE_DIR, /config/cache]"]
+[2025-03-30 05:09:06.492 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 05:09:06.492 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 05:09:06.492 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 05:09:06.493 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 05:09:06.494 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 05:09:06.693 -05:00] [ERR] [1] Main: The server is expected to host the web client, but the provided content directory is either invalid or empty: "/usr/share/jellyfin/web". If you do not want to host the web client with the server, you may set the '--nowebclient' command line flag, or set'"hostwebclient"=false' in your config settings
+[2025-03-30 05:09:22.696 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 05:09:23.093 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_CACHE_DIR, /config/cache]", "[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_DATA_DIR, /config/data]"]
+[2025-03-30 05:09:23.193 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 05:09:23.193 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 05:09:23.194 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 05:09:23.194 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 05:09:23.194 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 05:09:23.194 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 05:09:23.194 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 05:09:23.194 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 05:09:23.194 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 05:09:23.195 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 05:09:23.195 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 05:09:23.195 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 05:09:23.195 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 05:09:23.391 -05:00] [ERR] [1] Main: The server is expected to host the web client, but the provided content directory is either invalid or empty: "/usr/share/jellyfin/web". If you do not want to host the web client with the server, you may set the '--nowebclient' command line flag, or set'"hostwebclient"=false' in your config settings
+[2025-03-30 05:10:04.323 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 05:10:04.918 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_CACHE_DIR, /config/cache]", "[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_DATA_DIR, /config/data]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]"]
+[2025-03-30 05:10:04.920 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 05:10:04.921 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 05:10:04.921 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 05:10:04.921 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 05:10:04.922 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 05:10:04.922 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 05:10:04.922 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 05:10:05.017 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 05:10:05.017 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 05:10:05.018 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 05:10:05.018 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 05:10:05.018 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 05:10:05.018 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 05:10:07.219 -05:00] [INF] [1] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 05:10:07.625 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Loading assemblies
+[2025-03-30 05:10:08.724 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 05:10:08.725 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 05:10:08.725 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 05:10:08.726 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "100.119.0.2", "192.168.100.2"]
+[2025-03-30 05:10:08.817 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["0.0.0.0"]
+[2025-03-30 05:10:08.817 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 05:10:08.817 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 05:10:22.326 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: There are pending EFCore migrations in the database. Applying... (This may take a while, do not stop Jellyfin)
+[2025-03-30 05:10:26.320 -05:00] [WRN] [1] Microsoft.EntityFrameworkCore.Migrations: An operation of type '"SqlOperation"' will be attempted while a rebuild of table '"ImageInfos"' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[2025-03-30 05:10:26.320 -05:00] [WRN] [1] Microsoft.EntityFrameworkCore.Migrations: An operation of type '"SqlOperation"' will be attempted while a rebuild of table '"ImageInfos"' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[2025-03-30 05:10:26.322 -05:00] [WRN] [1] Microsoft.EntityFrameworkCore.Migrations: An operation of type '"SqlOperation"' will be attempted while a rebuild of table '"Permissions"' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[2025-03-30 05:10:26.322 -05:00] [WRN] [1] Microsoft.EntityFrameworkCore.Migrations: An operation of type '"SqlOperation"' will be attempted while a rebuild of table '"Permissions"' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[2025-03-30 05:10:26.324 -05:00] [WRN] [1] Microsoft.EntityFrameworkCore.Migrations: An operation of type '"SqlOperation"' will be attempted while a rebuild of table '"Preferences"' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[2025-03-30 05:10:26.324 -05:00] [WRN] [1] Microsoft.EntityFrameworkCore.Migrations: An operation of type '"SqlOperation"' will be attempted while a rebuild of table '"Preferences"' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[2025-03-30 05:10:26.325 -05:00] [WRN] [1] Microsoft.EntityFrameworkCore.Migrations: An operation of type '"SqlOperation"' will be attempted while a rebuild of table '"Users"' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[2025-03-30 05:10:26.325 -05:00] [WRN] [1] Microsoft.EntityFrameworkCore.Migrations: An operation of type '"SqlOperation"' will be attempted while a rebuild of table '"Users"' is pending. The database may not be in an expected state. Review the SQL generated by this migration to help diagnose any failures. Consider moving these operations to a subsequent migration.
+[2025-03-30 05:10:29.131 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: EFCore migrations applied successfully
+[2025-03-30 05:10:35.425 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb" "10.10.6.0"
+[2025-03-30 05:10:35.426 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Studio Images" "10.10.6.0"
+[2025-03-30 05:10:35.426 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OMDb" "10.10.6.0"
+[2025-03-30 05:10:35.722 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "MusicBrainz" "10.10.6.0"
+[2025-03-30 05:10:35.817 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AudioDB" "10.10.6.0"
+[2025-03-30 05:10:37.018 -05:00] [INF] [1] Main: Kestrel is listening on "0.0.0.0"
+[2025-03-30 05:10:45.321 -05:00] [WRN] [1] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: The WebRootPath was not found: "/run/s6-rc:s6-rc-init:nnbPah/servicedirs/svc-jellyfin/wwwroot". Static files may be unavailable.
+[2025-03-30 05:10:46.918 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Running startup tasks
+[2025-03-30 05:10:47.620 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-03-31 03:00:00.000 -05:00, which is 21:49:12.3795809 from now.
+[2025-03-30 05:10:47.718 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-03-31 02:00:00.000 -05:00, which is 20:49:12.2819501 from now.
+[2025-03-30 05:10:48.523 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Found ffmpeg version "7.0.2"
+[2025-03-30 05:10:50.320 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "decoders": ["libdav1d", "av1", "av1_rkmpp", "h264", "h264_rkmpp", "hevc", "hevc_rkmpp", "mpeg1_rkmpp", "mpeg2video", "mpeg2_rkmpp", "mpeg4", "mpeg4_rkmpp", "msmpeg4", "vp8", "vp8_rkmpp", "libvpx", "vp9", "vp9_rkmpp", "libvpx-vp9", "aac", "ac3", "ac4", "dca", "flac", "mp3", "truehd"]
+[2025-03-30 05:10:50.819 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "encoders": ["libsvtav1", "libx264", "h264_v4l2m2m", "h264_rkmpp", "libx265", "hevc_rkmpp", "mjpeg_rkmpp", "aac", "libfdk_aac", "ac3", "alac", "dca", "flac", "libmp3lame", "libopus", "truehd", "libvorbis", "srt"]
+[2025-03-30 05:10:51.318 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available filters: ["overlay_opencl", "overlay_rkrga", "scale_opencl", "scale_rkrga", "tonemapx", "tonemap_opencl", "transpose_opencl", "vpp_rkrga", "zscale", "alphasrc"]
+[2025-03-30 05:10:51.817 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "scale_cuda" with option "format" is not available
+[2025-03-30 05:10:51.917 -05:00] [INF] [13] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 05:10:51.918 -05:00] [INF] [12] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 05:10:52.118 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "tonemap_cuda" with option "GPU accelerated HDR to SDR tonemapping" is not available
+[2025-03-30 05:10:53.518 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vaapi" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 05:10:54.117 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vulkan" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 05:10:55.017 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available hwaccel types: ["drm", "opencl", "rkmpp"]
+[2025-03-30 05:11:04.318 -05:00] [INF] [12] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Update Plugins" Completed after 0 minute(s) and 12 seconds
+[2025-03-30 05:13:31.719 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: FFmpeg: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+[2025-03-30 05:13:31.721 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: ServerId: "70caba014e9341f8920ee0c71b729732"
+[2025-03-30 05:13:31.721 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Core startup complete
+[2025-03-30 05:13:31.722 -05:00] [INF] [1] Main: Startup complete 0:03:29.2983301
+[2025-03-30 07:21:21.117 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 07:21:21.806 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_CACHE_DIR, /config/cache]", "[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_DATA_DIR, /config/data]"]
+[2025-03-30 07:21:21.906 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 07:21:21.909 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 07:21:21.909 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 07:21:21.910 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 07:21:21.910 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 07:21:21.910 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 07:21:21.910 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 07:21:21.910 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 07:21:21.910 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 07:21:21.910 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 07:21:21.911 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 07:21:21.911 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 07:21:21.911 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 07:21:26.039 -05:00] [INF] [1] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 07:21:26.975 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Loading assemblies
+[2025-03-30 07:21:28.326 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 07:21:28.330 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 07:21:28.342 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 07:21:28.344 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "192.168.100.7", "172.20.0.29"]
+[2025-03-30 07:21:28.353 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["0.0.0.0"]
+[2025-03-30 07:21:28.361 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 07:21:28.361 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 07:21:57.933 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb" "10.10.6.0"
+[2025-03-30 07:21:57.950 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Studio Images" "10.10.6.0"
+[2025-03-30 07:21:57.953 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OMDb" "10.10.6.0"
+[2025-03-30 07:21:58.323 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "MusicBrainz" "10.10.6.0"
+[2025-03-30 07:21:58.323 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AudioDB" "10.10.6.0"
+[2025-03-30 07:21:59.714 -05:00] [INF] [1] Main: Kestrel is listening on "0.0.0.0"
+[2025-03-30 07:22:09.324 -05:00] [WRN] [1] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: The WebRootPath was not found: "/run/s6-rc:s6-rc-init:nbKcdi/servicedirs/svc-jellyfin/wwwroot". Static files may be unavailable.
+[2025-03-30 07:22:10.514 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Running startup tasks
+[2025-03-30 07:22:11.205 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-03-31 03:00:00.000 -05:00, which is 19:37:48.7945388 from now.
+[2025-03-30 07:22:11.210 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-03-31 02:00:00.000 -05:00, which is 18:37:48.7896763 from now.
+[2025-03-30 07:22:14.617 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Found ffmpeg version "7.0.2"
+[2025-03-30 07:22:15.611 -05:00] [INF] [12] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 07:22:17.425 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "decoders": ["libdav1d", "av1", "av1_rkmpp", "h264", "h264_rkmpp", "hevc", "hevc_rkmpp", "mpeg1_rkmpp", "mpeg2video", "mpeg2_rkmpp", "mpeg4", "mpeg4_rkmpp", "msmpeg4", "vp8", "vp8_rkmpp", "libvpx", "vp9", "vp9_rkmpp", "libvpx-vp9", "aac", "ac3", "ac4", "dca", "flac", "mp3", "truehd"]
+[2025-03-30 07:22:17.700 -05:00] [INF] [13] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 07:22:18.150 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "encoders": ["libsvtav1", "libx264", "h264_v4l2m2m", "h264_rkmpp", "libx265", "hevc_rkmpp", "mjpeg_rkmpp", "aac", "libfdk_aac", "ac3", "alac", "dca", "flac", "libmp3lame", "libopus", "truehd", "libvorbis", "srt"]
+[2025-03-30 07:22:18.717 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available filters: ["overlay_opencl", "overlay_rkrga", "scale_opencl", "scale_rkrga", "tonemapx", "tonemap_opencl", "transpose_opencl", "vpp_rkrga", "zscale", "alphasrc"]
+[2025-03-30 07:22:19.493 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "scale_cuda" with option "format" is not available
+[2025-03-30 07:22:20.013 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "tonemap_cuda" with option "GPU accelerated HDR to SDR tonemapping" is not available
+[2025-03-30 07:22:21.408 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vaapi" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 07:22:21.904 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vulkan" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 07:22:22.640 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available hwaccel types: ["drm", "opencl", "rkmpp"]
+[2025-03-30 07:22:33.993 -05:00] [INF] [17] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Update Plugins" Completed after 0 minute(s) and 18 seconds
+[2025-03-30 07:25:32.113 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: FFmpeg: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+[2025-03-30 07:25:32.115 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: ServerId: "70caba014e9341f8920ee0c71b729732"
+[2025-03-30 07:25:32.115 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Core startup complete
+[2025-03-30 07:25:32.116 -05:00] [INF] [1] Main: Startup complete 0:04:14.4102026
+[2025-03-30 07:38:15.318 -05:00] [INF] [18] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 07:38:15.505 -05:00] [INF] [18] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 07:38:15.611 -05:00] [INF] [18] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 07:54:04.817 -05:00] [INF] [20] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 07:54:04.823 -05:00] [INF] [20] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 07:54:04.908 -05:00] [INF] [20] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 07:57:35.675 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 07:57:35.678 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 07:57:35.678 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 08:22:11.308 -05:00] [INF] [21] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Download missing subtitles" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:11.606 -05:00] [INF] [21] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Audio Normalization" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:11.715 -05:00] [INF] [23] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Download missing lyrics" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:11.917 -05:00] [INF] [21] Emby.Server.Implementations.ScheduledTasks.Tasks.OptimizeDatabaseTask: Optimizing and vacuuming jellyfin.db...
+[2025-03-30 08:22:12.107 -05:00] [INF] [23] Emby.Server.Implementations.Library.LibraryManager: People validation complete
+[2025-03-30 08:22:12.107 -05:00] [INF] [23] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Refresh People" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:12.311 -05:00] [INF] [23] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Media Segment Scan" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:12.510 -05:00] [INF] [21] Emby.Server.Implementations.ScheduledTasks.Tasks.OptimizeDatabaseTask: jellyfin.db optimized successfully!
+[2025-03-30 08:22:12.510 -05:00] [INF] [21] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Optimize database" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:12.707 -05:00] [INF] [23] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Log Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:12.814 -05:00] [INF] [23] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Cache Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:13.109 -05:00] [INF] [23] Emby.Server.Implementations.Library.LibraryManager: Validating media library
+[2025-03-30 08:22:13.505 -05:00] [INF] [21] Emby.Server.Implementations.ScheduledTasks.TaskManager: "TasksRefreshChannels" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 08:22:15.011 -05:00] [WRN] [23] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-03-30 08:22:15.406 -05:00] [WRN] [21] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-03-30 08:22:15.613 -05:00] [INF] [22] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Scan Media Library" Completed after 0 minute(s) and 2 seconds
+[2025-03-30 08:22:16.610 -05:00] [INF] [22] Jellyfin.LiveTv.Guide.GuideManager: Refreshing guide with 7 days of guide data
+[2025-03-30 08:22:16.806 -05:00] [INF] [22] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Refresh Guide" Completed after 0 minute(s) and 3 seconds
+[2025-03-30 09:22:14.408 -05:00] [INF] [105] Emby.Server.Implementations.Library.LibraryManager: Validating media library
+[2025-03-30 09:22:14.424 -05:00] [WRN] [105] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-03-30 09:22:14.521 -05:00] [WRN] [106] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-03-30 09:22:14.607 -05:00] [INF] [106] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Scan Media Library" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 09:22:17.410 -05:00] [INF] [106] Jellyfin.LiveTv.Guide.GuideManager: Refreshing guide with 7 days of guide data
+[2025-03-30 09:22:17.412 -05:00] [INF] [106] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Refresh Guide" Completed after 0 minute(s) and 3 seconds
+[2025-03-30 09:42:48.137 -05:00] [INF] [73] Emby.Server.Implementations.Session.SessionManager: Sending shutdown notifications
+[2025-03-30 09:42:48.311 -05:00] [INF] [71] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 09:42:48.458 -05:00] [INF] [72] Main: Running query planner optimizations in the database... This might take a while
+[2025-03-30 09:42:48.915 -05:00] [INF] [72] Emby.Server.Implementations.ApplicationHost: Disposing "CoreAppHost"
+[2025-03-30 09:42:48.915 -05:00] [INF] [72] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzArtistProvider"
+[2025-03-30 09:42:48.918 -05:00] [INF] [72] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzAlbumProvider"
+[2025-03-30 09:42:48.918 -05:00] [INF] [72] Emby.Server.Implementations.ApplicationHost: Disposing "PluginManager"
+[2025-03-30 09:43:11.372 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 09:43:11.974 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_CACHE_DIR, /config/cache]", "[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_DATA_DIR, /config/data]"]
+[2025-03-30 09:43:12.080 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 09:43:12.088 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 09:43:12.090 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 09:43:12.091 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 09:43:12.091 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 09:43:12.091 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 09:43:12.091 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 09:43:12.091 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 09:43:12.107 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 09:43:12.108 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 09:43:12.109 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 09:43:12.109 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 09:43:12.109 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 09:43:14.671 -05:00] [INF] [1] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 09:43:15.280 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Loading assemblies
+[2025-03-30 09:43:16.397 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 09:43:16.397 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 09:43:16.397 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 09:43:16.479 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "172.20.0.27", "192.168.100.12"]
+[2025-03-30 09:43:16.480 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["0.0.0.0"]
+[2025-03-30 09:43:16.481 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 09:43:16.482 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 09:43:38.472 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb" "10.10.6.0"
+[2025-03-30 09:43:38.474 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Studio Images" "10.10.6.0"
+[2025-03-30 09:43:38.474 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OMDb" "10.10.6.0"
+[2025-03-30 09:43:38.878 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "MusicBrainz" "10.10.6.0"
+[2025-03-30 09:43:38.879 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AudioDB" "10.10.6.0"
+[2025-03-30 09:43:40.180 -05:00] [INF] [1] Main: Kestrel is listening on "0.0.0.0"
+[2025-03-30 09:43:48.673 -05:00] [WRN] [1] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: The WebRootPath was not found: "/run/s6-rc:s6-rc-init:CHpCeO/servicedirs/svc-jellyfin/wwwroot". Static files may be unavailable.
+[2025-03-30 09:43:50.370 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Running startup tasks
+[2025-03-30 09:43:50.799 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-03-31 03:00:00.000 -05:00, which is 17:16:09.2004554 from now.
+[2025-03-30 09:43:51.096 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-03-31 02:00:00.000 -05:00, which is 16:16:08.9030605 from now.
+[2025-03-30 09:43:53.076 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Found ffmpeg version "7.0.2"
+[2025-03-30 09:43:54.770 -05:00] [INF] [8] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 09:43:54.873 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "decoders": ["libdav1d", "av1", "av1_rkmpp", "h264", "h264_rkmpp", "hevc", "hevc_rkmpp", "mpeg1_rkmpp", "mpeg2video", "mpeg2_rkmpp", "mpeg4", "mpeg4_rkmpp", "msmpeg4", "vp8", "vp8_rkmpp", "libvpx", "vp9", "vp9_rkmpp", "libvpx-vp9", "aac", "ac3", "ac4", "dca", "flac", "mp3", "truehd"]
+[2025-03-30 09:43:55.472 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "encoders": ["libsvtav1", "libx264", "h264_v4l2m2m", "h264_rkmpp", "libx265", "hevc_rkmpp", "mjpeg_rkmpp", "aac", "libfdk_aac", "ac3", "alac", "dca", "flac", "libmp3lame", "libopus", "truehd", "libvorbis", "srt"]
+[2025-03-30 09:43:55.773 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available filters: ["overlay_opencl", "overlay_rkrga", "scale_opencl", "scale_rkrga", "tonemapx", "tonemap_opencl", "transpose_opencl", "vpp_rkrga", "zscale", "alphasrc"]
+[2025-03-30 09:43:56.469 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "scale_cuda" with option "format" is not available
+[2025-03-30 09:43:56.676 -05:00] [INF] [15] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 09:43:57.272 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "tonemap_cuda" with option "GPU accelerated HDR to SDR tonemapping" is not available
+[2025-03-30 09:43:58.567 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vaapi" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 09:43:58.873 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vulkan" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 09:43:59.669 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available hwaccel types: ["drm", "opencl", "rkmpp"]
+[2025-03-30 09:44:08.886 -05:00] [INF] [15] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Update Plugins" Completed after 0 minute(s) and 13 seconds
+[2025-03-30 09:47:05.183 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: FFmpeg: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+[2025-03-30 09:47:05.185 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: ServerId: "70caba014e9341f8920ee0c71b729732"
+[2025-03-30 09:47:05.186 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Core startup complete
+[2025-03-30 09:47:05.186 -05:00] [INF] [1] Main: Startup complete 0:03:56.2002963
+[2025-03-30 09:49:40.093 -05:00] [INF] [13] Emby.Server.Implementations.Session.SessionManager: Sending shutdown notifications
+[2025-03-30 09:49:40.280 -05:00] [INF] [8] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 09:49:40.403 -05:00] [INF] [8] Main: Running query planner optimizations in the database... This might take a while
+[2025-03-30 09:49:40.850 -05:00] [INF] [8] Emby.Server.Implementations.ApplicationHost: Disposing "CoreAppHost"
+[2025-03-30 09:49:40.853 -05:00] [INF] [8] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzArtistProvider"
+[2025-03-30 09:49:40.858 -05:00] [INF] [8] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzAlbumProvider"
+[2025-03-30 09:49:40.862 -05:00] [INF] [8] Emby.Server.Implementations.ApplicationHost: Disposing "PluginManager"
+[2025-03-30 09:51:44.419 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 09:51:44.923 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_DATA_DIR, /config/data]", "[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_CACHE_DIR, /config/cache]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]"]
+[2025-03-30 09:51:45.007 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 09:51:45.020 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 09:51:45.020 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 09:51:45.087 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 09:51:45.087 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 09:51:45.087 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 09:51:45.088 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 09:51:45.088 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 09:51:45.088 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 09:51:45.088 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 09:51:45.094 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 09:51:45.094 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 09:51:45.094 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 09:51:48.070 -05:00] [INF] [1] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 09:51:48.701 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Loading assemblies
+[2025-03-30 09:51:49.887 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 09:51:49.890 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 09:51:49.893 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 09:51:49.899 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "192.168.100.7", "172.20.0.33"]
+[2025-03-30 09:51:49.903 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["0.0.0.0"]
+[2025-03-30 09:51:49.903 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 09:51:49.905 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 09:52:14.790 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb" "10.10.6.0"
+[2025-03-30 09:52:14.803 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Studio Images" "10.10.6.0"
+[2025-03-30 09:52:14.808 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OMDb" "10.10.6.0"
+[2025-03-30 09:52:15.090 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "MusicBrainz" "10.10.6.0"
+[2025-03-30 09:52:15.093 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AudioDB" "10.10.6.0"
+[2025-03-30 09:52:16.697 -05:00] [INF] [1] Main: Kestrel is listening on "0.0.0.0"
+[2025-03-30 09:52:26.685 -05:00] [WRN] [1] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: The WebRootPath was not found: "/run/s6-rc:s6-rc-init:OncMAD/servicedirs/svc-jellyfin/wwwroot". Static files may be unavailable.
+[2025-03-30 09:52:29.083 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Running startup tasks
+[2025-03-30 09:52:29.581 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-03-31 03:00:00.000 -05:00, which is 17:07:30.4186901 from now.
+[2025-03-30 09:52:29.882 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-03-31 02:00:00.000 -05:00, which is 16:07:30.1178837 from now.
+[2025-03-30 09:52:30.881 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Found ffmpeg version "7.0.2"
+[2025-03-30 09:52:33.081 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "decoders": ["libdav1d", "av1", "av1_rkmpp", "h264", "h264_rkmpp", "hevc", "hevc_rkmpp", "mpeg1_rkmpp", "mpeg2video", "mpeg2_rkmpp", "mpeg4", "mpeg4_rkmpp", "msmpeg4", "vp8", "vp8_rkmpp", "libvpx", "vp9", "vp9_rkmpp", "libvpx-vp9", "aac", "ac3", "ac4", "dca", "flac", "mp3", "truehd"]
+[2025-03-30 09:52:33.780 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "encoders": ["libsvtav1", "libx264", "h264_v4l2m2m", "h264_rkmpp", "libx265", "hevc_rkmpp", "mjpeg_rkmpp", "aac", "libfdk_aac", "ac3", "alac", "dca", "flac", "libmp3lame", "libopus", "truehd", "libvorbis", "srt"]
+[2025-03-30 09:52:34.479 -05:00] [INF] [15] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 09:52:34.480 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available filters: ["overlay_opencl", "overlay_rkrga", "scale_opencl", "scale_rkrga", "tonemapx", "tonemap_opencl", "transpose_opencl", "vpp_rkrga", "zscale", "alphasrc"]
+[2025-03-30 09:52:34.804 -05:00] [INF] [8] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 09:52:34.979 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "scale_cuda" with option "format" is not available
+[2025-03-30 09:52:35.688 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "tonemap_cuda" with option "GPU accelerated HDR to SDR tonemapping" is not available
+[2025-03-30 09:52:37.280 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vaapi" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 09:52:37.584 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vulkan" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 09:52:38.678 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available hwaccel types: ["drm", "opencl", "rkmpp"]
+[2025-03-30 09:52:46.581 -05:00] [INF] [18] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Update Plugins" Completed after 0 minute(s) and 12 seconds
+[2025-03-30 09:55:38.899 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: FFmpeg: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+[2025-03-30 09:55:38.903 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: ServerId: "70caba014e9341f8920ee0c71b729732"
+[2025-03-30 09:55:38.908 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Core startup complete
+[2025-03-30 09:55:38.908 -05:00] [INF] [1] Main: Startup complete 0:03:57.0178046
+[2025-03-30 10:15:00.986 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:15:01.081 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:15:01.089 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 10:25:00.760 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:25:00.784 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:25:00.787 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 10:30:00.426 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:30:00.430 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:30:00.436 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 10:33:31.508 -05:00] [INF] [31] Emby.Server.Implementations.Session.SessionManager: Sending shutdown notifications
+[2025-03-30 10:33:31.735 -05:00] [INF] [26] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 10:33:31.855 -05:00] [INF] [26] Main: Running query planner optimizations in the database... This might take a while
+[2025-03-30 10:33:32.387 -05:00] [INF] [26] Emby.Server.Implementations.ApplicationHost: Disposing "CoreAppHost"
+[2025-03-30 10:33:32.387 -05:00] [INF] [26] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzArtistProvider"
+[2025-03-30 10:33:32.390 -05:00] [INF] [26] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzAlbumProvider"
+[2025-03-30 10:33:32.390 -05:00] [INF] [26] Emby.Server.Implementations.ApplicationHost: Disposing "PluginManager"
+[2025-03-30 10:33:58.061 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 10:33:58.829 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_DATA_DIR, /config/data]", "[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_CACHE_DIR, /config/cache]", "[JELLYFIN_CONFIG_DIR, /config]"]
+[2025-03-30 10:33:58.865 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 10:33:58.883 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 10:33:58.883 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 10:33:58.884 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 10:33:58.884 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 10:33:58.884 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 10:33:58.895 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 10:33:58.895 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 10:33:58.895 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 10:33:58.895 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 10:33:58.895 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 10:33:58.895 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 10:33:58.895 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 10:34:01.931 -05:00] [INF] [1] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 10:34:02.494 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Loading assemblies
+[2025-03-30 10:34:03.691 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 10:34:03.694 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 10:34:03.700 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 10:34:03.705 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "172.20.0.32", "192.168.100.13"]
+[2025-03-30 10:34:03.712 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["0.0.0.0"]
+[2025-03-30 10:34:03.718 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 10:34:03.719 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 10:34:35.553 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb" "10.10.6.0"
+[2025-03-30 10:34:35.622 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Studio Images" "10.10.6.0"
+[2025-03-30 10:34:35.641 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OMDb" "10.10.6.0"
+[2025-03-30 10:34:36.060 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "MusicBrainz" "10.10.6.0"
+[2025-03-30 10:34:36.077 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AudioDB" "10.10.6.0"
+[2025-03-30 10:34:38.671 -05:00] [INF] [1] Main: Kestrel is listening on "0.0.0.0"
+[2025-03-30 10:34:54.096 -05:00] [WRN] [1] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: The WebRootPath was not found: "/run/s6-rc:s6-rc-init:fCPHkm/servicedirs/svc-jellyfin/wwwroot". Static files may be unavailable.
+[2025-03-30 10:34:56.979 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Running startup tasks
+[2025-03-30 10:34:57.581 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-03-31 03:00:00.000 -05:00, which is 16:25:02.4189275 from now.
+[2025-03-30 10:34:58.093 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-03-31 02:00:00.000 -05:00, which is 15:25:01.9067591 from now.
+[2025-03-30 10:34:59.578 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Found ffmpeg version "7.0.2"
+[2025-03-30 10:35:01.784 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "decoders": ["libdav1d", "av1", "av1_rkmpp", "h264", "h264_rkmpp", "hevc", "hevc_rkmpp", "mpeg1_rkmpp", "mpeg2video", "mpeg2_rkmpp", "mpeg4", "mpeg4_rkmpp", "msmpeg4", "vp8", "vp8_rkmpp", "libvpx", "vp9", "vp9_rkmpp", "libvpx-vp9", "aac", "ac3", "ac4", "dca", "flac", "mp3", "truehd"]
+[2025-03-30 10:35:02.028 -05:00] [INF] [12] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 10:35:02.390 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "encoders": ["libsvtav1", "libx264", "h264_v4l2m2m", "h264_rkmpp", "libx265", "hevc_rkmpp", "mjpeg_rkmpp", "aac", "libfdk_aac", "ac3", "alac", "dca", "flac", "libmp3lame", "libopus", "truehd", "libvorbis", "srt"]
+[2025-03-30 10:35:02.895 -05:00] [INF] [15] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 10:35:03.470 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available filters: ["overlay_opencl", "overlay_rkrga", "scale_opencl", "scale_rkrga", "tonemapx", "tonemap_opencl", "transpose_opencl", "vpp_rkrga", "zscale", "alphasrc"]
+[2025-03-30 10:35:03.880 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "scale_cuda" with option "format" is not available
+[2025-03-30 10:35:04.512 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "tonemap_cuda" with option "GPU accelerated HDR to SDR tonemapping" is not available
+[2025-03-30 10:35:07.076 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vaapi" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 10:35:07.490 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vulkan" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 10:35:08.211 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available hwaccel types: ["drm", "opencl", "rkmpp"]
+[2025-03-30 10:35:11.193 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:35:11.416 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:35:11.580 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 10:35:22.518 -05:00] [INF] [17] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Update Plugins" Completed after 0 minute(s) and 19 seconds
+[2025-03-30 10:38:23.477 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: FFmpeg: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+[2025-03-30 10:38:23.572 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: ServerId: "70caba014e9341f8920ee0c71b729732"
+[2025-03-30 10:38:23.572 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Core startup complete
+[2025-03-30 10:38:23.573 -05:00] [INF] [1] Main: Startup complete 0:04:27.8720655
+[2025-03-30 10:45:00.476 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:45:00.479 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:45:00.481 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 10:50:00.593 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:50:00.595 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:50:00.595 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 10:55:00.624 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:55:00.624 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 10:55:00.625 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:00:07.744 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:00:07.745 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:00:07.746 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:10:00.491 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:10:00.493 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:10:00.493 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:15:00.727 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:15:00.727 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:15:00.728 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:25:00.505 -05:00] [INF] [27] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:25:00.505 -05:00] [INF] [27] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:25:00.506 -05:00] [INF] [27] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:30:00.870 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:30:00.871 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:30:00.872 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:35:00.780 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:35:00.780 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:35:00.781 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:40:06.983 -05:00] [INF] [32] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:40:06.983 -05:00] [INF] [32] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:40:06.984 -05:00] [INF] [32] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:50:00.516 -05:00] [INF] [32] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:50:00.517 -05:00] [INF] [32] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:50:00.517 -05:00] [INF] [32] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 11:55:00.381 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:55:00.382 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 11:55:00.384 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:00:01.854 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:00:01.855 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:00:01.855 -05:00] [INF] [28] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:05:00.730 -05:00] [INF] [31] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:05:00.731 -05:00] [INF] [31] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:05:00.732 -05:00] [INF] [31] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:15:00.405 -05:00] [INF] [31] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:15:00.407 -05:00] [INF] [31] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:15:00.408 -05:00] [INF] [31] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:20:00.481 -05:00] [INF] [29] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:20:00.485 -05:00] [INF] [29] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:20:00.486 -05:00] [INF] [29] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:25:00.735 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:25:00.736 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:25:00.736 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:30:00.901 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:30:00.902 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:30:00.903 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:35:00.346 -05:00] [INF] [23] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:35:00.346 -05:00] [INF] [23] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:35:00.346 -05:00] [INF] [23] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:40:00.409 -05:00] [INF] [24] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:40:00.409 -05:00] [INF] [24] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:40:00.409 -05:00] [INF] [24] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:45:01.558 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:45:01.558 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:45:01.559 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:55:00.372 -05:00] [INF] [18] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:55:00.372 -05:00] [INF] [18] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 12:55:00.373 -05:00] [INF] [18] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 12:57:33.294 -05:00] [INF] [36] Emby.Server.Implementations.Session.SessionManager: Sending shutdown notifications
+[2025-03-30 12:57:33.543 -05:00] [INF] [18] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 12:57:33.654 -05:00] [INF] [37] Main: Running query planner optimizations in the database... This might take a while
+[2025-03-30 12:57:34.174 -05:00] [INF] [37] Emby.Server.Implementations.ApplicationHost: Disposing "CoreAppHost"
+[2025-03-30 12:57:34.181 -05:00] [INF] [37] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzArtistProvider"
+[2025-03-30 12:57:34.184 -05:00] [INF] [37] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzAlbumProvider"
+[2025-03-30 12:57:34.186 -05:00] [INF] [37] Emby.Server.Implementations.ApplicationHost: Disposing "PluginManager"
+[2025-03-30 13:02:27.392 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 13:02:27.844 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_DATA_DIR, /config/data]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_CACHE_DIR, /config/cache]", "[JELLYFIN_CONFIG_DIR, /config]"]
+[2025-03-30 13:02:27.909 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 13:02:27.959 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 13:02:27.960 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 13:02:27.960 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 13:02:27.960 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 13:02:27.960 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 13:02:27.961 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 13:02:27.961 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 13:02:27.961 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 13:02:27.961 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 13:02:28.008 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 13:02:28.008 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 13:02:28.008 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 13:02:30.959 -05:00] [INF] [1] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 13:02:31.674 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Loading assemblies
+[2025-03-30 13:02:32.946 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 13:02:32.956 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 13:02:32.957 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 13:02:32.971 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "172.20.0.30", "192.168.100.12"]
+[2025-03-30 13:02:33.017 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["0.0.0.0"]
+[2025-03-30 13:02:33.022 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 13:02:33.024 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 13:02:58.445 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb" "10.10.6.0"
+[2025-03-30 13:02:58.449 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Studio Images" "10.10.6.0"
+[2025-03-30 13:02:58.452 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OMDb" "10.10.6.0"
+[2025-03-30 13:02:58.792 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "MusicBrainz" "10.10.6.0"
+[2025-03-30 13:02:58.824 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AudioDB" "10.10.6.0"
+[2025-03-30 13:03:00.422 -05:00] [INF] [1] Main: Kestrel is listening on "0.0.0.0"
+[2025-03-30 13:03:10.418 -05:00] [WRN] [1] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: The WebRootPath was not found: "/run/s6-rc:s6-rc-init:ofIkDH/servicedirs/svc-jellyfin/wwwroot". Static files may be unavailable.
+[2025-03-30 13:03:13.063 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Running startup tasks
+[2025-03-30 13:03:13.715 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-03-31 03:00:00.000 -05:00, which is 13:56:46.2844788 from now.
+[2025-03-30 13:03:14.029 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-03-31 02:00:00.000 -05:00, which is 12:56:45.9704467 from now.
+[2025-03-30 13:03:14.817 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Found ffmpeg version "7.0.2"
+[2025-03-30 13:03:16.213 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "decoders": ["libdav1d", "av1", "av1_rkmpp", "h264", "h264_rkmpp", "hevc", "hevc_rkmpp", "mpeg1_rkmpp", "mpeg2video", "mpeg2_rkmpp", "mpeg4", "mpeg4_rkmpp", "msmpeg4", "vp8", "vp8_rkmpp", "libvpx", "vp9", "vp9_rkmpp", "libvpx-vp9", "aac", "ac3", "ac4", "dca", "flac", "mp3", "truehd"]
+[2025-03-30 13:03:16.613 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "encoders": ["libsvtav1", "libx264", "h264_v4l2m2m", "h264_rkmpp", "libx265", "hevc_rkmpp", "mjpeg_rkmpp", "aac", "libfdk_aac", "ac3", "alac", "dca", "flac", "libmp3lame", "libopus", "truehd", "libvorbis", "srt"]
+[2025-03-30 13:03:16.920 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available filters: ["overlay_opencl", "overlay_rkrga", "scale_opencl", "scale_rkrga", "tonemapx", "tonemap_opencl", "transpose_opencl", "vpp_rkrga", "zscale", "alphasrc"]
+[2025-03-30 13:03:17.355 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "scale_cuda" with option "format" is not available
+[2025-03-30 13:03:17.724 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "tonemap_cuda" with option "GPU accelerated HDR to SDR tonemapping" is not available
+[2025-03-30 13:03:18.438 -05:00] [INF] [15] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 13:03:19.327 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vaapi" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 13:03:19.626 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vulkan" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 13:03:19.825 -05:00] [INF] [15] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 13:03:20.821 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available hwaccel types: ["drm", "opencl", "rkmpp"]
+[2025-03-30 13:03:31.014 -05:00] [INF] [17] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Update Plugins" Completed after 0 minute(s) and 13 seconds
+[2025-03-30 13:06:06.922 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: FFmpeg: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+[2025-03-30 13:06:06.925 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: ServerId: "70caba014e9341f8920ee0c71b729732"
+[2025-03-30 13:06:06.925 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Core startup complete
+[2025-03-30 13:06:06.925 -05:00] [INF] [1] Main: Startup complete 0:03:42.0132138
+[2025-03-30 13:10:00.911 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:10:00.917 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:10:01.015 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 13:15:00.792 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:15:00.795 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:15:00.796 -05:00] [INF] [13] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 13:25:00.520 -05:00] [INF] [20] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:25:00.528 -05:00] [INF] [20] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:25:00.529 -05:00] [INF] [20] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 13:30:01.041 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:30:01.042 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:30:01.043 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 13:35:01.197 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:35:01.198 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:35:01.198 -05:00] [INF] [21] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 13:50:00.417 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:50:00.418 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:50:00.418 -05:00] [INF] [22] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 13:55:00.398 -05:00] [INF] [25] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:55:00.399 -05:00] [INF] [25] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 13:55:00.400 -05:00] [INF] [25] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 14:02:31.119 -05:00] [INF] [25] Jellyfin.Server.Implementations.Users.UserManager: Authentication request for "brunner56" has been denied (IP: "46.110.81.130").
+[2025-03-30 14:02:31.147 -05:00] [ERR] [25] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request: "Invalid username or password entered". URL "POST" "/Users/authenticatebyname".
+[2025-03-30 14:02:34.178 -05:00] [INF] [25] Jellyfin.Server.Implementations.Users.UserManager: Authentication request for "brunner56" has been denied (IP: "46.110.81.130").
+[2025-03-30 14:02:34.181 -05:00] [ERR] [25] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request: "Invalid username or password entered". URL "POST" "/Users/authenticatebyname".
+[2025-03-30 14:03:38.812 -05:00] [INF] [25] Jellyfin.Server.Implementations.Users.UserManager: Authentication request for "brunner56" has been denied (IP: "46.110.81.130").
+[2025-03-30 14:03:38.818 -05:00] [ERR] [25] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request: "Invalid username or password entered". URL "POST" "/Users/authenticatebyname".
+[2025-03-30 14:03:42.729 -05:00] [INF] [27] Jellyfin.Server.Implementations.Users.UserManager: Authentication request for "admin" has been denied (IP: "46.110.81.130").
+[2025-03-30 14:03:42.730 -05:00] [ERR] [27] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request: "Invalid username or password entered". URL "POST" "/Users/authenticatebyname".
+[2025-03-30 14:03:45.600 -05:00] [INF] [27] Jellyfin.Server.Implementations.Users.UserManager: Authentication request for "boden.crouch@gmail.com" has been denied (IP: "46.110.81.130").
+[2025-03-30 14:03:45.601 -05:00] [ERR] [27] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request: "Invalid username or password entered". URL "POST" "/Users/authenticatebyname".
+[2025-03-30 14:03:52.713 -05:00] [INF] [17] Jellyfin.Server.Implementations.Users.UserManager: Authentication request for "brunner56" has been denied (IP: "46.110.81.130").
+[2025-03-30 14:03:52.717 -05:00] [ERR] [17] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request: "Invalid username or password entered". URL "POST" "/Users/authenticatebyname".
+[2025-03-30 14:03:57.079 -05:00] [INF] [17] Jellyfin.Server.Implementations.Users.UserManager: Authentication request for "brunner56" has been denied (IP: "46.110.81.130").
+[2025-03-30 14:03:57.083 -05:00] [ERR] [17] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request: "Invalid username or password entered". URL "POST" "/Users/authenticatebyname".
+[2025-03-30 14:05:05.712 -05:00] [INF] [23] Emby.Server.Implementations.Session.SessionManager: Sending shutdown notifications
+[2025-03-30 14:05:05.914 -05:00] [INF] [22] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 14:05:06.013 -05:00] [INF] [17] Main: Running query planner optimizations in the database... This might take a while
+[2025-03-30 14:05:06.415 -05:00] [INF] [17] Emby.Server.Implementations.ApplicationHost: Disposing "CoreAppHost"
+[2025-03-30 14:05:06.416 -05:00] [INF] [17] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzArtistProvider"
+[2025-03-30 14:05:06.416 -05:00] [INF] [17] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzAlbumProvider"
+[2025-03-30 14:05:06.416 -05:00] [INF] [17] Emby.Server.Implementations.ApplicationHost: Disposing "PluginManager"
+[2025-03-30 14:05:20.516 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 14:05:20.915 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_DATA_DIR, /config/data]", "[JELLYFIN_CACHE_DIR, /config/cache]"]
+[2025-03-30 14:05:21.020 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 14:05:21.023 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 14:05:21.026 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 14:05:21.030 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 14:05:21.030 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 14:05:21.030 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 14:05:21.031 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 14:05:21.031 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 14:05:21.031 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 14:05:21.031 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 14:05:21.118 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 14:05:21.118 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 14:05:21.118 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 14:05:23.213 -05:00] [INF] [1] Jellyfin.Server.Migrations.MigrationRunner: Marking following migrations as applied because this is a fresh install: ["CreateNetworkConfiguration", "MigrateMusicBrainzTimeout", "MigrateNetworkConfiguration", "MigrateEncodingOptions"]
+[2025-03-30 14:05:23.617 -05:00] [INF] [1] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:05:24.224 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Loading assemblies
+[2025-03-30 14:05:25.415 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 14:05:25.415 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 14:05:25.416 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 14:05:25.417 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "172.20.0.30", "192.168.100.14"]
+[2025-03-30 14:05:25.418 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["0.0.0.0"]
+[2025-03-30 14:05:25.418 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 14:05:25.418 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 14:05:46.619 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb" "10.10.6.0"
+[2025-03-30 14:05:46.621 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Studio Images" "10.10.6.0"
+[2025-03-30 14:05:46.622 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OMDb" "10.10.6.0"
+[2025-03-30 14:05:47.015 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "MusicBrainz" "10.10.6.0"
+[2025-03-30 14:05:47.015 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AudioDB" "10.10.6.0"
+[2025-03-30 14:05:47.816 -05:00] [INF] [1] Jellyfin.Server.Migrations.MigrationRunner: Marking following migrations as applied because this is a fresh install: ["DisableTranscodingThrottling", "CreateLoggingConfigHeirarchy", "MigrateActivityLogDatabase", "RemoveDuplicateExtras", "MigrateUserDatabase", "MigrateDisplayPreferencesDatabase", "RemoveDownloadImagesInAdvance", "MigrateAuthenticationDatabase", "FixPlaylistOwner", "MigrateRatingLevels", "FixAudioData", "RemoveDuplicatePlaylistChildren"]
+[2025-03-30 14:05:48.513 -05:00] [INF] [1] Main: Kestrel is listening on "0.0.0.0"
+[2025-03-30 14:05:56.812 -05:00] [WRN] [1] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: The WebRootPath was not found: "/run/s6-rc:s6-rc-init:kKedEL/servicedirs/svc-jellyfin/wwwroot". Static files may be unavailable.
+[2025-03-30 14:05:58.817 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Running startup tasks
+[2025-03-30 14:05:59.318 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-03-31 03:00:00.000 -05:00, which is 12:54:00.6820151 from now.
+[2025-03-30 14:05:59.616 -05:00] [INF] [1] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-03-31 02:00:00.000 -05:00, which is 11:54:00.3836991 from now.
+[2025-03-30 14:06:02.717 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Found ffmpeg version "7.0.2"
+[2025-03-30 14:06:03.124 -05:00] [INF] [10] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:06:04.213 -05:00] [INF] [13] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 1 seconds
+[2025-03-30 14:06:05.414 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "decoders": ["libdav1d", "av1", "av1_rkmpp", "h264", "h264_rkmpp", "hevc", "hevc_rkmpp", "mpeg1_rkmpp", "mpeg2video", "mpeg2_rkmpp", "mpeg4", "mpeg4_rkmpp", "msmpeg4", "vp8", "vp8_rkmpp", "libvpx", "vp9", "vp9_rkmpp", "libvpx-vp9", "aac", "ac3", "ac4", "dca", "flac", "mp3", "truehd"]
+[2025-03-30 14:06:06.112 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "encoders": ["libsvtav1", "libx264", "h264_v4l2m2m", "h264_rkmpp", "libx265", "hevc_rkmpp", "mjpeg_rkmpp", "aac", "libfdk_aac", "ac3", "alac", "dca", "flac", "libmp3lame", "libopus", "truehd", "libvorbis", "srt"]
+[2025-03-30 14:06:06.612 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available filters: ["overlay_opencl", "overlay_rkrga", "scale_opencl", "scale_rkrga", "tonemapx", "tonemap_opencl", "transpose_opencl", "vpp_rkrga", "zscale", "alphasrc"]
+[2025-03-30 14:06:06.921 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "scale_cuda" with option "format" is not available
+[2025-03-30 14:06:07.214 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "tonemap_cuda" with option "GPU accelerated HDR to SDR tonemapping" is not available
+[2025-03-30 14:06:08.217 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vaapi" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 14:06:08.516 -05:00] [WRN] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vulkan" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 14:06:09.523 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available hwaccel types: ["drm", "opencl", "rkmpp"]
+[2025-03-30 14:06:18.518 -05:00] [INF] [15] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Update Plugins" Completed after 0 minute(s) and 15 seconds
+[2025-03-30 14:08:56.118 -05:00] [INF] [1] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: FFmpeg: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+[2025-03-30 14:08:56.119 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: ServerId: "70caba014e9341f8920ee0c71b729732"
+[2025-03-30 14:08:56.120 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Core startup complete
+[2025-03-30 14:08:56.215 -05:00] [INF] [1] Main: Startup complete 0:03:37.8945173
+[2025-03-30 14:10:04.541 -05:00] [INF] [17] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:10:04.620 -05:00] [INF] [17] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:10:04.714 -05:00] [INF] [17] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 14:11:13.011 -05:00] [INF] [15] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:11:13.014 -05:00] [INF] [15] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:11:13.016 -05:00] [INF] [3] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 14:11:13.440 -05:00] [WRN] [3] Jellyfin.Server.Implementations.Users.UserManager: No users, creating one with username "abc"
+[2025-03-30 14:14:04.192 -05:00] [INF] [24] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:14:04.198 -05:00] [INF] [24] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:14:10.315 -05:00] [INF] [20] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 14:14:10.316 -05:00] [INF] [20] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 14:14:10.316 -05:00] [INF] [20] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 14:14:10.316 -05:00] [INF] [20] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "172.20.0.30", "192.168.100.14"]
+[2025-03-30 14:14:10.316 -05:00] [INF] [20] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["0.0.0.0"]
+[2025-03-30 14:14:10.316 -05:00] [INF] [20] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 14:14:10.316 -05:00] [INF] [20] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 14:14:11.465 -05:00] [INF] [23] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:14:11.468 -05:00] [INF] [23] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:14:11.470 -05:00] [INF] [20] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 14:14:11.471 -05:00] [INF] [20] Jellyfin.Networking.PortForwardingHost: Starting NAT discovery
+[2025-03-30 14:14:11.513 -05:00] [INF] [24] Emby.Server.Implementations.Library.LibraryManager: Validating media library
+[2025-03-30 14:14:12.033 -05:00] [INF] [24] Emby.Server.Implementations.Library.LibraryManager: Found duplicate path: "/media/music/videos"
+[2025-03-30 14:14:13.415 -05:00] [INF] [24] Emby.Server.Implementations.Library.LibraryManager: Found duplicate path: "/media/music/videos"
+[2025-03-30 14:14:16.455 -05:00] [WRN] [24] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/books" is inaccessible or empty, skipping
+[2025-03-30 14:14:16.979 -05:00] [WRN] [24] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/xxx" is inaccessible or empty, skipping
+[2025-03-30 14:14:17.705 -05:00] [WRN] [24] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/movies" is inaccessible or empty, skipping
+[2025-03-30 14:14:17.708 -05:00] [WRN] [24] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/anime" is inaccessible or empty, skipping
+[2025-03-30 14:14:17.713 -05:00] [WRN] [24] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-03-30 14:14:21.812 -05:00] [INF] [25] Jellyfin.Server.Implementations.Users.UserManager: Authentication request for "brunner56" has succeeded.
+[2025-03-30 14:14:21.814 -05:00] [INF] [25] Emby.Server.Implementations.Session.SessionManager: Current/Max sessions for user "brunner56": 0/0
+[2025-03-30 14:14:21.817 -05:00] [INF] [25] Emby.Server.Implementations.Session.SessionManager: Creating new access token for user 45c7d798-3f68-42af-bf70-6404914defeb
+[2025-03-30 14:14:22.514 -05:00] [INF] [3] Emby.Server.Implementations.Library.LibraryManager: Found duplicate path: "/media/music/videos"
+[2025-03-30 14:14:22.552 -05:00] [WRN] [3] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/books" is inaccessible or empty, skipping
+[2025-03-30 14:14:22.554 -05:00] [WRN] [3] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/xxx" is inaccessible or empty, skipping
+[2025-03-30 14:14:22.561 -05:00] [WRN] [3] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/movies" is inaccessible or empty, skipping
+[2025-03-30 14:14:22.614 -05:00] [WRN] [3] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/anime" is inaccessible or empty, skipping
+[2025-03-30 14:14:22.615 -05:00] [WRN] [3] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-03-30 14:14:27.818 -05:00] [INF] [23] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:14:58.425 -05:00] [INF] [20] MediaBrowser.Providers.TV.SeriesMetadataService: Creating Season "Season Unknown" entry for "Doctor Who: Video Commentaries"
+[2025-03-30 14:14:59.917 -05:00] [INF] [20] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Starting "/usr/lib/jellyfin-ffmpeg/ffprobe" with args "-analyzeduration 200M -probesize 1G -i file:\"/media/tv/Doctor Who (2023)/Doctor Who (2023) - S01E05 - Dot and Bubble WEBDL-1080p.mkv\" -threads 0 -v warning -print_format json -show_streams -show_chapters -show_format"
+[2025-03-30 14:15:01.313 -05:00] [INF] [25] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:15:01.318 -05:00] [INF] [25] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:15:01.318 -05:00] [INF] [25] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 14:15:09.319 -05:00] [INF] [25] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Starting "/usr/lib/jellyfin-ffmpeg/ffprobe" with args "-analyzeduration 200M -probesize 1G -i file:\"/media/tv/Doctor Who (2023)/Doctor Who (2023) - S01E07 - The Legend of Ruby Sunday (1) WEBDL-1080p.mkv\" -threads 0 -v warning -print_format json -show_streams -show_chapters -show_format"
+[2025-03-30 14:15:15.212 -05:00] [INF] [23] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["::1/128", "fe80::/10", "fc00::/7", "127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 14:15:15.213 -05:00] [INF] [23] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 14:15:15.213 -05:00] [INF] [23] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["::1/128", "fe80::/10", "fc00::/7", "127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 14:15:15.213 -05:00] [INF] [23] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "172.20.0.30", "192.168.100.14", "::1"]
+[2025-03-30 14:15:15.214 -05:00] [INF] [23] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["::"]
+[2025-03-30 14:15:15.215 -05:00] [INF] [23] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 14:15:15.215 -05:00] [INF] [23] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 14:15:17.818 -05:00] [INF] [24] MediaBrowser.Providers.TV.SeriesMetadataService: Removing virtual season null in series "Doctor Who: Video Commentaries"
+[2025-03-30 14:15:17.821 -05:00] [INF] [24] Emby.Server.Implementations.Library.LibraryManager: Removing item, Type: "Season", Name: "Season Unknown", Path: "", Id: 3ecf5049-1331-48f7-3674-ee54c113022f
+[2025-03-30 14:15:17.921 -05:00] [INF] [24] MediaBrowser.Providers.TV.SeriesMetadataService: Creating Season "Season 1" entry for "Doctor Who: Video Commentaries"
+[2025-03-30 14:15:25.926 -05:00] [INF] [20] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:15:27.912 -05:00] [INF] [23] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:15:48.217 -05:00] [WRN] [25] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 14:15:48.320 -05:00] [INF] [25] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:15:52.819 -05:00] [INF] [20] MediaBrowser.Providers.TV.SeriesMetadataService: Creating Season "Season Unknown" entry for "Game of Thrones"
+[2025-03-30 14:15:53.012 -05:00] [INF] [20] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Starting "/usr/lib/jellyfin-ffmpeg/ffprobe" with args "-analyzeduration 200M -probesize 1G -i file:\"/media/tv/Game of Thrones/Game of Thrones - S02E01 - The North Remembers HDTV-720p.3gp\" -threads 0 -v warning -print_format json -show_streams -show_chapters -show_format"
+[2025-03-30 14:15:55.142 -05:00] [INF] [25] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:15:59.414 -05:00] [INF] [29] MediaBrowser.Providers.TV.SeriesMetadataService: Removing virtual season null in series "Game of Thrones"
+[2025-03-30 14:15:59.414 -05:00] [INF] [29] Emby.Server.Implementations.Library.LibraryManager: Removing item, Type: "Season", Name: "Season Unknown", Path: "", Id: 91961703-25e0-d3b3-e1c2-6d725b9d0166
+[2025-03-30 14:15:59.415 -05:00] [INF] [29] MediaBrowser.Providers.TV.SeriesMetadataService: Creating Season "Season 2" entry for "Game of Thrones"
+[2025-03-30 14:16:15.520 -05:00] [WRN] [25] Microsoft.EntityFrameworkCore.Query: Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2025-03-30 14:16:41.117 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/4eadcea987cf4d04aca3173b3e81b654.png"
+[2025-03-30 14:16:42.114 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/4eadcea987cf4d04aca3173b3e81b654.png"
+[2025-03-30 14:16:42.218 -05:00] [ERR] [29] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/4eadcea987cf4d04aca3173b3e81b654.png'.
+File name: '/tmp/jellyfin/4eadcea987cf4d04aca3173b3e81b654.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:16:42.415 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/c88743b97e16404da839dad5cd6c47cb.png"
+[2025-03-30 14:16:42.817 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/c88743b97e16404da839dad5cd6c47cb.png"
+[2025-03-30 14:16:42.818 -05:00] [ERR] [29] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/c88743b97e16404da839dad5cd6c47cb.png'.
+File name: '/tmp/jellyfin/c88743b97e16404da839dad5cd6c47cb.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:16:42.918 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/f7c9be442258455ba3e53ea6352cf8d2.png"
+[2025-03-30 14:16:43.316 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/f7c9be442258455ba3e53ea6352cf8d2.png"
+[2025-03-30 14:16:43.318 -05:00] [ERR] [29] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/f7c9be442258455ba3e53ea6352cf8d2.png'.
+File name: '/tmp/jellyfin/f7c9be442258455ba3e53ea6352cf8d2.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:16:43.420 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/ca515078d7a64b4f81f4122e904aa7f7.png"
+[2025-03-30 14:16:43.913 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/ca515078d7a64b4f81f4122e904aa7f7.png"
+[2025-03-30 14:16:43.915 -05:00] [ERR] [29] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/ca515078d7a64b4f81f4122e904aa7f7.png'.
+File name: '/tmp/jellyfin/ca515078d7a64b4f81f4122e904aa7f7.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:16:44.027 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/53c391087a5f42c4a03bad61c9896cfb.png"
+[2025-03-30 14:16:45.014 -05:00] [INF] [29] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/53c391087a5f42c4a03bad61c9896cfb.png"
+[2025-03-30 14:16:45.014 -05:00] [ERR] [29] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/53c391087a5f42c4a03bad61c9896cfb.png'.
+File name: '/tmp/jellyfin/53c391087a5f42c4a03bad61c9896cfb.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:16:45.814 -05:00] [INF] [33] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Scan Media Library" Completed after 2 minute(s) and 34 seconds
+[2025-03-30 14:16:46.215 -05:00] [INF] [33] Emby.Server.Implementations.IO.LibraryMonitor: Watching directory "/media/tv"
+[2025-03-30 14:16:46.430 -05:00] [INF] [25] Emby.Server.Implementations.IO.LibraryMonitor: Watching directory "/media/music"
+[2025-03-30 14:18:30.555 -05:00] [WRN] [32] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 14:18:30.564 -05:00] [INF] [32] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:18:50.532 -05:00] [INF] [32] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:19:09.772 -05:00] [INF] [25] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:19:09.773 -05:00] [INF] [25] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:21:14.959 -05:00] [WRN] [31] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 14:21:15.017 -05:00] [INF] [31] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:21:37.194 -05:00] [INF] [30] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:21:42.751 -05:00] [INF] [30] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:21:42.755 -05:00] [INF] [30] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:21:58.034 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:21:58.035 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:22:13.921 -05:00] [INF] [30] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:22:13.922 -05:00] [INF] [30] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:22:25.754 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:22:25.757 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:22:42.028 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:22:42.031 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:22:53.362 -05:00] [INF] [21] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:22:53.366 -05:00] [INF] [21] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:23:08.675 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:23:08.678 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:23:23.572 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:23:23.573 -05:00] [INF] [31] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:23:35.598 -05:00] [INF] [30] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:23:35.602 -05:00] [INF] [30] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:24:01.847 -05:00] [WRN] [31] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 14:24:01.855 -05:00] [INF] [31] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:25:06.814 -05:00] [INF] [31] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:25:19.120 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "LDAP Authentication" "20.0.0.0"
+[2025-03-30 14:25:19.212 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:25:25.824 -05:00] [INF] [26] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "SSO Authentication" "3.5.2.4"
+[2025-03-30 14:25:25.863 -05:00] [INF] [26] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:25:36.442 -05:00] [INF] [22] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Ani-Sync" "3.7.0.0"
+[2025-03-30 14:25:36.518 -05:00] [INF] [22] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:25:42.615 -05:00] [INF] [26] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "OPDS" "6.0.0.0"
+[2025-03-30 14:25:42.625 -05:00] [INF] [26] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:25:48.044 -05:00] [INF] [26] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Playback Reporting" "15.0.0.0"
+[2025-03-30 14:25:48.050 -05:00] [INF] [26] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:25:54.212 -05:00] [INF] [31] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Reports" "17.0.0.0"
+[2025-03-30 14:25:54.218 -05:00] [INF] [31] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:25:58.367 -05:00] [INF] [32] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Session Cleaner" "4.0.0.0"
+[2025-03-30 14:25:58.419 -05:00] [INF] [32] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:26:10.713 -05:00] [INF] [28] Emby.Server.Implementations.Plugins.PluginManager: No local manifest exists for plugin "Skin Manager". Skipping manifest reconciliation.
+[2025-03-30 14:26:10.714 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Skin Manager" "2.0.2.0"
+[2025-03-30 14:26:10.722 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:26:16.033 -05:00] [INF] [32] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Subtitle Extract" "4.0.0.0"
+[2025-03-30 14:26:16.039 -05:00] [INF] [32] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:26:25.304 -05:00] [INF] [28] Emby.Server.Implementations.Plugins.PluginManager: No local manifest exists for plugin "Theme Songs". Skipping manifest reconciliation.
+[2025-03-30 14:26:25.306 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Theme Songs" "10.10.0.1"
+[2025-03-30 14:26:25.310 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:26:29.243 -05:00] [INF] [31] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Trakt" "26.0.0.0"
+[2025-03-30 14:26:29.250 -05:00] [INF] [31] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:26:34.814 -05:00] [INF] [32] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Transcode Killer" "3.0.0.0"
+[2025-03-30 14:26:34.822 -05:00] [INF] [32] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:26:44.312 -05:00] [INF] [31] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:26:53.690 -05:00] [INF] [32] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:27:01.812 -05:00] [INF] [32] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "NextPVR" "11.0.0.0"
+[2025-03-30 14:27:01.819 -05:00] [INF] [32] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:27:04.672 -05:00] [INF] [32] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:27:05.713 -05:00] [INF] [31] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:27:14.759 -05:00] [INF] [32] Emby.Server.Implementations.Plugins.PluginManager: No local manifest exists for plugin "SMS notification". Skipping manifest reconciliation.
+[2025-03-30 14:27:14.760 -05:00] [INF] [32] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "SMS notification" "1.0.2.0"
+[2025-03-30 14:27:14.767 -05:00] [INF] [32] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:27:23.488 -05:00] [INF] [31] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Webhook" "17.0.0.0"
+[2025-03-30 14:27:23.497 -05:00] [INF] [31] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:27:29.042 -05:00] [INF] [22] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:27:29.789 -05:00] [INF] [18] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:27:34.917 -05:00] [INF] [31] Emby.Server.Implementations.Plugins.PluginManager: No local manifest exists for plugin "Intros". Skipping manifest reconciliation.
+[2025-03-30 14:27:34.918 -05:00] [INF] [31] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Intros" "1.3.1.0"
+[2025-03-30 14:27:34.926 -05:00] [INF] [31] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:27:38.343 -05:00] [INF] [31] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Local Intros" "3.0.0.0"
+[2025-03-30 14:27:38.350 -05:00] [INF] [31] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:28:33.414 -05:00] [INF] [31] Emby.Server.Implementations.Plugins.PluginManager: No local manifest exists for plugin "subbuzz". Skipping manifest reconciliation.
+[2025-03-30 14:28:33.416 -05:00] [INF] [31] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "subbuzz" "1.2.1.0"
+[2025-03-30 14:28:33.512 -05:00] [INF] [31] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:28:38.544 -05:00] [INF] [31] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "VGMdb" "4.0.0.0"
+[2025-03-30 14:28:38.550 -05:00] [INF] [31] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:28:55.812 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Themerr" "2024.523.2124.32"
+[2025-03-30 14:28:55.821 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:29:00.759 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "TheTVDB" "19.0.0.0"
+[2025-03-30 14:29:00.781 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:29:07.212 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "TVmaze" "12.0.0.0"
+[2025-03-30 14:29:07.218 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:29:12.736 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "TMDb Box Sets" "11.0.0.0"
+[2025-03-30 14:29:12.818 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:29:30.785 -05:00] [WRN] [18] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 14:29:30.795 -05:00] [INF] [18] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:29:36.708 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Open Subtitles" "20.0.0.0"
+[2025-03-30 14:29:36.714 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:29:47.416 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "LrcLib" "2.0.0.0"
+[2025-03-30 14:29:47.423 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:29:52.146 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Kitsu" "6.0.0.0"
+[2025-03-30 14:29:52.157 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:29:57.928 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "IMVDb" "4.0.0.0"
+[2025-03-30 14:29:57.936 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:03.713 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Fanart" "12.0.0.0"
+[2025-03-30 14:30:03.724 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:10.048 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Discogs" "1.0.0.0"
+[2025-03-30 14:30:10.054 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:15.049 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Cover Art Archive" "8.0.0.0"
+[2025-03-30 14:30:15.119 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:20.315 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Bookshelf" "12.0.0.0"
+[2025-03-30 14:30:20.320 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:25.474 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Artwork" "1.0.0.0"
+[2025-03-30 14:30:25.515 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:30.345 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "AniSearch" "5.0.0.0"
+[2025-03-30 14:30:30.351 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:35.043 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "AniList" "11.0.0.0"
+[2025-03-30 14:30:35.048 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:39.952 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "AniDB" "10.0.0.0"
+[2025-03-30 14:30:39.958 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:55.024 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "DLNA" "8.0.0.0"
+[2025-03-30 14:30:55.033 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:30:59.415 -05:00] [INF] [28] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Chapter Segments Provider" "3.0.0.0"
+[2025-03-30 14:30:59.424 -05:00] [INF] [28] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:31:25.316 -05:00] [INF] [21] Emby.Server.Implementations.Plugins.PluginManager: No local manifest exists for plugin "Merge Versions". Skipping manifest reconciliation.
+[2025-03-30 14:31:25.412 -05:00] [INF] [21] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Merge Versions" "10.10.0.1"
+[2025-03-30 14:31:25.512 -05:00] [INF] [21] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:31:41.512 -05:00] [INF] [30] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "TVHeadend" "12.0.0.0"
+[2025-03-30 14:31:41.517 -05:00] [INF] [30] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:31:54.878 -05:00] [INF] [18] Emby.Server.Implementations.Plugins.PluginManager: No local manifest exists for plugin "NapiSub". Skipping manifest reconciliation.
+[2025-03-30 14:31:54.879 -05:00] [INF] [18] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "NapiSub" "1.0.1.0"
+[2025-03-30 14:31:54.889 -05:00] [INF] [18] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:32:16.135 -05:00] [INF] [28] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Download missing subtitles" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:16.620 -05:00] [INF] [18] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Download missing lyrics" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:17.021 -05:00] [INF] [30] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Extract Chapter Images" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:18.087 -05:00] [INF] [18] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Generate Trickplay Images" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:21.577 -05:00] [INF] [29] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Media Segment Scan" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:25.113 -05:00] [INF] [21] Emby.Server.Implementations.IO.LibraryMonitor: Stopping directory watching for path "/media/music"
+[2025-03-30 14:32:25.114 -05:00] [INF] [21] Emby.Server.Implementations.IO.LibraryMonitor: Stopping directory watching for path "/media/tv"
+[2025-03-30 14:32:25.215 -05:00] [INF] [21] Emby.Server.Implementations.Library.LibraryManager: Validating media library
+[2025-03-30 14:32:25.223 -05:00] [ERR] [21] MediaBrowser.Providers.Folders.FolderMetadataService: Error in "Dynamic Image Provider"
+System.UnauthorizedAccessException: Access to the path '/tmp/jellyfin/3bcb23d3ecc94027aaa1fae503965d47.jpg' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.FileSystem.CopyFile(String sourceFullPath, String destFullPath, Boolean overwrite)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.CreateSingleImage(IEnumerable`1 itemsWithImages, String outputPathWithoutExtension, ImageType imageType)
+   at Emby.Server.Implementations.Images.BaseFolderImageProvider`1.CreateImage(BaseItem item, IReadOnlyCollection`1 itemsWithImages, String outputPathWithoutExtension, ImageType imageType, Int32 imageIndex)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:32:25.616 -05:00] [INF] [29] Emby.Server.Implementations.Library.LibraryManager: People validation complete
+[2025-03-30 14:32:25.616 -05:00] [INF] [29] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Refresh People" Completed after 0 minute(s) and 2 seconds
+[2025-03-30 14:32:26.213 -05:00] [INF] [21] Emby.Server.Implementations.Library.LibraryManager: Found duplicate path: "/media/music/videos"
+[2025-03-30 14:32:26.714 -05:00] [WRN] [21] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/books" is inaccessible or empty, skipping
+[2025-03-30 14:32:27.026 -05:00] [WRN] [21] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/xxx" is inaccessible or empty, skipping
+[2025-03-30 14:32:27.494 -05:00] [WRN] [21] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/movies" is inaccessible or empty, skipping
+[2025-03-30 14:32:27.884 -05:00] [WRN] [21] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/anime" is inaccessible or empty, skipping
+[2025-03-30 14:32:27.885 -05:00] [WRN] [21] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-03-30 14:32:28.116 -05:00] [INF] [29] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Activity Log" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:28.520 -05:00] [INF] [19] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/e3b774ff500348c0b2501e205460b5f1.png"
+[2025-03-30 14:32:28.717 -05:00] [INF] [29] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Cache Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:29.419 -05:00] [INF] [30] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Log Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:29.914 -05:00] [INF] [30] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:30.813 -05:00] [INF] [30] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 14:32:31.814 -05:00] [INF] [28] Emby.Server.Implementations.ScheduledTasks.Tasks.OptimizeDatabaseTask: Optimizing and vacuuming jellyfin.db...
+[2025-03-30 14:32:32.116 -05:00] [INF] [19] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/e3b774ff500348c0b2501e205460b5f1.png"
+[2025-03-30 14:32:32.212 -05:00] [ERR] [19] MediaBrowser.Providers.Folders.CollectionFolderMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/e3b774ff500348c0b2501e205460b5f1.png'.
+File name: '/tmp/jellyfin/e3b774ff500348c0b2501e205460b5f1.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:32:32.314 -05:00] [INF] [20] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Migrate Trickplay Image Location" Completed after 0 minute(s) and 1 seconds
+[2025-03-30 14:32:33.111 -05:00] [INF] [28] Emby.Server.Implementations.ScheduledTasks.Tasks.OptimizeDatabaseTask: jellyfin.db optimized successfully!
+[2025-03-30 14:32:33.112 -05:00] [INF] [28] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Optimize database" Completed after 0 minute(s) and 1 seconds
+[2025-03-30 14:32:33.516 -05:00] [INF] [19] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/1ade269dafac4b90befa542af9826b0c.png"
+[2025-03-30 14:32:34.112 -05:00] [INF] [19] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/1ade269dafac4b90befa542af9826b0c.png"
+[2025-03-30 14:32:34.113 -05:00] [ERR] [19] MediaBrowser.Providers.Folders.CollectionFolderMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/1ade269dafac4b90befa542af9826b0c.png'.
+File name: '/tmp/jellyfin/1ade269dafac4b90befa542af9826b0c.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:32:34.312 -05:00] [INF] [19] Emby.Server.Implementations.Library.LibraryManager: Found duplicate path: "/media/music/videos"
+[2025-03-30 14:32:34.315 -05:00] [WRN] [19] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/books" is inaccessible or empty, skipping
+[2025-03-30 14:32:34.317 -05:00] [WRN] [19] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/xxx" is inaccessible or empty, skipping
+[2025-03-30 14:32:34.329 -05:00] [WRN] [19] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/movies" is inaccessible or empty, skipping
+[2025-03-30 14:32:34.332 -05:00] [WRN] [19] MediaBrowser.Controller.Entities.BaseItem: Library folder "/media/anime" is inaccessible or empty, skipping
+[2025-03-30 14:32:34.334 -05:00] [WRN] [19] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-03-30 14:33:13.521 -05:00] [INF] [21] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:33:17.726 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/89e9e7319d1146daa997f55de47c3777.png"
+[2025-03-30 14:33:18.329 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/89e9e7319d1146daa997f55de47c3777.png"
+[2025-03-30 14:33:18.413 -05:00] [ERR] [26] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/89e9e7319d1146daa997f55de47c3777.png'.
+File name: '/tmp/jellyfin/89e9e7319d1146daa997f55de47c3777.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:33:18.420 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/11bce9d7b47440f3a5caf5b2564207a0.png"
+[2025-03-30 14:33:18.918 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/11bce9d7b47440f3a5caf5b2564207a0.png"
+[2025-03-30 14:33:18.918 -05:00] [ERR] [26] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/11bce9d7b47440f3a5caf5b2564207a0.png'.
+File name: '/tmp/jellyfin/11bce9d7b47440f3a5caf5b2564207a0.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:33:19.012 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/0e74ca97c89240759ac7dfcad7c2112a.png"
+[2025-03-30 14:33:19.555 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/0e74ca97c89240759ac7dfcad7c2112a.png"
+[2025-03-30 14:33:19.616 -05:00] [ERR] [26] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/0e74ca97c89240759ac7dfcad7c2112a.png'.
+File name: '/tmp/jellyfin/0e74ca97c89240759ac7dfcad7c2112a.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:33:19.640 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/641009b737484f1382e67897b12cc2ff.png"
+[2025-03-30 14:33:20.118 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/641009b737484f1382e67897b12cc2ff.png"
+[2025-03-30 14:33:20.119 -05:00] [ERR] [26] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/641009b737484f1382e67897b12cc2ff.png'.
+File name: '/tmp/jellyfin/641009b737484f1382e67897b12cc2ff.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:33:20.213 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Creating image collage and saving to "/tmp/jellyfin/19d4b4b596ce4c938e1826b4113ccdf1.png"
+[2025-03-30 14:33:21.324 -05:00] [INF] [26] Jellyfin.Drawing.ImageProcessor: Completed creation of image collage and saved to "/tmp/jellyfin/19d4b4b596ce4c938e1826b4113ccdf1.png"
+[2025-03-30 14:33:21.324 -05:00] [ERR] [26] MediaBrowser.Providers.Genres.GenreMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin/19d4b4b596ce4c938e1826b4113ccdf1.png'.
+File name: '/tmp/jellyfin/19d4b4b596ce4c938e1826b4113ccdf1.png'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at MediaBrowser.Model.IO.AsyncFile.OpenRead(String path)
+   at MediaBrowser.Providers.Manager.ProviderManager.SaveImage(BaseItem item, String source, String mimeType, ImageType type, Nullable`1 imageIndex, Nullable`1 saveLocallyWithMedia, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-03-30 14:33:21.621 -05:00] [INF] [26] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Scan Media Library" Completed after 0 minute(s) and 56 seconds
+[2025-03-30 14:33:22.015 -05:00] [INF] [19] Emby.Server.Implementations.IO.LibraryMonitor: Watching directory "/media/music"
+[2025-03-30 14:33:22.355 -05:00] [INF] [28] Emby.Server.Implementations.IO.LibraryMonitor: Watching directory "/media/tv"
+[2025-03-30 14:34:59.417 -05:00] [INF] [18] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Keyframe Extractor" Completed after 2 minute(s) and 40 seconds
+[2025-03-30 14:35:01.655 -05:00] [WRN] [18] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 14:35:01.671 -05:00] [INF] [18] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:35:03.960 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:35:03.960 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:35:03.962 -05:00] [INF] [26] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 14:35:06.425 -05:00] [INF] [24] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:40:00.619 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:40:00.621 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:40:00.621 -05:00] [INF] [10] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 14:44:43.112 -05:00] [INF] [43] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:44:53.327 -05:00] [INF] [41] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:45:00.511 -05:00] [INF] [43] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:45:00.511 -05:00] [INF] [43] Jellyfin.Api.Auth.CustomAuthenticationHandler: "CustomAuthentication" was not authenticated. Failure message: "Invalid token."
+[2025-03-30 14:45:00.512 -05:00] [INF] [43] Jellyfin.Api.Auth.CustomAuthenticationHandler: AuthenticationScheme: "CustomAuthentication" was challenged.
+[2025-03-30 14:45:03.607 -05:00] [INF] [43] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:45:03.609 -05:00] [INF] [43] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:45:14.666 -05:00] [INF] [44] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Jellyfin Xtream" "0.7.1.0"
+[2025-03-30 14:45:14.678 -05:00] [INF] [44] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:45:57.051 -05:00] [WRN] [44] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 14:45:57.060 -05:00] [INF] [44] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 14:58:13.312 -05:00] [INF] [31] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 14:58:15.637 -05:00] [ERR] [31] Jellyfin.Api.Middleware.ExceptionMiddleware: Error processing request: "The process cannot access the file '/config/data/plugins/Fanart_12.0.0.0/jellyfin-plugin-fanart.png' because it is being used by another process". URL "GET" "/Packages".
+[2025-03-30 14:58:24.536 -05:00] [INF] [37] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Saving system configuration
+[2025-03-30 14:58:24.537 -05:00] [INF] [37] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 14:58:34.671 -05:00] [INF] [36] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "TeleJelly" "1.0.8"
+[2025-03-30 14:58:34.675 -05:00] [INF] [36] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 14:59:42.854 -05:00] [WRN] [36] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 14:59:42.861 -05:00] [INF] [36] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 15:11:14.938 -05:00] [INF] [17] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 15:13:36.260 -05:00] [WRN] [17] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 15:13:36.280 -05:00] [INF] [17] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 15:14:38.412 -05:00] [INF] [25] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" request
+[2025-03-30 15:16:25.455 -05:00] [WRN] [21] Emby.Server.Implementations.HttpServer.WebSocketConnection: WS "46.110.81.130" error receiving data: "The remote party closed the WebSocket connection without completing the close handshake."
+[2025-03-30 15:16:25.465 -05:00] [INF] [21] Emby.Server.Implementations.HttpServer.WebSocketManager: WS "46.110.81.130" closed
+[2025-03-30 15:19:01.616 -05:00] [INF] [3] Emby.Server.Implementations.Session.SessionManager: Sending shutdown notifications
+[2025-03-30 15:19:01.915 -05:00] [INF] [28] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 15:19:02.013 -05:00] [INF] [42] Main: Running query planner optimizations in the database... This might take a while
+[2025-03-30 15:19:02.321 -05:00] [INF] [34] Emby.Server.Implementations.IO.LibraryMonitor: Stopping directory watching for path "/media/music"
+[2025-03-30 15:19:02.321 -05:00] [INF] [34] Emby.Server.Implementations.IO.LibraryMonitor: Stopping directory watching for path "/media/tv"
+[2025-03-30 15:19:02.613 -05:00] [INF] [42] Emby.Server.Implementations.ApplicationHost: Disposing "CoreAppHost"
+[2025-03-30 15:19:02.613 -05:00] [INF] [42] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzArtistProvider"
+[2025-03-30 15:19:02.614 -05:00] [INF] [42] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzAlbumProvider"
+[2025-03-30 15:19:02.614 -05:00] [INF] [42] Emby.Server.Implementations.ApplicationHost: Disposing "PluginManager"
+[2025-03-30 15:19:25.236 -05:00] [INF] [1] Main: Jellyfin version: "10.10.6"
+[2025-03-30 15:19:25.836 -05:00] [INF] [1] Main: Environment Variables: ["[JELLYFIN_WEB_DIR, /usr/share/jellyfin/web]", "[JELLYFIN_LOG_DIR, /config/log]", "[JELLYFIN_CONFIG_DIR, /config]", "[JELLYFIN_PublishedServerUrl, https://jellyfin.bolabaden.org]", "[JELLYFIN_DATA_DIR, /config/data]", "[JELLYFIN_CACHE_DIR, /config/cache]"]
+[2025-03-30 15:19:25.839 -05:00] [INF] [1] Main: Arguments: ["/usr/lib/jellyfin/bin/jellyfin.dll", "--ffmpeg=/usr/lib/jellyfin-ffmpeg/ffmpeg"]
+[2025-03-30 15:19:25.935 -05:00] [INF] [1] Main: Operating system: "Ubuntu 24.04.2 LTS"
+[2025-03-30 15:19:25.936 -05:00] [INF] [1] Main: Architecture: Arm64
+[2025-03-30 15:19:25.937 -05:00] [INF] [1] Main: 64-Bit Process: True
+[2025-03-30 15:19:25.937 -05:00] [INF] [1] Main: User Interactive: True
+[2025-03-30 15:19:25.937 -05:00] [INF] [1] Main: Processor count: 1
+[2025-03-30 15:19:25.940 -05:00] [INF] [1] Main: Program data path: "/config/data"
+[2025-03-30 15:19:25.940 -05:00] [INF] [1] Main: Log directory path: "/config/log"
+[2025-03-30 15:19:25.941 -05:00] [INF] [1] Main: Config directory path: "/config"
+[2025-03-30 15:19:25.941 -05:00] [INF] [1] Main: Cache path: "/config/cache"
+[2025-03-30 15:19:25.941 -05:00] [INF] [1] Main: Temp directory path: "/tmp/jellyfin"
+[2025-03-30 15:19:25.942 -05:00] [INF] [1] Main: Web resources path: "/usr/share/jellyfin/web"
+[2025-03-30 15:19:25.942 -05:00] [INF] [1] Main: Application directory: "/usr/lib/jellyfin/bin/"
+[2025-03-30 15:19:28.037 -05:00] [INF] [1] Emby.Server.Implementations.AppBase.BaseConfigurationManager: Setting cache path: "/config/cache"
+[2025-03-30 15:19:29.134 -05:00] [INF] [1] Emby.Server.Implementations.ApplicationHost: Loading assemblies
+[2025-03-30 15:19:29.440 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "jellyfin-ani-sync, Version=3.7.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Ani-Sync_3.7.0.0/jellyfin-ani-sync.dll"
+[2025-03-30 15:19:29.445 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.AniDB, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/AniDB_10.0.0.0/Jellyfin.Plugin.AniDB.dll"
+[2025-03-30 15:19:29.536 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.AniList, Version=11.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/AniList_11.0.0.0/Jellyfin.Plugin.AniList.dll"
+[2025-03-30 15:19:29.543 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.AniSearch, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/AniSearch_5.0.0.0/Jellyfin.Plugin.AniSearch.dll"
+[2025-03-30 15:19:29.546 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Artwork, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Artwork_1.0.0.0/Jellyfin.Plugin.Artwork.dll"
+[2025-03-30 15:19:29.642 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "SharpCompress, Version=0.38.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96" from "/config/data/plugins/Bookshelf_12.0.0.0/SharpCompress.dll"
+[2025-03-30 15:19:29.740 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "ZstdSharp, Version=0.8.1.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf" from "/config/data/plugins/Bookshelf_12.0.0.0/ZstdSharp.dll"
+[2025-03-30 15:19:29.753 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Bookshelf, Version=12.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Bookshelf_12.0.0.0/Jellyfin.Plugin.Bookshelf.dll"
+[2025-03-30 15:19:29.835 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.ChapterSegments, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Chapter Segments Provider_3.0.0.0/Jellyfin.Plugin.ChapterSegments.dll"
+[2025-03-30 15:19:29.841 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "MetaBrainz.MusicBrainz.CoverArt, Version=6.0.0.0, Culture=neutral, PublicKeyToken=be12cbb629c03021" from "/config/data/plugins/Cover Art Archive_8.0.0.0/MetaBrainz.MusicBrainz.CoverArt.dll"
+[2025-03-30 15:19:29.842 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "MetaBrainz.Common.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=be12cbb629c03021" from "/config/data/plugins/Cover Art Archive_8.0.0.0/MetaBrainz.Common.Json.dll"
+[2025-03-30 15:19:29.843 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.CoverArtArchive, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Cover Art Archive_8.0.0.0/Jellyfin.Plugin.CoverArtArchive.dll"
+[2025-03-30 15:19:29.852 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Discogs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Discogs_1.0.0.0/Jellyfin.Plugin.Discogs.dll"
+[2025-03-30 15:19:29.946 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Dlna, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/DLNA_8.0.0.0/Jellyfin.Plugin.Dlna.dll"
+[2025-03-30 15:19:29.949 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Dlna.Model, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/DLNA_8.0.0.0/Jellyfin.Plugin.Dlna.Model.dll"
+[2025-03-30 15:19:29.951 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Rssdp, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/DLNA_8.0.0.0/Rssdp.dll"
+[2025-03-30 15:19:29.958 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Dlna.Playback, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/DLNA_8.0.0.0/Jellyfin.Plugin.Dlna.Playback.dll"
+[2025-03-30 15:19:30.039 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Fanart, Version=12.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Fanart_12.0.0.0/Jellyfin.Plugin.Fanart.dll"
+[2025-03-30 15:19:30.042 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.IMVDb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/IMVDb_4.0.0.0/Jellyfin.Plugin.IMVDb.dll"
+[2025-03-30 15:19:30.044 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Intros, Version=1.3.1.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Intros_1.3.1.0/Jellyfin.Plugin.Intros.dll"
+[2025-03-30 15:19:30.136 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Xtream, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Jellyfin Xtream_0.7.1.0/Jellyfin.Xtream.dll"
+[2025-03-30 15:19:30.139 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Kitsu, Version=6.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Kitsu_6.0.0.0/Jellyfin.Plugin.Kitsu.dll"
+[2025-03-30 15:19:30.144 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "LDAP-Auth, Version=20.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/LDAP Authentication_20.0.0.0/LDAP-Auth.dll"
+[2025-03-30 15:19:30.148 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Novell.Directory.Ldap.NETStandard, Version=3.6.0.0, Culture=neutral, PublicKeyToken=510c34e9dec7f86f" from "/config/data/plugins/LDAP Authentication_20.0.0.0/Novell.Directory.Ldap.NETStandard.dll"
+[2025-03-30 15:19:30.237 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.LocalIntros, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Local Intros_3.0.0.0/Jellyfin.Plugin.LocalIntros.dll"
+[2025-03-30 15:19:30.239 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.LrcLib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/LrcLib_2.0.0.0/Jellyfin.Plugin.LrcLib.dll"
+[2025-03-30 15:19:30.241 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.MergeVersions, Version=10.10.0.1, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Merge Versions_10.10.0.1/Jellyfin.Plugin.MergeVersions.dll"
+[2025-03-30 15:19:30.243 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.NapiSub, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/NapiSub_1.0.1.0/Jellyfin.Plugin.NapiSub.dll"
+[2025-03-30 15:19:30.248 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.NextPVR, Version=11.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/NextPVR_11.0.0.0/Jellyfin.Plugin.NextPVR.dll"
+[2025-03-30 15:19:30.337 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Opds, Version=6.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/OPDS_6.0.0.0/Jellyfin.Plugin.Opds.dll"
+[2025-03-30 15:19:30.341 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.OpenSubtitles, Version=20.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Open Subtitles_20.0.0.0/Jellyfin.Plugin.OpenSubtitles.dll"
+[2025-03-30 15:19:30.347 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.PlaybackReporting, Version=15.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Playback Reporting_15.0.0.0/Jellyfin.Plugin.PlaybackReporting.dll"
+[2025-03-30 15:19:30.437 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "SQLitePCL.pretty, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Playback Reporting_15.0.0.0/SQLitePCL.pretty.dll"
+[2025-03-30 15:19:30.938 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13" from "/config/data/plugins/Reports_17.0.0.0/SixLabors.Fonts.dll"
+[2025-03-30 15:19:30.943 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" from "/config/data/plugins/Reports_17.0.0.0/System.IO.Packaging.dll"
+[2025-03-30 15:19:32.538 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "DocumentFormat.OpenXml, Version=2.16.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17" from "/config/data/plugins/Reports_17.0.0.0/DocumentFormat.OpenXml.dll"
+[2025-03-30 15:19:32.636 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Reports, Version=17.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Reports_17.0.0.0/Jellyfin.Plugin.Reports.dll"
+[2025-03-30 15:19:32.954 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "ClosedXML, Version=0.97.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b" from "/config/data/plugins/Reports_17.0.0.0/ClosedXML.dll"
+[2025-03-30 15:19:32.957 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca" from "/config/data/plugins/Reports_17.0.0.0/ExcelNumberFormat.dll"
+[2025-03-30 15:19:33.035 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.SessionCleaner, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Session Cleaner_4.0.0.0/Jellyfin.Plugin.SessionCleaner.dll"
+[2025-03-30 15:19:33.043 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.SkinManager, Version=2.0.2.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Skin Manager_2.0.2.0/Jellyfin.Plugin.SkinManager.dll"
+[2025-03-30 15:19:33.046 -05:00] [ERR] [1] Emby.Server.Implementations.Plugins.PluginManager: Failed to load assembly "/config/data/plugins/SMS notification_1.0.2.0/Jellyfin.Plugin.Sms.dll". This error occurs when a plugin references an incompatible version of one of the shared libraries. Disabling plugin
+System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types.
+Could not load type 'MediaBrowser.Controller.Notifications.INotificationService' from assembly 'MediaBrowser.Controller, Version=10.10.6.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.RuntimeModule.GetTypes(RuntimeModule module)
+   at System.Reflection.RuntimeModule.GetTypes()
+   at Emby.Server.Implementations.Plugins.PluginManager.LoadAssemblies()+MoveNext()
+System.TypeLoadException: Could not load type 'MediaBrowser.Controller.Notifications.INotificationService' from assembly 'MediaBrowser.Controller, Version=10.10.6.0, Culture=neutral, PublicKeyToken=null'.
+[2025-03-30 15:19:33.436 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "SSO-Auth, Version=3.5.2.4, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/SSO Authentication_3.5.2.4/SSO-Auth.dll"
+[2025-03-30 15:19:33.445 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "IdentityModel.OidcClient, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5580d04c1b6c37c1" from "/config/data/plugins/SSO Authentication_3.5.2.4/IdentityModel.OidcClient.dll"
+[2025-03-30 15:19:33.535 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "IdentityModel, Version=5.2.0.0, Culture=neutral, PublicKeyToken=e7877f4675df049f" from "/config/data/plugins/SSO Authentication_3.5.2.4/IdentityModel.dll"
+[2025-03-30 15:19:33.843 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "subbuzz, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/subbuzz_1.2.1.0/subbuzz.dll"
+[2025-03-30 15:19:33.941 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "SharpCompress, Version=0.37.2.0, Culture=neutral, PublicKeyToken=afb0a02973931d96" from "/config/data/plugins/subbuzz_1.2.1.0/SharpCompress.dll"
+[2025-03-30 15:19:34.034 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "ZstdSharp, Version=0.8.0.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf" from "/config/data/plugins/subbuzz_1.2.1.0/ZstdSharp.dll"
+[2025-03-30 15:19:34.037 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.SubtitleExtract, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Subtitle Extract_4.0.0.0/Jellyfin.Plugin.SubtitleExtract.dll"
+[2025-03-30 15:19:34.436 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "TeleJelly, Version=1.0.8.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TeleJelly_1.0.8/TeleJelly.dll"
+[2025-03-30 15:19:34.441 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.ThemeSongs, Version=10.10.0.1, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Theme Songs_10.10.0.1/Jellyfin.Plugin.ThemeSongs.dll"
+[2025-03-30 15:19:34.540 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Themerr, Version=2024.523.2124.32, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Themerr_2024.523.2124.32/Jellyfin.Plugin.Themerr.dll"
+[2025-03-30 15:19:34.637 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "YoutubeExplode, Version=6.3.16.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Themerr_2024.523.2124.32/YoutubeExplode.dll"
+[2025-03-30 15:19:34.741 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Tvdb.Sdk, Version=4.7.10.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TheTVDB_19.0.0.0/Tvdb.Sdk.dll"
+[2025-03-30 15:19:34.836 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Tvdb, Version=19.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TheTVDB_19.0.0.0/Jellyfin.Plugin.Tvdb.dll"
+[2025-03-30 15:19:34.839 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.TMDbBoxSets, Version=11.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TMDb Box Sets_11.0.0.0/Jellyfin.Plugin.TMDbBoxSets.dll"
+[2025-03-30 15:19:34.845 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Trakt, Version=26.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Trakt_26.0.0.0/Trakt.dll"
+[2025-03-30 15:19:34.847 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.TranscodeKiller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Transcode Killer_3.0.0.0/Jellyfin.Plugin.TranscodeKiller.dll"
+[2025-03-30 15:19:34.936 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "TVHeadEnd, Version=12.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TVHeadend_12.0.0.0/TVHeadEnd.dll"
+[2025-03-30 15:19:34.945 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.TvMaze, Version=12.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TVmaze_12.0.0.0/Jellyfin.Plugin.TvMaze.dll"
+[2025-03-30 15:19:35.042 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Polly, Version=7.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc" from "/config/data/plugins/TVmaze_12.0.0.0/Polly.dll"
+[2025-03-30 15:19:35.044 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "TvMaze.Api.Client, Version=0.1.72.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TVmaze_12.0.0.0/TvMaze.Api.Client.dll"
+[2025-03-30 15:19:35.136 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Flurl.Http, Version=3.0.1.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TVmaze_12.0.0.0/Flurl.Http.dll"
+[2025-03-30 15:19:35.139 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Flurl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/TVmaze_12.0.0.0/Flurl.dll"
+[2025-03-30 15:19:35.235 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Vgmdb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/VGMdb_4.0.0.0/Jellyfin.Plugin.Vgmdb.dll"
+[2025-03-30 15:19:35.535 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "MimeKit, Version=4.8.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814" from "/config/data/plugins/Webhook_17.0.0.0/MimeKit.dll"
+[2025-03-30 15:19:35.544 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "MQTTnet, Version=4.3.7.1207, Culture=neutral, PublicKeyToken=fdb7629f2e364a63" from "/config/data/plugins/Webhook_17.0.0.0/MQTTnet.dll"
+[2025-03-30 15:19:35.545 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "MQTTnet.Extensions.ManagedClient, Version=4.3.7.1207, Culture=neutral, PublicKeyToken=fdb7629f2e364a63" from "/config/data/plugins/Webhook_17.0.0.0/MQTTnet.Extensions.ManagedClient.dll"
+[2025-03-30 15:19:36.035 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "MailKit, Version=4.8.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b" from "/config/data/plugins/Webhook_17.0.0.0/MailKit.dll"
+[2025-03-30 15:19:36.440 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938" from "/config/data/plugins/Webhook_17.0.0.0/BouncyCastle.Cryptography.dll"
+[2025-03-30 15:19:36.636 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Handlebars, Version=2.1.6.0, Culture=neutral, PublicKeyToken=22225d0bf33cd661" from "/config/data/plugins/Webhook_17.0.0.0/Handlebars.dll"
+[2025-03-30 15:19:36.639 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded assembly "Jellyfin.Plugin.Webhook, Version=17.0.0.0, Culture=neutral, PublicKeyToken=null" from "/config/data/plugins/Webhook_17.0.0.0/Jellyfin.Plugin.Webhook.dll"
+[2025-03-30 15:19:37.739 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN subnets: ["::1/128", "fe80::/10", "fc00::/7", "127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 15:19:37.739 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Defined LAN exclusions: []
+[2025-03-30 15:19:37.740 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Used LAN subnets: ["::1/128", "fe80::/10", "fc00::/7", "127.0.0.1/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+[2025-03-30 15:19:37.743 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered interface addresses: ["127.0.0.1", "192.168.100.14", "172.20.0.30", "::1"]
+[2025-03-30 15:19:37.744 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Bind Addresses ["::"]
+[2025-03-30 15:19:37.744 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Remote IP filter is "Allowlist"
+[2025-03-30 15:19:37.744 -05:00] [INF] [1] Jellyfin.Networking.Manager.NetworkManager: Filtered subnets: []
+[2025-03-30 15:20:02.036 -05:00] [INF] [1] subbuzz.Providers.SubBuzz: SubtitleProvider instance created.
+[2025-03-30 15:20:03.437 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Ani-Sync" "3.7.0.0"
+[2025-03-30 15:20:03.440 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AniDB" "10.0.0.0"
+[2025-03-30 15:20:03.536 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AniList" "11.0.0.0"
+[2025-03-30 15:20:03.540 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AniSearch" "5.0.0.0"
+[2025-03-30 15:20:03.542 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Artwork" "1.0.0.0"
+[2025-03-30 15:20:03.544 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Bookshelf" "12.0.0.0"
+[2025-03-30 15:20:03.546 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Chapter Segments Provider" "3.0.0.0"
+[2025-03-30 15:20:03.636 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Cover Art Archive" "8.0.0.0"
+[2025-03-30 15:20:03.638 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Discogs" "1.0.0.0"
+[2025-03-30 15:20:03.640 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "DLNA" "8.0.0.0"
+[2025-03-30 15:20:03.642 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Fanart" "12.0.0.0"
+[2025-03-30 15:20:03.643 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "IMVDb" "4.0.0.0"
+[2025-03-30 15:20:03.645 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Intros" "1.3.1.0"
+[2025-03-30 15:20:03.736 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Jellyfin Xtream" "0.7.1.0"
+[2025-03-30 15:20:03.738 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Kitsu" "6.0.0.0"
+[2025-03-30 15:20:03.740 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "LDAP-Auth" "20.0.0.0"
+[2025-03-30 15:20:03.741 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Local Intros" "3.0.0.0"
+[2025-03-30 15:20:03.743 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "LrcLib" "2.0.0.0"
+[2025-03-30 15:20:03.744 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Merge Versions" "10.10.0.1"
+[2025-03-30 15:20:03.835 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "NapiSub" "1.0.1.0"
+[2025-03-30 15:20:03.837 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "NextPVR" "11.0.0.0"
+[2025-03-30 15:20:03.839 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OPDS Feed" "6.0.0.0"
+[2025-03-30 15:20:03.948 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Open Subtitles" "20.0.0.0"
+[2025-03-30 15:20:04.034 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Playback Reporting" "15.0.0.0"
+[2025-03-30 15:20:04.037 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Reports" "17.0.0.0"
+[2025-03-30 15:20:04.041 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Session Cleaner" "4.0.0.0"
+[2025-03-30 15:20:04.043 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "SkinManager" "2.0.2.0"
+[2025-03-30 15:20:04.045 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "SSO-Auth" "3.5.2.4"
+[2025-03-30 15:20:04.136 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "subbuzz" "1.2.1.0"
+[2025-03-30 15:20:04.140 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Subtitle Extract" "4.0.0.0"
+[2025-03-30 15:20:04.144 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TeleJelly" "1.0.8"
+[2025-03-30 15:20:04.240 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Theme Songs" "10.10.0.1"
+[2025-03-30 15:20:04.250 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Themerr" "2024.523.2124.32"
+[2025-03-30 15:20:04.257 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Themerr" "2024.523.2124.32"
+[2025-03-30 15:20:04.334 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TheTVDB" "19.0.0.0"
+[2025-03-30 15:20:04.337 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb Box Sets" "11.0.0.0"
+[2025-03-30 15:20:04.341 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Trakt" "26.0.0.0"
+[2025-03-30 15:20:04.434 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Transcode Killer" "3.0.0.0"
+[2025-03-30 15:20:04.437 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TVHeadend" "12.0.0.0"
+[2025-03-30 15:20:04.442 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TVmaze" "12.0.0.0"
+[2025-03-30 15:20:04.443 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "VGMdb" "4.0.0.0"
+[2025-03-30 15:20:04.449 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Webhook" "17.0.0.0"
+[2025-03-30 15:20:04.453 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "TMDb" "10.10.6.0"
+[2025-03-30 15:20:04.454 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "Studio Images" "10.10.6.0"
+[2025-03-30 15:20:04.535 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "OMDb" "10.10.6.0"
+[2025-03-30 15:20:04.741 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "MusicBrainz" "10.10.6.0"
+[2025-03-30 15:20:04.742 -05:00] [INF] [1] Emby.Server.Implementations.Plugins.PluginManager: Loaded plugin: "AudioDB" "10.10.6.0"
+[2025-03-30 15:20:07.939 -05:00] [INF] [1] Main: Kestrel is listening on "all interfaces"
+[2025-03-30 15:20:08.437 -05:00] [INF] [8] Jellyfin.Plugin.Dlna.DlnaManager: Using user profile directory "/config/data/plugins/configurations/dlna/user"
+[2025-03-30 15:20:08.439 -05:00] [INF] [8] Jellyfin.Plugin.Dlna.DlnaManager: Using system profile directory "/config/data/plugins/DLNA_8.0.0.0/profiles"
+[2025-03-30 15:20:10.341 -05:00] [INF] [8] Jellyfin.Plugin.Dlna.Main.DlnaHost: Registering publisher for "urn:schemas-upnp-org:device:MediaServer:1" on "192.168.100.14" with uri "http://192.168.100.14:8096/dlna/70caba01-4e93-41f8-920e-e0c71b729732/description.xml"
+[2025-03-30 15:20:10.546 -05:00] [INF] [8] Jellyfin.Plugin.Dlna.Main.DlnaHost: Registering publisher for "urn:schemas-upnp-org:device:MediaServer:1" on "172.20.0.30" with uri "http://172.20.0.30:8096/dlna/70caba01-4e93-41f8-920e-e0c71b729732/description.xml"
+[2025-03-30 15:20:10.839 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.EventMonitorEntryPoint: EventMonitorEntryPoint Running
+[2025-03-30 15:20:11.136 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.Data.ActivityRepository: Sqlite version: 3.41.2
+[2025-03-30 15:20:11.138 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.Data.ActivityRepository: Sqlite compiler options: ATOMIC_INTRINSICS=1,COMPILER=gcc-9.4.0,DEFAULT_AUTOVACUUM,DEFAULT_CACHE_SIZE=-2000,DEFAULT_FILE_FORMAT=4,DEFAULT_FOREIGN_KEYS,DEFAULT_JOURNAL_SIZE_LIMIT=-1,DEFAULT_MMAP_SIZE=0,DEFAULT_PAGE_SIZE=4096,DEFAULT_PCACHE_INITSZ=20,DEFAULT_RECURSIVE_TRIGGERS,DEFAULT_SECTOR_SIZE=4096,DEFAULT_SYNCHRONOUS=2,DEFAULT_WAL_AUTOCHECKPOINT=1000,DEFAULT_WAL_SYNCHRONOUS=2,DEFAULT_WORKER_THREADS=0,ENABLE_COLUMN_METADATA,ENABLE_FTS3,ENABLE_FTS3_PARENTHESIS,ENABLE_FTS4,ENABLE_FTS5,ENABLE_MATH_FUNCTIONS,ENABLE_RTREE,ENABLE_SNAPSHOT,MALLOC_SOFT_LIMIT=1024,MAX_ATTACHED=10,MAX_COLUMN=2000,MAX_COMPOUND_SELECT=500,MAX_DEFAULT_PAGE_SIZE=8192,MAX_EXPR_DEPTH=1000,MAX_FUNCTION_ARG=127,MAX_LENGTH=1000000000,MAX_LIKE_PATTERN_LENGTH=50000,MAX_MMAP_SIZE=0x7fff0000,MAX_PAGE_COUNT=1073741823,MAX_PAGE_SIZE=65536,MAX_SQL_LENGTH=1000000000,MAX_TRIGGER_DEPTH=1000,MAX_VARIABLE_NUMBER=32766,MAX_VDBE_OP=250000000,MAX_WORKER_THREADS=8,MUTEX_PTHREADS,SYSTEM_MALLOC,TEMP_STORE=1,THREADSAFE=1
+[2025-03-30 15:20:11.338 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.Data.ActivityRepository: Default journal_mode for "/config/data/data/playback_reporting.db" is "delete"
+[2025-03-30 15:20:11.338 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.Data.ActivityRepository: Initialize PlaybackActivity Repository
+[2025-03-30 15:20:11.339 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.Data.ActivityRepository: PlaybackActivity table schema miss match!
+[2025-03-30 15:20:11.339 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.Data.ActivityRepository: Expected : "datecreated:datetime|userid:text|itemid:text|itemtype:text|itemname:text|playbackmethod:text|clientname:text|devicename:text|playduration:int"
+[2025-03-30 15:20:11.339 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.Data.ActivityRepository: Received : ""
+[2025-03-30 15:20:11.339 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.Data.ActivityRepository: Dropping and recreating PlaybackActivity table
+[2025-03-30 15:20:15.537 -05:00] [INF] [8] Jellyfin.Networking.PortForwardingHost: Starting NAT discovery
+[2025-03-30 15:20:27.941 -05:00] [WRN] [8] Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware: The WebRootPath was not found: "/run/s6-rc:s6-rc-init:NpiDDB/servicedirs/svc-jellyfin/wwwroot". Static files may be unavailable.
+[2025-03-30 15:20:28.544 -05:00] [INF] [8] Emby.Server.Implementations.ApplicationHost: Running startup tasks
+[2025-03-30 15:20:28.741 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.TaskCleanDb: TaskCleanDb Loaded
+[2025-03-30 15:20:28.746 -05:00] [INF] [8] Jellyfin.Plugin.PlaybackReporting.TaskRunBackup: TaskRunBackup Loaded
+[2025-03-30 15:20:29.146 -05:00] [INF] [8] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Playback Reporting Trim Db" set to fire at 2025-03-31 00:00:00.000 -05:00, which is 08:39:30.8537265 from now.
+[2025-03-30 15:20:29.638 -05:00] [INF] [15] Emby.Server.Implementations.IO.LibraryMonitor: Watching directory "/media/music"
+[2025-03-30 15:20:29.836 -05:00] [INF] [8] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-03-31 03:00:00.000 -05:00, which is 11:39:30.1640310 from now.
+[2025-03-30 15:20:30.034 -05:00] [INF] [8] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-03-31 02:00:00.000 -05:00, which is 10:39:29.9651696 from now.
+[2025-03-30 15:20:30.737 -05:00] [INF] [15] Emby.Server.Implementations.IO.LibraryMonitor: Watching directory "/media/tv"
+[2025-03-30 15:20:31.835 -05:00] [INF] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Found ffmpeg version "7.0.2"
+[2025-03-30 15:20:32.738 -05:00] [INF] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "decoders": ["libdav1d", "av1", "av1_rkmpp", "h264", "h264_rkmpp", "hevc", "hevc_rkmpp", "mpeg1_rkmpp", "mpeg2video", "mpeg2_rkmpp", "mpeg4", "mpeg4_rkmpp", "msmpeg4", "vp8", "vp8_rkmpp", "libvpx", "vp9", "vp9_rkmpp", "libvpx-vp9", "aac", "ac3", "ac4", "dca", "flac", "mp3", "truehd"]
+[2025-03-30 15:20:33.636 -05:00] [INF] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available "encoders": ["libsvtav1", "libx264", "h264_v4l2m2m", "h264_rkmpp", "libx265", "hevc_rkmpp", "mjpeg_rkmpp", "aac", "libfdk_aac", "ac3", "alac", "dca", "flac", "libmp3lame", "libopus", "truehd", "libvorbis", "srt"]
+[2025-03-30 15:20:34.238 -05:00] [INF] [21] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean up collections and playlists" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 15:20:34.237 -05:00] [INF] [20] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Clean Transcode Directory" Completed after 0 minute(s) and 0 seconds
+[2025-03-30 15:20:34.341 -05:00] [INF] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available filters: ["overlay_opencl", "overlay_rkrga", "scale_opencl", "scale_rkrga", "tonemapx", "tonemap_opencl", "transpose_opencl", "vpp_rkrga", "zscale", "alphasrc"]
+[2025-03-30 15:20:35.139 -05:00] [WRN] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "scale_cuda" with option "format" is not available
+[2025-03-30 15:20:35.637 -05:00] [WRN] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "tonemap_cuda" with option "GPU accelerated HDR to SDR tonemapping" is not available
+[2025-03-30 15:20:37.740 -05:00] [WRN] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vaapi" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 15:20:38.136 -05:00] [WRN] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Filter: "overlay_vulkan" with option "Action to take when encountering EOF from secondary input" is not available
+[2025-03-30 15:20:38.838 -05:00] [INF] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: Available hwaccel types: ["drm", "opencl", "rkmpp"]
+[2025-03-30 15:20:54.744 -05:00] [INF] [20] Emby.Server.Implementations.Plugins.PluginManager: No local manifest exists for plugin "Intros". Skipping manifest reconciliation.
+[2025-03-30 15:20:54.837 -05:00] [INF] [20] Emby.Server.Implementations.Updates.InstallationManager: Plugin "installed": "Intros" "1.3.2.0"
+[2025-03-30 15:20:58.138 -05:00] [INF] [20] Emby.Server.Implementations.ApplicationHost: App needs to be restarted.
+[2025-03-30 15:20:58.139 -05:00] [INF] [20] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Update Plugins" Completed after 0 minute(s) and 24 seconds
+[2025-03-30 15:23:56.144 -05:00] [INF] [8] MediaBrowser.MediaEncoding.Encoder.MediaEncoder: FFmpeg: "/usr/lib/jellyfin-ffmpeg/ffmpeg"
+[2025-03-30 15:23:56.144 -05:00] [INF] [8] Emby.Server.Implementations.ApplicationHost: ServerId: "70caba014e9341f8920ee0c71b729732"
+[2025-03-30 15:23:56.145 -05:00] [INF] [8] Emby.Server.Implementations.ApplicationHost: Core startup complete
+[2025-03-30 15:23:56.145 -05:00] [INF] [8] Main: Startup complete 0:04:32.9045288
+[2025-03-30 15:43:59.040 -05:00] [INF] [35] Emby.Server.Implementations.IO.LibraryMonitor: "tv" ("/media/tv") will be refreshed.
+[2025-03-30 15:55:43.637 -05:00] [INF] [3] Emby.Server.Implementations.Session.SessionManager: Sending shutdown notifications
+[2025-03-30 15:55:43.836 -05:00] [INF] [29] Jellyfin.Networking.PortForwardingHost: Stopping NAT discovery
+[2025-03-30 15:55:43.937 -05:00] [INF] [34] Jellyfin.Plugin.Dlna.Main.DlnaHost: Disposing SsdpDevicePublisher
+[2025-03-30 15:55:44.872 -05:00] [INF] [34] Jellyfin.Plugin.Dlna.Main.DlnaHost: Disposing PlayToManager
+[2025-03-30 15:55:44.937 -05:00] [INF] [34] Main: Running query planner optimizations in the database... This might take a while
+[2025-03-30 15:55:45.239 -05:00] [INF] [29] Rssdp.Infrastructure.SsdpCommunicationsServer: "SsdpCommunicationsServer" disposing _BroadcastListenSocket
+[2025-03-30 15:55:45.241 -05:00] [INF] [29] Rssdp.Infrastructure.SsdpCommunicationsServer: "SsdpCommunicationsServer" Disposing 2 sendSockets
+[2025-03-30 15:55:45.242 -05:00] [INF] [29] Rssdp.Infrastructure.SsdpCommunicationsServer: "SsdpCommunicationsServer" disposing sendSocket from "192.168.100.14"
+[2025-03-30 15:55:45.242 -05:00] [INF] [29] Rssdp.Infrastructure.SsdpCommunicationsServer: "SsdpCommunicationsServer" disposing sendSocket from "172.20.0.30"
+[2025-03-30 15:55:45.339 -05:00] [INF] [29] Emby.Server.Implementations.IO.LibraryMonitor: Stopping directory watching for path "/media/music"
+[2025-03-30 15:55:45.339 -05:00] [INF] [29] Emby.Server.Implementations.IO.LibraryMonitor: Stopping directory watching for path "/media/tv"
+[2025-03-30 15:55:45.437 -05:00] [INF] [34] Emby.Server.Implementations.ApplicationHost: Disposing "CoreAppHost"
+[2025-03-30 15:55:45.437 -05:00] [INF] [34] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzArtistProvider"
+[2025-03-30 15:55:45.437 -05:00] [INF] [34] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzAlbumProvider"
+[2025-03-30 15:55:45.438 -05:00] [INF] [34] Emby.Server.Implementations.ApplicationHost: Disposing "CoverArtArchiveImageProvider"
+[2025-03-30 15:55:45.439 -05:00] [INF] [34] Emby.Server.Implementations.ApplicationHost: Disposing "ThemerrManager"
+[2025-03-30 15:55:45.439 -05:00] [INF] [34] Emby.Server.Implementations.ApplicationHost: Disposing "PluginManager"

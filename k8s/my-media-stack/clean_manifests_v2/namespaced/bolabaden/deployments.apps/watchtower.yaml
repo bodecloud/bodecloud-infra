@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1"},"generation":1,"name":"watchtower","namespace":"bolabaden"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"watchtower"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"watchtower"}},"spec":{"containers":[{"env":[{"name":"PGID","value":"988"},{"name":"PUID","value":"1001"},{"name":"TZ","value":"America/Chicago"},{"name":"UMASK","value":"002"},{"name":"WATCHTOWER_CLEANUP","value":"true"},{"name":"WATCHTOWER_NOTIFICATION_REPORT","value":"true"},{"name":"WATCHTOWER_NOTIFICATION_URL"},{"name":"WATCHTOWER_SCHEDULE","value":"0 0 6 * * *"}],"image":"containrrr/watchtower:latest","imagePullPolicy":"IfNotPresent","name":"watchtower","ports":[{"containerPort":8080,"name":"watchtower-8080","protocol":"TCP"}],"resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"128Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/var/run/docker.sock","name":"var-run-docker-sock"}]}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"hostPath":{"path":"/var/run/docker.sock","type":""},"name":"var-run-docker-sock"}]}}}}
+  name: watchtower
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: watchtower
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: watchtower
+    spec:
+      containers:
+      - env:
+        - name: PGID
+          value: "988"
+        - name: PUID
+          value: "1001"
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "002"
+        - name: WATCHTOWER_CLEANUP
+          value: "true"
+        - name: WATCHTOWER_NOTIFICATION_REPORT
+          value: "true"
+        - name: WATCHTOWER_NOTIFICATION_URL
+        - name: WATCHTOWER_SCHEDULE
+          value: 0 0 6 * * *
+        image: containrrr/watchtower:latest
+        imagePullPolicy: IfNotPresent
+        name: watchtower
+        ports:
+        - containerPort: 8080
+          name: watchtower-8080
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: var-run-docker-sock
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /var/run/docker.sock
+          type: ""
+        name: var-run-docker-sock
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2025-06-14T19:17:51Z"
+    lastUpdateTime: "2025-06-14T19:18:12Z"
+    message: ReplicaSet "watchtower-68bd74ff47" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    type: Progressing
+  - lastTransitionTime: "2025-06-14T22:39:41Z"
+    lastUpdateTime: "2025-06-14T22:39:41Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

@@ -1,0 +1,164 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: brunner56-starter
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: starter
+    helm.sh/chart: starter-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    configmap.reloader.stakater.com/reload: tooling-scripts
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: starter
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: starter
+    spec:
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: tooling-scripts
+        configMap:
+          name: tooling-scripts
+          defaultMode: 493
+      initContainers:
+      - name: update-dns
+        image: alpine/k8s:1.29.1
+        command:
+        - /usr/bin/dumb-init
+        - /bin/bash
+        - -c
+        - /tooling-scripts/update-dns-on-init.sh
+        envFrom:
+        - secretRef:
+            name: cloudflare-api-token
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: ELF_TENANT_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/instance']
+        resources: {}
+        volumeMounts:
+        - name: tooling-scripts
+          mountPath: /tooling-scripts
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+      containers:
+      - name: brunner56-starter
+        image: alpine/k8s:1.29.1
+        command:
+        - /bin/bash
+        - -c
+        - 'echo "This pod simple reserves contended resources for a tenant"
+
+
+          sleep infinity
+
+          '
+        resources:
+          requests:
+            cpu: 250m
+            memory: 1Mi
+          limits:
+            cpu: 500m
+            memory: 2Mi
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: tooling-scripts
+          mountPath: /tooling-scripts
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+      - name: clean-up-dns
+        image: alpine/k8s:1.29.1
+        command:
+        - /usr/bin/dumb-init
+        - /bin/bash
+        - -c
+        - /tooling-scripts/clean-up-dns-on-termination.sh
+        envFrom:
+        - secretRef:
+            name: cloudflare-api-token
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: ELF_TENANT_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/instance']
+        resources: {}
+        volumeMounts:
+        - name: tooling-scripts
+          mountPath: /tooling-scripts
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      automountServiceAccountToken: true
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        runAsNonRoot: true
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      priorityClassName: tenant-normal
+      enableServiceLinks: false
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600

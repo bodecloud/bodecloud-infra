@@ -1,0 +1,21 @@
+kubernetesClusterDomain: cluster.local
+sambaConfig:
+  configYml: |-
+    auth:
+      - user: brunner56
+        group: brunner56
+        uid: 568
+        gid: 568
+        password: brunner56
+    global:
+      - "force user = brunner56"
+      - "force group = brunner56"
+    share:
+      - name: symlinks
+        comment: symlinks
+        path: /samba/symlinks-block
+        browsable: yes
+        readonly: no
+        guestok: no
+        veto: no
+        recycle: no

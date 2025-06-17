@@ -1,0 +1,140 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: cert-manager-cainjector-86db5d9886-
+  labels:
+    app: cainjector
+    app.kubernetes.io/component: cainjector
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cainjector
+    app.kubernetes.io/version: v1.14.0
+    helm.sh/chart: cert-manager-v1.14.0
+    pod-template-hash: 86db5d9886
+  name: cert-manager-cainjector-86db5d9886-qkwdm
+  namespace: cert-manager
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: cert-manager-cainjector-86db5d9886
+spec:
+  containers:
+  - args:
+    - --v=2
+    - --leader-election-namespace=kube-system
+    env:
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    image: quay.io/jetstack/cert-manager-cainjector:v1.14.0
+    imagePullPolicy: IfNotPresent
+    name: cert-manager-cainjector
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rfdxv
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  nodeName: beatapostapita
+  nodeSelector:
+    kubernetes.io/os: linux
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: cert-manager-cainjector
+  serviceAccountName: cert-manager-cainjector
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-rfdxv
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:38:42Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:38:39Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:38:44Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:38:44Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:38:39Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://afc51bb1a3cb539c7e791d31d9ea6b6d1141d30769d2a94370d92975672ef45f
+    image: quay.io/jetstack/cert-manager-cainjector:v1.14.0
+    imageID: quay.io/jetstack/cert-manager-cainjector@sha256:b897b367f16313ebbd75f218a1df88b9326b9129688bfc9114d57848d8d5082b
+    lastState:
+      terminated:
+        containerID: containerd://1db7a9135d6d9391e733f58486ac55a673a5a2b302660058f9a3bedb2007d7b1
+        exitCode: 1
+        finishedAt: "2025-06-14T17:38:42Z"
+        reason: Error
+        startedAt: "2025-06-14T17:38:42Z"
+    name: cert-manager-cainjector
+    ready: true
+    restartCount: 1
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:38:43Z"
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rfdxv
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.26
+  podIPs:
+  - ip: 10.42.0.26
+  qosClass: BestEffort
+  startTime: "2025-06-14T17:38:39Z"

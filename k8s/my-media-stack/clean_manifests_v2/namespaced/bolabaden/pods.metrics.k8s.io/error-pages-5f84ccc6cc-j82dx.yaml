@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: error-pages
+  usage:
+    cpu: 39471n
+    memory: 6364Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: error-pages
+    pod-template-hash: 5f84ccc6cc
+  name: error-pages-5f84ccc6cc-j82dx
+  namespace: bolabaden
+timestamp: "2025-06-14T22:57:00Z"
+window: 19.077s

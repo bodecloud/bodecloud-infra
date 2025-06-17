@@ -1,0 +1,40 @@
+#! warp-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: warp
+  namespace: my-media-stack
+spec:
+  selector: {}
+  ports:
+    - name: warp-8888
+      port: 8888
+      targetPort: warp-8888
+    - name: warp-4000
+      port: 4000
+      targetPort: warp-4000
+    - name: warp-3232
+      port: 3232
+      targetPort: warp-3232
+    - name: warp-443
+      port: 443
+      targetPort: warp-443
+    - name: warp-1080
+      port: 1080
+      targetPort: warp-1080
+    - name: warp-3005
+      port: 3005
+      targetPort: warp-3005
+    - name: warp-8000
+      port: 8000
+      targetPort: warp-8000
+    - name: warp-8181
+      port: 8181
+      targetPort: warp-8181
+    - name: warp-8469
+      port: 8469
+      targetPort: warp-8469
+    - name: warp-3185
+      port: 3185
+      targetPort: warp-3185

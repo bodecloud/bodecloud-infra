@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"cronjob","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"postgres-vacuum"},"name":"postgres-vacuum","namespace":"default"},"spec":{"jobTemplate":{"spec":{"template":{"spec":{"containers":[{"args":["-c","psql -h postgresql -U postgres -c \"VACUUM ANALYZE;\""],"command":["/bin/bash"],"image":"postgres:15-alpine","name":"postgres-vacuum","resources":{"limits":{"cpu":"500m","memory":"1Gi"},"requests":{"cpu":"100m","memory":"256Mi"}}}],"restartPolicy":"OnFailure"}}}},"schedule":"0 1 * * 0"}}
+  labels:
+    app.kubernetes.io/component: cronjob
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: postgres-vacuum
+  name: postgres-vacuum
+  namespace: default
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - args:
+            - -c
+            - psql -h postgresql -U postgres -c "VACUUM ANALYZE;"
+            command:
+            - /bin/bash
+            image: postgres:15-alpine
+            imagePullPolicy: IfNotPresent
+            name: postgres-vacuum
+            resources:
+              limits:
+                cpu: 500m
+                memory: 1Gi
+              requests:
+                cpu: 100m
+                memory: 256Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: 0 1 * * 0
+  successfulJobsHistoryLimit: 3
+  suspend: false

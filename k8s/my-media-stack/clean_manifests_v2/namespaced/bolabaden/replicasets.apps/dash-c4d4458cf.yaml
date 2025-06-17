@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: dash
+    pod-template-hash: c4d4458cf
+  name: dash-c4d4458cf
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: dash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dash
+      pod-template-hash: c4d4458cf
+  template:
+    metadata:
+      labels:
+        app: dash
+        pod-template-hash: c4d4458cf
+    spec:
+      containers:
+      - image: mauricenino/dashdot:latest
+        imagePullPolicy: IfNotPresent
+        name: dash
+        ports:
+        - containerPort: 3001
+          name: dash-3001
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /mnt/host
+          name: mnt-host
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /
+          type: ""
+        name: mnt-host
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

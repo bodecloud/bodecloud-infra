@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.yaml": "yaml"
+    },
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportUnusedImport": "none",
+        "reportOptionalMemberAccess": "none"
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "git.ignoreLimitWarning": true
+}

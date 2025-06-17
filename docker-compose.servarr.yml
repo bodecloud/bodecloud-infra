@@ -1,0 +1,798 @@
+x-common-env: &common-env
+  PGID: ${PGID:-988} # 'docker' Group ID
+  PUID: ${PUID:-1002} # A non-root user ID
+  TZ: ${TZ:-America/Chicago} # Your Timezone
+
+x-resource-limits: &resource-limits
+  cpu_shares: 1024 # CPU share weight (relative, 2-262144). Higher = more CPU *if competing*.
+  #  mem_limit: 512m        # Max RAM usage (e.g., 64m, 1g). Exceeding = container kill.
+  #  mem_reservation: 325m  # Soft RAM limit (e.g., 32m, 512m).  Best effort, not guaranteed.
+  #  mem_swappiness: 30      # Swap usage (0-100). 0 = off. Higher = more swap, may slow down container.
+  #memswap_limit: 1024m    # Max RAM + Swap.  Usually same as mem_limit.
+  labels:
+    autoheal: "true"
+
+x-swarm-resource-limits: &swarm-resource-limits
+  resources:
+    limits:
+      cpus: "0.10"
+      memory: 1024M
+#    reservations:
+#     cpus: '0.05'
+#    memory:  256M
+
+x-common-deploy: &common-deploy
+  placement:
+    preferences:
+      - spread: node.labels.worker_priority
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    window: 120s
+  labels:
+    autoheal: "true"
+    swarm.autoscaler: "true"
+#  resources:
+#    limits:
+#      cpus: '0.10'
+#      memory: 128M
+#    reservations:
+#      cpus: '0.10'
+#      memory: 64M
+
+x-bazarr-labels: &bazarr-labels
+  traefik.enable: "true"
+  traefik.http.services.bazarr.loadbalancer.server.port: 6767
+
+x-checkrr-labels: &checkrr-labels
+  traefik.enable: "true"
+  traefik.http.services.checkrr.loadbalancer.server.port: 8585
+
+x-lidarr-labels: &lidarr-labels
+  traefik.enable: "true"
+  traefik.http.services.lidarr.loadbalancer.server.port: 8686
+
+x-radarr-labels: &radarr-labels
+  traefik.enable: "true"
+  traefik.http.services.radarr.loadbalancer.server.port: 7878
+
+x-readarr-labels: &readarr-labels
+  traefik.enable: "true"
+  traefik.http.services.readarr.loadbalancer.server.port: 8787
+
+x-sonarr-labels: &sonarr-labels
+  traefik.enable: "true"
+  traefik.http.services.sonarr.loadbalancer.server.port: 8989
+
+x-suggestarr-labels: &suggestarr-labels
+  traefik.enable: "true"
+  traefik.http.services.suggestarr.loadbalancer.server.port: 5000
+
+x-tdarr-labels: &tdarr-labels
+  traefik.enable: "true"
+  traefik.http.services.tdarr.loadbalancer.server.port: ${TDARR_WEBUI_PORT:-8265}
+
+x-unpackerr-labels: &unpackerr-labels
+  traefik.enable: "true"
+  traefik.http.services.unpackerr.loadbalancer.server.port: ${UN_WEBSERVER_PORT:-5656}
+
+x-whisparr-labels: &whisparr-labels
+  traefik.enable: "true"
+  traefik.http.services.whisparr.loadbalancer.server.port: 6969
+
+services:
+  bazarr:
+    # 🔹🔹 Bazarr 🔹🔹
+    image: linuxserver/bazarr
+    container_name: bazarr
+    hostname: bazarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${BAZARR_PORT:-6767}:6767
+    volumes:
+      - ${ROOT_DIR:-.}/configs/bazarr/config:/config
+      - ${ROOT_DIR:-.}/data/media/anime:/media/anime
+      - ${ROOT_DIR:-.}/data/media/movies:/media/movies
+      - ${ROOT_DIR:-.}/data/media/tv:/media/tv
+      - ${ROOT_DIR:-.}/downloads/bazarr:/downloads
+    environment:
+      <<: *common-env
+    labels:
+      <<: *bazarr-labels
+      homepage.group: Media Management
+      homepage.name: Bazarr
+      homepage.icon: bazarr.png
+      homepage.href: https://bazarr.${DOMAIN}/
+      homepage.description: Companion application to Sonarr and Radarr for automatic subtitle downloading and management in multiple languages.
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *bazarr-labels
+    restart: unless-stopped
+
+  checkrr:
+    # 🔹🔹 Checkrr 🔹🔹  https://github.com/aetaric/checkrr
+    # Scan your library files for corrupt media and replace the files via sonarr and radarr
+    image: aetaric/checkrr:3.4.0
+    container_name: checkrr
+    hostname: checkrr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${CHECKRR_PORT:-8585}:8585
+    volumes:
+#      - ${ROOT_DIR:-.}/configs/certs:/certs
+      - ${ROOT_DIR:-.}/configs/checkrr/config/checkrr.db:/checkrr.db
+      - ${ROOT_DIR:-.}/configs/checkrr/config/checkrr.yaml:/checkrr.yaml
+      - ${ROOT_DIR:-.}/configs/checkrr/logs:/logs
+      - ${ROOT_DIR:-.}/data/media:/media
+    environment:
+      <<: *common-env
+      GIN_MODE: release
+    labels:
+      <<: *checkrr-labels
+      homepage.group: System Monitoring
+      homepage.name: Checkrr
+      homepage.icon: checkrr.png
+      homepage.href: https://checkrr.${DOMAIN}/
+      homepage.description: A comprehensive system monitoring tool that checks the health and status of your various services and applications.
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *checkrr-labels
+    restart: unless-stopped
+
+  decluttarr:
+    # 🔹🔹 Decluttarr 🔹🔹  https://github.com/manimatter/decluttarr
+    # Watches radarr, sonarr, lidarr, readarr and whisparr download queues and removes downloads if they become stalled or no longer needed.
+    image: ghcr.io/manimatter/decluttarr
+    container_name: decluttarr
+    hostname: decluttarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    environment:
+      <<: *common-env
+      TEST_RUN: ${DECLUTTARR_TEST_RUN:-false}
+      SSL_VERIFICATION: ${DECLUTTARR_SSL_VERIFICATION:-false}
+      FAILED_IMPORT_MESSAGE_PATTERNS: ' [ "Not a Custom Format upgrade for existing", "Not an upgrade for existing" ]' # TODO: add more patterns
+      IGNORED_DOWNLOAD_CLIENTS: '["emulerr"]'
+      LOG_LEVEL: ${DECLUTTARR_LOG_LEVEL:-VERBOSE}
+      MIN_DOWNLOAD_SPEED: ${DECLUTTARR_MIN_DOWNLOAD_SPEED:-100} # 100 KB/s
+      NO_STALLED_REMOVAL_QBIT_TAG: ${DECLUTTARR_NO_STALLED_REMOVAL_QBIT_TAG:-Don't Kill}
+      PERMITTED_ATTEMPTS: ${DECLUTTARR_PERMITTED_ATTEMPTS:-3}
+      LIDARR_KEY: ${LIDARR_API_KEY}
+      LIDARR_URL: http://${DOMAIN}:${LIDARR_PORT:-8686}
+      RADARR_KEY: ${RADARR_API_KEY}
+      RADARR_URL: http://${DOMAIN}:${RADARR_PORT:-7878}
+      READARR_KEY: ${READARR_API_KEY}
+      READARR_URL: http://${DOMAIN}:${READARR_PORT:-8787}
+      SONARR_KEY: ${SONARR_API_KEY}
+      SONARR_URL: http://${DOMAIN}:${SONARR_PORT:-8989}
+      WHISPARR_URL: http://${DOMAIN}:${WHISPARR_PORT:-6969}
+      WHISPARR_KEY: ${WHISPARR_API_KEY}
+      QBITTORRENT_URL: http://${DOMAIN}:${QB_WEBUI_PORT:-8084}
+      QBITTORRENT_USERNAME: ${QBITTORRENT_USERNAME:-admin}
+      QBITTORRENT_PASSWORD: ${QBITTORRENT_PASSWORD:-adminadmin}
+      REMOVE_FAILED: ${DECLUTTARR_REMOVE_FAILED:-true}
+      REMOVE_FAILED_IMPORTS: ${DECLUTTARR_REMOVE_FAILED_IMPORTS:-true}
+      REMOVE_METADATA_MISSING: ${DECLUTTARR_REMOVE_METADATA_MISSING:-true}
+      REMOVE_MISSING_FILES: ${DECLUTTARR_REMOVE_MISSING_FILES:-true}
+      REMOVE_ORPHANS: ${DECLUTTARR_REMOVE_ORPHANS:-true}
+      REMOVE_SLOW: ${DECLUTTARR_REMOVE_SLOW:-true}
+      REMOVE_STALLED: ${DECLUTTARR_REMOVE_STALLED:-true}
+      REMOVE_TIMER: ${DECLUTTARR_REMOVE_TIMER:-10} # 10 seconds
+      REMOVE_UNMONITORED: ${DECLUTTARR_REMOVE_UNMONITORED:-true}
+      RUN_PERIODIC_RESCANS: '{
+        "RADARR": {"MISSING": true, "CUTOFF_UNMET": true, "MAX_CONCURRENT_SCANS": 3, "MIN_DAYS_BEFORE_RESCAN": 7},
+        "SONARR": {"MISSING": true, "CUTOFF_UNMET": true, "MAX_CONCURRENT_SCANS": 3, "MIN_DAYS_BEFORE_RESCAN": 7}
+        }'
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+  lidarr:
+    # 🔹🔹 Lidarr 🔹🔹
+    image: linuxserver/lidarr
+    container_name: lidarr
+    hostname: lidarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${LIDARR_PORT:-8686}:8686
+    volumes:
+      - ${ROOT_DIR:-.}/data/media/music/videos:/media/music/videos
+      - ${ROOT_DIR:-.}/data/media/music:/media/music
+      - ${ROOT_DIR:-.}/configs/lidarr/config:/config
+    environment:
+      <<: *common-env
+    labels:
+      <<: *lidarr-labels
+      homepage.group: Music Management
+      homepage.name: Lidarr Music
+      homepage.icon: lidarr.png
+      homepage.href: https://lidarr.${DOMAIN}
+      homepage.description: Helps you automatically download and organize your music collection, ensuring correct metadata and album art.
+      homepage.weight: 2
+      homepage.widget.type: lidarr
+      homepage.widget.url: https://lidarr.${DOMAIN}
+      homepage.widget.key: ${LIDARR_API_KEY}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *lidarr-labels
+    healthcheck:
+      test: curl -fSs http://localhost:8686 > /dev/null || exit 1
+      start_period: 20s
+      timeout: 5s
+      interval: 5s
+      retries: 3
+    restart: unless-stopped
+
+  lidarr-exporter:
+    # 🔹🔹 Lidarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Lidarr metrics for Prometheus
+    depends_on:
+      - prometheus
+      - lidarr
+    # image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: lidarr-exporter
+    hostname: lidarr-exporter
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - ${LIDARR_EXPORTER_PORT:-9709}:${LIDARR_EXPORTER_PORT:-9709}
+    environment:
+      APIKEY: ${LIDARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${LIDARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-TRUE}
+      PORT: ${LIDARR_EXPORTER_PORT:-9709}
+      URL: ${LIDARR_EXPORTER_URL:-http://lidarr:${LIDARR_PORT:-8686}}
+    command: ["lidarr"]
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+  radarr:
+    # 🔹🔹 Radarr 🔹🔹
+    image: linuxserver/radarr
+    container_name: radarr
+    hostname: radarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${RADARR_PORT:-7878}:7878
+    volumes:
+      - ${ROOT_DIR:-.}/data/media/movies:/movies
+      - ${ROOT_DIR:-.}/downloads/movies:/downloads/movies
+      - ${ROOT_DIR:-.}/configs/radarr/config:/config
+    environment:
+      <<: *common-env
+    labels:
+      <<: *radarr-labels
+      homepage.group: Movie Management
+      homepage.name: Radarr Movies
+      homepage.icon: radarr.png
+      homepage.href: https://radarr.${DOMAIN}
+      homepage.description: Automates your movie downloads, finding and adding new releases to your collection as they become available.
+      homepage.weight: 1
+      homepage.widget.type: radarr
+      homepage.widget.url: https://radarr.${DOMAIN}
+      homepage.widget.key: ${RADARR_API_KEY}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *radarr-labels
+    restart: unless-stopped
+
+  radarr-exporter:
+    # 🔹🔹 Radarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Radarr metrics for Prometheus
+    depends_on:
+      - prometheus
+      - radarr
+    # image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: radarr-exporter
+    hostname: radarr-exporter
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - ${RADARR_EXPORTER_PORT:-9707}:${RADARR_EXPORTER_PORT:-9707}
+    environment:
+      PORT: ${RADARR_EXPORTER_PORT:-9707}
+      URL: http://radarr:${RADARR_PORT:-7878}
+      APIKEY: ${RADARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${RADARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+    command: ["radarr"]
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: "no"
+
+  readarr:
+    # 🔹🔹 Readarr 🔹🔹
+    image: linuxserver/readarr:develop
+    container_name: readarr
+    hostname: readarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${READARR_PORT:-8787}:8787
+    volumes:
+      - ${ROOT_DIR:-.}/configs/readarr/config:/config
+      - ${ROOT_DIR:-.}/data/media/books:/books
+      - ${ROOT_DIR:-.}/data/media/comics:/comics
+      - ${ROOT_DIR:-.}/data/media/manga:/manga
+      - ${ROOT_DIR:-.}/downloads:/downloads
+    environment:
+      <<: *common-env
+    labels:
+      <<: *readarr-labels
+      homepage.group: E-books & Comics
+      homepage.name: Readarr
+      homepage.icon: readarr.png
+      homepage.href: https://readarr.${DOMAIN}
+      homepage.description: Manages and automates the downloading of ebooks and audiobooks, ensuring your digital library is always up-to-date.
+      homepage.weight: 5
+      homepage.widget.type: readarr
+      homepage.widget.url: https://readarr.${DOMAIN}
+      homepage.widget.key: ${READARR_API_KEY}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *readarr-labels
+    restart: unless-stopped
+
+  readarr-exporter:
+    # 🔹🔹 Readarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Readarr metrics for Prometheus
+    depends_on:
+      - prometheus
+      - readarr
+    # image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: readarr-exporter
+    hostname: readarr-exporter
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - ${READARR_EXPORTER_PORT:-9706}:${READARR_EXPORTER_PORT:-9706}
+    environment:
+      PORT: ${READARR_EXPORTER_PORT:-9706}
+      URL: https://readarr:${READARR_PORT:-8787}
+      APIKEY: ${READARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${READARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+    command: ["readarr"]
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: "no"
+
+  recyclarr:
+    # 🔹🔹 Recyclarr 🔹🔹  # https://github.com/recyclarr/recyclarr
+    # command-line application that will automatically synchronize recommended settings from the TRaSH guides to your Sonarr/Radarr instances.
+    image: ghcr.io/recyclarr/recyclarr
+    container_name: recyclarr
+    hostname: recyclarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    ports:
+      - ${RECYCLARR_PORT:-32888}:8989
+    init: true
+    volumes:
+      - ${ROOT_DIR:-.}/configs/recyclarr:/config
+    environment:
+      <<: *common-env
+      TINI_SUBREAPER: "false"
+      RADARR_API_KEY: ${RADARR_API_KEY}
+      RADARR_BASE_URL: http://radarr:${RADARR_PORT:-7878}
+      SONARR_API_KEY: ${SONARR_API_KEY}
+      SONARR_BASE_URL: http://sonarr:${SONARR_PORT:-8989}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+  sonarr:
+    # 🔹🔹 Sonarr 🔹🔹
+    # Sonarr is a PVR for Usenet and BitTorrent users. It's a sleek Web UI that integrates seamlessly with your various PVR apps.
+    image: linuxserver/sonarr
+    container_name: sonarr
+    hostname: sonarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${SONARR_PORT:-8989}:8989
+    volumes:
+      - ${ROOT_DIR:-.}/data/media/anime:/anime
+      - ${ROOT_DIR:-.}/data/media/tv:/tv
+      - ${ROOT_DIR:-.}/downloads/anime:/downloads/anime
+      - ${ROOT_DIR:-.}/downloads/tv:/downloads/tv
+      - ${ROOT_DIR:-.}/configs/sonarr/config:/config
+    environment:
+      <<: *common-env
+    labels:
+      <<: *sonarr-labels
+      homepage.group: TV Management
+      homepage.name: Sonarr TV
+      homepage.icon: sonarr.png
+      homepage.href: https://sonarr.${DOMAIN}
+      homepage.description: Manages your TV show downloads, automatically finding and adding new episodes as they air, keeping your library organized.
+      homepage.weight: 0
+      homepage.widget.type: sonarr
+      homepage.widget.url: https://sonarr.${DOMAIN}
+      homepage.widget.key: ${SONARR_API_KEY}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *sonarr-labels
+    restart: unless-stopped
+
+  sonarr-exporter:
+    # 🔹🔹 Sonarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Sonarr metrics for Prometheus
+    depends_on:
+      - prometheus
+      - sonarr
+    # image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: sonarr-exporter
+    hostname: sonarr-exporter
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    ports:
+      - ${SONARR_EXPORTER_PORT:-9708}:${SONARR_EXPORTER_PORT:-9708}
+    security_opt:
+      - no-new-privileges:true
+    command: ["sonarr"]
+    environment:
+      PORT: ${SONARR_EXPORTER_PORT:-9708}
+      URL: http://${GLUETUN_IP:-172.19.4.1}:${SONARR_PORT:-8989}
+      APIKEY: ${SONARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${SONARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+    restart: "no"
+
+  suggestarr:
+    # 🔹🔹 Suggestarr 🔹🔹
+    # Suggestarr is a tool that helps you manage your media library by suggesting new content to add to it.
+    image: ciuse99/suggestarr
+    container_name: suggestarr
+    hostname: suggestarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - traefik_public
+    ports:
+      - ${SUGGESTARR_PORT:-5003}:5000
+    volumes:
+      - ${ROOT_DIR:-.}/configs/suggestarr:/app/config/config_files
+    environment:
+      <<: *common-env
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    healthcheck:
+      test: curl -fSs http://localhost:5000 > /dev/null || exit 1
+      start_period: 20s
+      timeout: 5s
+      interval: 5s
+      retries: 3
+    restart: unless-stopped
+
+  tdarr:
+    # 🔹🔹 Tdarr 🔹🔹  # https://github.com/haveagitgat/tdarr
+    # Library Optimizer
+    # image: ghcr.io/haveagitgat/tdarr
+    # use this one with arm:
+    image: ghcr.io/haveagitgat/tdarr:2.35.02@sha256:14a86431d9d86070915d8ff444e6d56ec4e5fb78b0bd664e07d67e5f3b93e839
+    container_name: tdarr
+    hostname: tdarr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - traefik_public
+    ports:
+      - ${TDARR_WEBUI_PORT:-8265}:${TDARR_WEBUI_PORT:-8265} # WebUI port
+      - ${TDARR_SERVER_PORT:-8266}:${TDARR_SERVER_PORT:-8266} # Server port
+    volumes:
+      - ${ROOT_DIR:-.}/configs/tdarr/configs:/app/configs
+      - ${ROOT_DIR:-.}/configs/tdarr/logs:/app/logs
+      - ${ROOT_DIR:-.}/configs/tdarr/server:/app/server
+      - ${ROOT_DIR:-.}/configs/transcode_cache:/temp
+      - ${ROOT_DIR:-.}/data/media/anime:/media/anime
+      - ${ROOT_DIR:-.}/data/media/movies:/media/movies
+      - ${ROOT_DIR:-.}/data/media/tv:/media/tv
+    #      devices:
+    #      - driver: nvidia
+    #        count: all
+    #        capabilities: [gpu]
+    environment:
+      <<: *common-env
+      UMASK_SET: 002
+      ffmpegVersion: ${TDARR_FFMPEG_VERSION:-6}
+      inContainer: ${TDARR_IN_CONTAINER:-true}
+      internalNode: ${TDARR_INTERNAL_NODE:-true}
+      nodeName: ${TDARR_NODE_NAME:-MyInternalNode}
+      serverIP: ${TDARR_SERVER_IP:-0.0.0.0}
+      serverPort: ${TDARR_SERVER_PORT:-8266}
+      webUIPort: ${TDARR_WEBUI_PORT:-8265}
+      #NVIDIA_DRIVER_CAPABILITIES: all
+      #NVIDIA_VISIBLE_DEVICES: all
+    labels:
+      <<: *tdarr-labels
+      homepage.group: Media Processing
+      homepage.name: Tdarr
+      homepage.icon: tdarr.png
+      homepage.href: https://tdarr.${DOMAIN}
+      homepage.description: Transcodes and processes your media files, ensuring they are optimized for playback on various devices and platforms.
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *tdarr-labels
+    restart: unless-stopped
+
+  unpackerr:
+    # 🔹🔹 Unpackerr 🔹🔹
+    # Extracts downloads for Radarr, Sonarr, Lidarr, Readarr, and/or a Watch folder - Deletes extracted files after import
+    image: golift/unpackerr
+    container_name: unpackerr
+    hostname: unpackerr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${UN_WEBSERVER_PORT:-5656}:${UN_WEBSERVER_PORT:-5656}
+    security_opt:
+      - no-new-privileges:true
+    # Uncomment the devices section for tv tuners and intel gpus
+    #devices:
+    #- /dev/dri/card0:/dev/dri/card0
+    #- /dev/dri/renderD128:/dev/dri/renderD128
+    volumes:
+      # You need at least this one volume mapped so Unpackerr can find your files to extract.
+      # Make sure this matches your Starr apps; the folder mount (/downloads or /data) should be identical.
+      - ${ROOT_DIR:-.}/downloads:/downloads
+      # Feel free to change the config and logs paths to match your host system.
+      - ${ROOT_DIR:-.}/configs/unpackerr/config:/config
+      - ${ROOT_DIR:-.}/configs/unpackerr/logs:/logs
+      - ${ROOT_DIR:-.}/certs:/certs
+    # What you see below are defaults mixed with examples where examples make more sense than the default.
+    # You only need to modify things specific to your environment.
+    # Remove apps and feature configs you do not use or need.
+    # ie. Remove all lines that begin with UN_CMDHOOK, UN_WEBHOOK,
+    #     UN_FOLDER, UN_WEBSERVER, and other apps you do not use.
+    environment:
+      <<: *common-env
+      ## General Config
+      UN_ACTIVITY: ${UN_ACTIVITY:-false} # Setting activity to true will silence all app queue log lines with only zeros.
+      UN_DEBUG: ${UN_DEBUG:-true} # Turn on debug messages in the output. Recommend trying this so you know what it looks like. I personally leave it on.
+      UN_DIR_MODE: ${UN_DIR_MODE:-0755} # What mode to create directories with
+      UN_ERROR_STDERR: ${UN_ERROR_STDERR:-false} # Send error output to stderr instead of stdout by setting error_stderr to true.
+      UN_FILE_MODE: ${UN_FILE_MODE:-0644} # What mode to create files with
+      UN_INTERVAL: ${UN_INTERVAL:-2m} # How often to poll sonarr and radarr.
+      UN_LOG_FILE_MB: ${UN_LOG_FILE_MB:-10} # How large to make each log file
+      UN_LOG_FILE: ${UN_LOG_FILE:-/logs/unpackerr_main.log} # Log file path
+      UN_LOG_FILES: ${UN_LOG_FILES:-10} # How many log files to keep
+      UN_LOG_QUEUES: ${UN_LOG_QUEUES:-1m} # The Starr-application activity queue is logged on an interval.
+      UN_MAX_RETRIES: ${UN_MAX_RETRIES:-3} # How many times to retry a failed extraction. Pauses `UN_RETRY_DELAY` between attempts.
+      UN_PARALLEL: ${UN_PARALLEL:-1} # How many files may be extracted in parallel. 1 works fine. Raise this only if you have fast disks and CPU.
+      UN_QUIET: ${UN_QUIET:-false} # Disable writing messages to stdout/stderr. This silences the app.
+      UN_RETRY_DELAY: ${UN_RETRY_DELAY:-5m} # How long to wait before removing the history for a failed extraction.
+      UN_START_DELAY: ${UN_START_DELAY:-1m} # How long an item must be queued (download complete) before extraction will start.
+      # Webserver Config
+      UN_WEBSERVER_LISTEN_ADDR: ${UN_WEBSERVER_LISTEN_IP_ADDR:-0.0.0.0}:${UN_WEBSERVER_PORT:-5656} # The address and port to listen on.
+      UN_WEBSERVER_LOG_FILE_MB: ${UN_WEBSERVER_LOG_FILE_MB:-1} # How large to make each log file
+      UN_WEBSERVER_LOG_FILE: ${UN_WEBSERVER_LOG_FILE:-/logs/unpackerr_webserver.log} # Log file path
+      UN_WEBSERVER_LOG_FILES: ${UN_WEBSERVER_LOG_FILES:-10} # How many log files to keep
+      UN_WEBSERVER_METRICS: ${UN_WEBSERVER_METRICS:-false} # Enable metrics collection.
+      UN_WEBSERVER_SSL_CERT_FILE: ${UN_WEBSERVER_SSL_CERT_FILE:-/certs/cert.pem} # Path to the SSL certificate file
+      UN_WEBSERVER_SSL_KEY_FILE: ${UN_WEBSERVER_SSL_KEY_FILE:-/certs/key.pem} # Path to the SSL key file
+      UN_WEBSERVER_UPSTREAMS: ${UN_WEBSERVER_UPSTREAMS:-} # [] / List of upstream proxy CIDRs or IPs to trust.
+      UN_WEBSERVER_URLBASE: ${UN_WEBSERVER_URLBASE:-} # The base URL to use for the webserver.
+      ## Folder Config
+      UN_FOLDER_0_DELETE_AFTER: ${UN_FOLDER_0_DELETE_AFTER:-10m} # The default is 0. Set to 0 to disable all deletes. Uncomment it to enable deletes. Uses Go Duration.
+      UN_FOLDER_0_DELETE_FILES: ${UN_FOLDER_0_DELETE_FILES:-false} # Delete extracted files after successful extraction? true/false, no quotes. Honors delete_after.
+      UN_FOLDER_0_DELETE_ORIGINAL: ${UN_FOLDER_0_DELETE_ORIGINAL:-true} # Delete original items after successful extraction? true/false, no quotes. Honors delete_after.
+      UN_FOLDER_0_DISABLE_LOG: ${UN_FOLDER_0_DISABLE_LOG:-false} # Disable extraction log (unpackerred.txt) file creation? true/false, no quotes.
+      UN_FOLDER_0_DISABLE_RECURSION: ${UN_FOLDER_0_DISABLE_RECURSION:-false} # Unpackerr extracts archives inside archives. Set this to true to disable recursive extractions.
+      UN_FOLDER_0_EXTRACT_ISOS: ${UN_FOLDER_0_EXTRACT_ISOS:-false} # Set this to true if you want this app to extract ISO files with .iso extension.
+      UN_FOLDER_0_EXTRACT_PATH: ${UN_FOLDER_0_EXTRACT_PATH:-} # No Default / Where to extract to. Uses UN_FOLDER_0_PATH if not set.
+      UN_FOLDER_0_MOVE_BACK: ${UN_FOLDER_0_MOVE_BACK:-true} # Move extracted files into original folder? If `false`, files go into an '_unpackerred' folder.
+      UN_FOLDER_0_PATH: ${UN_FOLDER_0_PATH:-/downloads/auto_extract} # No Default / Folder to watch for archives. Not for Starr apps.
+      UN_FOLDERS_INTERVAL: ${UN_FOLDERS_INTERVAL:-2m} # "0s" / How often poller checks for new folders. Use 1ms to disable it.
+      # Lidarr
+      UN_LIDARR_0_API_KEY: ${LIDARR_API_KEY} # What is the app apikey, Settings -> General (Feel free to leave this blank here and add it to your generated config later)
+      UN_LIDARR_0_DELETE_DELAY: ${UN_LIDARR_0_DELETE_DELAY:-5m} # How long to wait after import before deleting the extracted items.
+      UN_LIDARR_0_DELETE_ORIG: ${UN_LIDARR_0_DELETE_ORIG:-true} # Setting this to true deletes the entire original download folder after import.
+      UN_LIDARR_0_PATHS_0: ${UN_LIDARR_0_PATHS_0:-/downloads/music}
+      UN_LIDARR_0_PROTOCOLS: ${UN_LIDARR_0_PROTOCOLS:-torrent,usenet} # Default protocols is torrent. Alternative: torrent,usenet
+      UN_LIDARR_0_SYNCTHING: ${UN_LIDARR_0_SYNCTHING:-false} # If you use Syncthing, setting this to true will make unpackerr wait for syncs to finish.
+      UN_LIDARR_0_TIMEOUT: ${UN_LIDARR_0_TIMEOUT:-10s} # How long to wait for a reply from the backend.
+      UN_LIDARR_0_URL: http://lidarr:${LIDARR_PORT:-8686} # What is the address of the app on your system (open it in the browser and copy it)
+      # Radarr
+      UN_RADARR_0_API_KEY: ${RADARR_API_KEY} # What is the app apikey, Settings -> General (Feel free to leave this blank here and add it to your generated config later)
+      UN_RADARR_0_DELETE_DELAY: ${UN_RADARR_0_DELETE_DELAY:-5m} # How long to wait after import before deleting the extracted items.
+      UN_RADARR_0_DELETE_ORIG: ${UN_RADARR_0_DELETE_ORIG:-true} # Setting this to true deletes the entire original download folder after import.
+      UN_RADARR_0_PATHS_0: ${UN_RADARR_0_PATHS_0:-/downloads/movies}
+      UN_RADARR_0_PROTOCOLS: ${UN_RADARR_0_PROTOCOLS:-torrent,usenet} # Default protocols is torrent. Alternative: torrent,usenet
+      UN_RADARR_0_SYNCTHING: ${UN_RADARR_0_SYNCTHING:-false} # If you use Syncthing, setting this to true will make unpackerr wait for syncs to finish.
+      UN_RADARR_0_TIMEOUT: ${UN_RADARR_0_TIMEOUT:-10s} # How long to wait for a reply from the backend.
+      UN_RADARR_0_URL: http://radarr:${RADARR_PORT:-7878} # What is the address of the app on your system (open it in the browser and copy it)
+      # Readarr
+      UN_READARR_0_API_KEY: ${READARR_API_KEY} # What is the app apikey, Settings -> General (Feel free to leave this blank here and add it to your generated config later)
+      UN_READARR_0_DELETE_DELAY: ${UN_READARR_0_DELETE_DELAY:-5m} # How long to wait after import before deleting the extracted items.
+      UN_READARR_0_DELETE_ORIG: ${UN_READARR_0_DELETE_ORIG:-true} # Setting this to true deletes the entire original download folder after import.
+      UN_READARR_0_PATHS_0: ${UN_READARR_0_PATHS_0:-/downloads/books}
+      UN_READARR_0_PATHS_1: ${UN_READARR_0_PATHS_1:-/downloads/comics}
+      UN_READARR_0_PATHS_2: ${UN_READARR_0_PATHS_2:-/downloads/manga}
+      UN_READARR_0_PROTOCOLS: ${UN_READARR_0_PROTOCOLS:-torrent,usenet} # Default protocols is torrent. Alternative: torrent,usenet
+      UN_READARR_0_SYNCTHING: ${UN_READARR_0_SYNCTHING:-false} # If you use Syncthing, setting this to true will make unpackerr wait for syncs to finish.
+      UN_READARR_0_TIMEOUT: ${UN_READARR_0_TIMEOUT:-10s} # How long to wait for a reply from the backend.
+      UN_READARR_0_URL: http://readarr:${READARR_PORT:-8787} # What is the address of the app on your system (open it in the browser and copy it)
+      # Sonarr
+      UN_SONARR_0_API_KEY: ${SONARR_API_KEY} # What is the app apikey, Settings -> General (Feel free to leave this blank here and add it to your generated config later)
+      UN_SONARR_0_DELETE_DELAY: ${UN_SONARR_0_DELETE_DELAY:-5m} # How long to wait after import before deleting the extracted items.
+      UN_SONARR_0_DELETE_ORIG: ${UN_SONARR_0_DELETE_ORIG:-true} # Setting this to true deletes the entire original download folder after import.
+      UN_SONARR_0_PATHS_0: ${UN_SONARR_0_PATHS_0:-/downloads/anime}
+      UN_SONARR_0_PATHS_1: ${UN_SONARR_0_PATHS_1:-/downloads/tv}
+      UN_SONARR_0_PROTOCOLS: ${UN_SONARR_0_PROTOCOLS:-torrent,usenet} # Default protocols is torrent. Alternative: torrent,usenet
+      UN_SONARR_0_SYNCTHING: ${UN_SONARR_0_SYNCTHING:-false} # If you use Syncthing, setting this to true will make unpackerr wait for syncs to finish.
+      UN_SONARR_0_TIMEOUT: ${UN_SONARR_0_TIMEOUT:-10s} # How long to wait for a reply from the backend.
+      UN_SONARR_0_URL: http://sonarr:${SONARR_PORT:-8989} # What is the address of the app on your system (open it in the browser and copy it)
+      # Whisparr
+      UN_WHISPARR_0_API_KEY: ${WHISPARR_API_KEY} # What is the app apikey, Settings -> General (Feel free to leave this blank here and add it to your generated config later)
+      UN_WHISPARR_0_DELETE_DELAY: ${UN_WHISPARR_0_DELETE_DELAY:-5m} # How long to wait after import before deleting the extracted items.
+      UN_WHISPARR_0_DELETE_ORIG: ${UN_WHISPARR_0_DELETE_ORIG:-true} # Setting this to true deletes the entire original download folder after import.
+      UN_WHISPARR_0_PATHS_0: ${UN_WHISPARR_0_PATHS_0:-/downloads/xxx}
+      UN_WHISPARR_0_PROTOCOLS: ${UN_WHISPARR_0_PROTOCOLS:-torrent,usenet} # Default protocols is torrent. Alternative: torrent,usenet
+      UN_WHISPARR_0_SYNCTHING: ${UN_WHISPARR_0_SYNCTHING:-false} # If you use Syncthing, setting this to true will make unpackerr wait for syncs to finish.
+      UN_WHISPARR_0_TIMEOUT: ${UN_WHISPARR_0_TIMEOUT:-10s} # How long to wait for a reply from the backend.
+      UN_WHISPARR_0_URL: http://whisparr:${WHISPARR_PORT:-6969} # What is the address of the app on your system (open it in the browser and copy it)
+      ## Web Hooks
+      #UN_WEBHOOK_0_URL: ${UN_WEBHOOK_0_URL:-}  # e.g. https://notifiarr.com/api/v1/notification/unpackerr/api_key_from_notifiarr_com
+      #UN_WEBHOOK_0_NAME: ${UN_WEBHOOK_0_NAME:-}  # Set this to hide the URL in logs.
+      #UN_WEBHOOK_0_SILENT: ${UN_WEBHOOK_0_SILENT:-true}  # Turns off success logs (less log spam)
+      #UN_WEBHOOK_0_EVENTS_0: ${UN_WEBHOOK_0_EVENTS_0:-1}  # list of event ids to include, 0 == all. Example: 1,2,3,4
+      #UN_WEBHOOK_0_EVENTS_1: ${UN_WEBHOOK_0_EVENTS_1:-4}  # 1 = download started, 2 = download finished, 3 = extraction started
+      #UN_WEBHOOK_0_EVENTS_2: ${UN_WEBHOOK_0_EVENTS_2:-6}  # 4 = extraction finished, 5 = download failed, 6 = extraction failed
+      #UN_WEBHOOK_0_NICKNAME: ${UN_WEBHOOK_0_NICKNAME:-Unpackerr}  # Used in Discord and Slack templates as bot name, in Telegram as chat_id.
+      #UN_WEBHOOK_0_CHANNEL: ${UN_WEBHOOK_0_CHANNEL:-}  # Also passed into templates. Used in Slack templates for destination channel.
+      #UN_WEBHOOK_0_EXCLUDE_0: ${UN_WEBHOOK_0_EXCLUDE_0:-}  # List of apps to exclude, Example: radarr, lidarr
+      #UN_WEBHOOK_0_EXCLUDE_1: ${UN_WEBHOOK_0_EXCLUDE_1:-}
+      #UN_WEBHOOK_0_TEMPLATE_PATH: ${UN_WEBHOOK_0_TEMPLATE_PATH:-}  # Override internal webhook template for discord.com or other hooks.
+      #UN_WEBHOOK_0_TEMPLATE: ${UN_WEBHOOK_0_TEMPLATE:-}  # Override automatic template detection. Values: notifiarr, discord, telegram, gotify, pushover, slack
+      #UN_WEBHOOK_0_IGNORE_SSL: ${UN_WEBHOOK_0_IGNORE_SSL:-true}  # Set this to true to ignore the SSL certificate on the server.
+      #UN_WEBHOOK_0_TIMEOUT: ${UN_WEBHOOK_0_TIMEOUT:-10s}  # You can adjust how long to wait for a server response.
+      #UN_WEBHOOK_0_CONTENT_TYPE: ${UN_WEBHOOK_0_CONTENT_TYPE:-application/json}  # If your custom template uses another MIME type, set this.
+      ## Command Hooks
+      #UN_CMDHOOK_0_COMMAND: ${UN_CMDHOOK_0_COMMAND:-/downloads/scripts/command.sh}  # Path to command or script.
+      #UN_CMDHOOK_0_EVENTS_0: ${UN_CMDHOOK_0_EVENTS_0:-1}  # list of event ids to include, 0 == all. Example: 1,2,3,4
+      #UN_CMDHOOK_0_EVENTS_1: ${UN_CMDHOOK_0_EVENTS_1:-4}  # 1 = download started, 2 = download finished, 3 = extraction started
+      #UN_CMDHOOK_0_EVENTS_2: ${UN_CMDHOOK_0_EVENTS_2:-7}  # 4 = extraction finished, 5 = download failed, 6 = extraction failed
+      #UN_CMDHOOK_0_EXCLUDE_0: ${UN_CMDHOOK_0_EXCLUDE_0:-}  # list of apps to
+      #UN_CMDHOOK_0_EXCLUDE_1: ${UN_CMDHOOK_0_EXCLUDE_1:-}  # exclude, Example: radarr, lidarr
+      #UN_CMDHOOK_0_NAME: ${UN_CMDHOOK_0_NAME:-}  # Provide an optional name for logging.
+      #UN_CMDHOOK_0_SHELL: ${UN_CMDHOOK_0_SHELL:-false}  # Runs the command inside /bin/sh ('nix) or cmd.exe (Windows).
+      #UN_CMDHOOK_0_SILENT: ${UN_CMDHOOK_0_SILENT:-false}  # Hides command output from logs.
+      #UN_CMDHOOK_0_TIMEOUT: ${UN_CMDHOOK_0_TIMEOUT:-10s}  # You can adjust how long to wait for a server response.
+    labels:
+      <<: *unpackerr-labels
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *unpackerr-labels
+    restart: unless-stopped
+
+  whisparr:
+    # 🔹🔹 Whisparr 🔹🔹  https://github.com/thespad/whisparr
+    # Whisparr is a fork of Sonarr for managing and downloading adult content.
+    image: ghcr.io/thespad/whisparr
+    container_name: whisparr
+    hostname: whisparr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${WHISPARR_PORT:-6969}:6969
+    volumes:
+      - ${ROOT_DIR:-.}/configs/whisparr/config:/config
+      - ${ROOT_DIR:-.}/downloads/xxx:/downloads/xxx
+      - ${ROOT_DIR:-.}/data/media/xxx:/xxx
+    environment:
+      <<: *common-env
+    labels:
+      <<: *whisparr-labels
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *whisparr-labels
+    healthcheck:
+      test: curl -fSs http://localhost:6969 > /dev/null || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+
+  whisparr-exporter:
+    # 🔹🔹 Whisparr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Whisparr metrics for Prometheus
+    depends_on:
+      - prometheus
+      - whisparr
+    # image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: whisparr-exporter
+    hostname: whisparr-exporter
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    ports:
+      - ${WHISPARR_EXPORTER_PORT:-9710}:${WHISPARR_EXPORTER_PORT:-9710}
+    security_opt:
+      - no-new-privileges:true
+    command: ["whisparr"]
+    environment:
+      PORT: ${WHISPARR_EXPORTER_PORT:-9710}
+      URL: http://whisparr:${WHISPARR_PORT:-6969}
+      APIKEY: ${WHISPARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${WHISPARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+    restart: "no"

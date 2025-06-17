@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+rcloneuiConfig:
+  configYaml: |-
+    # Example configuration
+    # Replace with actual configuration
+    example_key: "example_value"
+  tz: UTC

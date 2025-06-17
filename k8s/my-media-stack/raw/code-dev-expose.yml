@@ -1,0 +1,13 @@
+#! code-dev-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-dev
+  namespace: my-media-stack
+spec:
+  selector: {}
+  ports:
+    - name: code-dev-8443
+      port: 8443
+      targetPort: code-dev-8443

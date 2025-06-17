@@ -1,0 +1,59 @@
+#! jackett-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: jackett
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: jackett
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: jackett
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: jackett
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: jackett
+                  image: linuxserver/jackett
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: PGID
+                      value: "988"
+                    - name: PUID
+                      value: "1002"
+                    - name: TZ
+                      value: "America/Chicago"
+                    - name: UMASK
+                      value: "022"
+                  securityContext:
+                    runAsUser: 1002:988
+                  livenessProbe:
+                    exec:
+                        command:
+                            - /bin/sh
+                            - -c
+                            - curl -fs http://127.0.0.1:9117/api/v2.0/indexers/all/results/torznab?t=indexers&apikey=nnx0n84pcj7umynyd2pbid2nl1zzuemz || exit 1
+                    periodSeconds: 30
+                    initialDelaySeconds: 60
+                    timeoutSeconds: 10
+                  ports:
+                    - name: jackett-9117
+                      containerPort: 9117
+                  volumeMounts:
+                    - name: config
+                      mountPath: /config
+            volumes:
+                - name: config
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/jackett/config

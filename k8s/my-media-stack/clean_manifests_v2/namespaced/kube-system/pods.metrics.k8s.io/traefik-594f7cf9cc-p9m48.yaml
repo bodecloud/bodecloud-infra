@@ -1,0 +1,18 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: traefik
+  usage:
+    cpu: 1581751n
+    memory: 85028Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.kubernetes.io/instance: traefik-kube-system
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefik
+    helm.sh/chart: traefik-34.2.1_up34.2.0
+    pod-template-hash: 594f7cf9cc
+  name: traefik-594f7cf9cc-p9m48
+  namespace: kube-system
+timestamp: "2025-06-14T23:02:03Z"
+window: 12.538s

@@ -1,0 +1,91 @@
+---
+# Playbook to uninstall and clean up k3s
+
+- name: Reset k3s cluster
+  hosts: k3s_cluster
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Get hostname
+      debug:
+        msg: "Resetting k3s on {{ inventory_hostname }}"
+
+    - name: Stop k3s service if running
+      systemd:
+        name: "{{ item }}"
+        state: stopped
+        enabled: false
+      failed_when: false # Don't fail if service doesn't exist
+      with_items:
+        - k3s
+        - k3s-agent
+
+    - name: Uninstall k3s
+      command:
+        cmd: /usr/local/bin/k3s-uninstall.sh
+      failed_when: false
+      register: k3s_uninstall
+
+    - name: Uninstall k3s-agent
+      command:
+        cmd: /usr/local/bin/k3s-agent-uninstall.sh
+      failed_when: false
+      register: k3s_agent_uninstall
+
+    - name: Remove k3s service files
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - /etc/systemd/system/k3s.service
+        - /etc/systemd/system/k3s-agent.service
+
+    - name: Clean up k3s directories
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - /var/lib/rancher/k3s
+        - /etc/rancher/k3s
+        - /var/lib/kubelet
+        - /var/lib/cni
+        - /var/run/k3s
+        - /run/k3s
+        - /run/flannel
+        - /etc/cni
+        - /var/log/pods
+
+    - name: Clean up k3s binary
+      file:
+        path: /usr/local/bin/k3s
+        state: absent
+
+    - name: Clean up kubeconfig
+      file:
+        path: "/home/{{ ansible_user }}/.kube/config"
+        state: absent
+      failed_when: false
+
+    - name: Clean up any remaining containers
+      shell: "docker rm -f $(docker ps -qa) || true"
+      failed_when: false
+      when: "'docker' in ansible_facts.packages"
+
+    - name: Clean up any remaining container resources
+      shell: "for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher; do umount $mount; done"
+      failed_when: false
+
+    - name: Remove bash environment modifications
+      lineinfile:
+        path: "/home/{{ ansible_user }}/.bashrc"
+        regexp: "{{ item }}"
+        state: absent
+      with_items:
+        - "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+        - "alias kubectl='k3s kubectl'"
+      failed_when: false
+
+    - name: Restart server to ensure clean slate
+      reboot:
+        reboot_timeout: 3600
+      when: (k3s_uninstall.changed or k3s_agent_uninstall.changed) and inventory_hostname in groups['server']

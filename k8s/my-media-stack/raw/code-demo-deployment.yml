@@ -1,0 +1,61 @@
+#! code-demo-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-demo
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-demo
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: code-demo
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: code
+          image: linuxserver/code-server:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: CODESERVER_PASSWORD
+              value: "ubuntu"
+            - name: CODESERVER_SUDO_PASSWORD
+              value: "h4L0m4St3R327"
+            - name: DEFAULT_WORKSPACE
+              value: "/workspace"
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1001"
+            - name: TZ
+              value: "America/Chicago"
+            - name: UMASK
+              value: "002"
+          ports:
+            - name: code-demo-8443
+              containerPort: 8443
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: config
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/code-server/demo/config
+        - name: workspace
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/code-server/demo/workspace

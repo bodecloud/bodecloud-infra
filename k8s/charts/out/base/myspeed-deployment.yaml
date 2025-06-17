@@ -1,0 +1,40 @@
+#! myspeed-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: myspeed
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: myspeed
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: myspeed
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: myspeed
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: myspeed
+                  image: germannewsmaker/myspeed
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: myspeed-5216
+                      containerPort: 5216
+                  volumeMounts:
+                    - name: myspeed-data
+                      mountPath: /myspeed/data
+            volumes:
+                - name: myspeed-data
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/myspeed

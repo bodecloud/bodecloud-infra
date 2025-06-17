@@ -1,0 +1,2493 @@
+b2S3CmdRestoreConfig:
+  s3Cfg: |-
+    [default]
+    bucket_location = us-west-002
+    host_base = s3.us-west-002.backblazeb2.com
+    host_bucket = %(bucket)s.s3.us-west-002.backblazeb2.com
+brunner56Filebrowser:
+  brunner56Filebrowser:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: false
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      tz: UTC
+    image:
+      repository: ghcr.io/elfhosted/filebrowser
+      tag: 2.23.0@sha256:296e3a3d08c5ca07a26350358fa2e58a597a41adb253a65bba27b557f36383e5
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 6Mi
+  copyRecyclarrExampleConfig:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  elfbot:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  setup:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/filebrowser
+      tag: 2.23.0@sha256:296e3a3d08c5ca07a26350358fa2e58a597a41adb253a65bba27b557f36383e5
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  strategy:
+    type: Recreate
+  type: ClusterIP
+brunner56Gatus:
+  brunner56Gatus:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      gatusConfigPath: /config/config.yaml
+      smtpFrom: health@elfhosted.com
+      smtpPort: "587"
+    image:
+      repository: ghcr.io/elfhosted/gatus
+      tag: 5.17.0@sha256:e2752cf7e1781478b12e0ca48159a40549905195afe39fe0a5e39ac2c7256dac
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 128Mi
+      requests:
+        cpu: "0"
+        memory: 20Mi
+  podSecurityContext:
+    fsGroup: 568
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  type: ClusterIP
+brunner56Homer:
+  brunner56Homer:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsNonRoot: false
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      tz: UTC
+    image:
+      repository: filebrowser/filebrowser
+      tag: v2.31.2
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 200m
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: Always
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 1
+    type: RollingUpdate
+  type: ClusterIP
+  ui:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/homer
+      tag: v25.05.2@sha256:60772bd0292281282161f10aa2bea105bba344158937f1c0022c6986ef5aedc3
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+brunner56Kubernetesdashboard:
+  dashboardMetricsScraper:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsGroup: 2001
+      runAsUser: 1001
+    image:
+      repository: kubernetesui/metrics-scraper
+      tag: v1.0.9
+    imagePullPolicy: IfNotPresent
+  kubernetesdashboard:
+    args:
+    - --namespace=bolabaden
+    - --sidecar-host=http://127.0.0.1:8000
+    - --enable-skip-login
+    - --enable-insecure-login
+    - --system-banner=Built</A> with ❤️ by <A HREF="https://funkypenguin.co.nz">@funkypenguin</A>
+      and friends (<I><A HREF="https://chat.funkypenguin.co.nz">join us!</A></I>)
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsGroup: 2001
+      runAsUser: 1001
+    image:
+      repository: kubernetesui/dashboard
+      tag: v2.6.1
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 256Mi
+      requests:
+        cpu: "0"
+        memory: 64Mi
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 443
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  type: ClusterIP
+brunner56Plex:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Plex:
+    containerSecurityContext:
+      privileged: true
+      runAsGroup: 568
+      runAsUser: 568
+    image:
+      repository: ghcr.io/elfhosted/plex
+      tag: 1.41.7.9823-59f304c16@sha256:04b14748f9a3e5d23e1431ab2d4c5c07aca14a1fe5541b62481f0064eea8420e
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: 100m
+        memory: 1Gi
+  gluetun:
+    containerSecurityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+        - SYS_MODULE
+      privileged: true
+      runAsUser: 0
+    env:
+      dnsKeepNameserver: "on"
+      dot: "off"
+      firewallInputPorts: 32400,3000,8888,3001,3002
+      firewallOutboundSubnets: 10.0.0.0/8
+      httpControlServerAddress: :8000
+      httpControlServerPort: "8000"
+      vpnEndpointPort: "2408"
+      vpnServiceProvider: custom
+      vpnType: wireguard
+      wireguardMtu: "1280"
+    image:
+      repository: ghcr.io/elfhosted/gluetun
+      tag: 3.40.0@sha256:59b0cc8a9412b9a4645d1f12dff0daba80b8be88acd1b5d1a0fb6dfa625eb9a5
+    imagePullPolicy: IfNotPresent
+  podSecurityContext:
+    fsGroup: 568
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+    supplementalGroups:
+    - 993
+  podinfo:
+    image:
+      repository: stefanprodan/podinfo
+      tag: latest
+    imagePullPolicy: Always
+  ports:
+  - name: http
+    port: 32400
+    targetPort: http
+  replicas: 1
+  restartWithDebridav:
+    image:
+      repository: ghcr.io/elfhosted/debridav
+      tag: 0.9.5@sha256:1e596ddb97a7e6a4827b1dfc0718992b0c432416841a8a4c3dd3cd7491850c3c
+    imagePullPolicy: IfNotPresent
+  restartWithDecypharr:
+    image:
+      repository: ghcr.io/elfhosted/decypharr-beta
+      tag: rolling@sha256:b310afa9976f950ab62d7ec20801b46cb9a28176121d1c275424d780825ca4ee
+    imagePullPolicy: IfNotPresent
+  restartWithZurg:
+    image:
+      repository: ghcr.io/elfhosted/zurg-rc
+      tag: 2025.05.14.0031-nightly@sha256:513bcc2be2a9fb8b8df7fc458f76747bebcc884776bfbfd4393e16d61b2c1227
+    imagePullPolicy: IfNotPresent
+  revisionHistoryLimit: 3
+  setup:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  setupWarp:
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  speedtest:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: false
+      runAsGroup: 101
+      runAsUser: 101
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      changeContainerPorts: "True"
+      httpPort: "3002"
+      httpsPort: "3003"
+    image:
+      repository: openspeedtest/latest
+      tag: latest@sha256:1745e913f596fe98882b286a67751efdae74774e9caa742a4934bb056e8748d2
+    imagePullPolicy: Always
+  strategy:
+    type: Recreate
+  tinyproxy:
+    image:
+      repository: ghcr.io/elfhosted/tinyproxy
+      tag: v1.4.3@sha256:262bbdc0e468ee97c049203becc52b9ad7bf4c21405d58c82766d1aebb2e27e5
+    imagePullPolicy: IfNotPresent
+  type: ClusterIP
+brunner56Rclonefm:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Rclonefm:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/rclone
+      tag: 1.69.3@sha256:9396f8c3a649dba9f91169a62142c9f3e6da00974bda573d864b62c07f78234e
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 150m
+        memory: 512Mi
+      requests:
+        cpu: "0"
+        memory: 60Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 5573
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  setup:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  strategy:
+    type: Recreate
+  type: ClusterIP
+brunner56Rcloneui:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Rcloneui:
+    containerSecurityContext:
+      privileged: true
+      readOnlyRootFilesystem: false
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/rclone
+      tag: 1.69.3@sha256:9396f8c3a649dba9f91169a62142c9f3e6da00974bda573d864b62c07f78234e
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 60Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 5572
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  setup:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  strategy:
+    type: Recreate
+  type: ClusterIP
+brunner56Riven:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Riven:
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/riven
+      tag: v0.21.21@sha256:bf1a9cab579d5eaac0ed72e20584b139547db7c38753a03b3756151af5e0ac13
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 20Mi
+  database:
+    args:
+    - -c
+    - shared_buffers=500MB
+    - -c
+    - work_mem=4MB
+    - -c
+    - effective_cache_size=1GB
+    - -c
+    - max_connections=310
+    env:
+      postgresDb: riven
+      postgresPassword: postgres
+      postgresUser: postgres
+    image:
+      repository: postgres
+      tag: 17-alpine
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 500m
+        memory: 8Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 3001
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  setup:
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  setupPostgres:
+    containerSecurityContext:
+      runAsUser: 0
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  strategy:
+    type: Recreate
+  type: ClusterIP
+brunner56Rivenfrontend:
+  brunner56Rivenfrontend:
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/riven-frontend
+      tag: v0.20.0@sha256:c4d792868a8113a2f57f504fe371cbcd8c52172d734c812c366bff352672998e
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 20Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 3000
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  type: ClusterIP
+brunner56Starter:
+  brunner56Starter:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        cpu: 250m
+        memory: 1Mi
+  cleanUpDns:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsNonRoot: true
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  updateDns:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+brunner56Traefikforwardauth:
+  brunner56Traefikforwardauth:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      tz: UTC
+    image:
+      repository: ghcr.io/elfhosted/traefik-forward-auth
+      tag: 3.1.0@sha256:19cd990fae90c544100676bc049f944becc8c454639e57d20f6f48e27de90776
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 32Mi
+      requests:
+        cpu: "0"
+        memory: 6Mi
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 4181
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  type: ClusterIP
+brunner56Wizarr:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Wizarr:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/wizarr
+      tag: 2025.5.d@sha256:58c2e28b6fbe604b6a6b4478944ff5071b6700d1a81a58708b70359c58e325ca
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 128Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 5690
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  type: ClusterIP
+brunner56Zurg:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Zurg:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/zurg-rc
+      tag: 2025.05.14.0031-nightly@sha256:513bcc2be2a9fb8b8df7fc458f76747bebcc884776bfbfd4393e16d61b2c1227
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "0"
+        memory: 32Mi
+  copyExampleConfig:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  ports:
+  - name: http
+    port: 9999
+    targetPort: http
+  replicas: 1
+  revisionHistoryLimit: 3
+  setup:
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  strategy:
+    type: Recreate
+  type: ClusterIP
+config:
+  cliDebridUpdateSh: |-
+    #!/bin/bash
+    webhook_url="http://cli-debrid:5000/webhook/rclone"  # Replace with your actual webhook URL
+    # First notify our webhook for each file
+    for arg in "$@"
+    do
+        arg_clean=$(echo "$arg" | sed 's/\\//g')
+        echo "Notifying webhook for: $arg_clean"
+        encoded_webhook_arg=$(echo -n "$arg_clean" | python3 -c "import sys, urllib.parse as ul; print(ul.quote(sys.stdin.read()))")
+        curl -s -X GET "$webhook_url?file=$encoded_webhook_arg"
+    done
+    echo "Updates completed!"
+  configYml: |-
+    # Zurg configuration version
+    zurg: v1
+    # Get your token for the next line from https://real-debrid.com/apitoken
+    token: REPLACE-ME-WITH-YOUR-RD-TOKEN
+    # additional download tokens - uncomment the lines below, and populate this with your additional tokens to auto-overcome bandwidth limitation issues
+    # download_tokens:
+    # - "iamtoken1"
+    # - "iamtoken2"
+    # basic functionality
+    host: "[::]" # do not change this if you are running it inside a docker container
+    port: 9999 # do not change this if you are running it inside a docker container
+    concurrent_workers: 32
+    check_for_changes_every_secs: 30
+    # misc configs
+    retain_folder_name_extension: true # if true, zurg won't modify the filenames from real-debrid
+    retain_rd_torrent_name: true # if true, it will strictly follow RD API torrent name property w/c should make this more compatible with rdt-client
+    auto_delete_rar_torrents: false # if true, zurg will delete unstreamable rar files (these torrents will always be compressed in a rar archive no matter what files you select)
+    use_download_cache: false # if true, during zurg initialization, it will fetch all downloads to unrestrict links faster
+    enable_repair: true
+    repair_every_mins: 60
+    on_library_update: sh plex_update.sh "$@"
+    ignore_renames: true
+    # do a RD speed test on every start
+    cache_network_test_results: false
+    # network configs
+    network_buffer_size: 1048576 # 1 MiB
+    serve_from_rclone: false # serve file data from rclone, not from zurg (zurg will only provide rclone the link to download)
+    verify_download_link: true # if true, zurg will check if the link is truly streamable; only relevant if serve_from_rclone is set to true (as it already does this all the time if serve_from_rclone is false)
+    force_ipv6: false # force connect to real-debrid ipv6 addresses
+    rate_limit_sleep_secs: 6 # wait time after getting a 429 from Real-Debrid API
+    realdebrid_timeout_secs: 60 # api timeout
+    retries_until_failed: 5 # api failures until considered failed
+    get_torrents_count: 5000
+    rar_action: extract
+    addl_playable_extensions:
+    - mp3
+    - flac
+    - m4b
+    - mp4
+    - mkv
+    - avi
+    # List of directory definitions and their filtering rules
+    directories:
+      audiobooks:
+        group_order: 5
+        group: media
+        filters:
+          - and:
+            - is_music: true
+            - media_info_duration_gte: 600
+      music:
+        group_order: 10
+        group: media
+        filters:
+          - is_music: true
+      anime:
+        group_order: 15
+        group: media
+        filters:
+          - regex: /\b[a-fA-F0-9]{8}\b/
+          - any_file_inside_regex: /\b[a-fA-F0-9]{8}\b/
+      shows:
+        group_order: 20
+        group: media
+        filters:
+          - has_episodes: true
+      movies:
+        group_order: 25
+        group: media
+        only_show_the_biggest_file: true
+        filters:
+          - regex: /.*/
+  plexUpdateSh: |-
+    #!/bin/bash
+    # PLEX PARTIAL SCAN script or PLEX UPDATE script
+    # When zurg detects changes, it can trigger this script IF your config.yml contains
+    # on_library_update: sh plex_update.sh "$@"
+    # Modified from https://github.com/debridmediamanager/zurg-testing/blob/main/plex_update.sh
+    token="REPLACE-ME-WITH-YOUR-PLEX-TOKEN" # go to https://elfhosted.com/how-to/get-plex-token/ to get your plex token
+    # DON'T CHANGE ANYTHING AFTER THIS LINE
+    plex_url="http://plex:32400" # If you're using zurg inside a Docker container, by default it is 172.17.0.1:32400
+    zurg_mount="/storage/realdebrid-zurg" # replace with your zurg mount path, ensure this is what Plex sees
+    # Get the list of section IDs
+    section_ids=$(curl -sLX GET "$plex_url/library/sections" -H "X-Plex-Token: $token" | xmllint --xpath "//Directory/@key" - | sed 's/key="//g' | tr '"' '\n')
+    for arg in "$@"
+    do
+        modified_arg="$zurg_mount/$arg"
+        encoded_arg=$(echo -n "$modified_arg" | python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.stdin.read()))")
+        if [ -z "$encoded_arg" ]; then
+            echo "Error: Encoded argument is empty. Check the input or encoding process."
+            continue
+        fi
+        for section_id in $section_ids
+        do
+            final_url="${plex_url}/library/sections/${section_id}/refresh?path=${encoded_arg}&X-Plex-Token=${token}"
+            echo "Encoded argument: $encoded_arg"
+            echo "Section ID: $section_id"
+            echo "Final URL: $final_url"
+            curl -s "$final_url"
+        done
+    done
+    echo "All updated sections refreshed"
+    # credits to godver3
+  setupSh: |-
+    #!/bin/bash
+    # Disable native auth (we do it with traefik instead when necessary)
+    sed -i  "s/^username:/#username/" /config/config.yml
+    sed -i  "s/^password:/#password/" /config/config.yml
+    # Socks via WARP
+    # # Enable proxy only if gluetun vars are not present
+    # if [[ ! -z "$ZURG_WARP_ENABLED" ]]; then
+    #   echo "not enabling warp, we may no longer need it"
+    #   # grep proxy /config/config.yml || echo 'proxy: socks5://127.0.0.1:1080' >> /config/config.yml
+    #   # sed -i  "s/^#proxy:/proxy/" /config/config.yml
+    # else
+    #   # remove proxy if found
+    #   sed -i  "s/^proxy:/#proxy/" /config/config.yml
+    # fi
+    # revert to repairing every hour
+    grep repair_every_mins /config/config.yml \
+      || echo 'repair_every_mins: 60' >> /config/config.yml
+    # Enable rar extraction if it's not already there
+    grep rar_action /config/config.yml || echo 'rar_action: extract' >> /config/config.yml
+    # Check for changes every 10 sec - this is too aggressive on large libraries
+    # sed -i  "s/check_for_changes_every_secs:.*/check_for_changes_every_secs: 10/" /config/config.yml
+    # don't repair uncached
+    grep restrict_repair_to_cached /config/config.yml \
+      || echo 'restrict_repair_to_cached: true' >> /config/config.yml
+    # Don't serve from rclone
+    sed -i  "s/serve_from_rclone:.*/serve_from_rclone: false/" /config/config.yml
+    # Disable plex_update.sh unless user uses plexdebrid
+      # we don't need the script
+      sed -i  "s/on_library_update/#on_library_update/" /config/config.yml
+    # Enable repair everywhere
+    # disabled on 13 nov 2024 to debug
+    # sed -i  "s/enable_repair:.*/enable_repair: true/" /config/config.yml
+elfhostedUserConfig:
+  userid: "8067"
+  username: brunner56
+  webdavPassword: ""
+  webdavUsername: brunner56
+elfterm:
+  ports:
+  - name: http
+    port: 3001
+    targetPort: 0
+  type: ClusterIP
+env:
+  logLevel: debug
+filebrowser:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 0
+  type: ClusterIP
+filebrowserElfbotScript:
+  elfbot: "#!/bin/bash\nif [[ $# -lt 2 ]]; then\n    echo \"usage: elfbot <command>
+    <app> <optional>\"\n    echo\n    echo '<app> must match an app found in /config'\n
+    \   echo\n    echo \"valid commands are:\"\n    echo\n    echo \"elfbot restart
+    <app>                          : restarts an app\"\n    echo \"elfbot pause <app>
+    \                           : stop an app, wait 5 min, and restart it\"\n    echo
+    \"elfbot reset <app> [--yesiamsure]             : resets an app to defaults\"\n
+    \   echo \"elfbot backup <app>                           : creates a dated backup
+    folder in under /config/<app>\"\n    echo \"elfbot env <app> <key>=<value>                :
+    set an env var inside an app (advanced beta feature)\"\n    echo \"elfbot claim
+    plex <token>                     : claims a plex server\"\n    echo \"elfbot blackhole
+    <app>                        : symlink the contents of the CWD into /storage/symlinks/blackhole/<app>/
+    for automated import\"\n    echo \"elfbot symlink <storage-mount>                :
+    import remotely-mounted, read-only media as symlinks, or generate a report\"\n
+    \   echo \"elfbot symlink report-broken                  : generate a report on
+    all broken symlinks found under /storage/symlinks\"\n    echo \"elfbot symlink
+    delete-broken                  : delete (without confirmation!) all broken symlinks
+    found under /storage/symlinks\"\n    # echo \"elfbot recyclarr <command>                    :
+    run recyclarr (using config files in /storage/filebrowser/recyclarr)\"\n    echo\nfi\ncase
+    $1 in\n    \"restart\")\n        if [[ \"$3\" == \"--force\" && \"$4\" != \"--yesiamsure\"
+    ]]; then\n            echo force-killing a healthy pod can result in data loss!
+    add \\'--yesiamsure\\' after your restart --force command to force-kill\n            exit
+    1\n        elif [[ \"$3\" == \"--force\" ]]; then\n            echo \"force-restarting
+    $2, data loss may occur (but sometimes there's no other way)...\"\n            echo
+    forcerestart > /elfbot/$2\n        else\n            echo \"restarting $2...\"\n
+    \           echo restart > /elfbot/$2\n        fi\n        ;;\n    \"pause\")\n
+    \       echo \"pausing $2 for 5 min...\"\n        echo pause > /elfbot/$2\n        ;;\n
+    \   \"env\")\n        if [[ \"$#\" -lt 3 ]]; then\n            echo syntax is
+    \"elfbot env <app> KEY=VALUE\"\n            exit 1\n        fi\n        echo \"adding
+    $3 to env for $2, triggering a restart...\"\n        echo $3 > /elfbot/$2\n        ;;\n
+    \   \"reset\")\n        if [[ \"$3\" != \"--yesiamsure\" ]]; then\n            echo
+    potentially dangerous! add \\'--yesiamsure\\' after your reset command to force\n
+    \           exit 1\n        fi\n        if [[ \"$2\" == \"all\" ]]; then\n            echo
+    \"This command will irrecoverably reset ALL of your app's data. If you didn't
+    mean to do this, hit CTRL-C within the next 10s to abort..\"\n            sleep
+    10s\n            # Get all pods in the current namespace\n            pods=$(kubectl
+    get pods -o jsonpath='{.items[*].metadata.name}')\n            # Iterate through
+    each pod, find their labels, and use these to trigger a reset\n            for
+    pod in $pods; do\n            # Extract the value of the 'app.elfhosted.com/name'
+    label\n            elfhosted_label=$(kubectl get pod $pod -o jsonpath='{.metadata.labels.app\\.elfhosted\\.com/name}'
+    2>/dev/null)\n            if [[ -z \"$elfhosted_label\" ]]; then\n                #
+    If 'app.elfhosted.com/name' doesn't exist, extract 'app.kubernetes.io/name' instead\n
+    \               kubernetes_label=$(kubectl get pod $pod -o jsonpath='{.metadata.labels.app\\.kubernetes\\.io/name}'
+    2>/dev/null)\n                # provided a label was found...\n                if
+    [[ -z \"$kubernetes_label\" ]]; then\n                    echo \"resetting $kubernetes_label...
+    \U0001F5D1️\"\n                    sleep 5s\n                    echo reset >
+    /elfbot/$kubernetes_label\n                fi\n            elif [[ \"$elfhosted_label\"
+    != \"filebrowser\" ]]; then\n                echo \"resetting $elfhosted_label...
+    \U0001F5D1️\"\n                sleep 5s\n                echo reset > /elfbot/$elfhosted_label\n
+    \           fi\n            done\n            exit 0\n        else\n            echo
+    reset > /elfbot/$2\n            echo \"resetting $2... \U0001F5D1️\"\n        fi\n
+    \       ;;\n    \"backup\")\n        if [[ \"$2\" == \"symlinks\" ]]; then\n            TIMESTAMP=$(printf
+    '%(%Y-%m-%d--%H-%M)T\\n' -1)\n            echo \"Backing up all symlinks to /storage/backup/symlinks-$TIMESTAMP.tar.gz\"\n
+    \           tar -C /storage/symlinks -czf /storage/backup/symlinks-$TIMESTAMP.tar.gz
+    .\n            BACKUP_SIZE=$(du -sh /storage/backup/symlinks-$TIMESTAMP.tar.gz
+    | awk '{print $1}')\n            echo \"Done! (yes, it really was that fast!)
+    - total size \U0001F52C $BACKUP_SIZE \"\n            exit 0\n        fi\n        if
+    [[ \"$2\" == \"offsite\" ]]; then\n            for RS in $(kubectl get replicationsource
+    -o=name | cut -f2 -d/); do\n                echo \"$(date '+%H:%M:%S') Triggering
+    manual backup of $RS...\"\n                MANUAL=$(date +%s)\n                kubectl
+    patch replicationsource $RS --type merge -p '{\"spec\":{\"restic\":{\"unlock\":\"'$MANUAL'\"}}}'
+    > /dev/null 2>&1 &\n                kubectl patch replicationsource $RS --type
+    merge -p '{\"spec\":{\"trigger\":{\"manual\":\"'$MANUAL'\"}}}' > /dev/null 2>&1
+    &\n                LAST_MANUAL_SYNC=\"\"\n                while [ \"$LAST_MANUAL_SYNC\"
+    != \"$MANUAL\" ]; do\n                    # Perform the sync check\n                    LAST_MANUAL_SYNC=$(kubectl
+    get replicationsource $RS --template=\\{\\{.status.lastManualSync}})\n                    #
+    Print progress and wait for 10 seconds\n                    echo -n '\U0001F4BE'\n
+    \                   sleep 10\n                done\n                if [ \"$LAST_MANUAL_SYNC\"
+    == \"$MANUAL\" ]; then\n                    echo \"✅ Done!\"\n                fi\n
+    \           done\n            exit 0\n        fi\n        if [[ \"$2\" == \"all\"
+    ]]; then\n            APPS=$(ls /storage/config)\n            echo \"Backing up
+    multiple apps, restarting each with a 1 min delay, this may take a while...\"\n
+    \           SLEEP=1m\n        else\n            APPS=$2 # if we're just backing
+    up one app\n            SLEEP=0s\n        fi\n        for APP in $APPS\n        do\n
+    \           if [[ \"$APP\" == \"filebrowser\" ]]; then\n                echo \"skipping
+    filebrowser (we're using it right now!)...\"\n            else\n                FREE_SPACE=$(df
+    -P /storage/backup | awk 'NR==2 {print $4}')\n                NEEDED_SPACE=$(du
+    -s /storage/config/$APP | cut -f1)\n                if [[ \"$FREE_SPACE\" -lt
+    \"$NEEDED_SPACE\" ]]; then\n                    echo \"Error - not enough free
+    space for backup. We need $NEEDED_SPACE bytes, but we only have $FREE_SPACE remaining
+    :(\"\n                else\n                    TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n'
+    -1)\n                    echo backup > /elfbot/$APP\n                    echo
+    \"restarting $APP, backup will be saved as /storage/backup/$APP-$TIMESTAMP ...\"\n
+    \                   sleep $SLEEP\n                fi\n            fi\n        done\n
+    \       ;;\n    \"claim\")\n        if [[ \"$#\" -lt 3 ]]; then\n            echo
+    plex claim token missing, get one from https://www.plex.tv/claim/\n            exit
+    1\n        fi\n        if [[ ! \"$3\" =~ \"claim-\" ]]; then\n            echo
+    plex claim token invalid, get one from https://www.plex.tv/claim/\n            exit
+    1\n        fi\n        if [[ \"$2\" = \"plex\" ]]; then\n            echo \"Attempting
+    to claim Plex with claim [$3], and triggering a restart...\"\n            echo
+    PLEX_CLAIM=$3 > /elfbot/plex\n        else\n            echo \"this command is
+    only for claiming plex\"\n        fi\n        ;;\n    \"recyclarr\")\n        if
+    [[ \"$#\" -lt 2 ]]; then\n            # Just echo the recyclarr options\n            recyclarr\n
+    \           exit 0\n        fi\n        echo \"This may take a while...\"\n        HOME=/storage/config/recyclarr/
+    RECYCLARR_APP_DATA=/storage/config/recyclarr/ $@\n        ;;\n    \"blackhole\")\n
+    \       if [[ \"$#\" -lt 2 ]]; then\n            echo \"ERROR: target missing
+    - example : 'elfbot blackhole radarr'\"\n            exit 1\n        fi\n        ITEMPATH=\"$(pwd)\"\n
+    \       # Never symlink ourselves!\n        if [[ $ITEMPATH == *\"/storage/symlinks\"*
+    ]]; then\n            echo \"ERROR: Can't symlink a source in /storage/symlinks
+    (#deathbysymlink)\"\n            exit 1\n        fi\n        # Get ready to create
+    symlinks\n        TARGET=/storage/symlinks/blackhole/$2\n        CACHE=/storage/symlinks/blackhole/.symlink_cache\n
+    \       echo \"Symlinking new items in $ITEMPATH to $TARGET... \"\n        mkdir
+    -p $TARGET\n        mkdir -p $CACHE\n        ls \"${ITEMPATH}/\" | while read
+    -r ITEM\n        do\n            # symlink to target only if cache doesn't already
+    exist\n            # so that if a user moves a file out of the TARGET folder while
+    importing, we don't recreate it\n            ln -s \"${ITEMPATH}/${ITEM}\" \"$CACHE/\"
+    2> /dev/null\n            if [[ $? -eq 0 ]]; then\n                cp -rs \"${ITEMPATH}/${ITEM}\"
+    \"$TARGET/\" 2> /dev/null\n            echo \"[created symlink] $TARGET/${ITEM}\"\n
+    \           else\n            echo \"[already exists, skipped] $CACHE/${DIR}${ITEM}\"\n
+    \           fi\n        done\n        echo \"Done! \U0001F389\"\n        ;;\n
+    \   \"elfstorage\")\n        if [[ \"$2\" == \"report\" ]]; then\n            TIMESTAMP=$(printf
+    '%(%Y-%m-%d--%H-%M)T\\n' -1)\n            echo \"Generating elfstorage report,
+    this may take ~5 min...\"\n            tree --du -hF -s  /storage/elfstorage/
+    -H https://brunner56-filebrowser.elfhosted.com/files/elfstorage -T \"\U0001F9DD
+    ElfHosted [/storage/elfstorage] usage for brunner56\"> /storage/elfstorage/disk-usage-report-$TIMESTAMP.html\n
+    \           echo \"Done! \U0001F389\"\n            echo \"Report generated at
+    /elfstorage/disk-usage-report-$TIMESTAMP.html\"\n            exit 0\n        fi\n
+    \       ;;\n    \"symlink\")\n        if [[ \"$#\" -lt 2 ]]; then\n            echo
+    \"ERROR: path missing - example : 'elfbot symlink /storage/realdebrid-zurg/movies'\"\n
+    \           exit 1\n        elif [[ \"$2\" == \"report-broken\" ]]; then\n            echo
+    \"Generating symlink report, see /symlinks/report.txt for details...\"\n            echo
+    -e \"Listing broken symlinks as identified at $(date)..\\n\\n\" > /storage/symlinks/report.txt\n
+    \           find /storage/symlinks   -xtype l | grep -v .symlinked_cache >> /storage/symlinks/report.txt\n
+    \           exit 0\n        elif [[ \"$2\" == \"delete-broken\" ]]; then\n            echo
+    \"Deleting all broken symlinks...\"\n            find /storage/symlinks -xtype
+    l -exec rm {} \\;\n            echo \".. Done!\"\n            exit 0\n        elif
+    [[ \"$2\" == \"here\" ]]; then\n            ITEMPATH=\"$(pwd)\"\n        elif
+    [[ ! -d \"$2\" ]]; then\n            echo \"ERROR: $2 does not exist\"\n            exit
+    1\n        else\n            ITEMPATH=$2\n        fi\n        # Never symlink
+    ourselves!\n        if [[ $ITEMPATH == *\"/storage/symlinks\"* ]]; then\n            echo
+    \"ERROR: Can't symlink a source in /storage/symlinks (#deathbysymlink)\"\n            exit
+    1\n        fi\n        # Get ready to create symlinks\n        mkdir -p /storage/symlinks/.symlink_cache\n
+    \       TARGET=/storage/symlinks/import\n        CACHE=/storage/symlinks/.symlink_cache\n
+    \       # Get the last bit of the source path\n        DIR=$(awk -F'/' '{ a =
+    length($NF) ? $NF : $(NF-1); print a }' <<< $ITEMPATH)\n        echo \"Symlinking
+    new items in $ITEMPATH to $TARGET/${DIR}... \"\n        mkdir -p \"$TARGET/${DIR}\"\n
+    \       mkdir -p \"$CACHE/${DIR}\"\n        ls \"${ITEMPATH}/\" | while read -r
+    ITEM\n        do\n            # symlink to target only if cache doesn't already
+    exist\n            # so that if a user moves a file out of the TARGET folder while
+    importing, we don't recreate it\n            ln -s \"${ITEMPATH}/${ITEM}\" \"$CACHE/${DIR}/\"
+    2> /dev/null\n            if [[ $? -eq 0 ]]; then\n                cp -rs \"${ITEMPATH}/${ITEM}\"
+    \"$TARGET/${DIR}/\" 2> /dev/null\n            fi\n        done\n        echo \"Done!
+    \U0001F389\"\n        ;;\nesac"
+filebrowserEnv:
+  fbAddress: 0.0.0.0
+  fbConfig: /etc/filebrowser/.filebrowser.json
+  fbDatabase: /tmp/filebrowser.db
+  radarr4KApiKey: 7da5d4ba79804527b78a78b68c7a0781
+  radarrApiKey: 041776c8d5f74bf295aa486d9d51c33a
+  s6ReadOnlyRoot: "1"
+  sonarr4KApiKey: e4f93c115169484bbed19821f7ac8e49
+  sonarrApiKey: a6f1c7d07fab4be49c5c1cb545f85a76
+gatus:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 0
+  type: ClusterIP
+gatusConfig:
+  configYaml: "storage:\n  type: sqlite\n  path: /data/data.db\nui:\n  logo: https://elfhosted.com/images/logo.svg\n
+    \ link: https://elfhosted.com\n  header: brunner56's ElfHosted Health\n  title:
+    Health | ElfHosted\n  buttons:\n  - name: Dashboard\n    link: https://brunner56.elfhosted.com\n
+    \ - name: Account\n    link: https://store.elfhosted.com/my-account\n  - name:
+    Docs\n    link: https://elfhosted.com\n  - name: Discord\n    link: https://discord.elfhosted.com\nalerting:\n
+    \ email:\n    from: \"${SMTP_FROM}\"\n    username: \"${SMTP_USERNAME}\"\n    password:
+    \"${SMTP_PASSWORD}\"\n    host: \"${SMTP_HOST}\"\n    port: ${SMTP_PORT}\n    to:
+    \"boden.crouch@gmail.com\"\n    default-alert:\n      description: |\n        See
+    https://brunner56-health.elfhosted.com for details, or\n        visit https://discord.elfhosted.com
+    for status updates / help.\n        -- Sent with ❤️ from your friends at ElfHosted
+    \U0001F9DD\n        (https://elfhosted.com)\n      send-on-resolved: true\n      failure-threshold:
+    4\n      success-threshold: 1\nmaintenance:\n  start: 22:00 # 22am UTC = 10am
+    NZDT after DST change\n  duration: 1h\nendpoints:\n  - name: plex\n    group:
+    consume-media\n    url: \"http://plex:32400\"\n    interval: 5m\n    conditions:\n
+    \     - \"[STATUS] == 401\"\n    alerts:\n      - type: email\n  - name: wizarr\n
+    \   group: manage-media\n    url: \"http://wizarr:5690\"\n    interval: 5m\n    conditions:\n
+    \     - \"[STATUS] == 200\"\n    alerts:\n      - type: email\n  - name: riven-backend\n
+    \   group: manage-media\n    url: \"http://riven:3001\"\n    interval: 5m\n    conditions:\n
+    \     - \"[STATUS] == 200\"\n    alerts:\n      - type: email\n  - name: riven-frontend\n
+    \   group: manage-media\n    url: \"http://riven-frontend:3000\"\n    interval:
+    5m\n    conditions:\n      - \"[STATUS] == 200\"\n    alerts:\n      - type: email\n
+    \ - name: zurg\n    group: download-media\n    url: \"http://zurg:9999/http/version.txt\"\n
+    \   interval: 5m\n    conditions:\n    - \"[STATUS] == 200\"\n    alerts:\n      -
+    type: email\n  - name: filebrowser\n    group: tools\n    url: \"http://filebrowser:8080\"\n
+    \   interval: 5m\n    conditions:\n      - \"[STATUS] == 200\"\n    alerts:\n
+    \     - type: email\n  - name: kubernetes-dashboard\n    group: tools\n    url:
+    \"http://kubernetes-dashboard:9090\"\n    interval: 5m\n    conditions:\n      -
+    \"[STATUS] == 200\"\n    alerts:\n      - type: email\n  - name: rcloneui\n    group:
+    tools\n    url: \"http://rcloneui:5572\"\n    interval: 5m\n    conditions:\n
+    \     - \"[STATUS] == 200\"\n    alerts:\n      - type: email\n  - name: rclonefm\n
+    \   group: tools\n    url: \"http://rclonefm:5573\"\n    interval: 5m\n    conditions:\n
+    \     - \"[STATUS] == 200\"\n    alerts:\n      - type: email"
+homer:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 0
+  type: ClusterIP
+homerConfig:
+  configYml: "---\n# Homepage configuration\n# See https://fontawesome.com/icons for
+    icons options\n# Optional: Use external configuration file.\n# Using this will
+    ignore remaining config in this file\n# externalConfig: https://example.com/server-luci/config.yaml\nsubtitle:
+    \"brunner56 is ...\"\ntitle: \"ElfHosted!\"\ndocumentTitle: \"ElfHosted - brunner56\"
+    # Customize the browser tab text\n# Alternatively a fa icon can be provided:\n#
+    icon: \"fas fa-wand-magic-sparkles\"\nlogo: https://elfhosted.com/images/logo.png\nheader:
+    true # Set to false to hide the header\nfooter: Version 1.378.1\ncolumns: \"3\"
+    # \"auto\" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)\nconnectivityCheck:
+    false # whether you want to display a message when the apps are not accessible
+    anymore (VPN disconnected for example)\n# Optional theming\n# theme: default #
+    'default' or one of the themes available in 'src/assets/themes'.\n# Optional custom
+    stylesheet\n# Will load custom CSS files. Especially useful for custom icon sets.\nstylesheet:\n
+    \ - \"assets/custom.css\"\n# Here is the exhaustive list of customization parameters\n#
+    However all value are optional and will fallback to default if not set.\n# if
+    you want to change only some of the colors, feel free to remove all unused key.\ncolors:\n
+    \ light:\n    highlight-primary: \"#222526\"\n    highlight-secondary: \"#4285f4\"\n
+    \   highlight-hover: \"#5a95f5\"\n    background: \"#222526\"\n    card-background:
+    \"#ffffff\"\n    text: \"#363636\"\n    text-header: \"#ffffff\"\n    text-title:
+    \"#303030\"\n    text-subtitle: \"#424242\"\n    card-shadow: rgba(0, 0, 0, 0.1)\n
+    \   link-hover: \"#363636\"\n    background-image: /assets/backgrounds/background-light.jpg\n
+    \ dark:\n    highlight-primary: \"#222526\"\n    highlight-secondary: \"#4285f4\"\n
+    \   highlight-hover: \"#5a95f5\"\n    background: \"#222526\"\n    card-background:
+    \"#2b2b2b\"\n    text: \"#eaeaea\"\n    text-header: \"#ffffff\"\n    text-title:
+    \"#fafafa\"\n    text-subtitle: \"#f5f5f5\"\n    card-shadow: rgba(0, 0, 0, 0.4)\n
+    \   link-hover: \"#ffdd57\"\n    background-image: /assets/backgrounds/background-dark.jpg\n#
+    Optional message\nmessage:\n  url: https://brunner56.elfhosted.com/assets/message/message.json\n
+    \ # mapping:\n  #   content: 'message'\n  #   style: 'style'\n  #   title: 'title'\n
+    \ refreshInterval: 10000\n  icon: \"fas fa-door-open\"\n# Optional navbar\n# links:
+    [] # Allows for navbar (dark mode, layout, and search) without any links\nlinks:\n
+    \ - name: \"Apps\"\n    icon: \"fas fa-couch\"\n    url: \"#config\"\n  - name:
+    \"Health\"\n    icon: \"fas fa-heartbeat\"\n    url: \"https://brunner56-health.elfhosted.com\"\n
+    \   target: \"_blank\" # optional html tag target attribute\n  - name: \"Store\"\n
+    \   icon: \"fas fa-store\"\n    url: \"https://store.elfhosted.com\"\n    target:
+    \"_blank\" # optional html tag target attribute\n  - name: \"Docs\"\n    icon:
+    \"fas fa-book\"\n    url: \"https://docs.elfhosted.com\"\n    target: \"_blank\"
+    # optional html tag target attribute\n  - name: \"Account\"\n    icon: \"fa fa-user\"\n
+    \   url: \"https://store.elfhosted.com/my-account/\"\n    target: \"_blank\" #
+    optional html tag target attribute\n  - name: \"Discord\"\n    icon: \"fa-brands
+    fa-discord\"\n    url: \"https://discord.elfhosted.com\"\n    target: \"_blank\"
+    # optional html tag target attribute\n  - name: \"Logout\"\n    icon: \"fas fa-lock\"\n
+    \   url: https://brunner56-auth-me.elfhosted.com/_oauth/logout\n# Services\n#
+    First level array represents a group.\n# Leave only a \"items\" key if not using
+    group (group name, icon & tagstyle are optional, section separation will not be
+    displayed).\nservices:\n  - name: \"Consume Media\"\n    icon: \"fas fa-couch\"\n
+    \   # A path to an image can also be provided. Note that icon take precedence
+    if both icon and logo are set.\n    # logo: \"path/to/logo\"\n    items:\n      -
+    name: \"Plex\"\n        logo: \"assets/png/plex.png\"\n        # Alternatively
+    a fa icon can be provided:\n        # icon: \"fab fa-photo-video\"\n        subtitle:
+    \"Watch Movies/TV\"\n        tag: \"public\"\n        tagstyle: \"is-danger\"\n
+    \       url: \"https://brunner56-plex.elfhosted.com\"\n        target: \"_blank\"
+    # optional html tag target attribute\n  - name: \"Manage Media\"\n    icon: \"fas
+    fa-photo-video\"\n    items:\n      - name: \"Wizarr\"\n        icon: \"fas fa-hat-wizard\"\n
+    \       subtitle: \"Manage Plex / Emby / Jellyfin Accounts / Invites\"\n        tag:
+    \"public\"\n        tagstyle: \"is-danger\"\n        url: \"https://brunner56-wizarr.elfhosted.com\"\n
+    \       target: \"_blank\" # optional html tag target attribute\n      - name:
+    \"Riven\"\n        icon: \"fas fa-mountain\"\n        subtitle: \"All-in-one Debrid
+    Media Management\"\n        tag: \"protected\"\n        tagstyle: \"is-success\"\n
+    \       url: \"https://brunner56-riven.elfhosted.com\"\n        target: \"_blank\"
+    # optional html tag target attribute\n      - name: \"Riven (backend)\"\n        icon:
+    \"fas fa-mountain\"\n        subtitle: \"Geek out over Riven's backend\"\n        tag:
+    \"protected\"\n        tagstyle: \"is-success\"\n        url: \"https://brunner56-riven-backend.elfhosted.com\"\n
+    \       target: \"_blank\" # optional html tag target attribute\n  - name: \"Download
+    Media\"\n    icon: \"fas fa-cloud-arrow-down\"\n    items:\n      - name: \"Zurg\"\n
+    \       logo: \"assets/png/real-debrid.png\"\n        subtitle: \"Manage RealDebrid
+    Mount\"\n        tag: \"protected\"\n        tagstyle: \"is-success\"\n        url:
+    \"https://brunner56-zurg.elfhosted.com/http/\"\n        target: \"_blank\" # optional
+    html tag target attribute\n  - name: \"Tools\"\n    icon: \"fas fa-toolbox\"\n
+    \   items:\n      - name: \"FileBrowser\"\n        logo: \"assets/png/filebrowser.png\"\n
+    \       subtitle: \"Manage Files\"\n        tag: \"protected\"\n        tagstyle:
+    \"is-success\"\n        url: \"https://brunner56-filebrowser.elfhosted.com\"\n
+    \       target: \"_blank\" # optional html tag target attribute\n      - name:
+    \"ElfTerm\"\n        icon: \"fas fa-terminal\"\n        subtitle: \"Enter the
+    ElfTerm.. \U0001FA84\"\n        tag: \"protected\"\n        tagstyle: \"is-success\"\n
+    \       url: \"https://brunner56-elfterm.elfhosted.com\"\n        target: \"_blank\"
+    # optional html tag target attribute\n      - name: \"Kubernetes Dashboard\"\n
+    \       logo: \"assets/png/kubernetes.png\"\n        subtitle: \"Kubernetes Resources\"\n
+    \       tag: \"protected\"\n        tagstyle: \"is-success\"\n        url: \"https://brunner56-kubernetes.elfhosted.com\"\n
+    \       target: \"_blank\" # optional html tag target attribute\n  - name: \"Rclone\"\n
+    \   icon: \"fas fa-truck\"\n    items:\n      - name: \"Rclone Remotes\"\n        logo:
+    \"assets/png/rclone.png\"\n        subtitle: \"Rclone remotes\"\n        tag:
+    \"protected\"\n        tagstyle: \"is-success\"\n        url: \"https://brunner56-filebrowser.elfhosted.com/files/config/rclone/rclone.conf\"\n
+    \       target: \"_blank\" # optional html tag target attribute\n      - name:
+    \"Rclone UI\"\n        logo: \"assets/png/rclone.png\"\n        subtitle: \"Rclone
+    UI\"\n        tag: \"protected\"\n        tagstyle: \"is-success\"\n        url:
+    \"https://brunner56-rcloneui.elfhosted.com\"\n        target: \"_blank\" # optional
+    html tag target attribute\n      - name: \"Rclone FM\"\n        logo: \"assets/png/rclone.png\"\n
+    \       subtitle: \"Rclone File Manager\"\n        tag: \"protected\"\n        tagstyle:
+    \"is-success\"\n        url: \"https://brunner56-rclonefm.elfhosted.com\"\n        target:
+    \"_blank\" # optional html tag target attribute\n  - name: \"Grafana\"\n    icon:
+    \"fas fa-globe\"\n    items:\n      - name: \"Cluster Resources\"\n        logo:
+    \"assets/png/grafana.png\"\n        subtitle: \"Cluster Resources\"\n        tag:
+    \"public\"\n        tagstyle: \"is-danger\"\n        url: \"https://fnky.nz/grafana-elfhosted\"\n
+    \       target: \"_blank\" # optional html tag target attribute"
+  customCss: |-
+    @charset "UTF-8";
+    /* raleway-regular - latin */
+    @font-face {
+      font-family: 'Raleway';
+      font-style: normal;
+      font-weight: 400;
+      src: url('./fonts/raleway-v22-latin-regular.eot'); /* IE9 Compat Modes */
+      src: local(''),
+          url('./fonts/raleway-v22-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./fonts/raleway-v22-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./fonts/raleway-v22-latin-regular.woff') format('woff'), /* Modern Browsers */
+          url('./fonts/raleway-v22-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+          url('./fonts/raleway-v22-latin-regular.svg#Raleway') format('svg'); /* Legacy iOS */
+    }
+    /* lato-regular - latin */
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 400;
+      src: url('./fonts/lato-v20-latin-regular.eot'); /* IE9 Compat Modes */
+      src: local(''),
+          url('./fonts/lato-v20-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./fonts/lato-v20-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./fonts/lato-v20-latin-regular.woff') format('woff'), /* Modern Browsers */
+          url('./fonts/lato-v20-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+          url('./fonts/lato-v20-latin-regular.svg#Lato') format('svg'); /* Legacy iOS */
+    }
+    /* lato-700 - latin */
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 700;
+      src: url('./fonts/lato-v20-latin-700.eot'); /* IE9 Compat Modes */
+      src: local(''),
+          url('./fonts/lato-v20-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./fonts/lato-v20-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./fonts/lato-v20-latin-700.woff') format('woff'), /* Modern Browsers */
+          url('./fonts/lato-v20-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+          url('./fonts/lato-v20-latin-700.svg#Lato') format('svg'); /* Legacy iOS */
+    }
+    /* lato-900 - latin */
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 900;
+      src: url('./fonts/lato-v20-latin-900.eot'); /* IE9 Compat Modes */
+      src: local(''),
+          url('./fonts/lato-v20-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./fonts/lato-v20-latin-900.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./fonts/lato-v20-latin-900.woff') format('woff'), /* Modern Browsers */
+          url('./fonts/lato-v20-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
+          url('./fonts/lato-v20-latin-900.svg#Lato') format('svg'); /* Legacy iOS */
+    }
+    /* Sets the group title to be a bolder font */
+    .group-title {
+      font-family: Lato;
+      font-weight: 800;
+    }
+    /* Changes the card title to be a bolder font */
+    .title {
+      font-weight: 700;
+    }
+    /* Changes the subtitle to be a bolder font */
+    .subtitle {
+      font-weight: 500;
+    }
+    /* Adds spacing to the bottom of cards */
+    body #app .card-content {
+      margin-bottom: 0.75rem;
+    }
+    /*Adds more border radius to the cards */
+    body .layout-vertical .column div:first-of-type .card {
+      border-radius: 1rem;
+    }
+    body .layout-vertical .card {
+      border-radius: 1rem;
+    }
+    .card {
+        border-radius: 1rem;
+    }
+    body .layout-vertical .column div:last-of-type .card {
+        border-radius: 1rem;
+    }
+    /* Changes Header Opacity */
+    body #bighead .first-line {
+      background-color: #50762E;
+    }
+    body #bighead .navbar {
+      background-color: #36511F;
+    }
+    body .search-bar input {
+        opacity: 20%;
+    }
+    body #bighead .navbar a:focus, body #bighead .navbar a:hover {
+      background-color: #50762E;
+      color: var(--link-hover);
+    }
+  diskUsageSh: "#!/bin/bash\n# # Un-break permissions on config PVCs, if attaching
+    them here has caused a problem\n# chown 568:568 /config/* # if this pod (which
+    runs as root) starts first, it can set config volumes to be owned by root\nif
+    [ ! -f /www/assets/backgrounds/background-dark.jpg ]; then\n  curl -s 'https://images.unsplash.com/photo-1545486332-9e0999c535b2?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=adrien-olichon-_GH9LwhlSO4-unsplash.jpg&w=640'
+    -L --output /www/assets/backgrounds/background-dark.jpg\nfi\nif [ ! -f /www/assets/backgrounds/background-light.jpg
+    ]; then\n  curl -s 'https://unsplash.com/photos/kO1G3neRA2o/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTh8fGxpZ2h0JTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3MjExNzAzMzd8MA&force=true&w=640'
+    -L --output /www/assets/backgrounds/background-light.jpg\nfi\n# until zurg is
+    up, continue producing this error message every minute\nDAYSREMAINING=$(curl -s
+    http://zurg:9999/stats | jq .user_infos[0].premium)\nwhile [[ ! \"$DAYSREMAINING\"
+    -gt 0 ]]; do\n  echo \"Zurg not up yet, waiting....\"\n  echo '{\"title\": \"Warning,
+    brunner56, your setup is incomplete \U0001F631!\",\"content\": \"⚠️ Zurg is not
+    running, likely you key is not setup, invalid, or expired - Add it <A HREF=https://brunner56-filebrowser.elfhosted.com/files/config/zurg/config.yml>here</A>
+    (refreshes every 5min)\",\"style\": \"is-danger\",\"icon\": \"fas fa-exclamation-triangle\"}'
+    > /www/assets/message/message.json\n  sleep 60s\n  DAYSREMAINING=$(curl -s http://zurg:9999/stats
+    | jq .user_infos[0].premium)\ndone\nrm /www/assets/message/message.json\nwhile
+    true\ndo\n  # Once for all of /config, /backup, /logs...\n  # tree --du -hF -s
+    \ /config/ -H https://brunner56-filebrowser.elfhosted.com/files/config -T \"\U0001F9DD
+    ElfHosted [/config] usage for brunner56\"> /www/assets/message/disk-usage-config.html\n
+    \ # tree --du -hF -s  /backup/ -H https://brunner56-filebrowser.elfhosted.com/files/backup
+    -T \"\U0001F9DD ElfHosted [/backup] usage for brunner56\"> /www/assets/message/disk-usage-backup.html\n
+    \ # tree --du -hF -s  /logs/   -H https://brunner56-filebrowser.elfhosted.com/files/logs
+    -T \"\U0001F9DD ElfHosted [/logs] usage for brunner56\"> /www/assets/message/disk-usage-logs.html\n
+    \ # TOTAL_USED_RAW=$(du -s /config/ | cut -f1)\n  # TOTAL_USED_HUMAN=$(du -sh
+    /config/ | cut -f1)\n  # for STORAGE_PATH in $(ls /config); do\n  #   # And again
+    per-app /config...\n  #   # disabled on 19 Feb 2024 - consumes too much I/O now
+    that we have \"infinite\" streaming - @funkypenguin\n  #   # tree --du -hF -s
+    \ /config/${STORAGE_PATH} -H https://brunner56-filebrowser.elfhosted.com/files/config/${STORAGE_PATH}
+    -T \"\U0001F9DD ElfHosted [/config/${STORAGE_PATH}] usage for brunner56\"> /www/assets/message/disk-usage-config-${STORAGE_PATH}.html\n
+    \ #   USED_RAW=$(du -s /config/${STORAGE_PATH} | cut -f1)\n  #   USED_HUMAN=$(du
+    -sh /config/${STORAGE_PATH} | cut -f1)\n  #   # Keep the highest percentage used
+    number\n  #   if [[ ! -z ${EXISTING_USAGE+x} ]]; then\n  #     if [[ \"$USED_RAW\"
+    -gt \"$EXISTING_USAGE\" ]]; then\n  #       EXISTING_USAGE=$USED_RAW\n  #       CONFIG_BIGGEST_CONSUMER=$STORAGE_PATH\n
+    \ #       CONFIG_DISK_USED_HUMAN=$USED_HUMAN\n  #       echo -n \"<A HREF='https://brunner56-filebrowser.elfhosted.com/files/config/'
+    TARGET='_blank'>/config</A>: Largest volume-per-app consumer is <A HREF='https://brunner56.elfhosted.com/assets/message/disk-usage-config-${CONFIG_BIGGEST_CONSUMER}/'
+    TARGET='_blank'>${CONFIG_BIGGEST_CONSUMER}</A> with ${CONFIG_DISK_USED_HUMAN}
+    used<BR/>\" > /www/assets/message/message_details_config.html\n  #     fi\n  #
+    \  else\n  #       EXISTING_USAGE=$USED_RAW\n  #       CONFIG_BIGGEST_CONSUMER=$STORAGE_PATH\n
+    \ #       CONFIG_DISK_USED_HUMAN=$USED_HUMAN\n  #       echo -n \"<A HREF='https://brunner56-filebrowser.elfhosted.com/files/config/'
+    TARGET='_blank'>/config</A>: Largest volume-per-app consumer is <A HREF='https://brunner56.elfhosted.com/assets/message/disk-usage-config-${CONFIG_BIGGEST_CONSUMER}/'
+    TARGET='_blank'>${CONFIG_BIGGEST_CONSUMER}</A> with ${CONFIG_DISK_USED_HUMAN}
+    used<BR/>\" > /www/assets/message/message_details_config.html\n  #   fi\n  # done\n
+    \ # echo \"\U0001F4BE /config/ $TOTAL_USED_HUMAN of 100GB used: \"> /www/assets/message/message_details.html\n
+    \ # PERCENTAGE_USED=$(cat /www/assets/message/disk_space_percent_used)\n  # if
+    [[ \"$PERCENTAGE_USED\" -ge 90 || \"$CONFIG_PERCENTAGE_USED\" -ge 90 ]]; then\n
+    \ #   STYLE=\"is-danger\"\n  #   ICON=\"fa fa-thermometer-full\"\n  #   MESSAGE=\"Time
+    to clean up! \U0001F9F9\"\n  # elif [[ \"$PERCENTAGE_USED\" -ge 75 || \"$CONFIG_PERCENTAGE_USED\"
+    -ge 75 ]]; then\n  #   STYLE=\"is-warning\"\n  #   ICON=\"fa fa-thermometer-three-quarters\"\n
+    \ #   MESSAGE=\"Getting full.. \U0001F354\"\n  # elif [[ \"$PERCENTAGE_USED\"
+    -ge 50 || \"$CONFIG_PERCENTAGE_USED\" -ge 50 ]]; then\n  #   STYLE=\"is-info\"\n
+    \ #   ICON=\"fa fa-thermometer-half\"\n  #   MESSAGE=\"Halfway there..\"\n  #
+    elif [[ \"$PERCENTAGE_USED\" -ge 25  || \"$CONFIG_PERCENTAGE_USED\" -ge 25 ]];
+    then\n  #   STYLE=\"is-success\"\n  #   ICON=\"fa fa-thermometer-quarter\"\n  #
+    \  MESSAGE=\"Nice and tidy! \U0001F44D\"\n  # else\n  #   STYLE=\"is-success\"\n
+    \ #   ICON=\"fa fa-thermometer-empty\"\n  #   MESSAGE=\"Gigabytes everywhere!
+    \U0001F973\"\n  # fi\n  RD_DAYS_REMAINING=$(curl -s http://zurg:9999/stats | jq
+    -r '[.user_infos[] | \"\\(.username) expires in \\(.premium) days\"] | join(\",
+    \")')\n  RD_LIBRARY_SIZE=$(curl -s http://zurg:9999/stats | jq .library_size)
+    # items\n  ZURG_MESSAGE=\"\U0001F47D Zurg reports $RD_LIBRARY_SIZE items, $RD_DAYS_REMAINING\"\n
+    \ RIVEN_TOTAL_ITEMS=$(curl -s -H \"Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u\"
+    http://riven:8080/api/v1/stats | jq .total_items) # items\n  RIVEN_TOTAL_MOVIES=$(curl
+    -s -H \"Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u\" http://riven:8080/api/v1/stats
+    | jq .total_movies) # items\n  RIVEN_TOTAL_SHOWS=$(curl -s -H \"Authorization:
+    Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u\" http://riven:8080/api/v1/stats | jq
+    .total_shows) # items\n  RIVEN_TOTAL_SEASONS=$(curl -s -H \"Authorization: Bearer
+    1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u\" http://riven:8080/api/v1/stats | jq .total_seasons)
+    # items\n  RIVEN_TOTAL_EPISODES=$(curl -s -H \"Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u\"
+    http://riven:8080/api/v1/stats | jq .total_episodes) # items\n  RIVEN_TOTAL_SYMLINKS=$(curl
+    -s -H \"Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u\" http://riven:8080/api/v1/stats
+    | jq .total_symlinks) # items\n  RIVEN_MESSAGE=\"\U0001F5FB Riven reports $RIVEN_TOTAL_ITEMS
+    total items (<I>$RIVEN_TOTAL_MOVIES movies \U0001F37F, $RIVEN_TOTAL_SHOWS shows
+    \U0001F4FA across $RIVEN_TOTAL_SEASONS seasons and $RIVEN_TOTAL_EPISODES episodes
+    across $RIVEN_TOTAL_SYMLINKS symlinks!</I>)\"\n  COMPLIMENT=$(curl -s http://elfhosted-internal.my-fun-api/compliment
+    | jq -r .data.compliment)\n  # DISK_USAGE_CONFIG=$(cat /www/assets/message/message_details.html
+    /www/assets/message/message_details_config.html )\n  echo \"{ \\\"title\\\":\\\"Welcome,
+    brunner56!\\\", \\\"content\\\":\\\"❤️ ${COMPLIMENT}</BR>${ZURG_MESSAGE}<BR/>
+    ${RIVEN_MESSAGE}\\\",\\\"style\\\":\\\"${STYLE}\\\",\\\"icon\\\":\\\"${ICON}\\\"
+    }\" > /www/assets/message/message.json\n  sleep $(shuf -i 1800-5400 -n 1)\ndone"
+kubeRootCaCrt:
+  caCrt: |-
+    -----BEGIN CERTIFICATE-----
+    MIIBdzCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy
+    dmVyLWNhQDE2ODY1MzkyNTYwHhcNMjMwNjEyMDMwNzM2WhcNMzMwNjA5MDMwNzM2
+    WjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE2ODY1MzkyNTYwWTATBgcqhkjO
+    PQIBBggqhkjOPQMBBwNCAASur5RfBYPuCBWTATG+0m9SBlDPR2aDR4KBjo6wTokA
+    xVuCAe/wBTROcVIIJmx8LyLcFa2qTiVwzI3zsNVz60NVo0IwQDAOBgNVHQ8BAf8E
+    BAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUUDYuim7f/9hsSKRuMpl+
+    0D+283YwCgYIKoZIzj0EAwIDSAAwRQIgLRgt/GGCIQRNBvolfddtx1BS1X1o50H0
+    j6TmmxHhYQ8CIQCZUH78CHeiRNT57jcC0NNmJP5SA7pwQCWL7ZVMRjvsnQ==
+    -----END CERTIFICATE-----
+kubernetesClusterDomain: cluster.local
+kubernetesDashboard:
+  ports:
+  - name: http
+    port: 9090
+    targetPort: 0
+  type: ClusterIP
+mattermostBackup:
+  daily: |-
+    #!/bin/sh
+    now=$(date +"%s_%Y-%m-%d")
+    /usr/bin/mysqldump --opt -h ${MYSQL_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE} > "/backup/${now}_${MYSQL_DATABASE}.sql"
+notifiarrConfig:
+  notifiarrConf: |-
+    ###############################################
+    # Notifiarr Client Example Configuration File #
+    # Created by Notifiarr v0.4.4   @ 232801T0734 #
+    ###############################################
+    ## This API key must be copied from your notifiarr.com account.
+    api_key = "api-key-from-notifiarr.com"
+    ## Setting a UI password enables the human accessible web GUI. Must be at least 9 characters.
+    ## The default username is admin; change it by setting ui_password to "username:password"
+    ## Set to "webauth" to disable the login form and use only proxy authentication. See upstreams, below.
+    ## Your auth proxy must pass the x-webauth-user header if you set this to "webauth".
+    ## You may also set a custom auth header by setting to "webauth:<header>" e.g. "webauth:remote-user"
+    ## Disable auth by setting this to "noauth". Not recommended. Requires "upstreams" being set.
+    ui_password = "webauth"
+    ## The ip:port to listen on for incoming HTTP requests. 0.0.0.0 means all/any IP and is recommended!
+    ## You may use "127.0.0.1:5454" to listen only on localhost; good if using a local proxy.
+    ## This is used to receive Plex webhooks and Media Request commands.
+    ##
+    bind_addr = "0.0.0.0:5454"
+    ## This application can update itself on Windows systems.
+    ## Set this to "daily" to check GitHub every day for updates.
+    ## You may also set it to a Go duration like "12h" or "72h".
+    ## THIS ONLY WORKS ON WINDOWS
+    auto_update = "off"
+    ## Quiet makes the app not log anything to output.
+    ## Recommend setting log files if you make the app quiet.
+    ## This is always true on Windows and macOS app.
+    ## Log files are automatically written on those platforms.
+    ##
+    quiet = false
+    ## Debug prints more data and json payloads. This increases application memory usage.
+    debug = false
+    max_body = 0 # maximum body size for debug logs. 0 = no limit.
+    host_id = "brunner56-notifiarr.elfhosted.com"
+    ## All API paths start with /api. This does not affect incoming /plex webhooks.
+    ## Change it to /somethingelse/api by setting urlbase to "/somethingelse"
+    ##
+    urlbase = "/"
+    ## Allowed upstream networks. Networks here are allowed to send two special headers:
+    ## (1) x-forwarded-for (2) x-webauth-user
+    ## The first header sets the IPs in logs.
+    ## The second header allows an auth proxy to set a logged-in username. Be careful.
+    ##
+    ## Set this to your reverse proxy server's IP or network. If you leave off the mask,
+    ## then /32 or /128 is assumed depending on IP version. Empty by default. Example:
+    ##
+    upstreams = [ "10.2.0.0/15" ] # for ElfHosted's Traefik pods
+    ## If you provide a cert and key file (pem) paths, this app will listen with SSL/TLS.
+    ## Uncomment both lines and add valid file paths. Make sure this app can read them.
+    ##
+    #ssl_key_file  = '/path/to/cert.key'
+    #ssl_cert_file = '/path/to/cert.key'
+    ## If you set these, logs will be written to these files.
+    ## If blank on windows or macOS, log file paths are chosen for you.
+    log_file = '/tmp/notifiarr.log'
+    http_log = '/tmp/notifiarr.http.log'
+    ##
+    ## Set this to the number of megabytes to rotate files.
+    log_file_mb = 100
+    ##
+    ## How many files to keep? 0 = all.
+    log_files = 5
+    ##
+    ## Unix file mode for new log files. Umask also affects this.
+    ## Missing, blank or 0 uses default of 0600. Permissive is 0644. Ignored by Windows.
+    file_mode = "0600"
+    ## Web server and website timeout.
+    ##
+    timeout = "1m"
+    ## This application can integrate with apt on Debian-based OSes.
+    ## Set apt to true to enable this integration. A true setting causes
+    ## notifiarr to relay apt package install/update hooks to notifiarr.com.
+    ##
+    apt = false
+    ## Setting serial to true makes the app use fewer threads when polling apps.
+    ## This spreads CPU usage out and uses a bit less memory.
+    serial = false
+    ## Retries controls how many times to retry requests to notifiarr.com.
+    ## Sometimes cloudflare returns a 521, and this mitigates those problems.
+    ## Setting this to 0 will take the default of 4. Use 1 to disable retrying.
+    retries = 4
+    ##################
+    # Starr Settings #
+    ##################
+    ## The API keys are specific to the app. Get it from Settings -> General.
+    ## Configurations for unused apps are harmless. Set URL and API key for
+    ## apps you have and want to make requests to using Media Bot.
+    ## See the Service Checks section below for information about setting the names.
+    ##
+    ## Examples follow. UNCOMMENT (REMOVE #), AT MINIMUM: [[header]], url, api_key
+    ## Setting any application timeout to "-1s" will disable that application.
+    [[lidarr]]
+    name     = "Lidarr | ElfHosted" # Set a name to enable checks of your service.
+    url      = "http://lidarr:8686/"
+    api_key  = "0e68e28531a249659737513d3102bfe9"
+    [[prowlarr]]
+    name     = "Prowlarr | ElfHosted" # Set a name to enable checks of your service.
+    url      = "http://prowlarr:9696/"
+    api_key  = "c53bc3bd17c645c3a457e5342a02cd66"
+    [[radarr]]
+    name      = "Radarr | ElfHosted" # Set a name to enable checks of your service.
+    url       = "http://radarr:7878/"
+    api_key   = "041776c8d5f74bf295aa486d9d51c33a"
+    [[radarr]]
+    name      = "Radarr 4K | ElfHosted" # Set a name to enable checks of your service.
+    url       = "http://radarr4k:7878/"
+    api_key   = "7da5d4ba79804527b78a78b68c7a0781"
+    [[readarr]]
+    name      = "Readarr | ElfHosted" # Set a name to enable checks of your service.
+    url       = "http://readarr:8787/"
+    api_key   = "74b033ff59964011b8a32c014fdb9b68"
+    [[readarr]]
+    name      = "Readarr Audio | ElfHosted" # Set a name to enable checks of your service.
+    url       = "http://readarraudio:8787/"
+    api_key   = "8496cefe2c6b46ee921e18caddf6a943"
+    [[sonarr]]
+    name      = "Sonarr | ElfHosted"  # Set a name to enable checks of your service.
+    url       = "http://sonarr:8989/"
+    api_key   = "a6f1c7d07fab4be49c5c1cb545f85a76"
+    [[sonarr]]
+    name      = "Sonarr 4K | ElfHosted"  # Set a name to enable checks of your service.
+    url       = "http://sonarr4k:8989/"
+    api_key   = "e4f93c115169484bbed19821f7ac8e49"
+    # Download Client Configs (below) are used for dashboard state and service checks.
+    [[deluge]]
+    name     = "Deluge | ElfHosted"  # Set a name to enable checks of your service.
+    url      = "http://deluge:8112/"
+    password = "deluge"
+    [[qbit]]
+    name     = "Qbittorrent | ElfHosted"  # Set a name to enable checks of your service.
+    url      = "http://qbittorrent:8080/"
+    user     = ""
+    pass     = ""
+    [[rtorrent]]
+    name     = "ruTorrent | ElfHosted"  # Set a name to enable checks of your service.
+    url      = "http://rutorrent:8080/plugins/rpc/rpc.php"
+    user     = ""
+    pass     = ""
+    [[nzbget]]
+    name     = "NZBGet | ElfHosted"  # Set a name to enable checks of your service.
+    url      = "http://nzbget:6789/"
+    user     = ""
+    pass     = ""
+    [[sabnzbd]]
+    name     = "SABnzbd | ElfHosted"  # Set a name to enable checks of this application.
+    url      = "http://sabnzbd:8080/"
+    api_key  = "8flkbru7ncdps3dzzgk48q2msz41m4on"
+    #################
+    # Plex Settings #
+    #################
+    ## Find your token: https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/
+    ##
+    #[plex]
+    #url     = "http://localhost:32400/" # Your plex URL
+    #token   = "" # your plex token; get this from a web inspector
+    #####################
+    # Tautulli Settings #
+    #####################
+    # Enables email=>username map. Set a name to enable service checks.
+    # Must uncomment [tautulli], 'api_key' and 'url' at a minimum.
+    #[tautulli]
+    #  name    = "" # only set a name to enable service checks.
+    #  url     = "http://localhost:8181/" # Your Tautulli URL
+    #  api_key = "" # your tautulli api key; get this from settings
+    ##################
+    # MySQL Snapshot #
+    ##################
+    # Enables MySQL process list in snapshot output.
+    # Adding a name to a server enables TCP service checks.
+    # Example Grant:
+    # GRANT PROCESS ON *.* to 'notifiarr'@'localhost'
+    #[[snapshot.mysql]]
+    #name = "" # only set a name to enable service checks.
+    #host = "localhost:3306"
+    #user = "notifiarr"
+    #pass = "password"
+    ###################
+    # Nvidia Snapshot #
+    ###################
+    # The app will automatically collect Nvidia data if nvidia-smi is present.
+    # Use the settings below to disable Nvidia GPU collection, or restrict collection to only specific Bus IDs.
+    # SMI Path is found automatically if left blank. Set it to path to nvidia-smi (nvidia-smi.exe on Windows).
+    [snapshot.nvidia]
+    disabled = true
+    smi_path = ''''''
+    bus_ids  = []
+    ##################
+    # Service Checks #
+    ##################
+    ## This application performs service checks on configured services at the specified interval.
+    ## The service states are sent to Notifiarr.com. Failed services generate a notification.
+    ## Setting names on Starr apps (above) enables service checks for that app.
+    ## Setting the Interval to "-1s" (Disabled in UI) will disable service checks on that named instance.
+    ## Use the [[service]] directive to add more service checks. Example below.
+    [services]
+      disabled = true  # Setting this to true disables all service checking routines.
+      parallel = 1     # How many services to check concurrently. 1 should be enough.
+      interval = "10m" # How often to send service states to Notifiarr.com. Minimum = 5m.
+      log_file = '/tmp/notifiarr.services.log'    # Service Check logs go to the app log by default. Change that by setting a services.log file here.
+    ## Uncomment the following section to create a service check on a URL or IP:port.
+    ## You may include as many [[service]] sections as you have services to check.
+    ## Do not add Radarr, Sonarr, Readarr, Prowlarr, or Lidarr here! Add a name to enable their checks.
+    ##
+    ## Example with comments follows.
+    #[[service]]
+    #  name     = "MyServer"          # name must be unique
+    #  type     = "http"              # type can be "http" or "tcp"
+    #  check    = 'http://127.0.0.1/'  # url for 'http', host/IP:port for 'tcp'
+    #  expect   = "200"               # return code to expect (for http only)
+    #  timeout  = "10s"               # how long to wait for tcp or http checks.
+    #  interval = "5m"                # how often to check this service.
+    ## Another example. Remember to uncomment [[service]] if you use this!
+    ##
+    #[[service]]
+    #  name    = "Bazarr"
+    #  type    = "http"
+    #  check   = 'http://10.1.1.2:6767/series/'
+    #  expect  = "200"
+    #  timeout = "10s"
+    ######################
+    # File & Log Watcher #
+    ######################
+    ## Tail a log file, regex match lines, and send notifications.
+    ## Example:
+    #[[watch_file]]
+    #  path  = '/var/log/system.log'
+    #  skip  = '''error'''
+    #  regex = '''[Ee]rror'''
+    #  poll  = false
+    #  pipe  = false
+    #  must_exist = false
+    #  log_match  = true
+    ###################
+    # Custom Commands #
+    ###################
+    ## Run and trigger custom commands.
+    ## Commands may have required arguments thet can be passed in when the command is run.
+    ## These use the format ({regex}) - a regular expression wrapped by curly braces and parens.
+    ## The example below allows a user to run any combination of ls -la on /usr, /home, or /tmp:
+    ## command = "/bin/ls ({-la|-al|-l|-a}) ({/usr|/home|/tmp})"
+    ##
+    ## Full Example (remove the leading # hashes to use it):
+    #[[command]]
+    #  name    = 'some-name-for-logs'
+    #  command = '/var/log/system.log'
+    #  shell   = false
+    #  log     = true
+    #  notify  = true
+    #  timeout = "10s"
+plex:
+  ports:
+  - name: http
+    port: 32400
+    targetPort: 0
+  - name: speed
+    port: 3002
+    targetPort: 0
+  - name: tinyproxy
+    port: 8888
+    targetPort: 0
+  type: ClusterIP
+plexConfig:
+  advertiseIp: https://brunner56-plex.elfhosted.com:443
+  plexPreference2: FSEventLibraryPartialScanEnabled=1
+  plexPreference3: FSEventLibraryUpdatesEnabled=1
+  plexPreference4: TranscoderPhotoFileSizeLimitMiB=5
+  plexPreference7: autoEmptyTrash=0
+  plexPreference8: BackgroundTranscodeLowPriority=1
+  plexPreference9: LongRunningJobThreads=1
+  plexPreference10: TranscoderH264BackgroundPreset=ultrafast
+  plexPreference11: RelayEnabled=0
+  plexPreference12: TranscoderTempDirectory=/transcode
+  plexPreference13: MinutesAllowedPaused=30
+  plexPreference14: GenerateIntroMarkerBehavior=scheduled
+  plexPreference15: ButlerStartHour=9
+  plexPreference16: ButlerEndHour=10
+  plexPreference17: ButlerTaskDeepMediaAnalysis=0
+  plexPreference18: ButlerTaskUpgradeMediaAnalysis=0
+  plexPreference19: MarkerSource=cloud
+  plexPreference20: GenerateCreditsMarkerBehavior=never
+  plexPreference21: GenerateChapterThumbBehavior=never
+  plexPreference22: GenerateChapterThumbBehavior=never
+  plexPreference23: GenerateIntroMarkerBehavior=never
+  plexPreference24: GenerateBIFBehavior=never
+  plexPreference25: GenerateAdMarkerBehavior=never
+  waitForMountPaths: /storage/realdebrid-zurg/__all__
+  waitForUrls: http://zurg:9999/http/version.txt
+  waitForVpn: "true"
+plexProxy:
+  ports:
+  - name: http
+    port: 8888
+    targetPort: 0
+  type: ClusterIP
+plexTinyproxyConf:
+  tinyproxyConf: |-
+    Port 8888
+    Listen 0.0.0.0
+    # Allow all connections
+    Allow 0.0.0.0/0
+    Timeout 600
+    DisableViaHeader yes
+    ReversePath "/" "http://localhost:32400/"
+    # ReverseBaseURL "https://brunner56-plex.elfhosted.com"
+    # ReverseMagic Yes
+    ReverseOnly Yes
+    # Anonymous "Host"
+    # Anonymous "Authorization"
+    # Anonymous "Cookie"
+    # Anonymous "X-Forwarded-Proto"
+pvc:
+  backup:
+    storageClass: local-path
+    storageRequest: 20Gi
+  config:
+    storageClass: local-path
+    storageRequest: 100Gi
+  logs:
+    storageClass: local-path
+    storageRequest: 1Gi
+  rclone:
+    storageClass: local-path
+    storageRequest: 1Gi
+  realdebridZurg:
+    storageClass: local-path
+    storageRequest: 1Gi
+  symlinks:
+    storageClass: local-path
+    storageRequest: 5Gi
+  transcode1G:
+    storageClass: local-path
+    storageRequest: 1Gi
+  volsyncRdBackupCache:
+    storageClass: local-path
+    storageRequest: 20Gi
+  volsyncRdBackupDest:
+    storageClass: local-path
+    storageRequest: 20Gi
+  volsyncRdConfigCache:
+    storageClass: local-path
+    storageRequest: 100Gi
+  volsyncRdConfigDest:
+    storageClass: local-path
+    storageRequest: 100Gi
+  volsyncRdSymlinksCache:
+    storageClass: local-path
+    storageRequest: 5Gi
+  volsyncRdSymlinksDest:
+    storageClass: local-path
+    storageRequest: 5Gi
+  volsyncRsBackupCache:
+    storageClass: local-path
+    storageRequest: 20Gi
+  volsyncRsConfigCache:
+    storageClass: local-path
+    storageRequest: 100Gi
+  volsyncRsSymlinksCache:
+    storageClass: local-path
+    storageRequest: 5Gi
+rclonefm:
+  ports:
+  - name: rclonefm
+    port: 5573
+    targetPort: 0
+  type: ClusterIP
+rclonefmConfig:
+  rcloneRemoteStorage: |-
+    [storage]
+    type = alias
+    remote = /storage
+  settingsJs: |-
+    export const guiVersion = "0.4.0";
+    export const rcloneSettings = {
+        host: "https://brunner56-rclonefm.elfhosted.com",
+        // null if --rc-no-auth, otherwise what is set in --rc-user
+        user: null,
+        // null if --rc-no-auth, otherwise what is set in --rc-pass
+        pass: null,
+        // null if there is no login_token in URL query parameters,
+        // otherwise is set from there and takes over user/pass
+        loginToken: null
+    };
+    export const asyncOperations = [
+        "/sync/copy",
+        "/sync/move",
+        "/operations/purge",
+        "/operations/copyfile",
+        "/operations/movefile",
+        "/operations/deletefile"
+    ];
+    export const remotes = {
+        "storage": {
+            "startingFolder": "/storage",
+            "canQueryDisk": true,
+            "pathToQueryDisk": ""
+        }
+    };
+    export const userSettings = {
+        timerRefreshEnabled: true,
+        timerRefreshView: 2,
+        timerRefreshViewInterval: undefined,
+        timerProcessQueue: 5,
+        timerProcessQueueInterval: undefined
+    };
+rcloneui:
+  ports:
+  - name: rcloneui
+    port: 5572
+    targetPort: 0
+  - name: webdav-local
+    port: 5575
+    targetPort: 0
+  type: ClusterIP
+rcloneuiConfig:
+  configYaml: |-
+    # Example configuration
+    # Replace with actual configuration
+    example_key: "example_value"
+  tz: UTC
+recyclarrConfig:
+  recyclarrYaml: ""
+riven:
+  ports:
+  - name: http
+    port: 3001
+    targetPort: 0
+  - name: postgres
+    port: 5432
+    targetPort: 0
+  - name: backend
+    port: 8080
+    targetPort: 0
+  type: ClusterIP
+rivenFrontend:
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 0
+  type: ClusterIP
+rivenFrontendConfig:
+  serverJson: |-
+    {
+      "backendUrl": "http://riven:8080",
+      "apiKey": "1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u"
+    }
+rivenFrontendEnv:
+  origin: https://brunner56-riven.elfhosted.com
+rivenSetup:
+  setupSh: |-
+    #!/bin/bash
+    # make symlink directories if they don't exist, to make onboarding simpler
+    mkdir -p /storage/symlinks/movies
+    mkdir -p /storage/symlinks/shows
+    # Enforce API key
+    contents="$(jq '.api_key="1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u"' /config/settings.json)" && \
+      echo -E "${contents}" > /config/settings.json
+rutorrentConfig:
+  02WaitForVpnSh: |-
+    #!/usr/bin/env bash
+    echo "Waiting for VPN to be connected..."
+    while ! grep -s -q "connected" /shared/vpnstatus; do
+        # Also account for gluetun-style http controller
+        if (/usr/local/bin/curl -s http://localhost:8042/v1/openvpn/status | grep -q running); then
+            break
+        fi
+        echo "VPN not connected"
+        sleep 2
+    done
+    echo "VPN Connected, starting application..."
+  03SetInboundPortSh: |-
+    #!/usr/bin/env bash
+    # If we have been given a port by pia/gluetun, prepare for it before starting
+    PORT_FILE=/data/rtorrent/forwarded-port
+    PORT_FILE_OVERRIDE=/data/rtorrent/forwarded-port-override
+    # Apply the port
+    if [[ -f "$PORT_FILE_OVERRIDE" ]]; then
+        echo -n $(cat $PORT_FILE_OVERRIDE)-$(cat $PORT_FILE_OVERRIDE) > /port-range/port-range.txt
+    elif [[ -f "$PORT_FILE" ]]; then
+        echo -n $(cat $PORT_FILE)-$(cat $PORT_FILE) > /port-range/port-range.txt
+        mv $PORT_FILE ${PORT_FILE}-previous
+    else
+        sleep 1m # failsafe incase it took a while to create the file, give us one last chance
+        if [[ -f "$PORT_FILE" ]]; then
+          echo -n $(cat $PORT_FILE)-$(cat $PORT_FILE) > /port-range/port-range.txt
+          mv $PORT_FILE ${PORT_FILE}-previous
+        else
+          echo -n 1234-1234 > /port-range/port-range.txt
+        fi
+    fi
+  05ApplyElfhostedConfigSh: |-
+    #!/bin/bash
+    cp /.rtlocal.rc-elfhosted /etc/rtorrent/.rtlocal.rc
+    cp /.rtorrent.rc-elfhosted /data/rtorrent/.rtorrent.rc
+  RtlocalRcElfhosted: |-
+    # Launch as a daemon
+    system.daemon.set = true
+     # madvise
+    pieces.preload.type.set = 1
+    pieces.memory.max.set = 4096M
+    network.send_buffer.size.set = 16M
+    network.receive_buffer.size.set = 48M
+    # Initialize plugins
+    execute2 = {sh,-c,/usr/bin/php /var/www/rutorrent/php/initplugins.php rtorrent &}
+    # system is stable, reduce session save from 20min to 12h
+    schedule2 = session_save, 1200, 43200, ((session.save))
+    # reduce fragmentation
+    system.file.allocate = 1
+    method.insert = get_port_range, simple|private, "execute.capture=ash,-c,\"cat /port-range/port-range.txt\""
+    network.port_range.set = "$cat=$get_port_range="
+  RtorrentRcElfhosted: |2-
+
+    # Instance layout
+    method.insert = cfg.basedir, private|const|string, (cat,"/data/rtorrent/")
+    method.insert = cfg.download, private|const|string, (cat,"/storage/elfstorage/downloads/")
+    method.insert = cfg.download_complete, private|const|string, (cat,(cfg.download),"completed/")
+    method.insert = cfg.download_temp, private|const|string, (cat,"/tmp/")
+    method.insert = cfg.logs, private|const|string, (cat,(cfg.basedir),"log/")
+    method.insert = cfg.session, private|const|string, (cat,(cfg.basedir),".session/")
+    method.insert = cfg.watch, private|const|string, (cat,(cfg.basedir),"watch/")
+    method.insert = cfg.rundir, private|const|string, (cat,"/var/run/rtorrent/")
+    # Gets the full path of data of a torrent (it's a workaround for the possibly empty 'd.base_path' attribute)
+    method.insert = d.data_path, simple, "if=(d.is_multi_file), (cat,(d.directory),/), (cat,(d.directory),/,(d.name))"
+    # Default directory to save the downloaded torrents
+    # We used this when we downloaded to /tmp
+    # directory.default.set = (cat,(cfg.download_temp))
+    directory.default.set = (cat,(cfg.download_complete))
+    # Default session directory
+    session.path.set = (cat,(cfg.session))
+    # PID file
+    execute.nothrow = sh,-c,(cat,"echo >",(cfg.rundir),"rtorrent.pid"," ",(system.pid))
+    # SCGI socket and make it group-writable and secure
+    network.scgi.open_local = (cat, (cfg.rundir), "scgi.socket")
+    schedule2 = scgi_permission, 0, 0, (cat,"execute.nothrow=chmod,\"g+w,o=\",",(cfg.rundir),"scgi.socket")
+    # Listening port for incoming peer traffic
+    # network.port_range.set = 50000-50000
+    # network.port_random.set = no
+    # UDP port to use for DHT
+    # dht.port.set = 6881
+    # XMLRPC size limit
+    network.xmlrpc.size_limit.set = 1M
+    # Logging
+    ## levels = critical error warn notice info debug
+    ## groups = connection_* dht_* peer_* rpc_* storage_* thread_* tracker_* torrent_*
+    log.open_file = "log",(cat,(cfg.logs),"rtorrent.log")
+    log.open_file = "debug-log",(cat,(cfg.logs),"rtorrent-debug.log")
+    log.add_output = "info","log"
+    log.add_output = "debug","debug-log"
+    log.add_output = "rpc_events","log"
+    #log.execute = (cat,(cfg.logs),"execute.log")
+    #log.xmlrpc = (cat,(cfg.logs),"xmlrpc.log")
+    #### Originally from .rtorrent.rc
+    # Maximum and minimum number of peers to connect to per torrent
+    throttle.min_peers.normal.set = 1
+    throttle.max_peers.normal.set = 100
+    # Same as above but for seeding completed torrents (-1 = same as downloading)
+    throttle.min_peers.seed.set = 1
+    throttle.max_peers.seed.set = 5
+    # Maximum number of simultanious uploads per torrent
+    throttle.max_uploads.set = 15
+    # Global upload and download rate in KiB. "0" for unlimited
+    throttle.global_down.max_rate.set_kb = 0
+    throttle.global_up.max_rate.set_kb = 0
+    # Enable DHT support for trackerless torrents or when all trackers are down
+    # May be set to "disable" (completely disable DHT), "off" (do not start DHT),
+    # "auto" (start and stop DHT as needed), or "on" (start DHT immediately)
+    dht.mode.set = disable
+    # Enable peer exchange (for torrents not marked private)
+    protocol.pex.set = no
+    # Check hash for finished torrents. Might be usefull until the bug is
+    # fixed that causes lack of diskspace not to be properly reported
+    pieces.hash.on_completion.set = no
+    # Set whether the client should try to connect to UDP trackers
+    trackers.use_udp.set = yes
+    # Set the max amount of memory address space used to mapping file chunks. This refers to memory mapping, not
+    # physical memory allocation. Default: 1GB (max_memory_usage)
+    # This may also be set using ulimit -m where 3/4 will be allocated to file chunks
+    # Alternative calls to bind and ip that should handle dynamic ip's
+    #schedule2 = ip_tick,0,1800,ip=rakshasa
+    #schedule2 = bind_tick,0,1800,bind=rakshasa
+    # Encryption options, set to none (default) or any combination of the following:
+    # allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
+    protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+    # Set the umask for this process, which is applied to all files created by the program
+    system.umask.set = 0022
+    # Add a preferred filename encoding to the list
+    encoding.add = UTF-8
+    # Watch a directory for new torrents, and stop those that have been deleted
+    schedule2 = watch_directory, 1, 1, (cat,"load.start=",(cfg.watch),"*.torrent")
+    schedule2 = untied_directory, 5, 5, (cat,"stop_untied=",(cfg.watch),"*.torrent")
+    # Close torrents when diskspace is low
+    schedule2 = monitor_diskspace, 15, 60, ((close_low_diskspace,1000M))
+    # Move finished (no need Autotools/Automove plugin on ruTorrent)
+    # method.insert = d.get_finished_dir, simple, "cat=$cfg.download_complete=,$d.custom1="
+    # method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,-u,$argument.0=,$argument.1=; d.save_full_session="
+    # method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.data_path=,$d.get_finished_dir="
+    # Erase data when torrent deleted (no need erasedata plugin on ruTorrent)
+    # method.set_key = event.download.erased,delete_erased,"execute=rm,-rf,--,$d.data_path="
+sambaConfig:
+  configYml: |-
+    auth:
+      - user: brunner56
+        group: brunner56
+        uid: 568
+        gid: 568
+        password: brunner56
+    global:
+      - "force user = brunner56"
+      - "force group = brunner56"
+    share:
+      - name: symlinks
+        comment: symlinks
+        path: /samba/symlinks-block
+        browsable: yes
+        readonly: no
+        guestok: no
+        veto: no
+        recycle: no
+seafileConfig:
+  ccnetConf: |-
+    [General]
+    SERVICE_URL=https://brunner56-seafile.elfhosted.com
+  seafileAdminEmail: boden.crouch@gmail.com
+storagehub:
+  ports:
+  - name: tcp2049
+    port: 2049
+    targetPort: 0
+  - name: udp11
+    port: 111
+    targetPort: 0
+  type: ClusterIP
+toolingScripts:
+  cleanUpDnsOnTerminationSh: |-
+    #!/bin/bash
+    function cleanup_dns_on_shutdown {
+        echo "Received SIGTERM, cleaning up DNS entries..."
+        source /tooling-scripts/cloudflare-scripts.sh
+        DNS_DOMAIN=elfhosted.com
+        delete_cloudflare_record $DNS_DOMAIN $ELF_TENANT_NAME-plex.$DNS_DOMAIN CNAME
+    }
+    # When we terminate, delete the DNS record
+    trap cleanup_dns_on_shutdown SIGTERM
+    # Hang around doing nothing until terminated
+    while true
+    do
+        echo "Waiting for SIGTERM to remove DNS entry"
+        sleep infinity
+    done
+  cloudflareScriptsSh: |-
+    #!/bin/bash
+    check_existing_records() {
+        local zone_id=$1
+        local record_name=$2
+        # Check for any existing A, AAAA, or CNAME records
+        local existing_records=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records?name=${record_name}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+        # Look for any records of these types
+        local conflicting_records=$(echo $existing_records | jq -r '.result[] | select(.type == "A" or .type == "AAAA" or .type == "CNAME")')
+        if [ ! -z "$conflicting_records" ]; then
+            echo "$conflicting_records"
+            return 0
+        else
+            return 1
+        fi
+    }
+    manage_cloudflare_record() {
+        # Check for API token in environment
+        if [ -z "${CF_API_KEY}" ]; then
+            echo "Error: CF_API_KEY environment variable is not set"
+            return 1
+        fi
+        # Parameters
+        local domain=$1
+        local record_name=$2
+        local record_type=$3
+        local content=$4
+        # Input validation
+        if [ -z "$domain" ] || [ -z "$record_name" ] || [ -z "$record_type" ] || [ -z "$content" ]; then
+            echo "Error: Missing required parameters"
+            echo "Usage: manage_cloudflare_record DOMAIN RECORD_NAME RECORD_TYPE CONTENT"
+            echo "Example: manage_cloudflare_record example.com www A 192.0.2.1"
+            echo "Example: manage_cloudflare_record example.com blog CNAME target.example.net"
+            return 1
+        fi
+        # Validate record type
+        case ${record_type^^} in
+            A|CNAME)
+                ;;
+            *)
+                echo "Error: Unsupported record type ${record_type}. Supported types: A, CNAME"
+                return 1
+                ;;
+        esac
+        # Find Zone ID
+        local zone_response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${domain}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+        local zone_id=$(echo $zone_response | jq -r '.result[0].id')
+        if [ -z "$zone_id" ] || [ "$zone_id" = "null" ]; then
+            echo "Error: Could not find Zone ID for domain ${domain}"
+            echo "API Response:"
+            echo $zone_response | jq '.'
+            return 1
+        fi
+        # echo "Found Zone ID: ${zone_id}"
+        # Check for any existing conflicting records
+        local conflicting_records
+        if conflicting_records=$(check_existing_records "$zone_id" "$record_name"); then
+            echo "Found existing DNS records for ${record_name}:"
+            echo "$conflicting_records" | jq -r '. | "Type: \(.type), Content: \(.content), ID: \(.id)"'
+            # If there's an existing record of the same type, update it
+            local existing_id=$(echo "$conflicting_records" | jq -r "select(.type == \"${record_type^^}\") | .id")
+            if [ ! -z "$existing_id" ] && [ "$existing_id" != "null" ]; then
+                echo "Updating existing ${record_type} record..."
+                local json_data="{
+                    \"type\": \"${record_type^^}\",
+                    \"name\": \"${record_name}\",
+                    \"content\": \"${content}\",
+                    \"ttl\": 1,
+                    \"proxied\": false
+                }"
+                local response=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${existing_id}" \
+                    -H "Authorization: Bearer ${CF_API_KEY}" \
+                    -H "Content-Type: application/json" \
+                    --data "${json_data}")
+                if echo $response | jq -e '.success' > /dev/null; then
+                    echo "Successfully updated ${record_type} record ${record_name}"
+                    return 0
+                else
+                    echo "Error updating ${record_type} record ${record_name}:"
+                    echo $response | jq '.'
+                    return 1
+                fi
+            else
+                echo "Error: Cannot create ${record_type} record ${record_name}. Please delete existing A/AAAA/CNAME records first."
+                echo "You can use delete_cloudflare_record to remove existing records."
+                return 1
+            fi
+        else
+            # No conflicting records found, create new record
+            echo "No existing A/AAAA/CNAME records found for ${record_name}. Creating new ${record_type} record..."
+            local json_data="{
+                \"type\": \"${record_type^^}\",
+                \"name\": \"${record_name}\",
+                \"content\": \"${content}\",
+                \"ttl\": 1,
+                \"proxied\": false
+            }"
+            local response=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records" \
+                -H "Authorization: Bearer ${CF_API_KEY}" \
+                -H "Content-Type: application/json" \
+                --data "${json_data}")
+            if echo $response | jq -e '.success' > /dev/null; then
+                echo "Successfully created ${record_type} record"
+                echo "Record ID: $(echo $response | jq -r '.result.id')"
+                return 0
+            else
+                echo "Error creating ${record_type} record ${record_name}:"
+                echo $response | jq '.'
+                return 1
+            fi
+        fi
+    }
+    delete_cloudflare_record() {
+        # Check for API token in environment
+        if [ -z "${CF_API_KEY}" ]; then
+            echo "Error: CF_API_KEY environment variable is not set"
+            return 1
+        fi
+        # Parameters
+        local domain=$1
+        local record_name=$2
+        local record_type=$3
+        # Input validation
+        if [ -z "$domain" ] || [ -z "$record_name" ] || [ -z "$record_type" ]; then
+            echo "Error: Missing required parameters"
+            echo "Usage: delete_cloudflare_record DOMAIN RECORD_NAME RECORD_TYPE"
+            echo "Example: delete_cloudflare_record example.com www A"
+            return 1
+        fi
+        # Validate record type
+        case ${record_type^^} in
+            A|CNAME)
+                ;;
+            *)
+                echo "Error: Unsupported record type ${record_type}. Supported types: A, CNAME"
+                return 1
+                ;;
+        esac
+        # Find Zone ID
+        local zone_response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${domain}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+        local zone_id=$(echo $zone_response | jq -r '.result[0].id')
+        if [ -z "$zone_id" ] || [ "$zone_id" = "null" ]; then
+            echo "Error: Could not find Zone ID for domain ${domain}"
+            echo "API Response:"
+            echo $zone_response | jq '.'
+            return 1
+        fi
+        # echo "Found Zone ID: ${zone_id}"
+        # Check for existing record
+        local existing_record=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records?type=${record_type^^}&name=${record_name}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+        local record_id=$(echo $existing_record | jq -r '.result[0].id')
+        if [ "$record_id" = "null" ]; then
+            echo "No ${record_type} record found for ${record_name}"
+            return 0
+        fi
+        echo "Found ${record_type} ${record_name} record with ID: ${record_id}"
+        # Delete the record
+        local response=$(curl -s -X DELETE "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${record_id}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+        # Check if the operation was successful
+        if echo $response | jq -e '.success' > /dev/null; then
+            echo "Successfully deleted ${record_type} record ${record_name}"
+            return 0
+        else
+            echo "Error deleting ${record_type} record ${record_name}:"
+            echo $response | jq '.'
+            return 1
+        fi
+    }
+    # Example usage:
+    # export CF_API_KEY="your-api-token"
+    # To handle the error case you encountered:
+    # 1. First delete any existing conflicting records:
+    # delete_cloudflare_record "example.com" "blog" "A"
+    # delete_cloudflare_record "example.com" "blog" "AAAA"
+    # 2. Then create your new record:
+    # manage_cloudflare_record "example.com" "blog" "CNAME" "target.example.net"
+  updateDnsOnInitSh: |-
+    # Detect external address
+    source /tooling-scripts/cloudflare-scripts.sh
+    DNS_DOMAIN=elfhosted.com
+    MY_NODE_IP=$(curl -s ifconfig.me)
+    # Create one for the node, if it doesn't exist
+    manage_cloudflare_record $DNS_DOMAIN $MY_NODE_NAME.$DNS_DOMAIN A $MY_NODE_IP
+    manage_cloudflare_record $DNS_DOMAIN $ELF_TENANT_NAME-plex.$DNS_DOMAIN CNAME $MY_NODE_NAME.$DNS_DOMAIN
+traefikForwardAuth:
+  ports:
+  - name: http
+    port: 4181
+    targetPort: 0
+  type: ClusterIP
+traefikForwardAuthConfig:
+  authHost: brunner56-auth-me.elfhosted.com
+  clientId: XbLfjhaDz2Bnxce99YYhRkuxkzGrjjUr
+  clientSecret: wAHba6W7gGsmWTHGAx8ztQsUYEv6usuf
+  cookieDomain: elfhosted.com
+  cookieName: brunner56-auth-me.elfhosted.com
+  encryptionKey: TR9vQgnPNKgdNRLWMeGgAWq7Yy52fbPu
+  lifetime: "2764800"
+  logoutRedirect: https://store.elfhosted.com/my-account/customer-logout/
+  providerUri: https://store.elfhosted.com/
+  scope: openid email
+  whitelist: boden.crouch@gmail.com
+wizarr:
+  ports:
+  - name: http
+    port: 5690
+    targetPort: 0
+  type: ClusterIP
+wizarrEnv:
+  appUrl: https://brunner56-wizarr.elfhosted.com
+  disableBuiltinAuth: "true"
+wizarrStepsJellyfin:
+  01DownloadMd: "---\ntitle: \"Join & download Jellyfin\"\nrequire: true\n---\nYou're
+    in! \U0001F389\nGreat news! You've been granted access to brunner56's **ElfHosted
+    Jellyfin Server**! \U0001F973"
+  02AboutMd: "---\ntitle: \"What is Jellyfin?\"\n---\n## ℹ️ What's Jellyfin?\nJellyfin
+    lets people share their film and TV libraries with friends. \"\n      \"You're
+    here because brunner56’s invited you to theirs! \U0001F4FA\n## \U0001F37F How
+    do I watch stuff?\nSearch your phone, tablet, computer or smart-TV's app store
+    for \"Jellyfin\", or [download on this device](https://jellyfin.org/downloads){target=_blank
+    .btn}.\nSign in, search, push play. That’s it!"
+  03RequestsMd: "---\ntitle:  \"Automatic requests\"\nrequires: [overseerr_url]\n---\n#\"Request
+    mooar content \U0001F64B‍♀️\nCan't find what you want to watch? Make a request
+    — robots will grab the film or episode automatically and add it to the library.\n[Make
+    a request]({{ overseerr_url }}){:target=_blank .btn}"
+  04DiscordMd: |-
+    ---
+    title:  "Discord community"
+    requires: [discord_id]
+    ---
+    <iframe src="https://discord.com/widget?id={{discord_id }}&theme=dark"
+            width="350" height="500"
+            allowtransparency="true" frameborder="0"
+            sandbox="allow-popups allow-same-origin allow-scripts"></iframe>
+  05TipsMd: "---\ntitle: \"Tips for the best experience\"\n---\n## \U0001F39E Get
+    the best quality\nPlex sometimes defaults to low quality or shows its own adverts
+    first. \"\n      \"Here’s how to fix that:\n1. **Set streaming quality to original**
+    – Settings → Playback\n2. **Enable hardware decoding** if your device supports
+    it for smoother 4K.\n3. **Prefer Ethernet over Wi-Fi** on smart-TVs.\n*Happy viewing!*
+    \U0001F37F"
+  06ElfhostedMd: "---\ntitle: \"Get ElfHosted!\"\n---\n## \U0001F39E Want your **own**
+    media library?\nReady to take it to the next level?\nGet your **own** Media Server
+    with a [ElfHosted bundle](https://store.elfhosted.com/product-category/streaming-bundles/){target=_blank
+    .btn}, $1 7-day trials available!\nRock on! \U0001F918"
+wizarrStepsPlex:
+  01DownloadMd: "---\ntitle: \"Join & download Plex\"\nrequire: true\n---\nYou're
+    in! \U0001F389\nGreat news! You've been granted access to brunner56's **ElfHosted
+    Plex Server**! \U0001F973"
+  02AboutMd: "---\ntitle: \"What is Plex?\"\n---\n## ℹ️ What's Plex?\nPlex lets people
+    share their film and TV libraries with friends.\nYou're here because brunner56's
+    invited you to theirs! \U0001F4FA\n## \U0001F37F How do I watch stuff?\nSearch
+    your phone, tablet, computer or smart-TV's app store for \"Plex\", or [download
+    on this device](https://www.plex.tv/en-gb/media-server-downloads/#plex-app){target=_blank
+    .btn}.\nSign in, search, push play. That’s it!"
+  03RequestsMd: "---\ntitle:  \"Automatic requests\"\nrequires: [overseerr_url]\n---\n#\"Request
+    mooar content \U0001F64B‍♀️\nCan’t find what you want to watch? Make a request
+    — robots will grab the film or episode automatically and add it to the library.\n[Make
+    a request]({{ overseerr_url }}){:target=_blank .btn}"
+  04DiscordMd: |-
+    ---
+    title:  "Discord community"
+    requires: [discord_id]
+    ---
+    <iframe src="https://discord.com/widget?id={{ discord_id }}&theme=dark"
+            width="350" height="500"
+            allowtransparency="true" frameborder="0"
+            sandbox="allow-popups allow-same-origin allow-scripts"></iframe>
+  05TipsMd: "---\ntitle: \"Tips for the best experience\"\n---\n## \U0001F39E Get
+    the best quality\nPlex sometimes defaults to low quality or shows its own adverts
+    first. \"\n      \"Here’s how to fix that:\n1. **Disable trailers & extras** –
+    Settings → Experience → untick *Show cinematic trailers*\n2. **Force original
+    quality** – Settings → Playback → set *Automatic* to *Original*\n3. **Use a wired
+    connection** if you’re on a smart-TV for stutter-free 4K.\n4. **Read the [Plex
+    Guide](https://plexguide.com/){target=_blank .btn}** to learn more\n*Happy viewing!*
+    \U0001F37F"
+  06ElfhostedMd: "---\ntitle: \"Get ElfHosted!\"\n---\n## \U0001F39E Want your **own**
+    Plex?\nReady to take it to the next level?\nGet your **own** Plex Server with
+    a [ElfHosted bundle](https://store.elfhosted.com/product-category/streaming-bundles/){target=_blank
+    .btn}, $1 7-day trials available!\nRock on! \U0001F918"
+zurg:
+  ports:
+  - name: http
+    port: 9999
+    targetPort: 0
+  type: ClusterIP

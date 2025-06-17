@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  TZ: UTC
+  config.yaml: |
+    # Example configuration
+    # Replace with actual configuration
+    example_key: "example_value"
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rcloneui
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: rcloneui-config
+  namespace: bolabaden

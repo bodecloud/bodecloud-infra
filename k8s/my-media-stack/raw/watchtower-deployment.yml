@@ -1,0 +1,58 @@
+#! watchtower-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watchtower
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watchtower
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: watchtower
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: watchtower
+          image: containrrr/watchtower:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1001"
+            - name: TZ
+              value: "America/Chicago"
+            - name: UMASK
+              value: "002"
+            - name: WATCHTOWER_CLEANUP
+              value: "true"
+            - name: WATCHTOWER_NOTIFICATION_REPORT
+              value: "true"
+            - name: WATCHTOWER_NOTIFICATION_URL
+              value: ""
+            - name: WATCHTOWER_SCHEDULE
+              value: "0 0 6 * * *"
+          ports:
+            - name: watchtower-8080
+              containerPort: 8080
+          volumeMounts:
+            - name: var-run-docker-sock
+              mountPath: /var/run/docker.sock
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: var-run-docker-sock
+          hostPath:
+            path: /var/run/docker.sock

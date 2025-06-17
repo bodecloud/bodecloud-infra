@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: error-pages
+    pod-template-hash: 5f84ccc6cc
+  name: error-pages-5f84ccc6cc
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: error-pages
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: error-pages
+      pod-template-hash: 5f84ccc6cc
+  template:
+    metadata:
+      labels:
+        app: error-pages
+        pod-template-hash: 5f84ccc6cc
+    spec:
+      containers:
+      - image: httpd:alpine
+        imagePullPolicy: IfNotPresent
+        name: error-pages
+        ports:
+        - containerPort: 80
+          name: error-pages-80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 25m
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /usr/local/apache2/htdocs
+          name: usr-local-apache2-htdocs
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/traefik/error-pages
+          type: ""
+        name: usr-local-apache2-htdocs
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

@@ -1,0 +1,154 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: stremio-5b9c64df64-
+  labels:
+    app: stremio
+    pod-template-hash: 5b9c64df64
+  name: stremio-5b9c64df64-cbwmv
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: stremio-5b9c64df64
+spec:
+  containers:
+  - env:
+    - name: CASTING_DISABLED
+      value: "1"
+    - name: IPADDRESS
+      value: 149.130.221.93
+    - name: NO_CORS
+      value: "0"
+    - name: SERVER_URL
+      value: https://stremio.my-media-stack.org
+    - name: WEBUI_LOCATION
+      value: https://stremio-web.my-media-stack.org/
+    image: th3w1zard1/stremio-docker:latest
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - curl -fs http://127.0.0.1:11470 || curl -fs http://127.0.0.1:12470
+      failureThreshold: 3
+      initialDelaySeconds: 40
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: stremio
+    ports:
+    - containerPort: 11470
+      name: stremio-11470
+      protocol: TCP
+    - containerPort: 12470
+      name: stremio-12470
+      protocol: TCP
+    - containerPort: 8080
+      name: stremio-8080
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /root/.stremio-server
+      name: root--stremio-server
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-fp2rz
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/stremio/root/.stremio-server
+      type: ""
+    name: root--stremio-server
+  - name: kube-api-access-fp2rz
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:05Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:53Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:05Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:05Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:49Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://ad62b9ab15091830b6d5b62fbe187effce93bcf3b188a491567fc19c8be065e7
+    image: docker.io/th3w1zard1/stremio-docker:latest
+    imageID: docker.io/th3w1zard1/stremio-docker@sha256:79ff17256e6cc099a667991ec64af346b52a8dc1370f8d1a787464521ee9d383
+    lastState: {}
+    name: stremio
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:40:04Z"
+    volumeMounts:
+    - mountPath: /root/.stremio-server
+      name: root--stremio-server
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-fp2rz
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.87
+  podIPs:
+  - ip: 10.42.0.87
+  qosClass: Burstable
+  startTime: "2025-06-14T22:39:53Z"

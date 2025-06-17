@@ -1,0 +1,10 @@
+kubernetesClusterDomain: cluster.local
+storagehub:
+  ports:
+  - name: tcp2049
+    port: 2049
+    targetPort: 0
+  - name: udp11
+    port: 111
+    targetPort: 0
+  type: ClusterIP

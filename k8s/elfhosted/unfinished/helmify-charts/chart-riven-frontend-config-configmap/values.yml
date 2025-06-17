@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+rivenFrontendConfig:
+  serverJson: |-
+    {
+      "backendUrl": "http://riven:8080",
+      "apiKey": "1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u"
+    }

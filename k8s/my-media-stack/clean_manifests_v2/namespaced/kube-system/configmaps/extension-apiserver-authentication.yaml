@@ -1,0 +1,36 @@
+apiVersion: v1
+data:
+  client-ca-file: |
+    -----BEGIN CERTIFICATE-----
+    MIIBdzCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3MtY2xp
+    ZW50LWNhQDE3NDk2MjM3ODYwHhcNMjUwNjExMDYzNjI2WhcNMzUwNjA5MDYzNjI2
+    WjAjMSEwHwYDVQQDDBhrM3MtY2xpZW50LWNhQDE3NDk2MjM3ODYwWTATBgcqhkjO
+    PQIBBggqhkjOPQMBBwNCAARYmZxNOu540HOnG41ZYtNXFDiyoNYABirLqUK0SwuK
+    3XwblqG1CJhLWThHAA2+X5SI6786M2hCyJBd6TPNd2alo0IwQDAOBgNVHQ8BAf8E
+    BAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUhKrz95agWZKV0UwWOvTx
+    pKfK5JIwCgYIKoZIzj0EAwIDSAAwRQIhAOE2OEpvXKgLsTgBiZ5pI/P7I6Pdhcn3
+    jqiAH9MSDmRkAiADcL71oH0ZFtZ31bgW+WJiND0Z03xrV1UV4MfzyzMwqw==
+    -----END CERTIFICATE-----
+  requestheader-allowed-names: '["system:auth-proxy"]'
+  requestheader-client-ca-file: |
+    -----BEGIN CERTIFICATE-----
+    MIIBhzCCAS2gAwIBAgIBADAKBggqhkjOPQQDAjArMSkwJwYDVQQDDCBrM3MtcmVx
+    dWVzdC1oZWFkZXItY2FAMTc0OTYyMzc4NjAeFw0yNTA2MTEwNjM2MjZaFw0zNTA2
+    MDkwNjM2MjZaMCsxKTAnBgNVBAMMIGszcy1yZXF1ZXN0LWhlYWRlci1jYUAxNzQ5
+    NjIzNzg2MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEqbVAh6WC/cAqCYr64eCQ
+    CxoyFKFLZkajHOEj08PJAtOVjnhQY8nLz4fMgrXw63vV7nIar/TqGCj6StjNcnUo
+    TaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYE
+    FJmFqE6Xtewo+hI1P8xgQbLHkZnjMAoGCCqGSM49BAMCA0gAMEUCIGw4Tgz60g6I
+    rQNMDn+jzeW3ERLQmk51OUo3u0c/HidZAiEAsIuHlXhr8fGYO6VMbapmt4D+NXfZ
+    1ErFkcDhEzd3qkU=
+    -----END CERTIFICATE-----
+  requestheader-extra-headers-prefix: '["X-Remote-Extra-"]'
+  requestheader-group-headers: '["X-Remote-Group"]'
+  requestheader-username-headers: '["X-Remote-User"]'
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"client-ca-file":"-----BEGIN CERTIFICATE-----\nMIIBdzCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3MtY2xp\nZW50LWNhQDE3NDk2MjM3ODYwHhcNMjUwNjExMDYzNjI2WhcNMzUwNjA5MDYzNjI2\nWjAjMSEwHwYDVQQDDBhrM3MtY2xpZW50LWNhQDE3NDk2MjM3ODYwWTATBgcqhkjO\nPQIBBggqhkjOPQMBBwNCAARYmZxNOu540HOnG41ZYtNXFDiyoNYABirLqUK0SwuK\n3XwblqG1CJhLWThHAA2+X5SI6786M2hCyJBd6TPNd2alo0IwQDAOBgNVHQ8BAf8E\nBAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUhKrz95agWZKV0UwWOvTx\npKfK5JIwCgYIKoZIzj0EAwIDSAAwRQIhAOE2OEpvXKgLsTgBiZ5pI/P7I6Pdhcn3\njqiAH9MSDmRkAiADcL71oH0ZFtZ31bgW+WJiND0Z03xrV1UV4MfzyzMwqw==\n-----END CERTIFICATE-----\n","requestheader-allowed-names":"[\"system:auth-proxy\"]","requestheader-client-ca-file":"-----BEGIN CERTIFICATE-----\nMIIBhzCCAS2gAwIBAgIBADAKBggqhkjOPQQDAjArMSkwJwYDVQQDDCBrM3MtcmVx\ndWVzdC1oZWFkZXItY2FAMTc0OTYyMzc4NjAeFw0yNTA2MTEwNjM2MjZaFw0zNTA2\nMDkwNjM2MjZaMCsxKTAnBgNVBAMMIGszcy1yZXF1ZXN0LWhlYWRlci1jYUAxNzQ5\nNjIzNzg2MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEqbVAh6WC/cAqCYr64eCQ\nCxoyFKFLZkajHOEj08PJAtOVjnhQY8nLz4fMgrXw63vV7nIar/TqGCj6StjNcnUo\nTaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYE\nFJmFqE6Xtewo+hI1P8xgQbLHkZnjMAoGCCqGSM49BAMCA0gAMEUCIGw4Tgz60g6I\nrQNMDn+jzeW3ERLQmk51OUo3u0c/HidZAiEAsIuHlXhr8fGYO6VMbapmt4D+NXfZ\n1ErFkcDhEzd3qkU=\n-----END CERTIFICATE-----\n","requestheader-extra-headers-prefix":"[\"X-Remote-Extra-\"]","requestheader-group-headers":"[\"X-Remote-Group\"]","requestheader-username-headers":"[\"X-Remote-User\"]"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"extension-apiserver-authentication","namespace":"kube-system"}}
+  name: extension-apiserver-authentication
+  namespace: kube-system

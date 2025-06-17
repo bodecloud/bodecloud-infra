@@ -1,0 +1,12 @@
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  labels:
+    apiserver.kubernetes.io/identity: kube-apiserver
+    kubernetes.io/hostname: beatapostapita
+  name: apiserver-bxlyoszjqrqf663ec23r2ib5vm
+  namespace: kube-system
+spec:
+  holderIdentity: apiserver-bxlyoszjqrqf663ec23r2ib5vm_5219a96b-c6df-4d61-b2c1-3ca94028f651
+  leaseDurationSeconds: 3600
+  renewTime: "2025-06-14T23:02:19.110203Z"

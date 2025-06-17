@@ -1,0 +1,252 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "filebrowser.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "filebrowser.labels" . | nindent 4 }}
+    {{- with .Values.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  annotations:
+    {{- with .Values.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "filebrowser.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "filebrowser.selectorLabels" . | nindent 8 }}
+        {{- with .Values.labels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      annotations:
+        kubernetes.io/egress-bandwidth: 5M
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "filebrowser.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
+      securityContext:
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      hostname: {{ .Values.hostname }}
+      enableServiceLinks: {{ .Values.enableServiceLinks }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      
+      volumes:
+        - name: backup
+          persistentVolumeClaim:
+            claimName: {{ include "filebrowser.fullname" . }}-backup
+        - name: config
+          persistentVolumeClaim:
+            claimName: {{ include "filebrowser.fullname" . }}-config
+        - name: dummy-storage
+          emptyDir:
+            sizeLimit: 1Gi
+        - name: elfbot
+          emptyDir:
+            sizeLimit: 1Gi
+        - name: elfbot-script
+          configMap:
+            name: {{ include "filebrowser.fullname" . }}-elfbot-script
+            defaultMode: {{ .Values.configMaps.filebrowserElfbotScript.defaultMode }}
+        - name: elfbot-script-ucfirst
+          configMap:
+            name: {{ include "filebrowser.fullname" . }}-elfbot-script
+            defaultMode: {{ .Values.configMaps.filebrowserElfbotScript.defaultMode }}
+        - name: elfterm-state
+          emptyDir:
+            sizeLimit: 1Gi
+        - name: logs
+          persistentVolumeClaim:
+            claimName: {{ include "filebrowser.fullname" . }}-logs
+        - name: rclone
+          persistentVolumeClaim:
+            claimName: {{ include "filebrowser.fullname" . }}-rclone
+        {{- if .Values.persistence.realdebridZurg.enabled }}
+        - name: rclonemountrealdebridzurg
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.realdebridZurg.existingClaim }}
+        {{- end }}
+        - name: recyclarr-config
+          configMap:
+            name: {{ include "filebrowser.fullname" . }}-recyclarr-config
+            defaultMode: {{ .Values.configMaps.recyclarrConfig.defaultMode }}
+        - name: symlinks
+          persistentVolumeClaim:
+            claimName: {{ include "filebrowser.fullname" . }}-symlinks
+        - name: tmp
+          emptyDir: {}
+
+      initContainers:
+        {{- range .Values.initContainers }}
+        - name: {{ .name }}
+          image: "{{ $.Values.global.imageRegistry }}/{{ .image.repository }}:{{ .image.tag }}@{{ .image.digest }}"
+          command:
+            {{- toYaml .command | nindent 12 }}
+          resources:
+            {{- if .resources }}
+            {{- toYaml .resources | nindent 12 }}
+            {{- end }}
+          volumeMounts:
+            - name: config
+              mountPath: /config/
+              {{- if eq .name "copy-recyclarr-example-config" }}
+              subPath: recyclarr
+              {{- end }}
+            {{- if eq .name "copy-recyclarr-example-config" }}
+            - name: recyclarr-config
+              mountPath: /bootstrap/
+            {{- end }}
+            {{- if eq .name "setup" }}
+            - name: tmp
+              mountPath: /tmp
+            - name: dummy-storage
+              mountPath: /storage
+            {{- end }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+        {{- end }}
+
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.global.imageRegistry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}@{{ .Values.image.digest }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: {{ include "filebrowser.fullname" . }}-env
+          env:
+            - name: TZ
+              value: {{ .Values.env.TZ }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: backup
+              mountPath: /storage/backup
+            - name: config
+              mountPath: /storage/config
+            - name: dummy-storage
+              mountPath: /dummy-storage
+            - name: elfbot
+              mountPath: /elfbot
+            - name: elfbot-script
+              mountPath: /usr/local/bin/elfbot
+              subPath: elfbot
+            - name: elfbot-script-ucfirst
+              mountPath: /usr/local/bin/Elfbot
+              subPath: elfbot
+            - name: elfterm-state
+              mountPath: /home/elfie/.local/state
+            - name: logs
+              mountPath: /storage/logs
+            - name: rclone
+              mountPath: /storage/rclone
+            {{- if .Values.persistence.realdebridZurg.enabled }}
+            - name: rclonemountrealdebridzurg
+              mountPath: /storage/realdebrid-zurg
+            {{- end }}
+            - name: recyclarr-config
+              mountPath: /recyclarr-config
+            - name: symlinks
+              mountPath: /storage/symlinks
+            - name: tmp
+              mountPath: /tmp
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          startupProbe:
+            {{- toYaml .Values.startupProbe | nindent 12 }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+
+        {{- if .Values.elfbot.enabled }}
+        - name: elfbot
+          image: "{{ .Values.global.imageRegistry }}/{{ .Values.elfbot.image.repository }}:{{ .Values.elfbot.image.tag }}@{{ .Values.elfbot.image.digest }}"
+          command:
+            - /usr/bin/dumb-init
+            - /bin/bash
+            - -c
+            - |
+              # respond to creation or modification, but not deletion
+              inotifywait -m -e create -e modify --format "%f" /elfbot \
+                | while read APP
+                  do
+                    # if we are force-killing the pod, then don't bother with the configmap
+                    if (cat /elfbot/$APP | grep -q forcerestart); then
+                      echo "forcerestart requested, deleting $APP pod with --force.."
+                      kubectl delete pod -l app.kubernetes.io/name=$APP --force
+                      kubectl delete pod -l app.elfhosted.com/name=$APP --force
+                    else
+
+                      # put the contents of the file into the configmap which will trigger the restart
+                      echo command received for ${APP} : [$(cat /elfbot/$APP)]
+                      # create the configmap if it doesn't exist, since reloader only looks at _changes_ to configmaps
+                      if ! $(kubectl get configmap -n {{ .Release.Namespace }} elfbot-${APP} 2>&1 >/dev/null); then
+                          kubectl create configmap -n {{ .Release.Namespace }} elfbot-${APP} --from-literal=elfbot_last_action=$(date +%s)
+                          sleep 10s
+                      fi
+
+                      # If we were passed a key=value string in /etc/elfbot, then split it
+                      COMMAND=$(cat /elfbot/$APP)
+
+                      # We separate key and value with an '=', but sometimes the value may contain __another__ '=' (like Plex preferences)
+                      sep='='
+                      case $COMMAND in
+                        # If we are separated by an =
+                        (*"$sep"*)
+                          KEY=${COMMAND%%"$sep"*}
+                          VALUE=${COMMAND#*"$sep"}
+                          ;;
+                        # if not, we are a simple command like "backup"
+                        (*)
+                          KEY=$COMMAND
+                          VALUE=$(date +%s)
+                          ;;
+                      esac
+
+                      # patch the configmap with the latest key/value
+                      kubectl patch configmap -n {{ .Release.Namespace }} elfbot-${APP} -p "{\"data\":{\"${KEY}\":\"${VALUE}\"}}"
+                    fi
+                  done
+          resources:
+            {{- toYaml .Values.elfbot.resources | nindent 12 }}
+          volumeMounts:
+            - name: elfbot
+              mountPath: /elfbot
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            {{- toYaml .Values.elfbot.securityContext | nindent 12 }}
+        {{- end }}
+        
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+  strategy:
+    {{- toYaml .Values.strategy | nindent 4 }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  progressDeadlineSeconds: {{ .Values.progressDeadlineSeconds }}

@@ -1,0 +1,26 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: lb-tcp-8080
+  usage:
+    cpu: "0"
+    memory: 336Ki
+- name: lb-tcp-443
+  usage:
+    cpu: "0"
+    memory: 328Ki
+- name: lb-tcp-80
+  usage:
+    cpu: "0"
+    memory: 324Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: svclb-traefik-679a600c
+    controller-revision-hash: 86b78b86f9
+    pod-template-generation: "2"
+    svccontroller.k3s.cattle.io/svcname: traefik
+    svccontroller.k3s.cattle.io/svcnamespace: kube-system
+  name: svclb-traefik-679a600c-xgbv6
+  namespace: kube-system
+timestamp: "2025-06-14T23:01:56Z"
+window: 17.871s

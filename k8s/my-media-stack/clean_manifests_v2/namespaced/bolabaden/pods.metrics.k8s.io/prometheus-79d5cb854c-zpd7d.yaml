@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: prometheus
+  usage:
+    cpu: 495802n
+    memory: 57968Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: prometheus
+    pod-template-hash: 79d5cb854c
+  name: prometheus-79d5cb854c-zpd7d
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:48Z"
+window: 15.367s

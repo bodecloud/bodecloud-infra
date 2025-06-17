@@ -1,0 +1,21 @@
+apiVersion: v2
+name: rclonefm
+description: A Helm chart for RcloneFM - Web-based file manager for Rclone cloud storage
+type: application
+version: 0.3.0
+appVersion: "latest"
+home: https://github.com/rclone/rclone
+sources:
+  - https://github.com/rclone/rclone
+keywords:
+  - rclonefm
+  - rclone
+  - file-manager
+  - cloud-storage
+  - web-interface
+  - elfhosted
+maintainers:
+  - name: ElfHosted
+    url: https://elfhosted.com
+annotations:
+  category: Storage 

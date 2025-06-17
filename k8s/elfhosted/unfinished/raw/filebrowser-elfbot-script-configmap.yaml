@@ -1,0 +1,321 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: filebrowser-elfbot-script
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  elfbot: |
+    #!/bin/bash
+
+    if [[ $# -lt 2 ]]; then 
+        echo "usage: elfbot <command> <app> <optional>"
+        echo
+        echo '<app> must match an app found in /config'
+        echo
+        echo "valid commands are:"
+        echo
+        echo "elfbot restart <app>                          : restarts an app"
+        echo "elfbot pause <app>                            : stop an app, wait 5 min, and restart it"
+        echo "elfbot reset <app> [--yesiamsure]             : resets an app to defaults"
+        echo "elfbot backup <app>                           : creates a dated backup folder in under /config/<app>"
+        echo "elfbot env <app> <key>=<value>                : set an env var inside an app (advanced beta feature)"
+        echo "elfbot claim plex <token>                     : claims a plex server"
+        echo "elfbot blackhole <app>                        : symlink the contents of the CWD into /storage/symlinks/blackhole/<app>/ for automated import"
+        echo "elfbot symlink <storage-mount>                : import remotely-mounted, read-only media as symlinks, or generate a report"
+        echo "elfbot symlink report-broken                  : generate a report on all broken symlinks found under /storage/symlinks"
+        echo "elfbot symlink delete-broken                  : delete (without confirmation!) all broken symlinks found under /storage/symlinks"
+        # echo "elfbot recyclarr <command>                    : run recyclarr (using config files in /storage/filebrowser/recyclarr)" 
+
+        echo
+    fi
+
+    case $1 in
+
+        "restart")
+
+            if [[ "$3" == "--force" && "$4" != "--yesiamsure" ]]; then
+                echo force-killing a healthy pod can result in data loss! add \'--yesiamsure\' after your restart --force command to force-kill
+                exit 1
+            elif [[ "$3" == "--force" ]]; then
+                echo "force-restarting $2, data loss may occur (but sometimes there's no other way)..."
+                echo forcerestart > /elfbot/$2
+            else            
+                echo "restarting $2..."
+                echo restart > /elfbot/$2
+            fi
+            ;;
+
+        "pause")
+
+            echo "pausing $2 for 5 min..."
+            echo pause > /elfbot/$2
+            ;;     
+
+        "env")
+
+            if [[ "$#" -lt 3 ]]; then  
+                echo syntax is "elfbot env <app> KEY=VALUE"
+                exit 1
+            fi
+            echo "adding $3 to env for $2, triggering a restart..."
+            echo $3 > /elfbot/$2
+            ;;                        
+
+        "reset")
+
+            if [[ "$3" != "--yesiamsure" ]]; then
+                echo potentially dangerous! add \'--yesiamsure\' after your reset command to force
+                exit 1
+            fi
+            if [[ "$2" == "all" ]]; then
+
+                echo "This command will irrecoverably reset ALL of your app's data. If you didn't mean to do this, hit CTRL-C within the next 10s to abort.."
+                sleep 10s
+                # Get all pods in the current namespace
+                pods=$(kubectl get pods -o jsonpath='{.items[*].metadata.name}')
+
+                # Iterate through each pod, find their labels, and use these to trigger a reset
+                for pod in $pods; do
+                # Extract the value of the 'app.elfhosted.com/name' label
+                elfhosted_label=$(kubectl get pod $pod -o jsonpath='{.metadata.labels.app\.elfhosted\.com/name}' 2>/dev/null)
+                
+                if [[ -z "$elfhosted_label" ]]; then
+
+                    # If 'app.elfhosted.com/name' doesn't exist, extract 'app.kubernetes.io/name' instead
+                    kubernetes_label=$(kubectl get pod $pod -o jsonpath='{.metadata.labels.app\.kubernetes\.io/name}' 2>/dev/null)
+
+                    # provided a label was found...
+                    if [[ -z "$kubernetes_label" ]]; then
+                        echo "resetting $kubernetes_label... 🗑️"
+                        sleep 5s
+                        echo reset > /elfbot/$kubernetes_label
+                    fi
+                elif [[ "$elfhosted_label" != "filebrowser" ]]; then
+                    echo "resetting $elfhosted_label... 🗑️"
+                    sleep 5s
+                    echo reset > /elfbot/$elfhosted_label            
+                fi
+                done
+
+                exit 0
+
+            else               
+                echo reset > /elfbot/$2
+                echo "resetting $2... 🗑️"
+            fi
+            ;;
+
+        "backup")   
+
+            if [[ "$2" == "symlinks" ]]; then
+                TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\n' -1)
+                echo "Backing up all symlinks to /storage/backup/symlinks-$TIMESTAMP.tar.gz"
+                tar -C /storage/symlinks -czf /storage/backup/symlinks-$TIMESTAMP.tar.gz .
+                BACKUP_SIZE=$(du -sh /storage/backup/symlinks-$TIMESTAMP.tar.gz | awk '{print $1}')
+                echo "Done! (yes, it really was that fast!) - total size 🗜️ $BACKUP_SIZE"
+                exit 0
+            fi
+
+            if [[ "$2" == "offsite" ]]; then
+                for RS in $(kubectl get replicationsource -o=name | cut -f2 -d/); do
+
+                    echo "$(date '+%H:%M:%S') Triggering manual backup of $RS..."
+                    MANUAL=$(date +%s)
+                    kubectl patch replicationsource $RS --type merge -p '{"spec":{"restic":{"unlock":"'$MANUAL'"}}}' > /dev/null 2>&1 &
+                    kubectl patch replicationsource $RS --type merge -p '{"spec":{"trigger":{"manual":"'$MANUAL'"}}}' > /dev/null 2>&1 &
+
+                    LAST_MANUAL_SYNC=""
+
+                    while [ "$LAST_MANUAL_SYNC" != "$MANUAL" ]; do
+                        # Perform the sync check
+                        LAST_MANUAL_SYNC=$(kubectl get replicationsource $RS --template={{.status.lastManualSync}})
+                        
+                        # Print progress and wait for 10 seconds
+                        echo -n '📦'
+                        sleep 10
+                    done
+
+                    if [ "$LAST_MANUAL_SYNC" == "$MANUAL" ]; then
+                        echo "✅ Done!"
+                    fi
+
+                done
+                exit 0
+            fi
+
+            if [[ "$2" == "all" ]]; then
+                APPS=$(ls /storage/config)
+                echo "Backing up multiple apps, restarting each with a 1 min delay, this may take a while..."
+                SLEEP=1m
+            else
+                APPS=$2 # if we're just backing up one app
+                SLEEP=0s
+            fi  
+
+            for APP in $APPS
+            do
+                if [[ "$APP" == "filebrowser" ]]; then
+                    echo "skipping filebrowser (we're using it right now!)..."
+                else
+                    FREE_SPACE=$(df -P /storage/backup | awk 'NR==2 {print $4}')
+                    NEEDED_SPACE=$(du -s /storage/config/$APP | cut -f1)
+
+                    if [[ "$FREE_SPACE" -lt "$NEEDED_SPACE" ]]; then
+                        echo "Error - not enough free space for backup. We need $NEEDED_SPACE bytes, but we only have $FREE_SPACE remaining :("
+                    else
+                        TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\n' -1)
+                        echo backup > /elfbot/$APP
+                        echo "restarting $APP, backup will be saved as /storage/backup/$APP-$TIMESTAMP ..."
+                        sleep $SLEEP
+                    fi
+                fi
+            done
+            ;;       
+
+        "claim")
+            if [[ "$#" -lt 3 ]]; then  
+                echo plex claim token missing, get one from https://www.plex.tv/claim/
+                exit 1
+            fi       
+            if [[ ! "$3" =~ "claim-" ]]; then  
+                echo plex claim token invalid, get one from https://www.plex.tv/claim/
+                exit 1
+            fi   
+            if [[ "$2" = "plex" ]]; then
+
+                echo "Attempting to claim Plex with claim [$3], and triggering a restart..."
+                echo PLEX_CLAIM=$3 > /elfbot/plex
+            else
+                echo "this command is only for claiming plex"
+            fi
+            ;;     
+
+        "recyclarr")
+
+            if [[ "$#" -lt 2 ]]; then
+                # Just echo the recyclarr options
+                recyclarr
+                exit 0
+            fi
+
+            echo "This may take a while..."
+            HOME=/storage/config/recyclarr/ RECYCLARR_APP_DATA=/storage/config/recyclarr/ $@
+            ;;                          
+
+        "blackhole")
+
+            if [[ "$#" -lt 2 ]]; then
+                echo "ERROR: target missing - example : 'elfbot blackhole radarr'"
+                exit 1
+            fi
+            ITEMPATH="$(pwd)"
+
+            # Never symlink ourselves!
+            if [[ $ITEMPATH == *"/storage/symlinks"* ]]; then
+                echo "ERROR: Can't symlink a source in /storage/symlinks (#deathbysymlink)"
+                exit 1
+            fi
+
+            # Get ready to create symlinks
+
+            TARGET=/storage/symlinks/blackhole/$2
+            CACHE=/storage/symlinks/blackhole/.symlink_cache
+
+            echo "Symlinking new items in $ITEMPATH to $TARGET... "
+            mkdir -p $TARGET
+            mkdir -p $CACHE
+
+            ls "${ITEMPATH}/" | while read -r ITEM
+            do
+                # symlink to target only if cache doesn't already exist
+                # so that if a user moves a file out of the TARGET folder while importing, we don't recreate it
+                ln -s "${ITEMPATH}/${ITEM}" "$CACHE/" 2> /dev/null
+                if [[ $? -eq 0 ]]; then
+                    cp -rs "${ITEMPATH}/${ITEM}" "$TARGET/" 2> /dev/null
+                echo "[created symlink] $TARGET/${ITEM}"
+                else
+                echo "[already exists, skipped] $CACHE/${DIR}${ITEM}"
+                fi
+            done
+
+            echo "Done! 🎉"
+
+            ;;
+
+        "elfstorage")
+
+            if [[ "$2" == "report" ]]; then
+                TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\n' -1)
+                echo "Generating elfstorage report, this may take ~5 min..."
+
+                tree --du -hF -s  /storage/elfstorage/ -H https://brunner56-filebrowser.elfhosted.com/files/elfstorage -T "🧑‍💻 ElfHosted [/storage/elfstorage] usage for brunner56"> /storage/elfstorage/disk-usage-report-$TIMESTAMP.html
+                echo "Done! 🎉"
+                echo "Report generated at /elfstorage/disk-usage-report-$TIMESTAMP.html"
+                exit 0
+            fi
+
+            ;;            
+
+        "symlink")
+
+            if [[ "$#" -lt 2 ]]; then
+                echo "ERROR: path missing - example : 'elfbot symlink /storage/realdebrid-zurg/movies'"
+                exit 1
+            elif [[ "$2" == "report-broken" ]]; then
+                echo "Generating symlink report, see /symlinks/report.txt for details..."
+                echo -e "Listing broken symlinks as identified at $(date)..\n\n" > /storage/symlinks/report.txt
+                find /storage/symlinks   -xtype l | grep -v .symlinked_cache >> /storage/symlinks/report.txt
+                exit 0
+            elif [[ "$2" == "delete-broken" ]]; then
+                echo "Deleting all broken symlinks..."
+                find /storage/symlinks -xtype l -exec rm {} \;
+                echo ".. Done!"
+                exit 0
+            elif [[ "$2" == "here" ]]; then
+                ITEMPATH="$(pwd)"
+            elif [[ ! -d "$2" ]]; then
+                echo "ERROR: $2 does not exist"
+                exit 1
+            else
+                ITEMPATH=$2
+            fi
+
+            # Never symlink ourselves!
+            if [[ $ITEMPATH == *"/storage/symlinks"* ]]; then
+                echo "ERROR: Can't symlink a source in /storage/symlinks (#deathbysymlink)"
+                exit 1
+            fi
+
+            # Get ready to create symlinks
+            mkdir -p /storage/symlinks/.symlink_cache
+
+            TARGET=/storage/symlinks/import
+            CACHE=/storage/symlinks/.symlink_cache
+
+            # Get the last bit of the source path
+            DIR=$(awk -F'/' '{ a = length($NF) ? $NF : $(NF-1); print a }' <<< $ITEMPATH)
+            echo "Symlinking new items in $ITEMPATH to $TARGET/${DIR}... "
+            mkdir -p "$TARGET/${DIR}"
+            mkdir -p "$CACHE/${DIR}"
+
+            ls "${ITEMPATH}/" | while read -r ITEM
+            do
+                # symlink to target only if cache doesn't already exist
+                # so that if a user moves a file out of the TARGET folder while importing, we don't recreate it
+                ln -s "${ITEMPATH}/${ITEM}" "$CACHE/${DIR}/" 2> /dev/null
+                if [[ $? -eq 0 ]]; then
+                    cp -rs "${ITEMPATH}/${ITEM}" "$TARGET/${DIR}/" 2> /dev/null
+                fi
+            done
+
+            echo "Done! 🎉"
+
+            ;;
+    esac

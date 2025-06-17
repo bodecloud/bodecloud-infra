@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+zurg:
+  ports:
+  - name: http
+    port: 9999
+    targetPort: 0
+  type: ClusterIP

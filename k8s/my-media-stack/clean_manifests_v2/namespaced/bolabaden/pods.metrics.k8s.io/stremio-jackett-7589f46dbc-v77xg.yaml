@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: stremio-jackett
+  usage:
+    cpu: 27846248n
+    memory: 102364Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: stremio-jackett
+    pod-template-hash: 7589f46dbc
+  name: stremio-jackett-7589f46dbc-v77xg
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:55Z"
+window: 17.912s

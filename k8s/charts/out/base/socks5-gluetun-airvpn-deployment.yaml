@@ -1,0 +1,29 @@
+#! socks5-gluetun-airvpn-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: socks5-gluetun-airvpn
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: socks5-gluetun-airvpn
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: socks5-gluetun-airvpn
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: socks5-gluetun-airvpn
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: socks5-gluetun-airvpn
+                  image: serjs/go-socks5-proxy
+                  imagePullPolicy: IfNotPresent

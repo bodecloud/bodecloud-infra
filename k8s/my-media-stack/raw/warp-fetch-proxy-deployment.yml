@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warp-fetch-proxy
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warp-fetch-proxy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: warp-fetch-proxy
+    spec:
+      containers:
+        - name: warp-fetch-proxy
+          image: nginx:alpine
+          ports:
+            - name: proxy-3128
+              containerPort: 3128
+          env:
+            - name: TZ
+              value: "America/Chicago"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"

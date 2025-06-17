@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: overseerr
+  name: overseerr
+  namespace: default
+subsets:
+- addresses:
+  - ip: 10.42.0.41
+    nodeName: beatapostapita
+    targetRef:
+      kind: Pod
+      name: overseerr-5866b7bfcc-64ckh
+      namespace: default
+  ports:
+  - name: http
+    port: 5055
+    protocol: TCP

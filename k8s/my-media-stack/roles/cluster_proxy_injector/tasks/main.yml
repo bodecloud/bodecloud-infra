@@ -1,0 +1,126 @@
+---
+- name: Create proxy injector ServiceAccount
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: proxy-injector
+        namespace: vpn-gateway
+    state: present
+
+- name: Create proxy injector ClusterRole
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: proxy-injector
+      rules:
+        - apiGroups: [""]
+          resources: ["pods"]
+          verbs: ["get", "list", "watch"]
+        - apiGroups: ["apps"]
+          resources: ["deployments", "replicasets"]
+          verbs: ["get", "list", "watch"]
+        - apiGroups: ["admissionregistration.k8s.io"]
+          resources: ["mutatingadmissionconfigurations"]
+          verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+        - apiGroups: ["cert-manager.io"]
+          resources: ["certificates"]
+          verbs: ["get", "list", "watch"]
+    state: present
+
+- name: Create proxy injector ClusterRoleBinding
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: proxy-injector
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: proxy-injector
+      subjects:
+        - kind: ServiceAccount
+          name: proxy-injector
+          namespace: vpn-gateway
+    state: present
+
+- name: Create proxy injector ConfigMap
+  kubernetes.core.k8s:
+    definition: "{{ proxy_injector_config }}"
+    state: present
+
+- name: Deploy proxy injector
+  kubernetes.core.k8s:
+    definition: "{{ proxy_injector_deployment }}"
+    state: present
+
+- name: Create proxy injector Service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: proxy-injector
+        namespace: vpn-gateway
+        labels:
+          app: proxy-injector
+      spec:
+        selector:
+          app: proxy-injector
+        ports:
+          - name: webhook
+            port: 443
+            targetPort: 8443
+        type: ClusterIP
+    state: present
+
+- name: Wait for proxy injector to be ready
+  kubernetes.core.k8s_info:
+    api_version: apps/v1
+    kind: Deployment
+    name: proxy-injector
+    namespace: vpn-gateway
+    wait: true
+    wait_condition:
+      type: Available
+      status: "True"
+    wait_timeout: 300
+
+- name: Create MutatingWebhookConfiguration
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: admissionregistration.k8s.io/v1
+      kind: MutatingWebhookConfiguration
+      metadata:
+        name: proxy-injector
+      webhooks:
+        - name: proxy-injector.vpn-gateway.svc.cluster.local
+          clientConfig:
+            service:
+              name: proxy-injector
+              namespace: vpn-gateway
+              path: /
+          rules:
+            - operations: ["CREATE", "UPDATE"]
+              apiGroups: [""]
+              apiVersions: ["v1"]
+              resources: ["pods"]
+          admissionReviewVersions: ["v1", "v1beta1"]
+          sideEffects: None
+          failurePolicy: Ignore
+          namespaceSelector:
+            matchExpressions:
+              - key: name
+                operator: NotIn
+                values:
+                  - kube-system
+                  - kube-public
+                  - kube-node-lease
+                  - vpn-gateway
+                  - metallb-system
+                  - cert-manager
+    state: present

@@ -1,0 +1,7 @@
+brunner56Rcloneui:
+  ports:
+  - name: http
+    port: 5572
+    targetPort: http
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

@@ -1,0 +1,7 @@
+brunner56Kubernetesdashboard:
+  ports:
+  - name: http
+    port: 443
+    targetPort: http
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

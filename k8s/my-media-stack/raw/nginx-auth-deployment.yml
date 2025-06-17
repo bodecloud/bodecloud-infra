@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-auth
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-auth
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nginx-auth
+    spec:
+      containers:
+        - name: nginx-auth
+          image: nginx:alpine
+          ports:
+            - name: nginx-auth-80
+              containerPort: 80
+          env:
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1002"
+            - name: TZ
+              value: "America/Chicago"
+            - name: UMASK
+              value: "002"
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              readOnly: true
+            - name: auth-config
+              mountPath: /etc/nginx/auth
+              readOnly: true
+            - name: cache
+              mountPath: /var/cache/nginx
+            - name: logs
+              mountPath: /var/log/nginx
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+      volumes:
+        - name: nginx-conf
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/nginx-middlewares/nginx.conf
+            type: File
+        - name: auth-config
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/nginx-middlewares/auth
+            type: DirectoryOrCreate
+        - name: cache
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/nginx-middlewares/cache
+            type: DirectoryOrCreate
+        - name: logs
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/nginx-middlewares/logs
+            type: DirectoryOrCreate

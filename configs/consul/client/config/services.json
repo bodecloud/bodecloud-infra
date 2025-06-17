@@ -1,0 +1,35 @@
+{
+  "services": [
+    {
+      "id": "traefik-local",
+      "name": "traefik-${VPS_NAME}",
+      "tags": ["traefik", "exposed"],
+      "address": "${VPS_PUBLIC_IP}",
+      "port": 80,
+      "checks": [
+        {
+          "id": "traefik-http",
+          "name": "Traefik HTTP Check",
+          "http": "http://${VPS_PRIVATE_IP}:80",
+          "interval": "10s",
+          "timeout": "1s"
+        }
+      ],
+      "meta": {
+        "vps_name": "${VPS_NAME}",
+        "region": "${VPS_REGION}"
+      }
+    }
+  ],
+  "watches": [
+    {
+      "type": "services",
+      "handler_type": "http",
+      "http_handler_config": {
+        "path": "http://localhost:8500/v1/agent/check/register",
+        "method": "PUT",
+        "timeout": "10s"
+      }
+    }
+  ]
+} 

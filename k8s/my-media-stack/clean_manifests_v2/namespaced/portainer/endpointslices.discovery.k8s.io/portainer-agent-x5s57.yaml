@@ -1,0 +1,34 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.73
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: portainer-agent-7b6cd68b7b-zrhnc
+    namespace: portainer
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:32:43Z"
+  generateName: portainer-agent-
+  labels:
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: portainer-agent
+  name: portainer-agent-x5s57
+  namespace: portainer
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: portainer-agent
+ports:
+- name: http
+  port: 9001
+  protocol: TCP

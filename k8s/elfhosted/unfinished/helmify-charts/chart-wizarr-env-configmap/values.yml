@@ -1,0 +1,4 @@
+kubernetesClusterDomain: cluster.local
+wizarrEnv:
+  appUrl: https://brunner56-wizarr.elfhosted.com
+  disableBuiltinAuth: "true"

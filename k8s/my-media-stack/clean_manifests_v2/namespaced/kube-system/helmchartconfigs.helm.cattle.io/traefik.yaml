@@ -1,0 +1,45 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"helm.cattle.io/v1","kind":"HelmChartConfig","metadata":{"annotations":{},"name":"traefik","namespace":"kube-system"},"spec":{"valuesContent":"additionalArguments:\n  - \"--global.checknewversion=true\"\n  - \"--global.sendanonymoususage=false\"\n  - \"--log.level=DEBUG\"\n  - \"--api.dashboard=true\"\n  - \"--api.debug=false\"\n  - \"--api.disableDashboardAd=true\"\n  - \"--api.insecure=true\"\n  - \"--ping.terminatingStatusCode=503\"\n  - \"--serverstransport.insecureskipverify=true\"\n  - \"--accesslog.format=json\"\n  - \"--providers.kubernetesingress=true\"\n  - \"--providers.kubernetesingress.allowexternalnameservices=true\"\n  - \"--providers.kubernetescrd=true\"\n  - \"--providers.kubernetescrd.allowexternalnameservices=true\"\n  - \"--certificatesresolvers.letsencrypt.acme.email=boden.crouch@gmail.com\"\n  - \"--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json\"\n  - \"--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=cloudflare\"\n  - \"--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=dane.ns.cloudflare.com,tori.ns.cloudflare.com,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4\"\n  - \"--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web\"\n  - \"--certificatesresolvers.letsencrypt.acme.tlschallenge=true\"\n  - \"--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory\"\n  - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.email=boden.crouch@gmail.com\"\n  - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.storage=/data/acme_duckdns.json\"\n  - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.dnschallenge.provider=duckdns\"\n  - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.dnschallenge.resolvers=dane.ns.cloudflare.com,tori.ns.cloudflare.com,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4\"\n  - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.httpchallenge.entrypoint=web\"\n  - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.tlschallenge=true\"\n  - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory\"\n  - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.email=boden.crouch@gmail.com\"\n  - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.storage=/data/acme_beatapostapita_duckdns.json\"\n  - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.dnschallenge.provider=duckdns\"\n  - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.dnschallenge.resolvers=dane.ns.cloudflare.com,tori.ns.cloudflare.com,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4\"\n  - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.httpchallenge.entrypoint=web\"\n  - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.tlschallenge=true\"\n  - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory\"\n\npersistence:\n  enabled: true\n  size: 1Gi\n  path: /data\n\nenv:\n  - name: DUCKDNS_TOKEN\n    value: \"a7c4d0ad-114e-40ef-ba1d-d217904a50f2\"\n  - name: CLOUDFLARE_EMAIL\n    value: \"boden.crouch@gmail.com\"\n  - name: CLOUDFLARE_API_KEY\n    value: \"34a4d9943975b89dd2430870ce146f26aa5bf\"\n\nports:\n  web:\n    redirections:\n      entryPoint:\n        to: websecure\n        scheme: https\n        permanent: true\n  websecure:\n    tls:\n      enabled: true\n      certResolver: \"beatapostapita_duckdns_letsencrypt\"\n      domains:\n        - main: \"beatapostapita.duckdns.org\"\n          sans:\n            - \"*.beatapostapita.duckdns.org\"\n  traefik:\n    port: 8080\n    expose:\n      default: true\n\ningressRoute:\n  dashboard:\n    enabled: false\n\nservice:\n  type: LoadBalancer "}}
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: "additionalArguments:\n  - \"--global.checknewversion=true\"\n  -
+    \"--global.sendanonymoususage=false\"\n  - \"--log.level=DEBUG\"\n  - \"--api.dashboard=true\"\n
+    \ - \"--api.debug=false\"\n  - \"--api.disableDashboardAd=true\"\n  - \"--api.insecure=true\"\n
+    \ - \"--ping.terminatingStatusCode=503\"\n  - \"--serverstransport.insecureskipverify=true\"\n
+    \ - \"--accesslog.format=json\"\n  - \"--providers.kubernetesingress=true\"\n
+    \ - \"--providers.kubernetesingress.allowexternalnameservices=true\"\n  - \"--providers.kubernetescrd=true\"\n
+    \ - \"--providers.kubernetescrd.allowexternalnameservices=true\"\n  - \"--certificatesresolvers.letsencrypt.acme.email=boden.crouch@gmail.com\"\n
+    \ - \"--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json\"\n  -
+    \"--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=cloudflare\"\n
+    \ - \"--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=dane.ns.cloudflare.com,tori.ns.cloudflare.com,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4\"\n
+    \ - \"--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web\"\n
+    \ - \"--certificatesresolvers.letsencrypt.acme.tlschallenge=true\"\n  - \"--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory\"\n
+    \ - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.email=boden.crouch@gmail.com\"\n
+    \ - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.storage=/data/acme_duckdns.json\"\n
+    \ - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.dnschallenge.provider=duckdns\"\n
+    \ - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.dnschallenge.resolvers=dane.ns.cloudflare.com,tori.ns.cloudflare.com,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4\"\n
+    \ - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.httpchallenge.entrypoint=web\"\n
+    \ - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.tlschallenge=true\"\n
+    \ - \"--certificatesresolvers.bolabaden_duckdns_letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory\"\n
+    \ - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.email=boden.crouch@gmail.com\"\n
+    \ - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.storage=/data/acme_beatapostapita_duckdns.json\"\n
+    \ - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.dnschallenge.provider=duckdns\"\n
+    \ - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.dnschallenge.resolvers=dane.ns.cloudflare.com,tori.ns.cloudflare.com,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4\"\n
+    \ - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.httpchallenge.entrypoint=web\"\n
+    \ - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.tlschallenge=true\"\n
+    \ - \"--certificatesresolvers.beatapostapita_duckdns_letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory\"\n\npersistence:\n
+    \ enabled: true\n  size: 1Gi\n  path: /data\n\nenv:\n  - name: DUCKDNS_TOKEN\n
+    \   value: \"a7c4d0ad-114e-40ef-ba1d-d217904a50f2\"\n  - name: CLOUDFLARE_EMAIL\n
+    \   value: \"boden.crouch@gmail.com\"\n  - name: CLOUDFLARE_API_KEY\n    value:
+    \"34a4d9943975b89dd2430870ce146f26aa5bf\"\n\nports:\n  web:\n    redirections:\n
+    \     entryPoint:\n        to: websecure\n        scheme: https\n        permanent:
+    true\n  websecure:\n    tls:\n      enabled: true\n      certResolver: \"beatapostapita_duckdns_letsencrypt\"\n
+    \     domains:\n        - main: \"beatapostapita.duckdns.org\"\n          sans:\n
+    \           - \"*.beatapostapita.duckdns.org\"\n  traefik:\n    port: 8080\n    expose:\n
+    \     default: true\n\ningressRoute:\n  dashboard:\n    enabled: false\n\nservice:\n
+    \ type: LoadBalancer "

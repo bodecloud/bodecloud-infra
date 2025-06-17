@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-rcloneui-config
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+data:
+  TZ: {{ .Values.rcloneuiConfig.tz | quote }}
+  config.yaml: {{ .Values.rcloneuiConfig.configYaml | toYaml | indent 1 }}

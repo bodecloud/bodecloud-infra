@@ -1,0 +1,956 @@
+---
+# VPN Gateway System with Pod-Gateway Integration
+# Provides transparent egress routing for all pods through VPN gateways
+# Uses VXLAN tunnels and automatic failover
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vpn-gateway
+  labels:
+    name: vpn-gateway
+
+---
+# ConfigMap with pod-gateway configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pod-gateway-config
+  namespace: vpn-gateway
+data:
+  settings.sh: |
+    #!/bin/bash
+    # Pod-Gateway Settings for VPN Integration
+    
+    # Gateway hostname (will be set dynamically by controller)
+    GATEWAY_NAME="${ACTIVE_VPN_GATEWAY:-gluetun-premiumize-us}"
+    
+    # K8S DNS configuration
+    K8S_DNS_IPS="10.96.0.10"
+    NOT_ROUTED_TO_GATEWAY_CIDRS="10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
+    
+    # VXLAN Configuration
+    VXLAN_ID="42"
+    VXLAN_PORT="4789"
+    VXLAN_IP_NETWORK="172.16.1"
+    VXLAN_GATEWAY_FIRST_DYNAMIC_IP=20
+    
+    # VPN Interface Configuration
+    VPN_INTERFACE="tun0"
+    VPN_BLOCK_OTHER_TRAFFIC=true
+    VPN_TRAFFIC_PORT="1194"
+    VPN_LOCAL_CIDRS="10.0.0.0/8 192.168.0.0/16 172.16.0.0/12"
+    
+    # DNS Configuration
+    DNS_LOCAL_CIDRS="cluster.local svc.cluster.local"
+    RESOLV_CONF_COPY="/etc/resolv_copy.conf"
+    
+    # Health and Connection Settings
+    CONNECTION_RETRY_COUNT=3
+    GATEWAY_ENABLE_DNSSEC=true
+    IPTABLES_NFT=no
+    
+    # VPN Interface MTU
+    VPN_INTERFACE_MTU="1420"
+
+  nat.conf: |
+    # Static NAT configuration for port forwarding
+    # Format: hostname ip_suffix ports
+    # Example: myapp 100 tcp:8080,udp:9090
+
+  gateway_init.sh: |
+    #!/bin/bash
+    set -euo pipefail
+    
+    # Load settings
+    source /config/settings.sh
+    
+    echo "=== Initializing VPN Gateway Pod-Gateway ==="
+    
+    # Enable IP forwarding
+    echo 1 > /proc/sys/net/ipv4/ip_forward
+    echo 0 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+    
+    # Create VXLAN interface
+    VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+    
+    if ip link show vxlan0 >/dev/null 2>&1; then
+        ip link del vxlan0
+    fi
+    
+    ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT
+    ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0
+    ip link set up dev vxlan0
+    ip link set mtu $VPN_INTERFACE_MTU dev vxlan0
+    
+    # Set routing rules
+    ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+    
+    # Configure iptables for NAT and forwarding
+    iptables -t nat -A POSTROUTING -j MASQUERADE
+    
+    # Allow VXLAN traffic
+    iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT
+    iptables -A OUTPUT -o eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT
+    
+    # Allow DHCP traffic from VXLAN
+    iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT
+    
+    # Configure VPN-specific rules if VPN interface exists
+    if [[ -n "$VPN_INTERFACE" ]] && ip link show $VPN_INTERFACE >/dev/null 2>&1; then
+        echo "Configuring iptables for VPN interface: $VPN_INTERFACE"
+        
+        # Forward established connections
+        iptables -A FORWARD -i $VPN_INTERFACE -m state --state ESTABLISHED,RELATED -j ACCEPT
+        iptables -A FORWARD -i $VPN_INTERFACE -j REJECT
+        
+        if [[ "$VPN_BLOCK_OTHER_TRAFFIC" == "true" ]]; then
+            # Block non-VPN traffic
+            iptables -P FORWARD DROP
+            iptables -I FORWARD -o $VPN_INTERFACE -j ACCEPT
+            
+            iptables -P OUTPUT DROP
+            iptables -A OUTPUT -p udp --dport $VPN_TRAFFIC_PORT -j ACCEPT
+            iptables -A OUTPUT -p tcp --dport $VPN_TRAFFIC_PORT -j ACCEPT
+            
+            # Allow local traffic
+            for local_cidr in $VPN_LOCAL_CIDRS; do
+                iptables -A OUTPUT -d $local_cidr -j ACCEPT
+            done
+            
+            iptables -A OUTPUT -o $VPN_INTERFACE -j ACCEPT
+            iptables -A OUTPUT -o vxlan0 -j ACCEPT
+        fi
+        
+        # Add routes for local networks
+        K8S_GW_IP=$(ip route | awk '/default/ { print $3 }')
+        for local_cidr in $VPN_LOCAL_CIDRS; do
+            ip route add $local_cidr via $K8S_GW_IP || true
+        done
+    fi
+    
+    echo "✅ VPN Gateway Pod-Gateway initialization complete"
+
+  gateway_sidecar.sh: |
+    #!/bin/bash
+    set -euo pipefail
+    
+    source /config/settings.sh
+    
+    echo "=== Starting VPN Gateway Sidecar Services ==="
+    
+    # Start DHCP server for VXLAN clients
+    cat > /tmp/dnsmasq.conf << EOF
+    interface=vxlan0
+    bind-interfaces
+    dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+    dhcp-option=3,${VXLAN_IP_NETWORK}.1
+    dhcp-option=6,${VXLAN_IP_NETWORK}.1
+    server=10.96.0.10
+    EOF
+    
+    # Start dnsmasq for DHCP and DNS
+    dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+    DNSMASQ_PID=$!
+    
+    # Health check endpoint
+    while true; do
+        # Check if VPN is connected
+        if [[ -n "$VPN_INTERFACE" ]] && ip link show $VPN_INTERFACE >/dev/null 2>&1; then
+            # Test external connectivity through VPN
+            if timeout 5 curl -s --interface $VPN_INTERFACE http://httpbin.org/ip >/dev/null 2>&1; then
+                echo "$(date): VPN Gateway healthy - $VPN_INTERFACE connected"
+            else
+                echo "$(date): VPN Gateway unhealthy - no external connectivity"
+            fi
+        else
+            echo "$(date): VPN Gateway unhealthy - $VPN_INTERFACE not found"
+        fi
+        sleep 30
+    done
+
+  client_init.sh: |
+    #!/bin/bash
+    set -euo pipefail
+    
+    source /config/settings.sh
+    
+    echo "=== Initializing Pod-Gateway Client ==="
+    
+    # Remove existing VXLAN if present
+    if ip link show vxlan0 >/dev/null 2>&1; then
+        ip link del vxlan0
+    fi
+    
+    # Set up routes for local traffic (before removing default route)
+    K8S_GW_IP=$(ip route | awk '/default/ { print $3 }')
+    for local_cidr in $NOT_ROUTED_TO_GATEWAY_CIDRS; do
+        ip route add $local_cidr via $K8S_GW_IP || true
+    done
+    
+    # Remove default routes to force traffic through gateway
+    ip route del default || true
+    ip -6 route del default || true
+    
+    # Verify we can't reach external IPs directly
+    if timeout 2 ping -c 1 8.8.8.8 >/dev/null 2>&1; then
+        echo "❌ ERROR: Can still reach external IPs directly!"
+        exit 1
+    fi
+    
+    # Resolve gateway IP
+    K8S_DNS_IP=$(echo $K8S_DNS_IPS | cut -d' ' -f1)
+    GATEWAY_IP=$(dig +short $GATEWAY_NAME @$K8S_DNS_IP)
+    
+    if [[ -z "$GATEWAY_IP" ]]; then
+        echo "❌ ERROR: Could not resolve gateway $GATEWAY_NAME"
+        exit 1
+    fi
+    
+    echo "Gateway resolved: $GATEWAY_NAME -> $GATEWAY_IP"
+    
+    # Add route to gateway
+    ip route add $GATEWAY_IP via $K8S_GW_IP
+    
+    # Test connectivity to gateway
+    if ! timeout 10 ping -c 3 $GATEWAY_IP; then
+        echo "❌ ERROR: Cannot reach gateway at $GATEWAY_IP"
+        exit 1
+    fi
+    
+    # Create VXLAN tunnel to gateway
+    ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT
+    bridge fdb append to 00:00:00:00:00:00 dst $GATEWAY_IP dev vxlan0
+    ip link set up dev vxlan0
+    ip link set mtu $VPN_INTERFACE_MTU dev vxlan0
+    
+    # Get IP via DHCP or use static IP
+    HOSTNAME_REAL=$(hostname | cut -d'-' -f1)
+    NAT_ENTRY=$(grep "^$HOSTNAME_REAL " /config/nat.conf || true)
+    
+    if [[ -z "$NAT_ENTRY" ]]; then
+        echo "Getting dynamic IP via DHCP..."
+        killall udhcpc || true
+        udhcpc --now --interface=vxlan0 --script=/usr/share/udhcpc/default.script
+    else
+        IP=$(echo $NAT_ENTRY | cut -d' ' -f2)
+        VXLAN_IP="${VXLAN_IP_NETWORK}.${IP}"
+        echo "Using static IP: $VXLAN_IP"
+        ip addr add ${VXLAN_IP}/24 dev vxlan0
+        ip route add default via ${VXLAN_IP_NETWORK}.1
+    fi
+    
+    # Test connectivity through gateway
+    VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+    if ! timeout 10 ping -c 3 $VXLAN_GATEWAY_IP; then
+        echo "❌ ERROR: Cannot reach gateway via VXLAN"
+        exit 1
+    fi
+    
+    echo "✅ Pod-Gateway client initialization complete"
+
+  client_sidecar.sh: |
+    #!/bin/bash
+    set -euo pipefail
+    
+    source /config/settings.sh
+    
+    echo "=== Starting Pod-Gateway Client Sidecar ==="
+    
+    while true; do
+        # Check VXLAN connectivity to gateway
+        VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+        
+        if ! timeout 5 ping -c 1 $VXLAN_GATEWAY_IP >/dev/null 2>&1; then
+            echo "$(date): VXLAN connection lost, reinitializing..."
+            /config/client_init.sh
+        else
+            echo "$(date): VXLAN connection healthy"
+        fi
+        
+        sleep 30
+    done
+
+---
+# VPN Gateway Controller - manages active gateway selection and failover
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vpn-controller-config
+  namespace: vpn-gateway
+data:
+  controller.py: |
+    #!/usr/bin/env python3
+    import asyncio
+    import aiohttp
+    import logging
+    import json
+    import os
+    from kubernetes import client, config
+    from kubernetes.client.rest import ApiException
+    
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    
+    class VPNGatewayController:
+        def __init__(self):
+            config.load_incluster_config()
+            self.v1 = client.CoreV1Api()
+            self.apps_v1 = client.AppsV1Api()
+            self.namespace = "vpn-gateway"
+            
+            # VPN Gateway priority order (first = highest priority)
+            self.vpn_gateways = [
+                {"name": "gluetun-premiumize-us", "priority": 1, "type": "premiumize", "country": "us"},
+                {"name": "gluetun-premiumize-nl", "priority": 2, "type": "premiumize", "country": "nl"},
+                {"name": "gluetun-premiumize-gb", "priority": 3, "type": "premiumize", "country": "gb"},
+                {"name": "gluetun-premiumize-de", "priority": 4, "type": "premiumize", "country": "de"},
+                {"name": "gluetun-premiumize-ca", "priority": 5, "type": "premiumize", "country": "ca"},
+                {"name": "gluetun-airvpn", "priority": 6, "type": "airvpn", "country": "us"},
+                {"name": "warp-gateway", "priority": 7, "type": "warp", "country": "us"}
+            ]
+            
+            self.active_gateway = None
+            self.standby_gateway = None
+    
+        async def check_gateway_health(self, gateway_name):
+            """Check if a VPN gateway is healthy"""
+            try:
+                # Try to get pod IP
+                pods = self.v1.list_namespaced_pod(
+                    namespace=self.namespace,
+                    label_selector=f"app={gateway_name}"
+                )
+                
+                if not pods.items:
+                    return False
+                
+                pod = pods.items[0]
+                if pod.status.phase != "Running":
+                    return False
+                
+                pod_ip = pod.status.pod_ip
+                if not pod_ip:
+                    return False
+                
+                # Determine gateway type and test appropriate connectivity
+                if gateway_name == "warp-gateway":
+                    # WARP uses SOCKS5 on port 1080 - test with direct connection
+                    import socket
+                    try:
+                        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        sock.settimeout(5)
+                        result = sock.connect_ex((pod_ip, 1080))
+                        sock.close()
+                        if result == 0:
+                            logger.info(f"Gateway {gateway_name} healthy - SOCKS5 port accessible")
+                            return True
+                        else:
+                            logger.warning(f"Gateway {gateway_name} SOCKS5 port not accessible")
+                            return False
+                    except Exception as e:
+                        logger.warning(f"Gateway {gateway_name} SOCKS5 test failed: {e}")
+                        return False
+                else:
+                    # Gluetun gateways use HTTP proxy on port 8888
+                    async with aiohttp.ClientSession() as session:
+                        proxy_url = f"http://{pod_ip}:8888"
+                        try:
+                            async with session.get(
+                                "http://httpbin.org/ip",
+                                proxy=proxy_url,
+                                timeout=aiohttp.ClientTimeout(total=10)
+                            ) as response:
+                                if response.status == 200:
+                                    data = await response.json()
+                                    logger.info(f"Gateway {gateway_name} healthy - IP: {data.get('origin')}")
+                                    return True
+                        except Exception as e:
+                            logger.warning(f"Gateway {gateway_name} health check failed: {e}")
+                            return False
+                        
+            except Exception as e:
+                logger.error(f"Error checking gateway {gateway_name}: {e}")
+                return False
+            
+            return False
+    
+        async def scale_deployment(self, deployment_name, replicas):
+            """Scale a deployment to specified replica count"""
+            try:
+                # Get current deployment
+                deployment = self.apps_v1.read_namespaced_deployment(
+                    name=deployment_name,
+                    namespace=self.namespace
+                )
+                
+                # Update replica count
+                deployment.spec.replicas = replicas
+                
+                # Apply the update
+                self.apps_v1.patch_namespaced_deployment(
+                    name=deployment_name,
+                    namespace=self.namespace,
+                    body=deployment
+                )
+                
+                logger.info(f"Scaled {deployment_name} to {replicas} replicas")
+                return True
+                
+            except ApiException as e:
+                logger.error(f"Error scaling {deployment_name}: {e}")
+                return False
+    
+        async def update_active_gateway_config(self, gateway_name):
+            """Update ConfigMap to set active gateway"""
+            try:
+                # Get current ConfigMap
+                cm = self.v1.read_namespaced_config_map(
+                    name="pod-gateway-config",
+                    namespace=self.namespace
+                )
+                
+                # Update settings.sh with new active gateway
+                settings = cm.data["settings.sh"]
+                updated_settings = settings.replace(
+                    'GATEWAY_NAME="${ACTIVE_VPN_GATEWAY:-gluetun-premiumize-us}"',
+                    f'GATEWAY_NAME="{gateway_name}"'
+                )
+                
+                cm.data["settings.sh"] = updated_settings
+                
+                # Apply the update
+                self.v1.patch_namespaced_config_map(
+                    name="pod-gateway-config",
+                    namespace=self.namespace,
+                    body=cm
+                )
+                
+                logger.info(f"Updated active gateway config to: {gateway_name}")
+                return True
+                
+            except ApiException as e:
+                logger.error(f"Error updating gateway config: {e}")
+                return False
+    
+        async def ensure_gateway_running(self, gateway_info):
+            """Ensure a gateway is running and healthy"""
+            gateway_name = gateway_info["name"]
+            
+            # Scale up the deployment
+            await self.scale_deployment(gateway_name, 1)
+            
+            # Determine max attempts based on gateway type
+            if gateway_info["type"] == "warp":
+                max_attempts = 15  # Give WARP more time to start
+                wait_time = 10
+            else:
+                max_attempts = 6   # Fail fast on gluetun containers (1 minute max)
+                wait_time = 10
+            
+            # Wait for pod to be ready
+            for attempt in range(max_attempts):
+                await asyncio.sleep(wait_time)
+                
+                if await self.check_gateway_health(gateway_name):
+                    logger.info(f"Gateway {gateway_name} is ready and healthy")
+                    return True
+                    
+                logger.info(f"Waiting for {gateway_name} to be ready... (attempt {attempt + 1}/{max_attempts})")
+            
+            logger.error(f"Gateway {gateway_name} failed to become healthy after {max_attempts} attempts")
+            return False
+    
+        async def failover_to_next_gateway(self):
+            """Perform failover to the next available gateway"""
+            logger.info("Starting VPN gateway failover...")
+            
+            # Scale down current active gateway if it exists
+            if self.active_gateway:
+                await self.scale_deployment(self.active_gateway["name"], 0)
+                self.active_gateway = None
+            
+            # Try each gateway in priority order
+            for gateway_info in self.vpn_gateways:
+                gateway_name = gateway_info["name"]
+                logger.info(f"Attempting failover to {gateway_name}")
+                
+                if await self.ensure_gateway_running(gateway_info):
+                    # Update active gateway
+                    self.active_gateway = gateway_info
+                    await self.update_active_gateway_config(gateway_name)
+                    
+                    # Set up standby gateway (next in priority)
+                    await self.setup_standby_gateway()
+                    
+                    logger.info(f"✅ Failover successful to {gateway_name}")
+                    return True
+                else:
+                    # Scale down failed gateway
+                    await self.scale_deployment(gateway_name, 0)
+            
+            logger.error("❌ All VPN gateways failed! No connectivity available.")
+            return False
+    
+        async def setup_standby_gateway(self):
+            """Set up standby gateway (next in priority after active)"""
+            if not self.active_gateway:
+                return
+            
+            active_priority = self.active_gateway["priority"]
+            
+            # Find next gateway in priority order
+            for gateway_info in self.vpn_gateways:
+                if gateway_info["priority"] > active_priority:
+                    gateway_name = gateway_info["name"]
+                    logger.info(f"Setting up standby gateway: {gateway_name}")
+                    
+                    if await self.ensure_gateway_running(gateway_info):
+                        self.standby_gateway = gateway_info
+                        logger.info(f"✅ Standby gateway ready: {gateway_name}")
+                        return
+                    else:
+                        await self.scale_deployment(gateway_name, 0)
+            
+            logger.warning("No standby gateway could be established")
+    
+        async def monitor_and_failover(self):
+            """Main monitoring loop"""
+            logger.info("Starting VPN Gateway Controller")
+            
+            # Initial setup - start with highest priority gateway
+            if not await self.failover_to_next_gateway():
+                logger.error("Failed to start any VPN gateway!")
+                return
+            
+            # Main monitoring loop
+            while True:
+                try:
+                    # Check active gateway health
+                    if self.active_gateway:
+                        gateway_name = self.active_gateway["name"]
+                        
+                        if await self.check_gateway_health(gateway_name):
+                            logger.info(f"Active gateway {gateway_name} is healthy")
+                        else:
+                            logger.warning(f"Active gateway {gateway_name} is unhealthy, initiating failover")
+                            
+                            # Try standby first if available
+                            if self.standby_gateway and await self.check_gateway_health(self.standby_gateway["name"]):
+                                logger.info(f"Promoting standby gateway {self.standby_gateway['name']} to active")
+                                
+                                # Scale down old active
+                                await self.scale_deployment(self.active_gateway["name"], 0)
+                                
+                                # Promote standby to active
+                                self.active_gateway = self.standby_gateway
+                                self.standby_gateway = None
+                                await self.update_active_gateway_config(self.active_gateway["name"])
+                                
+                                # Set up new standby
+                                await self.setup_standby_gateway()
+                            else:
+                                # Full failover
+                                await self.failover_to_next_gateway()
+                    else:
+                        logger.warning("No active gateway, starting failover")
+                        await self.failover_to_next_gateway()
+                    
+                    # Check standby gateway health
+                    if self.standby_gateway:
+                        if not await self.check_gateway_health(self.standby_gateway["name"]):
+                            logger.warning(f"Standby gateway {self.standby_gateway['name']} is unhealthy")
+                            await self.scale_deployment(self.standby_gateway["name"], 0)
+                            self.standby_gateway = None
+                            await self.setup_standby_gateway()
+                    
+                    await asyncio.sleep(30)  # Check every 30 seconds
+                    
+                except Exception as e:
+                    logger.error(f"Error in monitoring loop: {e}")
+                    await asyncio.sleep(10)
+    
+    if __name__ == "__main__":
+        controller = VPNGatewayController()
+        asyncio.run(controller.monitor_and_failover())
+
+---
+# VPN Gateway Controller Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpn-gateway-controller
+  namespace: vpn-gateway
+  labels:
+    app: vpn-gateway-controller
+    component: vpn-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vpn-gateway-controller
+  template:
+    metadata:
+      labels:
+        app: vpn-gateway-controller
+        component: vpn-gateway
+    spec:
+      serviceAccountName: vpn-gateway-controller-sa
+      containers:
+        - name: controller
+          image: python:3.11-slim
+          command:
+            - /bin/bash
+            - -c
+            - |
+              pip install kubernetes aiohttp
+              python /config/controller.py
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+      volumes:
+        - name: config
+          configMap:
+            name: vpn-controller-config
+            defaultMode: 0755
+
+---
+# ServiceAccount for VPN Gateway Controller
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vpn-gateway-controller-sa
+  namespace: vpn-gateway
+
+---
+# ClusterRole for VPN Gateway Controller
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: vpn-gateway-controller-role
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "configmaps"]
+    verbs: ["get", "list", "watch", "patch", "update"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "deployments/scale"]
+    verbs: ["get", "list", "watch", "patch", "update"]
+
+---
+# ClusterRoleBinding for VPN Gateway Controller
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: vpn-gateway-controller-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: vpn-gateway-controller-role
+subjects:
+  - kind: ServiceAccount
+    name: vpn-gateway-controller-sa
+    namespace: vpn-gateway
+
+---
+# Pod-Gateway DaemonSet - runs on all nodes to intercept egress traffic
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: pod-gateway
+  namespace: vpn-gateway
+  labels:
+    app: pod-gateway
+    component: vpn-gateway
+spec:
+  selector:
+    matchLabels:
+      app: pod-gateway
+  template:
+    metadata:
+      labels:
+        app: pod-gateway
+        component: vpn-gateway
+    spec:
+      hostNetwork: true
+      hostPID: true
+      tolerations:
+        - operator: Exists
+      containers:
+        - name: pod-gateway
+          image: ghcr.io/k8s-at-home/pod-gateway:latest
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - NET_RAW
+                - SYS_MODULE
+            privileged: true
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: lib-modules
+              mountPath: /lib/modules
+              readOnly: true
+            - name: proc
+              mountPath: /host/proc
+              readOnly: true
+          command:
+            - /bin/bash
+            - -c
+            - |
+              # Node-level pod-gateway setup
+              echo "=== Setting up Pod-Gateway on node $NODE_NAME ==="
+              
+              # Load configuration
+              source /config/settings.sh
+              
+              # Get pod CIDR for this node
+              POD_CIDR=$(cat /host/proc/1/root/var/lib/kubelet/config.yaml | grep clusterCIDR | awk '{print $2}' || echo "10.244.0.0/16")
+              
+              # Set up iptables rules to capture pod egress traffic
+              # Mark packets from pods for routing through VPN gateway
+              iptables -t mangle -A OUTPUT -s $POD_CIDR -j MARK --set-mark 42 || true
+              
+              # Route marked packets through VXLAN tunnel
+              ip rule add fwmark 42 table 100 || true
+              
+              # Monitor for active gateway changes and update routing
+              while true; do
+                # Get current active gateway from ConfigMap
+                ACTIVE_GATEWAY=$(kubectl get configmap pod-gateway-config -n vpn-gateway -o jsonpath='{.data.settings\.sh}' | grep GATEWAY_NAME | cut -d'"' -f2)
+                
+                if [[ -n "$ACTIVE_GATEWAY" ]]; then
+                  # Resolve gateway IP
+                  GATEWAY_IP=$(dig +short $ACTIVE_GATEWAY.vpn-gateway.svc.cluster.local)
+                  
+                  if [[ -n "$GATEWAY_IP" ]]; then
+                    # Update routing table to send marked traffic to gateway
+                    ip route replace default via $GATEWAY_IP table 100 || true
+                    echo "$(date): Updated routing to gateway $ACTIVE_GATEWAY ($GATEWAY_IP)"
+                  fi
+                fi
+                
+                sleep 30
+              done
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+      volumes:
+        - name: config
+          configMap:
+            name: pod-gateway-config
+        - name: lib-modules
+          hostPath:
+            path: /lib/modules
+        - name: proc
+          hostPath:
+            path: /proc
+
+---
+# Premiumize US VPN Gateway (Primary)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-premiumize-us
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-us
+    component: vpn-gateway
+    priority: "1"
+spec:
+  replicas: 0  # Managed by controller
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-us
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-us
+        component: vpn-gateway
+    spec:
+      initContainers:
+        - name: gateway-init
+          image: ghcr.io/k8s-at-home/pod-gateway:latest
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+            privileged: true
+          command:
+            - /bin/bash
+            - -c
+            - |
+              source /config/settings.sh
+              
+              # Enable IP forwarding
+              echo 1 > /proc/sys/net/ipv4/ip_forward
+              
+              # Create VXLAN interface
+              VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+              ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT || true
+              ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true
+              ip link set up dev vxlan0
+              ip link set mtu $VPN_INTERFACE_MTU dev vxlan0 || true
+              
+              # Set routing rules
+              ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+              
+              # Configure iptables for NAT and forwarding
+              iptables -t nat -A POSTROUTING -j MASQUERADE || true
+              iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT || true
+              iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT || true
+              
+              echo "Gateway init complete"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      containers:
+        - name: gluetun
+          image: ghcr.io/qdm12/gluetun:latest
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+            privileged: true
+          env:
+            - name: VPN_SERVICE_PROVIDER
+              value: "custom"
+            - name: VPN_TYPE
+              value: "openvpn"
+            - name: OPENVPN_CUSTOM_CONFIG
+              value: "/gluetun/premiumize-us.ovpn"
+            - name: HTTP_PROXY
+              value: "on"
+            - name: HTTP_PROXY_ADDRESS
+              value: "0.0.0.0:8888"
+            - name: SHADOWSOCKS
+              value: "on"
+            - name: SHADOWSOCKS_ADDRESS
+              value: "0.0.0.0:8388"
+            - name: HEALTH_SERVER_ADDRESS
+              value: "0.0.0.0:9999"
+          ports:
+            - containerPort: 8888
+              name: http-proxy
+            - containerPort: 8388
+              name: shadowsocks
+            - containerPort: 9999
+              name: health
+          volumeMounts:
+            - name: gluetun-config
+              mountPath: /gluetun
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9999
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9999
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "300m"
+        - name: gateway-sidecar
+          image: ghcr.io/k8s-at-home/pod-gateway:latest
+          command:
+            - /bin/bash
+            - -c
+            - |
+              source /config/settings.sh
+              
+              # Start DHCP server for VXLAN clients
+              cat > /tmp/dnsmasq.conf << EOF
+              interface=vxlan0
+              bind-interfaces
+              dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+              dhcp-option=3,${VXLAN_IP_NETWORK}.1
+              dhcp-option=6,${VXLAN_IP_NETWORK}.1
+              server=10.96.0.10
+              EOF
+              
+              # Start dnsmasq for DHCP and DNS
+              dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+              
+              # Health monitoring
+              while true; do
+                if ip link show tun0 >/dev/null 2>&1; then
+                  if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                    echo "$(date): VPN Gateway healthy - tun0 connected"
+                  else
+                    echo "$(date): VPN Gateway unhealthy - no external connectivity"
+                  fi
+                else
+                  echo "$(date): VPN Gateway unhealthy - tun0 not found"
+                fi
+                sleep 30
+              done
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+      volumes:
+        - name: config
+          configMap:
+            name: pod-gateway-config
+            defaultMode: 0755
+        - name: gluetun-config
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/gluetun/premiumize/us
+            type: DirectoryOrCreate
+
+---
+# Services for VPN Gateways
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-premiumize-us
+  namespace: vpn-gateway
+  labels:
+    app: gluetun-premiumize-us
+    component: vpn-gateway
+spec:
+  selector:
+    app: gluetun-premiumize-us
+  ports:
+    - name: http-proxy
+      port: 8888
+      targetPort: 8888
+    - name: shadowsocks
+      port: 8388
+      targetPort: 8388
+    - name: health
+      port: 9999
+      targetPort: 9999 

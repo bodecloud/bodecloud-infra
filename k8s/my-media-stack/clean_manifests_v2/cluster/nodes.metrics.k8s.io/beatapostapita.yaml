@@ -1,0 +1,19 @@
+apiVersion: metrics.k8s.io/v1beta1
+kind: NodeMetrics
+metadata:
+  labels:
+    beta.kubernetes.io/arch: arm64
+    beta.kubernetes.io/instance-type: k3s
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: arm64
+    kubernetes.io/hostname: beatapostapita
+    kubernetes.io/os: linux
+    node-role.kubernetes.io/control-plane: "true"
+    node-role.kubernetes.io/master: "true"
+    node.kubernetes.io/instance-type: k3s
+  name: beatapostapita
+timestamp: "2025-06-14T23:08:44Z"
+usage:
+  cpu: 3700024636n
+  memory: 12898184Ki
+window: 20.295s

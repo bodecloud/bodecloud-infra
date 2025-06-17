@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4yRQW/iMBCF/8pqzkmWEDaApT2we+ihNyr1UvUwsSfgxvFE9iRVi/jvVYBWVQW0R3v0vvfezA6ws/cUomUPCkKFOsNethzsK4plnzWLmFn+PeSQQGO9AQX/XR+Fwpod/bPeWL+BBFoSNCgIagfoPctBHscnV0+kJZJkwXKmUcTRyLQjDJKLc372FNLN0ICCpoifJkOe/Lq13vxdGcP+W4THlkDBWCw15GiDwuFHqtihHqVNX1EaX6JQC/sEHFbkrnbbYtyCgumiNKYuppO6NlOtF8tiTvNJmc9wWWA1o7Io8j9lMRuhp5QtSbA6ppHCQEEdTdWX7PsEAjtaU33Yd2dvAvfdtQuePR98uF60if2xIaiH3TvhjsJgNa205t4LXIh++j+7wsf9WwAAAP//tiOP7XoCAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: auth-delegator
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: 286ddf320ffd2cc8937e70614a93ab4e63315634
+  name: metrics-server:system:auth-delegator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system

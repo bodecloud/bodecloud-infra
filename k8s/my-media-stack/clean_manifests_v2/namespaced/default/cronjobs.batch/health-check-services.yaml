@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"cronjob","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"health-check-services"},"name":"health-check-services","namespace":"default"},"spec":{"jobTemplate":{"spec":{"template":{"spec":{"containers":[{"args":["-c","\n      services=\"plex:32400 radarr:7878 sonarr:8989 prowlarr:9696\"\n      for service in $services; do\n        host=$(echo $service | cut -d: -f1)\n        port=$(echo $service | cut -d: -f2)\n        if curl -f -s http://$host:$port/ping \u003e /dev/null; then\n          echo \"$service is healthy\"\n        else\n          echo \"$service is unhealthy\"\n        fi\n      done\n    "],"command":["/bin/sh"],"image":"curlimages/curl:latest","name":"health-check-services","resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"10m","memory":"64Mi"}}}],"restartPolicy":"OnFailure"}}}},"schedule":"*/5 * * * *"}}
+  labels:
+    app.kubernetes.io/component: cronjob
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: health-check-services
+  name: health-check-services
+  namespace: default
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - args:
+            - -c
+            - "\n      services=\"plex:32400 radarr:7878 sonarr:8989 prowlarr:9696\"\n
+              \     for service in $services; do\n        host=$(echo $service | cut
+              -d: -f1)\n        port=$(echo $service | cut -d: -f2)\n        if curl
+              -f -s http://$host:$port/ping > /dev/null; then\n          echo \"$service
+              is healthy\"\n        else\n          echo \"$service is unhealthy\"\n
+              \       fi\n      done\n    "
+            command:
+            - /bin/sh
+            image: curlimages/curl:latest
+            imagePullPolicy: Always
+            name: health-check-services
+            resources:
+              limits:
+                cpu: 100m
+                memory: 128Mi
+              requests:
+                cpu: 10m
+                memory: 64Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: '*/5 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+  lastScheduleTime: "2025-06-14T22:55:00Z"
+  lastSuccessfulTime: "2025-06-14T22:55:17Z"

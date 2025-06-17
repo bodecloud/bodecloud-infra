@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:04:25Z"
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: riven
+  name: riven
+  namespace: default
+subsets:
+- notReadyAddresses:
+  - ip: 10.42.0.44
+    nodeName: beatapostapita
+    targetRef:
+      kind: Pod
+      name: riven-6d6bff59f7-nwznd
+      namespace: default
+  ports:
+  - name: backend
+    port: 8001
+    protocol: TCP
+  - name: http
+    port: 8080
+    protocol: TCP

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "chart-volsync-rs-config-cache-pvc.fullname" . }}-volsync-rs-config-cache
+  labels:
+    app.kubernetes.io/created-by: volsync
+  {{- include "chart-volsync-rs-config-cache-pvc.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.pvc.volsyncRsConfigCache.storageRequest | quote }}
+  storageClassName: {{ .Values.pvc.volsyncRsConfigCache.storageClass | quote }}

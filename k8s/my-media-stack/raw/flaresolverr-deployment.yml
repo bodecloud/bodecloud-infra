@@ -1,0 +1,79 @@
+#! flaresolverr-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaresolverr
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaresolverr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: flaresolverr
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: flaresolverr
+          image: ghcr.io/thephaseless/byparr:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: BROWSER_TIMEOUT
+              value: "120000"
+            - name: CAPTCHA_SOLVER
+              value: "none"
+            - name: HEADLESS
+              value: "true"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: LOG_HTML
+              value: "false"
+            - name: LOG_LEVEL
+              value: "info"
+            - name: PGID
+              value: "988"
+            - name: PORT
+              value: "8191"
+            - name: PROMETHEUS_ENABLED
+              value: "false"
+            - name: PROMETHEUS_PORT
+              value: "9090"
+            - name: PUID
+              value: "1001"
+            - name: TEST_URL
+              value: "https://www.google.com"
+            - name: TZ
+              value: "America/Chicago"
+            - name: UMASK
+              value: "002"
+          ports:
+            - name: flaresolve-8191
+              containerPort: 8191
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8191
+            initialDelaySeconds: 120
+            periodSeconds: 60
+            timeoutSeconds: 30
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8191
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"

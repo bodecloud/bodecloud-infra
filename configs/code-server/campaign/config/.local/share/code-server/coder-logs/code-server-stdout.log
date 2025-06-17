@@ -1,0 +1,83 @@
+[2025-04-27T01:44:43.889Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-27T01:44:43.890Z] info  Using user-data-dir /config/data
+[2025-04-27T01:44:43.901Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-27T01:44:43.902Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-27T01:44:43.902Z] info    - Authentication is disabled
+[2025-04-27T01:44:43.902Z] info    - Not serving HTTPS
+[2025-04-27T01:44:43.902Z] info  Session server listening on /config/data/code-server-ipc.sock
+[2025-04-27T01:48:45.766Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-27T01:48:45.768Z] info  Using user-data-dir /config/data
+[2025-04-27T01:48:45.778Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-27T01:48:45.778Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-27T01:48:45.778Z] info    - Authentication is disabled
+[2025-04-27T01:48:45.778Z] info    - Not serving HTTPS
+[2025-04-27T01:48:45.778Z] info  Session server listening on /config/data/code-server-ipc.sock
+[20:49:00] 
+
+
+
+
+[20:49:00] Extension host agent started.
+[20:49:00] Started initializing default profile extensions in extensions installation folder. file:///config/extensions
+[20:49:00] Completed initializing default profile extensions in extensions installation folder. file:///config/extensions
+[20:49:02] [10.76.0.11][e34a067b][ManagementConnection] New connection established.
+[20:49:03] [10.76.0.11][ada34ec6][ExtensionHostConnection] New connection established.
+[20:49:03] [10.76.0.11][ada34ec6][ExtensionHostConnection] <281> Launched Extension Host Process.
+[2025-04-27T01:49:52.898Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-27T01:49:52.899Z] info  Using user-data-dir /config/data
+[2025-04-27T01:49:52.914Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-27T01:49:52.915Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-27T01:49:52.915Z] info    - Authentication is disabled
+[2025-04-27T01:49:52.915Z] info    - Not serving HTTPS
+[2025-04-27T01:49:52.915Z] info  Session server listening on /config/data/code-server-ipc.sock
+[20:50:01] 
+
+
+
+
+[20:50:01] Extension host agent started.
+[20:50:02] [10.76.0.11][e7eb1760][ManagementConnection] New connection established.
+[20:50:03] [10.76.0.11][14fdf257][ExtensionHostConnection] New connection established.
+[20:50:03] [10.76.0.11][14fdf257][ExtensionHostConnection] <278> Launched Extension Host Process.
+[21:07:06] Getting Manifest... ms-azuretools.vscode-docker
+[21:07:07] Installing extension: ms-azuretools.vscode-docker {
+  isMachineScoped: false,
+  installPreReleaseVersion: false,
+  pinned: false,
+  isApplicationScoped: false,
+  profileLocation: pr {
+    scheme: 'file',
+    authority: '',
+    path: '/config/extensions/extensions.json',
+    query: '',
+    fragment: '',
+    _formatted: 'file:///config/extensions/extensions.json',
+    _fsPath: '/config/extensions/extensions.json'
+  },
+  productVersion: { version: '1.99.3', date: '2025-04-16T22:22:02.429Z' }
+}
+[21:07:08] Extension signature verification is not done: ms-azuretools.vscode-docker
+[21:07:08] Extracted extension to file:///config/extensions/ms-azuretools.vscode-docker-1.29.5-universal: ms-azuretools.vscode-docker
+[21:07:08] Renamed to /config/extensions/ms-azuretools.vscode-docker-1.29.5-universal
+[21:07:08] Extension installed successfully: ms-azuretools.vscode-docker file:///config/extensions/extensions.json
+[2025-04-27T02:34:04.563Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-27T02:34:04.564Z] info  Using user-data-dir /config/data
+[2025-04-27T02:34:04.574Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-27T02:34:04.575Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-27T02:34:04.575Z] info    - Authentication is disabled
+[2025-04-27T02:34:04.575Z] info    - Not serving HTTPS
+[2025-04-27T02:34:04.575Z] info  Session server listening on /config/data/code-server-ipc.sock
+[2025-04-27T02:34:15.157Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-27T02:34:15.159Z] info  Using user-data-dir /config/data
+[2025-04-27T02:34:15.176Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-27T02:34:15.176Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-27T02:34:15.176Z] info    - Authentication is disabled
+[2025-04-27T02:34:15.176Z] info    - Not serving HTTPS
+[2025-04-27T02:34:15.176Z] info  Session server listening on /config/data/code-server-ipc.sock
+[2025-04-27T02:35:02.810Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-27T02:35:02.811Z] info  Using user-data-dir /config/data
+[2025-04-27T02:35:02.823Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-27T02:35:02.824Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-27T02:35:02.824Z] info    - Authentication is disabled
+[2025-04-27T02:35:02.824Z] info    - Not serving HTTPS
+[2025-04-27T02:35:02.824Z] info  Session server listening on /config/data/code-server-ipc.sock

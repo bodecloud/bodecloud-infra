@@ -1,0 +1,22 @@
+apiVersion: v2
+name: traefik-forward-auth
+description: A Helm chart for Traefik Forward Auth - OAuth/OIDC authentication middleware for Traefik
+type: application
+version: 0.3.0
+appVersion: "latest"
+home: https://github.com/thomseddon/traefik-forward-auth
+sources:
+  - https://github.com/thomseddon/traefik-forward-auth
+keywords:
+  - traefik
+  - forward-auth
+  - oauth
+  - oidc
+  - authentication
+  - middleware
+  - elfhosted
+maintainers:
+  - name: ElfHosted
+    url: https://elfhosted.com
+annotations:
+  category: Security 

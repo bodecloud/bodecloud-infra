@@ -1,0 +1,56 @@
+---
+# AI/LLM services deployment tasks
+# This file can be expanded to include LobeChat and other AI services
+
+- name: Deploy LobeChat
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: lobechat
+        namespace: my-media-stack
+        labels:
+          app: lobechat
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: lobechat
+        template:
+          metadata:
+            labels:
+              app: lobechat
+          spec:
+            containers:
+              - name: lobechat
+                image: lobehub/lobe-chat:latest
+                ports:
+                  - containerPort: 3210
+                env:
+                  - name: NEXT_PUBLIC_BASE_PATH
+                    value: ""
+                resources:
+                  requests:
+                    memory: 256Mi
+                    cpu: 100m
+                  limits:
+                    memory: 512Mi
+                    cpu: 500m
+  when: media_stack.services.lobechat
+
+- name: Create LobeChat service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: lobechat
+        namespace: my-media-stack
+      spec:
+        selector:
+          app: lobechat
+        ports:
+          - port: 3210
+            targetPort: 3210
+  when: media_stack.services.lobechat

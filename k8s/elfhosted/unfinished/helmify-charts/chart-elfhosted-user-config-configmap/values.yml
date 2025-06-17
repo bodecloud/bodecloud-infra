@@ -1,0 +1,6 @@
+elfhostedUserConfig:
+  userid: "8067"
+  username: brunner56
+  webdavPassword: ""
+  webdavUsername: brunner56
+kubernetesClusterDomain: cluster.local

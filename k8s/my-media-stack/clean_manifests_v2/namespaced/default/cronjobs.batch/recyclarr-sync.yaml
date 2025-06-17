@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"cronjob","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"recyclarr-sync"},"name":"recyclarr-sync","namespace":"default"},"spec":{"jobTemplate":{"spec":{"template":{"spec":{"containers":[{"args":["sync"],"command":["recyclarr"],"image":"ghcr.io/recyclarr/recyclarr:latest","name":"recyclarr-sync","resources":{"limits":{"cpu":"500m","memory":"1Gi"},"requests":{"cpu":"100m","memory":"256Mi"}}}],"restartPolicy":"OnFailure"}}}},"schedule":"0 6 * * *"}}
+  labels:
+    app.kubernetes.io/component: cronjob
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: recyclarr-sync
+  name: recyclarr-sync
+  namespace: default
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - args:
+            - sync
+            command:
+            - recyclarr
+            image: ghcr.io/recyclarr/recyclarr:latest
+            imagePullPolicy: Always
+            name: recyclarr-sync
+            resources:
+              limits:
+                cpu: 500m
+                memory: 1Gi
+              requests:
+                cpu: 100m
+                memory: 256Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: 0 6 * * *
+  successfulJobsHistoryLimit: 3
+  suspend: false

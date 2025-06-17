@@ -1,0 +1,172 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: cert-manager-webhook-6d4778b87b-
+  labels:
+    app: webhook
+    app.kubernetes.io/component: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/version: v1.14.0
+    helm.sh/chart: cert-manager-v1.14.0
+    pod-template-hash: 6d4778b87b
+  name: cert-manager-webhook-6d4778b87b-qzjs5
+  namespace: cert-manager
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: cert-manager-webhook-6d4778b87b
+spec:
+  containers:
+  - args:
+    - --v=2
+    - --secure-port=10250
+    - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+    - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+    - --dynamic-serving-dns-names=cert-manager-webhook
+    - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE)
+    - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE).svc
+    env:
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    image: quay.io/jetstack/cert-manager-webhook:v1.14.0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /livez
+        port: 6080
+        scheme: HTTP
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: cert-manager-webhook
+    ports:
+    - containerPort: 10250
+      name: https
+      protocol: TCP
+    - containerPort: 6080
+      name: healthcheck
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /healthz
+        port: 6080
+        scheme: HTTP
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hsg5w
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  nodeName: beatapostapita
+  nodeSelector:
+    kubernetes.io/os: linux
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: cert-manager-webhook
+  serviceAccountName: cert-manager-webhook
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-hsg5w
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:38:42Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:38:39Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:18Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:18Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:38:39Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://eb062864933361965e274da9d122da4d9ea64c5443067b112c5b2cd58dadfe95
+    image: quay.io/jetstack/cert-manager-webhook:v1.14.0
+    imageID: quay.io/jetstack/cert-manager-webhook@sha256:d09da2b626132bb17eb62f2f9d7e921198c6bc001b40f0aa3ba079968db471ed
+    lastState:
+      terminated:
+        containerID: containerd://a667f163776fd1a1ca6a0c4710618ee19274f3d87345f3c8572b88bf1e412e48
+        exitCode: 1
+        finishedAt: "2025-06-14T17:38:41Z"
+        reason: Error
+        startedAt: "2025-06-14T17:38:41Z"
+    name: cert-manager-webhook
+    ready: true
+    restartCount: 1
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:38:43Z"
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hsg5w
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.27
+  podIPs:
+  - ip: 10.42.0.27
+  qosClass: BestEffort
+  startTime: "2025-06-14T17:38:39Z"

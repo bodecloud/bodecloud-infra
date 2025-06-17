@@ -1,0 +1,32 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: wizarr
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: wizarr
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 5690
+    targetPort: 5690
+  selector:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: wizarr
+  clusterIP: 10.43.127.14
+  clusterIPs:
+  - 10.43.127.14
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

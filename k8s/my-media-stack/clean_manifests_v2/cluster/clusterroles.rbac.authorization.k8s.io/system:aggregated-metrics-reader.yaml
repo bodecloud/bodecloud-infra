@@ -1,0 +1,25 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/5SSQY/TMBCF/wp6ZydsNy1tLXFAHDhw48AF9TCxh9QksSvPJBWs8t+RQ0FcCrsna/TmPet99hPoEj5zlpAiLHJLrqZJzymHH6Qhxbo/SB3S63kDgz5ED4v3wyTK+VMaGAYjK3lSgn0CxZh09UkZU/uNnQprnUOqHakOXMJCSYG5q6dr5Fx1cw+LvpG/lHljXn0M0b99532K/42INDIsqOsyd6Tsq5E1BydVZvKcnxUgF3IlpZ9aruS7KI9YDAZqefhnzTPJGRZ+f9y1D5v26Hfu69Y3++2WHw/H4843zUNDh81u//jGUWF5n/+fCpWmivwYynNpnl7gYh/0xaY58PW3aTG4Af1Fwd7nuhjkaWCB/bJ+sQ85TZcy4bZ4uwwng8ySpuzWZVySFxjE5FmKOHNuV6FjhcEQpBxXUnfGaTktPwMAAP//qEhhz8ECAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: aggregated-metrics-reader
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: d795b01b9d5cf4d3744e28995d3303a815726cae
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  name: system:aggregated-metrics-reader
+rules:
+- apiGroups:
+  - metrics.k8s.io
+  resources:
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch

@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: speedtest
+  usage:
+    cpu: 15219797n
+    memory: 128324Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: speedtest
+    pod-template-hash: 76cb64d55f
+  name: speedtest-76cb64d55f-khmpv
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:48Z"
+window: 17.325s

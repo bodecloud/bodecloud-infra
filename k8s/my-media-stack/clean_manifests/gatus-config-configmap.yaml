@@ -1,0 +1,58 @@
+apiVersion: v1
+data:
+  config.yaml: "storage:\n  type: sqlite\n  path: /data/data.db\n\nui:\n  logo: https://elfhosted.com/images/logo.svg\n
+    \ link: https://elfhosted.com\n  header: brunner56's ElfHosted Health\n  title:
+    Health | ElfHosted\n  buttons:\n  - name: Dashboard\n    link: https://brunner56.elfhosted.com\n
+    \ - name: Account\n    link: https://store.elfhosted.com/my-account\n  - name:
+    Docs\n    link: https://elfhosted.com\n  - name: Discord\n    link: https://discord.elfhosted.com\n
+    \ \nalerting:\n  email:\n    from: \"${SMTP_FROM}\"\n    username: \"${SMTP_USERNAME}\"\n
+    \   password: \"${SMTP_PASSWORD}\"\n    host: \"${SMTP_HOST}\"\n    port: ${SMTP_PORT}\n
+    \   to: \"boden.crouch@gmail.com\"\n    default-alert:\n      description: |\n\n\n
+    \       See https://brunner56-health.elfhosted.com for details, or\n        visit
+    https://discord.elfhosted.com for status updates / help.\n\n        -- Sent with
+    ❤️ from your friends at ElfHosted \U0001F9DD\n        (https://elfhosted.com)\n
+    \     send-on-resolved: true\n      failure-threshold: 4\n      success-threshold:
+    1\n\nmaintenance:\n  start: 22:00 # 22am UTC = 10am NZDT after DST change\n  duration:
+    1h\n\nendpoints:\n\n  \n\n  \n\n  \n  - name: plex\n    group: consume-media\n
+    \   url: \"http://plex:32400\"\n    interval: 5m\n    conditions:\n      - \"[STATUS]
+    == 401\"\n    alerts:\n      - type: email\n  \n\n  \n\n  \n\n        \n\n  \n\n
+    \ \n\n  \n\n        \n\n  \n\n        \n\n  \n\n  \n\n  \n\n        \n\n       \n\n
+    \             \n\n  \n\n  \n\n  \n  \n        \n\n  \n\n  \n\n     \n\n  \n\n
+    \ \n\n  \n\n  \n\n  \n\n  \n\n  \n\n      \n\n  \n\n  \n\n  \n\n  \n\n  \n\n        \n\n
+    \    \n\n  \n  \n  \n\n        \n\n  \n\n        \n\n  \n\n  \n\n  \n  - name:
+    wizarr\n    group: manage-media\n    url: \"http://wizarr:5690\"\n    interval:
+    5m\n    conditions:\n      - \"[STATUS] == 200\"\n    alerts:\n      - type: email\n
+    \       \n\n  \n\n        \n\n  \n\n  \n\n        \n\n       \n\n         \n  \n
+    \       \n\n  \n  - name: riven-backend\n    group: manage-media\n    url: \"http://riven:3001\"\n
+    \   interval: 5m\n    conditions:\n      - \"[STATUS] == 200\"\n    alerts:\n
+    \     - type: email\n\n  - name: riven-frontend\n    group: manage-media\n    url:
+    \"http://riven-frontend:3000\"\n    interval: 5m\n    conditions:\n      - \"[STATUS]
+    == 200\"\n    alerts:\n      - type: email          \n  \n\n    \n\n  \n\n        \n\n
+    \     \n\n              \n\n        \n\n  \n\n  \n\n        \n\n  \n\n  \n\n  \n\n
+    \     \n\n              \n\n         \n\n                 \n\n  \n\n  \n\n  \n\n
+    \ \n\n        \n\n  \n\n  \n\n  \n\n  \n\n  \n\n        \n\n  \n\n  \n\n  \n\n
+    \   \n\n    \n\n                 \n\n     \n\n        \n\n        \n\n     \n\n
+    \                                 \n\n  \n  - name: zurg\n    group: download-media\n
+    \   url: \"http://zurg:9999/http/version.txt\"\n    interval: 5m\n    conditions:\n
+    \   - \"[STATUS] == 200\"\n    alerts:\n      - type: email\n  \n\n  \n\n  \n\n
+    \       \n\n  \n\n  \n\n        \n\n           \n\n              \n\n  - name:
+    filebrowser\n    group: tools\n    url: \"http://filebrowser:8080\"\n    interval:
+    5m\n    conditions:\n      - \"[STATUS] == 200\"\n    alerts:\n      - type: email\n\n
+    \ - name: kubernetes-dashboard\n    group: tools\n    url: \"http://kubernetes-dashboard:9090\"\n
+    \   interval: 5m\n    conditions:\n      - \"[STATUS] == 200\"\n    alerts:\n
+    \     - type: email\n\n  \n\n  \n  - name: rcloneui\n    group: tools\n    url:
+    \"http://rcloneui:5572\"\n    interval: 5m\n    conditions:\n      - \"[STATUS]
+    == 200\"\n    alerts:\n      - type: email\n  \n\n  \n  - name: rclonefm\n    group:
+    tools\n    url: \"http://rclonefm:5573\"\n    interval: 5m\n    conditions:\n
+    \     - \"[STATUS] == 200\"\n    alerts:\n      - type: email\n"
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: gatus-config
+  namespace: bolabaden

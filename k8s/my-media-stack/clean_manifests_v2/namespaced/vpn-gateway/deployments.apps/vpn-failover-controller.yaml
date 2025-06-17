@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1"},"generation":1,"labels":{"app":"vpn-failover-controller","component":"vpn-gateway"},"name":"vpn-failover-controller","namespace":"vpn-gateway"},"spec":{"progressDeadlineSeconds":600,"replicas":0,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"vpn-failover-controller"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"vpn-failover-controller","component":"vpn-gateway"}},"spec":{"containers":[{"command":["/bin/bash","/config/failover-controller.sh"],"image":"bitnami/kubectl:latest","imagePullPolicy":"Always","name":"failover-controller","resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/config","name":"config"}]}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"serviceAccount":"vpn-failover-sa","serviceAccountName":"vpn-failover-sa","terminationGracePeriodSeconds":30,"volumes":[{"configMap":{"defaultMode":493,"name":"vpn-failover-config"},"name":"config"}]}}}}
+  labels:
+    app: vpn-failover-controller
+    component: vpn-gateway
+  name: vpn-failover-controller
+  namespace: vpn-gateway
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: vpn-failover-controller
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: vpn-failover-controller
+        component: vpn-gateway
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - /config/failover-controller.sh
+        image: bitnami/kubectl:latest
+        imagePullPolicy: Always
+        name: failover-controller
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: vpn-failover-sa
+      serviceAccountName: vpn-failover-sa
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 493
+          name: vpn-failover-config
+        name: config
+  conditions:
+  - lastTransitionTime: "2025-06-14T17:40:43Z"
+    lastUpdateTime: "2025-06-14T17:40:43Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    type: Available
+  - lastTransitionTime: "2025-06-14T17:40:42Z"
+    lastUpdateTime: "2025-06-14T17:40:43Z"
+    message: ReplicaSet "vpn-failover-controller-579c7c6f9d" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    type: Progressing
+  observedGeneration: 2

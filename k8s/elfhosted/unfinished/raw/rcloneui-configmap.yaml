@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rcloneui-config
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/name: rcloneui
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+data:
+  config.yaml: |
+    # Example configuration
+
+    # Replace with actual configuration
+    example_key: "example_value"
+  TZ: UTC

@@ -1,0 +1,19 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: postgresql
+  usage:
+    cpu: 642226n
+    memory: 18020Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: postgresql
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: postgresql
+    apps.kubernetes.io/pod-index: "0"
+    controller-revision-hash: postgresql-69f69c96ff
+    statefulset.kubernetes.io/pod-name: postgresql-0
+  name: postgresql-0
+  namespace: default
+timestamp: "2025-06-14T23:00:53Z"
+window: 11.102s

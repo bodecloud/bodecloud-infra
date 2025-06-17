@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"name":"vpn-failover-role"},"rules":[{"apiGroups":["apps"],"resources":["deployments","deployments/scale"],"verbs":["get","list","patch","update"]},{"apiGroups":[""],"resources":["pods"],"verbs":["get","list","watch"]}]}
+  name: vpn-failover-role
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - deployments/scale
+  verbs:
+  - get
+  - list
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - watch

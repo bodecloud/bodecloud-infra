@@ -1,0 +1,44 @@
+#! dash-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dash
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dash
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: dash
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: dash
+          image: mauricenino/dashdot:latest
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          ports:
+            - name: dash-3001
+              containerPort: 3001
+          volumeMounts:
+            - name: mnt-host
+              mountPath: /mnt/host
+              readOnly: true
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: mnt-host
+          hostPath:
+            path: /

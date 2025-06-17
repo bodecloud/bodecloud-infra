@@ -1,0 +1,145 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: plex-86c4594cd4-
+  labels:
+    app.elfhosted.com/name: plex
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: plex
+    pod-template-hash: 86c4594cd4
+  name: plex-86c4594cd4-lvhf9
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: plex-86c4594cd4
+spec:
+  containers:
+  - env:
+    - name: TZ
+      value: UTC
+    - name: PLEX_UID
+      value: "568"
+    - name: PLEX_GID
+      value: "568"
+    image: plexinc/pms-docker:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 32400
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: plex
+    ports:
+    - containerPort: 32400
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 32400
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "4"
+        memory: 8Gi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+      subPath: plex
+    - mountPath: /transcode
+      name: transcode
+    - mountPath: /plex-config
+      name: plex-config
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - name: transcode
+    persistentVolumeClaim:
+      claimName: transcode-1g
+  - configMap:
+      defaultMode: 420
+      name: plex-config
+    name: plex-config
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:21:56Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:21Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:21Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://b5be0d9c5672b798a3e4858f8b44946548b310173b5642af9010e71c644c7174
+    image: docker.io/plexinc/pms-docker:latest
+    imageID: docker.io/plexinc/pms-docker@sha256:3ec0e4ea00cb2d964da92a5b3dd06e882e0a91d38f9a326fb54b8f229a3a6e89
+    lastState: {}
+    name: plex
+    ready: true
+    restartCount: 2
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:21:55Z"
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /transcode
+      name: transcode
+    - mountPath: /plex-config
+      name: plex-config
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.250
+  podIPs:
+  - ip: 10.42.0.250
+  qosClass: Burstable
+  startTime: "2025-06-14T15:09:43Z"

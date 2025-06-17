@@ -1,0 +1,44 @@
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+a socket was left hanging
+a socket was left hanging
+a socket was left hanging
+a socket was left hanging
+a socket was left hanging
+a socket was left hanging
+[06:17:20] [10.76.0.13][17e1c984][ManagementConnection] Unknown reconnection token (never seen).
+[06:17:22] [10.76.0.13][ddb25a20][ExtensionHostConnection] Unknown reconnection token (never seen).
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+a socket was left hanging
+a socket was left hanging
+[06:39:04] [10.76.0.8][56b8f37d][ManagementConnection] Unknown reconnection token (never seen).
+[06:39:06] [10.76.0.8][7226be47][ExtensionHostConnection] Unknown reconnection token (never seen).
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+a socket was left hanging
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 12
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 13
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 14
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 15
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 16
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 17
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 18
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 19
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 20
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 21
+[17:36:41] RequestStore#acceptReply was called without receiving a matching request 22
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+File not found: /app/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+[17:39:32] Could not load vsce-sign module Cannot find package '@vscode/vsce-sign' imported from /app/code-server/lib/vscode/out/server-main.js
+[17:43:28] Could not load vsce-sign module Cannot find package '@vscode/vsce-sign' imported from /app/code-server/lib/vscode/out/server-main.js
+a socket was left hanging
+a socket was left hanging
+a socket was left hanging
+a socket was left hanging

@@ -1,0 +1,16 @@
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  labels:
+    kube-aggregator.kubernetes.io/automanaged: "true"
+  name: v1.gateway.networking.k8s.io
+spec:
+  group: gateway.networking.k8s.io
+  groupPriorityMinimum: 1000
+  version: v1
+  versionPriority: 100
+  conditions:
+  - lastTransitionTime: "2025-06-11T06:36:59Z"
+    message: Local APIServices are always available
+    reason: Local
+    type: Available

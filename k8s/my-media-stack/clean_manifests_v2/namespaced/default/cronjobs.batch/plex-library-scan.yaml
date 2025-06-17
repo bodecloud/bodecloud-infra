@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"cronjob","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"plex-library-scan"},"name":"plex-library-scan","namespace":"default"},"spec":{"jobTemplate":{"spec":{"template":{"spec":{"containers":[{"args":["-c","curl -X POST \"http://plex:32400/library/sections/all/refresh?X-Plex-Token=$PLEX_TOKEN\""],"command":["/bin/bash"],"image":"filebrowser/filebrowser:v2.31.2","name":"plex-library-scan","resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"10m","memory":"64Mi"}}}],"restartPolicy":"OnFailure"}}}},"schedule":"0 5 * * *"}}
+  labels:
+    app.kubernetes.io/component: cronjob
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: plex-library-scan
+  name: plex-library-scan
+  namespace: default
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - args:
+            - -c
+            - curl -X POST "http://plex:32400/library/sections/all/refresh?X-Plex-Token=$PLEX_TOKEN"
+            command:
+            - /bin/bash
+            image: filebrowser/filebrowser:v2.31.2
+            imagePullPolicy: IfNotPresent
+            name: plex-library-scan
+            resources:
+              limits:
+                cpu: 100m
+                memory: 128Mi
+              requests:
+                cpu: 10m
+                memory: 64Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: 0 5 * * *
+  successfulJobsHistoryLimit: 3
+  suspend: false

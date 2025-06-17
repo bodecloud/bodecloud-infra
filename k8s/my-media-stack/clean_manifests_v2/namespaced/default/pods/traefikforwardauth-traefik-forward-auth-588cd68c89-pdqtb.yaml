@@ -1,0 +1,157 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: traefikforwardauth-traefik-forward-auth-588cd68c89-
+  labels:
+    app.kubernetes.io/instance: traefikforwardauth
+    app.kubernetes.io/name: traefik-forward-auth
+    pod-template-hash: 588cd68c89
+  name: traefikforwardauth-traefik-forward-auth-588cd68c89-pdqtb
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: traefikforwardauth-traefik-forward-auth-588cd68c89
+spec:
+  automountServiceAccountToken: true
+  containers:
+  - env:
+    - name: SECRET
+      valueFrom:
+        secretKeyRef:
+          key: secret
+          name: traefikforwardauth-traefik-forward-auth
+    - name: TZ
+      value: UTC
+    image: thomseddon/traefik-forward-auth:2.2.0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 4181
+      timeoutSeconds: 1
+    name: traefikforwardauth-traefik-forward-auth
+    ports:
+    - containerPort: 4181
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 4181
+      timeoutSeconds: 1
+    resources: {}
+    startupProbe:
+      failureThreshold: 30
+      periodSeconds: 5
+      successThreshold: 1
+      tcpSocket:
+        port: 4181
+      timeoutSeconds: 1
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-thwnv
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  imagePullSecrets:
+  - name: regcred
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-thwnv
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:22Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:16Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:16Z"
+    message: 'containers with unready status: [traefikforwardauth-traefik-forward-auth]'
+    reason: ContainersNotReady
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:16Z"
+    message: 'containers with unready status: [traefikforwardauth-traefik-forward-auth]'
+    reason: ContainersNotReady
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:12Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://1d78574d4c0468a67ca954e0dc7c940c0a50c6d3a5d87a7abc99a694d83ba2db
+    image: docker.io/thomseddon/traefik-forward-auth:2.2.0
+    imageID: docker.io/thomseddon/traefik-forward-auth@sha256:e875194d67e21c077f3de0b9d315bb3023a226f2cac81ddd9d02a4250ed89b4b
+    lastState:
+      terminated:
+        containerID: containerd://1d78574d4c0468a67ca954e0dc7c940c0a50c6d3a5d87a7abc99a694d83ba2db
+        exitCode: 255
+        finishedAt: "2025-06-14T22:56:16Z"
+        reason: Error
+        startedAt: "2025-06-14T22:56:16Z"
+    name: traefikforwardauth-traefik-forward-auth
+    ready: false
+    restartCount: 8
+    started: false
+    state:
+      waiting:
+        message: back-off 5m0s restarting failed container=traefikforwardauth-traefik-forward-auth
+          pod=traefikforwardauth-traefik-forward-auth-588cd68c89-pdqtb_default(d36b9fab-5aa8-41c3-9b5a-a8e1bd133a6b)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-thwnv
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.88
+  podIPs:
+  - ip: 10.42.0.88
+  qosClass: BestEffort
+  startTime: "2025-06-14T22:40:16Z"

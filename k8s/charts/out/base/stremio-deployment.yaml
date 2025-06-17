@@ -1,0 +1,54 @@
+#! stremio-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: stremio
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: stremio
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: stremio
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: stremio
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: stremio
+                  image: tsaridas/stremio-docker:latest
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: CASTING_DISABLED
+                      value: "1"
+                    - name: IPADDRESS
+                      value: "149.130.221.93"
+                    - name: NO_CORS
+                      value: "0"
+                    - name: SERVER_URL
+                      value: "https://149-130-221-93.519b6502d940.stremio.rocks:12470/"
+                    - name: WEBUI_LOCATION
+                      value: "https://app.strem.io/shell-v4.4/"
+                  ports:
+                    - name: stremio-12470
+                      containerPort: 12470
+                    - name: stremio-8080
+                      containerPort: 8080
+                    - name: stremio-11470
+                      containerPort: 11470
+                  volumeMounts:
+                    - name: root--stremio-server
+                      mountPath: /root/.stremio-server
+            volumes:
+                - name: root--stremio-server
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/stremio/root/.stremio-server

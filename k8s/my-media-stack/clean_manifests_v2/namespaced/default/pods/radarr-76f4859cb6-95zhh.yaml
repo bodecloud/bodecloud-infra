@@ -1,0 +1,130 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: radarr-76f4859cb6-
+  labels:
+    app.elfhosted.com/name: radarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: radarr
+    pod-template-hash: 76f4859cb6
+  name: radarr-76f4859cb6-95zhh
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: radarr-76f4859cb6
+spec:
+  containers:
+  - image: linuxserver/radarr:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 7878
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: radarr
+    ports:
+    - containerPort: 7878
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 7878
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+      subPath: radarr
+    - mountPath: /storage/symlinks
+      name: symlinks
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - name: symlinks
+    persistentVolumeClaim:
+      claimName: symlinks
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:22:02Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:26Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:26Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://2263d465627150348ba4a5339d9588598b8f4beeb105e751ba3809ed392170c8
+    image: docker.io/linuxserver/radarr:latest
+    imageID: docker.io/linuxserver/radarr@sha256:36e43720c130ec2d3ed80726d2134af3c6644729f4750abc830fdda7fa71d1e1
+    lastState: {}
+    name: radarr
+    ready: true
+    restartCount: 2
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:22:00Z"
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /storage/symlinks
+      name: symlinks
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.248
+  podIPs:
+  - ip: 10.42.0.248
+  qosClass: Burstable
+  startTime: "2025-06-14T15:09:43Z"

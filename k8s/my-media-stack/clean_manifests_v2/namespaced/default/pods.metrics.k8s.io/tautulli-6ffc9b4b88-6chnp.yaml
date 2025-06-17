@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: tautulli
+  usage:
+    cpu: 920359n
+    memory: 70328Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: tautulli
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: tautulli
+    pod-template-hash: 6ffc9b4b88
+  name: tautulli-6ffc9b4b88-6chnp
+  namespace: default
+timestamp: "2025-06-14T23:00:47Z"
+window: 13.787s

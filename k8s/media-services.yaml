@@ -1,0 +1,548 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stremio
+  namespace: media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stremio
+  template:
+    metadata:
+      labels:
+        app: stremio
+    spec:
+      containers:
+      - name: stremio
+        image: tsaridas/stremio-docker:latest
+        ports:
+        - containerPort: 8080
+          name: http
+        - containerPort: 11470
+          name: stremio
+        env:
+        - name: NO_CORS
+          value: "1"
+        - name: CASTING_DISABLED
+          value: "1"
+        volumeMounts:
+        - name: stremio-data
+          mountPath: /root/.stremio-server
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+      volumes:
+      - name: stremio-data
+        persistentVolumeClaim:
+          claimName: stremio-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stremio
+  namespace: media-stack
+spec:
+  selector:
+    app: stremio
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  - name: stremio
+    port: 11470
+    targetPort: 11470
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaresolverr
+  namespace: media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaresolverr
+  template:
+    metadata:
+      labels:
+        app: flaresolverr
+    spec:
+      containers:
+      - name: flaresolverr
+        image: ghcr.io/flaresolverr/flaresolverr:latest
+        ports:
+        - containerPort: 8191
+          name: http
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: LOG_HTML
+          value: "false"
+        - name: CAPTCHA_SOLVER
+          value: "none"
+        - name: TZ
+          value: "UTC"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8191
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8191
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaresolverr
+  namespace: media-stack
+spec:
+  selector:
+    app: flaresolverr
+  ports:
+  - name: http
+    port: 8191
+    targetPort: 8191
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  namespace: media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      containers:
+      - name: prowlarr
+        image: lscr.io/linuxserver/prowlarr:latest
+        ports:
+        - containerPort: 9696
+          name: http
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "UTC"
+        volumeMounts:
+        - name: prowlarr-config
+          mountPath: /config
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9696
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9696
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: prowlarr-config
+        persistentVolumeClaim:
+          claimName: prowlarr-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowlarr
+  namespace: media-stack
+spec:
+  selector:
+    app: prowlarr
+  ports:
+  - name: http
+    port: 9696
+    targetPort: 9696
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  namespace: media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+      - name: radarr
+        image: lscr.io/linuxserver/radarr:latest
+        ports:
+        - containerPort: 7878
+          name: http
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "UTC"
+        volumeMounts:
+        - name: radarr-config
+          mountPath: /config
+        - name: media-downloads
+          mountPath: /downloads
+        - name: media-movies
+          mountPath: /movies
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 7878
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 7878
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: radarr-config
+        persistentVolumeClaim:
+          claimName: radarr-pvc
+      - name: media-downloads
+        persistentVolumeClaim:
+          claimName: media-downloads-pvc
+      - name: media-movies
+        persistentVolumeClaim:
+          claimName: media-movies-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+  namespace: media-stack
+spec:
+  selector:
+    app: radarr
+  ports:
+  - name: http
+    port: 7878
+    targetPort: 7878
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  namespace: media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - name: sonarr
+        image: lscr.io/linuxserver/sonarr:latest
+        ports:
+        - containerPort: 8989
+          name: http
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "UTC"
+        volumeMounts:
+        - name: sonarr-config
+          mountPath: /config
+        - name: media-downloads
+          mountPath: /downloads
+        - name: media-tv
+          mountPath: /tv
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8989
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8989
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: sonarr-config
+        persistentVolumeClaim:
+          claimName: sonarr-pvc
+      - name: media-downloads
+        persistentVolumeClaim:
+          claimName: media-downloads-pvc
+      - name: media-tv
+        persistentVolumeClaim:
+          claimName: media-tv-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr
+  namespace: media-stack
+spec:
+  selector:
+    app: sonarr
+  ports:
+  - name: http
+    port: 8989
+    targetPort: 8989
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+      - name: qbittorrent
+        image: lscr.io/linuxserver/qbittorrent:latest
+        ports:
+        - containerPort: 8080
+          name: webui
+        - containerPort: 6881
+          name: torrent-tcp
+          protocol: TCP
+        - containerPort: 6881
+          name: torrent-udp
+          protocol: UDP
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "UTC"
+        - name: WEBUI_PORT
+          value: "8080"
+        - name: TORRENTING_PORT
+          value: "6881"
+        volumeMounts:
+        - name: qbittorrent-config
+          mountPath: /config
+        - name: media-downloads
+          mountPath: /downloads
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+      volumes:
+      - name: qbittorrent-config
+        persistentVolumeClaim:
+          claimName: qbittorrent-pvc
+      - name: media-downloads
+        persistentVolumeClaim:
+          claimName: media-downloads-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+  namespace: media-stack
+spec:
+  selector:
+    app: qbittorrent
+  ports:
+  - name: webui
+    port: 8080
+    targetPort: 8080
+  - name: torrent-tcp
+    port: 6881
+    targetPort: 6881
+    protocol: TCP
+  - name: torrent-udp
+    port: 6881
+    targetPort: 6881
+    protocol: UDP
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      containers:
+      - name: jellyfin
+        image: lscr.io/linuxserver/jellyfin:latest
+        ports:
+        - containerPort: 8096
+          name: http
+        - containerPort: 8920
+          name: https
+        - containerPort: 7359
+          name: discovery-udp
+          protocol: UDP
+        - containerPort: 1900
+          name: dlna-udp
+          protocol: UDP
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "UTC"
+        - name: JELLYFIN_PublishedServerUrl
+          value: "https://jellyfin.example.com"
+        volumeMounts:
+        - name: jellyfin-config
+          mountPath: /config
+        - name: jellyfin-cache
+          mountPath: /cache
+        - name: media-movies
+          mountPath: /data/movies
+          readOnly: true
+        - name: media-tv
+          mountPath: /data/tvshows
+          readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8096
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8096
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+      volumes:
+      - name: jellyfin-config
+        persistentVolumeClaim:
+          claimName: jellyfin-config-pvc
+      - name: jellyfin-cache
+        persistentVolumeClaim:
+          claimName: jellyfin-cache-pvc
+      - name: media-movies
+        persistentVolumeClaim:
+          claimName: media-movies-pvc
+      - name: media-tv
+        persistentVolumeClaim:
+          claimName: media-tv-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin
+  namespace: media-stack
+spec:
+  selector:
+    app: jellyfin
+  ports:
+  - name: http
+    port: 8096
+    targetPort: 8096
+  - name: https
+    port: 8920
+    targetPort: 8920
+  - name: discovery-udp
+    port: 7359
+    targetPort: 7359
+    protocol: UDP
+  - name: dlna-udp
+    port: 1900
+    targetPort: 1900
+    protocol: UDP 

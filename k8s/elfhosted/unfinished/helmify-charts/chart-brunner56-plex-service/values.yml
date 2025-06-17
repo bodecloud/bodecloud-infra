@@ -1,0 +1,7 @@
+brunner56Plex:
+  ports:
+  - name: http
+    port: 32400
+    targetPort: http
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

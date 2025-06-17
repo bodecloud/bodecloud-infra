@@ -1,0 +1,232 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vpn-failover-config
+  namespace: vpn-gateway
+data:
+  failover-controller.sh: |
+    #!/bin/bash
+    set -euo pipefail
+
+    # VPN Provider priority order (first = highest priority)
+    VPN_PROVIDERS=(
+      "custom.ovpn:US"
+      "premiumize-nl.ovpn:NL"
+      "premiumize-de.ovpn:DE"
+    )
+
+    # Function to test VPN connectivity
+    test_vpn() {
+      local config_file="$1"
+      local country_code="$2"
+      
+      echo "Testing VPN provider: $config_file ($country_code)"
+      
+      # Copy the VPN config to the custom config location
+      cp "/vpn-configs/$config_file" "/gluetun/custom.ovpn"
+      
+      # Restart the VPN container
+      kubectl rollout restart deployment vpn-gateway -n vpn-gateway
+      
+      # Wait for the pod to be ready
+      echo "Waiting for VPN pod to be ready..."
+      kubectl wait --for=condition=ready pod -l app=vpn-gateway -n vpn-gateway --timeout=120s
+      
+      # Wait for the VPN to connect
+      sleep 15
+      
+      # Test connectivity
+      CURRENT_COUNTRY=$(kubectl exec -n vpn-gateway -l app=vpn-gateway -- curl -s --max-time 5 http://ipinfo.io/country)
+      if [[ -n "$CURRENT_COUNTRY" ]]; then
+        echo "✅ VPN connected and working! Current country: $CURRENT_COUNTRY"
+        return 0
+      else
+        echo "❌ VPN connection failed"
+        return 1
+      fi
+    }
+
+    # Function to check DNS resolution for Premiumize hostnames
+    resolve_premiumize_hostname() {
+      local country="$1"
+      local hostname="vpn-${country}.premiumize.me"
+      
+      echo "Resolving $hostname..."
+      IP=""
+      for i in {1..5}; do
+        if IP=$(getent hosts "$hostname" | awk '{print $1}' | head -1); then
+          if [[ "$IP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "✓ Resolved $hostname -> $IP (attempt $i)"
+            return 0
+          fi
+        fi
+        echo "Resolution attempt $i failed, retrying in 2s..."
+        sleep 2
+      done
+      
+      echo "❌ Failed to resolve $hostname after 5 attempts"
+      return 1
+    }
+
+    # Function to update VPN status in ConfigMap
+    update_vpn_status() {
+      local status="$1"
+      local country="$2"
+      local ip="$3"
+      
+      kubectl patch configmap vpn-status -n vpn-gateway --type=merge -p "{\"data\":{\"status\":\"$status\",\"country\":\"$country\",\"ip\":\"$ip\"}}"
+    }
+
+    # Create status ConfigMap if it doesn't exist
+    if ! kubectl get configmap vpn-status -n vpn-gateway &>/dev/null; then
+      kubectl create configmap vpn-status -n vpn-gateway --from-literal=status="initializing" --from-literal=country="unknown" --from-literal=ip="unknown"
+    fi
+
+    # Main failover loop
+    while true; do
+      echo "=== VPN Gateway Failover Check $(date) ==="
+      
+      # Check if VPN is working
+      CURRENT_IP=""
+      CURRENT_COUNTRY=""
+      
+      if CURRENT_IP=$(kubectl exec -n vpn-gateway -l app=vpn-gateway -- curl -s --max-time 5 http://ipinfo.io/ip 2>/dev/null) && \
+         CURRENT_COUNTRY=$(kubectl exec -n vpn-gateway -l app=vpn-gateway -- curl -s --max-time 5 http://ipinfo.io/country 2>/dev/null); then
+        
+        if [[ -n "$CURRENT_IP" && -n "$CURRENT_COUNTRY" ]]; then
+          echo "✓ Current VPN connection is healthy - IP: $CURRENT_IP, Country: $CURRENT_COUNTRY"
+          update_vpn_status "connected" "$CURRENT_COUNTRY" "$CURRENT_IP"
+          sleep 60
+          continue
+        fi
+      fi
+      
+      echo "Current VPN connection is down, trying failover..."
+      update_vpn_status "failing_over" "unknown" "unknown"
+      
+      # Try each VPN provider in priority order
+      for provider in "${VPN_PROVIDERS[@]}"; do
+        IFS=':' read -r config country <<< "$provider"
+        
+        # Check DNS resolution for Premiumize hostnames
+        if [[ "$config" != "custom.ovpn" ]]; then
+          country_code=$(echo "$country" | tr '[:upper:]' '[:lower:]')
+          if ! resolve_premiumize_hostname "$country_code"; then
+            echo "DNS resolution failed for $country VPN, skipping..."
+            continue
+          fi
+        fi
+        
+        if test_vpn "$config" "$country"; then
+          CURRENT_IP=$(kubectl exec -n vpn-gateway -l app=vpn-gateway -- curl -s --max-time 5 http://ipinfo.io/ip 2>/dev/null)
+          echo "Successfully connected to $country VPN with IP $CURRENT_IP"
+          update_vpn_status "connected" "$country" "$CURRENT_IP"
+          break
+        else
+          echo "Failed to connect to $country VPN, trying next provider..."
+          update_vpn_status "failing" "$country" "unknown"
+        fi
+        
+        sleep 5
+      done
+      
+      echo "=== End Failover Check ==="
+      sleep 30
+    done
+
+---
+# Create a ConfigMap to store VPN status information
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vpn-status
+  namespace: vpn-gateway
+data:
+  status: "initializing"
+  country: "unknown"
+  ip: "unknown"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpn-failover-controller
+  namespace: vpn-gateway
+  labels:
+    app: vpn-failover-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vpn-failover-controller
+  template:
+    metadata:
+      labels:
+        app: vpn-failover-controller
+    spec:
+      serviceAccountName: vpn-failover-sa
+      containers:
+      - name: controller
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/bash
+        - /config/failover-controller.sh
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: vpn-configs
+          mountPath: /vpn-configs
+      volumes:
+      - name: config
+        configMap:
+          name: vpn-failover-config
+          defaultMode: 0755
+      - name: vpn-configs
+        configMap:
+          name: vpn-configs
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vpn-failover-sa
+  namespace: vpn-gateway
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: vpn-failover-role
+  namespace: vpn-gateway
+rules:
+- apiGroups: [""]
+  resources: ["pods", "configmaps"]
+  verbs: ["get", "list", "watch", "update", "patch", "create"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "update", "patch"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: vpn-failover-rolebinding
+  namespace: vpn-gateway
+subjects:
+- kind: ServiceAccount
+  name: vpn-failover-sa
+  namespace: vpn-gateway
+roleRef:
+  kind: Role
+  name: vpn-failover-role
+  apiGroup: rbac.authorization.k8s.io 

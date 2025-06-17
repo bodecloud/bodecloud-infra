@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"storyteller"},"name":"storyteller","namespace":"default"},"spec":{"ports":[{"name":"http","port":8080,"protocol":"TCP","targetPort":8080}],"selector":{"app.elfhosted.com/name":"storyteller"},"type":"ClusterIP"}}
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: storyteller
+  name: storyteller
+  namespace: default
+spec:
+  clusterIP: 10.43.225.2
+  clusterIPs:
+  - 10.43.225.2
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app.elfhosted.com/name: storyteller
+  sessionAffinity: None
+  type: ClusterIP
+  loadBalancer: {}

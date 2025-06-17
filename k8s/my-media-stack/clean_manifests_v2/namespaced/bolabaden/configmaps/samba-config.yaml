@@ -1,0 +1,36 @@
+apiVersion: v1
+data:
+  config.yml: |
+    auth:
+      - user: brunner56
+        group: brunner56
+        gid: 568
+        password: brunner56
+
+
+    global:
+      - "force user = brunner56"
+      - "force group = brunner56"
+
+    share:
+      - name: symlinks
+        comment: symlinks
+        path: /samba/symlinks-block
+        browsable: yes
+        readonly: no
+        guestok: no
+        veto: no
+        recycle: no
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"config.yml":"auth:\n  - user: brunner56\n    group: brunner56\n    uid: 568\n    gid: 568\n    password: brunner56\n\n\nglobal:\n  - \"force user = brunner56\"\n  - \"force group = brunner56\"\n\nshare:\n  - name: symlinks\n    comment: symlinks\n    path: /samba/symlinks-block\n    browsable: yes\n    readonly: no\n    guestok: no\n    veto: no\n    recycle: no\n"},"kind":"ConfigMap","metadata":{"annotations":{"meta.helm.sh/release-name":"brunner56","meta.helm.sh/release-namespace":"my-media-stack"},"labels":{"app.kubernetes.io/managed-by":"Helm","helm.toolkit.fluxcd.io/name":"brunner56","helm.toolkit.fluxcd.io/namespace":"my-media-stack"},"name":"samba-config","namespace":"bolabaden"}}
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  name: samba-config
+  namespace: bolabaden

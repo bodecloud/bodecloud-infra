@@ -1,0 +1,42 @@
+[00:00:02 DBG] Recyclarr Version: 7.4.1+Branch.master.Sha.5bcd1122e967c828fceceea9810ebd1a33ce344a
+[00:00:02 DBG] App Data Dir: /config
+[00:00:02 DBG] Config Templates Repo: Using Branch & Clone URL: master, https://github.com/recyclarr/config-templates.git
+[00:00:02 DBG] Trash Guides Repo: Using Branch & Clone URL: master, https://github.com/TRaSH-/Guides.git
+[00:00:02 INF] Config Templates Repo: Cloning...
+[00:00:02 INF] Trash Guides Repo: Cloning...
+[00:00:02 DBG] Config Templates Repo: Executing git command with args: ["clone","-b","master","--depth","1","https://github.com/recyclarr/config-templates.git","."]
+[00:00:02 DBG] Trash Guides Repo: Executing git command with args: ["clone","-b","master","--depth","1","https://github.com/TRaSH-/Guides.git","."]
+[00:00:02 DBG] Trash Guides Repo: Using working directory: /config/repositories/trash-guides
+[00:00:02 DBG] Config Templates Repo: Using working directory: /config/repositories/config-templates
+[00:00:03 DBG] Config Templates Repo: Command Output: 
+[00:00:03 DBG] Config Templates Repo: Executing git command with args: ["remote","set-url","origin","https://github.com/recyclarr/config-templates.git"]
+[00:00:03 DBG] Config Templates Repo: Using working directory: /config/repositories/config-templates
+[00:00:03 DBG] Config Templates Repo: Command Output: 
+[00:00:03 DBG] Config Templates Repo: Remote 'origin' set to https://github.com/recyclarr/config-templates.git
+[00:00:03 DBG] Config Templates Repo: Executing git command with args: ["checkout","-f","master"]
+[00:00:03 DBG] Config Templates Repo: Using working directory: /config/repositories/config-templates
+[00:00:03 DBG] Config Templates Repo: Command Output: Your branch is up to date with 'origin/master'.
+[00:00:03 DBG] Config Templates Repo: Executing git command with args: ["fetch","origin"]
+[00:00:03 DBG] Config Templates Repo: Using working directory: /config/repositories/config-templates
+[00:00:03 DBG] Config Templates Repo: Command Output: 
+[00:00:03 DBG] Config Templates Repo: Executing git command with args: ["reset","--hard","origin/master"]
+[00:00:03 DBG] Config Templates Repo: Using working directory: /config/repositories/config-templates
+[00:00:03 DBG] Config Templates Repo: Command Output: HEAD is now at 8050c6c ci(deps): Update tj-actions/changed-files action to v46 (#120)
+[00:00:05 DBG] Trash Guides Repo: Command Output: 
+[00:00:05 DBG] Trash Guides Repo: Executing git command with args: ["remote","set-url","origin","https://github.com/TRaSH-/Guides.git"]
+[00:00:05 DBG] Trash Guides Repo: Using working directory: /config/repositories/trash-guides
+[00:00:05 DBG] Trash Guides Repo: Command Output: 
+[00:00:05 DBG] Trash Guides Repo: Remote 'origin' set to https://github.com/TRaSH-/Guides.git
+[00:00:05 DBG] Trash Guides Repo: Executing git command with args: ["checkout","-f","master"]
+[00:00:05 DBG] Trash Guides Repo: Using working directory: /config/repositories/trash-guides
+[00:00:05 DBG] Trash Guides Repo: Command Output: Your branch is up to date with 'origin/master'.
+[00:00:05 DBG] Trash Guides Repo: Executing git command with args: ["fetch","origin"]
+[00:00:05 DBG] Trash Guides Repo: Using working directory: /config/repositories/trash-guides
+[00:00:05 DBG] Trash Guides Repo: Command Output: 
+[00:00:05 DBG] Trash Guides Repo: Executing git command with args: ["reset","--hard","origin/master"]
+[00:00:05 DBG] Trash Guides Repo: Using working directory: /config/repositories/trash-guides
+[00:00:06 DBG] Trash Guides Repo: Command Output: HEAD is now at a625f0f chore(changelog): Update updates.txt
+[00:00:06 DBG] recyclarr.yml: Loading config file: /config/recyclarr.yml
+[00:00:06 DBG] Duplicate instances: ["main"]
+[00:00:06 DBG] Skipping notification because the body is empty
+[00:00:06 DBG] Cleaning up logs using max files of 20

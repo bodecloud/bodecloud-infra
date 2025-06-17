@@ -1,0 +1,25 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  annotations:
+    helmcharts.cattle.io/managed-by: helm-controller
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4yRTU/DMAyG/wqytBP9oEvLtkgcBpoEmoQQX1fkJh4NbZOq8YZQ1f+OMi7bYcAxyZvHj+0BsDOv1HvjLEioqGkThcwNJcaluwwiqI3VIOGWmvamwp4hgpYYNTKCHACtdYxsnPXh6MoPUuyJk964A5QJDIhOvrtPS338vqtBQi38kUR0tjZWXy21dvZPhMWWQAL3SBtT/yvuO1ThT70tKfZfnqmFMYIGS2p+bapCX4EEXeQolKb5olDTDRZCX5RFlhdznCFli6mYiRltLkWAHuvFqtfwc3lCwnekgoLaj15Cxdx5maaTYf1yvXq8Xz2vnt6WD3fjJPVhDSrdJ316UCEWeTJNsvNtJ3IYx+8AAAD//y0sY6z0AQAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: traefik
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  finalizers:
+  - wrangler.cattle.io/on-helm-chart-remove
+  labels:
+    objectset.rio.cattle.io/hash: d54a3cde895c2fa53d0b51458a7ae1923737ef63
+  name: traefik-crd
+  namespace: kube-system
+spec:
+  chart: https://%{KUBERNETES_API}%/static/charts/traefik-crd-34.2.1+up34.2.0.tgz
+  conditions:
+  - message: Applying HelmChart using Job kube-system/helm-install-traefik-crd
+    reason: Job created
+    type: JobCreated
+  - status: "False"
+    type: Failed
+  jobName: helm-install-traefik-crd

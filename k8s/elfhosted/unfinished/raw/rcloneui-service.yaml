@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rcloneui
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rcloneui
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  ports:
+  - name: rcloneui
+    protocol: TCP
+    port: 5572
+    targetPort: 5572
+  - name: webdav-local
+    protocol: TCP
+    port: 5575
+    targetPort: 5575
+  selector:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: rcloneui
+  clusterIP: 10.43.133.194
+  clusterIPs:
+  - 10.43.133.194
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "3"
+  labels:
+    app.elfhosted.com/name: jellyseerr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: jellyseerr
+    pod-template-hash: 8574d6486d
+  name: jellyseerr-8574d6486d
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: jellyseerr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: jellyseerr
+      pod-template-hash: 8574d6486d
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-06-12T01:11:04Z"
+      labels:
+        app.elfhosted.com/name: jellyseerr
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: jellyseerr
+        pod-template-hash: 8574d6486d
+    spec:
+      containers:
+      - image: fallenbagel/jellyseerr:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 5055
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: jellyseerr
+        ports:
+        - containerPort: 5055
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 5055
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /app/config
+          name: config
+          subPath: jellyseerr
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1

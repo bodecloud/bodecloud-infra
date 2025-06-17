@@ -1,0 +1,20 @@
+apiVersion: v1
+automountServiceAccountToken: true
+kind: ServiceAccount
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4ySQY/TMBCF/wqas1OaTdtQSxwQHJA4IMGKC+IwnrxsTRy7sidFaNX/jhJV7MKqsMexZ755em/uiY/+C3LxKZKlU02GeNI0pinqZ+STF7wRmavbNCCS1TzB0OBjR5b+7CBDI5Q7ViZ7TxxjUlafYpnL5L5DtEBX2aeVsGrAyqeXfgYdEMZKUtScQkCu5MBZq4w7XzQvDDJXCelHRK7uTsMF9OjrVJsXH3zsXr9HGN/O0P9yIo8gS5oZvR+e1V6OLPPMMDlU5WdRjHQ2JBmL9Fs/oiiPR7JxCsFQYIfwT1MOXA5kSdb9vgW3fLNF00Haer9tpeXmZlNz86pvsO0Z237edtG9OPkg/po8Q4v8T+iREQWF7Ne/juGJlWTIhSTDx3nyHQKWXGzPocDQQ3q/ny5X8tj7J+5OS/7iZCdus672kE216XZcuXrHVdO24mTddQ4tnb+dz78CAAD///g0w+WxAgAA
+    objectset.rio.cattle.io/id: helm-controller-chart-registration
+    objectset.rio.cattle.io/owner-gvk: helm.cattle.io/v1, Kind=HelmChart
+    objectset.rio.cattle.io/owner-name: traefik
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: c0f97ea7a25e3dec71957c7a3241a38f3e5fae5f
+  name: helm-traefik
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: helm.cattle.io/v1
+    blockOwnerDeletion: false
+    controller: false
+    kind: HelmChart
+    name: traefik

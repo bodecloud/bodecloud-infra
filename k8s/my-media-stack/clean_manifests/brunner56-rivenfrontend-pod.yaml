@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app.elfhosted.com/name: riven-frontend
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: rivenfrontend
+    pod-template-hash: 8bb6658db
+  name: brunner56-rivenfrontend-8bb6658db-2mw95
+  namespace: bolabaden
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.elfhosted.com/role
+            operator: In
+            values:
+            - nodefinder
+        topologyKey: kubernetes.io/hostname
+  automountServiceAccountToken: false
+  containers:
+  - envFrom:
+    - configMapRef:
+        name: riven-frontend-env
+    - configMapRef:
+        name: elfbot-rivenfrontend
+        optional: true
+    image: ghcr.io/elfhosted/riven-frontend:v0.20.0@sha256:c4d792868a8113a2f57f504fe371cbcd8c52172d734c812c366bff352672998e
+    livenessProbe:
+      tcpSocket:
+        port: 3000
+    name: brunner56-rivenfrontend
+    ports:
+    - containerPort: 3000
+      name: http
+    readinessProbe:
+      tcpSocket:
+        port: 3000
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 20Mi
+    securityContext:
+      readOnlyRootFilesystem: false
+      seccompProfile:
+        type: RuntimeDefault
+    startupProbe:
+      failureThreshold: 30
+      periodSeconds: 5
+      tcpSocket:
+        port: 3000
+    volumeMounts:
+    - mountPath: /riven/config
+      name: config
+    - mountPath: /tmp
+      name: tmp
+  enableServiceLinks: false
+  preemptionPolicy: PreemptLowerPriority
+  priority: 4000
+  priorityClassName: tenant-normal
+  securityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: default
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      name: riven-frontend-config
+    name: config
+  - name: tmp

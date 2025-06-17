@@ -1,0 +1,150 @@
+# Default configuration for all environments
+# These values will be used as base and can be overridden by specific environments
+
+# Global settings
+global:
+  # Domain for all services
+  domain: example.com
+
+  # Time zone for all services
+  timezone: UTC
+
+  # Storage class to use by default
+  storageClass: longhorn
+
+  # Default resource limits
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  # Default node selectors
+  nodeSelector: {}
+
+  # Default tolerations
+  tolerations: []
+
+  # Default security context
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+
+# Infrastructure configuration
+infrastructure:
+  # Traefik configuration
+  traefik:
+    enabled: true
+    replicas: 1
+    dashboard:
+      enabled: true
+    service:
+      type: LoadBalancer
+    ssl:
+      enabled: true
+      certResolver: letsencrypt
+
+  # Cert-manager configuration
+  certManager:
+    enabled: true
+    email: admin@example.com
+    solvers:
+      - dns01:
+          cloudflare:
+            email: admin@example.com
+
+  # MetalLB configuration
+  metallb:
+    enabled: true
+    addressPools:
+      - name: default
+        protocol: layer2
+        addresses:
+          - 192.168.1.200-192.168.1.250
+
+# Storage configuration
+storage:
+  # Longhorn configuration
+  longhorn:
+    enabled: true
+    defaultDataPath: /var/lib/longhorn
+    persistence:
+      defaultClassReplicaCount: 3
+    defaultSettings:
+      backupTargetCredentialSecret: longhorn-backup-target
+
+  # NFS Provisioner (optional)
+  nfsProvisioner:
+    enabled: false
+    server: nfs-server.example.com
+    path: /shared
+
+# Monitoring configuration
+monitoring:
+  # Prometheus configuration
+  prometheus:
+    enabled: true
+    retention: 7d
+    storageSize: 50Gi
+
+  # Grafana configuration
+  grafana:
+    enabled: true
+    adminPassword: admin
+    persistence:
+      enabled: true
+      size: 10Gi
+
+  # Loki configuration
+  loki:
+    enabled: true
+    persistence:
+      enabled: true
+      size: 50Gi
+
+# Media services configuration
+media:
+  # Plex configuration
+  plex:
+    enabled: true
+    claimToken: ""
+    persistence:
+      config:
+        enabled: true
+        size: 20Gi
+      data:
+        enabled: true
+        size: 1000Gi
+
+  # Sonarr configuration
+  sonarr:
+    enabled: true
+    persistence:
+      config:
+        enabled: true
+        size: 1Gi
+      downloads:
+        enabled: true
+        size: 500Gi
+
+  # Radarr configuration
+  radarr:
+    enabled: true
+    persistence:
+      config:
+        enabled: true
+        size: 1Gi
+      downloads:
+        enabled: true
+        size: 500Gi
+
+  # Prowlarr configuration
+  prowlarr:
+    enabled: true
+    persistence:
+      config:
+        enabled: true
+        size: 1Gi

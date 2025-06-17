@@ -1,0 +1,82 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    batch.kubernetes.io/cronjob-scheduled-timestamp: "2025-06-14T22:40:00Z"
+  labels:
+    batch.kubernetes.io/controller-uid: 5a7840fc-9681-40f7-bf88-50fd3b506841
+    batch.kubernetes.io/job-name: health-check-services-29165680
+    controller-uid: 5a7840fc-9681-40f7-bf88-50fd3b506841
+    job-name: health-check-services-29165680
+  name: health-check-services-29165680
+  namespace: default
+  ownerReferences:
+  - apiVersion: batch/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: CronJob
+    name: health-check-services
+spec:
+  backoffLimit: 6
+  completionMode: NonIndexed
+  completions: 1
+  manualSelector: false
+  parallelism: 1
+  podReplacementPolicy: TerminatingOrFailed
+  selector:
+    matchLabels:
+      batch.kubernetes.io/controller-uid: 5a7840fc-9681-40f7-bf88-50fd3b506841
+  suspend: false
+  template:
+    metadata:
+      labels:
+        batch.kubernetes.io/controller-uid: 5a7840fc-9681-40f7-bf88-50fd3b506841
+        batch.kubernetes.io/job-name: health-check-services-29165680
+        controller-uid: 5a7840fc-9681-40f7-bf88-50fd3b506841
+        job-name: health-check-services-29165680
+    spec:
+      containers:
+      - args:
+        - -c
+        - "\n      services=\"plex:32400 radarr:7878 sonarr:8989 prowlarr:9696\"\n
+          \     for service in $services; do\n        host=$(echo $service | cut -d:
+          -f1)\n        port=$(echo $service | cut -d: -f2)\n        if curl -f -s
+          http://$host:$port/ping > /dev/null; then\n          echo \"$service is
+          healthy\"\n        else\n          echo \"$service is unhealthy\"\n        fi\n
+          \     done\n    "
+        command:
+        - /bin/sh
+        image: curlimages/curl:latest
+        imagePullPolicy: Always
+        name: health-check-services
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  completionTime: "2025-06-14T22:40:33Z"
+  conditions:
+  - lastProbeTime: "2025-06-14T22:40:33Z"
+    lastTransitionTime: "2025-06-14T22:40:33Z"
+    message: Reached expected number of succeeded pods
+    reason: CompletionsReached
+    type: SuccessCriteriaMet
+  - lastProbeTime: "2025-06-14T22:40:33Z"
+    lastTransitionTime: "2025-06-14T22:40:33Z"
+    message: Reached expected number of succeeded pods
+    reason: CompletionsReached
+    type: Complete
+  ready: 0
+  startTime: "2025-06-14T22:40:00Z"
+  succeeded: 1
+  terminating: 0
+  uncountedTerminatedPods: {}

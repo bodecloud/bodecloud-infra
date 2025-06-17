@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warp-pod-gateway
+  namespace: my-media-stack
+  labels:
+    app: warp-pod-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warp-pod-gateway
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: warp-pod-gateway
+    spec:
+      restartPolicy: Always
+      securityContext:
+        sysctls:
+          - name: net.ipv4.ip_forward
+            value: "1"
+          - name: net.ipv4.conf.all.src_valid_mark
+            value: "1"
+      initContainers:
+        - name: gateway-init
+          image: ghcr.io/angelnu/pod-gateway:v1.10.0
+          command: ["/bin/gateway_init.sh"]
+          securityContext:
+            privileged: true
+          env:
+            - name: VXLAN_ID
+              value: "42"
+            - name: VXLAN_IP_NETWORK
+              value: "172.16.0"
+            - name: VXLAN_GATEWAY_FIRST_DYNAMIC_IP
+              value: "10"  # Start dynamic IPs from .10
+            - name: VPN_INTERFACE
+              value: "CloudflareWARP"
+            - name: VPN_BLOCK_OTHER_TRAFFIC
+              value: "false"  # Allow all traffic dynamically
+          volumeMounts:
+            - name: pod-gateway-config
+              mountPath: /config
+      containers:
+        - name: warp
+          image: caomingjun/warp:latest
+          securityContext:
+            privileged: true
+          env:
+            - name: WARP_SLEEP
+              value: "2"
+            - name: WARP_LICENSE_KEY
+              value: "eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9"
+            - name: TUNNEL_TOKEN
+              value: "eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9"
+            - name: WARP_ENABLE_NAT
+              value: "1"
+          volumeMounts:
+            - name: warp-data
+              mountPath: /var/lib/cloudflare-warp
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "100m"
+        - name: gateway-sidecar
+          image: ghcr.io/angelnu/pod-gateway:v1.10.0
+          command: ["/bin/gateway_sidecar.sh"]
+          securityContext:
+            privileged: true
+          env:
+            - name: VXLAN_ID
+              value: "42"
+            - name: VXLAN_IP_NETWORK
+              value: "172.16.0"
+            - name: VXLAN_GATEWAY_FIRST_DYNAMIC_IP
+              value: "10"
+            - name: VPN_INTERFACE
+              value: "CloudflareWARP"
+            - name: VPN_BLOCK_OTHER_TRAFFIC
+              value: "false"
+          volumeMounts:
+            - name: pod-gateway-config
+              mountPath: /config
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "25m"
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
+      volumes:
+        - name: warp-data
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/warp/gateway
+            type: DirectoryOrCreate
+        - name: pod-gateway-config
+          configMap:
+            name: pod-gateway-config
+            defaultMode: 0755
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: warp-pod-gateway
+  namespace: my-media-stack
+spec:
+  selector:
+    app: warp-pod-gateway
+  ports:
+    - name: vxlan
+      port: 4789
+      protocol: UDP
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pod-gateway-config
+  namespace: my-media-stack
+data:
+  settings.sh: |
+    #!/bin/bash
+    VXLAN_ID="42"
+    VXLAN_IP_NETWORK="172.16.0"
+    VXLAN_GATEWAY_FIRST_DYNAMIC_IP=10
+    VPN_INTERFACE=CloudflareWARP
+    VPN_BLOCK_OTHER_TRAFFIC=false
+  
+  nat.conf: |
+    # Fully dynamic - no static assignments needed 

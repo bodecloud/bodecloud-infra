@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1"},"generation":1,"name":"warp-fetch-proxy","namespace":"bolabaden"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"warp-fetch-proxy"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"warp-fetch-proxy"}},"spec":{"containers":[{"env":[{"name":"TZ","value":"America/Chicago"}],"image":"nginx:alpine","imagePullPolicy":"IfNotPresent","name":"warp-fetch-proxy","ports":[{"containerPort":3128,"name":"proxy-3128","protocol":"TCP"}],"resources":{"limits":{"cpu":"200m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}}}
+  name: warp-fetch-proxy
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: warp-fetch-proxy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: warp-fetch-proxy
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: America/Chicago
+        image: nginx:alpine
+        imagePullPolicy: IfNotPresent
+        name: warp-fetch-proxy
+        ports:
+        - containerPort: 3128
+          name: proxy-3128
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2025-06-14T19:17:50Z"
+    lastUpdateTime: "2025-06-14T19:18:29Z"
+    message: ReplicaSet "warp-fetch-proxy-8564764c96" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    type: Progressing
+  - lastTransitionTime: "2025-06-14T22:41:56Z"
+    lastUpdateTime: "2025-06-14T22:41:56Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

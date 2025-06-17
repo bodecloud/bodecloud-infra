@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: dash
+  usage:
+    cpu: 25009222n
+    memory: 25168Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: dash
+    pod-template-hash: c4d4458cf
+  name: dash-c4d4458cf-kvncn
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:52Z"
+window: 17.783s

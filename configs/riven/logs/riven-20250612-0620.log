@@ -1,0 +1,30 @@
+25-06-12 06:20:24 | 🤖 PROGRAM   | program.start - Riven v0.21.21 starting!
+25-06-12 06:20:24 | ❌ ERROR     | symlink.validate - rclone_path or library_path is set to the current directory.
+25-06-12 06:20:24 | ❌ ERROR     | __init__.validate - No downloader service is initialized. Please initialize a downloader service.
+25-06-12 06:20:24 | ❌ ERROR     | symlink.validate - Library path not set or set to the current directory in SymlinkLibrary settings.
+25-06-12 06:20:24 | ❌ ERROR     | symlink.__init__ - SymlinkLibrary initialization failed due to invalid configuration.
+25-06-12 06:20:24 | ⚠️  WARNING   | program.initialize_services - No content services initialized, items need to be added manually.
+25-06-12 06:20:24 | ❌ ERROR     | program.initialize_services - No Scraping service initialized, you must enable at least one.
+25-06-12 06:20:24 | ❌ ERROR     | program.initialize_services - No Downloader service initialized, you must enable at least one.
+25-06-12 06:20:24 | 🤖 PROGRAM   | program.start - ----------------------------------------------
+25-06-12 06:20:24 | ❌ ERROR     | program.start - Riven is waiting for configuration to start!
+25-06-12 06:20:24 | 🤖 PROGRAM   | program.start - ----------------------------------------------
+25-06-12 06:20:30 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:20:40 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:20:50 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:00 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:10 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:17 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:20 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:30 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:34 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:44 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:47 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:21:54 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:22:04 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:22:14 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:22:17 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:22:17 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:22:27 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:22:37 | 👾 API       | main.dispatch - GET / - 404 - 0.00s
+25-06-12 06:22:47 | 👾 API       | main.dispatch - GET / - 404 - 0.00s

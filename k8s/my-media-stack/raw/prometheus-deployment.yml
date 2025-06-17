@@ -1,0 +1,66 @@
+#! prometheus-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config.file=/etc/prometheus/prometheus.yml
+            - --storage.tsdb.retention.size=1GB
+            - --web.console.libraries=/etc/prometheus/console_libraries
+            - --web.console.templates=/etc/prometheus/consoles
+            - --web.enable-lifecycle
+          env:
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1002"
+            - name: TZ
+              value: "America/Chicago"
+            - name: UMASK
+              value: "022"
+          ports:
+            - name: prometheus-9090
+              containerPort: 9090
+          volumeMounts:
+            - name: etc-prometheus
+              mountPath: /etc/prometheus
+            - name: etc-prometheus-console-libraries
+              mountPath: /etc/prometheus/console_libraries
+            - name: etc-prometheus-consoles
+              mountPath: /etc/prometheus/consoles
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+      volumes:
+        - name: etc-prometheus
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/prometheus
+        - name: etc-prometheus-console-libraries
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/prometheus/console_libraries
+        - name: etc-prometheus-consoles
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/prometheus/consoles

@@ -1,0 +1,47 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"name":"cert-manager-setup"},"rules":[{"apiGroups":["apps"],"resources":["deployments"],"verbs":["get","list","watch"]},{"apiGroups":["apiextensions.k8s.io"],"resources":["customresourcedefinitions"],"verbs":["get","list","watch"]},{"apiGroups":[""],"resources":["namespaces"],"verbs":["create","get","list","watch","patch","update"]},{"apiGroups":["cert-manager.io"],"resources":["clusterissuers","certificates"],"verbs":["create","get","list","watch","update","patch"]}]}
+  name: cert-manager-setup
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+  - patch
+  - update
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - clusterissuers
+  - certificates
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+  - update
+  - patch

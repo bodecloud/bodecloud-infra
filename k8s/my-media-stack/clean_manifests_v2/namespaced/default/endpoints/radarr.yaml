@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: radarr
+  name: radarr
+  namespace: default
+subsets:
+- addresses:
+  - ip: 10.42.0.248
+    nodeName: beatapostapita
+    targetRef:
+      kind: Pod
+      name: radarr-76f4859cb6-95zhh
+      namespace: default
+  ports:
+  - name: http
+    port: 7878
+    protocol: TCP

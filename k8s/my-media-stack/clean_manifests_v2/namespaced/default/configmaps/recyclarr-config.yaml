@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  recyclarr.yml: "# Recyclarr Configuration\nradarr:\n  movies:\n    base_url: http://radarr:7878\n
+    \   api_key: !env_var RADARR_API_KEY\n    \n    quality_definition:\n      type:
+    movie\n      \n    custom_formats:\n      - trash_ids:\n          - 496f355514737f7d83bf7aa4d24f8169
+    \ # TrueHD Atmos\n          - 2f22d89048b01681dde8afe73aabb0b9  # DTS-X\n          -
+    417804f7f2c4308c1f4c5d380d4c4475  # ATMOS (undefined)\n        quality_profiles:\n
+    \         - name: Ultra-HD\n            \nsonarr:\n  tv:\n    base_url: http://sonarr:8989\n
+    \   api_key: !env_var SONARR_API_KEY\n    \n    quality_definition:\n      type:
+    series\n      \n    custom_formats:\n      - trash_ids:\n          - 32b367365729d530ca1c124a0b180c64
+    \ # Bad Dual Groups\n          - 82d40da2bc6923f41e14394075dd4b03  # No-RlsGroup\n
+    \       quality_profiles:\n          - name: HD-1080p"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"recyclarr.yml":"# Recyclarr Configuration\nradarr:\n  movies:\n    base_url: http://radarr:7878\n    api_key: !env_var RADARR_API_KEY\n    \n    quality_definition:\n      type: movie\n      \n    custom_formats:\n      - trash_ids:\n          - 496f355514737f7d83bf7aa4d24f8169  # TrueHD Atmos\n          - 2f22d89048b01681dde8afe73aabb0b9  # DTS-X\n          - 417804f7f2c4308c1f4c5d380d4c4475  # ATMOS (undefined)\n        quality_profiles:\n          - name: Ultra-HD\n            \nsonarr:\n  tv:\n    base_url: http://sonarr:8989\n    api_key: !env_var SONARR_API_KEY\n    \n    quality_definition:\n      type: series\n      \n    custom_formats:\n      - trash_ids:\n          - 32b367365729d530ca1c124a0b180c64  # Bad Dual Groups\n          - 82d40da2bc6923f41e14394075dd4b03  # No-RlsGroup\n        quality_profiles:\n          - name: HD-1080p"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"recyclarr-config","namespace":"default"}}
+  name: recyclarr-config
+  namespace: default

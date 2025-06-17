@@ -1,0 +1,13 @@
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  name: beatapostapita
+  namespace: kube-node-lease
+  ownerReferences:
+  - apiVersion: v1
+    kind: Node
+    name: beatapostapita
+spec:
+  holderIdentity: beatapostapita
+  leaseDurationSeconds: 40
+  renewTime: "2025-06-14T23:01:19.538766Z"

@@ -1,0 +1,277 @@
+# Default values for zurg
+# This is a YAML-formatted file.
+
+# Global settings
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: "local-path"
+
+# Zurg application image configuration
+image:
+  repository: ghcr.io/elfhosted/zurg
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+# Ubuntu image for bootstrap
+ubuntu:
+  image:
+    repository: ubuntu
+    tag: "20.04"
+    pullPolicy: IfNotPresent
+
+# Number of replicas
+replicaCount: 1
+
+# Service account
+serviceAccount:
+  create: false
+  name: "default"
+  automount: false
+  annotations: {}
+
+# Security context for the pod
+securityContext:
+  runAsUser: 568
+  runAsGroup: 568
+  fsGroup: 568
+  fsGroupChangePolicy: OnRootMismatch
+  seccompProfile:
+    type: RuntimeDefault
+
+# Container security contexts
+containerSecurityContext:
+  zurg:
+    readOnlyRootFilesystem: true
+    seccompProfile:
+      type: RuntimeDefault
+      
+  bootstrap:
+    capabilities:
+      drop:
+        - ALL
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+
+# Environment variables from ConfigMaps
+envFrom:
+  - configMapRef:
+      name: zurg-env
+
+# Resources for containers
+resources:
+  zurg:
+    limits:
+      cpu: "1"
+      memory: 2Gi
+    requests:
+      cpu: "0"
+      memory: 32Mi
+      
+  bootstrap:
+    limits:
+      cpu: "1"
+      memory: 4Gi
+    requests:
+      cpu: "0"
+      memory: 1Mi
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 9999
+  targetPort: 9999
+  annotations: {}
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: zurg.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Persistence configuration
+persistence:
+  backup:
+    enabled: true
+    size: 10Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  config:
+    enabled: true
+    size: 5Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  logs:
+    enabled: true
+    size: 2Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+
+# ConfigMaps configuration
+configMaps:
+  zurgEnv:
+    enabled: true
+    data: {}
+    
+  elfbotZurg:
+    enabled: true
+    data: {}
+    
+  zurgConfig:
+    enabled: true
+    data:
+      config.yml: |
+        # Zurg configuration
+        token: ""
+        host: "0.0.0.0"
+        port: 9999
+        concurrent_workers: 20
+        check_for_changes_every_secs: 10
+        retain_folder_name_extension: false
+        retain_rd_torrent_name: false
+        auto_delete_rar_torrents: true
+        
+  toolingScripts:
+    enabled: true
+    data:
+      script.sh: |
+        #!/bin/bash
+        echo "Tooling script placeholder"
+
+# Bootstrap configuration
+bootstrap:
+  enabled: true
+  env:
+    S3_ENDPOINT_URL: "https://s3.us-west-000.backblazeb2.com"
+  secretRefs:
+    - name: b2-elfhosted-config-ro
+      keys:
+        - access-key-id
+        - secret-key
+
+# Health probes
+livenessProbe:
+  tcpSocket:
+    port: 9999
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  tcpSocket:
+    port: 9999
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+startupProbe:
+  tcpSocket:
+    port: 9999
+  timeoutSeconds: 1
+  periodSeconds: 5
+  successThreshold: 1
+  failureThreshold: 120
+
+# Node selector and affinity
+nodeSelector: {}
+
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+            - key: node-role.elfhosted.com/contended
+              operator: In
+              values:
+                - "true"
+  podAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                  - nodefinder
+          topologyKey: kubernetes.io/hostname
+      - weight: 2
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.elfhosted.com/name
+                operator: In
+                values:
+                  - zurg
+          topologyKey: kubernetes.io/hostname
+          namespaceSelector: {}
+
+tolerations: []
+
+# Priority class
+priorityClassName: "tenant-normal"
+
+# Annotations for configmap reloader
+annotations:
+  configmap.reloader.stakater.com/reload: "elfbot-all,elfbot-zurg,zurg-env,gluetun-config"
+  kubernetes.io/egress-bandwidth: "150M"
+
+# Enable service links
+enableServiceLinks: false
+
+# Deployment strategy
+strategy:
+  type: Recreate
+
+# Revision history limit
+revisionHistoryLimit: 3
+
+# Progress deadline
+progressDeadlineSeconds: 600
+
+# Volume configuration
+volumes:
+  shared:
+    enabled: true
+  tmp:
+    enabled: true
+
+# Labels
+labels:
+  app.elfhosted.com/class: "debrid"
+  app.elfhosted.com/name: "zurg"
+
+# Zurg specific configuration
+zurg:
+  # Configuration file path
+  configPath: "/config"
+  
+  # Logs path
+  logsPath: "/config/logs"
+  
+  # Port
+  port: 9999
+  
+  # Host
+  host: "0.0.0.0" 

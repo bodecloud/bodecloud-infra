@@ -1,0 +1,48 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    storage:
+      type: memory
+
+    metrics: true
+
+    endpoints:
+      - name: Plex
+        url: "https://plex.elfhosted.com"
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
+          - "[RESPONSE_TIME] < 1000"
+        alerts:
+          - type: discord
+            enabled: true
+            failure-threshold: 3
+            success-threshold: 2
+
+      - name: Radarr
+        url: "https://radarr.elfhosted.com"
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
+          - "[RESPONSE_TIME] < 1000"
+
+      - name: Sonarr
+        url: "https://sonarr.elfhosted.com"
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
+          - "[RESPONSE_TIME] < 1000"
+
+      - name: Prowlarr
+        url: "https://prowlarr.elfhosted.com"
+        interval: 30s
+        conditions:
+          - "[STATUS] == 200"
+          - "[RESPONSE_TIME] < 1000"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"config.yaml":"storage:\n  type: memory\n\nmetrics: true\n\nendpoints:\n  - name: Plex\n    url: \"https://plex.elfhosted.com\"\n    interval: 30s\n    conditions:\n      - \"[STATUS] == 200\"\n      - \"[RESPONSE_TIME] \u003c 1000\"\n    alerts:\n      - type: discord\n        enabled: true\n        failure-threshold: 3\n        success-threshold: 2\n\n  - name: Radarr\n    url: \"https://radarr.elfhosted.com\"\n    interval: 30s\n    conditions:\n      - \"[STATUS] == 200\"\n      - \"[RESPONSE_TIME] \u003c 1000\"\n\n  - name: Sonarr\n    url: \"https://sonarr.elfhosted.com\"\n    interval: 30s\n    conditions:\n      - \"[STATUS] == 200\"\n      - \"[RESPONSE_TIME] \u003c 1000\"\n\n  - name: Prowlarr\n    url: \"https://prowlarr.elfhosted.com\"\n    interval: 30s\n    conditions:\n      - \"[STATUS] == 200\"\n      - \"[RESPONSE_TIME] \u003c 1000\""},"kind":"ConfigMap","metadata":{"annotations":{},"name":"gatus-config","namespace":"default"}}
+  name: gatus-config
+  namespace: default

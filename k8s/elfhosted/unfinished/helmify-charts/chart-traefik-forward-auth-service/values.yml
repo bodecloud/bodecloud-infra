@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+traefikForwardAuth:
+  ports:
+  - name: http
+    port: 4181
+    targetPort: 0
+  type: ClusterIP

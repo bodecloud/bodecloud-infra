@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: code-dev
+  usage:
+    cpu: 217968n
+    memory: 81720Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: code-dev
+    pod-template-hash: d466fffc8
+  name: code-dev-d466fffc8-766nn
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:51Z"
+window: 12.8s

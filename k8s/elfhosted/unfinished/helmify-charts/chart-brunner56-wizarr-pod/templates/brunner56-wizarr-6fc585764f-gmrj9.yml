@@ -1,0 +1,190 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "chart-brunner56-wizarr-pod.fullname" . }}-brunner56-wizarr-6fc585764f-gmrj9
+  labels:
+    pod-template-hash: 6fc585764f
+  {{- include "chart-brunner56-wizarr-pod.labels" . | nindent 4 }}
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.elfhosted.com/role
+            operator: In
+            values:
+            - nodefinder
+        topologyKey: kubernetes.io/hostname
+  automountServiceAccountToken: false
+  containers:
+  - envFrom:
+    - configMapRef:
+        name: wizarr-env
+    - configMapRef:
+        name: elfbot-wizarr
+        optional: true
+    image: ghcr.io/elfhosted/wizarr:2025.5.d@sha256:58c2e28b6fbe604b6a6b4478944ff5071b6700d1a81a58708b70359c58e325ca
+    livenessProbe:
+      tcpSocket:
+        port: 5690
+    name: brunner56-wizarr
+    ports:
+    - containerPort: 5690
+      name: http
+    readinessProbe:
+      tcpSocket:
+        port: 5690
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 128Mi
+    securityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    startupProbe:
+      failureThreshold: 30
+      periodSeconds: 5
+      tcpSocket:
+        port: 5690
+    volumeMounts:
+    - mountPath: /backup
+      name: backup
+    - mountPath: /home/elfie/.cache
+      name: cache
+    - mountPath: /data/database
+      name: config
+      subPath: wizarr
+    - mountPath: /elfbot
+      name: elfbot
+    - mountPath: /tmp
+      name: tmp
+    - mountPath: /data/wizard_steps
+      name: wizarr-steps
+    - mountPath: /opt/default_wizard_steps/jellyfin
+      name: wizarr-steps-jellyfin
+    - mountPath: /opt/default_wizard_steps/plex
+      name: wizarr-steps-plex
+  enableServiceLinks: false
+  initContainers:
+  - command:
+    - /bin/bash
+    - -c
+    - "set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name
+      if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\nfi\n\n#
+      look for commands - we match specific names in order of least-destructive\nTIMESTAMP_NOW=$(date
+      +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)\n
+      \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+      -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\n# If no command is set, then
+      move onto the next possibility\nif [[ -f /etc/elfbot/backup && -z \"$COMMAND\"
+      ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n
+      \ if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\n#
+      If no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/reset
+      && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)\n
+      \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+      -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\ncase $COMMAND in\n\n  \"pause\")\n
+      \   echo \"Recent pause command found, sleeping 5m..\"\n    sleep 300\n    ;;\n\n
+      \ \"reset\")\n\n    # Safety check - if /config/homer exists, we've not mounted
+      /config properly and are about to wipe out EVERYTHING\n    if [ -e \"/config/homer\"
+      ]; then\n        echo \"The path /config/homer exists. Exiting.\"\n        exit
+      1\n    fi      \n    echo \"Recent reset command found, resetting\"\n    rm
+      -rf /config/*\n    ;;\n\n  \"backup\")\n    echo \"Recent backup command found,
+      backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\n    TIMESTAMP=$(printf
+      '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n
+      \   ;;\n\nesac\n\nif [[ ! -f /config/i-am-bootstrapped ]]\nthen\n  echo \"Bootstrapping
+      from goldilocks config...\"\n  s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/*
+      /config/\n  touch /config/i-am-bootstrapped\nfi\n"
+    env:
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          key: access-key-id
+          name: b2-elfhosted-config-ro
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          key: secret-key
+          name: b2-elfhosted-config-ro
+    - name: S3_ENDPOINT_URL
+      value: https://s3.us-west-000.backblazeb2.com
+    - name: K8S_APP_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.labels['app.kubernetes.io/name']
+    - name: ELF_APP_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.labels['app.elfhosted.com/name']
+    image: alpine/k8s:1.29.1
+    name: bootstrap
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    volumeMounts:
+    - mountPath: /etc/elfbot
+      name: elfbot
+    - mountPath: /storage/backup
+      name: backup
+    - mountPath: /config
+      name: config
+      subPath: wizarr
+    - mountPath: /tmp
+      name: tmp
+  preemptionPolicy: PreemptLowerPriority
+  priority: 4000
+  priorityClassName: tenant-normal
+  securityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: default
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: backup
+    persistentVolumeClaim:
+      claimName: backup
+  - name: cache
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - configMap:
+      name: elfbot-wizarr
+      optional: true
+    name: elfbot
+  - name: tmp
+  - name: wizarr-steps
+  - configMap:
+      name: wizarr-steps-jellyfin
+    name: wizarr-steps-jellyfin
+  - configMap:
+      name: wizarr-steps-plex
+    name: wizarr-steps-plex

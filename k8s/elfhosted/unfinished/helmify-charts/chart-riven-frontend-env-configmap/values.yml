@@ -1,0 +1,3 @@
+kubernetesClusterDomain: cluster.local
+rivenFrontendEnv:
+  origin: https://brunner56-riven.elfhosted.com

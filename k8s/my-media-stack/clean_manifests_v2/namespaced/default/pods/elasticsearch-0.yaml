@@ -1,0 +1,129 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: elasticsearch-
+  labels:
+    app.elfhosted.com/name: elasticsearch
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: elasticsearch
+    apps.kubernetes.io/pod-index: "0"
+    controller-revision-hash: elasticsearch-7558b46bd5
+    statefulset.kubernetes.io/pod-name: elasticsearch-0
+  name: elasticsearch-0
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: elasticsearch
+spec:
+  containers:
+  - env:
+    - name: discovery.type
+      value: single-node
+    - name: ES_JAVA_OPTS
+      value: -Xms512m -Xmx512m
+    - name: xpack.security.enabled
+      value: "false"
+    image: elasticsearch:8.11.0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      tcpSocket:
+        port: 9200
+      timeoutSeconds: 10
+    name: elasticsearch
+    ports:
+    - containerPort: 9200
+      name: main
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 9200
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: 200m
+        memory: 1Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /usr/share/elasticsearch/data
+      name: elasticsearch-data
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: elasticsearch-0
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: elasticsearch
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: elasticsearch-data
+    persistentVolumeClaim:
+      claimName: elasticsearch-data-elasticsearch-0
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:45:33Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:45:27Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:18Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:18Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:45:27Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://f73133059f4a451b9209bf156a6079bfb65c8d453c03131a2d154b965fb0edf5
+    image: docker.io/library/elasticsearch:8.11.0
+    imageID: docker.io/library/elasticsearch@sha256:2cadca6c21de5802b085f25532bba11cb893589b64ca8c94d62ac69eec923fad
+    lastState: {}
+    name: elasticsearch
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:45:32Z"
+    volumeMounts:
+    - mountPath: /usr/share/elasticsearch/data
+      name: elasticsearch-data
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.64
+  podIPs:
+  - ip: 10.42.0.64
+  qosClass: Burstable
+  startTime: "2025-06-14T17:45:27Z"

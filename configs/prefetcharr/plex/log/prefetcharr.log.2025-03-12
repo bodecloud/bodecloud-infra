@@ -1,0 +1,497 @@
+2025-03-12T00:02:22.808184Z  INFO prefetcharr: prefetcharr 0.10.0
+2025-03-12T00:02:22.811754Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T00:02:22.813226Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.2:8989
+2025-03-12T00:02:22.815916Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.2:8989
+2025-03-12T00:02:28.011796Z  INFO prefetcharr: Start watching Plex sessions
+2025-03-12T00:02:28.012087Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", sonarr:8989)
+2025-03-12T00:02:28.012361Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T00:02:28.018121Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.6:32400
+2025-03-12T00:02:28.018647Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.6:32400
+2025-03-12T00:02:28.019813Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T00:02:28.021236Z DEBUG hyper_util::client::legacy::pool: reuse idle connection for ("http", plex:32400)
+2025-03-12T00:02:28.024259Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T00:08:34.393221Z  INFO prefetcharr: prefetcharr 0.10.0
+2025-03-12T00:08:34.393634Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T00:08:34.412482Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.20.0.8:8989
+2025-03-12T00:08:34.424702Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.20.0.8:8989
+2025-03-12T00:08:41.194770Z  INFO prefetcharr: Start watching Plex sessions
+2025-03-12T00:08:41.194877Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T00:08:41.200723Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.20.0.6:32400
+2025-03-12T00:08:41.201221Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.20.0.6:32400
+2025-03-12T00:08:41.206796Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T00:08:41.208381Z DEBUG hyper_util::client::legacy::pool: reuse idle connection for ("http", plex:32400)
+2025-03-12T00:08:41.209593Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T00:18:12.507053Z  INFO prefetcharr: prefetcharr 0.10.0
+2025-03-12T00:18:12.507311Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T00:18:12.514301Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.24.0.18:8989
+2025-03-12T00:18:12.524033Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T00:18:12.524091Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-12T00:18:14.525741Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T00:18:14.527831Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.24.0.18:8989
+2025-03-12T00:18:14.527996Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.24.0.18:8989
+2025-03-12T00:18:21.855801Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", sonarr:8989)
+2025-03-12T00:18:21.856129Z  INFO prefetcharr: Start watching Plex sessions
+2025-03-12T00:18:21.856450Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T00:18:21.862050Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.24.0.9:32400
+2025-03-12T00:18:21.862673Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.24.0.9:32400
+2025-03-12T00:18:21.942504Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T00:18:21.943976Z DEBUG hyper_util::client::legacy::pool: reuse idle connection for ("http", plex:32400)
+2025-03-12T00:18:22.043005Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T00:33:22.044918Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T00:33:22.045511Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.24.0.9:32400
+2025-03-12T00:33:22.045834Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.24.0.9:32400
+2025-03-12T00:33:22.046399Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T00:48:22.047198Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T00:48:22.049423Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.24.0.9:32400
+2025-03-12T00:48:22.049738Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.24.0.9:32400
+2025-03-12T00:48:22.050850Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T01:03:22.051932Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T01:03:22.052639Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.24.0.9:32400
+2025-03-12T01:03:22.052983Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.24.0.9:32400
+2025-03-12T01:03:22.053723Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T01:18:22.055115Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T01:18:22.061038Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.24.0.9:32400
+2025-03-12T01:18:22.061555Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.24.0.9:32400
+2025-03-12T01:18:22.062503Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T01:33:28.499495Z  INFO prefetcharr: prefetcharr 0.10.0
+2025-03-12T01:33:28.514437Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T01:33:28.540133Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.16:8989
+2025-03-12T01:33:28.540821Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T01:33:28.541095Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-12T01:33:30.542801Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T01:33:30.544303Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.16:8989
+2025-03-12T01:33:30.545731Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T01:33:30.545913Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-12T01:33:34.547232Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T01:33:34.555241Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.16:8989
+2025-03-12T01:33:34.555832Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.23.0.16:8989
+2025-03-12T01:33:41.390801Z  INFO prefetcharr: Start watching Plex sessions
+2025-03-12T01:33:41.390910Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T01:33:41.390956Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", sonarr:8989)
+2025-03-12T01:33:41.394281Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.12:32400
+2025-03-12T01:33:41.394539Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.23.0.12:32400
+2025-03-12T01:33:41.396258Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T01:33:41.397929Z DEBUG hyper_util::client::legacy::pool: reuse idle connection for ("http", plex:32400)
+2025-03-12T01:33:41.399951Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T01:48:41.401065Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T01:48:41.401639Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.12:32400
+2025-03-12T01:48:41.402081Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.23.0.12:32400
+2025-03-12T01:48:41.403667Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T02:03:41.405106Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T02:03:41.405661Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.12:32400
+2025-03-12T02:03:41.405853Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.23.0.12:32400
+2025-03-12T02:03:41.406425Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T02:18:41.406821Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T02:18:41.407557Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.12:32400
+2025-03-12T02:18:41.407945Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.23.0.12:32400
+2025-03-12T02:18:41.408898Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T02:22:13.824452Z  INFO prefetcharr: prefetcharr 0.10.0
+2025-03-12T02:22:13.828250Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:22:13.847981Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.17:8989
+2025-03-12T02:22:13.848347Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T02:22:13.848368Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-12T02:22:15.851434Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:22:15.922924Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.17:8989
+2025-03-12T02:22:15.932706Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T02:22:15.934643Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-12T02:22:19.935902Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:22:19.941531Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.17:8989
+2025-03-12T02:22:19.941771Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T02:22:19.941792Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-12T02:22:27.942783Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:22:27.952155Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.17:8989
+2025-03-12T02:22:27.952439Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T02:22:27.952469Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-12T02:22:43.955748Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:22:43.958656Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.17:8989
+2025-03-12T02:22:43.959020Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.23.0.17:8989
+2025-03-12T02:22:50.676355Z  INFO prefetcharr: Start watching Plex sessions
+2025-03-12T02:22:50.677073Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T02:22:50.677831Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.23.0.12:32400
+2025-03-12T02:22:50.679118Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.23.0.12:32400
+2025-03-12T02:22:51.224313Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T02:22:51.225574Z DEBUG hyper_util::client::legacy::pool: reuse idle connection for ("http", plex:32400)
+2025-03-12T02:22:51.420743Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T02:32:38.933225Z  INFO prefetcharr: prefetcharr 0.10.0
+2025-03-12T02:32:38.933397Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:32:38.941320Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.15:8989
+2025-03-12T02:32:38.941701Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T02:32:38.941727Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-12T02:32:40.943129Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:32:40.954201Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.15:8989
+2025-03-12T02:32:40.954409Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T02:32:40.954431Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-12T02:32:44.956131Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:32:44.956625Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.15:8989
+2025-03-12T02:32:44.956861Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T02:32:44.956900Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-12T02:32:52.958736Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T02:32:52.963410Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.15:8989
+2025-03-12T02:32:52.963876Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.15:8989
+2025-03-12T02:32:53.860391Z  INFO prefetcharr: Start watching Plex sessions
+2025-03-12T02:32:53.860531Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T02:32:53.863911Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.6:32400
+2025-03-12T02:32:53.864257Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.6:32400
+2025-03-12T02:32:53.902897Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T02:32:53.904973Z DEBUG hyper_util::client::legacy::pool: reuse idle connection for ("http", plex:32400)
+2025-03-12T02:32:53.918926Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T02:47:53.921475Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T02:47:53.922312Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.6:32400
+2025-03-12T02:47:53.922875Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.6:32400
+2025-03-12T02:47:53.924591Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T03:02:53.925820Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T03:02:53.926631Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.6:32400
+2025-03-12T03:02:53.926990Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.6:32400
+2025-03-12T03:02:53.927498Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T03:17:53.928249Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T03:17:53.929024Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.6:32400
+2025-03-12T03:17:53.929355Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.6:32400
+2025-03-12T03:17:53.931084Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T03:21:01.827136Z  INFO prefetcharr: prefetcharr 0.10.0
+2025-03-12T03:21:01.827488Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T03:21:01.843117Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.17:8989
+2025-03-12T03:21:01.846302Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T03:21:01.846517Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-12T03:21:03.847903Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T03:21:03.848828Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.17:8989
+2025-03-12T03:21:03.849167Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (http://sonarr:8989/api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-12T03:21:03.849508Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-12T03:21:07.851548Z DEBUG reqwest::connect: starting new connection: http://sonarr:8989/    
+2025-03-12T03:21:07.854209Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.17:8989
+2025-03-12T03:21:07.854564Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.17:8989
+2025-03-12T03:21:11.639886Z  INFO prefetcharr: Start watching Plex sessions
+2025-03-12T03:21:11.640296Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T03:21:11.640498Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", sonarr:8989)
+2025-03-12T03:21:11.644878Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T03:21:11.645533Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T03:21:11.654817Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T03:21:11.655981Z DEBUG hyper_util::client::legacy::pool: reuse idle connection for ("http", plex:32400)
+2025-03-12T03:21:11.657017Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T03:36:11.657876Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T03:36:11.659662Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T03:36:11.660262Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T03:36:11.661226Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T03:51:11.664131Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T03:51:11.664852Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T03:51:11.665160Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T03:51:11.666536Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T04:06:11.668759Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T04:06:11.669425Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T04:06:11.669823Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T04:06:11.672212Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T04:21:11.674119Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T04:21:11.674798Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T04:21:11.675149Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T04:21:11.675671Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T04:36:11.677670Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T04:36:11.678166Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T04:36:11.678391Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T04:36:11.679261Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T04:51:11.681390Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T04:51:11.682012Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T04:51:11.682564Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T04:51:11.683221Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T05:06:11.684231Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T05:06:11.687676Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T05:06:11.687954Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T05:06:11.691941Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T05:21:11.693871Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T05:21:11.694537Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T05:21:11.694992Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T05:21:11.695568Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T05:36:11.696875Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T05:36:11.697610Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T05:36:11.698107Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T05:36:11.699071Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T05:51:11.701278Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T05:51:11.701824Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T05:51:11.702125Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T05:51:11.703509Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T06:06:11.705718Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T06:06:11.706422Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T06:06:11.706966Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T06:06:11.708057Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T06:21:11.708809Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T06:21:11.709601Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T06:21:11.709909Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T06:21:11.710522Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T06:36:11.712516Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T06:36:11.713081Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T06:36:11.713373Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T06:36:11.713903Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T06:51:11.715643Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T06:51:11.716159Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T06:51:11.716458Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T06:51:11.717075Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T07:06:11.718373Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T07:06:11.720035Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T07:06:11.721219Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T07:06:11.723855Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T07:21:11.724944Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T07:21:11.725980Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T07:21:11.726331Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T07:21:11.728044Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T07:36:11.730341Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T07:36:11.731032Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T07:36:11.731609Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T07:36:11.732592Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T07:51:11.734068Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T07:51:11.735069Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T07:51:11.735284Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T07:51:11.735817Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T08:06:11.737716Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T08:06:11.738242Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T08:06:11.739667Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T08:06:11.740311Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T08:21:11.741462Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T08:21:11.742165Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T08:21:11.742512Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T08:21:11.743235Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T08:36:11.744158Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T08:36:11.744831Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T08:36:11.744999Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T08:36:11.745733Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T08:51:11.746817Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T08:51:11.747339Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T08:51:11.747495Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T08:51:11.748111Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T09:06:11.749226Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T09:06:11.751012Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T09:06:11.751647Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T09:06:11.752803Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T09:21:11.754093Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T09:21:11.754852Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T09:21:11.755253Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T09:21:11.756015Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T09:36:11.757913Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T09:36:11.758804Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T09:36:11.759248Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T09:36:11.760487Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T09:51:11.762108Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T09:51:11.762592Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T09:51:11.762976Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T09:51:11.763809Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T10:06:11.764944Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T10:06:11.765479Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T10:06:11.765871Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T10:06:11.766873Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T10:21:11.771420Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T10:21:11.772279Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T10:21:11.772685Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T10:21:11.774734Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T10:36:11.776307Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T10:36:11.777035Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T10:36:11.777374Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T10:36:11.778410Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T10:51:11.780046Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T10:51:11.780743Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T10:51:11.781257Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T10:51:11.782335Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T11:06:11.784048Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T11:06:11.785794Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T11:06:11.787446Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T11:06:11.790682Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T11:21:11.791672Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T11:21:11.792318Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T11:21:11.793368Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T11:21:11.794049Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T11:36:11.795868Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T11:36:11.796435Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T11:36:11.796823Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T11:36:11.797369Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T11:51:11.799439Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T11:51:11.800056Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T11:51:11.800530Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T11:51:11.801724Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T12:06:11.804063Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T12:06:11.806319Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T12:06:11.808042Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T12:06:11.810483Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T12:21:11.811762Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T12:21:11.812511Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T12:21:11.812957Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T12:21:11.813672Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T12:36:11.815259Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T12:36:11.815978Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T12:36:11.816705Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T12:36:11.817380Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T12:51:11.819051Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T12:51:11.819640Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T12:51:11.819835Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T12:51:11.821275Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T13:06:11.823247Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T13:06:11.824740Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T13:06:11.825664Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T13:06:11.826750Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T13:21:11.828714Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T13:21:11.829513Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T13:21:11.830073Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T13:21:11.831171Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T13:36:11.832290Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T13:36:11.832842Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T13:36:11.833244Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T13:36:11.833822Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T13:51:11.834873Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T13:51:11.835775Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T13:51:11.836173Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T13:51:11.837108Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T14:06:11.837829Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T14:06:11.838415Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T14:06:11.838737Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T14:06:11.839376Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T14:21:11.841074Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T14:21:11.841643Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T14:21:11.841957Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T14:21:11.842523Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T14:36:11.844443Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T14:36:11.844993Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T14:36:11.845328Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T14:36:11.846077Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T14:51:11.847104Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T14:51:11.847774Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T14:51:11.848080Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T14:51:11.848778Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T15:06:11.849888Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T15:06:11.850830Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T15:06:11.851414Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T15:06:11.852917Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T15:21:11.854767Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T15:21:11.856325Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T15:21:11.856831Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T15:21:11.857511Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T15:36:11.859262Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T15:36:11.859878Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T15:36:11.860125Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T15:36:11.861116Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T15:51:11.861842Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T15:51:11.862380Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T15:51:11.862592Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T15:51:11.863159Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T16:06:11.863942Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T16:06:11.864513Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T16:06:11.864766Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T16:06:11.865353Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T16:21:11.866268Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T16:21:11.866913Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T16:21:11.867247Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T16:21:11.868841Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T16:36:11.870274Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T16:36:11.871296Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T16:36:11.871923Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T16:36:11.874243Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T16:51:11.876392Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T16:51:11.876917Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T16:51:11.877209Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T16:51:11.877861Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T17:06:11.879555Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T17:06:11.880842Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T17:06:11.881610Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T17:06:11.884697Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T17:21:11.886523Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T17:21:11.887337Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T17:21:11.887800Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T17:21:11.889118Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T17:36:11.890716Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T17:36:11.892690Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T17:36:11.893176Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T17:36:11.893994Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T17:51:11.894816Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T17:51:11.895355Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T17:51:11.895761Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T17:51:11.896395Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T18:06:11.898290Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T18:06:11.898947Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T18:06:11.899287Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T18:06:11.899968Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T18:21:11.901030Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T18:21:11.901558Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T18:21:11.902066Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T18:21:11.902573Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T18:36:11.903783Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T18:36:11.904431Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T18:36:11.904740Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T18:36:11.906028Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T18:51:11.907208Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T18:51:11.907736Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T18:51:11.908028Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T18:51:11.908516Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T19:06:11.910241Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T19:06:11.911903Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T19:06:11.912230Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T19:06:11.914540Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T19:21:11.915905Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T19:21:11.916370Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T19:21:11.916528Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T19:21:11.917173Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T19:36:11.918043Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T19:36:11.918860Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T19:36:11.919582Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T19:36:11.920311Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T19:51:11.921708Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T19:51:11.922382Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T19:51:11.924696Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T19:51:11.925470Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T20:06:11.927598Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T20:06:11.928207Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T20:06:11.929961Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T20:06:11.950262Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T20:21:11.952275Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T20:21:11.952837Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T20:21:11.953187Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T20:21:11.953885Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T20:36:11.954732Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T20:36:11.955268Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T20:36:11.955581Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T20:36:11.956577Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T20:51:11.958249Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T20:51:11.959672Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T20:51:11.960155Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T20:51:11.961009Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T21:06:11.961852Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T21:06:11.962985Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T21:06:11.963703Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T21:06:11.965277Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T21:21:11.968737Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T21:21:11.969405Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T21:21:11.970143Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T21:21:11.970709Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T21:36:11.972606Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T21:36:11.975863Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T21:36:11.976492Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T21:36:11.977246Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T21:51:11.978885Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T21:51:11.979503Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T21:51:11.979822Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T21:51:11.980350Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T22:06:11.981737Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T22:06:11.982307Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T22:06:11.982900Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T22:06:11.983828Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T22:21:11.984790Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T22:21:11.985416Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T22:21:11.985798Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T22:21:11.986496Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T22:36:11.987704Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T22:36:11.988207Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T22:36:11.988518Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T22:36:11.988977Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T22:51:11.990229Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T22:51:11.991090Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T22:51:11.991429Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T22:51:11.992361Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T23:06:11.994548Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T23:06:11.997483Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T23:06:11.998760Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T23:06:12.000991Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T23:21:12.002360Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T23:21:12.003014Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T23:21:12.003774Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T23:21:12.004510Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T23:36:12.006432Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T23:36:12.007055Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T23:36:12.007399Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T23:36:12.008146Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)
+2025-03-12T23:51:12.009477Z DEBUG reqwest::connect: starting new connection: http://plex:32400/    
+2025-03-12T23:51:12.010128Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.22.0.10:32400
+2025-03-12T23:51:12.010477Z DEBUG hyper_util::client::legacy::connect::http: connected to 172.22.0.10:32400
+2025-03-12T23:51:12.012701Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for ("http", plex:32400)

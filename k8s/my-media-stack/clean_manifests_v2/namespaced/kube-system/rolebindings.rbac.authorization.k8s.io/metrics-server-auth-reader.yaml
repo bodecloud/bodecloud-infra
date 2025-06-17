@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4ySP0/DMBDFvwq6OQmkbaoqEkNZGNiKxIIYLvZreySxI9sJf6p+d+RCUTs0MFqn9/P7+bwj7uQJzos1VJKrWGXch6118slBrMnqhc/EXg85JVSL0VTSyja4E6PFbCihFoE1B6ZyR2yMDYecj0dbvUIFj5A5sZniEBpEmEQKJRfn9s3ApZuhppLqqT+ZDHly9SBG3y61tuZPhOEWVFI0Sh1Yw/0r4jtWMVf3FVL/4QNa2ifUcIVmVGzLfkslFXquoVVV5MjVBJiogteTm1mB2VQviiKv5noxXc8j9Kdii+BE+dTDDXDpeeORTs42WGF9ePxO7p3tu7E9ni+Rfq/He4CJnyDlTk46wARRB8CxzT4h33/rU/m8O+Ie4QZRWCplexPogteYy8v+KwAA///W26sDjQIAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: auth-reader
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: 5d6dedcb51e1c2ee2c5af2045e43d8551b6d83f6
+  name: metrics-server-auth-reader
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: extension-apiserver-authentication-reader
+subjects:
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system

@@ -1,0 +1,204 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: homer-config, elfbot-homer
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: homer
+    app.kubernetes.io/version: v22.07.2
+    helm.sh/chart: homer-8.0.2
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: brunner56-homer
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: homer
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: "2025-05-29T17:12:59Z"
+      labels:
+        app.elfhosted.com/role: nodefinder
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: homer
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - command:
+        - /bin/bash
+        - /usr/local/bin/disk_usage.sh
+        env:
+        - name: TZ
+          value: UTC
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        name: brunner56-homer
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 1Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsNonRoot: false
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /backup
+          name: backup
+        - mountPath: /config
+          name: config
+        - mountPath: /config-yml
+          name: config-yml
+          subPath: config.yml
+        - mountPath: /custom-css
+          name: custom-css
+          subPath: custom-css
+        - mountPath: /usr/local/bin/disk_usage.sh
+          name: disk-usage
+          subPath: disk_usage.sh
+        - mountPath: /gatus-config
+          name: gatus-config
+        - mountPath: /logs
+          name: logs
+        - mountPath: /www/assets/message
+          name: message
+        - mountPath: /storage/rclone
+          name: rclone
+        - mountPath: /storage/realdebrid-zurg
+          name: rclonemountrealdebridzurg
+        - mountPath: /storage/symlinks
+          name: symlinks
+        - mountPath: /tmp
+          name: tmp
+      - image: ghcr.io/elfhosted/homer:v25.05.2@sha256:60772bd0292281282161f10aa2bea105bba344158937f1c0022c6986ef5aedc3
+        imagePullPolicy: IfNotPresent
+        name: ui
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /www/assets/config.yml
+          name: config-yml
+          subPath: config.yml
+        - mountPath: /www/assets/custom.css
+          name: custom-css
+          subPath: custom.css
+        - mountPath: /www/assets/message
+          name: message
+        - mountPath: /www/assets/backgrounds
+          name: config
+          readOnly: true
+          subPath: homer/backgrounds
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: backup
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - configMap:
+          defaultMode: 420
+          name: homer-config
+        name: config-yml
+      - configMap:
+          defaultMode: 420
+          name: homer-config
+        name: custom-css
+      - configMap:
+          defaultMode: 420
+          name: homer-config
+        name: disk-usage
+      - configMap:
+          defaultMode: 420
+          name: gatus-config
+        name: gatus-config
+      - name: logs
+        persistentVolumeClaim:
+          claimName: logs
+      - name: message
+      - name: rclone
+        persistentVolumeClaim:
+          claimName: rclone
+      - name: rclonemountrealdebridzurg
+        persistentVolumeClaim:
+          claimName: realdebrid-zurg
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: symlinks
+      - name: tmp

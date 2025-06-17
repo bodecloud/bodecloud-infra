@@ -1,0 +1,30 @@
+brunner56Traefikforwardauth:
+  brunner56Traefikforwardauth:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      tz: UTC
+    image:
+      repository: ghcr.io/elfhosted/traefik-forward-auth
+      tag: 3.1.0@sha256:19cd990fae90c544100676bc049f944becc8c454639e57d20f6f48e27de90776
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 32Mi
+      requests:
+        cpu: "0"
+        memory: 6Mi
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+kubernetesClusterDomain: cluster.local

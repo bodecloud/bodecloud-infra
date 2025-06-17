@@ -1,0 +1,19 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: influxdb
+  usage:
+    cpu: 446478n
+    memory: 44604Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: influxdb
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: influxdb
+    apps.kubernetes.io/pod-index: "0"
+    controller-revision-hash: influxdb-dd65d998f
+    statefulset.kubernetes.io/pod-name: influxdb-0
+  name: influxdb-0
+  namespace: default
+timestamp: "2025-06-14T23:00:36Z"
+window: 13.219s

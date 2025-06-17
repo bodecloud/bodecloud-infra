@@ -1,0 +1,2095 @@
+{
+  "timestamp": "2025-06-17T01:29:38.006534",
+  "events": [
+    {
+      "timestamp": "2025-06-17T01:29:51.431424",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "starting_research",
+        "output": "\ud83d\udd0d Starting the research task for '\"WINEHQ AppDB UE4 graphical glitches compatibility database community fixes\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:51.432288",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "agent_generated",
+        "output": "",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:51.433756",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83c\udf10 Browsing the web to learn more about the task: \"WINEHQ AppDB UE4 graphical glitches compatibility database community fixes\"...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:53.802817",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83e\udd14 Planning the research strategy and subtasks...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:53.810910",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "starting_research",
+        "output": "\ud83d\udd0d Starting the research task for '\"WINE UE4 white texture fix DXVK VKD3D Proton June 2025\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:53.811414",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "agent_generated",
+        "output": "",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:53.812691",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83c\udf10 Browsing the web to learn more about the task: \"WINE UE4 white texture fix DXVK VKD3D Proton June 2025\"...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:57.334325",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83e\udd14 Planning the research strategy and subtasks...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:57.342566",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "starting_research",
+        "output": "\ud83d\udd0d Starting the research task for '\"WINE DirectX to Vulkan UE4 graphical glitches patches fixes recent\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:57.343124",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "agent_generated",
+        "output": "",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:29:57.344372",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83c\udf10 Browsing the web to learn more about the task: \"WINE DirectX to Vulkan UE4 graphical glitches patches fixes recent\"...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:00.353808",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83e\udd14 Planning the research strategy and subtasks...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:01.733408",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subqueries",
+        "output": "\ud83d\uddc2\ufe0f I will conduct my research based on the following queries: ['WINE AppDB UE4 graphical glitches 2024 2025', 'WINEHQ AppDB UE4 compatibility reports user experiences', 'UE4 games on Linux WINE graphical issues fixes', 'WINE UE4 performance tweaks community patches', '\"WINEHQ AppDB UE4 graphical glitches compatibility database community fixes\"']...",
+        "metadata": [
+          "WINE AppDB UE4 graphical glitches 2024 2025",
+          "WINEHQ AppDB UE4 compatibility reports user experiences",
+          "UE4 games on Linux WINE graphical issues fixes",
+          "WINE UE4 performance tweaks community patches",
+          "\"WINEHQ AppDB UE4 graphical glitches compatibility database community fixes\""
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:01.734441",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'WINE AppDB UE4 graphical glitches 2024 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.150761",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=39604\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=39604"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.151536",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/packaged-project-crashes-on-start-after-migrating-to-4-27/2078334\n",
+        "metadata": "https://forums.unrealengine.com/t/packaged-project-crashes-on-start-after-migrating-to-4-27/2078334"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.152770",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/unrealengine/comments/ogbj6j/ue5_and_ue4_editor_graphical_glitch/\n",
+        "metadata": "https://www.reddit.com/r/unrealengine/comments/ogbj6j/ue5_and_ue4_editor_graphical_glitch/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.153874",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://manerosss.wordpress.com/2016/09/16/unreal-engine-games-on-linux-wine/\n",
+        "metadata": "https://manerosss.wordpress.com/2016/09/16/unreal-engine-games-on-linux-wine/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.154959",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.tomshardware.com/threads/getting-desperate-in-game-graphics-keep-glitching-flickering-or-tearing-suspected-gpu-issue.3739133/\n",
+        "metadata": "https://forums.tomshardware.com/threads/getting-desperate-in-game-graphics-keep-glitching-flickering-or-tearing-suspected-gpu-issue.3739133/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.156087",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://appdb.winehq.org/\n",
+        "metadata": "https://appdb.winehq.org/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.157213",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/how-to-fix-editor-ui-rendering-issue-overlapping-windows-and-panels/2236062\n",
+        "metadata": "https://forums.unrealengine.com/t/how-to-fix-editor-ui-rendering-issue-overlapping-windows-and-panels/2236062"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.158416",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.159570",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.693092",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 7 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.694763",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.695936",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.697485",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: WINE AppDB UE4 graphical glitches 2024 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:04.748729",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'WINEHQ AppDB UE4 compatibility reports user experiences'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:07.440373",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\n",
+        "metadata": "https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:07.441315",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux_gaming/comments/hbwh4c/winehq_appdb_forgotten/\n",
+        "metadata": "https://www.reddit.com/r/linux_gaming/comments/hbwh4c/winehq_appdb_forgotten/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:07.442833",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=39559\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=39559"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:07.444387",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://askubuntu.com/questions/6156/how-compatible-is-wine-with-windows-as-of-today/\n",
+        "metadata": "https://askubuntu.com/questions/6156/how-compatible-is-wine-with-windows-as-of-today/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:07.445718",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/winehq/comments/136b8uk/wine_app_database/\n",
+        "metadata": "https://www.reddit.com/r/winehq/comments/136b8uk/wine_app_database/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:07.447093",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/wine_gaming/comments/9g84d1/why_is_the_winehqorg_appdb_being_neglected/\n",
+        "metadata": "https://www.reddit.com/r/wine_gaming/comments/9g84d1/why_is_the_winehqorg_appdb_being_neglected/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:07.448423",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:07.449748",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 6 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:08.782753",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:08.783865",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:08.785457",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:08.787067",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: WINEHQ AppDB UE4 compatibility reports user experiences (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:08.816600",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'UE4 games on Linux WINE graphical issues fixes'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:11.575042",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=32996\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=32996"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:11.576258",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/running-windows-editor-through-wine-severe-graphical-issues/1320028\n",
+        "metadata": "https://forums.unrealengine.com/t/running-windows-editor-through-wine-severe-graphical-issues/1320028"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:11.577996",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.developer.nvidia.com/t/graphic-issues-with-unreal-engine-w-343-22/35066\n",
+        "metadata": "https://forums.developer.nvidia.com/t/graphic-issues-with-unreal-engine-w-343-22/35066"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:11.579419",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux4noobs/comments/17yknit/how_to_run_universal_unreal_engine_4_unlocker/\n",
+        "metadata": "https://www.reddit.com/r/linux4noobs/comments/17yknit/how_to_run_universal_unreal_engine_4_unlocker/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:11.580900",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.level1techs.com/t/ue4-games-on-dxvk-and-wine-proton-with-avx-vs-avx2-performance-difference/147727\n",
+        "metadata": "https://forum.level1techs.com/t/ue4-games-on-dxvk-and-wine-proton-with-avx-vs-avx2-performance-difference/147727"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:11.582384",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux_gaming/comments/1c2n7eq/why_do_unreal_engine_games_run_poorly_on_linux/\n",
+        "metadata": "https://www.reddit.com/r/linux_gaming/comments/1c2n7eq/why_do_unreal_engine_games_run_poorly_on_linux/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:11.584373",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:11.586232",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 6 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:12.395997",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:12.397315",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:12.399442",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:12.401251",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: UE4 games on Linux WINE graphical issues fixes (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:12.503279",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'WINE UE4 performance tweaks community patches'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:15.337440",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/OptimizedGaming/comments/15vl88s/unreal_engine_45_postprocessing_tweaks/\n",
+        "metadata": "https://www.reddit.com/r/OptimizedGaming/comments/15vl88s/unreal_engine_45_postprocessing_tweaks/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:15.338873",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.nexusmods.com/avowed/mods/5\n",
+        "metadata": "https://www.nexusmods.com/avowed/mods/5"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:15.340608",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\n",
+        "metadata": "https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:15.343127",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.nexusmods.com/site/mods/1035\n",
+        "metadata": "https://www.nexusmods.com/site/mods/1035"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:15.346027",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://steamcommunity.com/sharedfiles/filedetails/?id=1313703067\n",
+        "metadata": "https://steamcommunity.com/sharedfiles/filedetails/?id=1313703067"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:15.348239",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/AlteriaX/WuWa-Configs\n",
+        "metadata": "https://github.com/AlteriaX/WuWa-Configs"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:15.349974",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:15.352171",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 6 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:16.243543",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:16.245366",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:16.247124",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:16.248892",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: WINE UE4 performance tweaks community patches (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:16.309029",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for '\"WINEHQ AppDB UE4 graphical glitches compatibility database community fixes\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.943958",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.945736",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 0 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.948052",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 0 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.949706",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.951625",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.953909",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: \"WINEHQ AppDB UE4 graphical glitches compatibility database community fixes\" (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.955979",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_not_found",
+        "output": "\ud83e\udd37 No content found for '\"WINEHQ AppDB UE4 graphical glitches compatibility database community fixes\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.958597",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://forum.winehq.org/viewtopic.php?t=39604\nTitle: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine - WineHQ Forums\nContent: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine\nPost by ShadowOne333 \u00bb Tue Oct 29, 2024 12:05 pm\nby ShadowOne333 \u00bb\n\nSource: https://forum.winehq.org/viewtopic.php?t=39604\nTitle: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine - WineHQ Forums\nContent: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine\nOpen forum for end-user questions about Wine. Before asking questions, check out the Wiki as a first step. Forum Rules\nPost Reply Search Advanced search 2 posts \u2022 Page 1 of 1\nSearch Advanced search\n2 posts \u2022 Page 1 of 1\n\nSource: https://manerosss.wordpress.com/2016/09/16/unreal-engine-games-on-linux-wine/\nTitle: Unreal Engine Games on Linux using Wine (AMD) \u2013 manero's blog\nContent: Post under construction :)\nUpdate 5 Apr 2017: Some issues are not there anymore but it looks like the engine still suffer some graphical glitches with Wine Gallium Nine (it was running fine for a short period of time Wine 2.0-2.2), I\u2019ll strikethrough all the fixed issues. Anyway if you\u2019re using an old Mesa version you may still encounter some of them. If you have a GPU prior to the 7000 series you probably don\u2019t have some of this issues.\nOn this post I want to talk about some Unreal Engine games running on Linux using Wine. If you follow my blog or my youtube channel you already know that I\u2019m quite an advocate of Wine Gallium Nine and the Open Source drivers, especially on AMD.\nI usually have extremely good performances when using Gallium Nine, it quite known that with that patch, you can expect to run your games with the same Windows\u2019 performances. Sometime even better!\n\nSource: https://manerosss.wordpress.com/2016/09/16/unreal-engine-games-on-linux-wine/\nTitle: Unreal Engine Games on Linux using Wine (AMD) \u2013 manero's blog\nContent: Post under construction :) Update 5 Apr 2017: Some issues are not there anymore but it looks like the engine still suffer some graphical glitches with Wine Gallium Nine (it was running fine for a short period of time Wine 2.0-2.2), I\u2019ll strikethrough all the fixed issues. Anyway if you\u2019re using an old Mesa version you may still encounter some of them. If you have a GPU prior to the 7000 series you probably don\u2019t have some of this issues. Hi! On this post I want to talk about some Unreal Engine games running on Linux using Wine. If you follow my blog or my youtube channel you already know that I\u2019m quite an advocate of Wine Gallium Nine and the Open Source drivers, especially on AMD. I usually have extremely good performances when using Gallium Nine, it quite known that with that patch, you can expect to run your games with the same Windows\u2019 performances. Sometime even better! Anyway some Unreal Engine games are a pain to get them to properly work, and definitely the most difficult I\n\nSource: https://manerosss.wordpress.com/2016/09/16/unreal-engine-games-on-linux-wine/\nTitle: Unreal Engine Games on Linux using Wine (AMD) \u2013 manero's blog\nContent: Post under construction :) Update 5 Apr 2017: Some issues are not there anymore but it looks like the engine still suffer some graphical glitches with Wine Gallium Nine (it was running fine for a short period of time Wine 2.0-2.2), I\u2019ll strikethrough all the fixed issues. Anyway if you\u2019re using an old Mesa version you may still encounter some of them. If you have a GPU prior to the 7000 series you probably don\u2019t have some of this issues. Hi! On this post I want to talk about some Unreal Engine games running on Linux using Wine. If you follow my blog or my youtube channel you already know that I\u2019m quite an advocate of Wine Gallium Nine and the Open Source drivers, especially on AMD. I usually have extremely good performances when using Gallium Nine, it quite known that with that patch, you can expect to run your games with the same Windows\u2019 performances. Sometime even better! Anyway some Unreal Engine games are a pain to get them to properly work, and definitely the most difficult I\n\nSource: https://forum.winehq.org/viewtopic.php?t=39604\nTitle: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine - WineHQ Forums\nContent: Code: Select all\nShadowOne333 Newbie Posts: 2 Joined: Tue Oct 29, 2024 11:58 am Re: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine Quote Post by ShadowOne333 \u00bb Tue Mar 18, 2025 9:35 pm User @Dario has been able to find a workaround using DXVK here: https://github.com/doitsujin/dxvk/issue ... 2727071152 However, the main issue with WineD3D not loading the proper subroutine from the ASI file is still persistent, and Dario gave a detailed explanation on what is happening in this comment: https://bugs.winehq.org/show_bug.cgi?id=53775#c7 Top\n\nSource: https://forum.winehq.org/viewtopic.php?t=39604\nTitle: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine - WineHQ Forums\nContent: Re: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine Quote Post by ShadowOne333 \u00bb Tue Mar 18, 2025 9:35 pm User @Dario has been able to find a workaround using DXVK here: https://github.com/doitsujin/dxvk/issue ... 2727071152 However, the main issue with WineD3D not loading the proper subroutine from the ASI file is still persistent, and Dario gave a detailed explanation on what is happening in this comment: https://bugs.winehq.org/show_bug.cgi?id=53775#c7\nRe: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine\nPost by ShadowOne333 \u00bb Tue Mar 18, 2025 9:35 pm\nby ShadowOne333 \u00bb\n\nSource: https://manerosss.wordpress.com/2016/09/16/unreal-engine-games-on-linux-wine/\nTitle: Unreal Engine Games on Linux using Wine (AMD) \u2013 manero's blog\nContent: Anyway some Unreal Engine games are a pain to get them to properly work, and definitely the most difficult I tried so far.\nMost of them end up suffering the same bugs and issues, thus I\u2019m writing this post to list these errors comparing different games!\nHere is a list of games using Unreal Engine, where I take all the specific information.\nGames tried so far:\nThis is a mixed playlist that contains all the UE games I tried on Linux, showing some issues but also all the games that were running fine.\nand now the issues I encountered:\nrandom graphical glitches (G9 only) since Wine 2.x\nThere are some polygons appearing while playing, sometimes you can barely notice them as they contain part of what you\u2019re looking at, some other times they are brightly colored and are pretty evident.\nexamples: \u00b7 Murdered: Soul Suspect \u00b7 DmC: Devil May Cry \u00b7 Remember Me\nThe PC freezes and a hard reboot is required (G9 only) fixed\nColor Layers Bug (G9 only) fixed but a new graphical issue appeared\n\nSource: https://forum.winehq.org/viewtopic.php?t=39604\nTitle: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine - WineHQ Forums\nContent: Re: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine Quote Post by ShadowOne333 \u00bb Tue Mar 18, 2025 9:35 pm User @Dario has been able to find a workaround using DXVK here: https://github.com/doitsujin/dxvk/issue ... 2727071152 However, the main issue with WineD3D not loading the proper subroutine from the ASI file is still persistent, and Dario gave a detailed explanation on what is happening in this comment: https://bugs.winehq.org/show_bug.cgi?id=53775#c7\n\nSource: https://forum.winehq.org/viewtopic.php?t=39604\nTitle: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine - WineHQ Forums\nContent: Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine Open forum for end-user questions about Wine. Before asking questions, check out the Wiki as a first step. Forum Rules Post Reply Search Advanced search 2 posts \u2022 Page 1 of 1 ShadowOne333 Newbie Posts: 2 Joined: Tue Oct 29, 2024 11:58 am Graphical glitch with Resident Evil 3 (GOG) with Classic Rebirth+Seamless HD Project through Wine Quote Post by ShadowOne333 \u00bb Tue Oct 29, 2024 12:05 pm Good day, WineHQ community. I've been trying to get RE3 working on Linux with the HD/Seamless HD Project (SHDP) mod for over a month now, but no matter what I try, I always end up with the same result, which is the actual backgrounds/textures looking really small on the upper-left corner of the screen, as seen in these images: https://imgur.com/a/Bj8o51s To get the game running on Linux, I use the following DLL overrides: Code: Select\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.961501",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: 4. WineHQ AppDB: Community-Driven Compatibility\nThe WineHQ AppDB is a community-driven database that provides information on the compatibility of various Windows applications with Wine. It offers a wealth of user reviews, ratings, and detailed notes on how to configure Wine for specific applications. The AppDB is an excellent resource for finding solutions and troubleshooting compatibility issues.\nExploring the WineHQ AppDB\nYou can access the WineHQ AppDB by visiting the official website. The database is organized by application, and you can search for specific EXE files to find compatibility reports and user experiences. Each application listing provides valuable insights, including common issues, workarounds, and suggested Wine settings.\nContributing to the AppDB\n\nSource: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: However, they may require more system resources compared to emulation methods like Wine. 4. WineHQ AppDB: Community-Driven Compatibility The WineHQ AppDB is a community-driven database that provides information on the compatibility of various Windows applications with Wine. It offers a wealth of user reviews, ratings, and detailed notes on how to configure Wine for specific applications. The AppDB is an excellent resource for finding solutions and troubleshooting compatibility issues. Exploring the WineHQ AppDB You can access the WineHQ AppDB by visiting the official website. The database is organized by application, and you can search for specific EXE files to find compatibility reports and user experiences. Each application listing provides valuable insights, including common issues, workarounds, and suggested Wine settings. Contributing to the AppDB The WineHQ AppDB relies on community contributions to keep the compatibility information up-to-date. If you successfully run an EXE\n\nSource: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: EXE files to find compatibility reports and user experiences. Each application listing provides valuable insights, including common issues, workarounds, and suggested Wine settings. Contributing to the AppDB The WineHQ AppDB relies on community contributions to keep the compatibility information up-to-date. If you successfully run an EXE file using Wine, you can contribute your experience to help others. This collaborative effort ensures that the AppDB remains a valuable resource for the Linux community. \ud83d\udca1 By actively participating in the WineHQ AppDB community, you can not only benefit from the collective knowledge but also contribute to the improvement of Wine's compatibility for your favorite applications. 5. Wine Staging: Enhanced Compatibility Wine Staging is a project that focuses on improving Wine\u2019s compatibility and performance. It includes experimental patches and features that may not be present in the official Wine release. Wine Staging is particularly useful for running\n\nSource: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: EXE files to find compatibility reports and user experiences. Each application listing provides valuable insights, including common issues, workarounds, and suggested Wine settings. Contributing to the AppDB The WineHQ AppDB relies on community contributions to keep the compatibility information up-to-date. If you successfully run an EXE file using Wine, you can contribute your experience to help others. This collaborative effort ensures that the AppDB remains a valuable resource for the Linux community. \ud83d\udca1 By actively participating in the WineHQ AppDB community, you can not only benefit from the collective knowledge but also contribute to the improvement of Wine's compatibility for your favorite applications. 5. Wine Staging: Enhanced Compatibility Wine Staging is a project that focuses on improving Wine\u2019s compatibility and performance. It includes experimental patches and features that may not be present in the official Wine release. Wine Staging is particularly useful for running\n\nSource: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: EXE files to find compatibility reports and user experiences. Each application listing provides valuable insights, including common issues, workarounds, and suggested Wine settings. Contributing to the AppDB The WineHQ AppDB relies on community contributions to keep the compatibility information up-to-date. If you successfully run an EXE file using Wine, you can contribute your experience to help others. This collaborative effort ensures that the AppDB remains a valuable resource for the Linux community. \ud83d\udca1 By actively participating in the WineHQ AppDB community, you can not only benefit from the collective knowledge but also contribute to the improvement of Wine's compatibility for your favorite applications. 5. Wine Staging: Enhanced Compatibility Wine Staging is a project that focuses on improving Wine\u2019s compatibility and performance. It includes experimental patches and features that may not be present in the official Wine release. Wine Staging is particularly useful for running\n\nSource: https://forum.winehq.org/viewtopic.php?t=39559\nTitle: Compatibility and Support - WineHQ Forums\nContent: \u2630 WineHQ Wiki AppDB Bugzilla Forums\nWineHQ Forums Home Search User Menu Register Login\n\nSource: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: website. The database is organized by application, and you can search for specific EXE files to find compatibility reports and user experiences. Each application listing provides valuable insights, including common issues, workarounds, and suggested Wine settings. Contributing to the AppDB The WineHQ AppDB relies on community contributions to keep the compatibility information up-to-date. If you successfully run an EXE file using Wine, you can contribute your experience to help others. This collaborative effort ensures that the AppDB remains a valuable resource for the Linux community. \ud83d\udca1 By actively participating in the WineHQ AppDB community, you can not only benefit from the collective knowledge but also contribute to the improvement of Wine's compatibility for your favorite applications. 5. Wine Staging: Enhanced Compatibility Wine Staging is a project that focuses on improving Wine\u2019s compatibility and performance. It includes experimental patches and features that may not be\n\nSource: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: website. The database is organized by application, and you can search for specific EXE files to find compatibility reports and user experiences. Each application listing provides valuable insights, including common issues, workarounds, and suggested Wine settings. Contributing to the AppDB The WineHQ AppDB relies on community contributions to keep the compatibility information up-to-date. If you successfully run an EXE file using Wine, you can contribute your experience to help others. This collaborative effort ensures that the AppDB remains a valuable resource for the Linux community. \ud83d\udca1 By actively participating in the WineHQ AppDB community, you can not only benefit from the collective knowledge but also contribute to the improvement of Wine's compatibility for your favorite applications. 5. Wine Staging: Enhanced Compatibility Wine Staging is a project that focuses on improving Wine\u2019s compatibility and performance. It includes experimental patches and features that may not be\n\nSource: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: website. The database is organized by application, and you can search for specific EXE files to find compatibility reports and user experiences. Each application listing provides valuable insights, including common issues, workarounds, and suggested Wine settings. Contributing to the AppDB The WineHQ AppDB relies on community contributions to keep the compatibility information up-to-date. If you successfully run an EXE file using Wine, you can contribute your experience to help others. This collaborative effort ensures that the AppDB remains a valuable resource for the Linux community. \ud83d\udca1 By actively participating in the WineHQ AppDB community, you can not only benefit from the collective knowledge but also contribute to the improvement of Wine's compatibility for your favorite applications. 5. Wine Staging: Enhanced Compatibility Wine Staging is a project that focuses on improving Wine\u2019s compatibility and performance. It includes experimental patches and features that may not be\n\nSource: https://gws.sandbox.iam.s.uw.edu/how-to-run-exe-file-in-linux\nTitle: Run EXE Files on Linux: 5 Easy Ways - University Innovation Hub\nContent: Contributing to the AppDB\nThe WineHQ AppDB relies on community contributions to keep the compatibility information up-to-date. If you successfully run an EXE file using Wine, you can contribute your experience to help others. This collaborative effort ensures that the AppDB remains a valuable resource for the Linux community.\n\ud83d\udca1 By actively participating in the WineHQ AppDB community, you can not only benefit from the collective knowledge but also contribute to the improvement of Wine's compatibility for your favorite applications.\n5. Wine Staging: Enhanced Compatibility\nWine Staging is a project that focuses on improving Wine\u2019s compatibility and performance. It includes experimental patches and features that may not be present in the official Wine release. Wine Staging is particularly useful for running more complex or niche applications that require specific optimizations.\nInstalling Wine Staging\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.964556",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://forum.winehq.org/viewtopic.php?t=32996\nTitle: An indie Unreal Engine game works fine except The Graphics part - WineHQ Forums\nContent: An indie Unreal Engine game works fine except The Graphics part Questions about Wine on Linux Locked Search Advanced search 2 posts \u2022 Page 1 of 1 thisusername Level 2 Posts: 26 Joined: Mon Jun 17, 2019 10:38 am An indie Unreal Engine game works fine except The Graphics part Post by thisusername \u00bb Fri Sep 27, 2019 5:53 pm There is Indie Unreal Engine game called \" Project Tetra \" the game works fine for the performance i even made settings low just in case but the graphics not clear some parts of screen are black etc. the damaged part is the texture/maps in most. as i remember clean wineprefix/ default Wine not helping , Dxvk not working because Vulkan is not supported by the GPU / but it is installed, directX not helping with this issue in specific with this game if it's installed by Winetricks or manually. so is this error can be fixed because i faced issues like this like for example Space Engine and was fixed by override the correct files. or it just can't work on my device (in\n\nSource: https://forums.developer.nvidia.com/t/graphic-issues-with-unreal-engine-w-343-22/35066\nTitle: Graphic issues with Unreal Engine w/ 343.22 - Linux - NVIDIA Developer Forums\nContent: Graphic issues with Unreal Engine w/ 343.22 Graphics / Linux Linux\nGraphic issues with Unreal Engine w/ 343.22\nGraphics / Linux Linux\nGraphics / Linux\nGraphics / Linux\nGraphics / Linux\n\nSource: https://forums.developer.nvidia.com/t/graphic-issues-with-unreal-engine-w-343-22/35066\nTitle: Graphic issues with Unreal Engine w/ 343.22 - Linux - NVIDIA Developer Forums\nContent: Graphic issues with Unreal Engine w/ 343.22 Graphics / Linux Linux r2rX October 6, 2014, 5:28pm 1 Hello everyone, I just wanted to report a few bugs that i\u2019ve noticed with the Linux drivers and game ports using Unreal Engine. This applies to both Borderlands 2 and Painkiller. It also applies to several driver revisions (don\u2019t remember the first version I encountered this). It also seems to be distro insensitive (applies to Linux Mint/Ubuntu and Arch). The issues stem from enabling certain features in the NVIDIA X Server Settings: 1.) If the Anisotropic Filtering override is enabled (with any value; 1-16), there is a great deal of red artifacts spanning across the entire screen. 2.) If Texture Sharpening is enabled , there is a similar effect on specific textures (or lighting?). The screenshots are from Borderlands 2 but the same symptoms are present in Painkiller as well. These two titles are the only ones that i\u2019ve experienced this, in Linux. Just thought i\u2019d let however is interested\n\nSource: https://forum.winehq.org/viewtopic.php?t=32996\nTitle: An indie Unreal Engine game works fine except The Graphics part - WineHQ Forums\nContent: Quick links Unanswered topics Active topics Search FAQ Login Register Home Board index WineHQ Wine Help Linux Search An indie Unreal Engine game works fine except The Graphics part Questions about Wine on Linux Locked Search Advanced search 2 posts \u2022 Page 1 of 1 thisusername Level 2 Posts: 26 Joined: Mon Jun 17, 2019 10:38 am An indie Unreal Engine game works fine except The Graphics part Post by thisusername \u00bb Fri Sep 27, 2019 5:53 pm There is Indie Unreal Engine game called \" Project Tetra \" the game works fine for the performance i even made settings low just in case but the graphics not clear some parts of screen are black etc. the damaged part is the texture/maps in most. as i remember clean wineprefix/ default Wine not helping , Dxvk not working because Vulkan is not supported by the GPU / but it is installed, directX not helping with this issue in specific with this game if it's installed by Winetricks or manually. so is this error can be fixed because i faced issues like this\n\nSource: https://forum.winehq.org/viewtopic.php?t=32996\nTitle: An indie Unreal Engine game works fine except The Graphics part - WineHQ Forums\nContent: An indie Unreal Engine game works fine except The Graphics part\nQuestions about Wine on Linux\nLocked Search Advanced search 2 posts \u2022 Page 1 of 1\nSearch Advanced search\n2 posts \u2022 Page 1 of 1\n\nSource: https://forums.unrealengine.com/t/running-windows-editor-through-wine-severe-graphical-issues/1320028\nTitle: Running Windows editor through Wine - severe graphical issues - Getting Started & Setup - Epic Developer Community Forums\nContent: Getting Started & Setup\nquestion, Linux, unreal-engine\nquestion, Linux, unreal-engine\neldomtom2 (eldomtom2) October 2, 2023, 3:27pm 1 I am attempting to run the Windows-only TSW4 Unreal editor through Wine, however I get severe graphical issues such as the viewport being entirely black and the dropdown menus being completely disorted - here is a video showing them. Does anyone know anything about the cause of this, and if it can be fixed?\neldomtom2 (eldomtom2) October 2, 2023, 3:27pm 1 I am attempting to run the Windows-only TSW4 Unreal editor through Wine, however I get severe graphical issues such as the viewport being entirely black and the dropdown menus being completely disorted - here is a video showing them. Does anyone know anything about the cause of this, and if it can be fixed?\neldomtom2 (eldomtom2) October 2, 2023, 3:27pm 1\nOctober 2, 2023, 3:27pm 1\n\nSource: https://forums.unrealengine.com/t/running-windows-editor-through-wine-severe-graphical-issues/1320028\nTitle: Running Windows editor through Wine - severe graphical issues - Getting Started & Setup - Epic Developer Community Forums\nContent: Running Windows editor through Wine - severe graphical issues Development Getting Started & Setup question, Linux, unreal-engine eldomtom2 (eldomtom2) October 2, 2023, 3:27pm 1 I am attempting to run the Windows-only TSW4 Unreal editor through Wine, however I get severe graphical issues such as the viewport being entirely black and the dropdown menus being completely disorted - here is a video showing them. Does anyone know anything about the cause of this, and if it can be fixed?\nRunning Windows editor through Wine - severe graphical issues Development Getting Started & Setup question, Linux, unreal-engine\nRunning Windows editor through Wine - severe graphical issues\nDevelopment Getting Started & Setup\nGetting Started & Setup\nGetting Started & Setup\nGetting Started & Setup\nquestion, Linux, unreal-engine\nquestion, Linux, unreal-engine\n\nSource: https://forum.winehq.org/viewtopic.php?t=32996\nTitle: An indie Unreal Engine game works fine except The Graphics part - WineHQ Forums\nContent: An indie Unreal Engine game works fine except The Graphics part Post by thisusername \u00bb Fri Sep 27, 2019 5:53 pm There is Indie Unreal Engine game called \" Project Tetra \" the game works fine for the performance i even made settings low just in case but the graphics not clear some parts of screen are black etc. the damaged part is the texture/maps in most. as i remember clean wineprefix/ default Wine not helping , Dxvk not working because Vulkan is not supported by the GPU / but it is installed, directX not helping with this issue in specific with this game if it's installed by Winetricks or manually. so is this error can be fixed because i faced issues like this like for example Space Engine and was fixed by override the correct files. or it just can't work on my device (in specific without Windows OS) ? The log / wine staging 4.16 (staging settings are disabled because it's worse with this game (in specific) / tested also with Wine 4.11 /4.9 as i remember / there is similar unreal\n\nSource: https://forum.winehq.org/viewtopic.php?t=32996\nTitle: An indie Unreal Engine game works fine except The Graphics part - WineHQ Forums\nContent: An indie Unreal Engine game works fine except The Graphics part Post by thisusername \u00bb Fri Sep 27, 2019 5:53 pm There is Indie Unreal Engine game called \" Project Tetra \" the game works fine for the performance i even made settings low just in case but the graphics not clear some parts of screen are black etc. the damaged part is the texture/maps in most. as i remember clean wineprefix/ default Wine not helping , Dxvk not working because Vulkan is not supported by the GPU / but it is installed, directX not helping with this issue in specific with this game if it's installed by Winetricks or manually. so is this error can be fixed because i faced issues like this like for example Space Engine and was fixed by override the correct files. or it just can't work on my device (in specific without Windows OS) ? The log / wine staging 4.16 (staging settings are disabled because it's worse with this game (in specific) / tested also with Wine 4.11 /4.9 as i remember / there is similar unreal\n\nSource: https://forum.winehq.org/viewtopic.php?t=32996\nTitle: An indie Unreal Engine game works fine except The Graphics part - WineHQ Forums\nContent: There is Indie Unreal Engine game called \" Project Tetra \" the game works fine for the performance i even made settings low just in case but the graphics not clear some parts of screen are black etc. the damaged part is the texture/maps in most. as i remember clean wineprefix/ default Wine not helping , Dxvk not working because Vulkan is not supported by the GPU / but it is installed, directX not helping with this issue in specific with this game if it's installed by Winetricks or manually. so is this error can be fixed because i faced issues like this like for example Space Engine and was fixed by override the correct files. or it just can't work on my device (in specific without Windows OS) ? The log / wine staging 4.16 (staging settings are disabled because it's worse with this game (in specific) / tested also with Wine 4.11 /4.9 as i remember / there is similar unreal engine game less complicated but with similar problems with graphics and performance etc, fixed by disabling\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.968203",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Unreal Engine 4 Multicore Tweaks and Performance Options\n\nSource: https://github.com/AlteriaX/WuWa-Configs\nTitle: GitHub - AlteriaX/WuWa-Configs: Engine Tweaks to Improve Visuals/Stutters\nContent: For explanations and image comparisons: Link\nCommon folder contains: Input.ini to disable mouse smoothing and FoV scaling\nCopy Engine.ini (choose one config) and other ini files to this location:\n..Wuthering Waves\\Wuthering Waves Game\\Client\\Saved\\Config\\WindowsNoEditor\nReferences: UE4.27 Commands, UE4 Documentation, UE Forum\nAbout Engine Tweaks to Improve Visuals/Stutters Topics wutheringwaves wuwa wuthering-waves Resources Readme Uh oh! There was an error while loading. Please reload this page. Activity Stars 708 stars Watchers 26 watching Forks 27 forks Report repository Releases 13 tags Packages 0 No packages published\nAbout Engine Tweaks to Improve Visuals/Stutters Topics wutheringwaves wuwa wuthering-waves Resources Readme Uh oh! There was an error while loading. Please reload this page. Activity Stars 708 stars Watchers 26 watching Forks 27 forks Report repository Releases 13 tags Packages 0 No packages published\n\nSource: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Unreal Engine 4 Multicore Tweaks\nUnreal Engine 4 Multicore Tweaks\nThis guide gives you some tweaks you can try in various config files and launch arguments inside your Unreal Engine 4 Game to get some more performance out of your Multi-core system.\nAfter %command% Launch Options to Try (Steam):\nAfter %command% Launch Options to Try (Steam):\n(place these in your Launch Options in Steam, after %command%)\n-USEALLAVAILABLECORES Explicitly make the game utilize all available CPU cores, self explanitory\nExplicitly make the game utilize all available CPU cores, self explanitory\n-NOTEXTURESTREAMING Disable streaming textures in and out of VRAM based on player location. This can be benefitial for systems with lots of VRAM avalilable, or when the game doesn't stream textures correctly, causing textures to stay blurry for far too long.\n\nSource: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Raw unreal-multicore-tweaks.md Unreal Engine 4 Multicore Tweaks This guide gives you some tweaks you can try in various config files and launch arguments inside your Unreal Engine 4 Game to get some more performance out of your Multi-core system. After %command% Launch Options to Try (Steam): (place these in your Launch Options in Steam, after %command%) -USEALLAVAILABLECORES Explicitly make the game utilize all available CPU cores, self explanitory -NOTEXTURESTREAMING Disable streaming textures in and out of VRAM based on player location. This can be benefitial for systems with lots of VRAM avalilable, or when the game doesn't stream textures correctly, causing textures to stay blurry for far too long. -nomansky (not the game) Disable generation of dynamic sky and cloud effects. Good to use when you're on a low end system or need extra performance. Can also be used to troubleshoot graphical issues. -lowmemory This flag is designed for low-memory systems and reduces the memory\n\nSource: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Raw unreal-multicore-tweaks.md Unreal Engine 4 Multicore Tweaks This guide gives you some tweaks you can try in various config files and launch arguments inside your Unreal Engine 4 Game to get some more performance out of your Multi-core system. After %command% Launch Options to Try (Steam): (place these in your Launch Options in Steam, after %command%) -USEALLAVAILABLECORES Explicitly make the game utilize all available CPU cores, self explanitory -NOTEXTURESTREAMING Disable streaming textures in and out of VRAM based on player location. This can be benefitial for systems with lots of VRAM avalilable, or when the game doesn't stream textures correctly, causing textures to stay blurry for far too long. -nomansky (not the game) Disable generation of dynamic sky and cloud effects. Good to use when you're on a low end system or need extra performance. Can also be used to troubleshoot graphical issues. -lowmemory This flag is designed for low-memory systems and reduces the memory\n\nSource: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Unreal Engine 4 Multicore Tweaks This guide gives you some tweaks you can try in various config files and launch arguments inside your Unreal Engine 4 Game to get some more performance out of your Multi-core system. After %command% Launch Options to Try (Steam): (place these in your Launch Options in Steam, after %command%) -USEALLAVAILABLECORES Explicitly make the game utilize all available CPU cores, self explanitory -NOTEXTURESTREAMING Disable streaming textures in and out of VRAM based on player location. This can be benefitial for systems with lots of VRAM avalilable, or when the game doesn't stream textures correctly, causing textures to stay blurry for far too long. -nomansky (not the game) Disable generation of dynamic sky and cloud effects. Good to use when you're on a low end system or need extra performance. Can also be used to troubleshoot graphical issues. -lowmemory This flag is designed for low-memory systems and reduces the memory footprint of certain UE4 Games. Your\n\nSource: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Unreal Engine 4 Multicore Tweaks and Performance Options Raw unreal-multicore-tweaks.md Unreal Engine 4 Multicore Tweaks This guide gives you some tweaks you can try in various config files and launch arguments inside your Unreal Engine 4 Game to get some more performance out of your Multi-core system. After %command% Launch Options to Try (Steam): (place these in your Launch Options in Steam, after %command%) -USEALLAVAILABLECORES Explicitly make the game utilize all available CPU cores, self explanitory -NOTEXTURESTREAMING Disable streaming textures in and out of VRAM based on player location. This can be benefitial for systems with lots of VRAM avalilable, or when the game doesn't stream textures correctly, causing textures to stay blurry for far too long. -nomansky (not the game) Disable generation of dynamic sky and cloud effects. Good to use when you're on a low end system or need extra performance. Can also be used to troubleshoot graphical issues. -lowmemory This flag is\n\nSource: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Unreal Engine 4 Multicore Tweaks and Performance Options Raw unreal-multicore-tweaks.md Unreal Engine 4 Multicore Tweaks This guide gives you some tweaks you can try in various config files and launch arguments inside your Unreal Engine 4 Game to get some more performance out of your Multi-core system. After %command% Launch Options to Try (Steam): (place these in your Launch Options in Steam, after %command%) -USEALLAVAILABLECORES Explicitly make the game utilize all available CPU cores, self explanitory -NOTEXTURESTREAMING Disable streaming textures in and out of VRAM based on player location. This can be benefitial for systems with lots of VRAM avalilable, or when the game doesn't stream textures correctly, causing textures to stay blurry for far too long. -nomansky (not the game) Disable generation of dynamic sky and cloud effects. Good to use when you're on a low end system or need extra performance. Can also be used to troubleshoot graphical issues. -lowmemory This flag is\n\nSource: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Unreal Engine 4 Multicore Tweaks and Performance Options Raw unreal-multicore-tweaks.md Unreal Engine 4 Multicore Tweaks This guide gives you some tweaks you can try in various config files and launch arguments inside your Unreal Engine 4 Game to get some more performance out of your Multi-core system. After %command% Launch Options to Try (Steam): (place these in your Launch Options in Steam, after %command%) -USEALLAVAILABLECORES Explicitly make the game utilize all available CPU cores, self explanitory -NOTEXTURESTREAMING Disable streaming textures in and out of VRAM based on player location. This can be benefitial for systems with lots of VRAM avalilable, or when the game doesn't stream textures correctly, causing textures to stay blurry for far too long. -nomansky (not the game) Disable generation of dynamic sky and cloud effects. Good to use when you're on a low end system or need extra performance. Can also be used to troubleshoot graphical issues. -lowmemory This flag is\n\nSource: https://gist.github.com/spongeyperson/cf1980ab9cb04a974869dec854cd0d4a\nTitle: Unreal Engine 4 Multicore Tweaks and Performance Options \u00b7 GitHub\nContent: Save spongeyperson/cf1980ab9cb04a974869dec854cd0d4a to your computer and use it in GitHub Desktop. Download ZIP Unreal Engine 4 Multicore Tweaks and Performance Options Raw unreal-multicore-tweaks.md Unreal Engine 4 Multicore Tweaks This guide gives you some tweaks you can try in various config files and launch arguments inside your Unreal Engine 4 Game to get some more performance out of your Multi-core system. After %command% Launch Options to Try (Steam): (place these in your Launch Options in Steam, after %command%) -USEALLAVAILABLECORES Explicitly make the game utilize all available CPU cores, self explanitory -NOTEXTURESTREAMING Disable streaming textures in and out of VRAM based on player location. This can be benefitial for systems with lots of VRAM avalilable, or when the game doesn't stream textures correctly, causing textures to stay blurry for far too long. -nomansky (not the game) Disable generation of dynamic sky and cloud effects. Good to use when you're on a low end\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.974648",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "research_step_finalized",
+        "output": "Finalized research step.\n\ud83d\udcb8 Total Research Costs: $0.01170672",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.987243",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subqueries",
+        "output": "\ud83d\uddc2\ufe0f I will conduct my research based on the following queries: ['WINE DirectX to Vulkan UE4 graphical glitches June 2025', 'UE4 DirectX to Vulkan WINE patch status June 2025', 'recent fixes DirectX to Vulkan UE4 WINE compatibility', 'performance comparison WINE DirectX 11 vs Vulkan UE4 June 2025', '\"WINE DirectX to Vulkan UE4 graphical glitches patches fixes recent\"']...",
+        "metadata": [
+          "WINE DirectX to Vulkan UE4 graphical glitches June 2025",
+          "UE4 DirectX to Vulkan WINE patch status June 2025",
+          "recent fixes DirectX to Vulkan UE4 WINE compatibility",
+          "performance comparison WINE DirectX 11 vs Vulkan UE4 June 2025",
+          "\"WINE DirectX to Vulkan UE4 graphical glitches patches fixes recent\""
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.990695",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subqueries",
+        "output": "\ud83d\uddc2\ufe0f I will conduct my research based on the following queries: ['WINE UE4 texture issues Proton DXVK VKD3D 2025', 'UE4 white texture bug WINE Proton DXVK VKD3D performance June 2025', 'DXVK VKD3D compatibility Unreal Engine 4 WINE Proton review June 2025', 'WINE Proton UE4 texture fix comparison DXVK vs VKD3D 2025 performance impact', '\"WINE UE4 white texture fix DXVK VKD3D Proton June 2025\"']...",
+        "metadata": [
+          "WINE UE4 texture issues Proton DXVK VKD3D 2025",
+          "UE4 white texture bug WINE Proton DXVK VKD3D performance June 2025",
+          "DXVK VKD3D compatibility Unreal Engine 4 WINE Proton review June 2025",
+          "WINE Proton UE4 texture fix comparison DXVK vs VKD3D 2025 performance impact",
+          "\"WINE UE4 white texture fix DXVK VKD3D Proton June 2025\""
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:23.993411",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'WINE DirectX to Vulkan UE4 graphical glitches June 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.333667",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=37126\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=37126"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.336358",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=31400\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=31400"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.339528",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://linuxiac.com/wine-10-4-improves-vulkan-video-decoder/\n",
+        "metadata": "https://linuxiac.com/wine-10-4-improves-vulkan-video-decoder/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.342217",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=36263\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=36263"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.344735",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=37213\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=37213"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.348223",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/tag/directx\n",
+        "metadata": "https://forums.unrealengine.com/tag/directx"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.351001",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.353750",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 6 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.913212",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.916680",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 1 new images from 1 total images",
+        "metadata": [
+          {
+            "url": "https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2025/03/wine104-1024x576.jpg",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.919411",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.922826",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: WINE DirectX to Vulkan UE4 graphical glitches June 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:26.967934",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'UE4 DirectX to Vulkan WINE patch status June 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:29.498572",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.level1techs.com/t/ue4-games-on-dxvk-and-wine-proton-with-avx-vs-avx2-performance-difference/147727?page=3\n",
+        "metadata": "https://forum.level1techs.com/t/ue4-games-on-dxvk-and-wine-proton-with-avx-vs-avx2-performance-difference/147727?page=3"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:29.501473",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/Gcenx/DXVK-macOS/releases\n",
+        "metadata": "https://github.com/Gcenx/DXVK-macOS/releases"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:29.504125",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/doitsujin/dxvk\n",
+        "metadata": "https://github.com/doitsujin/dxvk"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:29.507123",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/doitsujin/dxvk/releases\n",
+        "metadata": "https://github.com/doitsujin/dxvk/releases"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:29.509907",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.winehq.org/news/\n",
+        "metadata": "https://www.winehq.org/news/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:29.512869",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:29.515888",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:30.670717",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:30.673256",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:30.680062",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:30.683096",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: UE4 DirectX to Vulkan WINE patch status June 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:30.815722",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'recent fixes DirectX to Vulkan UE4 WINE compatibility'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:32.980193",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://alternativeto.net/news/2025/3/wine-10-4-continues-work-on-vulkan-video-decoder-support-in-wined3d-and-bluetooth-driver/\n",
+        "metadata": "https://alternativeto.net/news/2025/3/wine-10-4-continues-work-on-vulkan-video-decoder-support-in-wined3d-and-bluetooth-driver/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:32.982840",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.phoronix.com/news/Wine-10.4-Released\n",
+        "metadata": "https://www.phoronix.com/news/Wine-10.4-Released"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:32.988628",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.fosslinux.com/5878/wine-4-0-released-with-vulkan-direct3d-12-and-better-hidpi-support.htm\n",
+        "metadata": "https://www.fosslinux.com/5878/wine-4-0-released-with-vulkan-direct3d-12-and-better-hidpi-support.htm"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:32.991963",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.gamersonlinux.com/forum/threads/dxvk-guide.2540/\n",
+        "metadata": "https://www.gamersonlinux.com/forum/threads/dxvk-guide.2540/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:32.995281",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/ue5-game-wont-launch-on-linux-seems-to-be-a-vulkan-error/1581188\n",
+        "metadata": "https://forums.unrealengine.com/t/ue5-game-wont-launch-on-linux-seems-to-be-a-vulkan-error/1581188"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:32.998202",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:33.001534",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:34.921154",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:34.924174",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 1 new images from 4 total images",
+        "metadata": [
+          {
+            "url": "https://b1490832.smushcdn.com/1490832/wp-content/uploads/2020/01/fl_logo_v3.png?lossy=2&strip=1&webp=1",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:34.927959",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:34.931254",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: recent fixes DirectX to Vulkan UE4 WINE compatibility (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:34.967840",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'performance comparison WINE DirectX 11 vs Vulkan UE4 June 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:37.989999",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://splicedonline.com/is-directx-faster-than-vulkan/\n",
+        "metadata": "https://splicedonline.com/is-directx-faster-than-vulkan/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:37.994194",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/unrealengine4/comments/16jagx9/unreal_engine_directx_11_performance_comparison/\n",
+        "metadata": "https://www.reddit.com/r/unrealengine4/comments/16jagx9/unreal_engine_directx_11_performance_comparison/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:37.997507",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.g2a.com/news/features/vulkan-vs-dx11-comparison/\n",
+        "metadata": "https://www.g2a.com/news/features/vulkan-vs-dx11-comparison/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:38.000860",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://umatechnology.org/directx-vs-vulkan-battle-of-the-modern-graphics-apis/\n",
+        "metadata": "https://umatechnology.org/directx-vs-vulkan-battle-of-the-modern-graphics-apis/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:38.004306",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://josephmatino.com/directx-vs-vulkan-which-api-is-best-for-new-gamers/\n",
+        "metadata": "https://josephmatino.com/directx-vs-vulkan-which-api-is-best-for-new-gamers/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:38.007953",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\n",
+        "metadata": "https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:38.011348",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/when-will-vulkan-be-good/718577\n",
+        "metadata": "https://forums.unrealengine.com/t/when-will-vulkan-be-good/718577"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:38.014820",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:38.018277",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:41.105990",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:41.108898",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 1 new images from 1 total images",
+        "metadata": [
+          {
+            "url": "https://josephmatino.com/stupped/2024/06/DirectX-Vs-Vulkan-860x452.jpg",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:41.112567",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:41.116434",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: performance comparison WINE DirectX 11 vs Vulkan UE4 June 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:41.173447",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for '\"WINE DirectX to Vulkan UE4 graphical glitches patches fixes recent\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:51.911116",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:51.914591",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 0 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:51.918488",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 0 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:51.922127",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:51.925570",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:51.929589",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: \"WINE DirectX to Vulkan UE4 graphical glitches patches fixes recent\" (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:51.934052",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_not_found",
+        "output": "\ud83e\udd37 No content found for '\"WINE DirectX to Vulkan UE4 graphical glitches patches fixes recent\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:51.937650",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'WINE UE4 texture issues Proton DXVK VKD3D 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:54.829018",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\n",
+        "metadata": "https://github.com/HansKristian-Work/vkd3d-proton/issues/1229"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:54.832071",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.developer.nvidia.com/t/assertion-failed-expression-status-vkcreatecomputepipelines-with-ue5-games-with-wine-proton/293470\n",
+        "metadata": "https://forums.developer.nvidia.com/t/assertion-failed-expression-status-vkcreatecomputepipelines-with-ue5-games-with-wine-proton/293470"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:54.836132",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=39199\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=39199"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:54.839674",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://bbs.archlinux.org/viewtopic.php?id=304187\n",
+        "metadata": "https://bbs.archlinux.org/viewtopic.php?id=304187"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:54.843670",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://glfs-book.github.io/glfs/wine/vkd3d-proton.html\n",
+        "metadata": "https://glfs-book.github.io/glfs/wine/vkd3d-proton.html"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:54.847253",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux_gaming/comments/tjw5xh/winevalve_dxvk_vkd3dproton_dxvknvapi_proton/\n",
+        "metadata": "https://www.reddit.com/r/linux_gaming/comments/tjw5xh/winevalve_dxvk_vkd3dproton_dxvknvapi_proton/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:54.850832",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:54.854509",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 6 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:55.659416",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:55.663885",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:55.667539",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:55.671456",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: WINE UE4 texture issues Proton DXVK VKD3D 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:55.717973",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'UE4 white texture bug WINE Proton DXVK VKD3D performance June 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:58.456231",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/doitsujin/dxvk/issues/4436\n",
+        "metadata": "https://github.com/doitsujin/dxvk/issues/4436"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:58.460340",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/wine_gaming/comments/so6ejo/when_im_playing_gta_iv_there_are_these_weird/\n",
+        "metadata": "https://www.reddit.com/r/wine_gaming/comments/so6ejo/when_im_playing_gta_iv_there_are_these_weird/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:58.464217",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/doitsujin/dxvk/issues/3670\n",
+        "metadata": "https://github.com/doitsujin/dxvk/issues/3670"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:58.468063",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.developer.nvidia.com/t/directx12-performance-is-terrible-on-linux/303207?page=2\n",
+        "metadata": "https://forums.developer.nvidia.com/t/directx12-performance-is-terrible-on-linux/303207?page=2"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:58.472098",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.guru3d.com/threads/we-need-to-talk-about-ue4-shader-compilation-issues.442198/page-23\n",
+        "metadata": "https://forums.guru3d.com/threads/we-need-to-talk-about-ue4-shader-compilation-issues.442198/page-23"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:58.475990",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:58.480111",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:59.415683",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:59.419185",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:59.423759",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:59.428049",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: UE4 white texture bug WINE Proton DXVK VKD3D performance June 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:30:59.472678",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'DXVK VKD3D compatibility Unreal Engine 4 WINE Proton review June 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:01.785170",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://best-of-web.builder.io/library/doitsujin/dxvk\n",
+        "metadata": "https://best-of-web.builder.io/library/doitsujin/dxvk"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:01.788592",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.emunations.com/updates/dxvk\n",
+        "metadata": "https://www.emunations.com/updates/dxvk"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:01.793293",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.libhunt.com/compare-vkd3d-vs-dxvk\n",
+        "metadata": "https://www.libhunt.com/compare-vkd3d-vs-dxvk"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:01.797087",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux_gaming/comments/15xyo0b/wine_constantly_using_dxvk_instead_of_using/\n",
+        "metadata": "https://www.reddit.com/r/linux_gaming/comments/15xyo0b/wine_constantly_using_dxvk_instead_of_using/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:01.800908",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/doitsujin/dxvk/issues/710\n",
+        "metadata": "https://github.com/doitsujin/dxvk/issues/710"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:01.805176",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:01.808687",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:02.664630",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:02.668242",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:02.672233",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:02.676073",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: DXVK VKD3D compatibility Unreal Engine 4 WINE Proton review June 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:02.859055",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'WINE Proton UE4 texture fix comparison DXVK vs VKD3D 2025 performance impact'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.413555",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.neogaf.com/threads/this-is-the-performance-difference-you-can-expect-from-running-your-games-on-steamos-vs-windows.1613621/\n",
+        "metadata": "https://www.neogaf.com/threads/this-is-the-performance-difference-you-can-expect-from-running-your-games-on-steamos-vs-windows.1613621/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.420359",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux_gaming/comments/zqi01k/what_are_the_differences_between_proton_wine_dxvk/\n",
+        "metadata": "https://www.reddit.com/r/linux_gaming/comments/zqi01k/what_are_the_differences_between_proton_wine_dxvk/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.424993",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/linux_gaming/comments/tsyxyf/vkd3d_vs_dxvk_in_cpu_limited_situations/\n",
+        "metadata": "https://www.reddit.com/r/linux_gaming/comments/tsyxyf/vkd3d_vs_dxvk_in_cpu_limited_situations/"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.429225",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.developer.nvidia.com/t/please-sort-out-the-dx12-vkd3d-proton-performance-under-linux/284642\n",
+        "metadata": "https://forums.developer.nvidia.com/t/please-sort-out-the-dx12-vkd3d-proton-performance-under-linux/284642"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.433474",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/HansKristian-Work/vkd3d-proton\n",
+        "metadata": "https://github.com/HansKristian-Work/vkd3d-proton"
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.437754",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.441891",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.959690",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.963222",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.967293",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:06.971125",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: WINE Proton UE4 texture fix comparison DXVK vs VKD3D 2025 performance impact (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:07.029594",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for '\"WINE UE4 white texture fix DXVK VKD3D Proton June 2025\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.306650",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.310162",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 0 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.314341",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 0 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.318200",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.322126",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.326311",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: \"WINE UE4 white texture fix DXVK VKD3D Proton June 2025\" (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.330336",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_not_found",
+        "output": "\ud83e\udd37 No content found for '\"WINE UE4 white texture fix DXVK VKD3D Proton June 2025\"'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.335030",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://forum.winehq.org/viewtopic.php?t=31400\nTitle: New to Vulkan and DXVK - trouble using them with latest Wine - WineHQ Forums\nContent: New to Vulkan and DXVK - trouble using them with latest Wine\nPost by BenoitSmith \u00bb Wed Nov 07, 2018 10:17 am\nby BenoitSmith \u00bb\n\nSource: https://forum.winehq.org/viewtopic.php?t=37126\nTitle: Make sure you have DirectX 11 installed, have up to date - WineHQ Forums\nContent: Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:fixme:imm:ImeSetActiveContext (0000000000010052, 1): stub 00b4:fixme:imm:ImeSetActiveContext (0000000000010026, 0): stub 00b4:fixme:imm:ImmReleaseContext (0000000000010020, 0000000000010026): stub glxinfo -B command result : 36 Last edited by Bhavana on Mon Nov 21, 2022 1:03 am, edited 1 time in total. Top DarkShadow44 Level 9 Posts: 1338 Joined: Tue Nov 22, 2016 5:39 pm Re: Make sure you have DirectX 11 installed, have up to date Post by DarkShadow44 \u00bb Mon Nov 21, 2022 2:13 pm Did you set the wined3d renderer to vulkan? Because your wine doesn't have vulkan support. Also, my glxinfo -B result is this: Code: Select allname of display: :0 display: :0 screen: 0 direct rendering: Yes Extended renderer info (GLX_MESA_query_renderer): Vendor: AMD (0x1002) Device: AMD Radeon RX 5700 (navi10, LLVM 14.0.6, DRM 3.48, 6.0.9-arch1-1) (0x731f) Version: 22.2.3 Accelerated:\n\nSource: https://forum.winehq.org/viewtopic.php?t=31400\nTitle: New to Vulkan and DXVK - trouble using them with latest Wine - WineHQ Forums\nContent: Code: Select all0009:fixme:exec:SHELL_execute flags ignored: 0x00000100 002b:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 002b:err:vulkan:wine_vk_init Failed to load Wine graphics driver supporting Vulkan. 002b:err:module:attach_dlls \"winevulkan.dll\" failed to initialize, aborting 002b:err:module:attach_dlls Initializing dlls for L\"C:\\\\VulkanSDK\\\\1.1.73.0\\\\Bin\\\\cube.exe\" failed, status c0000142\nCode: Select all\n\nSource: https://forum.winehq.org/viewtopic.php?t=31400\nTitle: New to Vulkan and DXVK - trouble using them with latest Wine - WineHQ Forums\nContent: Vulkan support. 002b:err:vulkan:wine_vk_init Failed to load Wine graphics driver supporting Vulkan. 002b:err:module:attach_dlls \"winevulkan.dll\" failed to initialize, aborting 002b:err:module:attach_dlls Initializing dlls for L\"C:\\\\VulkanSDK\\\\1.1.73.0\\\\Bin\\\\cube.exe\" failed, status c0000142 - Output of \" WINEPREFIX=<my_prefix> wine start 'C:\\VulkanSDK\\1.1.73.0\\RunTimeInstaller\\x86\\vulkaninfo.exe' \": - Output of \" WINEPREFIX=<my_prefix> wine start 'C:\\VulkanSDK\\1.1.73.0\\RunTimeInstaller\\x64\\vulkaninfo.exe' \":\n\nSource: https://forum.winehq.org/viewtopic.php?t=31400\nTitle: New to Vulkan and DXVK - trouble using them with latest Wine - WineHQ Forums\nContent: Vulkan support. 002b:err:vulkan:wine_vk_init Failed to load Wine graphics driver supporting Vulkan. 002b:err:module:attach_dlls \"winevulkan.dll\" failed to initialize, aborting 002b:err:module:attach_dlls Initializing dlls for L\"C:\\\\VulkanSDK\\\\1.1.73.0\\\\Bin\\\\cube.exe\" failed, status c0000142 - Output of \" WINEPREFIX=<my_prefix> wine start 'C:\\VulkanSDK\\1.1.73.0\\RunTimeInstaller\\x86\\vulkaninfo.exe' \": - Output of \" WINEPREFIX=<my_prefix> wine start 'C:\\VulkanSDK\\1.1.73.0\\RunTimeInstaller\\x64\\vulkaninfo.exe' \":\n\nSource: https://forum.winehq.org/viewtopic.php?t=37126\nTitle: Make sure you have DirectX 11 installed, have up to date - WineHQ Forums\nContent: driver supporting Vulkan. 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:fixme:imm:ImeSetActiveContext (0000000000010052, 1): stub 00b4:fixme:imm:ImeSetActiveContext (0000000000010026, 0): stub 00b4:fixme:imm:ImmReleaseContext (0000000000010020, 0000000000010026): stub\n\nSource: https://forum.winehq.org/viewtopic.php?t=37126\nTitle: Make sure you have DirectX 11 installed, have up to date - WineHQ Forums\nContent: 007c:fixme:hid:handle_IRP_MN_QUERY_ID Unhandled type 00000005 007c:fixme:hid:handle_IRP_MN_QUERY_ID Unhandled type 00000005 007c:fixme:hid:handle_IRP_MN_QUERY_ID Unhandled type 00000005 007c:fixme:hid:handle_IRP_MN_QUERY_ID Unhandled type 00000005 0024:fixme:ntdll:NtQuerySystemInformation info_class SYSTEM_PERFORMANCE_INFORMATION 0024:fixme:imm:ImmReleaseContext (0000000000030046, 0000000000010052): stub 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine\n\nSource: https://forum.winehq.org/viewtopic.php?t=37126\nTitle: Make sure you have DirectX 11 installed, have up to date - WineHQ Forums\nContent: Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:fixme:imm:ImeSetActiveContext (0000000000010052, 1): stub 00b4:fixme:imm:ImeSetActiveContext (0000000000010026, 0): stub 00b4:fixme:imm:ImmReleaseContext (0000000000010020, 0000000000010026): stub glxinfo -B command result : 36 Last edited by Bhavana on Mon Nov 21, 2022 1:03 am, edited 1 time in total. Top\n\nSource: https://forum.winehq.org/viewtopic.php?t=37126\nTitle: Make sure you have DirectX 11 installed, have up to date - WineHQ Forums\nContent: Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:err:vulkan:get_vulkan_driver Wine was built without Vulkan support. 0024:err:vulkan:init_vulkan Failed to load Wine graphics driver supporting Vulkan. 0024:fixme:imm:ImeSetActiveContext (0000000000010052, 1): stub 00b4:fixme:imm:ImeSetActiveContext (0000000000010026, 0): stub 00b4:fixme:imm:ImmReleaseContext (0000000000010020, 0000000000010026): stub glxinfo -B command result : 36 Last edited by Bhavana on Mon Nov 21, 2022 1:03 am, edited 1 time in total. Top\n\nSource: https://forum.winehq.org/viewtopic.php?t=31400\nTitle: New to Vulkan and DXVK - trouble using them with latest Wine - WineHQ Forums\nContent: Wine was built without Vulkan support. 002b:err:vulkan:wine_vk_init Failed to load Wine graphics driver supporting Vulkan. 002b:err:module:attach_dlls \"winevulkan.dll\" failed to initialize, aborting 002b:err:module:attach_dlls Initializing dlls for L\"C:\\\\VulkanSDK\\\\1.1.73.0\\\\Bin\\\\cube.exe\" failed, status c0000142 - Output of \" WINEPREFIX=<my_prefix> wine start 'C:\\VulkanSDK\\1.1.73.0\\RunTimeInstaller\\x86\\vulkaninfo.exe' \": - Output of \" WINEPREFIX=<my_prefix> wine start 'C:\\VulkanSDK\\1.1.73.0\\RunTimeInstaller\\x64\\vulkaninfo.exe' \": Top\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.339599",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://www.fosslinux.com/5878/wine-4-0-released-with-vulkan-direct3d-12-and-better-hidpi-support.htm\nTitle: Wine 4.0 released with Vulkan, Direct3D 12, and HiDPI support\nContent: Home NewsWine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support\nWine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support\n\nSource: https://www.phoronix.com/news/Wine-10.4-Released\nTitle: Wine 10.4 Brings More Direct3D To Vulkan Video Handling, Continued Bluetooth Driver Work - Phoronix\nContent: Wine 10.4 Brings More Direct3D To Vulkan Video Handling, Continued Bluetooth Driver Work Written by Michael Larabel in WINE on 21 March 2025 at 06:54 PM EDT. 9 Comments Wine 10.4 is out tonight as the newest bi-weekly development release of this open-source software for running Windows games and applications on Linux, macOS, and other platforms. Wine 10.4 continues the recent work of Direct3D video acceleration APIs implemented over Vulkan Video. There is further Vulkan Video decode support now wired up within WineD3D. Wine 10.4 also continues work on another recent effort in the past few months of the initial Bluetooth driver for Wine that debuted in Wine 10.0. Wine 10.4 also brings accessibility support within the SysLink control, improved PDB support within the DbgHelp debug helper, and 28 known bug fixes. The bug fixes range from fixing an iTunes UI issue to problems with Myst, Need for Speed: Shift, Battle.net, Firefox, and a variety of other games/app troubles. Wine 10.4\n\nSource: https://www.phoronix.com/news/Wine-10.4-Released\nTitle: Wine 10.4 Brings More Direct3D To Vulkan Video Handling, Continued Bluetooth Driver Work - Phoronix\nContent: Wine 10.4 Brings More Direct3D To Vulkan Video Handling, Continued Bluetooth Driver Work Written by Michael Larabel in WINE on 21 March 2025 at 06:54 PM EDT. 9 Comments Wine 10.4 is out tonight as the newest bi-weekly development release of this open-source software for running Windows games and applications on Linux, macOS, and other platforms. Wine 10.4 continues the recent work of Direct3D video acceleration APIs implemented over Vulkan Video. There is further Vulkan Video decode support now wired up within WineD3D. Wine 10.4 also continues work on another recent effort in the past few months of the initial Bluetooth driver for Wine that debuted in Wine 10.0. Wine 10.4 also brings accessibility support within the SysLink control, improved PDB support within the DbgHelp debug helper, and 28 known bug fixes. The bug fixes range from fixing an iTunes UI issue to problems with Myst, Need for Speed: Shift, Battle.net, Firefox, and a variety of other games/app troubles. Wine 10.4\n\nSource: https://www.phoronix.com/news/Wine-10.4-Released\nTitle: Wine 10.4 Brings More Direct3D To Vulkan Video Handling, Continued Bluetooth Driver Work - Phoronix\nContent: Wine 10.4 Brings More Direct3D To Vulkan Video Handling, Continued Bluetooth Driver Work Written by Michael Larabel in WINE on 21 March 2025 at 06:54 PM EDT. 9 Comments Wine 10.4 is out tonight as the newest bi-weekly development release of this open-source software for running Windows games and applications on Linux, macOS, and other platforms. Wine 10.4 continues the recent work of Direct3D video acceleration APIs implemented over Vulkan Video. There is further Vulkan Video decode support now wired up within WineD3D. Wine 10.4 also continues work on another recent effort in the past few months of the initial Bluetooth driver for Wine that debuted in Wine 10.0. Wine 10.4 also brings accessibility support within the SysLink control, improved PDB support within the DbgHelp debug helper, and 28 known bug fixes. The bug fixes range from fixing an iTunes UI issue to problems with Myst, Need for Speed: Shift, Battle.net, Firefox, and a variety of other games/app troubles. Wine 10.4\n\nSource: https://www.phoronix.com/news/Wine-10.4-Released\nTitle: Wine 10.4 Brings More Direct3D To Vulkan Video Handling, Continued Bluetooth Driver Work - Phoronix\nContent: Wine 10.4 Brings More Direct3D To Vulkan Video Handling, Continued Bluetooth Driver Work Written by Michael Larabel in WINE on 21 March 2025 at 06:54 PM EDT. 9 Comments Wine 10.4 is out tonight as the newest bi-weekly development release of this open-source software for running Windows games and applications on Linux, macOS, and other platforms. Wine 10.4 continues the recent work of Direct3D video acceleration APIs implemented over Vulkan Video. There is further Vulkan Video decode support now wired up within WineD3D. Wine 10.4 also continues work on another recent effort in the past few months of the initial Bluetooth driver for Wine that debuted in Wine 10.0. Wine 10.4 also brings accessibility support within the SysLink control, improved PDB support within the DbgHelp debug helper, and 28 known bug fixes. The bug fixes range from fixing an iTunes UI issue to problems with Myst, Need for Speed: Shift, Battle.net, Firefox, and a variety of other games/app troubles. Wine 10.4\n\nSource: https://www.fosslinux.com/5878/wine-4-0-released-with-vulkan-direct3d-12-and-better-hidpi-support.htm\nTitle: Wine 4.0 released with Vulkan, Direct3D 12, and HiDPI support\nContent: Wine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support by James Kiarie January 23, 2019 By James Kiarie Published: January 23, 2019Updated: December 23, 2019 1K Wine 4.0 has officially been released, promising massive improvements in its latest release. Besides the 6000 changes made to the newest version, developers have centered their focus on four key highlights. Key New Features in Wine 4.0 \u2022 Vulkan support \u2022 Direct3D 12 support \u2022 Game controllers support \u2022 High-DPI support on Android Don\u2019t get too excited yet as you need a GPU to support both Vulkan and Direct3D support. Additionally, Direct3D 12 support will require the vkd3d library, as well as a Vulkan Graphics Card to give you remarkable gaming experience. Other New Features Other notable core features of the Direct3D 10 and 11 features include: \u2022 Multi-sample textures and views, as well as multi-sample resolves. \u2022 Per-sample fragment shading. \u2022 Support for 1D textures. \u2022 Draws without render target views or\n\nSource: https://www.fosslinux.com/5878/wine-4-0-released-with-vulkan-direct3d-12-and-better-hidpi-support.htm\nTitle: Wine 4.0 released with Vulkan, Direct3D 12, and HiDPI support\nContent: Wine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support by James Kiarie January 23, 2019 By James Kiarie Published: January 23, 2019Updated: December 23, 2019 1K Wine 4.0 has officially been released, promising massive improvements in its latest release. Besides the 6000 changes made to the newest version, developers have centered their focus on four key highlights. Key New Features in Wine 4.0 \u2022 Vulkan support \u2022 Direct3D 12 support \u2022 Game controllers support \u2022 High-DPI support on Android Don\u2019t get too excited yet as you need a GPU to support both Vulkan and Direct3D support. Additionally, Direct3D 12 support will require the vkd3d library, as well as a Vulkan Graphics Card to give you remarkable gaming experience. Other New Features Other notable core features of the Direct3D 10 and 11 features include: \u2022 Multi-sample textures and views, as well as multi-sample resolves. \u2022 Per-sample fragment shading. \u2022 Support for 1D textures. \u2022 Draws without render target views or\n\nSource: https://www.fosslinux.com/5878/wine-4-0-released-with-vulkan-direct3d-12-and-better-hidpi-support.htm\nTitle: Wine 4.0 released with Vulkan, Direct3D 12, and HiDPI support\nContent: Wine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support by James Kiarie January 23, 2019 By James Kiarie Published: January 23, 2019Updated: December 23, 2019 1K Wine 4.0 has officially been released, promising massive improvements in its latest release. Besides the 6000 changes made to the newest version, developers have centered their focus on four key highlights. Key New Features in Wine 4.0 \u2022 Vulkan support \u2022 Direct3D 12 support \u2022 Game controllers support \u2022 High-DPI support on Android Don\u2019t get too excited yet as you need a GPU to support both Vulkan and Direct3D support. Additionally, Direct3D 12 support will require the vkd3d library, as well as a Vulkan Graphics Card to give you remarkable gaming experience. Other New Features Other notable core features of the Direct3D 10 and 11 features include: \u2022 Multi-sample textures and views, as well as multi-sample resolves. \u2022 Per-sample fragment shading. \u2022 Support for 1D textures. \u2022 Draws without render target views or\n\nSource: https://www.fosslinux.com/5878/wine-4-0-released-with-vulkan-direct3d-12-and-better-hidpi-support.htm\nTitle: Wine 4.0 released with Vulkan, Direct3D 12, and HiDPI support\nContent: Wine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support by James Kiarie January 23, 2019 By James Kiarie Published: January 23, 2019Updated: December 23, 2019\nWine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support\nby James Kiarie January 23, 2019\nby James Kiarie\nBy James Kiarie Published: January 23, 2019Updated: December 23, 2019\nBy James Kiarie\nBy James Kiarie\nPublished: January 23, 2019\nUpdated: December 23, 2019\n\nSource: https://www.fosslinux.com/5878/wine-4-0-released-with-vulkan-direct3d-12-and-better-hidpi-support.htm\nTitle: Wine 4.0 released with Vulkan, Direct3D 12, and HiDPI support\nContent: Home NewsWine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support Wine 4.0 released with Vulkan, Direct3D 12, and better HiDPI support by James Kiarie January 23, 2019 By James Kiarie Published: January 23, 2019Updated: December 23, 2019 1K Wine 4.0 has officially been released, promising massive improvements in its latest release. Besides the 6000 changes made to the newest version, developers have centered their focus on four key highlights. Key New Features in Wine 4.0 \u2022 Vulkan support \u2022 Direct3D 12 support \u2022 Game controllers support \u2022 High-DPI support on Android Don\u2019t get too excited yet as you need a GPU to support both Vulkan and Direct3D support. Additionally, Direct3D 12 support will require the vkd3d library, as well as a Vulkan Graphics Card to give you remarkable gaming experience. Other New Features Other notable core features of the Direct3D 10 and 11 features include: \u2022 Multi-sample textures and views, as well as multi-sample resolves. \u2022 Per-sample fragment\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.344583",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://www.winehq.org/news/\nTitle: WineHQ - News\nContent: Various bug fixes.\nVkd3d 1.16 Released\nMay 20, 2025\nThe vkd3d team is proud to announce that release 1.16 of vkd3d, the Direct3D to Vulkan translation library, is now available. This release contains improvements that are listed in the release notes below. The main highlights are: Support for DirectX Intermediate Language (DXIL) shaders. Initial support for geometry shaders in the HLSL compiler. Miscellaneous bug fixes.\nThe vkd3d team is proud to announce that release 1.16 of vkd3d, the Direct3D to Vulkan translation library, is now available.\nThis release contains improvements that are listed in the release notes below. The main highlights are:\nSupport for DirectX Intermediate Language (DXIL) shaders.\nInitial support for geometry shaders in the HLSL compiler.\nMiscellaneous bug fixes.\nWine 10.8 Released\nMay 16, 2025\n\nSource: https://github.com/Gcenx/DXVK-macOS/releases\nTitle: Releases \u00b7 Gcenx/DXVK-macOS \u00b7 GitHub\nContent: require the modified UE4 hack from @italomandara that will be bundled within the next Wineskin wrapper update Warning These builds are not for use with CrossOver use CXPatcher Contributors italomandara Assets 3 Loading Uh oh! There was an error while loading. Please reload this page. \ud83d\udc4d 3 remixer-dec, bobble233, and mihaiconstantin reacted with thumbs up emoji All reactions \ud83d\udc4d 3 reactions 3 people reacted v1.10.3-20230402 02 Apr 15:12 Gcenx v1.10.3-20230402 b144ae2 Compare Choose a tag to compare Loading View all tags v1.10.3-20230402 DXVK-macOS only supports DirectX 10 & DirectX 11 This release is based on upstream/1.10.x plus cherry picked commits from upstream/master so the requirements are different. Note: The version schema is based on YYYYMMDD (year month day) so newer builds can easily be identified. Requirements Vulkan 1.2 (MoltenVK-v1.2.0 or later) wine-7.1 or later The following third-party wine packages would work; CrossOver-22.x WineCX-22.x wine-crossover 22.x DXVK-async\n\nSource: https://forum.level1techs.com/t/ue4-games-on-dxvk-and-wine-proton-with-avx-vs-avx2-performance-difference/147727?page=3\nTitle: UE4 games on DXVK and Wine/Proton with AVX vs AVX2... Performance difference? - Page 3 - Gaming - Level1Techs Forums\nContent: of dealing with performance regressions like this SPECIFICALLY with Unreal Engine. Wine 6.5 is broken in other ways too, like start.exe failing. BTW, found out those Media Foundation patches require clearcpuid=514 NOT to be present. Then everything is rosy. 1 Like modzilla April 7, 2021, 4:07pm 59 This is nuts man! I get why you\u2019re sick and tired of that\u2026 The_Riddick June 2, 2021, 9:26pm 60 I\u2019ve noticed some games having tremendous improvements with DX12 renderer but not vulkan. One example is SCUM which launches with DX11 by default, but DX12 is pretty great with no real performance dips at 4k high settings, BUT Vulkan on the other hand is not much better then DX11\u2026 SCUM may run better under Linux with DX12, unfortunately the game has EasyAntiLinux implementation like a allot of other games I play so its unfortunate. A linux build may come down the pipe, one day\u2026 FurryJackman June 3, 2021, 1:41am 61 DX12 and VKD3D is still very much work in progress, and the only one you should pay\n\nSource: https://www.winehq.org/news/\nTitle: WineHQ - News\nContent: Various bug fixes.\nVkd3d 1.14 Released\nNovember 21, 2024\nThe vkd3d team is proud to announce that release 1.14 of vkd3d, the Direct3D to Vulkan translation library, is now available. This release contains improvements that are listed in the release notes below. The main highlights are: Disassembler support for binary effects. Initial support for Metal Shading Language output. Miscellaneous bug fixes.\nThe vkd3d team is proud to announce that release 1.14 of vkd3d, the Direct3D to Vulkan translation library, is now available.\nThis release contains improvements that are listed in the release notes below. The main highlights are:\nDisassembler support for binary effects.\nInitial support for Metal Shading Language output.\nMiscellaneous bug fixes.\nWine 9.21 Released\nNovember 8, 2024\n\nSource: https://www.winehq.org/news/\nTitle: WineHQ - News\nContent: More progress on the Bluetooth driver.\nVarious bug fixes.\nVkd3d 1.15 Released\nFebruary 19, 2025\nThe vkd3d team is proud to announce that release 1.15 of vkd3d, the Direct3D to Vulkan translation library, is now available. This release contains improvements that are listed in the release notes below. The main highlights are: Much more complete support for tessellation shaders in the HLSL compiler. Improved function overload resolution in the HLSL compiler. Miscellaneous bug fixes.\nThe vkd3d team is proud to announce that release 1.15 of vkd3d, the Direct3D to Vulkan translation library, is now available.\nThis release contains improvements that are listed in the release notes below. The main highlights are:\nMuch more complete support for tessellation shaders in the HLSL compiler.\nImproved function overload resolution in the HLSL compiler.\nMiscellaneous bug fixes.\nWine 10.1 Released\nFebruary 7, 2025\n\nSource: https://forum.level1techs.com/t/ue4-games-on-dxvk-and-wine-proton-with-avx-vs-avx2-performance-difference/147727?page=3\nTitle: UE4 games on DXVK and Wine/Proton with AVX vs AVX2... Performance difference? - Page 3 - Gaming - Level1Techs Forums\nContent: FurryJackman April 5, 2021, 10:37am 58\nApril 5, 2021, 10:37am 58\nIt\u2019s not over yet. DXVK-git just enabled SSE3 instructions and performance regressed 10fps vs the previous builds without it enabled. My OC 10920X used to hit 80fps on the 1.0.0.2 patch of Breathedge, now it only hits 70fps. Whether this is DXVK or Wine 6.5 causing the problems, we will never know, because I\u2019m tired of dealing with performance regressions like this SPECIFICALLY with Unreal Engine. Wine 6.5 is broken in other ways too, like start.exe failing. BTW, found out those Media Foundation patches require clearcpuid=514 NOT to be present. Then everything is rosy.\n\nSource: https://www.winehq.org/news/\nTitle: WineHQ - News\nContent: split debug info using build ids. Various bug fixes. Wine 9.22 Released November 22, 2024 The Wine development release 9.22 is now available. What\u2019s new in this release: Support for display mode virtualization. Locale data updated to Unicode CLDR 46. More support for network sessions in DirectPlay. Wayland driver enabled in default configuration. Various bug fixes. Vkd3d 1.14 Released November 21, 2024 The vkd3d team is proud to announce that release 1.14 of vkd3d, the Direct3D to Vulkan translation library, is now available. This release contains improvements that are listed in the release notes below. The main highlights are: Disassembler support for binary effects. Initial support for Metal Shading Language output. Miscellaneous bug fixes. Wine 9.21 Released November 8, 2024 The Wine development release 9.21 is now available. What\u2019s new in this release: More support for network sessions in DirectPlay. Header fixes for C++ compilation. I/O completion fixes. More formats supported in\n\nSource: https://www.winehq.org/news/\nTitle: WineHQ - News\nContent: split debug info using build ids. Various bug fixes. Wine 9.22 Released November 22, 2024 The Wine development release 9.22 is now available. What\u2019s new in this release: Support for display mode virtualization. Locale data updated to Unicode CLDR 46. More support for network sessions in DirectPlay. Wayland driver enabled in default configuration. Various bug fixes. Vkd3d 1.14 Released November 21, 2024 The vkd3d team is proud to announce that release 1.14 of vkd3d, the Direct3D to Vulkan translation library, is now available. This release contains improvements that are listed in the release notes below. The main highlights are: Disassembler support for binary effects. Initial support for Metal Shading Language output. Miscellaneous bug fixes. Wine 9.21 Released November 8, 2024 The Wine development release 9.21 is now available. What\u2019s new in this release: More support for network sessions in DirectPlay. Header fixes for C++ compilation. I/O completion fixes. More formats supported in\n\nSource: https://github.com/doitsujin/dxvk/releases\nTitle: Releases \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: of Vulkan swap chains in the graphics driver. It does not affect Linux systems in any way since the concept of exclusive fullscreen, and thus any problems associated with it, do not exist there. Bug fixes and Improvements Added an implementation of D3D9 shader validation interfaces. This is needed for The Void and used in several other D3D9 games. (PR #4398) Fixed behaviour when D3D9 applications use incorrect texture types as seen in Alpha Protocol. (PR #4513) If VK_KHR_maintenance5 is supported, DXVK will now use VK_FORMAT_A8_UNORM to implement the corresponding D3D11 format. This fixes warnings in various games, as well as rendering issues in TopSpin 2K25 (#4514). Optimized behaviour of disabled clip planes for D3D9 games. (PR #4508) Fixed an issue where the DXVK_CONFIG environment variable was not applied correctly under specific circumstances. Fixed various issues causing Wine test failures for D3D8 and D3D9. (PR #4479) Borderlands 2: Fixed missing lava in certain places. (PR\n\nSource: https://github.com/doitsujin/dxvk\nTitle: GitHub - doitsujin/dxvk: Vulkan-based implementation of D3D8, 9, 10 and 11 for Linux / Wine\nContent: A Vulkan-based translation layer for Direct3D 8/9/10/11 which allows running 3D applications on Linux using Wine.\nFor the current status of the project, please refer to the project wiki.\nThe most recent development builds can be found here.\nRelease builds can be found here.\nHow to use\nHow to use\nIn order to install a DXVK package obtained from the release page into a given wine prefix, copy or symlink the DLLs into the following directories as follows, then open winecfg and manually add native DLL overrides for d3d8, d3d9, d3d10core, d3d11 and dxgi under the Libraries tab.\nIn a default Wine prefix that would be as follows:\nexport WINEPREFIX=/path/to/wineprefix cp x64/*.dll $WINEPREFIX/drive_c/windows/system32 cp x32/*.dll $WINEPREFIX/drive_c/windows/syswow64 winecfg\nFor a pure 32-bit Wine prefix (non default) the 32-bit DLLs instead go to the system32 directory:\nexport WINEPREFIX=/path/to/wineprefix cp x32/*.dll $WINEPREFIX/drive_c/windows/system32 winecfg\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.349833",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://umatechnology.org/directx-vs-vulkan-battle-of-the-modern-graphics-apis/\nTitle: DirectX vs Vulkan: Battle of the Modern Graphics APIs - UMA Technology\nContent: DirectX vs Vulkan: Battle of the Modern Graphics APIs\nJanuary 14, 2025 by UMATechnology\nJanuary 14, 2025\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: devices yielded these framerate improvements across the board: By eliminating driver bloat and leveraging multi-core mobile processors more effectively, Vulkan again demonstrates substantially faster rendering critical for power-limited mobile form factors. These quantified benchmark results provide convincing evidence of exactly how much additional graphics performance Vulkan\u2019s technical design unlocks. Industry Support and Projections Now that we evaluated key architectural differences between the APIs and performance testing, let\u2019s shift gears to examine ecosystem momentum across customers, tools, and projections. DirectX 12 Remains Prevalent in Windows Gaming Given Microsoft\u2019s operating system market share into hundreds of millions of PCs and Xbox console adoption, DirectX enjoys overwhelming support. Leading consumer gaming engines like Unity and Unreal Engine offer DirectX 12 rendering while Vulkan plays catchup. Additionally, blockbuster game franchise technical architects\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: devices yielded these framerate improvements across the board: By eliminating driver bloat and leveraging multi-core mobile processors more effectively, Vulkan again demonstrates substantially faster rendering critical for power-limited mobile form factors. These quantified benchmark results provide convincing evidence of exactly how much additional graphics performance Vulkan\u2019s technical design unlocks. Industry Support and Projections Now that we evaluated key architectural differences between the APIs and performance testing, let\u2019s shift gears to examine ecosystem momentum across customers, tools, and projections. DirectX 12 Remains Prevalent in Windows Gaming Given Microsoft\u2019s operating system market share into hundreds of millions of PCs and Xbox console adoption, DirectX enjoys overwhelming support. Leading consumer gaming engines like Unity and Unreal Engine offer DirectX 12 rendering while Vulkan plays catchup. Additionally, blockbuster game franchise technical architects\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: devices yielded these framerate improvements across the board: By eliminating driver bloat and leveraging multi-core mobile processors more effectively, Vulkan again demonstrates substantially faster rendering critical for power-limited mobile form factors. These quantified benchmark results provide convincing evidence of exactly how much additional graphics performance Vulkan\u2019s technical design unlocks. Industry Support and Projections Now that we evaluated key architectural differences between the APIs and performance testing, let\u2019s shift gears to examine ecosystem momentum across customers, tools, and projections. DirectX 12 Remains Prevalent in Windows Gaming Given Microsoft\u2019s operating system market share into hundreds of millions of PCs and Xbox console adoption, DirectX enjoys overwhelming support. Leading consumer gaming engines like Unity and Unreal Engine offer DirectX 12 rendering while Vulkan plays catchup. Additionally, blockbuster game franchise technical architects\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: So for many applications, DirectX provides ample control without the need to micromanage every graphics setting. But for elite developers striving to unlock maximum performance, Vulkan offers unlimited potential. Performance Optimization Comparison Now that we understand their differences, let\u2019s analyze real-world performance testing illuminating each API\u2018s optimization capabilities for rendering complex graphics. Windows GPU Benchmark Battle Given its Windows lineage, comparing DirectX 12 and Vulkan head-to-head on Microsoft\u2019s OS makes for an exciting showdown. Tom\u2019s Hardware pit six high-end Nvidia and AMD cards against intensive graphics workloads using Vulkan versus DX11 and DX12 across Windows 10 rigs. Here were the results: API Frame Rate Gain over DX11 DX12 15% \u2013 22% Increase Vulkan 31% \u2013 33% Increase As you can see, Vulkan outperformed DX11 by nearly 2X over DirectX 12 representing tremendous efficiency gains from its extreme parallelization and low overhead driver\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: Windows GPU Benchmark Battle\nGiven its Windows lineage, comparing DirectX 12 and Vulkan head-to-head on Microsoft\u2019s OS makes for an exciting showdown.\nTom\u2019s Hardware pit six high-end Nvidia and AMD cards against intensive graphics workloads using Vulkan versus DX11 and DX12 across Windows 10 rigs. Here were the results:\nAs you can see, Vulkan outperformed DX11 by nearly 2X over DirectX 12 representing tremendous efficiency gains from its extreme parallelization and low overhead driver architecture.\nDominating Mobile Game Performance\nBeyond desktop benchmarks, let\u2019s explore how these APIs compare when running graphically-rich mobile games on popular platforms like Android.\nUsing simulated gameplay situations testing Vulkan vs OpenGL ES on Android devices yielded these framerate improvements across the board:\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: non-real-time graphics applications like video production suites needing maximum quality, Vulkan flexibly achieves perfection. Conclusion I hope this high-level but approachable Vulkan versus DirectX comparison helped highlight their respective strengths while providing historical context given their importance for real-time graphics innovation over decades. Where once DirectX reigned supreme as the proprietary API accelerating Windows gaming, Vulkan now challenges its dominance across multiple vectors from mobile to the metaverse. Evaluate both thoroughly given your performance requirements, target platforms, and development resource constraints when embarking on your next project. What comparisons or benchmarks stood out as most insightful in differentiating Vulkan and DirectX 12 for you? Are there additional test cases or research sources I should consider including to sharpen perspectives further? I welcome your thoughts and feedback. Please reach out any time as both our\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: non-real-time graphics applications like video production suites needing maximum quality, Vulkan flexibly achieves perfection. Conclusion I hope this high-level but approachable Vulkan versus DirectX comparison helped highlight their respective strengths while providing historical context given their importance for real-time graphics innovation over decades. Where once DirectX reigned supreme as the proprietary API accelerating Windows gaming, Vulkan now challenges its dominance across multiple vectors from mobile to the metaverse. Evaluate both thoroughly given your performance requirements, target platforms, and development resource constraints when embarking on your next project. What comparisons or benchmarks stood out as most insightful in differentiating Vulkan and DirectX 12 for you? Are there additional test cases or research sources I should consider including to sharpen perspectives further? I welcome your thoughts and feedback. Please reach out any time as both our\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: non-real-time graphics applications like video production suites needing maximum quality, Vulkan flexibly achieves perfection. Conclusion I hope this high-level but approachable Vulkan versus DirectX comparison helped highlight their respective strengths while providing historical context given their importance for real-time graphics innovation over decades. Where once DirectX reigned supreme as the proprietary API accelerating Windows gaming, Vulkan now challenges its dominance across multiple vectors from mobile to the metaverse. Evaluate both thoroughly given your performance requirements, target platforms, and development resource constraints when embarking on your next project. What comparisons or benchmarks stood out as most insightful in differentiating Vulkan and DirectX 12 for you? Are there additional test cases or research sources I should consider including to sharpen perspectives further? I welcome your thoughts and feedback. Please reach out any time as both our\n\nSource: https://www.downelink.com/hello-friend-lets-compare-vulkan-and-directx-graphics-apis/\nTitle: Hello friend, let\u2018s compare Vulkan and DirectX graphics APIs - DowneLink\nContent: By eliminating driver bloat and leveraging multi-core mobile processors more effectively, Vulkan again demonstrates substantially faster rendering critical for power-limited mobile form factors.\nThese quantified benchmark results provide convincing evidence of exactly how much additional graphics performance Vulkan\u2019s technical design unlocks.\nIndustry Support and Projections\nNow that we evaluated key architectural differences between the APIs and performance testing, let\u2019s shift gears to examine ecosystem momentum across customers, tools, and projections.\nDirectX 12 Remains Prevalent in Windows Gaming\nGiven Microsoft\u2019s operating system market share into hundreds of millions of PCs and Xbox console adoption, DirectX enjoys overwhelming support. Leading consumer gaming engines like Unity and Unreal Engine offer DirectX 12 rendering while Vulkan plays catchup.\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.354630",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\nTitle: The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) \u00b7 Issue #1229 \u00b7 HansKristian-Work/vkd3d-proton \u00b7 GitHub\nContent: the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so. Xserver version: 1.21.1.4 DXVK version: vkd3d-proton-2.6.0 Wine/Proton version: Proton Experimental Bleeding-Edge-7.0-245 More Information: After a bit of research and inspection, it seems VKD3D-Proton does not support this. The shader model 6.6 code path seems to be broken in the demo. Personally think it depends on NvAPI to use 64bit atomics in shaders.MetadataMetadataAssigneesNo one assignedLabelsNo labelsNo labelsProjectsNo projectsMilestoneNo milestoneRelationshipsNone yetDevelopmentNo branches or pull requestsIssue actions Footer \u00a9 2025 GitHub, Inc. Footer navigation Terms Privacy Security Status Docs Contact Manage cookies Do not share my personal information You can\u2019t perform that action at this time.\n\nSource: https://forums.developer.nvidia.com/t/assertion-failed-expression-status-vkcreatecomputepipelines-with-ue5-games-with-wine-proton/293470\nTitle: Assertion Failed expression: \"!status && \"vkCreateComputePipelines\"\" with UE5 games with Wine/Proton - Linux - NVIDIA Developer Forums\nContent: Assertion Failed expression: \"!status && \"vkCreateComputePipelines\"\" with UE5 games with Wine/Proton Graphics / Linux Linux mozo May 20, 2024, 2:36pm 1 Hello, This problem plagues me since I bought RTX 4090. It occurs with Unreal Engine 5 games (like Lords of the Fallen, Jusant, Immortals of Aveum to name a few) with Wine/Proton. I tried different driver versions, different Wine/Proton versions, different DXVK and VKD3D versions with no success at all. I think the error occures when the vkd3d-proton.cache.write file is being created. For some games the game will start at some point with a several tries but for other games like Lords of the Fallen, there\u2019s no way to play - it always crashes at shader compiling when a New Game is being selected. Here\u2019s a screenshot of the error: Screenshot_2024_20_05_13_51280\u00d7800 26.1 KB There was no such problem with my oldest GTX 1080Ti. nvidia-bug-report.log.gz (739.2 KB) My system is: Operating System: Arch Linux KDE Plasma Version: 6.0.4 KDE\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\nTitle: The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) \u00b7 Issue #1229 \u00b7 HansKristian-Work/vkd3d-proton \u00b7 GitHub\nContent: When launching Matrix Awakens by using proton, the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so. Xserver version: 1.21.1.4 DXVK version: vkd3d-proton-2.6.0 Wine/Proton version: Proton Experimental Bleeding-Edge-7.0-245 More Information: After a bit of research and inspection, it seems VKD3D-Proton does not support this. The shader model 6.6 code path seems to be broken in the demo. Personally think it depends on NvAPI to use 64bit atomics in shaders.\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\nTitle: The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) \u00b7 Issue #1229 \u00b7 HansKristian-Work/vkd3d-proton \u00b7 GitHub\nContent: HansKristian-Work / vkd3d-proton Public Notifications You must be signed in to change notification settings Fork 229 Star 2.2k Code Issues 183 Pull requests 16 Actions Projects 0 Security Uh oh! There was an error while loading. Please reload this page. Insights Additional navigation options Code Issues Pull requests Actions Projects Security Insights The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) #1229New issueCopy linkNew issueCopy linkClosedClosedThe Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1)#1229Copy linkDescriptionp0ryaeopened on Sep 11, 2022Issue body actionsWhen launching Matrix Awakens by using proton, the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so. Xserver version: 1.21.1.4 DXVK version: vkd3d-proton-2.6.0 Wine/Proton version: Proton Experimental Bleeding-Edge-7.0-245 More Information:\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\nTitle: The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) \u00b7 Issue #1229 \u00b7 HansKristian-Work/vkd3d-proton \u00b7 GitHub\nContent: HansKristian-Work / vkd3d-proton Public Notifications You must be signed in to change notification settings Fork 229 Star 2.2k Code Issues 183 Pull requests 16 Actions Projects 0 Security Uh oh! There was an error while loading. Please reload this page. Insights Additional navigation options Code Issues Pull requests Actions Projects Security Insights The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) #1229New issueCopy linkNew issueCopy linkClosedClosedThe Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1)#1229Copy linkDescriptionp0ryaeopened on Sep 11, 2022Issue body actionsWhen launching Matrix Awakens by using proton, the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so. Xserver version: 1.21.1.4 DXVK version: vkd3d-proton-2.6.0 Wine/Proton version: Proton Experimental Bleeding-Edge-7.0-245 More Information:\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\nTitle: The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) \u00b7 Issue #1229 \u00b7 HansKristian-Work/vkd3d-proton \u00b7 GitHub\nContent: When launching Matrix Awakens by using proton, the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so. Xserver version: 1.21.1.4 DXVK version: vkd3d-proton-2.6.0 Wine/Proton version: Proton Experimental Bleeding-Edge-7.0-245 More Information: After a bit of research and inspection, it seems VKD3D-Proton does not support this. The shader model 6.6 code path seems to be broken in the demo. Personally think it depends on NvAPI to use 64bit atomics in shaders.\nWhen launching Matrix Awakens by using proton, the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so.\nXserver version: 1.21.1.4\nDXVK version: vkd3d-proton-2.6.0\nWine/Proton version: Proton Experimental Bleeding-Edge-7.0-245\n\nSource: https://glfs-book.github.io/glfs/wine/vkd3d-proton.html\nTitle: \n      VKD3D-Proton-2.14.1\n    \nContent: Introduction to VKD3D-Proton The VKD3D-Proton package contains DLL files which converts Direct3D 12 calls to Vulkan. By default in Wine, Direct3D 12 calls are also converted to Vulkan; however, this package makes more aggressive optimizations geared towards gaming and replaces the default implementation provided by Wine, VKD3D. VKD3D-Proton Dependencies Required DXVK-2.6.2 (for dxgi and the configuration section), Glslang-15.3.0, MinGW-w64-GCC-15.1.0 (compiled with POSIX thread support), and Wine-10.9 Required (Runtime) Vulkan-Loader-1.4.313\nIntroduction to VKD3D-Proton\nThe VKD3D-Proton package contains DLL files which converts Direct3D 12 calls to Vulkan. By default in Wine, Direct3D 12 calls are also converted to Vulkan; however, this package makes more aggressive optimizations geared towards gaming and replaces the default implementation provided by Wine, VKD3D.\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\nTitle: The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) \u00b7 Issue #1229 \u00b7 HansKristian-Work/vkd3d-proton \u00b7 GitHub\nContent: p0ryaeopened on Sep 11, 2022Issue body actionsWhen launching Matrix Awakens by using proton, the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so. Xserver version: 1.21.1.4 DXVK version: vkd3d-proton-2.6.0 Wine/Proton version: Proton Experimental Bleeding-Edge-7.0-245 More Information: After a bit of research and inspection, it seems VKD3D-Proton does not support this. The shader model 6.6 code path seems to be broken in the demo. Personally think it depends on NvAPI to use 64bit atomics in shaders.\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\nTitle: The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) \u00b7 Issue #1229 \u00b7 HansKristian-Work/vkd3d-proton \u00b7 GitHub\nContent: Descriptionp0ryaeopened on Sep 11, 2022Issue body actionsWhen launching Matrix Awakens by using proton, the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so. Xserver version: 1.21.1.4 DXVK version: vkd3d-proton-2.6.0 Wine/Proton version: Proton Experimental Bleeding-Edge-7.0-245 More Information: After a bit of research and inspection, it seems VKD3D-Proton does not support this. The shader model 6.6 code path seems to be broken in the demo. Personally think it depends on NvAPI to use 64bit atomics in shaders.\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton/issues/1229\nTitle: The Matrix Awakens textures are missing/broken/don't load (Compiled from UE5.1) \u00b7 Issue #1229 \u00b7 HansKristian-Work/vkd3d-proton \u00b7 GitHub\nContent: Descriptionp0ryaeopened on Sep 11, 2022Issue body actionsWhen launching Matrix Awakens by using proton, the game is pretty smooth and the character skins and NPC skins load, but when it comes to loading the world textures, car textures and road textures the game fails to do so. Xserver version: 1.21.1.4 DXVK version: vkd3d-proton-2.6.0 Wine/Proton version: Proton Experimental Bleeding-Edge-7.0-245 More Information: After a bit of research and inspection, it seems VKD3D-Proton does not support this. The shader model 6.6 code path seems to be broken in the demo. Personally think it depends on NvAPI to use 64bit atomics in shaders.\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.359625",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: dreamhuntopened on Sep 23, 2023\nopened on Sep 23, 2023\nIssue body actions\nIssue body actions\nIssue body actions\nIssue body actions\nHello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: dreamhuntopened on Sep 23, 2023Issue body actionsHello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401MetadataMetadataAssigneesNo one assignedLabelscan't reproduceProjectsNo projectsMilestoneNo milestoneRelationshipsNone yetDevelopmentNo branches or pull requestsIssue actions Footer \u00a9 2025 GitHub, Inc. Footer navigation Terms Privacy Security Status Docs Contact Manage cookies Do\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: Descriptiondreamhuntopened on Sep 23, 2023Issue body actionsHello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: Descriptiondreamhuntopened on Sep 23, 2023Issue body actionsHello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: Descriptiondreamhuntopened on Sep 23, 2023Issue body actionsHello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: Descriptiondreamhuntopened on Sep 23, 2023Issue body actionsHello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: Descriptiondreamhuntopened on Sep 23, 2023Issue body actionsHello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401MetadataMetadataAssigneesNo one assignedLabelscan't reproduceProjectsNo projectsMilestoneNo milestoneRelationshipsNone yetDevelopmentNo branches or pull requestsIssue actions\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: Descriptiondreamhuntopened on Sep 23, 2023Issue body actionsHello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\ud83d\udc40React with \ud83d\udc401MetadataMetadataAssigneesNo one assignedLabelscan't reproduceProjectsNo projectsMilestoneNo milestoneRelationshipsNone yetDevelopmentNo branches or pull requestsIssue actions\n\nSource: https://github.com/doitsujin/dxvk/issues/3670\nTitle: Games doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous \u00b7 Issue #3670 \u00b7 doitsujin/dxvk \u00b7 GitHub\nContent: Hello, I have a weird problem: Some games (all UE 4 titles for example and Baldurs Gate 3) doesn't run with v.2.3 and Proton but are working fine with 2.2 and previous. If I use Wine or Wine-Staging (Tkg), the games are running fine. When I use DXVK 2.3 and Proton or ProtonGE, the games starts to a black screen and doesn't go further. Software information Generally all UE 4 games and Baldur's Gate 3. I remember some Unity3D titles but I can't recall the exact names. System information GPU: GTX 1080Ti Driver: I tried all possible drivers from 525.125.06 to 535.43.09 Wine version: Many Proton and ProtonGE versions, including Proton 8.0-3, Proton Experimental (BE), ProtonGE 8-15, etc. DXVK version: 2.3 Log files Baldur's Gate 3 Proton 8.0-3.log\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.364675",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: vkd3d-proton is a fork of VKD3D, which aims to implement the full Direct3D 12 API on top of Vulkan. The project serves as the development effort for Direct3D 12 support in Proton.\nThe original project is available at WineHQ.\nPerformance and game compatibility are important targets, at the expense of compatibility with older drivers and systems. Modern Vulkan extensions and features are aggressively made use of to improve game performance and compatibility. It is recommended to use the very latest drivers you can get your hands on for the best experience. Backwards compatibility with the vkd3d standalone API is not a goal of this project.\nThere are some hard requirements on drivers to be able to implement D3D12 in a reasonably performant way.\nDescriptor indexing with at least 1000000 UpdateAfterBind descriptors for all types except UniformBuffer. Essentially all features in VkPhysicalDeviceDescriptorIndexingFeatures must be supported.\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: vkd3d-proton vkd3d-proton is a fork of VKD3D, which aims to implement the full Direct3D 12 API on top of Vulkan. The project serves as the development effort for Direct3D 12 support in Proton. Upstream The original project is available at WineHQ. Priorities Performance and game compatibility are important targets, at the expense of compatibility with older drivers and systems. Modern Vulkan extensions and features are aggressively made use of to improve game performance and compatibility. It is recommended to use the very latest drivers you can get your hands on for the best experience. Backwards compatibility with the vkd3d standalone API is not a goal of this project. Drivers There are some hard requirements on drivers to be able to implement D3D12 in a reasonably performant way. Vulkan 1.3 Descriptor indexing with at least 1000000 UpdateAfterBind descriptors for all types except UniformBuffer. Essentially all features in VkPhysicalDeviceDescriptorIndexingFeatures must be supported.\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: Repository files navigationREADMELGPL-2.1 licenseLicensevkd3d-proton vkd3d-proton is a fork of VKD3D, which aims to implement the full Direct3D 12 API on top of Vulkan. The project serves as the development effort for Direct3D 12 support in Proton. Upstream The original project is available at WineHQ. Priorities Performance and game compatibility are important targets, at the expense of compatibility with older drivers and systems. Modern Vulkan extensions and features are aggressively made use of to improve game performance and compatibility. It is recommended to use the very latest drivers you can get your hands on for the best experience. Backwards compatibility with the vkd3d standalone API is not a goal of this project. Drivers There are some hard requirements on drivers to be able to implement D3D12 in a reasonably performant way. Vulkan 1.3 Descriptor indexing with at least 1000000 UpdateAfterBind descriptors for all types except UniformBuffer. Essentially all features in\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: Repository files navigationREADMELGPL-2.1 licenseLicensevkd3d-proton vkd3d-proton is a fork of VKD3D, which aims to implement the full Direct3D 12 API on top of Vulkan. The project serves as the development effort for Direct3D 12 support in Proton. Upstream The original project is available at WineHQ. Priorities Performance and game compatibility are important targets, at the expense of compatibility with older drivers and systems. Modern Vulkan extensions and features are aggressively made use of to improve game performance and compatibility. It is recommended to use the very latest drivers you can get your hands on for the best experience. Backwards compatibility with the vkd3d standalone API is not a goal of this project. Drivers There are some hard requirements on drivers to be able to implement D3D12 in a reasonably performant way. Vulkan 1.3 Descriptor indexing with at least 1000000 UpdateAfterBind descriptors for all types except UniformBuffer. Essentially all features in\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: is a fork of VKD3D, which aims to implement the full Direct3D 12 API on top of Vulkan. The project serves as the development effort for Direct3D 12 support in Proton. Upstream The original project is available at WineHQ. Priorities Performance and game compatibility are important targets, at the expense of compatibility with older drivers and systems. Modern Vulkan extensions and features are aggressively made use of to improve game performance and compatibility. It is recommended to use the very latest drivers you can get your hands on for the best experience. Backwards compatibility with the vkd3d standalone API is not a goal of this project. Drivers There are some hard requirements on drivers to be able to implement D3D12 in a reasonably performant way. Vulkan 1.3 Descriptor indexing with at least 1000000 UpdateAfterBind descriptors for all types except UniformBuffer. Essentially all features in VkPhysicalDeviceDescriptorIndexingFeatures must be supported. Further, the following\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: Instead, DXVK (2.1+) and vkd3d-proton share a DXGI implementation. A note on using vkd3d-proton on Windows Native Windows use is mostly relevant for developer testing purposes. Do not expect games running on Windows 7 or 8.1 to magically make use of vkd3d-proton, as many games will only even attempt to load d3d12.dll if they are running on Windows 10. Native Linux build A native Linux binary can be built, but it is not intended to be compatible with upstream Wine. A native option is mostly relevant for development purposes for the time being. Environment variables Most of the environment variables used by vkd3d-proton are for debugging purposes. The environment variables are not considered a part of API and might be changed or removed in the future versions of vkd3d-proton. Some of debug variables are lists of elements. Elements must be separated by commas or semicolons. VKD3D_CONFIG - a list of options that change the behavior of vkd3d-proton. vk_debug - enables Vulkan debug\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: Instead, DXVK (2.1+) and vkd3d-proton share a DXGI implementation. A note on using vkd3d-proton on Windows Native Windows use is mostly relevant for developer testing purposes. Do not expect games running on Windows 7 or 8.1 to magically make use of vkd3d-proton, as many games will only even attempt to load d3d12.dll if they are running on Windows 10. Native Linux build A native Linux binary can be built, but it is not intended to be compatible with upstream Wine. A native option is mostly relevant for development purposes for the time being. Environment variables Most of the environment variables used by vkd3d-proton are for debugging purposes. The environment variables are not considered a part of API and might be changed or removed in the future versions of vkd3d-proton. Some of debug variables are lists of elements. Elements must be separated by commas or semicolons. VKD3D_CONFIG - a list of options that change the behavior of vkd3d-proton. vk_debug - enables Vulkan debug\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: of Vulkan. The project serves as the development effort for Direct3D 12 support in Proton. Upstream The original project is available at WineHQ. Priorities Performance and game compatibility are important targets, at the expense of compatibility with older drivers and systems. Modern Vulkan extensions and features are aggressively made use of to improve game performance and compatibility. It is recommended to use the very latest drivers you can get your hands on for the best experience. Backwards compatibility with the vkd3d standalone API is not a goal of this project. Drivers There are some hard requirements on drivers to be able to implement D3D12 in a reasonably performant way. Vulkan 1.3 Descriptor indexing with at least 1000000 UpdateAfterBind descriptors for all types except UniformBuffer. Essentially all features in VkPhysicalDeviceDescriptorIndexingFeatures must be supported. Further, the following device features are required: samplerMirrorClampToEdge shaderDrawParameters\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: The intended way to use vkd3d-proton is as native Win32 DLLs (d3d12.dll and d3d12core.dll). These serve as a drop-in replacement for D3D12, and can be used in Wine (Proton or vanilla flavors), or on Windows.\nvkd3d-proton does not supply the necessary DXGI components on its own. Instead, DXVK (2.1+) and vkd3d-proton share a DXGI implementation.\nA note on using vkd3d-proton on Windows\nA note on using vkd3d-proton on Windows\nNative Windows use is mostly relevant for developer testing purposes. Do not expect games running on Windows 7 or 8.1 to magically make use of vkd3d-proton, as many games will only even attempt to load d3d12.dll if they are running on Windows 10.\nNative Linux build\nNative Linux build\nA native Linux binary can be built, but it is not intended to be compatible with upstream Wine. A native option is mostly relevant for development purposes for the time being.\n\nSource: https://github.com/HansKristian-Work/vkd3d-proton\nTitle: GitHub - HansKristian-Work/vkd3d-proton: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nContent: full Direct3D 12 API on top of Vulkan. The project serves as the development effort for Direct3D 12 support in Proton. Upstream The original project is available at WineHQ. Priorities Performance and game compatibility are important targets, at the expense of compatibility with older drivers and systems. Modern Vulkan extensions and features are aggressively made use of to improve game performance and compatibility. It is recommended to use the very latest drivers you can get your hands on for the best experience. Backwards compatibility with the vkd3d standalone API is not a goal of this project. Drivers There are some hard requirements on drivers to be able to implement D3D12 in a reasonably performant way. Vulkan 1.3 Descriptor indexing with at least 1000000 UpdateAfterBind descriptors for all types except UniformBuffer. Essentially all features in VkPhysicalDeviceDescriptorIndexingFeatures must be supported. Further, the following device features are required:\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-17T01:31:16.371590",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://best-of-web.builder.io/library/doitsujin/dxvk\nTitle: Dxvk Overview, Examples, Pros and Cons in 2025\nContent: Top Related Projectsvkd3d-proton2,125Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.Compare to DxvkProton25,797Compatibility tool for Steam Play based on Wine and additional componentsCompare to Dxvkwine3,427Compare to DxvkQuick OverviewDXVK is a Vulkan-based translation layer for Direct3D 9/10/11 that allows running 3D applications on Linux using Wine. It aims to provide compatibility and high performance for Windows games and applications on Linux systems by translating Direct3D calls to Vulkan. Pros High performance translation of Direct3D to Vulkan Enables many Windows games to run on Linux with good compatibility Actively maintained and regularly updated Integrates well with Wine and Proton for Steam Play Cons May not support all Direct3D features perfectly Performance can vary depending on the specific game or application Requires a Vulkan-capable graphics card and driver Some anti-cheat systems may not work with DXVK, limiting online play for\n\nSource: https://best-of-web.builder.io/library/doitsujin/dxvk\nTitle: Dxvk Overview, Examples, Pros and Cons in 2025\nContent: Top Related Projectsvkd3d-proton2,125Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.Compare to DxvkProton25,797Compatibility tool for Steam Play based on Wine and additional componentsCompare to Dxvkwine3,427Compare to DxvkQuick OverviewDXVK is a Vulkan-based translation layer for Direct3D 9/10/11 that allows running 3D applications on Linux using Wine. It aims to provide compatibility and high performance for Windows games and applications on Linux systems by translating Direct3D calls to Vulkan. Pros High performance translation of Direct3D to Vulkan Enables many Windows games to run on Linux with good compatibility Actively maintained and regularly updated Integrates well with Wine and Proton for Steam Play Cons May not support all Direct3D features perfectly Performance can vary depending on the specific game or application Requires a Vulkan-capable graphics card and driver Some anti-cheat systems may not work with DXVK, limiting online play for\n\nSource: https://best-of-web.builder.io/library/doitsujin/dxvk\nTitle: Dxvk Overview, Examples, Pros and Cons in 2025\nContent: dxvkVulkan-based implementation of D3D8, 9, 10 and 11 for Linux / Wine14,56394814,563322View on GitHubTop Related Projectsvkd3d-proton2,125Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.Compare to DxvkProton25,797Compatibility tool for Steam Play based on Wine and additional componentsCompare to Dxvkwine3,427Compare to DxvkQuick OverviewDXVK is a Vulkan-based translation layer for Direct3D 9/10/11 that allows running 3D applications on Linux using Wine. It aims to provide compatibility and high performance for Windows games and applications on Linux systems by translating Direct3D calls to Vulkan. Pros High performance translation of Direct3D to Vulkan Enables many Windows games to run on Linux with good compatibility Actively maintained and regularly updated Integrates well with Wine and Proton for Steam Play Cons May not support all Direct3D features perfectly Performance can vary depending on the specific game or application Requires a Vulkan-capable\n\nSource: https://www.libhunt.com/compare-vkd3d-vs-dxvk\nTitle: vkd3d vs dxvk - compare differences and reviews? | LibHunt\nContent: project | /r/GTA | 7 Dec 2023 DXVK versions after 2.0 require Vulkan 1.3 support, which may not be available on your GPU. Try using an older build, such as this one. almost 120 fps smooth camera movement 2 projects | /r/thesims3 | 7 Dec 2023 Give DXVK a try https://github.com/doitsujin/dxvk/releases, use 32bit d3d9.dll Risen 3 / DXVK 2.3 / ARC A770 16G / 1440p / WIN 11 1 project | /r/IntelArc | 29 Nov 2023 What to download:https://github.com/doitsujin/dxvk/releases/tag/v2.3 Re-Installed game an hour ago, got hit with App will Terminate Now 1 project | /r/sims2help | 19 Nov 2023 What are some alternatives? When comparing vkd3d and dxvk you can also consider the following projects: vkd3d-proton - Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation. dxvk-async wine-docker-builder NFSU-XtendedInput - NFS Underground & Underground 2 - XInput Plugin PKGBUILDS - FOR ISSUES, PLEASE USE THE CORRESPONDING SUBPROJECT ISSUE TRACKER - Some pkgbuilds and stuff. Please don't\n\nSource: https://best-of-web.builder.io/library/doitsujin/dxvk\nTitle: Dxvk Overview, Examples, Pros and Cons in 2025\nContent: Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.Compare to Dxvk\nFork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nCompare to Dxvk\nProton25,797Compatibility tool for Steam Play based on Wine and additional componentsCompare to Dxvk\nProton25,797Compatibility tool for Steam Play based on Wine and additional componentsCompare to Dxvk\nCompatibility tool for Steam Play based on Wine and additional componentsCompare to Dxvk\nCompatibility tool for Steam Play based on Wine and additional components\nCompare to Dxvk\nwine3,427Compare to Dxvk\nwine3,427Compare to Dxvk\nCompare to Dxvk\nCompare to Dxvk\n\nSource: https://www.libhunt.com/compare-vkd3d-vs-dxvk\nTitle: vkd3d vs dxvk - compare differences and reviews? | LibHunt\nContent: vkd3d Posts with mentions or reviews of vkd3d. We have used some of these posts to build our list of alternatives and similar projects. The last one was on 2021-04-25. wine-tkg and proton-tkg 6.7 - Frogging-Family 6 projects | /r/linux_gaming | 25 Apr 2021 You'll need the usual dependencies for Wine, so installing Wine or Wine-staging on your system is recommended even if only for that. Comes with the latest devel version of DXVK - https://github.com/doitsujin/dxvk/commits/master Comes with the latest devel version of HansKristian & Doitsujin's vkd3d-proton standalone - https://github.com/HansKristian-Work/vkd3d LAA is enabled by default. It fixes a huge amount of crashes on 32-bit games when using DXVK. However a small number of (older) games might run into issues with it, so you can disable LAA by using PROTON_DISABLE_LARGE_ADDRESS_AWARE=1 %command% in your game's launch options. Proton build has winetricks integration. It requires you to have the tk package (python3-tk on Debian\n\nSource: https://www.libhunt.com/compare-vkd3d-vs-dxvk\nTitle: vkd3d vs dxvk - compare differences and reviews? | LibHunt\nContent: vkd3d Posts with mentions or reviews of vkd3d. We have used some of these posts to build our list of alternatives and similar projects. The last one was on 2021-04-25. wine-tkg and proton-tkg 6.7 - Frogging-Family 6 projects | /r/linux_gaming | 25 Apr 2021 You'll need the usual dependencies for Wine, so installing Wine or Wine-staging on your system is recommended even if only for that. Comes with the latest devel version of DXVK - https://github.com/doitsujin/dxvk/commits/master Comes with the latest devel version of HansKristian & Doitsujin's vkd3d-proton standalone - https://github.com/HansKristian-Work/vkd3d LAA is enabled by default. It fixes a huge amount of crashes on 32-bit games when using DXVK. However a small number of (older) games might run into issues with it, so you can disable LAA by using PROTON_DISABLE_LARGE_ADDRESS_AWARE=1 %command% in your game's launch options. Proton build has winetricks integration. It requires you to have the tk package (python3-tk on Debian\n\nSource: https://best-of-web.builder.io/library/doitsujin/dxvk\nTitle: Dxvk Overview, Examples, Pros and Cons in 2025\nContent: Performance can vary depending on the specific game or application Requires a Vulkan-capable graphics card and driver Some anti-cheat systems may not work with DXVK, limiting online play for certain games Getting Started To use DXVK with Wine: Download the latest DXVK release from the GitHub repository. Extract the files and copy the appropriate .dll files to your Wine prefix: WINEPREFIX=\"/path/to/prefix\" WINEARCH=win64 wine winecfg cp /path/to/dxvk/x64/*.dll ~/.wine/drive_c/windows/system32/ cp /path/to/dxvk/x32/*.dll ~/.wine/drive_c/windows/syswow64/ Set the necessary environment variables: export DXVK_HUD=1 export DXVK_LOG_LEVEL=none Run your Direct3D application using Wine: WINEPREFIX=\"/path/to/prefix\" wine /path/to/application.exe Note: For Steam Play/Proton users, DXVK is typically included and configured automatically.Competitor Comparisonsvkd3d-proton2,125Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.Pros of vkd3d-proton Focuses specifically on\n\nSource: https://best-of-web.builder.io/library/doitsujin/dxvk\nTitle: Dxvk Overview, Examples, Pros and Cons in 2025\nContent: Note: DXVK Native requires a backend to be explicitly set via the DXVK_WSI_DRIVER environment variable. The current built-in options are SDL3, SDL2, and GLFW.\nDXVK Native comes with a slim set of Windows header definitions required for D3D9/11 and the MinGW headers for D3D9/11. In most cases, it will end up being plug and play with your renderer, but there may be certain teething issues such as:\n__uuidof(type) is supported, but __uuidof(variable) is not supported. Use __uuidof_var(variable) instead.\nTop Related Projectsvkd3d-proton2,125Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.Compare to DxvkProton25,797Compatibility tool for Steam Play based on Wine and additional componentsCompare to Dxvkwine3,427Compare to DxvkConvert designs to code with AIIntroducing Visual Copilot: A new AI model to turn Figma designs to high quality code using your components.Try Visual Copilot\n\nSource: https://www.libhunt.com/compare-vkd3d-vs-dxvk\nTitle: vkd3d vs dxvk - compare differences and reviews? | LibHunt\nContent: When comparing vkd3d and dxvk you can also consider the following projects:\nvkd3d-proton - Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation. dxvk-async wine-docker-builder NFSU-XtendedInput - NFS Underground & Underground 2 - XInput Plugin PKGBUILDS - FOR ISSUES, PLEASE USE THE CORRESPONDING SUBPROJECT ISSUE TRACKER - Some pkgbuilds and stuff. Please don't target release tags and always use current. The PKGBUILDs are meant to be retro-compatible. Kernels are the exception. d912pxy - DirectX9 to DirectX12 API proxy for Guild Wars 2\nvkd3d-proton - Fork of VKD3D. Development branches for Proton's Direct3D 12 implementation.\nNFSU-XtendedInput - NFS Underground & Underground 2 - XInput Plugin\nPKGBUILDS - FOR ISSUES, PLEASE USE THE CORRESPONDING SUBPROJECT ISSUE TRACKER - Some pkgbuilds and stuff. Please don't target release tags and always use current. The PKGBUILDs are meant to be retro-compatible. Kernels are the exception.\n",
+        "metadata": null
+      }
+    }
+  ],
+  "content": {
+    "query": "",
+    "sources": [],
+    "context": [],
+    "report": "",
+    "costs": 0.0
+  }
+}

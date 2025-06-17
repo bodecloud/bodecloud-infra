@@ -1,0 +1,70 @@
+#! cadvisor-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: cadvisor
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: cadvisor
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: cadvisor
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: cadvisor
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: cadvisor
+                  image: gcr.io/cadvisor/cadvisor
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: cadvisor-8080
+                      containerPort: 8080
+                  volumeMounts:
+                    - name: rootfs
+                      mountPath: /rootfs
+                      readOnly: true
+                    - name: sys
+                      mountPath: /sys
+                      readOnly: true
+                    - name: var-lib-docker
+                      mountPath: /var/lib/docker
+                      readOnly: true
+                    - name: var-run
+                      mountPath: /var/run
+                      readOnly: true
+                    - name: var-run-docker-sock
+                      mountPath: /var/run/docker.sock
+                      readOnly: true
+            volumes:
+                - name: rootfs
+                  hostPath:
+                    path: /
+                  readOnly: true
+                - name: sys
+                  hostPath:
+                    path: /sys
+                  readOnly: true
+                - name: var-lib-docker
+                  hostPath:
+                    path: /var/lib/docker/
+                  readOnly: true
+                - name: var-run
+                  hostPath:
+                    path: /var/run
+                  readOnly: true
+                - name: var-run-docker-sock
+                  hostPath:
+                    path: /var/run/docker.sock
+                  readOnly: true

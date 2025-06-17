@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+plexProxy:
+  ports:
+  - name: http
+    port: 8888
+    targetPort: 0
+  type: ClusterIP

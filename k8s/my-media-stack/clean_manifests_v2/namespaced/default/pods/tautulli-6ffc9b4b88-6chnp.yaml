@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-06-12T01:11:04Z"
+  generateName: tautulli-6ffc9b4b88-
+  labels:
+    app.elfhosted.com/name: tautulli
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: tautulli
+    pod-template-hash: 6ffc9b4b88
+  name: tautulli-6ffc9b4b88-6chnp
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: tautulli-6ffc9b4b88
+spec:
+  containers:
+  - image: linuxserver/tautulli:latest
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8181
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: tautulli
+    ports:
+    - containerPort: 8181
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8181
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+      subPath: tautulli
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: baden.vpshostingservice.co
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:04:08Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:03:51Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:04:59Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:04:59Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:03:51Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://3d1648b10994698d29987299d5634f6263620d8eb5dc002378273860582e84af
+    image: docker.io/linuxserver/tautulli:latest
+    imageID: docker.io/linuxserver/tautulli@sha256:899245206017f6874e32a499a7cd305526ffa3440252cbfee6a175198c3453df
+    lastState: {}
+    name: tautulli
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T15:04:08Z"
+    volumeMounts:
+    - mountPath: /config
+      name: config
+  hostIP: 209.54.102.83
+  hostIPs:
+  - ip: 209.54.102.83
+  phase: Running
+  podIP: 10.42.3.16
+  podIPs:
+  - ip: 10.42.3.16
+  qosClass: Burstable
+  startTime: "2025-06-14T15:03:51Z"

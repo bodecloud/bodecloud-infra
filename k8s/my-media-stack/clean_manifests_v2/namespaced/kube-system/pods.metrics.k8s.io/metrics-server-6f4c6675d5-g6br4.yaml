@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: metrics-server
+  usage:
+    cpu: 5368858n
+    memory: 50768Ki
+kind: PodMetrics
+metadata:
+  labels:
+    k8s-app: metrics-server
+    pod-template-hash: 6f4c6675d5
+  name: metrics-server-6f4c6675d5-g6br4
+  namespace: kube-system
+timestamp: "2025-06-14T23:02:10Z"
+window: 17.321s

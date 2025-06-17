@@ -1,0 +1,92 @@
+brunner56Riven:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Riven:
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/riven
+      tag: v0.21.21@sha256:bf1a9cab579d5eaac0ed72e20584b139547db7c38753a03b3756151af5e0ac13
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 20Mi
+  database:
+    args:
+    - -c
+    - shared_buffers=500MB
+    - -c
+    - work_mem=4MB
+    - -c
+    - effective_cache_size=1GB
+    - -c
+    - max_connections=310
+    env:
+      postgresDb: riven
+      postgresPassword: postgres
+      postgresUser: postgres
+    image:
+      repository: postgres
+      tag: 17-alpine
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 500m
+        memory: 8Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+  revisionHistoryLimit: 3
+  setup:
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  setupPostgres:
+    containerSecurityContext:
+      runAsUser: 0
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+  strategy:
+    type: Recreate
+kubernetesClusterDomain: cluster.local

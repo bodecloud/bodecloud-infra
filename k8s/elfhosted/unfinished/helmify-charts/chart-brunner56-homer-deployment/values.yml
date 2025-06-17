@@ -1,0 +1,58 @@
+brunner56Homer:
+  brunner56Homer:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsNonRoot: false
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      tz: UTC
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20230605@sha256:6088a1e9fc0ce83aec9910af0899661c23b5f2025428d7da631b9b9390241b6c
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 200m
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: Always
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 1
+    type: RollingUpdate
+  ui:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/homer
+      tag: v25.05.2@sha256:60772bd0292281282161f10aa2bea105bba344158937f1c0022c6986ef5aedc3
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+kubernetesClusterDomain: cluster.local

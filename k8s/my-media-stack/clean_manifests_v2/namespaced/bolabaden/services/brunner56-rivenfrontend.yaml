@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"meta.helm.sh/release-name":"brunner56","meta.helm.sh/release-namespace":"bolabaden"},"labels":{"app.kubernetes.io/instance":"brunner56","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"rivenfrontend","app.kubernetes.io/service":"brunner56-rivenfrontend","helm.sh/chart":"rivenfrontend-0.2.1","helm.toolkit.fluxcd.io/name":"brunner56","helm.toolkit.fluxcd.io/namespace":"bolabaden"},"name":"brunner56-rivenfrontend","namespace":"bolabaden"},"spec":{"clusterIP":"10.43.223.25","clusterIPs":["10.43.223.25"],"ipFamilies":["IPv4"],"ipFamilyPolicy":"SingleStack","ports":[{"name":"http","port":3000,"targetPort":"http"}],"selector":{"app.kubernetes.io/instance":"brunner56","app.kubernetes.io/name":"rivenfrontend"}}}
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rivenfrontend
+    app.kubernetes.io/service: brunner56-rivenfrontend
+    helm.sh/chart: rivenfrontend-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: brunner56-rivenfrontend
+  namespace: bolabaden
+spec:
+  clusterIP: 10.43.223.25
+  clusterIPs:
+  - 10.43.223.25
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: rivenfrontend
+  sessionAffinity: None
+  type: ClusterIP
+  loadBalancer: {}

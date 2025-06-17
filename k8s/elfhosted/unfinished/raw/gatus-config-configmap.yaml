@@ -1,0 +1,140 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: gatus-config
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  config.yaml: |
+    storage:
+      type: sqlite
+      path: /data/data.db
+
+    ui:
+      logo: https://elfhosted.com/images/logo.svg
+      link: https://elfhosted.com
+      header: brunner56's ElfHosted Health
+      title: Health | ElfHosted
+      buttons:
+      - name: Dashboard
+        link: https://brunner56.elfhosted.com
+      - name: Account
+        link: https://store.elfhosted.com/my-account
+      - name: Docs
+        link: https://elfhosted.com
+      - name: Discord
+        link: https://discord.elfhosted.com
+      
+    alerting:
+      email:
+        from: "${SMTP_FROM}"
+        username: "${SMTP_USERNAME}"
+        password: "${SMTP_PASSWORD}"
+        host: "${SMTP_HOST}"
+        port: ${SMTP_PORT}
+        to: "boden.crouch@gmail.com"
+        default-alert:
+          description: |
+
+
+            See https://brunner56-health.elfhosted.com for details, or
+            visit https://discord.elfhosted.com for status updates / help.
+
+            -- Sent with ❤️ from your friends at ElfHosted 🧝
+            (https://elfhosted.com)
+          send-on-resolved: true
+          failure-threshold: 4
+          success-threshold: 1
+
+    maintenance:
+      start: 22:00 # 22am UTC = 10am NZDT after DST change
+      duration: 1h
+
+    endpoints:
+
+      - name: plex
+        group: consume-media
+        url: "http://plex:32400"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 401"
+        alerts:
+          - type: email
+
+      - name: wizarr
+        group: manage-media
+        url: "http://wizarr:5690"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: email
+
+      - name: riven-backend
+        group: manage-media
+        url: "http://riven:3001"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: email
+
+      - name: riven-frontend
+        group: manage-media
+        url: "http://riven-frontend:3000"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: email
+
+      - name: zurg
+        group: download-media
+        url: "http://zurg:9999/http/version.txt"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: email
+
+      - name: filebrowser
+        group: tools
+        url: "http://filebrowser:8080"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: email
+
+      - name: kubernetes-dashboard
+        group: tools
+        url: "http://kubernetes-dashboard:9090"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: email
+
+      - name: rcloneui
+        group: tools
+        url: "http://rcloneui:5572"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: email
+
+      - name: rclonefm
+        group: tools
+        url: "http://rclonefm:5573"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: email

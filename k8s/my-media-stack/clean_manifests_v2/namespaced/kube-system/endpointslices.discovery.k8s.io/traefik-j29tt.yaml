@@ -1,0 +1,42 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.34
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: traefik-594f7cf9cc-p9m48
+    namespace: kube-system
+kind: EndpointSlice
+metadata:
+  generateName: traefik-
+  labels:
+    app.kubernetes.io/instance: traefik-kube-system
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefik
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    helm.sh/chart: traefik-34.2.1_up34.2.0
+    kubernetes.io/service-name: traefik
+  name: traefik-j29tt
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: traefik
+ports:
+- name: web
+  port: 8000
+  protocol: TCP
+- name: websecure
+  port: 8443
+  protocol: TCP
+- name: traefik
+  port: 8080
+  protocol: TCP

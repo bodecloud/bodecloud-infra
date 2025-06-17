@@ -1,0 +1,70 @@
+#! tinyauth-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tinyauth
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tinyauth
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tinyauth
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: tinyauth
+          image: ghcr.io/steveiliop56/tinyauth:v3
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_TITLE
+              value: "my-media-stack"
+            - name: APP_URL
+              value: "https://auth.my-media-stack.org"
+            - name: COOKIE_SECURE
+              value: "true"
+            - name: GITHUB_CLIENT_ID
+              value: "Ov23li1ijiBeH6cBV9bJ"
+            - name: GITHUB_CLIENT_SECRET
+              value: "99adef0dd47be1f9fb76885b0ac6722fd9730d08"
+            - name: GOOGLE_CLIENT_ID
+              value: "324816055390-dftm6jq2d3ifs37miivj3nj09piv0df9.apps.googleusercontent.com"
+            - name: GOOGLE_CLIENT_SECRET
+              value: "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"
+            - name: LOGIN_MAX_RETRIES
+              value: "5"
+            - name: LOGIN_TIMEOUT
+              value: "300"
+            - name: OAUTH_AUTO_REDIRECT
+              value: "none"
+            - name: OAUTH_WHITELIST
+              value: ""
+            - name: SECRET
+              value: "b9a4ZxFNBbyR9KdTAf2kSciI5jUCQLzE"
+            - name: SESSION_EXPIRY
+              value: "604800"
+            - name: USERS
+              value: "brunner56:$2y$05$CEXtGy1XS4BlkTXEgSG64eSQlrGn.55Xm2HbiSgVSgO./WoVXXLAa,my-media-stack.duckdns@gmail.com:$2y$05$BbVWsqh2XkzaxvLGwd.0euD/PkkoaeFNDIhB0tTEBn4tAjGckKRzq"
+          ports:
+            - name: tinyauth-3000
+              containerPort: 3000
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "25m"
+            limits:
+              memory: "128Mi"
+              cpu: "50m"
+      volumes:
+        - name: data
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/tinyauth

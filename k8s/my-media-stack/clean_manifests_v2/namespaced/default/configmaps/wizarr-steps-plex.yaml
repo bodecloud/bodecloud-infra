@@ -1,0 +1,30 @@
+apiVersion: v1
+data:
+  steps.json: |-
+    [
+      {
+        "step": 1,
+        "title": "Welcome to Plex!",
+        "description": "Follow these steps to get started with your Plex server.",
+        "content": "Your Plex server is ready to use!"
+      },
+      {
+        "step": 2,
+        "title": "Download the App",
+        "description": "Download the Plex app for your device.",
+        "content": "Visit https://www.plex.tv/media-server-downloads/ to download the app."
+      },
+      {
+        "step": 3,
+        "title": "Connect to Server",
+        "description": "Connect to your Plex server.",
+        "content": "Use the server address: https://plex.elfhosted.com"
+      }
+    ]
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"steps.json":"[\n  {\n    \"step\": 1,\n    \"title\": \"Welcome to Plex!\",\n    \"description\": \"Follow these steps to get started with your Plex server.\",\n    \"content\": \"Your Plex server is ready to use!\"\n  },\n  {\n    \"step\": 2,\n    \"title\": \"Download the App\",\n    \"description\": \"Download the Plex app for your device.\",\n    \"content\": \"Visit https://www.plex.tv/media-server-downloads/ to download the app.\"\n  },\n  {\n    \"step\": 3,\n    \"title\": \"Connect to Server\",\n    \"description\": \"Connect to your Plex server.\",\n    \"content\": \"Use the server address: https://plex.elfhosted.com\"\n  }\n]"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"wizarr-steps-plex","namespace":"default"}}
+  name: wizarr-steps-plex
+  namespace: default

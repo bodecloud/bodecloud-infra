@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+rclonefm:
+  ports:
+  - name: rclonefm
+    port: 5573
+    targetPort: 0
+  type: ClusterIP

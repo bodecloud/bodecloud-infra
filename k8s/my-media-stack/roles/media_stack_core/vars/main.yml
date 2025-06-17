@@ -1,0 +1,623 @@
+---
+# =============================================================================
+# MEDIA STACK CORE SERVICE DEFINITIONS
+# =============================================================================
+# This file contains Kubernetes resource definitions for all media stack services
+# converted from the standalone YAML files in the raw directory.
+# =============================================================================
+
+# =============================================================================
+# STREMIO ADDONS
+# =============================================================================
+
+# MediaFusion Deployment
+mediafusion_deployment:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: mediafusion
+    namespace: "{{ deploy_services.namespace | default('my-media-stack') }}"
+    labels:
+      app: mediafusion
+      component: stremio-addon
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: mediafusion
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          app: mediafusion
+          component: stremio-addon
+      spec:
+        restartPolicy: Always
+        initContainers:
+          - name: wait-for-mongodb
+            image: busybox:1.35
+            command: ["sh", "-c"]
+            args:
+              - |
+                echo "Waiting for MongoDB to be ready..."
+                until nc -z mongodb 27017; do
+                  echo "MongoDB is not ready yet..."
+                  sleep 2
+                done
+                echo "MongoDB is ready!"
+          - name: wait-for-redis
+            image: busybox:1.35
+            command: ["sh", "-c"]
+            args:
+              - |
+                echo "Waiting for Redis to be ready..."
+                until nc -z redis 6379; do
+                  echo "Redis is not ready yet..."
+                  sleep 2
+                done
+                echo "Redis is ready!"
+        containers:
+          - name: mediafusion
+            image: mhdzumair/mediafusion:latest
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: API_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: MEDIAFUSION_API_PASSWORD
+              - name: SECRET_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: MEDIAFUSION_SECRET_KEY
+              - name: HOST_URL
+                value: "{{ mediafusion_config.url }}"
+              - name: POSTER_HOST_URL
+                value: "{{ mediafusion_config.url }}"
+              - name: MONGO_URI
+                value: "{{ mediafusion_config.mongo_uri }}"
+              - name: REDIS_URL
+                value: "redis://redis:6379"
+              - name: TMDB_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: TMDB_API_KEY
+              - name: PROWLARR_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: PROWLARR_API_KEY
+              - name: PROWLARR_URL
+                value: "{{ prowlarr_config.url }}"
+              - name: JACKETT_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: JACKETT_API_KEY
+              - name: JACKETT_URL
+                value: "{{ jackett_config.url }}"
+              - name: FLARESOLVERR_URL
+                value: "http://flaresolverr:8191"
+              - name: TZ
+                value: "{{ timezone }}"
+              - name: PUID
+                value: "{{ puid }}"
+              - name: PGID
+                value: "{{ pgid }}"
+              - name: UMASK
+                value: "{{ storage.umask | default('002') }}"
+              # Additional MediaFusion specific settings
+              - name: BACKGROUND_SEARCH_INTERVAL_HOURS
+                value: "24"
+              - name: IS_SCRAP_FROM_PROWLARR
+                value: "True"
+              - name: IS_SCRAP_FROM_JACKETT
+                value: "True"
+              - name: IS_SCRAP_FROM_ZILEAN
+                value: "True"
+              - name: ZILEAN_URL
+                value: "{{ zilean_config.url }}"
+            resources:
+              requests:
+                memory: "128Mi"
+                cpu: "50m"
+              limits:
+                memory: "512Mi"
+                cpu: "100m"
+            livenessProbe:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - curl -f http://localhost:8000/health > /dev/null 2>&1 || exit 1
+              periodSeconds: 60
+              initialDelaySeconds: 10
+              timeoutSeconds: 10
+              failureThreshold: 5
+            ports:
+              - name: http
+                containerPort: 8000
+              - name: api
+                containerPort: 9191
+
+# Comet Deployment
+comet_deployment:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: comet
+    namespace: "{{ deploy_services.namespace | default('my-media-stack') }}"
+    labels:
+      app: comet
+      component: stremio-addon
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: comet
+    template:
+      metadata:
+        labels:
+          app: comet
+          component: stremio-addon
+      spec:
+        containers:
+          - name: comet
+            image: g0ldyy/comet:latest
+            ports:
+              - name: http
+                containerPort: 2020
+            env:
+              - name: TZ
+                value: "{{ timezone }}"
+              - name: ADDON_ID
+                value: "{{ comet_config.addon_id }}"
+              - name: ADDON_NAME
+                value: "{{ comet_config.addon_name }}"
+              - name: FASTAPI_HOST
+                value: "0.0.0.0"
+              - name: FASTAPI_PORT
+                value: "2020"
+              - name: FASTAPI_WORKERS
+                value: "4"
+              - name: USE_GUNICORN
+                value: "True"
+              - name: DASHBOARD_ADMIN_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: COMET_DASHBOARD_PASSWORD
+              - name: DATABASE_TYPE
+                value: "sqlite"
+              - name: DATABASE_PATH
+                value: "/data/comet.db"
+              - name: DATABASE_URL
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: COMET_DATABASE_URL
+              - name: INDEXER_MANAGER_TYPE
+                value: "prowlarr"
+              - name: INDEXER_MANAGER_URL
+                value: "{{ prowlarr_config.url }}"
+              - name: INDEXER_MANAGER_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: PROWLARR_API_KEY
+              - name: PROXY_DEBRID_STREAM_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: COMET_PROXY_PASSWORD
+              - name: PROXY_DEBRID_STREAM_DEBRID_DEFAULT_APIKEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: PREMIUMIZE_API_KEY
+              # Additional Comet settings
+              - name: METADATA_CACHE_TTL
+                value: "2592000"
+              - name: TORRENT_CACHE_TTL
+                value: "1296000"
+              - name: DEBRID_CACHE_TTL
+                value: "86400"
+              - name: INDEXER_MANAGER_TIMEOUT
+                value: "60"
+              - name: GET_TORRENT_TIMEOUT
+                value: "2"
+              - name: DOWNLOAD_TORRENT_FILES
+                value: "False"
+              - name: PROXY_DEBRID_STREAM
+                value: "True"
+              - name: PROXY_DEBRID_STREAM_MAX_CONNECTIONS
+                value: "-1"
+              - name: PROXY_DEBRID_STREAM_DEBRID_DEFAULT_SERVICE
+                value: "premiumize"
+              - name: REMOVE_ADULT_CONTENT
+                value: "True"
+            volumeMounts:
+              - name: comet-data
+                mountPath: /data
+            resources:
+              requests:
+                memory: "512Mi"
+                cpu: "200m"
+              limits:
+                memory: "1Gi"
+                cpu: "1000m"
+            livenessProbe:
+              httpGet:
+                path: /health
+                port: 2020
+              initialDelaySeconds: 60
+              periodSeconds: 30
+              timeoutSeconds: 10
+              failureThreshold: 5
+            readinessProbe:
+              httpGet:
+                path: /health
+                port: 2020
+              initialDelaySeconds: 10
+              periodSeconds: 10
+              timeoutSeconds: 5
+              failureThreshold: 3
+        volumes:
+          - name: comet-data
+            hostPath:
+              path: "{{ config_path }}/stremio/addons/comet/data"
+              type: DirectoryOrCreate
+
+# AIOStreams Deployment
+aiostreams_deployment:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: aiostreams
+    namespace: "{{ deploy_services.namespace | default('my-media-stack') }}"
+    labels:
+      app: aiostreams
+      component: stremio-addon
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: aiostreams
+    template:
+      metadata:
+        labels:
+          app: aiostreams
+          component: stremio-addon
+      spec:
+        containers:
+          - name: aiostreams
+            image: ghcr.io/geek-cookbook/aiostreams:latest
+            ports:
+              - name: http
+                containerPort: 8080
+            env:
+              - name: TZ
+                value: "{{ timezone }}"
+              - name: API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: AIOSTREAMS_API_KEY
+              - name: PREMIUMIZE_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: PREMIUMIZE_API_KEY
+              - name: REALDEBRID_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: api-keys
+                    key: REALDEBRID_API_KEY
+            volumeMounts:
+              - name: aiostreams-config
+                mountPath: /app/config
+            resources:
+              requests:
+                memory: "128Mi"
+                cpu: "50m"
+              limits:
+                memory: "256Mi"
+                cpu: "200m"
+        volumes:
+          - name: aiostreams-config
+            hostPath:
+              path: "{{ config_path }}/stremio/addons/aiostreams/config"
+              type: DirectoryOrCreate
+
+# =============================================================================
+# INFRASTRUCTURE SERVICES
+# =============================================================================
+
+# MongoDB Deployment
+mongodb_deployment:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: mongodb
+    namespace: "{{ deploy_services.namespace | default('my-media-stack') }}"
+    labels:
+      app: mongodb
+      component: database
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: mongodb
+    template:
+      metadata:
+        labels:
+          app: mongodb
+          component: database
+      spec:
+        containers:
+          - name: mongodb
+            image: mongo:7.0
+            ports:
+              - name: mongodb
+                containerPort: 27017
+            env:
+              - name: TZ
+                value: "{{ timezone }}"
+            volumeMounts:
+              - name: mongodb-data
+                mountPath: /data/db
+            resources:
+              requests:
+                memory: "256Mi"
+                cpu: "100m"
+              limits:
+                memory: "512Mi"
+                cpu: "500m"
+        volumes:
+          - name: mongodb-data
+            hostPath:
+              path: "{{ config_path }}/mediafusion/mongodb"
+              type: DirectoryOrCreate
+
+# Redis Deployment
+redis_deployment:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: redis
+    namespace: "{{ deploy_services.namespace | default('my-media-stack') }}"
+    labels:
+      app: redis
+      component: cache
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: redis
+    template:
+      metadata:
+        labels:
+          app: redis
+          component: cache
+      spec:
+        containers:
+          - name: redis
+            image: redis:7-alpine
+            ports:
+              - name: redis
+                containerPort: 6379
+            env:
+              - name: TZ
+                value: "{{ timezone }}"
+            volumeMounts:
+              - name: redis-data
+                mountPath: /data
+            resources:
+              requests:
+                memory: "64Mi"
+                cpu: "50m"
+              limits:
+                memory: "128Mi"
+                cpu: "100m"
+        volumes:
+          - name: redis-data
+            hostPath:
+              path: "{{ config_path }}/mediafusion/redis"
+              type: DirectoryOrCreate
+
+# =============================================================================
+# SERVARR SERVICES
+# =============================================================================
+
+# Prowlarr Deployment
+prowlarr_deployment:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: prowlarr
+    namespace: "{{ deploy_services.namespace | default('my-media-stack') }}"
+    labels:
+      app: prowlarr
+      component: servarr
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: prowlarr
+    template:
+      metadata:
+        labels:
+          app: prowlarr
+          component: servarr
+      spec:
+        containers:
+          - name: prowlarr
+            image: lscr.io/linuxserver/prowlarr:latest
+            ports:
+              - name: http
+                containerPort: 9696
+            env:
+              - name: TZ
+                value: "{{ timezone }}"
+              - name: PUID
+                value: "{{ puid }}"
+              - name: PGID
+                value: "{{ pgid }}"
+              - name: UMASK
+                value: "{{ storage.umask | default('002') }}"
+            volumeMounts:
+              - name: prowlarr-config
+                mountPath: /config
+            resources:
+              requests:
+                memory: "128Mi"
+                cpu: "50m"
+              limits:
+                memory: "256Mi"
+                cpu: "200m"
+        volumes:
+          - name: prowlarr-config
+            hostPath:
+              path: "{{ config_path }}/prowlarr"
+              type: DirectoryOrCreate
+
+# Jackett Deployment
+jackett_deployment:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: jackett
+    namespace: "{{ deploy_services.namespace | default('my-media-stack') }}"
+    labels:
+      app: jackett
+      component: indexer
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: jackett
+    template:
+      metadata:
+        labels:
+          app: jackett
+          component: indexer
+      spec:
+        containers:
+          - name: jackett
+            image: lscr.io/linuxserver/jackett:latest
+            ports:
+              - name: http
+                containerPort: 9117
+            env:
+              - name: TZ
+                value: "{{ timezone }}"
+              - name: PUID
+                value: "{{ puid }}"
+              - name: PGID
+                value: "{{ pgid }}"
+              - name: UMASK
+                value: "{{ storage.umask | default('002') }}"
+            volumeMounts:
+              - name: jackett-config
+                mountPath: /config
+            resources:
+              requests:
+                memory: "128Mi"
+                cpu: "50m"
+              limits:
+                memory: "256Mi"
+                cpu: "200m"
+        volumes:
+          - name: jackett-config
+            hostPath:
+              path: "{{ config_path }}/jackett"
+              type: DirectoryOrCreate
+
+# =============================================================================
+# UTILITY SERVICES
+# =============================================================================
+
+# Flaresolverr Deployment
+flaresolverr_deployment:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: flaresolverr
+    namespace: "{{ deploy_services.namespace | default('my-media-stack') }}"
+    labels:
+      app: flaresolverr
+      component: utility
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: flaresolverr
+    template:
+      metadata:
+        labels:
+          app: flaresolverr
+          component: utility
+      spec:
+        containers:
+          - name: flaresolverr
+            image: ghcr.io/flaresolverr/flaresolverr:latest
+            ports:
+              - name: http
+                containerPort: 8191
+            env:
+              - name: TZ
+                value: "{{ timezone }}"
+              - name: LOG_LEVEL
+                value: "info"
+              - name: LOG_HTML
+                value: "false"
+              - name: CAPTCHA_SOLVER
+                value: "none"
+            resources:
+              requests:
+                memory: "256Mi"
+                cpu: "100m"
+              limits:
+                memory: "512Mi"
+                cpu: "500m"
+
+# =============================================================================
+# SERVICES LIST FOR CONDITIONAL DEPLOYMENT
+# =============================================================================
+
+# List of all service deployments for conditional deployment
+media_stack_services:
+  - name: mediafusion
+    deployment: "{{ mediafusion_deployment }}"
+    enabled: "{{ deploy_services.mediafusion | default(false) }}"
+
+  - name: comet
+    deployment: "{{ comet_deployment }}"
+    enabled: "{{ deploy_services.comet | default(false) }}"
+
+  - name: aiostreams
+    deployment: "{{ aiostreams_deployment }}"
+    enabled: "{{ deploy_services.aiostreams | default(false) }}"
+
+  - name: mongodb
+    deployment: "{{ mongodb_deployment }}"
+    enabled: "{{ deploy_services.mongodb | default(false) }}"
+
+  - name: redis
+    deployment: "{{ redis_deployment }}"
+    enabled: "{{ deploy_services.redis | default(false) }}"
+
+  - name: prowlarr
+    deployment: "{{ prowlarr_deployment }}"
+    enabled: "{{ deploy_services.prowlarr | default(false) }}"
+
+  - name: jackett
+    deployment: "{{ jackett_deployment }}"
+    enabled: "{{ deploy_services.jackett | default(false) }}"
+
+  - name: flaresolverr
+    deployment: "{{ flaresolverr_deployment }}"
+    enabled: "{{ deploy_services.flaresolverr | default(false) }}"

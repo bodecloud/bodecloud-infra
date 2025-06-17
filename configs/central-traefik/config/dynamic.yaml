@@ -1,0 +1,57 @@
+http:
+  routers:          
+    # Catch-all router with lowest priority for unmatched hosts
+    catchall-404:
+      rule: "Host(`*`)"
+      entryPoints:
+        - web
+        - websecure
+      # Use the lowest priority
+      priority: 1
+      # Use the error pages middleware defined below
+      middlewares:
+        - error-pages@file
+      # The service here doesn't strictly matter as the middleware intercepts,
+      # but Traefik requires one. We can point it to the error-pages service itself
+      # or use the built-in noop service if preferred.
+      service: noop@internal
+      tls: {}
+
+  services:
+    # Define the error page service
+    error-pages:
+      loadBalancer:
+        servers:
+          - url: "http://error-pages:80"
+
+  # Middlewares configuration
+  middlewares:
+    error-pages:
+      errors:
+        status:
+          - "400-499"
+          - "500-599"
+        service: traefik-error-pages
+        query: "/{status}.html"
+
+    ipallowlist-private:
+      ipAllowList:
+        sourceRange:
+          - "127.0.0.1/32" # localhost
+          - "10.0.0.0/8" # private network
+          - "172.16.0.0/12" # private network
+          - "192.168.0.0/16" # private network
+          - "100.64.0.0/10" # Tailscale network
+          - "fd7a:115c:a1e0::/48" # Tailscale IPv6 network
+
+    secure-headers:
+      headers:
+        sslRedirect: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 31536000
+        contentTypeNosniff: true
+        browserXssFilter: true
+        customFrameOptionsValue: "SAMEORIGIN"
+        contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'"

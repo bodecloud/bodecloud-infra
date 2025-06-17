@@ -1,0 +1,29 @@
+[2025-06-15 02:00:00.723 +00:00] [INF] [33] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Extract Chapter Images" Completed after 0 minute(s) and 0 seconds
+[2025-06-15 02:00:01.230 +00:00] [INF] [33] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Extract Chapter Images" set to fire at 2025-06-[2025-06-15 02:00:01.361 +00:00] [INF] [3] Emby.Server.Imple[2025-06-15 03:00:00.653 +00:00] [INF] [3] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Generate Trickplay Images" Completed after 0 minute(s) and 0 seco[202[2025-06-15 03:00:01.119 +00:00] [INF] [3] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-0[2025-06-15 03:00:01.138 +00:00] [INF] [25] Emby.Server.Implementations.ScheduledTasks.TaskManager: Daily trigger for "Generate Trickplay Images" set to fire at 2025-06-16 03:00:00.000 +00:00, which is 23:59:58.8632216 from now.[[2025-06-15 03:12:36.392 +00:00] [INF] [66] Emby.Server.Implementations.Library.LibraryManager: Validating media library
+[2025-06-15 03:12:36.477 +00:00] [INF] [64] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Media Segment Scan" Completed after 0 minute(s) and 0 seconds
+[2025-06-15 03:12:36.603 +00:00] [ERR] [66] MediaBrowser.Providers.Folders.FolderMetadataService: Error in "Dynamic Image Provider"
+System.IO.FileNotFoundException: Could not find file '/tmp/jellyfin'.
+File name: '/tmp/jellyfin'
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchToFileInternal(BaseItem item, IReadOnlyList`1 itemsWithImages, ImageType imageType, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Images.BaseDynamicImageProvider`1.FetchAsync(T item, MetadataRefreshOptions options, CancellationToken cancellationToken)
+   at MediaBrowser.Providers.Manager.MetadataService`2.RunCustomProvider(ICustomMetadataProvider`1 provider, TItemType item, String logName, MetadataRefreshOptions options, RefreshResult refreshResult, CancellationToken cancellationToken)
+[2025-06-15 03:12:36.721 +00:00] [WRN] [66] MediaBrowser.Controller.Entities.BaseItem: Library folder "/config/data/data/playlists" is inaccessible or empty, skipping
+[2025-06-15 03:12:36.739 +00:00] [ERR] [66] Emby.Server.Implementations.ScheduledTasks.TaskManager: Error executing Scheduled Task
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Threading.Tasks.Dataflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.
+
+File name: 'System.Threading.Tasks.Dataflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+   at MediaBrowser.Controller.Entities.Folder.RunTasks[T](Func`3 task, IList`1 children, IProgress`1 progress, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at MediaBrowser.Controller.Entities.Folder.RunTasks[T](Func`3 task, IList`1 children, IProgress`1 progress, CancellationToken cancellationToken)
+   at MediaBrowser.Controller.Entities.Folder.RefreshMetadataRecursive(IList`1 children, MetadataRefreshOptions refreshOptions, Boolean recursive, IProgress`1 progress, CancellationToken cancellationToken)
+   at MediaBrowser.Controller.Entities.Folder.ValidateChildrenInternal2(IProgress`1 progress, Boolean recursive, Boolean refreshChildMetadata, Boolean allowRemoveRoot, MetadataRefreshOptions refreshOptions, IDirectoryService directoryService, CancellationToken cancellationToken)
+   at MediaBrowser.Controller.Entities.Folder.ValidateChildrenInternal(IProgress`1 progress, Boolean recursive, Boolean refreshChildMetadata, Boolean allowRemoveRoot, MetadataRefreshOptions refreshOptions, IDirectoryService directoryService, CancellationToken cancellationToken)
+   at MediaBrowser.Controller.Entities.AggregateFolder.ValidateChildrenInternal(IProgress`1 progress, Boolean recursive, Boolean refreshChildMetadata, Boolean allowRemoveRoot, MetadataRefreshOptions refreshOptions, IDirectoryService directoryService, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Library.LibraryManager.ValidateTopLibraryFolders(CancellationToken cancellationToken, Boolean removeRoot)
+   at Emby.Server.Implementations.Library.LibraryManager.PerformLibraryValidation(IProgress`1 progress, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.Library.LibraryManager.ValidateMediaLibraryInternal(IProgress`1 progress, CancellationToken cancellationToken)
+   at Emby.Server.Implementations.ScheduledTasks.ScheduledTaskWorker.ExecuteInternal(TaskOptions options)
+[2025-06-15 03:12:36.742 +00:00] [INF] [66] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Scan Media Library" Failed after 0 minute(s) and 0 seconds

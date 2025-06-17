@@ -1,0 +1,7 @@
+---
+# K3s agent configuration
+server: { { k3s_server_url } }
+token: { { k3s_master_token } }
+node-ip: { { node_tailscale_ip } }
+kubelet-arg:
+  - "node-ip={{ node_tailscale_ip }}"

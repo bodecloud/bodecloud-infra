@@ -1,0 +1,10 @@
+apiVersion: k3s.cattle.io/v1
+kind: Addon
+metadata:
+  annotations:
+    addon.k3s.cattle.io/gvks: rbac.authorization.k8s.io/v1, Kind=ClusterRole
+  name: aggregated-metrics-reader
+  namespace: kube-system
+spec:
+  checksum: 63b058ebe88b8179b459777318be49b591fefe629d9258b10974aeed224b5530
+  source: /var/lib/rancher/k3s/server/manifests/metrics-server/aggregated-metrics-reader.yaml

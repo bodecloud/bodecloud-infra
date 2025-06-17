@@ -1,0 +1,37 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.11
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: metrics-server-6f4c6675d5-g6br4
+    namespace: kube-system
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T17:22:11Z"
+  generateName: metrics-server-
+  labels:
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/cluster-service: "true"
+    kubernetes.io/name: Metrics-server
+    kubernetes.io/service-name: metrics-server
+    objectset.rio.cattle.io/hash: a5d3bc601c871e123fa32b27f549b6ea770bcf4a
+  name: metrics-server-s5mw2
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: metrics-server
+ports:
+- name: https
+  port: 10250
+  protocol: TCP

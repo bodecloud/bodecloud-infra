@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: jackett
+  usage:
+    cpu: 279641201n
+    memory: 89696Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: jackett
+    pod-template-hash: 56755c4f59
+  name: jackett-56755c4f59-tf2v4
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:53Z"
+window: 16.742s

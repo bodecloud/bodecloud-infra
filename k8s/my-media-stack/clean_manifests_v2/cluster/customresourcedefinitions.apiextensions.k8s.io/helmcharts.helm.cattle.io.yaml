@@ -1,0 +1,370 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/+xYTXPbNhP+K+/gTOsdJ05ia6YHV22atImjsWxdOjkswRUFC8RisKBsjUf/vQOS+qYlyHVbH3Ijgf18dhcL7KMAq4boWJER3fCDDx5N+OXO5Jw7iv4/PRWJmCiTia7oleypuEam0kn8BUfKKB94E1Gghww8iO6jAGPIQ9jg8EvpHUrP6DtOUUeC9xqDZBVEiuTJfbo36E7y6eRp05L//aFM9tMeu/YLN1Cg6Iox6kKOwXnuhM8VWZQAtiCDFDFPhHRYOX6jCmQPhRVdU2qdCA0p6r1wjIHHoiveXAB8OMM3kOK7i7MPZ+dnODp//0FenF/A+4s3p6N3p+np2dvzoO2g+fNEsEUZ1OaOStsQbzhYuRAomiB/Ql30gjSRCKtLB3pDhUgEK5OXGtz6elBlHTK6Kd6aiaF781Ghzlh0R6AZE8GSbLD2agFZJhIxrZOPRffPRwFZVoUNdN8p49H1SJdFs3nHZPrgA0Qd9uBL7txRGoSJJRC/UyoS4WeVHvZOmVzMky1ei7IjG/8avoW7EZweXI5+6cNKxs3ORoS0xv2VlOFyIYLboaUV63X9F8EXgjbc1vxpYzFCSkrk2TuwKxk/ry1tSfi+JKoOFJZjLKrDgiyay/7n4dvBcsk6sui8qtNykcCbq1D6cR+Yew4zNF5BXVyN1pRII5iQlIFwgNKhD/uhGCHVKLrelZhsCa0t3KXa8mW+XKlrOahJQU6+jUZfVKFaFTUMIa1zdBXHEqxWu+sUPWxMQ9kj49FEMoRDClep2qo/IzlBd425Yu9m/wKCI1C6dNgnreQsyo/1PI6hV4ZRlg4HE2VvvgyG6NRo1u79HaWfC8hjfAmnJCjz6eam3y7LUjYIepWfVVF6iMARrL10Bbm+o5HSrWZsMmiSoMfEfg/HjuH1wvOixb/VDSUm1Rvi3hhMfkyAXWkuj9FT0V+RuSbaVwlrsak4bhldnALGL8qUD0c70vB9s8tL0YFo4hR1HET0srFORLkfjX1JwSglFfbVJi2X1mos0HjQVVpVViiPxXrzWIv3EzrAOZi1CzwmKWYsvd404VmnaSKmoMvngnLIx3tlMrrn6NzNC4ZVVx403fugC7tsV7HeNxkkkVvN21P1kSp2YWsDsrqORdUsWupdHkHaIzNS+VdoPQZfrAHz0U1Ka7rvOzVVGnP8lSXo6vETF4RX3+IkWEiVVkto94ORZRuVfNCyQ3WXObIvKbHNRbsIXhYXM+tIfqUy8p7pELJvRs9CO/6oNPKMPRZHlOgrbP0/Wvh/W5Q/ulFkN+L6ubY+U1nH5eFkUqboDHrkE2X8CbmTRkGl9enjZKViexYSFXpVIJVx50d1q+FjXrY1R/1Y3XexUrkhh7c2A49PzA0mOOOXPdD/Rms+JHoa/QpuTZVqnLaLkiRTJ88+KAtkjn0oOwSOfKuvbPonT5NDuC4mjC9TlFVVumlotrUM9uQq7JrfMnXNDLuefC0wmM/n3zcwASnResyutma36yPb6gqzFsF6Dh1UYjZcjl3D6nz+VwAAAP//EdZTnQkYAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: apiextensions.k8s.io/v1, Kind=CustomResourceDefinition
+    objectset.rio.cattle.io/owner-name: helmcharts.helm.cattle.io
+    objectset.rio.cattle.io/owner-namespace: ""
+  labels:
+    objectset.rio.cattle.io/hash: 29aa74e2abe5947484ef867c989a6921f51b1438
+  name: helmcharts.helm.cattle.io
+spec:
+  conversion:
+    strategy: None
+  group: helm.cattle.io
+  names:
+    kind: HelmChart
+    listKind: HelmChartList
+    plural: helmcharts
+    singular: helmchart
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.jobName
+      name: Job
+      type: string
+    - jsonPath: .spec.chart
+      name: Chart
+      type: string
+    - jsonPath: .spec.targetNamespace
+      name: TargetNamespace
+      type: string
+    - jsonPath: .spec.version
+      name: Version
+      type: string
+    - jsonPath: .spec.repo
+      name: Repo
+      type: string
+    - jsonPath: .spec.helmVersion
+      name: HelmVersion
+      type: string
+    - jsonPath: .spec.bootstrap
+      name: Bootstrap
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              authPassCredentials:
+                type: boolean
+              authSecret:
+                nullable: true
+                properties:
+                  name:
+                    nullable: true
+                    type: string
+                type: object
+              backOffLimit:
+                nullable: true
+                type: integer
+              bootstrap:
+                type: boolean
+              chart:
+                nullable: true
+                type: string
+              chartContent:
+                nullable: true
+                type: string
+              createNamespace:
+                type: boolean
+              dockerRegistrySecret:
+                nullable: true
+                properties:
+                  name:
+                    nullable: true
+                    type: string
+                type: object
+              failurePolicy:
+                nullable: true
+                type: string
+              helmVersion:
+                nullable: true
+                type: string
+              insecureSkipTLSVerify:
+                type: boolean
+              jobImage:
+                nullable: true
+                type: string
+              plainHTTP:
+                type: boolean
+              podSecurityContext:
+                nullable: true
+                properties:
+                  appArmorProfile:
+                    nullable: true
+                    properties:
+                      localhostProfile:
+                        nullable: true
+                        type: string
+                      type:
+                        nullable: true
+                        type: string
+                    type: object
+                  fsGroup:
+                    nullable: true
+                    type: integer
+                  fsGroupChangePolicy:
+                    nullable: true
+                    type: string
+                  runAsGroup:
+                    nullable: true
+                    type: integer
+                  runAsNonRoot:
+                    nullable: true
+                    type: boolean
+                  runAsUser:
+                    nullable: true
+                    type: integer
+                  seLinuxChangePolicy:
+                    nullable: true
+                    type: string
+                  seLinuxOptions:
+                    nullable: true
+                    properties:
+                      level:
+                        nullable: true
+                        type: string
+                      role:
+                        nullable: true
+                        type: string
+                      type:
+                        nullable: true
+                        type: string
+                      user:
+                        nullable: true
+                        type: string
+                    type: object
+                  seccompProfile:
+                    nullable: true
+                    properties:
+                      localhostProfile:
+                        nullable: true
+                        type: string
+                      type:
+                        nullable: true
+                        type: string
+                    type: object
+                  supplementalGroups:
+                    items:
+                      type: integer
+                    nullable: true
+                    type: array
+                  supplementalGroupsPolicy:
+                    nullable: true
+                    type: string
+                  sysctls:
+                    items:
+                      properties:
+                        name:
+                          nullable: true
+                          type: string
+                        value:
+                          nullable: true
+                          type: string
+                      type: object
+                    nullable: true
+                    type: array
+                  windowsOptions:
+                    nullable: true
+                    properties:
+                      gmsaCredentialSpec:
+                        nullable: true
+                        type: string
+                      gmsaCredentialSpecName:
+                        nullable: true
+                        type: string
+                      hostProcess:
+                        nullable: true
+                        type: boolean
+                      runAsUserName:
+                        nullable: true
+                        type: string
+                    type: object
+                type: object
+              repo:
+                nullable: true
+                type: string
+              repoCA:
+                nullable: true
+                type: string
+              repoCAConfigMap:
+                nullable: true
+                properties:
+                  name:
+                    nullable: true
+                    type: string
+                type: object
+              securityContext:
+                nullable: true
+                properties:
+                  allowPrivilegeEscalation:
+                    nullable: true
+                    type: boolean
+                  appArmorProfile:
+                    nullable: true
+                    properties:
+                      localhostProfile:
+                        nullable: true
+                        type: string
+                      type:
+                        nullable: true
+                        type: string
+                    type: object
+                  capabilities:
+                    nullable: true
+                    properties:
+                      add:
+                        items:
+                          nullable: true
+                          type: string
+                        nullable: true
+                        type: array
+                      drop:
+                        items:
+                          nullable: true
+                          type: string
+                        nullable: true
+                        type: array
+                    type: object
+                  privileged:
+                    nullable: true
+                    type: boolean
+                  procMount:
+                    nullable: true
+                    type: string
+                  readOnlyRootFilesystem:
+                    nullable: true
+                    type: boolean
+                  runAsGroup:
+                    nullable: true
+                    type: integer
+                  runAsNonRoot:
+                    nullable: true
+                    type: boolean
+                  runAsUser:
+                    nullable: true
+                    type: integer
+                  seLinuxOptions:
+                    nullable: true
+                    properties:
+                      level:
+                        nullable: true
+                        type: string
+                      role:
+                        nullable: true
+                        type: string
+                      type:
+                        nullable: true
+                        type: string
+                      user:
+                        nullable: true
+                        type: string
+                    type: object
+                  seccompProfile:
+                    nullable: true
+                    properties:
+                      localhostProfile:
+                        nullable: true
+                        type: string
+                      type:
+                        nullable: true
+                        type: string
+                    type: object
+                  windowsOptions:
+                    nullable: true
+                    properties:
+                      gmsaCredentialSpec:
+                        nullable: true
+                        type: string
+                      gmsaCredentialSpecName:
+                        nullable: true
+                        type: string
+                      hostProcess:
+                        nullable: true
+                        type: boolean
+                      runAsUserName:
+                        nullable: true
+                        type: string
+                    type: object
+                type: object
+              set:
+                additionalProperties:
+                  x-kubernetes-int-or-string: true
+                nullable: true
+                type: object
+              targetNamespace:
+                nullable: true
+                type: string
+              timeout:
+                nullable: true
+                type: string
+              valuesContent:
+                nullable: true
+                type: string
+              valuesSecrets:
+                items:
+                  properties:
+                    ignoreUpdates:
+                      type: boolean
+                    keys:
+                      items:
+                        nullable: true
+                        type: string
+                      nullable: true
+                      type: array
+                    name:
+                      nullable: true
+                      type: string
+                  type: object
+                nullable: true
+                type: array
+              version:
+                nullable: true
+                type: string
+            type: object
+            properties:
+              conditions:
+                items:
+                  properties:
+                    message:
+                      nullable: true
+                      type: string
+                    reason:
+                      nullable: true
+                      type: string
+                      nullable: true
+                      type: string
+                    type:
+                      nullable: true
+                      type: string
+                  type: object
+                nullable: true
+                type: array
+              jobName:
+                nullable: true
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+  acceptedNames:
+    kind: HelmChart
+    listKind: HelmChartList
+    plural: helmcharts
+    singular: helmchart
+  conditions:
+  - lastTransitionTime: "2025-06-11T06:36:39Z"
+    message: no conflicts found
+    reason: NoConflicts
+    type: NamesAccepted
+  - lastTransitionTime: "2025-06-11T06:36:39Z"
+    message: the initial names have been accepted
+    reason: InitialNamesAccepted
+    type: Established
+  storedVersions:
+  - v1

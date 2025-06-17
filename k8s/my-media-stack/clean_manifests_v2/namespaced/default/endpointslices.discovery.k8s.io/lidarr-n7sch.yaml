@@ -1,0 +1,36 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.5
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: lidarr-77fc4cd668-5wvtl
+    namespace: default
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:00:50Z"
+  generateName: lidarr-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: lidarr
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: lidarr
+  name: lidarr-n7sch
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: lidarr
+ports:
+- name: http
+  port: 8686
+  protocol: TCP

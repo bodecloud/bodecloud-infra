@@ -1,0 +1,339 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: brunner56-rivenfrontend-8bb6658db-2mw95
+  generateName: brunner56-rivenfrontend-8bb6658db-
+  namespace: my-media-stack
+  uid: 5248d48b-59a8-48ce-a7c3-4dde7a98d82d
+  resourceVersion: '2389350020'
+  creationTimestamp: '2025-05-29T16:29:05Z'
+  labels:
+    app.elfhosted.com/name: riven-frontend
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: rivenfrontend
+    pod-template-hash: 8bb6658db
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: brunner56-rivenfrontend-8bb6658db
+      uid: 21803fbe-4332-41e6-bf4a-cdf0d02d5c6a
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: k3s
+      operation: Update
+      apiVersion: v1
+      time: '2025-05-29T16:29:05Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+          f:labels:
+            .: {}
+            f:app.elfhosted.com/name: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"21803fbe-4332-41e6-bf4a-cdf0d02d5c6a"}: {}
+        f:spec:
+          f:affinity:
+            .: {}
+            f:podAffinity:
+              .: {}
+              f:requiredDuringSchedulingIgnoredDuringExecution: {}
+          f:automountServiceAccountToken: {}
+          f:containers:
+            k:{"name":"brunner56-rivenfrontend"}:
+              .: {}
+              f:envFrom: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:livenessProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:tcpSocket:
+                  .: {}
+                  f:port: {}
+                f:timeoutSeconds: {}
+              f:name: {}
+              f:ports:
+                .: {}
+                k:{"containerPort":3000,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+              f:readinessProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:tcpSocket:
+                  .: {}
+                  f:port: {}
+                f:timeoutSeconds: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:securityContext:
+                .: {}
+                f:readOnlyRootFilesystem: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:startupProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:tcpSocket:
+                  .: {}
+                  f:port: {}
+                f:timeoutSeconds: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/riven/config"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/tmp"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+          f:dnsPolicy: {}
+          f:enableServiceLinks: {}
+          f:priorityClassName: {}
+          f:restartPolicy: {}
+          f:schedulerName: {}
+          f:securityContext:
+            .: {}
+            f:fsGroup: {}
+            f:fsGroupChangePolicy: {}
+            f:runAsGroup: {}
+            f:runAsUser: {}
+            f:seccompProfile:
+              .: {}
+              f:type: {}
+          f:serviceAccount: {}
+          f:serviceAccountName: {}
+          f:terminationGracePeriodSeconds: {}
+          f:volumes:
+            .: {}
+            k:{"name":"config"}:
+              .: {}
+              f:configMap:
+                .: {}
+                f:defaultMode: {}
+                f:name: {}
+              f:name: {}
+            k:{"name":"tmp"}:
+              .: {}
+              f:emptyDir: {}
+              f:name: {}
+    - manager: k3s
+      operation: Update
+      apiVersion: v1
+      time: '2025-05-29T16:29:12Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions:
+            k:{"type":"ContainersReady"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Initialized"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"PodReadyToStartContainers"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Ready"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+          f:containerStatuses: {}
+          f:hostIP: {}
+          f:hostIPs: {}
+          f:phase: {}
+          f:podIP: {}
+          f:podIPs:
+            .: {}
+            k:{"ip":"10.2.115.193"}:
+              .: {}
+              f:ip: {}
+          f:startTime: {}
+      subresource: status
+spec:
+  volumes:
+    - name: config
+      configMap:
+        name: riven-frontend-config
+        defaultMode: 420
+    - name: tmp
+      emptyDir: {}
+  containers:
+    - name: brunner56-rivenfrontend
+      image: >-
+        ghcr.io/elfhosted/riven-frontend:v0.20.0@sha256:c4d792868a8113a2f57f504fe371cbcd8c52172d734c812c366bff352672998e
+      ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+      envFrom:
+        - configMapRef:
+            name: riven-frontend-env
+        - configMapRef:
+            name: elfbot-rivenfrontend
+            optional: true
+      resources:
+        limits:
+          cpu: '1'
+          memory: 1Gi
+        requests:
+          cpu: '0'
+          memory: 20Mi
+      volumeMounts:
+        - name: config
+          mountPath: /riven/config
+        - name: tmp
+          mountPath: /tmp
+      livenessProbe:
+        tcpSocket:
+          port: 3000
+        timeoutSeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 3
+      readinessProbe:
+        tcpSocket:
+          port: 3000
+        timeoutSeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 3
+      startupProbe:
+        tcpSocket:
+          port: 3000
+        timeoutSeconds: 1
+        periodSeconds: 5
+        successThreshold: 1
+        failureThreshold: 30
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        readOnlyRootFilesystem: false
+        seccompProfile:
+          type: RuntimeDefault
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  automountServiceAccountToken: false
+  nodeName: hansel18
+  securityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    seccompProfile:
+      type: RuntimeDefault
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                  - nodefinder
+          topologyKey: kubernetes.io/hostname
+  schedulerName: default-scheduler
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+  priorityClassName: tenant-normal
+  priority: 4000
+  enableServiceLinks: false
+  preemptionPolicy: PreemptLowerPriority
+status:
+  phase: Running
+  conditions:
+    - type: PodReadyToStartContainers
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:29:07Z'
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:29:05Z'
+    - type: Ready
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:29:12Z'
+    - type: ContainersReady
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:29:12Z'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:29:05Z'
+  hostIP: 10.0.42.38
+  hostIPs:
+    - ip: 10.0.42.38
+  podIP: 10.2.115.193
+  podIPs:
+    - ip: 10.2.115.193
+  startTime: '2025-05-29T16:29:05Z'
+  containerStatuses:
+    - name: brunner56-rivenfrontend
+      state:
+        running:
+          startedAt: '2025-05-29T16:29:07Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:f5bdf082549fabd396bd0d7dcdac41f0731b17811e66fd14eec5c4a5798c7feb
+      imageID: >-
+        ghcr.io/elfhosted/riven-frontend@sha256:c4d792868a8113a2f57f504fe371cbcd8c52172d734c812c366bff352672998e
+      containerID: >-
+        containerd://9105a80afdade936b3e36dbdc85b625d474ce3fbeaae4e10fabbef4ec6c5d07f
+      started: true
+      volumeMounts:
+        - name: config
+          mountPath: /riven/config
+        - name: tmp
+          mountPath: /tmp
+  qosClass: Burstable

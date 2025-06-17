@@ -1,0 +1,133 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: warp-56c8b6cbf4-
+  labels:
+    app: warp
+    pod-template-hash: 56c8b6cbf4
+  name: warp-56c8b6cbf4-cfd5t
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: warp-56c8b6cbf4
+spec:
+  containers:
+  - env:
+    - name: TUNNEL_TOKEN
+      value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+    - name: WARP_LICENSE_KEY
+      value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+    - name: WARP_SLEEP
+      value: "2"
+    image: caomingjun/warp:latest
+    imagePullPolicy: IfNotPresent
+    name: warp
+    ports:
+    - containerPort: 8888
+      name: warp-8888
+      protocol: TCP
+    - containerPort: 4000
+      name: warp-4000
+      protocol: TCP
+    - containerPort: 3232
+      name: warp-3232
+      protocol: TCP
+    - containerPort: 443
+      name: warp-443
+      protocol: TCP
+    - containerPort: 1080
+      name: warp-1080
+      protocol: TCP
+    - containerPort: 3005
+      name: warp-3005
+      protocol: TCP
+    - containerPort: 8000
+      name: warp-8000
+      protocol: TCP
+    - containerPort: 8181
+      name: warp-8181
+      protocol: TCP
+    - containerPort: 8469
+      name: warp-8469
+      protocol: TCP
+    - containerPort: 3185
+      name: warp-3185
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    securityContext:
+      capabilities:
+        add:
+        - MKNOD
+        - AUDIT_WRITE
+        - NET_ADMIN
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/lib/cloudflare-warp
+      name: var-lib-cloudflare-warp
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-prrpx
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: baden.vpshostingservice.co
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    sysctls:
+    - name: net.ipv4.conf.all.src_valid_mark
+      value: "1"
+    - name: net.ipv6.conf.all.disable_ipv6
+      value: "1"
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/data
+      type: ""
+    name: var-lib-cloudflare-warp
+  - name: kube-api-access-prrpx
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  message: 'Pod was rejected: forbidden sysctl: "net.ipv4.conf.all.src_valid_mark"
+    not allowlisted'
+  phase: Failed
+  qosClass: Burstable
+  reason: SysctlForbidden
+  startTime: "2025-06-14T22:38:59Z"

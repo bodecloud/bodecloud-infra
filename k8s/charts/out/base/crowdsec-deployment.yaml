@@ -1,0 +1,168 @@
+#! crowdsec-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: crowdsec
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: crowdsec
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: crowdsec
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: crowdsec
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: crowdsec
+                  image: crowdsecurity/crowdsec:latest
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: AGENTS_ALLOWED_OU
+                      value: "agent-ou"
+                    - name: AGENT_PASSWORD
+                      value: ""
+                    - name: AGENT_USERNAME
+                      value: ""
+                    - name: APPSEC_CONFIGS
+                      value: ""
+                    - name: APPSEC_RULES
+                      value: ""
+                    - name: BOUNCERS_ALLOWED_OU
+                      value: "bouncer-ou"
+                    - name: BOUNCER_KEY_TRAEFIK
+                      value: "usvi2urbIG5obProVWwcf2ImTrtB93x668jWDvrH"
+                    - name: CACERT_FILE
+                      value: ""
+                    - name: CAPI_WHITELISTS_PATH
+                      value: ""
+                    - name: CI_TESTING
+                      value: "false"
+                    - name: CLIENT_CERT_FILE
+                      value: ""
+                    - name: CLIENT_KEY_FILE
+                      value: ""
+                    - name: COLLECTIONS
+                      value: "crowdsecurity/traefik"
+                    - name: CONFIG_FILE
+                      value: "/etc/crowdsec/config.yaml"
+                    - name: CONTEXTS
+                      value: ""
+                    - name: CUSTOM_HOSTNAME
+                      value: "localhost"
+                    - name: DEBUG
+                      value: "false"
+                    - name: DISABLE_AGENT
+                      value: "false"
+                    - name: DISABLE_APPSEC_CONFIGS
+                      value: ""
+                    - name: DISABLE_APPSEC_RULES
+                      value: ""
+                    - name: DISABLE_COLLECTIONS
+                      value: ""
+                    - name: DISABLE_CONTEXTS
+                      value: ""
+                    - name: DISABLE_LOCAL_API
+                      value: "false"
+                    - name: DISABLE_ONLINE_API
+                      value: "false"
+                    - name: DISABLE_PARSERS
+                      value: ""
+                    - name: DISABLE_POSTOVERFLOWS
+                      value: ""
+                    - name: DISABLE_SCENARIOS
+                      value: ""
+                    - name: DSN
+                      value: ""
+                    - name: ENROLL_INSTANCE_NAME
+                      value: ""
+                    - name: ENROLL_KEY
+                      value: "cm91pb2bz0011e35iltz9k6ra"
+                    - name: ENROLL_TAGS
+                      value: ""
+                    - name: INSECURE_SKIP_VERIFY
+                      value: ""
+                    - name: LAPI_CERT_FILE
+                      value: ""
+                    - name: LAPI_KEY_FILE
+                      value: ""
+                    - name: LEVEL_DEBUG
+                      value: "false"
+                    - name: LEVEL_ERROR
+                      value: "false"
+                    - name: LEVEL_FATAL
+                      value: "false"
+                    - name: LEVEL_INFO
+                      value: "false"
+                    - name: LEVEL_TRACE
+                      value: "false"
+                    - name: LEVEL_WARN
+                      value: "false"
+                    - name: LOCAL_API_URL
+                      value: "http://0.0.0.0:8080"
+                    - name: METRICS_PORT
+                      value: "6060"
+                    - name: NO_HUB_UPGRADE
+                      value: "false"
+                    - name: PARSERS
+                      value: ""
+                    - name: PGID
+                      value: "988"
+                    - name: PLUGIN_DIR
+                      value: "/usr/local/lib/crowdsec/plugins/"
+                    - name: POSTOVERFLOWS
+                      value: ""
+                    - name: PUID
+                      value: "1002"
+                    - name: SCENARIOS
+                      value: ""
+                    - name: TEST_MODE
+                      value: "false"
+                    - name: TYPE
+                      value: ""
+                    - name: TZ
+                      value: "America/Chicago"
+                    - name: UMASK
+                      value: "022"
+                    - name: USE_TLS
+                      value: "false"
+                    - name: USE_WAL
+                      value: "false"
+                  ports:
+                    - name: crowdsec-6060
+                      containerPort: 6060
+                    - name: crowdsec-8080
+                      containerPort: 8080
+                  volumeMounts:
+                    - name: var-lib-crowdsec-data
+                      mountPath: /var/lib/crowdsec/data
+                    - name: etc-crowdsec
+                      mountPath: /etc/crowdsec
+                    - name: usr-local-lib-crowdsec-plugins
+                      mountPath: /usr/local/lib/crowdsec/plugins
+                    - name: var-log
+                      mountPath: /var/log
+            volumes:
+                - name: var-lib-crowdsec-data
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/crowdsec/data
+                - name: etc-crowdsec
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/crowdsec/etc/crowdsec
+                - name: usr-local-lib-crowdsec-plugins
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/crowdsec/plugins
+                - name: var-log
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/crowdsec/logs

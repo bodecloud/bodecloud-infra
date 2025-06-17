@@ -1,0 +1,50 @@
+
+x-common-env: &common-env
+  TZ: ${TZ:-America/Chicago}
+  PUID: ${PUID:-1001}
+  PGID: ${PGID:-989}
+  UMASK: ${UMASK:-002}
+
+services:
+  consul-client:
+    image: hashicorp/consul:latest
+    container_name: consul-client
+    hostname: ${CONSUL_CLIENT_HOSTNAME:-consul-client-${VPS_NAME:-node1}}
+    network_mode: "host"  # Use host network for optimal service discovery
+    volumes:
+      - ${CONFIG_PATH:-./configs}/consul/client/data:/consul/data
+      - ${CONFIG_PATH:-./configs}/consul/client/config:/consul/config
+    environment:
+      <<: *common-env
+      CONSUL_BIND_INTERFACE: ${CONSUL_BIND_INTERFACE:-eth0}
+    command: >
+      agent -client=0.0.0.0
+      -node=${CONSUL_CLIENT_HOSTNAME:-consul-client-${VPS_NAME:-node1}}
+      -retry-join=${CONSUL_SERVER_ADDRESS:-consul-server.${DOMAIN}}
+      -retry-join-wan=${CONSUL_SERVER_ADDRESS:-consul-server.${DOMAIN}}
+      -data-dir=/consul/data
+      -config-dir=/consul/config
+      -domain=consul
+      -enable-script-checks=true
+    healthcheck:
+      test: ["CMD", "consul", "members"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+
+  # Configure local Traefik as a properly registered Consul service
+  traefik-local-registration:
+    image: hashicorp/consul:latest
+    container_name: traefik-registration
+    hostname: ${VPS_NAME:-node1}-traefik-registration
+    restart: always
+    depends_on:
+      - consul-client
+    network_mode: "host"
+    volumes:
+      - ${CONFIG_PATH:-./configs}/consul/client/services:/consul/services:ro
+    command: >
+      services register
+      /consul/services/traefik-local.json
+

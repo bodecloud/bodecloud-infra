@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: prowlarr
+    pod-template-hash: 89b768ff9
+  name: prowlarr-89b768ff9
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+      pod-template-hash: 89b768ff9
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+        pod-template-hash: 89b768ff9
+    spec:
+      containers:
+      - env:
+        - name: PGID
+          value: "988"
+        - name: PUID
+          value: "1001"
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "002"
+        image: linuxserver/prowlarr
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'curl -fs -H "Authorization: Bearer 29440a82740d475cacb35327c62c87a1"
+              http://127.0.0.1:9696/api/v1/system/status || exit 1'
+          failureThreshold: 3
+          initialDelaySeconds: 120
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: prowlarr
+        ports:
+        - containerPort: 9696
+          name: prowlarr-9696
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/prowlarr/config
+          type: ""
+        name: config
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

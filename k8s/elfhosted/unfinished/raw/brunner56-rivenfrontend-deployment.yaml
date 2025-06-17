@@ -1,0 +1,120 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: brunner56-rivenfrontend
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rivenfrontend
+    helm.sh/chart: rivenfrontend-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-rivenfrontend,riven-frontend-env,riven-frontend-config
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: rivenfrontend
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.elfhosted.com/name: riven-frontend
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: rivenfrontend
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: riven-frontend-config
+          defaultMode: 420
+      - name: tmp
+        emptyDir: {}
+      containers:
+      - name: brunner56-rivenfrontend
+        image: ghcr.io/elfhosted/riven-frontend:v0.20.0@sha256:c4d792868a8113a2f57f504fe371cbcd8c52172d734c812c366bff352672998e
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: riven-frontend-env
+        - configMapRef:
+            name: elfbot-rivenfrontend
+            optional: true
+        resources:
+          limits:
+            cpu: '1'
+            memory: 1Gi
+          requests:
+            cpu: '0'
+            memory: 20Mi
+        volumeMounts:
+        - name: config
+          mountPath: /riven/config
+        - name: tmp
+          mountPath: /tmp
+        livenessProbe:
+          tcpSocket:
+            port: 3000
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 3000
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        startupProbe:
+          tcpSocket:
+            port: 3000
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 30
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          readOnlyRootFilesystem: false
+          seccompProfile:
+            type: RuntimeDefault
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      priorityClassName: tenant-normal
+      enableServiceLinks: false
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600

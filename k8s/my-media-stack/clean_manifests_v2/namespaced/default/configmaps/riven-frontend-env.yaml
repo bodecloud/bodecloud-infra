@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  BACKEND_URL: https://riven-backend.elfhosted.com
+  ORIGIN: https://riven.elfhosted.com
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"BACKEND_URL":"https://riven-backend.elfhosted.com","ORIGIN":"https://riven.elfhosted.com"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"riven-frontend-env","namespace":"default"}}
+  name: riven-frontend-env
+  namespace: default

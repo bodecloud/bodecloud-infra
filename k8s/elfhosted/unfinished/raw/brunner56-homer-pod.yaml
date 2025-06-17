@@ -1,0 +1,633 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: brunner56-homer-56b8846f47-h7dkj
+  generateName: brunner56-homer-56b8846f47-
+  namespace: my-media-stack
+  uid: bd0819bd-6ff0-48b0-a4ae-d5b27bd77618
+  resourceVersion: '2389386664'
+  creationTimestamp: '2025-05-29T16:29:05Z'
+  labels:
+    app.elfhosted.com/role: nodefinder
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: homer
+    pod-template-hash: 56b8846f47
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: brunner56-homer-56b8846f47
+      uid: 01d6825b-ff5f-4517-beaa-63a6ff72c2f8
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: k3s
+      operation: Update
+      apiVersion: v1
+      time: '2025-05-29T16:29:05Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+          f:labels:
+            .: {}
+            f:app.elfhosted.com/role: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"01d6825b-ff5f-4517-beaa-63a6ff72c2f8"}: {}
+        f:spec:
+          f:automountServiceAccountToken: {}
+          f:containers:
+            k:{"name":"brunner56-homer"}:
+              .: {}
+              f:command: {}
+              f:env:
+                .: {}
+                k:{"name":"TZ"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:livenessProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:tcpSocket:
+                  .: {}
+                  f:port: {}
+                f:timeoutSeconds: {}
+              f:name: {}
+              f:ports:
+                .: {}
+                k:{"containerPort":8080,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+              f:readinessProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:tcpSocket:
+                  .: {}
+                  f:port: {}
+                f:timeoutSeconds: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:securityContext:
+                .: {}
+                f:readOnlyRootFilesystem: {}
+                f:runAsGroup: {}
+                f:runAsNonRoot: {}
+                f:runAsUser: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:startupProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:tcpSocket:
+                  .: {}
+                  f:port: {}
+                f:timeoutSeconds: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/backup"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/config"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/config-yml"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+                k:{"mountPath":"/custom-css"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+                k:{"mountPath":"/gatus-config"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/logs"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/storage/rclone"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/storage/realdebrid-zurg"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/storage/symlinks"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/tmp"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/usr/local/bin/disk_usage.sh"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+                k:{"mountPath":"/www/assets/message"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+            k:{"name":"ui"}:
+              .: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:securityContext:
+                .: {}
+                f:allowPrivilegeEscalation: {}
+                f:capabilities:
+                  .: {}
+                  f:drop: {}
+                f:readOnlyRootFilesystem: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/www/assets/backgrounds"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:readOnly: {}
+                  f:subPath: {}
+                k:{"mountPath":"/www/assets/config.yml"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+                k:{"mountPath":"/www/assets/custom.css"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+                k:{"mountPath":"/www/assets/message"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+          f:dnsPolicy: {}
+          f:enableServiceLinks: {}
+          f:priorityClassName: {}
+          f:restartPolicy: {}
+          f:schedulerName: {}
+          f:securityContext:
+            .: {}
+            f:fsGroup: {}
+            f:fsGroupChangePolicy: {}
+            f:runAsNonRoot: {}
+            f:seccompProfile:
+              .: {}
+              f:type: {}
+          f:serviceAccount: {}
+          f:serviceAccountName: {}
+          f:terminationGracePeriodSeconds: {}
+          f:volumes:
+            .: {}
+            k:{"name":"backup"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"config"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"config-yml"}:
+              .: {}
+              f:configMap:
+                .: {}
+                f:defaultMode: {}
+                f:name: {}
+              f:name: {}
+            k:{"name":"custom-css"}:
+              .: {}
+              f:configMap:
+                .: {}
+                f:defaultMode: {}
+                f:name: {}
+              f:name: {}
+            k:{"name":"disk-usage"}:
+              .: {}
+              f:configMap:
+                .: {}
+                f:defaultMode: {}
+                f:name: {}
+              f:name: {}
+            k:{"name":"gatus-config"}:
+              .: {}
+              f:configMap:
+                .: {}
+                f:defaultMode: {}
+                f:name: {}
+              f:name: {}
+            k:{"name":"logs"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"message"}:
+              .: {}
+              f:emptyDir: {}
+              f:name: {}
+            k:{"name":"rclone"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"rclonemountrealdebridzurg"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"symlinks"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"tmp"}:
+              .: {}
+              f:emptyDir: {}
+              f:name: {}
+    - manager: k3s
+      operation: Update
+      apiVersion: v1
+      time: '2025-05-29T16:42:50Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions:
+            .: {}
+            k:{"type":"ContainersReady"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Initialized"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"PodReadyToStartContainers"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"PodScheduled"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Ready"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+          f:containerStatuses: {}
+          f:hostIP: {}
+          f:hostIPs: {}
+          f:phase: {}
+          f:podIP: {}
+          f:podIPs:
+            .: {}
+            k:{"ip":"10.2.115.149"}:
+              .: {}
+              f:ip: {}
+          f:startTime: {}
+      subresource: status
+spec:
+  volumes:
+    - name: backup
+      persistentVolumeClaim:
+        claimName: backup
+    - name: config
+      persistentVolumeClaim:
+        claimName: config
+    - name: config-yml
+      configMap:
+        name: homer-config
+        defaultMode: 420
+    - name: custom-css
+      configMap:
+        name: homer-config
+        defaultMode: 420
+    - name: disk-usage
+      configMap:
+        name: homer-config
+        defaultMode: 420
+    - name: gatus-config
+      configMap:
+        name: gatus-config
+        defaultMode: 420
+    - name: logs
+      persistentVolumeClaim:
+        claimName: logs
+    - name: message
+      emptyDir: {}
+    - name: rclone
+      persistentVolumeClaim:
+        claimName: rclone
+    - name: rclonemountrealdebridzurg
+      persistentVolumeClaim:
+        claimName: realdebrid-zurg
+    - name: symlinks
+      persistentVolumeClaim:
+        claimName: symlinks
+    - name: tmp
+      emptyDir: {}
+  containers:
+    - name: brunner56-homer
+      image: >-
+        alpine/k8s:1.29.1
+      command:
+        - /bin/bash
+        - /usr/local/bin/disk_usage.sh
+      ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+      env:
+        - name: TZ
+          value: UTC
+      resources:
+        limits:
+          cpu: 200m
+          memory: 1Gi
+        requests:
+          cpu: '0'
+          memory: 1Mi
+      volumeMounts:
+        - name: backup
+          mountPath: /backup
+        - name: config
+          mountPath: /config
+        - name: config-yml
+          mountPath: /config-yml
+          subPath: config.yml
+        - name: custom-css
+          mountPath: /custom-css
+          subPath: custom-css
+        - name: disk-usage
+          mountPath: /usr/local/bin/disk_usage.sh
+          subPath: disk_usage.sh
+        - name: gatus-config
+          mountPath: /gatus-config
+        - name: logs
+          mountPath: /logs
+        - name: message
+          mountPath: /www/assets/message
+        - name: rclone
+          mountPath: /storage/rclone
+        - name: rclonemountrealdebridzurg
+          mountPath: /storage/realdebrid-zurg
+        - name: symlinks
+          mountPath: /storage/symlinks
+        - name: tmp
+          mountPath: /tmp
+      livenessProbe:
+        tcpSocket:
+          port: 8080
+        timeoutSeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 3
+      readinessProbe:
+        tcpSocket:
+          port: 8080
+        timeoutSeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 3
+      startupProbe:
+        tcpSocket:
+          port: 8080
+        timeoutSeconds: 1
+        periodSeconds: 5
+        successThreshold: 1
+        failureThreshold: 30
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        runAsNonRoot: false
+        readOnlyRootFilesystem: true
+        seccompProfile:
+          type: RuntimeDefault
+    - name: ui
+      image: >-
+        ghcr.io/elfhosted/homer:v25.05.2@sha256:60772bd0292281282161f10aa2bea105bba344158937f1c0022c6986ef5aedc3
+      resources:
+        limits:
+          cpu: '1'
+          memory: 4Gi
+        requests:
+          cpu: '0'
+          memory: 1Mi
+      volumeMounts:
+        - name: config-yml
+          mountPath: /www/assets/config.yml
+          subPath: config.yml
+        - name: custom-css
+          mountPath: /www/assets/custom.css
+          subPath: custom.css
+        - name: message
+          mountPath: /www/assets/message
+        - name: config
+          readOnly: true
+          mountPath: /www/assets/backgrounds
+          subPath: homer/backgrounds
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+        runAsUser: 568
+        runAsGroup: 568
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  automountServiceAccountToken: false
+  nodeName: hansel18
+  securityContext:
+    runAsNonRoot: false
+    fsGroup: 568
+    fsGroupChangePolicy: Always
+    seccompProfile:
+      type: RuntimeDefault
+  schedulerName: default-scheduler
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+  priorityClassName: tenant-normal
+  priority: 4000
+  enableServiceLinks: false
+  preemptionPolicy: PreemptLowerPriority
+status:
+  phase: Running
+  conditions:
+    - type: PodReadyToStartContainers
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:42:48Z'
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:42:33Z'
+    - type: Ready
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:42:50Z'
+    - type: ContainersReady
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:42:50Z'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:42:33Z'
+  hostIP: 10.0.42.38
+  hostIPs:
+    - ip: 10.0.42.38
+  podIP: 10.2.115.149
+  podIPs:
+    - ip: 10.2.115.149
+  startTime: '2025-05-29T16:42:33Z'
+  containerStatuses:
+    - name: brunner56-homer
+      state:
+        running:
+          startedAt: '2025-05-29T16:42:47Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:a91bb0385ba73a04c67571be3e5ebf0c42b344a52389c9f01da79c2803896569
+      imageID: >-
+        filebrowser/filebrowser:v2.31.2
+      containerID: >-
+        containerd://0bb81b60ec07521d5ea348c34462326df7a5e5118d56110db8d88865deebcfa3
+      started: true
+      volumeMounts:
+        - name: backup
+          mountPath: /backup
+        - name: config
+          mountPath: /config
+        - name: config-yml
+          mountPath: /config-yml
+        - name: custom-css
+          mountPath: /custom-css
+        - name: disk-usage
+          mountPath: /usr/local/bin/disk_usage.sh
+        - name: gatus-config
+          mountPath: /gatus-config
+        - name: logs
+          mountPath: /logs
+        - name: message
+          mountPath: /www/assets/message
+        - name: rclone
+          mountPath: /storage/rclone
+        - name: rclonemountrealdebridzurg
+          mountPath: /storage/realdebrid-zurg
+        - name: symlinks
+          mountPath: /storage/symlinks
+        - name: tmp
+          mountPath: /tmp
+    - name: ui
+      state:
+        running:
+          startedAt: '2025-05-29T16:42:47Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:d0ae54e4ecdef9fef1d13a97e09979c8c05930133076476242d5dbf7a9d08c5c
+      imageID: >-
+        ghcr.io/elfhosted/homer@sha256:60772bd0292281282161f10aa2bea105bba344158937f1c0022c6986ef5aedc3
+      containerID: >-
+        containerd://b994c76cf09ea2cb70aa2f7142335b8de93a8a6c31e181b0f2afa7b46a300fc7
+      started: true
+      volumeMounts:
+        - name: config-yml
+          mountPath: /www/assets/config.yml
+        - name: custom-css
+          mountPath: /www/assets/custom.css
+        - name: message
+          mountPath: /www/assets/message
+        - name: config
+          mountPath: /www/assets/backgrounds
+          readOnly: true
+          recursiveReadOnly: Disabled
+  qosClass: Burstable

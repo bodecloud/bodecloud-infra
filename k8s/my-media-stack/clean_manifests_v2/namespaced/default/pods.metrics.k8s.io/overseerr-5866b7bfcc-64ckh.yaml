@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: overseerr
+  usage:
+    cpu: 16208863n
+    memory: 228948Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: overseerr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: overseerr
+    pod-template-hash: 5866b7bfcc
+  name: overseerr-5866b7bfcc-64ckh
+  namespace: default
+timestamp: "2025-06-14T23:00:40Z"
+window: 19.879s

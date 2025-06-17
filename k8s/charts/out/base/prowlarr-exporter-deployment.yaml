@@ -1,0 +1,71 @@
+#! prowlarr-exporter-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: prowlarr-exporter
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: prowlarr-exporter
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: prowlarr-exporter
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: prowlarr-exporter
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: prowlarr-exporter
+                  image: ghcr.io/onedr0p/exportarr
+                  imagePullPolicy: IfNotPresent
+                  command: [prowlarr]
+                  env:
+                    - name: APIKEY
+                      value: "e6352949607b467e9e48b4bca32f55f1"
+                    - name: AUTH_PASSWORD
+                      value: "b00tstr4p"
+                    - name: AUTH_USERNAME
+                      value: "bolabaden"
+                    - name: DISABLE_SSL_VERIFY
+                      value: "false"
+                    - name: ENABLE_ADDITIONAL_METRICS
+                      value: "false"
+                    - name: ENABLE_UNKNOWN_QUEUE_ITEMS
+                      value: "false"
+                    - name: FORM_AUTH
+                      value: "false"
+                    - name: INTERFACE
+                      value: "0.0.0.0"
+                    - name: LOG_LEVEL
+                      value: "debug"
+                    - name: PGID
+                      value: "988"
+                    - name: PORT
+                      value: "9710"
+                    - name: PROWLARR__BACKFILL
+                      value: "false"
+                    - name: PROWLARR__BACKFILL_SINCE_DATE
+                      value: ""
+                    - name: PUID
+                      value: "1002"
+                    - name: TZ
+                      value: "America/Chicago"
+                    - name: UMASK
+                      value: "022"
+                    - name: URL
+                      value: "http://gluetun-premiumize-nl:9696"
+                  securityContext:
+                    runAsUser: 1002:988
+                  ports:
+                    - name: prowlarr-e-9710
+                      containerPort: 9710

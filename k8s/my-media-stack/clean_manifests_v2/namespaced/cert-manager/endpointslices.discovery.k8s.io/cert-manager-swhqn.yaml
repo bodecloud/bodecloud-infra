@@ -1,0 +1,41 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.65
+  conditions:
+    ready: false
+    serving: false
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: cert-manager-9fd4dc6bf-rv5c4
+    namespace: cert-manager
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:04:18Z"
+  generateName: cert-manager-
+  labels:
+    app: cert-manager
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/version: v1.14.0
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    helm.sh/chart: cert-manager-v1.14.0
+    kubernetes.io/service-name: cert-manager
+  name: cert-manager-swhqn
+  namespace: cert-manager
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: cert-manager
+ports:
+- name: tcp-prometheus-servicemonitor
+  port: 9402
+  protocol: TCP

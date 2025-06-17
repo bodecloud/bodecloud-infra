@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app.elfhosted.com/name: filebrowser
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: filebrowser
+    pod-template-hash: 5fb5648dcf
+  name: filebrowser-5fb5648dcf
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: filebrowser
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: filebrowser
+      pod-template-hash: 5fb5648dcf
+  template:
+    metadata:
+      labels:
+        app.elfhosted.com/name: filebrowser
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: filebrowser
+        pod-template-hash: 5fb5648dcf
+    spec:
+      containers:
+      - image: filebrowser/filebrowser:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: filebrowser
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /srv
+          name: config
+        - mountPath: /srv/symlinks
+          name: symlinks
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: symlinks
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T15:05:12Z"
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: prowlarr
+  name: prowlarr
+  namespace: default
+subsets:
+- addresses:
+  - ip: 10.42.3.17
+    nodeName: baden.vpshostingservice.co
+    targetRef:
+      kind: Pod
+      name: prowlarr-799895546f-29njq
+      namespace: default
+  ports:
+  - name: http
+    port: 9696
+    protocol: TCP

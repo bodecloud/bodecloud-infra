@@ -1,0 +1,36 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.3.17
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: baden.vpshostingservice.co
+  targetRef:
+    kind: Pod
+    name: prowlarr-799895546f-29njq
+    namespace: default
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T15:05:12Z"
+  generateName: prowlarr-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: prowlarr
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: prowlarr
+  name: prowlarr-h7s27
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: prowlarr
+ports:
+- name: http
+  port: 9696
+  protocol: TCP

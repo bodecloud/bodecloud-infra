@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "3"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.elfhosted.com/name":"wizarr","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"wizarr"},"name":"wizarr","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app.elfhosted.com/name":"wizarr"}},"template":{"metadata":{"labels":{"app.elfhosted.com/name":"wizarr","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"wizarr"}},"spec":{"containers":[{"image":"ghcr.io/wizarrrr/wizarr:latest","livenessProbe":{"failureThreshold":3,"httpGet":{"path":"/","port":5690,"scheme":"HTTP"},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":10},"name":"wizarr","ports":[{"containerPort":5690,"name":"http","protocol":"TCP"}],"readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/","port":5690,"scheme":"HTTP"},"initialDelaySeconds":10,"periodSeconds":10,"timeoutSeconds":5},"resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"10m","memory":"128Mi"}},"volumeMounts":[{"mountPath":"/data/database","name":"config","subPath":"wizarr"}]}],"restartPolicy":"Always","volumes":[{"name":"config","persistentVolumeClaim":{"claimName":"config"}}]}}}}
+  labels:
+    app.elfhosted.com/name: wizarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: wizarr
+  name: wizarr
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: wizarr
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-06-12T01:11:04Z"
+      labels:
+        app.elfhosted.com/name: wizarr
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: wizarr
+    spec:
+      containers:
+      - image: ghcr.io/wizarrrr/wizarr:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 5690
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: wizarr
+        ports:
+        - containerPort: 5690
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 5690
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data/database
+          name: config
+          subPath: wizarr
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2025-06-12T03:32:16Z"
+    lastUpdateTime: "2025-06-12T03:32:16Z"
+    message: ReplicaSet "wizarr-5b5967b" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    type: Progressing
+  - lastTransitionTime: "2025-06-14T15:08:10Z"
+    lastUpdateTime: "2025-06-14T15:08:10Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    type: Available
+  observedGeneration: 3
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

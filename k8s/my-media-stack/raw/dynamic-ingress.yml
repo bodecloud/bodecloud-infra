@@ -1,0 +1,27 @@
+# Dynamic routing for services using Traefik service annotations
+# This approach uses service annotations to automatically expose services
+# Services need to have the following annotations:
+#   traefik.ingress.kubernetes.io/service.loadbalancer.server.port: "80"
+#   traefik.ingress.kubernetes.io/router.rule: "Host(`servicename.beatapostapita.duckdns.org`)"
+#   traefik.ingress.kubernetes.io/router.tls: "true"
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: default-wildcard-route
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "HostRegexp(`{subdomain:[a-z0-9-]+}.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: whoami  # Default fallback service
+          port: 80
+          namespace: my-media-stack
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+---
+# This is the proper way to achieve dynamic routing:
+# Add annotations to each service's manifest to enable automatic discovery 

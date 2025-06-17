@@ -1,0 +1,39 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.44
+  conditions:
+    ready: false
+    serving: false
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: riven-6d6bff59f7-nwznd
+    namespace: default
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:04:25Z"
+  generateName: riven-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: riven
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: riven
+  name: riven-shgls
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: riven
+ports:
+- name: http
+  port: 8080
+  protocol: TCP
+- name: backend
+  port: 8001
+  protocol: TCP

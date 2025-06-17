@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-brunner56-gatus-59b6dff76d-c2nw8
+  labels:
+    pod-template-hash: 59b6dff76d
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.elfhosted.com/role
+            operator: In
+            values:
+            - nodefinder
+        topologyKey: kubernetes.io/hostname
+  automountServiceAccountToken: false
+  containers:
+  - env:
+    - name: GATUS_CONFIG_PATH
+      value: /config/config.yaml
+    - name: SMTP_FROM
+      value: health@elfhosted.com
+    - name: SMTP_PORT
+      value: "587"
+    envFrom:
+    - secretRef:
+        name: gatus-smtp-config
+    image: ghcr.io/elfhosted/gatus:5.17.0@sha256:e2752cf7e1781478b12e0ca48159a40549905195afe39fe0a5e39ac2c7256dac
+    livenessProbe:
+      tcpSocket:
+        port: 8080
+    name: brunner56-gatus
+    ports:
+    - containerPort: 8080
+      name: http
+    readinessProbe:
+      tcpSocket:
+        port: 8080
+    resources:
+      limits:
+        cpu: "1"
+        memory: 128Mi
+      requests:
+        cpu: "0"
+        memory: 20Mi
+    securityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    startupProbe:
+      failureThreshold: 30
+      periodSeconds: 5
+      tcpSocket:
+        port: 8080
+    volumeMounts:
+    - mountPath: /data/
+      name: config
+      subPath: gatus
+    - mountPath: /config
+      name: gatus-config
+  enableServiceLinks: false
+  preemptionPolicy: PreemptLowerPriority
+  priority: 4000
+  priorityClassName: tenant-normal
+  securityContext:
+    fsGroup: 568
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: default
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - configMap:
+      name: gatus-config
+    name: gatus-config

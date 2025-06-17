@@ -1,0 +1,466 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: homer-config
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  config.yml: |
+    ---
+    # Homepage configuration
+    # See https://fontawesome.com/icons for icons options
+
+    # Optional: Use external configuration file.
+    # Using this will ignore remaining config in this file
+    # externalConfig: https://example.com/server-luci/config.yaml
+
+    subtitle: "brunner56 is ..."
+    title: "ElfHosted!"
+    documentTitle: "ElfHosted - brunner56" # Customize the browser tab text
+    # Alternatively a fa icon can be provided:
+    # icon: "fas fa-wand-magic-sparkles"
+    logo: https://elfhosted.com/images/logo.png
+    header: true # Set to false to hide the header
+    footer: Version 1.378.1
+
+    columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+    connectivityCheck: false # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
+
+    # Optional theming
+    # theme: default # 'default' or one of the themes available in 'src/assets/themes'.
+
+    # Optional custom stylesheet
+    # Will load custom CSS files. Especially useful for custom icon sets.
+    stylesheet:
+      - "assets/custom.css"
+
+    # Here is the exhaustive list of customization parameters
+    # However all value are optional and will fallback to default if not set.
+    # if you want to change only some of the colors, feel free to remove all unused key.
+    colors:
+      light:
+        highlight-primary: "#222526"
+        highlight-secondary: "#4285f4"
+        highlight-hover: "#5a95f5"
+        background: "#222526"
+        card-background: "#ffffff"
+        text: "#363636"
+        text-header: "#ffffff"
+        text-title: "#303030"
+        text-subtitle: "#424242"
+        card-shadow: rgba(0, 0, 0, 0.1)
+        link-hover: "#363636"
+        background-image: /assets/backgrounds/background-light.jpg
+      dark:
+        highlight-primary: "#222526"
+        highlight-secondary: "#4285f4"
+        highlight-hover: "#5a95f5"
+        background: "#222526"
+        card-background: "#2b2b2b"
+        text: "#eaeaea"
+        text-header: "#ffffff"
+        text-title: "#fafafa"
+        text-subtitle: "#f5f5f5"
+        card-shadow: rgba(0, 0, 0, 0.4)
+        link-hover: "#ffdd57"
+        background-image: /assets/backgrounds/background-dark.jpg
+
+    # Optional message
+    message:
+      url: https://brunner56.elfhosted.com/assets/message/message.json
+      # mapping:
+      #   content: 'message'
+      #   style: 'style'
+      #   title: 'title'
+      refreshInterval: 10000
+      icon: "fas fa-door-open"
+
+    # Optional navbar
+    # links: [] # Allows for navbar (dark mode, layout, and search) without any links
+    links:
+
+      - name: "Apps"
+        icon: "fas fa-couch"
+        url: "#config"
+
+      - name: "Health"
+        icon: "fas fa-heartbeat"
+        url: "https://brunner56-health.elfhosted.com"
+        target: "_blank" # optional html tag target attribute
+
+      - name: "Store"
+        icon: "fas fa-store"
+        url: "https://store.elfhosted.com"
+        target: "_blank" # optional html tag target attribute
+
+      - name: "Docs"
+        icon: "fas fa-book"
+        url: "https://docs.elfhosted.com"
+        target: "_blank" # optional html tag target attribute
+
+      - name: "Account"
+        icon: "fa fa-user"
+        url: "https://store.elfhosted.com/my-account/"
+        target: "_blank" # optional html tag target attribute
+
+      - name: "Discord"
+        icon: "fa-brands fa-discord"
+        url: "https://discord.elfhosted.com"
+        target: "_blank" # optional html tag target attribute
+
+      - name: "Logout"
+        icon: "fas fa-lock"
+        url: https://brunner56-auth-me.elfhosted.com/_oauth/logout
+
+    # Services
+    # First level array represents a group.
+    # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+    services:
+      - name: "Consume Media"
+        icon: "fas fa-couch"
+        # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
+        # logo: "path/to/logo"
+        items:
+
+          - name: "Plex"
+            logo: "assets/png/plex.png"
+            # Alternatively a fa icon can be provided:
+            # icon: "fab fa-photo-video"
+            subtitle: "Watch Movies/TV"
+            tag: "public"
+            tagstyle: "is-danger"
+            url: "https://brunner56-plex.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+      - name: "Manage Media"
+        icon: "fas fa-photo-video"
+        items:
+
+          - name: "Wizarr"
+            icon: "fas fa-hat-wizard"
+            subtitle: "Manage Plex / Emby / Jellyfin Accounts / Invites"
+            tag: "public"
+            tagstyle: "is-danger"
+            url: "https://brunner56-wizarr.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+          - name: "Riven"
+            icon: "fas fa-mountain"
+            subtitle: "All-in-one Debrid Media Management"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-riven.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+          - name: "Riven (backend)"
+            icon: "fas fa-mountain"
+            subtitle: "Geek out over Riven's backend"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-riven-backend.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+      - name: "Download Media"
+        icon: "fas fa-cloud-arrow-down"
+        items:
+
+          - name: "Zurg"
+            logo: "assets/png/real-debrid.png"
+            subtitle: "Manage RealDebrid Mount"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-zurg.elfhosted.com/http/"
+            target: "_blank" # optional html tag target attribute
+
+      - name: "Tools"
+        icon: "fas fa-toolbox"
+        items:
+
+          - name: "FileBrowser"
+            logo: "assets/png/filebrowser.png"
+            subtitle: "Manage Files"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-filebrowser.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+          - name: "ElfTerm"
+            icon: "fas fa-terminal"
+            subtitle: "Enter the ElfTerm.. 🧄"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-elfterm.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+          - name: "Kubernetes Dashboard"
+            logo: "assets/png/kubernetes.png"
+            subtitle: "Kubernetes Resources"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-kubernetes.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+      - name: "Rclone"
+        icon: "fas fa-truck"
+        items:
+
+          - name: "Rclone Remotes"
+            logo: "assets/png/rclone.png"
+            subtitle: "Rclone remotes"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-filebrowser.elfhosted.com/files/config/rclone/rclone.conf"
+            target: "_blank" # optional html tag target attribute
+
+          - name: "Rclone UI"
+            logo: "assets/png/rclone.png"
+            subtitle: "Rclone UI"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-rcloneui.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+          - name: "Rclone FM"
+            logo: "assets/png/rclone.png"
+            subtitle: "Rclone File Manager"
+            tag: "protected"
+            tagstyle: "is-success"
+            url: "https://brunner56-rclonefm.elfhosted.com"
+            target: "_blank" # optional html tag target attribute
+
+      - name: "Grafana"
+        icon: "fas fa-globe"
+        items:
+
+          - name: "Cluster Resources"
+            logo: "assets/png/grafana.png"
+            subtitle: "Cluster Resources"
+            tag: "public"
+            tagstyle: "is-danger"
+            url: "https://fnky.nz/grafana-elfhosted"
+            target: "_blank" # optional html tag target attribute
+  custom.css: |
+    @charset "UTF-8";
+
+    /* raleway-regular - latin */
+    @font-face {
+      font-family: 'Raleway';
+      font-style: normal;
+      font-weight: 400;
+      src: url('./fonts/raleway-v22-latin-regular.eot'); /* IE9 Compat Modes */
+      src: local(''),
+          url('./fonts/raleway-v22-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./fonts/raleway-v22-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./fonts/raleway-v22-latin-regular.woff') format('woff'), /* Modern Browsers */
+          url('./fonts/raleway-v22-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+          url('./fonts/raleway-v22-latin-regular.svg#Raleway') format('svg'); /* Legacy iOS */
+    }
+
+    /* lato-regular - latin */
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 400;
+      src: url('./fonts/lato-v20-latin-regular.eot'); /* IE9 Compat Modes */
+      src: local(''),
+          url('./fonts/lato-v20-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./fonts/lato-v20-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./fonts/lato-v20-latin-regular.woff') format('woff'), /* Modern Browsers */
+          url('./fonts/lato-v20-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+          url('./fonts/lato-v20-latin-regular.svg#Lato') format('svg'); /* Legacy iOS */
+    }
+
+    /* lato-700 - latin */
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 700;
+      src: url('./fonts/lato-v20-latin-700.eot'); /* IE9 Compat Modes */
+      src: local(''),
+          url('./fonts/lato-v20-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./fonts/lato-v20-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./fonts/lato-v20-latin-700.woff') format('woff'), /* Modern Browsers */
+          url('./fonts/lato-v20-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+          url('./fonts/lato-v20-latin-700.svg#Lato') format('svg'); /* Legacy iOS */
+    }
+
+    /* lato-900 - latin */
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 900;
+      src: url('./fonts/lato-v20-latin-900.eot'); /* IE9 Compat Modes */
+      src: local(''),
+          url('./fonts/lato-v20-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./fonts/lato-v20-latin-900.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./fonts/lato-v20-latin-900.woff') format('woff'), /* Modern Browsers */
+          url('./fonts/lato-v20-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
+          url('./fonts/lato-v20-latin-900.svg#Lato') format('svg'); /* Legacy iOS */
+    }
+
+    /* Sets the group title to be a bolder font */
+    .group-title {
+      font-family: Lato;
+      font-weight: 800;
+    }
+
+    /* Changes the card title to be a bolder font */
+    .title {
+      font-weight: 700;
+    }
+
+    /* Changes the subtitle to be a bolder font */
+    .subtitle {
+      font-weight: 500;
+    }
+
+    /* Adds spacing to the bottom of cards */
+    body #app .card-content {
+      margin-bottom: 0.75rem;
+    }
+
+    /*Adds more border radius to the cards */
+    body .layout-vertical .column div:first-of-type .card {
+      border-radius: 1rem;
+    }
+
+    body .layout-vertical .card {
+      border-radius: 1rem;
+    }
+
+    .card {
+        border-radius: 1rem;
+    }
+
+    body .layout-vertical .column div:last-of-type .card {
+        border-radius: 1rem;
+    }
+
+    /* Changes Header Opacity */
+    body #bighead .first-line {
+      background-color: #50762E;
+    }
+
+    body #bighead .navbar {
+      background-color: #36511F;
+    }
+
+    body .search-bar input {
+        opacity: 20%;
+    }
+
+    body #bighead .navbar a:focus, body #bighead .navbar a:hover {
+      background-color: #50762E;
+      color: var(--link-hover);
+    }
+  disk_usage.sh: |
+    #!/bin/bash
+
+    # # Un-break permissions on config PVCs, if attaching them here has caused a problem
+    # chown 568:568 /config/* # if this pod (which runs as root) starts first, it can set config volumes to be owned by root
+
+    if [ ! -f /www/assets/backgrounds/background-dark.jpg ]; then
+      curl -s 'https://images.unsplash.com/photo-1545486332-9e0999c535b2?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=adrien-olichon-_GH9LwhlSO4-unsplash.jpg&w=640' -L --output /www/assets/backgrounds/background-dark.jpg
+    fi
+
+    if [ ! -f /www/assets/backgrounds/background-light.jpg ]; then
+      curl -s 'https://unsplash.com/photos/kO1G3neRA2o/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTh8fGxpZ2h0JTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3MjExNzAzMzd8MA&force=true&w=640' -L --output /www/assets/backgrounds/background-light.jpg
+    fi
+
+
+    # until zurg is up, continue producing this error message every minute
+    DAYSREMAINING=$(curl -s http://zurg:9999/stats | jq .user_infos[0].premium)
+    while [[ ! "$DAYSREMAINING" -gt 0 ]]; do
+      echo "Zurg not up yet, waiting...."
+      echo '{"title": "Warning, brunner56, your setup is incomplete 😲!","content": "⚠ Zurg is not running, likely you key is not setup, invalid, or expired - Add it <A HREF=https://brunner56-filebrowser.elfhosted.com/files/config/zurg/config.yml>here</A> (refreshes every 5min)","style": "is-danger","icon": "fas fa-exclamation-triangle"}' > /www/assets/message/message.json
+      sleep 60s
+      DAYSREMAINING=$(curl -s http://zurg:9999/stats | jq .user_infos[0].premium)
+    done
+
+
+    rm /www/assets/message/message.json
+    while true
+    do
+
+      # Once for all of /config, /backup, /logs...
+      # tree --du -hF -s  /config/ -H https://brunner56-filebrowser.elfhosted.com/files/config -T "🧝 ElfHosted [/config] usage for brunner56"> /www/assets/message/disk-usage-config.html
+      # tree --du -hF -s  /backup/ -H https://brunner56-filebrowser.elfhosted.com/files/backup -T "🧝 ElfHosted [/backup] usage for brunner56"> /www/assets/message/disk-usage-backup.html
+      # tree --du -hF -s  /logs/   -H https://brunner56-filebrowser.elfhosted.com/files/logs -T "🧝 ElfHosted [/logs] usage for brunner56"> /www/assets/message/disk-usage-logs.html
+
+      # TOTAL_USED_RAW=$(du -s /config/ | cut -f1)
+      # TOTAL_USED_HUMAN=$(du -sh /config/ | cut -f1)
+
+      # for STORAGE_PATH in $(ls /config); do
+      #   # And again per-app /config...
+      #   # disabled on 19 Feb 2024 - consumes too much I/O now that we have "infinite" streaming - @funkypenguin
+      #   # tree --du -hF -s  /config/${STORAGE_PATH} -H https://brunner56-filebrowser.elfhosted.com/files/config/${STORAGE_PATH} -T "🧝 ElfHosted [/config/${STORAGE_PATH}] usage for brunner56"> /www/assets/message/disk-usage-config-${STORAGE_PATH}.html
+
+      #   USED_RAW=$(du -s /config/${STORAGE_PATH} | cut -f1)
+      #   USED_HUMAN=$(du -sh /config/${STORAGE_PATH} | cut -f1)
+
+      #   # Keep the highest percentage used number
+      #   if [[ ! -z ${EXISTING_USAGE+x} ]]; then
+      #     if [[ "$USED_RAW" -gt "$EXISTING_USAGE" ]]; then
+      #       EXISTING_USAGE=$USED_RAW
+      #       CONFIG_BIGGEST_CONSUMER=$STORAGE_PATH
+      #       CONFIG_DISK_USED_HUMAN=$USED_HUMAN
+      #       echo -n "<A HREF='https://brunner56-filebrowser.elfhosted.com/files/config/' TARGET='_blank'>/config</A>: Largest volume-per-app consumer is <A HREF='https://brunner56.elfhosted.com/assets/message/disk-usage-config-${CONFIG_BIGGEST_CONSUMER}/' TARGET='_blank'>${CONFIG_BIGGEST_CONSUMER}</A> with ${CONFIG_DISK_USED_HUMAN} used<BR/>" > /www/assets/message/message_details_config.html
+      #     fi
+      #   else
+      #     EXISTING_USAGE=$USED_RAW
+      #     CONFIG_BIGGEST_CONSUMER=$STORAGE_PATH
+      #     CONFIG_DISK_USED_HUMAN=$USED_HUMAN
+      #     echo -n "<A HREF='https://brunner56-filebrowser.elfhosted.com/files/config/' TARGET='_blank'>/config</A>: Largest volume-per-app consumer is <A HREF='https://brunner56.elfhosted.com/assets/message/disk-usage-config-${CONFIG_BIGGEST_CONSUMER}/' TARGET='_blank'>${CONFIG_BIGGEST_CONSUMER}</A> with ${CONFIG_DISK_USED_HUMAN} used<BR/>" > /www/assets/message/message_details_config.html
+      #   fi
+      # done
+
+      # echo "🗂 /config/ $TOTAL_USED_HUMAN of 100GB used: " > /www/assets/message/message_details.html
+
+      # PERCENTAGE_USED=$(cat /www/assets/message/disk_space_percent_used)
+      # if [[ "$PERCENTAGE_USED" -ge 90 || "$CONFIG_PERCENTAGE_USED" -ge 90 ]]; then
+      #   STYLE="is-danger"
+      #   ICON="fa fa-thermometer-full"
+      #   MESSAGE="Time to clean up! 🧽"
+      # elif [[ "$PERCENTAGE_USED" -ge 75 || "$CONFIG_PERCENTAGE_USED" -ge 75 ]]; then
+      #   STYLE="is-warning"
+      #   ICON="fa fa-thermometer-three-quarters"
+      #   MESSAGE="Getting full.. 🍔"
+      # elif [[ "$PERCENTAGE_USED" -ge 50 || "$CONFIG_PERCENTAGE_USED" -ge 50 ]]; then
+      #   STYLE="is-info"
+      #   ICON="fa fa-thermometer-half"
+      #   MESSAGE="Halfway there.."
+      # elif [[ "$PERCENTAGE_USED" -ge 25  || "$CONFIG_PERCENTAGE_USED" -ge 25 ]]; then
+      #   STYLE="is-success"
+      #   ICON="fa fa-thermometer-quarter"
+      #   MESSAGE="Nice and tidy! 👍"
+      # else
+      #   STYLE="is-success"
+      #   ICON="fa fa-thermometer-empty"
+      #   MESSAGE="Gigabytes everywhere! 🥳"
+      # fi
+
+      RD_DAYS_REMAINING=$(curl -s http://zurg:9999/stats | jq -r '[.user_infos[] | "\(.username) expires in \(.premium) days"] | join(", ")')
+      RD_LIBRARY_SIZE=$(curl -s http://zurg:9999/stats | jq .library_size) # items
+      ZURG_MESSAGE="👾 Zurg reports $RD_LIBRARY_SIZE items, $RD_DAYS_REMAINING"
+
+      RIVEN_TOTAL_ITEMS=$(curl -s -H "Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u" http://riven:8080/api/v1/stats | jq .total_items) # items
+      RIVEN_TOTAL_MOVIES=$(curl -s -H "Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u" http://riven:8080/api/v1/stats | jq .total_movies) # items
+      RIVEN_TOTAL_SHOWS=$(curl -s -H "Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u" http://riven:8080/api/v1/stats | jq .total_shows) # items
+      RIVEN_TOTAL_SEASONS=$(curl -s -H "Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u" http://riven:8080/api/v1/stats | jq .total_seasons) # items
+      RIVEN_TOTAL_EPISODES=$(curl -s -H "Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u" http://riven:8080/api/v1/stats | jq .total_episodes) # items
+      RIVEN_TOTAL_SYMLINKS=$(curl -s -H "Authorization: Bearer 1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u" http://riven:8080/api/v1/stats | jq .total_symlinks) # items
+      RIVEN_MESSAGE="🗄 Riven reports $RIVEN_TOTAL_ITEMS total items (<I>$RIVEN_TOTAL_MOVIES movies 🍿, $RIVEN_TOTAL_SHOWS shows 📺 across $RIVEN_TOTAL_SEASONS seasons and $RIVEN_TOTAL_EPISODES episodes across $RIVEN_TOTAL_SYMLINKS symlinks!</I>)"
+
+      COMPLIMENT=$(curl -s http://elfhosted-internal.my-fun-api/compliment | jq -r .data.compliment)
+
+      # DISK_USAGE_CONFIG=$(cat /www/assets/message/message_details.html /www/assets/message/message_details_config.html )
+      echo "{ \"title\":\"Welcome, brunner56!\", \"content\":\"❤️ ${COMPLIMENT}</BR>${ZURG_MESSAGE}<BR/> ${RIVEN_MESSAGE}\",\"style\":\"${STYLE}\",\"icon\":\"${ICON}\" }" > /www/assets/message/message.json
+
+      sleep $(shuf -i 1800-5400 -n 1)
+    done

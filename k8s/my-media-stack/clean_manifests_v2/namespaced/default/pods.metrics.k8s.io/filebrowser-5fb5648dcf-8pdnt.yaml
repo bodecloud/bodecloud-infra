@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: filebrowser
+  usage:
+    cpu: 65298n
+    memory: 7792Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: filebrowser
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: filebrowser
+    pod-template-hash: 5fb5648dcf
+  name: filebrowser-5fb5648dcf-8pdnt
+  namespace: default
+timestamp: "2025-06-14T23:00:42Z"
+window: 18.668s

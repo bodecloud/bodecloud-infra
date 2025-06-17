@@ -1,0 +1,752 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: brunner56-zurg-79859b68d6
+  namespace: my-media-stack
+  uid: 84c38482-1874-457a-9d0a-74c5401c8ca5
+  resourceVersion: '2389452055'
+  generation: 1
+  creationTimestamp: '2025-05-29T16:29:05Z'
+  labels:
+    app.elfhosted.com/class: debrid
+    app.elfhosted.com/name: zurg
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: zurg
+    pod-template-hash: 79859b68d6
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-zurg,zurg-env,gluetun-config
+    deployment.kubernetes.io/desired-replicas: '1'
+    deployment.kubernetes.io/max-replicas: '1'
+    deployment.kubernetes.io/revision: '1'
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: brunner56-zurg
+      uid: 54eb56f3-424a-4c90-9c55-ed81a654ec48
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: k3s
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-05-29T16:29:05Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:configmap.reloader.stakater.com/reload: {}
+            f:deployment.kubernetes.io/desired-replicas: {}
+            f:deployment.kubernetes.io/max-replicas: {}
+            f:deployment.kubernetes.io/revision: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.elfhosted.com/class: {}
+            f:app.elfhosted.com/name: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"54eb56f3-424a-4c90-9c55-ed81a654ec48"}: {}
+        f:spec:
+          f:replicas: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubernetes.io/egress-bandwidth: {}
+              f:labels:
+                .: {}
+                f:app.elfhosted.com/class: {}
+                f:app.elfhosted.com/name: {}
+                f:app.kubernetes.io/instance: {}
+                f:app.kubernetes.io/name: {}
+                f:pod-template-hash: {}
+            f:spec:
+              f:affinity:
+                .: {}
+                f:nodeAffinity:
+                  .: {}
+                  f:preferredDuringSchedulingIgnoredDuringExecution: {}
+                f:podAffinity:
+                  .: {}
+                  f:preferredDuringSchedulingIgnoredDuringExecution: {}
+              f:automountServiceAccountToken: {}
+              f:containers:
+                k:{"name":"brunner56-zurg"}:
+                  .: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":9999,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:startupProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/backup"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/config/logs"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/example-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/shared"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tooling-scripts"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"ghcr-io-elfhosted"}: {}
+              f:initContainers:
+                .: {}
+                k:{"name":"bootstrap"}:
+                  .: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"AWS_ACCESS_KEY_ID"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                    k:{"name":"AWS_SECRET_ACCESS_KEY"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                    k:{"name":"ELF_APP_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"K8S_APP_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"S3_ENDPOINT_URL"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsGroup: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/etc/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/backup"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                k:{"name":"copy-example-config"}:
+                  .: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/bootstrap/"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                k:{"name":"setup"}:
+                  .: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/bootstrap/"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:fsGroup: {}
+                f:fsGroupChangePolicy: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"backup"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"config"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"elfbot"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"example-config"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"logs"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"shared"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"tooling-scripts"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+    - manager: k3s
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-05-29T17:12:59Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:fullyLabeledReplicas: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+      subresource: status
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: zurg
+      pod-template-hash: 79859b68d6
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.elfhosted.com/class: debrid
+        app.elfhosted.com/name: zurg
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: zurg
+        pod-template-hash: 79859b68d6
+      annotations:
+        kubernetes.io/egress-bandwidth: 150M
+    spec:
+      volumes:
+        - name: backup
+          persistentVolumeClaim:
+            claimName: backup
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: elfbot
+          configMap:
+            name: elfbot-zurg
+            defaultMode: 420
+            optional: true
+        - name: example-config
+          configMap:
+            name: zurg-config
+            defaultMode: 420
+        - name: logs
+          persistentVolumeClaim:
+            claimName: logs
+        - name: shared
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+        - name: tooling-scripts
+          configMap:
+            name: tooling-scripts
+            defaultMode: 493
+      initContainers:
+        - name: bootstrap
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /bin/bash
+            - '-c'
+            - >
+              set -e
+
+
+              # Allows us to use app.elfhosted.com/name, but fall back to
+              app.kubernetes.io/name if the former doesn't exist
+
+              if [[ -z "$ELF_APP_NAME" ]]; then
+                ELF_APP_NAME=$K8S_APP_NAME
+              fi
+
+
+              # look for commands - we match specific names in order of
+              least-destructive
+
+              TIMESTAMP_NOW=$(date +%s)
+
+              if [[ -f /etc/elfbot/pause ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=pause
+                fi
+              fi
+
+
+              # If no command is set, then move onto the next possibility
+
+              if [[ -f /etc/elfbot/backup && -z "$COMMAND" ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=backup
+                fi
+              fi
+
+
+              # If no command is set, then move onto the next possibility
+
+              if [[ -f /etc/elfbot/reset && -z "$COMMAND" ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=reset
+                fi
+              fi
+
+
+              case $COMMAND in
+
+                "pause")
+                  echo "Recent pause command found, sleeping 5m.."
+                  sleep 300
+                  ;;
+
+                "reset")
+
+                  # Safety check - if /config/homer exists, we've not mounted /config properly and are about to wipe out EVERYTHING
+                  if [ -e "/config/homer" ]; then
+                      echo "The path /config/homer exists. Exiting."
+                      exit 1
+                  fi      
+                  echo "Recent reset command found, resetting"
+                  rm -rf /config/*
+                  ;;
+
+                "backup")
+                  echo "Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}"
+                  TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\n' -1)
+                  cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP
+                  ;;
+
+              esac
+
+
+              if [[ ! -f /config/i-am-bootstrapped ]]
+
+              then
+                echo "Bootstrapping from goldilocks config..."
+                s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/
+                touch /config/i-am-bootstrapped
+              fi
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: b2-elfhosted-config-ro
+                  key: access-key-id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: b2-elfhosted-config-ro
+                  key: secret-key
+            - name: S3_ENDPOINT_URL
+              value: https://s3.us-west-000.backblazeb2.com
+            - name: K8S_APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.kubernetes.io/name']
+            - name: ELF_APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.elfhosted.com/name']
+          resources:
+            limits:
+              cpu: '1'
+              memory: 4Gi
+            requests:
+              cpu: '0'
+              memory: 1Mi
+          volumeMounts:
+            - name: elfbot
+              mountPath: /etc/elfbot
+            - name: backup
+              mountPath: /storage/backup
+            - name: config
+              mountPath: /config
+              subPath: zurg
+            - name: tmp
+              mountPath: /tmp
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+        - name: copy-example-config
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              set -x
+              set -e
+
+              # We need a /config/logs folder
+              mkdir -p /config/logs
+
+              # If we don't already have an example config, create one
+              if [[ ! -f /config/config.yml ]];
+              then
+                cp /bootstrap/config.yml /config/
+              fi
+
+              # If we don't already have an example plex_update, create one
+              if [[ ! -f /config/plex_update.sh ]];
+              then
+                cp /bootstrap/plex_update.sh /config/
+              fi
+          resources: {}
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: zurg
+            - name: example-config
+              mountPath: /bootstrap/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
+        - name: setup
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /bin/bash
+            - '-c'
+            - >
+              # run the setup script from the configmap, so that we can make
+              templated changes
+
+              bash /bootstrap/setup.sh
+          resources: {}
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: zurg
+            - name: example-config
+              mountPath: /bootstrap/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      containers:
+        - name: brunner56-zurg
+          image: >-
+            ghcr.io/elfhosted/zurg-rc:2025.05.14.0031-nightly@sha256:513bcc2be2a9fb8b8df7fc458f76747bebcc884776bfbfd4393e16d61b2c1227
+          ports:
+            - name: http
+              containerPort: 9999
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: zurg-env
+          resources:
+            limits:
+              cpu: '1'
+              memory: 2Gi
+            requests:
+              cpu: '0'
+              memory: 32Mi
+          volumeMounts:
+            - name: backup
+              mountPath: /backup
+            - name: config
+              mountPath: /config
+              subPath: zurg
+            - name: elfbot
+              mountPath: /elfbot
+            - name: example-config
+              mountPath: /example-config
+            - name: logs
+              mountPath: /config/logs
+              subPath: zurg
+            - name: shared
+              mountPath: /shared
+            - name: tmp
+              mountPath: /tmp
+            - name: tooling-scripts
+              mountPath: /tooling-scripts
+          livenessProbe:
+            tcpSocket:
+              port: 9999
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: 9999
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            tcpSocket:
+              port: 9999
+            timeoutSeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 120
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      imagePullSecrets:
+        - name: ghcr-io-elfhosted
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: node-role.elfhosted.com/contended
+                    operator: In
+                    values:
+                      - 'true'
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.elfhosted.com/role
+                      operator: In
+                      values:
+                        - nodefinder
+                topologyKey: kubernetes.io/hostname
+            - weight: 2
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.elfhosted.com/name
+                      operator: In
+                      values:
+                        - zurg
+                topologyKey: kubernetes.io/hostname
+                namespaceSelector: {}
+      schedulerName: default-scheduler
+      priorityClassName: tenant-normal
+      enableServiceLinks: false
+status:
+  replicas: 1
+  fullyLabeledReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  observedGeneration: 1

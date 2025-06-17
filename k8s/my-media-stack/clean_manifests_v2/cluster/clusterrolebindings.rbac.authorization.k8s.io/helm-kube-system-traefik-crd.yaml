@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4yRzY7UQAyEXwX5nA7zw2g2kTjAHkDitiAuiIPT7Z6Y9E/kdoJgNO+Okl3QrMQuHLut+lyuOgOO/JmkcE7QgnRoa5y0z8I/UTmnergpNeeX8xYqGDg5aOE2TEVJ7nKgt5wcpxNUEEnRoSK0Z8CUsq7ysjxz942sFtJaONcWVQMtTF5gPYVobE4qOQQSY3sUNUInLiorA6onCfl7IjGneXgAXY3mbfXiAyf3+j2FeLtA/8lJGAlaUEHyPBgr7r8kZUS76IapI1N+FKUIlwqs0Gr/E0cqinGENk0hVBCwo/BsMD2WHlp4deP93h3sfrs9dvvjzltn8bBpjs3BN3533OzQbw7Nbtn24H1N88qIuT7mUoHkQHfk15JGfid5Gp+r/a+dw59t9v7ToIucFnyZ7i+C9sv5t/IjycyW3libp6Tw2OrjrJ9M8+vlVwAAAP//b1bdJakCAAA
+    objectset.rio.cattle.io/id: helm-controller-chart-registration
+    objectset.rio.cattle.io/owner-gvk: helm.cattle.io/v1, Kind=HelmChart
+    objectset.rio.cattle.io/owner-name: traefik-crd
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: 48ff3d5c3117b372fcdca509795f9f2702af0592
+  name: helm-kube-system-traefik-crd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: helm-traefik-crd
+  namespace: kube-system

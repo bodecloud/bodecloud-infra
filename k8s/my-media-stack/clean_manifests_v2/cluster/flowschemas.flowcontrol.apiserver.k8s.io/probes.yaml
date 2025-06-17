@@ -1,0 +1,31 @@
+apiVersion: flowcontrol.apiserver.k8s.io/v1
+kind: FlowSchema
+metadata:
+  annotations:
+    apf.kubernetes.io/autoupdate-spec: "true"
+  name: probes
+spec:
+  matchingPrecedence: 2
+  priorityLevelConfiguration:
+    name: exempt
+  rules:
+  - nonResourceRules:
+    - nonResourceURLs:
+      - /healthz
+      - /readyz
+      - /livez
+      verbs:
+      - get
+    subjects:
+    - group:
+        name: system:unauthenticated
+      kind: Group
+    - group:
+        name: system:authenticated
+      kind: Group
+  conditions:
+  - lastTransitionTime: "2025-06-11T06:36:36Z"
+    message: This FlowSchema references the PriorityLevelConfiguration object named
+      "exempt" and it exists
+    reason: Found
+    type: Dangling

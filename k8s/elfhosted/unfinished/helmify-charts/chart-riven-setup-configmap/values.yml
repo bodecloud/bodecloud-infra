@@ -1,0 +1,10 @@
+kubernetesClusterDomain: cluster.local
+rivenSetup:
+  setupSh: |-
+    #!/bin/bash
+    # make symlink directories if they don't exist, to make onboarding simpler
+    mkdir -p /storage/symlinks/movies
+    mkdir -p /storage/symlinks/shows
+    # Enforce API key
+    contents="$(jq '.api_key="1nMZNC0Cg6UP7sblvFirUi9Sad4ga84u"' /config/settings.json)" && \
+      echo -E "${contents}" > /config/settings.json

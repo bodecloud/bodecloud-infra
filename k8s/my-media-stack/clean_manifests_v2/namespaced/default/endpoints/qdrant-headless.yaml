@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    app: qdrant
+    app.kubernetes.io/component: cluster-discovery
+    app.kubernetes.io/instance: qdrant
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: qdrant
+    app.kubernetes.io/version: v1.14.1
+    helm.sh/chart: qdrant-1.14.1
+    service.kubernetes.io/headless: ""
+  name: qdrant-headless
+  namespace: default

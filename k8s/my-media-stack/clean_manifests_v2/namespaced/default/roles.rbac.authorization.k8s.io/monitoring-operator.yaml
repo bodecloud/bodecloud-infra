@@ -1,0 +1,38 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"name":"monitoring-operator","namespace":"default"},"rules":[{"apiGroups":[""],"resources":["pods","services","endpoints"],"verbs":["get","list","watch"]},{"apiGroups":["apps"],"resources":["deployments","replicasets","daemonsets","statefulsets"],"verbs":["get","list","watch"]},{"apiGroups":["metrics.k8s.io"],"resources":["pods","nodes"],"verbs":["get","list"]}]}
+  name: monitoring-operator
+  namespace: default
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - services
+  - endpoints
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - replicasets
+  - daemonsets
+  - statefulsets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - metrics.k8s.io
+  resources:
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list

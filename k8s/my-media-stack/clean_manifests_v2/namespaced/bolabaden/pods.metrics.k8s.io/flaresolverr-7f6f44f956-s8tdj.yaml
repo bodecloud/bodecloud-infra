@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: flaresolverr
+  usage:
+    cpu: 1737506n
+    memory: 116008Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: flaresolverr
+    pod-template-hash: 7f6f44f956
+  name: flaresolverr-7f6f44f956-s8tdj
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:57Z"
+window: 17.829s

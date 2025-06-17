@@ -1,0 +1,7 @@
+brunner56Traefikforwardauth:
+  ports:
+  - name: http
+    port: 4181
+    targetPort: http
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

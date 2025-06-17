@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "chart-volsync-rd-symlinks-cache-pvc.fullname" . }}-volsync-rd-symlinks-cache
+  labels:
+    app.kubernetes.io/created-by: volsync
+  {{- include "chart-volsync-rd-symlinks-cache-pvc.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.pvc.volsyncRdSymlinksCache.storageRequest | quote }}
+  storageClassName: {{ .Values.pvc.volsyncRdSymlinksCache.storageClass | quote }}

@@ -1,0 +1,67 @@
+# Infrastructure releases for Media Stack
+# These are the core components needed for the cluster to function properly
+
+releases:
+  # Traefik - Ingress Controller
+  - name: traefik
+    namespace: kube-system
+    chart: traefik/traefik
+    version: 26.0.0
+    installed: {{ .Values.infrastructure.traefik.enabled }}
+    values:
+      - ../values/traefik-values.yaml
+      - deployment:
+          replicas: {{ .Values.infrastructure.traefik.replicas }}
+        dashboard:
+          enabled: {{ .Values.infrastructure.traefik.dashboard.enabled }}
+        service:
+          type: {{ .Values.infrastructure.traefik.service.type }}
+        additionalArguments:
+          {{- if .Values.infrastructure.traefik.ssl.enabled }}
+          - "--certificatesresolvers.letsencrypt.acme.email={{ .Values.infrastructure.certManager.email }}"
+          - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
+          - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+          {{- end }}
+        persistence:
+          enabled: true
+          size: 128Mi
+          storageClass: {{ .Values.global.storageClass }}
+        ports:
+          web:
+            redirectTo: websecure
+          websecure:
+            tls:
+              enabled: {{ .Values.infrastructure.traefik.ssl.enabled }}
+  
+  # Cert-Manager - Certificate Management
+  - name: cert-manager
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    version: v1.13.2
+    installed: {{ .Values.infrastructure.certManager.enabled }}
+    values:
+      - ../values/cert-manager-values.yaml
+    set:
+      - name: installCRDs
+        value: true
+  
+  # ClusterIssuer for cert-manager
+  - name: cert-manager-issuers
+    namespace: cert-manager
+    chart: ../charts/cert-manager-issuers
+    dependsOn:
+      - cert-manager/cert-manager
+    installed: {{ .Values.infrastructure.certManager.enabled }}
+    values:
+      - email: {{ .Values.infrastructure.certManager.email }}
+        solvers: {{ toYaml .Values.infrastructure.certManager.solvers | nindent 10 }}
+  
+  # MetalLB - Load Balancer for bare metal Kubernetes
+  - name: metallb
+    namespace: metallb-system
+    chart: metallb/metallb
+    version: 0.14.3
+    installed: {{ .Values.infrastructure.metallb.enabled }}
+    values:
+      - ../values/metallb-values.yaml
+      - addressPools: {{ toYaml .Values.infrastructure.metallb.addressPools | nindent 10 }} 

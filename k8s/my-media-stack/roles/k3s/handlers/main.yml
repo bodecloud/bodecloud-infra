@@ -1,0 +1,14 @@
+---
+- name: reload systemd
+  systemd:
+    daemon_reload: true
+
+- name: restart k3s
+  systemd:
+    name: k3s
+    state: restarted
+
+- name: restart k3s-agent
+  systemd:
+    name: k3s-agent
+    state: restarted

@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+wizarr:
+  ports:
+  - name: http
+    port: 5690
+    targetPort: 0
+  type: ClusterIP

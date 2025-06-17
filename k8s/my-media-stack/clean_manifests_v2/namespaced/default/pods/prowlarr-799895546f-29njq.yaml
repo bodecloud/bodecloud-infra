@@ -1,0 +1,123 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: prowlarr-799895546f-
+  labels:
+    app.elfhosted.com/name: prowlarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: prowlarr
+    pod-template-hash: 799895546f
+  name: prowlarr-799895546f-29njq
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: prowlarr-799895546f
+spec:
+  containers:
+  - image: linuxserver/prowlarr:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 9696
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: prowlarr
+    ports:
+    - containerPort: 9696
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 9696
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+      subPath: prowlarr
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: baden.vpshostingservice.co
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:04:37Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:04:15Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:05:12Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:05:12Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:04:15Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://64d8b88ed918a5b3f0fd35f58aeee78c8db07c00ce7e204af8b551190d228a2d
+    image: docker.io/linuxserver/prowlarr:latest
+    imageID: docker.io/linuxserver/prowlarr@sha256:b058be8a4e083e0cba238f03759994617a559abe0c89e5ed66454b44395da6a9
+    lastState: {}
+    name: prowlarr
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T15:04:37Z"
+    volumeMounts:
+    - mountPath: /config
+      name: config
+  hostIP: 209.54.102.83
+  hostIPs:
+  - ip: 209.54.102.83
+  phase: Running
+  podIP: 10.42.3.17
+  podIPs:
+  - ip: 10.42.3.17
+  qosClass: Burstable
+  startTime: "2025-06-14T15:04:15Z"

@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: searxng
+  usage:
+    cpu: 1008402n
+    memory: 317396Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: searxng
+    pod-template-hash: 7d96c7c44
+  name: searxng-7d96c7c44-k6xjp
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:51Z"
+window: 15.71s

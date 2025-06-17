@@ -1,0 +1,274 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+x-common-env: &common-env
+  PGID: ${PGID:-988} # 'docker' Group ID
+  PUID: ${PUID:-1001} # A non-root user ID
+  TZ: ${TZ:-America/Chicago} # Your Timezone
+
+x-resource-limits: &resource-limits
+  cpu_shares: 1024 # CPU share weight (relative, 2-262144). Higher = more CPU *if competing*.
+  #  mem_limit: 512m        # Max RAM usage (e.g., 64m, 1g). Exceeding = container kill.
+  #  mem_reservation: 325m  # Soft RAM limit (e.g., 32m, 512m).  Best effort, not guaranteed.
+  #  mem_swappiness: 30      # Swap usage (0-100). 0 = off. Higher = more swap, may slow down container.
+  #memswap_limit: 1024m    # Max RAM + Swap.  Usually same as mem_limit.
+  labels:
+    autoheal: "true"
+
+x-common-deploy: &common-deploy
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    window: 120s
+  labels:
+    autoheal: "true"
+    swarm.autoscaler: "true"
+
+x-swarm-resource-limits: &swarm-resource-limits
+  resources:
+    limits:
+      cpus: "0.10"
+      memory: 1024M
+#    reservations:
+#     cpus: '0.05'
+#    memory:  256M
+
+x-swarm-worker-priority: &swarm-worker-priority
+  placement:
+    preferences:
+      - spread: node.labels.worker_priority
+
+x-swarm-manager-only: &swarm-manager-only
+  placement:
+    constraints:
+      - node.role == manager
+
+services:
+  flaresolverr:
+    # 🔹🔹 Flaresolverr 🔹🔹  # https://github.com/flaresolverr/flaresolverr
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    image: ghcr.io/flaresolverr/flaresolverr
+    container_name: flaresolverr
+    network_mode: service:gluetun
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      <<: *common-env
+      CAPTCHA_SOLVER: ${FLARESOLVERR_CAPTCHA_SOLVER:-none}
+      LOG_HTML: ${FLARESOLVERR_LOG_HTML:-false}
+      LOG_LEVEL: ${FLARESOLVERR_LOG_LEVEL:-info}
+    labels:
+      homepage.group: Utilities
+      homepage.name: FlareSolverr
+      homepage.icon: flaresolverr.png
+      homepage.href: https://flaresolverr.${DOMAIN}/
+      homepage.description: Proxy server to bypass Cloudflare protection, enabling access to websites that are protected by anti-bot measures.
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+  meilisearch:
+    # 🔹🔹 Meilisearch 🔹🔹
+    image: getmeili/meilisearch
+    container_name: meilisearch
+    hostname: meilisearch
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - traefik_public
+    profiles:
+      - opt
+    environment:
+      <<: *common-env
+      http_proxy:
+      https_proxy:
+      MEILI_DB_PATH: ${MEILI_DB_PATH:-/data.ms}
+      MEILI_ENV: ${MEILI_ENV:-development}
+      MEILI_LOG_LEVEL: ${MEILI_LOG_LEVEL:-info}
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
+      MEILI_NO_ANALYTICS: ${MEILI_NO_ANALYTICS:-true}
+    ports:
+      - ${MEILI_PORT:-7700}:7700
+    volumes:
+      - ${ROOT_DIR:-.}/configs/meilisearch:/data.ms
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    healthcheck:
+      test: curl -fSs http://localhost:7700 > /dev/null || exit 1
+      start_period: 20s
+      timeout: 5s
+      interval: 5s
+      retries: 3
+    restart: unless-stopped
+
+  mongodb:
+    # 🔹🔹 MongoDB 🔹🔹  # https://github.com/danny-avila/librechat
+    image: mongo
+    container_name: mongodb
+    hostname: mongodb
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    ports:
+      - ${LIBRECHAT_MONGODB_PORT:-27017}:27017
+    profiles:
+      - opt
+    volumes:
+      - ${ROOT_DIR:-.}/configs/librechat/data-node:/data/db
+    command: mongod --noauth
+    environment:
+      <<: *common-env
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+  postgresql:
+    image: postgres:17.4
+    container_name: postgresql
+    hostname: postgresql
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    volumes:
+      - ${ROOT_DIR:-.}/configs/postgresql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+  prometheus:
+    # 🔹🔹 Prometheus 🔹🔹  https://github.com/prometheus/prometheus
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - traefik_public
+    ports:
+      - ${PROMETHEUS_PORT:-9090}:9090
+    volumes:
+      - ${ROOT_DIR:-.}/configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command: [
+        "--config.file=/etc/prometheus/prometheus.yml", # Specifies the path to the Prometheus configuration file
+        "--storage.tsdb.retention.size=1GB", # Sets the maximum size of the time series database to 1GB
+        "--web.console.libraries=/etc/prometheus/console_libraries", # Path to console libraries for the web UI
+        "--web.console.templates=/etc/prometheus/consoles", # Path to console templates for the web UI
+        "--web.enable-lifecycle", # Enables lifecycle management for the web interface (e.g., for graceful shutdown)
+      ]
+    labels:
+      homepage.group: Server Monitoring
+      homepage.name: Prometheus Monitoring
+      homepage.icon: prometheus.png
+      homepage.href: https://prometheus.${DOMAIN}
+      homepage.description: Monitors your server's performance and resource usage, providing detailed metrics and alerts to help you maintain system health.
+    environment:
+      <<: *common-env
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      mode: replicated # Deploys the service in replicated mode
+      replicas: 1 # Specifies that only one replica of the service should be running
+      placement:
+        constraints:
+          - node.role == manager # Ensures that the service runs only on manager nodes in a Swarm
+      resources:
+        limits:
+          cpus: "0.50" # Sets a limit of 0.5 CPU for the service
+          memory: 1024M # Sets a limit of 1024 MB of memory for the service
+        reservations:
+          cpus: "0.50" # Reserves 0.5 CPU for the service
+          memory: 128M # Reserves 128 MB of memory for the service
+    restart: unless-stopped
+
+  redis:
+    #image: redis:alpine
+    image: docker.io/library/redis:alpine
+    container_name: redis
+    hostname: redis
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - traefik_public
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ${ROOT_DIR:-.}/configs/redis:/data
+      - ${ROOT_DIR:-.}/configs/redis/etc/sysctl.conf:/etc/sysctl.conf
+    command: --save 60 1 --loglevel warning
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    restart: unless-stopped
+
+  searxng:
+    # 🔹🔹 SearxNG 🔹🔹  # https://hub.docker.com/r/searxng/searxng
+    # SearxNG is a privacy-respecting, hackable, open-source metasearch engine.
+    image: docker.io/searxng/searxng
+    container_name: searxng
+    hostname: searxng
+    extra_hosts:
+      - host.docker.internal:172.17.0.1
+    networks:
+      - infrastructure_network
+    ports:
+      - ${SEARXNG_PORT:-8077}:8080
+    volumes:
+      - ${ROOT_DIR:-.}/configs/searxng:/etc/searxng
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:${SEARXNG_PORT:-8077}
+    <<: *resource-limits
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 2
+
+  vectordb:
+    image: ankane/pgvector
+    container_name: vectordb
+    hostname: vectordb
+    extra_hosts:
+      - host.docker.internal:172.17.0.1
+    networks:
+      - infrastructure_network
+    volumes:
+      - ${ROOT_DIR:-.}/configs/librechat/postgresql_data:/var/lib/postgresql/data
+    profiles:
+      - opt
+    environment:
+      POSTGRES_DB: ${VECTORDB_POSTGRES_DB:-librechat}
+      POSTGRES_USER: ${VECTORDB_POSTGRES_USER:-myuser}
+      POSTGRES_PASSWORD: ${VECTORDB_POSTGRES_PASSWORD}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+networks:
+  infrastructure_network:
+    name: infrastructure_network
+    external: false

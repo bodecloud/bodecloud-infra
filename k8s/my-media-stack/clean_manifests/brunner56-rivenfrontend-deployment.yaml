@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-rivenfrontend,riven-frontend-env,riven-frontend-config
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rivenfrontend
+    helm.sh/chart: rivenfrontend-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: brunner56-rivenfrontend
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: rivenfrontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: "2025-05-29T17:12:59Z"
+      labels:
+        app.elfhosted.com/name: riven-frontend
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: rivenfrontend
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: riven-frontend-env
+        - configMapRef:
+            name: elfbot-rivenfrontend
+            optional: true
+        image: ghcr.io/elfhosted/riven-frontend:v0.20.0@sha256:c4d792868a8113a2f57f504fe371cbcd8c52172d734c812c366bff352672998e
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 3000
+          timeoutSeconds: 1
+        name: brunner56-rivenfrontend
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 3000
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: "0"
+            memory: 20Mi
+        securityContext:
+          readOnlyRootFilesystem: false
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 3000
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /riven/config
+          name: config
+        - mountPath: /tmp
+          name: tmp
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 568
+        runAsUser: 568
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: riven-frontend-config
+        name: config
+      - name: tmp

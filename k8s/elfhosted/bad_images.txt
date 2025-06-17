@@ -1,0 +1,13 @@
+# Bad images from failing pods - Sat Jun 14 14:03:30 UTC 2025
+curlimages/curl:latest
+debridmediamanager/zurg-testing:latest
+filebrowser/filebrowser:latest
+ghcr.io/elfhosted/notifiarr:latest
+ghcr.io/elfhosted/riven:latest
+ghcr.io/elfhosted/tooling:focal-20240530
+ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+ghcr.io/elfhosted/zurg:v0.9.3-hotfix.6
+prom/node-exporter:latest
+sctx/overseerr:latest
+spoked/riven:latest
+twinproduction/gatus:latest

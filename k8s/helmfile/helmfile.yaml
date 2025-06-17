@@ -1,0 +1,48 @@
+# Main helmfile configuration for Media Stack
+# Helmfile is a declarative specification for deploying Helm charts
+
+# Define default values
+defaults:
+  wait: true
+  timeout: 600
+  recreatePods: false
+  force: false
+
+# Define the environment
+environments:
+  # Default environment for all releases
+  default:
+    values:
+      - environments/default.yaml
+  # Production environment
+  production:
+    values:
+      - environments/default.yaml
+      - environments/production.yaml
+  # Development environment
+  development:
+    values:
+      - environments/default.yaml
+      - environments/development.yaml
+
+# Repositories where to find helm charts
+repositories:
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: traefik
+    url: https://helm.traefik.io/traefik
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: longhorn
+    url: https://charts.longhorn.io
+  - name: metallb
+    url: https://metallb.github.io/metallb
+
+# Include specific release configurations
+helmfiles:
+  - releases/infrastructure.yaml
+  - releases/storage.yaml
+  - releases/monitoring.yaml
+  - releases/media.yaml

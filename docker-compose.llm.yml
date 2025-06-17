@@ -1,0 +1,367 @@
+x-common-env: &common-env
+  TZ: ${TZ:-America/Chicago}
+  PUID: ${PUID:-1002}
+  PGID: ${PGID:-988}
+  UMASK: ${UMASK:-002}
+
+x-common-uidgid: &common-uidgid
+  user: ${PUID:-1002}:${PGID:-988}
+
+x-resource-limits: &resource-limits
+  labels:
+    autoheal: "true"
+
+x-common-logging: &common-logging
+  logging:
+    driver: "local"
+    options:
+      max-file: "5"
+      max-size: "10m"
+services:
+  gptr:
+    build:
+      context: ${SRC_DIR:-./src}/gpt-researcher
+      args:
+        target: runtime
+#    image: th3w1zard1/gpt-researcher:dev
+    container_name: gptr
+    hostname: ${GPT_RESEARCHER_HOSTNAME:-gptr}
+    networks:
+      publicnet:
+        ipv4_address: ${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
+    expose:
+      - 8000
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BRAVE_API_KEY=${BRAVE_API_KEY}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+      - FIRE_CRAWL_API_KEY=${FIRE_CRAWL_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GLAMA_API_KEY=${GLAMA_API_KEY}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - HF_TOKEN=${HF_TOKEN}
+      - HUGGINGFACE_ACCESS_TOKEN=${HUGGINGFACE_ACCESS_TOKEN}
+      - HUGGINGFACE_API_TOKEN=${HUGGINGFACE_API_TOKEN}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+      - MISTRALAI_API_KEY=${MISTRALAI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - PERPLEXITY_API_KEY=${PERPLEXITY_API_KEY}
+      - PERPLEXITYAI_API_KEY=${PERPLEXITYAI_API_KEY}
+      - REPLICATE_API_KEY=${REPLICATE_API_KEY}
+      - REVID_API_KEY=${REVID_API_KEY}
+      - SAMBANOVA_API_KEY=${SAMBANOVA_API_KEY}
+      - SEARCH1API_KEY=${SEARCH1API_KEY}
+      - SERPAPI_API_KEY=${SERPAPI_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+      - TOGETHERAI_API_KEY=${TOGETHERAI_API_KEY}
+      - UNIFY_API_KEY=${UNIFY_API_KEY}
+      - UPSTAGE_API_KEY=${UPSTAGE_API_KEY}
+      - UPSTAGEAI_API_KEY=${UPSTAGEAI_API_KEY}
+      - YOU_API_KEY=${YOU_API_KEY}
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.gptr.rule: Host(`gptr.${DOMAIN}`) || Host(`gptr.${DUCKDNS_DOMAIN}`) || Host(`gptr.${TS_SUBDOMAIN}.duckdns.org`) || Host(`gptr.localhost`)
+      traefik.http.services.gptr.loadbalancer.server.port: 8000
+    healthcheck:  # docker exec gptr ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8000 > /dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 2m
+    restart: always
+
+  litellm:
+    profiles:
+      - fallback
+    depends_on:
+      litellm-database:
+        condition: service_healthy
+    image: ghcr.io/berriai/litellm:main-stable
+    container_name: litellm
+    hostname: ${LITELLM_HOSTNAME:-litellm}
+    networks:
+      publicnet:
+        ipv4_address: ${LITELLM_IPV4_ADDRESS:-10.76.128.44}
+    expose:
+      - 4000
+    environment:
+      DATABASE_URL: "postgresql://${LITELLM_DATABASE_USER:-llmproxy}:${LITELLM_DATABASE_PASSWORD:-dbpassword9090}@${LITELLM_DATABASE_HOST:-litellm-database}:5432/litellm"
+      STORE_MODEL_IN_DB: "${STORE_MODEL_IN_DB:-True}" # allows adding models to proxy via UI
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-sk-0c460ace5f24fcf76e8d8f5631fdc97cd84d1c03f3}
+      MASTER_KEY: ${LITELLM_MASTER_KEY:-sk-0c460ace5f24fcf76e8d8f5631fdc97cd84d1c03f3}
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.litellm.middlewares: tinyauth@docker
+      traefik.http.routers.litellm.rule: Host(`litellm.${DOMAIN}`) || Host(`litellm.${DUCKDNS_DOMAIN}`) || Host(`litellm.${TS_SUBDOMAIN}.duckdns.org`) || Host(`litellm.localhost`)
+      traefik.http.services.litellm.loadbalancer.server.port: 4000
+      homepage.group: AI
+      homepage.name: Litellm
+      homepage.icon: litellm.png
+      homepage.href: https://litellm.${DOMAIN}/
+      homepage.description: A proxy for LLM providers.
+    volumes:
+     - ${CONFIG_PATH:-./configs}/litellm/config.yaml:/app/config.yaml
+    command:
+      - "--config=/app/config.yaml"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f -H \"Authorization: Bearer $$LITELLM_MASTER_KEY\" http://127.0.0.1:4000/health/liveliness"]
+      interval: ${LITELLM_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${LITELLM_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${LITELLM_HEALTHCHECK_RETRIES:-3}
+      start_period: ${LITELLM_HEALTHCHECK_START_PERIOD:-40s}
+    restart: always
+ 
+  litellm-database:
+    image: postgres:16
+    container_name: litellm-database
+    hostname: ${LITELLM_DB_HOSTNAME:-litellm-database}
+    networks:
+      publicnet:
+        ipv4_address: ${LITELLM_DB_IPV4_ADDRESS:-10.76.128.45}
+    expose:
+      - 5432
+    environment:
+      POSTGRES_DB: ${LITELLM_DATABASE_NAME:-litellm}
+      POSTGRES_USER: ${LITELLM_DATABASE_USER:-llmproxy}
+      POSTGRES_PASSWORD: ${LITELLM_DATABASE_PASSWORD:-dbpassword9090}
+#    volumes:
+#      - ${CONFIG_PATH:-./configs}/litellm/db:/var/lib/postgresql/data  # Persists Postgres data across container restarts
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.lobechat.rule: Host(`litellm-database.${DOMAIN}`) || Host(`litellm-database.${DUCKDNS_DOMAIN}`) || Host(`litellm-database.${TS_SUBDOMAIN}.duckdns.org`) || Host(`litellm-database.localhost`)
+      traefik.http.services.lobechat.loadbalancer.server.port: 3210
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB:-litellm} -U $${POSTGRES_USER:-llmproxy} -h $${POSTGRES_HOST:-litellm-database} -p $${POSTGRES_PORT:-5432}"]
+      interval: ${LITELLM_DATABASE_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${LITELLM_DATABASE_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${LITELLM_DATABASE_HEALTHCHECK_RETRIES:-5}
+    restart: always
+
+  lobechat:
+    image: lobehub/lobe-chat:latest
+    container_name: lobechat
+    hostname: ${LOBECHAT_HOSTNAME:-lobechat}
+    networks:
+      publicnet:
+        ipv4_address: ${LOBECHAT_IPV4_ADDRESS:-10.76.128.46}
+    expose:
+      - 3210
+    volumes:
+      - ${CONFIG_PATH:-./configs}/lobechat/host_config:/configs/lobechat/host_config
+    env_file:
+      - ${ROOT_DIR:-.}/.env
+    environment:
+      <<: *common-env
+      ACCESS_CODE: ${LOBECHAT_ACCESS_CODE:-brunner56}
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.lobechat.middlewares: tinyauth@docker
+      traefik.http.routers.lobechat.rule: Host(`lobechat.${DOMAIN}`) || Host(`lobechat.${DUCKDNS_DOMAIN}`) || Host(`lobechat.${TS_SUBDOMAIN}.duckdns.org`) || Host(`lobechat.localhost`)
+      traefik.http.services.lobechat.loadbalancer.server.port: 3210
+      homepage.group: AI
+      homepage.name: Lobe Chat
+      homepage.icon: lobechat.png
+      homepage.href: https://lobechat.${DOMAIN}/
+      homepage.description: A chatbot for your applications.
+    healthcheck:  # docker exec lobechat ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3210 || exit 1"]
+      interval: ${LOBECHAT_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${LOBECHAT_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${LOBECHAT_HEALTHCHECK_RETRIES:-3}
+    restart: always
+
+  khoj:
+    depends_on:
+      khoj-database:
+        condition: service_healthy
+    # Use the following line to use the latest version of khoj. Otherwise, it will build from source. Set this to ghcr.io/khoj-ai/khoj-cloud:latest if you want to use the prod image.
+    image: ghcr.io/khoj-ai/khoj
+    # Uncomment the following line to build from source. This will take a few minutes. Comment the next two lines out if you want to use the official image.
+    # build:
+    # context: ${SRC_DIR:-./src}/khoj
+    container_name: khoj
+    hostname: ${KHOJ_HOSTNAME:-khoj}
+    networks:
+      publicnet:
+        ipv4_address: ${KHOJ_IPV4_ADDRESS:-10.76.128.29}
+    expose:
+      - ${KHOJ_INTERNAL_PORT:-42110}
+    ports:
+      # If changing the local port (left hand side), no other changes required.
+      # If changing the remote port (right hand side),
+      #   change the port in the args in the build section,
+      #   as well as the port in the command section to match
+      - ${KHOJ_PORT:-42110}:${KHOJ_INTERNAL_PORT:-42110}
+    working_dir: /app
+    volumes:
+      - ${ROOT_DIR:-.}/configs/khoj/config:/root/.khoj
+      - ${ROOT_DIR:-.}/configs/khoj/models:/root/.cache/torch/sentence_transformers
+      - ${ROOT_DIR:-.}/configs/khoj/models:/root/.cache/huggingface
+    # Use 0.0.0.0 to explicitly set the host ip for the service on the container. https://pythonspeed.com/articles/docker-connection-refused/
+    env_file:
+      - ${ROOT_DIR:-.}/.env
+    environment:
+      <<: *common-env
+      POSTGRES_DB: ${KHOJ_POSTGRES_DB:-postgres}
+      POSTGRES_USER: ${KHOJ_POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${KHOJ_POSTGRES_PASSWORD:-postgres}
+      POSTGRES_HOST: ${KHOJ_DB_IPV4_ADDRESS:-10.76.128.42}
+      POSTGRES_PORT: ${KHOJ_POSTGRES_PORT:-5432}
+      KHOJ_DJANGO_SECRET_KEY: ${KHOJ_DJANGO_SECRET_KEY}
+      KHOJ_DEBUG: ${KHOJ_DEBUG:-True}
+      KHOJ_ADMIN_EMAIL: ${KHOJ_ADMIN_EMAIL:?not set}
+      KHOJ_ADMIN_PASSWORD: ${KHOJ_ADMIN_PASSWORD:?not set}
+      # Default URL of Terrarium, the default Python sandbox used by Khoj to run code. Its container is specified above
+      KHOJ_TERRARIUM_URL: ${KHOJ_TERRARIUM_URL:-http://${KHOJ_SANDBOX_HOSTNAME:-khoj-sandbox}:8080}
+      # Uncomment line below to have Khoj run code in remote E2B code sandbox instead of the self-hosted Terrarium sandbox above. Get your E2B API key from https://e2b.dev/.
+      #- E2B_API_KEY=${E2B_API_KEY}
+      # Default URL of SearxNG, the default web search engine used by Khoj. Its container is specified above
+      KHOJ_SEARXNG_URL: ${SEARXNG_URL:-http://${SEARXNG_HOSTNAME:-searxng}:8080}
+      # Uncomment line below to use with Ollama running on your local machine at localhost:11434.
+      # Change URL to use with other OpenAI API compatible providers like VLLM, LMStudio etc.
+      #OPENAI_BASE_URL: http://host.docker.internal:11434/v1/
+      #OPENAI_BASE_URL: http://152.117.108.32:11434/v1/
+      #OPENAI_BASE_URL: http://${LITELLM_HOSTNAME:-litellm}:4000/v1/
+      #
+      # Uncomment appropriate lines below to use chat models by OpenAI, Anthropic, Google.
+      # Ensure you set your provider specific API keys.
+      # ---
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      # Resend
+      # This will allow you to automatically send sign-in links to users who want to log in.
+      RESEND_EMAIL: ${RESEND_EMAIL}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      #
+      # Uncomment appropriate lines below to enable web results with Khoj
+      # Ensure you set your provider specific API keys.
+      # ---
+      # Free, Slower API. Does both web search and webpage read. Get API key from https://jina.ai/
+      JINA_API_KEY: ${JINA_API_KEY}
+      # Paid, Fast API. Only does web search. Get API key from https://serper.dev/
+      #SERPER_DEV_API_KEY: ${SERPER_DEV_API_KEY}
+      # Paid, Fast, Open API. Only does webpage read. Get API key from https://firecrawl.dev/
+      FIRECRAWL_API_KEY: ${FIRECRAWL_API_KEY}
+      # Paid, Fast, Higher Read Success API. Only does webpage read. Get API key from https://olostep.com/
+      #OLOSTEP_API_KEY: ${OLOSTEP_API_KEY}
+      #
+      # Uncomment the necessary lines below to make your instance publicly accessible.
+      # Proceed with caution, especially if you are using anonymous mode.
+      # ---
+      # KHOJ_NO_HTTPS: True
+      # Replace the KHOJ_DOMAIN with the server's externally accessible domain or I.P address from a remote machie (no http/https prefix).
+      # Ensure this is set correctly to avoid CSRF trusted origin or unset cookie issue when trying to access the admin panel.
+      # KHOJ_DOMAIN: 192.168.0.104
+      # KHOJ_DOMAIN: khoj.example.com
+      KHOJ_DOMAIN: ${KHOJ_HOSTNAME:-khoj}.${DOMAIN}
+      # Replace the KHOJ_ALLOWED_DOMAIN with the server's internally accessible domain or I.P address on the host machine (no http/https prefix).
+      # Only set if using a load balancer/reverse_proxy in front of your Khoj server. If unset, it defaults to KHOJ_DOMAIN.
+      # For example, if the load balancer service is added to the khoj docker network, set KHOJ_ALLOWED_DOMAIN to khoj's docker service name: `server'.
+      # KHOJ_ALLOWED_DOMAIN: server
+      # KHOJ_ALLOWED_DOMAIN: 127.0.0.1
+      # Uncomment the line below to disable telemetry.
+      # Telemetry helps us prioritize feature development and understand how people are using Khoj
+      # Read more at https://docs.khoj.dev/miscellaneous/telemetry
+      KHOJ_TELEMETRY_DISABLE: ${TELEMETRY_DISABLE:-False}
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.khoj.middlewares: tinyauth@docker
+      traefik.http.routers.khoj.rule: Host(`khoj.${DOMAIN}`) || Host(`khoj.${DUCKDNS_DOMAIN}`) || Host(`khoj.${TS_SUBDOMAIN}.duckdns.org`) || Host(`khoj.localhost`)
+      traefik.http.services.khoj.loadbalancer.server.port: ${KHOJ_INTERNAL_PORT:-42110}
+      homepage.group: AI
+      homepage.name: Khoj
+      homepage.icon: khoj.png
+      homepage.href: https://khoj.${DOMAIN}/
+      homepage.description: Your AI second brain.
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:${KHOJ_INTERNAL_PORT:-42110} || exit 1"]
+      interval: ${KHOJ_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${KHOJ_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${KHOJ_HEALTHCHECK_RETRIES:-3}
+      start_period: ${KHOJ_HEALTHCHECK_START_PERIOD:-40s}
+    # Comment out this line when you're using the official ghcr.io/khoj-ai/khoj-cloud:latest prod image.
+    command: --host="0.0.0.0" --port=${KHOJ_INTERNAL_PORT:-42110} -vv --non-interactive --anonymous-mode
+    restart: always
+
+  khoj-sandbox:
+    image: ghcr.io/khoj-ai/terrarium
+    container_name: khoj-sandbox
+    hostname: ${KHOJ_SANDBOX_HOSTNAME:-khoj-sandbox}
+    networks:
+      publicnet:
+        ipv4_address: ${KHOJ_SANDBOX_IPV4_ADDRESS:-10.76.128.49}
+    expose:
+      - 8080
+    volumes:
+      - ${ROOT_DIR:-.}/configs/khoj/terrarium:/root/.khoj/
+    environment:
+      <<: *common-env
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.khoj-sandbox.rule: Host(`khoj-sandbox.${DOMAIN}`) || Host(`khoj-sandbox.${DUCKDNS_DOMAIN}`) || Host(`khoj-sandbox.${TS_SUBDOMAIN}.duckdns.org`) || Host(`khoj-sandbox.localhost`)
+      traefik.http.services.khoj-sandbox.loadbalancer.server.port: 8080
+    healthcheck:  # docker exec khoj-sandbox ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8080/health"]
+      interval: ${KHOJ_TERRARIUM_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${KHOJ_TERRARIUM_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${KHOJ_TERRARIUM_HEALTHCHECK_RETRIES:-2}
+    restart: always
+
+  khoj-database:
+    image: ankane/pgvector
+    container_name: khoj-database
+    hostname: ${KHOJ_DB_HOSTNAME:-khoj-database}
+    networks:
+      publicnet:
+        ipv4_address: ${KHOJ_DB_IPV4_ADDRESS:-10.76.128.42} # No idea why this is needed, but it works.
+    environment:
+      <<: *common-env
+      POSTGRES_USER: ${KHOJ_POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${KHOJ_POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${KHOJ_POSTGRES_DB:-postgres}
+      POSTGRES_HOST: ${KHOJ_POSTGRES_HOST:-khoj-database}
+      POSTGRES_PORT: ${KHOJ_POSTGRES_PORT:-5432}
+      KHOJ_DJANGO_SECRET_KEY: ${KHOJ_DJANGO_SECRET_KEY}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+#    volumes:
+#      - ${ROOT_DIR:-.}/configs/khoj/db:/var/lib/postgresql/data/
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.keycloak-postgres.rule: Host(`khoj-database.${DOMAIN}`) || Host(`khoj-database.${DUCKDNS_DOMAIN}`) || Host(`khoj-database.${TS_SUBDOMAIN}.duckdns.org`) || Host(`khoj-database.localhost`)
+      traefik.http.services.keycloak-postgres.loadbalancer.server.port: 5432
+    healthcheck:  # docker exec khoj-database ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -h $${POSTGRES_HOST} -p $${POSTGRES_PORT}"]
+      interval: ${KHOJ_DATABASE_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${KHOJ_DATABASE_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${KHOJ_DATABASE_HEALTHCHECK_RETRIES:-5}
+    restart: always
+
+
+
+
+networks:
+  publicnet:  # https://docs.docker.com/engine/network/drivers/bridge/#differences-between-user-defined-bridges-and-the-default-bridge
+    external: true  # docker network create --driver=bridge --attachable publicnet --subnet=${PUBLICNET_SUBNET:-10.76.0.0/16} --gateway=${PUBLICNET_GATEWAY:-10.76.0.1} --ip-range=${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+    attachable: true
+    name: publicnet
+    ipam:
+      config:
+        - subnet: ${PUBLICNET_SUBNET:-10.76.0.0/16}
+          gateway: ${PUBLICNET_GATEWAY:-10.76.0.1}
+          ip_range: ${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+
+volumes:
+  github-runner-arm64-work:
+    driver: local

@@ -1,0 +1,231 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu, memory request for init
+      container gateway-init; cpu, memory limit for init container gateway-init'
+  generateName: gluetun-airvpn-5bc64f9f75-
+  labels:
+    app: gluetun-airvpn
+    component: vpn-gateway
+    pod-template-hash: 5bc64f9f75
+  name: gluetun-airvpn-5bc64f9f75-ztt49
+  namespace: vpn-gateway
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: gluetun-airvpn-5bc64f9f75
+spec:
+  containers:
+  - env:
+    - name: VPN_SERVICE_PROVIDER
+      value: airvpn
+    - name: OPENVPN_CIPHERS
+      value: aes-256-gcm
+    - name: SERVER_COUNTRIES
+      value: United States
+    - name: HTTP_PROXY
+      value: "on"
+    - name: HTTP_PROXY_ADDRESS
+      value: 0.0.0.0:8888
+    - name: SHADOWSOCKS
+      value: "on"
+    - name: SHADOWSOCKS_ADDRESS
+      value: 0.0.0.0:8388
+    - name: HEALTH_SERVER_ADDRESS
+      value: 0.0.0.0:9999
+    image: ghcr.io/qdm12/gluetun:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 9999
+        scheme: HTTP
+      initialDelaySeconds: 60
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: gluetun
+    ports:
+    - containerPort: 8888
+      name: http-proxy
+      protocol: TCP
+    - containerPort: 8388
+      name: shadowsocks
+      protocol: TCP
+    - containerPort: 9999
+      name: health
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 9999
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /gluetun
+      name: gluetun-config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-8l9vz
+      readOnly: true
+  - command:
+    - /bin/bash
+    - -c
+    - "\n                                source /config/settings.sh\n                                \n
+      \                               # Start DHCP server for VXLAN clients\n                                cat
+      > /tmp/dnsmasq.conf << EOF\n                                interface=vxlan0\n
+      \                               bind-interfaces\n                                dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h\n
+      \                               dhcp-option=3,${VXLAN_IP_NETWORK}.1\n                                dhcp-option=6,${VXLAN_IP_NETWORK}.1\n
+      \                               server=10.96.0.10\n                                EOF\n
+      \                               \n                                # Start dnsmasq
+      for DHCP and DNS\n                                dnsmasq --conf-file=/tmp/dnsmasq.conf
+      --no-daemon &\n                                \n                                #
+      Health monitoring\n                                while true; do\n                                  if
+      ip link show tun0 >/dev/null 2>&1; then\n                                    if
+      timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then\n
+      \                                     echo \"$(date): VPN Gateway healthy -
+      tun0 connected\"\n                                    else\n                                      echo
+      \"$(date): VPN Gateway unhealthy - no external connectivity\"\n                                    fi\n
+      \                                 else\n                                    echo
+      \"$(date): VPN Gateway unhealthy - tun0 not found\"\n                                  fi\n
+      \                                 sleep 30\n                                done\n
+      \                               "
+    image: ghcr.io/k8s-at-home/pod-gateway:latest
+    imagePullPolicy: Always
+    name: gateway-sidecar
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-8l9vz
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  initContainers:
+  - command:
+    - /bin/bash
+    - -c
+    - "\n                                source /config/settings.sh\n                                \n
+      \                               # Enable IP forwarding\n                                echo
+      1 > /proc/sys/net/ipv4/ip_forward\n                                \n                                #
+      Create VXLAN interface\n                                VXLAN_GATEWAY_IP=\"${VXLAN_IP_NETWORK}.1\"\n
+      \                               ip link add vxlan0 type vxlan id $VXLAN_ID dev
+      eth0 dstport $VXLAN_PORT || true\n                                ip addr add
+      ${VXLAN_GATEWAY_IP}/24 dev vxlan0 || true\n                                ip
+      link set up dev vxlan0\n                                ip link set mtu $VPN_INTERFACE_MTU
+      dev vxlan0 || true\n                                \n                                #
+      Set routing rules\n                                ip rule add from all lookup
+      main suppress_prefixlength 0 preference 50 || true\n                                \n
+      \                               # Configure iptables for NAT and forwarding\n
+      \                               iptables -t nat -A POSTROUTING -j MASQUERADE
+      || true\n                                iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT
+      -j ACCEPT || true\n                                iptables -A INPUT -i vxlan0
+      -p udp --sport=68 --dport=67 -j ACCEPT || true\n                                \n
+      \                               echo \"Gateway init complete\"\n                                "
+    image: ghcr.io/k8s-at-home/pod-gateway:latest
+    imagePullPolicy: Always
+    name: gateway-init
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+      privileged: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-8l9vz
+      readOnly: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    sysctls:
+    - name: net.ipv6.conf.all.disable_ipv6
+      value: "1"
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 493
+      name: pod-gateway-config
+    name: config
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/gluetun/airvpn
+      type: DirectoryOrCreate
+    name: gluetun-config
+  - name: kube-api-access-8l9vz
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  message: 'Pod was rejected: forbidden sysctl: "net.ipv6.conf.all.disable_ipv6" not
+    allowlisted'
+  phase: Failed
+  qosClass: Burstable
+  reason: SysctlForbidden
+  startTime: "2025-06-14T22:28:53Z"

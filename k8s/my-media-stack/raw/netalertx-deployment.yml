@@ -1,0 +1,60 @@
+#! netalertx-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netalertx
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netalertx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: netalertx
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: netalertx
+          image: ghcr.io/jokob-sk/netalertx:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PGID
+              value: "988"
+            - name: PORT
+              value: "20211"
+            - name: PUID
+              value: "1002"
+            - name: TZ
+              value: "America/Chicago"
+            - name: UMASK
+              value: "022"
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: app-config
+              mountPath: /app/config
+            - name: app-db
+              mountPath: /app/db
+            - name: app-api
+              mountPath: /app/api
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: app-config
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/netalertx/config
+        - name: app-db
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/netalertx/db
+        - name: app-api
+          emptyDir: {}

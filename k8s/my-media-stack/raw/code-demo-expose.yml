@@ -1,0 +1,12 @@
+#! code-demo-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-demo
+  namespace: my-media-stack
+spec:
+  ports:
+    - name: code-demo-8443
+      port: 8443
+      targetPort: code-demo-8443

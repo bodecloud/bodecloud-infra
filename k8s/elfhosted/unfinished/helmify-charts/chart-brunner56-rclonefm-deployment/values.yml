@@ -1,0 +1,75 @@
+brunner56Rclonefm:
+  bootstrap:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      s3EndpointUrl: https://s3.us-west-000.backblazeb2.com
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  brunner56Rclonefm:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: ghcr.io/elfhosted/rclone
+      tag: 1.69.3@sha256:9396f8c3a649dba9f91169a62142c9f3e6da00974bda573d864b62c07f78234e
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 150m
+        memory: 512Mi
+      requests:
+        cpu: "0"
+        memory: 60Mi
+  podSecurityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+  revisionHistoryLimit: 3
+  setup:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    image:
+      repository: filebrowser/filebrowser
+      tag: focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+  strategy:
+    type: Recreate
+kubernetesClusterDomain: cluster.local

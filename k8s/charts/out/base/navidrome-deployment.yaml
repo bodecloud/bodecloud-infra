@@ -1,0 +1,50 @@
+#! navidrome-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: navidrome
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: navidrome
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: navidrome
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: navidrome
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: navidrome
+                  image: deluan/navidrome:latest
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: ND_LOGLEVEL
+                      value: "debug"
+                  ports:
+                    - name: navidrome-4533
+                      containerPort: 4533
+                  volumeMounts:
+                    - name: data
+                      mountPath: /data
+                    - name: music
+                      mountPath: /music
+                      readOnly: true
+            volumes:
+                - name: data
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/navidrome
+                - name: music
+                  hostPath:
+                    path: G:/Stuff/bolabaden/data/media/music
+                  readOnly: true

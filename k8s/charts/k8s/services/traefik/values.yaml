@@ -1,0 +1,147 @@
+# charts/k8s/services/traefik/values.yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/traefik/traefik-helm-chart/master/traefik/values.schema.json
+
+image:
+#  name: traefik # Removed as per linter
+  tag: v3.1.1 # Match docker-compose, Use specific version instead of latest
+
+# Deploy Traefik as a Deployment
+deployment:
+  kind: Deployment
+  replicas: 1
+  # Add volume mounts
+  volumeMounts:
+    # Mount the entire configmap directory to /config
+    - name: traefik-config-volume
+      mountPath: /config
+    # Mount host paths
+    - name: tailscale-sock-volume
+      mountPath: /var/run/tailscale/tailscaled.sock
+    - name: traefik-etc-volume
+      mountPath: /etc/traefik
+    - name: traefik-plugins-volume
+      mountPath: /plugins-local
+    # Persistence mount for /certs (defined below under persistence)
+    # Note: The persistence section handles mounting the volume named 'acme-storage'
+    #       and the 'path' value there defines the mount point *inside* the container.
+  # Add volume definitions
+  volumes:
+    # ConfigMap volume for /config
+    - name: traefik-config-volume
+      configMap:
+        name: traefik-config
+    # HostPath volumes
+    - name: tailscale-sock-volume
+      hostPath:
+        path: /var/run/tailscale/tailscaled.sock
+        type: Socket # Specify type for sockets
+    - name: traefik-etc-volume
+      hostPath:
+        path: ${CONFIG_PATH:-/home/brunner56/my-media-stack/configs}/traefik/etc/traefik # Use absolute path or ensure it's correct on the node
+        type: DirectoryOrCreate # Use DirectoryOrCreate or Directory
+    - name: traefik-plugins-volume
+      hostPath:
+        path: ${CONFIG_PATH:-/home/brunner56/my-media-stack/configs}/traefik/plugins-local # Use absolute path or ensure it's correct on the node
+        type: DirectoryOrCreate # Use DirectoryOrCreate or Directory
+    # Persistence volume defined below
+
+# Enable Kubernetes CRD provider
+providers:
+  kubernetesCRD:
+    enabled: true
+  kubernetesIngress:
+    enabled: false # Disable the Ingress provider if using CRD primarily
+
+# Removed entryPoints section - It's defined in traefik.yaml now
+
+# Enable RBAC creation (required for CRD provider)
+rbac:
+  enabled: true
+
+# Modify arguments to only load the config file
+additionalArguments:
+  - "--configFile=/config/traefik.yaml"
+
+# Mount the ACME storage volume at /certs (matching traefik.yaml storage)
+persistence:
+  enabled: true
+  name: acme-storage
+  # You might want to adjust size, storageClass, accessMode based on your PV provisioner
+  size: 1Gi
+  path: /certs # Mount point inside the container
+  # storageClass: "" # Specify if needed
+  # accessMode: ReadWriteOnce # Default
+
+# Environment variables
+# Provide Cloudflare API token via environment variable from the secret (Needed by dnsChallenge in traefik.yaml)
+envFrom:
+  - secretRef:
+      name: cloudflare-api-token
+# Add other env vars from docker-compose
+env:
+  - name: LEGO_DISABLE_CNAME_SUPPORT
+    value: "false"
+  # TZ is often useful
+  - name: TZ
+    value: "America/Chicago" # Assuming from .env, adjust if needed
+
+# Enable the Traefik dashboard (accessible via port-forward or an IngressRoute)
+# Keep this section as it defines the K8s IngressRoute for the dashboard
+ingressRoute:
+  dashboard:
+    enabled: true
+    match: Host(`traefik.k3s.local`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`)) # Adjust Host as needed
+    entryPoints: ["websecure"] # Make sure 'websecure' entrypoint exists in your traefik.yaml
+    middlewares: [] # Add authentication middleware here if desired
+
+# Optional: Add pilots token if you use Traefik Pilot
+# pilot:
+#   token: "YOUR_PILOT_TOKEN"
+
+# Add security context to run as non-root
+# Match capabilities and runAsUser/Group from docker-compose equivalents if specified
+# NOTE: Running as root might be required for NET_ADMIN and low port binding without hostPort shenanigans.
+# Let's remove the non-root settings and run as root (default behavior for helm chart)
+securityContext:
+  capabilities:
+    # drop: [ALL] # Removed to allow default capabilities
+    add: ["NET_ADMIN"]
+  # readOnlyRootFilesystem: true # Might cause issues if run as root needs to write somewhere unexpected
+  # runAsGroup: 65532 # Removed
+  # runAsNonRoot: true # Removed
+  # runAsUser: 65532 # Removed
+
+# Remove empty podSecurityContext
+# podSecurityContext:
+#   # fsGroup: 65532 # Removed
+#   # fsGroupChangePolicy: OnRootMismatch # Removed
+#   # runAsGroup: 65532 # Removed
+#   # runAsNonRoot: true # Removed
+#   # runAsUser: 65532 # Removed
+#   # supplementalGroups: [65532] # Removed
+#   # Keep sysctls removed from previous attempt
+
+
+# Service type (LoadBalancer, NodePort, or ClusterIP)
+# This maps to the `ports` section in docker-compose
+service:
+  enabled: true
+  type: LoadBalancer # Match docker-compose exposing ports 80/443
+  # annotations: {} # Keep annotations if needed
+  # loadBalancerIP: "" # Specify if needed
+  # externalTrafficPolicy: Cluster # Default, adjust if needed
+  # Define ports directly under service
+  ports:
+    web:
+      port: 80        # External port
+      targetPort: 80 # Target port name or number in the container (defined by entrypoint)
+      protocol: TCP
+      # nodePort: 30080 # Specify NodePort if service type is NodePort
+    websecure:
+      port: 443       # External port
+      targetPort: 443 # Target port name or number in the container (defined by entrypoint)
+      protocol: TCP
+      # nodePort: 30443 # Specify NodePort if service type is NodePort
+
+# Removed logs section - Controlled by traefik.yaml
+# Removed api section - Controlled by traefik.yaml 

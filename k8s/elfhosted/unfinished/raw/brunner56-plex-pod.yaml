@@ -1,0 +1,1373 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: brunner56-plex-6d858db6b9-phkp7
+  generateName: brunner56-plex-6d858db6b9-
+  namespace: my-media-stack
+  uid: a8defb77-afe4-4bfd-a31b-2998c4f635d2
+  resourceVersion: '2389457142'
+  creationTimestamp: '2025-05-29T16:29:05Z'
+  labels:
+    app.elfhosted.com/class: debrid
+    app.elfhosted.com/name: plex
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: plex
+    pod-template-hash: 6d858db6b9
+  annotations:
+    kubernetes.io/egress-bandwidth: 150M
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: brunner56-plex-6d858db6b9
+      uid: df7490b3-6fbe-4e1a-9372-591aaea58f1c
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: k3s
+      operation: Update
+      apiVersion: v1
+      time: '2025-05-29T16:29:05Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubernetes.io/egress-bandwidth: {}
+          f:generateName: {}
+          f:labels:
+            .: {}
+            f:app.elfhosted.com/class: {}
+            f:app.elfhosted.com/name: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"df7490b3-6fbe-4e1a-9372-591aaea58f1c"}: {}
+        f:spec:
+          f:affinity:
+            .: {}
+            f:podAffinity:
+              .: {}
+              f:requiredDuringSchedulingIgnoredDuringExecution: {}
+          f:automountServiceAccountToken: {}
+          f:containers:
+            k:{"name":"brunner56-plex"}:
+              .: {}
+              f:envFrom: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:livenessProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:httpGet:
+                  .: {}
+                  f:path: {}
+                  f:port: {}
+                  f:scheme: {}
+                f:initialDelaySeconds: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:timeoutSeconds: {}
+              f:name: {}
+              f:ports:
+                .: {}
+                k:{"containerPort":32400,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+              f:readinessProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:httpGet:
+                  .: {}
+                  f:path: {}
+                  f:port: {}
+                  f:scheme: {}
+                f:initialDelaySeconds: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:timeoutSeconds: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:securityContext:
+                .: {}
+                f:privileged: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+              f:startupProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:httpGet:
+                  .: {}
+                  f:path: {}
+                  f:port: {}
+                  f:scheme: {}
+                f:initialDelaySeconds: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:timeoutSeconds: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/backup"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/config/"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+                k:{"mountPath":"/dev/dri/renderD128"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/elfbot"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/phototranscoder"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/shared"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/storage/rclone"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/storage/realdebrid-zurg"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/storage/symlinks"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/tinyproxy-conf"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/tmp"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/transcode"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+            k:{"name":"gluetun"}:
+              .: {}
+              f:env:
+                .: {}
+                k:{"name":"DNS_KEEP_NAMESERVER"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"DOT"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"FIREWALL_INPUT_PORTS"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"FIREWALL_OUTBOUND_SUBNETS"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"HTTP_CONTROL_SERVER_ADDRESS"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"HTTP_CONTROL_SERVER_PORT"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"VPN_ENDPOINT_PORT"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"VPN_SERVICE_PROVIDER"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"VPN_TYPE"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"WIREGUARD_MTU"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:securityContext:
+                .: {}
+                f:capabilities:
+                  .: {}
+                  f:add: {}
+                f:privileged: {}
+                f:runAsUser: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/shared"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+            k:{"name":"podinfo"}:
+              .: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+            k:{"name":"speedtest"}:
+              .: {}
+              f:env:
+                .: {}
+                k:{"name":"CHANGE_CONTAINER_PORTS"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"HTTPS_PORT"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"HTTP_PORT"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:securityContext:
+                .: {}
+                f:allowPrivilegeEscalation: {}
+                f:capabilities:
+                  .: {}
+                  f:drop: {}
+                f:readOnlyRootFilesystem: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+            k:{"name":"tinyproxy"}:
+              .: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/etc/tinyproxy/tinyproxy.conf"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+          f:dnsPolicy: {}
+          f:enableServiceLinks: {}
+          f:initContainers:
+            .: {}
+            k:{"name":"bootstrap"}:
+              .: {}
+              f:command: {}
+              f:env:
+                .: {}
+                k:{"name":"AWS_ACCESS_KEY_ID"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:secretKeyRef: {}
+                k:{"name":"AWS_SECRET_ACCESS_KEY"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:secretKeyRef: {}
+                k:{"name":"ELF_APP_NAME"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:fieldRef: {}
+                k:{"name":"K8S_APP_NAME"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:fieldRef: {}
+                k:{"name":"S3_ENDPOINT_URL"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:securityContext:
+                .: {}
+                f:allowPrivilegeEscalation: {}
+                f:capabilities:
+                  .: {}
+                  f:drop: {}
+                f:readOnlyRootFilesystem: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/config"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+                k:{"mountPath":"/etc/elfbot"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/storage/backup"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                k:{"mountPath":"/tmp"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+            k:{"name":"restart-with-debridav"}:
+              .: {}
+              f:command: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+            k:{"name":"restart-with-decypharr"}:
+              .: {}
+              f:command: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+            k:{"name":"restart-with-zurg"}:
+              .: {}
+              f:command: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+            k:{"name":"setup"}:
+              .: {}
+              f:command: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:securityContext:
+                .: {}
+                f:allowPrivilegeEscalation: {}
+                f:capabilities:
+                  .: {}
+                  f:drop: {}
+                f:readOnlyRootFilesystem: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/config"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+                  f:subPath: {}
+                k:{"mountPath":"/phototranscoder"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+            k:{"name":"setup-warp"}:
+              .: {}
+              f:command: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:securityContext:
+                .: {}
+                f:readOnlyRootFilesystem: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/shared"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+          f:priorityClassName: {}
+          f:restartPolicy: {}
+          f:schedulerName: {}
+          f:securityContext:
+            .: {}
+            f:fsGroup: {}
+            f:runAsGroup: {}
+            f:runAsUser: {}
+            f:seccompProfile:
+              .: {}
+              f:type: {}
+            f:supplementalGroups: {}
+          f:serviceAccount: {}
+          f:serviceAccountName: {}
+          f:terminationGracePeriodSeconds: {}
+          f:volumes:
+            .: {}
+            k:{"name":"backup"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"config"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"elfbot"}:
+              .: {}
+              f:configMap:
+                .: {}
+                f:defaultMode: {}
+                f:name: {}
+                f:optional: {}
+              f:name: {}
+            k:{"name":"phototranscoder"}:
+              .: {}
+              f:emptyDir:
+                .: {}
+                f:sizeLimit: {}
+              f:name: {}
+            k:{"name":"rclone"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"rclonemountrealdebridzurg"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"render-device"}:
+              .: {}
+              f:hostPath:
+                .: {}
+                f:path: {}
+                f:type: {}
+              f:name: {}
+            k:{"name":"shared"}:
+              .: {}
+              f:emptyDir: {}
+              f:name: {}
+            k:{"name":"symlinks"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+            k:{"name":"tinyproxy-conf"}:
+              .: {}
+              f:configMap:
+                .: {}
+                f:defaultMode: {}
+                f:name: {}
+              f:name: {}
+            k:{"name":"tmp"}:
+              .: {}
+              f:emptyDir: {}
+              f:name: {}
+            k:{"name":"transcode"}:
+              .: {}
+              f:name: {}
+              f:persistentVolumeClaim:
+                .: {}
+                f:claimName: {}
+    - manager: k3s
+      operation: Update
+      apiVersion: v1
+      time: '2025-05-29T17:15:45Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions:
+            .: {}
+            k:{"type":"ContainersReady"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Initialized"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"PodReadyToStartContainers"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"PodScheduled"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Ready"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+          f:containerStatuses: {}
+          f:hostIP: {}
+          f:hostIPs: {}
+          f:initContainerStatuses: {}
+          f:phase: {}
+          f:podIP: {}
+          f:podIPs:
+            .: {}
+            k:{"ip":"10.2.112.106"}:
+              .: {}
+              f:ip: {}
+          f:startTime: {}
+      subresource: status
+spec:
+  volumes:
+    - name: backup
+      persistentVolumeClaim:
+        claimName: backup
+    - name: config
+      persistentVolumeClaim:
+        claimName: config
+    - name: elfbot
+      configMap:
+        name: elfbot-plex
+        defaultMode: 420
+        optional: true
+    - name: phototranscoder
+      emptyDir:
+        sizeLimit: 50Gi
+    - name: rclone
+      persistentVolumeClaim:
+        claimName: rclone
+    - name: rclonemountrealdebridzurg
+      persistentVolumeClaim:
+        claimName: realdebrid-zurg
+    - name: render-device
+      hostPath:
+        path: /dev/dri/renderD128
+        type: ''
+    - name: shared
+      emptyDir: {}
+    - name: symlinks
+      persistentVolumeClaim:
+        claimName: symlinks
+    - name: tinyproxy-conf
+      configMap:
+        name: plex-tinyproxy-conf
+        defaultMode: 420
+    - name: tmp
+      emptyDir: {}
+    - name: transcode
+      persistentVolumeClaim:
+        claimName: transcode-1g
+  initContainers:
+    - name: bootstrap
+      image: >-
+        alpine/k8s:1.29.1
+      command:
+        - /bin/bash
+        - '-c'
+        - >
+          set -e
+
+
+          # Allows us to use app.elfhosted.com/name, but fall back to
+          app.kubernetes.io/name if the former doesn't exist
+
+          if [[ -z "$ELF_APP_NAME" ]]; then
+            ELF_APP_NAME=$K8S_APP_NAME
+          fi
+
+
+          # look for commands - we match specific names in order of
+          least-destructive
+
+          TIMESTAMP_NOW=$(date +%s)
+
+          if [[ -f /etc/elfbot/pause ]]; then
+            TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)
+            TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+            if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+              COMMAND=pause
+            fi
+          fi
+
+
+          # If no command is set, then move onto the next possibility
+
+          if [[ -f /etc/elfbot/backup && -z "$COMMAND" ]]; then
+            TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)
+            TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+            if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+              COMMAND=backup
+            fi
+          fi
+
+
+          # If no command is set, then move onto the next possibility
+
+          if [[ -f /etc/elfbot/reset && -z "$COMMAND" ]]; then
+            TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)
+            TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+            if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+              COMMAND=reset
+            fi
+          fi
+
+
+          case $COMMAND in
+
+            "pause")
+              echo "Recent pause command found, sleeping 5m.."
+              sleep 300
+              ;;
+
+            "reset")
+
+              # Safety check - if /config/homer exists, we've not mounted /config properly and are about to wipe out EVERYTHING
+              if [ -e "/config/homer" ]; then
+                  echo "The path /config/homer exists. Exiting."
+                  exit 1
+              fi      
+              echo "Recent reset command found, resetting"
+              rm -rf /config/*
+              ;;
+
+            "backup")
+              echo "Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}"
+              TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\n' -1)
+              cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP
+              ;;
+
+          esac
+
+
+          if [[ ! -f /config/i-am-bootstrapped ]]
+
+          then
+            echo "Bootstrapping from goldilocks config..."
+            s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/
+            touch /config/i-am-bootstrapped
+          fi
+      env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: b2-elfhosted-config-ro
+              key: access-key-id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: b2-elfhosted-config-ro
+              key: secret-key
+        - name: S3_ENDPOINT_URL
+          value: https://s3.us-west-000.backblazeb2.com
+        - name: K8S_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/name']
+        - name: ELF_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.elfhosted.com/name']
+      resources:
+        limits:
+          cpu: '1'
+          memory: 4Gi
+        requests:
+          cpu: '0'
+          memory: 1Mi
+      volumeMounts:
+        - name: elfbot
+          mountPath: /etc/elfbot
+        - name: backup
+          mountPath: /storage/backup
+        - name: config
+          mountPath: /config
+          subPath: plex
+        - name: tmp
+          mountPath: /tmp
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+        runAsUser: 568
+        runAsGroup: 568
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+    - name: restart-with-debridav
+      image: >-
+        ghcr.io/elfhosted/debridav:0.9.5@sha256:1e596ddb97a7e6a4827b1dfc0718992b0c432416841a8a4c3dd3cd7491850c3c
+      command:
+        - /bin/bash
+        - '-c'
+        - >
+          echo "This pod only exists to cause a restart when debridav is
+          updated"        
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+    - name: restart-with-decypharr
+      image: >-
+        ghcr.io/elfhosted/decypharr-beta:rolling@sha256:b310afa9976f950ab62d7ec20801b46cb9a28176121d1c275424d780825ca4ee
+      command:
+        - /bin/bash
+        - '-c'
+        - >
+          echo "This pod only exists to cause a restart when decypharr is
+          updated"
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+    - name: restart-with-zurg
+      image: >-
+        ghcr.io/elfhosted/zurg-rc:2025.05.14.0031-nightly@sha256:513bcc2be2a9fb8b8df7fc458f76747bebcc884776bfbfd4393e16d61b2c1227
+      command:
+        - /bin/bash
+        - '-c'
+        - |
+          echo "This pod only exists to cause a restart when zurg is updated"
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+    - name: setup
+      image: >-
+        alpine/k8s:1.29.1
+      command:
+        - /bin/bash
+        - '-c'
+        - >
+          set -x
+
+          set -e
+
+
+          # Clean up wasteful temporary media storage (Plex will just
+          re-download these)
+
+          if [ -d "/config/Library/Application Support/Plex Media
+          Server/Cache/PhotoTranscoder" ]; then
+            rm -rf "/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder"
+            ln -s /phototranscoder '/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder'
+          fi
+      resources: {}
+      volumeMounts:
+        - name: config
+          mountPath: /config
+          subPath: plex
+        - name: phototranscoder
+          mountPath: /phototranscoder
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+        runAsUser: 568
+        runAsGroup: 568
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+    - name: setup-warp
+      image: >-
+        alpine/k8s:1.29.1
+      command:
+        - /bin/bash
+        - '-c'
+        - >
+          set -x
+
+          set -e
+
+
+          cd /shared
+
+
+          # Create cloudflare account
+
+          wgcf register --accept-tos
+
+
+          # Create gluetun config
+
+          wgcf generate -p /shared/wg0.conf
+
+
+          # grab the values from the profile and put them into env vars for
+          gluetun to consume
+
+          echo "export WIREGUARD_PRIVATE_KEY=$(grep PrivateKey /shared/wg0.conf
+          | cut -f3 -d' ')" > /shared/env
+
+          echo "export WIREGUARD_PUBLIC_KEY=$(grep PublicKey /shared/wg0.conf |
+          cut -f3 -d' ')" >> /shared/env
+
+          echo "export WIREGUARD_ADDRESSES=$(grep Address /shared/wg0.conf |
+          grep '/32' | cut -f3 -d' ')" >> /shared/env
+
+
+          echo "export VPN_ENDPOINT_IP=$(dig +short dig +short
+          engage.cloudflareclient.com)" >> /shared/env
+      resources: {}
+      volumeMounts:
+        - name: shared
+          mountPath: /shared
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        readOnlyRootFilesystem: false
+        seccompProfile:
+          type: RuntimeDefault
+  containers:
+    - name: brunner56-plex
+      image: >-
+        ghcr.io/elfhosted/plex:1.41.7.9823-59f304c16@sha256:04b14748f9a3e5d23e1431ab2d4c5c07aca14a1fe5541b62481f0064eea8420e
+      ports:
+        - name: http
+          containerPort: 32400
+          protocol: TCP
+      envFrom:
+        - configMapRef:
+            name: plex-config
+        - configMapRef:
+            name: elfbot-plex
+            optional: true
+      resources:
+        limits:
+          cpu: '2'
+          memory: 4Gi
+        requests:
+          cpu: 100m
+          memory: 1Gi
+      volumeMounts:
+        - name: backup
+          mountPath: /backup
+        - name: config
+          mountPath: /config/
+          subPath: plex
+        - name: elfbot
+          mountPath: /elfbot
+        - name: phototranscoder
+          mountPath: /phototranscoder
+        - name: rclone
+          mountPath: /storage/rclone
+        - name: rclonemountrealdebridzurg
+          mountPath: /storage/realdebrid-zurg
+        - name: render-device
+          mountPath: /dev/dri/renderD128
+        - name: shared
+          mountPath: /shared
+        - name: symlinks
+          mountPath: /storage/symlinks
+        - name: tinyproxy-conf
+          mountPath: /tinyproxy-conf
+        - name: tmp
+          mountPath: /tmp
+        - name: transcode
+          mountPath: /transcode
+          subPath: plex
+      livenessProbe:
+        httpGet:
+          path: /web/index.html
+          port: 32400
+          scheme: HTTP
+        initialDelaySeconds: 30
+        timeoutSeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 5
+      readinessProbe:
+        httpGet:
+          path: /web/index.html
+          port: 32400
+          scheme: HTTP
+        initialDelaySeconds: 30
+        timeoutSeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 5
+      startupProbe:
+        httpGet:
+          path: /web/index.html
+          port: 32400
+          scheme: HTTP
+        initialDelaySeconds: 30
+        timeoutSeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 5
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        privileged: true
+        runAsUser: 568
+        runAsGroup: 568
+    - name: gluetun
+      image: >-
+        ghcr.io/elfhosted/gluetun:3.40.0@sha256:59b0cc8a9412b9a4645d1f12dff0daba80b8be88acd1b5d1a0fb6dfa625eb9a5
+      env:
+        - name: DNS_KEEP_NAMESERVER
+          value: 'on'
+        - name: DOT
+          value: 'off'
+        - name: FIREWALL_INPUT_PORTS
+          value: 32400,3000,8888,3001,3002
+        - name: FIREWALL_OUTBOUND_SUBNETS
+          value: 10.0.0.0/8
+        - name: HTTP_CONTROL_SERVER_ADDRESS
+          value: ':8000'
+        - name: HTTP_CONTROL_SERVER_PORT
+          value: '8000'
+        - name: VPN_ENDPOINT_PORT
+          value: '2408'
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: wireguard
+        - name: WIREGUARD_MTU
+          value: '1280'
+      resources: {}
+      volumeMounts:
+        - name: shared
+          mountPath: /shared
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN
+            - SYS_MODULE
+        privileged: true
+        runAsUser: 0
+    - name: podinfo
+      image: stefanprodan/podinfo
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: Always
+    - name: speedtest
+      image: >-
+        openspeedtest/latest:latest@sha256:1745e913f596fe98882b286a67751efdae74774e9caa742a4934bb056e8748d2
+      env:
+        - name: CHANGE_CONTAINER_PORTS
+          value: 'True'
+        - name: HTTPS_PORT
+          value: '3003'
+        - name: HTTP_PORT
+          value: '3002'
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: Always
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+        runAsUser: 101
+        runAsGroup: 101
+        readOnlyRootFilesystem: false
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+    - name: tinyproxy
+      image: >-
+        ghcr.io/elfhosted/tinyproxy:v1.4.3@sha256:262bbdc0e468ee97c049203becc52b9ad7bf4c21405d58c82766d1aebb2e27e5
+      resources: {}
+      volumeMounts:
+        - name: tinyproxy-conf
+          mountPath: /etc/tinyproxy/tinyproxy.conf
+          subPath: tinyproxy.conf
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  automountServiceAccountToken: false
+  nodeName: hansel18
+  securityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    supplementalGroups:
+      - 993
+    fsGroup: 568
+    seccompProfile:
+      type: RuntimeDefault
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                  - nodefinder
+          topologyKey: kubernetes.io/hostname
+  schedulerName: default-scheduler
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+  priorityClassName: tenant-streaming
+  priority: 5000
+  enableServiceLinks: false
+  preemptionPolicy: PreemptLowerPriority
+status:
+  phase: Running
+  conditions:
+    - type: PodReadyToStartContainers
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:42:48Z'
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:42:57Z'
+    - type: Ready
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T17:15:45Z'
+    - type: ContainersReady
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T17:15:45Z'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: '2025-05-29T17:12:59Z'
+      lastTransitionTime: '2025-05-29T16:42:32Z'
+  hostIP: 10.0.42.38
+  hostIPs:
+    - ip: 10.0.42.38
+  podIP: 10.2.112.106
+  podIPs:
+    - ip: 10.2.112.106
+  startTime: '2025-05-29T16:42:32Z'
+  initContainerStatuses:
+    - name: bootstrap
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2025-05-29T16:42:47Z'
+          finishedAt: '2025-05-29T16:42:48Z'
+          containerID: >-
+            containerd://65590c78d29bc348f3bbd0134daa701c5dc73d0cbf3fedde7c550b4b99f0c611
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:9f55c133c2c68fbd7f186aa9c8d472a92dda455270e3a9c95fdafaf4cce0003e
+      imageID: >-
+        filebrowser/filebrowser:v2.31.2
+      containerID: >-
+        containerd://65590c78d29bc348f3bbd0134daa701c5dc73d0cbf3fedde7c550b4b99f0c611
+      started: false
+      volumeMounts:
+        - name: elfbot
+          mountPath: /etc/elfbot
+        - name: backup
+          mountPath: /storage/backup
+        - name: config
+          mountPath: /config
+        - name: tmp
+          mountPath: /tmp
+    - name: restart-with-debridav
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2025-05-29T16:42:49Z'
+          finishedAt: '2025-05-29T16:42:49Z'
+          containerID: >-
+            containerd://2ea35160c6c39196be07c3dc30641211feda828373b2687715e049b0d44a04cf
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:e6e04637f29c169f4663e27003ee5e836b10da9c115f5e0b0c7eedf0f116792d
+      imageID: >-
+        ghcr.io/elfhosted/debridav@sha256:1e596ddb97a7e6a4827b1dfc0718992b0c432416841a8a4c3dd3cd7491850c3c
+      containerID: >-
+        containerd://2ea35160c6c39196be07c3dc30641211feda828373b2687715e049b0d44a04cf
+      started: false
+    - name: restart-with-decypharr
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2025-05-29T16:42:50Z'
+          finishedAt: '2025-05-29T16:42:50Z'
+          containerID: >-
+            containerd://75b60dc8a5044ee97cf02faa41a5f6a25d8e40d81592116336c85efe594509c8
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:1fa4badd98ae83db0a48d9ffa84eec382ee1bae97c6c0c2afa3cd3f39c746d54
+      imageID: >-
+        ghcr.io/elfhosted/decypharr-beta@sha256:b310afa9976f950ab62d7ec20801b46cb9a28176121d1c275424d780825ca4ee
+      containerID: >-
+        containerd://75b60dc8a5044ee97cf02faa41a5f6a25d8e40d81592116336c85efe594509c8
+      started: false
+    - name: restart-with-zurg
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2025-05-29T16:42:51Z'
+          finishedAt: '2025-05-29T16:42:51Z'
+          containerID: >-
+            containerd://a1e55a63a2f7b3e693ad3827736c2222e1bf19cc40be48b850ca7e601bcd9788
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:ea647c62debf20362c0490a78d9f033c68adaecece6bda926277a484b38f7cb3
+      imageID: >-
+        ghcr.io/elfhosted/zurg-rc@sha256:513bcc2be2a9fb8b8df7fc458f76747bebcc884776bfbfd4393e16d61b2c1227
+      containerID: >-
+        containerd://a1e55a63a2f7b3e693ad3827736c2222e1bf19cc40be48b850ca7e601bcd9788
+      started: false
+    - name: setup
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2025-05-29T16:42:52Z'
+          finishedAt: '2025-05-29T16:42:52Z'
+          containerID: >-
+            containerd://e373364fb2fa87636bc9ac5fa043a364d525aefb333e027d31373afd5d177d90
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:9f55c133c2c68fbd7f186aa9c8d472a92dda455270e3a9c95fdafaf4cce0003e
+      imageID: >-
+        filebrowser/filebrowser:v2.31.2
+      containerID: >-
+        containerd://e373364fb2fa87636bc9ac5fa043a364d525aefb333e027d31373afd5d177d90
+      started: false
+      volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: phototranscoder
+          mountPath: /phototranscoder
+    - name: setup-warp
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2025-05-29T16:42:53Z'
+          finishedAt: '2025-05-29T16:42:56Z'
+          containerID: >-
+            containerd://47568451f3b855fc3ed406844389241054007c9c463f9aab73cf5e329f9385fd
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:9f55c133c2c68fbd7f186aa9c8d472a92dda455270e3a9c95fdafaf4cce0003e
+      imageID: >-
+        filebrowser/filebrowser:v2.31.2
+      containerID: >-
+        containerd://47568451f3b855fc3ed406844389241054007c9c463f9aab73cf5e329f9385fd
+      started: false
+      volumeMounts:
+        - name: shared
+          mountPath: /shared
+  containerStatuses:
+    - name: brunner56-plex
+      state:
+        running:
+          startedAt: '2025-05-29T17:15:06Z'
+      lastState:
+        terminated:
+          exitCode: 143
+          reason: Error
+          startedAt: '2025-05-29T17:08:55Z'
+          finishedAt: '2025-05-29T17:10:05Z'
+          containerID: >-
+            containerd://33645593706005c2cb1a6285dc3be3fe07edb6a3ce1f6dd90ac88727081138c4
+      ready: true
+      restartCount: 13
+      image: sha256:ee89c831653ea30169d71a8f0abba79f96f8e00d7dd4630aceec1da48254df41
+      imageID: >-
+        ghcr.io/elfhosted/plex@sha256:04b14748f9a3e5d23e1431ab2d4c5c07aca14a1fe5541b62481f0064eea8420e
+      containerID: >-
+        containerd://7a2f9ce8c87b521b295232d03889f71e16550735a7c5a13c301b9d9bfb8bf9d9
+      started: true
+      volumeMounts:
+        - name: backup
+          mountPath: /backup
+        - name: config
+          mountPath: /config/
+        - name: elfbot
+          mountPath: /elfbot
+        - name: phototranscoder
+          mountPath: /phototranscoder
+        - name: rclone
+          mountPath: /storage/rclone
+        - name: rclonemountrealdebridzurg
+          mountPath: /storage/realdebrid-zurg
+        - name: render-device
+          mountPath: /dev/dri/renderD128
+        - name: shared
+          mountPath: /shared
+        - name: symlinks
+          mountPath: /storage/symlinks
+        - name: tinyproxy-conf
+          mountPath: /tinyproxy-conf
+        - name: tmp
+          mountPath: /tmp
+        - name: transcode
+          mountPath: /transcode
+    - name: gluetun
+      state:
+        running:
+          startedAt: '2025-05-29T16:42:58Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:d63471797f7e7bb867acda553c4dd5e787af924a81883264de28a6ce6fd9272b
+      imageID: >-
+        ghcr.io/elfhosted/gluetun@sha256:59b0cc8a9412b9a4645d1f12dff0daba80b8be88acd1b5d1a0fb6dfa625eb9a5
+      containerID: >-
+        containerd://f430afeb8931cdf757f5690abb07f334b94b4a0853d5621408a477d9bf3a5e9e
+      started: true
+      volumeMounts:
+        - name: shared
+          mountPath: /shared
+    - name: podinfo
+      state:
+        running:
+          startedAt: '2025-05-29T16:42:59Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: docker.io/stefanprodan/podinfo:latest
+      imageID: >-
+        docker.io/stefanprodan/podinfo@sha256:10af81c9659824cecaa7fe09134c6c318136341b4ae84c4a37f18d9bd8a33eac
+      containerID: >-
+        containerd://ffa38c6415f70d4f21de8dc9d80e774e44b3f0d88b0be713f297b9978698b504
+      started: true
+    - name: speedtest
+      state:
+        running:
+          startedAt: '2025-05-29T16:43:01Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:c6ad5c343a9aee830a65130b5eccec89a52903691dfa4aafeba477798e75b9d4
+      imageID: >-
+        docker.io/openspeedtest/latest@sha256:1745e913f596fe98882b286a67751efdae74774e9caa742a4934bb056e8748d2
+      containerID: >-
+        containerd://210f48d101a249ac6cf2a45aa8f536451b2ddf57dae9d8e014ebaa2fd5653c3c
+      started: true
+    - name: tinyproxy
+      state:
+        running:
+          startedAt: '2025-05-29T16:43:01Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: sha256:14285ae6138d5fc4a938359dda4454f90cfdd14639de9683bbb67a7aba403541
+      imageID: >-
+        ghcr.io/elfhosted/tinyproxy@sha256:262bbdc0e468ee97c049203becc52b9ad7bf4c21405d58c82766d1aebb2e27e5
+      containerID: >-
+        containerd://924fc7d50a332eec40fcaa47eab3c74737c1ddded431a2b01994c8d3cf53de64
+      started: true
+      volumeMounts:
+        - name: tinyproxy-conf
+          mountPath: /etc/tinyproxy/tinyproxy.conf
+  qosClass: Burstable

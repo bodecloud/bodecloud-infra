@@ -1,0 +1,60 @@
+#! code-demo-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: code-demo
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: code-demo
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: code-demo
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: code-demo
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: code
+                  image: linuxserver/code-server:latest
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: CODESERVER_PASSWORD
+                      value: "brunner56"
+                    - name: CODESERVER_SUDO_PASSWORD
+                      value: "h4L0m4St3R327"
+                    - name: DEFAULT_WORKSPACE
+                      value: "/workspace"
+                    - name: PGID
+                      value: "988"
+                    - name: PUID
+                      value: "1002"
+                    - name: TZ
+                      value: "America/Chicago"
+                    - name: UMASK
+                      value: "022"
+                  ports:
+                    - name: code-demo-8443
+                      containerPort: 8443
+                  volumeMounts:
+                    - name: config
+                      mountPath: /config
+                    - name: workspace
+                      mountPath: /workspace
+            volumes:
+                - name: config
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/code-server/demo/config
+                - name: workspace
+                  hostPath:
+                    path: G:/Stuff/bolabaden/configs/code-server/demo/workspace

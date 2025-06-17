@@ -1,0 +1,294 @@
+{
+    "realm": "MediaStack",
+    "enabled": true,
+    "displayName": "Media Stack Services",
+    "displayNameHtml": "<div class='kc-logo-text'><span>Media Stack Services</span></div>",
+    "sslRequired": "external",
+    "registrationAllowed": true,
+    "registrationEmailAsUsername": true,
+    "rememberMe": true,
+    "verifyEmail": true,
+    "loginWithEmailAllowed": true,
+    "duplicateEmailsAllowed": false,
+    "resetPasswordAllowed": true,
+    "editUsernameAllowed": false,
+    "bruteForceProtected": true,
+    "permanentLockout": false,
+    "maxFailureWaitSeconds": 900,
+    "minimumQuickLoginWaitSeconds": 60,
+    "waitIncrementSeconds": 60,
+    "quickLoginCheckMilliSeconds": 1000,
+    "maxDeltaTimeSeconds": 43200,
+    "failureFactor": 5,
+    "defaultRoles": [
+        "user"
+    ],
+    "roles": {
+        "realm": [
+            {
+                "name": "user",
+                "description": "Regular user with standard access"
+            },
+            {
+                "name": "premium_user",
+                "description": "Premium user with higher rate limits"
+            },
+            {
+                "name": "admin",
+                "description": "Administrator with full access"
+            }
+        ]
+    },
+    "requiredCredentials": [
+        "password"
+    ],
+    "passwordPolicy": "length(8) and forceExpiredPasswordChange(365) and notUsername(undefined)",
+    "otpPolicyType": "totp",
+    "otpPolicyAlgorithm": "HmacSHA1",
+    "otpPolicyInitialCounter": 0,
+    "otpPolicyDigits": 6,
+    "otpPolicyLookAheadWindow": 1,
+    "otpPolicyPeriod": 30,
+    "browserSecurityHeaders": {
+        "contentSecurityPolicy": "frame-src 'self'; frame-ancestors 'self'; object-src 'none';",
+        "xContentTypeOptions": "nosniff",
+        "xRobotsTag": "none",
+        "xFrameOptions": "SAMEORIGIN",
+        "xXSSProtection": "1; mode=block",
+        "strictTransportSecurity": "max-age=31536000; includeSubDomains"
+    },
+    "smtpServer": {
+        "host": "${env.SMTP_HOST:mailhog}",
+        "port": "${env.SMTP_PORT:1025}",
+        "from": "${env.SMTP_FROM:keycloak@mediastack.local}",
+        "fromDisplayName": "${env.SMTP_FROM_DISPLAY_NAME:Media Stack Services}",
+        "replyTo": "${env.SMTP_REPLY_TO:no-reply@mediastack.local}",
+        "replyToDisplayName": "${env.SMTP_REPLY_TO_DISPLAY_NAME:Media Stack Services}",
+        "ssl": "${env.SMTP_SSL:false}",
+        "starttls": "${env.SMTP_STARTTLS:false}",
+        "auth": "${env.SMTP_AUTH:false}"
+    },
+    "loginTheme": "keycloak",
+    "accountTheme": "keycloak",
+    "adminTheme": "keycloak",
+    "emailTheme": "keycloak",
+    "identityProviders": [
+        {
+            "alias": "google",
+            "displayName": "Google",
+            "providerId": "google",
+            "enabled": true,
+            "updateProfileFirstLoginMode": "on",
+            "trustEmail": true,
+            "storeToken": false,
+            "addReadTokenRoleOnCreate": false,
+            "authenticateByDefault": false,
+            "linkOnly": false,
+            "firstBrokerLoginFlowAlias": "first broker login",
+            "config": {
+                "clientId": "${env.GOOGLE_CLIENT_ID:}",
+                "clientSecret": "${env.GOOGLE_CLIENT_SECRET:}",
+                "useJwksUrl": "true",
+                "defaultScope": "openid email profile",
+                "hideOnLoginPage": "false"
+            }
+        },
+        {
+            "alias": "facebook",
+            "displayName": "Facebook",
+            "providerId": "facebook",
+            "enabled": true,
+            "updateProfileFirstLoginMode": "on",
+            "trustEmail": true,
+            "storeToken": false,
+            "addReadTokenRoleOnCreate": false,
+            "authenticateByDefault": false,
+            "linkOnly": false,
+            "firstBrokerLoginFlowAlias": "first broker login",
+            "config": {
+                "clientId": "${env.FACEBOOK_CLIENT_ID:}",
+                "clientSecret": "${env.FACEBOOK_CLIENT_SECRET:}",
+                "defaultScope": "email public_profile",
+                "hideOnLoginPage": "false"
+            }
+        }
+    ],
+    "clients": [
+        {
+            "clientId": "media-stack-client",
+            "name": "Media Stack Services",
+            "description": "Client for Media Stack Services",
+            "rootUrl": "https://${env.DOMAIN:localhost}",
+            "adminUrl": "https://${env.DOMAIN:localhost}",
+            "baseUrl": "https://${env.DOMAIN:localhost}",
+            "surrogateAuthRequired": false,
+            "enabled": true,
+            "alwaysDisplayInConsole": false,
+            "clientAuthenticatorType": "client-secret",
+            "secret": "${env.CLIENT_SECRET:change-me}",
+            "redirectUris": [
+                "https://*.${env.DOMAIN:localhost}/*"
+            ],
+            "webOrigins": [
+                "https://*.${env.DOMAIN:localhost}"
+            ],
+            "notBefore": 0,
+            "bearerOnly": false,
+            "consentRequired": false,
+            "standardFlowEnabled": true,
+            "implicitFlowEnabled": false,
+            "directAccessGrantsEnabled": true,
+            "serviceAccountsEnabled": false,
+            "publicClient": false,
+            "frontchannelLogout": false,
+            "protocol": "openid-connect",
+            "attributes": {
+                "saml.assertion.signature": "false",
+                "saml.force.post.binding": "false",
+                "saml.multivalued.roles": "false",
+                "saml.encrypt": "false",
+                "saml.server.signature": "false",
+                "saml.server.signature.keyinfo.ext": "false",
+                "exclude.session.state.from.auth.response": "false",
+                "saml_force_name_id_format": "false",
+                "saml.client.signature": "false",
+                "tls.client.certificate.bound.access.tokens": "false",
+                "saml.authnstatement": "false",
+                "display.on.consent.screen": "false",
+                "saml.onetimeuse.condition": "false"
+            },
+            "authenticationFlowBindingOverrides": {},
+            "fullScopeAllowed": true,
+            "nodeReRegistrationTimeout": -1,
+            "defaultClientScopes": [
+                "web-origins",
+                "profile",
+                "roles",
+                "email"
+            ],
+            "optionalClientScopes": [
+                "address",
+                "phone",
+                "offline_access"
+            ]
+        },
+        {
+            "clientId": "traefik-forward-auth",
+            "name": "Traefik Forward Auth",
+            "description": "Client for Traefik Forward Auth middleware",
+            "rootUrl": "https://${env.DOMAIN:localhost}",
+            "adminUrl": "https://${env.DOMAIN:localhost}",
+            "baseUrl": "https://${env.DOMAIN:localhost}",
+            "surrogateAuthRequired": false,
+            "enabled": true,
+            "alwaysDisplayInConsole": false,
+            "clientAuthenticatorType": "client-secret",
+            "secret": "${env.TRAEFIK_AUTH_SECRET:change-me}",
+            "redirectUris": [
+                "https://*.${env.DOMAIN:localhost}/_oauth"
+            ],
+            "webOrigins": [
+                "https://*.${env.DOMAIN:localhost}"
+            ],
+            "notBefore": 0,
+            "bearerOnly": false,
+            "consentRequired": false,
+            "standardFlowEnabled": true,
+            "implicitFlowEnabled": false,
+            "directAccessGrantsEnabled": true,
+            "serviceAccountsEnabled": true,
+            "publicClient": false,
+            "frontchannelLogout": false,
+            "protocol": "openid-connect",
+            "attributes": {
+                "saml.assertion.signature": "false",
+                "saml.force.post.binding": "false",
+                "saml.multivalued.roles": "false",
+                "saml.encrypt": "false",
+                "saml.server.signature": "false",
+                "saml.server.signature.keyinfo.ext": "false",
+                "exclude.session.state.from.auth.response": "false",
+                "saml_force_name_id_format": "false",
+                "saml.client.signature": "false",
+                "tls.client.certificate.bound.access.tokens": "false",
+                "saml.authnstatement": "false",
+                "display.on.consent.screen": "false",
+                "saml.onetimeuse.condition": "false"
+            },
+            "authenticationFlowBindingOverrides": {},
+            "fullScopeAllowed": true,
+            "nodeReRegistrationTimeout": -1,
+            "defaultClientScopes": [
+                "web-origins",
+                "profile",
+                "roles",
+                "email"
+            ],
+            "optionalClientScopes": [
+                "address",
+                "phone",
+                "offline_access"
+            ]
+        }
+    ],
+    "groups": [
+        {
+            "name": "Standard Users",
+            "path": "/Standard Users",
+            "attributes": {},
+            "realmRoles": [
+                "user"
+            ],
+            "clientRoles": {},
+            "subGroups": []
+        },
+        {
+            "name": "Premium Users",
+            "path": "/Premium Users",
+            "attributes": {},
+            "realmRoles": [
+                "user",
+                "premium_user"
+            ],
+            "clientRoles": {},
+            "subGroups": []
+        },
+        {
+            "name": "Administrators",
+            "path": "/Administrators",
+            "attributes": {},
+            "realmRoles": [
+                "user",
+                "premium_user",
+                "admin"
+            ],
+            "clientRoles": {},
+            "subGroups": []
+        }
+    ],
+    "eventsEnabled": true,
+    "eventsListeners": [
+        "jboss-logging"
+    ],
+    "enabledEventTypes": [
+        "LOGIN",
+        "LOGIN_ERROR",
+        "LOGOUT",
+        "LOGOUT_ERROR",
+        "REGISTER",
+        "REGISTER_ERROR",
+        "UPDATE_PROFILE",
+        "UPDATE_PROFILE_ERROR",
+        "UPDATE_PASSWORD",
+        "UPDATE_PASSWORD_ERROR",
+        "UPDATE_EMAIL",
+        "UPDATE_EMAIL_ERROR"
+    ],
+    "adminEventsEnabled": true,
+    "adminEventsDetailsEnabled": true,
+    "internationalizationEnabled": true,
+    "supportedLocales": [
+        "en"
+    ],
+    "defaultLocale": "en"
+}

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{"objectset.rio.cattle.io/applied":"H4sIAAAAAAAA/4yST4/TMBDFvwqas12aTdtQS5yWAxJCSAhxQRzGk+fWxLEr2y1Cq3x3lFCxK1YFjv4zv3nz3jwQn/xn5OJTJEOXhhQNPvZk6D5F5w/v+USKRlTuuTKZB+IYU+XqUyzzMdlvkFpQV9mnlXCtASufXvqZcUQYtaRYcwoBWcuRc9UZB19qXhikbhLS94isD5fhCnrydGnUi3c+9q/fIoz3M/SfnMgjyFDNDOeH//peTixzzXC20OVHqRhpUiQZi/RPfkSpPJ7IxHMIigJbhL+acuRyJEOydvsO3PHdFm0P6Zr9tpOO27tNw+0r12LrGFs3d7vq/uXcbCVi1Y9T3NKpaJnjIxwyoqCQ+fJH2M88JUU2JBk+zJVvELAEZByHAkWPMf6+um7K0xCe2XxeFkGs7MRu1noP2ehNv2Ntmx3rtuvEyrrvLTqavk7TzwAAAP//kH+XD5ECAAA","objectset.rio.cattle.io/id":"helm-controller-chart-registration","objectset.rio.cattle.io/owner-gvk":"helm.cattle.io/v1, Kind=HelmChart","objectset.rio.cattle.io/owner-name":"traefik","objectset.rio.cattle.io/owner-namespace":"kube-system"},"labels":{"objectset.rio.cattle.io/hash":"c0f97ea7a25e3dec71957c7a3241a38f3e5fae5f"},"name":"chart-content-traefik","namespace":"kube-system","ownerReferences":[{"apiVersion":"helm.cattle.io/v1","blockOwnerDeletion":false,"controller":false,"kind":"HelmChart","name":"traefik","uid":"cbc6cb40-9ec4-4d6a-b16a-377cbc0ddbe7"}]}}
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4yST4/TMBDFvwqas12aTdtQS5yWAxJCSAhxQRzGk+fWxLEr2y1Cq3x3lFCxK1YFjv4zv3nz3jwQn/xn5OJTJEOXhhQNPvZk6D5F5w/v+USKRlTuuTKZB+IYU+XqUyzzMdlvkFpQV9mnlXCtASufXvqZcUQYtaRYcwoBWcuRc9UZB19qXhikbhLS94isD5fhCnrydGnUi3c+9q/fIoz3M/SfnMgjyFDNDOeH//peTixzzXC20OVHqRhpUiQZi/RPfkSpPJ7IxHMIigJbhL+acuRyJEOydvsO3PHdFm0P6Zr9tpOO27tNw+0r12LrGFs3d7vq/uXcbCVi1Y9T3NKpaJnjIxwyoqCQ+fJH2M88JUU2JBk+zJVvELAEZByHAkWPMf6+um7K0xCe2XxeFkGs7MRu1noP2ehNv2Ntmx3rtuvEyrrvLTqavk7TzwAAAP//kH+XD5ECAAA
+    objectset.rio.cattle.io/id: helm-controller-chart-registration
+    objectset.rio.cattle.io/owner-gvk: helm.cattle.io/v1, Kind=HelmChart
+    objectset.rio.cattle.io/owner-name: traefik
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: c0f97ea7a25e3dec71957c7a3241a38f3e5fae5f
+  name: chart-content-traefik
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: helm.cattle.io/v1
+    blockOwnerDeletion: false
+    controller: false
+    kind: HelmChart
+    name: traefik

@@ -1,0 +1,72 @@
+---
+# Development tools deployment tasks
+# This file can be expanded to include code-server and other development tools
+
+- name: Deploy Code Server
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: code-server
+        namespace: my-media-stack
+        labels:
+          app: code-server
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: code-server
+        template:
+          metadata:
+            labels:
+              app: code-server
+          spec:
+            containers:
+              - name: code-server
+                image: lscr.io/linuxserver/code-server:latest
+                ports:
+                  - containerPort: 8443
+                env:
+                  - name: PUID
+                    value: "{{ media_stack.puid }}"
+                  - name: PGID
+                    value: "{{ media_stack.pgid }}"
+                  - name: TZ
+                    value: "{{ media_stack.timezone }}"
+                  - name: PASSWORD
+                    value: "changeme"
+                  - name: SUDO_PASSWORD
+                    value: "changeme"
+                volumeMounts:
+                  - name: config
+                    mountPath: /config
+                resources:
+                  requests:
+                    memory: 512Mi
+                    cpu: 200m
+                  limits:
+                    memory: 1Gi
+                    cpu: 1000m
+            volumes:
+              - name: config
+                hostPath:
+                  path: "{{ media_stack.config_path }}/code-server"
+                  type: DirectoryOrCreate
+  when: media_stack.services.code_server
+
+- name: Create Code Server service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: code-server
+        namespace: my-media-stack
+      spec:
+        selector:
+          app: code-server
+        ports:
+          - port: 8443
+            targetPort: 8443
+  when: media_stack.services.code_server

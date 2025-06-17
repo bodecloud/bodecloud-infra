@@ -1,0 +1,199 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: zurg-config
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  cli_debrid_update.sh: |
+    #!/bin/bash
+
+    webhook_url="http://cli-debrid:5000/webhook/rclone"  # Replace with your actual webhook URL
+
+    # First notify our webhook for each file
+    for arg in "$@"
+    do
+        arg_clean=$(echo "$arg" | sed 's/\\\\//g')
+        echo "Notifying webhook for: $arg_clean"
+        encoded_webhook_arg=$(echo -n "$arg_clean" | python3 -c "import sys, urllib.parse as ul; print(ul.quote(sys.stdin.read()))")
+        curl -s -X GET "$webhook_url?file=$encoded_webhook_arg"
+    done
+
+    echo "Updates completed!"
+  config.yml: |
+    # Zurg configuration version
+    zurg: v1
+
+    # Get your token for the next line from https://real-debrid.com/apitoken
+    token: REPLACE-ME-WITH-YOUR-RD-TOKEN 
+
+    # additional download tokens - uncomment the lines below, and populate this with your additional tokens to auto-overcome bandwidth limitation issues
+    # download_tokens:
+    # - "iamtoken1"
+    # - "iamtoken2"
+
+
+    # basic functionality
+    host: "[::]" # do not change this if you are running it inside a docker container
+    port: 9999 # do not change this if you are running it inside a docker container
+    concurrent_workers: 32
+    check_for_changes_every_secs: 30
+
+    # misc configs
+    retain_folder_name_extension: true # if true, zurg won't modify the filenames from real-debrid
+    retain_rd_torrent_name: true # if true, it will strictly follow RD API torrent name property w/c should make this more compatible with rdt-client
+    auto_delete_rar_torrents: false # if true, zurg will delete unstreamable rar files (these torrents will always be compressed in a rar archive no matter what files you select)
+    use_download_cache: false # if true, during zurg initialization, it will fetch all downloads to unrestrict links faster
+
+    enable_repair: true 
+    repair_every_mins: 60
+    on_library_update: sh plex_update.sh "$@"
+    ignore_renames: true
+
+    # do a RD speed test on every start
+    cache_network_test_results: false
+
+    # network configs
+    network_buffer_size: 1048576 # 1 MiB
+    serve_from_rclone: false # serve file data from rclone, not from zurg (zurg will only provide rclone the link to download)
+    verify_download_link: true # if true, zurg will check if the link is truly streamable; only relevant if serve_from_rclone is set to true (as it already does this all the time if serve_from_rclone is false)
+    force_ipv6: false # force connect to real-debrid ipv6 addresses
+    rate_limit_sleep_secs: 6 # wait time after getting a 429 from Real-Debrid API
+    realdebrid_timeout_secs: 60 # api timeout
+    retries_until_failed: 5 # api failures until considered failed
+    get_torrents_count: 5000
+
+    rar_action: extract
+
+    addl_playable_extensions:
+    - mp3
+    - flac
+    - m4b
+    - mp4
+    - mkv
+    - avi
+
+    # List of directory definitions and their filtering rules
+    directories:
+      audiobooks:
+        group_order: 5
+        group: media
+        filters:
+          - and:
+              - is_music: true
+              - media_info_duration_gte: 600
+
+      music:
+        group_order: 10
+        group: media
+        filters:
+          - is_music: true
+
+      anime:
+        group_order: 15
+        group: media
+        filters:
+          - regex: /\b[a-fA-F0-9]{8}\b/
+          - any_file_inside_regex: /\b[a-fA-F0-9]{8}\b/
+
+      shows:
+        group_order: 20
+        group: media
+        filters:
+          - has_episodes: true
+
+      movies:
+        group_order: 25
+        group: media
+        only_show_the_biggest_file: true
+        filters:
+          - regex: /.*/
+  plex_update.sh: |
+    #!/bin/bash
+
+    # PLEX PARTIAL SCAN script or PLEX UPDATE script
+    # When zurg detects changes, it can trigger this script IF your config.yml contains
+    # on_library_update: sh plex_update.sh "$@"
+    # Modified from https://github.com/debridmediamanager/zurg-testing/blob/main/plex_update.sh
+
+    token="REPLACE-ME-WITH-YOUR-PLEX-TOKEN" # go to https://elfhosted.com/how-to/get-plex-token/ to get your plex token
+
+    # DON'T CHANGE ANYTHING AFTER THIS LINE
+    plex_url="http://plex:32400" # If you're using zurg inside a Docker container, by default it is 172.17.0.1:32400
+    zurg_mount="/storage/realdebrid-zurg" # replace with your zurg mount path, ensure this is what Plex sees
+
+    # Get the list of section IDs
+    section_ids=$(curl -sLX GET "$plex_url/library/sections" -H "X-Plex-Token: $token" | xmllint --xpath "//Directory/@key" - | sed 's/key="//g' | tr '"' '\n')
+
+    for arg in "$@"
+    do
+        modified_arg="$zurg_mount/$arg"
+        encoded_arg=$(echo -n "$modified_arg" | python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.stdin.read()))")
+
+        if [ -z "$encoded_arg" ]; then
+            echo "Error: Encoded argument is empty. Check the input or encoding process."
+            continue
+        fi
+
+        for section_id in $section_ids
+        do
+            final_url="${plex_url}/library/sections/${section_id}/refresh?path=${encoded_arg}&X-Plex-Token=${token}"
+
+            echo "Encoded argument: $encoded_arg"
+            echo "Section ID: $section_id"
+            echo "Final URL: $final_url"
+
+            curl -s "$final_url"
+        done
+
+    done
+
+    echo "All updated sections refreshed"
+
+    # credits to godver3  
+  setup.sh: |
+    #!/bin/bash
+
+    # Disable native auth (we do it with traefik instead when necessary)
+    sed -i  "s/^username:/#username/" /config/config.yml
+    sed -i  "s/^password:/#password/" /config/config.yml
+
+    # Socks via WARP
+    # # Enable proxy only if gluetun vars are not present
+    # if [[ ! -z "$ZURG_WARP_ENABLED" ]]; then
+    #   echo "not enabling warp, we may no longer need it"
+    #   # grep proxy /config/config.yml || echo 'proxy: socks5://127.0.0.1:1080' >> /config/config.yml
+    #   # sed -i  "s/^#proxy:/proxy/" /config/config.yml
+    # else
+    #   # remove proxy if found
+    #   sed -i  "s/^proxy:/#proxy/" /config/config.yml
+    # fi
+
+    # revert to repairing every hour
+    grep repair_every_mins /config/config.yml || echo 'repair_every_mins: 60' >> /config/config.yml
+
+    # Enable rar extraction if it's not already there
+    grep rar_action /config/config.yml || echo 'rar_action: extract' >> /config/config.yml
+
+    # Check for changes every 10 sec - this is too aggressive on large libraries
+    # sed -i  "s/check_for_changes_every_secs:.*/check_for_changes_every_secs: 10/" /config/config.yml
+
+    # don't repair uncached
+    grep restrict_repair_to_cached /config/config.yml || echo 'restrict_repair_to_cached: true' >> /config/config.yml
+
+    # Don't serve from rclone
+    sed -i  "s/serve_from_rclone:.*/serve_from_rclone: false/" /config/config.yml
+
+    # Disable plex_update.sh unless user uses plexdebrid
+    #  # we don't need the script
+    sed -i  "s/on_library_update/#on_library_update/" /config/config.yml
+
+    # Enable repair everywhere
+    # disabled on 13 nov 2024 to debug 
+    # sed -i  "s/enable_repair:.*/enable_repair: true/" /config/config.yml

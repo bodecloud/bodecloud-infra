@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "2"
+  labels:
+    app.elfhosted.com/name: sonarr-4k
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: sonarr-4k
+    pod-template-hash: 75d744d9d8
+  name: sonarr-4k-75d744d9d8
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: sonarr-4k
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: sonarr-4k
+      pod-template-hash: 75d744d9d8
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-06-12T01:11:04Z"
+      labels:
+        app.elfhosted.com/name: sonarr-4k
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: sonarr-4k
+        pod-template-hash: 75d744d9d8
+    spec:
+      containers:
+      - image: ghcr.io/elfhosted/sonarr:4.0.0.748
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8989
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: sonarr-4k
+        ports:
+        - containerPort: 8989
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8989
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: sonarr4k
+        - mountPath: /storage/symlinks
+          name: symlinks
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: symlinks
+  observedGeneration: 2
+  replicas: 0

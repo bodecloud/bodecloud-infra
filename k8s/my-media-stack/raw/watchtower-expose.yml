@@ -1,0 +1,13 @@
+#! watchtower-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: watchtower
+  namespace: my-media-stack
+spec:
+  selector: {}
+  ports:
+    - name: watchtower-8080
+      port: 8080
+      targetPort: watchtower-8080

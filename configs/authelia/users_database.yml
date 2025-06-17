@@ -1,0 +1,19 @@
+# yamllint disable rule:line-length
+---
+###############################################################
+#                         Users Database                      #
+###############################################################
+
+# This file can be used if you do not have an LDAP set up.
+
+users:
+  brunner56:
+    disabled: false
+    displayname: "Boden Crouch"
+    password: "$argon2i$v=19$m=4096,t=3,p=1$c29tZXNhbHQ$iAs6Vx2WNPQFGDOJN0IyebBJehS7zbVMxKiet6tabzA"
+    email: boden.crouch@gmail.com
+    groups:
+      - admins
+      - dev
+...
+# yamllint enable rule:line-length

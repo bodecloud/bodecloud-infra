@@ -1,0 +1,17 @@
+kubernetesClusterDomain: cluster.local
+plexTinyproxyConf:
+  tinyproxyConf: |-
+    Port 8888
+    Listen 0.0.0.0
+    # Allow all connections
+    Allow 0.0.0.0/0
+    Timeout 600
+    DisableViaHeader yes
+    ReversePath "/" "http://localhost:32400/"
+    # ReverseBaseURL "https://brunner56-plex.elfhosted.com"
+    # ReverseMagic Yes
+    ReverseOnly Yes
+    # Anonymous "Host"
+    # Anonymous "Authorization"
+    # Anonymous "Cookie"
+    # Anonymous "X-Forwarded-Proto"

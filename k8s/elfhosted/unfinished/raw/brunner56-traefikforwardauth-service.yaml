@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: brunner56-traefikforwardauth
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefikforwardauth
+    app.kubernetes.io/service: brunner56-traefikforwardauth
+    app.kubernetes.io/version: 2.2.0
+    helm.sh/chart: traefikforwardauth-2.2.10
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 4181
+    targetPort: http
+  selector:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: traefikforwardauth
+  clusterIP: 10.43.45.2
+  clusterIPs:
+  - 10.43.45.2
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

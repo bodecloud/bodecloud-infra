@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: {{ include "chart-brunner56-traefikforwardauth-replicaset.fullname" . }}-brunner56-traefikforwardauth-7db49dfc96
+  labels:
+    pod-template-hash: 7db49dfc96
+  {{- include "chart-brunner56-traefikforwardauth-replicaset.labels" . | nindent 4 }}
+  annotations:
+    configmap.reloader.stakater.com/reload: traefik-forward-auth-config
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: traefikforwardauth
+      pod-template-hash: 7db49dfc96
+  template:
+    metadata:
+      creationTimestamp: "2025-05-29T17:12:59Z"
+      labels:
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: traefikforwardauth
+        pod-template-hash: 7db49dfc96
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: SECRET
+          valueFrom:
+            secretKeyRef:
+              key: secret
+              name: brunner56-traefikforwardauth
+        - name: TZ
+          value: UTC
+        envFrom:
+        - configMapRef:
+            name: traefik-forward-auth-config
+        image: ghcr.io/elfhosted/traefik-forward-auth:3.1.0@sha256:19cd990fae90c544100676bc049f944becc8c454639e57d20f6f48e27de90776
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+        name: brunner56-traefikforwardauth
+        ports:
+        - containerPort: 4181
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 32Mi
+          requests:
+            cpu: "0"
+            memory: 6Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30

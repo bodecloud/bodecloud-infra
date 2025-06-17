@@ -1,0 +1,28 @@
+kubernetesClusterDomain: cluster.local
+plexConfig:
+  advertiseIp: https://brunner56-plex.elfhosted.com:443
+  plexPreference2: FSEventLibraryPartialScanEnabled=1
+  plexPreference3: FSEventLibraryUpdatesEnabled=1
+  plexPreference4: TranscoderPhotoFileSizeLimitMiB=5
+  plexPreference7: autoEmptyTrash=0
+  plexPreference8: BackgroundTranscodeLowPriority=1
+  plexPreference9: LongRunningJobThreads=1
+  plexPreference10: TranscoderH264BackgroundPreset=ultrafast
+  plexPreference11: RelayEnabled=0
+  plexPreference12: TranscoderTempDirectory=/transcode
+  plexPreference13: MinutesAllowedPaused=30
+  plexPreference14: GenerateIntroMarkerBehavior=scheduled
+  plexPreference15: ButlerStartHour=9
+  plexPreference16: ButlerEndHour=10
+  plexPreference17: ButlerTaskDeepMediaAnalysis=0
+  plexPreference18: ButlerTaskUpgradeMediaAnalysis=0
+  plexPreference19: MarkerSource=cloud
+  plexPreference20: GenerateCreditsMarkerBehavior=never
+  plexPreference21: GenerateChapterThumbBehavior=never
+  plexPreference22: GenerateChapterThumbBehavior=never
+  plexPreference23: GenerateIntroMarkerBehavior=never
+  plexPreference24: GenerateBIFBehavior=never
+  plexPreference25: GenerateAdMarkerBehavior=never
+  waitForMountPaths: /storage/realdebrid-zurg/__all__
+  waitForUrls: http://zurg:9999/http/version.txt
+  waitForVpn: "true"

@@ -1,0 +1,34 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.248
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: radarr-76f4859cb6-95zhh
+    namespace: default
+kind: EndpointSlice
+metadata:
+  generateName: radarr-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: radarr
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: radarr
+  name: radarr-vvz5l
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: radarr
+ports:
+- name: http
+  port: 7878
+  protocol: TCP

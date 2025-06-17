@@ -1,0 +1,158 @@
+x-common-env: &common-env
+  PGID: ${PGID:-988} # 'docker' Group ID
+  PUID: ${PUID:-1001} # A non-root user ID
+  TZ: ${TZ:-America/Chicago} # Your Timezone
+
+x-resource-limits: &resource-limits
+  cpu_shares: 1024 # CPU share weight (relative, 2-262144). Higher = more CPU *if competing*.
+  #  mem_limit: 512m        # Max RAM usage (e.g., 64m, 1g). Exceeding = container kill.
+  #  mem_reservation: 325m  # Soft RAM limit (e.g., 32m, 512m).  Best effort, not guaranteed.
+  #  mem_swappiness: 30      # Swap usage (0-100). 0 = off. Higher = more swap, may slow down container.
+  #memswap_limit: 1024m    # Max RAM + Swap.  Usually same as mem_limit.
+  labels:
+    autoheal: "true"
+
+x-swarm-resource-limits: &swarm-resource-limits
+  resources:
+    limits:
+      cpus: "0.10"
+      memory: 1024M
+#    reservations:
+#     cpus: '0.05'
+#    memory:  256M
+
+x-common-deploy: &common-deploy
+  placement:
+    preferences:
+      - spread: node.labels.worker_priority
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    window: 120s
+  labels:
+    autoheal: "true"
+    swarm.autoscaler: "true"
+#  resources:
+#    limits:
+#      cpus: '0.10'
+#      memory: 128M
+#    reservations:
+#      cpus: '0.10'
+#      memory: 64M
+
+x-qbittorrent-labels: &qbittorrent-labels
+  traefik.enable: "true"
+  traefik.http.services.qbittorrent.loadbalancer.server.port: ${QB_WEBUI_PORT:-8084}
+  #traefik.http.routers.qbittorrent.middlewares: qbittorrent-strip-slash,qbittorrent-stripprefix
+  # https://github.com/qbittorrent/qBittorrent/issues/5693#issuecomment-552146296
+  #traefik.http.middlewares.qbittorrent-stripprefix.stripPrefix.prefixes: /qbittorrent
+  # https://community.traefik.io/t/middleware-to-add-the-if-needed/1895/19
+  #traefik.http.middlewares.qbittorrent-strip-slash.redirectregex.regex: ^.*\/qbittorrent$$
+  #traefik.http.middlewares.qbittorrent-strip-slash.redirectregex.replacement: $$1/
+  #traefik.http.middlewares.qbittorrent-strip-slash.redirectregex.permanent: "false"
+
+services:
+  deluge:
+    # 🔹🔹 Deluge 🔹🔹
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    image: linuxserver/deluge
+    container_name: deluge
+    network_mode: service:gluetun
+    volumes:
+      - ${ROOT_DIR:-.}/downloads:/downloads:rw
+      - ${ROOT_DIR:-.}/configs/deluge:/config:rw
+    environment:
+      DELUGE_LOGLEVEL: ${DELUGE_LOGLEVEL:-info}
+    labels:
+      homepage.group: Download Clients
+      homepage.name: Deluge
+      homepage.icon: deluge.png
+      homepage.href: https://deluge.${DOMAIN}/
+      homepage.description: A lightweight, cross-platform BitTorrent client designed for downloading files efficiently and securely from the internet.
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+  qbittorrent:
+    # 🔹🔹 qBittorrent 🔹🔹
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    hostname: qbittorrent
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - traefik_public
+    ports:
+      - ${QB_WEBUI_PORT:-8084}:${QB_WEBUI_PORT:-8084}
+      - ${QB_TORRENTING_PORT:-6881}:${QB_TORRENTING_PORT:-6881}
+      - ${QB_TORRENTING_PORT:-6881}:${QB_TORRENTING_PORT:-6881}/udp
+    volumes:
+      - ${ROOT_DIR:-.}/downloads:/downloads
+      - ${ROOT_DIR:-.}/configs/qbittorrent/config:/config
+      - ${ROOT_DIR:-.}/configs/qbittorrent/scripts:/scripts
+    environment:
+      <<: *common-env
+      TORRENTING_PORT: ${QB_TORRENTING_PORT:-6881}
+      WEBUI_PORT: ${QB_WEBUI_PORT:-8084}
+    labels:
+      <<: *qbittorrent-labels
+      #com.centurylinklabs.watchtower.depends-on: /vpn
+      homepage.group: Download Clients
+      homepage.name: qBittorrent Downloader
+      homepage.icon: qbittorrent.png
+      homepage.href: https://qbittorrent.${DOMAIN}
+      homepage.description: A user-friendly torrent client for downloading and managing files via BitTorrent, offering a clean interface and powerful features.
+      homepage.weight: 2
+      homepage.widget.type: qbittorrent
+      homepage.widget.url: https://qbittorrent.${DOMAIN}
+      homepage.widget.username: ${QBITTORRENT_USERNAME:-admin}
+      homepage.widget.password: ${QBITTORRENT_PASSWORD:-adminadmin}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *qbittorrent-labels
+    restart: unless-stopped
+
+  transmission:
+    # 🔹🔹 Transmission 🔹🔹
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    image: linuxserver/transmission
+    container_name: transmission
+    network_mode: service:gluetun
+    volumes:
+      - ${ROOT_DIR:-.}/configs/transmission/data:/config:rw
+      - ${ROOT_DIR:-.}/data/watch:/watch:rw
+      - ${ROOT_DIR:-.}/downloads:/downloads/complete:rw
+      - ${ROOT_DIR:-.}/downloads/incomplete:/downloads/incomplete:rw
+    environment:
+      <<: *common-env
+      HOST_WHITELIST: ${TRANSMISSION_HOST_WHITELIST:-}
+      USER: ${TRANSMISSION_USER:-admin}
+      PASS: ${TRANSMISSION_PASS:-admin}
+      PEERPORT: ${TRANSMISSION_PEERPORT:-51413}
+      TRANSMISSION_WEB_HOME: ${TRANSMISSION_WEB_HOME:-}
+    labels:
+      homepage.group: Download Clients
+      homepage.name: Transmission Downloader
+      homepage.icon: transmission.png
+      homepage.href: https://transmission.${DOMAIN}
+      homepage.description: A lightweight and efficient BitTorrent client for downloading and managing torrent files, known for its simplicity and speed.
+      homepage.weight: 2
+      homepage.widget.type: transmission
+      homepage.widget.url: https://transmission.${DOMAIN}
+      homepage.widget.username: ${TRANSMISSION_USERNAME:-admin}
+      homepage.widget.password: ${TRANSMISSION_PASSWORD:-admin}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
+
+networks:
+  qbittorrent_network:
+    driver: bridge

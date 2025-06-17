@@ -1,0 +1,21 @@
+apiVersion: v2
+name: zurg
+description: A Helm chart for Zurg - Real-Debrid WebDAV proxy and mount service
+type: application
+version: 0.3.0
+appVersion: "latest"
+home: https://github.com/debridmediamanager/zurg-testing
+sources:
+  - https://github.com/debridmediamanager/zurg-testing
+keywords:
+  - zurg
+  - real-debrid
+  - webdav
+  - mount
+  - debrid
+  - elfhosted
+maintainers:
+  - name: ElfHosted
+    url: https://elfhosted.com
+annotations:
+  category: Storage 

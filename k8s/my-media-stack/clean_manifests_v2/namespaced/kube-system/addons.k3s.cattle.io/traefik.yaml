@@ -1,0 +1,10 @@
+apiVersion: k3s.cattle.io/v1
+kind: Addon
+metadata:
+  annotations:
+    addon.k3s.cattle.io/gvks: helm.cattle.io/v1, Kind=HelmChart
+  name: traefik
+  namespace: kube-system
+spec:
+  checksum: 0e44580d7b16b7c1c3c46b5c197700c56898fcbc7b4f77acf17628ac7f749f31
+  source: /var/lib/rancher/k3s/server/manifests/traefik.yaml

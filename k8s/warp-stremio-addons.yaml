@@ -1,0 +1,828 @@
+# Warp VPN with Stremio Addons Sidecars
+# This deployment contains Warp VPN with all Stremio addons sharing the network stack
+# This replicates the Docker Compose "network_mode: service:warp" behavior
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warp-stremio-addons
+  namespace: vpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warp-stremio-addons
+  template:
+    metadata:
+      labels:
+        app: warp-stremio-addons
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "1"
+        - name: net.ipv4.conf.all.src_valid_mark
+          value: "1"
+      containers:
+      # Warp VPN container
+      - name: warp
+        image: caomingjun/warp:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - MKNOD
+            - AUDIT_WRITE
+        env:
+        - name: WARP_SLEEP
+          value: "2"
+        ports:
+        - containerPort: 1080
+          name: socks5
+        - containerPort: 3005
+          name: aiostreams
+        - containerPort: 8000
+          name: mediafusion
+        - containerPort: 8080
+          name: stremthru
+        - containerPort: 8181
+          name: zilean
+        - containerPort: 8469
+          name: aiostremio
+        - containerPort: 8888
+          name: mediaflow-proxy
+        - containerPort: 4000
+          name: jackettio
+        - containerPort: 3000
+          name: stremio-jackett
+        - containerPort: 2020
+          name: comet
+        volumeMounts:
+        - name: warp-data
+          mountPath: /var/lib/cloudflare-warp
+        livenessProbe:
+          tcpSocket:
+            port: 1080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          tcpSocket:
+            port: 1080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+      
+      # AIOStreams sidecar
+      - name: aiostreams
+        image: ghcr.io/viren070/aiostreams:dev
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: database-secrets
+              key: mongodb-uri
+        - name: REDIS_URL
+          value: "redis://redis.infrastructure.svc.cluster.local:6379"
+        - name: PREMIUMIZE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: premiumize-api-key
+        - name: REAL_DEBRID_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: real-debrid-api-key
+        - name: ALL_DEBRID_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: all-debrid-api-key
+        - name: TORBOX_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: torbox-api-key
+        - name: DEBRID_LINK_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: debrid-link-api-key
+        - name: PUT_IO_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: put-io-token
+        - name: EASYNEWS_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: easynews-username
+        - name: EASYNEWS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: easynews-password
+        - name: ZILEAN_URL
+          value: "http://127.0.0.1:8181"
+        - name: MEDIAFUSION_URL
+          value: "http://127.0.0.1:8000"
+        - name: PROWLARR_URL
+          value: "http://gluetun-premiumize-nl.vpn.svc.cluster.local:9696"
+        - name: PROWLARR_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: prowlarr-api-key
+        - name: JACKETT_URL
+          value: "http://gluetun-premiumize-nl.vpn.svc.cluster.local:9117"
+        - name: JACKETT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: jackett-api-key
+        - name: FLARESOLVERR_URL
+          value: "http://flaresolverr.media-stack.svc.cluster.local:8191"
+        volumeMounts:
+        - name: aiostreams-data
+          mountPath: /app/data
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3005
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3005
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+      
+      # MediaFusion sidecar
+      - name: mediafusion
+        image: mhdzumair/mediafusion:latest
+        env:
+        - name: HOST_URL
+          value: "https://mediafusion.bolabaden.org"
+        - name: POSTER_HOST_URL
+          value: "https://mediafusion.bolabaden.org"
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: mediafusion-secret-key
+        - name: API_PASSWORD
+          value: "h4L0m4St3R327"
+        - name: METADATA_PRIMARY_SOURCE
+          value: "tmdb"
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: database-secrets
+              key: mongodb-uri
+        - name: REDIS_URL
+          value: "redis://redis.infrastructure.svc.cluster.local:6379"
+        - name: FLARESOLVERR_URL
+          value: "http://flaresolverr.media-stack.svc.cluster.local:8191"
+        - name: TMDB_API_KEY
+          value: "cec876f852b9c15d2c1b436b1117dff7"
+        - name: IS_SCRAP_FROM_PROWLARR
+          value: "False"
+        - name: PROWLARR_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: prowlarr-api-key
+        - name: PROWLARR_URL
+          value: "http://gluetun-premiumize-nl.vpn.svc.cluster.local:9696"
+        - name: PROWLARR_IMMEDIATE_MAX_PROCESS
+          value: "30"
+        - name: PROWLARR_IMMEDIATE_MAX_PROCESS_TIME
+          value: "120"
+        - name: PROWLARR_SEARCH_INTERVAL_HOUR
+          value: "24"
+        - name: PROWLARR_FEED_SCRAPE_INTERVAL_HOUR
+          value: "2"
+        - name: PROWLARR_LIVE_TITLE_SEARCH
+          value: "true"
+        - name: IS_SCRAP_FROM_JACKETT
+          value: "False"
+        - name: JACKETT_URL
+          value: "http://gluetun-premiumize-nl.vpn.svc.cluster.local:9117"
+        - name: JACKETT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: jackett-api-key
+        - name: JACKETT_IMMEDIATE_MAX_PROCESS
+          value: "30"
+        - name: JACKETT_IMMEDIATE_MAX_PROCESS_TIME
+          value: "120"
+        - name: JACKETT_SEARCH_INTERVAL_HOUR
+          value: "24"
+        - name: JACKETT_FEED_SCRAPE_INTERVAL_HOUR
+          value: "1"
+        - name: JACKETT_LIVE_TITLE_SEARCH
+          value: "true"
+        - name: IS_SCRAP_FROM_ZILEAN
+          value: "False"
+        - name: ZILEAN_SEARCH_INTERVAL_HOUR
+          value: "1"
+        - name: ZILEAN_URL
+          value: "https://zilean.elfhosted.com"
+        - name: IS_SCRAP_FROM_TORRENTIO
+          value: "false"
+        - name: TORRENTIO_SEARCH_INTERVAL_DAYS
+          value: "1"
+        - name: TORRENTIO_URL
+          value: "https://torrentio.strem.fun"
+        - name: IS_SCRAP_FROM_MEDIAFUSION
+          value: "false"
+        - name: MEDIAFUSION_SEARCH_INTERVAL_DAYS
+          value: "1"
+        - name: MEDIAFUSION_URL
+          value: "http://127.0.0.1:8000"
+        - name: IS_SCRAP_FROM_BT4G
+          value: "true"
+        - name: BT4G_URL
+          value: "https://bt4gprx.com"
+        - name: BT4G_SEARCH_INTERVAL_HOUR
+          value: "18"
+        - name: BT4G_SEARCH_TIMEOUT
+          value: "30"
+        - name: BT4G_IMMEDIATE_MAX_PROCESS
+          value: "30"
+        - name: BT4G_IMMEDIATE_MAX_PROCESS_TIME
+          value: "30"
+        - name: IS_SCRAP_FROM_YTS
+          value: "True"
+        - name: ENABLE_RATE_LIMIT
+          value: "False"
+        - name: STORE_STREMTHRU_MAGNET_CACHE
+          value: "True"
+        - name: SCRAPE_WITH_AKA_TITLES
+          value: "False"
+        - name: BACKGROUND_SEARCH_INTERVAL_HOURS
+          value: "24"
+        - name: TAMILMV_SCHEDULER_CRONTAB
+          value: "13 */8 * * *"
+        - name: TAMIL_BLASTERS_SCHEDULER_CRONTAB
+          value: "20 */8 * * *"
+        - name: TAMILULTRA_SCHEDULER_CRONTAB
+          value: "33 */8 * * *"
+        volumeMounts:
+        - name: mediafusion-data
+          mountPath: /app/data
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 1200
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+      
+      # AIOStremio sidecar
+      - name: aiostremio
+        image: viren070/aiostremio:latest
+        env:
+        - name: REDIS_URL
+          value: "redis://aiostremio-redis.stremio-addons.svc.cluster.local:6379"
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: database-secrets
+              key: mongodb-uri
+        - name: PREMIUMIZE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: premiumize-api-key
+        - name: REAL_DEBRID_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: real-debrid-api-key
+        - name: ALL_DEBRID_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: all-debrid-api-key
+        - name: TORBOX_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: torbox-api-key
+        - name: DEBRID_LINK_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: debrid-link-api-key
+        - name: PUT_IO_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: put-io-token
+        volumeMounts:
+        - name: aiostremio-data
+          mountPath: /app/data
+        - name: aiostremio-db
+          mountPath: /app/db
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8469
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8469
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+      
+      # Comet sidecar
+      - name: comet
+        image: g0ldyy/comet:latest
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: database-secrets
+              key: mongodb-uri
+        - name: REDIS_URL
+          value: "redis://redis.infrastructure.svc.cluster.local:6379"
+        - name: PROWLARR_URL
+          value: "http://gluetun-premiumize-nl.vpn.svc.cluster.local:9696"
+        - name: PROWLARR_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: prowlarr-api-key
+        - name: JACKETT_URL
+          value: "http://gluetun-premiumize-nl.vpn.svc.cluster.local:9117"
+        - name: JACKETT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: jackett-api-key
+        - name: FLARESOLVERR_URL
+          value: "http://flaresolverr.media-stack.svc.cluster.local:8191"
+        - name: PREMIUMIZE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: premiumize-api-key
+        - name: REAL_DEBRID_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: real-debrid-api-key
+        - name: ALL_DEBRID_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: all-debrid-api-key
+        - name: TORBOX_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: torbox-api-key
+        - name: DEBRID_LINK_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: debrid-link-api-key
+        volumeMounts:
+        - name: comet-data
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 2020
+          initialDelaySeconds: 60
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 2020
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+      
+      # Jackettio sidecar
+      - name: jackettio
+        image: arvida42/jackettio:latest
+        env:
+        - name: PUID
+          value: "1001"
+        - name: PGID
+          value: "988"
+        - name: TZ
+          value: "America/Chicago"
+        - name: UMASK
+          value: "002"
+        - name: NODE_ENV
+          value: "production"
+        - name: DATA_FOLDER
+          value: "/data"
+        - name: JACKETT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: jackett-api-key
+        - name: JACKETT_URL
+          value: "http://gluetun-premiumize-nl.vpn.svc.cluster.local:9117/"
+        volumeMounts:
+        - name: jackettio-data
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 4000
+          initialDelaySeconds: 60
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 4000
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      
+      # Stremio-Jackett sidecar
+      - name: stremio-jackett
+        image: belmeg/stremio-addon-jackett:latest
+        env:
+        - name: JACKETT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: addon-secrets
+              key: jackett-api-key
+        - name: JACKETT_URL
+          value: "http://gluetun-premiumize-nl.vpn.svc.cluster.local:9117/"
+        - name: ADDON_NAME
+          value: "stremio_jackett"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 60
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      
+      # Stremthru sidecar
+      - name: stremthru
+        image: stremthru/stremthru:latest
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: database-secrets
+              key: mongodb-uri
+        - name: REDIS_URL
+          value: "redis://redis.infrastructure.svc.cluster.local:6379"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      
+      # MediaFlow Proxy sidecar
+      - name: mediaflow-proxy
+        image: mhdzumair/mediaflow-proxy:latest
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: database-secrets
+              key: mongodb-uri
+        - name: REDIS_URL
+          value: "redis://redis.infrastructure.svc.cluster.local:6379"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8888
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8888
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      
+      # Zilean sidecar
+      - name: zilean
+        image: ipromknight/zilean:latest
+        env:
+        - name: Zilean__EnableDashboard
+          value: "true"
+        - name: Zilean__Database__ConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: database-secrets
+              key: zilean-connection-string
+        - name: Zilean__Imdb__UseLucene
+          value: "true"
+        - name: Zilean__Parsing__BatchSize
+          value: "100000"
+        - name: Zilean__Dmm_ScrapeSchedule
+          value: "32 * * * *"
+        volumeMounts:
+        - name: zilean-data
+          mountPath: /app/data
+        - name: zilean-tmp
+          mountPath: /app/tmp
+        livenessProbe:
+          httpGet:
+            path: /healthchecks/ping
+            port: 8181
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 60
+          failureThreshold: 10
+        readinessProbe:
+          httpGet:
+            path: /healthchecks/ping
+            port: 8181
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 60
+          failureThreshold: 10
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+      
+      volumes:
+      - name: warp-data
+        persistentVolumeClaim:
+          claimName: warp-pvc
+      - name: aiostreams-data
+        persistentVolumeClaim:
+          claimName: aiostreams-data-pvc
+      - name: mediafusion-data
+        persistentVolumeClaim:
+          claimName: mediafusion-data-pvc
+      - name: aiostremio-data
+        persistentVolumeClaim:
+          claimName: aiostremio-data-pvc
+      - name: aiostremio-db
+        emptyDir: {}
+      - name: comet-data
+        persistentVolumeClaim:
+          claimName: comet-data-pvc
+      - name: jackettio-data
+        persistentVolumeClaim:
+          claimName: jackettio-data-pvc
+      - name: zilean-data
+        persistentVolumeClaim:
+          claimName: zilean-pvc
+      - name: zilean-tmp
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: warp-stremio-addons
+  namespace: vpn
+spec:
+  selector:
+    app: warp-stremio-addons
+  ports:
+  - name: socks5
+    port: 1080
+    targetPort: 1080
+  - name: aiostreams
+    port: 3005
+    targetPort: 3005
+  - name: mediafusion
+    port: 8000
+    targetPort: 8000
+  - name: stremthru
+    port: 8080
+    targetPort: 8080
+  - name: zilean
+    port: 8181
+    targetPort: 8181
+  - name: aiostremio
+    port: 8469
+    targetPort: 8469
+  - name: mediaflow-proxy
+    port: 8888
+    targetPort: 8888
+  - name: jackettio
+    port: 4000
+    targetPort: 4000
+  - name: stremio-jackett
+    port: 3000
+    targetPort: 3000
+  - name: comet
+    port: 2020
+    targetPort: 2020
+
+---
+# AIOStremio Redis (separate deployment)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aiostremio-redis
+  namespace: stremio-addons
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aiostremio-redis
+  template:
+    metadata:
+      labels:
+        app: aiostremio-redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+        ports:
+        - containerPort: 6379
+        command: ["redis-server", "--appendonly", "yes", "--save", "60", "1"]
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: aiostremio-redis-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aiostremio-redis
+  namespace: stremio-addons
+spec:
+  selector:
+    app: aiostremio-redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+
+---
+# Zilean PostgreSQL (separate deployment)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zilean-postgres
+  namespace: stremio-addons
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zilean-postgres
+  template:
+    metadata:
+      labels:
+        app: zilean-postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:17.4
+        ports:
+        - containerPort: 5432
+        env:
+        - name: PGDATA
+          value: "/var/lib/postgresql/data/pgdata"
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"
+        - name: POSTGRES_DB
+          value: "zilean"
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data/pgdata
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -d
+            - zilean
+            - -U
+            - postgres
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -d
+            - zilean
+            - -U
+            - postgres
+          initialDelaySeconds: 10
+          periodSeconds: 10
+      volumes:
+      - name: postgres-data
+        persistentVolumeClaim:
+          claimName: zilean-postgres-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zilean-postgres
+  namespace: stremio-addons
+spec:
+  selector:
+    app: zilean-postgres
+  ports:
+  - port: 5432
+    targetPort: 5432 

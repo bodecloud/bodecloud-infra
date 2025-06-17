@@ -1,0 +1,23 @@
+apiVersion: v2
+name: riven
+description: A Helm chart for Riven - A media management backend for automated content discovery and streaming
+type: application
+version: 0.3.0
+appVersion: "latest"
+home: https://github.com/rivenmedia/riven
+sources:
+  - https://github.com/rivenmedia/riven
+  - https://github.com/spencerwooo/riven
+keywords:
+  - riven
+  - media
+  - streaming
+  - automation
+  - torrent
+  - debrid
+  - elfhosted
+maintainers:
+  - name: ElfHosted
+    url: https://elfhosted.com
+annotations:
+  category: Media 

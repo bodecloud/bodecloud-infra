@@ -1,0 +1,7 @@
+brunner56Wizarr:
+  ports:
+  - name: http
+    port: 5690
+    targetPort: http
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

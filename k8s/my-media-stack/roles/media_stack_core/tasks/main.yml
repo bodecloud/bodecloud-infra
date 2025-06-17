@@ -1,0 +1,57 @@
+---
+- name: Create media stack directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: "0755"
+  loop:
+    - "{{ media_stack.config_path }}"
+    - "{{ media_stack.data_path }}"
+    - "/home/ubuntu/my-media-stack/k8s"
+    - "/home/ubuntu/my-media-stack/manifests"
+
+- name: Install Python dependencies for Kubernetes
+  pip:
+    name:
+      - kubernetes
+      - PyYAML
+      - jsonpatch
+    state: present
+
+- name: Copy existing configuration files
+  synchronize:
+    src: "{{ playbook_dir }}/../../configs/"
+    dest: "{{ media_stack.config_path }}/"
+    delete: false
+    recursive: true
+  delegate_to: localhost
+  become: false
+
+- name: Set ownership of config files
+  file:
+    path: "{{ media_stack.config_path }}"
+    owner: ubuntu
+    group: ubuntu
+    recurse: true
+
+- name: Create VPN credentials files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: ubuntu
+    group: ubuntu
+    mode: "0600"
+  loop:
+    - src: premiumize-auth.conf.j2
+      dest: "{{ media_stack.config_path }}/gluetun/auth/premiumize.conf"
+  when: vpn_providers.premiumize is defined
+
+- name: Ensure kubectl is available for ubuntu user
+  lineinfile:
+    path: /home/ubuntu/.bashrc
+    line: "export KUBECONFIG=/home/ubuntu/.kube/config"
+    create: true
+    owner: ubuntu
+    group: ubuntu

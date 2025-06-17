@@ -1,0 +1,171 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: nginx-auth-9bd77d666-
+  labels:
+    app: nginx-auth
+    pod-template-hash: 9bd77d666
+  name: nginx-auth-9bd77d666-gcnds
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: nginx-auth-9bd77d666
+spec:
+  containers:
+  - env:
+    - name: PGID
+      value: "988"
+    - name: PUID
+      value: "1002"
+    - name: TZ
+      value: America/Chicago
+    - name: UMASK
+      value: "002"
+    image: nginx:alpine
+    imagePullPolicy: IfNotPresent
+    name: nginx-auth
+    ports:
+    - containerPort: 80
+      name: nginx-auth-80
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 200m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/nginx/nginx.conf
+      name: nginx-conf
+      readOnly: true
+      subPath: nginx.conf
+    - mountPath: /etc/nginx/auth
+      name: auth-config
+      readOnly: true
+    - mountPath: /var/cache/nginx
+      name: cache
+    - mountPath: /var/log/nginx
+      name: logs
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-cs9pl
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/nginx-middlewares/nginx.conf
+      type: File
+    name: nginx-conf
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/nginx-middlewares/auth
+      type: DirectoryOrCreate
+    name: auth-config
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/nginx-middlewares/cache
+      type: DirectoryOrCreate
+    name: cache
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/nginx-middlewares/logs
+      type: DirectoryOrCreate
+    name: logs
+  - name: kube-api-access-cs9pl
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:36Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:35Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:35Z"
+    message: 'containers with unready status: [nginx-auth]'
+    reason: ContainersNotReady
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:35Z"
+    message: 'containers with unready status: [nginx-auth]'
+    reason: ContainersNotReady
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:32Z"
+    type: PodScheduled
+  containerStatuses:
+  - image: nginx:alpine
+    imageID: ""
+    lastState: {}
+    name: nginx-auth
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      waiting:
+        message: failed to prepare subPath for volumeMount "nginx-conf" of container
+          "nginx-auth"
+        reason: CreateContainerConfigError
+    volumeMounts:
+    - mountPath: /etc/nginx/nginx.conf
+      name: nginx-conf
+      readOnly: true
+      recursiveReadOnly: Disabled
+    - mountPath: /etc/nginx/auth
+      name: auth-config
+      readOnly: true
+      recursiveReadOnly: Disabled
+    - mountPath: /var/cache/nginx
+      name: cache
+    - mountPath: /var/log/nginx
+      name: logs
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-cs9pl
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Pending
+  podIP: 10.42.0.90
+  podIPs:
+  - ip: 10.42.0.90
+  qosClass: Burstable
+  startTime: "2025-06-14T22:40:35Z"

@@ -1,0 +1,160 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-brunner56-homer-56b8846f47-h7dkj
+  labels:
+    app.elfhosted.com/role: nodefinder
+    pod-template-hash: 56b8846f47
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - command:
+    - /bin/bash
+    - /usr/local/bin/disk_usage.sh
+    env:
+    - name: TZ
+      value: UTC
+    image: alpine/k8s:1.29.1
+    livenessProbe:
+      tcpSocket:
+        port: 8080
+    name: brunner56-homer
+    ports:
+    - containerPort: 8080
+      name: http
+    readinessProbe:
+      tcpSocket:
+        port: 8080
+    resources:
+      limits:
+        cpu: 200m
+        memory: 1Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+    securityContext:
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsNonRoot: false
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    startupProbe:
+      failureThreshold: 30
+      periodSeconds: 5
+      tcpSocket:
+        port: 8080
+    volumeMounts:
+    - mountPath: /backup
+      name: backup
+    - mountPath: /config
+      name: config
+    - mountPath: /config-yml
+      name: config-yml
+      subPath: config.yml
+    - mountPath: /custom-css
+      name: custom-css
+      subPath: custom-css
+    - mountPath: /usr/local/bin/disk_usage.sh
+      name: disk-usage
+      subPath: disk_usage.sh
+    - mountPath: /gatus-config
+      name: gatus-config
+    - mountPath: /logs
+      name: logs
+    - mountPath: /www/assets/message
+      name: message
+    - mountPath: /storage/rclone
+      name: rclone
+    - mountPath: /storage/realdebrid-zurg
+      name: rclonemountrealdebridzurg
+    - mountPath: /storage/symlinks
+      name: symlinks
+    - mountPath: /tmp
+      name: tmp
+  - image: ghcr.io/elfhosted/homer:v25.05.2@sha256:60772bd0292281282161f10aa2bea105bba344158937f1c0022c6986ef5aedc3
+    name: ui
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "0"
+        memory: 1Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 568
+      runAsUser: 568
+      seccompProfile:
+        type: RuntimeDefault
+    volumeMounts:
+    - mountPath: /www/assets/config.yml
+      name: config-yml
+      subPath: config.yml
+    - mountPath: /www/assets/custom.css
+      name: custom-css
+      subPath: custom.css
+    - mountPath: /www/assets/message
+      name: message
+    - mountPath: /www/assets/backgrounds
+      name: config
+      readOnly: true
+      subPath: homer/backgrounds
+  enableServiceLinks: false
+  preemptionPolicy: PreemptLowerPriority
+  priority: 4000
+  priorityClassName: tenant-normal
+  securityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: Always
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: default
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: backup
+    persistentVolumeClaim:
+      claimName: backup
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - configMap:
+      name: homer-config
+    name: config-yml
+  - configMap:
+      name: homer-config
+    name: custom-css
+  - configMap:
+      name: homer-config
+    name: disk-usage
+  - configMap:
+      name: gatus-config
+    name: gatus-config
+  - name: logs
+    persistentVolumeClaim:
+      claimName: logs
+  - name: message
+  - name: rclone
+    persistentVolumeClaim:
+      claimName: rclone
+  - name: rclonemountrealdebridzurg
+    persistentVolumeClaim:
+      claimName: realdebrid-zurg
+  - name: symlinks
+    persistentVolumeClaim:
+      claimName: symlinks
+  - name: tmp

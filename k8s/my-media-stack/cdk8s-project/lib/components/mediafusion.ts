@@ -1,0 +1,148 @@
+import { Construct } from 'constructs';
+import { KubeDeployment, Quantity } from '../../imports/k8s';
+
+/**
+ * Creates the MediaFusion deployment
+ */
+export function createMediaFusionDeployment(scope: Construct): void {
+  new KubeDeployment(scope, 'mediafusion-deployment', {
+    metadata: {
+      name: 'mediafusion',
+      namespace: 'my-media-stack',
+    },
+    spec: {
+      replicas: 1,
+      selector: {},
+      strategy: {
+        type: 'Recreate',
+      },
+      template: {
+        spec: {
+          restartPolicy: 'Always',
+          initContainers: [
+            {
+              name: 'wait-for-mongodb',
+              image: 'busybox:1.35',
+              command: ['sh', '-c'],
+              args: [
+                `echo "Waiting for MongoDB to be ready..."
+until nc -z mongodb 27017; do
+  echo "MongoDB is not ready yet..."
+  sleep 2
+done
+echo "MongoDB is ready!"`,
+              ],
+            },
+            {
+              name: 'wait-for-redis',
+              image: 'busybox:1.35',
+              command: ['sh', '-c'],
+              args: [
+                `echo "Waiting for Redis to be ready..."
+until nc -z redis 6379; do
+  echo "Redis is not ready yet..."
+  sleep 2
+done
+echo "Redis is ready!"`,
+              ],
+            },
+          ],
+          containers: [
+            {
+              name: 'mediafusion',
+              image: 'mhdzumair/mediafusion:latest',
+              imagePullPolicy: 'IfNotPresent',
+              env: [
+                { name: 'API_PASSWORD', value: 'h4L0m4St3R327' },
+                { name: 'BACKGROUND_SEARCH_INTERVAL_HOURS', value: '24' },
+                { name: 'BT4G_IMMEDIATE_MAX_PROCESS', value: '30' },
+                { name: 'BT4G_IMMEDIATE_MAX_PROCESS_TIME', value: '30' },
+                { name: 'BT4G_SEARCH_INTERVAL_HOUR', value: '18' },
+                { name: 'BT4G_SEARCH_TIMEOUT', value: '30' },
+                { name: 'BT4G_URL', value: 'https://bt4gprx.com' },
+                { name: 'ENABLE_RATE_LIMIT', value: 'False' },
+                { name: 'FLARESOLVERR_URL', value: 'http://flaresolverr:8191' },
+                { name: 'HOST_URL', value: 'https://mediafusion.my-media-stack.org' },
+                { name: 'IS_SCRAP_FROM_BT4G', value: 'true' },
+                { name: 'IS_SCRAP_FROM_JACKETT', value: 'True' },
+                { name: 'IS_SCRAP_FROM_MEDIAFUSION', value: 'false' },
+                { name: 'IS_SCRAP_FROM_PROWLARR', value: 'True' },
+                { name: 'IS_SCRAP_FROM_TORRENTIO', value: 'false' },
+                { name: 'IS_SCRAP_FROM_YTS', value: 'True' },
+                { name: 'IS_SCRAP_FROM_ZILEAN', value: 'True' },
+                { name: 'JACKETT_API_KEY', value: 'nnx0n84pcj7umynyd2pbid2nl1zzuemz' },
+                { name: 'JACKETT_FEED_SCRAPE_INTERVAL_HOUR', value: '1' },
+                { name: 'JACKETT_IMMEDIATE_MAX_PROCESS', value: '30' },
+                { name: 'JACKETT_IMMEDIATE_MAX_PROCESS_TIME', value: '120' },
+                { name: 'JACKETT_LIVE_TITLE_SEARCH', value: 'true' },
+                { name: 'JACKETT_SEARCH_INTERVAL_HOUR', value: '24' },
+                { name: 'JACKETT_URL', value: 'http://jackett:9117' },
+                { name: 'MEDIAFUSION_SEARCH_INTERVAL_DAYS', value: '1' },
+                { name: 'MEDIAFUSION_URL', value: 'https://mediafusion.elfhosted.com' },
+                { name: 'METADATA_PRIMARY_SOURCE', value: 'tmdb' },
+                { name: 'MONGO_URI', value: 'mongodb://mongodb:27017/mediafusion' },
+                { name: 'PGID', value: '988' },
+                { name: 'POSTER_HOST_URL', value: 'https://mediafusion.my-media-stack.org' },
+                { name: 'PROWLARR_API_KEY', value: '29440a82740d475cacb35327c62c87a1' },
+                { name: 'PROWLARR_FEED_SCRAPE_INTERVAL_HOUR', value: '2' },
+                { name: 'PROWLARR_IMMEDIATE_MAX_PROCESS', value: '30' },
+                { name: 'PROWLARR_IMMEDIATE_MAX_PROCESS_TIME', value: '120' },
+                { name: 'PROWLARR_LIVE_TITLE_SEARCH', value: 'true' },
+                { name: 'PROWLARR_SEARCH_INTERVAL_HOUR', value: '24' },
+                { name: 'PROWLARR_URL', value: 'http://prowlarr:9696' },
+                { name: 'PUID', value: '1001' },
+                { name: 'REDIS_URL', value: 'redis://redis:6379' },
+                { name: 'SCRAPE_WITH_AKA_TITLES', value: 'False' },
+                { name: 'SECRET_KEY', value: 'c75ac92df70c4383c8d1bb37f65454f9' },
+                { name: 'STORE_STREMTHRU_MAGNET_CACHE', value: 'True' },
+                { name: 'TAMILMV_SCHEDULER_CRONTAB', value: '13 */8 * * *' },
+                { name: 'TAMILULTRA_SCHEDULER_CRONTAB', value: '33 */8 * * *' },
+                { name: 'TAMIL_BLASTERS_SCHEDULER_CRONTAB', value: '20 */8 * * *' },
+                { name: 'TMDB_API_KEY', value: 'cec876f852b9c15d2c1b436b1117dff7' },
+                { name: 'TORRENTIO_SEARCH_INTERVAL_DAYS', value: '1' },
+                { name: 'TORRENTIO_URL', value: 'https://torrentio.strem.fun' },
+                { name: 'TZ', value: 'America/Chicago' },
+                { name: 'UMASK', value: '002' },
+                { name: 'ZILEAN_SEARCH_INTERVAL_HOUR', value: '1' },
+                { name: 'ZILEAN_URL', value: 'https://zilean.elfhosted.com' },
+              ],
+              resources: {
+                requests: {
+                  memory: Quantity.fromString('128Mi'),
+                  cpu: Quantity.fromString('50m'),
+                },
+                limits: {
+                  memory: Quantity.fromString('512Mi'),
+                  cpu: Quantity.fromString('100m'),
+                },
+              },
+              livenessProbe: {
+                exec: {
+                  command: [
+                    '/bin/sh',
+                    '-c',
+                    'curl -f http://localhost:8000/health > /dev/null 2>&1 || exit 1',
+                  ],
+                },
+                periodSeconds: 60,
+                initialDelaySeconds: 10,
+                timeoutSeconds: 10,
+                failureThreshold: 5,
+              },
+              ports: [
+                {
+                  name: 'mediafusion-8000',
+                  containerPort: 8000,
+                },
+                {
+                  name: 'mediafusion-9191',
+                  containerPort: 9191,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  });
+}

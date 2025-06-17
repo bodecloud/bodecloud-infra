@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"cronjob","app.kubernetes.io/instance":"myprecious","app.kubernetes.io/name":"cleanup-transcode"},"name":"cleanup-transcode","namespace":"default"},"spec":{"jobTemplate":{"spec":{"template":{"spec":{"containers":[{"args":["-c","find /transcode -type f -mtime +1 -delete \u0026\u0026 echo \"Transcode cleanup completed\""],"command":["/bin/bash"],"image":"filebrowser/filebrowser:v2.31.2","name":"cleanup-transcode","resources":{"limits":{"cpu":"200m","memory":"512Mi"},"requests":{"cpu":"50m","memory":"128Mi"}}}],"restartPolicy":"OnFailure"}}}},"schedule":"*/30 * * * *"}}
+  labels:
+    app.kubernetes.io/component: cronjob
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: cleanup-transcode
+  name: cleanup-transcode
+  namespace: default
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - args:
+            - -c
+            - find /transcode -type f -mtime +1 -delete && echo "Transcode cleanup
+              completed"
+            command:
+            - /bin/bash
+            image: filebrowser/filebrowser:v2.31.2
+            imagePullPolicy: IfNotPresent
+            name: cleanup-transcode
+            resources:
+              limits:
+                cpu: 200m
+                memory: 512Mi
+              requests:
+                cpu: 50m
+                memory: 128Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: '*/30 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+  lastScheduleTime: "2025-06-14T22:30:00Z"

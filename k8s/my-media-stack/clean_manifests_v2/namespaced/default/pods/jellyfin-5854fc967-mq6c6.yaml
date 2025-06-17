@@ -1,0 +1,137 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: jellyfin-5854fc967-
+  labels:
+    app.elfhosted.com/name: jellyfin
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: jellyfin
+    pod-template-hash: 5854fc967
+  name: jellyfin-5854fc967-mq6c6
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: jellyfin-5854fc967
+spec:
+  containers:
+  - image: linuxserver/jellyfin:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8096
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: jellyfin
+    ports:
+    - containerPort: 8096
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 8096
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "4"
+        memory: 8Gi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config
+      subPath: jellyfin
+    - mountPath: /storage/symlinks
+      name: symlinks
+    - mountPath: /transcode
+      name: transcode
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - name: symlinks
+    persistentVolumeClaim:
+      claimName: symlinks
+  - name: transcode
+    persistentVolumeClaim:
+      claimName: transcode-1g
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:22:03Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:24Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:04:24Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:09:43Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://776d00a78fe6010a20bb730714d92f5e515ababf928d35a2391d565b9670be81
+    image: docker.io/linuxserver/jellyfin:latest
+    imageID: docker.io/linuxserver/jellyfin@sha256:58cf629c955968b94157e6607797bd285ad4d408d83ca2ea4bfc7dffbc2c3661
+    lastState: {}
+    name: jellyfin
+    ready: true
+    restartCount: 2
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:22:01Z"
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /storage/symlinks
+      name: symlinks
+    - mountPath: /transcode
+      name: transcode
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.239
+  podIPs:
+  - ip: 10.42.0.239
+  qosClass: Burstable
+  startTime: "2025-06-14T15:09:43Z"

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "elfhosted-combined.fullname" . }}-kube-root-ca.crt
+  labels:
+  {{- include "elfhosted-combined.labels" . | nindent 4 }}
+  annotations:
+    kubernetes.io/description: Contains a CA bundle that can be used to verify the kube-apiserver
+      when using internal endpoints such as the internal service IP or kubernetes.default.svc.
+      No other usage is guaranteed across distributions of Kubernetes clusters.
+data:
+  ca.crt: {{ .Values.kubeRootCaCrt.caCrt | toYaml | indent 1 }}

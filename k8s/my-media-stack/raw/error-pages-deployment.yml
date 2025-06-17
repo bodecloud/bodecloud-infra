@@ -1,0 +1,42 @@
+#! error-pages-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: error-pages
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: error-pages
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: error-pages
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: error-pages
+          image: httpd:alpine
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: error-pages-80
+              containerPort: 80
+          volumeMounts:
+            - name: usr-local-apache2-htdocs
+              mountPath: /usr/local/apache2/htdocs
+              readOnly: true
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "10m"
+            limits:
+              memory: "64Mi"
+              cpu: "25m"
+      volumes:
+        - name: usr-local-apache2-htdocs
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/traefik/error-pages

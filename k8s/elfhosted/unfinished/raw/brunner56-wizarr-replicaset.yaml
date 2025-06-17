@@ -1,0 +1,603 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: brunner56-wizarr-6fc585764f
+  namespace: my-media-stack
+  uid: e6276e3f-fedc-4ea4-96ff-0b7375bc1fba
+  resourceVersion: '2389387022'
+  generation: 1
+  creationTimestamp: '2025-05-29T16:29:06Z'
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: wizarr
+    pod-template-hash: 6fc585764f
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-wizarr
+    deployment.kubernetes.io/desired-replicas: '1'
+    deployment.kubernetes.io/max-replicas: '1'
+    deployment.kubernetes.io/revision: '1'
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: brunner56-wizarr
+      uid: b237d38f-5c24-4f74-ad7b-016b01093792
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: k3s
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-05-29T16:29:06Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:configmap.reloader.stakater.com/reload: {}
+            f:deployment.kubernetes.io/desired-replicas: {}
+            f:deployment.kubernetes.io/max-replicas: {}
+            f:deployment.kubernetes.io/revision: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b237d38f-5c24-4f74-ad7b-016b01093792"}: {}
+        f:spec:
+          f:replicas: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app.kubernetes.io/instance: {}
+                f:app.kubernetes.io/name: {}
+                f:pod-template-hash: {}
+            f:spec:
+              f:affinity:
+                .: {}
+                f:podAffinity:
+                  .: {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution: {}
+              f:automountServiceAccountToken: {}
+              f:containers:
+                k:{"name":"brunner56-wizarr"}:
+                  .: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":5690,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:startupProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:tcpSocket:
+                      .: {}
+                      f:port: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/backup"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/database"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/data/wizard_steps"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/home/elfie/.cache"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/opt/default_wizard_steps/jellyfin"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/opt/default_wizard_steps/plex"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:initContainers:
+                .: {}
+                k:{"name":"bootstrap"}:
+                  .: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"AWS_ACCESS_KEY_ID"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                    k:{"name":"AWS_SECRET_ACCESS_KEY"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                    k:{"name":"ELF_APP_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"K8S_APP_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"S3_ENDPOINT_URL"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsGroup: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/etc/elfbot"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/storage/backup"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:fsGroup: {}
+                f:fsGroupChangePolicy: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"backup"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"cache"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"config"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+                k:{"name":"elfbot"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"wizarr-steps"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"wizarr-steps-jellyfin"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"wizarr-steps-plex"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+    - manager: k3s
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-05-29T16:42:57Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:fullyLabeledReplicas: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+      subresource: status
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: wizarr
+      pod-template-hash: 6fc585764f
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: wizarr
+        pod-template-hash: 6fc585764f
+    spec:
+      volumes:
+        - name: backup
+          persistentVolumeClaim:
+            claimName: backup
+        - name: cache
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: elfbot
+          configMap:
+            name: elfbot-wizarr
+            defaultMode: 420
+            optional: true
+        - name: tmp
+          emptyDir: {}
+        - name: wizarr-steps
+          emptyDir: {}
+        - name: wizarr-steps-jellyfin
+          configMap:
+            name: wizarr-steps-jellyfin
+            defaultMode: 420
+        - name: wizarr-steps-plex
+          configMap:
+            name: wizarr-steps-plex
+            defaultMode: 420
+      initContainers:
+        - name: bootstrap
+          image: >-
+            alpine/k8s:1.29.1
+          command:
+            - /bin/bash
+            - '-c'
+            - >
+              set -e
+
+
+              # Allows us to use app.elfhosted.com/name, but fall back to
+              app.kubernetes.io/name if the former doesn't exist
+
+              if [[ -z "$ELF_APP_NAME" ]]; then
+                ELF_APP_NAME=$K8S_APP_NAME
+              fi
+
+
+              # look for commands - we match specific names in order of
+              least-destructive
+
+              TIMESTAMP_NOW=$(date +%s)
+
+              if [[ -f /etc/elfbot/pause ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=pause
+                fi
+              fi
+
+
+              # If no command is set, then move onto the next possibility
+
+              if [[ -f /etc/elfbot/backup && -z "$COMMAND" ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=backup
+                fi
+              fi
+
+
+              # If no command is set, then move onto the next possibility
+
+              if [[ -f /etc/elfbot/reset && -z "$COMMAND" ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=reset
+                fi
+              fi
+
+
+              case $COMMAND in
+
+                "pause")
+                  echo "Recent pause command found, sleeping 5m.."
+                  sleep 300
+                  ;;
+
+                "reset")
+
+                  # Safety check - if /config/homer exists, we've not mounted /config properly and are about to wipe out EVERYTHING
+                  if [ -e "/config/homer" ]; then
+                      echo "The path /config/homer exists. Exiting."
+                      exit 1
+                  fi      
+                  echo "Recent reset command found, resetting"
+                  rm -rf /config/*
+                  ;;
+
+                "backup")
+                  echo "Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}"
+                  TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\n' -1)
+                  cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP
+                  ;;
+
+              esac
+
+
+              if [[ ! -f /config/i-am-bootstrapped ]]
+
+              then
+                echo "Bootstrapping from goldilocks config..."
+                s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/
+                touch /config/i-am-bootstrapped
+              fi
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: b2-elfhosted-config-ro
+                  key: access-key-id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: b2-elfhosted-config-ro
+                  key: secret-key
+            - name: S3_ENDPOINT_URL
+              value: https://s3.us-west-000.backblazeb2.com
+            - name: K8S_APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.kubernetes.io/name']
+            - name: ELF_APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.elfhosted.com/name']
+          resources:
+            limits:
+              cpu: '1'
+              memory: 4Gi
+            requests:
+              cpu: '0'
+              memory: 1Mi
+          volumeMounts:
+            - name: elfbot
+              mountPath: /etc/elfbot
+            - name: backup
+              mountPath: /storage/backup
+            - name: config
+              mountPath: /config
+              subPath: wizarr
+            - name: tmp
+              mountPath: /tmp
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+      containers:
+        - name: brunner56-wizarr
+          image: >-
+            ghcr.io/elfhosted/wizarr:2025.5.d@sha256:58c2e28b6fbe604b6a6b4478944ff5071b6700d1a81a58708b70359c58e325ca
+          ports:
+            - name: http
+              containerPort: 5690
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: wizarr-env
+            - configMapRef:
+                name: elfbot-wizarr
+                optional: true
+          resources:
+            limits:
+              cpu: '1'
+              memory: 1Gi
+            requests:
+              cpu: '0'
+              memory: 128Mi
+          volumeMounts:
+            - name: backup
+              mountPath: /backup
+            - name: cache
+              mountPath: /home/elfie/.cache
+            - name: config
+              mountPath: /data/database
+              subPath: wizarr
+            - name: elfbot
+              mountPath: /elfbot
+            - name: tmp
+              mountPath: /tmp
+            - name: wizarr-steps
+              mountPath: /data/wizard_steps
+            - name: wizarr-steps-jellyfin
+              mountPath: /opt/default_wizard_steps/jellyfin
+            - name: wizarr-steps-plex
+              mountPath: /opt/default_wizard_steps/plex
+          livenessProbe:
+            tcpSocket:
+              port: 5690
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: 5690
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            tcpSocket:
+              port: 5690
+            timeoutSeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.elfhosted.com/role
+                    operator: In
+                    values:
+                      - nodefinder
+              topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      priorityClassName: tenant-normal
+      enableServiceLinks: false
+status:
+  replicas: 1
+  fullyLabeledReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  observedGeneration: 1

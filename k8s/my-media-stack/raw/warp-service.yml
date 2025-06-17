@@ -1,0 +1,22 @@
+#! warp-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: warp-published
+  namespace: my-media-stack
+spec:
+  selector: {}
+  ports:
+    - name: warp-443
+      port: 443
+      protocol: UDP
+      targetPort: warp-443
+    - name: warp-1080
+      port: 1080
+      protocol: TCP
+      targetPort: warp-1080
+    - name: warp-3232
+      port: 3232
+      protocol: TCP
+      targetPort: warp-3232

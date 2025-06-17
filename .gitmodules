@@ -1,0 +1,3 @@
+[submodule "src/cloudflare-ddns"]
+	path = src/cloudflare-ddns
+	url = https://github.com/favonia/cloudflare-ddns

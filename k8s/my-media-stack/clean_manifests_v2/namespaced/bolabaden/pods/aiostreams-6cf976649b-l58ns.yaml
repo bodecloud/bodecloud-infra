@@ -1,0 +1,242 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: aiostreams-6cf976649b-
+  labels:
+    app: aiostreams
+    pod-template-hash: 6cf976649b
+  name: aiostreams-6cf976649b-l58ns
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: aiostreams-6cf976649b
+spec:
+  containers:
+  - env:
+    - name: TZ
+      value: America/Chicago
+    - name: ADDON_NAME
+      value: BadenAIO
+    - name: ADDON_ID
+      value: aiostreams.bolabaden.org
+    - name: DETERMINISTIC_ADDON_ID
+      value: "false"
+    - name: PORT
+      value: "3005"
+    - name: SECRET_KEY
+      value: 1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82
+    - name: API_KEY
+      value: sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9
+    - name: SHOW_DIE
+      value: "false"
+    - name: LOG_LEVEL
+      value: debug
+    - name: LOG_FORMAT
+      value: text
+    - name: LOG_SENSITIVE_INFO
+      value: "true"
+    - name: MAX_ADDONS
+      value: "50"
+    - name: MAX_KEYWORD_FILTERS
+      value: "30"
+    - name: MAX_REGEX_SORT_PATTERNS
+      value: "30"
+    - name: MAX_MOVIE_SIZE
+      value: "161061273600"
+    - name: MAX_EPISODE_SIZE
+      value: "161061273600"
+    - name: MAX_TIMEOUT
+      value: "50000"
+    - name: MIN_TIMEOUT
+      value: "1000"
+    - name: MEDIAFLOW_IP_TIMEOUT
+      value: "30000"
+    - name: ENCRYPT_MEDIAFLOW_URLS
+      value: "true"
+    - name: STREMTHRU_TIMEOUT
+      value: "30000"
+    - name: DEFAULT_STREMTHRU_URL
+      value: https://stremthru.bolabaden.org/
+    - name: DEFAULT_STREMTHRU_CREDENTIAL
+      value: YnJ1bm5lcjU2OmhiTG9tNFN0M1IzMjc=
+    - name: ENCRYPT_STREMTHRU_URLS
+      value: "true"
+    - name: DEFAULT_TIMEOUT
+      value: "15000"
+    - name: COMET_URL
+      value: http://comet:2020/
+    - name: FORCE_COMET_HOSTNAME
+      value: comet.bolabaden.org
+    - name: FORCE_COMET_PORT
+      value: "443"
+    - name: FORCE_COMET_PROTOCOL
+      value: https
+    - name: MEDIAFUSION_URL
+      value: http://mediafusion:8000/
+    - name: MEDIAFUSION_CONFIG_TIMEOUT
+      value: "5000"
+    - name: MEDIAFUSION_API_PASSWORD
+      value: h4L0m4St3R327
+    - name: JACKETTIO_URL
+      value: https://jackettio.elfhosted.com/
+    - name: DEFAULT_JACKETTIO_INDEXERS
+      value: '["1337x", "animetosho", "anirena", "limetorrents", "nyaasi", "solidtorrents",
+        "thepiratebay", "torlock", "yts"]'
+    - name: DEFAULT_JACKETTIO_STREMTHRU_URL
+      value: https://stremthru.bolabaden.org
+    - name: STREMIO_JACKETT_URL
+      value: https://stremio-jackett.elfhosted.com/
+    - name: DEFAULT_STREMIO_JACKETT_TMDB_API_KEY
+      value: cec876f852b9c15d2c1b436b1117dff7
+    - name: STREMIO_JACKETT_CACHE_ENABLED
+      value: "true"
+    - name: STREMTHRU_STORE_URL
+      value: https://stremthru.bolabaden.org/stremio/store/
+    - name: EASYNEWS_PLUS_URL
+      value: https://b89262c192b0-stremio-easynews-addon.baby-beamup.club/
+    - name: EASYNEWS_PLUS_PLUS_URL
+      value: https://easynews-cloudflare-worker.jqrw92fchz.workers.dev/
+    - name: TORRENTIO_URL
+      value: https://torrentio.strem.fun/
+    - name: ORION_STREMIO_ADDON_URL
+      value: https://5a0d1888fa64-orion.baby-beamup.club/
+    - name: PEERFLIX_URL
+      value: https://peerflix-addon.onrender.com/
+    - name: TORBOX_STREMIO_URL
+      value: https://stremio.torbox.app/
+    - name: EASYNEWS_URL
+      value: https://ea627ddf0ee7-easynews.baby-beamup.club/
+    - name: DEBRIDIO_URL
+      value: https://debridio.adobotec.com/
+    image: ghcr.io/viren070/aiostreams:latest
+    imagePullPolicy: Always
+    livenessProbe:
+      failureThreshold: 5
+      httpGet:
+        path: /health
+        port: 3005
+        scheme: HTTP
+      initialDelaySeconds: 60
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: aiostreams
+    ports:
+    - containerPort: 3005
+      name: aiostreams-3005
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health
+        port: 3005
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /app/config
+      name: aiostreams-config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-x5qxc
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: baden.vpshostingservice.co
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/stremio/addons/aiostreams/config
+      type: DirectoryOrCreate
+    name: aiostreams-config
+  - name: kube-api-access-x5qxc
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:54Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:08Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:16Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:16Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:07Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://0d017c23e583e297bdb9a8c8927be5a684deee828cee2b7253015357c8d90ce9
+    image: ghcr.io/viren070/aiostreams:latest
+    imageID: ghcr.io/viren070/aiostreams@sha256:120f0d1794b16823040f4efbcbb703cc7dbb8db748b573e20ca7796958dedecf
+    lastState: {}
+    name: aiostreams
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:39:54Z"
+    volumeMounts:
+    - mountPath: /app/config
+      name: aiostreams-config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-x5qxc
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 209.54.102.83
+  hostIPs:
+  - ip: 209.54.102.83
+  phase: Running
+  podIP: 10.42.3.51
+  podIPs:
+  - ip: 10.42.3.51
+  qosClass: Burstable
+  startTime: "2025-06-14T22:39:08Z"

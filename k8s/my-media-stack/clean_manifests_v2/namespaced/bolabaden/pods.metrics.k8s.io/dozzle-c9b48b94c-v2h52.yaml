@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: dozzle
+  usage:
+    cpu: "0"
+    memory: 7580Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: dozzle
+    pod-template-hash: c9b48b94c
+  name: dozzle-c9b48b94c-v2h52
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:56Z"
+window: 13.288s

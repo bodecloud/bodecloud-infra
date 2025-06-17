@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: homepage
+  usage:
+    cpu: 747625n
+    memory: 143012Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: homepage
+    pod-template-hash: 6f79d4cf9c
+  name: homepage-6f79d4cf9c-f9qrj
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:44Z"
+window: 26.742s

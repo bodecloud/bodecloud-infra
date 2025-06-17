@@ -1,0 +1,160 @@
+[2025-04-21T18:42:24.274Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-21T18:42:24.275Z] info  Using user-data-dir /config/data
+[2025-04-21T18:42:24.293Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-21T18:42:24.293Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-21T18:42:24.294Z] info    - Authentication is disabled
+[2025-04-21T18:42:24.294Z] info    - Not serving HTTPS
+[2025-04-21T18:42:24.294Z] info  Session server listening on /config/data/code-server-ipc.sock
+[2025-04-21T18:45:52.893Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-21T18:45:52.894Z] info  Using user-data-dir /config/data
+[2025-04-21T18:45:52.941Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-21T18:45:52.941Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-21T18:45:52.942Z] info    - Authentication is disabled
+[2025-04-21T18:45:52.942Z] info    - Not serving HTTPS
+[2025-04-21T18:45:52.942Z] info  Session server listening on /config/data/code-server-ipc.sock
+[2025-04-22T22:55:22.332Z] info  code-server 4.99.3 c36b2d3edd1cc8db7cfc49f5bc55711e7c5ac928
+[2025-04-22T22:55:22.339Z] info  Using user-data-dir /config/data
+[2025-04-22T22:55:22.366Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-04-22T22:55:22.366Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-04-22T22:55:22.366Z] info    - Authentication is disabled
+[2025-04-22T22:55:22.366Z] info    - Not serving HTTPS
+[2025-04-22T22:55:22.366Z] info  Session server listening on /config/data/code-server-ipc.sock
+[22:29:39] 
+
+
+
+
+[22:29:40] Extension host agent started.
+[22:29:40] Started initializing default profile extensions in extensions installation folder. file:///config/extensions
+[22:29:40] Completed initializing default profile extensions in extensions installation folder. file:///config/extensions
+[22:29:44] [172.22.0.1][4eae2519][ManagementConnection] New connection established.
+[22:29:49] [172.22.0.1][c9e7458c][ExtensionHostConnection] New connection established.
+[22:29:49] [172.22.0.1][c9e7458c][ExtensionHostConnection] <278> Launched Extension Host Process.
+[22:31:05] Getting Manifest... pulkitgangwar.nextjs-snippets
+[22:31:06] Installing extension: pulkitgangwar.nextjs-snippets {
+  isMachineScoped: false,
+  installPreReleaseVersion: false,
+  pinned: false,
+  isApplicationScoped: false,
+  profileLocation: pr {
+    scheme: 'file',
+    authority: '',
+    path: '/config/extensions/extensions.json',
+    query: '',
+    fragment: '',
+    _formatted: 'file:///config/extensions/extensions.json',
+    _fsPath: '/config/extensions/extensions.json'
+  },
+  productVersion: { version: '1.99.3', date: '2025-04-16T22:22:02.429Z' }
+}
+[22:31:07] Extension signature verification is not done: pulkitgangwar.nextjs-snippets
+[22:31:07] Extracted extension to file:///config/extensions/pulkitgangwar.nextjs-snippets-1.0.2-universal: pulkitgangwar.nextjs-snippets
+[22:31:07] Renamed to /config/extensions/pulkitgangwar.nextjs-snippets-1.0.2-universal
+[22:31:07] Extension installed successfully: pulkitgangwar.nextjs-snippets file:///config/extensions/extensions.json
+[22:39:28] Getting Manifest... dbaeumer.vscode-eslint
+[22:39:28] Installing extension: dbaeumer.vscode-eslint {
+  isMachineScoped: false,
+  installPreReleaseVersion: false,
+  pinned: false,
+  isApplicationScoped: false,
+  profileLocation: pr {
+    scheme: 'file',
+    authority: '',
+    path: '/config/extensions/extensions.json',
+    query: '',
+    fragment: '',
+    _formatted: 'file:///config/extensions/extensions.json',
+    _fsPath: '/config/extensions/extensions.json'
+  },
+  productVersion: { version: '1.99.3', date: '2025-04-16T22:22:02.429Z' }
+}
+[22:39:29] Extension signature verification is not done: dbaeumer.vscode-eslint
+[22:39:29] Extracted extension to file:///config/extensions/dbaeumer.vscode-eslint-3.0.10-universal: dbaeumer.vscode-eslint
+[22:39:30] Renamed to /config/extensions/dbaeumer.vscode-eslint-3.0.10-universal
+[22:39:30] Extension installed successfully: dbaeumer.vscode-eslint file:///config/extensions/extensions.json
+[22:41:43] Getting Manifest... bradlc.vscode-tailwindcss
+[22:41:44] Installing extension: bradlc.vscode-tailwindcss {
+  isMachineScoped: false,
+  installPreReleaseVersion: false,
+  pinned: false,
+  isApplicationScoped: false,
+  profileLocation: pr {
+    scheme: 'file',
+    authority: '',
+    path: '/config/extensions/extensions.json',
+    query: '',
+    fragment: '',
+    _formatted: 'file:///config/extensions/extensions.json',
+    _fsPath: '/config/extensions/extensions.json'
+  },
+  productVersion: { version: '1.99.3', date: '2025-04-16T22:22:02.429Z' }
+}
+[22:41:45] Extension signature verification is not done: bradlc.vscode-tailwindcss
+[22:41:46] Extracted extension to file:///config/extensions/bradlc.vscode-tailwindcss-0.14.15-universal: bradlc.vscode-tailwindcss
+[22:41:46] Renamed to /config/extensions/bradlc.vscode-tailwindcss-0.14.15-universal
+[22:41:46] Extension installed successfully: bradlc.vscode-tailwindcss file:///config/extensions/extensions.json
+[22:44:13] Getting Manifest... xyz.local-history
+[22:44:14] Installing extension: xyz.local-history {
+  isMachineScoped: false,
+  installPreReleaseVersion: false,
+  pinned: false,
+  isApplicationScoped: false,
+  profileLocation: pr {
+    scheme: 'file',
+    authority: '',
+    path: '/config/extensions/extensions.json',
+    query: '',
+    fragment: '',
+    _formatted: 'file:///config/extensions/extensions.json',
+    _fsPath: '/config/extensions/extensions.json'
+  },
+  productVersion: { version: '1.99.3', date: '2025-04-16T22:22:02.429Z' }
+}
+[22:44:15] Extension signature verification is not done: xyz.local-history
+[22:44:16] Extracted extension to file:///config/extensions/xyz.local-history-1.8.1-universal: xyz.local-history
+[22:44:16] Renamed to /config/extensions/xyz.local-history-1.8.1-universal
+[22:44:16] Extension installed successfully: xyz.local-history file:///config/extensions/extensions.json
+[22:44:26] Getting Manifest... donjayamanne.githistory
+[22:44:27] Installing extension: donjayamanne.githistory {
+  isMachineScoped: false,
+  installPreReleaseVersion: false,
+  pinned: false,
+  isApplicationScoped: false,
+  profileLocation: pr {
+    scheme: 'file',
+    authority: '',
+    path: '/config/extensions/extensions.json',
+    query: '',
+    fragment: '',
+    _formatted: 'file:///config/extensions/extensions.json',
+    _fsPath: '/config/extensions/extensions.json'
+  },
+  productVersion: { version: '1.99.3', date: '2025-04-16T22:22:02.429Z' }
+}
+[22:44:28] Extension signature verification is not done: donjayamanne.githistory
+[22:44:28] Extracted extension to file:///config/extensions/donjayamanne.githistory-0.6.20-universal: donjayamanne.githistory
+[22:44:28] Renamed to /config/extensions/donjayamanne.githistory-0.6.20-universal
+[22:44:28] Extension installed successfully: donjayamanne.githistory file:///config/extensions/extensions.json
+[22:48:18] Getting Manifest... yandeu.five-server
+[22:48:18] Installing extension: yandeu.five-server {
+  isMachineScoped: false,
+  installPreReleaseVersion: false,
+  pinned: false,
+  isApplicationScoped: false,
+  profileLocation: pr {
+    scheme: 'file',
+    authority: '',
+    path: '/config/extensions/extensions.json',
+    query: '',
+    fragment: '',
+    _formatted: 'file:///config/extensions/extensions.json',
+    _fsPath: '/config/extensions/extensions.json'
+  },
+  productVersion: { version: '1.99.3', date: '2025-04-16T22:22:02.429Z' }
+}
+[22:48:20] Extension signature verification is not done: yandeu.five-server
+[22:48:22] Extracted extension to file:///config/extensions/yandeu.five-server-0.3.7-universal: yandeu.five-server
+[22:48:22] Renamed to /config/extensions/yandeu.five-server-0.3.7-universal
+[22:48:22] Extension installed successfully: yandeu.five-server file:///config/extensions/extensions.json
+[06:32:34] [172.22.0.1][4eae2519][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[06:32:34] [172.22.0.1][c9e7458c][ExtensionHostConnection] <278> Extension Host Process exited with code: 0, signal: null.

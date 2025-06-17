@@ -1,0 +1,7 @@
+brunner56Rclonefm:
+  ports:
+  - name: http
+    port: 5573
+    targetPort: http
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

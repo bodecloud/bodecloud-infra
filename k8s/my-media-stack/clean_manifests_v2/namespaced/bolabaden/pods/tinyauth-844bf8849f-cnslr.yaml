@@ -1,0 +1,154 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: tinyauth-844bf8849f-
+  labels:
+    app: tinyauth
+    pod-template-hash: 844bf8849f
+  name: tinyauth-844bf8849f-cnslr
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: tinyauth-844bf8849f
+spec:
+  containers:
+  - env:
+    - name: APP_TITLE
+      value: my-media-stack
+    - name: APP_URL
+      value: https://auth.my-media-stack.org
+    - name: COOKIE_SECURE
+      value: "true"
+    - name: GITHUB_CLIENT_ID
+      value: Ov23li1ijiBeH6cBV9bJ
+    - name: GITHUB_CLIENT_SECRET
+      value: 99adef0dd47be1f9fb76885b0ac6722fd9730d08
+    - name: GOOGLE_CLIENT_ID
+      value: 324816055390-dftm6jq2d3ifs37miivj3nj09piv0df9.apps.googleusercontent.com
+    - name: GOOGLE_CLIENT_SECRET
+      value: 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
+    - name: LOGIN_MAX_RETRIES
+      value: "5"
+    - name: LOGIN_TIMEOUT
+      value: "300"
+    - name: OAUTH_AUTO_REDIRECT
+      value: none
+    - name: OAUTH_WHITELIST
+    - name: SECRET
+      value: b9a4ZxFNBbyR9KdTAf2kSciI5jUCQLzE
+    - name: SESSION_EXPIRY
+      value: "604800"
+    - name: USERS
+      value: brunner56:$2y$05$CEXtGy1XS4BlkTXEgSG64eSQlrGn.55Xm2HbiSgVSgO./WoVXXLAa,my-media-stack.duckdns@gmail.com:$2y$05$BbVWsqh2XkzaxvLGwd.0euD/PkkoaeFNDIhB0tTEBn4tAjGckKRzq
+    image: ghcr.io/steveiliop56/tinyauth:v3
+    imagePullPolicy: IfNotPresent
+    name: tinyauth
+    ports:
+    - containerPort: 3000
+      name: tinyauth-3000
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 50m
+        memory: 128Mi
+      requests:
+        cpu: 25m
+        memory: 64Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-pjcnj
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/tinyauth
+      type: ""
+    name: data
+  - name: kube-api-access-pjcnj
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:35:29Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:35:26Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:35:29Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:35:29Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:35:25Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://b5a60c158a9701e25935383344539f27db07a0fa7d4513a6d16554e7199a0311
+    image: ghcr.io/steveiliop56/tinyauth:v3
+    imageID: ghcr.io/steveiliop56/tinyauth@sha256:5195a8b30e7283fd5508418abe1a865d54b0ba2ab194eb0ee9974efdf0c964cc
+    lastState: {}
+    name: tinyauth
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:35:29Z"
+    volumeMounts:
+    - mountPath: /data
+      name: data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-pjcnj
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.79
+  podIPs:
+  - ip: 10.42.0.79
+  qosClass: Burstable
+  startTime: "2025-06-14T22:35:26Z"

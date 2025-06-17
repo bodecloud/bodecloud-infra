@@ -1,0 +1,46 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"admissionregistration.k8s.io/v1","kind":"MutatingWebhookConfiguration","metadata":{"annotations":{},"name":"proxy-injector"},"webhooks":[{"admissionReviewVersions":["v1","v1beta1"],"clientConfig":{"service":{"name":"proxy-injector","namespace":"vpn-gateway","path":"/"}},"failurePolicy":"Ignore","name":"proxy-injector.vpn-gateway.svc.cluster.local","namespaceSelector":{"matchExpressions":[{"key":"name","operator":"NotIn","values":["kube-system","kube-public","kube-node-lease","vpn-gateway","metallb-system","cert-manager"]}]},"rules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE","UPDATE"],"resources":["pods"]}],"sideEffects":"None"}]}
+  name: proxy-injector
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: proxy-injector
+      namespace: vpn-gateway
+      path: /
+      port: 443
+  failurePolicy: Ignore
+  matchPolicy: Equivalent
+  name: proxy-injector.vpn-gateway.svc.cluster.local
+  namespaceSelector:
+    matchExpressions:
+    - key: name
+      operator: NotIn
+      values:
+      - kube-system
+      - kube-public
+      - kube-node-lease
+      - vpn-gateway
+      - metallb-system
+      - cert-manager
+  objectSelector: {}
+  reinvocationPolicy: Never
+  rules:
+  - apiGroups:
+    - ""
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - pods
+    scope: '*'
+  sideEffects: None
+  timeoutSeconds: 10

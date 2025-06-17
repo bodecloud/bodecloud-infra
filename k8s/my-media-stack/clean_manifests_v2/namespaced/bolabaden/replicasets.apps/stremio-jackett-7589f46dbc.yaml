@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: stremio-jackett
+    pod-template-hash: 7589f46dbc
+  name: stremio-jackett-7589f46dbc
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: stremio-jackett
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stremio-jackett
+      pod-template-hash: 7589f46dbc
+  template:
+    metadata:
+      labels:
+        app: stremio-jackett
+        pod-template-hash: 7589f46dbc
+    spec:
+      containers:
+      - env:
+        - name: ADDON_NAME
+          value: stremio_jackett
+        - name: JACKETT_API_KEY
+          value: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+        - name: JACKETT_URL
+          value: https://jackett.my-media-stack.org
+        image: belmeg/stremio-addon-jackett:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -fs http://127.0.0.1:3000 || exit 1
+          failureThreshold: 5
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: stremio-jackett
+        ports:
+        - containerPort: 3000
+          name: stremio-ja-3000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

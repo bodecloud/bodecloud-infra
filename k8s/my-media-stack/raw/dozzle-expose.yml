@@ -1,0 +1,13 @@
+#! dozzle-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: dozzle
+    namespace: my-media-stack
+spec:
+    selector: {}
+    ports:
+        - name: dozzle-8080
+          port: 8080
+          targetPort: dozzle-8080

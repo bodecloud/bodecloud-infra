@@ -1,0 +1,32 @@
+# Cert-manager setup - ClusterIssuer and Certificate
+# This file creates the required issuers and certificates
+# The proxy injector will wait for these to be ready using init containers
+
+---
+# Self-signed ClusterIssuer for internal certificates
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+  labels:
+    app: cert-manager-setup
+spec:
+  selfSigned: {}
+
+---
+# Certificate for the webhook
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: proxy-injector-cert
+  namespace: vpn-gateway
+  labels:
+    app: cert-manager-setup
+spec:
+  secretName: proxy-injector-certs
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - proxy-injector.vpn-gateway.svc
+    - proxy-injector.vpn-gateway.svc.cluster.local

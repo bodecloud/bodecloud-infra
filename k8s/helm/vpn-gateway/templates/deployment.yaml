@@ -1,0 +1,125 @@
+{{- range .Values.premiumize.countries }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vpn-gateway.fullname" $ }}-premiumize-{{ . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "vpn-gateway.labels" $ | nindent 4 }}
+    app: gluetun-premiumize-{{ . }}
+    component: vpn-gateway
+spec:
+  replicas: 0 # Start with 0 replicas, controller will scale up
+  selector:
+    matchLabels:
+      app: gluetun-premiumize-{{ . }}
+  template:
+    metadata:
+      labels:
+        app: gluetun-premiumize-{{ . }}
+        component: vpn-gateway
+    spec:
+      serviceAccountName: {{ include "vpn-gateway.serviceAccountName" $ }}
+      securityContext:
+        {{- toYaml $.Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: gluetun
+          securityContext:
+            {{- toYaml $.Values.securityContext | nindent 12 }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          env:
+            - name: VPN_SERVICE_PROVIDER
+              value: custom
+            - name: VPN_TYPE
+              value: openvpn
+            - name: OPENVPN_CUSTOM_CONFIG
+              value: /gluetun/vpn-{{ . }}.premiumize.me.ovpn
+            - name: HTTP_PROXY
+              value: "on"
+            - name: HTTP_PROXY_ADDRESS
+              value: "0.0.0.0:8888"
+            - name: SHADOWSOCKS
+              value: "on"
+            - name: SHADOWSOCKS_ADDRESS
+              value: "0.0.0.0:8388"
+            - name: HEALTH_SERVER_ADDRESS
+              value: "0.0.0.0:9999"
+          ports:
+            - name: http-proxy
+              containerPort: 8888
+              protocol: TCP
+            - name: shadowsocks
+              containerPort: 8388
+              protocol: TCP
+            - name: health
+              containerPort: 9999
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: health
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: health
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: gluetun-config
+              mountPath: /gluetun
+        - name: gateway-sidecar
+          image: "{{ $.Values.gatewaySidecar.image.repository }}:{{ $.Values.gatewaySidecar.image.tag }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          command:
+            - /bin/bash
+            - -c
+            - |
+              source /config/settings.sh
+              # Start DHCP server for VXLAN clients
+              cat > /tmp/dnsmasq.conf << EOF
+              interface=vxlan0
+              bind-interfaces
+              dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+              dhcp-option=3,${VXLAN_IP_NETWORK}.1
+              dhcp-option=6,${VXLAN_IP_NETWORK}.1
+              server=10.96.0.10
+              EOF
+              # Start dnsmasq for DHCP and DNS
+              dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+              # Health monitoring
+              while true; do
+                if ip link show tun0 >/dev/null 2>&1; then
+                  if timeout 5 curl -s --interface tun0 http://httpbin.org/ip >/dev/null 2>&1; then
+                    echo "$(date): VPN Gateway healthy - tun0 connected"
+                  else
+                    echo "$(date): VPN Gateway unhealthy - no external connectivity"
+                  fi
+                else
+                  echo "$(date): VPN Gateway unhealthy - tun0 not found"
+                fi
+                sleep 30
+              done
+          resources:
+            {{- toYaml $.Values.gatewaySidecar.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: gluetun-config
+          configMap:
+            name: {{ $.Release.Name }}-vpn-configs
+        - name: config
+          configMap:
+            name: {{ $.Release.Name }}-pod-gateway-config
+            defaultMode: 0777
+{{- end }} 

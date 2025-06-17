@@ -1,0 +1,171 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: crowdsec
+    pod-template-hash: cb4599c
+  name: crowdsec-cb4599c
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: crowdsec
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crowdsec
+      pod-template-hash: cb4599c
+  template:
+    metadata:
+      labels:
+        app: crowdsec
+        pod-template-hash: cb4599c
+    spec:
+      containers:
+      - env:
+        - name: AGENTS_ALLOWED_OU
+          value: agent-ou
+        - name: AGENT_PASSWORD
+        - name: AGENT_USERNAME
+        - name: APPSEC_CONFIGS
+        - name: APPSEC_RULES
+        - name: BOUNCERS_ALLOWED_OU
+          value: bouncer-ou
+        - name: BOUNCER_KEY_TRAEFIK
+          value: usvi2urbIG5obProVWwcf2ImTrtB93x668jWDvrH
+        - name: CACERT_FILE
+        - name: CAPI_WHITELISTS_PATH
+        - name: CI_TESTING
+          value: "false"
+        - name: CLIENT_CERT_FILE
+        - name: CLIENT_KEY_FILE
+        - name: COLLECTIONS
+          value: crowdsecurity/traefik
+        - name: CONFIG_FILE
+          value: /etc/crowdsec/config.yaml
+        - name: CONTEXTS
+        - name: CUSTOM_HOSTNAME
+          value: localhost
+        - name: DEBUG
+          value: "false"
+        - name: DISABLE_AGENT
+          value: "false"
+        - name: DISABLE_APPSEC_CONFIGS
+        - name: DISABLE_APPSEC_RULES
+        - name: DISABLE_COLLECTIONS
+        - name: DISABLE_CONTEXTS
+        - name: DISABLE_LOCAL_API
+          value: "false"
+        - name: DISABLE_ONLINE_API
+          value: "false"
+        - name: DISABLE_PARSERS
+        - name: DISABLE_POSTOVERFLOWS
+        - name: DISABLE_SCENARIOS
+        - name: DSN
+        - name: ENROLL_INSTANCE_NAME
+        - name: ENROLL_KEY
+          value: cm91pb2bz0011e35iltz9k6ra
+        - name: ENROLL_TAGS
+        - name: INSECURE_SKIP_VERIFY
+        - name: LAPI_CERT_FILE
+        - name: LAPI_KEY_FILE
+        - name: LEVEL_DEBUG
+          value: "false"
+        - name: LEVEL_ERROR
+          value: "false"
+        - name: LEVEL_FATAL
+          value: "false"
+        - name: LEVEL_INFO
+          value: "false"
+        - name: LEVEL_TRACE
+          value: "false"
+        - name: LEVEL_WARN
+          value: "false"
+        - name: LOCAL_API_URL
+          value: http://0.0.0.0:8080
+        - name: METRICS_PORT
+          value: "6060"
+        - name: NO_HUB_UPGRADE
+          value: "false"
+        - name: PARSERS
+        - name: PGID
+          value: "988"
+        - name: PLUGIN_DIR
+          value: /usr/local/lib/crowdsec/plugins/
+        - name: POSTOVERFLOWS
+        - name: PUID
+          value: "1002"
+        - name: SCENARIOS
+        - name: TEST_MODE
+          value: "false"
+        - name: TYPE
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "022"
+        - name: USE_TLS
+          value: "false"
+        - name: USE_WAL
+          value: "false"
+        image: crowdsecurity/crowdsec:latest
+        imagePullPolicy: IfNotPresent
+        name: crowdsec
+        ports:
+        - containerPort: 6060
+          name: crowdsec-6060
+          protocol: TCP
+        - containerPort: 8080
+          name: crowdsec-8080
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/crowdsec/data
+          name: var-lib-crowdsec-data
+        - mountPath: /etc/crowdsec
+          name: etc-crowdsec
+        - mountPath: /usr/local/lib/crowdsec/plugins
+          name: usr-local-lib-crowdsec-plugins
+        - mountPath: /var/log
+          name: var-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/crowdsec/data
+          type: ""
+        name: var-lib-crowdsec-data
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/crowdsec/etc/crowdsec
+          type: ""
+        name: etc-crowdsec
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/crowdsec/plugins
+          type: ""
+        name: usr-local-lib-crowdsec-plugins
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/crowdsec/logs
+          type: ""
+        name: var-log
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

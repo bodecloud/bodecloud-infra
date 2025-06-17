@@ -1,0 +1,74 @@
+---
+- name: Check if Tailscale is already installed
+  command: which tailscale
+  register: tailscale_installed
+  failed_when: false
+  changed_when: false
+
+- name: Download Tailscale installation script
+  get_url:
+    url: https://tailscale.com/install.sh
+    dest: /tmp/tailscale-install.sh
+    mode: "0755"
+  when: tailscale_installed.rc != 0
+
+- name: Install Tailscale
+  shell: /tmp/tailscale-install.sh
+  when: tailscale_installed.rc != 0
+
+- name: Check if Tailscale is already connected
+  command: tailscale status --json
+  register: tailscale_status
+  failed_when: false
+  changed_when: false
+
+- name: Parse Tailscale status
+  set_fact:
+    tailscale_connected: "{{ (tailscale_status.stdout | from_json).BackendState == 'Running' }}"
+  when: tailscale_status.rc == 0
+
+- name: Set tailscale_connected to false if status check failed
+  set_fact:
+    tailscale_connected: false
+  when: tailscale_status.rc != 0
+
+- name: Connect to Tailscale network
+  command: >
+    tailscale up
+    --authkey={{ tailscale_authkey }}
+    --hostname={{ tailscale_hostname }}
+    --advertise-tags={{ tailscale_tags }}
+    --accept-routes
+    --accept-dns=false
+  when:
+    - not tailscale_connected
+    - tailscale_authkey != ""
+  register: tailscale_up_result
+
+- name: Display Tailscale connection status
+  debug:
+    msg: |
+      Tailscale Status:
+      - Hostname: {{ tailscale_hostname }}
+      - Connected: {{ tailscale_connected }}
+      - Tags: {{ tailscale_tags }}
+
+- name: Get Tailscale IP address
+  shell: tailscale ip -4
+  register: tailscale_ip
+  changed_when: false
+
+- name: Set Tailscale IP fact
+  set_fact:
+    node_tailscale_ip: "{{ tailscale_ip.stdout.strip() }}"
+
+- name: Display Tailscale IP
+  debug:
+    msg: "Node {{ inventory_hostname }} Tailscale IP: {{ node_tailscale_ip }}"
+
+- name: Update inventory with Tailscale IP for master node
+  set_fact:
+    k3s_master_ip: "{{ node_tailscale_ip }}"
+  when: k3s_node_role == "master"
+  delegate_to: localhost
+  run_once: true

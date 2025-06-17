@@ -1,0 +1,46 @@
+apiVersion: v1
+data:
+  01_download.md: "---\ntitle: \"Join & download Jellyfin\"\nrequire: true\n---\n\nYou're
+    in! \U0001F389\n\nGreat news! You've been granted access to brunner56's **ElfHosted
+    Jellyfin Server**! \U0001F973\n"
+  02_about.md: "---\ntitle: \"What is Jellyfin?\"\n---\n\n## ℹ️ What's Jellyfin?\n\nJellyfin
+    lets people share their film and TV libraries with friends. \"\n      \"You're
+    here because brunner56’s invited you to theirs! \U0001F4FA\n\n## \U0001F37F How
+    do I watch stuff?\n\nSearch your phone, tablet, computer or smart-TV's app store
+    for \"Jellyfin\", or [download on this device](https://jellyfin.org/downloads){target=_blank
+    .btn}.\n\nSign in, search, push play. That’s it!\n"
+  03_requests.md: "---\ntitle:  \"Automatic requests\"\nrequires: [overseerr_url]\n---\n\n#\"Request
+    mooar content \U0001F64B‍♀️\n\nCan't find what you want to watch? Make a request
+    — robots will grab the film or episode automatically and add it to the library.\n\n[Make
+    a request]({{ overseerr_url }}){:target=_blank .btn}\n"
+  04_discord.md: |
+    ---
+    title:  "Discord community"
+    requires: [discord_id]
+    ---
+
+    <iframe src="https://discord.com/widget?id={{discord_id }}&theme=dark"
+            width="350" height="500"
+            allowtransparency="true" frameborder="0"
+            sandbox="allow-popups allow-same-origin allow-scripts"></iframe>
+  05_tips.md: "---\ntitle: \"Tips for the best experience\"\n---\n\n## \U0001F39E
+    Get the best quality\n\nPlex sometimes defaults to low quality or shows its own
+    adverts first. \"\n      \"Here’s how to fix that:\n\n1. **Set streaming quality
+    to original** – Settings → Playback  \n2. **Enable hardware decoding** if your
+    device supports it for smoother 4K.  \n3. **Prefer Ethernet over Wi-Fi** on smart-TVs.\n\n*Happy
+    viewing!* \U0001F37F\n"
+  06_elfhosted.md: "---\ntitle: \"Get ElfHosted!\"\n---\n\n## \U0001F39E Want your
+    **own** media library?\n\nReady to take it to the next level?\n\nGet your **own**
+    Media Server with a [ElfHosted bundle](https://store.elfhosted.com/product-category/streaming-bundles/){target=_blank
+    .btn}, $1 7-day trials available!\n\nRock on! \U0001F918\n"
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: wizarr-steps-jellyfin
+  namespace: bolabaden

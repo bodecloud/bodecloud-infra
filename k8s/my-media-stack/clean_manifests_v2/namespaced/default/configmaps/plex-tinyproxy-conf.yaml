@@ -1,0 +1,32 @@
+apiVersion: v1
+data:
+  tinyproxy.conf: |-
+    User tinyproxy
+    Group tinyproxy
+    Port 8888
+    Listen 0.0.0.0
+    Timeout 600
+    DefaultErrorFile "/usr/share/tinyproxy/default.html"
+    StatFile "/usr/share/tinyproxy/stats.html"
+    Logfile "/var/log/tinyproxy/tinyproxy.log"
+    LogLevel Info
+    PidFile "/var/run/tinyproxy/tinyproxy.pid"
+    MaxClients 100
+    MinSpareServers 5
+    MaxSpareServers 20
+    StartServers 10
+    MaxRequestsPerChild 0
+    Allow 127.0.0.1
+    Allow 10.0.0.0/8
+    Allow 172.16.0.0/12
+    Allow 192.168.0.0/16
+    ViaProxyName "tinyproxy"
+    ConnectPort 443
+    ConnectPort 563
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"tinyproxy.conf":"User tinyproxy\nGroup tinyproxy\nPort 8888\nListen 0.0.0.0\nTimeout 600\nDefaultErrorFile \"/usr/share/tinyproxy/default.html\"\nStatFile \"/usr/share/tinyproxy/stats.html\"\nLogfile \"/var/log/tinyproxy/tinyproxy.log\"\nLogLevel Info\nPidFile \"/var/run/tinyproxy/tinyproxy.pid\"\nMaxClients 100\nMinSpareServers 5\nMaxSpareServers 20\nStartServers 10\nMaxRequestsPerChild 0\nAllow 127.0.0.1\nAllow 10.0.0.0/8\nAllow 172.16.0.0/12\nAllow 192.168.0.0/16\nViaProxyName \"tinyproxy\"\nConnectPort 443\nConnectPort 563"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"plex-tinyproxy-conf","namespace":"default"}}
+  name: plex-tinyproxy-conf
+  namespace: default

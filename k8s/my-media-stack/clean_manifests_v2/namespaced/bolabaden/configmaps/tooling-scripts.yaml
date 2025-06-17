@@ -1,0 +1,246 @@
+apiVersion: v1
+data:
+  clean-up-dns-on-termination.sh: "#!/bin/bash\n\nfunction cleanup_dns_on_shutdown
+    {\n    echo \"Received SIGTERM, cleaning up DNS entries...\"\n\n    source /tooling-scripts/cloudflare-scripts.sh\n
+    \   DNS_DOMAIN=elfhosted.com\n\n    \n    delete_cloudflare_record $DNS_DOMAIN
+    $ELF_TENANT_NAME-plex.$DNS_DOMAIN CNAME\n    \n    \n    \n    \n            \n
+    \   \n    \n    \n}\n\n# When we terminate, delete the DNS record\ntrap cleanup_dns_on_shutdown
+    SIGTERM\n\n# Hang around doing nothing until terminated\nwhile true\ndo\n    echo
+    \"Waiting for SIGTERM to remove DNS entry\"\n    sleep infinity\ndone\n"
+  cloudflare-scripts.sh: |
+    #!/bin/bash
+
+    check_existing_records() {
+        local zone_id=$1
+        local record_name=$2
+
+        # Check for any existing A, AAAA, or CNAME records
+        local existing_records=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records?name=${record_name}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+
+        # Look for any records of these types
+        local conflicting_records=$(echo $existing_records | jq -r '.result[] | select(.type == "A" or .type == "AAAA" or .type == "CNAME")')
+
+        if [ ! -z "$conflicting_records" ]; then
+            echo "$conflicting_records"
+            return 0
+        else
+            return 1
+        fi
+    }
+
+    manage_cloudflare_record() {
+        # Check for API token in environment
+        if [ -z "${CF_API_KEY}" ]; then
+            echo "Error: CF_API_KEY environment variable is not set"
+            return 1
+        fi
+
+        # Parameters
+        local domain=$1
+        local record_name=$2
+        local record_type=$3
+        local content=$4
+
+        # Input validation
+        if [ -z "$domain" ] || [ -z "$record_name" ] || [ -z "$record_type" ] || [ -z "$content" ]; then
+            echo "Error: Missing required parameters"
+            echo "Usage: manage_cloudflare_record DOMAIN RECORD_NAME RECORD_TYPE CONTENT"
+            echo "Example: manage_cloudflare_record example.com www A 192.0.2.1"
+            echo "Example: manage_cloudflare_record example.com blog CNAME target.example.net"
+            return 1
+        fi
+
+        # Validate record type
+        case ${record_type^^} in
+            A|CNAME)
+                ;;
+            *)
+                echo "Error: Unsupported record type ${record_type}. Supported types: A, CNAME"
+                return 1
+                ;;
+        esac
+
+        # Find Zone ID
+        local zone_response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${domain}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+
+        local zone_id=$(echo $zone_response | jq -r '.result[0].id')
+
+        if [ -z "$zone_id" ] || [ "$zone_id" = "null" ]; then
+            echo "Error: Could not find Zone ID for domain ${domain}"
+            echo "API Response:"
+            echo $zone_response | jq '.'
+            return 1
+        fi
+
+        # echo "Found Zone ID: ${zone_id}"
+
+        # Check for any existing conflicting records
+        local conflicting_records
+        if conflicting_records=$(check_existing_records "$zone_id" "$record_name"); then
+            echo "Found existing DNS records for ${record_name}:"
+            echo "$conflicting_records" | jq -r '. | "Type: \(.type), Content: \(.content), ID: \(.id)"'
+
+            # If there's an existing record of the same type, update it
+            local existing_id=$(echo "$conflicting_records" | jq -r "select(.type == \"${record_type^^}\") | .id")
+            if [ ! -z "$existing_id" ] && [ "$existing_id" != "null" ]; then
+                echo "Updating existing ${record_type} record..."
+                local json_data="{
+                    \"type\": \"${record_type^^}\",
+                    \"name\": \"${record_name}\",
+                    \"content\": \"${content}\",
+                    \"ttl\": 1,
+                    \"proxied\": false
+                }"
+
+                local response=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${existing_id}" \
+                    -H "Authorization: Bearer ${CF_API_KEY}" \
+                    -H "Content-Type: application/json" \
+                    --data "${json_data}")
+
+                if echo $response | jq -e '.success' > /dev/null; then
+                    echo "Successfully updated ${record_type} record ${record_name}"
+                    return 0
+                else
+                    echo "Error updating ${record_type} record ${record_name}:"
+                    echo $response | jq '.'
+                    return 1
+                fi
+            else
+                echo "Error: Cannot create ${record_type} record ${record_name}. Please delete existing A/AAAA/CNAME records first."
+                echo "You can use delete_cloudflare_record to remove existing records."
+                return 1
+            fi
+        else
+            # No conflicting records found, create new record
+            echo "No existing A/AAAA/CNAME records found for ${record_name}. Creating new ${record_type} record..."
+            local json_data="{
+                \"type\": \"${record_type^^}\",
+                \"name\": \"${record_name}\",
+                \"content\": \"${content}\",
+                \"ttl\": 1,
+                \"proxied\": false
+            }"
+
+            local response=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records" \
+                -H "Authorization: Bearer ${CF_API_KEY}" \
+                -H "Content-Type: application/json" \
+                --data "${json_data}")
+
+            if echo $response | jq -e '.success' > /dev/null; then
+                echo "Successfully created ${record_type} record"
+                echo "Record ID: $(echo $response | jq -r '.result.id')"
+                return 0
+            else
+                echo "Error creating ${record_type} record ${record_name}:"
+                echo $response | jq '.'
+                return 1
+            fi
+        fi
+    }
+
+    delete_cloudflare_record() {
+        # Check for API token in environment
+        if [ -z "${CF_API_KEY}" ]; then
+            echo "Error: CF_API_KEY environment variable is not set"
+            return 1
+        fi
+
+        # Parameters
+        local domain=$1
+        local record_name=$2
+        local record_type=$3
+
+        # Input validation
+        if [ -z "$domain" ] || [ -z "$record_name" ] || [ -z "$record_type" ]; then
+            echo "Error: Missing required parameters"
+            echo "Usage: delete_cloudflare_record DOMAIN RECORD_NAME RECORD_TYPE"
+            echo "Example: delete_cloudflare_record example.com www A"
+            return 1
+        fi
+
+        # Validate record type
+        case ${record_type^^} in
+            A|CNAME)
+                ;;
+            *)
+                echo "Error: Unsupported record type ${record_type}. Supported types: A, CNAME"
+                return 1
+                ;;
+        esac
+
+        # Find Zone ID
+        local zone_response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${domain}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+
+        local zone_id=$(echo $zone_response | jq -r '.result[0].id')
+
+        if [ -z "$zone_id" ] || [ "$zone_id" = "null" ]; then
+            echo "Error: Could not find Zone ID for domain ${domain}"
+            echo "API Response:"
+            echo $zone_response | jq '.'
+            return 1
+        fi
+
+        # echo "Found Zone ID: ${zone_id}"
+
+        # Check for existing record
+        local existing_record=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records?type=${record_type^^}&name=${record_name}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+
+        local record_id=$(echo $existing_record | jq -r '.result[0].id')
+
+        if [ "$record_id" = "null" ]; then
+            echo "No ${record_type} record found for ${record_name}"
+            return 0
+        fi
+
+        echo "Found ${record_type} ${record_name} record with ID: ${record_id}"
+
+        # Delete the record
+        local response=$(curl -s -X DELETE "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${record_id}" \
+            -H "Authorization: Bearer ${CF_API_KEY}" \
+            -H "Content-Type: application/json")
+
+        # Check if the operation was successful
+        if echo $response | jq -e '.success' > /dev/null; then
+            echo "Successfully deleted ${record_type} record ${record_name}"
+            return 0
+        else
+            echo "Error deleting ${record_type} record ${record_name}:"
+            echo $response | jq '.'
+            return 1
+        fi
+    }
+    # Example usage:
+    # export CF_API_KEY="your-api-token"
+
+    # To handle the error case you encountered:
+    # 1. First delete any existing conflicting records:
+    # delete_cloudflare_record "example.com" "blog" "A"
+    # delete_cloudflare_record "example.com" "blog" "AAAA"
+    # 2. Then create your new record:
+    # manage_cloudflare_record "example.com" "blog" "CNAME" "target.example.net"
+  update-dns-on-init.sh: "# Detect external address\n\nsource /tooling-scripts/cloudflare-scripts.sh\nDNS_DOMAIN=elfhosted.com\nMY_NODE_IP=$(curl
+    -s ifconfig.me)\n\n# Create one for the node, if it doesn't exist\nmanage_cloudflare_record
+    $DNS_DOMAIN $MY_NODE_NAME.$DNS_DOMAIN A $MY_NODE_IP\n\n\nmanage_cloudflare_record
+    $DNS_DOMAIN $ELF_TENANT_NAME-plex.$DNS_DOMAIN CNAME $MY_NODE_NAME.$DNS_DOMAIN\n\n\n\n
+    \   \n\n\n    \n"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"clean-up-dns-on-termination.sh":"#!/bin/bash\n\nfunction cleanup_dns_on_shutdown {\n    echo \"Received SIGTERM, cleaning up DNS entries...\"\n\n    source /tooling-scripts/cloudflare-scripts.sh\n    DNS_DOMAIN=elfhosted.com\n\n    \n    delete_cloudflare_record $DNS_DOMAIN $ELF_TENANT_NAME-plex.$DNS_DOMAIN CNAME\n    \n    \n    \n    \n            \n    \n    \n    \n}\n\n# When we terminate, delete the DNS record\ntrap cleanup_dns_on_shutdown SIGTERM\n\n# Hang around doing nothing until terminated\nwhile true\ndo\n    echo \"Waiting for SIGTERM to remove DNS entry\"\n    sleep infinity\ndone\n","cloudflare-scripts.sh":"#!/bin/bash\n\ncheck_existing_records() {\n    local zone_id=$1\n    local record_name=$2\n\n    # Check for any existing A, AAAA, or CNAME records\n    local existing_records=$(curl -s -X GET \"https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records?name=${record_name}\" \\\n        -H \"Authorization: Bearer ${CF_API_KEY}\" \\\n        -H \"Content-Type: application/json\")\n\n    # Look for any records of these types\n    local conflicting_records=$(echo $existing_records | jq -r '.result[] | select(.type == \"A\" or .type == \"AAAA\" or .type == \"CNAME\")')\n\n    if [ ! -z \"$conflicting_records\" ]; then\n        echo \"$conflicting_records\"\n        return 0\n    else\n        return 1\n    fi\n}\n\nmanage_cloudflare_record() {\n    # Check for API token in environment\n    if [ -z \"${CF_API_KEY}\" ]; then\n        echo \"Error: CF_API_KEY environment variable is not set\"\n        return 1\n    fi\n\n    # Parameters\n    local domain=$1\n    local record_name=$2\n    local record_type=$3\n    local content=$4\n\n    # Input validation\n    if [ -z \"$domain\" ] || [ -z \"$record_name\" ] || [ -z \"$record_type\" ] || [ -z \"$content\" ]; then\n        echo \"Error: Missing required parameters\"\n        echo \"Usage: manage_cloudflare_record DOMAIN RECORD_NAME RECORD_TYPE CONTENT\"\n        echo \"Example: manage_cloudflare_record example.com www A 192.0.2.1\"\n        echo \"Example: manage_cloudflare_record example.com blog CNAME target.example.net\"\n        return 1\n    fi\n\n    # Validate record type\n    case ${record_type^^} in\n        A|CNAME)\n            ;;\n        *)\n            echo \"Error: Unsupported record type ${record_type}. Supported types: A, CNAME\"\n            return 1\n            ;;\n    esac\n\n    # Find Zone ID\n    local zone_response=$(curl -s -X GET \"https://api.cloudflare.com/client/v4/zones?name=${domain}\" \\\n        -H \"Authorization: Bearer ${CF_API_KEY}\" \\\n        -H \"Content-Type: application/json\")\n\n    local zone_id=$(echo $zone_response | jq -r '.result[0].id')\n\n    if [ -z \"$zone_id\" ] || [ \"$zone_id\" = \"null\" ]; then\n        echo \"Error: Could not find Zone ID for domain ${domain}\"\n        echo \"API Response:\"\n        echo $zone_response | jq '.'\n        return 1\n    fi\n\n    # echo \"Found Zone ID: ${zone_id}\"\n\n    # Check for any existing conflicting records\n    local conflicting_records\n    if conflicting_records=$(check_existing_records \"$zone_id\" \"$record_name\"); then\n        echo \"Found existing DNS records for ${record_name}:\"\n        echo \"$conflicting_records\" | jq -r '. | \"Type: \\(.type), Content: \\(.content), ID: \\(.id)\"'\n\n        # If there's an existing record of the same type, update it\n        local existing_id=$(echo \"$conflicting_records\" | jq -r \"select(.type == \\\"${record_type^^}\\\") | .id\")\n        if [ ! -z \"$existing_id\" ] \u0026\u0026 [ \"$existing_id\" != \"null\" ]; then\n            echo \"Updating existing ${record_type} record...\"\n            local json_data=\"{\n                \\\"type\\\": \\\"${record_type^^}\\\",\n                \\\"name\\\": \\\"${record_name}\\\",\n                \\\"content\\\": \\\"${content}\\\",\n                \\\"ttl\\\": 1,\n                \\\"proxied\\\": false\n            }\"\n\n            local response=$(curl -s -X PUT \"https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${existing_id}\" \\\n                -H \"Authorization: Bearer ${CF_API_KEY}\" \\\n                -H \"Content-Type: application/json\" \\\n                --data \"${json_data}\")\n\n            if echo $response | jq -e '.success' \u003e /dev/null; then\n                echo \"Successfully updated ${record_type} record ${record_name}\"\n                return 0\n            else\n                echo \"Error updating ${record_type} record ${record_name}:\"\n                echo $response | jq '.'\n                return 1\n            fi\n        else\n            echo \"Error: Cannot create ${record_type} record ${record_name}. Please delete existing A/AAAA/CNAME records first.\"\n            echo \"You can use delete_cloudflare_record to remove existing records.\"\n            return 1\n        fi\n    else\n        # No conflicting records found, create new record\n        echo \"No existing A/AAAA/CNAME records found for ${record_name}. Creating new ${record_type} record...\"\n        local json_data=\"{\n            \\\"type\\\": \\\"${record_type^^}\\\",\n            \\\"name\\\": \\\"${record_name}\\\",\n            \\\"content\\\": \\\"${content}\\\",\n            \\\"ttl\\\": 1,\n            \\\"proxied\\\": false\n        }\"\n\n        local response=$(curl -s -X POST \"https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records\" \\\n            -H \"Authorization: Bearer ${CF_API_KEY}\" \\\n            -H \"Content-Type: application/json\" \\\n            --data \"${json_data}\")\n\n        if echo $response | jq -e '.success' \u003e /dev/null; then\n            echo \"Successfully created ${record_type} record\"\n            echo \"Record ID: $(echo $response | jq -r '.result.id')\"\n            return 0\n        else\n            echo \"Error creating ${record_type} record ${record_name}:\"\n            echo $response | jq '.'\n            return 1\n        fi\n    fi\n}\n\ndelete_cloudflare_record() {\n    # Check for API token in environment\n    if [ -z \"${CF_API_KEY}\" ]; then\n        echo \"Error: CF_API_KEY environment variable is not set\"\n        return 1\n    fi\n\n    # Parameters\n    local domain=$1\n    local record_name=$2\n    local record_type=$3\n\n    # Input validation\n    if [ -z \"$domain\" ] || [ -z \"$record_name\" ] || [ -z \"$record_type\" ]; then\n        echo \"Error: Missing required parameters\"\n        echo \"Usage: delete_cloudflare_record DOMAIN RECORD_NAME RECORD_TYPE\"\n        echo \"Example: delete_cloudflare_record example.com www A\"\n        return 1\n    fi\n\n    # Validate record type\n    case ${record_type^^} in\n        A|CNAME)\n            ;;\n        *)\n            echo \"Error: Unsupported record type ${record_type}. Supported types: A, CNAME\"\n            return 1\n            ;;\n    esac\n\n    # Find Zone ID\n    local zone_response=$(curl -s -X GET \"https://api.cloudflare.com/client/v4/zones?name=${domain}\" \\\n        -H \"Authorization: Bearer ${CF_API_KEY}\" \\\n        -H \"Content-Type: application/json\")\n\n    local zone_id=$(echo $zone_response | jq -r '.result[0].id')\n\n    if [ -z \"$zone_id\" ] || [ \"$zone_id\" = \"null\" ]; then\n        echo \"Error: Could not find Zone ID for domain ${domain}\"\n        echo \"API Response:\"\n        echo $zone_response | jq '.'\n        return 1\n    fi\n\n    # echo \"Found Zone ID: ${zone_id}\"\n\n    # Check for existing record\n    local existing_record=$(curl -s -X GET \"https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records?type=${record_type^^}\u0026name=${record_name}\" \\\n        -H \"Authorization: Bearer ${CF_API_KEY}\" \\\n        -H \"Content-Type: application/json\")\n\n    local record_id=$(echo $existing_record | jq -r '.result[0].id')\n\n    if [ \"$record_id\" = \"null\" ]; then\n        echo \"No ${record_type} record found for ${record_name}\"\n        return 0\n    fi\n\n    echo \"Found ${record_type} ${record_name} record with ID: ${record_id}\"\n\n    # Delete the record\n    local response=$(curl -s -X DELETE \"https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${record_id}\" \\\n        -H \"Authorization: Bearer ${CF_API_KEY}\" \\\n        -H \"Content-Type: application/json\")\n\n    # Check if the operation was successful\n    if echo $response | jq -e '.success' \u003e /dev/null; then\n        echo \"Successfully deleted ${record_type} record ${record_name}\"\n        return 0\n    else\n        echo \"Error deleting ${record_type} record ${record_name}:\"\n        echo $response | jq '.'\n        return 1\n    fi\n}\n# Example usage:\n# export CF_API_KEY=\"your-api-token\"\n\n# To handle the error case you encountered:\n# 1. First delete any existing conflicting records:\n# delete_cloudflare_record \"example.com\" \"blog\" \"A\"\n# delete_cloudflare_record \"example.com\" \"blog\" \"AAAA\"\n# 2. Then create your new record:\n# manage_cloudflare_record \"example.com\" \"blog\" \"CNAME\" \"target.example.net\"\n","update-dns-on-init.sh":"# Detect external address\n\nsource /tooling-scripts/cloudflare-scripts.sh\nDNS_DOMAIN=elfhosted.com\nMY_NODE_IP=$(curl -s ifconfig.me)\n\n# Create one for the node, if it doesn't exist\nmanage_cloudflare_record $DNS_DOMAIN $MY_NODE_NAME.$DNS_DOMAIN A $MY_NODE_IP\n\n\nmanage_cloudflare_record $DNS_DOMAIN $ELF_TENANT_NAME-plex.$DNS_DOMAIN CNAME $MY_NODE_NAME.$DNS_DOMAIN\n\n\n\n    \n\n\n    \n"},"kind":"ConfigMap","metadata":{"annotations":{"meta.helm.sh/release-name":"brunner56","meta.helm.sh/release-namespace":"my-media-stack"},"labels":{"app.kubernetes.io/managed-by":"Helm","helm.toolkit.fluxcd.io/name":"brunner56","helm.toolkit.fluxcd.io/namespace":"my-media-stack"},"name":"tooling-scripts","namespace":"bolabaden"}}
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  name: tooling-scripts
+  namespace: bolabaden

@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"cert-manager.io/v1","kind":"Certificate","metadata":{"annotations":{},"labels":{"app":"cert-manager-setup"},"name":"proxy-injector-cert","namespace":"vpn-gateway"},"spec":{"dnsNames":["proxy-injector.vpn-gateway.svc","proxy-injector.vpn-gateway.svc.cluster.local"],"issuerRef":{"kind":"ClusterIssuer","name":"selfsigned-issuer"},"secretName":"proxy-injector-certs"}}
+  labels:
+    app: cert-manager-setup
+  name: proxy-injector-cert
+  namespace: vpn-gateway
+spec:
+  dnsNames:
+  - proxy-injector.vpn-gateway.svc
+  - proxy-injector.vpn-gateway.svc.cluster.local
+  issuerRef:
+    kind: ClusterIssuer
+    name: selfsigned-issuer
+  secretName: proxy-injector-certs
+  conditions:
+  - lastTransitionTime: "2025-06-14T15:00:22Z"
+    message: Certificate is up to date and has not expired
+    reason: Ready
+    type: Ready
+  notAfter: "2025-09-12T15:00:22Z"
+  notBefore: "2025-06-14T15:00:22Z"
+  renewalTime: "2025-08-13T15:00:22Z"

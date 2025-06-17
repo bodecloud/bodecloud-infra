@@ -1,0 +1,127 @@
+x-common-env: &common-env
+  PGID: ${PGID:-988} # 'docker' Group ID
+  PUID: ${PUID:-1002} # A non-root user ID
+  TZ: ${TZ:-America/Chicago} # Your Timezone
+
+x-resource-limits: &resource-limits
+  cpu_shares: 1024 # CPU share weight (relative, 2-262144). Higher = more CPU *if competing*.
+  #  mem_limit: 512m        # Max RAM usage (e.g., 64m, 1g). Exceeding = container kill.
+  #  mem_reservation: 325m  # Soft RAM limit (e.g., 32m, 512m).  Best effort, not guaranteed.
+  #  mem_swappiness: 30      # Swap usage (0-100). 0 = off. Higher = more swap, may slow down container.
+  #memswap_limit: 1024m    # Max RAM + Swap.  Usually same as mem_limit.
+  labels:
+    autoheal: "true"
+
+x-common-deploy: &common-deploy
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    window: 120s
+  labels:
+    autoheal: "true"
+    swarm.autoscaler: "true"
+
+x-swarm-resource-limits: &swarm-resource-limits
+  resources:
+    limits:
+      cpus: "0.10"
+      memory: 1024M
+#    reservations:
+#     cpus: '0.05'
+#    memory:  256M
+
+x-swarm-worker-priority: &swarm-worker-priority
+  placement:
+    preferences:
+      - spread: node.labels.worker_priority
+
+x-swarm-manager-only: &swarm-manager-only
+  placement:
+    constraints:
+      - node.role == manager
+
+x-librechat-labels: &librechat-labels
+  traefik.enable: "true"
+  traefik.http.services.librechat.loadbalancer.server.port: 3080
+
+services:
+  librechat:
+    # 🔹🔹 LibreChat 🔹🔹  # https://github.com/danny-avila/librechat
+    depends_on:
+      - mongodb
+      - librechat-rag_api
+    image: ghcr.io/danny-avila/librechat-dev
+    container_name: librechat
+    hostname: librechat
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${LIBRECHAT_PORT:-3080}:3080
+    volumes:
+      - ${ROOT_DIR:-.}/configs/librechat/.env:/app/.env
+      - ${ROOT_DIR:-.}/configs/librechat/librechat.yaml:/app/librechat.yaml
+      - ${ROOT_DIR:-.}/configs/librechat/images:/app/client/public/images
+      - ${ROOT_DIR:-.}/configs/librechat/logs:/app/api/logs
+      - ${ROOT_DIR:-.}/configs/librechat/uploads:/app/uploads
+    environment:
+      <<: *common-env
+      API_KEY: ${LIBRECHAT_API_KEY}
+      CREDS_IV: ${LIBRECHAT_CREDS_IV}
+      CREDS_KEY: ${LIBRECHAT_CREDS_KEY}
+      JWT_REFRESH_SECRET: ${LIBRECHAT_JWT_REFRESH_SECRET}
+      JWT_SECRET: ${LIBRECHAT_JWT_SECRET}
+      SESSION_SECRET: ${LIBRECHAT_SESSION_SECRET}
+      ALLOW_EMAIL_LOGIN: ${LIBRECHAT_ALLOW_EMAIL_LOGIN:-true}
+      ALLOW_REGISTRATION: ${LIBRECHAT_ALLOW_REGISTRATION:-true}
+      ALLOW_SOCIAL_LOGIN: ${LIBRECHAT_ALLOW_SOCIAL_LOGIN:-true}
+      ALLOW_SOCIAL_REGISTRATION: ${LIBRECHAT_ALLOW_SOCIAL_REGISTRATION:-true}
+      HOST: ${LIBRECHAT_HOST:-0.0.0.0}
+      MEILI_HOST: http://meili:${MEILI_PORT:-7700}
+      MONGO_URI: ${LIBRECHAT_MONGO_URI:-mongodb://mongodb:27017/LibreChat}
+      RAG_API_URL: http://librechat-rag_api:${LIBRECHAT_RAG_PORT:-8005}
+      RAG_PORT: ${LIBRECHAT_RAG_PORT:-8005}
+      REFRESH_TOKEN_EXPIRY: ${LIBRECHAT_REFRESH_TOKEN_EXPIRY:-54000000} # 15 hours
+      SESSION_EXPIRY: ${LIBRECHAT_SESSION_EXPIRY:-604800000} # 7 days
+    labels:
+      <<: *librechat-labels
+      homepage.group: Chatbots
+      homepage.name: LibreChat
+      homepage.icon: librechat.png
+      homepage.href: https://librechat.${DOMAIN}
+      homepage.description: A WebUI for various LLM AI APIs with a large variety of features and providers.
+      homepage.weight: 2
+      homepage.widget.type: librechat
+      homepage.widget.url: https://librechat.${DOMAIN}
+      homepage.widget.key: ${LIBRECHAT_API_KEY}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *librechat-labels
+    restart: unless-stopped
+
+  librechat-rag_api:
+    # 🔹🔹 LibreChat RAG API 🔹🔹  # https://github.com/danny-avila/librechat
+    depends_on:
+      - vectordb
+    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite
+    container_name: librechat-rag_api
+    hostname: librechat-rag_api
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+    env_file:
+      - ${ROOT_DIR:-.}/configs/librechat/.env
+    environment:
+      <<: *common-env
+      DB_HOST: vectordb
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      RAG_PORT: ${LIBRECHAT_RAG_PORT:-8005}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped

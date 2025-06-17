@@ -1,0 +1,147 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: searxng-7d96c7c44-
+  labels:
+    app: searxng
+    pod-template-hash: 7d96c7c44
+  name: searxng-7d96c7c44-k6xjp
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: searxng-7d96c7c44
+spec:
+  containers:
+  - env:
+    - name: PGID
+      value: "988"
+    - name: PUID
+      value: "1001"
+    - name: SEARXNG_BASE_URL
+      value: http://searxng:8080
+    - name: TZ
+      value: America/Chicago
+    - name: UMASK
+      value: "002"
+    image: searxng/searxng:latest
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - wget --no-verbose --tries=1 --spider http://127.0.0.1:8080/ || exit 1
+      failureThreshold: 3
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: searxng
+    ports:
+    - containerPort: 8080
+      name: searxng-8080
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 256Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/searxng
+      name: etc-searxng
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xt664
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/searxng
+      type: ""
+    name: etc-searxng
+  - name: kube-api-access-xt664
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:36:50Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:36:44Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:36:50Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:36:50Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:36:43Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://c40619b3871d48dfaf392b3f0cefecc584899ac2297f2b7c0e63ce5a8a8be733
+    image: docker.io/searxng/searxng:latest
+    imageID: docker.io/searxng/searxng@sha256:a6ad4d72e07b3dc7b6cd80ed6d08e215fcea81b8165c9eeb3bf2b4c27a601f31
+    lastState: {}
+    name: searxng
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:36:49Z"
+    volumeMounts:
+    - mountPath: /etc/searxng
+      name: etc-searxng
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xt664
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.81
+  podIPs:
+  - ip: 10.42.0.81
+  qosClass: Burstable
+  startTime: "2025-06-14T22:36:44Z"

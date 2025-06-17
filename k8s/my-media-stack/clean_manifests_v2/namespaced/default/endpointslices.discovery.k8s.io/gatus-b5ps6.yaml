@@ -1,0 +1,34 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.42
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: gatus-66789cb9c-2dcvs
+    namespace: default
+kind: EndpointSlice
+metadata:
+  generateName: gatus-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: gatus
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: gatus
+  name: gatus-b5ps6
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: gatus
+ports:
+- name: http
+  port: 8080
+  protocol: TCP

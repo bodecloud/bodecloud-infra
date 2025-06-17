@@ -1,0 +1,64 @@
+---
+# Search services deployment tasks
+# This file can be expanded to include SearXNG and other search services
+
+- name: Deploy SearXNG
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: searxng
+        namespace: my-media-stack
+        labels:
+          app: searxng
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: searxng
+        template:
+          metadata:
+            labels:
+              app: searxng
+          spec:
+            containers:
+              - name: searxng
+                image: searxng/searxng:latest
+                ports:
+                  - containerPort: 8080
+                env:
+                  - name: SEARXNG_SECRET
+                    value: "your-secret-key-here"
+                volumeMounts:
+                  - name: config
+                    mountPath: /etc/searxng
+                resources:
+                  requests:
+                    memory: 256Mi
+                    cpu: 100m
+                  limits:
+                    memory: 512Mi
+                    cpu: 500m
+            volumes:
+              - name: config
+                hostPath:
+                  path: "{{ media_stack.config_path }}/searxng"
+                  type: DirectoryOrCreate
+  when: media_stack.services.searxng
+
+- name: Create SearXNG service
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: searxng
+        namespace: my-media-stack
+      spec:
+        selector:
+          app: searxng
+        ports:
+          - port: 8080
+            targetPort: 8080
+  when: media_stack.services.searxng

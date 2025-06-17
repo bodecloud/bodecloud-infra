@@ -1,0 +1,5 @@
+kubernetesClusterDomain: cluster.local
+pvc:
+  volsyncRdBackupCache:
+    storageClass: local-path
+    storageRequest: 20Gi

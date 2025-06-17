@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "elfhosted-combined.fullname" . }}-wizarr-steps-plex
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "elfhosted-combined.labels" . | nindent 4 }}
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+data:
+  01_download.md: {{ .Values.wizarrStepsPlex.01DownloadMd | toYaml | indent 1 }}
+  02_about.md: {{ .Values.wizarrStepsPlex.02AboutMd | toYaml | indent 1 }}
+  03_requests.md: {{ .Values.wizarrStepsPlex.03RequestsMd | toYaml | indent 1 }}
+  04_discord.md: {{ .Values.wizarrStepsPlex.04DiscordMd | toYaml | indent 1 }}
+  05_tips.md: {{ .Values.wizarrStepsPlex.05TipsMd | toYaml | indent 1 }}
+  06_elfhosted.md: {{ .Values.wizarrStepsPlex.06ElfhostedMd | toYaml | indent 1 }}

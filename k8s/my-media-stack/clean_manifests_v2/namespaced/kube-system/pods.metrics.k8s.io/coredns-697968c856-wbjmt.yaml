@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: coredns
+  usage:
+    cpu: 2639485n
+    memory: 26364Ki
+kind: PodMetrics
+metadata:
+  labels:
+    k8s-app: kube-dns
+    pod-template-hash: 697968c856
+  name: coredns-697968c856-wbjmt
+  namespace: kube-system
+timestamp: "2025-06-14T23:02:13Z"
+window: 18.199s

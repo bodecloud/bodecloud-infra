@@ -1,0 +1,7 @@
+brunner56Gatus:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

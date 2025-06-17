@@ -1,0 +1,13 @@
+kubernetesClusterDomain: cluster.local
+traefikForwardAuthConfig:
+  authHost: brunner56-auth-me.elfhosted.com
+  clientId: XbLfjhaDz2Bnxce99YYhRkuxkzGrjjUr
+  clientSecret: wAHba6W7gGsmWTHGAx8ztQsUYEv6usuf
+  cookieDomain: elfhosted.com
+  cookieName: brunner56-auth-me.elfhosted.com
+  encryptionKey: TR9vQgnPNKgdNRLWMeGgAWq7Yy52fbPu
+  lifetime: "2764800"
+  logoutRedirect: https://store.elfhosted.com/my-account/customer-logout/
+  providerUri: https://store.elfhosted.com/
+  scope: openid email
+  whitelist: boden.crouch@gmail.com

@@ -1,0 +1,151 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "2"
+    deployment.kubernetes.io/max-replicas: "3"
+    deployment.kubernetes.io/revision: "14"
+    deployment.kubernetes.io/revision-history: 2,4,6,8,10,12
+  labels:
+    app: proxy-injector
+    pod-template-hash: 96b478bbb
+  name: proxy-injector-96b478bbb
+  namespace: vpn-gateway
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: proxy-injector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proxy-injector
+      pod-template-hash: 96b478bbb
+  template:
+    metadata:
+      labels:
+        app: proxy-injector
+        pod-template-hash: 96b478bbb
+    spec:
+      containers:
+      - command:
+        - python3
+        - /app/inject.py
+        image: python:3.9-alpine
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: proxy-injector
+        ports:
+        - containerPort: 8443
+          name: webhook
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 45
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 50m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /app
+          name: config
+        - mountPath: /etc/certs
+          name: certs
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+          echo "Waiting for cert-manager to be ready..."
+
+          # Wait for cert-manager deployment
+          kubectl wait --for=condition=available deployment/cert-manager -n cert-manager --timeout=300s
+
+          # Wait for cert-manager CRDs to be established
+          echo "Waiting for cert-manager CRDs..."
+          kubectl wait --for condition=established --timeout=60s crd/clusterissuers.cert-manager.io
+          kubectl wait --for condition=established --timeout=60s crd/certificates.cert-manager.io
+
+          # Wait for ClusterIssuer to exist and be ready
+          echo "Waiting for ClusterIssuer to be ready..."
+          timeout=60
+          while [ $timeout -gt 0 ]; do
+            if kubectl get clusterissuer selfsigned-issuer &>/dev/null; then
+              echo "ClusterIssuer found"
+              break
+            fi
+            echo "Waiting for ClusterIssuer... ($timeout seconds remaining)"
+            sleep 5
+            timeout=$((timeout - 5))
+          done
+
+          # Wait for certificate to be ready
+          echo "Waiting for proxy-injector certificate to be ready..."
+          kubectl wait --for=condition=ready certificate/proxy-injector-cert -n vpn-gateway --timeout=300s
+
+          # Verify the secret exists
+          echo "Verifying certificate secret exists..."
+          kubectl get secret proxy-injector-certs -n vpn-gateway
+
+          echo "Certificate is ready!"
+        image: bitnami/kubectl:latest
+        imagePullPolicy: Always
+        name: wait-for-cert
+        resources:
+          limits:
+            cpu: 50m
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: proxy-injector
+      serviceAccountName: proxy-injector
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 493
+          name: proxy-injector-config
+        name: config
+      - name: certs
+        secret:
+          defaultMode: 420
+          secretName: proxy-injector-certs
+  conditions:
+  - lastTransitionTime: "2025-06-14T17:40:40Z"
+    message: 'pods "proxy-injector-96b478bbb-lr9cw" is forbidden: minimum memory usage
+      per Container is 64Mi, but request is 32Mi'
+    reason: FailedCreate
+    type: ReplicaFailure
+  observedGeneration: 1
+  replicas: 0

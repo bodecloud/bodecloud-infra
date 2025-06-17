@@ -1,0 +1,103 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+x-common-env: &common-env
+  PGID: ${PGID:-988} # 'docker' Group ID
+  PUID: ${PUID:-1002} # A non-root user ID
+  TZ: ${TZ:-America/Chicago} # Your Timezone
+
+x-resource-limits: &resource-limits
+  cpu_shares: 1024 # CPU share weight (relative, 2-262144). Higher = more CPU *if competing*.
+  #  mem_limit: 512m        # Max RAM usage (e.g., 64m, 1g). Exceeding = container kill.
+  #  mem_reservation: 325m  # Soft RAM limit (e.g., 32m, 512m).  Best effort, not guaranteed.
+  #  mem_swappiness: 30      # Swap usage (0-100). 0 = off. Higher = more swap, may slow down container.
+  #memswap_limit: 1024m    # Max RAM + Swap.  Usually same as mem_limit.
+  labels:
+    autoheal: "true"
+
+x-swarm-resource-limits: &swarm-resource-limits
+  resources:
+    limits:
+      cpus: "0.10"
+      memory: 1024M
+#    reservations:
+#     cpus: '0.05'
+#    memory:  256M
+
+x-common-deploy: &common-deploy
+  placement:
+    preferences:
+      - spread: node.labels.worker_priority
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    window: 120s
+  labels:
+    autoheal: "true"
+    swarm.autoscaler: "true"
+#  resources:
+#    limits:
+#      cpus: '0.10'
+#      memory: 128M
+#    reservations:
+#      cpus: '0.10'
+#      memory: 64M
+
+x-homeassistant-labels: &homeassistant-labels
+  traefik.enable: "true"
+  traefik.http.services.homeassistant.loadbalancer.server.port: 8123
+
+services:
+  homeassistant:
+    # 🔹🔹 Home Assistant 🔹🔹  # https://github.com/home-assistant/home-assistant
+    # Home Assistant is a home automation platform that allows you to control your home from your phone or computer.
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    hostname: homeassistant
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    privileged: true
+    networks:
+      - traefik_public
+    ports:
+      - ${HOMEASSISTANT_PORT:-8123}:8123
+    environment:
+      <<: *common-env
+    volumes:
+      - ${ROOT_DIR:-.}/configs/homeassistant/config:/config
+      - ${ROOT_DIR:-.}/data/media:/media
+    labels:
+      <<: *homeassistant-labels
+      homepage.group: Apps
+      homepage.name: Home Assistant
+      homepage.icon: home-assistant.png
+      homepage.href: https://homeassistant.${DOMAIN}/
+      homepage.description: Open source home automation that puts local control and privacy first
+      homepage.weight: 3
+      homepage.widget.type: homeassistant
+      homepage.widget.url: https://homeassistant.${DOMAIN}/
+      homepage.widget.key: ${HOMEASSISTANT_ACCESS_TOKEN}
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *homeassistant-labels
+    restart: unless-stopped
+
+  homeassistant-backup:
+    # 🔹🔹 Home Assistant Backup 🔹🔹  # https://github.com/adrienpoupa/rclone-backup
+    image: adrienpoupa/rclone-backup
+    container_name: homeassistant-backup
+    hostname: homeassistant-backup
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - traefik_public
+    #env_file:
+    #  - ${ROOT_DIR:-.}/configs/homeassistant/backup.env
+    volumes:
+      - ${ROOT_DIR:-.}/configs/homeassistant/backups:/backups
+      - ${ROOT_DIR:-.}/configs/homeassistant/backup:/config
+    environment:
+      - BACKUP_FOLDER_NAME=${BACKUP_FOLDER_NAME:-backups}
+      - BACKUP_FOLDER_PATH=${BACKUP_FOLDER_PATH:-/backups}
+    restart: unless-stopped

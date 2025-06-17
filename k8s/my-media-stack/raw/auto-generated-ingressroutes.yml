@@ -1,0 +1,903 @@
+---
+# Auto-generated IngressRoute for aiostreams
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: aiostreams-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`aiostreams.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: aiostreams
+          port: 3005
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for code-demo
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: code-demo-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`code-demo.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: code-demo
+          port: 8443
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for code-dev
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: code-dev-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`code-dev.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: code-dev
+          port: 8443
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for comet
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: comet-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`comet.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: comet
+          port: 2020
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for dash
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dash-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`dash.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: dash
+          port: 3001
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for dozzle
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dozzle-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`dozzle.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: dozzle
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for error-pages
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: error-pages-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`error-pages.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: error-pages
+          port: 80
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for flaresolverr
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flaresolverr-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`flaresolverr.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: flaresolverr
+          port: 8191
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for gluetun-airvpn
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gluetun-airvpn-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`gluetun-airvpn.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: gluetun-airvpn
+          port: 8888
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for gluetun-premiumize-nl
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gluetun-premiumize-nl-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`gluetun-premiumize-nl.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: gluetun-premiumize-nl
+          port: 1057
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for gluetun-premiumize-nl-published
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gluetun-premiumize-nl-published-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`gluetun-premiumize-nl-published.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: gluetun-premiumize-nl-published
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for gluetun-premiumize-us
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gluetun-premiumize-us-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`gluetun-premiumize-us.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: gluetun-premiumize-us
+          port: 11470
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for gluetun-premiumize-us-published
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gluetun-premiumize-us-published-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`gluetun-premiumize-us-published.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: gluetun-premiumize-us-published
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for gptr
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gptr-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`gptr.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: gptr
+          port: 8000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for homepage
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`homepage.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: homepage
+          port: 3000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for jackett
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jackett-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`jackett.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: jackett
+          port: 9117
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for khoj-database
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: khoj-database-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`khoj-database.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: khoj-database
+          port: 5432
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for khoj-sandbox
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: khoj-sandbox-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`khoj-sandbox.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: khoj-sandbox
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for lobechat
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: lobechat-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`lobechat.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: lobechat
+          port: 3210
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for mediafusion
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mediafusion-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`mediafusion.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: mediafusion
+          port: 8000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for mongodb
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mongodb-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`mongodb.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: mongodb
+          port: 27017
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for nginx-auth
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nginx-auth-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`nginx-auth.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: nginx-auth
+          port: 80
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for prowlarr
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prowlarr-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`prowlarr.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: prowlarr
+          port: 9696
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for redis
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: redis-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`redis.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: redis
+          port: 6379
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for searxng
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: searxng-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`searxng.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: searxng
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for speedtest
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: speedtest-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`speedtest.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: speedtest
+          port: 443
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for stremio
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stremio-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`stremio.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: stremio
+          port: 11470
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for stremio-jackett
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stremio-jackett-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`stremio-jackett.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: stremio-jackett
+          port: 3000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for tailscale-airvpn
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tailscale-airvpn-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`tailscale-airvpn.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: tailscale-airvpn
+          port: 41641
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for tailscale-premiumize-nl
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tailscale-premiumize-nl-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`tailscale-premiumize-nl.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: tailscale-premiumize-nl
+          port: 41649
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for tailscale-premiumize-us
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tailscale-premiumize-us-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`tailscale-premiumize-us.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: tailscale-premiumize-us
+          port: 41642
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for tailscale-warp
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tailscale-warp-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`tailscale-warp.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: tailscale-warp
+          port: 41641
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for tinyauth
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tinyauth-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`tinyauth.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: tinyauth
+          port: 3000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for tinyauth-published
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tinyauth-published-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`tinyauth-published.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: tinyauth-published
+          port: 3000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for traefik
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`traefik.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: traefik
+          port: 80
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for traefik-dashboard
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`traefik-dashboard.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: traefik-dashboard
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for warp
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: warp-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`warp.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: warp
+          port: 8888
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for warp-fetch-proxy
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: warp-fetch-proxy-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`warp-fetch-proxy.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: warp-fetch-proxy
+          port: 3128
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for warp-gateway
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: warp-gateway-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`warp-gateway.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: warp-gateway
+          port: 80
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for warp-pod-gateway
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: warp-pod-gateway-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`warp-pod-gateway.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: warp-pod-gateway
+          port: 4789
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for warp-published
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: warp-published-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`warp-published.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: warp-published
+          port: 443
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for watchtower
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: watchtower-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`watchtower.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: watchtower
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Auto-generated IngressRoute for whoami
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami-auto-ingressroute
+  namespace: my-media-stack
+  labels:
+    auto-generated: "true"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`whoami.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: whoami
+          port: 80
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+

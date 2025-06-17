@@ -1,0 +1,305 @@
+# Default values for homer
+# This is a YAML-formatted file.
+
+# Global settings
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: "local-path"
+
+# Homer UI image configuration
+image:
+  repository: b4bz/homer
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+# Ubuntu image for disk usage monitoring
+ubuntu:
+  image:
+    repository: ubuntu
+    tag: "20.04"
+    pullPolicy: IfNotPresent
+
+# Number of replicas
+replicaCount: 1
+
+# Service account
+serviceAccount:
+  create: false
+  name: "default"
+  automount: false
+  annotations: {}
+
+# Security context for the pod
+securityContext:
+  runAsNonRoot: false
+  fsGroup: 568
+  fsGroupChangePolicy: Always
+  seccompProfile:
+    type: RuntimeDefault
+
+# Container security contexts
+containerSecurityContext:
+  homer:
+    capabilities:
+      drop:
+        - ALL
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+      
+  diskUsage:
+    runAsUser: 568
+    runAsGroup: 568
+    runAsNonRoot: false
+    readOnlyRootFilesystem: true
+    seccompProfile:
+      type: RuntimeDefault
+
+# Environment variables
+env:
+  TZ: "UTC"
+
+# Resources for containers
+resources:
+  homer:
+    limits:
+      cpu: "1"
+      memory: 4Gi
+    requests:
+      cpu: "0"
+      memory: 1Mi
+      
+  diskUsage:
+    limits:
+      cpu: 200m
+      memory: 1Gi
+    requests:
+      cpu: "0"
+      memory: 1Mi
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: http
+  annotations: {}
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: homer.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Persistence configuration
+persistence:
+  backup:
+    enabled: true
+    size: 10Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  config:
+    enabled: true
+    size: 5Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  logs:
+    enabled: true
+    size: 2Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  rclone:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  symlinks:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  realdebridZurg:
+    enabled: true
+    size: 100Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+
+# ConfigMaps configuration
+configMaps:
+  homerConfig:
+    enabled: true
+    data:
+      config.yml: |
+        title: "ElfHosted Dashboard"
+        subtitle: "Homer"
+        logo: "logo.png"
+        header: true
+        footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>'
+        
+        theme: default
+        colors:
+          light:
+            highlight-primary: "#3367d6"
+            highlight-secondary: "#4285f4"
+            highlight-hover: "#5a95f5"
+            background: "#f5f5f5"
+            card-background: "#ffffff"
+            text: "#363636"
+            text-header: "#ffffff"
+            text-title: "#303030"
+            text-subtitle: "#424242"
+            card-shadow: rgba(0, 0, 0, 0.1)
+            link-hover: "#363636"
+          dark:
+            highlight-primary: "#3367d6"
+            highlight-secondary: "#4285f4"
+            highlight-hover: "#5a95f5"
+            background: "#131313"
+            card-background: "#2b2b2b"
+            text: "#eaeaea"
+            text-header: "#ffffff"
+            text-title: "#fafafa"
+            text-subtitle: "#f5f5f5"
+            card-shadow: rgba(0, 0, 0, 0.4)
+            link-hover: "#ffdd57"
+        
+        services:
+          - name: "Applications"
+            icon: "fas fa-cloud"
+            items:
+              - name: "Awesome app"
+                logo: "assets/tools/sample.png"
+                subtitle: "Bookmark example"
+                tag: "app"
+                url: "https://www.reddit.com/r/selfhosted/"
+                target: "_blank"
+                
+      custom.css: |
+        /* Custom CSS for Homer */
+        .title {
+          color: #3367d6;
+        }
+        
+      disk_usage.sh: |
+        #!/bin/bash
+        # Disk usage monitoring script
+        while true; do
+          echo "Monitoring disk usage..."
+          df -h > /www/assets/message/disk_usage.txt
+          sleep 300
+        done
+        
+  gatusConfig:
+    enabled: true
+    data: {}
+
+# Homer configuration
+homer:
+  # Title and branding
+  title: "ElfHosted Dashboard"
+  subtitle: "Homer"
+  logo: "logo.png"
+  
+  # Theme configuration
+  theme: "default"
+  
+  # Header and footer
+  header: true
+  footer: true
+
+# Disk usage monitoring
+diskUsage:
+  enabled: true
+  script: "/usr/local/bin/disk_usage.sh"
+
+# Health probes
+livenessProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+startupProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 5
+  successThreshold: 1
+  failureThreshold: 30
+
+# Node selector and affinity
+nodeSelector: {}
+
+affinity: {}
+
+tolerations: []
+
+# Priority class
+priorityClassName: "tenant-normal"
+
+# Annotations for configmap reloader
+annotations:
+  configmap.reloader.stakater.com/reload: "homer-config,elfbot-homer"
+
+# Enable service links
+enableServiceLinks: false
+
+# Deployment strategy
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 1
+    maxSurge: 25%
+
+# Revision history limit
+revisionHistoryLimit: 3
+
+# Progress deadline
+progressDeadlineSeconds: 600
+
+# Volume configuration
+volumes:
+  message:
+    enabled: true
+  tmp:
+    enabled: true
+
+# Labels
+labels:
+  app.elfhosted.com/role: "nodefinder" 

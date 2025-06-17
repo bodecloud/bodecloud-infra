@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-zurg
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+    zilean.elfhosted.com/scrape: "true"
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  type: {{ .Values.zurg.type }}
+  selector:
+    app.elfhosted.com/name: zurg
+    app.kubernetes.io/instance: brunner56
+    {{- include "elfhosted-neat-final.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.zurg.ports | toYaml | nindent 2 }}

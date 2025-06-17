@@ -1,0 +1,21 @@
+apiVersion: v2
+name: homer
+description: A Helm chart for Homer - A very simple static homepage for your server to keep your services on hand
+type: application
+version: 8.1.0
+appVersion: "v22.07.2"
+home: https://github.com/bastienwirtz/homer
+sources:
+  - https://github.com/bastienwirtz/homer
+keywords:
+  - homer
+  - dashboard
+  - homepage
+  - static
+  - services
+  - elfhosted
+maintainers:
+  - name: ElfHosted
+    url: https://elfhosted.com
+annotations:
+  category: Dashboard 

@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+rivenFrontend:
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 0
+  type: ClusterIP

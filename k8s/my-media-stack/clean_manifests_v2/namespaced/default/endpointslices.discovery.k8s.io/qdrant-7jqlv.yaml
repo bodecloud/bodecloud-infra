@@ -1,0 +1,24 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints: null
+kind: EndpointSlice
+metadata:
+  generateName: qdrant-
+  labels:
+    app: qdrant
+    app.kubernetes.io/instance: qdrant
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: qdrant
+    app.kubernetes.io/version: v1.14.1
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    helm.sh/chart: qdrant-1.14.1
+    kubernetes.io/service-name: qdrant
+  name: qdrant-7jqlv
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: qdrant
+ports: null

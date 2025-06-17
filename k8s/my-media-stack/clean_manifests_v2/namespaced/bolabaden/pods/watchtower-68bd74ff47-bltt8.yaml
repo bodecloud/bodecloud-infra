@@ -1,0 +1,142 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: watchtower-68bd74ff47-
+  labels:
+    app: watchtower
+    pod-template-hash: 68bd74ff47
+  name: watchtower-68bd74ff47-bltt8
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: watchtower-68bd74ff47
+spec:
+  containers:
+  - env:
+    - name: PGID
+      value: "988"
+    - name: PUID
+      value: "1001"
+    - name: TZ
+      value: America/Chicago
+    - name: UMASK
+      value: "002"
+    - name: WATCHTOWER_CLEANUP
+      value: "true"
+    - name: WATCHTOWER_NOTIFICATION_REPORT
+      value: "true"
+    - name: WATCHTOWER_NOTIFICATION_URL
+    - name: WATCHTOWER_SCHEDULE
+      value: 0 0 6 * * *
+    image: containrrr/watchtower:latest
+    imagePullPolicy: IfNotPresent
+    name: watchtower
+    ports:
+    - containerPort: 8080
+      name: watchtower-8080
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: var-run-docker-sock
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-r8bgj
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /var/run/docker.sock
+      type: ""
+    name: var-run-docker-sock
+  - name: kube-api-access-r8bgj
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:41Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:37Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:41Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:41Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:39:35Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://65d3bee5a8a82781a92f3b5c605c66de56530ed014261fed9a5f794e34b7f368
+    image: docker.io/containrrr/watchtower:latest
+    imageID: docker.io/containrrr/watchtower@sha256:6dd50763bbd632a83cb154d5451700530d1e44200b268a4e9488fefdfcf2b038
+    lastState: {}
+    name: watchtower
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:39:40Z"
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: var-run-docker-sock
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-r8bgj
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.86
+  podIPs:
+  - ip: 10.42.0.86
+  qosClass: Burstable
+  startTime: "2025-06-14T22:39:37Z"

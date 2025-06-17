@@ -1,0 +1,92 @@
+2025-03-24T09:15:07.331417Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-24T09:15:07.331572Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:15:07.338112Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:15:07.338154Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-24T09:15:09.339822Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:15:09.343044Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:15:09.406802Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-24T09:15:13.409025Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:15:13.410120Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:15:13.410151Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-24T09:15:21.411535Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:15:21.413515Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:15:21.413551Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-24T09:15:37.414884Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:15:37.416053Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:15:37.416078Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-24T09:16:09.416866Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:16:09.418050Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:16:09.418077Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-24T09:17:13.419484Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:17:13.421585Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:17:13.421705Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:17:13.421714Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-24T09:17:29.568443Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-24T09:17:29.569502Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:17:29.570789Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:17:29.571060Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-24T09:17:31.576990Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:17:31.604104Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:17:31.606969Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-24T09:17:35.608439Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:17:35.609443Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:17:35.609469Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-24T09:17:43.610485Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:17:43.613899Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:17:43.613941Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-24T09:17:59.616734Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:17:59.619814Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:17:59.619842Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-24T09:18:31.621133Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:18:31.622241Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:18:31.622297Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-24T09:19:35.624375Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:19:35.626998Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:19:35.627776Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:19:35.628754Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-24T09:19:42.121187Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-24T09:19:42.129232Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:19:42.132351Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:19:42.132379Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-24T09:19:44.133511Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:19:44.134583Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:19:44.134607Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-24T09:19:48.137499Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:19:48.307807Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:19:48.308086Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-24T09:19:56.309667Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:19:56.310545Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:19:56.310572Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-24T09:20:12.311674Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:20:12.312841Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:20:12.312863Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-24T09:20:44.314181Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:20:44.315340Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:20:44.315371Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-24T09:21:48.317148Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:21:48.321310Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:21:48.321639Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:21:48.321892Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-24T09:21:59.442203Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-24T09:21:59.442360Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:21:59.444009Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:21:59.444027Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-24T09:22:01.445455Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:22:01.446430Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:22:01.446461Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-24T09:22:05.448358Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:22:05.449611Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:22:05.449639Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-24T09:22:13.450642Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:22:13.451578Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:22:13.451619Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-24T09:22:29.452835Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:22:29.454012Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:22:29.454036Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-24T09:23:01.455440Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:23:01.457031Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:23:01.457632Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-24T09:24:05.459491Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-24T09:24:05.461532Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:24:05.461781Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-24T09:24:05.461794Z  INFO prefetcharr: prefetcharr exits due to an error

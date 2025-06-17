@@ -1,0 +1,681 @@
+Jun 13, 2025 12:35:50.827 [260126513848544] INFO - Plex Media Server v1.41.8.9834-071366d65 - Docker Docker Container (LinuxServer.io) aarch64 - build: linux-aarch64 debian - GMT 00:00
+Jun 13, 2025 12:35:50.836 [260126513848544] INFO - Linux version: 6.8.0-1026-oracle, language: en-US
+Jun 13, 2025 12:35:50.837 [260126513848544] INFO - Processor: 4-core ARM Neoverse-N1
+Jun 13, 2025 12:35:50.837 [260126513848544] INFO - Compiler is - Clang 11.0.1 (https://plex.tv 9b997da8e5b47bdb4a9425b3a3b290be393b4b1f)
+Jun 13, 2025 12:35:50.837 [260126513848544] INFO - /usr/lib/plexmediaserver/Plex Media Server
+Jun 13, 2025 12:35:50.848 [260126596403232] DEBUG - BPQ: [Idle] -> [Starting]
+Jun 13, 2025 12:35:50.852 [260126596403232] DEBUG - MyPlex: mapping state set to 'Unknown'.
+Jun 13, 2025 12:35:50.852 [260126596403232] DEBUG - Relay: read 0 cached entries from hosts file
+Jun 13, 2025 12:35:50.858 [260126596403232] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Jun 13, 2025 12:35:50.952 [260126596403232] DEBUG - MyPlex: no cached data to load for request for https://plex.tv/api/v2/server/users/features
+Jun 13, 2025 12:35:51.005 [260126596403232] DEBUG - HttpServer: Listening on IPv6 as well as IPv4.
+Jun 13, 2025 12:35:51.005 [260126596403232] DEBUG - HttpServer: Listening on port 32400.
+Jun 13, 2025 12:35:51.008 [260126596403232] DEBUG - HttpServer: Listening on port 32401.
+Jun 13, 2025 12:35:51.008 [260126596403232] DEBUG - Running server...
+Jun 13, 2025 12:35:51.011 [260126498210016] DEBUG - HttpServer: Set up a thread pool with 2 threads.
+Jun 13, 2025 12:35:51.012 [260126596403232] INFO - Running migrations. (EPG 0)
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 0.
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 1.
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 2.
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 3.
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 4.
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 5.
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 6.
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 7.
+Jun 13, 2025 12:35:51.013 [260126596403232] DEBUG - Captured session 8.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 9.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 10.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 11.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 12.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 13.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 14.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 15.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 16.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 17.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 18.
+Jun 13, 2025 12:35:51.014 [260126596403232] DEBUG - Captured session 19.
+Jun 13, 2025 12:35:51.020 [260126596403232] DEBUG - ChangestampAllocator: initialized to 0
+Jun 13, 2025 12:35:51.024 [260126596403232] DEBUG - Opening 2 database sessions to library (com.plexapp.plugins.library.blobs), SQLite 3.39.4, threadsafe=1
+Jun 13, 2025 12:35:51.028 [260126596403232] INFO - Running migrations. (EPG 0)
+Jun 13, 2025 12:35:51.029 [260126596403232] DEBUG - Captured session 0.
+Jun 13, 2025 12:35:51.030 [260126596403232] DEBUG - Captured session 1.
+Jun 13, 2025 12:35:51.126 [260126495404256] DEBUG - Grabber: Cleaning up orphaned grabs.
+Jun 13, 2025 12:35:51.127 [260126495404256] DEBUG - Grabber: Cleaned up 0 decrepit directories in 0.0 sec.
+Jun 13, 2025 12:35:51.128 [260126596403232] DEBUG - Media Provider: Registering provider com.plexapp.plugins.library
+Jun 13, 2025 12:35:51.129 [260126596403232] DEBUG - Auth: Refreshing tokens inside the token-based authentication filter.
+Jun 13, 2025 12:35:51.136 [260126495404256] DEBUG - Auth: Refreshing tokens inside the token-based authentication filter.
+Jun 13, 2025 12:35:51.139 [260126596403232] DEBUG - Opening 1 database sessions to library (), SQLite 3.39.4, threadsafe=1
+Jun 13, 2025 12:35:51.156 [260126487806176] DEBUG - File "/usr/lib/plexmediaserver/Resources/Plug-ins-071366d65" changed: -1 => 2025-06-10 17:40:52 (1749577252).
+Jun 13, 2025 12:35:51.157 [260126487806176] DEBUG - File "/config/Library/Application Support/Plex Media Server/Plug-ins" changed: -1 => 2025-06-12 01:28:37 (1749691717).
+Jun 13, 2025 12:35:51.157 [260126487806176] DEBUG - Scanning for plug-ins in "/usr/lib/plexmediaserver/Resources/Plug-ins-071366d65"
+Jun 13, 2025 12:35:51.171 [260126487806176] DEBUG - Scanning for plug-ins in "/config/Library/Application Support/Plex Media Server/Plug-ins"
+Jun 13, 2025 12:35:51.173 [260126487806176] DEBUG - PluginRepository::setStartState: 1, startingSystem
+Jun 13, 2025 12:35:51.173 [260126487806176] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/System.bundle.
+Jun 13, 2025 12:35:51.175 [260126487806176] DEBUG - [com.plexapp.system] Setting plug-in to always running (daemon mode).
+Jun 13, 2025 12:35:51.181 [260126487806176] DEBUG - Starting file watcher for com.plexapp.system
+Jun 13, 2025 12:35:51.183 [260126487806176] DEBUG - Plugin: setting environment variable: 'PYTHONHOME=/usr/lib/plexmediaserver/Resources/Python'
+Jun 13, 2025 12:35:51.184 [260126487806176] DEBUG - Plugin: setting environment variable: 'PYTHONPATH=/usr/lib/plexmediaserver/Resources/Python/python27.zip:/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/site-packages'
+Jun 13, 2025 12:35:51.197 [260126487806176] DEBUG - Spawned plug-in com.plexapp.system with PID 212
+Jun 13, 2025 12:35:51.203 [260126487806176] DEBUG - [com.plexapp.system] Sending command: GET /:/prefixes
+Jun 13, 2025 12:35:51.307 [260126501478624] DEBUG - Request: didn't get any data from [::1]:59008: End of file
+Jun 13, 2025 12:35:51.571 [260126481223904] DEBUG - Request: [10.42.0.1:42408 (Subnet)] GET / (3 live) #3
+Jun 13, 2025 12:35:51.596 [260126503588064] DEBUG - Completed: [10.42.0.1:42408] 503 GET / (3 live) #3 32ms 346 bytes
+Jun 13, 2025 12:35:52.790 [260126495404256] DEBUG - [JobRunner] Job running: /usr/lib/plexmediaserver/CrashUploader "--directory=/config/Library/Application Support/Plex Media Server/Crash Reports/1.41.8.9834-071366d65" --version=1.41.8.9834-071366d65 --platform=Linux --platformVersion=6.8.0-1026-oracle --serverUuid=4c3eaedacf3b9cca7fa73bf9f93caf3ba84a0470 --userId=NOUSERID --sentryUrl=https://o17675.ingest.sentry.io/api/1233455/ --sentryKey=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --vendor=Docker --model=aarch64 "--device=Docker Container (LinuxServer.io)"
+Jun 13, 2025 12:35:52.793 [260126495404256] DEBUG - [JobRunner] Jobs: Starting child process with pid 235
+Jun 13, 2025 12:35:52.858 [260126511653088] DEBUG - Jobs: '/usr/lib/plexmediaserver/CrashUploader' exit code for process 235 is 0 (success)
+Jun 13, 2025 12:35:53.427 [260126481223904] DEBUG - Request: [127.0.0.1:60390 (Loopback)] GET /:/plugins/com.plexapp.system/messaging/function/X0J1bmRsZVNlcnZpY2U6QWxsU2VydmljZXM_/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQoxCmRpY3QKMApyMAo_ (2 live) #4 GZIP Token ()
+Jun 13, 2025 12:35:53.428 [260126503588064] DEBUG - Completed: [127.0.0.1:60390] 503 GET /:/plugins/com.plexapp.system/messaging/function/X0J1bmRsZVNlcnZpY2U6QWxsU2VydmljZXM_/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQoxCmRpY3QKMApyMAo_ (2 live) #4 GZIP 1ms 436 bytes
+Jun 13, 2025 12:35:53.434 [260126481223904] DEBUG - Request: [127.0.0.1:60398 (Loopback)] GET / (4 live) #7 GZIP Token ()
+Jun 13, 2025 12:35:53.435 [260126503588064] DEBUG - Completed: [127.0.0.1:60398] 503 GET / (4 live) #7 GZIP 0ms 436 bytes
+Jun 13, 2025 12:35:54.704 [260126481223904] DEBUG - Request: [127.0.0.1:60412 (Loopback)] GET /servers (3 live) #8 GZIP Token ()
+Jun 13, 2025 12:35:54.706 [260126503588064] DEBUG - Completed: [127.0.0.1:60412] 503 GET /servers (3 live) #8 GZIP 4ms 436 bytes
+Jun 13, 2025 12:35:54.775 [260126487806176] DEBUG - Reading 486 bytes in the body, code is 200
+Jun 13, 2025 12:35:54.776 [260126487806176] DEBUG - [com.plexapp.system] Plug-in running on port 41607.
+Jun 13, 2025 12:35:54.776 [260126487806176] DEBUG -  * Plug-in handles prefix: /system
+Jun 13, 2025 12:35:54.776 [260126487806176] DEBUG -  * Plug-in handles prefix: /player
+Jun 13, 2025 12:35:54.776 [260126487806176] DEBUG - Read configuration for [com.plexapp.system], had 2 prefixes
+Jun 13, 2025 12:35:54.776 [260126487806176] DEBUG - Done with 1 synchronous plug-in starts, starting the rest in parallel.
+Jun 13, 2025 12:35:54.777 [260126487806176] DEBUG - PluginRepository::setStartState: 2, startingPlugins
+Jun 13, 2025 12:35:54.777 [260126487806176] DEBUG - Updating the list of agents known by the system.
+Jun 13, 2025 12:35:54.777 [260126487806176] DEBUG - [com.plexapp.system] Sending command over HTTP (GET): /system/agents
+Jun 13, 2025 12:35:54.777 [260126487806176] DEBUG - [HCl#2] HTTP requesting GET http://127.0.0.1:41607/system/agents
+Jun 13, 2025 12:35:54.778 [260126596403232] DEBUG - Image transcode cache directory: "/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder"
+Jun 13, 2025 12:35:54.782 [260126596403232] DEBUG - Transcoder: Cleaning old transcode directories.
+Jun 13, 2025 12:35:54.784 [260126596403232] DEBUG - MyPlex: stop public ip check and mapping - current mapped state: 'Unknown'.
+Jun 13, 2025 12:35:54.795 [260126596403232] DEBUG - NetworkInterface: Starting watch thread.
+Jun 13, 2025 12:35:54.795 [260126596403232] DEBUG - Network change.
+Jun 13, 2025 12:35:54.795 [260126476873952] DEBUG - NetworkInterface: Watching for changes on the interfaces.
+Jun 13, 2025 12:35:54.795 [260126596403232] DEBUG - NetworkInterface: Notified of network changed (force=0)
+Jun 13, 2025 12:35:54.795 [260126596403232] DEBUG - Detected primary interface: 10.42.0.229
+Jun 13, 2025 12:35:54.795 [260126596403232] DEBUG - Network interfaces:
+Jun 13, 2025 12:35:54.795 [260126596403232] DEBUG -  * 1 lo (127.0.0.1) (00-00-00-00-00-00) (loopback: 1)
+Jun 13, 2025 12:35:54.795 [260126596403232] DEBUG -  * 2 eth0 (10.42.0.229) (4E-B3-25-9A-57-10) (loopback: 0)
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG -  * 1 lo (::1) (00-00-00-00-00-00) (loopback: 1)
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - Creating NetworkServices singleton.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkServices: Initializing...
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Creating new service.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Got notification of changed network (first change: 1)
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Quick dispatch of network change.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Creating new service.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Got notification of changed network (first change: 1)
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Quick dispatch of network change.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Creating new service.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Got notification of changed network (first change: 1)
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Quick dispatch of network change.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Creating new service.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Got notification of changed network (first change: 1)
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Quick dispatch of network change.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Creating new service.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Got notification of changed network (first change: 1)
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Quick dispatch of network change.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Creating new service.
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Got notification of changed network (first change: 1)
+Jun 13, 2025 12:35:54.796 [260126596403232] DEBUG - NetworkService: Quick dispatch of network change.
+Jun 13, 2025 12:35:54.797 [260126474764512] DEBUG - Network change for advertiser.
+Jun 13, 2025 12:35:54.797 [260126474764512] DEBUG - NetworkService: Setting up multicast listener on 0.0.0.0:32414
+Jun 13, 2025 12:35:54.802 [260126474764512] DEBUG - Network change for advertiser.
+Jun 13, 2025 12:35:54.802 [260126474764512] DEBUG - NetworkService: Setting up multicast listener on 0.0.0.0:32410
+Jun 13, 2025 12:35:54.803 [260126474764512] DEBUG - Network change for advertiser.
+Jun 13, 2025 12:35:54.803 [260126474764512] DEBUG - NetworkService: Setting up multicast listener on 0.0.0.0:32412
+Jun 13, 2025 12:35:54.803 [260126474764512] DEBUG - NetworkService: Network change for browser (polled=0), closing 0 browse sockets.
+Jun 13, 2025 12:35:54.803 [260126474764512] DEBUG - NetworkService: Setting up multicast listener on 0.0.0.0:32413
+Jun 13, 2025 12:35:54.803 [260126474764512] DEBUG - NetworkService: Browsing on interface 127.0.0.1 on broadcast address 127.255.255.255 (index: 0)
+Jun 13, 2025 12:35:54.805 [260126474764512] DEBUG - NetworkService: Browsing on interface 10.42.0.229 on broadcast address 10.42.0.255 (index: 1)
+Jun 13, 2025 12:35:54.805 [260126474764512] DEBUG - NetworkService: Network change for browser (polled=1), closing 0 browse sockets.
+Jun 13, 2025 12:35:54.805 [260126474764512] DEBUG - NetworkService: Browsing on interface 127.0.0.1 on broadcast address 127.255.255.255 (index: 0)
+Jun 13, 2025 12:35:54.805 [260126474764512] DEBUG - NetworkService: Browsing on interface 10.42.0.229 on broadcast address 10.42.0.255 (index: 1)
+Jun 13, 2025 12:35:54.805 [260126474764512] DEBUG - NetworkService: Network change for browser (polled=0), closing 0 browse sockets.
+Jun 13, 2025 12:35:54.805 [260126474764512] DEBUG - NetworkService: Setting up multicast listener on 0.0.0.0:1901
+Jun 13, 2025 12:35:54.805 [260126474764512] DEBUG - NetworkService: Browsing on interface 10.42.0.229 on broadcast address 239.255.255.250 (index: 0)
+Jun 13, 2025 12:35:54.811 [260126495404256] DEBUG - [DatabaseFixups] Running fix-ups.
+Jun 13, 2025 12:35:54.811 [260126470488288] DEBUG - [HCl#3] HTTP requesting GET https://plex.tv/api/v2/release_channels?X-Plex-Token=
+Jun 13, 2025 12:35:54.813 [260126468260064] DEBUG - [ChildProcessMonitor] Plex Tuner Service starting.
+Jun 13, 2025 12:35:54.813 [260126596403232] DEBUG - Waiting for server condition to be signaled.
+Jun 13, 2025 12:35:54.813 [260126468260064] DEBUG - [ChildProcessMonitor/JobRunner] Job running: "/usr/lib/plexmediaserver/Plex Tuner Service" /usr/lib/plexmediaserver/Resources/Tuner/Private /usr/lib/plexmediaserver/Resources/Tuner/Shared 1.41.8.9834-071366d65 32600
+Jun 13, 2025 12:35:54.813 [260126459801824] DEBUG - [HCl#4] HTTP requesting GET https://plex.tv/api/v2/user/privacy?X-Plex-Token=
+Jun 13, 2025 12:35:54.816 [260126457692384] DEBUG - DVR: Starting up.
+Jun 13, 2025 12:35:54.814 [260126455582944] DEBUG - [HCl#5] HTTP requesting GET https://plex.tv/api/v2/features?X-Plex-Token=
+Jun 13, 2025 12:35:54.816 [260126461911264] DEBUG - MyPlex: Sending unclaimed device connections
+Jun 13, 2025 12:35:54.825 [260126457692384] DEBUG - Activity: registered new activity 498e5c02-de7b-4cd3-8eb9-ffad45ce8494 - "Processing subscriptions"
+Jun 13, 2025 12:35:54.826 [260126461911264] DEBUG - [HCl#6] HTTP requesting POST https://plex.tv/devices/4c3eaedacf3b9cca7fa73bf9f93caf3ba84a0470/unclaimed?Connection[][uri]=http://10.42.0.229:32400
+Jun 13, 2025 12:35:54.826 [260126468260064] DEBUG - [ChildProcessMonitor/JobRunner] Jobs: Starting child process with pid 289
+Jun 13, 2025 12:35:54.828 [260126495404256] DEBUG - [DatabaseFixups] Running database fix-ups completed in 0.0 seconds.
+Jun 13, 2025 12:35:54.877 [260126489981152] DEBUG - [HttpClient/HCl#2] HTTP/1.1 (0.1s) 200 response from GET http://127.0.0.1:41607/system/agents
+Jun 13, 2025 12:35:54.877 [260126487806176] DEBUG - [com.plexapp.system] HTTP reply status 200, with 8986 bytes of content.
+Jun 13, 2025 12:35:54.882 [260126487806176] DEBUG - The system knows about 12 agents.
+Jun 13, 2025 12:35:54.883 [260126440444128] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/Fanart-TV.bundle.
+Jun 13, 2025 12:35:54.884 [260126438334688] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/TheTVDB.bundle.
+Jun 13, 2025 12:35:54.885 [260126442553568] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/Framework.bundle.
+Jun 13, 2025 12:35:54.885 [260126487806176] DEBUG - Waiting for 16 plug-ins to finish starting.
+Jun 13, 2025 12:35:54.886 [260126438334688] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.thetvdb] yet.
+Jun 13, 2025 12:35:54.887 [260126438334688] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/LocalMedia.bundle.
+Jun 13, 2025 12:35:54.888 [260126440444128] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.fanarttv] yet.
+Jun 13, 2025 12:35:54.888 [260126440444128] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/Musicbrainz.bundle.
+Jun 13, 2025 12:35:54.891 [260126442553568] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/PersonalMedia.bundle.
+Jun 13, 2025 12:35:54.893 [260126442553568] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.none] yet.
+Jun 13, 2025 12:35:54.893 [260126438334688] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.localmedia] yet.
+Jun 13, 2025 12:35:54.893 [260126438334688] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/PlexThemeMusic.bundle.
+Jun 13, 2025 12:35:54.894 [260126438334688] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.plexthememusic] yet.
+Jun 13, 2025 12:35:54.894 [260126438334688] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/PlexMovie.bundle.
+Jun 13, 2025 12:35:54.895 [260126440444128] DEBUG - Perfect cache hit, we don't need to start [org.musicbrainz.agents.music] yet.
+Jun 13, 2025 12:35:54.897 [260126442553568] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/LyricFind.bundle.
+Jun 13, 2025 12:35:54.905 [260126442553568] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.lyricfind] yet.
+Jun 13, 2025 12:35:54.909 [260126442553568] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/LastFM.bundle.
+Jun 13, 2025 12:35:54.911 [260126438334688] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.imdb] yet.
+Jun 13, 2025 12:35:54.911 [260126438334688] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/TheMovieDB.bundle.
+Jun 13, 2025 12:35:54.912 [260126438334688] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.themoviedb] yet.
+Jun 13, 2025 12:35:54.912 [260126438334688] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/Media-Flags.bundle.
+Jun 13, 2025 12:35:54.912 [260126440444128] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/WebClient.bundle.
+Jun 13, 2025 12:35:54.913 [260126440444128] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/Scanners.bundle.
+Jun 13, 2025 12:35:54.916 [260126440444128] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/HTbackdrops.bundle.
+Jun 13, 2025 12:35:54.920 [260126442553568] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.lastfm] yet.
+Jun 13, 2025 12:35:54.920 [260126442553568] DEBUG - Starting plug-in /usr/lib/plexmediaserver/Resources/Plug-ins-071366d65/MoviePosterDB.bundle.
+Jun 13, 2025 12:35:54.926 [260126442553568] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.movieposterdb] yet.
+Jun 13, 2025 12:35:54.928 [260126440444128] DEBUG - Perfect cache hit, we don't need to start [com.plexapp.agents.htbackdrops] yet.
+Jun 13, 2025 12:35:54.930 [260126487806176] DEBUG - Starting scheduled updates, every 3600 seconds
+Jun 13, 2025 12:35:54.935 [260126487806176] INFO - LibraryUpdateManager path watching is disabled
+Jun 13, 2025 12:35:54.935 [260126487806176] DEBUG - Done waiting for all plug-ins to start.
+Jun 13, 2025 12:35:54.935 [260126487806176] DEBUG - PluginRepository::setStartState: 3, complete
+Jun 13, 2025 12:35:54.944 [260126421426400] DEBUG - Downloading document http://127.0.0.1:32400/:/plugins/com.plexapp.agents.imdb/prefs
+Jun 13, 2025 12:35:54.944 [260126421426400] DEBUG - Translator: Found locale en
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale af
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale nl_BE
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale pt
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale ar
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale fi
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale de
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale pl
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale ko
+Jun 13, 2025 12:35:54.946 [260126421426400] DEBUG - Translator: Found locale no
+Jun 13, 2025 12:35:54.947 [260126421426400] DEBUG - Translator: Found locale he
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale sv
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale uk
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale es
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale ro
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale lt
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale hr_HR
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale et_EE
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale sr
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale da
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale pt_BR
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale ru
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale hu_HU
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale fr
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale zh_CN
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale nl
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale hu
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale sl
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale sk
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale cs_CZ
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale ja_JP
+Jun 13, 2025 12:35:54.957 [260126421426400] DEBUG - Translator: Found locale it
+Jun 13, 2025 12:35:54.992 [260126421426400] DEBUG - [Req#e] Starting file watcher for com.plexapp.agents.imdb
+Jun 13, 2025 12:35:54.993 [260126421426400] DEBUG - [Req#e] Plugin: setting environment variable: 'PYTHONHOME=/usr/lib/plexmediaserver/Resources/Python'
+Jun 13, 2025 12:35:54.996 [260126421426400] DEBUG - [Req#e] Plugin: setting environment variable: 'PYTHONPATH=/usr/lib/plexmediaserver/Resources/Python/python27.zip:/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/site-packages'
+Jun 13, 2025 12:35:55.029 [260126421426400] DEBUG - [Req#e] Spawned plug-in com.plexapp.agents.imdb with PID 317
+Jun 13, 2025 12:35:55.029 [260126421426400] DEBUG - [Req#e] [com.plexapp.agents.imdb] Sending command: GET /:/prefixes
+Jun 13, 2025 12:35:56.044 [260126481223904] DEBUG - Request: [127.0.0.1:60414 (Loopback)] GET /system/messaging/clear_events/com.plexapp.agents.imdb (4 live) #b GZIP Token ()
+Jun 13, 2025 12:35:56.044 [260126481223904] DEBUG - [Req#b] [com.plexapp.system] Sending command over HTTP (GET): /system/messaging/clear_events/com.plexapp.agents.imdb
+Jun 13, 2025 12:35:56.044 [260126481223904] DEBUG - [Req#b/HCl#7] HTTP requesting GET http://127.0.0.1:41607/system/messaging/clear_events/com.plexapp.agents.imdb
+Jun 13, 2025 12:35:56.084 [260126489981152] DEBUG - [HttpClient/HCl#7] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:41607/system/messaging/clear_events/com.plexapp.agents.imdb (reused)
+Jun 13, 2025 12:35:56.084 [260126481223904] DEBUG - [Req#b] [com.plexapp.system] HTTP reply status 200, with 0 bytes of content.
+Jun 13, 2025 12:35:56.084 [260126501478624] DEBUG - Completed: [127.0.0.1:60414] 200 GET /system/messaging/clear_events/com.plexapp.agents.imdb (4 live) #b GZIP 41ms 280 bytes
+Jun 13, 2025 12:35:56.162 [260126481223904] DEBUG - Request: [127.0.0.1:60422 (Loopback)] GET /:/plugins/com.plexapp.system/resourceHashes (3 live) #f GZIP Token ()
+Jun 13, 2025 12:35:56.162 [260126481223904] DEBUG - [Req#f] [com.plexapp.system] Sending command over HTTP (GET): /:/plugins/com.plexapp.system/resourceHashes
+Jun 13, 2025 12:35:56.162 [260126481223904] DEBUG - [Req#f/HCl#8] HTTP requesting GET http://127.0.0.1:41607/:/plugins/com.plexapp.system/resourceHashes
+Jun 13, 2025 12:35:59.351 [260126439768288] DEBUG - Request: [10.42.0.1:56176 (Subnet)] GET / (4 live) #11
+Jun 13, 2025 12:35:59.357 [260126501478624] DEBUG - Completed: [10.42.0.1:56176] 200 GET / (4 live) #11 6ms 2762 bytes
+Jun 13, 2025 12:35:59.797 [260126474764512] DEBUG - [NSB] NetworkServiceBrowser: SERVER arrived: 127.0.0.1 (plex-569f6f7bdd-246qt)
+Jun 13, 2025 12:35:59.797 [260126474764512] DEBUG - [NSB] Notifying the system bundle an update to server /system/notify/serverUpdated?host=127.0.0.1
+Jun 13, 2025 12:35:59.797 [260126474764512] DEBUG - [NSB] [com.plexapp.system] Sending command over HTTP (GET): /system/notify/serverUpdated?host=127.0.0.1
+Jun 13, 2025 12:35:59.798 [260126474764512] DEBUG - [NSB/HCl#a] HTTP requesting GET http://127.0.0.1:41607/system/notify/serverUpdated?host=127.0.0.1
+Jun 13, 2025 12:35:59.804 [260126439768288] DEBUG - Request: [127.0.0.1:60424 (Loopback)] GET /servers (4 live) #13 GZIP Token ()
+Jun 13, 2025 12:35:59.809 [260126503588064] DEBUG - Completed: [127.0.0.1:60424] 200 GET /servers (4 live) #13 GZIP 5ms 499 bytes
+Jun 13, 2025 12:35:59.819 [260126489981152] WARN - [HttpClient/HCl#3] HTTP error requesting GET https://plex.tv/api/v2/release_channels?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:35:59.820 [260126464020704] DEBUG - Network: 10-42-0-229.abcdefghijklmnopqrstuvwxyz012345.plex.direct failed to resolve to 10.42.0.229 but instead yielded (null)
+Jun 13, 2025 12:35:59.821 [260126470488288] WARN - [AutoUpdateRequestHandler] Couldn't get update channels. Trying again soon.
+Jun 13, 2025 12:35:59.822 [260126489981152] DEBUG - [HttpClient/HCl#a] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:41607/system/notify/serverUpdated?host=127.0.0.1
+Jun 13, 2025 12:35:59.822 [260126474764512] DEBUG - [NSB] [com.plexapp.system] HTTP reply status 200, with 0 bytes of content.
+Jun 13, 2025 12:35:59.828 [260126489981152] WARN - [HttpClient/HCl#4] HTTP error requesting GET https://plex.tv/api/v2/user/privacy?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:35:59.828 [260126459801824] WARN - [Analytics] Couldn't get analytics privacy settings. Trying again soon.
+Jun 13, 2025 12:35:59.834 [260126489981152] WARN - [HttpClient/HCl#6] HTTP error requesting POST https://plex.tv/devices/4c3eaedacf3b9cca7fa73bf9f93caf3ba84a0470/unclaimed?Connection[][uri]=http://10.42.0.229:32400 (6, Couldn't resolve host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:35:59.851 [260126489981152] WARN - [HttpClient/HCl#5] HTTP error requesting GET https://plex.tv/api/v2/features?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:35:59.851 [260126455582944] WARN - FeatureManager: Couldn't get features. Trying again soon.
+Jun 13, 2025 12:36:01.125 [260126457692384] DEBUG - DVR:Device: Discovering and refreshing all devices.
+Jun 13, 2025 12:36:01.126 [260126457692384] DEBUG - Grabber: HDHomerun discovered 0 compatible devices.
+Jun 13, 2025 12:36:01.126 [260126457692384] DEBUG - [HCl#b] HTTP requesting POST http://127.0.0.1:32600/devices/discover
+Jun 13, 2025 12:36:01.175 [260126492213472] DEBUG - [MediaProviderManager] we had 0 cloud providers online, we now have 0
+Jun 13, 2025 12:36:01.210 [260126489981152] DEBUG - [HttpClient/HCl#8] HTTP/1.1 (5.0s) 404 response from GET http://127.0.0.1:41607/:/plugins/com.plexapp.system/resourceHashes
+Jun 13, 2025 12:36:01.210 [260126481223904] DEBUG - [Req#f] [com.plexapp.system] HTTP reply status 404, with 0 bytes of content.
+Jun 13, 2025 12:36:01.210 [260126501478624] DEBUG - Completed: [127.0.0.1:60422] 404 GET /:/plugins/com.plexapp.system/resourceHashes (3 live) #f GZIP 5048ms 261 bytes
+Jun 13, 2025 12:36:01.229 [260126439768288] DEBUG - Request: [127.0.0.1:36916 (Loopback)] GET /:/plugins/com.plexapp.system/messaging/function/X0J1bmRsZVNlcnZpY2U6QWxsU2VydmljZXM_/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQoxCmRpY3QKMApyMAo_ (3 live) #15 GZIP Token ()
+Jun 13, 2025 12:36:01.229 [260126439768288] DEBUG - [Req#15] [com.plexapp.system] Sending command over HTTP (GET): /:/plugins/com.plexapp.system/messaging/function/X0J1bmRsZVNlcnZpY2U6QWxsU2VydmljZXM_/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQoxCmRpY3QKMApyMAo_
+Jun 13, 2025 12:36:01.229 [260126439768288] DEBUG - [Req#15/HCl#c] HTTP requesting GET http://127.0.0.1:41607/:/plugins/com.plexapp.system/messaging/function/X0J1bmRsZVNlcnZpY2U6QWxsU2VydmljZXM_/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQoxCmRpY3QKMApyMAo_
+Jun 13, 2025 12:36:01.239 [260126489981152] DEBUG - [HttpClient/HCl#c] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:41607/:/plugins/com.plexapp.system/messaging/function/X0J1bmRsZVNlcnZpY2U6QWxsU2VydmljZXM_/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQoxCmRpY3QKMApyMAo_ (reused)
+Jun 13, 2025 12:36:01.240 [260126439768288] DEBUG - [Req#15] [com.plexapp.system] HTTP reply status 200, with 516 bytes of content.
+Jun 13, 2025 12:36:01.240 [260126501478624] DEBUG - Completed: [127.0.0.1:36916] 200 GET /:/plugins/com.plexapp.system/messaging/function/X0J1bmRsZVNlcnZpY2U6QWxsU2VydmljZXM_/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQoxCmRpY3QKMApyMAo_ (3 live) #15 GZIP 14ms 746 bytes
+Jun 13, 2025 12:36:01.283 [260126481223904] DEBUG - Request: [127.0.0.1:36930 (Loopback)] GET / (3 live) #18 GZIP Token ()
+Jun 13, 2025 12:36:01.285 [260126501478624] DEBUG - Completed: [127.0.0.1:36930] 200 GET / (3 live) #18 GZIP 1ms 1187 bytes
+Jun 13, 2025 12:36:01.935 [260126439768288] DEBUG - Request: [127.0.0.1:36946 (Loopback)] GET /:/plugins/com.plexapp.system/messaging/function/X0FnZW50U2VydmljZTpVcGRhdGVJbmZv/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQo3CmRpY3QKbGlzdApkaWN0Cmxpc3QKbGlzdApsaXN0Cmxpc3QKMgpzMjMKY29tLnBsZXhhcHAuYWdlbnRzLmltZGJzMTAKaWRlbnRpZmllcnIxCnMxMAphZ2VudF9pbmZvMQpyMgoxMApyMwpzMTEKbWVkaWFfdHlwZXNyNApzMTIKYWNjZXB0c19mcm9tbnMxNApmYWxsYmFja19hZ2VudHI1CnMxNApjb250cmlidXRlc190b3I2CnM5Cmxhbmd1YWdlc2IxczIwCnBlcnNpc3Rfc3RvcmVkX2ZpbGVzaTAKczcKdmVyc2lvbmIxczE2CnByaW1hcnlfcHJvdmlkZXJiMXM1CnByZWZzczE5ClBsZXggTW92aWUgKExlZ2FjeSlzNApuYW1lMQpzNQpNb3ZpZTEKczI5CmNvbS5wbGV4YXBwLmFnZW50cy5sb2NhbG1lZGlhMQpzMjkKY29tLnBsZXhhcHAuYWdlbnRzLnRoZW1vdmllZGIzMwpzMgplbnMyCnN2czIKZnJzMgplc3MyCm5sczIKZGVzMgppdHMyCmRhczIKYXJzMgpjYXMyCnpoczIKY3NzMgpldHMyCmZpczIKZWxzMgpoZXMyCmhpczIKaHVzMgppZHMyCmphczIKa29zMgpsdnMyCm5vczIKZmFzMgpwbHMyCnB0czIKcm9zMgpydXMyCnNrczIKdGhzMgp0cnMyCnVrczIKdmlyMAo_ (3 live) #1a GZIP Token ()
+Jun 13, 2025 12:36:01.935 [260126439768288] DEBUG - [Req#1a] [com.plexapp.system] Sending command over HTTP (GET): /:/plugins/com.plexapp.system/messaging/function/X0FnZW50U2VydmljZTpVcGRhdGVJbmZv/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQo3CmRpY3QKbGlzdApkaWN0Cmxpc3QKbGlzdApsaXN0Cmxpc3QKMgpzMjMKY29tLnBsZXhhcHAuYWdlbnRzLmltZGJzMTAKaWRlbnRpZmllcnIxCnMxMAphZ2VudF9pbmZvMQpyMgoxMApyMwpzMTEKbWVkaWFfdHlwZXNyNApzMTIKYWNjZXB0c19mcm9tbnMxNApmYWxsYmFja19hZ2VudHI1CnMxNApjb250cmlidXRlc190b3I2CnM5Cmxhbmd1YWdlc2IxczIwCnBlcnNpc3Rfc3RvcmVkX2ZpbGVzaTAKczcKdmVyc2lvbmIxczE2CnByaW1hcnlfcHJvdmlkZXJiMXM1CnByZWZzczE5ClBsZXggTW92aWUgKExlZ2FjeSlzNApuYW1lMQpzNQpNb3ZpZTEKczI5CmNvbS5wbGV4YXBwLmFnZW50cy5sb2NhbG1lZGlhMQpzMjkKY29tLnBsZXhhcHAuYWdlbnRzLnRoZW1vdmllZGIzMwpzMgplbnMyCnN2czIKZnJzMgplc3MyCm5sczIKZGVzMgppdHMyCmRhczIKYXJzMgpjYXMyCnpoczIKY3NzMgpldHMyCmZpczIKZWxzMgpoZXMyCmhpczIKaHVzMgppZHMyCmphczIKa29zMgpsdnMyCm5vczIKZmFzMgpwbHMyCnB0czIKcm9zMgpydXMyCnNrczIKdGhzMgp0cnMyCnVrczIKdmlyMAo_
+Jun 13, 2025 12:36:01.935 [260126439768288] DEBUG - [Req#1a/HCl#d] HTTP requesting GET http://127.0.0.1:41607/:/plugins/com.plexapp.system/messaging/function/X0FnZW50U2VydmljZTpVcGRhdGVJbmZv/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQo3CmRpY3QKbGlzdApkaWN0Cmxpc3QKbGlzdApsaXN0Cmxpc3QKMgpzMjMKY29tLnBsZXhhcHAuYWdlbnRzLmltZGJzMTAKaWRlbnRpZmllcnIxCnMxMAphZ2VudF9pbmZvMQpyMgoxMApyMwpzMTEKbWVkaWFfdHlwZXNyNApzMTIKYWNjZXB0c19mcm9tbnMxNApmYWxsYmFja19hZ2VudHI1CnMxNApjb250cmlidXRlc190b3I2CnM5Cmxhbmd1YWdlc2IxczIwCnBlcnNpc3Rfc3RvcmVkX2ZpbGVzaTAKczcKdmVyc2lvbmIxczE2CnByaW1hcnlfcHJvdmlkZXJiMXM1CnByZWZzczE5ClBsZXggTW92aWUgKExlZ2FjeSlzNApuYW1lMQpzNQpNb3ZpZTEKczI5CmNvbS5wbGV4YXBwLmFnZW50cy5sb2NhbG1lZGlhMQpzMjkKY29tLnBsZXhhcHAuYWdlbnRzLnRoZW1vdmllZGIzMwpzMgplbnMyCnN2czIKZnJzMgplc3MyCm5sczIKZGVzMgppdHMyCmRhczIKYXJzMgpjYXMyCnpoczIKY3NzMgpldHMyCmZpczIKZWxzMgpoZXMyCmhpczIKaHVzMgppZHMyCmphczIKa29zMgpsdnMyCm5vczIKZmFzMgpwbHMyCnB0czIKcm9zMgpydXMyCnNrczIKdGhzMgp0cnMyCnVrczIKdmlyMAo_
+Jun 13, 2025 12:36:01.947 [260126489981152] DEBUG - [HttpClient/HCl#d] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:41607/:/plugins/com.plexapp.system/messaging/function/X0FnZW50U2VydmljZTpVcGRhdGVJbmZv/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQo3CmRpY3QKbGlzdApkaWN0Cmxpc3QKbGlzdApsaXN0Cmxpc3QKMgpzMjMKY29tLnBsZXhhcHAuYWdlbnRzLmltZGJzMTAKaWRlbnRpZmllcnIxCnMxMAphZ2VudF9pbmZvMQpyMgoxMApyMwpzMTEKbWVkaWFfdHlwZXNyNApzMTIKYWNjZXB0c19mcm9tbnMxNApmYWxsYmFja19hZ2VudHI1CnMxNApjb250cmlidXRlc190b3I2CnM5Cmxhbmd1YWdlc2IxczIwCnBlcnNpc3Rfc3RvcmVkX2ZpbGVzaTAKczcKdmVyc2lvbmIxczE2CnByaW1hcnlfcHJvdmlkZXJiMXM1CnByZWZzczE5ClBsZXggTW92aWUgKExlZ2FjeSlzNApuYW1lMQpzNQpNb3ZpZTEKczI5CmNvbS5wbGV4YXBwLmFnZW50cy5sb2NhbG1lZGlhMQpzMjkKY29tLnBsZXhhcHAuYWdlbnRzLnRoZW1vdmllZGIzMwpzMgplbnMyCnN2czIKZnJzMgplc3MyCm5sczIKZGVzMgppdHMyCmRhczIKYXJzMgpjYXMyCnpoczIKY3NzMgpldHMyCmZpczIKZWxzMgpoZXMyCmhpczIKaHVzMgppZHMyCmphczIKa29zMgpsdnMyCm5vczIKZmFzMgpwbHMyCnB0czIKcm9zMgpydXMyCnNrczIKdGhzMgp0cnMyCnVrczIKdmlyMAo_
+Jun 13, 2025 12:36:01.947 [260126439768288] DEBUG - [Req#1a] [com.plexapp.system] HTTP reply status 200, with 16 bytes of content.
+Jun 13, 2025 12:36:01.947 [260126503588064] DEBUG - Completed: [127.0.0.1:36946] 200 GET /:/plugins/com.plexapp.system/messaging/function/X0FnZW50U2VydmljZTpVcGRhdGVJbmZv/Y2VyZWFsMQoxCmxpc3QKMApyMAo_/Y2VyZWFsMQo3CmRpY3QKbGlzdApkaWN0Cmxpc3QKbGlzdApsaXN0Cmxpc3QKMgpzMjMKY29tLnBsZXhhcHAuYWdlbnRzLmltZGJzMTAKaWRlbnRpZmllcnIxCnMxMAphZ2VudF9pbmZvMQpyMgoxMApyMwpzMTEKbWVkaWFfdHlwZXNyNApzMTIKYWNjZXB0c19mcm9tbnMxNApmYWxsYmFja19hZ2VudHI1CnMxNApjb250cmlidXRlc190b3I2CnM5Cmxhbmd1YWdlc2IxczIwCnBlcnNpc3Rfc3RvcmVkX2ZpbGVzaTAKczcKdmVyc2lvbmIxczE2CnByaW1hcnlfcHJvdmlkZXJiMXM1CnByZWZzczE5ClBsZXggTW92aWUgKExlZ2FjeSlzNApuYW1lMQpzNQpNb3ZpZTEKczI5CmNvbS5wbGV4YXBwLmFnZW50cy5sb2NhbG1lZGlhMQpzMjkKY29tLnBsZXhhcHAuYWdlbnRzLnRoZW1vdmllZGIzMwpzMgplbnMyCnN2czIKZnJzMgplc3MyCm5sczIKZGVzMgppdHMyCmRhczIKYXJzMgpjYXMyCnpoczIKY3NzMgpldHMyCmZpczIKZWxzMgpoZXMyCmhpczIKaHVzMgppZHMyCmphczIKa29zMgpsdnMyCm5vczIKZmFzMgpwbHMyCnB0czIKcm9zMgpydXMyCnNrczIKdGhzMgp0cnMyCnVrczIKdmlyMAo_ (3 live) #1a GZIP 12ms 415 bytes
+Jun 13, 2025 12:36:01.958 [260126421426400] DEBUG - [Req#e] Reading 148 bytes in the body, code is 200
+Jun 13, 2025 12:36:01.959 [260126421426400] DEBUG - [Req#e] [com.plexapp.agents.imdb] Plug-in running on port 45927.
+Jun 13, 2025 12:36:01.959 [260126421426400] DEBUG - [Req#e] Read configuration for [com.plexapp.agents.imdb], had 0 prefixes
+Jun 13, 2025 12:36:01.960 [260126421426400] DEBUG - [Req#e] [com.plexapp.agents.imdb] Sending command over HTTP (GET): /:/plugins/com.plexapp.agents.imdb/prefs
+Jun 13, 2025 12:36:01.960 [260126421426400] DEBUG - [Req#e/HCl#e] HTTP requesting GET http://127.0.0.1:45927/:/plugins/com.plexapp.agents.imdb/prefs
+Jun 13, 2025 12:36:01.983 [260126489981152] DEBUG - [HttpClient/HCl#e] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:45927/:/plugins/com.plexapp.agents.imdb/prefs
+Jun 13, 2025 12:36:01.983 [260126421426400] DEBUG - [Req#e] [com.plexapp.agents.imdb] HTTP reply status 200, with 2224 bytes of content.
+Jun 13, 2025 12:36:01.984 [260126421426400] DEBUG - Caching document http://127.0.0.1:32400/:/plugins/com.plexapp.agents.imdb/prefs as a31335d27e4c987d37b168a4cb97ef0693b40e50
+Jun 13, 2025 12:36:01.984 [260126421426400] DEBUG - IVA: Downloading trailer lists.
+Jun 13, 2025 12:36:02.830 [260126455582944] WARN - [Analytics] Attempting to send unrecognized metric (server:startup). Skipping.
+Jun 13, 2025 12:36:02.830 [260126459801824] WARN - [Analytics] Attempting to send unrecognized metric (server:agent_status). Skipping.
+Jun 13, 2025 12:36:03.559 [260126489981152] DEBUG - [HttpClient/HCl#b] HTTP/1.1 (2.4s) 200 response from POST http://127.0.0.1:32600/devices/discover
+Jun 13, 2025 12:36:04.827 [260126461911264] DEBUG - Grabber: Cleaning up orphaned grabs.
+Jun 13, 2025 12:36:04.827 [260126461911264] DEBUG - Grabber: Cleaned up 0 decrepit directories in 0.0 sec.
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Activity: registered new activity 4ae6b4a4-3ee0-4a2b-9d8a-b2e27536dbf6 - "Processing subscriptions"
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Subscription: Scheduling subscriptions.
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Subscription: Initialized 0 schedulers.
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Subscription: Starting with 0 grabs, scheduled 0 active ones preemptively.
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Subscription: Scheduled all subscriptions in 0 ms.
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Activity: Ended activity 4ae6b4a4-3ee0-4a2b-9d8a-b2e27536dbf6.
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Subscription: There are 0 active grabs at the end.
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Activity: Ended activity 498e5c02-de7b-4cd3-8eb9-ffad45ce8494.
+Jun 13, 2025 12:36:04.829 [260126461911264] DEBUG - Subscription: Refreshed all content in 2 ms.
+Jun 13, 2025 12:36:06.989 [260126444716256] ERROR - HTTP -6 downloading url https://meta.plex.tv/t/theater?language=en&redband=0&subtitleLanguage=en
+Jun 13, 2025 12:36:06.989 [260126421426400] ERROR - IVA: Error downloading trailers for source 1.
+Jun 13, 2025 12:36:09.344 [260126439768288] DEBUG - Request: [10.42.0.1:42556 (Subnet)] GET / (3 live) #1c
+Jun 13, 2025 12:36:09.345 [260126501478624] DEBUG - Completed: [10.42.0.1:42556] 200 GET / (3 live) #1c 1ms 2762 bytes
+Jun 13, 2025 12:36:11.993 [260126444716256] ERROR - HTTP -6 downloading url https://meta.plex.tv/t/video?language=en&redband=0&subtitleLanguage=en
+Jun 13, 2025 12:36:11.993 [260126421426400] ERROR - IVA: Error downloading trailers for source 2.
+Jun 13, 2025 12:36:19.348 [260126439768288] DEBUG - Request: [10.42.0.1:60296 (Subnet)] GET / (2 live) #1f
+Jun 13, 2025 12:36:19.350 [260126503588064] DEBUG - Completed: [10.42.0.1:60296] 200 GET / (2 live) #1f 4ms 2762 bytes
+Jun 13, 2025 12:36:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:39582 (Subnet)] GET / (2 live) #22
+Jun 13, 2025 12:36:20.992 [260126503588064] DEBUG - Completed: [10.42.0.1:39582] 200 GET / (2 live) #22 0ms 2762 bytes
+Jun 13, 2025 12:36:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:39596 (Subnet)] GET / (2 live) #24
+Jun 13, 2025 12:36:29.345 [260126503588064] DEBUG - Completed: [10.42.0.1:39596] 200 GET / (2 live) #24 0ms 2762 bytes
+Jun 13, 2025 12:36:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:47506 (Subnet)] GET / (2 live) #26
+Jun 13, 2025 12:36:39.345 [260126503588064] DEBUG - Completed: [10.42.0.1:47506] 200 GET / (2 live) #26 1ms 2762 bytes
+Jun 13, 2025 12:36:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:50348 (Subnet)] GET / (2 live) #28
+Jun 13, 2025 12:36:49.344 [260126501478624] DEBUG - Completed: [10.42.0.1:50348] 200 GET / (2 live) #28 0ms 2762 bytes
+Jun 13, 2025 12:36:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:43822 (Subnet)] GET / (2 live) #2a
+Jun 13, 2025 12:36:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:43822] 200 GET / (2 live) #2a 0ms 2762 bytes
+Jun 13, 2025 12:36:59.343 [260126439768288] DEBUG - Request: [10.42.0.1:43830 (Subnet)] GET / (2 live) #2c
+Jun 13, 2025 12:36:59.344 [260126503588064] DEBUG - Completed: [10.42.0.1:43830] 200 GET / (2 live) #2c 0ms 2762 bytes
+Jun 13, 2025 12:37:09.343 [260126439768288] DEBUG - Request: [10.42.0.1:44466 (Subnet)] GET / (2 live) #2e
+Jun 13, 2025 12:37:09.344 [260126503588064] DEBUG - Completed: [10.42.0.1:44466] 200 GET / (2 live) #2e 0ms 2762 bytes
+Jun 13, 2025 12:37:19.343 [260126439768288] DEBUG - Request: [10.42.0.1:57260 (Subnet)] GET / (2 live) #30
+Jun 13, 2025 12:37:19.344 [260126503588064] DEBUG - Completed: [10.42.0.1:57260] 200 GET / (2 live) #30 0ms 2762 bytes
+Jun 13, 2025 12:37:20.991 [260126439768288] DEBUG - Request: [10.42.0.1:56038 (Subnet)] GET / (2 live) #32
+Jun 13, 2025 12:37:20.991 [260126503588064] DEBUG - Completed: [10.42.0.1:56038] 200 GET / (2 live) #32 0ms 2762 bytes
+Jun 13, 2025 12:37:29.345 [260126439768288] DEBUG - Request: [10.42.0.1:56040 (Subnet)] GET / (2 live) #34
+Jun 13, 2025 12:37:29.346 [260126503588064] DEBUG - Completed: [10.42.0.1:56040] 200 GET / (2 live) #34 2ms 2762 bytes
+Jun 13, 2025 12:37:39.343 [260126439768288] DEBUG - Request: [10.42.0.1:37396 (Subnet)] GET / (2 live) #36
+Jun 13, 2025 12:37:39.344 [260126503588064] DEBUG - Completed: [10.42.0.1:37396] 200 GET / (2 live) #36 0ms 2762 bytes
+Jun 13, 2025 12:37:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:36714 (Subnet)] GET / (2 live) #38
+Jun 13, 2025 12:37:49.346 [260126501478624] DEBUG - Completed: [10.42.0.1:36714] 200 GET / (2 live) #38 2ms 2762 bytes
+Jun 13, 2025 12:37:50.850 [260126495404256] DEBUG - BPQ: [Starting] -> [Processing]
+Jun 13, 2025 12:37:50.852 [260126495404256] DEBUG - BPQ: generating queue items from 0 generator(s)
+Jun 13, 2025 12:37:50.852 [260126495404256] DEBUG - BPQ: generated 0 item(s) for queue
+Jun 13, 2025 12:37:50.853 [260126495404256] DEBUG - BPQ: [Processing] -> [Idle]
+Jun 13, 2025 12:37:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:46320 (Subnet)] GET / (2 live) #3a
+Jun 13, 2025 12:37:50.992 [260126503588064] DEBUG - Completed: [10.42.0.1:46320] 200 GET / (2 live) #3a 0ms 2762 bytes
+Jun 13, 2025 12:37:54.700 [260126439768288] DEBUG - Request: [127.0.0.1:35674 (Loopback)] GET /servers (2 live) #3c GZIP Token ()
+Jun 13, 2025 12:37:54.700 [260126503588064] DEBUG - Completed: [127.0.0.1:35674] 200 GET /servers (2 live) #3c GZIP 0ms 499 bytes
+Jun 13, 2025 12:37:54.703 [260126439768288] DEBUG - Request: [127.0.0.1:35680 (Loopback)] GET / (2 live) #3e GZIP Token ()
+Jun 13, 2025 12:37:54.704 [260126503588064] DEBUG - Completed: [127.0.0.1:35680] 200 GET / (2 live) #3e GZIP 0ms 1187 bytes
+Jun 13, 2025 12:37:54.707 [260126439768288] DEBUG - Request: [127.0.0.1:35688 (Loopback)] GET /library/sections (2 live) #40 GZIP Token ()
+Jun 13, 2025 12:37:54.711 [260126503588064] DEBUG - Completed: [127.0.0.1:35688] 200 GET /library/sections (2 live) #40 GZIP 4ms 403 bytes
+Jun 13, 2025 12:37:54.713 [260126439768288] DEBUG - Request: [127.0.0.1:35694 (Loopback)] GET /channels/all (2 live) #42 GZIP Token ()
+Jun 13, 2025 12:37:54.714 [260126503588064] DEBUG - Completed: [127.0.0.1:35694] 200 GET /channels/all (2 live) #42 GZIP 0ms 387 bytes
+Jun 13, 2025 12:37:54.716 [260126439768288] DEBUG - Request: [127.0.0.1:35708 (Loopback)] GET /library/sections (2 live) #44 GZIP Token ()
+Jun 13, 2025 12:37:54.717 [260126503588064] DEBUG - Completed: [127.0.0.1:35708] 200 GET /library/sections (2 live) #44 GZIP 0ms 403 bytes
+Jun 13, 2025 12:37:54.719 [260126439768288] DEBUG - Request: [127.0.0.1:35710 (Loopback)] GET /channels/all (2 live) #46 GZIP Token ()
+Jun 13, 2025 12:37:54.719 [260126503588064] DEBUG - Completed: [127.0.0.1:35710] 200 GET /channels/all (2 live) #46 GZIP 0ms 387 bytes
+Jun 13, 2025 12:37:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:46336 (Subnet)] GET / (2 live) #48
+Jun 13, 2025 12:37:59.346 [260126503588064] DEBUG - Completed: [10.42.0.1:46336] 200 GET / (2 live) #48 2ms 2762 bytes
+Jun 13, 2025 12:38:09.345 [260126439768288] DEBUG - Request: [10.42.0.1:42290 (Subnet)] GET / (2 live) #4a
+Jun 13, 2025 12:38:09.346 [260126501478624] DEBUG - Completed: [10.42.0.1:42290] 200 GET / (2 live) #4a 1ms 2762 bytes
+Jun 13, 2025 12:38:19.344 [260126439768288] DEBUG - Request: [10.42.0.1:50744 (Subnet)] GET / (2 live) #4c
+Jun 13, 2025 12:38:19.345 [260126501478624] DEBUG - Completed: [10.42.0.1:50744] 200 GET / (2 live) #4c 0ms 2762 bytes
+Jun 13, 2025 12:38:20.991 [260126439768288] DEBUG - Request: [10.42.0.1:60636 (Subnet)] GET / (3 live) #4e
+Jun 13, 2025 12:38:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:60636] 200 GET / (3 live) #4e 0ms 2762 bytes
+Jun 13, 2025 12:38:29.343 [260126439768288] DEBUG - Request: [10.42.0.1:60642 (Subnet)] GET / (2 live) #4f
+Jun 13, 2025 12:38:29.344 [260126503588064] DEBUG - Completed: [10.42.0.1:60642] 200 GET / (2 live) #4f 0ms 2762 bytes
+Jun 13, 2025 12:38:39.343 [260126439768288] DEBUG - Request: [10.42.0.1:36038 (Subnet)] GET / (2 live) #52
+Jun 13, 2025 12:38:39.344 [260126503588064] DEBUG - Completed: [10.42.0.1:36038] 200 GET / (2 live) #52 0ms 2762 bytes
+Jun 13, 2025 12:38:49.343 [260126439768288] DEBUG - Request: [10.42.0.1:55558 (Subnet)] GET / (2 live) #54
+Jun 13, 2025 12:38:49.345 [260126503588064] DEBUG - Completed: [10.42.0.1:55558] 200 GET / (2 live) #54 1ms 2762 bytes
+Jun 13, 2025 12:38:50.992 [260126439768288] DEBUG - Request: [10.42.0.1:50280 (Subnet)] GET / (2 live) #56
+Jun 13, 2025 12:38:50.993 [260126503588064] DEBUG - Completed: [10.42.0.1:50280] 200 GET / (2 live) #56 0ms 2762 bytes
+Jun 13, 2025 12:38:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:50286 (Subnet)] GET / (2 live) #58
+Jun 13, 2025 12:38:59.345 [260126503588064] DEBUG - Completed: [10.42.0.1:50286] 200 GET / (2 live) #58 0ms 2762 bytes
+Jun 13, 2025 12:39:09.343 [260126439768288] DEBUG - Request: [10.42.0.1:44594 (Subnet)] GET / (2 live) #5a
+Jun 13, 2025 12:39:09.346 [260126503588064] DEBUG - Completed: [10.42.0.1:44594] 200 GET / (2 live) #5a 2ms 2762 bytes
+Jun 13, 2025 12:39:19.344 [260126439768288] DEBUG - Request: [10.42.0.1:43180 (Subnet)] GET / (2 live) #5c
+Jun 13, 2025 12:39:19.344 [260126501478624] DEBUG - Completed: [10.42.0.1:43180] 200 GET / (2 live) #5c 0ms 2762 bytes
+Jun 13, 2025 12:39:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:48502 (Subnet)] GET / (2 live) #5e
+Jun 13, 2025 12:39:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:48502] 200 GET / (2 live) #5e 0ms 2762 bytes
+Jun 13, 2025 12:39:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:48510 (Subnet)] GET / (2 live) #60
+Jun 13, 2025 12:39:29.345 [260126501478624] DEBUG - Completed: [10.42.0.1:48510] 200 GET / (2 live) #60 0ms 2762 bytes
+Jun 13, 2025 12:39:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:47744 (Subnet)] GET / (2 live) #62
+Jun 13, 2025 12:39:39.345 [260126503588064] DEBUG - Completed: [10.42.0.1:47744] 200 GET / (2 live) #62 0ms 2762 bytes
+Jun 13, 2025 12:39:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:51830 (Subnet)] GET / (2 live) #64
+Jun 13, 2025 12:39:49.345 [260126501478624] DEBUG - Completed: [10.42.0.1:51830] 200 GET / (2 live) #64 0ms 2762 bytes
+Jun 13, 2025 12:39:50.992 [260126439768288] DEBUG - Request: [10.42.0.1:50080 (Subnet)] GET / (2 live) #66
+Jun 13, 2025 12:39:50.992 [260126503588064] DEBUG - Completed: [10.42.0.1:50080] 200 GET / (2 live) #66 0ms 2762 bytes
+Jun 13, 2025 12:39:59.384 [260126439768288] DEBUG - Request: [10.42.0.1:50094 (Subnet)] GET / (2 live) #68
+Jun 13, 2025 12:39:59.385 [260126501478624] DEBUG - Completed: [10.42.0.1:50094] 200 GET / (2 live) #68 0ms 2762 bytes
+Jun 13, 2025 12:40:09.346 [260126439768288] DEBUG - Request: [10.42.0.1:41786 (Subnet)] GET / (2 live) #6a
+Jun 13, 2025 12:40:09.349 [260126501478624] DEBUG - Completed: [10.42.0.1:41786] 200 GET / (2 live) #6a 3ms 2762 bytes
+Jun 13, 2025 12:40:19.344 [260126439768288] DEBUG - Request: [10.42.0.1:58018 (Subnet)] GET / (2 live) #6c
+Jun 13, 2025 12:40:19.346 [260126503588064] DEBUG - Completed: [10.42.0.1:58018] 200 GET / (2 live) #6c 1ms 2762 bytes
+Jun 13, 2025 12:40:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:54654 (Subnet)] GET / (2 live) #6e
+Jun 13, 2025 12:40:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:54654] 200 GET / (2 live) #6e 0ms 2762 bytes
+Jun 13, 2025 12:40:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:54664 (Subnet)] GET / (2 live) #70
+Jun 13, 2025 12:40:29.345 [260126503588064] DEBUG - Completed: [10.42.0.1:54664] 200 GET / (2 live) #70 0ms 2762 bytes
+Jun 13, 2025 12:40:39.345 [260126439768288] DEBUG - Request: [10.42.0.1:46928 (Subnet)] GET / (2 live) #72
+Jun 13, 2025 12:40:39.346 [260126501478624] DEBUG - Completed: [10.42.0.1:46928] 200 GET / (2 live) #72 1ms 2762 bytes
+Jun 13, 2025 12:40:49.345 [260126439768288] DEBUG - Request: [10.42.0.1:48400 (Subnet)] GET / (2 live) #74
+Jun 13, 2025 12:40:49.347 [260126503588064] DEBUG - Completed: [10.42.0.1:48400] 200 GET / (2 live) #74 2ms 2762 bytes
+Jun 13, 2025 12:40:50.992 [260126439768288] DEBUG - Request: [10.42.0.1:45178 (Subnet)] GET / (2 live) #76
+Jun 13, 2025 12:40:50.992 [260126503588064] DEBUG - Completed: [10.42.0.1:45178] 200 GET / (2 live) #76 0ms 2762 bytes
+Jun 13, 2025 12:40:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:45186 (Subnet)] GET / (2 live) #78
+Jun 13, 2025 12:40:59.344 [260126501478624] DEBUG - Completed: [10.42.0.1:45186] 200 GET / (2 live) #78 0ms 2762 bytes
+Jun 13, 2025 12:40:59.853 [260126429864160] DEBUG - [HCl#11] HTTP requesting GET https://plex.tv/api/v2/features?X-Plex-Token=
+Jun 13, 2025 12:41:04.860 [260126489981152] WARN - [HttpClient/HCl#11] HTTP error requesting GET https://plex.tv/api/v2/features?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:41:04.861 [260126429864160] WARN - FeatureManager: Couldn't get features. Trying again soon.
+Jun 13, 2025 12:41:09.347 [260126439768288] DEBUG - Request: [10.42.0.1:47780 (Subnet)] GET / (2 live) #7a
+Jun 13, 2025 12:41:09.351 [260126503588064] DEBUG - Completed: [10.42.0.1:47780] 200 GET / (2 live) #7a 3ms 2762 bytes
+Jun 13, 2025 12:41:19.360 [260126439768288] DEBUG - Request: [10.42.0.1:45764 (Subnet)] GET / (2 live) #7c
+Jun 13, 2025 12:41:19.363 [260126501478624] DEBUG - Completed: [10.42.0.1:45764] 200 GET / (2 live) #7c 2ms 2762 bytes
+Jun 13, 2025 12:41:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:59638 (Subnet)] GET / (2 live) #7e
+Jun 13, 2025 12:41:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:59638] 200 GET / (2 live) #7e 0ms 2762 bytes
+Jun 13, 2025 12:41:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:59650 (Subnet)] GET / (2 live) #80
+Jun 13, 2025 12:41:29.345 [260126503588064] DEBUG - Completed: [10.42.0.1:59650] 200 GET / (2 live) #80 0ms 2762 bytes
+Jun 13, 2025 12:41:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:40944 (Subnet)] GET / (2 live) #82
+Jun 13, 2025 12:41:39.346 [260126503588064] DEBUG - Completed: [10.42.0.1:40944] 200 GET / (2 live) #82 1ms 2762 bytes
+Jun 13, 2025 12:41:49.346 [260126439768288] DEBUG - Request: [10.42.0.1:36980 (Subnet)] GET / (2 live) #84
+Jun 13, 2025 12:41:49.348 [260126503588064] DEBUG - Completed: [10.42.0.1:36980] 200 GET / (2 live) #84 2ms 2762 bytes
+Jun 13, 2025 12:41:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:44968 (Subnet)] GET / (2 live) #86
+Jun 13, 2025 12:41:50.992 [260126503588064] DEBUG - Completed: [10.42.0.1:44968] 200 GET / (2 live) #86 0ms 2762 bytes
+Jun 13, 2025 12:41:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:44972 (Subnet)] GET / (2 live) #88
+Jun 13, 2025 12:41:59.345 [260126501478624] DEBUG - Completed: [10.42.0.1:44972] 200 GET / (2 live) #88 1ms 2762 bytes
+Jun 13, 2025 12:42:09.344 [260126439768288] DEBUG - Request: [10.42.0.1:35984 (Subnet)] GET / (2 live) #8a
+Jun 13, 2025 12:42:09.344 [260126501478624] DEBUG - Completed: [10.42.0.1:35984] 200 GET / (2 live) #8a 0ms 2762 bytes
+Jun 13, 2025 12:42:19.343 [260126439768288] DEBUG - Request: [10.42.0.1:36024 (Subnet)] GET / (2 live) #8c
+Jun 13, 2025 12:42:19.344 [260126503588064] DEBUG - Completed: [10.42.0.1:36024] 200 GET / (2 live) #8c 0ms 2762 bytes
+Jun 13, 2025 12:42:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:55226 (Subnet)] GET / (2 live) #8e
+Jun 13, 2025 12:42:20.992 [260126503588064] DEBUG - Completed: [10.42.0.1:55226] 200 GET / (2 live) #8e 0ms 2762 bytes
+Jun 13, 2025 12:42:29.345 [260126439768288] DEBUG - Request: [10.42.0.1:55232 (Subnet)] GET / (2 live) #90
+Jun 13, 2025 12:42:29.346 [260126503588064] DEBUG - Completed: [10.42.0.1:55232] 200 GET / (2 live) #90 1ms 2762 bytes
+Jun 13, 2025 12:42:39.345 [260126439768288] DEBUG - Request: [10.42.0.1:35902 (Subnet)] GET / (2 live) #92
+Jun 13, 2025 12:42:39.346 [260126503588064] DEBUG - Completed: [10.42.0.1:35902] 200 GET / (2 live) #92 0ms 2762 bytes
+Jun 13, 2025 12:42:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:59816 (Subnet)] GET / (2 live) #94
+Jun 13, 2025 12:42:49.345 [260126503588064] DEBUG - Completed: [10.42.0.1:59816] 200 GET / (2 live) #94 0ms 2762 bytes
+Jun 13, 2025 12:42:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:43876 (Subnet)] GET / (3 live) #96
+Jun 13, 2025 12:42:50.992 [260126503588064] DEBUG - Completed: [10.42.0.1:43876] 200 GET / (3 live) #96 0ms 2762 bytes
+Jun 13, 2025 12:42:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:43886 (Subnet)] GET / (2 live) #97
+Jun 13, 2025 12:42:59.345 [260126501478624] DEBUG - Completed: [10.42.0.1:43886] 200 GET / (2 live) #97 0ms 2762 bytes
+Jun 13, 2025 12:43:09.345 [260126439768288] DEBUG - Request: [10.42.0.1:52102 (Subnet)] GET / (2 live) #9a
+Jun 13, 2025 12:43:09.346 [260126503588064] DEBUG - Completed: [10.42.0.1:52102] 200 GET / (2 live) #9a 1ms 2762 bytes
+Jun 13, 2025 12:43:19.346 [260126439768288] DEBUG - Request: [10.42.0.1:47654 (Subnet)] GET / (2 live) #9c
+Jun 13, 2025 12:43:19.347 [260126501478624] DEBUG - Completed: [10.42.0.1:47654] 200 GET / (2 live) #9c 1ms 2762 bytes
+Jun 13, 2025 12:43:20.991 [260126439768288] DEBUG - Request: [10.42.0.1:39026 (Subnet)] GET / (2 live) #9e
+Jun 13, 2025 12:43:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:39026] 200 GET / (2 live) #9e 0ms 2762 bytes
+Jun 13, 2025 12:43:29.347 [260126439768288] DEBUG - Request: [10.42.0.1:39038 (Subnet)] GET / (2 live) #a0
+Jun 13, 2025 12:43:29.348 [260126503588064] DEBUG - Completed: [10.42.0.1:39038] 200 GET / (2 live) #a0 1ms 2762 bytes
+Jun 13, 2025 12:43:39.343 [260126439768288] DEBUG - Request: [10.42.0.1:44560 (Subnet)] GET / (2 live) #a2
+Jun 13, 2025 12:43:39.344 [260126503588064] DEBUG - Completed: [10.42.0.1:44560] 200 GET / (2 live) #a2 0ms 2762 bytes
+Jun 13, 2025 12:43:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:59492 (Subnet)] GET / (2 live) #a4
+Jun 13, 2025 12:43:49.346 [260126503588064] DEBUG - Completed: [10.42.0.1:59492] 200 GET / (2 live) #a4 2ms 2762 bytes
+Jun 13, 2025 12:43:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:59106 (Subnet)] GET / (2 live) #a6
+Jun 13, 2025 12:43:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:59106] 200 GET / (2 live) #a6 0ms 2762 bytes
+Jun 13, 2025 12:43:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:59118 (Subnet)] GET / (2 live) #a8
+Jun 13, 2025 12:43:59.345 [260126503588064] DEBUG - Completed: [10.42.0.1:59118] 200 GET / (2 live) #a8 0ms 2762 bytes
+Jun 13, 2025 12:44:09.343 [260126439768288] DEBUG - Request: [10.42.0.1:37826 (Subnet)] GET / (2 live) #aa
+Jun 13, 2025 12:44:09.344 [260126503588064] DEBUG - Completed: [10.42.0.1:37826] 200 GET / (2 live) #aa 0ms 2762 bytes
+Jun 13, 2025 12:44:19.344 [260126439768288] DEBUG - Request: [10.42.0.1:45534 (Subnet)] GET / (2 live) #ac
+Jun 13, 2025 12:44:19.345 [260126503588064] DEBUG - Completed: [10.42.0.1:45534] 200 GET / (2 live) #ac 0ms 2762 bytes
+Jun 13, 2025 12:44:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:32950 (Subnet)] GET / (2 live) #ae
+Jun 13, 2025 12:44:20.993 [260126503588064] DEBUG - Completed: [10.42.0.1:32950] 200 GET / (2 live) #ae 1ms 2762 bytes
+Jun 13, 2025 12:44:29.345 [260126439768288] DEBUG - Request: [10.42.0.1:32954 (Subnet)] GET / (2 live) #b0
+Jun 13, 2025 12:44:29.346 [260126501478624] DEBUG - Completed: [10.42.0.1:32954] 200 GET / (2 live) #b0 1ms 2762 bytes
+Jun 13, 2025 12:44:39.345 [260126439768288] DEBUG - Request: [10.42.0.1:42840 (Subnet)] GET / (2 live) #b2
+Jun 13, 2025 12:44:39.348 [260126501478624] DEBUG - Completed: [10.42.0.1:42840] 200 GET / (2 live) #b2 3ms 2762 bytes
+Jun 13, 2025 12:44:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:37548 (Subnet)] GET / (2 live) #b4
+Jun 13, 2025 12:44:49.345 [260126503588064] DEBUG - Completed: [10.42.0.1:37548] 200 GET / (2 live) #b4 0ms 2762 bytes
+Jun 13, 2025 12:44:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:47766 (Subnet)] GET / (3 live) #b6
+Jun 13, 2025 12:44:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:47766] 200 GET / (3 live) #b6 0ms 2762 bytes
+Jun 13, 2025 12:44:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:47782 (Subnet)] GET / (2 live) #b7
+Jun 13, 2025 12:44:59.345 [260126503588064] DEBUG - Completed: [10.42.0.1:47782] 200 GET / (2 live) #b7 0ms 2762 bytes
+Jun 13, 2025 12:45:09.348 [260126439768288] DEBUG - Request: [10.42.0.1:49212 (Subnet)] GET / (2 live) #ba
+Jun 13, 2025 12:45:09.352 [260126501478624] DEBUG - Completed: [10.42.0.1:49212] 200 GET / (2 live) #ba 5ms 2762 bytes
+Jun 13, 2025 12:45:19.349 [260126439768288] DEBUG - Request: [10.42.0.1:56768 (Subnet)] GET / (2 live) #bc
+Jun 13, 2025 12:45:19.351 [260126501478624] DEBUG - Completed: [10.42.0.1:56768] 200 GET / (2 live) #bc 2ms 2762 bytes
+Jun 13, 2025 12:45:20.991 [260126439768288] DEBUG - Request: [10.42.0.1:39190 (Subnet)] GET / (2 live) #be
+Jun 13, 2025 12:45:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:39190] 200 GET / (2 live) #be 0ms 2762 bytes
+Jun 13, 2025 12:45:29.406 [260126439768288] DEBUG - Request: [10.42.0.1:39196 (Subnet)] GET / (2 live) #c0
+Jun 13, 2025 12:45:29.409 [260126501478624] DEBUG - Completed: [10.42.0.1:39196] 200 GET / (2 live) #c0 4ms 2762 bytes
+Jun 13, 2025 12:45:39.345 [260126439768288] DEBUG - Request: [10.42.0.1:38448 (Subnet)] GET / (2 live) #c2
+Jun 13, 2025 12:45:39.347 [260126501478624] DEBUG - Completed: [10.42.0.1:38448] 200 GET / (2 live) #c2 1ms 2762 bytes
+Jun 13, 2025 12:45:49.345 [260126439768288] DEBUG - Request: [10.42.0.1:51730 (Subnet)] GET / (2 live) #c4
+Jun 13, 2025 12:45:49.346 [260126503588064] DEBUG - Completed: [10.42.0.1:51730] 200 GET / (2 live) #c4 1ms 2762 bytes
+Jun 13, 2025 12:45:50.992 [260126439768288] DEBUG - Request: [10.42.0.1:39150 (Subnet)] GET / (2 live) #c6
+Jun 13, 2025 12:45:50.993 [260126503588064] DEBUG - Completed: [10.42.0.1:39150] 200 GET / (2 live) #c6 0ms 2762 bytes
+Jun 13, 2025 12:45:59.345 [260126439768288] DEBUG - Request: [10.42.0.1:39158 (Subnet)] GET / (2 live) #c8
+Jun 13, 2025 12:45:59.348 [260126501478624] DEBUG - Completed: [10.42.0.1:39158] 200 GET / (2 live) #c8 2ms 2762 bytes
+Jun 13, 2025 12:46:04.863 [260126461911264] DEBUG - [HCl#12] HTTP requesting GET https://plex.tv/api/v2/features?X-Plex-Token=
+Jun 13, 2025 12:46:09.346 [260126439768288] DEBUG - Request: [10.42.0.1:42726 (Subnet)] GET / (2 live) #ca
+Jun 13, 2025 12:46:09.348 [260126503588064] DEBUG - Completed: [10.42.0.1:42726] 200 GET / (2 live) #ca 2ms 2762 bytes
+Jun 13, 2025 12:46:09.866 [260126489981152] WARN - [HttpClient/HCl#12] HTTP error requesting GET https://plex.tv/api/v2/features?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:46:09.868 [260126461911264] WARN - FeatureManager: Couldn't get features. Trying again soon.
+Jun 13, 2025 12:46:19.344 [260126439768288] DEBUG - Request: [10.42.0.1:34050 (Subnet)] GET / (2 live) #cc
+Jun 13, 2025 12:46:19.344 [260126501478624] DEBUG - Completed: [10.42.0.1:34050] 200 GET / (2 live) #cc 0ms 2762 bytes
+Jun 13, 2025 12:46:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:45290 (Subnet)] GET / (2 live) #ce
+Jun 13, 2025 12:46:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:45290] 200 GET / (2 live) #ce 0ms 2762 bytes
+Jun 13, 2025 12:46:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:45302 (Subnet)] GET / (2 live) #d0
+Jun 13, 2025 12:46:29.345 [260126501478624] DEBUG - Completed: [10.42.0.1:45302] 200 GET / (2 live) #d0 1ms 2762 bytes
+Jun 13, 2025 12:46:39.345 [260126439768288] DEBUG - Request: [10.42.0.1:38346 (Subnet)] GET / (2 live) #d2
+Jun 13, 2025 12:46:39.347 [260126503588064] DEBUG - Completed: [10.42.0.1:38346] 200 GET / (2 live) #d2 1ms 2762 bytes
+Jun 13, 2025 12:46:49.346 [260126439768288] DEBUG - Request: [10.42.0.1:39640 (Subnet)] GET / (2 live) #d4
+Jun 13, 2025 12:46:49.349 [260126501478624] DEBUG - Completed: [10.42.0.1:39640] 200 GET / (2 live) #d4 3ms 2762 bytes
+Jun 13, 2025 12:46:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:47846 (Subnet)] GET / (2 live) #d6
+Jun 13, 2025 12:46:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:47846] 200 GET / (2 live) #d6 0ms 2762 bytes
+Jun 13, 2025 12:46:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:47850 (Subnet)] GET / (2 live) #d8
+Jun 13, 2025 12:46:59.344 [260126501478624] DEBUG - Completed: [10.42.0.1:47850] 200 GET / (2 live) #d8 0ms 2762 bytes
+Jun 13, 2025 12:47:09.346 [260126439768288] DEBUG - Request: [10.42.0.1:37794 (Subnet)] GET / (2 live) #da
+Jun 13, 2025 12:47:09.347 [260126503588064] DEBUG - Completed: [10.42.0.1:37794] 200 GET / (2 live) #da 1ms 2762 bytes
+Jun 13, 2025 12:47:19.345 [260126439768288] DEBUG - Request: [10.42.0.1:44170 (Subnet)] GET / (2 live) #dc
+Jun 13, 2025 12:47:19.345 [260126501478624] DEBUG - Completed: [10.42.0.1:44170] 200 GET / (2 live) #dc 0ms 2762 bytes
+Jun 13, 2025 12:47:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:49214 (Subnet)] GET / (2 live) #de
+Jun 13, 2025 12:47:20.992 [260126503588064] DEBUG - Completed: [10.42.0.1:49214] 200 GET / (2 live) #de 0ms 2762 bytes
+Jun 13, 2025 12:47:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:49224 (Subnet)] GET / (2 live) #e0
+Jun 13, 2025 12:47:29.346 [260126503588064] DEBUG - Completed: [10.42.0.1:49224] 200 GET / (2 live) #e0 2ms 2762 bytes
+Jun 13, 2025 12:47:39.346 [260126439768288] DEBUG - Request: [10.42.0.1:46828 (Subnet)] GET / (2 live) #e2
+Jun 13, 2025 12:47:39.347 [260126501478624] DEBUG - Completed: [10.42.0.1:46828] 200 GET / (2 live) #e2 2ms 2762 bytes
+Jun 13, 2025 12:47:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:59452 (Subnet)] GET / (2 live) #e4
+Jun 13, 2025 12:47:49.345 [260126501478624] DEBUG - Completed: [10.42.0.1:59452] 200 GET / (2 live) #e4 0ms 2762 bytes
+Jun 13, 2025 12:47:50.992 [260126439768288] DEBUG - Request: [10.42.0.1:49964 (Subnet)] GET / (2 live) #e6
+Jun 13, 2025 12:47:50.992 [260126503588064] DEBUG - Completed: [10.42.0.1:49964] 200 GET / (2 live) #e6 0ms 2762 bytes
+Jun 13, 2025 12:47:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:49976 (Subnet)] GET / (2 live) #e8
+Jun 13, 2025 12:47:59.345 [260126503588064] DEBUG - Completed: [10.42.0.1:49976] 200 GET / (2 live) #e8 1ms 2762 bytes
+Jun 13, 2025 12:48:09.344 [260126439768288] DEBUG - Request: [10.42.0.1:37164 (Subnet)] GET / (2 live) #ea
+Jun 13, 2025 12:48:09.345 [260126503588064] DEBUG - Completed: [10.42.0.1:37164] 200 GET / (2 live) #ea 0ms 2762 bytes
+Jun 13, 2025 12:48:19.343 [260126439768288] DEBUG - Request: [10.42.0.1:59370 (Subnet)] GET / (2 live) #ec
+Jun 13, 2025 12:48:19.344 [260126503588064] DEBUG - Completed: [10.42.0.1:59370] 200 GET / (2 live) #ec 0ms 2762 bytes
+Jun 13, 2025 12:48:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:60356 (Subnet)] GET / (2 live) #ee
+Jun 13, 2025 12:48:20.992 [260126503588064] DEBUG - Completed: [10.42.0.1:60356] 200 GET / (2 live) #ee 0ms 2762 bytes
+Jun 13, 2025 12:48:29.345 [260126439768288] DEBUG - Request: [10.42.0.1:60368 (Subnet)] GET / (2 live) #f0
+Jun 13, 2025 12:48:29.345 [260126501478624] DEBUG - Completed: [10.42.0.1:60368] 200 GET / (2 live) #f0 0ms 2762 bytes
+Jun 13, 2025 12:48:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:36950 (Subnet)] GET / (2 live) #f2
+Jun 13, 2025 12:48:39.344 [260126501478624] DEBUG - Completed: [10.42.0.1:36950] 200 GET / (2 live) #f2 0ms 2762 bytes
+Jun 13, 2025 12:48:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:60674 (Subnet)] GET / (2 live) #f4
+Jun 13, 2025 12:48:49.344 [260126501478624] DEBUG - Completed: [10.42.0.1:60674] 200 GET / (2 live) #f4 0ms 2762 bytes
+Jun 13, 2025 12:48:50.993 [260126439768288] DEBUG - Request: [10.42.0.1:34292 (Subnet)] GET / (2 live) #f6
+Jun 13, 2025 12:48:50.993 [260126503588064] DEBUG - Completed: [10.42.0.1:34292] 200 GET / (2 live) #f6 1ms 2762 bytes
+Jun 13, 2025 12:48:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:34296 (Subnet)] GET / (2 live) #f8
+Jun 13, 2025 12:48:59.344 [260126503588064] DEBUG - Completed: [10.42.0.1:34296] 200 GET / (2 live) #f8 0ms 2762 bytes
+Jun 13, 2025 12:49:09.348 [260126439768288] DEBUG - Request: [10.42.0.1:41572 (Subnet)] GET / (2 live) #fa
+Jun 13, 2025 12:49:09.349 [260126501478624] DEBUG - Completed: [10.42.0.1:41572] 200 GET / (2 live) #fa 1ms 2762 bytes
+Jun 13, 2025 12:49:19.345 [260126439768288] DEBUG - Request: [10.42.0.1:58548 (Subnet)] GET / (2 live) #fc
+Jun 13, 2025 12:49:19.346 [260126501478624] DEBUG - Completed: [10.42.0.1:58548] 200 GET / (2 live) #fc 1ms 2762 bytes
+Jun 13, 2025 12:49:20.991 [260126439768288] DEBUG - Request: [10.42.0.1:45238 (Subnet)] GET / (2 live) #fe
+Jun 13, 2025 12:49:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:45238] 200 GET / (2 live) #fe 0ms 2762 bytes
+Jun 13, 2025 12:49:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:45252 (Subnet)] GET / (2 live) #100
+Jun 13, 2025 12:49:29.344 [260126503588064] DEBUG - Completed: [10.42.0.1:45252] 200 GET / (2 live) #100 0ms 2762 bytes
+Jun 13, 2025 12:49:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:40222 (Subnet)] GET / (2 live) #102
+Jun 13, 2025 12:49:39.345 [260126503588064] DEBUG - Completed: [10.42.0.1:40222] 200 GET / (2 live) #102 0ms 2762 bytes
+Jun 13, 2025 12:49:49.345 [260126439768288] DEBUG - Request: [10.42.0.1:46026 (Subnet)] GET / (2 live) #104
+Jun 13, 2025 12:49:49.345 [260126501478624] DEBUG - Completed: [10.42.0.1:46026] 200 GET / (2 live) #104 0ms 2762 bytes
+Jun 13, 2025 12:49:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:58660 (Subnet)] GET / (3 live) #106
+Jun 13, 2025 12:49:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:58660] 200 GET / (3 live) #106 0ms 2762 bytes
+Jun 13, 2025 12:49:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:58670 (Subnet)] GET / (2 live) #107
+Jun 13, 2025 12:49:59.345 [260126501478624] DEBUG - Completed: [10.42.0.1:58670] 200 GET / (2 live) #107 1ms 2762 bytes
+Jun 13, 2025 12:50:09.344 [260126439768288] DEBUG - Request: [10.42.0.1:46578 (Subnet)] GET / (2 live) #10a
+Jun 13, 2025 12:50:09.347 [260126503588064] DEBUG - Completed: [10.42.0.1:46578] 200 GET / (2 live) #10a 3ms 2762 bytes
+Jun 13, 2025 12:50:19.347 [260126439768288] DEBUG - Request: [10.42.0.1:57844 (Subnet)] GET / (2 live) #10c
+Jun 13, 2025 12:50:19.349 [260126501478624] DEBUG - Completed: [10.42.0.1:57844] 200 GET / (2 live) #10c 2ms 2762 bytes
+Jun 13, 2025 12:50:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:54494 (Subnet)] GET / (2 live) #10e
+Jun 13, 2025 12:50:20.993 [260126501478624] DEBUG - Completed: [10.42.0.1:54494] 200 GET / (2 live) #10e 0ms 2762 bytes
+Jun 13, 2025 12:50:29.345 [260126439768288] DEBUG - Request: [10.42.0.1:54510 (Subnet)] GET / (2 live) #110
+Jun 13, 2025 12:50:29.346 [260126503588064] DEBUG - Completed: [10.42.0.1:54510] 200 GET / (2 live) #110 0ms 2762 bytes
+Jun 13, 2025 12:50:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:59660 (Subnet)] GET / (2 live) #112
+Jun 13, 2025 12:50:39.346 [260126501478624] DEBUG - Completed: [10.42.0.1:59660] 200 GET / (2 live) #112 1ms 2762 bytes
+Jun 13, 2025 12:50:49.470 [260126439768288] DEBUG - Request: [10.42.0.1:51934 (Subnet)] GET / (1 live) #114
+Jun 13, 2025 12:50:49.471 [260126503588064] DEBUG - Completed: [10.42.0.1:51934] 200 GET / (2 live) #114 1ms 2762 bytes
+Jun 13, 2025 12:50:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:60296 (Subnet)] GET / (2 live) #116
+Jun 13, 2025 12:50:50.992 [260126503588064] DEBUG - Completed: [10.42.0.1:60296] 200 GET / (2 live) #116 0ms 2762 bytes
+Jun 13, 2025 12:50:59.345 [260126439768288] DEBUG - Request: [10.42.0.1:60312 (Subnet)] GET / (2 live) #118
+Jun 13, 2025 12:50:59.346 [260126501478624] DEBUG - Completed: [10.42.0.1:60312] 200 GET / (2 live) #118 1ms 2762 bytes
+Jun 13, 2025 12:50:59.822 [260126429864160] DEBUG - [HCl#13] HTTP requesting GET https://plex.tv/api/v2/release_channels?X-Plex-Token=
+Jun 13, 2025 12:50:59.829 [260126461911264] DEBUG - [HCl#14] HTTP requesting GET https://plex.tv/api/v2/user/privacy?X-Plex-Token=
+Jun 13, 2025 12:51:04.827 [260126489981152] WARN - [HttpClient/HCl#13] HTTP error requesting GET https://plex.tv/api/v2/release_channels?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:51:04.828 [260126429864160] WARN - [AutoUpdateRequestHandler] Couldn't get update channels. Trying again soon.
+Jun 13, 2025 12:51:04.834 [260126489981152] WARN - [HttpClient/HCl#14] HTTP error requesting GET https://plex.tv/api/v2/user/privacy?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:51:04.835 [260126461911264] WARN - [Analytics] Couldn't get analytics privacy settings. Trying again soon.
+Jun 13, 2025 12:51:09.347 [260126439768288] DEBUG - Request: [10.42.0.1:45326 (Subnet)] GET / (2 live) #11a
+Jun 13, 2025 12:51:09.350 [260126503588064] DEBUG - Completed: [10.42.0.1:45326] 200 GET / (2 live) #11a 4ms 2762 bytes
+Jun 13, 2025 12:51:09.868 [260126429864160] DEBUG - [HCl#15] HTTP requesting GET https://plex.tv/api/v2/features?X-Plex-Token=
+Jun 13, 2025 12:51:14.874 [260126489981152] WARN - [HttpClient/HCl#15] HTTP error requesting GET https://plex.tv/api/v2/features?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:51:14.874 [260126429864160] WARN - FeatureManager: Couldn't get features. Trying again soon.
+Jun 13, 2025 12:51:19.344 [260126439768288] DEBUG - Request: [10.42.0.1:52750 (Subnet)] GET / (2 live) #11c
+Jun 13, 2025 12:51:19.345 [260126501478624] DEBUG - Completed: [10.42.0.1:52750] 200 GET / (2 live) #11c 1ms 2762 bytes
+Jun 13, 2025 12:51:20.991 [260126439768288] DEBUG - Request: [10.42.0.1:56222 (Subnet)] GET / (2 live) #11e
+Jun 13, 2025 12:51:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:56222] 200 GET / (2 live) #11e 0ms 2762 bytes
+Jun 13, 2025 12:51:29.343 [260126439768288] DEBUG - Request: [10.42.0.1:56234 (Subnet)] GET / (2 live) #120
+Jun 13, 2025 12:51:29.344 [260126503588064] DEBUG - Completed: [10.42.0.1:56234] 200 GET / (2 live) #120 1ms 2762 bytes
+Jun 13, 2025 12:51:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:51342 (Subnet)] GET / (2 live) #122
+Jun 13, 2025 12:51:39.344 [260126503588064] DEBUG - Completed: [10.42.0.1:51342] 200 GET / (2 live) #122 0ms 2762 bytes
+Jun 13, 2025 12:51:49.345 [260126439768288] DEBUG - Request: [10.42.0.1:36312 (Subnet)] GET / (2 live) #124
+Jun 13, 2025 12:51:49.346 [260126501478624] DEBUG - Completed: [10.42.0.1:36312] 200 GET / (2 live) #124 1ms 2762 bytes
+Jun 13, 2025 12:51:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:38748 (Subnet)] GET / (2 live) #126
+Jun 13, 2025 12:51:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:38748] 200 GET / (2 live) #126 0ms 2762 bytes
+Jun 13, 2025 12:51:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:38750 (Subnet)] GET / (2 live) #128
+Jun 13, 2025 12:51:59.345 [260126501478624] DEBUG - Completed: [10.42.0.1:38750] 200 GET / (2 live) #128 0ms 2762 bytes
+Jun 13, 2025 12:52:09.344 [260126439768288] DEBUG - Request: [10.42.0.1:57718 (Subnet)] GET / (2 live) #12a
+Jun 13, 2025 12:52:09.345 [260126503588064] DEBUG - Completed: [10.42.0.1:57718] 200 GET / (2 live) #12a 1ms 2762 bytes
+Jun 13, 2025 12:52:19.344 [260126439768288] DEBUG - Request: [10.42.0.1:43908 (Subnet)] GET / (2 live) #12c
+Jun 13, 2025 12:52:19.344 [260126501478624] DEBUG - Completed: [10.42.0.1:43908] 200 GET / (2 live) #12c 0ms 2762 bytes
+Jun 13, 2025 12:52:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:48026 (Subnet)] GET / (2 live) #12e
+Jun 13, 2025 12:52:20.992 [260126501478624] DEBUG - Completed: [10.42.0.1:48026] 200 GET / (2 live) #12e 0ms 2762 bytes
+Jun 13, 2025 12:52:29.347 [260126439768288] DEBUG - Request: [10.42.0.1:48040 (Subnet)] GET / (2 live) #130
+Jun 13, 2025 12:52:29.347 [260126503588064] DEBUG - Completed: [10.42.0.1:48040] 200 GET / (2 live) #130 0ms 2762 bytes
+Jun 13, 2025 12:52:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:39028 (Subnet)] GET / (2 live) #132
+Jun 13, 2025 12:52:39.345 [260126503588064] DEBUG - Completed: [10.42.0.1:39028] 200 GET / (2 live) #132 0ms 2762 bytes
+Jun 13, 2025 12:52:49.346 [260126439768288] DEBUG - Request: [10.42.0.1:50538 (Subnet)] GET / (2 live) #134
+Jun 13, 2025 12:52:49.348 [260126501478624] DEBUG - Completed: [10.42.0.1:50538] 200 GET / (2 live) #134 1ms 2762 bytes
+Jun 13, 2025 12:52:50.992 [260126439768288] DEBUG - Request: [10.42.0.1:42980 (Subnet)] GET / (2 live) #136
+Jun 13, 2025 12:52:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:42980] 200 GET / (2 live) #136 0ms 2762 bytes
+Jun 13, 2025 12:52:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:42990 (Subnet)] GET / (2 live) #138
+Jun 13, 2025 12:52:59.345 [260126501478624] DEBUG - Completed: [10.42.0.1:42990] 200 GET / (2 live) #138 0ms 2762 bytes
+Jun 13, 2025 12:53:09.345 [260126439768288] DEBUG - Request: [10.42.0.1:54156 (Subnet)] GET / (2 live) #13a
+Jun 13, 2025 12:53:09.346 [260126503588064] DEBUG - Completed: [10.42.0.1:54156] 200 GET / (2 live) #13a 0ms 2762 bytes
+Jun 13, 2025 12:53:19.346 [260126439768288] DEBUG - Request: [10.42.0.1:57238 (Subnet)] GET / (2 live) #13c
+Jun 13, 2025 12:53:19.347 [260126503588064] DEBUG - Completed: [10.42.0.1:57238] 200 GET / (2 live) #13c 1ms 2762 bytes
+Jun 13, 2025 12:53:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:45232 (Subnet)] GET / (3 live) #13e
+Jun 13, 2025 12:53:20.992 [260126503588064] DEBUG - Completed: [10.42.0.1:45232] 200 GET / (3 live) #13e 0ms 2762 bytes
+Jun 13, 2025 12:53:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:45236 (Subnet)] GET / (2 live) #13f
+Jun 13, 2025 12:53:29.345 [260126503588064] DEBUG - Completed: [10.42.0.1:45236] 200 GET / (2 live) #13f 1ms 2762 bytes
+Jun 13, 2025 12:53:39.345 [260126439768288] DEBUG - Request: [10.42.0.1:51650 (Subnet)] GET / (2 live) #142
+Jun 13, 2025 12:53:39.346 [260126503588064] DEBUG - Completed: [10.42.0.1:51650] 200 GET / (2 live) #142 1ms 2762 bytes
+Jun 13, 2025 12:53:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:38932 (Subnet)] GET / (2 live) #144
+Jun 13, 2025 12:53:49.345 [260126503588064] DEBUG - Completed: [10.42.0.1:38932] 200 GET / (2 live) #144 1ms 2762 bytes
+Jun 13, 2025 12:53:50.992 [260126439768288] DEBUG - Request: [10.42.0.1:40734 (Subnet)] GET / (2 live) #146
+Jun 13, 2025 12:53:50.993 [260126501478624] DEBUG - Completed: [10.42.0.1:40734] 200 GET / (2 live) #146 0ms 2762 bytes
+Jun 13, 2025 12:53:59.344 [260126439768288] DEBUG - Request: [10.42.0.1:40748 (Subnet)] GET / (2 live) #148
+Jun 13, 2025 12:53:59.345 [260126503588064] DEBUG - Completed: [10.42.0.1:40748] 200 GET / (2 live) #148 0ms 2762 bytes
+Jun 13, 2025 12:54:09.344 [260126439768288] DEBUG - Request: [10.42.0.1:48724 (Subnet)] GET / (2 live) #14a
+Jun 13, 2025 12:54:09.346 [260126501478624] DEBUG - Completed: [10.42.0.1:48724] 200 GET / (2 live) #14a 2ms 2762 bytes
+Jun 13, 2025 12:54:19.347 [260126439768288] DEBUG - Request: [10.42.0.1:35824 (Subnet)] GET / (2 live) #14c
+Jun 13, 2025 12:54:19.349 [260126503588064] DEBUG - Completed: [10.42.0.1:35824] 200 GET / (2 live) #14c 2ms 2762 bytes
+Jun 13, 2025 12:54:20.991 [260126439768288] DEBUG - Request: [10.42.0.1:56472 (Subnet)] GET / (2 live) #14e
+Jun 13, 2025 12:54:20.992 [260126503588064] DEBUG - Completed: [10.42.0.1:56472] 200 GET / (2 live) #14e 0ms 2762 bytes
+Jun 13, 2025 12:54:29.346 [260126439768288] DEBUG - Request: [10.42.0.1:56476 (Subnet)] GET / (2 live) #150
+Jun 13, 2025 12:54:29.348 [260126503588064] DEBUG - Completed: [10.42.0.1:56476] 200 GET / (2 live) #150 2ms 2762 bytes
+Jun 13, 2025 12:54:39.346 [260126439768288] DEBUG - Request: [10.42.0.1:34040 (Subnet)] GET / (2 live) #152
+Jun 13, 2025 12:54:39.350 [260126501478624] DEBUG - Completed: [10.42.0.1:34040] 200 GET / (2 live) #152 4ms 2762 bytes
+Jun 13, 2025 12:54:49.345 [260126439768288] DEBUG - Request: [10.42.0.1:52738 (Subnet)] GET / (2 live) #154
+Jun 13, 2025 12:54:49.347 [260126503588064] DEBUG - Completed: [10.42.0.1:52738] 200 GET / (2 live) #154 2ms 2762 bytes
+Jun 13, 2025 12:54:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:60220 (Subnet)] GET / (2 live) #156
+Jun 13, 2025 12:54:50.992 [260126503588064] DEBUG - Completed: [10.42.0.1:60220] 200 GET / (2 live) #156 0ms 2762 bytes
+Jun 13, 2025 12:54:59.346 [260126439768288] DEBUG - Request: [10.42.0.1:60230 (Subnet)] GET / (2 live) #158
+Jun 13, 2025 12:54:59.347 [260126503588064] DEBUG - Completed: [10.42.0.1:60230] 200 GET / (2 live) #158 1ms 2762 bytes
+Jun 13, 2025 12:55:09.343 [260126439768288] DEBUG - Request: [10.42.0.1:41206 (Subnet)] GET / (2 live) #15a
+Jun 13, 2025 12:55:09.344 [260126503588064] DEBUG - Completed: [10.42.0.1:41206] 200 GET / (2 live) #15a 0ms 2762 bytes
+Jun 13, 2025 12:55:19.344 [260126439768288] DEBUG - Request: [10.42.0.1:42176 (Subnet)] GET / (2 live) #15c
+Jun 13, 2025 12:55:19.345 [260126501478624] DEBUG - Completed: [10.42.0.1:42176] 200 GET / (2 live) #15c 1ms 2762 bytes
+Jun 13, 2025 12:55:20.992 [260126439768288] DEBUG - Request: [10.42.0.1:44256 (Subnet)] GET / (2 live) #15e
+Jun 13, 2025 12:55:20.992 [260126503588064] DEBUG - Completed: [10.42.0.1:44256] 200 GET / (2 live) #15e 0ms 2762 bytes
+Jun 13, 2025 12:55:29.344 [260126439768288] DEBUG - Request: [10.42.0.1:44266 (Subnet)] GET / (2 live) #160
+Jun 13, 2025 12:55:29.345 [260126501478624] DEBUG - Completed: [10.42.0.1:44266] 200 GET / (2 live) #160 0ms 2762 bytes
+Jun 13, 2025 12:55:39.344 [260126439768288] DEBUG - Request: [10.42.0.1:44686 (Subnet)] GET / (2 live) #162
+Jun 13, 2025 12:55:39.345 [260126501478624] DEBUG - Completed: [10.42.0.1:44686] 200 GET / (2 live) #162 0ms 2762 bytes
+Jun 13, 2025 12:55:49.347 [260126439768288] DEBUG - Request: [10.42.0.1:45018 (Subnet)] GET / (2 live) #164
+Jun 13, 2025 12:55:49.350 [260126501478624] DEBUG - Completed: [10.42.0.1:45018] 200 GET / (2 live) #164 2ms 2762 bytes
+Jun 13, 2025 12:55:50.991 [260126439768288] DEBUG - Request: [10.42.0.1:45690 (Subnet)] GET / (2 live) #166
+Jun 13, 2025 12:55:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:45690] 200 GET / (2 live) #166 0ms 2762 bytes
+Jun 13, 2025 12:55:59.346 [260126439768288] DEBUG - Request: [10.42.0.1:45706 (Subnet)] GET / (2 live) #168
+Jun 13, 2025 12:55:59.349 [260126503588064] DEBUG - Completed: [10.42.0.1:45706] 200 GET / (2 live) #168 3ms 2762 bytes
+Jun 13, 2025 12:56:09.345 [260126439768288] DEBUG - Request: [10.42.0.1:56066 (Subnet)] GET / (2 live) #16a
+Jun 13, 2025 12:56:09.346 [260126501478624] DEBUG - Completed: [10.42.0.1:56066] 200 GET / (2 live) #16a 0ms 2762 bytes
+Jun 13, 2025 12:56:14.878 [260126429864160] DEBUG - [HCl#16] HTTP requesting GET https://plex.tv/api/v2/features?X-Plex-Token=
+Jun 13, 2025 12:56:19.345 [260126439768288] DEBUG - Request: [10.42.0.1:54916 (Subnet)] GET / (2 live) #16c
+Jun 13, 2025 12:56:19.346 [260126503588064] DEBUG - Completed: [10.42.0.1:54916] 200 GET / (2 live) #16c 1ms 2762 bytes
+Jun 13, 2025 12:56:19.884 [260126489981152] WARN - [HttpClient/HCl#16] HTTP error requesting GET https://plex.tv/api/v2/features?X-Plex-Token=xxxxxxxxxxxxxxxxxxxxe host name) (Could not resolve host: plex.tv)
+Jun 13, 2025 12:56:19.885 [260126429864160] WARN - FeatureManager: Couldn't get features. Trying again soon.
+Jun 13, 2025 12:56:20.993 [260126439768288] DEBUG - Request: [10.42.0.1:42552 (Subnet)] GET / (2 live) #16e
+Jun 13, 2025 12:56:20.994 [260126503588064] DEBUG - Completed: [10.42.0.1:42552] 200 GET / (2 live) #16e 1ms 2762 bytes
+Jun 13, 2025 12:56:29.382 [260126439768288] DEBUG - Request: [10.42.0.1:42556 (Subnet)] GET / (2 live) #170
+Jun 13, 2025 12:56:29.384 [260126503588064] DEBUG - Completed: [10.42.0.1:42556] 200 GET / (2 live) #170 2ms 2762 bytes
+Jun 13, 2025 12:56:39.357 [260126439768288] DEBUG - Request: [10.42.0.1:32950 (Subnet)] GET / (2 live) #172
+Jun 13, 2025 12:56:39.358 [260126503588064] DEBUG - Completed: [10.42.0.1:32950] 200 GET / (2 live) #172 1ms 2762 bytes
+Jun 13, 2025 12:56:49.344 [260126439768288] DEBUG - Request: [10.42.0.1:45384 (Subnet)] GET / (2 live) #174
+Jun 13, 2025 12:56:49.345 [260126503588064] DEBUG - Completed: [10.42.0.1:45384] 200 GET / (2 live) #174 0ms 2762 bytes
+Jun 13, 2025 12:56:50.992 [260126439768288] DEBUG - Request: [10.42.0.1:43724 (Subnet)] GET / (2 live) #176
+Jun 13, 2025 12:56:50.992 [260126501478624] DEBUG - Completed: [10.42.0.1:43724] 200 GET / (2 live) #176 0ms 2762 bytes
+Jun 13, 2025 12:56:54.811 [260126511653088] DEBUG - Shutting down with signal 15 (Terminated)
+Jun 13, 2025 12:56:54.811 [260126511653088] DEBUG - Ordered to stop server.
+Jun 13, 2025 12:56:54.811 [260126596403232] DEBUG - Stopping server...
+Jun 13, 2025 12:56:54.811 [260126596403232] DEBUG - HttpServer: Stopping server.
+Jun 13, 2025 12:56:54.812 [260126596403232] DEBUG - Server stopped.
+Jun 13, 2025 12:56:54.812 [260126472626400] DEBUG - MetadataItemClusterRequestHandler: a shutdown event has been received
+Jun 13, 2025 12:56:54.812 [260126461911264] DEBUG - TranscodeJobManager: [Running] onServerShutdown
+Jun 13, 2025 12:56:54.812 [260126461911264] DEBUG - TranscodeJobManager: [Running] -> [Shutdown]
+Jun 13, 2025 12:56:54.813 [260126596403232] DEBUG - NetworkService: Stopping advertisement.
+Jun 13, 2025 12:56:54.813 [260126474764512] ERROR - Network Service: Error in advertiser handle read: 125 (Operation canceled) socket=71
+Jun 13, 2025 12:56:54.815 [260126596403232] DEBUG - Killing plug-ins.
+Jun 13, 2025 12:56:54.831 [260126596403232] DEBUG - [com.plexapp.agents.imdb] Killing.
+Jun 13, 2025 12:56:54.836 [260126511653088] WARN - JobManager: Could not find job for handle 317
+Jun 13, 2025 12:56:54.837 [260126596403232] DEBUG - [com.plexapp.system] Killing.
+Jun 13, 2025 12:56:54.841 [260126511653088] WARN - JobManager: Could not find job for handle 212
+Jun 13, 2025 12:56:54.843 [260126596403232] DEBUG - ChildProcessMonitor: Waiting for Plex Tuner Service to exit.
+Jun 13, 2025 12:56:54.843 [260126596403232] DEBUG - [JobRunner] Signalling job ID 289 with 2
+Jun 13, 2025 12:56:54.886 [260126511653088] DEBUG - Jobs: '/usr/lib/plexmediaserver/Plex Tuner Service' exit code for process 289 is 0 (success)
+Jun 13, 2025 12:56:54.886 [260126468260064] DEBUG - [ChildProcessMonitor] Plex Tuner Service exited.
+Jun 13, 2025 12:56:54.891 [260126596403232] DEBUG - Database: Shutting down.
+Jun 13, 2025 12:56:54.913 [260126474764512] INFO - Network Service: Abandoning advertise socket, it was closed.
+Jun 13, 2025 12:56:54.966 [260126596403232] DEBUG - Database: Shutting down.

@@ -1,0 +1,76 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    batch.kubernetes.io/cronjob-scheduled-timestamp: "2025-06-14T22:30:00Z"
+  labels:
+    batch.kubernetes.io/controller-uid: 4d96553c-8eec-4ebe-9111-383ecde6d275
+    batch.kubernetes.io/job-name: cleanup-transcode-29165670
+    controller-uid: 4d96553c-8eec-4ebe-9111-383ecde6d275
+    job-name: cleanup-transcode-29165670
+  name: cleanup-transcode-29165670
+  namespace: default
+  ownerReferences:
+  - apiVersion: batch/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: CronJob
+    name: cleanup-transcode
+spec:
+  backoffLimit: 6
+  completionMode: NonIndexed
+  completions: 1
+  manualSelector: false
+  parallelism: 1
+  podReplacementPolicy: TerminatingOrFailed
+  selector:
+    matchLabels:
+      batch.kubernetes.io/controller-uid: 4d96553c-8eec-4ebe-9111-383ecde6d275
+  suspend: false
+  template:
+    metadata:
+      labels:
+        batch.kubernetes.io/controller-uid: 4d96553c-8eec-4ebe-9111-383ecde6d275
+        batch.kubernetes.io/job-name: cleanup-transcode-29165670
+        controller-uid: 4d96553c-8eec-4ebe-9111-383ecde6d275
+        job-name: cleanup-transcode-29165670
+    spec:
+      containers:
+      - args:
+        - -c
+        - find /transcode -type f -mtime +1 -delete && echo "Transcode cleanup completed"
+        command:
+        - /bin/bash
+        image: filebrowser/filebrowser:v2.31.2
+        imagePullPolicy: IfNotPresent
+        name: cleanup-transcode
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  conditions:
+  - lastProbeTime: "2025-06-14T22:35:43Z"
+    lastTransitionTime: "2025-06-14T22:35:43Z"
+    message: Job has reached the specified backoff limit
+    reason: BackoffLimitExceeded
+    type: FailureTarget
+  - lastProbeTime: "2025-06-14T22:35:46Z"
+    lastTransitionTime: "2025-06-14T22:35:46Z"
+    message: Job has reached the specified backoff limit
+    reason: BackoffLimitExceeded
+    type: Failed
+  failed: 1
+  ready: 0
+  startTime: "2025-06-14T22:30:00Z"
+  terminating: 0
+  uncountedTerminatedPods: {}

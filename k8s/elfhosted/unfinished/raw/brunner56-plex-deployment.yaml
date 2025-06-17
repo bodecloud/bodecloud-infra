@@ -1,0 +1,466 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: brunner56-plex
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: plex
+    helm.sh/chart: plex-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-plex,elfbot-imagemaid,plex-config,imagemaid-env,plex-tinyproxy-conf
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: plex
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.elfhosted.com/class: debrid
+        app.elfhosted.com/name: plex
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: plex
+      annotations:
+        kubernetes.io/egress-bandwidth: 150M
+    spec:
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: backup
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: elfbot
+        configMap:
+          name: elfbot-plex
+          defaultMode: 420
+          optional: true
+      - name: phototranscoder
+        emptyDir:
+          sizeLimit: 50Gi
+      - name: rclone
+        persistentVolumeClaim:
+          claimName: rclone
+      - name: rclonemountrealdebridzurg
+        persistentVolumeClaim:
+          claimName: realdebrid-zurg
+      - name: render-device
+        hostPath:
+          path: /dev/dri/renderD128
+          type: ''
+      - name: shared
+        emptyDir: {}
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: symlinks
+      - name: tinyproxy-conf
+        configMap:
+          name: plex-tinyproxy-conf
+          defaultMode: 420
+      - name: tmp
+        emptyDir: {}
+      - name: transcode
+        persistentVolumeClaim:
+          claimName: transcode-1g
+      initContainers:
+      - name: bootstrap
+        image: alpine/k8s:1.29.1
+        command:
+        - /bin/bash
+        - -c
+        - "set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name\
+          \ if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\n\
+          fi\n\n# look for commands - we match specific names in order of least-destructive\n\
+          TIMESTAMP_NOW=$(date +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat\
+          \ /etc/elfbot/pause)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n\
+          \  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\
+          \n# If no command is set, then move onto the next possibility\nif [[ -f\
+          \ /etc/elfbot/backup && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat\
+          \ /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n\
+          \  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\
+          \n# If no command is set, then move onto the next possibility\nif [[ -f\
+          \ /etc/elfbot/reset && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat\
+          \ /etc/elfbot/reset)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n\
+          \  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\
+          \ncase $COMMAND in\n\n  \"pause\")\n    echo \"Recent pause command found,\
+          \ sleeping 5m..\"\n    sleep 300\n    ;;\n\n  \"reset\")\n\n    # Safety\
+          \ check - if /config/homer exists, we've not mounted /config properly and\
+          \ are about to wipe out EVERYTHING\n    if [ -e \"/config/homer\" ]; then\n\
+          \        echo \"The path /config/homer exists. Exiting.\"\n        exit\
+          \ 1\n    fi      \n    echo \"Recent reset command found, resetting\"\n\
+          \    rm -rf /config/*\n    ;;\n\n  \"backup\")\n    echo \"Recent backup\
+          \ command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\
+          \n    TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config\
+          \ /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n    ;;\n\nesac\n\nif [[ ! -f\
+          \ /config/i-am-bootstrapped ]]\nthen\n  echo \"Bootstrapping from goldilocks\
+          \ config...\"\n  s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/*\
+          \ /config/\n  touch /config/i-am-bootstrapped\nfi\n"
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: b2-elfhosted-config-ro
+              key: access-key-id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: b2-elfhosted-config-ro
+              key: secret-key
+        - name: S3_ENDPOINT_URL
+          value: https://s3.us-west-000.backblazeb2.com
+        - name: K8S_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/name']
+        - name: ELF_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.elfhosted.com/name']
+        resources:
+          limits:
+            cpu: '1'
+            memory: 4Gi
+          requests:
+            cpu: '0'
+            memory: 1Mi
+        volumeMounts:
+        - name: elfbot
+          mountPath: /etc/elfbot
+        - name: backup
+          mountPath: /storage/backup
+        - name: config
+          mountPath: /config
+          subPath: plex
+        - name: tmp
+          mountPath: /tmp
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 568
+          runAsGroup: 568
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+      - name: restart-with-debridav
+        image: ghcr.io/elfhosted/debridav:0.9.5@sha256:1e596ddb97a7e6a4827b1dfc0718992b0c432416841a8a4c3dd3cd7491850c3c
+        command:
+        - /bin/bash
+        - -c
+        - "echo \"This pod only exists to cause a restart when debridav is updated\"\
+          \        \n"
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+      - name: restart-with-decypharr
+        image: ghcr.io/elfhosted/decypharr-beta:rolling@sha256:b310afa9976f950ab62d7ec20801b46cb9a28176121d1c275424d780825ca4ee
+        command:
+        - /bin/bash
+        - -c
+        - 'echo "This pod only exists to cause a restart when decypharr is updated"
+
+          '
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+      - name: restart-with-zurg
+        image: ghcr.io/elfhosted/zurg-rc:2025.05.14.0031-nightly@sha256:513bcc2be2a9fb8b8df7fc458f76747bebcc884776bfbfd4393e16d61b2c1227
+        command:
+        - /bin/bash
+        - -c
+        - 'echo "This pod only exists to cause a restart when zurg is updated"
+
+          '
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+      - name: setup
+        image: alpine/k8s:1.29.1
+        command:
+        - /bin/bash
+        - -c
+        - "set -x\nset -e\n\n# Clean up wasteful temporary media storage (Plex will\
+          \ just re-download these)\nif [ -d \"/config/Library/Application Support/Plex\
+          \ Media Server/Cache/PhotoTranscoder\" ]; then\n  rm -rf \"/config/Library/Application\
+          \ Support/Plex Media Server/Cache/PhotoTranscoder\"\n  ln -s /phototranscoder\
+          \ '/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder'\n\
+          fi\n"
+        resources: {}
+        volumeMounts:
+        - name: config
+          mountPath: /config
+          subPath: plex
+        - name: phototranscoder
+          mountPath: /phototranscoder
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 568
+          runAsGroup: 568
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+      - name: setup-warp
+        image: alpine/k8s:1.29.1
+        command:
+        - /bin/bash
+        - -c
+        - 'set -x
+
+          set -e
+
+
+          cd /shared
+
+
+          # Create cloudflare account
+
+          wgcf register --accept-tos
+
+
+          # Create gluetun config
+
+          wgcf generate -p /shared/wg0.conf
+
+
+          # grab the values from the profile and put them into env vars for gluetun
+          to consume
+
+          echo "export WIREGUARD_PRIVATE_KEY=$(grep PrivateKey /shared/wg0.conf |
+          cut -f3 -d'' '')" > /shared/env
+
+          echo "export WIREGUARD_PUBLIC_KEY=$(grep PublicKey /shared/wg0.conf | cut
+          -f3 -d'' '')" >> /shared/env
+
+          echo "export WIREGUARD_ADDRESSES=$(grep Address /shared/wg0.conf | grep
+          ''/32'' | cut -f3 -d'' '')" >> /shared/env
+
+
+          echo "export VPN_ENDPOINT_IP=$(dig +short dig +short engage.cloudflareclient.com)"
+          >> /shared/env
+
+          '
+        resources: {}
+        volumeMounts:
+        - name: shared
+          mountPath: /shared
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          readOnlyRootFilesystem: false
+          seccompProfile:
+            type: RuntimeDefault
+      containers:
+      - name: brunner56-plex
+        image: ghcr.io/elfhosted/plex:1.41.7.9823-59f304c16@sha256:04b14748f9a3e5d23e1431ab2d4c5c07aca14a1fe5541b62481f0064eea8420e
+        ports:
+        - name: http
+          containerPort: 32400
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: plex-config
+        - configMapRef:
+            name: elfbot-plex
+            optional: true
+        resources:
+          limits:
+            cpu: '2'
+            memory: 4Gi
+          requests:
+            cpu: 100m
+            memory: 1Gi
+        volumeMounts:
+        - name: backup
+          mountPath: /backup
+        - name: config
+          mountPath: /config/
+          subPath: plex
+        - name: elfbot
+          mountPath: /elfbot
+        - name: phototranscoder
+          mountPath: /phototranscoder
+        - name: rclone
+          mountPath: /storage/rclone
+        - name: rclonemountrealdebridzurg
+          mountPath: /storage/realdebrid-zurg
+        - name: render-device
+          mountPath: /dev/dri/renderD128
+        - name: shared
+          mountPath: /shared
+        - name: symlinks
+          mountPath: /storage/symlinks
+        - name: tinyproxy-conf
+          mountPath: /tinyproxy-conf
+        - name: tmp
+          mountPath: /tmp
+        - name: transcode
+          mountPath: /transcode
+          subPath: plex
+        livenessProbe:
+          httpGet:
+            path: /web/index.html
+            port: 32400
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /web/index.html
+            port: 32400
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
+        startupProbe:
+          httpGet:
+            path: /web/index.html
+            port: 32400
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+          runAsUser: 568
+          runAsGroup: 568
+      - name: gluetun
+        image: ghcr.io/elfhosted/gluetun:3.40.0@sha256:59b0cc8a9412b9a4645d1f12dff0daba80b8be88acd1b5d1a0fb6dfa625eb9a5
+        env:
+        - name: DNS_KEEP_NAMESERVER
+          value: 'on'
+        - name: DOT
+          value: 'off'
+        - name: FIREWALL_INPUT_PORTS
+          value: 32400,3000,8888,3001,3002
+        - name: FIREWALL_OUTBOUND_SUBNETS
+          value: 10.0.0.0/8
+        - name: HTTP_CONTROL_SERVER_ADDRESS
+          value: :8000
+        - name: HTTP_CONTROL_SERVER_PORT
+          value: '8000'
+        - name: VPN_ENDPOINT_PORT
+          value: '2408'
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: wireguard
+        - name: WIREGUARD_MTU
+          value: '1280'
+        resources: {}
+        volumeMounts:
+        - name: shared
+          mountPath: /shared
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - SYS_MODULE
+          privileged: true
+          runAsUser: 0
+      - name: podinfo
+        image: stefanprodan/podinfo
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: Always
+      - name: speedtest
+        image: openspeedtest/latest:latest@sha256:1745e913f596fe98882b286a67751efdae74774e9caa742a4934bb056e8748d2
+        env:
+        - name: CHANGE_CONTAINER_PORTS
+          value: 'True'
+        - name: HTTPS_PORT
+          value: '3003'
+        - name: HTTP_PORT
+          value: '3002'
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 101
+          runAsGroup: 101
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+      - name: tinyproxy
+        image: ghcr.io/elfhosted/tinyproxy:v1.4.3@sha256:262bbdc0e468ee97c049203becc52b9ad7bf4c21405d58c82766d1aebb2e27e5
+        resources: {}
+        volumeMounts:
+        - name: tinyproxy-conf
+          mountPath: /etc/tinyproxy/tinyproxy.conf
+          subPath: tinyproxy.conf
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        supplementalGroups:
+        - 993
+        fsGroup: 568
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      priorityClassName: tenant-streaming
+      enableServiceLinks: false
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600

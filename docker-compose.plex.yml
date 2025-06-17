@@ -1,0 +1,562 @@
+x-common-env: &common-env
+  PGID: ${PGID:-988} # 'docker' Group ID
+  PUID: ${PUID:-1001} # A non-root user ID
+  TZ: ${TZ:-America/Chicago} # Your Timezone
+
+x-resource-limits: &resource-limits
+  cpu_shares: 1024 # CPU share weight (relative, 2-262144). Higher = more CPU *if competing*.
+  #  mem_limit: 512m        # Max RAM usage (e.g., 64m, 1g). Exceeding = container kill.
+  #  mem_reservation: 325m  # Soft RAM limit (e.g., 32m, 512m).  Best effort, not guaranteed.
+  #  mem_swappiness: 30      # Swap usage (0-100). 0 = off. Higher = more swap, may slow down container.
+  #memswap_limit: 1024m    # Max RAM + Swap.  Usually same as mem_limit.
+  labels:
+    autoheal: "true"
+
+x-swarm-resource-limits: &swarm-resource-limits
+  resources:
+    limits:
+      cpus: "0.10"
+      memory: 1024M
+#    reservations:
+#     cpus: '0.05'
+#    memory:  256M
+
+x-common-deploy: &common-deploy
+  placement:
+    preferences:
+      - spread: node.labels.worker_priority
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    window: 120s
+  labels:
+    autoheal: "true"
+    swarm.autoscaler: "true"
+#  resources:
+#    limits:
+#      cpus: '0.10'
+#      memory: 128M
+#    reservations:
+#      cpus: '0.10'
+#      memory: 64M
+
+services:
+  maintainerr:
+    # 🔹🔹 Maintainerr 🔹🔹  https://docs.maintainerr.info/latest/Works/
+    # Looks and smells like Overseerr, does the opposite. Maintenance tool for the Plex ecosystem
+    depends_on:
+      plex:
+        condition: service_healthy
+    image: ghcr.io/jorenn92/maintainerr
+    container_name: maintainerr
+    hostname: maintainerr
+    networks:
+      - publicnet
+    ports:
+      - ${MAINTAINERR_API_PORT:-3002}:${MAINTAINERR_API_PORT:-3002}
+      - ${MAINTAINERR_UI_PORT:-6246}:${MAINTAINERR_UI_PORT:-6246}
+    volumes:
+      - ${ROOT_DIR:-.}/configs/maintainerr/data:/opt/data
+    environment:
+      <<: *common-env
+      API_PORT: ${MAINTAINERR_API_PORT:-3002}
+      DEBUG: ${MAINTAINERR_DEBUG:-true}
+      NODE_ENV: ${NODE_ENV:-production}
+      UI_HOSTNAME: ${MAINTAINERR_UI_HOSTNAME:-"0.0.0.0"} # "0.0.0.0" for IPv4, "::" for IPv6
+      UI_PORT: ${MAINTAINERR_UI_PORT:-6246} # Default 6246.
+      VERSION_TAG: ${MAINTAINERR_VERSION_TAG:-develop}
+      UV_USE_IO_URING: 0 # Temporary workaround for https://github.com/libuv/libuv/pull/4141
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.maintainerr.rule: Host(`maintainerr.${DOMAIN}`) || Host(`maintainerr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`maintainerr.${TS_HOSTNAME}.duckdns.org`)
+      traefik.http.services.maintainerr.loadbalancer.server.port: 3002
+      homepage.group: Media Server Management
+      homepage.name: Maintainerr
+      homepage.icon: maintainerr.png
+      homepage.href: https://maintainerr.${DOMAIN}
+      homepage.description: A comprehensive tool for monitoring and managing your server, providing insights and tools to keep everything running smoothly.
+    restart: unless-stopped
+  overseerr:
+    # 🔹🔹 Overseerr 🔹🔹
+    depends_on:
+      plex:
+        condition: service_healthy
+    image: linuxserver/overseerr
+    container_name: overseerr
+    hostname: overseerr
+    networks:
+      - publicnet
+    ports:
+      - ${OVERSEERR_PORT:-5050}:5055
+    volumes:
+      - ${ROOT_DIR:-.}/configs/overseerr/config:/config
+    environment:
+      <<: *common-env
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.overseerr.rule: Host(`overseerr.${DOMAIN}`) || Host(`overseerr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`overseerr.${TS_HOSTNAME}.duckdns.org`)
+      traefik.http.services.overseerr.loadbalancer.server.port: 5055
+      homepage.group: Media Requests
+      homepage.name: Overseerr Requests
+      homepage.icon: overseerr.png
+      homepage.href: https://overseerr.${DOMAIN}
+      homepage.description: Allows users to request movies and TV shows, integrating with your media server for easy content management.
+      homepage.weight: 3
+      homepage.widget.type: overseerr
+      homepage.widget.url: https://overseerr.${DOMAIN}
+      homepage.widget.key: ${OVERSEERR_API_KEY}
+    restart: unless-stopped
+  ombi:
+    image: linuxserver/ombi:latest
+    container_name: ombi
+    hostname: ombi
+    networks:
+      - publicnet
+    ports:
+      - ${OMBI_PORT:-3579}:3579
+    volumes:
+      - ${CONFIG_PATH:-./configs}/ombi:/config
+    environment:
+      <<: *common-env
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.ombi.rule: Host(`ombi.${DOMAIN}`) || Host(`ombi.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`ombi.${TS_HOSTNAME}.duckdns.org`)
+      traefik.http.services.ombi.loadbalancer.server.port: 3579
+      homepage.group: Media Requests
+    restart: always
+  riven:
+    depends_on:
+      riven-core:
+        condition: service_started
+#    image: node:16-alpine
+#    working_dir: /app
+#    command:
+#      - sh
+#      - -c
+#      - npm install && npm start
+    image: spoked/riven-frontend:latest
+    container_name: riven
+    hostname: ${RIVEN_HOSTNAME:-riven}
+    networks:
+      publicnet:
+        ipv4_address: ${RIVEN_IPV4_ADDRESS:-10.76.0.59}
+    tty: true
+    volumes:
+      - ${CONFIG_PATH:-./configs}/plex/riven/config:/riven/config
+      - ${ROOT_PATH:-./}storage/realdebrid-zurg:/storage/realdebrid-zurg
+      - ${ROOT_PATH:-./}storage/symlinks:/storage/symlinks
+      - ${ROOT_PATH:-./}logs:/logs
+    environment:
+      <<: *common-env
+      NODE_ENV: production
+      ORIGIN: https://riven.${DOMAIN}
+      BACKEND_URL: http://${RIVEN_CORE_HOSTNAME:-riven-core}:8080
+      DIALECT: postgres
+      DATABASE_URL: postgres://postgres:postgres@${RIVEN_DB_HOSTNAME:-riven-db}:5432/riven
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.riven.middlewares: tinyauth@docker
+      traefik.http.routers.riven.rule: Host(`riven.${DOMAIN}`) || Host(`riven.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`riven.${TS_HOSTNAME}.duckdns.org`)
+      traefik.http.services.riven.loadbalancer.server.port: 3000
+      homepage.group: Media
+      homepage.name: Riven
+      homepage.icon: riven.png
+      homepage.href: https://riven.${DOMAIN}/
+      homepage.description: Debrid service for Plex.
+    healthcheck:  # docker exec riven ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: always
+  riven-core:
+    depends_on:
+      riven-postgres:
+        condition: service_healthy
+#    image: spencerwooo/riven:latest
+    image: spoked/riven:latest
+    container_name: riven-core
+    hostname: ${RIVEN_CORE_HOSTNAME:-riven-core}
+    networks:
+      publicnet:
+        ipv4_address: ${RIVEN_CORE_IPV4_ADDRESS:-10.76.0.55}
+    tty: true
+    volumes:
+      - ${CONFIG_PATH:-./configs}/plex/riven/data:/riven/data
+      - ${ROOT_PATH:-./}storage/realdebrid-zurg:/storage/realdebrid-zurg
+      - ${ROOT_PATH:-./}storage/symlinks:/storage/symlinks
+      - ${ROOT_PATH:-./}logs:/logs
+    env_file:
+      - ${CONFIG_PATH:-./configs}/plex/riven/config/.env
+    environment:
+      <<: *common-env
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+#      traefik.http.routers.riven-core.middlewares: tinyauth@docker
+      traefik.http.routers.riven-core.rule: Host(`riven-core.${DOMAIN}`) || Host(`riven-core.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`riven-core.${TS_HOSTNAME}.duckdns.org`)
+      traefik.http.services.riven-core.loadbalancer.server.port: 8080
+    healthcheck:  # docker exec riven ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "curl -s http://127.0.0.1:8080 >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped
+  riven-postgres:
+    image: postgres:17.4-alpine
+    container_name: riven-postgres
+    hostname: ${RIVEN_DB_HOSTNAME:-riven-postgres}
+    networks:
+      publicnet:
+        ipv4_address: ${RIVEN_DB_IPV4_ADDRESS:-10.76.0.54}
+    volumes:
+      - ${CONFIG_PATH:-./configs}/plex/riven/pgdata:${RIVEN_PGDATA:-/var/lib/postgresql/data/pgdata}
+    environment:
+      <<: *common-env
+      PGDATA: ${RIVEN_PGDATA:-/var/lib/postgresql/data/pgdata}
+      POSTGRES_USER: ${RIVEN_DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${RIVEN_DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${RIVEN_DB_NAME:-riven}
+      POSTGRES_HOST: ${RIVEN_DB_HOSTNAME:-riven-postgres}
+      POSTGRES_PORT: ${RIVEN_DB_PORT:-5432}
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+#      traefik.http.routers.riven-db.middlewares: tinyauth@docker
+      traefik.http.routers.riven-db.rule: Host(`riven-postgres.${DOMAIN}`) || Host(`riven-postgres.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`riven-postgres.${TS_HOSTNAME}.duckdns.org`)
+      traefik.http.services.riven-db.loadbalancer.server.port: ${RIVEN_DB_PORT:-5432}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: always
+  plex:
+    # 🔹🔹 Plex Media Server 🔹🔹
+    image: plexinc/pms-docker
+    container_name: plex
+    hostname: plex
+    networks:
+      - publicnet
+    ports:
+      - "${PLEX_DLNA_PORT:-1900}:1900/udp"
+      - "${PLEX_PORT:-32400}:32400/tcp"
+      - "${PLEX_PORT2:-32410}:32410/udp"
+      - "${PLEX_PORT3:-8324}:8324/tcp"
+      - "${PLEX_PORT4:-32410}:32410/udp"
+      - "${PLEX_PORT5:-32412}:32412/udp"
+      - "${PLEX_PORT6:-32413}:32413/udp"
+      - "${PLEX_PORT7:-32414}:32414/udp"
+      - "${PLEX_PORT8:-32469}:32469/tcp"
+      - "${PLEX_PORT9:-8324}:8324/tcp"
+    # Uncomment below line if you have an embedded intel GPU
+    #devices:
+    #  - /dev/dri:/dev/dri
+    volumes:
+      - /dev/shm:/dev/shm
+      - "${CONFIG_PATH:-./configs}/plex:/config"
+      - "${CONFIG_PATH:-./configs}/plex/config:/config"
+      - "${CONFIG_PATH:-./configs}/plex/config/osx-config:/config/Library/Application Support/Plex Media Server"
+      - "${CONFIG_PATH:-./configs}/plex/transcodes:/transcode"
+      - ${ROOT_PATH:-./}storage/symlinks:/storage/symlinks
+    environment:
+      <<: *common-env
+      PLEX_CLAIM: ${PLEX_CLAIM}
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "${PLEX_TRAEFIK_ENABLE:-true}"
+      traefik.http.routers.plex.rule: Host(`plex.${DOMAIN}`) || Host(`plex.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`plex.${TS_HOSTNAME}.duckdns.org`) || Host(`plex.localhost`)
+      traefik.http.services.plex.loadbalancer.server.port: 32400
+      homepage.group: Media Streaming
+      homepage.name: Plex Media Server
+      homepage.icon: plex.png
+      homepage.href: https://plex.${DOMAIN}/
+      homepage.description: Stream your movies, TV shows, music, and photos to any device, providing a centralized media hub for all your content.
+      homepage.weight: 4
+      homepage.widget.type: plex
+      homepage.widget.url: https://plex.${DOMAIN}
+      homepage.widget.key: ${PLEX_TOKEN}  # see instructions here: https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/
+    healthcheck:
+      test: curl --connect-timeout 15 --silent --show-error --fail http://localhost:32400/identity
+      interval: 1m
+      timeout: 15s
+      retries: 3
+      start_period: 1m
+    restart: unless-stopped
+  tautulli:
+    image: ghcr.io/tautulli/tautulli:latest
+    container_name: tautulli
+    hostname: ${TAUTULLI_HOSTNAME:-tautulli}
+    networks:
+      publicnet:
+        ipv4_address: ${TAUTULLI_IPV4_ADDRESS:-10.76.0.53}
+    volumes:
+      - ${CONFIG_PATH:-./configs}/tautulli:/config
+    environment:
+      <<: *common-env
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.tautulli.middlewares: tinyauth@docker
+      traefik.http.routers.tautulli.rule: Host(`tautulli.${DOMAIN}`) || Host(`tautulli.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`tautulli.${TS_HOSTNAME}.duckdns.org`) || Host(`tautulli.localhost`)
+      traefik.http.services.tautulli.loadbalancer.server.port: 8181
+      homepage.group: Media Maintenance
+      homepage.name: Tautulli
+      homepage.icon: tautulli.png
+      homepage.href: https://tautulli.${DOMAIN}/
+      homepage.description: Tautulli is a web interface for Plex Media Server.
+      homepage.weight: 6
+      homepage.widget.type: tautulli
+      homepage.widget.url: https://tautulli.${DOMAIN}
+      homepage.widget.key: ${TAUTULLI_API_KEY}
+    restart: always
+  plex_authentication:
+    depends_on:
+      plex:
+        condition: service_healthy
+    image: ghcr.io/westsurname/scripts/plex_authentication:latest
+    container_name: plex_authentication
+    volumes:
+      - ${CONFIG_PATH:-./configs}/plex/plex_authentication/tokens.json:/app/shared/tokens.json
+      - ${CONFIG_PATH:-./configs}/plex/plex_authentication/sockets:/app/sockets
+    env_file:
+      - ${CONFIG_PATH:-./configs}/plex/west/.env
+    environment:
+      <<: *common-env
+    restart: always
+  plex_request:
+    depends_on:
+      plex:
+        condition: service_healthy
+    image: ghcr.io/westsurname/scripts/plex_request:latest
+    container_name: plex_request
+    volumes:
+      - ${CONFIG_PATH:-./configs}/plex/plex_request/tokens.json:/app/shared/tokens.json
+      - ${CONFIG_PATH:-./configs}/plex/plex_request/sockets:/app/sockets
+    env_file:
+      - ${CONFIG_PATH:-./configs}/plex/west/.env
+    environment:
+      - BLACKHOLE_RD_MOUNT_REFRESH_SECONDS=30
+      - BLACKHOLE_WAIT_FOR_TORRENT_TIMEOUT=10
+    restart: always
+  plex_watchlist:
+    depends_on:
+      plex:
+        condition: service_healthy
+      plex_authentication:
+        condition: service_started
+    image: ghcr.io/westsurname/scripts/watchlist:latest
+    container_name: plex_watchlist
+    hostname: ${PLEX_WATCHLIST_HOSTNAME:-plex_watchlist}
+    networks:
+      - publicnet
+    volumes:
+      - ${CONFIG_PATH:-./configs}/plex/plex_watchlist/tokens.json:/app/shared/tokens.json
+    env_file:
+      - ${CONFIG_PATH:-./configs}/plex/west/.env
+    environment:
+      <<: *common-env
+    restart: always
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    networks:
+      - publicnet
+    ports:
+      - 7878:7878
+    volumes:
+      - ${CONFIG_PATH:-./configs}/radarr:/config
+      - ${ROOT_PATH:-./}storage/downloads:/downloads
+      - ${ROOT_PATH:-./}storage/movies:/movies
+    environment:
+      <<: *common-env
+    restart: always
+  rclonefm:
+    image: rclone/rclone:latest
+    container_name: rclonefm
+    networks:
+      - publicnet
+    ports:
+      - 5573:5573
+    volumes:
+      - ${CONFIG_PATH:-./configs}/rclone:/config/rclone
+      - ${ROOT_PATH:-./}storage/rclone:/data
+      - ${CONFIG_PATH:-./configs}/rclonefm:/var/lib/rclonefm/js
+      - ${ROOT_PATH:-./}storage/realdebrid-zurg:/storage/realdebrid-zurg
+      - ${ROOT_PATH:-./}storage/symlinks:/storage/symlinks
+    environment:
+      TZ: America/Chicago
+    command:
+      - rcd
+      - --rc-web-gui
+      - --rc-addr=0.0.0.0:5573
+      - --rc-user=admin
+      - --rc-pass=admin
+    restart: always
+  rcloneui:
+    image: rclone/rclone:latest
+    container_name: rcloneui
+    networks:
+      - publicnet
+    ports:
+      - 5572:5572
+      - 5575:5575
+    volumes:
+      - ${CONFIG_PATH:-./configs}/rclone:/config/rclone
+      - ${ROOT_PATH:-./}storage/rclone:/data
+      - ${ROOT_PATH:-./}mount:/mount
+      - ${CONFIG_PATH:-./configs}/rclonefm/rclone-remote-storage:/rclone-remote-storage
+    environment:
+      TZ: America/Chicago
+    command:
+      - rcd
+      - --rc-web-gui
+      - --rc-addr=0.0.0.0:5572
+      - --rc-user=admin
+      - --rc-pass=admin
+    restart: always
+  realdebrid-account-monitor:
+    build:
+      context: ${SRC_PATH:-./src}/realdebrid-account-monitor
+#    image: realdebrid-account-monitor
+    container_name: realdebrid-account-monitor
+    environment:
+      <<: *common-env
+      # A list of your real debrid api keys. e.g. ["key1", "key2"]
+      # You can get your api key from https://real-debrid.com/apitoken
+      TOKENS: '["TE6M7M2GGBN6H6XT2OZTUQIX42LEPJ4EIZIHTN73HAW2TJUZAFHA", "FA5NDX4HOAQROKATB6WD7JTZLBZPWYLQSQE6UNBZ7XTUPAKG3YPQ"]'
+      # How often to check the accounts for traffic. This is a cron schedule.
+      # e.g. every hour: 0 * * * *
+      CRON_SCHEDULE: '0 * * * *'
+    volumes:
+      - ${DATA_DIR:-./data}/realdebrid-account-monitor:/app/data
+    restart: always
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    networks:
+      - publicnet
+    ports:
+      - 8989:8989
+    volumes:
+      - ${CONFIG_PATH:-./configs}/sonarr:/config
+      - ${ROOT_PATH:-./}storage/downloads:/downloads
+      - ${ROOT_PATH:-./}storage/tv:/tv
+    environment:
+      <<: *common-env
+    restart: always
+  prefetcharr-plex:
+    # 🔹🔹 Prefetcharr 🔹🔹
+    # Let Sonarr fetch the next season of a show you are watching on Plex.
+    depends_on:
+      plex:
+        condition: service_healthy
+    image: phueber/prefetcharr
+    container_name: prefetcharr-plex
+    hostname: prefetcharr-plex
+    networks:
+      - publicnet
+    volumes:
+      - ${ROOT_DIR:-.}/configs/prefetcharr/plex/log:${PREFETCHARR_PLEX_INTERNAL_LOG_DIR:-/log}
+    environment:
+      <<: *common-env
+      MEDIA_SERVER_TYPE: plex # `jellyfin`, `emby` or `plex`
+      INTERVAL: ${PREFETCHARR_PLEX_INTERVAL:-900} # 15 minutes
+      LOG_DIR: ${PREFETCHARR_PLEX_INTERNAL_LOG_DIR:-/log}
+      MEDIA_SERVER_API_KEY: ${PLEX_TOKEN}
+      MEDIA_SERVER_URL: http://plex:${PLEX_PORT:-32400}
+      REMAINING_EPISODES: ${PREFETCHARR_PLEX_REMAINING_EPISODES:-3} # The last <NUM> episodes trigger a search
+      RUST_LOG: ${PREFETCHARR_PLEX_LOG_LEVEL:-debug}
+      RADARR_API_KEY: ${RADARR_API_KEY}
+      RADARR_URL: http://radarr:${RADARR_PORT:-7878}
+      SONARR_API_KEY: ${SONARR_API_KEY}
+      SONARR_URL: http://sonarr:${SONARR_PORT:-8989}
+      # Optional: Only monitor sessions for specific user IDs or names
+    restart: unless-stopped
+
+  watchlistarr:
+    # 🔹🔹 Watchlistarr 🔹🔹
+    # Sync's Plex watchlists with Sonarr and Radarr
+    depends_on:
+      plex:
+        condition: service_healthy
+    image: nylonee/watchlistarr
+    container_name: watchlistarr
+    hostname: watchlistarr
+    networks:
+      - publicnet
+    volumes:
+      - ${ROOT_DIR:-.}/configs/watchlistarr/config:/app/config
+    environment:
+      <<: *common-env
+      ALLOW_CONTINUING_SHOW_DELETING: ${ALLOW_CONTINUING_SHOW_DELETING:-false}
+      ALLOW_ENDED_SHOW_DELETING: ${ALLOW_ENDED_SHOW_DELETING:-false}
+      ALLOW_MOVIE_DELETING: ${ALLOW_MOVIE_DELETING:-false}
+      DELETE_DAYS: ${WATCHLISTARR_DELETE_DAYS:-7}
+      DELETE_FILES: ${WATCHLISTARR_DELETE_FILES:-true}
+      DELETE_INTERVAL_DAYS: ${DELETE_INTERVAL_DAYS:-7}
+      LOG_LEVEL: ${WATCHLISTARR_LOG_LEVEL:-DEBUG}
+      PLEX_TOKEN: ${PLEX_TOKEN:?}
+      PLEX_WATCHLIST_URL_1: ${PLEX_WATCHLIST_URL_1:-}
+      PLEX_WATCHLIST_URL_2: ${PLEX_WATCHLIST_URL_2:-}
+      RADARR_API_KEY: ${RADARR_API_KEY}
+      RADARR_BASE_URL: http://radarr:${RADARR_PORT:-7878}
+      RADARR_BYPASS_IGNORED: ${RADARR_BYPASS_IGNORED:-false}
+      RADARR_QUALITY_PROFILE: ${RADARR_QUALITY_PROFILE:-}
+      RADARR_ROOT_FOLDER: ${RADARR_ROOT_FOLDER:-}
+      RADARR_TAGS: ${RADARR_TAGS:-}
+      REFRESH_INTERVAL_SECONDS: ${REFRESH_INTERVAL_SECONDS:-10}
+      SKIP_FRIEND_SYNC: ${WATCHLISTARR_SKIP_FRIEND_SYNC:-false}
+      SONARR_API_KEY: ${SONARR_API_KEY}
+      SONARR_BASE_URL: http://sonarr:${SONARR_PORT:-8989}
+      SONARR_BYPASS_IGNORED: ${SONARR_BYPASS_IGNORED:-false}
+      SONARR_QUALITY_PROFILE: ${SONARR_QUALITY_PROFILE:-}
+      SONARR_ROOT_FOLDER: ${SONARR_ROOT_FOLDER:-}
+      SONARR_SEASON_MONITORING: ${SONARR_SEASON_MONITORING:-}
+      SONARR_TAGS: ${SONARR_TAGS:-}
+    restart: unless-stopped
+
+  wizarr:
+    # 🔹🔹 Wizarr 🔹🔹  # https://github.com/wizarrrr/wizarr
+    # Advanced user invitation and management system for Jellyfin and Plex.
+    image: ghcr.io/wizarrrr/wizarr
+    container_name: wizarr
+    hostname: wizarr
+    networks:
+      - publicnet
+    ports:
+      - ${WIZARR_PORT:-5690}:5690
+    volumes:
+      - ${ROOT_DIR:-.}/configs/wizarr/:/data/database
+    environment:
+      <<: *common-env
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.wizarr.rule: Host(`wizarr.${DOMAIN}`) || Host(`wizarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`wizarr.${TS_HOSTNAME}.duckdns.org`)
+      traefik.http.services.wizarr.loadbalancer.server.port: 5690
+      homepage.group: User Management
+      homepage.name: Wizarr
+      homepage.icon: wizarr.png
+      homepage.href: https://wizarr.${DOMAIN}
+      homepage.description: Advanced user invitation and management system for Jellyfin and Plex.
+    restart: unless-stopped
+
+networks:
+  publicnet:  # https://docs.docker.com/engine/network/drivers/bridge/#differences-between-user-defined-bridges-and-the-default-bridge
+#    external: true  # docker network create --driver=bridge --attachable publicnet --subnet=${PUBLICNET_SUBNET:-10.76.0.0/16} --gateway=${PUBLICNET_GATEWAY:-10.76.0.1} --ip-range=${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+    attachable: true
+    name: publicnet
+    ipam:
+      config:
+        - subnet: ${PUBLICNET_SUBNET:-10.76.0.0/16}
+          gateway: ${PUBLICNET_GATEWAY:-10.76.0.1}
+          ip_range: ${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+
+secrets:
+  plex_claim:
+    file: ${ROOT_DIR:-.}/secrets/plex_claim

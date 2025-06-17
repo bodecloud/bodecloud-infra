@@ -1,0 +1,18 @@
+displayName: Auth-Based Rate Limit Plugin
+type: middleware
+import: github.com/bolabaden.duckdns.org/auth-based-rate-limit
+summary: 'Applies different rate limit middlewares based on authentication status'
+
+description: |
+  This middleware plugin for Traefik applies different rate limiting middlewares
+  based on user authentication status. It reads an auth header to determine if a user
+  is authenticated, then applies the appropriate middleware chain.
+
+  For authenticated users, a more permissive rate limit is applied.
+  For unauthenticated users, a more restrictive rate limit is applied.
+
+testData:
+  authHeader: "X-Auth-Status"
+  authenticatedValue: "authenticated"
+  authenticatedMiddleware: "chain-authenticated-default@file"
+  unauthenticatedMiddleware: "chain-public-default@file" 

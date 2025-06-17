@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: jellyfin
+  usage:
+    cpu: 1210663n
+    memory: 172408Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: jellyfin
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: jellyfin
+    pod-template-hash: 5854fc967
+  name: jellyfin-5854fc967-mq6c6
+  namespace: default
+timestamp: "2025-06-14T23:00:34Z"
+window: 18.062s

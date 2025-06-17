@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1","objectset.rio.cattle.io/applied":"H4sIAAAAAAAA/6xV4W8auRP9V36az7vJLoHQrsQHRPiV6tIUFXqnUxUh4x3Ah9f2eWZpuIj//TS7SUoupe1V9wUt9vj5zXvjmXtQwfyKkYx3UIAKgc53OSSwNa6EAq4wWL+v0DEkUCGrUrGC4h6Uc54VG+9I/vrlH6iZkM+i8WdaMVs8M/7cCAgkJ/f9Z4cxXe+2UMD2go52dnnyv1+MKwfDsvTuuxBOVQiFUIxGU0oYdxjT8pj+9wEoKC0o23qJKe2JsYJDAlYt0TZpbl9RqkJ4cdE30DeKNlAA5hl2uj3ML7B7qfqdnn5dlmXZXb3GZefi9Srv9vv97qqU+76aC7TrJyhSQC0EI+6MeDkxxD7ur01lGIosAUKLmn2UoEqx3lx/P6mDAHNUjOt9A+6tNW79MZSKsQW6++jUThmrlhahyA8J8D4Ivw/PYmUdq2Afzx0V0g+Ie1KSo8S1d6yMw0hQfLoHFdfyAWmqMXJamjg45ypAAmlKqOuIafCRB3nW6WXNqghqkdMQcYUxYpmqsoxIlEpGNHjrGKNT9u00Gd89fU48ccPtGKImTJ0vMSVWXFNzUxPQ0k8jkre1vJ1B3qNmhy2l2oQNxpRqw0iD+fVsMR5dTcbyOxsufns7nyyG49mi07tcvBm9W8wmw4tX3eRL3IcfivoHWt559RjX6V2eQjsZdYQ2mgxHk2EnW0zfX/+eX2S9r4G9CILbBEyl1uJuVE5vMJ5XJkYvDjy3u9hlZ/2zDiRgzQ4dEk2jXzYFtVLG1hHnm4i08baE4iKBDXN4gyz7QbE8wnM5+Bck0DhSNBGiP+kNNvU1mc+nMykr4wwbZa/Qqv0MtXclQXGZJRAwGl8+LeXytGqtkejo8jwBNhX6mr8EfuNdC5u2bJ+qeNoQbKrz6dwj2xA9e+0tFDAfTeFwm0BEVZqfUkRO7n9ekpeKdP6FIPIQ6qiR2tb1Z43EzbcONRSQZ1nVjJ3Kxz0U0M/embYpyQs2vB95x3jX5KOs9Z+n0eyMxTWOSSvbTCcoVsoSthK9d3b/wXv+v7H40DsLjrXs1m5IN97J7rO1j4RRjMiyQwI7b+sK3/naPfhVyef0Qcq2vzyYxVWQrgOHW/FHusHsqANLp4gOGakZQAQFWOPqO9E5ROOb5KwiumnRWrJtU9HRsNHKikkYd0bjUGvhcXOivNhbjI+j+tM9bFHEHD3ANOOVRBkZYkEihSOM74yYcUjuAVcr1FIcN36mN1jWVvpdC9NQit7i2fOcpJKjt2mwyuF/ilwp4nbivoS8ffSozRSrwPsrI5IfvubM4XD4OwAA///UraDKAQkAAA","objectset.rio.cattle.io/id":"","objectset.rio.cattle.io/owner-gvk":"k3s.cattle.io/v1, Kind=Addon","objectset.rio.cattle.io/owner-name":"metrics-server-deployment","objectset.rio.cattle.io/owner-namespace":"kube-system"},"generation":1,"labels":{"k8s-app":"metrics-server","objectset.rio.cattle.io/hash":"e10e245e13e46a725c9dddd4f9eb239f147774fd"},"name":"metrics-server","namespace":"kube-system"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":0,"selector":{"matchLabels":{"k8s-app":"metrics-server"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":1},"type":"RollingUpdate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"k8s-app":"metrics-server"},"name":"metrics-server"},"spec":{"containers":[{"args":["--cert-dir=/tmp","--secure-port=10250","--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname","--kubelet-use-node-status-port","--metric-resolution=15s","--tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"],"image":"rancher/mirrored-metrics-server:v0.7.2","imagePullPolicy":"IfNotPresent","livenessProbe":{"failureThreshold":3,"httpGet":{"path":"/livez","port":"https","scheme":"HTTPS"},"initialDelaySeconds":60,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1},"name":"metrics-server","ports":[{"containerPort":10250,"name":"https","protocol":"TCP"}],"readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/readyz","port":"https","scheme":"HTTPS"},"periodSeconds":2,"successThreshold":1,"timeoutSeconds":1},"resources":{"requests":{"cpu":"100m","memory":"70Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":1000},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/tmp","name":"tmp-dir"}]}],"dnsPolicy":"ClusterFirst","nodeSelector":{"kubernetes.io/os":"linux"},"priorityClassName":"system-node-critical","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"serviceAccount":"metrics-server","serviceAccountName":"metrics-server","terminationGracePeriodSeconds":30,"tolerations":[{"key":"CriticalAddonsOnly","operator":"Exists"},{"effect":"NoSchedule","key":"node-role.kubernetes.io/control-plane","operator":"Exists"},{"effect":"NoSchedule","key":"node-role.kubernetes.io/master","operator":"Exists"}],"volumes":[{"emptyDir":{},"name":"tmp-dir"}]}}}}
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xV4W8auRP9V36az7vJLoHQrsQHRPiV6tIUFXqnUxUh4x3Ah9f2eWZpuIj//TS7SUoupe1V9wUt9vj5zXvjmXtQwfyKkYx3UIAKgc53OSSwNa6EAq4wWL+v0DEkUCGrUrGC4h6Uc54VG+9I/vrlH6iZkM+i8WdaMVs8M/7cCAgkJ/f9Z4cxXe+2UMD2go52dnnyv1+MKwfDsvTuuxBOVQiFUIxGU0oYdxjT8pj+9wEoKC0o23qJKe2JsYJDAlYt0TZpbl9RqkJ4cdE30DeKNlAA5hl2uj3ML7B7qfqdnn5dlmXZXb3GZefi9Srv9vv97qqU+76aC7TrJyhSQC0EI+6MeDkxxD7ur01lGIosAUKLmn2UoEqx3lx/P6mDAHNUjOt9A+6tNW79MZSKsQW6++jUThmrlhahyA8J8D4Ivw/PYmUdq2Afzx0V0g+Ie1KSo8S1d6yMw0hQfLoHFdfyAWmqMXJamjg45ypAAmlKqOuIafCRB3nW6WXNqghqkdMQcYUxYpmqsoxIlEpGNHjrGKNT9u00Gd89fU48ccPtGKImTJ0vMSVWXFNzUxPQ0k8jkre1vJ1B3qNmhy2l2oQNxpRqw0iD+fVsMR5dTcbyOxsufns7nyyG49mi07tcvBm9W8wmw4tX3eRL3IcfivoHWt559RjX6V2eQjsZdYQ2mgxHk2EnW0zfX/+eX2S9r4G9CILbBEyl1uJuVE5vMJ5XJkYvDjy3u9hlZ/2zDiRgzQ4dEk2jXzYFtVLG1hHnm4i08baE4iKBDXN4gyz7QbE8wnM5+Bck0DhSNBGiP+kNNvU1mc+nMykr4wwbZa/Qqv0MtXclQXGZJRAwGl8+LeXytGqtkejo8jwBNhX6mr8EfuNdC5u2bJ+qeNoQbKrz6dwj2xA9e+0tFDAfTeFwm0BEVZqfUkRO7n9ekpeKdP6FIPIQ6qiR2tb1Z43EzbcONRSQZ1nVjJ3Kxz0U0M/embYpyQs2vB95x3jX5KOs9Z+n0eyMxTWOSSvbTCcoVsoSthK9d3b/wXv+v7H40DsLjrXs1m5IN97J7rO1j4RRjMiyQwI7b+sK3/naPfhVyef0Qcq2vzyYxVWQrgOHW/FHusHsqANLp4gOGakZQAQFWOPqO9E5ROOb5KwiumnRWrJtU9HRsNHKikkYd0bjUGvhcXOivNhbjI+j+tM9bFHEHD3ANOOVRBkZYkEihSOM74yYcUjuAVcr1FIcN36mN1jWVvpdC9NQit7i2fOcpJKjt2mwyuF/ilwp4nbivoS8ffSozRSrwPsrI5IfvubM4XD4OwAA///UraDKAQkAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: metrics-server-deployment
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    k8s-app: metrics-server
+    objectset.rio.cattle.io/hash: e10e245e13e46a725c9dddd4f9eb239f147774fd
+  name: metrics-server
+  namespace: kube-system
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: metrics-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        k8s-app: metrics-server
+      name: metrics-server
+    spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=10250
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
+        - --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+        image: rancher/mirrored-metrics-server:v0.7.2
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /livez
+            port: https
+            scheme: HTTPS
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: metrics-server
+        ports:
+        - containerPort: 10250
+          name: https
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: https
+            scheme: HTTPS
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 70Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-dir
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: system-node-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: metrics-server
+      serviceAccountName: metrics-server
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/control-plane
+        operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+      volumes:
+      - emptyDir: {}
+        name: tmp-dir
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2025-06-11T06:36:44Z"
+    lastUpdateTime: "2025-06-11T06:36:44Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    type: Available
+  - lastTransitionTime: "2025-06-11T06:36:44Z"
+    lastUpdateTime: "2025-06-11T06:37:15Z"
+    message: ReplicaSet "metrics-server-6f4c6675d5" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    type: Progressing
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

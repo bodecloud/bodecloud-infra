@@ -1,0 +1,335 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: brunner56-riven
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: riven
+    helm.sh/chart: riven-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-riven,riven-env,riven-setup
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: riven
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.elfhosted.com/name: riven
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: riven
+    spec:
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: backup
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: dev-shm
+        emptyDir: {}
+      - name: elfbot
+        configMap:
+          name: elfbot-riven
+          defaultMode: 420
+          optional: true
+      - name: logs
+        persistentVolumeClaim:
+          claimName: logs
+      - name: rclone
+        persistentVolumeClaim:
+          claimName: rclone
+      - name: rclonemountrealdebridzurg
+        persistentVolumeClaim:
+          claimName: realdebrid-zurg
+      - name: setup
+        configMap:
+          name: riven-setup
+          defaultMode: 420
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: symlinks
+      - name: tmp
+        emptyDir: {}
+      initContainers:
+      - name: bootstrap
+        image: alpine/k8s:1.29.1
+        command:
+        - /bin/bash
+        - -c
+        - "set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name\
+          \ if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\n\
+          fi\n\n# look for commands - we match specific names in order of least-destructive\n\
+          TIMESTAMP_NOW=$(date +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat\
+          \ /etc/elfbot/pause)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n\
+          \  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\
+          \n# If no command is set, then move onto the next possibility\nif [[ -f\
+          \ /etc/elfbot/backup && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat\
+          \ /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n\
+          \  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\
+          \n# If no command is set, then move onto the next possibility\nif [[ -f\
+          \ /etc/elfbot/reset && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat\
+          \ /etc/elfbot/reset)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n\
+          \  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\
+          \ncase $COMMAND in\n\n  \"pause\")\n    echo \"Recent pause command found,\
+          \ sleeping 5m..\"\n    sleep 300\n    ;;\n\n  \"reset\")\n\n    # Safety\
+          \ check - if /config/homer exists, we've not mounted /config properly and\
+          \ are about to wipe out EVERYTHING\n    if [ -e \"/config/homer\" ]; then\n\
+          \        echo \"The path /config/homer exists. Exiting.\"\n        exit\
+          \ 1\n    fi      \n    echo \"Recent reset command found, resetting\"\n\
+          \    rm -rf /config/*\n    ;;\n\n  \"backup\")\n    echo \"Recent backup\
+          \ command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\
+          \n    TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config\
+          \ /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n    ;;\n\nesac\n\nif [[ ! -f\
+          \ /config/i-am-bootstrapped ]]\nthen\n  echo \"Bootstrapping from goldilocks\
+          \ config...\"\n  s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/*\
+          \ /config/\n  touch /config/i-am-bootstrapped\nfi\n"
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: b2-elfhosted-config-ro
+              key: access-key-id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: b2-elfhosted-config-ro
+              key: secret-key
+        - name: S3_ENDPOINT_URL
+          value: https://s3.us-west-000.backblazeb2.com
+        - name: K8S_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/name']
+        - name: ELF_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.elfhosted.com/name']
+        resources:
+          limits:
+            cpu: '1'
+            memory: 4Gi
+          requests:
+            cpu: '0'
+            memory: 1Mi
+        volumeMounts:
+        - name: elfbot
+          mountPath: /etc/elfbot
+        - name: backup
+          mountPath: /storage/backup
+        - name: config
+          mountPath: /config
+          subPath: riven
+        - name: tmp
+          mountPath: /tmp
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsUser: 568
+          runAsGroup: 568
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+      - name: setup
+        image: alpine/k8s:1.29.1
+        command:
+        - /bin/bash
+        - -c
+        - '# run the setup script from the configmap, so that we can make templated
+          changes
+
+          bash /setup/setup.sh
+
+          '
+        resources: {}
+        volumeMounts:
+        - name: symlinks
+          mountPath: /storage/symlinks
+        - name: config
+          mountPath: /config
+          subPath: riven
+        - name: setup
+          mountPath: /setup/
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+      - name: setup-postgres
+        image: alpine/k8s:1.29.1
+        command:
+        - /bin/bash
+        - -c
+        - 'set -x
+
+          set -e
+
+
+          mkdir -p /config/postgresql/database
+
+          mkdir -p /config/postgresql/backups
+
+          chown elfie:elfie /config -R
+
+          '
+        resources: {}
+        volumeMounts:
+        - name: config
+          mountPath: /config
+          subPath: riven
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
+      containers:
+      - name: brunner56-riven
+        image: ghcr.io/elfhosted/riven:v0.21.21@sha256:bf1a9cab579d5eaac0ed72e20584b139547db7c38753a03b3756151af5e0ac13
+        ports:
+        - name: http
+          containerPort: 3001
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: riven-env
+        - configMapRef:
+            name: elfbot-riven
+            optional: true
+        resources:
+          limits:
+            cpu: '2'
+            memory: 4Gi
+          requests:
+            cpu: '0'
+            memory: 20Mi
+        volumeMounts:
+        - name: backup
+          mountPath: /backup
+        - name: config
+          mountPath: /riven/data
+          subPath: riven
+        - name: dev-shm
+          mountPath: /dev-shm
+        - name: elfbot
+          mountPath: /elfbot
+        - name: logs
+          mountPath: /riven/data/logs
+          subPath: riven
+        - name: rclone
+          mountPath: /storage/rclone
+        - name: rclonemountrealdebridzurg
+          mountPath: /storage/realdebrid-zurg
+        - name: setup
+          mountPath: /setup
+        - name: symlinks
+          mountPath: /storage/symlinks
+        - name: tmp
+          mountPath: /tmp
+        livenessProbe:
+          tcpSocket:
+            port: 3001
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 3001
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        startupProbe:
+          tcpSocket:
+            port: 3001
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 30
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          readOnlyRootFilesystem: false
+          seccompProfile:
+            type: RuntimeDefault
+      - name: database
+        image: postgres:17-alpine
+        args:
+        - -c
+        - shared_buffers=500MB
+        - -c
+        - work_mem=4MB
+        - -c
+        - effective_cache_size=1GB
+        - -c
+        - max_connections=310
+        env:
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_DB
+          value: riven
+        - name: POSTGRES_USER
+          value: postgres
+        resources:
+          limits:
+            cpu: 500m
+            memory: 8Gi
+          requests:
+            cpu: '0'
+            memory: 1Mi
+        volumeMounts:
+        - name: config
+          mountPath: /var/lib/postgresql/data
+          subPath: riven/postgresql/database
+        - name: dev-shm
+          mountPath: /dev/shm
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      priorityClassName: tenant-normal
+      enableServiceLinks: false
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600

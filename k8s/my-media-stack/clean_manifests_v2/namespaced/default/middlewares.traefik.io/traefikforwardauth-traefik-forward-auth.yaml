@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  annotations:
+    meta.helm.sh/release-name: traefikforwardauth
+    meta.helm.sh/release-namespace: default
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: traefikforwardauth-traefik-forward-auth
+  namespace: default
+spec:
+  forwardAuth:
+    address: http://traefikforwardauth-traefik-forward-auth.default:4181
+    authResponseHeaders:
+    - X-Forwarded-User

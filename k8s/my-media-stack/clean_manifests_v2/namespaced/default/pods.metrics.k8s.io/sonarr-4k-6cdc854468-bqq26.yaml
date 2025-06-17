@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: sonarr-4k
+  usage:
+    cpu: 3370206n
+    memory: 84204Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: sonarr-4k
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: sonarr-4k
+    pod-template-hash: 6cdc854468
+  name: sonarr-4k-6cdc854468-bqq26
+  namespace: default
+timestamp: "2025-06-14T23:00:52Z"
+window: 15.124s

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: filebrowser
+  name: filebrowser
+  namespace: default
+subsets:
+- addresses:
+  - ip: 10.42.0.245
+    nodeName: beatapostapita
+    targetRef:
+      kind: Pod
+      name: filebrowser-5fb5648dcf-8pdnt
+      namespace: default
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP

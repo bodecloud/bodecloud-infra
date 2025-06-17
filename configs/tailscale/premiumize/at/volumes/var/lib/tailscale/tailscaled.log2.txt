@@ -1,0 +1,310 @@
+{"logtail":{"client_time":"2025-06-07T17:31:23.268883451Z","proc_id":3944644121,"proc_seq":1},"text":"logtail started"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.272823087Z","proc_id":3944644121,"proc_seq":2},"text":"Program starting: v1.84.0-t0b36774ff, Go 1.24.2: []string{\"tailscaled\", \"--socket=/tmp/tailscaled.sock\", \"--statedir=/var/lib/tailscale\", \"--tun=userspace-networking\", \"--socks5-server=:1058\", \"--outbound-http-proxy-listen=0.0.0.0:8889\"}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.272884087Z","proc_id":3944644121,"proc_seq":3},"text":"LogID: 38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.272889967Z","proc_id":3944644121,"proc_seq":4},"text":"logpolicy: using system state directory \"/var/lib/tailscale\"\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.275544485Z","proc_id":3944644121,"proc_seq":5},"text":"dns: [rc=unknown ret=direct]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.275568045Z","proc_id":3944644121,"proc_seq":6},"text":"dns: using \"direct\" mode\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.275594525Z","proc_id":3944644121,"proc_seq":7},"text":"dns: using *dns.directManager\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.29170427Z","proc_id":3944644121,"proc_seq":8},"text":"dns: inotify: NewDirWatcher: context canceled\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.3025781Z","proc_id":3944644121,"proc_seq":9},"text":"wgengine.NewUserspaceEngine(tun \"userspace-networking\") ...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.30271162Z","proc_id":3944644121,"proc_seq":10},"v":1,"text":"using fake (no-op) tun device\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.3027179Z","proc_id":3944644121,"proc_seq":11},"v":1,"text":"using fake (no-op) OS network configurator\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.30272134Z","proc_id":3944644121,"proc_seq":12},"v":1,"text":"using fake (no-op) DNS configurator\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.318523805Z","proc_id":3944644121,"proc_seq":13},"text":"dns: using dns.noopManager\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.318604805Z","proc_id":3944644121,"proc_seq":14},"text":"link state: interfaces.State{defaultRoute=eth0 ifs={eth0:[10.76.128.101/16] tun0:[10.8.0.8/16]} v4=true v6=false}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319373564Z","proc_id":3944644121,"proc_seq":15},"text":"onPortUpdate(port=56625, network=udp6)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319384844Z","proc_id":3944644121,"proc_seq":16},"v":1,"text":"warning: fakeRouter.UpdateMagicsockPort: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319400724Z","proc_id":3944644121,"proc_seq":17},"text":"magicsock: [warning] failed to force-set UDP read buffer size to 7340032: operation not permitted; using kernel default values (impacts throughput only)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319406924Z","proc_id":3944644121,"proc_seq":18},"text":"magicsock: [warning] failed to force-set UDP write buffer size to 7340032: operation not permitted; using kernel default values (impacts throughput only)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319440084Z","proc_id":3944644121,"proc_seq":19},"text":"onPortUpdate(port=39290, network=udp4)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319443244Z","proc_id":3944644121,"proc_seq":20},"v":1,"text":"warning: fakeRouter.UpdateMagicsockPort: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319449044Z","proc_id":3944644121,"proc_seq":21},"text":"magicsock: [warning] failed to force-set UDP read buffer size to 7340032: operation not permitted; using kernel default values (impacts throughput only)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319457804Z","proc_id":3944644121,"proc_seq":22},"text":"magicsock: [warning] failed to force-set UDP write buffer size to 7340032: operation not permitted; using kernel default values (impacts throughput only)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319467924Z","proc_id":3944644121,"proc_seq":23},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319575764Z","proc_id":3944644121,"proc_seq":24},"text":"magicsock: disco key = d:7e4e5e2b78a35119\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.319584644Z","proc_id":3944644121,"proc_seq":25},"text":"Creating WireGuard device...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.336983908Z","proc_id":3944644121,"proc_seq":26},"text":"Bringing WireGuard device up...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.337017948Z","proc_id":3944644121,"proc_seq":27},"v":2,"text":"wg: UDP bind has been updated\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.337037588Z","proc_id":3944644121,"proc_seq":28},"v":2,"text":"wg: Interface state was Down, requested Up, now Up\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.337050108Z","proc_id":3944644121,"proc_seq":29},"text":"Bringing router up...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.337054108Z","proc_id":3944644121,"proc_seq":30},"v":1,"text":"warning: fakeRouter.Up: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.337060588Z","proc_id":3944644121,"proc_seq":31},"text":"Clearing router settings...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.337063908Z","proc_id":3944644121,"proc_seq":32},"v":1,"text":"warning: fakeRouter.Set: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.337073188Z","proc_id":3944644121,"proc_seq":33},"text":"Starting network monitor...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.337139188Z","proc_id":3944644121,"proc_seq":34},"text":"Engine created.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.347529658Z","proc_id":3944644121,"proc_seq":35},"v":2,"text":"wg: Routine: receive incoming receiveDERP - started\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.355373731Z","proc_id":3944644121,"proc_seq":36},"v":2,"text":"wg: Routine: receive incoming mkReceiveFunc - started\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.358484368Z","proc_id":3944644121,"proc_seq":37},"v":2,"text":"wg: Routine: receive incoming mkReceiveFunc - started\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.371706716Z","proc_id":3944644121,"proc_seq":38},"text":"pm: using backend prefs for \"profile-a34d\": Prefs{ra=true dns=false want=true routes=[0.0.0.0/0 ::/0 100.64.0.0/10 10.76.0.0/16 172.17.0.0/16] snat=true statefulFiltering=false nf=on host=\"tailscale-premiumize-at-micklethefickle-docker\" update=check Persist{o=, n=[iGQyL] u=\"th3w1zard1@github\"}}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.372721355Z","proc_id":3944644121,"proc_seq":39},"text":"logpolicy: using system state directory \"/var/lib/tailscale\"\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.379225029Z","proc_id":3944644121,"proc_seq":40},"v":1,"text":"netmap packet filter: (not ready yet)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.388423301Z","proc_id":3944644121,"proc_seq":41},"v":2,"text":"dnsfallback: SetCachePath loaded cached DERP map\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.38894774Z","proc_id":3944644121,"proc_seq":42},"text":"got LocalBackend in 98ms\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.38896298Z","proc_id":3944644121,"proc_seq":43},"text":"Start\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.38909426Z","proc_id":3944644121,"proc_seq":44},"text":"ipnext: active extensions: taildrop, relayserver\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.391866377Z","proc_id":3944644121,"proc_seq":45},"v":1,"Hostinfo":{"IPNVersion":"1.84.0-t0b36774ff","BackendLogID":"38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b","OS":"linux","OSVersion":"6.8.0-1026-oracle","Container":true,"Distro":"alpine","DistroVersion":"3.19.7","Desktop":false,"Package":"container","Hostname":"gluetun-premiumize-at","Machine":"aarch64","GoArch":"arm64","GoArchVar":"v8.0","GoVersion":"go1.24.2","Userspace":true,"UserspaceRouter":true,"AppConnector":false}}
+{"logtail":{"client_time":"2025-06-07T17:31:23.392972176Z","proc_id":3944644121,"proc_seq":46},"v":1,"text":"control: HostInfo: {\"IPNVersion\":\"1.84.0-t0b36774ff\",\"BackendLogID\":\"38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b\",\"OS\":\"linux\",\"OSVersion\":\"6.8.0-1026-oracle\",\"Container\":true,\"Distro\":\"alpine\",\"DistroVersion\":\"3.19.7\",\"Desktop\":false,\"Package\":\"container\",\"Hostname\":\"tailscale-premiumize-at-micklethefickle-docker\",\"Machine\":\"aarch64\",\"GoArch\":\"arm64\",\"GoArchVar\":\"v8.0\",\"GoVersion\":\"go1.24.2\",\"RoutableIPs\":[\"0.0.0.0/0\",\"::/0\",\"100.64.0.0/10\",\"10.76.0.0/16\",\"172.17.0.0/16\"],\"Userspace\":true,\"UserspaceRouter\":true,\"AppConnector\":false}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.393133336Z","proc_id":3944644121,"proc_seq":47},"text":"Backend: logs: be:38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b fe:\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.393202936Z","proc_id":3944644121,"proc_seq":48},"text":"control: client.Login(0)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.395072214Z","proc_id":3944644121,"proc_seq":49},"v":1,"text":"control: authRoutine: state:new; wantLoggedIn=true\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.395353694Z","proc_id":3944644121,"proc_seq":50},"v":1,"text":"control: direct.TryLogin(flags=0)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.396508413Z","proc_id":3944644121,"proc_seq":51},"text":"control: doLogin(regen=false, hasUrl=false)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.396599813Z","proc_id":3944644121,"proc_seq":52},"v":1,"text":"control: mapRoutine: state:authenticating\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:23.396803693Z","proc_id":3944644121,"proc_seq":53},"text":"health(warnable=warming-up): error: Tailscale is starting. Please wait.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:25.127784851Z","proc_id":3944644121,"proc_seq":54},"text":"control: control server key from https://controlplane.tailscale.com: ts2021=[fSeS+], legacy=[nlFWp]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:25.12919149Z","proc_id":3944644121,"proc_seq":55},"text":"control: RegisterReq: onode= node=[iGQyL] fup=false nks=false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:25.12956577Z","proc_id":3944644121,"proc_seq":56},"v":1,"text":"control: creating new noise client\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.72189353Z","proc_id":3944644121,"proc_seq":57},"text":"control: RegisterReq: got response; nodeKeyExpired=false, machineAuthorized=false; authURL=true\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.72192745Z","proc_id":3944644121,"proc_seq":58},"text":"control: AuthURL is https://login.tailscale.com/a/1d3398c301e3d7\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.72193777Z","proc_id":3944644121,"proc_seq":59},"v":1,"text":"control: sendStatus: authRoutine-url: state:url-visit-required\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.72194737Z","proc_id":3944644121,"proc_seq":60},"v":1,"text":"control: authRoutine: state:url-visit-required; wantLoggedIn=true\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.72195073Z","proc_id":3944644121,"proc_seq":61},"v":1,"text":"control: direct.WaitLoginURL\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.72196609Z","proc_id":3944644121,"proc_seq":62},"text":"control: doLogin(regen=false, hasUrl=true)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.72219005Z","proc_id":3944644121,"proc_seq":63},"text":"control: RegisterReq: onode= node=[iGQyL] fup=true nks=false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722575289Z","proc_id":3944644121,"proc_seq":64},"text":"Received auth URL: https://login.tailsc...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722584449Z","proc_id":3944644121,"proc_seq":65},"text":"popBrowserAuthNow(\"\"): url=true, key-expired=false, seamless-key-renewal=false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722588969Z","proc_id":3944644121,"proc_seq":66},"text":"blockEngineUpdates(true)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722592769Z","proc_id":3944644121,"proc_seq":67},"text":"stopEngineAndWait...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722719169Z","proc_id":3944644121,"proc_seq":68},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722824369Z","proc_id":3944644121,"proc_seq":69},"text":"wgengine: Reconfig: configuring userspace WireGuard config (with 0/0 peers)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722857089Z","proc_id":3944644121,"proc_seq":70},"text":"wgengine: Reconfig: configuring router\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722861649Z","proc_id":3944644121,"proc_seq":71},"v":1,"text":"warning: fakeRouter.Set: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722870809Z","proc_id":3944644121,"proc_seq":72},"text":"wgengine: Reconfig: user dialer\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722885769Z","proc_id":3944644121,"proc_seq":73},"text":"wgengine: Reconfig: configuring DNS\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722904609Z","proc_id":3944644121,"proc_seq":74},"text":"dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:0}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722912529Z","proc_id":3944644121,"proc_seq":75},"text":"dns: Resolvercfg: {Routes:{} Hosts:0 LocalDomains:[]}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722917489Z","proc_id":3944644121,"proc_seq":76},"text":"dns: OScfg: {}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722924129Z","proc_id":3944644121,"proc_seq":77},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722935249Z","proc_id":3944644121,"proc_seq":78},"text":"requestEngineStatusAndWait\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.722940929Z","proc_id":3944644121,"proc_seq":79},"text":"requestEngineStatusAndWait: waiting...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.726356766Z","proc_id":3944644121,"proc_seq":80},"text":"Switching ipn state NoState -> NeedsLogin (WantRunning=true, nm=false)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.726389766Z","proc_id":3944644121,"proc_seq":81},"text":"blockEngineUpdates(true)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.730386082Z","proc_id":3944644121,"proc_seq":82},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.730879962Z","proc_id":3944644121,"proc_seq":83},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.731006682Z","proc_id":3944644121,"proc_seq":84},"text":"requestEngineStatusAndWait: got status update.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.731015842Z","proc_id":3944644121,"proc_seq":85},"text":"stopEngineAndWait: done.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.731380801Z","proc_id":3944644121,"proc_seq":86},"v":1,"text":"authReconfig: blocked, skipping.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.966509584Z","proc_id":3944644121,"proc_seq":87},"text":"Start\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.966710543Z","proc_id":3944644121,"proc_seq":88},"v":1,"Hostinfo":{"IPNVersion":"1.84.0-t0b36774ff","BackendLogID":"38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b","OS":"linux","OSVersion":"6.8.0-1026-oracle","Container":true,"Distro":"alpine","DistroVersion":"3.19.7","Desktop":false,"Package":"container","Hostname":"gluetun-premiumize-at","Machine":"aarch64","GoArch":"arm64","GoArchVar":"v8.0","GoVersion":"go1.24.2","Userspace":true,"UserspaceRouter":true,"AppConnector":false}}
+{"logtail":{"client_time":"2025-06-07T17:31:27.971907699Z","proc_id":3944644121,"proc_seq":89},"v":1,"text":"control: HostInfo: {\"IPNVersion\":\"1.84.0-t0b36774ff\",\"BackendLogID\":\"38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b\",\"OS\":\"linux\",\"OSVersion\":\"6.8.0-1026-oracle\",\"Container\":true,\"Distro\":\"alpine\",\"DistroVersion\":\"3.19.7\",\"Desktop\":false,\"Package\":\"container\",\"Hostname\":\"tailscale-premiumize-at-micklethefickle-docker\",\"Machine\":\"aarch64\",\"GoArch\":\"arm64\",\"GoArchVar\":\"v8.0\",\"GoVersion\":\"go1.24.2\",\"RoutableIPs\":[\"0.0.0.0/0\",\"::/0\",\"100.64.0.0/10\",\"10.76.0.0/16\",\"172.17.0.0/16\"],\"Userspace\":true,\"UserspaceRouter\":true,\"AppConnector\":false}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.972789938Z","proc_id":3944644121,"proc_seq":90},"v":1,"text":"control: authRoutine: state:new; goal=nil paused=false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.972814698Z","proc_id":3944644121,"proc_seq":91},"v":1,"text":"control: mapRoutine: state:new\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.973741337Z","proc_id":3944644121,"proc_seq":92},"text":"Backend: logs: be:38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b fe:\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.974389136Z","proc_id":3944644121,"proc_seq":93},"text":"control: client.Login(0)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.975408535Z","proc_id":3944644121,"proc_seq":94},"text":"control: client.Shutdown ...\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.975463495Z","proc_id":3944644121,"proc_seq":95},"text":"control: updateRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.975468615Z","proc_id":3944644121,"proc_seq":96},"v":1,"text":"control: mapRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.975475175Z","proc_id":3944644121,"proc_seq":97},"v":1,"text":"control: mapRoutine: state:new\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.975478455Z","proc_id":3944644121,"proc_seq":98},"v":1,"text":"control: authRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.975483335Z","proc_id":3944644121,"proc_seq":99},"v":1,"text":"control: authRoutine: state:new; wantLoggedIn=true\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.976484934Z","proc_id":3944644121,"proc_seq":100},"v":1,"text":"control: direct.TryLogin(flags=0)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.977736453Z","proc_id":3944644121,"proc_seq":101},"v":1,"text":"control: WaitLoginURL: register request: Post \"https://controlplane.tailscale.com/machine/register\": context canceled\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.977777253Z","proc_id":3944644121,"proc_seq":102},"text":"control: authRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.977786133Z","proc_id":3944644121,"proc_seq":103},"text":"health(warnable=login-state): error: You are logged out.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.977798493Z","proc_id":3944644121,"proc_seq":104},"v":1,"text":"control: mapRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.977804013Z","proc_id":3944644121,"proc_seq":105},"text":"control: mapRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.977903533Z","proc_id":3944644121,"proc_seq":106},"text":"control: Client.Shutdown done.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:27.979607012Z","proc_id":3944644121,"proc_seq":107},"text":"control: doLogin(regen=false, hasUrl=false)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:28.373605967Z","proc_id":3944644121,"proc_seq":108},"text":"control: control server key from https://controlplane.tailscale.com: ts2021=[fSeS+], legacy=[nlFWp]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:28.373868927Z","proc_id":3944644121,"proc_seq":109},"text":"control: RegisterReq: onode= node=[iGQyL] fup=false nks=false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:28.374063366Z","proc_id":3944644121,"proc_seq":110},"v":1,"text":"control: creating new noise client\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:28.375199565Z","proc_id":3944644121,"proc_seq":111},"text":"control: controlhttp: forcing port 443 dial due to recent noise dial\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:28.395944906Z","proc_id":3944644121,"proc_seq":112},"text":"health(warnable=warming-up): ok\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543393638Z","proc_id":3944644121,"proc_seq":113},"text":"control: RegisterReq: got response; nodeKeyExpired=false, machineAuthorized=true; authURL=false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543428678Z","proc_id":3944644121,"proc_seq":114},"v":1,"text":"control: No AuthURL\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543457478Z","proc_id":3944644121,"proc_seq":115},"v":1,"text":"control: sendStatus: authRoutine-success: state:authenticated\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543514037Z","proc_id":3944644121,"proc_seq":116},"v":1,"text":"control: restartMap: synced=false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543521757Z","proc_id":3944644121,"proc_seq":117},"v":1,"text":"control: authRoutine: state:authenticated; goal=nil paused=false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543623717Z","proc_id":3944644121,"proc_seq":118},"text":"blockEngineUpdates(false)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543632357Z","proc_id":3944644121,"proc_seq":119},"v":1,"text":"authReconfig: netmap not yet valid. Skipping.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543677117Z","proc_id":3944644121,"proc_seq":120},"v":1,"text":"authReconfig: netmap not yet valid. Skipping.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543728077Z","proc_id":3944644121,"proc_seq":121},"text":"health(warnable=login-state): ok\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543745717Z","proc_id":3944644121,"proc_seq":122},"v":1,"text":"control: mapRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543750317Z","proc_id":3944644121,"proc_seq":123},"v":1,"text":"control: mapRoutine: state:authenticated\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.543766677Z","proc_id":3944644121,"proc_seq":124},"v":1,"text":"control: PollNetMap: stream=true ep=[]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:30.544065157Z","proc_id":3944644121,"proc_seq":125},"v":1,"text":"control: PollNetMap: stream=false ep=[]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.016979919Z","proc_id":3944644121,"proc_seq":126},"v":1,"text":"control: successful lite map update in 473ms\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.023545793Z","proc_id":3944644121,"proc_seq":127},"v":1,"controltime":"2025-06-07T17:31:30.956646554Z"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.023695633Z","proc_id":3944644121,"proc_seq":128},"text":"control: netmap: got new dial plan from control\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.023776193Z","proc_id":3944644121,"proc_seq":129},"v":1,"text":"control: new network map (periodic):\nnetmap: self: [iGQyL] auth=machine-authorized u=th3w1zard1@github [100.101.235.63/32 fd7a:115c:a1e0::301:eb3f/128]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.023785153Z","proc_id":3944644121,"proc_seq":130},"v":1,"text":"control: mapRoutine: netmap received: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.023789833Z","proc_id":3944644121,"proc_seq":131},"v":1,"text":"control: sendStatus: mapRoutine-got-netmap: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.025103671Z","proc_id":3944644121,"proc_seq":132},"text":"health(warnable=not-in-map-poll): ok\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.033841063Z","proc_id":3944644121,"proc_seq":133},"v":2,"text":"netstack: registered IP fd7a:115c:a1e0::301:eb3f/128\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.033861303Z","proc_id":3944644121,"proc_seq":134},"v":2,"text":"netstack: registered IP 100.101.235.63/32\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.034053383Z","proc_id":3944644121,"proc_seq":135},"text":"active login: th3w1zard1@github\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.03714762Z","proc_id":3944644121,"proc_seq":136},"v":1,"text":"netmap packet filter: 1 filters\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.041299856Z","proc_id":3944644121,"proc_seq":137},"v":1,"text":"magicsock: got updated network map; 13 peers\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.04859645Z","proc_id":3944644121,"proc_seq":138},"text":"monitor: gateway and self IP changed: gw=10.8.0.1 self=10.8.0.8\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.056040923Z","proc_id":3944644121,"proc_seq":139},"text":"Switching ipn state NoState -> Starting (WantRunning=true, nm=true)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.056108883Z","proc_id":3944644121,"proc_seq":140},"v":1,"text":"wgcfg: skipped peer [gJhsJ], doesn't offer DERP or disco\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.056121243Z","proc_id":3944644121,"proc_seq":141},"v":1,"text":"wgcfg: skipped peer [xJ3ej], doesn't offer DERP or disco\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.056460442Z","proc_id":3944644121,"proc_seq":142},"text":"magicsock: SetPrivateKey called (init)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.056471522Z","proc_id":3944644121,"proc_seq":143},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.056509602Z","proc_id":3944644121,"proc_seq":144},"text":"wgengine: Reconfig: configuring userspace WireGuard config (with 0/11 peers)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.056541202Z","proc_id":3944644121,"proc_seq":145},"v":2,"text":"wg: UAPI: Updating private key\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.05929076Z","proc_id":3944644121,"proc_seq":146},"text":"wgengine: Reconfig: configuring router\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.05932396Z","proc_id":3944644121,"proc_seq":147},"v":1,"text":"warning: fakeRouter.Set: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.059788599Z","proc_id":3944644121,"proc_seq":148},"text":"wgengine: Reconfig: user dialer\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.059858279Z","proc_id":3944644121,"proc_seq":149},"text":"tsdial: bart table size: 14\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.059881959Z","proc_id":3944644121,"proc_seq":150},"text":"wgengine: Reconfig: configuring DNS\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.059912679Z","proc_id":3944644121,"proc_seq":151},"text":"dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:14}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.059937359Z","proc_id":3944644121,"proc_seq":152},"text":"dns: Resolvercfg: {Routes:{} Hosts:14 LocalDomains:[]}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.059958159Z","proc_id":3944644121,"proc_seq":153},"text":"dns: OScfg: {}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.059979959Z","proc_id":3944644121,"proc_seq":154},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.059994039Z","proc_id":3944644121,"proc_seq":155},"v":1,"text":"authReconfig: ra=true dns=false 0x02: <nil>\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.060001799Z","proc_id":3944644121,"proc_seq":156},"v":1,"text":"initPeerAPIListener: entered\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.060686878Z","proc_id":3944644121,"proc_seq":157},"text":"peerapi: serving on http://100.101.235.63:55235\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063573036Z","proc_id":3944644121,"proc_seq":158},"text":"peerapi: serving on http://[fd7a:115c:a1e0::301:eb3f]:55235\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063666996Z","proc_id":3944644121,"proc_seq":159},"v":1,"text":"wgcfg: skipped peer [gJhsJ], doesn't offer DERP or disco\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063675636Z","proc_id":3944644121,"proc_seq":160},"v":1,"text":"wgcfg: skipped peer [xJ3ej], doesn't offer DERP or disco\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063748116Z","proc_id":3944644121,"proc_seq":161},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063772476Z","proc_id":3944644121,"proc_seq":162},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063780116Z","proc_id":3944644121,"proc_seq":163},"v":1,"text":"authReconfig: ra=true dns=false 0x02: <nil>\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063782996Z","proc_id":3944644121,"proc_seq":164},"v":1,"text":"initPeerAPIListener: entered\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063787276Z","proc_id":3944644121,"proc_seq":165},"v":1,"text":"initPeerAPIListener: 2 netmap addresses match existing listeners\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063872356Z","proc_id":3944644121,"proc_seq":166},"v":1,"text":"control: HostInfo: {\"IPNVersion\":\"1.84.0-t0b36774ff\",\"BackendLogID\":\"38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b\",\"OS\":\"linux\",\"OSVersion\":\"6.8.0-1026-oracle\",\"Container\":true,\"Distro\":\"alpine\",\"DistroVersion\":\"3.19.7\",\"Desktop\":false,\"Package\":\"container\",\"Hostname\":\"tailscale-premiumize-at-micklethefickle-docker\",\"Machine\":\"aarch64\",\"GoArch\":\"arm64\",\"GoArchVar\":\"v8.0\",\"GoVersion\":\"go1.24.2\",\"RoutableIPs\":[\"0.0.0.0/0\",\"::/0\",\"100.64.0.0/10\",\"10.76.0.0/16\",\"172.17.0.0/16\"],\"Services\":[{\"Proto\":\"peerapi4\",\"Port\":55235},{\"Proto\":\"peerapi6\",\"Port\":55235},{\"Proto\":\"peerapi-dns-proxy\",\"Port\":1}],\"Userspace\":true,\"UserspaceRouter\":true,\"AppConnector\":false}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.063893076Z","proc_id":3944644121,"proc_seq":167},"v":1,"text":"control: PollNetMap: stream=false ep=[]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.24251035Z","proc_id":3944644121,"proc_seq":168},"v":2,"text":"netcheck: attempting to do captive portal detection on interface eth0\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.24253535Z","proc_id":3944644121,"proc_seq":169},"v":2,"text":"netcheck: 5 available captive portal detection endpoints; trying 5\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.260848893Z","proc_id":3944644121,"proc_seq":170},"v":1,"controltime":"2025-06-07T17:31:31.195295109Z"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.260934813Z","proc_id":3944644121,"proc_seq":171},"v":1,"text":"control: mapRoutine: netmap received: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.260941893Z","proc_id":3944644121,"proc_seq":172},"v":1,"text":"control: sendStatus: mapRoutine-got-netmap: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.261632852Z","proc_id":3944644121,"proc_seq":173},"v":1,"text":"netmap diff:\n- [gJhsJ] D0 100.123.33.90 fd7a:115c:a1e0::a201:215a/128 : \n+ [gJhsJ] d:40324283fdaa6844 D0 100.123.33.90 fd7a:115c:a1e0::a201:215a/128 : \n- [xJ3ej] D0 100.101.241.99 fd7a:115c:a1e0::3701:f163/128 : \n+ [xJ3ej] d:ea1fa768c3536d10 D0 100.101.241.99 fd7a:115c:a1e0::3701:f163/128 : \n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.261689092Z","proc_id":3944644121,"proc_seq":174},"v":1,"text":"magicsock: got updated network map; 13 peers\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.261922652Z","proc_id":3944644121,"proc_seq":175},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.261929612Z","proc_id":3944644121,"proc_seq":176},"v":1,"text":"[RATELIMIT] format(\"magicsock: peermtu: peer MTU status is %v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.261995572Z","proc_id":3944644121,"proc_seq":177},"text":"wgengine: Reconfig: configuring userspace WireGuard config (with 0/13 peers)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262028812Z","proc_id":3944644121,"proc_seq":178},"text":"wgengine: Reconfig: configuring router\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262036492Z","proc_id":3944644121,"proc_seq":179},"v":1,"text":"warning: fakeRouter.Set: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262041012Z","proc_id":3944644121,"proc_seq":180},"text":"wgengine: Reconfig: user dialer\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262052172Z","proc_id":3944644121,"proc_seq":181},"text":"tsdial: bart table size: 16\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262055852Z","proc_id":3944644121,"proc_seq":182},"text":"wgengine: Reconfig: configuring DNS\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262066692Z","proc_id":3944644121,"proc_seq":183},"text":"dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:14}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262073492Z","proc_id":3944644121,"proc_seq":184},"text":"dns: Resolvercfg: {Routes:{} Hosts:14 LocalDomains:[]}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262120292Z","proc_id":3944644121,"proc_seq":185},"text":"dns: OScfg: {}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262132452Z","proc_id":3944644121,"proc_seq":186},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262144012Z","proc_id":3944644121,"proc_seq":187},"v":1,"text":"[RATELIMIT] format(\"wgengine: Reconfig done\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262152492Z","proc_id":3944644121,"proc_seq":188},"v":1,"text":"authReconfig: ra=true dns=false 0x02: <nil>\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262155572Z","proc_id":3944644121,"proc_seq":189},"v":1,"text":"initPeerAPIListener: entered\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.262159612Z","proc_id":3944644121,"proc_seq":190},"v":1,"text":"initPeerAPIListener: 2 netmap addresses match existing listeners\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.403185041Z","proc_id":3944644121,"proc_seq":191},"v":1,"text":"control: HostInfo: {\"IPNVersion\":\"1.84.0-t0b36774ff\",\"BackendLogID\":\"38c746a60e5e81acf783f92e16324117e7e6e387e9fcafe0385085be0f5db93b\",\"OS\":\"linux\",\"OSVersion\":\"6.8.0-1026-oracle\",\"Container\":true,\"Distro\":\"alpine\",\"DistroVersion\":\"3.19.7\",\"Desktop\":false,\"Package\":\"container\",\"Hostname\":\"tailscale-premiumize-at-micklethefickle-docker\",\"Machine\":\"aarch64\",\"GoArch\":\"arm64\",\"GoArchVar\":\"v8.0\",\"GoVersion\":\"go1.24.2\",\"RoutableIPs\":[\"0.0.0.0/0\",\"::/0\",\"100.64.0.0/10\",\"10.76.0.0/16\",\"172.17.0.0/16\"],\"Services\":[{\"Proto\":\"tcp\",\"Port\":53},{\"Proto\":\"tcp\",\"Port\":1058,\"Description\":\"tailscaled\"},{\"Proto\":\"tcp\",\"Port\":8000},{\"Proto\":\"tcp\",\"Port\":8889,\"Description\":\"tailscaled\"},{\"Proto\":\"tcp\",\"Port\":41503},{\"Proto\":\"tcp\",\"Port\":41644,\"Description\":\"containerboot\"},{\"Proto\":\"tcp\",\"Port\":55235,\"Description\":\"tailscaled\"},{\"Proto\":\"peerapi4\",\"Port\":55235},{\"Proto\":\"peerapi6\",\"Port\":55235},{\"Proto\":\"peerapi-dns-proxy\",\"Port\":1}],\"Userspace\":true,\"UserspaceRouter\":true,\"AppConnector\":false}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.434357812Z","proc_id":3944644121,"proc_seq":192},"v":1,"text":"control: successful lite map update in 370ms\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.434430812Z","proc_id":3944644121,"proc_seq":193},"v":1,"text":"control: PollNetMap: stream=false ep=[]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.477705572Z","proc_id":3944644121,"proc_seq":194},"v":1,"text":"control: mapRoutine: netmap received: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.477729132Z","proc_id":3944644121,"proc_seq":195},"v":1,"text":"control: sendStatus: mapRoutine-got-netmap: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.477733252Z","proc_id":3944644121,"proc_seq":196},"v":1,"text":"[RATELIMIT] format(\"control: sendStatus: %s: %v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.478487092Z","proc_id":3944644121,"proc_seq":197},"v":1,"text":"netmap diff: (none)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.478540251Z","proc_id":3944644121,"proc_seq":198},"v":1,"text":"magicsock: got updated network map; 13 peers\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.478961091Z","proc_id":3944644121,"proc_seq":199},"v":1,"text":"authReconfig: ra=true dns=false 0x02: <nil>\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.478971931Z","proc_id":3944644121,"proc_seq":200},"v":1,"text":"initPeerAPIListener: entered\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.478977251Z","proc_id":3944644121,"proc_seq":201},"v":1,"text":"initPeerAPIListener: 2 netmap addresses match existing listeners\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.686781059Z","proc_id":3944644121,"proc_seq":202},"v":1,"text":"control: successful lite map update in 252ms\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.719322468Z","proc_id":3944644121,"proc_seq":203},"v":1,"text":"control: mapRoutine: netmap received: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.719975068Z","proc_id":3944644121,"proc_seq":204},"v":1,"text":"netmap diff:\n- [5EhlF] d:f3d51ea0ff4b6daf D0 100.113.152.9 fd7a:115c:a1e0::ad01:980d/128 : \n+ [5EhlF] d:f3d51ea0ff4b6daf D27 100.113.152.9 fd7a:115c:a1e0::ad01:980d/128 :   199.58.86.204:55019       10.8.0.24:55019    10.76.128.98:55019\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.720029348Z","proc_id":3944644121,"proc_seq":205},"v":1,"text":"magicsock: got updated network map; 13 peers\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.723364425Z","proc_id":3944644121,"proc_seq":206},"v":1,"text":"authReconfig: ra=true dns=false 0x02: <nil>\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.723379665Z","proc_id":3944644121,"proc_seq":207},"v":1,"text":"[RATELIMIT] format(\"authReconfig: ra=%v dns=%v 0x%02x: %v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.723383265Z","proc_id":3944644121,"proc_seq":208},"v":1,"text":"initPeerAPIListener: entered\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.723385745Z","proc_id":3944644121,"proc_seq":209},"v":1,"text":"[RATELIMIT] format(\"initPeerAPIListener: entered\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.723390225Z","proc_id":3944644121,"proc_seq":210},"v":1,"text":"initPeerAPIListener: 2 netmap addresses match existing listeners\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.838516918Z","proc_id":3944644121,"proc_seq":211},"v":1,"text":"control: mapRoutine: netmap received: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.838540118Z","proc_id":3944644121,"proc_seq":212},"v":1,"text":"[RATELIMIT] format(\"control: mapRoutine: netmap received: %s\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.840063277Z","proc_id":3944644121,"proc_seq":213},"v":1,"text":"netmap diff: (none)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.840145437Z","proc_id":3944644121,"proc_seq":214},"v":1,"text":"magicsock: got updated network map; 13 peers\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.840153797Z","proc_id":3944644121,"proc_seq":215},"v":1,"text":"[RATELIMIT] format(\"magicsock: got updated network map; %d peers\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.840519716Z","proc_id":3944644121,"proc_seq":216},"v":1,"text":"initPeerAPIListener: 2 netmap addresses match existing listeners\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:31.840529956Z","proc_id":3944644121,"proc_seq":217},"v":1,"text":"[RATELIMIT] format(\"initPeerAPIListener: %d netmap addresses match existing listeners\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.241341265Z","proc_id":3944644121,"proc_seq":218},"text":"netcheck: DetectCaptivePortal(found=false)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.241425225Z","proc_id":3944644121,"proc_seq":219},"v":1,"text":"netcheck: report: udp=true v6=false v6os=false mapvarydest=false portmap= v4a=149.154.152.197:39290 captiveportal=false derp=26 derpdist=1v4:205ms,2v4:263ms,3v4:281ms,4v4:124ms,5v4:374ms,6v4:254ms,7v4:368ms,8v4:131ms,9v4:252ms,10v4:255ms,11v4:327ms,12v4:218ms,13v4:236ms,14v4:141ms,15v4:298ms,16v4:229ms,17v4:256ms,18v4:130ms,19v4:146ms,20v4:314ms,21v4:215ms,22v4:129ms,23v4:229ms,24v4:309ms,25v4:280ms,26v4:118ms,27v4:213ms,28v4:154ms\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.241479425Z","proc_id":3944644121,"proc_seq":220},"text":"magicsock: home DERP changing from derp-0 [0ms] to derp-26 [118ms]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.241504625Z","proc_id":3944644121,"proc_seq":221},"text":"magicsock: home is now derp-26 (nue)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.241703625Z","proc_id":3944644121,"proc_seq":222},"text":"magicsock: endpoints changed: 149.154.152.197:39290 (stun), 10.8.0.8:39290 (local), 10.76.128.101:39290 (local)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.241730945Z","proc_id":3944644121,"proc_seq":223},"v":2,"text":"control: client.newEndpoints([{149.154.152.197:39290 stun} {10.8.0.8:39290 local} {10.76.128.101:39290 local}])\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.241883664Z","proc_id":3944644121,"proc_seq":224},"text":"health(warnable=no-derp-home): ok\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.242255024Z","proc_id":3944644121,"proc_seq":225},"text":"magicsock: adding connection to derp-26 for home-keep-alive\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.242331864Z","proc_id":3944644121,"proc_seq":226},"text":"magicsock: 1 active derp conns: derp-26=cr0s,wr0s\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.242381184Z","proc_id":3944644121,"proc_seq":227},"text":"Switching ipn state Starting -> Running (WantRunning=true, nm=true)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.242423104Z","proc_id":3944644121,"proc_seq":228},"text":"control: NetInfo: NetInfo{varies=false hairpin= ipv6=false ipv6os=false udp=true icmpv4=false derp=#26 portmap= link=\"\" firewallmode=\"\"}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.242454144Z","proc_id":3944644121,"proc_seq":229},"v":1,"text":"control: PollNetMap: stream=false ep=[149.154.152.197:39290 10.8.0.8:39290 10.76.128.101:39290]\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.242458384Z","proc_id":3944644121,"proc_seq":230},"v":1,"text":"[RATELIMIT] format(\"control: PollNetMap: stream=%v ep=%v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.243224303Z","proc_id":3944644121,"proc_seq":231},"text":"derphttp.Client.Connect: connecting to derp-26 (nue)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.372676383Z","proc_id":3944644121,"proc_seq":232},"v":1,"controltime":"2025-06-07T17:31:32.308169714Z"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373392383Z","proc_id":3944644121,"proc_seq":233},"v":1,"text":"netmap packet filter: 1 filters\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373541742Z","proc_id":3944644121,"proc_seq":234},"v":1,"text":"netmap diff:\n+ [nWTfu] D0 100.64.119.110 fd7a:115c:a1e0::2801:776e/128 : \n- [1qpL/] d:e570e747dda4d57f D0 100.89.168.24 fd7a:115c:a1e0::3c01:a819/128 : \n+ [1qpL/] d:e570e747dda4d57f D14 100.89.168.24 fd7a:115c:a1e0::3c01:a819/128 : \n+ [Kwebv] D0 100.103.41.57 fd7a:115c:a1e0::9401:2939/128 : \n- [/odRF] d:f737dbc13f6c760b D0 100.92.57.45 fd7a:115c:a1e0::b301:3930/128 : \n+ [/odRF] d:f737dbc13f6c760b D0 100.92.57.45 fd7a:115c:a1e0::b301:3930/128 :   62.113.194.88:33357       10.8.0.21:33357   10.76.128.107:33357\n+ [GbU96] D0 100.119.19.26 fd7a:115c:a1e0::6001:131d/128 : \n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373725822Z","proc_id":3944644121,"proc_seq":235},"v":1,"text":"wgcfg: skipped peer [nWTfu], doesn't offer DERP or disco\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373732662Z","proc_id":3944644121,"proc_seq":236},"v":1,"text":"[RATELIMIT] format(\"wgcfg: skipped peer %s, doesn't offer DERP or disco\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373862222Z","proc_id":3944644121,"proc_seq":237},"text":"wgengine: Reconfig: configuring router\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373871782Z","proc_id":3944644121,"proc_seq":238},"v":1,"text":"warning: fakeRouter.Set: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373877022Z","proc_id":3944644121,"proc_seq":239},"text":"wgengine: Reconfig: user dialer\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373900622Z","proc_id":3944644121,"proc_seq":240},"text":"tsdial: bart table size: 16\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373905702Z","proc_id":3944644121,"proc_seq":241},"text":"wgengine: Reconfig: configuring DNS\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373917502Z","proc_id":3944644121,"proc_seq":242},"text":"dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:17}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373924542Z","proc_id":3944644121,"proc_seq":243},"text":"dns: Resolvercfg: {Routes:{} Hosts:17 LocalDomains:[]}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.373929262Z","proc_id":3944644121,"proc_seq":244},"text":"dns: OScfg: {}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.496717028Z","proc_id":3944644121,"proc_seq":245},"v":1,"text":"netcheck: report: udp=true v6=false v6os=false mapvarydest=false portmap= v4a=149.154.152.197:39290 derp=26 derpdist=4v4:126ms,22v4:129ms,26v4:123ms\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.512886893Z","proc_id":3944644121,"proc_seq":246},"v":1,"text":"control: successful lite map update in 270ms\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.610330403Z","proc_id":3944644121,"proc_seq":247},"v":1,"text":"netmap diff:\n- [1qpL/] d:e570e747dda4d57f D14 100.89.168.24 fd7a:115c:a1e0::3c01:a819/128 : \n+ [1qpL/] d:e570e747dda4d57f D14 100.89.168.24 fd7a:115c:a1e0::3c01:a819/128 :  193.235.207.84:47347        10.8.0.4:47347   10.76.128.106:47347\n- [/odRF] d:f737dbc13f6c760b D0 100.92.57.45 fd7a:115c:a1e0::b301:3930/128 :   62.113.194.88:33357       10.8.0.21:33357   10.76.128.107:33357\n+ [/odRF] d:f737dbc13f6c760b D4 100.92.57.45 fd7a:115c:a1e0::b301:3930/128 :   62.113.194.88:33357       10.8.0.21:33357   10.76.128.107:33357\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.621960712Z","proc_id":3944644121,"proc_seq":248},"text":"magicsock: derp-26 connected; connGen=1\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.626397268Z","proc_id":3944644121,"proc_seq":249},"text":"health(warnable=no-derp-connection): ok\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.626418108Z","proc_id":3944644121,"proc_seq":250},"text":"[RATELIMIT] format(\"health(warnable=%s): ok\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.67807102Z","proc_id":3944644121,"proc_seq":251},"v":1,"controltime":"2025-06-07T17:31:32.604250625Z"}
+{"logtail":{"client_time":"2025-06-07T17:31:32.680054858Z","proc_id":3944644121,"proc_seq":252},"v":1,"text":"netmap diff: (none)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.605289054Z","proc_id":3944644121,"proc_seq":253},"v":1,"controltime":"2025-06-07T17:31:37.541444936Z"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.605939053Z","proc_id":3944644121,"proc_seq":254},"v":1,"text":"netmap packet filter: 1 filters\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.608893931Z","proc_id":3944644121,"proc_seq":255},"v":1,"text":"netmap diff:\n- [nWTfu] D0 100.64.119.110 fd7a:115c:a1e0::2801:776e/128 : \n+ [nWTfu] d:2a4fd219d67931c6 D0 100.64.119.110 fd7a:115c:a1e0::2801:776e/128 : \n+ [lDY9u] D0 100.112.220.56 fd7a:115c:a1e0::f01:dc38/128 : \n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.621711959Z","proc_id":3944644121,"proc_seq":256},"text":"wgengine: Reconfig: configuring userspace WireGuard config (with 0/14 peers)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.622553838Z","proc_id":3944644121,"proc_seq":257},"text":"wgengine: Reconfig: configuring router\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.622577158Z","proc_id":3944644121,"proc_seq":258},"v":1,"text":"warning: fakeRouter.Set: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.622584318Z","proc_id":3944644121,"proc_seq":259},"text":"wgengine: Reconfig: user dialer\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.622599638Z","proc_id":3944644121,"proc_seq":260},"text":"tsdial: bart table size: 17\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.622604398Z","proc_id":3944644121,"proc_seq":261},"text":"wgengine: Reconfig: configuring DNS\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.622618518Z","proc_id":3944644121,"proc_seq":262},"text":"dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:18}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.622626238Z","proc_id":3944644121,"proc_seq":263},"text":"dns: Resolvercfg: {Routes:{} Hosts:18 LocalDomains:[]}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.622631718Z","proc_id":3944644121,"proc_seq":264},"text":"dns: OScfg: {}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.802153031Z","proc_id":3944644121,"proc_seq":265},"v":1,"text":"[RATELIMIT] format(\"control: sendStatus: %s: %v\") (7 dropped)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.805046909Z","proc_id":3944644121,"proc_seq":266},"v":1,"text":"control: sendStatus: mapRoutine-got-netmap: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.805772308Z","proc_id":3944644121,"proc_seq":267},"v":1,"text":"netmap diff:\n- [Kwebv] D0 100.103.41.57 fd7a:115c:a1e0::9401:2939/128 : \n+ [Kwebv] d:1544434baf0902d8 D0 100.103.41.57 fd7a:115c:a1e0::9401:2939/128 : \n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.805788628Z","proc_id":3944644121,"proc_seq":268},"v":1,"text":"[RATELIMIT] format(\"netmap diff:\\n%v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.819837935Z","proc_id":3944644121,"proc_seq":269},"text":"wgengine: Reconfig: configuring userspace WireGuard config (with 0/15 peers)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.822047853Z","proc_id":3944644121,"proc_seq":270},"text":"wgengine: Reconfig: configuring router\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.822069653Z","proc_id":3944644121,"proc_seq":271},"v":1,"text":"warning: fakeRouter.Set: not implemented.\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.822074253Z","proc_id":3944644121,"proc_seq":272},"v":1,"text":"[RATELIMIT] format(\"warning: fakeRouter.Set: not implemented.\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.822929692Z","proc_id":3944644121,"proc_seq":273},"text":"wgengine: Reconfig: user dialer\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.822955732Z","proc_id":3944644121,"proc_seq":274},"text":"tsdial: bart table size: 18\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.822960092Z","proc_id":3944644121,"proc_seq":275},"text":"wgengine: Reconfig: configuring DNS\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.822971812Z","proc_id":3944644121,"proc_seq":276},"text":"dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:18}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.822978692Z","proc_id":3944644121,"proc_seq":277},"text":"dns: Resolvercfg: {Routes:{} Hosts:18 LocalDomains:[]}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.824472291Z","proc_id":3944644121,"proc_seq":278},"text":"dns: OScfg: {}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.824508411Z","proc_id":3944644121,"proc_seq":279},"v":1,"text":"[RATELIMIT] format(\"wgengine: Reconfig done\") (7 dropped)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.824511691Z","proc_id":3944644121,"proc_seq":280},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.825969769Z","proc_id":3944644121,"proc_seq":281},"v":1,"text":"control: sendStatus: mapRoutine-got-netmap: state:synchronized\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.825986929Z","proc_id":3944644121,"proc_seq":282},"v":1,"text":"[RATELIMIT] format(\"control: sendStatus: %s: %v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829426246Z","proc_id":3944644121,"proc_seq":283},"text":"wgengine: Reconfig: configuring userspace WireGuard config (with 0/16 peers)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829467966Z","proc_id":3944644121,"proc_seq":284},"text":"wgengine: Reconfig: configuring router\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829473486Z","proc_id":3944644121,"proc_seq":285},"text":"[RATELIMIT] format(\"wgengine: Reconfig: configuring router\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829483526Z","proc_id":3944644121,"proc_seq":286},"text":"wgengine: Reconfig: user dialer\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829487806Z","proc_id":3944644121,"proc_seq":287},"text":"[RATELIMIT] format(\"wgengine: Reconfig: user dialer\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829499486Z","proc_id":3944644121,"proc_seq":288},"text":"tsdial: bart table size: 19\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829502846Z","proc_id":3944644121,"proc_seq":289},"text":"[RATELIMIT] format(\"tsdial: bart table size: %d\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829506486Z","proc_id":3944644121,"proc_seq":290},"text":"wgengine: Reconfig: configuring DNS\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.829509766Z","proc_id":3944644121,"proc_seq":291},"text":"[RATELIMIT] format(\"wgengine: Reconfig: configuring DNS\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.850803946Z","proc_id":3944644121,"proc_seq":292},"text":"dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:18}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.851622586Z","proc_id":3944644121,"proc_seq":293},"text":"[RATELIMIT] format(\"dns: Set: %v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.852985264Z","proc_id":3944644121,"proc_seq":294},"text":"dns: Resolvercfg: {Routes:{} Hosts:18 LocalDomains:[]}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.853442904Z","proc_id":3944644121,"proc_seq":295},"text":"[RATELIMIT] format(\"dns: Resolvercfg: %v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.853462824Z","proc_id":3944644121,"proc_seq":296},"text":"dns: OScfg: {}\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.853466824Z","proc_id":3944644121,"proc_seq":297},"text":"[RATELIMIT] format(\"dns: OScfg: %v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.853698544Z","proc_id":3944644121,"proc_seq":298},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:37.853709344Z","proc_id":3944644121,"proc_seq":299},"v":1,"text":"[RATELIMIT] format(\"wgengine: Reconfig done\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:38.357265877Z","proc_id":3944644121,"proc_seq":300},"v":1,"controltime":"2025-06-07T17:31:38.288664624Z"}
+{"logtail":{"client_time":"2025-06-07T17:31:38.357304317Z","proc_id":3944644121,"proc_seq":301},"metrics":"N20portmap_pcp_sentS0204N20portmap_pmp_sentS0404N22portmap_upnp_sentS0604N1enetcheck_reportS0804N28netcheck_report_fullS0a02N2enetcheck_stun_send_ipv4S0c9e01N2enetcheck_stun_recv_ipv4S0e9e01N40controlclient_auto_status_queuedS101cN52controlclient_auto_status_queue_skippableS1202N4econtrolclient_auto_status_queue_skippedS1402N4egauge_controlclient_map_requests_activeS1602N34controlclient_map_requestsS180aN3econtrolclient_map_requests_liteS1a08N3econtrolclient_map_requests_pollS1c02N44controlclient_map_response_messageS1e26N3ccontrolclient_map_response_mapS2024N48controlclient_map_response_map_deltaS2222N30controlclient_patch_derpS2402N3acontrolclient_patch_endpointsS2608N38controlclient_patch_discokeyS280aN34controlclient_patch_onlineS2a08N3acontrolclient_patchified_peerS2c14N46controlclient_patchified_peer_equalS2e08N40gauge_magicsock_netmap_num_peersS3022N3cgauge_magicsock_num_derp_connsS3202N2cmagicsock_restun_callsS3406N34magicsock_update_endpointsS3604N50gauge_localbackend_current_watch_ipn_busS3802N1eprofiles_switchS3a02N28gauge_profiles_countS3c02N46gauge_dns_manager_linux_mode_directS3e02","text":"[RATELIMIT] format(\"control: [v\\x00JSON]%d%s\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:38.363012831Z","proc_id":3944644121,"proc_seq":302},"v":1,"text":"[RATELIMIT] format(\"magicsock: peermtu: peer MTU status is %v\") (9 dropped)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:38.363037111Z","proc_id":3944644121,"proc_seq":303},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:38.727550093Z","proc_id":3944644121,"proc_seq":304},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:38.727575653Z","proc_id":3944644121,"proc_seq":305},"v":1,"text":"[RATELIMIT] format(\"magicsock: peermtu: peer MTU status is %v\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:38.727645733Z","proc_id":3944644121,"proc_seq":306},"text":"wgengine: Reconfig: configuring userspace WireGuard config (with 0/17 peers)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:38.727651893Z","proc_id":3944644121,"proc_seq":307},"text":"[RATELIMIT] format(\"wgengine: Reconfig: configuring userspace WireGuard config (with %d/%d peers)\")\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:39.201967774Z","proc_id":3944644121,"proc_seq":308},"v":1,"text":"netmap diff: (none)\n"}
+{"logtail":{"client_time":"2025-06-07T17:31:58.157145933Z","proc_id":3944644121,"proc_seq":309},"metrics":"I0202I0402I0602I0802I0c06I0e06I100cI1e10I2012I2212I2402I2604I2802I2a02I2c0aI2e06I3402I3602","v":1,"text":"netcheck: report: udp=true v6=false v6os=false mapvarydest=false portmap= v4a=149.154.152.197:39290 derp=26 derpdist=4v4:122ms,22v4:127ms,26v4:119ms\n"}
+{"logtail":{"client_time":"2025-06-07T17:32:21.965519841Z","proc_id":3944644121,"proc_seq":310},"metrics":"I0202I0402I0602I0802I0c06I0e06I3402I3602","v":1,"text":"netcheck: report: udp=true v6=false v6os=false mapvarydest=false portmap= v4a=149.154.152.197:39290 derp=26 derpdist=4v4:122ms,22v4:127ms,26v4:119ms\n"}

@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../namespaced/cert-manager/configmaps/kube-root-ca.crt.yaml
+- ../../namespaced/cert-manager/deployments.apps/cert-manager-cainjector.yaml
+- ../../namespaced/cert-manager/deployments.apps/cert-manager-webhook.yaml
+- ../../namespaced/cert-manager/deployments.apps/cert-manager.yaml
+- ../../namespaced/cert-manager/endpoints/cert-manager-webhook.yaml
+- ../../namespaced/cert-manager/endpoints/cert-manager.yaml
+- ../../namespaced/cert-manager/endpointslices.discovery.k8s.io/cert-manager-swhqn.yaml
+- ../../namespaced/cert-manager/endpointslices.discovery.k8s.io/cert-manager-webhook-ghjnl.yaml
+- ../../namespaced/cert-manager/jobs.batch/cert-manager-setup-job.yaml
+- ../../namespaced/cert-manager/jobs.batch/cert-manager-setup.yaml
+- ../../namespaced/cert-manager/pods.metrics.k8s.io/cert-manager-9fd4dc6bf-rv5c4.yaml
+- ../../namespaced/cert-manager/pods.metrics.k8s.io/cert-manager-cainjector-86db5d9886-qkwdm.yaml
+- ../../namespaced/cert-manager/pods.metrics.k8s.io/cert-manager-webhook-6d4778b87b-qzjs5.yaml
+- ../../namespaced/cert-manager/pods/cert-manager-9fd4dc6bf-rv5c4.yaml
+- ../../namespaced/cert-manager/pods/cert-manager-cainjector-86db5d9886-qkwdm.yaml
+- ../../namespaced/cert-manager/pods/cert-manager-webhook-6d4778b87b-qzjs5.yaml
+- ../../namespaced/cert-manager/replicasets.apps/cert-manager-755486ff9.yaml
+- ../../namespaced/cert-manager/replicasets.apps/cert-manager-7cd8b77b5.yaml
+- ../../namespaced/cert-manager/replicasets.apps/cert-manager-9fd4dc6bf.yaml
+- ../../namespaced/cert-manager/replicasets.apps/cert-manager-cainjector-86db5d9886.yaml
+- ../../namespaced/cert-manager/replicasets.apps/cert-manager-webhook-6d4778b87b.yaml
+- ../../namespaced/cert-manager/rolebindings.rbac.authorization.k8s.io/cert-manager-webhook:dynamic-serving.yaml
+- ../../namespaced/cert-manager/roles.rbac.authorization.k8s.io/cert-manager-webhook:dynamic-serving.yaml
+- ../../namespaced/cert-manager/secrets/cert-manager-webhook-ca.yaml
+- ../../namespaced/cert-manager/secrets/sh.helm.release.v1.cert-manager.v1.yaml
+- ../../namespaced/cert-manager/serviceaccounts/cert-manager-cainjector.yaml
+- ../../namespaced/cert-manager/serviceaccounts/cert-manager-webhook.yaml
+- ../../namespaced/cert-manager/serviceaccounts/cert-manager.yaml
+- ../../namespaced/cert-manager/serviceaccounts/default.yaml
+- ../../namespaced/cert-manager/services/cert-manager-webhook.yaml
+- ../../namespaced/cert-manager/services/cert-manager.yaml

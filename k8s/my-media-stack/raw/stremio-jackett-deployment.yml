@@ -1,0 +1,51 @@
+#! stremio-jackett-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stremio-jackett
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stremio-jackett
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: stremio-jackett
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: stremio-jackett
+          image: belmeg/stremio-addon-jackett:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ADDON_NAME
+              value: "stremio_jackett"
+            - name: JACKETT_API_KEY
+              value: "nnx0n84pcj7umynyd2pbid2nl1zzuemz"
+            - name: JACKETT_URL
+              value: "https://jackett.my-media-stack.org"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - curl -fs http://127.0.0.1:3000 || exit 1
+            periodSeconds: 60
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 5
+          ports:
+            - name: stremio-ja-3000
+              containerPort: 3000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

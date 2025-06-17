@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik
+  namespace: my-media-stack
+  labels:
+    app: traefik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      serviceAccountName: traefik
+      securityContext:
+        runAsUser: 1001
+        runAsGroup: 989
+        fsGroup: 989
+        sysctls:
+          - name: net.ipv6.conf.all.disable_ipv6
+            value: "1"
+      containers:
+        - name: traefik
+          image: traefik:latest
+          imagePullPolicy: Always
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          args:
+            - --configfile=/config/traefik.yml
+          env:
+            - name: CLOUDFLARE_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: traefik-secrets
+                  key: CLOUDFLARE_EMAIL
+            - name: CLOUDFLARE_DNS_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: traefik-secrets
+                  key: CLOUDFLARE_DNS_API_TOKEN
+            - name: CLOUDFLARE_ZONE_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: traefik-secrets
+                  key: CLOUDFLARE_ZONE_API_TOKEN
+            - name: LETS_ENCRYPT_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: traefik-secrets
+                  key: LETS_ENCRYPT_EMAIL
+            - name: DUCKDNS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: traefik-secrets
+                  key: DUCKDNS_TOKEN
+            - name: TZ
+              value: "America/Chicago"
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "989"
+            - name: UMASK
+              value: "002"
+            - name: CRYPT_IV
+              value: "ba5c7efba28ba5184ae70d77ae97fe35"
+            - name: CRYPT_KEY
+              value: "37326fd91e653cc2732774b8fca52e9c09052f4ea9d2c2f34b1dc3071fb1622d"
+          ports:
+            - name: web
+              containerPort: 80
+              protocol: TCP
+            - name: websecure
+              containerPort: 443
+              protocol: TCP
+            - name: admin
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 15
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: certs
+              mountPath: /certs
+            - name: traefik-config
+              mountPath: /config/traefik.yml
+              subPath: traefik.yml
+              readOnly: true
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+      volumes:
+        - name: certs
+          hostPath:
+            path: /home/ubuntu/my-media-stack/certs
+            type: DirectoryOrCreate
+        - name: traefik-config
+          configMap:
+            name: traefik-config
+      restartPolicy: Always
+      hostname: traefik 

@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1"},"generation":1,"name":"lobechat","namespace":"bolabaden"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"lobechat"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"lobechat"}},"spec":{"containers":[{"env":[{"name":"ACCESS_CODE","value":"brunner56"},{"name":"PGID","value":"988"},{"name":"PUID","value":"1002"},{"name":"TZ","value":"America/Chicago"},{"name":"UMASK","value":"002"}],"image":"lobehub/lobe-chat:latest","imagePullPolicy":"Always","name":"lobechat","ports":[{"containerPort":3210,"name":"lobechat-3210","protocol":"TCP"}],"resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"256Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/configs/lobechat/host_config","name":"host-config"}]}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"hostPath":{"path":"/home/ubuntu/my-media-stack/configs/lobechat/host_config","type":"DirectoryOrCreate"},"name":"host-config"}]}}}}
+  name: lobechat
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: lobechat
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: lobechat
+    spec:
+      containers:
+      - env:
+        - name: ACCESS_CODE
+          value: brunner56
+        - name: PGID
+          value: "988"
+        - name: PUID
+          value: "1002"
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "002"
+        image: lobehub/lobe-chat:latest
+        imagePullPolicy: Always
+        name: lobechat
+        ports:
+        - containerPort: 3210
+          name: lobechat-3210
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /configs/lobechat/host_config
+          name: host-config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/lobechat/host_config
+          type: DirectoryOrCreate
+        name: host-config
+  conditions:
+  - lastTransitionTime: "2025-06-14T19:17:44Z"
+    lastUpdateTime: "2025-06-14T19:18:01Z"
+    message: ReplicaSet "lobechat-5f687565c9" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    type: Progressing
+  - lastTransitionTime: "2025-06-14T22:55:19Z"
+    lastUpdateTime: "2025-06-14T22:55:19Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    type: Available
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1

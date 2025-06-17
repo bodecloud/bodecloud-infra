@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: netalertx
+  usage:
+    cpu: 3058953n
+    memory: 94076Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: netalertx
+    pod-template-hash: 669d97f7bf
+  name: netalertx-669d97f7bf-zch4r
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:56Z"
+window: 15.843s

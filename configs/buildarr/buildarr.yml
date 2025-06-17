@@ -1,0 +1,415 @@
+
+sonarr:
+  hostname: host
+  port: 8989
+  protocol: http
+  url_base: null
+  api_key: 6e47cf9c972e4833bcf5f303ca1a7d93
+  version: 4.0.13.2932
+  settings:
+    media_management:
+      rename_episodes: true
+      replace_illegal_characters: true
+      standard_episode_format: '{Series Title} - S{season:00}E{episode:00} - {Episode
+        Title} {Quality Full}'
+      daily_episode_format: '{Series Title} - {Air-Date} - {Episode Title} {Quality
+        Full}'
+      anime_episode_format: '{Series Title} - S{season:00}E{episode:00} - {Episode Title}
+        {Quality Full}'
+      series_folder_format: '{Series Title}'
+      season_folder_format: Season {season}
+      specials_folder_format: Specials
+      multiepisode_style: prefixed-range
+      create_empty_series_folders: false
+      delete_empty_folders: false
+      episode_title_required: always
+      skip_free_space_check: false
+      minimum_free_space: 100
+      use_hardlinks: true
+      import_extra_files: false
+      unmonitor_deleted_episodes: false
+      propers_and_repacks: prefer-and-upgrade
+      analyze_video_files: true
+      rescan_series_folder_after_refresh: always
+      change_file_date: none
+      recycling_bin: null
+      recycling_bin_cleanup: 7
+      set_permissions: false
+      chmod_folder: drwxr-xr-x
+      chown_group: null
+      root_folders:
+      - /tv
+      - /anime
+    profiles:
+      quality_profiles:
+        definitions:
+          Any:
+            upgrades_allowed: false
+            qualities:
+            - Bluray-1080p
+            - name: WEB 1080p
+              members:
+              - WEBDL-1080p
+              - WEBRip-1080p
+            - Bluray-720p
+            - name: WEB 720p
+              members:
+              - WEBRip-720p
+              - WEBDL-720p
+            - HDTV-1080p
+            - HDTV-720p
+            - Bluray-576p
+            - Bluray-480p
+            - DVD
+            - name: WEB 480p
+              members:
+              - WEBDL-480p
+              - WEBRip-480p
+            - SDTV
+            upgrade_until: null
+          SD:
+            upgrades_allowed: false
+            qualities:
+            - Bluray-576p
+            - Bluray-480p
+            - DVD
+            - name: WEB 480p
+              members:
+              - WEBDL-480p
+              - WEBRip-480p
+            - SDTV
+            upgrade_until: null
+          HD-720p:
+            upgrades_allowed: false
+            qualities:
+            - Bluray-720p
+            - name: WEB 720p
+              members:
+              - WEBRip-720p
+              - WEBDL-720p
+            - HDTV-720p
+            upgrade_until: null
+          HD-1080p:
+            upgrades_allowed: false
+            qualities:
+            - Bluray-1080p
+            - name: WEB 1080p
+              members:
+              - WEBDL-1080p
+              - WEBRip-1080p
+            - HDTV-1080p
+            upgrade_until: null
+          Ultra-HD:
+            upgrades_allowed: false
+            qualities:
+            - Bluray-2160p
+            - name: WEB 2160p
+              members:
+              - WEBDL-2160p
+              - WEBRip-2160p
+            - HDTV-2160p
+            upgrade_until: null
+          HD - 720p/1080p:
+            upgrades_allowed: false
+            qualities:
+            - Bluray-1080p
+            - name: WEB 1080p
+              members:
+              - WEBDL-1080p
+              - WEBRip-1080p
+            - Bluray-720p
+            - name: WEB 720p
+              members:
+              - WEBRip-720p
+              - WEBDL-720p
+            - HDTV-1080p
+            - HDTV-720p
+            upgrade_until: null
+      language_profiles:
+        definitions:
+          Deprecated:
+            upgrades_allowed: true
+            languages:
+            - english
+            upgrade_until: english
+      delay_profiles:
+        definitions:
+        - preferred_protocol: usenet-prefer
+          usenet_delay: 0
+          torrent_delay: 0
+          bypass_if_highest_quality: true
+          tags: []
+      release_profiles:
+        definitions: {}
+    quality:
+      definitions:
+        Unknown:
+          title: null
+          min: 1.0
+          max: 199.9
+        SDTV:
+          title: null
+          min: 2.0
+          max: 100.0
+        WEBRip-480p:
+          title: null
+          min: 2.0
+          max: 100.0
+        WEBDL-480p:
+          title: null
+          min: 2.0
+          max: 100.0
+        DVD:
+          title: null
+          min: 2.0
+          max: 100.0
+        Bluray-480p:
+          title: null
+          min: 2.0
+          max: 100.0
+        Bluray-576p:
+          title: null
+          min: 2.0
+          max: 100.0
+        HDTV-720p:
+          title: null
+          min: 3.0
+          max: 125.0
+        HDTV-1080p:
+          title: null
+          min: 4.0
+          max: 125.0
+        Raw-HD:
+          title: null
+          min: 4.0
+          max: null
+        WEBRip-720p:
+          title: null
+          min: 3.0
+          max: 130.0
+        WEBDL-720p:
+          title: null
+          min: 3.0
+          max: 130.0
+        Bluray-720p:
+          title: null
+          min: 4.0
+          max: 130.0
+        WEBRip-1080p:
+          title: null
+          min: 4.0
+          max: 130.0
+        WEBDL-1080p:
+          title: null
+          min: 4.0
+          max: 130.0
+        Bluray-1080p:
+          title: null
+          min: 4.0
+          max: 155.0
+        Bluray-1080p Remux:
+          title: null
+          min: 35.0
+          max: null
+        HDTV-2160p:
+          title: null
+          min: 35.0
+          max: 199.9
+        WEBRip-2160p:
+          title: null
+          min: 35.0
+          max: null
+        WEBDL-2160p:
+          title: null
+          min: 35.0
+          max: null
+        Bluray-2160p:
+          title: null
+          min: 35.0
+          max: null
+        Bluray-2160p Remux:
+          title: null
+          min: 35.0
+          max: null
+    indexers:
+      minimum_age: 0
+      retention: 0
+      maximum_size: 0
+      rss_sync_interval: 15
+      definitions: {}
+    download_clients:
+      enable_completed_download_handling: true
+      redownload_failed: true
+      definitions: {}
+      remote_path_mappings:
+        definitions: []
+    import_lists:
+      definitions: {}
+    connect:
+      definitions: {}
+    metadata:
+      kodi_emby:
+        enable: false
+        series_metadata: true
+        series_metadata_url: false
+        episode_metadata: true
+        series_images: true
+        season_images: true
+        episode_images: true
+      roksbox:
+        enable: false
+        episode_metadata: true
+        series_images: true
+        season_images: true
+        episode_images: true
+      wdtv:
+        enable: false
+        episode_metadata: true
+        series_images: true
+        season_images: true
+        episode_images: true
+    tags:
+      definitions: []
+    general:
+      host:
+        bind_address: '*'
+        port: 8989
+        ssl_port: 9898
+        use_ssl: false
+        url_base: null
+        instance_name: Sonarr
+      security:
+        authentication: form
+        username: brunner56
+        password: AVw//3+Li0lCxXgOsx5oIbSnJWFogrjUP7L8Lcmd6cg=
+        certificate_validation: local-disabled
+      proxy:
+        enable: false
+        proxy_type: http
+        hostname: null
+        port: 8080
+        username: null
+        password: null
+        ignored_addresses: []
+        bypass_proxy_for_local_addresses: true
+      logging:
+        log_level: DEBUG
+      analytics:
+        send_anonymous_usage_data: true
+      updates:
+        branch: main
+        automatic: false
+        mechanism: docker
+        script_path: null
+      backup:
+        folder: Backups
+        interval: 7
+        retention: 28
+    ui:
+      first_day_of_week: sunday
+      week_column_header: month-first
+      short_date_format: word-month-first
+      long_date_format: month-first
+      time_format: twelve-hour
+      show_relative_dates: true
+      enable_color_impaired_mode: false
+
+prowlarr:
+  hostname: host
+  port: 9696
+  protocol: http
+  url_base: null
+  api_key: e6352949607b467e9e48b4bca32f55f1
+  image: lscr.io/linuxserver/prowlarr
+  version: 1.31.2.4975
+  settings:
+    indexers:
+      indexers:
+        delete_unmanaged: false
+        definitions: {}
+      proxies:
+        delete_unmanaged: false
+        definitions: {}
+    apps:
+      applications:
+        delete_unmanaged: false
+        definitions: {}
+      sync_profiles:
+        delete_unmanaged: false
+        definitions:
+          Standard:
+            enable_rss: true
+            enable_interactive_search: true
+            enable_automatic_search: true
+            minimum_seeders: 1
+    download_clients:
+      delete_unmanaged: false
+      definitions:
+        Deluge:
+          enable: true
+          priority: 1
+          tags: []
+          type: deluge
+          host: localhost
+          port: 8112
+          use_ssl: false
+          url_base: null
+          password: '********'
+          category: prowlarr
+          client_priority: last
+          category_mappings: {}
+    notifications:
+      delete_unmanaged: false
+      definitions: {}
+    tags:
+      definitions: []
+    general:
+      host:
+        bind_address: '*'
+        port: 9696
+        ssl_port: 6969
+        use_ssl: false
+        ssl_cert_path: null
+        ssl_cert_password: null
+        url_base: null
+        instance_name: Prowlarr
+      security:
+        authentication: form
+        authentication_required: local-disabled
+        username: brunner56
+        password: bgOFbWDP+xEGHpG4+vbPzKUy3Pu7qGd5JEoB7aeHSKQ=
+        certificate_validation: local-disabled
+      proxy:
+        enable: false
+        proxy_type: http
+        hostname: null
+        port: 8080
+        username: null
+        password: null
+        ignored_addresses: []
+        bypass_proxy_for_local_addresses: true
+      logging:
+        log_level: INFO
+      analytics:
+        send_anonymous_usage_data: true
+      updates:
+        branch: master
+        automatic: true
+        mechanism: docker
+        script_path: null
+      backup:
+        folder: Backups
+        interval: 7
+        retention: 28
+    ui:
+      first_day_of_week: sunday
+      week_column_header: month-first
+      short_date_format: word-month-first
+      long_date_format: month-first
+      time_format: twelve-hour
+      show_relative_dates: true
+      enable_color_impaired_mode: false
+      theme: auto
+      ui_language: en
+
+

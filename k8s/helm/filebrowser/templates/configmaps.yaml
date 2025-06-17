@@ -1,0 +1,43 @@
+{{- if .Values.configMaps.filebrowserEnv.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "filebrowser.fullname" . }}-env
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "filebrowser.labels" . | nindent 4 }}
+data:
+  {{- with .Values.configMaps.filebrowserEnv.data }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
+
+---
+{{- if .Values.configMaps.filebrowserElfbotScript.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "filebrowser.fullname" . }}-elfbot-script
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "filebrowser.labels" . | nindent 4 }}
+data:
+  {{- with .Values.configMaps.filebrowserElfbotScript.data }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
+
+---
+{{- if .Values.configMaps.recyclarrConfig.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "filebrowser.fullname" . }}-recyclarr-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "filebrowser.labels" . | nindent 4 }}
+data:
+  {{- with .Values.configMaps.recyclarrConfig.data }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}

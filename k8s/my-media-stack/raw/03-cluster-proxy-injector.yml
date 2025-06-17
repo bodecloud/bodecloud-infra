@@ -1,0 +1,451 @@
+---
+# Cluster-wide Proxy Injector
+# This mutating admission webhook automatically configures ALL pods to use the VPN gateway
+# for external traffic without requiring individual pod modifications
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: proxy-injector
+  namespace: vpn-gateway
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: proxy-injector
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["mutatingadmissionconfigurations"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: proxy-injector
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: proxy-injector
+subjects:
+  - kind: ServiceAccount
+    name: proxy-injector
+    namespace: vpn-gateway
+
+---
+# ConfigMap with proxy injection logic
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: proxy-injector-config
+  namespace: vpn-gateway
+data:
+  inject.py: |
+    #!/usr/bin/env python3
+    import json
+    import base64
+    import random
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+    import ssl
+
+    # VPN Gateway endpoints
+    VPN_GATEWAYS = [
+        "http://gluetun-airvpn.vpn-gateway.svc.cluster.local:8888",
+        "http://gluetun-premiumize-nl.vpn-gateway.svc.cluster.local:8888", 
+        "http://gluetun-premiumize-us.vpn-gateway.svc.cluster.local:8888",
+        "socks5://warp-gateway.vpn-gateway.svc.cluster.local:1080"
+    ]
+
+    # Namespaces that should use VPN (all except system namespaces)
+    EXCLUDED_NAMESPACES = {
+        "kube-system", "kube-public", "kube-node-lease", 
+        "vpn-gateway", "metallb-system", "cert-manager"
+    }
+
+    class ProxyInjectorHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            # Health check endpoint
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b'OK')
+            
+        def do_POST(self):
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            
+            try:
+                admission_review = json.loads(body.decode('utf-8'))
+                response = self.mutate(admission_review)
+                
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps(response).encode('utf-8'))
+                
+            except Exception as e:
+                print(f"Error processing admission review: {e}")
+                self.send_response(500)
+                self.end_headers()
+
+        def mutate(self, admission_review):
+            request = admission_review["request"]
+            pod = request["object"]
+            namespace = pod.get("metadata", {}).get("namespace", "default")
+            
+            # Skip system namespaces
+            if namespace in EXCLUDED_NAMESPACES:
+                return self.create_response(request["uid"], allowed=True)
+            
+            # Skip if pod already has proxy configuration
+            if self.has_proxy_config(pod):
+                return self.create_response(request["uid"], allowed=True)
+            
+            # Create patches to inject proxy configuration
+            patches = self.create_proxy_patches(pod)
+            
+            if not patches:
+                return self.create_response(request["uid"], allowed=True)
+            
+            return self.create_response(
+                request["uid"], 
+                allowed=True, 
+                patches=patches
+            )
+
+        def has_proxy_config(self, pod):
+            """Check if pod already has proxy configuration"""
+            containers = pod.get("spec", {}).get("containers", [])
+            for container in containers:
+                env = container.get("env", [])
+                for env_var in env:
+                    if env_var.get("name") in ["HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY"]:
+                        return True
+            return False
+
+        def create_proxy_patches(self, pod):
+            """Create JSON patches to inject proxy configuration"""
+            patches = []
+            containers = pod.get("spec", {}).get("containers", [])
+            
+            # Select random VPN gateway
+            selected_gateway = random.choice(VPN_GATEWAYS)
+            
+            # Determine proxy URLs based on gateway type
+            if selected_gateway.startswith("socks5://"):
+                http_proxy = selected_gateway
+                https_proxy = selected_gateway
+                all_proxy = selected_gateway
+            else:
+                http_proxy = selected_gateway
+                https_proxy = selected_gateway
+                all_proxy = selected_gateway
+            
+            # Proxy environment variables
+            proxy_env_vars = [
+                {"name": "HTTP_PROXY", "value": http_proxy},
+                {"name": "HTTPS_PROXY", "value": https_proxy},
+                {"name": "ALL_PROXY", "value": all_proxy},
+                {"name": "NO_PROXY", "value": "localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.cluster.local,.svc"},
+                {"name": "VPN_GATEWAY_SELECTED", "value": selected_gateway}
+            ]
+            
+            # Add proxy env vars to each container
+            for i, container in enumerate(containers):
+                existing_env = container.get("env", [])
+                
+                # Add proxy environment variables
+                for env_var in proxy_env_vars:
+                    patches.append({
+                        "op": "add",
+                        "path": f"/spec/containers/{i}/env/-",
+                        "value": env_var
+                    })
+                
+                # If no env exists, create it first
+                if not existing_env:
+                    patches.insert(-len(proxy_env_vars), {
+                        "op": "add",
+                        "path": f"/spec/containers/{i}/env",
+                        "value": []
+                    })
+            
+            # Add init container for gateway health check
+            init_container = {
+                "name": "vpn-gateway-check",
+                "image": "alpine/curl:latest",
+                "command": [
+                    "/bin/sh", "-c",
+                    f"""
+                    echo "Testing VPN gateway: {selected_gateway}"
+                    if echo "{selected_gateway}" | grep -q "socks5://"; then
+                        # Test SOCKS5 proxy
+                        timeout 30 curl -s --socks5-hostname {selected_gateway.replace('socks5://', '')} http://httpbin.org/ip
+                    else
+                        # Test HTTP proxy  
+                        timeout 30 curl -s --proxy {selected_gateway} http://httpbin.org/ip
+                    fi
+                    if [ $? -eq 0 ]; then
+                        echo "VPN gateway is healthy"
+                    else
+                        echo "VPN gateway failed, trying fallback..."
+                        # Try other gateways as fallback
+                        for gateway in {' '.join(VPN_GATEWAYS)}; do
+                            if [ "$gateway" != "{selected_gateway}" ]; then
+                                echo "Testing fallback: $gateway"
+                                if echo "$gateway" | grep -q "socks5://"; then
+                                    timeout 10 curl -s --socks5-hostname $(echo $gateway | sed 's|socks5://||') http://httpbin.org/ip && break
+                                else
+                                    timeout 10 curl -s --proxy $gateway http://httpbin.org/ip && break
+                                fi
+                            fi
+                        done
+                    fi
+                    """
+                ],
+                "resources": {
+                    "requests": {"memory": "32Mi", "cpu": "10m"},
+                    "limits": {"memory": "64Mi", "cpu": "50m"}
+                }
+            }
+            
+            # Add init container
+            if not pod.get("spec", {}).get("initContainers"):
+                patches.append({
+                    "op": "add",
+                    "path": "/spec/initContainers",
+                    "value": [init_container]
+                })
+            else:
+                patches.append({
+                    "op": "add", 
+                    "path": "/spec/initContainers/-",
+                    "value": init_container
+                })
+            
+            return patches
+
+        def create_response(self, uid, allowed=True, patches=None):
+            """Create admission response"""
+            response = {
+                "apiVersion": "admission.k8s.io/v1",
+                "kind": "AdmissionReview",
+                "response": {
+                    "uid": uid,
+                    "allowed": allowed
+                }
+            }
+            
+            if patches:
+                response["response"]["patchType"] = "JSONPatch"
+                response["response"]["patch"] = base64.b64encode(
+                    json.dumps(patches).encode('utf-8')
+                ).decode('utf-8')
+            
+            return response
+
+    if __name__ == "__main__":
+        server = HTTPServer(('0.0.0.0', 8443), ProxyInjectorHandler)
+        
+        # Configure TLS with error handling
+        try:
+            context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+            context.load_cert_chain('/etc/certs/tls.crt', '/etc/certs/tls.key')
+            server.socket = context.wrap_socket(server.socket, server_side=True)
+            print("Proxy injector webhook server starting on port 8443 with TLS...")
+        except ssl.SSLError as e:
+            print(f"SSL Certificate error: {e}")
+            print("Waiting for cert-manager to generate certificates...")
+            import time
+            time.sleep(30)  # Wait for cert-manager to generate certs
+            try:
+                context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+                context.load_cert_chain('/etc/certs/tls.crt', '/etc/certs/tls.key')
+                server.socket = context.wrap_socket(server.socket, server_side=True)
+                print("TLS certificates loaded successfully on retry")
+            except Exception as retry_error:
+                print(f"Failed to load certificates after retry: {retry_error}")
+                print("Please check cert-manager installation and certificate generation")
+                exit(1)
+        except Exception as e:
+            print(f"Failed to configure TLS: {e}")
+            exit(1)
+        
+        server.serve_forever()
+
+---
+# Proxy Injector Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy-injector
+  namespace: vpn-gateway
+  labels:
+    app: proxy-injector
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: proxy-injector
+  template:
+    metadata:
+      labels:
+        app: proxy-injector
+    spec:
+      serviceAccountName: proxy-injector
+      initContainers:
+        - name: wait-for-cert
+          image: bitnami/kubectl:latest
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              echo "Waiting for cert-manager to be ready..."
+
+              # Wait for cert-manager deployment
+              kubectl wait --for=condition=available deployment/cert-manager -n cert-manager --timeout=300s
+
+              # Wait for cert-manager CRDs to be established
+              echo "Waiting for cert-manager CRDs..."
+              kubectl wait --for condition=established --timeout=60s crd/clusterissuers.cert-manager.io
+              kubectl wait --for condition=established --timeout=60s crd/certificates.cert-manager.io
+
+              # Wait for ClusterIssuer to exist and be ready
+              echo "Waiting for ClusterIssuer to be ready..."
+              timeout=60
+              while [ $timeout -gt 0 ]; do
+                if kubectl get clusterissuer selfsigned-issuer &>/dev/null; then
+                  echo "ClusterIssuer found"
+                  break
+                fi
+                echo "Waiting for ClusterIssuer... ($timeout seconds remaining)"
+                sleep 5
+                timeout=$((timeout - 5))
+              done
+
+              # Wait for certificate to be ready
+              echo "Waiting for proxy-injector certificate to be ready..."
+              kubectl wait --for=condition=ready certificate/proxy-injector-cert -n vpn-gateway --timeout=300s
+
+              # Verify the secret exists
+              echo "Verifying certificate secret exists..."
+              kubectl get secret proxy-injector-certs -n vpn-gateway
+
+              echo "Certificate is ready!"
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 50m
+              memory: 64Mi
+      containers:
+        - name: proxy-injector
+          image: python:3.9-alpine
+          command:
+            - python3
+            - /app/inject.py
+          ports:
+            - containerPort: 8443
+              name: webhook
+          volumeMounts:
+            - name: config
+              mountPath: /app
+            - name: certs
+              mountPath: /etc/certs
+              readOnly: true
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "10m"
+            limits:
+              memory: "128Mi"
+              cpu: "50m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8443
+              scheme: HTTPS
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8443
+              scheme: HTTPS
+            initialDelaySeconds: 45
+            periodSeconds: 5
+            failureThreshold: 10
+      volumes:
+        - name: config
+          configMap:
+            name: proxy-injector-config
+            defaultMode: 0755
+        - name: certs
+          secret:
+            secretName: proxy-injector-certs
+
+---
+# Proxy Injector Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: proxy-injector
+  namespace: vpn-gateway
+  labels:
+    app: proxy-injector
+spec:
+  selector:
+    app: proxy-injector
+  ports:
+    - name: webhook
+      port: 443
+      targetPort: 8443
+  type: ClusterIP
+
+---
+# Mutating Admission Webhook Configuration
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: proxy-injector
+webhooks:
+  - name: proxy-injector.vpn-gateway.svc.cluster.local
+    clientConfig:
+      service:
+        name: proxy-injector
+        namespace: vpn-gateway
+        path: /
+    rules:
+      - operations: ["CREATE", "UPDATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    admissionReviewVersions: ["v1", "v1beta1"]
+    sideEffects: None
+    failurePolicy: Ignore # Don't block pod creation if webhook fails
+    namespaceSelector:
+      matchExpressions:
+        - key: name
+          operator: NotIn
+          values:
+            [
+              "kube-system",
+              "kube-public",
+              "kube-node-lease",
+              "vpn-gateway",
+              "metallb-system",
+              "cert-manager",
+            ]

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:32:43Z"
+  name: portainer-agent
+  namespace: portainer
+subsets:
+- addresses:
+  - ip: 10.42.0.73
+    nodeName: beatapostapita
+    targetRef:
+      kind: Pod
+      name: portainer-agent-7b6cd68b7b-zrhnc
+      namespace: portainer
+  ports:
+  - name: http
+    port: 9001
+    protocol: TCP

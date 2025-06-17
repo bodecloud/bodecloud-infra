@@ -1,0 +1,185 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1"},"generation":1,"name":"aiostreams","namespace":"bolabaden"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"aiostreams"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"aiostreams"}},"spec":{"containers":[{"env":[{"name":"TZ","value":"America/Chicago"},{"name":"ADDON_NAME","value":"BadenAIO"},{"name":"ADDON_ID","value":"aiostreams.bolabaden.org"},{"name":"DETERMINISTIC_ADDON_ID","value":"false"},{"name":"PORT","value":"3005"},{"name":"SECRET_KEY","value":"1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82"},{"name":"API_KEY","value":"sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9"},{"name":"SHOW_DIE","value":"false"},{"name":"LOG_LEVEL","value":"debug"},{"name":"LOG_FORMAT","value":"text"},{"name":"LOG_SENSITIVE_INFO","value":"true"},{"name":"MAX_ADDONS","value":"50"},{"name":"MAX_KEYWORD_FILTERS","value":"30"},{"name":"MAX_REGEX_SORT_PATTERNS","value":"30"},{"name":"MAX_MOVIE_SIZE","value":"161061273600"},{"name":"MAX_EPISODE_SIZE","value":"161061273600"},{"name":"MAX_TIMEOUT","value":"50000"},{"name":"MIN_TIMEOUT","value":"1000"},{"name":"MEDIAFLOW_IP_TIMEOUT","value":"30000"},{"name":"ENCRYPT_MEDIAFLOW_URLS","value":"true"},{"name":"STREMTHRU_TIMEOUT","value":"30000"},{"name":"DEFAULT_STREMTHRU_URL","value":"https://stremthru.bolabaden.org/"},{"name":"DEFAULT_STREMTHRU_CREDENTIAL","value":"YnJ1bm5lcjU2OmhiTG9tNFN0M1IzMjc="},{"name":"ENCRYPT_STREMTHRU_URLS","value":"true"},{"name":"DEFAULT_TIMEOUT","value":"15000"},{"name":"COMET_URL","value":"http://comet:2020/"},{"name":"FORCE_COMET_HOSTNAME","value":"comet.bolabaden.org"},{"name":"FORCE_COMET_PORT","value":"443"},{"name":"FORCE_COMET_PROTOCOL","value":"https"},{"name":"MEDIAFUSION_URL","value":"http://mediafusion:8000/"},{"name":"MEDIAFUSION_CONFIG_TIMEOUT","value":"5000"},{"name":"MEDIAFUSION_API_PASSWORD","value":"h4L0m4St3R327"},{"name":"JACKETTIO_URL","value":"https://jackettio.elfhosted.com/"},{"name":"DEFAULT_JACKETTIO_INDEXERS","value":"[\"1337x\", \"animetosho\", \"anirena\", \"limetorrents\", \"nyaasi\", \"solidtorrents\", \"thepiratebay\", \"torlock\", \"yts\"]"},{"name":"DEFAULT_JACKETTIO_STREMTHRU_URL","value":"https://stremthru.bolabaden.org"},{"name":"STREMIO_JACKETT_URL","value":"https://stremio-jackett.elfhosted.com/"},{"name":"DEFAULT_STREMIO_JACKETT_TMDB_API_KEY","value":"cec876f852b9c15d2c1b436b1117dff7"},{"name":"STREMIO_JACKETT_CACHE_ENABLED","value":"true"},{"name":"STREMTHRU_STORE_URL","value":"https://stremthru.bolabaden.org/stremio/store/"},{"name":"EASYNEWS_PLUS_URL","value":"https://b89262c192b0-stremio-easynews-addon.baby-beamup.club/"},{"name":"EASYNEWS_PLUS_PLUS_URL","value":"https://easynews-cloudflare-worker.jqrw92fchz.workers.dev/"},{"name":"TORRENTIO_URL","value":"https://torrentio.strem.fun/"},{"name":"ORION_STREMIO_ADDON_URL","value":"https://5a0d1888fa64-orion.baby-beamup.club/"},{"name":"PEERFLIX_URL","value":"https://peerflix-addon.onrender.com/"},{"name":"TORBOX_STREMIO_URL","value":"https://stremio.torbox.app/"},{"name":"EASYNEWS_URL","value":"https://ea627ddf0ee7-easynews.baby-beamup.club/"},{"name":"DEBRIDIO_URL","value":"https://debridio.adobotec.com/"}],"image":"ghcr.io/viren070/aiostreams:latest","imagePullPolicy":"Always","livenessProbe":{"failureThreshold":5,"httpGet":{"path":"/health","port":3005,"scheme":"HTTP"},"initialDelaySeconds":60,"periodSeconds":30,"successThreshold":1,"timeoutSeconds":10},"name":"aiostreams","ports":[{"containerPort":3005,"name":"aiostreams-3005","protocol":"TCP"}],"readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/health","port":3005,"scheme":"HTTP"},"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5},"resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"256Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/app/config","name":"aiostreams-config"}]}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"hostPath":{"path":"/home/ubuntu/my-media-stack/configs/stremio/addons/aiostreams/config","type":"DirectoryOrCreate"},"name":"aiostreams-config"}]}}}}
+  name: aiostreams
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: aiostreams
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: aiostreams
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: America/Chicago
+        - name: ADDON_NAME
+          value: BadenAIO
+        - name: ADDON_ID
+          value: aiostreams.bolabaden.org
+        - name: DETERMINISTIC_ADDON_ID
+          value: "false"
+        - name: PORT
+          value: "3005"
+        - name: SECRET_KEY
+          value: 1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82
+        - name: API_KEY
+          value: sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9
+        - name: SHOW_DIE
+          value: "false"
+        - name: LOG_LEVEL
+          value: debug
+        - name: LOG_FORMAT
+          value: text
+        - name: LOG_SENSITIVE_INFO
+          value: "true"
+        - name: MAX_ADDONS
+          value: "50"
+        - name: MAX_KEYWORD_FILTERS
+          value: "30"
+        - name: MAX_REGEX_SORT_PATTERNS
+          value: "30"
+        - name: MAX_MOVIE_SIZE
+          value: "161061273600"
+        - name: MAX_EPISODE_SIZE
+          value: "161061273600"
+        - name: MAX_TIMEOUT
+          value: "50000"
+        - name: MIN_TIMEOUT
+          value: "1000"
+        - name: MEDIAFLOW_IP_TIMEOUT
+          value: "30000"
+        - name: ENCRYPT_MEDIAFLOW_URLS
+          value: "true"
+        - name: STREMTHRU_TIMEOUT
+          value: "30000"
+        - name: DEFAULT_STREMTHRU_URL
+          value: https://stremthru.bolabaden.org/
+        - name: DEFAULT_STREMTHRU_CREDENTIAL
+          value: YnJ1bm5lcjU2OmhiTG9tNFN0M1IzMjc=
+        - name: ENCRYPT_STREMTHRU_URLS
+          value: "true"
+        - name: DEFAULT_TIMEOUT
+          value: "15000"
+        - name: COMET_URL
+          value: http://comet:2020/
+        - name: FORCE_COMET_HOSTNAME
+          value: comet.bolabaden.org
+        - name: FORCE_COMET_PORT
+          value: "443"
+        - name: FORCE_COMET_PROTOCOL
+          value: https
+        - name: MEDIAFUSION_URL
+          value: http://mediafusion:8000/
+        - name: MEDIAFUSION_CONFIG_TIMEOUT
+          value: "5000"
+        - name: MEDIAFUSION_API_PASSWORD
+          value: h4L0m4St3R327
+        - name: JACKETTIO_URL
+          value: https://jackettio.elfhosted.com/
+        - name: DEFAULT_JACKETTIO_INDEXERS
+          value: '["1337x", "animetosho", "anirena", "limetorrents", "nyaasi", "solidtorrents",
+            "thepiratebay", "torlock", "yts"]'
+        - name: DEFAULT_JACKETTIO_STREMTHRU_URL
+          value: https://stremthru.bolabaden.org
+        - name: STREMIO_JACKETT_URL
+          value: https://stremio-jackett.elfhosted.com/
+        - name: DEFAULT_STREMIO_JACKETT_TMDB_API_KEY
+          value: cec876f852b9c15d2c1b436b1117dff7
+        - name: STREMIO_JACKETT_CACHE_ENABLED
+          value: "true"
+        - name: STREMTHRU_STORE_URL
+          value: https://stremthru.bolabaden.org/stremio/store/
+        - name: EASYNEWS_PLUS_URL
+          value: https://b89262c192b0-stremio-easynews-addon.baby-beamup.club/
+        - name: EASYNEWS_PLUS_PLUS_URL
+          value: https://easynews-cloudflare-worker.jqrw92fchz.workers.dev/
+        - name: TORRENTIO_URL
+          value: https://torrentio.strem.fun/
+        - name: ORION_STREMIO_ADDON_URL
+          value: https://5a0d1888fa64-orion.baby-beamup.club/
+        - name: PEERFLIX_URL
+          value: https://peerflix-addon.onrender.com/
+        - name: TORBOX_STREMIO_URL
+          value: https://stremio.torbox.app/
+        - name: EASYNEWS_URL
+          value: https://ea627ddf0ee7-easynews.baby-beamup.club/
+        - name: DEBRIDIO_URL
+          value: https://debridio.adobotec.com/
+        image: ghcr.io/viren070/aiostreams:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 3005
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: aiostreams
+        ports:
+        - containerPort: 3005
+          name: aiostreams-3005
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 3005
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /app/config
+          name: aiostreams-config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/stremio/addons/aiostreams/config
+          type: DirectoryOrCreate
+        name: aiostreams-config
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2025-06-14T19:17:33Z"
+    lastUpdateTime: "2025-06-14T19:18:05Z"
+    message: ReplicaSet "aiostreams-6cf976649b" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    type: Progressing
+  - lastTransitionTime: "2025-06-14T22:40:17Z"
+    lastUpdateTime: "2025-06-14T22:40:17Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

@@ -1,0 +1,21 @@
+apiVersion: v2
+name: plex
+description: A Helm chart for Plex Media Server with VPN, monitoring, and proxy sidecars
+type: application
+version: 0.3.0
+appVersion: "latest"
+home: https://www.plex.tv/
+sources:
+  - https://github.com/plexinc/plex-media-server
+keywords:
+  - plex
+  - media-server
+  - streaming
+  - vpn
+  - gluetun
+  - elfhosted
+maintainers:
+  - name: ElfHosted
+    url: https://elfhosted.com
+annotations:
+  category: Media 

@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app.elfhosted.com/name: wizarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: wizarr
+    pod-template-hash: 55549b76c8
+  name: wizarr-55549b76c8
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: wizarr
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: wizarr
+      pod-template-hash: 55549b76c8
+  template:
+    metadata:
+      labels:
+        app.elfhosted.com/name: wizarr
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: wizarr
+        pod-template-hash: 55549b76c8
+    spec:
+      containers:
+      - image: ghcr.io/elfhosted/wizarr:4.1.1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 5690
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: wizarr
+        ports:
+        - containerPort: 5690
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 5690
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data/database
+          name: config
+          subPath: wizarr
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+  observedGeneration: 2
+  replicas: 0

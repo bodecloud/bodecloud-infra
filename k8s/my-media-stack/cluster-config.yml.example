@@ -1,0 +1,376 @@
+---
+# =============================================================================
+# MEDIA STACK CLUSTER CONFIGURATION - EXAMPLE
+# =============================================================================
+# Copy this file to cluster-config.yml and modify with your values
+# =============================================================================
+
+# =============================================================================
+# CLUSTER INFRASTRUCTURE
+# =============================================================================
+cluster:
+  name: "media-stack"
+  domain: "your-domain.org"  # CHANGE THIS: Your domain name
+  subdomain: "your-subdomain"  # CHANGE THIS: Your subdomain
+  timezone: "America/Chicago"  # CHANGE THIS: Your timezone
+  
+  # Tailscale network configuration
+  tailscale:
+    base_domain: "your-tailnet.ts.net"  # CHANGE THIS: Your Tailscale domain
+    hostname: "your-master-hostname"  # CHANGE THIS: Your master hostname
+    authkey: "tskey-auth-XXXXXXXXXX"  # CHANGE THIS: Your Tailscale auth key
+    
+    # Node configuration - UPDATE WITH YOUR ACTUAL NODES
+    nodes:
+      master:
+        hostname: "your-master"  # CHANGE THIS
+        tailscale_ip: "100.x.x.x"  # CHANGE THIS
+        external_ip: "x.x.x.x"  # CHANGE THIS
+      agents:
+        - hostname: "agent1"  # CHANGE THIS
+          tailscale_ip: "100.x.x.x"  # CHANGE THIS
+        - hostname: "agent2"  # CHANGE THIS
+          tailscale_ip: "100.x.x.x"  # CHANGE THIS
+        # Add more agents as needed
+
+  # K3s configuration
+  k3s:
+    version: "v1.28.5+k3s1"
+    token: "CHANGE-THIS-TO-A-SECURE-TOKEN"  # CHANGE THIS: Generate a secure token
+    cluster_cidr: "10.42.0.0/16"
+    service_cidr: "10.43.0.0/16"
+
+# =============================================================================
+# CERTIFICATES & DNS
+# =============================================================================
+certificates:
+  acme:
+    email: "your-email@example.com"  # CHANGE THIS: Your email
+    resolver: "letsencrypt"
+    
+  # Cloudflare DNS configuration
+  cloudflare:
+    email: "your-email@example.com"  # CHANGE THIS: Your Cloudflare email
+    api_key: "your-cloudflare-api-key"  # CHANGE THIS: Your Cloudflare API key
+    dns_api_token: "your-dns-api-token"  # CHANGE THIS: Your DNS API token
+    zone_id: "your-zone-id"  # CHANGE THIS: Your Cloudflare zone ID
+    zone_api_token: "your-zone-api-token"  # CHANGE THIS: Your zone API token
+    
+  # DuckDNS configuration (alternative to Cloudflare)
+  duckdns:
+    domain: "your-subdomain.duckdns.org"  # CHANGE THIS: Your DuckDNS domain
+    token: "your-duckdns-token"  # CHANGE THIS: Your DuckDNS token
+
+# =============================================================================
+# VPN PROVIDERS
+# =============================================================================
+vpn:
+  providers:
+    premiumize:
+      enabled: true
+      customer_id: "your-customer-id"  # CHANGE THIS: Your Premiumize customer ID
+      api_key: "your-premiumize-api-key"  # CHANGE THIS: Your Premiumize API key
+      countries:
+        - "us"
+        - "nl" 
+        - "gb"
+        - "de"
+        - "ca"
+        # Add or remove countries as needed
+    
+    realdebrid:
+      enabled: true
+      api_key: "your-realdebrid-api-key"  # CHANGE THIS: Your Real-Debrid API key
+      
+    warp:
+      enabled: true
+      
+    airvpn:
+      enabled: false
+
+# =============================================================================
+# STORAGE & PATHS
+# =============================================================================
+storage:
+  config_path: "/home/ubuntu/my-media-stack/configs"  # CHANGE THIS: Your config path
+  data_path: "/home/ubuntu/my-media-stack/data"  # CHANGE THIS: Your data path
+  secrets_path: "/home/ubuntu/my-media-stack/secrets"  # CHANGE THIS: Your secrets path
+  
+  # User/Group configuration
+  puid: 1001  # CHANGE THIS: Your user ID
+  pgid: 989   # CHANGE THIS: Your group ID
+  umask: "002"
+
+# =============================================================================
+# MEDIA SERVICES CONFIGURATION
+# =============================================================================
+media_services:
+  # Plex configuration
+  plex:
+    enabled: true
+    url: "https://plex.your-domain.org"  # CHANGE THIS: Your Plex URL
+    token: "your-plex-token"  # CHANGE THIS: Your Plex token
+    claim: "claim-XXXXXXXXXX"  # CHANGE THIS: Your Plex claim token
+    server_machine_id: "your-machine-id"  # CHANGE THIS: Your Plex machine ID
+    movie_library_id: "your-movie-library-id"  # CHANGE THIS: Your movie library ID
+    tv_library_id: "your-tv-library-id"  # CHANGE THIS: Your TV library ID
+    
+  # Jellyfin configuration
+  jellyfin:
+    enabled: false
+    url: "https://jellyfin.your-domain.org"  # CHANGE THIS: Your Jellyfin URL
+    api_key: "your-jellyfin-api-key"  # CHANGE THIS: Your Jellyfin API key
+    
+  # Tautulli configuration
+  tautulli:
+    enabled: true
+    url: "https://tautulli.your-domain.org"  # CHANGE THIS: Your Tautulli URL
+    api_key: "your-tautulli-api-key"  # CHANGE THIS: Your Tautulli API key
+
+# =============================================================================
+# SERVARR SERVICES (*ARR STACK)
+# =============================================================================
+servarr:
+  # Sonarr configuration
+  sonarr:
+    enabled: true
+    url: "https://sonarr.your-domain.org"  # CHANGE THIS: Your Sonarr URL
+    api_key: "your-sonarr-api-key"  # CHANGE THIS: Your Sonarr API key
+    root_folder: "/mnt/plex/TV"
+    
+  # Radarr configuration  
+  radarr:
+    enabled: true
+    url: "https://radarr.your-domain.org"  # CHANGE THIS: Your Radarr URL
+    api_key: "your-radarr-api-key"  # CHANGE THIS: Your Radarr API key
+    root_folder: "/mnt/plex/Movies"
+    
+  # Prowlarr configuration
+  prowlarr:
+    enabled: true
+    url: "https://prowlarr.your-domain.org"  # CHANGE THIS: Your Prowlarr URL
+    api_key: "your-prowlarr-api-key"  # CHANGE THIS: Your Prowlarr API key
+    
+  # Bazarr configuration
+  bazarr:
+    enabled: true
+    url: "https://bazarr.your-domain.org"  # CHANGE THIS: Your Bazarr URL
+    api_key: "your-bazarr-api-key"  # CHANGE THIS: Your Bazarr API key
+    
+  # Lidarr configuration
+  lidarr:
+    enabled: false
+    url: "https://lidarr.your-domain.org"  # CHANGE THIS: Your Lidarr URL
+    api_key: "your-lidarr-api-key"  # CHANGE THIS: Your Lidarr API key
+    
+  # Readarr configuration
+  readarr:
+    enabled: false
+    url: "https://readarr.your-domain.org"  # CHANGE THIS: Your Readarr URL
+    api_key: "your-readarr-api-key"  # CHANGE THIS: Your Readarr API key
+    
+  # Whisparr configuration
+  whisparr:
+    enabled: false
+    url: "https://whisparr.your-domain.org"  # CHANGE THIS: Your Whisparr URL
+    api_key: "your-whisparr-api-key"  # CHANGE THIS: Your Whisparr API key
+
+# =============================================================================
+# DOWNLOAD CLIENTS
+# =============================================================================
+download_clients:
+  # SABnzbd configuration
+  sabnzbd:
+    enabled: false
+    url: "https://sabnzbd.your-domain.org"  # CHANGE THIS: Your SABnzbd URL
+    api_key: "your-sabnzbd-api-key"  # CHANGE THIS: Your SABnzbd API key
+    
+  # QBittorrent configuration
+  qbittorrent:
+    enabled: false
+    username: "your-username"  # CHANGE THIS: Your QBittorrent username
+    password: "your-password"  # CHANGE THIS: Your QBittorrent password
+
+# =============================================================================
+# STREMIO ADDONS
+# =============================================================================
+stremio:
+  # Comet configuration
+  comet:
+    enabled: true
+    url: "https://comet.your-domain.org"  # CHANGE THIS: Your Comet URL
+    addon_id: "comet.your-domain.org"  # CHANGE THIS: Your addon ID
+    addon_name: "Comet"
+    dashboard_password: "your-password"  # CHANGE THIS: Your dashboard password
+    database_url: "your-database-url"  # CHANGE THIS: Your database URL
+    proxy_password: "your-proxy-password"  # CHANGE THIS: Your proxy password
+    
+  # AIOStreams configuration
+  aiostreams:
+    enabled: true
+    api_key: "your-aiostreams-api-key"  # CHANGE THIS: Your AIOStreams API key
+    
+  # MediaFusion configuration
+  mediafusion:
+    enabled: true
+    url: "https://mediafusion.your-domain.org"  # CHANGE THIS: Your MediaFusion URL
+    secret_key: "your-secret-key"  # CHANGE THIS: Your secret key
+    api_password: "your-api-password"  # CHANGE THIS: Your API password
+    mongo_uri: "mongodb://mongodb:27017/mediafusion"
+    
+  # Torrentio configuration
+  torrentio:
+    enabled: true
+    url: "https://torrentio.your-domain.org"  # CHANGE THIS: Your Torrentio URL
+    
+  # Zilean configuration
+  zilean:
+    enabled: true
+    url: "https://zilean.your-domain.org"  # CHANGE THIS: Your Zilean URL
+    
+  # MediaFlow Proxy configuration
+  mediaflow_proxy:
+    enabled: true
+    url: "https://mediaflow-proxy.your-domain.org"  # CHANGE THIS: Your MediaFlow URL
+    api_password: "your-api-password"  # CHANGE THIS: Your API password
+
+# =============================================================================
+# INDEXERS
+# =============================================================================
+indexers:
+  # Jackett configuration
+  jackett:
+    enabled: true
+    url: "https://jackett.your-domain.org"  # CHANGE THIS: Your Jackett URL
+    api_key: "your-jackett-api-key"  # CHANGE THIS: Your Jackett API key
+
+# =============================================================================
+# AUTHENTICATION & SECURITY
+# =============================================================================
+auth:
+  # TinyAuth configuration
+  tinyauth:
+    enabled: true
+    secret: "your-tinyauth-secret"  # CHANGE THIS: Generate a secure secret
+    users: "user1:$apr1$hash1,user2:$apr1$hash2"  # CHANGE THIS: Your user hashes
+    
+  # OAuth configuration
+  oauth:
+    secret: "your-oauth-secret"  # CHANGE THIS: Generate a secure secret
+    
+  # Auth secret
+  auth_secret: "your-auth-secret"  # CHANGE THIS: Generate a secure secret
+
+# =============================================================================
+# EXTERNAL APIS
+# =============================================================================
+external_apis:
+  # TMDB configuration
+  tmdb:
+    api_key: "your-tmdb-api-key"  # CHANGE THIS: Your TMDB API key
+    access_token: "your-tmdb-access-token"  # CHANGE THIS: Your TMDB access token
+    
+  # OpenAI configuration
+  openai:
+    api_key: "your-openai-api-key"  # CHANGE THIS: Your OpenAI API key
+    
+  # Tavily configuration
+  tavily:
+    api_key: "your-tavily-api-key"  # CHANGE THIS: Your Tavily API key
+    
+  # Firecrawl configuration
+  firecrawl:
+    api_key: "your-firecrawl-api-key"  # CHANGE THIS: Your Firecrawl API key
+
+# =============================================================================
+# MONITORING & UTILITIES
+# =============================================================================
+monitoring:
+  # Grafana configuration
+  grafana:
+    enabled: false
+    username: "your-username"  # CHANGE THIS: Your Grafana username
+    password: "your-password"  # CHANGE THIS: Your Grafana password
+    
+  # Speedtest Tracker configuration
+  speedtest_tracker:
+    enabled: true
+    admin_email: "your-email@example.com"  # CHANGE THIS: Your email
+    admin_name: "your-name"  # CHANGE THIS: Your name
+    admin_password: "your-password"  # CHANGE THIS: Your password
+    api_token: "your-api-token"  # CHANGE THIS: Generate an API token
+    app_key: "base64:your-app-key"  # CHANGE THIS: Generate an app key
+
+# =============================================================================
+# DEVELOPMENT TOOLS
+# =============================================================================
+development:
+  # Code Server configuration
+  code_server:
+    enabled: false
+    password: "your-password"  # CHANGE THIS: Your Code Server password
+    sudo_password: "your-sudo-password"  # CHANGE THIS: Your sudo password
+    default_workspace: "/workspace"
+
+# =============================================================================
+# SERVICE DEPLOYMENT FLAGS
+# =============================================================================
+services:
+  # Core infrastructure (always enabled)
+  traefik: true
+  cert_manager: true
+  vpn_gateway: true
+  
+  # Media services
+  plex: true
+  jellyfin: false
+  tautulli: true
+  
+  # Servarr stack
+  sonarr: true
+  radarr: true
+  prowlarr: true
+  bazarr: true
+  lidarr: false
+  readarr: false
+  whisparr: false
+  
+  # Download clients
+  qbittorrent: false
+  sabnzbd: false
+  
+  # Stremio addons
+  comet: true
+  aiostreams: true
+  mediafusion: true
+  torrentio: true
+  zilean: true
+  mediaflow_proxy: true
+  stremio_jackett: true
+  
+  # Indexers
+  jackett: true
+  
+  # Utilities
+  homepage: true
+  dozzle: true
+  watchtower: true
+  speedtest_tracker: true
+  tinyauth: true
+  
+  # Development
+  code_server: false
+  
+  # AI/LLM
+  lobechat: false
+  
+  # Search
+  searxng: false
+  
+  # Monitoring
+  grafana: false
+  prometheus: false
+  
+  # Databases
+  redis: true
+  mongodb: true 

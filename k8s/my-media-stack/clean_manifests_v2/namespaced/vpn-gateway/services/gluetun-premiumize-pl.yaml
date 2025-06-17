@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"gluetun-premiumize-pl","component":"vpn-gateway"},"name":"gluetun-premiumize-pl","namespace":"vpn-gateway"},"spec":{"clusterIP":"10.43.98.3","clusterIPs":["10.43.98.3"],"internalTrafficPolicy":"Cluster","ipFamilies":["IPv4"],"ipFamilyPolicy":"SingleStack","ports":[{"name":"http-proxy","port":8888,"protocol":"TCP","targetPort":8888},{"name":"shadowsocks","port":8388,"protocol":"TCP","targetPort":8388},{"name":"health","port":9999,"protocol":"TCP","targetPort":9999}],"selector":{"app":"gluetun-premiumize-pl"},"sessionAffinity":"None","type":"ClusterIP"}}
+  labels:
+    app: gluetun-premiumize-pl
+    component: vpn-gateway
+  name: gluetun-premiumize-pl
+  namespace: vpn-gateway
+spec:
+  clusterIP: 10.43.98.3
+  clusterIPs:
+  - 10.43.98.3
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http-proxy
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+  - name: shadowsocks
+    port: 8388
+    protocol: TCP
+    targetPort: 8388
+  - name: health
+    port: 9999
+    protocol: TCP
+    targetPort: 9999
+  selector:
+    app: gluetun-premiumize-pl
+  sessionAffinity: None
+  type: ClusterIP
+  loadBalancer: {}

@@ -1,0 +1,32 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rclonefm
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rclonefm
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  ports:
+  - name: rclonefm
+    protocol: TCP
+    port: 5573
+    targetPort: 5573
+  selector:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: rclonefm
+  clusterIP: 10.43.42.51
+  clusterIPs:
+  - 10.43.42.51
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

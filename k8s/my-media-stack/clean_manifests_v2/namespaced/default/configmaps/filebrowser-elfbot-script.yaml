@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  elfbot.sh: |-
+    #!/bin/bash
+    # ElfBot script for Filebrowser
+    echo "ElfBot: Starting Filebrowser automation..."
+
+    # Add automation logic here
+    while true; do
+        echo "ElfBot: Monitoring Filebrowser..."
+        sleep 300
+    done
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"elfbot.sh":"#!/bin/bash\n# ElfBot script for Filebrowser\necho \"ElfBot: Starting Filebrowser automation...\"\n\n# Add automation logic here\nwhile true; do\n    echo \"ElfBot: Monitoring Filebrowser...\"\n    sleep 300\ndone"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"filebrowser-elfbot-script","namespace":"default"}}
+  name: filebrowser-elfbot-script
+  namespace: default

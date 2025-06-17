@@ -1,0 +1,12 @@
+cryptography
+fastapi
+pyyaml
+dagger-io
+httpx
+pydantic
+python-dotenv
+ruamel.yaml
+python-nomad
+python-jose
+starlette
+uvicorn

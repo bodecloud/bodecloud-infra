@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{"deprecated.daemonset.template.generation":"1"},"generation":1,"labels":{"app":"pod-gateway","component":"vpn-gateway"},"name":"pod-gateway","namespace":"vpn-gateway"},"spec":{"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"pod-gateway"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"pod-gateway","component":"vpn-gateway"}},"spec":{"containers":[{"command":["/bin/bash","-c","# Node-level pod-gateway setup\necho \"=== Setting up Pod-Gateway on node $NODE_NAME ===\"\n\n# Load configuration\nsource /config/settings.sh\n\n# Get pod CIDR for this node\nPOD_CIDR=$(cat /host/proc/1/root/var/lib/kubelet/config.yaml | grep clusterCIDR | awk '{print $2}' || echo \"10.244.0.0/16\")\n\n# Set up iptables rules to capture pod egress traffic\n# Mark packets from pods for routing through VPN gateway\niptables -t mangle -A OUTPUT -s $POD_CIDR -j MARK --set-mark 42 || true\n\n# Route marked packets through VXLAN tunnel\nip rule add fwmark 42 table 100 || true\n\n# Monitor for active gateway changes and update routing\nwhile true; do\n  # Get current active gateway from ConfigMap\n  ACTIVE_GATEWAY=$(kubectl get configmap pod-gateway-config -n vpn-gateway -o jsonpath='{.data.settings\\.sh}' | grep GATEWAY_NAME | cut -d'\"' -f2)\n  \n  if [[ -n \"$ACTIVE_GATEWAY\" ]]; then\n    # Resolve gateway IP\n    GATEWAY_IP=$(dig +short $ACTIVE_GATEWAY.vpn-gateway.svc.cluster.local)\n    \n    if [[ -n \"$GATEWAY_IP\" ]]; then\n      # Update routing table to send marked traffic to gateway\n      ip route replace default via $GATEWAY_IP table 100 || true\n      echo \"$(date): Updated routing to gateway $ACTIVE_GATEWAY ($GATEWAY_IP)\"\n    fi\n  fi\n  \n  sleep 30\ndone\n"],"env":[{"name":"NODE_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"spec.nodeName"}}}],"image":"ghcr.io/k8s-at-home/pod-gateway:latest","imagePullPolicy":"Always","name":"pod-gateway","resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}},"securityContext":{"capabilities":{"add":["NET_ADMIN","NET_RAW","SYS_MODULE"]},"privileged":true},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/config","name":"config"},{"mountPath":"/lib/modules","name":"lib-modules","readOnly":true},{"mountPath":"/host/proc","name":"proc","readOnly":true}]}],"dnsPolicy":"ClusterFirst","hostNetwork":true,"hostPID":true,"restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"tolerations":[{"operator":"Exists"}],"volumes":[{"configMap":{"defaultMode":420,"name":"pod-gateway-config"},"name":"config"},{"hostPath":{"path":"/lib/modules","type":""},"name":"lib-modules"},{"hostPath":{"path":"/proc","type":""},"name":"proc"}]}},"updateStrategy":{"rollingUpdate":{"maxSurge":0,"maxUnavailable":1},"type":"RollingUpdate"}}}
+  labels:
+    app: pod-gateway
+    component: vpn-gateway
+  name: pod-gateway
+  namespace: vpn-gateway
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: pod-gateway
+  template:
+    metadata:
+      labels:
+        app: pod-gateway
+        component: vpn-gateway
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          # Node-level pod-gateway setup
+          echo "=== Setting up Pod-Gateway on node $NODE_NAME ==="
+          # Load configuration
+          source /config/settings.sh
+          # Get pod CIDR for this node
+          POD_CIDR=$(cat /host/proc/1/root/var/lib/kubelet/config.yaml | grep clusterCIDR | awk '{print $2}' || echo "10.244.0.0/16")
+          # Set up iptables rules to capture pod egress traffic
+          # Mark packets from pods for routing through VPN gateway
+          iptables -t mangle -A OUTPUT -s $POD_CIDR -j MARK --set-mark 42 || true
+          # Route marked packets through VXLAN tunnel
+          ip rule add fwmark 42 table 100 || true
+          # Monitor for active gateway changes
+          while true; do
+            # Get current active gateway from ConfigMap
+            ACTIVE_GATEWAY=$(kubectl get configmap pod-gateway-config -n vpn-gateway -o jsonpath='{.data.settings.sh}' | grep GATEWAY_NAME | cut -d'"' -f2)
+            if [[ -n "$ACTIVE_GATEWAY" ]]; then
+              # Resolve gateway IP
+              GATEWAY_IP=$(dig +short $ACTIVE_GATEWAY.vpn-gateway.svc.cluster.local)
+              if [[ -n "$GATEWAY_IP" ]]; then
+                # Update routing table to send marked traffic to gateway
+                ip route replace default via $GATEWAY_IP table 100 || true
+                echo "$(date): Updated routing to gateway $ACTIVE_GATEWAY ($GATEWAY_IP)"
+              fi
+            fi
+            sleep 30
+          done"
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: ghcr.io/k8s-at-home/pod-gateway:latest
+        imagePullPolicy: Always
+        name: pod-gateway
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - NET_RAW
+            - SYS_MODULE
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - mountPath: /lib/modules
+          name: lib-modules
+          readOnly: true
+        - mountPath: /host/proc
+          name: proc
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      hostPID: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - operator: Exists
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: pod-gateway-config
+        name: config
+      - hostPath:
+          path: /lib/modules
+          type: ""
+        name: lib-modules
+      - hostPath:
+          path: /proc
+          type: ""
+        name: proc
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  currentNumberScheduled: 3
+  desiredNumberScheduled: 3
+  numberAvailable: 3
+  numberMisscheduled: 0
+  numberReady: 3
+  observedGeneration: 1
+  updatedNumberScheduled: 3

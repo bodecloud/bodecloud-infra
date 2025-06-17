@@ -1,0 +1,124 @@
+2025-03-28T20:34:09.271539Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-28T20:34:09.273656Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:34:09.275140Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-28T20:34:09.275466Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-28T20:34:11.276671Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:34:11.277575Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-28T20:34:11.277622Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-28T20:34:15.279592Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:34:15.280809Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-28T20:34:15.280935Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-28T20:34:23.284033Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:34:23.285957Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-28T20:34:23.285975Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-28T20:42:14.974449Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-28T20:42:14.996059Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:42:15.000561Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:42:15.002119Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:42:15.004692Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:42:15.004708Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-28T20:42:17.007378Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:42:17.007883Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:42:17.009147Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:42:17.011165Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:42:17.011215Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-28T20:42:21.012673Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:42:21.014170Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:42:21.017709Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:42:21.019359Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:42:21.019376Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-28T20:42:29.020844Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:42:29.021763Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:42:29.024379Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:42:29.026671Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:42:29.027992Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-28T20:42:45.029005Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:42:45.030666Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:42:45.031996Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:42:45.033132Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:42:45.033147Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-28T20:43:17.034729Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:43:17.035384Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:43:17.039490Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:43:17.042566Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:43:17.043893Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-28T20:44:21.045038Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:44:21.050306Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:44:21.051956Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:44:21.054333Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:44:21.054628Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:44:21.054634Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-28T20:44:55.584287Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-28T20:44:55.586518Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:44:55.670142Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:44:55.681214Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:44:55.708145Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:44:55.708166Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-28T20:44:57.709564Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:44:57.710398Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:44:57.712598Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:44:57.714455Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:44:57.714907Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-28T20:45:01.716853Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:45:01.721015Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:45:01.726656Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:45:01.728154Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:45:01.728174Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-28T20:45:09.729560Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:45:09.730243Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:45:09.731939Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:45:09.734170Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:45:09.734190Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-28T20:45:25.735947Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:45:25.742479Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:45:25.743789Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:45:25.744956Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:45:25.744974Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-28T20:45:57.747896Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:45:57.750881Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:45:57.761423Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:45:57.764017Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:45:57.764127Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-28T20:47:01.765977Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T20:47:01.768477Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T20:47:01.784332Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T20:47:01.790108Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:47:01.790230Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T20:47:01.791924Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-28T21:06:24.805044Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-28T21:06:24.811562Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T21:06:24.816438Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T21:06:24.818281Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T21:06:24.820443Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T21:06:24.820472Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-28T21:06:26.821777Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T21:06:26.822239Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T21:06:26.825988Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T21:06:26.828500Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T21:06:26.828636Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-28T21:06:30.829810Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T21:06:30.830454Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T21:06:30.831822Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T21:06:30.838125Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T21:06:30.850728Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-28T21:06:38.852132Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T21:06:38.855982Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T21:06:38.857757Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T21:06:38.863144Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T21:06:38.863162Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-28T21:06:54.864436Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T21:06:54.865054Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T21:06:54.866504Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T21:06:54.869389Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T21:06:54.869406Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-28T21:07:26.872957Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T21:07:26.874325Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T21:07:26.876189Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T21:07:26.877747Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T21:07:26.877813Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-28T21:08:30.880216Z DEBUG reqwest::connect: starting new connection: https://sonarr./    
+2025-03-28T21:08:30.889341Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.222:443
+2025-03-28T21:08:30.890906Z DEBUG hyper_util::client::legacy::connect::http: connecting to 172.19.7.21:443
+2025-03-28T21:08:30.892871Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T21:08:30.893386Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr./api): client error (Connect): tcp connect error: Connection refused (os error 111): Connection refused (os error 111)
+2025-03-28T21:08:30.893400Z  INFO prefetcharr: prefetcharr exits due to an error

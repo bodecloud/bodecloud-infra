@@ -1,0 +1,19 @@
+#! stremio-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: stremio
+  namespace: my-media-stack
+spec:
+  selector: {}
+  ports:
+    - name: stremio-11470
+      port: 11470
+      targetPort: stremio-11470
+    - name: stremio-12470
+      port: 12470
+      targetPort: stremio-12470
+    - name: stremio-8080
+      port: 8080
+      targetPort: stremio-8080

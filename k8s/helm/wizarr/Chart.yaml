@@ -1,0 +1,21 @@
+apiVersion: v2
+name: wizarr
+description: A Helm chart for Wizarr - A web-based invitation system for Plex and Jellyfin
+type: application
+version: 0.3.0
+appVersion: "latest"
+home: https://github.com/Wizarrrr/wizarr
+sources:
+  - https://github.com/Wizarrrr/wizarr
+keywords:
+  - wizarr
+  - invitation
+  - plex
+  - jellyfin
+  - user-management
+  - elfhosted
+maintainers:
+  - name: ElfHosted
+    url: https://elfhosted.com
+annotations:
+  category: User Management 

@@ -1,0 +1,37 @@
+apiVersion: v1
+data:
+  backup-script.sh: |-
+    #!/bin/bash
+    # Backup script for ElfHosted
+    echo "Starting backup process..."
+    # Add backup logic here
+  restore-script.sh: |-
+    #!/bin/bash
+    # Restore script for ElfHosted
+    echo "Starting restore process..."
+    # Add restore logic here
+  wait-for-it.sh: |-
+    #!/bin/bash
+    # Wait for it script
+    set -e
+    host="$1"
+    port="$2"
+    timeout="${3:-15}"
+
+    echo "Waiting for $host:$port..."
+    for i in $(seq $timeout); do
+      if nc -z "$host" "$port" > /dev/null 2>&1; then
+        echo "$host:$port is available"
+        exit 0
+      fi
+      sleep 1
+    done
+    echo "Timeout waiting for $host:$port"
+    exit 1
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"backup-script.sh":"#!/bin/bash\n# Backup script for ElfHosted\necho \"Starting backup process...\"\n# Add backup logic here","restore-script.sh":"#!/bin/bash\n# Restore script for ElfHosted\necho \"Starting restore process...\"\n# Add restore logic here","wait-for-it.sh":"#!/bin/bash\n# Wait for it script\nset -e\nhost=\"$1\"\nport=\"$2\"\ntimeout=\"${3:-15}\"\n\necho \"Waiting for $host:$port...\"\nfor i in $(seq $timeout); do\n  if nc -z \"$host\" \"$port\" \u003e /dev/null 2\u003e\u00261; then\n    echo \"$host:$port is available\"\n    exit 0\n  fi\n  sleep 1\ndone\necho \"Timeout waiting for $host:$port\"\nexit 1"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"tooling-scripts","namespace":"default"}}
+  name: tooling-scripts
+  namespace: default

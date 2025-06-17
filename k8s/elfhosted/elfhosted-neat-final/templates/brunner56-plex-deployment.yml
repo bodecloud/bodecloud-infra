@@ -1,0 +1,431 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-brunner56-plex
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-plex,elfbot-imagemaid,plex-config,imagemaid-env,plex-tinyproxy-conf
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: {{ .Values.brunner56Plex.replicas }}
+  revisionHistoryLimit: {{ .Values.brunner56Plex.revisionHistoryLimit }}
+  strategy:
+    type: {{ .Values.brunner56Plex.strategy.type | quote }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: plex
+    {{- include "elfhosted-neat-final.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app.elfhosted.com/class: debrid
+        app.elfhosted.com/name: plex
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: plex
+      {{- include "elfhosted-neat-final.selectorLabels" . | nindent 8 }}
+      annotations:
+        kubernetes.io/egress-bandwidth: 150M
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        envFrom:
+        - configMapRef:
+            name: {{ include "elfhosted-neat-final.fullname" . }}-plex-config
+        - configMapRef:
+            name: elfbot-plex
+            optional: true
+        image: {{ .Values.brunner56Plex.brunner56Plex.image.repository }}:{{ .Values.brunner56Plex.brunner56Plex.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.brunner56Plex.imagePullPolicy }}
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /web/index.html
+            port: 32400
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: brunner56-plex
+        ports:
+        - containerPort: 32400
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /web/index.html
+            port: 32400
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources: {{- toYaml .Values.brunner56Plex.brunner56Plex.resources | nindent 10
+          }}
+        securityContext: {{- toYaml .Values.brunner56Plex.brunner56Plex.containerSecurityContext
+          | nindent 10 }}
+        startupProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /web/index.html
+            port: 32400
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /backup
+          name: backup
+        - mountPath: /config/
+          name: config
+          subPath: plex
+        - mountPath: /elfbot
+          name: elfbot
+        - mountPath: /phototranscoder
+          name: phototranscoder
+        - mountPath: /storage/rclone
+          name: rclone
+        - mountPath: /storage/realdebrid-zurg
+          name: rclonemountrealdebridzurg
+        - mountPath: /dev/dri/renderD128
+          name: render-device
+        - mountPath: /shared
+          name: shared
+        - mountPath: /storage/symlinks
+          name: symlinks
+        - mountPath: /tinyproxy-conf
+          name: tinyproxy-conf
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /transcode
+          name: transcode
+          subPath: plex
+      - env:
+        - name: DNS_KEEP_NAMESERVER
+          value: {{ quote .Values.brunner56Plex.gluetun.env.dnsKeepNameserver }}
+        - name: DOT
+          value: {{ quote .Values.brunner56Plex.gluetun.env.dot }}
+        - name: FIREWALL_INPUT_PORTS
+          value: {{ quote .Values.brunner56Plex.gluetun.env.firewallInputPorts }}
+        - name: FIREWALL_OUTBOUND_SUBNETS
+          value: {{ quote .Values.brunner56Plex.gluetun.env.firewallOutboundSubnets }}
+        - name: HTTP_CONTROL_SERVER_ADDRESS
+          value: {{ quote .Values.brunner56Plex.gluetun.env.httpControlServerAddress }}
+        - name: HTTP_CONTROL_SERVER_PORT
+          value: {{ quote .Values.brunner56Plex.gluetun.env.httpControlServerPort }}
+        - name: VPN_ENDPOINT_PORT
+          value: {{ quote .Values.brunner56Plex.gluetun.env.vpnEndpointPort }}
+        - name: VPN_SERVICE_PROVIDER
+          value: {{ quote .Values.brunner56Plex.gluetun.env.vpnServiceProvider }}
+        - name: VPN_TYPE
+          value: {{ quote .Values.brunner56Plex.gluetun.env.vpnType }}
+        - name: WIREGUARD_MTU
+          value: {{ quote .Values.brunner56Plex.gluetun.env.wireguardMtu }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.gluetun.image.repository }}:{{ .Values.brunner56Plex.gluetun.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.gluetun.imagePullPolicy }}
+        name: gluetun
+        resources: {}
+        securityContext: {{- toYaml .Values.brunner56Plex.gluetun.containerSecurityContext
+          | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /shared
+          name: shared
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.podinfo.image.repository }}:{{ .Values.brunner56Plex.podinfo.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.podinfo.imagePullPolicy }}
+        name: podinfo
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - env:
+        - name: CHANGE_CONTAINER_PORTS
+          value: {{ quote .Values.brunner56Plex.speedtest.env.changeContainerPorts }}
+        - name: HTTPS_PORT
+          value: {{ quote .Values.brunner56Plex.speedtest.env.httpsPort }}
+        - name: HTTP_PORT
+          value: {{ quote .Values.brunner56Plex.speedtest.env.httpPort }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.speedtest.image.repository }}:{{ .Values.brunner56Plex.speedtest.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.speedtest.imagePullPolicy }}
+        name: speedtest
+        resources: {}
+        securityContext: {{- toYaml .Values.brunner56Plex.speedtest.containerSecurityContext
+          | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.tinyproxy.image.repository }}:{{ .Values.brunner56Plex.tinyproxy.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.tinyproxy.imagePullPolicy }}
+        name: tinyproxy
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/tinyproxy/tinyproxy.conf
+          name: tinyproxy-conf
+          subPath: tinyproxy.conf
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - "set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name
+          if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\nfi\n\n#
+          look for commands - we match specific names in order of least-destructive\nTIMESTAMP_NOW=$(date
+          +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)\n
+          \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+          -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\n# If no command is set, then
+          move onto the next possibility\nif [[ -f /etc/elfbot/backup && -z \"$COMMAND\"
+          ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n
+          \ if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\n# If
+          no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/reset
+          && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n
+          \ if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\ncase
+          $COMMAND in\n\n  \"pause\")\n    echo \"Recent pause command found, sleeping 5m..\"\n
+          \   sleep 300\n    ;;\n\n  \"reset\")\n\n    # Safety check - if /config/homer
+          exists, we've not mounted /config properly and are about to wipe out EVERYTHING\n
+          \   if [ -e \"/config/homer\" ]; then\n        echo \"The path /config/homer exists.
+          Exiting.\"\n        exit 1\n    fi      \n    echo \"Recent reset command found,
+          resetting\"\n    rm -rf /config/*\n    ;;\n\n  \"backup\")\n    echo \"Recent
+          backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\n
+          \   TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n
+          \   ;;\n\nesac\n\nif [[ ! -f /config/i-am-bootstrapped ]]\nthen\n  echo \"Bootstrapping
+          from goldilocks config...\"\n  s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/*
+          /config/\n  touch /config/i-am-bootstrapped\nfi\n"
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: access-key-id
+              name: b2-elfhosted-config-ro
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: b2-elfhosted-config-ro
+        - name: S3_ENDPOINT_URL
+          value: {{ quote .Values.brunner56Plex.bootstrap.env.s3EndpointUrl }}
+        - name: K8S_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/name']
+        - name: ELF_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.elfhosted.com/name']
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.bootstrap.image.repository }}:{{ .Values.brunner56Plex.bootstrap.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.bootstrap.imagePullPolicy }}
+        name: bootstrap
+        resources: {{- toYaml .Values.brunner56Plex.bootstrap.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.brunner56Plex.bootstrap.containerSecurityContext
+          | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/elfbot
+          name: elfbot
+        - mountPath: /storage/backup
+          name: backup
+        - mountPath: /config
+          name: config
+          subPath: plex
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - /bin/bash
+        - -c
+        - "echo \"This pod only exists to cause a restart when debridav is updated\"        \n"
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.restartWithDebridav.image.repository }}:{{ .Values.brunner56Plex.restartWithDebridav.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.restartWithDebridav.imagePullPolicy }}
+        name: restart-with-debridav
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          echo "This pod only exists to cause a restart when decypharr is updated"
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.restartWithDecypharr.image.repository }}:{{ .Values.brunner56Plex.restartWithDecypharr.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.restartWithDecypharr.imagePullPolicy
+          }}
+        name: restart-with-decypharr
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          echo "This pod only exists to cause a restart when zurg is updated"
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.restartWithZurg.image.repository }}:{{ .Values.brunner56Plex.restartWithZurg.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.restartWithZurg.imagePullPolicy }}
+        name: restart-with-zurg
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+      
+          # Clean up wasteful temporary media storage (Plex will just re-download these)
+          if [ -d "/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder" ]; then
+            rm -rf "/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder"
+            ln -s /phototranscoder '/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder'
+          fi
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.setup.image.repository }}:{{ .Values.brunner56Plex.setup.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.setup.imagePullPolicy }}
+        name: setup
+        resources: {}
+        securityContext: {{- toYaml .Values.brunner56Plex.setup.containerSecurityContext
+          | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: plex
+        - mountPath: /phototranscoder
+          name: phototranscoder
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+      
+          cd /shared
+      
+          # Create cloudflare account
+          wgcf register --accept-tos
+      
+          # Create gluetun config
+          wgcf generate -p /shared/wg0.conf
+      
+          # grab the values from the profile and put them into env vars for gluetun to consume
+          echo "export WIREGUARD_PRIVATE_KEY=$(grep PrivateKey /shared/wg0.conf | cut -f3 -d' ')" > /shared/env
+          echo "export WIREGUARD_PUBLIC_KEY=$(grep PublicKey /shared/wg0.conf | cut -f3 -d' ')" >> /shared/env
+          echo "export WIREGUARD_ADDRESSES=$(grep Address /shared/wg0.conf | grep '/32' | cut -f3 -d' ')" >> /shared/env
+      
+          echo "export VPN_ENDPOINT_IP=$(dig +short dig +short engage.cloudflareclient.com)" >> /shared/env
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.brunner56Plex.setupWarp.image.repository }}:{{ .Values.brunner56Plex.setupWarp.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Plex.setupWarp.imagePullPolicy }}
+        name: setup-warp
+        resources: {}
+        securityContext: {{- toYaml .Values.brunner56Plex.setupWarp.containerSecurityContext
+          | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /shared
+          name: shared
+      priorityClassName: tenant-streaming
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {{- toYaml .Values.brunner56Plex.podSecurityContext | nindent 8
+        }}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-neat-final.fullname" . }}-backup
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-neat-final.fullname" . }}-config
+      - configMap:
+          defaultMode: 420
+          name: elfbot-plex
+          optional: true
+        name: elfbot
+      - emptyDir:
+          sizeLimit: 50Gi
+        name: phototranscoder
+      - name: rclone
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-neat-final.fullname" . }}-rclone
+      - name: rclonemountrealdebridzurg
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-neat-final.fullname" . }}-realdebrid-zurg
+      - hostPath:
+          path: /dev/dri/renderD128
+          type: ""
+        name: render-device
+      - name: shared
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-neat-final.fullname" . }}-symlinks
+      - configMap:
+          defaultMode: 420
+          name: {{ include "elfhosted-neat-final.fullname" . }}-plex-tinyproxy-conf
+        name: tinyproxy-conf
+      - name: tmp
+      - name: transcode
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-neat-final.fullname" . }}-transcode-1g

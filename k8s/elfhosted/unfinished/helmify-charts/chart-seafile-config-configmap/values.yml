@@ -1,0 +1,6 @@
+kubernetesClusterDomain: cluster.local
+seafileConfig:
+  ccnetConf: |-
+    [General]
+    SERVICE_URL=https://brunner56-seafile.elfhosted.com
+  seafileAdminEmail: boden.crouch@gmail.com

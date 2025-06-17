@@ -1,0 +1,20 @@
++--------------------------------------+
+||      Official SickGear Docker      ||
+||        Tracks branch:main        ||
++--------------------------------------+
+Find third-party application helpers and
+config files at; /data/autoProcessTV/
+
+SABnzbd sample config file;
+$ cp ./autoProcessTV.cfg.sample ./autoProcessTV.cfg
+Deluge or Transmission sample config file;
+$ cp ./onTxComplete.sample.cfg ./onTxComplete.cfg
+
+On download completed helpers;
++- NZBGet, ./SickGear-NG/SickGear-NG.py
++- SABnzbd, ./sabToSickGear.py
++- Torrent (*nix), ./onTxComplete.sh
++- Torrent (Win), ./onTxComplete.bat
++----------------------------------------+
+file "/data/_DOCKER.txt"     
++----------------------------------------+

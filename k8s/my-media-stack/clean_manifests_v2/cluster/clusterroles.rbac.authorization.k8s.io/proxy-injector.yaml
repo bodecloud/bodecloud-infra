@@ -1,0 +1,45 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"name":"proxy-injector"},"rules":[{"apiGroups":[""],"resources":["pods"],"verbs":["get","list","watch"]},{"apiGroups":["apps"],"resources":["deployments","replicasets"],"verbs":["get","list","watch"]},{"apiGroups":["admissionregistration.k8s.io"],"resources":["mutatingadmissionconfigurations"],"verbs":["get","list","watch","create","update","patch","delete"]},{"apiGroups":["cert-manager.io"],"resources":["certificates"],"verbs":["get","list","watch"]}]}
+  name: proxy-injector
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - replicasets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingadmissionconfigurations
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  verbs:
+  - get
+  - list
+  - watch

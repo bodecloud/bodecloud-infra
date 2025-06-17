@@ -1,0 +1,16 @@
+#! mediafusion-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: mediafusion
+  namespace: my-media-stack
+spec:
+  selector: {}
+  ports:
+    - name: mediafusio-8000
+      port: 8000
+      targetPort: mediafusio-8000
+    - name: mediafusio-9191
+      port: 9191
+      targetPort: mediafusio-9191

@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: CSINode
+metadata:
+  annotations:
+    storage.alpha.kubernetes.io/migrated-plugins: kubernetes.io/aws-ebs,kubernetes.io/azure-disk,kubernetes.io/azure-file,kubernetes.io/cinder,kubernetes.io/gce-pd,kubernetes.io/portworx-volume,kubernetes.io/vsphere-volume
+  name: baden.vpshostingservice.co
+  ownerReferences:
+  - apiVersion: v1
+    kind: Node
+    name: baden.vpshostingservice.co
+spec:
+  drivers: null

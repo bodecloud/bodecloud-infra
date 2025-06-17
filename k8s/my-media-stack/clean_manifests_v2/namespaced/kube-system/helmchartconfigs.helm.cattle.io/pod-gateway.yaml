@@ -1,0 +1,18 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"helm.cattle.io/v1","kind":"HelmChartConfig","metadata":{"annotations":{},"name":"pod-gateway","namespace":"kube-system"},"spec":{"valuesContent":"image:\n  repository: angelnu/pod-gateway\n  tag: v1.10.0\n\nsettings:\n  VPN_INTERFACE: tun0\n  VPN_BLOCK_OTHER_TRAFFIC: true\n  VPN_TRAFFIC_PORT: \"1194\"\n  VPN_LOCAL_CIDRS: \"10.0.0.0/8 192.168.0.0/16 172.16.0.0/12\"\n  NOT_ROUTED_TO_GATEWAY_CIDRS: \"10.0.0.0/8 172.16.0.0/12 192.168.0.0/16\"\n  \n  VXLAN_ID: 42\n  VXLAN_IP_NETWORK: \"172.16.1\"\n  VXLAN_GATEWAY_FIRST_DYNAMIC_IP: 20\n\nrouted_namespaces:\n  - my-media-stack\n\nwebhook:\n  image:\n    repository: angelnu/gateway-admision-controller\n    tag: v3.10.0\n\npublicPorts:\n  - hostname: gluetun-premiumize-us\n    IP: 10\n    ports:\n      - type: tcp\n        port: 8080\n      - type: udp  \n        port: 6881\n\nDNS: 172.16.1.1"}}
+  name: pod-gateway
+  namespace: kube-system
+spec:
+  valuesContent: "image:\n  repository: angelnu/pod-gateway\n  tag: v1.10.0\n\nsettings:\n
+    \ VPN_INTERFACE: tun0\n  VPN_BLOCK_OTHER_TRAFFIC: true\n  VPN_TRAFFIC_PORT: \"1194\"\n
+    \ VPN_LOCAL_CIDRS: \"10.0.0.0/8 192.168.0.0/16 172.16.0.0/12\"\n  NOT_ROUTED_TO_GATEWAY_CIDRS:
+    \"10.0.0.0/8 172.16.0.0/12 192.168.0.0/16\"\n  \n  VXLAN_ID: 42\n  VXLAN_IP_NETWORK:
+    \"172.16.1\"\n  VXLAN_GATEWAY_FIRST_DYNAMIC_IP: 20\n\nrouted_namespaces:\n  -
+    my-media-stack\n\nwebhook:\n  image:\n    repository: angelnu/gateway-admision-controller\n
+    \   tag: v3.10.0\n\npublicPorts:\n  - hostname: gluetun-premiumize-us\n    IP:
+    10\n    ports:\n      - type: tcp\n        port: 8080\n      - type: udp  \n        port:
+    6881\n\nDNS: 172.16.1.1"

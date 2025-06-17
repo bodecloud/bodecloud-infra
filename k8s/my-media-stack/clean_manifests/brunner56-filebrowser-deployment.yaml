@@ -1,0 +1,329 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,filebrowser-elfbot-script,elfbot-filebrowser
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: filebrowser
+    app.kubernetes.io/version: 2.18.0
+    helm.sh/chart: filebrowser-1.4.2
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: brunner56-filebrowser
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: filebrowser
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/egress-bandwidth: 5M
+      creationTimestamp: "2025-05-29T17:12:59Z"
+      labels:
+        app.elfhosted.com/name: filebrowser
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: filebrowser
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: true
+      containers:
+      - env:
+        - name: TZ
+          value: UTC
+        envFrom:
+        - configMapRef:
+            name: filebrowser-env
+        image: ghcr.io/elfhosted/filebrowser:2.23.0@sha256:296e3a3d08c5ca07a26350358fa2e58a597a41adb253a65bba27b557f36383e5
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        name: brunner56-filebrowser
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: "0"
+            memory: 6Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /storage/backup
+          name: backup
+        - mountPath: /storage/config
+          name: config
+        - mountPath: /dummy-storage
+          name: dummy-storage
+        - mountPath: /elfbot
+          name: elfbot
+        - mountPath: /usr/local/bin/elfbot
+          name: elfbot-script
+          subPath: elfbot
+        - mountPath: /usr/local/bin/Elfbot
+          name: elfbot-script-ucfirst
+          subPath: elfbot
+        - mountPath: /home/elfie/.local/state
+          name: elfterm-state
+        - mountPath: /storage/logs
+          name: logs
+        - mountPath: /storage/rclone
+          name: rclone
+        - mountPath: /storage/realdebrid-zurg
+          name: rclonemountrealdebridzurg
+        - mountPath: /recyclarr-config
+          name: recyclarr-config
+        - mountPath: /storage/symlinks
+          name: symlinks
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - /usr/bin/dumb-init
+        - /bin/bash
+        - -c
+        - |
+          # respond to creation or modification, but not deletion
+          inotifywait -m -e create -e modify --format "%f" /elfbot \
+            | while read APP
+              do
+                # if we are force-killing the pod, then don't bother with the configmap
+                if (cat /elfbot/$APP | grep -q forcerestart); then
+                  echo "forcerestart requested, deleting $APP pod with --force.."
+                  kubectl delete pod -l app.kubernetes.io/name=$APP --force
+                  kubectl delete pod -l app.elfhosted.com/name=$APP --force
+                else
+
+                  # put the contents of the file into the configmap which will trigger the restart
+                  echo command received for ${APP} : [$(cat /elfbot/$APP)]
+                  # create the configmap if it doesn't exist, since reloader only looks at _changes_ to configmaps
+                  if ! $(kubectl get configmap -n bolabaden elfbot-${APP} 2>&1 >/dev/null); then
+                      kubectl create configmap -n bolabaden elfbot-${APP} --from-literal=elfbot_last_action=$(date +%s)
+                      sleep 10s
+                  fi
+
+                  # If we were passed a key=value string in /etc/elfbot, then split it
+                  COMMAND=$(cat /elfbot/$APP)
+
+                  # We separate key and value with an '=', but sometimes the value may contain __another__ '=' (like Plex preferences)
+                  sep='='
+                  case $COMMAND in
+                    # If we are separated by an =
+                    (*"$sep"*)
+                      KEY=${COMMAND%%"$sep"*}
+                      VALUE=${COMMAND#*"$sep"}
+                      ;;
+                    # if not, we are a simple command like "backup"
+                    (*)
+                      KEY=$COMMAND
+                      VALUE=$(date +%s)
+                      ;;
+                  esac
+
+
+                  # patch the configmap with the latest key/value
+                  kubectl patch configmap -n bolabaden elfbot-${APP} -p "{\"data\":{\"${KEY}\":\"${VALUE}\"}}"
+                fi
+              done
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: elfbot
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /elfbot
+          name: elfbot
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      hostname: elfhosted
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+          # If we don't already have an example config, create one
+          if [ ! -f /config/recyclarr.yaml ];
+          then
+            cp /bootstrap/recyclarr.yaml /config/
+          fi
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: copy-recyclarr-example-config
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config/
+          name: config
+          subPath: recyclarr
+        - mountPath: /bootstrap/
+          name: recyclarr-config
+      - command:
+        - /bin/bash
+        - -c
+        - "set -x\nset -e\n\n# Delete tmp db if necessary\nif [ -f /tmp/filebrowser.db
+          ]\nthen\n  rm /tmp/filebrowser.db\nfi\n\n\n/filebrowser config init \\\n
+          \ --disable-preview-resize \\\n  --disable-thumbnails \\\n  --disable-type-detection-by-header
+          \\\n  --branding.name=\"brunner56, by ElfHosted \U0001F9DD \" \\\n  --branding.files=/branding
+          \\\n  --branding.disableExternal \\\n  --auth.method=noauth \\\n  --lockPassword
+          \\\n  --database /tmp/filebrowser.db \\\n  --root /storage \\\n  --cache-dir
+          /tmp\n\n# allow zip, unzip, rar, unrar, ls, pwd, cd, mv\n/filebrowser config
+          set --database /tmp/filebrowser.db --commands zip,unzip,rar,unrar,ls,pwd,cd,mv,cp,ln,find,echo,grep,cat,touch,tar,gzip,rm,tree,du,mlocate,updatedb,locate,elfbot,Elfbot\n#
+          /filebrowser config set --database /tmp/filebrowser.db --shell 'vstat -c'\n\n#
+          now tell filebrowser about the user (who gets authenticated via the proxy)\n/filebrowser
+          users add 1 bogus --database /tmp/filebrowser.db\n"
+        image: ghcr.io/elfhosted/filebrowser:2.23.0@sha256:296e3a3d08c5ca07a26350358fa2e58a597a41adb253a65bba27b557f36383e5
+        imagePullPolicy: IfNotPresent
+        name: setup
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /storage
+          name: dummy-storage
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: filebrowser
+      serviceAccountName: filebrowser
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: backup
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: dummy-storage
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: elfbot
+      - configMap:
+          defaultMode: 493
+          name: filebrowser-elfbot-script
+        name: elfbot-script
+      - configMap:
+          defaultMode: 493
+          name: filebrowser-elfbot-script
+        name: elfbot-script-ucfirst
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: elfterm-state
+      - name: logs
+        persistentVolumeClaim:
+          claimName: logs
+      - name: rclone
+        persistentVolumeClaim:
+          claimName: rclone
+      - name: rclonemountrealdebridzurg
+        persistentVolumeClaim:
+          claimName: realdebrid-zurg
+      - configMap:
+          defaultMode: 420
+          name: recyclarr-config
+        name: recyclarr-config
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: symlinks
+      - name: tmp

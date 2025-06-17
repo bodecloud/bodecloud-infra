@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: deunhealth
+  usage:
+    cpu: "0"
+    memory: 3060Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: deunhealth
+    pod-template-hash: 767d9846f6
+  name: deunhealth-767d9846f6-zvwh5
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:53Z"
+window: 13.543s

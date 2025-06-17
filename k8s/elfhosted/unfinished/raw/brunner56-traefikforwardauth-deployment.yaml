@@ -1,0 +1,112 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: brunner56-traefikforwardauth
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefikforwardauth
+    app.kubernetes.io/version: 2.2.0
+    helm.sh/chart: traefikforwardauth-2.2.10
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    configmap.reloader.stakater.com/reload: traefik-forward-auth-config
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: traefikforwardauth
+  template:
+    metadata:
+      creationTimestamp: '2025-05-29T17:12:59Z'
+      labels:
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: traefikforwardauth
+    spec:
+      containers:
+      - name: brunner56-traefikforwardauth
+        image: ghcr.io/elfhosted/traefik-forward-auth:3.1.0@sha256:19cd990fae90c544100676bc049f944becc8c454639e57d20f6f48e27de90776
+        ports:
+        - name: http
+          containerPort: 4181
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: traefik-forward-auth-config
+        env:
+        - name: SECRET
+          valueFrom:
+            secretKeyRef:
+              name: brunner56-traefikforwardauth
+              key: secret
+        - name: TZ
+          value: UTC
+        resources:
+          limits:
+            cpu: '1'
+            memory: 32Mi
+          requests:
+            cpu: '0'
+            memory: 6Mi
+        livenessProbe:
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        startupProbe:
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 30
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      priorityClassName: tenant-normal
+      enableServiceLinks: false
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600

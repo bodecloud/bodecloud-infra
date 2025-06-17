@@ -1,0 +1,96 @@
+---
+# Resource Quota for my-media-stack namespace
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: my-media-stack-quota
+  namespace: my-media-stack
+spec:
+  hard:
+    # Memory limits
+    requests.memory: "16Gi"
+    limits.memory: "20Gi"
+    
+    # CPU limits  
+    requests.cpu: "8000m"
+    limits.cpu: "12000m"
+    
+    # Pod limits
+    pods: "50"
+    
+    # Storage limits
+    persistentvolumeclaims: "20"
+    requests.storage: "100Gi"
+
+---
+# Resource Quota for vpn-gateway namespace
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: vpn-gateway-quota
+  namespace: vpn-gateway
+spec:
+  hard:
+    # Memory limits
+    requests.memory: "1.5Gi"
+    limits.memory: "3Gi"
+    
+    # CPU limits
+    requests.cpu: "800m"
+    limits.cpu: "1600m"
+    
+    # Pod limits
+    pods: "10"
+
+---
+# Limit Range for my-media-stack namespace
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: my-media-stack-limits
+  namespace: my-media-stack
+spec:
+  limits:
+  - default:
+      memory: "512Mi"
+      cpu: "500m"
+    defaultRequest:
+      memory: "128Mi"
+      cpu: "100m"
+    max:
+      memory: "4Gi"
+      cpu: "2000m"
+    min:
+      memory: "32Mi"
+      cpu: "10m"
+    type: Container
+  - default:
+      storage: "10Gi"
+    max:
+      storage: "100Gi"
+    min:
+      storage: "1Gi"
+    type: PersistentVolumeClaim
+
+---
+# Limit Range for vpn-gateway namespace
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: vpn-gateway-limits
+  namespace: vpn-gateway
+spec:
+  limits:
+  - default:
+      memory: "512Mi"
+      cpu: "200m"
+    defaultRequest:
+      memory: "128Mi"
+      cpu: "50m"
+    max:
+      memory: "1Gi"
+      cpu: "500m"
+    min:
+      memory: "64Mi"
+      cpu: "10m"
+    type: Container 

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: warp-fetch-proxy
+    pod-template-hash: 8564764c96
+  name: warp-fetch-proxy-8564764c96
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: warp-fetch-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warp-fetch-proxy
+      pod-template-hash: 8564764c96
+  template:
+    metadata:
+      labels:
+        app: warp-fetch-proxy
+        pod-template-hash: 8564764c96
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: America/Chicago
+        image: nginx:alpine
+        imagePullPolicy: IfNotPresent
+        name: warp-fetch-proxy
+        ports:
+        - containerPort: 3128
+          name: proxy-3128
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

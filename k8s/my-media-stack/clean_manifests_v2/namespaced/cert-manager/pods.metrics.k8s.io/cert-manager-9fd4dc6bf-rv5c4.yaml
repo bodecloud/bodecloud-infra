@@ -1,0 +1,21 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: cert-manager-controller
+  usage:
+    cpu: 3167946n
+    memory: 51916Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: cert-manager
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/version: v1.14.0
+    helm.sh/chart: cert-manager-v1.14.0
+    pod-template-hash: 9fd4dc6bf
+  name: cert-manager-9fd4dc6bf-rv5c4
+  namespace: cert-manager
+timestamp: "2025-06-14T22:57:22Z"
+window: 14.326s

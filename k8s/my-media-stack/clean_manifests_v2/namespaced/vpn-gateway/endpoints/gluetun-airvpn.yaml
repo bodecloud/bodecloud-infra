@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T17:40:43Z"
+  labels:
+    app: gluetun-airvpn
+    component: vpn-gateway
+  name: gluetun-airvpn
+  namespace: vpn-gateway

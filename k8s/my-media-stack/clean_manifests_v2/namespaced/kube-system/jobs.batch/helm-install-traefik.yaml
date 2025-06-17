@@ -1,0 +1,155 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"Job","metadata":{"annotations":{"objectset.rio.cattle.io/applied":"H4sIAAAAAAAA/6xWXY/iOhL9KytL87RJCN9NpHlIQ1jYoSECprWrUQs5pgK+OHZkO8ygFv/9yk6mCU1PT49034hT56Sqzqkyzwjn9BGkooKjACVYk33j2EQOOlC+RQH6r0iQgzLQeIs1RsEzwpwLjTUVXJlHkfwFRCvQnqTCI1hrBh4VDWrQe2CZSwTXUjAG0iV7LLUrYUeVlpYDOb9kEN85SHd3PFREtVfHpvOvL5RvP0+AZUND+lsejjNAAdISQ0oPHwpXOSYGcygScNVJacjQ2UFEgk19TTNQGmc5CnjBmIMYToDZpph0ba3Ke5W5Pf1QHnus9ihAxE8HfcB93OpCewuk3xx0+6SP261OE7fv0jZ0Uwzd1GRW1Wi7TrnSmDH38qFfleQgW/ISUpDACSgUfHvli5v2IwclTJDDwiBHwMBqGaSYKXDQRfGXo8pOdb1uFCmsZ0hCeiTp+O4ASMftbHvYTZo97Lb7fZIQf7tNoI/OT2cHqRyI6XaCyUGk6YxmVKOg6fu+gzRkOcMazPt33PuOUIKndDcpRVhNwla39/nuvtfq+dHdeHw3vmuH4/5gHEb9+/4oHIWtcTf07wfDdnvQvO93B6POoNkNh6N+eHc/+sdtc66Vb7qNKQdZCSd35geqDIAc5LoKtKu0pHyHHLRjIsHMK9UfQYoLppflSJ4+oycHAT9apkqgefgQIQcdMSvqep2dl4jHaLmaLub1o2UUL+rPk2j2sBktp4/RssalgEjQ9bjhJFyuN+aTqzgc1r97PYXXgFrYXutcBY3Gp+cvX++j5TxaR6tNGE/PnxrKCE/KXqpGVYfb7ngtr/nvIrc//Juk3yhuHS7/E/1RluHX9WQTh6vVZriMRtF8PQ1nqxrMTkkdMJ2vouHXZbRZfZnGm/VsZfKYjv//HiaehdP5ZrJex+9FzRebeLn4X53JU0fieIQVSoP0mCCYOU3f67Q83/MbzZ59aFcPda5xOJ2ZJOPFbDqsM0r4ab/zk4Nohnf2FHOyB9k4MJrnIF1j8uDoewOv6yYFZduW3+r6bb+HKkxcMBYLRsnJtCSdCx1LUMBr68NwIAdJUKKQdnk9m9kAUkiqT0PBNfzQdvIZE99jSY+UwQ4iRTDD11sL5zihjGpqWdBWitwMUjibIbNuJODtgrPTUgg9pgwqlQMtCzg76ChYkcGDKLguBzEzP2OszQJp7EUGV3U3vCrzqo76O9vi38EJJnu4xZfHHyKwG+4NhvL8hkJneW1rZ/ltxGtG6wb1Rtz1DWAWmNH0/GTMwsUWVsCAaCGNDGaiJAcNyt7OCgWIUV78QFYSpbHULxZZ8DGmrJCmL29YQBY8VHPBjYKlbjaMiCyPpUgps9eFPuV2gxVc0wyqBVluXJBHSiAkxFQzr922l0ustEHpAMhyfRpRWV5CW1pkKEAPkAl5ql3XN8r/Gewi+B/iLjJ/DPhT8mtxHZRLYf7BwNbAX6bw2/PP7R48I6ohK88OcKr/DXi0JMPKAA7KS4eU3K7v+r7vvgS7V9HeCWfMJvSKc2gLe5+5ec1cQt7kf7rY1OZQEVwu4qezyaHs5gPOTblXgMrdF8Rbvrfu0lgXdn+d/w4AAP//0b/VuJcLAAA","objectset.rio.cattle.io/id":"helm-controller-chart-registration","objectset.rio.cattle.io/owner-gvk":"helm.cattle.io/v1, Kind=HelmChart","objectset.rio.cattle.io/owner-name":"traefik","objectset.rio.cattle.io/owner-namespace":"kube-system"},"generation":1,"labels":{"helmcharts.helm.cattle.io/chart":"traefik","objectset.rio.cattle.io/hash":"c0f97ea7a25e3dec71957c7a3241a38f3e5fae5f"},"name":"helm-install-traefik","namespace":"kube-system","ownerReferences":[{"apiVersion":"helm.cattle.io/v1","blockOwnerDeletion":false,"controller":false,"kind":"HelmChart","name":"traefik","uid":"cbc6cb40-9ec4-4d6a-b16a-377cbc0ddbe7"}]},"spec":{"backoffLimit":1000,"completionMode":"NonIndexed","completions":1,"manualSelector":false,"parallelism":1,"podReplacementPolicy":"TerminatingOrFailed","selector":{"matchLabels":{"batch.kubernetes.io/controller-uid":"2c5ce712-50bc-405c-bd5f-e2728c359c2e"}},"suspend":false,"template":{"metadata":{"annotations":{"helmcharts.helm.cattle.io/configHash":"SHA256=8B6260E8FF8F83AF79FAE7B7DADA2F5A0B9C3391B759D4915ACD7A8BDF5FDED0"},"creationTimestamp":null,"labels":{"batch.kubernetes.io/controller-uid":"2c5ce712-50bc-405c-bd5f-e2728c359c2e","batch.kubernetes.io/job-name":"helm-install-traefik","controller-uid":"2c5ce712-50bc-405c-bd5f-e2728c359c2e","helmcharts.helm.cattle.io/chart":"traefik","job-name":"helm-install-traefik"}},"spec":{"containers":[{"args":["install","--set-string","global.systemDefaultRegistry="],"env":[{"name":"NAME","value":"traefik"},{"name":"VERSION"},{"name":"REPO"},{"name":"HELM_DRIVER","value":"secret"},{"name":"CHART_NAMESPACE","value":"kube-system"},{"name":"CHART","value":"https://%{KUBERNETES_API}%/static/charts/traefik-34.2.1+up34.2.0.tgz"},{"name":"HELM_VERSION"},{"name":"TARGET_NAMESPACE","value":"kube-system"},{"name":"AUTH_PASS_CREDENTIALS","value":"false"},{"name":"INSECURE_SKIP_TLS_VERIFY","value":"false"},{"name":"PLAIN_HTTP","value":"false"},{"name":"NO_PROXY","value":".svc,.cluster.local,10.42.0.0/16,10.43.0.0/16"},{"name":"FAILURE_POLICY","value":"reinstall"}],"image":"rancher/klipper-helm:v0.9.5-build20250306","imagePullPolicy":"IfNotPresent","name":"helm","resources":{},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/home/klipper-helm/.helm","name":"klipper-helm"},{"mountPath":"/home/klipper-helm/.cache","name":"klipper-cache"},{"mountPath":"/home/klipper-helm/.config","name":"klipper-config"},{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/config","name":"values"},{"mountPath":"/chart","name":"content"}]}],"dnsPolicy":"ClusterFirst","nodeSelector":{"kubernetes.io/os":"linux"},"restartPolicy":"OnFailure","schedulerName":"default-scheduler","securityContext":{"runAsNonRoot":true,"seccompProfile":{"type":"RuntimeDefault"}},"serviceAccount":"helm-traefik","serviceAccountName":"helm-traefik","terminationGracePeriodSeconds":30,"volumes":[{"emptyDir":{"medium":"Memory"},"name":"klipper-helm"},{"emptyDir":{"medium":"Memory"},"name":"klipper-cache"},{"emptyDir":{"medium":"Memory"},"name":"klipper-config"},{"emptyDir":{"medium":"Memory"},"name":"tmp"},{"name":"values","projected":{"defaultMode":420,"sources":[{"secret":{"items":[{"key":"HelmChartValuesContent","path":"values-0-000-HelmChart-ValuesContent.yaml"},{"key":"HelmChartConfigValuesContent","path":"values-1-000-HelmChartConfig-ValuesContent.yaml"}],"name":"chart-values-traefik"}}]}},{"configMap":{"defaultMode":420,"name":"chart-content-traefik"},"name":"content"}]}}}}
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xWXY/iOhL9KytL87RJCN9NpHlIQ1jYoSECprWrUQs5pgK+OHZkO8ygFv/9yk6mCU1PT49034hT56Sqzqkyzwjn9BGkooKjACVYk33j2EQOOlC+RQH6r0iQgzLQeIs1RsEzwpwLjTUVXJlHkfwFRCvQnqTCI1hrBh4VDWrQe2CZSwTXUjAG0iV7LLUrYUeVlpYDOb9kEN85SHd3PFREtVfHpvOvL5RvP0+AZUND+lsejjNAAdISQ0oPHwpXOSYGcygScNVJacjQ2UFEgk19TTNQGmc5CnjBmIMYToDZpph0ba3Ke5W5Pf1QHnus9ihAxE8HfcB93OpCewuk3xx0+6SP261OE7fv0jZ0Uwzd1GRW1Wi7TrnSmDH38qFfleQgW/ISUpDACSgUfHvli5v2IwclTJDDwiBHwMBqGaSYKXDQRfGXo8pOdb1uFCmsZ0hCeiTp+O4ASMftbHvYTZo97Lb7fZIQf7tNoI/OT2cHqRyI6XaCyUGk6YxmVKOg6fu+gzRkOcMazPt33PuOUIKndDcpRVhNwla39/nuvtfq+dHdeHw3vmuH4/5gHEb9+/4oHIWtcTf07wfDdnvQvO93B6POoNkNh6N+eHc/+sdtc66Vb7qNKQdZCSd35geqDIAc5LoKtKu0pHyHHLRjIsHMK9UfQYoLppflSJ4+oycHAT9apkqgefgQIQcdMSvqep2dl4jHaLmaLub1o2UUL+rPk2j2sBktp4/RssalgEjQ9bjhJFyuN+aTqzgc1r97PYXXgFrYXutcBY3Gp+cvX++j5TxaR6tNGE/PnxrKCE/KXqpGVYfb7ngtr/nvIrc//Juk3yhuHS7/E/1RluHX9WQTh6vVZriMRtF8PQ1nqxrMTkkdMJ2vouHXZbRZfZnGm/VsZfKYjv//HiaehdP5ZrJex+9FzRebeLn4X53JU0fieIQVSoP0mCCYOU3f67Q83/MbzZ59aFcPda5xOJ2ZJOPFbDqsM0r4ab/zk4Nohnf2FHOyB9k4MJrnIF1j8uDoewOv6yYFZduW3+r6bb+HKkxcMBYLRsnJtCSdCx1LUMBr68NwIAdJUKKQdnk9m9kAUkiqT0PBNfzQdvIZE99jSY+UwQ4iRTDD11sL5zihjGpqWdBWitwMUjibIbNuJODtgrPTUgg9pgwqlQMtCzg76ChYkcGDKLguBzEzP2OszQJp7EUGV3U3vCrzqo76O9vi38EJJnu4xZfHHyKwG+4NhvL8hkJneW1rZ/ltxGtG6wb1Rtz1DWAWmNH0/GTMwsUWVsCAaCGNDGaiJAcNyt7OCgWIUV78QFYSpbHULxZZ8DGmrJCmL29YQBY8VHPBjYKlbjaMiCyPpUgps9eFPuV2gxVc0wyqBVluXJBHSiAkxFQzr922l0ustEHpAMhyfRpRWV5CW1pkKEAPkAl5ql3XN8r/Gewi+B/iLjJ/DPhT8mtxHZRLYf7BwNbAX6bw2/PP7R48I6ohK88OcKr/DXi0JMPKAA7KS4eU3K7v+r7vvgS7V9HeCWfMJvSKc2gLe5+5ec1cQt7kf7rY1OZQEVwu4qezyaHs5gPOTblXgMrdF8Rbvrfu0lgXdn+d/w4AAP//0b/VuJcLAAA
+    objectset.rio.cattle.io/id: helm-controller-chart-registration
+    objectset.rio.cattle.io/owner-gvk: helm.cattle.io/v1, Kind=HelmChart
+    objectset.rio.cattle.io/owner-name: traefik
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    helmcharts.helm.cattle.io/chart: traefik
+    objectset.rio.cattle.io/hash: c0f97ea7a25e3dec71957c7a3241a38f3e5fae5f
+  name: helm-install-traefik
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: helm.cattle.io/v1
+    blockOwnerDeletion: false
+    controller: false
+    kind: HelmChart
+    name: traefik
+spec:
+  backoffLimit: 1000
+  completionMode: NonIndexed
+  completions: 1
+  manualSelector: false
+  parallelism: 1
+  podReplacementPolicy: TerminatingOrFailed
+  selector:
+    matchLabels:
+      batch.kubernetes.io/controller-uid: 2c5ce712-50bc-405c-bd5f-e2728c359c2e
+  suspend: false
+  template:
+    metadata:
+      annotations:
+        helmcharts.helm.cattle.io/configHash: SHA256=8B6260E8FF8F83AF79FAE7B7DADA2F5A0B9C3391B759D4915ACD7A8BDF5FDED0
+      labels:
+        batch.kubernetes.io/controller-uid: 2c5ce712-50bc-405c-bd5f-e2728c359c2e
+        batch.kubernetes.io/job-name: helm-install-traefik
+        controller-uid: 2c5ce712-50bc-405c-bd5f-e2728c359c2e
+        helmcharts.helm.cattle.io/chart: traefik
+        job-name: helm-install-traefik
+    spec:
+      containers:
+      - args:
+        - install
+        - --set-string
+        - global.systemDefaultRegistry=
+        env:
+        - name: NAME
+          value: traefik
+        - name: VERSION
+        - name: REPO
+        - name: HELM_DRIVER
+          value: secret
+        - name: CHART_NAMESPACE
+          value: kube-system
+        - name: CHART
+          value: https://%{KUBERNETES_API}%/static/charts/traefik-34.2.1+up34.2.0.tgz
+        - name: HELM_VERSION
+        - name: TARGET_NAMESPACE
+          value: kube-system
+        - name: AUTH_PASS_CREDENTIALS
+          value: "false"
+        - name: INSECURE_SKIP_TLS_VERIFY
+          value: "false"
+        - name: PLAIN_HTTP
+          value: "false"
+        - name: NO_PROXY
+          value: .svc,.cluster.local,10.42.0.0/16,10.43.0.0/16
+        - name: FAILURE_POLICY
+          value: reinstall
+        image: rancher/klipper-helm:v0.9.5-build20250306
+        imagePullPolicy: IfNotPresent
+        name: helm
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /home/klipper-helm/.helm
+          name: klipper-helm
+        - mountPath: /home/klipper-helm/.cache
+          name: klipper-cache
+        - mountPath: /home/klipper-helm/.config
+          name: klipper-config
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /config
+          name: values
+        - mountPath: /chart
+          name: content
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      restartPolicy: OnFailure
+      schedulerName: default-scheduler
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: helm-traefik
+      serviceAccountName: helm-traefik
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir:
+          medium: Memory
+        name: klipper-helm
+      - emptyDir:
+          medium: Memory
+        name: klipper-cache
+      - emptyDir:
+          medium: Memory
+        name: klipper-config
+      - emptyDir:
+          medium: Memory
+        name: tmp
+      - name: values
+        projected:
+          defaultMode: 420
+          sources:
+          - secret:
+              items:
+              - key: HelmChartValuesContent
+                path: values-0-000-HelmChart-ValuesContent.yaml
+              - key: HelmChartConfigValuesContent
+                path: values-1-000-HelmChartConfig-ValuesContent.yaml
+              name: chart-values-traefik
+      - configMap:
+          defaultMode: 420
+          name: chart-content-traefik
+        name: content
+  completionTime: "2025-06-14T17:41:08Z"
+  conditions:
+  - lastProbeTime: "2025-06-14T17:41:08Z"
+    lastTransitionTime: "2025-06-14T17:41:08Z"
+    message: Reached expected number of succeeded pods
+    reason: CompletionsReached
+    type: SuccessCriteriaMet
+  - lastProbeTime: "2025-06-14T17:41:08Z"
+    lastTransitionTime: "2025-06-14T17:41:08Z"
+    message: Reached expected number of succeeded pods
+    reason: CompletionsReached
+    type: Complete
+  ready: 0
+  startTime: "2025-06-14T17:40:42Z"
+  succeeded: 1
+  terminating: 0
+  uncountedTerminatedPods: {}

@@ -1,0 +1,29 @@
+#! socks5-gluetun-premiumize-nl-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: socks5-gluetun-premiumize-nl
+    namespace: bolabaden
+    labels:
+        com.docker.compose.project: bolabaden
+        com.docker.compose.service: socks5-gluetun-premiumize-nl
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: bolabaden
+            com.docker.compose.service: socks5-gluetun-premiumize-nl
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: bolabaden
+                com.docker.compose.service: socks5-gluetun-premiumize-nl
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: socks5-gluetun-premiumize-nl
+                  image: serjs/go-socks5-proxy
+                  imagePullPolicy: IfNotPresent

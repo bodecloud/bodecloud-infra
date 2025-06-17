@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../namespaced/kube-node-lease/configmaps/kube-root-ca.crt.yaml
+- ../../namespaced/kube-node-lease/leases.coordination.k8s.io/baden.vpshostingservice.co.yaml
+- ../../namespaced/kube-node-lease/leases.coordination.k8s.io/beatapostapita.yaml
+- ../../namespaced/kube-node-lease/leases.coordination.k8s.io/cloudserver.bolabaden.lebla512ssd.org.yaml
+- ../../namespaced/kube-node-lease/serviceaccounts/default.yaml

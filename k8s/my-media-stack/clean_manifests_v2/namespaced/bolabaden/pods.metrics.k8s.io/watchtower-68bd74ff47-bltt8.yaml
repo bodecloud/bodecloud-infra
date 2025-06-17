@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: watchtower
+  usage:
+    cpu: 4750n
+    memory: 3136Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: watchtower
+    pod-template-hash: 68bd74ff47
+  name: watchtower-68bd74ff47-bltt8
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:53Z"
+window: 20.842s

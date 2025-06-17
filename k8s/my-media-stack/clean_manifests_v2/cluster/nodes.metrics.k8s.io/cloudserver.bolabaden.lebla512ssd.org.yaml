@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+kind: NodeMetrics
+metadata:
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/instance-type: k3s
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: cloudserver.bolabaden.lebla512ssd.org
+    kubernetes.io/os: linux
+    node.kubernetes.io/instance-type: k3s
+  name: cloudserver.bolabaden.lebla512ssd.org
+timestamp: "2025-06-14T23:08:38Z"
+usage:
+  cpu: 879719399n
+  memory: 241448Ki
+window: 10.392s

@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: aiostreams
+  usage:
+    cpu: 394605n
+    memory: 131692Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: aiostreams
+    pod-template-hash: 6cf976649b
+  name: aiostreams-6cf976649b-l58ns
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:32Z"
+window: 18.611s

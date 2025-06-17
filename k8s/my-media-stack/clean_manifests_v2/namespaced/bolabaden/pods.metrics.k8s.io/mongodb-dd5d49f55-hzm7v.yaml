@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: mongodb
+  usage:
+    cpu: 71638610n
+    memory: 173860Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: mongodb
+    pod-template-hash: dd5d49f55
+  name: mongodb-dd5d49f55-hzm7v
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:54Z"
+window: 17.56s

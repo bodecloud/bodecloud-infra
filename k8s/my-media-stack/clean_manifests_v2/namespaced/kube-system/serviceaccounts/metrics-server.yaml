@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4TPPU/DMBDG8a+Cbk4CeSlRLDF0ZkRiv/ieUJPEjuxrUFX1u6PAwlDa0X6kn/53Jl7cO2JywZOhtaSMRueFDL0hrs5ib204eqWMZigLK5M5E3sflNUFn7Zn6D9hNUGL6EJhWXVC4cKj2yDK/t3Dl0fMP9aRDI11+rOsZfbw6ry87EWCv0t4nkFmS4zOpjwhroi5YJnCacZP/n0gLWw3ZTz2yNMpKWa6ZDRxj+nmmQdOBzKE8glVs0NZo3nmttrZTkSkGTr0Vd0NZdO2bTPIhl4Npt//qx2X7wAAAP//ruNhwKsBAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: metrics-server-deployment
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: e10e245e13e46a725c9dddd4f9eb239f147774fd
+  name: metrics-server
+  namespace: kube-system

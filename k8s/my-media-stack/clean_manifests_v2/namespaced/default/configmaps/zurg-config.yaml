@@ -1,0 +1,27 @@
+apiVersion: v1
+data:
+  config.yml: |-
+    # Zurg configuration
+    token: your-real-debrid-token
+    host: 0.0.0.0
+    port: 9999
+    concurrent_workers: 20
+    check_for_changes_every_secs: 10
+    retain_folder_name_extension: false
+    retain_rd_torrent_name: false
+    auto_delete_rar_torrents: true
+    serve_from_rclone: false
+    rclone_mount_path: /storage/realdebrid-zurg
+    network_buffer_size: 1048576
+    api:
+      host: 0.0.0.0
+      port: 9999
+      username: ""
+      password: ""
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"config.yml":"# Zurg configuration\ntoken: your-real-debrid-token\nhost: 0.0.0.0\nport: 9999\nconcurrent_workers: 20\ncheck_for_changes_every_secs: 10\nretain_folder_name_extension: false\nretain_rd_torrent_name: false\nauto_delete_rar_torrents: true\nserve_from_rclone: false\nrclone_mount_path: /storage/realdebrid-zurg\nnetwork_buffer_size: 1048576\napi:\n  host: 0.0.0.0\n  port: 9999\n  username: \"\"\n  password: \"\""},"kind":"ConfigMap","metadata":{"annotations":{},"name":"zurg-config","namespace":"default"}}
+  name: zurg-config
+  namespace: default

@@ -1,0 +1,10 @@
+apiVersion: k3s.cattle.io/v1
+kind: Addon
+metadata:
+  annotations:
+    addon.k3s.cattle.io/gvks: rbac.authorization.k8s.io/v1, Kind=RoleBinding
+  name: auth-reader
+  namespace: kube-system
+spec:
+  checksum: 97a74f054fe2972fcc6ffb909224d9cb27f136cc152983c9ac96ff45579015c2
+  source: /var/lib/rancher/k3s/server/manifests/metrics-server/auth-reader.yaml

@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: vpn-gateway
+resources:
+  - namespace.yaml
+  - vpn-secret.yaml
+  - vpn-configs.yaml
+  - release.yaml
+  - vpn-failover.yaml
+  - networkPolicy.yaml
+  - terminal.yaml
+  - pod-gateway-network.yaml

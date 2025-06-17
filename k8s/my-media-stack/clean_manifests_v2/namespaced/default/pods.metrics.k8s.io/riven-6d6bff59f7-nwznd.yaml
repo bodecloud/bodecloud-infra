@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: riven
+  usage:
+    cpu: 56509403n
+    memory: 126708Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: riven
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: riven
+    pod-template-hash: 6d6bff59f7
+  name: riven-6d6bff59f7-nwznd
+  namespace: default
+timestamp: "2025-06-14T23:01:01Z"
+window: 28.606s

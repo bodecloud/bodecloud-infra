@@ -1,0 +1,360 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "riven.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "riven.labels" . | nindent 4 }}
+  {{- with .Values.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if .Values.revisionHistoryLimit }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  {{- end }}
+  {{- if .Values.progressDeadlineSeconds }}
+  progressDeadlineSeconds: {{ .Values.progressDeadlineSeconds }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "riven.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "riven.selectorLabels" . | nindent 8 }}
+        app.elfhosted.com/name: riven
+    spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "riven.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
+      {{- with .Values.securityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      
+      {{/* Init Containers */}}
+      {{- if or .Values.initContainers.bootstrap.enabled .Values.initContainers.setup.enabled .Values.initContainers.setupPostgres.enabled }}
+      initContainers:
+        {{/* Bootstrap Init Container */}}
+        {{- if .Values.initContainers.bootstrap.enabled }}
+        - name: bootstrap
+          image: {{ include "riven.bootstrapImage" . }}:{{ .Values.bootstrap.image.tag }}
+          imagePullPolicy: {{ .Values.bootstrap.image.pullPolicy }}
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+
+              # Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name if the former doesn't exist
+              if [[ -z "$ELF_APP_NAME" ]]; then
+                ELF_APP_NAME=$K8S_APP_NAME
+              fi
+
+              # look for commands - we match specific names in order of least-destructive
+              TIMESTAMP_NOW=$(date +%s)
+              if [[ -f /etc/elfbot/pause ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=pause
+                fi
+              fi
+
+              # If no command is set, then move onto the next possibility
+              if [[ -f /etc/elfbot/backup && -z "$COMMAND" ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=backup
+                fi
+              fi
+
+              # If no command is set, then move onto the next possibility
+              if [[ -f /etc/elfbot/reset && -z "$COMMAND" ]]; then
+                TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)
+                TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))
+                if [[ $TIMESTAMP_DIFF -lt 600 ]]; then
+                  COMMAND=reset
+                fi
+              fi
+
+              case $COMMAND in
+
+                "pause")
+                  echo "Recent pause command found, sleeping 5m.."
+                  sleep 300
+                  ;;
+
+                "reset")
+
+                  # Safety check - if /config/homer exists, we've not mounted /config properly and are about to wipe out EVERYTHING
+                  if [ -e "/config/homer" ]; then
+                      echo "The path /config/homer exists. Exiting."
+                      exit 1
+                  fi      
+                  echo "Recent reset command found, resetting"
+                  rm -rf /config/*
+                  ;;
+
+                "backup")
+                  echo "Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}"
+                  TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\n' -1)
+                  cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP
+                  ;;
+
+              esac
+
+              if [[ ! -f /config/i-am-bootstrapped ]]
+              then
+                echo "Bootstrapping from goldilocks config..."
+                s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/
+                touch /config/i-am-bootstrapped
+              fi
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.initContainers.bootstrap.secretRefs[0].name }}
+                  key: {{ .Values.initContainers.bootstrap.secretRefs[0].keys[0] }}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.initContainers.bootstrap.secretRefs[0].name }}
+                  key: {{ .Values.initContainers.bootstrap.secretRefs[0].keys[1] }}
+            - name: S3_ENDPOINT_URL
+              value: {{ .Values.initContainers.bootstrap.env.S3_ENDPOINT_URL }}
+            - name: K8S_APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.kubernetes.io/name']
+            - name: ELF_APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.elfhosted.com/name']
+          {{- with .Values.resources.bootstrap }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: elfbot
+              mountPath: /etc/elfbot
+            {{- if .Values.persistence.backup.enabled }}
+            - name: backup
+              mountPath: /storage/backup
+            {{- end }}
+            {{- if .Values.persistence.config.enabled }}
+            - name: config
+              mountPath: /config
+              subPath: riven
+            {{- end }}
+            {{- if .Values.volumes.tmp.enabled }}
+            - name: tmp
+              mountPath: /tmp
+            {{- end }}
+          {{- with .Values.containerSecurityContext.bootstrap }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        {{- end }}
+        
+        {{/* Setup Init Container */}}
+        {{- if .Values.initContainers.setup.enabled }}
+        - name: setup
+          image: {{ include "riven.bootstrapImage" . }}:{{ .Values.bootstrap.image.tag }}
+          imagePullPolicy: {{ .Values.bootstrap.image.pullPolicy }}
+          command:
+            - /bin/bash
+            - -c
+            - |
+              # run the setup script from the configmap, so that we can make templated changes
+              bash /setup/setup.sh
+          volumeMounts:
+            {{- if .Values.persistence.symlinks.enabled }}
+            - name: symlinks
+              mountPath: /storage/symlinks
+            {{- end }}
+            {{- if .Values.persistence.config.enabled }}
+            - name: config
+              mountPath: /config
+              subPath: riven
+            {{- end }}
+            {{- if .Values.configMaps.rivenSetup.enabled }}
+            - name: setup
+              mountPath: /setup/
+            {{- end }}
+        {{- end }}
+        
+        {{/* Setup PostgreSQL Init Container */}}
+        {{- if .Values.initContainers.setupPostgres.enabled }}
+        - name: setup-postgres
+          image: {{ include "riven.bootstrapImage" . }}:{{ .Values.bootstrap.image.tag }}
+          imagePullPolicy: {{ .Values.bootstrap.image.pullPolicy }}
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -x
+              set -e
+
+              mkdir -p /config/postgresql/database
+              mkdir -p /config/postgresql/backups
+              chown elfie:elfie /config -R
+          volumeMounts:
+            {{- if .Values.persistence.config.enabled }}
+            - name: config
+              mountPath: /config
+              subPath: riven
+            {{- end }}
+          {{- with .Values.containerSecurityContext.setupPostgres }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        {{- end }}
+      {{- end }}
+      
+      {{/* Main Containers */}}
+      containers:
+        {{/* Riven Application Container */}}
+        - name: {{ include "riven.fullname" . }}
+          image: {{ include "riven.image" . }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          {{- with include "riven.envFrom" . }}
+          envFrom:
+            {{- . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.resources.riven }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- if .Values.persistence.backup.enabled }}
+            - name: backup
+              mountPath: /backup
+            {{- end }}
+            {{- if .Values.persistence.config.enabled }}
+            - name: config
+              mountPath: /riven/data
+              subPath: riven
+            {{- end }}
+            {{- if .Values.volumes.devShm.enabled }}
+            - name: dev-shm
+              mountPath: /dev-shm
+            {{- end }}
+            {{- if .Values.configMaps.elfbotRiven.enabled }}
+            - name: elfbot
+              mountPath: /elfbot
+            {{- end }}
+            {{- if .Values.persistence.logs.enabled }}
+            - name: logs
+              mountPath: /riven/data/logs
+              subPath: riven
+            {{- end }}
+            {{- if .Values.persistence.rclone.enabled }}
+            - name: rclone
+              mountPath: /storage/rclone
+            {{- end }}
+            {{- if .Values.persistence.realdebridZurg.enabled }}
+            - name: rclonemountrealdebridzurg
+              mountPath: /storage/realdebrid-zurg
+            {{- end }}
+            {{- if .Values.configMaps.rivenSetup.enabled }}
+            - name: setup
+              mountPath: /setup
+            {{- end }}
+            {{- if .Values.persistence.symlinks.enabled }}
+            - name: symlinks
+              mountPath: /storage/symlinks
+            {{- end }}
+            {{- if .Values.volumes.tmp.enabled }}
+            - name: tmp
+              mountPath: /tmp
+            {{- end }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.startupProbe }}
+          startupProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.containerSecurityContext.riven }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        
+        {{/* PostgreSQL Database Container */}}
+        {{- if .Values.postgres.enabled }}
+        - name: database
+          image: {{ include "riven.postgresqlImage" . }}:{{ .Values.postgresql.image.tag }}
+          imagePullPolicy: {{ .Values.postgresql.image.pullPolicy }}
+          {{- if .Values.postgres.args }}
+          args:
+            {{- toYaml .Values.postgres.args | nindent 12 }}
+          {{- end }}
+          env:
+            {{- range $key, $value := .Values.postgres.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- with .Values.resources.postgresql }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- if .Values.persistence.config.enabled }}
+            - name: config
+              mountPath: /var/lib/postgresql/data
+              subPath: riven/postgresql/database
+            {{- end }}
+            {{- if .Values.volumes.devShm.enabled }}
+            - name: dev-shm
+              mountPath: /dev/shm
+            {{- end }}
+        {{- end }}
+      
+      {{/* Volumes */}}
+      {{- with include "riven.volumes" . }}
+      volumes:
+        {{- . | nindent 8 }}
+      {{- end }}
+      
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
+      enableServiceLinks: {{ .Values.enableServiceLinks }}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      schedulerName: default-scheduler 

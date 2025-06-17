@@ -1,0 +1,143 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: filebeat-
+  labels:
+    app.elfhosted.com/name: filebeat
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: filebeat
+    controller-revision-hash: 7ff98967cc
+    pod-template-generation: "1"
+  name: filebeat-6npt7
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: DaemonSet
+    name: filebeat
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchFields:
+          - key: metadata.name
+            operator: In
+            values:
+            - baden.vpshostingservice.co
+  containers:
+  - image: elastic/filebeat:8.11.0
+    imagePullPolicy: IfNotPresent
+    name: filebeat
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/log
+      name: varlog
+      readOnly: true
+    - mountPath: /var/lib/docker/containers
+      name: varlibdockercontainers
+      readOnly: true
+    - mountPath: /usr/share/filebeat/filebeat.yml
+      name: filebeat-config
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: baden.vpshostingservice.co
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/disk-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/pid-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/unschedulable
+    operator: Exists
+  volumes:
+  - hostPath:
+      path: /var/log
+      type: ""
+    name: varlog
+  - hostPath:
+      path: /var/lib/docker/containers
+      type: ""
+    name: varlibdockercontainers
+  - configMap:
+      defaultMode: 420
+      name: filebeat-config
+    name: filebeat-config
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:02:23Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:02:23Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:02:23Z"
+    message: 'containers with unready status: [filebeat]'
+    reason: ContainersNotReady
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:02:23Z"
+    message: 'containers with unready status: [filebeat]'
+    reason: ContainersNotReady
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:02:23Z"
+    type: PodScheduled
+  containerStatuses:
+  - image: elastic/filebeat:8.11.0
+    imageID: ""
+    lastState: {}
+    name: filebeat
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      waiting:
+        reason: ContainerCreating
+    volumeMounts:
+    - mountPath: /var/log
+      name: varlog
+      readOnly: true
+      recursiveReadOnly: Disabled
+    - mountPath: /var/lib/docker/containers
+      name: varlibdockercontainers
+      readOnly: true
+      recursiveReadOnly: Disabled
+    - mountPath: /usr/share/filebeat/filebeat.yml
+      name: filebeat-config
+  hostIP: 209.54.102.83
+  hostIPs:
+  - ip: 209.54.102.83
+  phase: Pending
+  qosClass: Burstable
+  startTime: "2025-06-14T15:02:23Z"

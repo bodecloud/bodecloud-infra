@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: traefikforwardauth
+    meta.helm.sh/release-namespace: default
+  labels:
+    app.kubernetes.io/instance: traefikforwardauth
+    app.kubernetes.io/name: traefik-forward-auth
+    pod-template-hash: 588cd68c89
+  name: traefikforwardauth-traefik-forward-auth-588cd68c89
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: traefikforwardauth-traefik-forward-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: traefikforwardauth
+      app.kubernetes.io/name: traefik-forward-auth
+      pod-template-hash: 588cd68c89
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: traefikforwardauth
+        app.kubernetes.io/name: traefik-forward-auth
+        pod-template-hash: 588cd68c89
+    spec:
+      automountServiceAccountToken: true
+      containers:
+      - env:
+        - name: SECRET
+          valueFrom:
+            secretKeyRef:
+              key: secret
+              name: traefikforwardauth-traefik-forward-auth
+        - name: TZ
+          value: UTC
+        image: thomseddon/traefik-forward-auth:2.2.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+        name: traefikforwardauth-traefik-forward-auth
+        ports:
+        - containerPort: 4181
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+        resources: {}
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 4181
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  replicas: 1

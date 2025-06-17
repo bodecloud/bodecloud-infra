@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+data:
+  spec:
+    template:
+      $patch: replace
+      metadata:
+        labels:
+          app: svclb-traefik-679a600c
+          svccontroller.k3s.cattle.io/svcname: traefik
+          svccontroller.k3s.cattle.io/svcnamespace: kube-system
+      spec:
+        automountServiceAccountToken: false
+        containers:
+        - env:
+          - name: SRC_PORT
+            value: "80"
+          - name: SRC_RANGES
+            value: 0.0.0.0/0
+          - name: DEST_PROTO
+            value: TCP
+          - name: DEST_PORT
+            value: "80"
+          - name: DEST_IPS
+            value: 10.43.74.33
+          image: rancher/klipper-lb:v0.4.13
+          imagePullPolicy: IfNotPresent
+          name: lb-tcp-80
+          ports:
+          - containerPort: 80
+            hostPort: 80
+            name: lb-tcp-80
+            protocol: TCP
+          resources: {}
+          securityContext:
+            capabilities:
+              add:
+              - NET_ADMIN
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        - env:
+          - name: SRC_PORT
+            value: "443"
+          - name: SRC_RANGES
+            value: 0.0.0.0/0
+          - name: DEST_PROTO
+            value: TCP
+          - name: DEST_PORT
+            value: "443"
+          - name: DEST_IPS
+            value: 10.43.74.33
+          image: rancher/klipper-lb:v0.4.13
+          imagePullPolicy: IfNotPresent
+          name: lb-tcp-443
+          ports:
+          - containerPort: 443
+            hostPort: 443
+            name: lb-tcp-443
+            protocol: TCP
+          resources: {}
+          securityContext:
+            capabilities:
+              add:
+              - NET_ADMIN
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        priorityClassName: system-node-critical
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          sysctls:
+          - name: net.ipv4.ip_forward
+            value: "1"
+        serviceAccount: svclb
+        serviceAccountName: svclb
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
+        - key: CriticalAddonsOnly
+          operator: Exists
+kind: ControllerRevision
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "1"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/8RVUW/bNhD+K8M9y7Jcqa4jYA9BEgzBVsew3b0URnCiTjFniiTIkxoj0H8fqDipsjpOMGAd/GCQvPt4/L7Tdw+AVv5JzkujIQe01o/bCUSwk7qEHC6RaqNXxBBBTYwlMkL+AKi1YWRptA9LU/xFgj1x7KSJBTIriqUZy4AB0avn5psmN7prd5DDuJ1Ev/wudfnrilwrBb2Zp7EmyIEdUiV37wr3FkXI2TUFjfzeM9XQRSAc9Y9Zy5o8Y20h141SESgsSJ184hb9FnKYpdNKFIKSDx/KjyXSxyKdTs+yiiaEVTo7E2cpVp9KARH4Vgij2RmlyMW71A/QtCnJkyLBxkEOFSpPb6T4VvxAxDviX2HiAOVboYrRAXA0/XSG0yQJxZ9I9ZZEYOp7/Q9QI4vtH88korWvg3ddBEy1VcjU5w767R0CncT+eRQOiMCGTW0azYeGPhcirNZmRxryXtsIwiUoNTkP+dcHIN32/4d6VsuL28XNcg0RtKiasDVLoIteBCzP579drQYhSdz/xi8iL69W69vF8mZ9M4hcXyx+jDl1Xx9xvRjeNkniLI0/ZXGaQreJQNZ4F/YdarElN94paS25kSryNomzeJLCIWjRKLUwSoo95HBdzQ0vHHnSDM+NGMQUdjRLIAJrHD+y9EzawjiGfJZEsDWev6+OZTvDRhj19OpNBI68aZyg0D9BNxKNk7y/MJrpnvu+Q4uFVJIlPTZZWUL+FeZX69vzy8/Xc9h0XWDnbdmyLP25uv3jwv9JuFDFCeWyLB1K1y+PAvxn4m0CuDR9qkLv5wcD7D/nUfDjkXCSpUAFR2/xey9Y+aH8mjiWts1iaW8r476hK4e0Q7fpCx6awnzguxABG0Xuab4GW6gqEgw5zM1KbKlsVBgLOwr89zU6oygORuQ0MfngUjV6JhfGog1Y/UC5upeefd8X/wby4Igjq1DTq8iPGBcH1s7L0mh/o9X+eMImWGZjS2RasUOmu32gNRiv1Hdf+oPHUXL/RWOLUmGhCPJJGBd7G1hbvojtLZiRm1500ThHmudNXZB7emgJeRJBSV46Ko8d6X7vs/T+yPaSsNxDnnTd3wEAAP//2wVDFT8JAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: /v1, Kind=Service
+    objectset.rio.cattle.io/owner-name: traefik
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    app: svclb-traefik-679a600c
+    controller-revision-hash: 689dd6f987
+    svccontroller.k3s.cattle.io/svcname: traefik
+    svccontroller.k3s.cattle.io/svcnamespace: kube-system
+  name: svclb-traefik-679a600c-689dd6f987
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: DaemonSet
+    name: svclb-traefik-679a600c
+revision: 1

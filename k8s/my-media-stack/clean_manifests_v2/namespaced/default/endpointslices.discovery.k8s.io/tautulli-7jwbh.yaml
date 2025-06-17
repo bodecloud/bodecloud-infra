@@ -1,0 +1,36 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.3.16
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: baden.vpshostingservice.co
+  targetRef:
+    kind: Pod
+    name: tautulli-6ffc9b4b88-6chnp
+    namespace: default
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T15:04:59Z"
+  generateName: tautulli-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: tautulli
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: tautulli
+  name: tautulli-7jwbh
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: tautulli
+ports:
+- name: http
+  port: 8181
+  protocol: TCP

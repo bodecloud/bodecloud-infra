@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: brunner56-homer
+  namespace: my-media-stack
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: homer
+    app.kubernetes.io/service: brunner56-homer
+    app.kubernetes.io/version: v22.07.2
+    helm.sh/chart: homer-8.0.2
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: http
+  selector:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: homer
+  clusterIP: 10.43.128.61
+  clusterIPs:
+  - 10.43.128.61
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

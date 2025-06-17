@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  PROWLARR__ANALYTICS_ENABLED: "False"
+  PROWLARR__API_KEY: your-api-key-here
+  PROWLARR__APPLICATION_URL: https://prowlarr.elfhosted.com
+  PROWLARR__BRANCH: master
+  PROWLARR__INSTANCE_NAME: Prowlarr
+  PROWLARR__LOG_LEVEL: info
+  PROWLARR__PORT: "9696"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"PROWLARR__ANALYTICS_ENABLED":"False","PROWLARR__API_KEY":"your-api-key-here","PROWLARR__APPLICATION_URL":"https://prowlarr.elfhosted.com","PROWLARR__BRANCH":"master","PROWLARR__INSTANCE_NAME":"Prowlarr","PROWLARR__LOG_LEVEL":"info","PROWLARR__PORT":"9696"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"prowlarr-env","namespace":"default"}}
+  name: prowlarr-env
+  namespace: default

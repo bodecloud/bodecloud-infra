@@ -1,0 +1,13 @@
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  name: cloudserver.bolabaden.lebla512ssd.org
+  namespace: kube-node-lease
+  ownerReferences:
+  - apiVersion: v1
+    kind: Node
+    name: cloudserver.bolabaden.lebla512ssd.org
+spec:
+  holderIdentity: cloudserver.bolabaden.lebla512ssd.org
+  leaseDurationSeconds: 40
+  renewTime: "2025-06-14T23:01:20.096865Z"

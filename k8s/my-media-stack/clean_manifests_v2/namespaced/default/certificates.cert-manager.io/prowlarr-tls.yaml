@@ -1,0 +1,36 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app.kubernetes.io/component: ingress
+    app.kubernetes.io/instance: myprecious
+  name: prowlarr-tls
+  namespace: default
+  ownerReferences:
+  - apiVersion: networking.k8s.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Ingress
+    name: prowlarr-ingress
+spec:
+  dnsNames:
+  - prowlarr.elfhosted.com
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: prowlarr-tls
+  usages:
+  - digital signature
+  - key encipherment
+  conditions:
+  - lastTransitionTime: "2025-06-14T14:48:49Z"
+    message: 'Issuing certificate as Secret contains invalid private key data: error
+      decoding private key PEM block'
+    reason: InvalidKeyPair
+    type: Ready
+  - lastTransitionTime: "2025-06-14T14:48:56Z"
+    message: 'Issuing certificate as Secret contains invalid private key data: error
+      decoding private key PEM block'
+    reason: InvalidKeyPair
+    type: Issuing

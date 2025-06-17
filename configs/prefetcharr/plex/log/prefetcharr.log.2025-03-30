@@ -1,0 +1,236 @@
+2025-03-30T11:03:37.629291Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:03:37.633341Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:03:37.678098Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:03:37.678116Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:03:39.680231Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:03:39.681198Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:03:39.681213Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:03:43.682532Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:03:43.683707Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:03:43.683726Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:03:51.685139Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:03:51.686242Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:03:51.686260Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:04:07.688226Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:04:07.797234Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:04:07.797327Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:04:39.799181Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:04:39.801946Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:04:40.085961Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:05:44.087205Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:05:44.088357Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:05:44.088593Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:05:44.088597Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:06:04.822667Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:06:04.822786Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:06:04.825867Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:06:04.826714Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:06:06.827999Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:06:06.829120Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:06:06.829137Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:06:10.830069Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:06:10.831209Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:06:10.831227Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:06:18.832900Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:06:18.834144Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:06:18.834162Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:06:34.835335Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:06:34.836449Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:06:34.836463Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:07:06.837992Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:07:06.839552Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:07:06.839570Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:08:10.840444Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:08:10.843434Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:08:10.843497Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:08:10.843502Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:08:16.432493Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:08:16.432614Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:08:16.434281Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:08:16.434419Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:08:18.436293Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:08:18.437664Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:08:18.437740Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:08:22.439310Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:08:22.440393Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:08:22.440410Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:08:30.442406Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:08:30.443690Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:08:30.443705Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:08:46.444690Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:08:46.537659Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:08:46.537678Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:09:18.538525Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:09:18.539817Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:09:18.539850Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:10:22.541170Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:10:22.543465Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:10:22.543528Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:10:22.543532Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:21:08.644300Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:21:08.644452Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:21:08.645926Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:21:08.645940Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:21:10.647143Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:21:10.649299Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:21:10.649312Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:21:14.650323Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:21:14.651386Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:21:14.651966Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:21:22.653461Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:21:22.654752Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:21:22.654768Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:21:38.656047Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:21:38.657124Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:21:38.657145Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:22:10.658398Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:22:10.659455Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:22:10.659468Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:23:14.662274Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:23:14.664880Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:23:14.664947Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:23:14.664951Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:24:12.836716Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:24:12.836879Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:24:12.840736Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:24:12.841912Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:24:14.843194Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:24:14.920586Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:24:14.920601Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:24:18.921182Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:24:18.923054Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:24:18.923076Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:24:26.925910Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:24:26.933142Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:24:26.933159Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:24:42.934186Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:24:42.939126Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:24:42.939158Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:25:14.940208Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:25:14.945608Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:25:14.945712Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:26:18.948264Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:26:18.949388Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:26:18.949457Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:26:18.949462Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:26:49.656960Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:26:49.657248Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:26:49.659283Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:26:49.660469Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:26:51.663318Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:26:51.665820Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:26:51.665837Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:26:55.667104Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:26:55.668667Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:26:55.668987Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:27:03.669522Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:27:03.670416Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:27:03.670442Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:27:19.672141Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:27:19.673132Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:27:19.673145Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:27:51.674504Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:27:51.676376Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:27:51.676391Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:28:55.678126Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:28:55.679567Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:28:55.679642Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:28:55.679647Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:29:29.344813Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:29:29.344949Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:29:29.347152Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:29:29.347165Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:29:31.354193Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:29:31.360863Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:29:31.360883Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:29:35.362176Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:29:35.363244Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:29:35.363259Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:29:43.364967Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:29:43.365978Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:29:43.365993Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:29:59.366550Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:29:59.367775Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:29:59.367791Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:30:31.371181Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:30:31.372719Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:30:31.372735Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:31:35.373601Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:31:35.375293Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:31:35.375384Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:31:35.375404Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:32:05.981382Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:32:05.981678Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:32:05.983527Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:32:05.983543Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:32:07.985412Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:32:07.986372Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:32:07.986533Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:32:11.987158Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:32:11.988106Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:32:11.988120Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:32:19.989040Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:32:19.990137Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:32:19.990959Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:32:35.992395Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:32:35.993716Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:32:35.993745Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:33:07.995165Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:33:07.996295Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:33:07.997847Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:34:11.999250Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:34:12.000831Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:34:12.000897Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:34:12.000902Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:41:55.112735Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:41:55.112921Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:41:55.117061Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:41:55.117082Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:41:57.118220Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:41:57.130587Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:41:57.135299Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:42:01.136912Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:42:01.142087Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:42:01.142450Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:42:09.142964Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:42:09.143960Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:42:09.143974Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:42:25.145743Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:42:25.146884Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:42:25.147676Z  INFO prefetcharr::util: Retry after 32 seconds
+2025-03-30T11:42:57.150139Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:42:57.151973Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:42:57.152077Z  INFO prefetcharr::util: Retry after 64 seconds
+2025-03-30T11:44:01.153225Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:44:01.154980Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:44:01.155074Z ERROR prefetcharr: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:44:01.155080Z  INFO prefetcharr: prefetcharr exits due to an error
+2025-03-30T11:45:22.007406Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:45:22.007647Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:45:22.011834Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:45:22.011849Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:45:24.013285Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:45:24.014708Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:45:24.014820Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:45:28.016436Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:45:28.017837Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:45:28.017855Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:45:36.021300Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:45:36.023260Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:45:36.023276Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:47:02.240185Z  INFO prefetcharr: prefetcharr 1.0.0
+2025-03-30T11:47:02.240309Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:47:02.241437Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:47:02.241450Z  INFO prefetcharr::util: Retry after 2 seconds
+2025-03-30T11:47:04.242306Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:47:04.243276Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:47:04.243310Z  INFO prefetcharr::util: Retry after 4 seconds
+2025-03-30T11:47:08.244484Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:47:08.250597Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:47:08.252065Z  INFO prefetcharr::util: Retry after 8 seconds
+2025-03-30T11:47:16.254255Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:47:16.255187Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:47:16.255218Z  INFO prefetcharr::util: Retry after 16 seconds
+2025-03-30T11:47:32.257114Z DEBUG reqwest::connect: starting new connection: https://sonarr.bolabaden.org/    
+2025-03-30T11:47:32.258485Z ERROR prefetcharr::util: Probing Sonarr failed: error sending request for url (https://sonarr.bolabaden.org/api): client error (Connect): dns error: failed to lookup address information: Name does not resolve: failed to lookup address information: Name does not resolve
+2025-03-30T11:47:32.259004Z  INFO prefetcharr::util: Retry after 32 seconds

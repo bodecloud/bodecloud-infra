@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: redis
+  usage:
+    cpu: 4965532n
+    memory: 4940Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: redis
+    pod-template-hash: 5f8dd778fb
+  name: redis-5f8dd778fb-fsnj7
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:45Z"
+window: 15.348s

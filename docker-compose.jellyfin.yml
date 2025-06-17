@@ -1,0 +1,165 @@
+x-common-env: &common-env
+  PGID: ${PGID:-988} # 'docker' Group ID
+  PUID: ${PUID:-1002} # A non-root user ID
+  TZ: ${TZ:-America/Chicago} # Your Timezone
+
+x-resource-limits: &resource-limits
+  cpu_shares: 1024 # CPU share weight (relative, 2-262144). Higher = more CPU *if competing*.
+  #  mem_limit: 512m        # Max RAM usage (e.g., 64m, 1g). Exceeding = container kill.
+  #  mem_reservation: 325m  # Soft RAM limit (e.g., 32m, 512m).  Best effort, not guaranteed.
+  #  mem_swappiness: 30      # Swap usage (0-100). 0 = off. Higher = more swap, may slow down container.
+  #memswap_limit: 1024m    # Max RAM + Swap.  Usually same as mem_limit.
+  labels:
+    autoheal: "true"
+
+x-common-deploy: &common-deploy
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    window: 120s
+  labels:
+    autoheal: "true"
+    swarm.autoscaler: "true"
+
+x-swarm-resource-limits: &swarm-resource-limits
+  resources:
+    limits:
+      cpus: "0.10"
+      memory: 1024M
+#    reservations:
+#     cpus: '0.05'
+#    memory:  256M
+
+x-swarm-worker-priority: &swarm-worker-priority
+  placement:
+    preferences:
+      - spread: node.labels.worker_priority
+
+x-swarm-manager-only: &swarm-manager-only
+  placement:
+    constraints:
+      - node.role == manager
+
+x-jellyfin-labels: &jellyfin-labels
+  traefik.enable: "true"
+  traefik.http.services.jellyfin.loadbalancer.server.port: 8096
+
+x-jellyseerr-labels: &jellyseerr-labels
+  traefik.enable: "true"
+  traefik.http.services.jellyseerr.loadbalancer.server.port: 5055
+
+x-jellystat-labels: &jellystat-labels
+  traefik.enable: "true"
+  traefik.http.services.jellystat.loadbalancer.server.port: 3000
+
+services:
+  jellyfin:
+    # 🔹🔹 Jellyfin 🔹🔹
+    image: linuxserver/jellyfin
+    container_name: jellyfin
+    hostname: jellyfin
+    extra_hosts:
+      - host.docker.internal:172.17.0.1
+    networks:
+      - traefik_public
+    ports:
+      - ${JELLYFIN_PORT:-8096}:8096
+      - ${JELLYFIN_PORT2:-8920}:8920
+      - ${JELLYFIN_DLNA_PORT:-1901}:1900/udp
+      - ${JELLYFIN_PORT3:-7359}:7359/udp
+    volumes:
+      - ${ROOT_DIR:-.}/data/media/anime:/media/anime
+      - ${ROOT_DIR:-.}/data/media/books:/media/books
+      - ${ROOT_DIR:-.}/data/media/movies:/media/movies
+      - ${ROOT_DIR:-.}/data/media/music:/media/music
+      - ${ROOT_DIR:-.}/data/media/music/videos:/media/music/videos
+      - ${ROOT_DIR:-.}/data/media/tv:/media/tv
+      - ${ROOT_DIR:-.}/data/media/xxx:/media/xxx
+      - ${ROOT_DIR:-.}/configs/jellyfin/data:/data
+      - ${ROOT_DIR:-.}/configs/jellyfin/cache:/cache
+      - ${ROOT_DIR:-.}/configs/jellyfin/config:/config
+      - ${ROOT_DIR:-.}/configs/jellyfin/transcode:/transcode
+    environment:
+      <<: *common-env
+      JELLYFIN_PublishedServerUrl: https://jellyfin.${DOMAIN}
+    labels:
+      <<: *jellyfin-labels
+      homepage.group: Media Streaming
+      homepage.name: Jellyfin Media Server
+      homepage.icon: jellyfin.png
+      homepage.href: https://jellyfin.${DOMAIN}/
+      homepage.description: Organize and stream your movies, TV shows, and music to any device, creating your own personal media center.
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *jellyfin-labels
+    restart: unless-stopped
+
+  jellyseerr:
+    # 🔹🔹 Jellyseerr 🔹🔹
+    image: fallenbagel/jellyseerr
+    container_name: jellyseerr
+    hostname: jellyseerr
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - traefik_public
+    ports:
+      - ${JELLYSEERR_PORT:-5055}:5055
+    volumes:
+      - ${ROOT_DIR:-.}/configs/jellyseerr/config:/app/config
+    environment:
+      <<: *common-env
+      LOG_LEVEL: ${LOG_LEVEL:-debug}
+    labels:
+      <<: *jellyseerr-labels
+      homepage.group: Media Requests
+      homepage.name: Jellyseerr Requests
+      homepage.icon: jellyseerr.png
+      homepage.href: https://jellyseerr.${DOMAIN}/
+      homepage.description: Allows you and others to request new movies and TV shows to be added to your Jellyfin media server.
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *jellyseerr-labels
+    restart: unless-stopped
+
+  jellystat:
+    # 🔹🔹 Jellystat 🔹🔹
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    image: cyfershepard/jellystat
+    container_name: jellystat
+    hostname: jellystat
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - infrastructure_network
+      - traefik_public
+    ports:
+      - ${JELLYSTAT_PORT:-3003}:3000
+    volumes:
+      - ${ROOT_DIR:-.}/configs/jellystat/backup-data:/app/backend/backup-data
+    environment:
+      <<: *common-env
+      POSTGRES_USER: ${JELLYSTAT_POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${JELLYSTAT_POSTGRES_PASSWORD}
+      POSTGRES_IP: ${JELLYSTAT_POSTGRES_IP:-postgresql}
+      POSTGRES_PORT: ${JELLYSTAT_POSTGRES_PORT:-5432}
+      JWT_SECRET: ${JELLYSTAT_JWT_SECRET}
+    labels:
+      <<: *jellystat-labels
+      homepage.group: Media Statistics
+      homepage.name: Jellystat Analytics
+      homepage.icon: jellystat.png
+      homepage.href: https://jellystat.${DOMAIN}
+      homepage.description: Tracks and displays statistics about your Jellyfin media server usage, showing you what's being watched and how often.
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      labels:
+        <<: *jellystat-labels
+    restart: unless-stopped

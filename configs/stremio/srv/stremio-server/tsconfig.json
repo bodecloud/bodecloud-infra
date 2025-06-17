@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ES2016", // Or a later version depending on your Node.js target
+    "allowJs": true, // Allow JavaScript files to be compiled
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    /* Strictness */
+    "strict": true, // Enable all strict type-checking options
+    "noImplicitAny": true, // Raise error on expressions and declarations with an implied 'any' type.
+    // "strictNullChecks": true, // We might disable this initially if the JS code heavily relies on null/undefined
+    /* If NOT transpiling code: */
+    "module": "CommonJS", // Keep commonjs for typical Node.js server environments
+    "outDir": "./dist", // Redirect output structure to the directory
+    "rootDir": "./src", // Specify the root directory of input files
+    /* Completeness */
+    "declaration": true, // Generate corresponding '.d.ts' file.
+    "sourceMap": true, // Generate corresponding '.map' file.
+
+    /* Add TypeRoots if necessary */
+    // "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
+  "include": ["src/**/*"], // Which files TypeScript should check
+  "exclude": ["node_modules", "dist"] // Which files TypeScript should ignore
+} 

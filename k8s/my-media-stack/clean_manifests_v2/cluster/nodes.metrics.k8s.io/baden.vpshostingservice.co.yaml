@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+kind: NodeMetrics
+metadata:
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/instance-type: k3s
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: baden.vpshostingservice.co
+    kubernetes.io/os: linux
+    node.kubernetes.io/instance-type: k3s
+  name: baden.vpshostingservice.co
+timestamp: "2025-06-14T23:08:38Z"
+usage:
+  cpu: 297785516n
+  memory: 2015712Ki
+window: 10.122s

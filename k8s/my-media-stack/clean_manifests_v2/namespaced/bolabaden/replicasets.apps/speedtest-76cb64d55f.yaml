@@ -1,0 +1,140 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: speedtest
+    pod-template-hash: 76cb64d55f
+  name: speedtest-76cb64d55f
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: speedtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: speedtest
+      pod-template-hash: 76cb64d55f
+  template:
+    metadata:
+      labels:
+        app: speedtest
+        pod-template-hash: 76cb64d55f
+    spec:
+      containers:
+      - env:
+        - name: ADMIN_EMAIL
+          value: boden.crouch@gmail.com
+        - name: ADMIN_NAME
+          value: ubuntu
+        - name: ADMIN_PASSWORD
+          value: h4L0m4St3R327
+        - name: API_RATE_LIMIT
+          value: "60"
+        - name: APP_KEY
+          value: base64:OZVnVd3/7lJTtOTtVZ0YqxXJKtle2R48NIrfFv11CkM=
+        - name: APP_NAME
+          value: Speedtest Tracker
+        - name: APP_TIMEZONE
+          value: America/Chicago
+        - name: APP_URL
+        - name: ASSET_URL
+        - name: CHART_BEGIN_AT_ZERO
+          value: "true"
+        - name: CHART_DATETIME_FORMAT
+          value: j/m G:i
+        - name: CONTENT_WIDTH
+          value: 7xl
+        - name: DATETIME_FORMAT
+          value: j M Y, G:i:s
+        - name: DB_CONNECTION
+          value: sqlite
+        - name: DISPLAY_TIMEZONE
+          value: America/Chicago
+        - name: PGID
+          value: "988"
+        - name: PRUNE_RESULTS_OLDER_THAN
+          value: "0"
+        - name: PUBLIC_DASHBOARD
+          value: "true"
+        - name: PUID
+          value: "1001"
+        - name: SPEEDTEST_BLOCKED_SERVERS
+        - name: SPEEDTEST_INTERFACE
+        - name: SPEEDTEST_SCHEDULE
+          value: 0 * * * *
+        - name: SPEEDTEST_SERVERS
+        - name: SPEEDTEST_SKIP_IPS
+        - name: THRESHOLD_DOWNLOAD
+          value: "900"
+        - name: THRESHOLD_ENABLED
+          value: "true"
+        - name: THRESHOLD_PING
+          value: "25"
+        - name: THRESHOLD_UPLOAD
+          value: "900"
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "002"
+        image: linuxserver/speedtest-tracker
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -fs http://127.0.0.1:80 > /dev/null || exit 1
+          failureThreshold: 3
+          initialDelaySeconds: 20
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: speedtest
+        ports:
+        - containerPort: 443
+          name: speedtest-443
+          protocol: TCP
+        - containerPort: 80
+          name: speedtest-80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - mountPath: /config/keys
+          name: config-keys
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/speedtest-tracker/config
+          type: ""
+        name: config
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/certs/speedtest-tracker/keys
+          type: ""
+        name: config-keys
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

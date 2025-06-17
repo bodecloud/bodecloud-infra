@@ -1,0 +1,54 @@
+---
+- name: Deploy VPN test pod
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: vpn-test
+        namespace: default
+      spec:
+        containers:
+          - name: test
+            image: curlimages/curl:latest
+            command: ["sleep", "3600"]
+        restartPolicy: Never
+    state: present
+
+- name: Wait for test pod to be ready
+  kubernetes.core.k8s_info:
+    api_version: v1
+    kind: Pod
+    name: vpn-test
+    namespace: default
+    wait: true
+    wait_condition:
+      type: Ready
+      status: "True"
+    wait_timeout: 60
+
+- name: Test external connectivity through VPN
+  kubernetes.core.k8s_exec:
+    namespace: default
+    pod: vpn-test
+    command: timeout 10 curl -s http://httpbin.org/ip
+  register: vpn_test_result
+  failed_when: false
+
+- name: Display VPN test result
+  debug:
+    msg: |
+      VPN Connectivity Test:
+      {% if vpn_test_result.rc == 0 %}
+      ✅ SUCCESS - External IP: {{ (vpn_test_result.stdout | from_json).origin }}
+      {% else %}
+      ❌ FAILED - VPN connectivity issue
+      {% endif %}
+
+- name: Cleanup test pod
+  kubernetes.core.k8s:
+    api_version: v1
+    kind: Pod
+    name: vpn-test
+    namespace: default
+    state: absent

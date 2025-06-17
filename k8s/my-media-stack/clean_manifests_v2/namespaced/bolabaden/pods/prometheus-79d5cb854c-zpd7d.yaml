@@ -1,0 +1,157 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: prometheus-79d5cb854c-
+  labels:
+    app: prometheus
+    pod-template-hash: 79d5cb854c
+  name: prometheus-79d5cb854c-zpd7d
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: prometheus-79d5cb854c
+spec:
+  containers:
+  - args:
+    - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.retention.size=1GB
+    - --web.console.libraries=/etc/prometheus/console_libraries
+    - --web.console.templates=/etc/prometheus/consoles
+    - --web.enable-lifecycle
+    env:
+    - name: PGID
+      value: "988"
+    - name: PUID
+      value: "1002"
+    - name: TZ
+      value: America/Chicago
+    - name: UMASK
+      value: "022"
+    image: prom/prometheus
+    imagePullPolicy: IfNotPresent
+    name: prometheus
+    ports:
+    - containerPort: 9090
+      name: prometheus-9090
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/prometheus
+      name: etc-prometheus
+    - mountPath: /etc/prometheus/console_libraries
+      name: etc-prometheus-console-libraries
+    - mountPath: /etc/prometheus/consoles
+      name: etc-prometheus-consoles
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xrgf6
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/prometheus
+      type: ""
+    name: etc-prometheus
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/prometheus/console_libraries
+      type: ""
+    name: etc-prometheus-console-libraries
+  - hostPath:
+      path: /home/ubuntu/my-media-stack/configs/prometheus/consoles
+      type: ""
+    name: etc-prometheus-consoles
+  - name: kube-api-access-xrgf6
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:25Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:22Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:25Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:25Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:15Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://8f68888369f5b9dfc9555e36c21d03875497fd53659f6d1bb66d59d4d2def77c
+    image: docker.io/prom/prometheus:latest
+    imageID: docker.io/prom/prometheus@sha256:9abc6cf6aea7710d163dbb28d8eeb7dc5baef01e38fa4cd146a406dd9f07f70d
+    lastState: {}
+    name: prometheus
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:40:24Z"
+    volumeMounts:
+    - mountPath: /etc/prometheus
+      name: etc-prometheus
+    - mountPath: /etc/prometheus/console_libraries
+      name: etc-prometheus-console-libraries
+    - mountPath: /etc/prometheus/consoles
+      name: etc-prometheus-consoles
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xrgf6
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.89
+  podIPs:
+  - ip: 10.42.0.89
+  qosClass: Burstable
+  startTime: "2025-06-14T22:40:22Z"

@@ -1,0 +1,51 @@
+#! redis-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: redis
+          image: redis:latest
+          imagePullPolicy: IfNotPresent
+          command: ["redis-server", "--appendonly", "yes", "--save", "60", "1"]
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - redis-cli ping > /dev/null 2>&1 || exit 1
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          ports:
+            - name: redis-6379
+              containerPort: 6379
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      volumes:
+        - name: data
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/redis

@@ -1,0 +1,10 @@
+filebrowserEnv:
+  fbAddress: 0.0.0.0
+  fbConfig: /etc/filebrowser/.filebrowser.json
+  fbDatabase: /tmp/filebrowser.db
+  radarr4KApiKey: 7da5d4ba79804527b78a78b68c7a0781
+  radarrApiKey: 041776c8d5f74bf295aa486d9d51c33a
+  s6ReadOnlyRoot: "1"
+  sonarr4KApiKey: e4f93c115169484bbed19821f7ac8e49
+  sonarrApiKey: a6f1c7d07fab4be49c5c1cb545f85a76
+kubernetesClusterDomain: cluster.local

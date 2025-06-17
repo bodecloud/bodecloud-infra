@@ -1,0 +1,333 @@
+# Default values for riven
+# This is a YAML-formatted file.
+
+# Global settings
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: "local-path"
+
+# Riven application image configuration
+image:
+  repository: spencerwooo/riven
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+# Database image configuration  
+postgresql:
+  image:
+    repository: postgres
+    tag: "17-alpine"
+    pullPolicy: IfNotPresent
+
+# Bootstrap/setup image configuration
+bootstrap:
+  image:
+    repository: ubuntu
+    tag: "20.04"
+    pullPolicy: IfNotPresent
+
+# Number of replicas
+replicaCount: 1
+
+# Service account
+serviceAccount:
+  create: false
+  name: "default"
+  automount: false
+  annotations: {}
+
+# Security context for the pod
+securityContext:
+  runAsUser: 568
+  runAsGroup: 568
+  fsGroup: 568
+  fsGroupChangePolicy: OnRootMismatch
+  seccompProfile:
+    type: RuntimeDefault
+
+# Container security contexts
+containerSecurityContext:
+  riven:
+    readOnlyRootFilesystem: false
+    seccompProfile:
+      type: RuntimeDefault
+      
+  bootstrap:
+    capabilities:
+      drop:
+        - ALL
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+      
+  setupPostgres:
+    runAsUser: 0
+    seccompProfile:
+      type: RuntimeDefault
+
+# Environment variables from ConfigMaps
+envFrom:
+  - configMapRef:
+      name: riven-env
+  - configMapRef:
+      name: elfbot-riven
+      optional: true
+
+# Resources for Riven container
+resources:
+  riven:
+    limits:
+      cpu: "2"
+      memory: 4Gi
+    requests:
+      cpu: "0"
+      memory: 20Mi
+      
+  postgresql:
+    limits:
+      cpu: 500m
+      memory: 8Gi
+    requests:
+      cpu: "0"
+      memory: 1Mi
+      
+  bootstrap:
+    limits:
+      cpu: "1"
+      memory: 4Gi
+    requests:
+      cpu: "0"
+      memory: 1Mi
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 3001
+  targetPort: http
+  annotations: {}
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: riven.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Persistence configuration
+persistence:
+  backup:
+    enabled: true
+    size: 10Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  config:
+    enabled: true
+    size: 5Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  logs:
+    enabled: true
+    size: 2Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  rclone:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  symlinks:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  realdebridZurg:
+    enabled: true
+    size: 100Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+
+# ConfigMaps configuration
+configMaps:
+  rivenEnv:
+    enabled: true
+    data: {}
+    # Add your environment variables here:
+    # DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/riven"
+    # RIVEN_FORCE_ENV: "true"
+    
+  rivenSetup:
+    enabled: true
+    data:
+      setup.sh: |
+        #!/bin/bash
+        set -e
+        
+        # Ensure symlinks directory exists
+        mkdir -p /storage/symlinks
+        
+        # Set permissions
+        chown -R 568:568 /storage/symlinks
+        
+        echo "Riven setup complete"
+        
+  elfbotRiven:
+    enabled: true
+    data: {}
+
+# PostgreSQL configuration
+postgres:
+  enabled: true
+  args:
+    - "-c"
+    - "shared_buffers=500MB"
+    - "-c"
+    - "work_mem=4MB"
+    - "-c"
+    - "effective_cache_size=1GB"
+    - "-c"
+    - "max_connections=310"
+  env:
+    POSTGRES_PASSWORD: "postgres"
+    POSTGRES_DB: "riven"
+    POSTGRES_USER: "postgres"
+
+# Init containers configuration
+initContainers:
+  bootstrap:
+    enabled: true
+    env:
+      S3_ENDPOINT_URL: "https://s3.us-west-000.backblazeb2.com"
+    secretRefs:
+      - name: b2-elfhosted-config-ro
+        keys:
+          - access-key-id
+          - secret-key
+          
+  setup:
+    enabled: true
+    
+  setupPostgres:
+    enabled: true
+
+# Health probes
+livenessProbe:
+  tcpSocket:
+    port: 3001
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  tcpSocket:
+    port: 3001
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+startupProbe:
+  tcpSocket:
+    port: 3001
+  timeoutSeconds: 1
+  periodSeconds: 5
+  successThreshold: 1
+  failureThreshold: 30
+
+# Node selector and affinity
+nodeSelector: {}
+
+affinity:
+  podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.elfhosted.com/role
+              operator: In
+              values:
+                - nodefinder
+        topologyKey: kubernetes.io/hostname
+
+tolerations: []
+
+# Priority class
+priorityClassName: "tenant-normal"
+
+# Annotations for configmap reloader
+annotations:
+  configmap.reloader.stakater.com/reload: "elfbot-all,elfbot-riven,riven-env,riven-setup"
+
+# Enable service links
+enableServiceLinks: false
+
+# Deployment strategy
+strategy:
+  type: Recreate
+
+# Revision history limit
+revisionHistoryLimit: 3
+
+# Progress deadline
+progressDeadlineSeconds: 600
+
+# Volume configuration
+volumes:
+  devShm:
+    enabled: true
+    sizeLimit: "1Gi"
+  tmp:
+    enabled: true
+    sizeLimit: "1Gi"
+
+# Riven specific configuration
+riven:
+  # Force environment mode
+  forceEnv: true
+  
+  # Database configuration
+  database:
+    url: "postgresql://postgres:postgres@localhost:5432/riven"
+    
+  # API configuration
+  api:
+    port: 3001
+    host: "0.0.0.0"
+    
+  # Logging configuration
+  logging:
+    level: "INFO"
+    
+  # Media configuration
+  media:
+    path: "/storage/symlinks"
+    
+  # Rclone configuration
+  rclone:
+    enabled: true
+    path: "/storage/rclone" 

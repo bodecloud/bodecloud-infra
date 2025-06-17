@@ -1,0 +1,21 @@
+#! publicnet-network-policy.yaml
+# Generated code, do not edit
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: publicnet-network-policy
+  namespace: my-media-stack
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {}
+  egress:
+    - to:
+        - podSelector:
+            matchLabels: {}

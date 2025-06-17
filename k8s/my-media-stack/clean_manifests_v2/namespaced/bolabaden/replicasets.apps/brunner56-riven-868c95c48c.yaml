@@ -1,0 +1,332 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-riven,riven-env,riven-setup
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"ReplicaSet","metadata":{"annotations":{"configmap.reloader.stakater.com/reload":"elfbot-all,elfbot-riven,riven-env,riven-setup","deployment.kubernetes.io/desired-replicas":"1","deployment.kubernetes.io/max-replicas":"1","deployment.kubernetes.io/revision":"1","meta.helm.sh/release-name":"brunner56","meta.helm.sh/release-namespace":"bolabaden"},"labels":{"app.elfhosted.com/name":"riven","app.kubernetes.io/instance":"brunner56","app.kubernetes.io/name":"riven","pod-template-hash":"868c95c48c"},"name":"brunner56-riven-868c95c48c","namespace":"bolabaden"},"spec":{"replicas":1,"selector":{"matchLabels":{"app.kubernetes.io/instance":"brunner56","app.kubernetes.io/name":"riven","pod-template-hash":"868c95c48c"}},"template":{"metadata":{"creationTimestamp":"2025-05-29T17:12:59Z","labels":{"app.elfhosted.com/name":"riven","app.kubernetes.io/instance":"brunner56","app.kubernetes.io/name":"riven","pod-template-hash":"868c95c48c"}},"spec":{"affinity":{"podAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":[{"labelSelector":{"matchExpressions":[{"key":"app.elfhosted.com/role","operator":"In","values":["nodefinder"]}]},"topologyKey":"kubernetes.io/hostname"}]}},"automountServiceAccountToken":false,"containers":[{"envFrom":[{"configMapRef":{"name":"riven-env"}},{"configMapRef":{"name":"elfbot-riven","optional":true}}],"image":"ghcr.io/elfhosted/riven:v0.21.21@sha256:bf1a9cab579d5eaac0ed72e20584b139547db7c38753a03b3756151af5e0ac13","imagePullPolicy":"IfNotPresent","livenessProbe":{"failureThreshold":3,"periodSeconds":10,"successThreshold":1,"tcpSocket":{"port":3001},"timeoutSeconds":1},"name":"brunner56-riven","ports":[{"containerPort":3001,"name":"http","protocol":"TCP"}],"readinessProbe":{"failureThreshold":3,"periodSeconds":10,"successThreshold":1,"tcpSocket":{"port":3001},"timeoutSeconds":1},"resources":{"limits":{"cpu":"2","memory":"4Gi"},"requests":{"cpu":"0","memory":"20Mi"}},"securityContext":{"readOnlyRootFilesystem":false,"seccompProfile":{"type":"RuntimeDefault"}},"startupProbe":{"failureThreshold":30,"periodSeconds":5,"successThreshold":1,"tcpSocket":{"port":3001},"timeoutSeconds":1},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/backup","name":"backup"},{"mountPath":"/riven/data","name":"config","subPath":"riven"},{"mountPath":"/dev-shm","name":"dev-shm"},{"mountPath":"/elfbot","name":"elfbot"},{"mountPath":"/riven/data/logs","name":"logs","subPath":"riven"},{"mountPath":"/storage/rclone","name":"rclone"},{"mountPath":"/storage/realdebrid-zurg","name":"rclonemountrealdebridzurg"},{"mountPath":"/setup","name":"setup"},{"mountPath":"/storage/symlinks","name":"symlinks"},{"mountPath":"/tmp","name":"tmp"}]},{"args":["-c","shared_buffers=500MB","-c","work_mem=4MB","-c","effective_cache_size=1GB","-c","max_connections=310"],"env":[{"name":"POSTGRES_PASSWORD","value":"postgres"},{"name":"POSTGRES_DB","value":"riven"},{"name":"POSTGRES_USER","value":"postgres"}],"image":"postgres:17-alpine","imagePullPolicy":"IfNotPresent","name":"database","resources":{"limits":{"cpu":"500m","memory":"8Gi"},"requests":{"cpu":"0","memory":"1Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/var/lib/postgresql/data","name":"config","subPath":"riven/postgresql/database"},{"mountPath":"/dev/shm","name":"dev-shm"}]}],"dnsPolicy":"ClusterFirst","enableServiceLinks":false,"initContainers":[{"command":["/bin/bash","-c","set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\nfi\n\n# look for commands - we match specific names in order of least-destructive\nTIMESTAMP_NOW=$(date +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\n# If no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/backup \u0026\u0026 -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\n# If no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/reset \u0026\u0026 -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\ncase $COMMAND in\n\n  \"pause\")\n    echo \"Recent pause command found, sleeping 5m..\"\n    sleep 300\n    ;;\n\n  \"reset\")\n\n    # Safety check - if /config/homer exists, we've not mounted /config properly and are about to wipe out EVERYTHING\n    if [ -e \"/config/homer\" ]; then\n        echo \"The path /config/homer exists. Exiting.\"\n        exit 1\n    fi      \n    echo \"Recent reset command found, resetting\"\n    rm -rf /config/*\n    ;;\n\n  \"backup\")\n    echo \"Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\n    TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n    ;;\n\nesac\n\nif [[ ! -f /config/i-am-bootstrapped ]]\nthen\n  echo \"Bootstrapping from goldilocks config...\"\n  s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/\n  touch /config/i-am-bootstrapped\nfi\n"],"env":[{"name":"AWS_ACCESS_KEY_ID","valueFrom":{"secretKeyRef":{"key":"access-key-id","name":"b2-elfhosted-config-ro"}}},{"name":"AWS_SECRET_ACCESS_KEY","valueFrom":{"secretKeyRef":{"key":"secret-key","name":"b2-elfhosted-config-ro"}}},{"name":"S3_ENDPOINT_URL","value":"https://s3.us-west-000.backblazeb2.com"},{"name":"K8S_APP_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.labels['app.kubernetes.io/name']"}}},{"name":"ELF_APP_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.labels['app.elfhosted.com/name']"}}}],"image":"alpine/k8s:1.29.1","imagePullPolicy":"IfNotPresent","name":"bootstrap","resources":{"limits":{"cpu":"1","memory":"4Gi"},"requests":{"cpu":"0","memory":"1Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsGroup":568,"runAsUser":568,"seccompProfile":{"type":"RuntimeDefault"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/etc/elfbot","name":"elfbot"},{"mountPath":"/storage/backup","name":"backup"},{"mountPath":"/config","name":"config","subPath":"riven"},{"mountPath":"/tmp","name":"tmp"}]},{"command":["/bin/bash","-c","# run the setup script from the configmap, so that we can make templated changes\nbash /setup/setup.sh\n"],"image":"alpine/k8s:1.29.1","imagePullPolicy":"IfNotPresent","name":"setup","terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/storage/symlinks","name":"symlinks"},{"mountPath":"/config","name":"config","subPath":"riven"},{"mountPath":"/setup/","name":"setup"}]},{"command":["/bin/bash","-c","set -x\nset -e\n\nmkdir -p /config/postgresql/database\nmkdir -p /config/postgresql/backups\nchown elfie:elfie /config -R\n"],"image":"alpine/k8s:1.29.1","imagePullPolicy":"IfNotPresent","name":"setup-postgres","securityContext":{"runAsUser":0,"seccompProfile":{"type":"RuntimeDefault"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/config","name":"config","subPath":"riven"}]}],"priorityClassName":"tenant-normal","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{"fsGroup":568,"fsGroupChangePolicy":"OnRootMismatch","runAsGroup":568,"runAsUser":568,"seccompProfile":{"type":"RuntimeDefault"}},"serviceAccount":"default","serviceAccountName":"default","terminationGracePeriodSeconds":30,"volumes":[{"name":"backup","persistentVolumeClaim":{"claimName":"backup"}},{"name":"config","persistentVolumeClaim":{"claimName":"config"}},{"name":"dev-shm"},{"configMap":{"defaultMode":420,"name":"elfbot-riven","optional":true},"name":"elfbot"},{"name":"logs","persistentVolumeClaim":{"claimName":"logs"}},{"name":"rclone","persistentVolumeClaim":{"claimName":"rclone"}},{"name":"rclonemountrealdebridzurg","persistentVolumeClaim":{"claimName":"realdebrid-zurg"}},{"configMap":{"defaultMode":420,"name":"riven-setup"},"name":"setup"},{"name":"symlinks","persistentVolumeClaim":{"claimName":"symlinks"}},{"name":"tmp"}]}}}}
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.elfhosted.com/name: riven
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: riven
+    pod-template-hash: 868c95c48c
+  name: brunner56-riven-868c95c48c
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: brunner56-riven
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: riven
+      pod-template-hash: 868c95c48c
+  template:
+    metadata:
+      labels:
+        app.elfhosted.com/name: riven
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: riven
+        pod-template-hash: 868c95c48c
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: riven-env
+        - configMapRef:
+            name: elfbot-riven
+            optional: true
+        image: ghcr.io/elfhosted/riven:v0.21.21@sha256:bf1a9cab579d5eaac0ed72e20584b139547db7c38753a03b3756151af5e0ac13
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 3001
+          timeoutSeconds: 1
+        name: brunner56-riven
+        ports:
+        - containerPort: 3001
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 3001
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "2"
+            memory: 4Gi
+          requests:
+            cpu: "0"
+            memory: 20Mi
+        securityContext:
+          readOnlyRootFilesystem: false
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 3001
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /backup
+          name: backup
+        - mountPath: /riven/data
+          name: config
+          subPath: riven
+        - mountPath: /dev-shm
+          name: dev-shm
+        - mountPath: /elfbot
+          name: elfbot
+        - mountPath: /riven/data/logs
+          name: logs
+          subPath: riven
+        - mountPath: /storage/rclone
+          name: rclone
+        - mountPath: /storage/realdebrid-zurg
+          name: rclonemountrealdebridzurg
+        - mountPath: /setup
+          name: setup
+        - mountPath: /storage/symlinks
+          name: symlinks
+        - mountPath: /tmp
+          name: tmp
+      - args:
+        - -c
+        - shared_buffers=500MB
+        - -c
+        - work_mem=4MB
+        - -c
+        - effective_cache_size=1GB
+        - -c
+        - max_connections=310
+        env:
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_DB
+          value: riven
+        - name: POSTGRES_USER
+          value: postgres
+        image: postgres:17-alpine
+        imagePullPolicy: IfNotPresent
+        name: database
+        resources:
+          limits:
+            cpu: 500m
+            memory: 8Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: config
+          subPath: riven/postgresql/database
+        - mountPath: /dev/shm
+          name: dev-shm
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - "set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name
+          if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\nfi\n\n#
+          look for commands - we match specific names in order of least-destructive\nTIMESTAMP_NOW=$(date
+          +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)\n
+          \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+          -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\n# If no command is set,
+          then move onto the next possibility\nif [[ -f /etc/elfbot/backup && -z \"$COMMAND\"
+          ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n
+          \ if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\n#
+          If no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/reset
+          && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)\n
+          \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+          -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\ncase $COMMAND in\n\n  \"pause\")\n
+          \   echo \"Recent pause command found, sleeping 5m..\"\n    sleep 300\n
+          \   ;;\n\n  \"reset\")\n\n    # Safety check - if /config/homer exists,
+          we've not mounted /config properly and are about to wipe out EVERYTHING\n
+          \   if [ -e \"/config/homer\" ]; then\n        echo \"The path /config/homer
+          exists. Exiting.\"\n        exit 1\n    fi      \n    echo \"Recent reset
+          command found, resetting\"\n    rm -rf /config/*\n    ;;\n\n  \"backup\")\n
+          \   echo \"Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\n
+          \   TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config
+          /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n    ;;\n\nesac\n\nif [[ ! -f /config/i-am-bootstrapped
+          ]]\nthen\n  echo \"Bootstrapping from goldilocks config...\"\n  s5cmd sync
+          s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/\n  touch /config/i-am-bootstrapped\nfi\n"
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: access-key-id
+              name: b2-elfhosted-config-ro
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: b2-elfhosted-config-ro
+        - name: S3_ENDPOINT_URL
+          value: https://s3.us-west-000.backblazeb2.com
+        - name: K8S_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/name']
+        - name: ELF_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.elfhosted.com/name']
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: bootstrap
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/elfbot
+          name: elfbot
+        - mountPath: /storage/backup
+          name: backup
+        - mountPath: /config
+          name: config
+          subPath: riven
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          # run the setup script from the configmap, so that we can make templated changes
+          bash /setup/setup.sh
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: setup
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /storage/symlinks
+          name: symlinks
+        - mountPath: /config
+          name: config
+          subPath: riven
+        - mountPath: /setup/
+          name: setup
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+
+          mkdir -p /config/postgresql/database
+          mkdir -p /config/postgresql/backups
+          chown elfie:elfie /config -R
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: setup-postgres
+        resources: {}
+        securityContext:
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: riven
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 568
+        runAsUser: 568
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: backup
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - emptyDir: {}
+        name: dev-shm
+      - configMap:
+          defaultMode: 420
+          name: elfbot-riven
+          optional: true
+        name: elfbot
+      - name: logs
+        persistentVolumeClaim:
+          claimName: logs
+      - name: rclone
+        persistentVolumeClaim:
+          claimName: rclone
+      - name: rclonemountrealdebridzurg
+        persistentVolumeClaim:
+          claimName: realdebrid-zurg
+      - configMap:
+          defaultMode: 420
+          name: riven-setup
+        name: setup
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: symlinks
+      - emptyDir: {}
+        name: tmp
+  observedGeneration: 4
+  replicas: 0

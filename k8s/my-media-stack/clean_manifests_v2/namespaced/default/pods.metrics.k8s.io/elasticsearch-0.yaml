@@ -1,0 +1,19 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: elasticsearch
+  usage:
+    cpu: 4826047n
+    memory: 899240Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: elasticsearch
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: elasticsearch
+    apps.kubernetes.io/pod-index: "0"
+    controller-revision-hash: elasticsearch-7558b46bd5
+    statefulset.kubernetes.io/pod-name: elasticsearch-0
+  name: elasticsearch-0
+  namespace: default
+timestamp: "2025-06-14T23:00:38Z"
+window: 17.43s

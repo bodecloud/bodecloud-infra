@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  AUTH_HOST: auth.elfhosted.com
+  COOKIE_DOMAIN: .elfhosted.com
+  DEFAULT_PROVIDER: oidc
+  LOG_LEVEL: info
+  PROVIDERS_OIDC_CLIENT_ID: traefik-forward-auth
+  PROVIDERS_OIDC_CLIENT_SECRET: your-client-secret
+  PROVIDERS_OIDC_ISSUER_URL: https://auth.elfhosted.com
+  SECRET: your-secret-key
+  URL_PATH: /_oauth
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"AUTH_HOST":"auth.elfhosted.com","COOKIE_DOMAIN":".elfhosted.com","DEFAULT_PROVIDER":"oidc","LOG_LEVEL":"info","PROVIDERS_OIDC_CLIENT_ID":"traefik-forward-auth","PROVIDERS_OIDC_CLIENT_SECRET":"your-client-secret","PROVIDERS_OIDC_ISSUER_URL":"https://auth.elfhosted.com","SECRET":"your-secret-key","URL_PATH":"/_oauth"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"traefik-forward-auth-config","namespace":"default"}}
+  name: traefik-forward-auth-config
+  namespace: default

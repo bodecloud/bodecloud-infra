@@ -1,0 +1,152 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: starter
+    pod-template-hash: 6b9c849db8
+  name: brunner56-starter-6b9c849db8-w9hml
+  namespace: bolabaden
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.elfhosted.com/role
+            operator: In
+            values:
+            - nodefinder
+        topologyKey: kubernetes.io/hostname
+  automountServiceAccountToken: true
+  containers:
+  - command:
+    - /bin/bash
+    - -c
+    - |
+      echo "This pod simple reserves contended resources for a tenant"
+
+      sleep infinity
+    image: alpine/k8s:1.29.1
+    name: brunner56-starter
+    resources:
+      requests:
+        cpu: 250m
+        memory: 1Mi
+    securityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    volumeMounts:
+    - mountPath: /config
+      name: config
+    - mountPath: /tooling-scripts
+      name: tooling-scripts
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h2rp2
+      readOnly: true
+  - command:
+    - /usr/bin/dumb-init
+    - /bin/bash
+    - -c
+    - /tooling-scripts/clean-up-dns-on-termination.sh
+    env:
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    - name: ELF_TENANT_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.labels['app.kubernetes.io/instance']
+    envFrom:
+    - secretRef:
+        name: cloudflare-api-token
+    image: alpine/k8s:1.29.1
+    name: clean-up-dns
+    securityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    volumeMounts:
+    - mountPath: /tooling-scripts
+      name: tooling-scripts
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h2rp2
+      readOnly: true
+  enableServiceLinks: false
+  initContainers:
+  - command:
+    - /usr/bin/dumb-init
+    - /bin/bash
+    - -c
+    - /tooling-scripts/update-dns-on-init.sh
+    env:
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    - name: ELF_TENANT_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.labels['app.kubernetes.io/instance']
+    envFrom:
+    - secretRef:
+        name: cloudflare-api-token
+    image: alpine/k8s:1.29.1
+    name: update-dns
+    securityContext:
+      readOnlyRootFilesystem: true
+      seccompProfile:
+        type: RuntimeDefault
+    volumeMounts:
+    - mountPath: /tooling-scripts
+      name: tooling-scripts
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h2rp2
+      readOnly: true
+  preemptionPolicy: PreemptLowerPriority
+  priority: 4000
+  priorityClassName: tenant-normal
+  securityContext:
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 568
+    runAsNonRoot: true
+    runAsUser: 568
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: default
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  - configMap:
+      defaultMode: 493
+      name: tooling-scripts
+    name: tooling-scripts
+  - name: kube-api-access-h2rp2
+    projected:
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              fieldPath: metadata.namespace
+            path: namespace

@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: whoami
+  usage:
+    cpu: "0"
+    memory: 1032Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: whoami
+    pod-template-hash: d9d5cd44
+  name: whoami-d9d5cd44-m9xbq
+  namespace: bolabaden
+timestamp: "2025-06-14T22:56:49Z"
+window: 10.156s

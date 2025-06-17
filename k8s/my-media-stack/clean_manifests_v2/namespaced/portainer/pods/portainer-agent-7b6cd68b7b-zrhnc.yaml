@@ -1,0 +1,121 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: portainer-agent-7b6cd68b7b-
+  labels:
+    app: portainer-agent
+    pod-template-hash: 7b6cd68b7b
+  name: portainer-agent-7b6cd68b7b-zrhnc
+  namespace: portainer
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: portainer-agent-7b6cd68b7b
+spec:
+  containers:
+  - env:
+    - name: LOG_LEVEL
+      value: DEBUG
+    - name: AGENT_CLUSTER_ADDR
+      value: portainer-agent-headless
+    - name: KUBERNETES_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    image: portainer/agent:2.27.6
+    imagePullPolicy: Always
+    name: portainer-agent
+    ports:
+    - containerPort: 9001
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-7nhtj
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: portainer-sa-clusteradmin
+  serviceAccountName: portainer-sa-clusteradmin
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-7nhtj
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:43Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:38Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:43Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:43Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:37Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://1af4515bf609d8ac86af4e4c86bcafca81b77e68fc9a36c4a4bac58caaad67dc
+    image: docker.io/portainer/agent:2.27.6
+    imageID: docker.io/portainer/agent@sha256:d6d91e663e8436039c66fcd199145402c585710ec3b61f8f2abbf5a945f608a4
+    lastState: {}
+    name: portainer-agent
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:32:43Z"
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-7nhtj
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.73
+  podIPs:
+  - ip: 10.42.0.73
+  qosClass: BestEffort
+  startTime: "2025-06-14T22:32:38Z"

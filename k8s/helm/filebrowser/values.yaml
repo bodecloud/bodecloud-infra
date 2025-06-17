@@ -1,0 +1,351 @@
+# Default values for filebrowser
+# This is a YAML-formatted file.
+
+# Global settings
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: "local-path"
+
+# FileBrowser application image configuration
+image:
+  repository: filebrowser/filebrowser
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+# Ubuntu image for init containers and elfbot
+ubuntu:
+  image:
+    repository: ubuntu
+    tag: "20.04"
+    pullPolicy: IfNotPresent
+
+# Number of replicas
+replicaCount: 1
+
+# Service account
+serviceAccount:
+  create: true
+  name: "filebrowser"
+  automount: true
+  annotations: {}
+
+# Security context for the pod
+securityContext:
+  fsGroup: 568
+  fsGroupChangePolicy: OnRootMismatch
+  seccompProfile:
+    type: RuntimeDefault
+
+# Container security contexts
+containerSecurityContext:
+  filebrowser:
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: false
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+      
+  initContainers:
+    capabilities:
+      drop:
+        - ALL
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+      
+  elfbot:
+    capabilities:
+      drop:
+        - ALL
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+
+# Environment variables
+env:
+  TZ: "UTC"
+
+# Environment variables from ConfigMaps
+envFrom:
+  - configMapRef:
+      name: filebrowser-env
+
+# Resources for containers
+resources:
+  filebrowser:
+    limits:
+      cpu: "1"
+      memory: 1Gi
+    requests:
+      cpu: "0"
+      memory: 6Mi
+      
+  initContainers:
+    limits:
+      cpu: "1"
+      memory: 4Gi
+    requests:
+      cpu: "0"
+      memory: 1Mi
+      
+  elfbot:
+    limits:
+      cpu: "1"
+      memory: 4Gi
+    requests:
+      cpu: "0"
+      memory: 1Mi
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: http
+  annotations: {}
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: filebrowser.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Persistence configuration
+persistence:
+  backup:
+    enabled: true
+    size: 10Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  config:
+    enabled: true
+    size: 5Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  logs:
+    enabled: true
+    size: 2Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  rclone:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  symlinks:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  realdebridZurg:
+    enabled: true
+    size: 100Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+
+# ConfigMaps configuration
+configMaps:
+  filebrowserEnv:
+    enabled: true
+    data: {}
+    
+  filebrowserElfbotScript:
+    enabled: true
+    data:
+      elfbot: |
+        #!/bin/bash
+        # ElfBot script for FileBrowser
+        echo "ElfBot script executed with args: $@"
+        
+  recyclarrConfig:
+    enabled: true
+    data:
+      recyclarr.yaml: |
+        # Recyclarr configuration
+        sonarr:
+          base_url: http://sonarr:8989
+          api_key: your-api-key
+        radarr:
+          base_url: http://radarr:7878
+          api_key: your-api-key
+
+# FileBrowser configuration
+filebrowser:
+  # Branding configuration
+  branding:
+    name: "FileBrowser, by ElfHosted 🧙"
+    disableExternal: true
+    
+  # Authentication configuration
+  auth:
+    method: "noauth"
+    
+  # Feature toggles
+  features:
+    disablePreviewResize: true
+    disableThumbnails: true
+    disableTypeDetectionByHeader: true
+    lockPassword: true
+    
+  # Root directory
+  root: "/storage"
+  
+  # Cache directory
+  cacheDir: "/tmp"
+  
+  # Database path
+  database: "/tmp/filebrowser.db"
+  
+  # Allowed commands
+  commands:
+    - zip
+    - unzip
+    - rar
+    - unrar
+    - ls
+    - pwd
+    - cd
+    - mv
+    - cp
+    - ln
+    - find
+    - echo
+    - grep
+    - cat
+    - touch
+    - tar
+    - gzip
+    - rm
+    - tree
+    - du
+    - mlocate
+    - updatedb
+    - locate
+    - elfbot
+    - Elfbot
+
+# Init containers configuration
+initContainers:
+  copyRecyclarrConfig:
+    enabled: true
+    
+  setup:
+    enabled: true
+
+# Sidecar containers
+sidecars:
+  elfbot:
+    enabled: true
+
+# Health probes
+livenessProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+startupProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 5
+  successThreshold: 1
+  failureThreshold: 30
+
+# Node selector and affinity
+nodeSelector: {}
+
+affinity:
+  podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.elfhosted.com/role
+              operator: In
+              values:
+                - nodefinder
+        topologyKey: kubernetes.io/hostname
+
+tolerations: []
+
+# Priority class
+priorityClassName: "tenant-normal"
+
+# Annotations for configmap reloader
+annotations:
+  configmap.reloader.stakater.com/reload: "elfbot-all,filebrowser-elfbot-script,elfbot-filebrowser"
+  kubernetes.io/egress-bandwidth: "5M"
+
+# Enable service links
+enableServiceLinks: false
+
+# Deployment strategy
+strategy:
+  type: Recreate
+
+# Revision history limit
+revisionHistoryLimit: 3
+
+# Progress deadline
+progressDeadlineSeconds: 600
+
+# Volume configuration
+volumes:
+  dummyStorage:
+    enabled: true
+    sizeLimit: "1Gi"
+  elfbot:
+    enabled: true
+    sizeLimit: "1Gi"
+  elftermState:
+    enabled: true
+    sizeLimit: "1Gi"
+  tmp:
+    enabled: true
+
+# Hostname
+hostname: "elfhosted"
+
+# Namespace for elfbot operations
+elfbot:
+  namespace: "default" 

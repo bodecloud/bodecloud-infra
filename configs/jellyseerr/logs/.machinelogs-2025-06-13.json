@@ -1,0 +1,10 @@
+{"level":"info","message":"Commit Tag: $GIT_SHA","timestamp":"2025-06-13T07:51:03.041Z"}
+{"level":"info","message":"Starting Jellyseerr version 2.6.0","timestamp":"2025-06-13T07:51:03.799Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0001_migrate_hostname.js'...","timestamp":"2025-06-13T07:51:05.006Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0002_migrate_apitokens.js'...","timestamp":"2025-06-13T07:51:05.009Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0003_emby_media_server_type.js'...","timestamp":"2025-06-13T07:51:05.019Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0004_migrate_region_setting.js'...","timestamp":"2025-06-13T07:51:05.021Z"}
+{"label":"Settings Migrator","level":"debug","message":"Checking migration '0005_migrate_network_settings.js'...","timestamp":"2025-06-13T07:51:05.023Z"}
+{"label":"Notifications","level":"info","message":"Registered notification agents","timestamp":"2025-06-13T07:51:05.028Z"}
+{"label":"Server","level":"info","message":"Skipping starting the scheduled jobs as we have no Plex/Jellyfin/Emby servers setup yet","timestamp":"2025-06-13T07:51:05.036Z"}
+{"label":"Server","level":"info","message":"Server ready on port 5055","timestamp":"2025-06-13T07:51:05.320Z"}

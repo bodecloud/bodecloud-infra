@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/component: kubernetes-dashboard
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kubernetesdashboard
+    app.kubernetes.io/version: 2.6.1
+    helm.sh/chart: kubernetesdashboard-5.10.0
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+    kubernetes.io/cluster-service: "true"
+  name: brunner56-kubernetesdashboard
+  namespace: bolabaden
+spec:
+  clusterIP: 10.43.234.209
+  clusterIPs:
+  - 10.43.234.209
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 443
+    targetPort: http
+  selector:
+    app.kubernetes.io/component: kubernetes-dashboard
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: kubernetesdashboard

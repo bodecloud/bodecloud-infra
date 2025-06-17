@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app.elfhosted.com/name: radarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: radarr
+    pod-template-hash: 76f4859cb6
+  name: radarr-76f4859cb6
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: radarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: radarr
+      pod-template-hash: 76f4859cb6
+  template:
+    metadata:
+      labels:
+        app.elfhosted.com/name: radarr
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: radarr
+        pod-template-hash: 76f4859cb6
+    spec:
+      containers:
+      - image: linuxserver/radarr:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 7878
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: radarr
+        ports:
+        - containerPort: 7878
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 7878
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: radarr
+        - mountPath: /storage/symlinks
+          name: symlinks
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: symlinks
+        persistentVolumeClaim:
+          claimName: symlinks
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

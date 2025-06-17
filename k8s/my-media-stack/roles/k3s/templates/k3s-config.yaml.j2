@@ -1,0 +1,19 @@
+---
+# K3s master configuration
+token: { { k3s_token } }
+bind-address: { { node_tailscale_ip } }
+advertise-address: { { node_tailscale_ip } }
+node-ip: { { node_tailscale_ip } }
+cluster-init: true
+disable:
+  - traefik # We'll install our own Traefik
+  - servicelb # We'll use MetalLB or similar
+write-kubeconfig-mode: "0644"
+kube-apiserver-arg:
+  - "service-node-port-range=80-32767"
+kube-controller-manager-arg:
+  - "bind-address=0.0.0.0"
+kube-scheduler-arg:
+  - "bind-address=0.0.0.0"
+kubelet-arg:
+  - "node-ip={{ node_tailscale_ip }}"

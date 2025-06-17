@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/recyclarr/recyclarr/master/schemas/config-schema.json
+
+# An empty starter config to use with Recyclarr. Update the values below as needed for your
+# instance. You will be required to update the `api_key` and `base_url` for each instance you want
+# to use.
+#
+# If you'd rather use pre-built configuration instead of building your own from scratch, see these
+# pages:
+# - Config Templates: https://recyclarr.dev/wiki/guide-configs/
+# - CLI Command: https://recyclarr.dev/wiki/cli/config/list/templates/
+#
+# This file WILL NOT WORK as it currently is. You need to read the documentation and build this
+# configuration from scratch. Note that there's no "one size fits all" configuration. Please refer
+# to the TRaSH Guides to understand how to build the appropriate configuration based on your
+# hardware setup and capabilities.
+#
+# For more details on the configuration, see the Configuration Reference on the wiki here:
+# https://recyclarr.dev/wiki/yaml/config-reference/
+#
+# Want a more flexible file layout?
+# See: https://recyclarr.dev/wiki/file-structure/
+
+# Configuration specific to Sonarr. For Radarr, the layout is the same.
+# See: https://recyclarr.dev/wiki/yaml/config-reference/basic/
+
+sonarr:
+  sonarr-main:
+    base_url: http://sonarr:8989
+    api_key: 5fa91e23f1ce4bfda1159fb0d717b70e
+    quality_definition:
+      type: series
+
+radarr:
+  radarr-main:
+    base_url: http://radarr:7878
+    api_key: fc44a10e3c7c4c0582cf99f1d7ff0f18
+    quality_definition:
+      type: movie
+      preferred_ratio: 0.5

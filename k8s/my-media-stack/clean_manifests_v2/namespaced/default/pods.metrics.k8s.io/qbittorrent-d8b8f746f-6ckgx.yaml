@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: qbittorrent
+  usage:
+    cpu: 84915183n
+    memory: 5052Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: qbittorrent
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: qbittorrent
+    pod-template-hash: d8b8f746f
+  name: qbittorrent-d8b8f746f-6ckgx
+  namespace: default
+timestamp: "2025-06-14T23:00:59Z"
+window: 13.995s

@@ -1,0 +1,131 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/restartedAt: "2025-06-12T01:11:04Z"
+  generateName: wizarr-5b5967b-
+  labels:
+    app.elfhosted.com/name: wizarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: wizarr
+    pod-template-hash: 5b5967b
+  name: wizarr-5b5967b-sd7vl
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: wizarr-5b5967b
+spec:
+  containers:
+  - image: ghcr.io/wizarrrr/wizarr:latest
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 5690
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: wizarr
+    ports:
+    - containerPort: 5690
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 5690
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data/database
+      name: config
+      subPath: wizarr
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: baden.vpshostingservice.co
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: config
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:04:26Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:03:47Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:08:10Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:08:10Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T15:03:47Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://5cf71308848ac9b483285101f8eeeaaf91bd382b44e00284be2cfd9ff7ce232f
+    image: ghcr.io/wizarrrr/wizarr:latest
+    imageID: ghcr.io/wizarrrr/wizarr@sha256:b7fde11c0cc9e98fdcb69929de4e36b673ef59a4cf78b1589c2afe805aad955d
+    lastState:
+      terminated:
+        containerID: containerd://bfeafa488d6edf3e965ee45014afbf459f35b1025895edbafd3424efa0c16d1d
+        exitCode: 137
+        finishedAt: "2025-06-14T15:06:48Z"
+        reason: Error
+        startedAt: "2025-06-14T15:04:26Z"
+    name: wizarr
+    ready: true
+    restartCount: 1
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T15:06:48Z"
+    volumeMounts:
+    - mountPath: /data/database
+      name: config
+  hostIP: 209.54.102.83
+  hostIPs:
+  - ip: 209.54.102.83
+  phase: Running
+  podIP: 10.42.3.15
+  podIPs:
+  - ip: 10.42.3.15
+  qosClass: Burstable
+  startTime: "2025-06-14T15:03:47Z"

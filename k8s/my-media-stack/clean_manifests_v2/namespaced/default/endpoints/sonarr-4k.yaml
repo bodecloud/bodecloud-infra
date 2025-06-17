@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:04:21Z"
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: sonarr-4k
+  name: sonarr-4k
+  namespace: default
+subsets:
+- addresses:
+  - ip: 10.42.0.244
+    nodeName: beatapostapita
+    targetRef:
+      kind: Pod
+      name: sonarr-4k-6cdc854468-bqq26
+      namespace: default
+  ports:
+  - name: http
+    port: 8989
+    protocol: TCP

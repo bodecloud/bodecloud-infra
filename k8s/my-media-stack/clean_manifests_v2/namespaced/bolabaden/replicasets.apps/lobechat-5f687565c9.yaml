@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: lobechat
+    pod-template-hash: 5f687565c9
+  name: lobechat-5f687565c9
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: lobechat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lobechat
+      pod-template-hash: 5f687565c9
+  template:
+    metadata:
+      labels:
+        app: lobechat
+        pod-template-hash: 5f687565c9
+    spec:
+      containers:
+      - env:
+        - name: ACCESS_CODE
+          value: brunner56
+        - name: PGID
+          value: "988"
+        - name: PUID
+          value: "1002"
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "002"
+        image: lobehub/lobe-chat:latest
+        imagePullPolicy: Always
+        name: lobechat
+        ports:
+        - containerPort: 3210
+          name: lobechat-3210
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /configs/lobechat/host_config
+          name: host-config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/ubuntu/my-media-stack/configs/lobechat/host_config
+          type: DirectoryOrCreate
+        name: host-config
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  replicas: 1

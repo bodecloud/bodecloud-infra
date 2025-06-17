@@ -1,0 +1,43 @@
+{{- if .Values.configMaps.rivenEnv.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "riven.fullname" . }}-riven-env
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "riven.labels" . | nindent 4 }}
+data:
+  {{- with .Values.configMaps.rivenEnv.data }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
+
+---
+{{- if .Values.configMaps.rivenSetup.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "riven.fullname" . }}-riven-setup
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "riven.labels" . | nindent 4 }}
+data:
+  {{- with .Values.configMaps.rivenSetup.data }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
+
+---
+{{- if .Values.configMaps.elfbotRiven.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "riven.fullname" . }}-elfbot-riven
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "riven.labels" . | nindent 4 }}
+data:
+  {{- with .Values.configMaps.elfbotRiven.data }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }} 

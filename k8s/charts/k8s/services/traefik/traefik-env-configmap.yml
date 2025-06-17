@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-env
+data:
+  CONFIG_PATH: "/home/brunner56/my-media-stack/configs"
+  CERTS_PATH: "/home/brunner56/my-media-stack/certs"
+  DOCKER_SOCK: "/var/run/docker.sock"
+  CLOUDFLARE_EMAIL: "boden.crouch@gmail.com"
+  CLOUDFLARE_DNS_API_TOKEN: "fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I"
+  CLOUDFLARE_ZONE_API_TOKEN: "fp6tjZWb66p1rCyZBM9k0hxrE0n0Y7XctSTwP52I"
+  LETS_ENCRYPT_EMAIL: "boden.crouch@gmail.com"
+  LEGO_DISABLE_CNAME_SUPPORT: "false"
+  DUCKDNS_TOKEN: "2c18769a-2889-4648-a70c-2fe44dd10f20"
+  ZEROSSL_API_KEY: "c04746f32a98d6915aea626941916bd7"
+  DOMAIN: "bolabaden.org"
+  DUCKDNS_DOMAIN: "bolabaden.duckdns.org"
+  TS_HOSTNAME: "micklethefickle" 

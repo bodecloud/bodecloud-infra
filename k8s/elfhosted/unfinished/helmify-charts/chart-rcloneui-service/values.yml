@@ -1,0 +1,10 @@
+kubernetesClusterDomain: cluster.local
+rcloneui:
+  ports:
+  - name: rcloneui
+    port: 5572
+    targetPort: 0
+  - name: webdav-local
+    port: 5575
+    targetPort: 0
+  type: ClusterIP

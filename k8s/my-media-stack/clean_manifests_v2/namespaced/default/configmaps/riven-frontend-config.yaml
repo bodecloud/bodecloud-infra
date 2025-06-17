@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  config.json: |-
+    {
+      "apiUrl": "https://riven-backend.elfhosted.com",
+      "title": "Riven",
+      "theme": "dark"
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"config.json":"{\n  \"apiUrl\": \"https://riven-backend.elfhosted.com\",\n  \"title\": \"Riven\",\n  \"theme\": \"dark\"\n}"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"riven-frontend-config","namespace":"default"}}
+  name: riven-frontend-config
+  namespace: default

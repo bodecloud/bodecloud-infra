@@ -1,0 +1,30 @@
+apiVersion: v1
+data:
+  steps.json: |-
+    [
+      {
+        "step": 1,
+        "title": "Welcome to Jellyfin!",
+        "description": "Follow these steps to get started with your Jellyfin server.",
+        "content": "Your Jellyfin server is ready to use!"
+      },
+      {
+        "step": 2,
+        "title": "Download the App",
+        "description": "Download the Jellyfin app for your device.",
+        "content": "Visit https://jellyfin.org/downloads/ to download the app."
+      },
+      {
+        "step": 3,
+        "title": "Connect to Server",
+        "description": "Connect to your Jellyfin server.",
+        "content": "Use the server address: https://jellyfin.elfhosted.com"
+      }
+    ]
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"steps.json":"[\n  {\n    \"step\": 1,\n    \"title\": \"Welcome to Jellyfin!\",\n    \"description\": \"Follow these steps to get started with your Jellyfin server.\",\n    \"content\": \"Your Jellyfin server is ready to use!\"\n  },\n  {\n    \"step\": 2,\n    \"title\": \"Download the App\",\n    \"description\": \"Download the Jellyfin app for your device.\",\n    \"content\": \"Visit https://jellyfin.org/downloads/ to download the app.\"\n  },\n  {\n    \"step\": 3,\n    \"title\": \"Connect to Server\",\n    \"description\": \"Connect to your Jellyfin server.\",\n    \"content\": \"Use the server address: https://jellyfin.elfhosted.com\"\n  }\n]"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"wizarr-steps-jellyfin","namespace":"default"}}
+  name: wizarr-steps-jellyfin
+  namespace: default

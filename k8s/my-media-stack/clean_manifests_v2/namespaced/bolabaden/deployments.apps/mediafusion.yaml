@@ -1,0 +1,214 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1"},"generation":1,"name":"mediafusion","namespace":"bolabaden"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"mediafusion"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"mediafusion"}},"spec":{"containers":[{"env":[{"name":"API_PASSWORD","value":"h4L0m4St3R327"},{"name":"BACKGROUND_SEARCH_INTERVAL_HOURS","value":"24"},{"name":"BT4G_IMMEDIATE_MAX_PROCESS","value":"30"},{"name":"BT4G_IMMEDIATE_MAX_PROCESS_TIME","value":"30"},{"name":"BT4G_SEARCH_INTERVAL_HOUR","value":"18"},{"name":"BT4G_SEARCH_TIMEOUT","value":"30"},{"name":"BT4G_URL","value":"https://bt4gprx.com"},{"name":"ENABLE_RATE_LIMIT","value":"False"},{"name":"FLARESOLVERR_URL","value":"http://flaresolverr:8191"},{"name":"HOST_URL","value":"https://mediafusion.my-media-stack.org"},{"name":"IS_SCRAP_FROM_BT4G","value":"true"},{"name":"IS_SCRAP_FROM_JACKETT","value":"True"},{"name":"IS_SCRAP_FROM_MEDIAFUSION","value":"false"},{"name":"IS_SCRAP_FROM_PROWLARR","value":"True"},{"name":"IS_SCRAP_FROM_TORRENTIO","value":"false"},{"name":"IS_SCRAP_FROM_YTS","value":"True"},{"name":"IS_SCRAP_FROM_ZILEAN","value":"True"},{"name":"JACKETT_API_KEY","value":"nnx0n84pcj7umynyd2pbid2nl1zzuemz"},{"name":"JACKETT_FEED_SCRAPE_INTERVAL_HOUR","value":"1"},{"name":"JACKETT_IMMEDIATE_MAX_PROCESS","value":"30"},{"name":"JACKETT_IMMEDIATE_MAX_PROCESS_TIME","value":"120"},{"name":"JACKETT_LIVE_TITLE_SEARCH","value":"true"},{"name":"JACKETT_SEARCH_INTERVAL_HOUR","value":"24"},{"name":"JACKETT_URL","value":"http://jackett:9117"},{"name":"MEDIAFUSION_SEARCH_INTERVAL_DAYS","value":"1"},{"name":"MEDIAFUSION_URL","value":"https://mediafusion.elfhosted.com"},{"name":"METADATA_PRIMARY_SOURCE","value":"tmdb"},{"name":"MONGO_URI","value":"mongodb://mongodb:27017/mediafusion"},{"name":"PGID","value":"988"},{"name":"POSTER_HOST_URL","value":"https://mediafusion.my-media-stack.org"},{"name":"PROWLARR_API_KEY","value":"29440a82740d475cacb35327c62c87a1"},{"name":"PROWLARR_FEED_SCRAPE_INTERVAL_HOUR","value":"2"},{"name":"PROWLARR_IMMEDIATE_MAX_PROCESS","value":"30"},{"name":"PROWLARR_IMMEDIATE_MAX_PROCESS_TIME","value":"120"},{"name":"PROWLARR_LIVE_TITLE_SEARCH","value":"true"},{"name":"PROWLARR_SEARCH_INTERVAL_HOUR","value":"24"},{"name":"PROWLARR_URL","value":"http://prowlarr:9696"},{"name":"PUID","value":"1001"},{"name":"REDIS_URL","value":"redis://redis:6379"},{"name":"SCRAPE_WITH_AKA_TITLES","value":"False"},{"name":"SECRET_KEY","value":"c75ac92df70c4383c8d1bb37f65454f9"},{"name":"STORE_STREMTHRU_MAGNET_CACHE","value":"True"},{"name":"TAMILMV_SCHEDULER_CRONTAB","value":"13 */8 * * *"},{"name":"TAMILULTRA_SCHEDULER_CRONTAB","value":"33 */8 * * *"},{"name":"TAMIL_BLASTERS_SCHEDULER_CRONTAB","value":"20 */8 * * *"},{"name":"TMDB_API_KEY","value":"cec876f852b9c15d2c1b436b1117dff7"},{"name":"TORRENTIO_SEARCH_INTERVAL_DAYS","value":"1"},{"name":"TORRENTIO_URL","value":"https://torrentio.strem.fun"},{"name":"TZ","value":"America/Chicago"},{"name":"UMASK","value":"002"},{"name":"ZILEAN_SEARCH_INTERVAL_HOUR","value":"1"},{"name":"ZILEAN_URL","value":"https://zilean.elfhosted.com"}],"image":"mhdzumair/mediafusion:latest","imagePullPolicy":"IfNotPresent","livenessProbe":{"exec":{"command":["/bin/sh","-c","curl -f http://localhost:8000/health \u003e /dev/null 2\u003e\u00261 || exit 1"]},"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":60,"successThreshold":1,"timeoutSeconds":10},"name":"mediafusion","ports":[{"containerPort":8000,"name":"mediafusio-8000","protocol":"TCP"},{"containerPort":9191,"name":"mediafusio-9191","protocol":"TCP"}],"resources":{"limits":{"cpu":"100m","memory":"512Mi"},"requests":{"cpu":"50m","memory":"128Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","initContainers":[{"args":["echo \"Waiting for MongoDB to be ready...\"\nuntil nc -z mongodb 27017; do\n  echo \"MongoDB is not ready yet...\"\n  sleep 2\ndone\necho \"MongoDB is ready!\"\n"],"command":["sh","-c"],"image":"busybox:1.35","imagePullPolicy":"IfNotPresent","name":"wait-for-mongodb","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"},{"args":["echo \"Waiting for Redis to be ready...\"\nuntil nc -z redis 6379; do\n  echo \"Redis is not ready yet...\"\n  sleep 2\ndone\necho \"Redis is ready!\"\n"],"command":["sh","-c"],"image":"busybox:1.35","imagePullPolicy":"IfNotPresent","name":"wait-for-redis","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}}}
+  name: mediafusion
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mediafusion
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mediafusion
+    spec:
+      containers:
+      - env:
+        - name: API_PASSWORD
+          value: h4L0m4St3R327
+        - name: BACKGROUND_SEARCH_INTERVAL_HOURS
+          value: "24"
+        - name: BT4G_IMMEDIATE_MAX_PROCESS
+          value: "30"
+        - name: BT4G_IMMEDIATE_MAX_PROCESS_TIME
+          value: "30"
+        - name: BT4G_SEARCH_INTERVAL_HOUR
+          value: "18"
+        - name: BT4G_SEARCH_TIMEOUT
+          value: "30"
+        - name: BT4G_URL
+          value: https://bt4gprx.com
+        - name: ENABLE_RATE_LIMIT
+          value: "False"
+        - name: FLARESOLVERR_URL
+          value: http://flaresolverr:8191
+        - name: HOST_URL
+          value: https://mediafusion.my-media-stack.org
+        - name: IS_SCRAP_FROM_BT4G
+          value: "true"
+        - name: IS_SCRAP_FROM_JACKETT
+          value: "True"
+        - name: IS_SCRAP_FROM_MEDIAFUSION
+          value: "false"
+        - name: IS_SCRAP_FROM_PROWLARR
+          value: "True"
+        - name: IS_SCRAP_FROM_TORRENTIO
+          value: "false"
+        - name: IS_SCRAP_FROM_YTS
+          value: "True"
+        - name: IS_SCRAP_FROM_ZILEAN
+          value: "True"
+        - name: JACKETT_API_KEY
+          value: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+        - name: JACKETT_FEED_SCRAPE_INTERVAL_HOUR
+          value: "1"
+        - name: JACKETT_IMMEDIATE_MAX_PROCESS
+          value: "30"
+        - name: JACKETT_IMMEDIATE_MAX_PROCESS_TIME
+          value: "120"
+        - name: JACKETT_LIVE_TITLE_SEARCH
+          value: "true"
+        - name: JACKETT_SEARCH_INTERVAL_HOUR
+          value: "24"
+        - name: JACKETT_URL
+          value: http://jackett:9117
+        - name: MEDIAFUSION_SEARCH_INTERVAL_DAYS
+          value: "1"
+        - name: MEDIAFUSION_URL
+          value: https://mediafusion.elfhosted.com
+        - name: METADATA_PRIMARY_SOURCE
+          value: tmdb
+        - name: MONGO_URI
+          value: mongodb://mongodb:27017/mediafusion
+        - name: PGID
+          value: "988"
+        - name: POSTER_HOST_URL
+          value: https://mediafusion.my-media-stack.org
+        - name: PROWLARR_API_KEY
+          value: 29440a82740d475cacb35327c62c87a1
+        - name: PROWLARR_FEED_SCRAPE_INTERVAL_HOUR
+          value: "2"
+        - name: PROWLARR_IMMEDIATE_MAX_PROCESS
+          value: "30"
+        - name: PROWLARR_IMMEDIATE_MAX_PROCESS_TIME
+          value: "120"
+        - name: PROWLARR_LIVE_TITLE_SEARCH
+          value: "true"
+        - name: PROWLARR_SEARCH_INTERVAL_HOUR
+          value: "24"
+        - name: PROWLARR_URL
+          value: http://prowlarr:9696
+        - name: PUID
+          value: "1001"
+        - name: REDIS_URL
+          value: redis://redis:6379
+        - name: SCRAPE_WITH_AKA_TITLES
+          value: "False"
+        - name: SECRET_KEY
+          value: c75ac92df70c4383c8d1bb37f65454f9
+        - name: STORE_STREMTHRU_MAGNET_CACHE
+          value: "True"
+        - name: TAMILMV_SCHEDULER_CRONTAB
+          value: 13 */8 * * *
+        - name: TAMILULTRA_SCHEDULER_CRONTAB
+          value: 33 */8 * * *
+        - name: TAMIL_BLASTERS_SCHEDULER_CRONTAB
+          value: 20 */8 * * *
+        - name: TMDB_API_KEY
+          value: cec876f852b9c15d2c1b436b1117dff7
+        - name: TORRENTIO_SEARCH_INTERVAL_DAYS
+          value: "1"
+        - name: TORRENTIO_URL
+          value: https://torrentio.strem.fun
+        - name: TZ
+          value: America/Chicago
+        - name: UMASK
+          value: "002"
+        - name: ZILEAN_SEARCH_INTERVAL_HOUR
+          value: "1"
+        - name: ZILEAN_URL
+          value: https://zilean.elfhosted.com
+        image: mhdzumair/mediafusion:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -f http://localhost:8000/health > /dev/null 2>&1 || exit 1
+          failureThreshold: 5
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: mediafusion
+        ports:
+        - containerPort: 8000
+          name: mediafusio-8000
+          protocol: TCP
+        - containerPort: 9191
+          name: mediafusio-9191
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - args:
+        - |
+          echo "Waiting for MongoDB to be ready..."
+          until nc -z mongodb 27017; do
+            echo "MongoDB is not ready yet..."
+            sleep 2
+          done
+          echo "MongoDB is ready!"
+        command:
+        - sh
+        - -c
+        image: busybox:1.35
+        imagePullPolicy: IfNotPresent
+        name: wait-for-mongodb
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - args:
+        - |
+          echo "Waiting for Redis to be ready..."
+          until nc -z redis 6379; do
+            echo "Redis is not ready yet..."
+            sleep 2
+          done
+          echo "Redis is ready!"
+        command:
+        - sh
+        - -c
+        image: busybox:1.35
+        imagePullPolicy: IfNotPresent
+        name: wait-for-redis
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  conditions:
+  - lastTransitionTime: "2025-06-14T19:17:45Z"
+    lastUpdateTime: "2025-06-14T19:17:45Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    type: Available
+  - lastTransitionTime: "2025-06-14T22:49:01Z"
+    lastUpdateTime: "2025-06-14T22:49:01Z"
+    message: ReplicaSet "mediafusion-694f8f8dc8" has timed out progressing.
+    reason: ProgressDeadlineExceeded
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1

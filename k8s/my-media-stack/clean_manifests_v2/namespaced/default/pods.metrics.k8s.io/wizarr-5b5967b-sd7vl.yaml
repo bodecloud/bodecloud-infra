@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: wizarr
+  usage:
+    cpu: 16277598n
+    memory: 235624Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: wizarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: wizarr
+    pod-template-hash: 5b5967b
+  name: wizarr-5b5967b-sd7vl
+  namespace: default
+timestamp: "2025-06-14T23:00:57Z"
+window: 17.374s

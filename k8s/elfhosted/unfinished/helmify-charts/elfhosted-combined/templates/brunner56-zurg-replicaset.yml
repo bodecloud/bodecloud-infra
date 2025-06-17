@@ -1,0 +1,308 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: {{ include "elfhosted-combined.fullname" . }}-brunner56-zurg-79859b68d6
+  labels:
+    app.elfhosted.com/class: debrid
+    app.elfhosted.com/name: zurg
+    pod-template-hash: 79859b68d6
+  {{- include "elfhosted-combined.labels" . | nindent 4 }}
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-zurg,zurg-env,gluetun-config
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: zurg
+      pod-template-hash: 79859b68d6
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/egress-bandwidth: 150M
+      creationTimestamp: "2025-05-29T17:12:59Z"
+      labels:
+        app.elfhosted.com/class: debrid
+        app.elfhosted.com/name: zurg
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: zurg
+        pod-template-hash: 79859b68d6
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: node-role.elfhosted.com/contended
+                operator: In
+                values:
+                - "true"
+            weight: 1
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.elfhosted.com/role
+                  operator: In
+                  values:
+                  - nodefinder
+              topologyKey: kubernetes.io/hostname
+            weight: 1
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.elfhosted.com/name
+                  operator: In
+                  values:
+                  - zurg
+              topologyKey: kubernetes.io/hostname
+            weight: 2
+      automountServiceAccountToken: false
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: zurg-env
+        image: ghcr.io/elfhosted/zurg-rc:2025.05.14.0031-nightly@sha256:513bcc2be2a9fb8b8df7fc458f76747bebcc884776bfbfd4393e16d61b2c1227
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 9999
+          timeoutSeconds: 1
+        name: brunner56-zurg
+        ports:
+        - containerPort: 9999
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 9999
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 2Gi
+          requests:
+            cpu: "0"
+            memory: 32Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          failureThreshold: 120
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 9999
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /backup
+          name: backup
+        - mountPath: /config
+          name: config
+          subPath: zurg
+        - mountPath: /elfbot
+          name: elfbot
+        - mountPath: /example-config
+          name: example-config
+        - mountPath: /config/logs
+          name: logs
+          subPath: zurg
+        - mountPath: /shared
+          name: shared
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /tooling-scripts
+          name: tooling-scripts
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      imagePullSecrets:
+      - name: ghcr-io-elfhosted
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - "set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name
+          if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\nfi\n\n#
+          look for commands - we match specific names in order of least-destructive\nTIMESTAMP_NOW=$(date
+          +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)\n
+          \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+          -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\n# If no command is set,
+          then move onto the next possibility\nif [[ -f /etc/elfbot/backup && -z \"$COMMAND\"
+          ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n
+          \ if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\n#
+          If no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/reset
+          && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)\n
+          \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+          -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\ncase $COMMAND in\n\n  \"pause\")\n
+          \   echo \"Recent pause command found, sleeping 5m..\"\n    sleep 300\n
+          \   ;;\n\n  \"reset\")\n\n    # Safety check - if /config/homer exists,
+          we've not mounted /config properly and are about to wipe out EVERYTHING\n
+          \   if [ -e \"/config/homer\" ]; then\n        echo \"The path /config/homer
+          exists. Exiting.\"\n        exit 1\n    fi      \n    echo \"Recent reset
+          command found, resetting\"\n    rm -rf /config/*\n    ;;\n\n  \"backup\")\n
+          \   echo \"Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\n
+          \   TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config
+          /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n    ;;\n\nesac\n\nif [[ ! -f /config/i-am-bootstrapped
+          ]]\nthen\n  echo \"Bootstrapping from goldilocks config...\"\n  s5cmd sync
+          s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/\n  touch /config/i-am-bootstrapped\nfi\n"
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: access-key-id
+              name: b2-elfhosted-config-ro
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: b2-elfhosted-config-ro
+        - name: S3_ENDPOINT_URL
+          value: https://s3.us-west-000.backblazeb2.com
+        - name: K8S_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/name']
+        - name: ELF_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.elfhosted.com/name']
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: bootstrap
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/elfbot
+          name: elfbot
+        - mountPath: /storage/backup
+          name: backup
+        - mountPath: /config
+          name: config
+          subPath: zurg
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+
+          # We need a /config/logs folder
+          mkdir -p /config/logs
+
+          # If we don't already have an example config, create one
+          if [[ ! -f /config/config.yml ]];
+          then
+            cp /bootstrap/config.yml /config/
+          fi
+
+          # If we don't already have an example plex_update, create one
+          if [[ ! -f /config/plex_update.sh ]];
+          then
+            cp /bootstrap/plex_update.sh /config/
+          fi
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: copy-example-config
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: zurg
+        - mountPath: /bootstrap/
+          name: example-config
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          # run the setup script from the configmap, so that we can make templated changes
+          bash /bootstrap/setup.sh
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: setup
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: zurg
+        - mountPath: /bootstrap/
+          name: example-config
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 568
+        runAsUser: 568
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: backup
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - configMap:
+          defaultMode: 420
+          name: elfbot-zurg
+          optional: true
+        name: elfbot
+      - configMap:
+          defaultMode: 420
+          name: zurg-config
+        name: example-config
+      - name: logs
+        persistentVolumeClaim:
+          claimName: logs
+      - name: shared
+      - name: tmp
+      - configMap:
+          defaultMode: 493
+          name: tooling-scripts
+        name: tooling-scripts

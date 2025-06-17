@@ -1,0 +1,22 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints: null
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-11T23:33:00Z"
+  generateName: torbox-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: torbox
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: torbox
+  name: torbox-zhm88
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: torbox
+ports: null

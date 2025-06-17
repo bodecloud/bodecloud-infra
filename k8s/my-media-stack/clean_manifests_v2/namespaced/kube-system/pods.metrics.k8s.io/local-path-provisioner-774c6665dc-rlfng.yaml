@@ -1,0 +1,15 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: local-path-provisioner
+  usage:
+    cpu: 199222n
+    memory: 36844Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app: local-path-provisioner
+    pod-template-hash: 774c6665dc
+  name: local-path-provisioner-774c6665dc-rlfng
+  namespace: kube-system
+timestamp: "2025-06-14T23:02:14Z"
+window: 16.725s

@@ -1,0 +1,209 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: svclb-traefik-679a600c-
+  labels:
+    app: svclb-traefik-679a600c
+    controller-revision-hash: 86b78b86f9
+    pod-template-generation: "2"
+    svccontroller.k3s.cattle.io/svcname: traefik
+    svccontroller.k3s.cattle.io/svcnamespace: kube-system
+  name: svclb-traefik-679a600c-v6nmr
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: DaemonSet
+    name: svclb-traefik-679a600c
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchFields:
+          - key: metadata.name
+            operator: In
+            values:
+            - beatapostapita
+  automountServiceAccountToken: false
+  containers:
+  - env:
+    - name: SRC_PORT
+      value: "8080"
+    - name: SRC_RANGES
+      value: 0.0.0.0/0
+    - name: DEST_PROTO
+      value: TCP
+    - name: DEST_PORT
+      value: "8080"
+    - name: DEST_IPS
+      value: 10.43.74.33
+    image: rancher/klipper-lb:v0.4.13
+    imagePullPolicy: IfNotPresent
+    name: lb-tcp-8080
+    ports:
+    - containerPort: 8080
+      hostPort: 8080
+      name: lb-tcp-8080
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+  - env:
+    - name: SRC_PORT
+      value: "80"
+    - name: SRC_RANGES
+      value: 0.0.0.0/0
+    - name: DEST_PROTO
+      value: TCP
+    - name: DEST_PORT
+      value: "80"
+    - name: DEST_IPS
+      value: 10.43.74.33
+    image: rancher/klipper-lb:v0.4.13
+    imagePullPolicy: IfNotPresent
+    name: lb-tcp-80
+    ports:
+    - containerPort: 80
+      hostPort: 80
+      name: lb-tcp-80
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+  - env:
+    - name: SRC_PORT
+      value: "443"
+    - name: SRC_RANGES
+      value: 0.0.0.0/0
+    - name: DEST_PROTO
+      value: TCP
+    - name: DEST_PORT
+      value: "443"
+    - name: DEST_IPS
+      value: 10.43.74.33
+    image: rancher/klipper-lb:v0.4.13
+    imagePullPolicy: IfNotPresent
+    name: lb-tcp-443
+    ports:
+    - containerPort: 443
+      hostPort: 443
+      name: lb-tcp-443
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 2000001000
+  priorityClassName: system-node-critical
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    sysctls:
+    - name: net.ipv4.ip_forward
+      value: "1"
+  serviceAccount: svclb
+  serviceAccountName: svclb
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Exists
+  - key: CriticalAddonsOnly
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/disk-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/pid-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/unschedulable
+    operator: Exists
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T18:12:07Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T18:12:06Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T18:12:07Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T18:12:07Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T18:12:06Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://47b8bdcf542287cf42710ebec55502584c10dbbc5c10bae76870a3a261a03849
+    image: docker.io/rancher/klipper-lb:v0.4.13
+    imageID: docker.io/rancher/klipper-lb@sha256:7eb86d5b908ec6ddd9796253d8cc2f43df99420fc8b8a18452a94dc56f86aca0
+    lastState: {}
+    name: lb-tcp-443
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T18:12:07Z"
+  - containerID: containerd://468eda6fc487beed0d5e09bf45cc8dc0a641c10816d41c65d2dd6c6164be4036
+    image: docker.io/rancher/klipper-lb:v0.4.13
+    imageID: docker.io/rancher/klipper-lb@sha256:7eb86d5b908ec6ddd9796253d8cc2f43df99420fc8b8a18452a94dc56f86aca0
+    lastState: {}
+    name: lb-tcp-80
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T18:12:07Z"
+  - containerID: containerd://75cc84ccd735b40524d7625ff41b372f60ba450eb2ef2cca55a2e0fe9f6ab5f6
+    image: docker.io/rancher/klipper-lb:v0.4.13
+    imageID: docker.io/rancher/klipper-lb@sha256:7eb86d5b908ec6ddd9796253d8cc2f43df99420fc8b8a18452a94dc56f86aca0
+    lastState: {}
+    name: lb-tcp-8080
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T18:12:07Z"
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.68
+  podIPs:
+  - ip: 10.42.0.68
+  qosClass: BestEffort
+  startTime: "2025-06-14T18:12:06Z"

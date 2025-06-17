@@ -1,0 +1,33 @@
+apiVersion: v1
+data:
+  initialize.sh: |
+    #!/bin/sh
+    SET_INDEX=${HOSTNAME##*-}
+    echo "Starting initializing for pod $SET_INDEX"
+    if [ "$SET_INDEX" = "0" ]; then
+      exec ./entrypoint.sh --uri 'http://qdrant-0.qdrant-headless:6335'
+    else
+      exec ./entrypoint.sh --bootstrap 'http://qdrant-0.qdrant-headless:6335' --uri 'http://qdrant-'"$SET_INDEX"'.qdrant-headless:6335'
+    fi
+  production.yaml: |
+    cluster:
+      consensus:
+        tick_period_ms: 100
+      enabled: true
+      p2p:
+        enable_tls: false
+        port: 6335
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: qdrant
+    meta.helm.sh/release-namespace: default
+  labels:
+    app: qdrant
+    app.kubernetes.io/instance: qdrant
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: qdrant
+    app.kubernetes.io/version: v1.14.1
+    helm.sh/chart: qdrant-1.14.1
+  name: qdrant
+  namespace: default

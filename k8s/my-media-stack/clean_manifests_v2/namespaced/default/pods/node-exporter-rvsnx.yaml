@@ -1,0 +1,150 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: node-exporter-
+  labels:
+    app.elfhosted.com/name: node-exporter
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: node-exporter
+    controller-revision-hash: 5c595f64f4
+    pod-template-generation: "1"
+  name: node-exporter-rvsnx
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: DaemonSet
+    name: node-exporter
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchFields:
+          - key: metadata.name
+            operator: In
+            values:
+            - baden.vpshostingservice.co
+  containers:
+  - image: prom/node-exporter:latest
+    imagePullPolicy: Always
+    name: node-exporter
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /host/proc
+      name: proc
+      readOnly: true
+    - mountPath: /host/sys
+      name: sys
+      readOnly: true
+    - mountPath: /rootfs
+      name: root
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostNetwork: true
+  nodeName: baden.vpshostingservice.co
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/disk-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/pid-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/unschedulable
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/network-unavailable
+    operator: Exists
+  volumes:
+  - hostPath:
+      path: /proc
+      type: ""
+    name: proc
+  - hostPath:
+      path: /sys
+      type: ""
+    name: sys
+  - hostPath:
+      path: /
+      type: ""
+    name: root
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:24:23Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:24:20Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:24:23Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:24:23Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T17:24:20Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://2b7374485ea8cf2d9867528eb20d68111d56fbd5b2c26c1fa1d3cf5d84b3cdeb
+    image: docker.io/prom/node-exporter:latest
+    imageID: docker.io/prom/node-exporter@sha256:d00a542e409ee618a4edc67da14dd48c5da66726bbd5537ab2af9c1dfc442c8a
+    lastState: {}
+    name: node-exporter
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T17:24:22Z"
+    volumeMounts:
+    - mountPath: /host/proc
+      name: proc
+      readOnly: true
+      recursiveReadOnly: Disabled
+    - mountPath: /host/sys
+      name: sys
+      readOnly: true
+      recursiveReadOnly: Disabled
+    - mountPath: /rootfs
+      name: root
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 209.54.102.83
+  hostIPs:
+  - ip: 209.54.102.83
+  phase: Running
+  podIP: 209.54.102.83
+  podIPs:
+  - ip: 209.54.102.83
+  qosClass: Burstable
+  startTime: "2025-06-14T17:24:20Z"

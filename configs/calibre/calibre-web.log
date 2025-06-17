@@ -1,0 +1,452 @@
+[2025-03-11 17:45:08,895]  WARN {cps.config_sql:364} Log path /config/calibre-web.log not valid, falling back to default
+[2025-03-11 17:45:08,999]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 17:45:09,003]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 17:45:09,004]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 17:49:40,894]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 17:49:40,897]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 17:49:40,897]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 17:49:41,294]  INFO {cps:178} Starting Calibre Web...
+[2025-03-11 17:49:45,602]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-11 17:49:47,793]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-11 17:49:47,794]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-11 17:49:47,794]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-11 17:49:47,795]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-11 17:49:47,795]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-11 17:49:47 CDT], next run at: 2025-03-11 17:49:47 CDT)" (scheduled at 2025-03-11 17:49:47.795155-05:00)
+[2025-03-11 17:49:47,796]  INFO {apscheduler.scheduler:641} Removed job eb3e1cf85d3044d79ac225379cd8b30a
+[2025-03-11 17:49:48,003]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-11 17:49:47 CDT], next run at: 2025-03-11 17:49:47 CDT)" executed successfully
+[2025-03-11 17:49:49,800]  INFO {cps.ub:764} github Blueprint Created
+[2025-03-11 17:49:49,804]  INFO {cps.ub:764} google Blueprint Created
+[2025-03-11 17:50:06,314]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-11 17:55:07,870]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-11 17:55:07,948]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-11 17:55:07,962]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-11 18:04:27,709]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 18:04:27,711]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 18:04:27,711]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 18:04:28,203]  INFO {cps:178} Starting Calibre Web...
+[2025-03-11 18:04:32,915]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-11 18:04:35,215]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-11 18:04:35,216]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-11 18:04:35,216]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-11 18:04:35,302]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-11 18:04:35,302]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-11 18:04:35 CDT], next run at: 2025-03-11 18:04:35 CDT)" (scheduled at 2025-03-11 18:04:35.301900-05:00)
+[2025-03-11 18:04:35,303]  INFO {apscheduler.scheduler:641} Removed job 2c8992327193427682669629bbb7b2d1
+[2025-03-11 18:04:35,502]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-11 18:04:35 CDT], next run at: 2025-03-11 18:04:35 CDT)" executed successfully
+[2025-03-11 18:04:55,113]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-11 18:58:02,143]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-11 18:58:02,169]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-11 18:58:02,186]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-11 19:06:55,117]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 19:06:55,118]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 19:06:55,119]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 19:06:55,425]  INFO {cps:178} Starting Calibre Web...
+[2025-03-11 19:07:00,723]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-11 19:07:02,724]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-11 19:07:02,816]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-11 19:07:02,816]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-11 19:07:02,817]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-11 19:07:02,818]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-11 19:07:02 CDT], next run at: 2025-03-11 19:07:02 CDT)" (scheduled at 2025-03-11 19:07:02.817295-05:00)
+[2025-03-11 19:07:02,818]  INFO {apscheduler.scheduler:641} Removed job 0ee51c21827548d9979a237a3c55f754
+[2025-03-11 19:07:03,023]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-11 19:07:02 CDT], next run at: 2025-03-11 19:07:02 CDT)" executed successfully
+[2025-03-11 19:13:00,114]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 19:13:00,116]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 19:13:00,116]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 19:13:00,515]  INFO {cps:178} Starting Calibre Web...
+[2025-03-11 19:13:04,914]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-11 19:13:06,916]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-11 19:13:06,917]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-11 19:13:06,917]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-11 19:13:06,917]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-11 19:13:07,115]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-11 19:13:06 CDT], next run at: 2025-03-11 19:13:06 CDT)" (scheduled at 2025-03-11 19:13:06.917575-05:00)
+[2025-03-11 19:13:07,116]  INFO {apscheduler.scheduler:641} Removed job 80e004a2b103448f8faa851c7365a0e9
+[2025-03-11 19:13:07,209]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-11 19:13:06 CDT], next run at: 2025-03-11 19:13:06 CDT)" executed successfully
+[2025-03-11 19:13:25,111]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-11 20:24:24,864]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-11 20:24:24,929]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-11 20:24:24,933]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-11 20:38:04,344]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 20:38:04,436]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 20:38:04,436]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 20:38:04,744]  INFO {cps:178} Starting Calibre Web...
+[2025-03-11 20:38:09,942]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-11 20:38:12,140]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-11 20:38:12,141]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-11 20:38:12,141]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-11 20:38:12,141]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-11 20:38:12,142]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-11 20:38:12 CDT], next run at: 2025-03-11 20:38:12 CDT)" (scheduled at 2025-03-11 20:38:12.141532-05:00)
+[2025-03-11 20:38:12,142]  INFO {apscheduler.scheduler:641} Removed job a37b920c1fbe4809bb06190d07750080
+[2025-03-11 20:38:12,144]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-11 20:38:12 CDT], next run at: 2025-03-11 20:38:12 CDT)" executed successfully
+[2025-03-11 20:38:32,041]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-11 21:21:56,703]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-11 21:21:56,778]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-11 21:21:56,785]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-11 21:23:13,036]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 21:23:13,046]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 21:23:13,051]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 21:23:13,459]  INFO {cps:178} Starting Calibre Web...
+[2025-03-11 21:23:18,351]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-11 21:23:20,541]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-11 21:23:20,629]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-11 21:23:20,630]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-11 21:23:20,630]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-11 21:23:20,832]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-11 21:23:20 CDT], next run at: 2025-03-11 21:23:20 CDT)" (scheduled at 2025-03-11 21:23:20.630223-05:00)
+[2025-03-11 21:23:20,834]  INFO {apscheduler.scheduler:641} Removed job b56287f0a4c5472a832044ead3a2d3d0
+[2025-03-11 21:23:20,843]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-11 21:23:20 CDT], next run at: 2025-03-11 21:23:20 CDT)" executed successfully
+[2025-03-11 21:23:40,630]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-11 21:27:01,747]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-11 21:27:01,764]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-11 21:27:01,766]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-11 21:37:06,888]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 21:37:06,889]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 21:37:06,889]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 21:37:07,284]  INFO {cps:178} Starting Calibre Web...
+[2025-03-11 21:37:11,684]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-11 21:37:13,686]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-11 21:37:13,687]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-11 21:37:13,688]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-11 21:37:13,688]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-11 21:37:13,689]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-11 21:37:13 CDT], next run at: 2025-03-11 21:37:13 CDT)" (scheduled at 2025-03-11 21:37:13.688597-05:00)
+[2025-03-11 21:37:13,887]  INFO {apscheduler.scheduler:641} Removed job 745a4c31a98c41008640293076266287
+[2025-03-11 21:37:13,985]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-11 21:37:13 CDT], next run at: 2025-03-11 21:37:13 CDT)" executed successfully
+[2025-03-11 21:37:32,700]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-11 22:19:56,084]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-11 22:19:56,087]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-11 22:19:56,102]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-11 22:25:27,714]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 22:25:27,715]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-11 22:25:27,716]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-11 22:25:28,021]  INFO {cps:178} Starting Calibre Web...
+[2025-03-11 22:25:32,418]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-11 22:25:34,716]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-11 22:25:34,717]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-11 22:25:34,717]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-11 22:25:34,717]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-11 22:25:34,718]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-11 22:25:34 CDT], next run at: 2025-03-11 22:25:34 CDT)" (scheduled at 2025-03-11 22:25:34.717681-05:00)
+[2025-03-11 22:25:34,916]  INFO {apscheduler.scheduler:641} Removed job 55319c04491c4055b64fad4067863f53
+[2025-03-11 22:25:34,918]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-11 22:25:34 CDT], next run at: 2025-03-11 22:25:34 CDT)" executed successfully
+[2025-03-11 22:25:53,418]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-12 04:00:00,001]  INFO {apscheduler.executors.default:123} Running job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-13 04:00:00 CDT)" (scheduled at 2025-03-12 04:00:00-05:00)
+[2025-03-12 04:00:00,002]  INFO {apscheduler.executors.default:144} Job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-13 04:00:00 CDT)" executed successfully
+[2025-03-12 04:10:00,000]  INFO {apscheduler.executors.default:123} Running job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-13 04:10:00 CDT)" (scheduled at 2025-03-12 04:10:00-05:00)
+[2025-03-12 04:10:00,000]  INFO {apscheduler.executors.default:144} Job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-13 04:10:00 CDT)" executed successfully
+[2025-03-12 11:43:35,933] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:172.202.249.86', 40854, 0, 0)) Invalid HTTP method: 'MGLNDD_64.181.216.162_8083\n'
+[2025-03-12 13:56:54,290] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.146.53', 46244, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03UV§KÃ#"#ñ\x10³\x08Âò=ß¾ªí¡Wf\x82¯\tuÔ\x87\x8d\x8b#ÿ \x96ÎÿJñíeÕå\x87wäm\x85\x85ê×\xad\xa0\x8dî\x9d%)ï\x1c^\x86¥¬\x87²\x00&Ì¨Ì©À/À0À+À,À\x13À\tÀ\x14À\n'
+[2025-03-12 13:57:02,086] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.146.53', 38816, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-12 13:57:07,508] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.146.53', 38880, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-12 13:57:12,864] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbc864c20 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.146.53', 51378, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-12 13:57:18,045] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.146.53', 51474, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03Òx'xVe\x0c\x93Àò\x90\x86)Â2¶¹\x1c\x0bâ\x80\x1cp[ÈÔrø¢\x0få\x07 \x93ý(MAj\x0cò4¾b\x83ý\x96\x01\x9d\x9d=\x8e\x81)\x92ñ+ûÈ\x93\x80\x8a`\x08<\x00&Ì¨Ì©À/À0À+À,À\x13À\tÀ\x14À\n"
+[2025-03-12 14:23:55,496] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbc8651d0 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.81', 62536, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03%MÖqª'©yüåï\x99fùm[\x93à_¯wê6÷\\\x93K·y§í\x9e ¡A[\x91\x88tï\x9b.Ç\x95MrT\x89\x89.{Ã2¢n©\x13c\x1dw\x10}µ\x0e\x14\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n"
+[2025-03-12 14:23:55,819] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbc865080 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.81', 62546, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03èxÏéAÙ\x93ÅÊ\x1f\x85_\tÎö5&\tÌÌíñóðO<V\x9dò\x7fñ#\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-12 18:43:10,087] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:172.104.11.34', 34948, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x01\n'
+[2025-03-12 18:43:10,444] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:172.104.11.34', 34954, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x01\n'
+[2025-03-12 23:37:24,606] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbc864750 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.25', 61562, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03C©7E9\x04ßD¥Ð"!ß\x8f\x1b]5Þµêz\x9bù×¡?\r+bÏvi í`ªvúc\x17ØÂÂ\x08 0ëº4\x84Üh-~®¸þæ½J\n'
+[2025-03-12 23:37:24,970] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.25', 61574, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03i\x81½1\x9eön\tx\x11kÑÕâUtb_º\\VlGÕº¤\x87\x0b\xad\x92èÉ\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-13 00:19:14,246] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:52.249.39.87', 44190, 0, 0)) Invalid HTTP method: 'MGLNDD_64.181.216.162_8083\n'
+[2025-03-13 04:00:00,000]  INFO {apscheduler.executors.default:123} Running job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-14 04:00:00 CDT)" (scheduled at 2025-03-13 04:00:00-05:00)
+[2025-03-13 04:00:00,001]  INFO {apscheduler.executors.default:144} Job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-14 04:00:00 CDT)" executed successfully
+[2025-03-13 04:10:00,000]  INFO {apscheduler.executors.default:123} Running job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-14 04:10:00 CDT)" (scheduled at 2025-03-13 04:10:00-05:00)
+[2025-03-13 04:10:00,000]  INFO {apscheduler.executors.default:144} Job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-14 04:10:00 CDT)" executed successfully
+[2025-03-13 08:30:20,231] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.64', 45344, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-13 08:30:25,251] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.64', 45384, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-13 08:30:35,528] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.64', 57452, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-13 08:30:44,795] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14590 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.64', 55092, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03¿m+!óë9ÌV\x03\x0eFN\x16jÉOP&\x9c\x87¤ìã\x0bO~\x99\x00mMÆ +½5\r\x0b½\x93[\x1dðCò\x1c\x11D\x0f½\x91\x02÷\x9bþE)\x01}\x17O\x18Vîö\x00&Ì¨Ì©À/À0À+À,À\x13À\tÀ\x14À\n'
+[2025-03-13 14:43:17,768] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14440 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:205.210.31.205', 58142, 0, 0)) Invalid http version: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x8fD¥ÄS\x07â#\xa0ªÖççðp\x92\x03Ù¡gíG\x99\x9ey\x00D\x9e`+Û\\ ¡¹ÖY\n'
+[2025-03-13 14:43:18,027] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca147c0 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:205.210.31.205', 58152, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03\x11ië?ªÎT¶Jéë}B\x94ÀÊ\x1dLG\t]åCÏt\x14~(&º³E\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-13 14:45:58,964] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.128', 58078, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03íõÕ\x15ôÍø8\x9fï²Å"ÇþÝëÝF¦\x11Ý*BíÂØª,Ë5J ×Î\x14\x0bË®k=Ûx®µx\x83^Q\x1d3\x19«ò^®@\x06\t\x85Ì\x16i3Ø\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-13 14:45:59,154] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.128', 58094, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03è\x00\n'
+[2025-03-13 23:26:55,637] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:152.32.149.246', 40040, 0, 0)) Invalid http version: "\x16\x03\x01\x01\x17\x01\x00\x01\x13\x03\x03\x0f\x81§õ\x0b\xa0J\x06y¨$áÖõn\x04ÂÕ'O\x83\x94Uv°\x92\x12Ú!\x97ºË ¦<0\x0f6\x14eÒí\x11¸Vñ,Lî\x91b\x93,zPÀ\n"
+[2025-03-14 01:07:25,540] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14590 object, fd=12, family=10, type=1, proto=0>: (from ('::ffff:161.35.9.83', 59438, 0, 0)) Invalid HTTP method: '\r\n'
+[2025-03-14 04:00:00,000]  INFO {apscheduler.executors.default:123} Running job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-15 04:00:00 CDT)" (scheduled at 2025-03-14 04:00:00-05:00)
+[2025-03-14 04:00:00,001]  INFO {apscheduler.executors.default:144} Job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-15 04:00:00 CDT)" executed successfully
+[2025-03-14 04:10:00,000]  INFO {apscheduler.executors.default:123} Running job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-15 04:10:00 CDT)" (scheduled at 2025-03-14 04:10:00-05:00)
+[2025-03-14 04:10:00,000]  INFO {apscheduler.executors.default:144} Job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-15 04:10:00 CDT)" executed successfully
+[2025-03-14 09:45:01,585] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14b40 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.92', 35692, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03¸^\x19Ò$\x08òÿ2\x05\x84y\x94Àz·h át\x99UæG\x1eªJ=\x9eþpÞ $\x7f*Ó\rà\x98æñ0®%\x91ø\x1b\x1a½f\x86\x04\rv¢CëRÅâ¸Év@\x00&Ì¨Ì©À/À0À+À,À\x13À\tÀ\x14À\n'
+[2025-03-14 09:45:14,755] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14d00 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.92', 39332, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-14 09:45:25,365] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.92', 59790, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-14 09:45:44,984] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14590 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.92', 45250, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-14 09:46:10,363] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:206.168.34.92', 42244, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03%\x06`ëF3ü\x90\x1eÄ\x0eaä\x8aÎ_\x9d¦\x1ewfDJ]\x15\x87Ù·\x8d»\x19ø d÷²ê\x0fW\x81Ì#aNÕ\x9fGl\x89¼YçûXçÂÉ`ó(]YÞ\x16W\x00&Ì¨Ì©À/À0À+À,À\x13À\tÀ\x14À\n'
+[2025-03-14 11:26:50,381] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:172.206.147.10', 58034, 0, 0)) Invalid HTTP method: 'MGLNDD_64.181.216.162_8083\n'
+[2025-03-15 02:31:53,332] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14520 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.142', 57654, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x08îCkÍ¦¦hý\x94ãíq\x9abe1X\x18P\x1b\x8f³F"U\x85\x8f\x82Ô¨£ \x8fYW\x14®.¡\xa0KY×Ê\x91;\x01?Ý·\x9c%µÕ,¸r"¡\xad\x11Z\xadª\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-15 02:31:53,600] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15080 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.142', 57666, 0, 0)) Invalid http version: '\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03<àÊ\x93Z®ÜLº¨_béÜ×¹\x9b"¯mm\x96[]\x1doø8ÿ\x80V.\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À\'À#À\x13À\tÀ(À$À\x14À\n'
+[2025-03-15 03:37:57,322] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:205.210.31.102', 62140, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03bÞ~\x0cLó5\x19~a$_\x16¥\x84b\x10B´l°1Î*(?\x1e,ï>µr l\x08(!»ð\x803wo\x87üY-¦\x9fëoÙá*\x96*\x9bx\x91äÝî\\IA\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-15 03:37:57,346] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edb3862660 object, fd=13, family=10, type=1, proto=0>: (from ('::ffff:205.210.31.102', 62144, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03ô\x9eþ\x08¢\x06¼Ãü\x17\x1bî0\x11\x92lt$\x1e\x11ìÉ^U\x1f[HJVÉµþ\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-15 04:00:00,000]  INFO {apscheduler.executors.default:123} Running job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-16 04:00:00 CDT)" (scheduled at 2025-03-15 04:00:00-05:00)
+[2025-03-15 04:00:00,001]  INFO {apscheduler.executors.default:144} Job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-16 04:00:00 CDT)" executed successfully
+[2025-03-15 04:10:00,000]  INFO {apscheduler.executors.default:123} Running job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-16 04:10:00 CDT)" (scheduled at 2025-03-15 04:10:00-05:00)
+[2025-03-15 04:10:00,000]  INFO {apscheduler.executors.default:144} Job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-16 04:10:00 CDT)" executed successfully
+[2025-03-15 05:21:15,861] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14ad0 object, fd=14, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.180', 47864, 0, 0)) Expected GET method; Got command='\x16\x03\x01\x00î\x01\x00\x00ê\x03\x031'; path="\x83OCÁGá3*_8Î|'"; raw="\x16\x03\x01\x00î\x01\x00\x00ê\x03\x031\x0b\x83OCÁGá3*_8Î|'\n"
+[2025-03-15 05:21:32,897] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca141a0 object, fd=14, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.180', 59034, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-15 05:21:41,693] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14ad0 object, fd=14, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.180', 46514, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-15 05:21:56,673] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14440 object, fd=14, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.180', 38464, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-15 05:22:08,442] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14f30 object, fd=14, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.180', 51162, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03\x80dL<Ó¶#\x17&\x15j\x8a\x18×\x17ßo\x00\x1dO\x02çkÔ\x87pÒ\x89Z\x00úu \x00×\x02\x9az\x9e:yÎKÏ:ÓÅÀ\x92\x16k\x93\x80Î´\x9a,\x05,kÍ#'ù:\x00&Ì¨Ì©À/À0À+À,À\x13À\tÀ\x14À\n"
+[2025-03-15 23:35:11,376] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15010 object, fd=15, family=10, type=1, proto=0>: (from ('::ffff:147.185.132.81', 62682, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03{'ø\xadÚÿ@ÿMWÕã\x86G¸Ï\x0bGý´IÍ¬\x10å\x08~\x94¶6æ} ²¡H\xada\x1e~\x9fàÅüÅ\x90s\x82B>Æ\x18nþqÞ§DU§éC¸¿\r\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n"
+[2025-03-15 23:35:11,430] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15550 object, fd=15, family=10, type=1, proto=0>: (from ('::ffff:147.185.132.81', 62690, 0, 0)) Invalid HTTP method: "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03\x9cg\x0cï&\x88ï\x1e¥ßE\x13(¾ô{ú\x96w¸÷\x17¥ø\x12#rp[¦óv\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-16 00:23:56,423] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca155c0 object, fd=15, family=10, type=1, proto=0>: (from ('::ffff:172.206.147.64', 36552, 0, 0)) Invalid HTTP method: 'MGLNDD_64.181.216.162_8083\n'
+[2025-03-16 04:00:00,000]  INFO {apscheduler.executors.default:123} Running job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-17 04:00:00 CDT)" (scheduled at 2025-03-16 04:00:00-05:00)
+[2025-03-16 04:00:00,001]  INFO {apscheduler.executors.default:144} Job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-17 04:00:00 CDT)" executed successfully
+[2025-03-16 04:10:00,000]  INFO {apscheduler.executors.default:123} Running job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-17 04:10:00 CDT)" (scheduled at 2025-03-16 04:10:00-05:00)
+[2025-03-16 04:10:00,000]  INFO {apscheduler.executors.default:144} Job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-17 04:10:00 CDT)" executed successfully
+[2025-03-16 04:14:01,662] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14d70 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:199.45.154.125', 52620, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03nõ\x0eäÙÀàÙª\x80Ü\x15l+ÞÙ=\\\x06Ø{\x0c\x945\xa0¿ÓeW\x81ºc ½¼»CÎí\x82\x91Û\x96óÖL¼fæ±\x9a\t"\x07Éâ\x95\x1b\x10á ¼ë\x05\x15\x00&Ì¨Ì©À/À0À+À,À\x13À\tÀ\x14À\n'
+[2025-03-16 04:14:10,103] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca152b0 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:199.45.154.125', 46782, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-16 04:14:14,725] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14590 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:199.45.154.125', 46838, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-16 04:14:25,179] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14910 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:199.45.154.125', 36932, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-16 04:14:32,546] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15320 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:199.45.154.125', 41664, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03[\x82ôò{*ùøÊm*G^\x13s1ÙýçÊ(Æ\x1fÖ\x062\x1c3À\x9b\x17[ \x87ÍK\x911z§[þ\x8dZ,\x82ÿ\x1f=/\x9c\x89\x86\x11^©£$¬g\x03\x8bAïß\x00&Ì¨Ì©À/À0À+À,À\x13À\tÀ\x14À\n'
+[2025-03-16 04:50:04,324] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14980 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.8', 58068, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x86Ýtúé\x05\x81_\x7fú\x150\x94\x15×<Ci·\x1e\x12Ë7M\x82æ\x11ü¯Cùì 71Féº\x88z[YJA\x16Ø\x18\\\x82Ò\x1eF\x8bßÚÕ\x91îÕJ½L\x9f»Ð\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-16 04:50:04,646] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15320 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.8', 58082, 0, 0)) Invalid http version: "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03\x875\xa0d\x8b\x9fÆÂCC\x12Ùk?\x14\x8f¤\x17U\x07göü?§\x9dâ\x86\x19*\x11t\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-16 13:46:11,054] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14d70 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:8.211.45.218', 27234, 0, 0)) Invalid http version: "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03I\x06²ù¼\x99iÀYûøºe-\x83Ud]\x0e\x8d·b8´gÆÝ9dZ8f gÁ\x81i³öòË°©\x19NÖ½\x95g|püé<Z¡\x90T·é¥8'O;\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n"
+[2025-03-16 15:57:08,311] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15a90 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.148', 60218, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03Â2T+\tß\x1b\x85\x80ü\x93\x00¬ä\x91MÈÑ\x84:P\x08\x9d´üé\x9dúòc\x8c\x84 hoÂ\x1bÂâW¼\x85{\x90\x96q\x9a¤-SÂ´xC\x11×B¬°Ö\x05Nêµi\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-16 15:57:08,541] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15a90 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.148', 60232, 0, 0)) Expected GET method; Got command="\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03\x88d!24o'\x1b4Èj\x00-Æ\x16\x9aA\x12s\x18F\x17\x92\x158U\x14:RºKa\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À"; path='À(À$À\x14À'; raw="\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03\x88d!24o'\x1b4Èj\x00-Æ\x16\x9aA\x12s\x18F\x17\x92\x158U\x14:RºKa\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-16 23:26:28,105] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15a90 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:18.188.118.217', 40810, 0, 0)) Invalid HTTP method: '\n'
+[2025-03-16 23:30:43,237] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15a90 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:18.188.118.217', 59988, 0, 0)) Expected GET method; Got command='\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ýØå¦ÁeJð5s\x12Ez©\x16Öõá²ç×\xad0sÝ,Åÿÿ-Øà\x00\x00\x1aÀ/À+À\x11À\x07À\x13À'; path='À\x14À'; raw='\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ýØå¦ÁeJð5s\x12Ez©\x16Öõá²ç×\xad0sÝ,Åÿÿ-Øà\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\tÀ\x14À\n'
+[2025-03-16 23:33:32,885] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14c20 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:18.188.118.217', 56194, 0, 0)) Invalid HTTP method: 'SSH-2.0-Go\r\n'
+[2025-03-16 23:36:45,513] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca14750 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:18.188.118.217', 51344, 0, 0)) Invalid http version: "\x16\x03\x01\x00{\x01\x00\x00w\x03\x03Oy%IÚ1D&'¦ÂÝ8ÙåÄÑ\x01¤\x1e§G#¤oXeÈ$bÊ\x95\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\tÀ\x14À\n"
+[2025-03-16 23:56:20,179] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15a90 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:141.98.11.116', 62631, 0, 0)) Expected GET method; Got command='\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:'; path='mstshash=Administr'; raw='\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr\r\n'
+[2025-03-17 02:53:49,485] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15b00 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.227', 63732, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03À\x9b¹\x13>NîIÁïuiYK8Z\x86UY]\x10\x1d\x9aEÅþ\x8eþ\x17\x12\x0es ½\x0c\x07\x8a\x94\x97q¯\tü\x816i\x12\x0b G\xad\x87\x93í_¬b>[:|\x93uqf\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-17 02:53:49,676] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca158d0 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.227', 63740, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03\x818\x13Qpv\x0eã\n'
+[2025-03-17 03:00:10,852] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf5edbca15b00 object, fd=16, family=10, type=1, proto=0>: (from ('::ffff:141.98.11.116', 65319, 0, 0)) Expected GET method; Got command='\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:'; path='mstshash=Administr'; raw='\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr\r\n'
+[2025-03-17 03:50:04,564]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-17 03:50:04,663]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-17 03:50:05,738]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-17 03:58:46,100]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 03:58:46,102]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-17 03:58:46,102]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 03:58:46,509]  INFO {cps:178} Starting Calibre Web...
+[2025-03-17 03:58:51,406]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-17 03:58:53,609]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-17 03:58:53,610]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-17 03:58:53,610]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-17 03:58:53,698]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-17 03:58:53,699]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-17 03:58:53 CDT], next run at: 2025-03-17 03:58:53 CDT)" (scheduled at 2025-03-17 03:58:53.698683-05:00)
+[2025-03-17 03:58:53,699]  INFO {apscheduler.scheduler:641} Removed job aaa6e27aa1c847f99554bbb592c27919
+[2025-03-17 03:58:53,908]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-17 03:58:53 CDT], next run at: 2025-03-17 03:58:53 CDT)" executed successfully
+[2025-03-17 03:59:13,806]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-17 04:00:00,000]  INFO {apscheduler.executors.default:123} Running job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-18 04:00:00 CDT)" (scheduled at 2025-03-17 04:00:00-05:00)
+[2025-03-17 04:00:00,005]  INFO {apscheduler.executors.default:144} Job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-18 04:00:00 CDT)" executed successfully
+[2025-03-17 04:10:00,000]  INFO {apscheduler.executors.default:123} Running job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-18 04:10:00 CDT)" (scheduled at 2025-03-17 04:10:00-05:00)
+[2025-03-17 04:10:00,000]  INFO {apscheduler.executors.default:144} Job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-18 04:10:00 CDT)" executed successfully
+[2025-03-17 04:12:17,016] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf885bf160670 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.114', 38350, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03±YÁ]t`\tåîCe\x9cÍ\x7f\\\x7fö©/oûíáÖÙVÃ\x96yô\x92< \x98T¼ÖIAùÐ\x8ex$\x8e;âÌ\x9e\x0bGÝ\n'
+[2025-03-17 04:12:32,378] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf885bf160750 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.114', 46398, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-17 04:12:44,836] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf885bf160750 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.114', 37034, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-17 04:13:02,617] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf885bf1a3a10 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.114', 35748, 0, 0)) Invalid http version: 'PRI * HTTP/2.0\r\n'
+[2025-03-17 04:13:13,868] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf885bf160670 object, fd=11, family=10, type=1, proto=0>: (from ('::ffff:167.94.138.114', 33944, 0, 0)) Expected GET method; Got command='\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03\x99ÊªÉ\x82ïÔâ/J\x8c±\x9fYU"{qÞ\x14¬Ó%/$\x87äÝ\x13Ï\x0f\x9c'; path='`51Ð®Ë'; raw='\x16\x03\x01\x00÷\x01\x00\x00ó\x03\x03\x99ÊªÉ\x82ïÔâ/J\x8c±\x9fYU"{qÞ\x14¬Ó%/$\x87äÝ\x13Ï\x0f\x9c `51Ð®Ë\n'
+[2025-03-17 04:14:33,088]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-17 04:14:33,091]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-17 04:14:33,100]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-17 04:15:45,058]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 04:15:45,060]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-17 04:15:45,060]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 04:15:45,455]  INFO {cps:178} Starting Calibre Web...
+[2025-03-17 04:15:49,952]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-17 04:15:52,058]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-17 04:15:52,059]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-17 04:15:52,059]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-17 04:15:52,059]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-17 04:15:52,060]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-17 04:15:52 CDT], next run at: 2025-03-17 04:15:52 CDT)" (scheduled at 2025-03-17 04:15:52.059588-05:00)
+[2025-03-17 04:15:52,060]  INFO {apscheduler.scheduler:641} Removed job 91e3c7026de24e878f8802f75715b8d2
+[2025-03-17 04:15:52,357]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-17 04:15:52 CDT], next run at: 2025-03-17 04:15:52 CDT)" executed successfully
+[2025-03-17 04:16:10,959]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-17 04:48:27,249] ERROR {cps.server:1349} <gevent._socket3.socket at 0xff7363479160 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:141.98.11.116', 61965, 0, 0)) Expected GET method; Got command='\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:'; path='mstshash=Administr'; raw='\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr\r\n'
+[2025-03-17 07:38:22,222] ERROR {cps.server:1349} <gevent._socket3.socket at 0xff7363360520 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:141.98.11.116', 64584, 0, 0)) Expected GET method; Got command='\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:'; path='mstshash=Administr'; raw='\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr\r\n'
+[2025-03-17 12:08:06,560]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-17 12:08:06,569]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-17 12:08:06,571]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-17 12:14:03,434]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 12:14:03,435]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-17 12:14:03,436]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 12:14:03,849]  INFO {cps:178} Starting Calibre Web...
+[2025-03-17 12:14:09,443]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-17 12:14:12,040]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-17 12:14:12,041]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-17 12:14:12,041]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-17 12:14:12,042]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-17 12:14:12,042]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-17 12:14:12 CDT], next run at: 2025-03-17 12:14:12 CDT)" (scheduled at 2025-03-17 12:14:12.041935-05:00)
+[2025-03-17 12:14:12,043]  INFO {apscheduler.scheduler:641} Removed job fe4d4bbf166f4067b6fc7dc063a655ca
+[2025-03-17 12:14:12,335]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-17 12:14:12 CDT], next run at: 2025-03-17 12:14:12 CDT)" executed successfully
+[2025-03-17 12:14:35,135]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-17 12:29:16,230] ERROR {cps.server:1349} <gevent._socket3.socket at 0xef6e7a87c520 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:48.216.196.127', 44614, 0, 0)) Invalid HTTP method: 'MGLNDD_64.181.216.162_8083\n'
+[2025-03-17 21:11:53,956]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-17 21:11:54,045]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-17 21:11:54,098]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-17 21:17:32,391]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 21:17:32,480]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-17 21:17:32,481]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 21:17:32,891]  INFO {cps:178} Starting Calibre Web...
+[2025-03-17 21:17:38,380]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-17 21:17:40,789]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-17 21:17:40,790]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-17 21:17:40,790]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-17 21:17:40,791]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-17 21:17:40,791]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-17 21:17:40 CDT], next run at: 2025-03-17 21:17:40 CDT)" (scheduled at 2025-03-17 21:17:40.791201-05:00)
+[2025-03-17 21:17:40,792]  INFO {apscheduler.scheduler:641} Removed job a1738992ba4b4e87b5712c5391677eed
+[2025-03-17 21:17:41,081]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-17 21:17:40 CDT], next run at: 2025-03-17 21:17:40 CDT)" executed successfully
+[2025-03-17 21:18:01,982]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-17 23:35:14,778]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-17 23:35:14,786]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-17 23:35:14,790]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-17 23:36:36,712]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 23:36:36,714]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-17 23:36:36,715]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-17 23:36:37,115]  INFO {cps:178} Starting Calibre Web...
+[2025-03-17 23:36:41,806]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-17 23:36:44,025]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-17 23:36:44,108]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-17 23:36:44,109]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-17 23:36:44,109]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-17 23:36:44,385]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-17 23:36:44 CDT], next run at: 2025-03-17 23:36:44 CDT)" (scheduled at 2025-03-17 23:36:44.109456-05:00)
+[2025-03-17 23:36:44,390]  INFO {apscheduler.scheduler:641} Removed job 64811f3a6ce64a998e4422961b699013
+[2025-03-17 23:36:44,467]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-17 23:36:44 CDT], next run at: 2025-03-17 23:36:44 CDT)" executed successfully
+[2025-03-17 23:37:04,411]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-18 00:59:20,944]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-18 00:59:20,946]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-18 00:59:20,951]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-18 01:39:54,745]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-18 01:39:54,747]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-18 01:39:54,747]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-18 01:39:55,243]  INFO {cps:178} Starting Calibre Web...
+[2025-03-18 01:40:00,248]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-18 01:40:02,849]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-18 01:40:02,850]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-18 01:40:02,850]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-18 01:40:02,938]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-18 01:40:02,940]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-18 01:40:02 CDT], next run at: 2025-03-18 01:40:02 CDT)" (scheduled at 2025-03-18 01:40:02.850777-05:00)
+[2025-03-18 01:40:02,940]  INFO {apscheduler.scheduler:641} Removed job 496fc807c6f34c3fb7032ca1fe348c3c
+[2025-03-18 01:40:03,138]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-18 01:40:02 CDT], next run at: 2025-03-18 01:40:02 CDT)" executed successfully
+[2025-03-18 01:40:22,345]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-18 01:45:36,000] ERROR {cps.server:1349} <gevent._socket3.socket at 0xe88142d68520 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.30', 61822, 0, 0)) Invalid http version: "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03ã]ð'ì8Âè\x9f\x92¥8¢¦\x15a\x80\x10Ð\x91ß\x02ÌüòEÍ.\x15¿´² (i\x14âzLe±é.²¹GTã¼0[ÈpGÍâ\x16Xîe¨\x8cõ\x8bz\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n"
+[2025-03-18 01:45:36,323] ERROR {cps.server:1349} <gevent._socket3.socket at 0xe88142d68670 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.30', 61838, 0, 0)) Invalid http version: "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03\x81{'\x8eæ\x01J£Ë#Y\x08p\x14#1¶\x03â\xad\x10Näæÿ\xa0F\x02\xadP£ô\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-18 03:26:36,658] ERROR {cps.server:1349} <gevent._socket3.socket at 0xe88142e847c0 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:205.210.31.26', 62748, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x99IA*`æËÈñ2 ÐèMn!%\x03pC\x95º£\x9f\x03õ¢÷ú\x90V\x0c @V¡$DëH~¿[±¾@\x00!Ü+\x94YK\r~Î\x9aG\x14]\t"\x11x»\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-18 03:26:36,699] ERROR {cps.server:1349} <gevent._socket3.socket at 0xe88142e847c0 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:205.210.31.26', 62752, 0, 0)) Invalid http version: "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03mÅ\x8e\x82\tgác\xaddáNË§õB]%´lþì^-S¿\x92%ÊV§\x95\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-18 04:00:00,000]  INFO {apscheduler.executors.default:123} Running job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-19 04:00:00 CDT)" (scheduled at 2025-03-18 04:00:00-05:00)
+[2025-03-18 04:00:00,001]  INFO {apscheduler.executors.default:144} Job "delete temp (trigger: cron[hour='4'], next run at: 2025-03-19 04:00:00 CDT)" executed successfully
+[2025-03-18 04:10:00,000]  INFO {apscheduler.executors.default:123} Running job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-19 04:10:00 CDT)" (scheduled at 2025-03-18 04:10:00-05:00)
+[2025-03-18 04:10:00,000]  INFO {apscheduler.executors.default:144} Job "end scheduled task (trigger: cron[hour='4', minute='10'], next run at: 2025-03-19 04:10:00 CDT)" executed successfully
+[2025-03-18 05:31:58,192]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-18 05:31:58,215]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-18 05:31:58,230]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-18 05:38:36,838]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-18 05:38:36,844]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-18 05:38:36,844]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-18 05:38:37,485]  INFO {cps:178} Starting Calibre Web...
+[2025-03-18 05:38:44,058]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-18 05:38:46,641]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-18 05:38:46,642]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-18 05:38:46,642]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-18 05:38:46,642]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-18 05:38:46,838]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-18 05:38:46 CDT], next run at: 2025-03-18 05:38:46 CDT)" (scheduled at 2025-03-18 05:38:46.642751-05:00)
+[2025-03-18 05:38:46,839]  INFO {apscheduler.scheduler:641} Removed job c1a37c7f1e8c420380b212b9c8febd2f
+[2025-03-18 05:38:46,842]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-18 05:38:46 CDT], next run at: 2025-03-18 05:38:46 CDT)" executed successfully
+[2025-03-18 05:39:11,837]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-18 10:31:44,180]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-18 10:31:44,208]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-18 10:31:44,250]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-18 16:52:46,094]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-18 16:52:46,095]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-18 16:52:46,096]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-18 16:52:46,511]  INFO {cps:178} Starting Calibre Web...
+[2025-03-18 16:52:52,002]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-18 16:52:54,626]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-18 16:52:54,632]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-18 16:52:54,632]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-18 16:52:54,633]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-18 16:52:54,894]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-18 16:52:54 CDT], next run at: 2025-03-18 16:52:54 CDT)" (scheduled at 2025-03-18 16:52:54.633015-05:00)
+[2025-03-18 16:52:54,896]  INFO {apscheduler.scheduler:641} Removed job a2f9f0f922ee4b87be1505e66c29bd28
+[2025-03-18 16:52:54,899]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-18 16:52:54 CDT], next run at: 2025-03-18 16:52:54 CDT)" executed successfully
+[2025-03-18 16:53:16,897]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-18 17:31:41,219]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-18 17:31:41,220]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-18 17:31:41,221]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-18 17:31:41,622]  INFO {cps:178} Starting Calibre Web...
+[2025-03-18 17:31:46,023]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-18 17:31:48,122]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-18 17:31:48,123]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-18 17:31:48,123]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-18 17:31:48,124]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-18 17:31:48,124]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-18 17:31:48 CDT], next run at: 2025-03-18 17:31:48 CDT)" (scheduled at 2025-03-18 17:31:48.124041-05:00)
+[2025-03-18 17:31:48,124]  INFO {apscheduler.scheduler:641} Removed job 5c73cbd3f57e4e69a9a42f4e2c220913
+[2025-03-18 17:31:48,324]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-18 17:31:48 CDT], next run at: 2025-03-18 17:31:48 CDT)" executed successfully
+[2025-03-18 17:32:05,817]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-18 19:24:04,121] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf7e719c0ad60 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.6', 58336, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03æþÜ\x1aM¤»O\x91X\x83·¯\xa0#¶\x93tfÉøþB\x11í^G[\x81ayM òÊº\x00ð\x9cÞx\xa0ÿ0Ò¸9AÞ®Õ\x145mò|\x10ð¦Éå\x95xV$\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-18 19:24:04,444] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf7e719c0add0 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:198.235.24.6', 58342, 0, 0)) Expected GET method; Got command="\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03©\x87\x83¾ªö#¼\x7fÚë\x8a¹,\x90ä3\x7fÕð+\x8dyÌ\x89\x0eü6ss*Í\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À"; path='À(À$À\x14À'; raw="\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03©\x87\x83¾ªö#¼\x7fÚë\x8a¹,\x90ä3\x7fÕð+\x8dyÌ\x89\x0eü6ss*Í\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-18 23:20:56,865] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf7e719c0ad60 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:205.210.31.25', 59852, 0, 0)) Invalid HTTP method: '\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03oãµ\x99qÿ>\x9b6^¹\x0b\x03\x0ciN\x0f\x8a!\x96Ó\x17:½øÓ½I\x1f1òÃ IEÛ`ÂU\x06\x10ÞÏ\x88Ò¸\x9b\x94ï¿\x8f\x8e»\x06é\x86\x08\x8eyìà\x94W¡§\x00&À+À/À,À0Ì©Ì¨À\tÀ\x13À\n'
+[2025-03-18 23:20:56,965] ERROR {cps.server:1349} <gevent._socket3.socket at 0xf7e719c0add0 object, fd=10, family=10, type=1, proto=0>: (from ('::ffff:205.210.31.25', 59862, 0, 0)) Expected GET method; Got command="\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03$1\x0fm\x8c÷?¨2qs_ì«O\x0fr\x1a¾M\x94\x8fÊ¦}q>õË\x9c3\x88\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À"; path='À(À$À\x14À'; raw="\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03$1\x0fm\x8c÷?¨2qs_ì«O\x0fr\x1a¾M\x94\x8fÊ¦}q>õË\x9c3\x88\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\tÀ(À$À\x14À\n"
+[2025-03-19 11:32:17,070]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-19 11:32:17,162]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-19 11:32:17,162]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-19 11:32:17,576]  INFO {cps:178} Starting Calibre Web...
+[2025-03-19 11:32:23,070]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-19 11:32:25,770]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-19 11:32:25,771]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-19 11:32:25,771]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-19 11:32:25,771]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-19 11:32:25,772]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-19 11:32:25 CDT], next run at: 2025-03-19 11:32:25 CDT)" (scheduled at 2025-03-19 11:32:25.771742-05:00)
+[2025-03-19 11:32:25,772]  INFO {apscheduler.scheduler:641} Removed job 5843f126ec1e4a2694f4bfffb2c6d5ac
+[2025-03-19 11:32:26,062]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-19 11:32:25 CDT], next run at: 2025-03-19 11:32:25 CDT)" executed successfully
+[2025-03-21 07:30:51,425]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-21 07:30:51,516]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-21 07:30:51,517]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-21 07:30:52,019]  INFO {cps:178} Starting Calibre Web...
+[2025-03-21 07:30:57,830]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-21 07:31:00,417]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-21 07:31:00,418]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-21 07:31:00,418]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-21 07:31:00,419]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-21 07:31:00,419]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-21 07:31:00 CDT], next run at: 2025-03-21 07:31:00 CDT)" (scheduled at 2025-03-21 07:31:00.419148-05:00)
+[2025-03-21 07:31:00,420]  INFO {apscheduler.scheduler:641} Removed job 0c436f202d624f8eaff83fc18e24833c
+[2025-03-21 07:31:00,621]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-21 07:31:00 CDT], next run at: 2025-03-21 07:31:00 CDT)" executed successfully
+[2025-03-21 07:31:20,423]  INFO {cps.server:218} Starting Gevent server on [::]:8083
+[2025-03-21 09:35:58,919]  INFO {cps.server:319} webserver stop (restart=False)
+[2025-03-21 09:35:58,935]  INFO {apscheduler.scheduler:212} Scheduler has been shut down
+[2025-03-21 09:35:59,021]  INFO {cps.server:298} Performing shutdown of Calibre-Web
+[2025-03-21 09:37:24,149]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-21 09:37:24,152]  WARN {cps.config_sql:400} invalidating configuration
+[2025-03-21 09:37:24,152]  WARN {cps.config_sql:364} Log path  not valid, falling back to default
+[2025-03-21 09:37:24,658]  INFO {cps:178} Starting Calibre Web...
+[2025-03-21 09:37:29,952]  WARN {py.warnings:110} /lsiopy/lib/python3.12/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.
+  warnings.warn(
+
+[2025-03-21 09:37:32,553]  INFO {apscheduler.scheduler:181} Scheduler started
+[2025-03-21 09:37:32,555]  INFO {apscheduler.scheduler:895} Added job "delete temp" to job store "default"
+[2025-03-21 09:37:32,555]  INFO {apscheduler.scheduler:895} Added job "end scheduled task" to job store "default"
+[2025-03-21 09:37:32,556]  INFO {apscheduler.scheduler:895} Added job "immediately delete temp" to job store "default"
+[2025-03-21 09:37:32,560]  INFO {apscheduler.executors.default:123} Running job "immediately delete temp (trigger: date[2025-03-21 09:37:32 CDT], next run at: 2025-03-21 09:37:32 CDT)" (scheduled at 2025-03-21 09:37:32.555964-05:00)
+[2025-03-21 09:37:32,753]  INFO {apscheduler.scheduler:641} Removed job bc116cbf2eee45d5a3929d26d7b54f19
+[2025-03-21 09:37:32,759]  INFO {apscheduler.executors.default:144} Job "immediately delete temp (trigger: date[2025-03-21 09:37:32 CDT], next run at: 2025-03-21 09:37:32 CDT)" executed successfully
+[2025-03-21 09:37:54,849]  INFO {cps.server:218} Starting Gevent server on [::]:8083

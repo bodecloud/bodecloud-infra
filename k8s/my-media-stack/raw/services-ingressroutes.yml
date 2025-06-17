@@ -1,0 +1,189 @@
+---
+# Whoami service - test service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`whoami.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: whoami
+          port: 80
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Homepage service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`homepage.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: homepage
+          port: 3000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Dozzle service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dozzle-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`dozzle.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: dozzle
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# SearXNG service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: searxng-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`searxng.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: searxng
+          port: 8080
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Prowlarr service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prowlarr-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`prowlarr.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: prowlarr
+          port: 9696
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Stremio service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stremio-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`stremio.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: stremio
+          port: 11470
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Speedtest service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: speedtest-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`speedtest.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: speedtest
+          port: 80
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# MediaFusion service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mediafusion-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`mediafusion.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: mediafusion
+          port: 8000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# GPT Researcher service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gptr-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`gptr.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: gptr
+          port: 8000
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt
+
+---
+# Jackett service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jackett-ingressroute
+  namespace: my-media-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`jackett.beatapostapita.duckdns.org`)"
+      kind: Rule
+      services:
+        - name: jackett
+          port: 9117
+  tls:
+    certResolver: beatapostapita_duckdns_letsencrypt 

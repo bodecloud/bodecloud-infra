@@ -1,0 +1,39 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.12
+  conditions:
+    ready: false
+    serving: false
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: qbittorrent-d8b8f746f-6ckgx
+    namespace: default
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:04:19Z"
+  generateName: qbittorrent-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: qbittorrent
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: qbittorrent
+  name: qbittorrent-kblwf
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: qbittorrent
+ports:
+- name: http
+  port: 8080
+  protocol: TCP
+- name: gluetun
+  port: 8999
+  protocol: TCP

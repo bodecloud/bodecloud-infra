@@ -1,0 +1,159 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "14"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"14"},"generation":14,"labels":{"app":"proxy-injector"},"name":"proxy-injector","namespace":"vpn-gateway"},"spec":{"progressDeadlineSeconds":600,"replicas":2,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"proxy-injector"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"proxy-injector"}},"spec":{"containers":[{"command":["python3","/app/inject.py"],"image":"python:3.9-alpine","imagePullPolicy":"IfNotPresent","livenessProbe":{"failureThreshold":5,"httpGet":{"path":"/","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":60,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1},"name":"proxy-injector","ports":[{"containerPort":8443,"name":"webhook","protocol":"TCP"}],"readinessProbe":{"failureThreshold":10,"httpGet":{"path":"/","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":45,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":1},"resources":{"limits":{"cpu":"50m","memory":"128Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/app","name":"config"},{"mountPath":"/etc/certs","name":"certs","readOnly":true}]}],"dnsPolicy":"ClusterFirst","initContainers":[{"command":["/bin/bash","-c","set -e\necho \"Waiting for cert-manager to be ready...\"\n\n# Wait for cert-manager deployment\nkubectl wait --for=condition=available deployment/cert-manager -n cert-manager --timeout=300s\n\n# Wait for cert-manager CRDs to be established\necho \"Waiting for cert-manager CRDs...\"\nkubectl wait --for condition=established --timeout=60s crd/clusterissuers.cert-manager.io\nkubectl wait --for condition=established --timeout=60s crd/certificates.cert-manager.io\n\n# Wait for ClusterIssuer to exist and be ready\necho \"Waiting for ClusterIssuer to be ready...\"\ntimeout=60\nwhile [ $timeout -gt 0 ]; do\n  if kubectl get clusterissuer selfsigned-issuer \u0026\u003e/dev/null; then\n    echo \"ClusterIssuer found\"\n    break\n  fi\n  echo \"Waiting for ClusterIssuer... ($timeout seconds remaining)\"\n  sleep 5\n  timeout=$((timeout - 5))\ndone\n\n# Wait for certificate to be ready\necho \"Waiting for proxy-injector certificate to be ready...\"\nkubectl wait --for=condition=ready certificate/proxy-injector-cert -n vpn-gateway --timeout=300s\n\n# Verify the secret exists\necho \"Verifying certificate secret exists...\"\nkubectl get secret proxy-injector-certs -n vpn-gateway\n\necho \"Certificate is ready!\"\n"],"image":"bitnami/kubectl:latest","imagePullPolicy":"Always","name":"wait-for-cert","resources":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"10m","memory":"32Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"serviceAccount":"proxy-injector","serviceAccountName":"proxy-injector","terminationGracePeriodSeconds":30,"volumes":[{"configMap":{"defaultMode":493,"name":"proxy-injector-config"},"name":"config"},{"name":"certs","secret":{"defaultMode":420,"secretName":"proxy-injector-certs"}}]}}}}
+  labels:
+    app: proxy-injector
+  name: proxy-injector
+  namespace: vpn-gateway
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: proxy-injector
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: proxy-injector
+    spec:
+      containers:
+      - command:
+        - python3
+        - /app/inject.py
+        image: python:3.9-alpine
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: proxy-injector
+        ports:
+        - containerPort: 8443
+          name: webhook
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 45
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 50m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /app
+          name: config
+        - mountPath: /etc/certs
+          name: certs
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+          echo "Waiting for cert-manager to be ready..."
+
+          # Wait for cert-manager deployment
+          kubectl wait --for=condition=available deployment/cert-manager -n cert-manager --timeout=300s
+
+          # Wait for cert-manager CRDs to be established
+          echo "Waiting for cert-manager CRDs..."
+          kubectl wait --for condition=established --timeout=60s crd/clusterissuers.cert-manager.io
+          kubectl wait --for condition=established --timeout=60s crd/certificates.cert-manager.io
+
+          # Wait for ClusterIssuer to exist and be ready
+          echo "Waiting for ClusterIssuer to be ready..."
+          timeout=60
+          while [ $timeout -gt 0 ]; do
+            if kubectl get clusterissuer selfsigned-issuer &>/dev/null; then
+              echo "ClusterIssuer found"
+              break
+            fi
+            echo "Waiting for ClusterIssuer... ($timeout seconds remaining)"
+            sleep 5
+            timeout=$((timeout - 5))
+          done
+
+          # Wait for certificate to be ready
+          echo "Waiting for proxy-injector certificate to be ready..."
+          kubectl wait --for=condition=ready certificate/proxy-injector-cert -n vpn-gateway --timeout=300s
+
+          # Verify the secret exists
+          echo "Verifying certificate secret exists..."
+          kubectl get secret proxy-injector-certs -n vpn-gateway
+
+          echo "Certificate is ready!"
+        image: bitnami/kubectl:latest
+        imagePullPolicy: Always
+        name: wait-for-cert
+        resources:
+          limits:
+            cpu: 50m
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: proxy-injector
+      serviceAccountName: proxy-injector
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 493
+          name: proxy-injector-config
+        name: config
+      - name: certs
+        secret:
+          defaultMode: 420
+          secretName: proxy-injector-certs
+  conditions:
+  - lastTransitionTime: "2025-06-14T17:40:38Z"
+    lastUpdateTime: "2025-06-14T17:40:38Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    type: Available
+  - lastTransitionTime: "2025-06-14T17:40:38Z"
+    lastUpdateTime: "2025-06-14T17:40:38Z"
+    message: 'pods "proxy-injector-bcf66667-4t69k" is forbidden: minimum memory usage
+      per Container is 64Mi, but request is 32Mi'
+    reason: FailedCreate
+    type: ReplicaFailure
+  - lastTransitionTime: "2025-06-14T17:50:39Z"
+    lastUpdateTime: "2025-06-14T17:50:39Z"
+    message: ReplicaSet "proxy-injector-96b478bbb" has timed out progressing.
+    reason: ProgressDeadlineExceeded
+    type: Progressing
+  observedGeneration: 15
+  unavailableReplicas: 3

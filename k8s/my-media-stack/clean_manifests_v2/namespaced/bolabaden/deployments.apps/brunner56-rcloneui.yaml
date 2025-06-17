@@ -1,0 +1,286 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: elfbot-all,elfbot-rcloneui,elfhosted-user-config
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"configmap.reloader.stakater.com/reload":"elfbot-all,elfbot-rcloneui,elfhosted-user-config","meta.helm.sh/release-name":"brunner56","meta.helm.sh/release-namespace":"bolabaden"},"labels":{"app.kubernetes.io/instance":"brunner56","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"rcloneui","helm.sh/chart":"rcloneui-0.2.1","helm.toolkit.fluxcd.io/name":"brunner56","helm.toolkit.fluxcd.io/namespace":"bolabaden"},"name":"brunner56-rcloneui","namespace":"bolabaden"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":3,"selector":{"matchLabels":{"app.kubernetes.io/instance":"brunner56","app.kubernetes.io/name":"rcloneui"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"creationTimestamp":"2025-05-29T17:12:59Z","labels":{"app.kubernetes.io/instance":"brunner56","app.kubernetes.io/name":"rcloneui"}},"spec":{"affinity":{"podAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":[{"labelSelector":{"matchExpressions":[{"key":"app.elfhosted.com/role","operator":"In","values":["nodefinder"]}]},"topologyKey":"kubernetes.io/hostname"}]}},"automountServiceAccountToken":false,"containers":[{"image":"ghcr.io/elfhosted/rclone:1.69.3@sha256:9396f8c3a649dba9f91169a62142c9f3e6da00974bda573d864b62c07f78234e","imagePullPolicy":"IfNotPresent","livenessProbe":{"failureThreshold":3,"periodSeconds":10,"successThreshold":1,"tcpSocket":{"port":5572},"timeoutSeconds":1},"name":"brunner56-rcloneui","ports":[{"containerPort":5572,"name":"http","protocol":"TCP"}],"readinessProbe":{"failureThreshold":3,"periodSeconds":10,"successThreshold":1,"tcpSocket":{"port":5572},"timeoutSeconds":1},"resources":{"limits":{"cpu":"1","memory":"1Gi"},"requests":{"cpu":"0","memory":"60Mi"}},"securityContext":{"privileged":true,"readOnlyRootFilesystem":false,"seccompProfile":{"type":"RuntimeDefault"}},"startupProbe":{"failureThreshold":30,"periodSeconds":5,"successThreshold":1,"tcpSocket":{"port":5572},"timeoutSeconds":1},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/backup","name":"backup"},{"mountPath":"/home/elfie/.cache","name":"cache"},{"mountPath":"/config/","name":"config","subPath":"rclone"},{"mountPath":"/elfbot","name":"elfbot"},{"mountPath":"/mount","name":"mount"},{"mountPath":"/rclone-remote-storage","name":"rclone-remote-storage","subPath":"rclone-remote-storage"},{"mountPath":"/tmp","name":"tmp"}]}],"dnsPolicy":"ClusterFirst","enableServiceLinks":false,"initContainers":[{"command":["/bin/bash","-c","set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\nfi\n\n# look for commands - we match specific names in order of least-destructive\nTIMESTAMP_NOW=$(date +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\n# If no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/backup \u0026\u0026 -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\n# If no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/reset \u0026\u0026 -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\ncase $COMMAND in\n\n  \"pause\")\n    echo \"Recent pause command found, sleeping 5m..\"\n    sleep 300\n    ;;\n\n  \"reset\")\n\n    # Safety check - if /config/homer exists, we've not mounted /config properly and are about to wipe out EVERYTHING\n    if [ -e \"/config/homer\" ]; then\n        echo \"The path /config/homer exists. Exiting.\"\n        exit 1\n    fi      \n    echo \"Recent reset command found, resetting\"\n    rm -rf /config/*\n    ;;\n\n  \"backup\")\n    echo \"Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\n    TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n    ;;\n\nesac\n\nif [[ ! -f /config/i-am-bootstrapped ]]\nthen\n  echo \"Bootstrapping from goldilocks config...\"\n  s5cmd sync s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/\n  touch /config/i-am-bootstrapped\nfi\n"],"env":[{"name":"AWS_ACCESS_KEY_ID","valueFrom":{"secretKeyRef":{"key":"access-key-id","name":"b2-elfhosted-config-ro"}}},{"name":"AWS_SECRET_ACCESS_KEY","valueFrom":{"secretKeyRef":{"key":"secret-key","name":"b2-elfhosted-config-ro"}}},{"name":"S3_ENDPOINT_URL","value":"https://s3.us-west-000.backblazeb2.com"},{"name":"K8S_APP_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.labels['app.kubernetes.io/name']"}}},{"name":"ELF_APP_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.labels['app.elfhosted.com/name']"}}}],"image":"alpine/k8s:1.29.1","imagePullPolicy":"IfNotPresent","name":"bootstrap","resources":{"limits":{"cpu":"1","memory":"4Gi"},"requests":{"cpu":"0","memory":"1Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsGroup":568,"runAsUser":568,"seccompProfile":{"type":"RuntimeDefault"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/etc/elfbot","name":"elfbot"},{"mountPath":"/storage/backup","name":"backup"},{"mountPath":"/config","name":"config","subPath":"rclone"},{"mountPath":"/tmp","name":"tmp"}]},{"command":["/bin/bash","-c","set -x\nset -e\n\n# add local remote if it doesn't exist\ngrep -q '/storage' /config/rclone.conf || cat /rclone-remote-storage \u003e\u003e /config/rclone.conf\n"],"image":"alpine/k8s:1.29.1","imagePullPolicy":"IfNotPresent","name":"setup","resources":{"limits":{"cpu":"1","memory":"4Gi"},"requests":{"cpu":"0","memory":"1Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsGroup":568,"runAsUser":568,"seccompProfile":{"type":"RuntimeDefault"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/config","name":"config","subPath":"rclone"},{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/rclone-remote-storage","name":"rclone-remote-storage","subPath":"rclone-remote-storage"}]}],"priorityClassName":"tenant-normal","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{"fsGroup":568,"fsGroupChangePolicy":"OnRootMismatch","runAsGroup":568,"runAsUser":568,"seccompProfile":{"type":"RuntimeDefault"}},"serviceAccount":"default","serviceAccountName":"default","terminationGracePeriodSeconds":30,"volumes":[{"name":"backup","persistentVolumeClaim":{"claimName":"backup"}},{"name":"cache"},{"name":"config","persistentVolumeClaim":{"claimName":"config"}},{"configMap":{"defaultMode":420,"name":"elfbot-rclonebrowser","optional":true},"name":"elfbot"},{"emptyDir":{"sizeLimit":"1Gi"},"name":"mount"},{"configMap":{"defaultMode":420,"name":"rclonefm-config"},"name":"rclone-remote-storage"},{"name":"tmp"}]}}}}
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rcloneui
+    helm.sh/chart: rcloneui-0.2.1
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+  name: brunner56-rcloneui
+  namespace: bolabaden
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: rcloneui
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: rcloneui
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - image: ghcr.io/elfhosted/rclone:1.69.3@sha256:9396f8c3a649dba9f91169a62142c9f3e6da00974bda573d864b62c07f78234e
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 5572
+          timeoutSeconds: 1
+        name: brunner56-rcloneui
+        ports:
+        - containerPort: 5572
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 5572
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: "0"
+            memory: 60Mi
+        securityContext:
+          privileged: true
+          readOnlyRootFilesystem: false
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 5572
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /backup
+          name: backup
+        - mountPath: /home/elfie/.cache
+          name: cache
+        - mountPath: /config/
+          name: config
+          subPath: rclone
+        - mountPath: /elfbot
+          name: elfbot
+        - mountPath: /mount
+          name: mount
+        - mountPath: /rclone-remote-storage
+          name: rclone-remote-storage
+          subPath: rclone-remote-storage
+        - mountPath: /tmp
+          name: tmp
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - "set -e\n\n# Allows us to use app.elfhosted.com/name, but fall back to app.kubernetes.io/name
+          if the former doesn't exist\nif [[ -z \"$ELF_APP_NAME\" ]]; then\n  ELF_APP_NAME=$K8S_APP_NAME\nfi\n\n#
+          look for commands - we match specific names in order of least-destructive\nTIMESTAMP_NOW=$(date
+          +%s)\nif [[ -f /etc/elfbot/pause ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/pause)\n
+          \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+          -lt 600 ]]; then\n    COMMAND=pause\n  fi\nfi\n\n# If no command is set,
+          then move onto the next possibility\nif [[ -f /etc/elfbot/backup && -z \"$COMMAND\"
+          ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/backup)\n  TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n
+          \ if [[ $TIMESTAMP_DIFF -lt 600 ]]; then\n    COMMAND=backup\n  fi\nfi\n\n#
+          If no command is set, then move onto the next possibility\nif [[ -f /etc/elfbot/reset
+          && -z \"$COMMAND\" ]]; then\n  TIMESTAMP_COMMAND=$(cat /etc/elfbot/reset)\n
+          \ TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_COMMAND))\n  if [[ $TIMESTAMP_DIFF
+          -lt 600 ]]; then\n    COMMAND=reset\n  fi\nfi\n\ncase $COMMAND in\n\n  \"pause\")\n
+          \   echo \"Recent pause command found, sleeping 5m..\"\n    sleep 300\n
+          \   ;;\n\n  \"reset\")\n\n    # Safety check - if /config/homer exists,
+          we've not mounted /config properly and are about to wipe out EVERYTHING\n
+          \   if [ -e \"/config/homer\" ]; then\n        echo \"The path /config/homer
+          exists. Exiting.\"\n        exit 1\n    fi      \n    echo \"Recent reset
+          command found, resetting\"\n    rm -rf /config/*\n    ;;\n\n  \"backup\")\n
+          \   echo \"Recent backup command found, backing up to /storage/backup/${ELF_APP_NAME}-${TIMESTAMP}\"\n
+          \   TIMESTAMP=$(printf '%(%Y-%m-%d--%H-%M)T\\n' -1)\n    cp -rfp /config
+          /storage/backup/$ELF_APP_NAME-$TIMESTAMP\n    ;;\n\nesac\n\nif [[ ! -f /config/i-am-bootstrapped
+          ]]\nthen\n  echo \"Bootstrapping from goldilocks config...\"\n  s5cmd sync
+          s3://elfhosted-config/goldilocks/$ELF_APP_NAME/* /config/\n  touch /config/i-am-bootstrapped\nfi\n"
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: access-key-id
+              name: b2-elfhosted-config-ro
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: b2-elfhosted-config-ro
+        - name: S3_ENDPOINT_URL
+          value: https://s3.us-west-000.backblazeb2.com
+        - name: K8S_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/name']
+        - name: ELF_APP_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.elfhosted.com/name']
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: bootstrap
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/elfbot
+          name: elfbot
+        - mountPath: /storage/backup
+          name: backup
+        - mountPath: /config
+          name: config
+          subPath: rclone
+        - mountPath: /tmp
+          name: tmp
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+
+          # add local remote if it doesn't exist
+          grep -q '/storage' /config/rclone.conf || cat /rclone-remote-storage >> /config/rclone.conf
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: setup
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: "0"
+            memory: 1Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 568
+          runAsUser: 568
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: rclone
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /rclone-remote-storage
+          name: rclone-remote-storage
+          subPath: rclone-remote-storage
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 568
+        runAsUser: 568
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: backup
+        persistentVolumeClaim:
+          claimName: backup
+      - emptyDir: {}
+        name: cache
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - configMap:
+          defaultMode: 420
+          name: elfbot-rclonebrowser
+          optional: true
+        name: elfbot
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: mount
+      - configMap:
+          defaultMode: 420
+          name: rclonefm-config
+        name: rclone-remote-storage
+      - emptyDir: {}
+        name: tmp
+  conditions:
+  - lastTransitionTime: "2025-06-14T19:06:10Z"
+    lastUpdateTime: "2025-06-14T19:06:10Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    type: Available
+  - lastTransitionTime: "2025-06-14T19:06:07Z"
+    lastUpdateTime: "2025-06-14T19:06:07Z"
+    message: 'pods "brunner56-rcloneui-6df94f6cf-" is forbidden: no PriorityClass
+      with name tenant-normal was found'
+    reason: FailedCreate
+    type: ReplicaFailure
+  - lastTransitionTime: "2025-06-14T19:16:07Z"
+    lastUpdateTime: "2025-06-14T19:16:07Z"
+    message: ReplicaSet "brunner56-rcloneui-6df94f6cf" has timed out progressing.
+    reason: ProgressDeadlineExceeded
+    type: Progressing
+  observedGeneration: 5
+  unavailableReplicas: 1

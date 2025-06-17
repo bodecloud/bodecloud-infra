@@ -1,0 +1,253 @@
+# Default values for wizarr
+# This is a YAML-formatted file.
+
+# Global settings
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: "local-path"
+
+# Wizarr application image configuration
+image:
+  repository: ghcr.io/wizarrrr/wizarr
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+# Ubuntu image for bootstrap
+ubuntu:
+  image:
+    repository: ubuntu
+    tag: "20.04"
+    pullPolicy: IfNotPresent
+
+# Number of replicas
+replicaCount: 1
+
+# Service account
+serviceAccount:
+  create: false
+  name: "default"
+  automount: false
+  annotations: {}
+
+# Security context for the pod
+securityContext:
+  runAsUser: 568
+  runAsGroup: 568
+  fsGroup: 568
+  fsGroupChangePolicy: OnRootMismatch
+  seccompProfile:
+    type: RuntimeDefault
+
+# Container security contexts
+containerSecurityContext:
+  wizarr:
+    readOnlyRootFilesystem: true
+    seccompProfile:
+      type: RuntimeDefault
+      
+  bootstrap:
+    capabilities:
+      drop:
+        - ALL
+    runAsUser: 568
+    runAsGroup: 568
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+
+# Environment variables from ConfigMaps
+envFrom:
+  - configMapRef:
+      name: wizarr-env
+  - configMapRef:
+      name: elfbot-wizarr
+      optional: true
+
+# Resources for containers
+resources:
+  wizarr:
+    limits:
+      cpu: "1"
+      memory: 1Gi
+    requests:
+      cpu: "0"
+      memory: 128Mi
+      
+  bootstrap:
+    limits:
+      cpu: "1"
+      memory: 4Gi
+    requests:
+      cpu: "0"
+      memory: 1Mi
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 5690
+  targetPort: 5690
+  annotations: {}
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: wizarr.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Persistence configuration
+persistence:
+  backup:
+    enabled: true
+    size: 10Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    
+  config:
+    enabled: true
+    size: 5Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+
+# ConfigMaps configuration
+configMaps:
+  wizarrEnv:
+    enabled: true
+    data: {}
+    
+  elfbotWizarr:
+    enabled: true
+    data: {}
+    
+  wizarrStepsJellyfin:
+    enabled: true
+    data:
+      step1.json: |
+        {
+          "title": "Welcome to Jellyfin",
+          "description": "Follow these steps to get started with Jellyfin",
+          "steps": [
+            {
+              "title": "Download Jellyfin App",
+              "description": "Download the Jellyfin app for your device"
+            }
+          ]
+        }
+        
+  wizarrStepsPlex:
+    enabled: true
+    data:
+      step1.json: |
+        {
+          "title": "Welcome to Plex",
+          "description": "Follow these steps to get started with Plex",
+          "steps": [
+            {
+              "title": "Download Plex App",
+              "description": "Download the Plex app for your device"
+            }
+          ]
+        }
+
+# Bootstrap configuration
+bootstrap:
+  enabled: true
+  env:
+    S3_ENDPOINT_URL: "https://s3.us-west-000.backblazeb2.com"
+  secretRefs:
+    - name: b2-elfhosted-config-ro
+      keys:
+        - access-key-id
+        - secret-key
+
+# Health probes
+livenessProbe:
+  tcpSocket:
+    port: 5690
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  tcpSocket:
+    port: 5690
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+startupProbe:
+  tcpSocket:
+    port: 5690
+  timeoutSeconds: 1
+  periodSeconds: 5
+  successThreshold: 1
+  failureThreshold: 30
+
+# Node selector and affinity
+nodeSelector: {}
+
+affinity:
+  podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.elfhosted.com/role
+              operator: In
+              values:
+                - nodefinder
+        topologyKey: kubernetes.io/hostname
+
+tolerations: []
+
+# Priority class
+priorityClassName: "tenant-normal"
+
+# Annotations for configmap reloader
+annotations:
+  configmap.reloader.stakater.com/reload: "elfbot-all,elfbot-wizarr"
+
+# Enable service links
+enableServiceLinks: false
+
+# Deployment strategy
+strategy:
+  type: Recreate
+
+# Revision history limit
+revisionHistoryLimit: 3
+
+# Progress deadline
+progressDeadlineSeconds: 600
+
+# Volume configuration
+volumes:
+  cache:
+    enabled: true
+  tmp:
+    enabled: true
+  wizarrSteps:
+    enabled: true
+
+# Wizarr specific configuration
+wizarr:
+  # Database path
+  databasePath: "/data/database"
+  
+  # Wizard steps path
+  wizardStepsPath: "/data/wizard_steps"
+  
+  # Default wizard steps path
+  defaultWizardStepsPath: "/opt/default_wizard_steps" 

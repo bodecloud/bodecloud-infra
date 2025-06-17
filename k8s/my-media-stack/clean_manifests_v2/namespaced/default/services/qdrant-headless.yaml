@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: qdrant
+    meta.helm.sh/release-namespace: default
+  labels:
+    app: qdrant
+    app.kubernetes.io/component: cluster-discovery
+    app.kubernetes.io/instance: qdrant
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: qdrant
+    app.kubernetes.io/version: v1.14.1
+    helm.sh/chart: qdrant-1.14.1
+  name: qdrant-headless
+  namespace: default
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 6333
+    protocol: TCP
+    targetPort: 6333
+  - name: grpc
+    port: 6334
+    protocol: TCP
+    targetPort: 6334
+  - name: p2p
+    port: 6335
+    protocol: TCP
+    targetPort: 6335
+  publishNotReadyAddresses: true
+  selector:
+    app: qdrant
+    app.kubernetes.io/instance: qdrant
+    app.kubernetes.io/name: qdrant
+  sessionAffinity: None
+  type: ClusterIP
+  loadBalancer: {}

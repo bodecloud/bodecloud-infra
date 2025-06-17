@@ -1,0 +1,2106 @@
+x-common-env: &common-env
+  TZ: ${TZ:-America/Chicago}
+  PUID: ${PUID:-1001}
+  PGID: ${PGID:-988}
+  UMASK: ${UMASK:-002}
+
+x-common-uidgid: &common-uidgid
+  user: ${PUID:-1001}:${PGID:-988}
+
+x-resource-limits: &resource-limits
+  labels:
+    autoheal: "true"
+
+x-common-logging: &common-logging
+  logging:
+    driver: "local"
+    options:
+      max-file: "5"
+      max-size: "10m"
+
+
+services:
+  autobrr:
+    # 🔹🔹 Autobrr 🔹🔹  # https://github.com/autobrr/autobrr
+    # Modern, easy to use download automation for torrents and usenet.
+    image: ghcr.io/autobrr/autobrr
+    container_name: autobrr
+    network_mode: service:gluetun-premiumize
+#    hostname: autobrr
+#    networks:
+#      - publicnet
+#    ports:
+#      - ${AUTOBRR__PORT:-7474}:${AUTOBRR__PORT:-7474}
+    volumes:
+      - ${CONFIG_PATH:-./configs}/autobrr/config:/config
+      - ${CONFIG_PATH:-./configs}/autobrr/logs:/logs
+      - ${DATA_PATH:-./data}:/data
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+      AUTOBRR__BASE_URL: ${AUTOBRR__BASE_URL:-}
+      AUTOBRR__CHECK_FOR_UPDATES: ${AUTOBRR__CHECK_FOR_UPDATES:-true}
+      AUTOBRR__CUSTOM_DEFINITIONS: ${AUTOBRR__CUSTOM_DEFINITIONS:-}
+      AUTOBRR__DATABASE_TYPE: ${AUTOBRR__DATABASE_TYPE:-sqlite}
+      AUTOBRR__HOST: ${AUTOBRR__HOST:-0.0.0.0}
+      AUTOBRR__LOG_LEVEL: ${AUTOBRR__LOG_LEVEL:-info}
+      AUTOBRR__LOG_MAX_BACKUPS: ${AUTOBRR__LOG_MAX_BACKUPS:-8}
+      AUTOBRR__LOG_MAX_SIZE: ${AUTOBRR__LOG_MAX_SIZE:-2}
+      AUTOBRR__LOG_PATH: ${AUTOBRR__LOG_PATH:-logs/autobrr.log}
+      AUTOBRR__METRICS_BASIC_AUTH_USERS: ${AUTOBRR__METRICS_BASIC_AUTH_USERS:-}
+      AUTOBRR__METRICS_ENABLED: ${AUTOBRR__METRICS_ENABLED:-false}
+      AUTOBRR__METRICS_HOST: ${AUTOBRR__METRICS_HOST:-0.0.0.0}
+      AUTOBRR__METRICS_PORT: ${AUTOBRR__METRICS_PORT:-9092}
+      AUTOBRR__OIDC_CLIENT_ID: ${AUTOBRR__OIDC_CLIENT_ID:-}
+      AUTOBRR__OIDC_CLIENT_SECRET: ${AUTOBRR__OIDC_CLIENT_SECRET:-}
+      AUTOBRR__OIDC_DISABLE_BUILT_IN_LOGIN: ${AUTOBRR__OIDC_DISABLE_BUILT_IN_LOGIN:-false}
+      AUTOBRR__OIDC_ENABLED: ${AUTOBRR__OIDC_ENABLED:-false}
+      AUTOBRR__OIDC_ISSUER: ${AUTOBRR__OIDC_ISSUER:-}
+      AUTOBRR__OIDC_REDIRECT_URL: ${AUTOBRR__OIDC_REDIRECT_URL:-}
+      AUTOBRR__PORT: ${AUTOBRR__PORT:-7474}
+      AUTOBRR__POSTGRES_DATABASE: ${AUTOBRR__POSTGRES_DATABASE:-autobrr}
+      AUTOBRR__POSTGRES_EXTRA_PARAMS: ${AUTOBRR__POSTGRES_EXTRA_PARAMS:-}
+      AUTOBRR__POSTGRES_HOST: ${AUTOBRR__POSTGRES_HOST:-postgres}
+      AUTOBRR__POSTGRES_PASS: ${AUTOBRR__POSTGRES_PASS:-autobrr}
+      AUTOBRR__POSTGRES_PORT: ${AUTOBRR__POSTGRES_PORT:-5430}
+      AUTOBRR__POSTGRES_SSLMODE: ${AUTOBRR__POSTGRES_SSLMODE:-disable}
+      AUTOBRR__POSTGRES_USER: ${AUTOBRR__POSTGRES_USER:-autobrr}
+      AUTOBRR__SESSION_SECRET: ${AUTOBRR__SESSION_SECRET:-}
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.autobrr.rule: Host(`autobrr.${DOMAIN}`) || Host(`autobrr.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.autobrr.loadbalancer.server.port: 7474
+      homepage.group: Source Aggregator
+      homepage.name: Autobrr
+      homepage.icon: autobrr.png
+      homepage.href: https://autobrr.${DOMAIN}/
+      homepage.description: Redefines download automation for torrents and Usenet
+      homepage.type: autobrr
+      homepage.url: http://gluetun-premiumize:${AUTOBRR__PORT:-7474}
+      homepage.key: ${AUTOBRR__API_KEY}
+    restart: always
+
+  bazarr:
+    # 🔹🔹 Bazarr 🔹🔹
+    image: linuxserver/bazarr
+    container_name: bazarr
+    hostname: bazarr
+    networks:
+      - publicnet
+#    ports:
+#      - ${BAZARR_PORT:-6767}:6767
+    volumes:
+      - ${CONFIG_PATH:-./configs}/bazarr/config:/config
+      - ${DATA_PATH:-./data}/downloads/bazarr:/downloads
+      - ${DATA_PATH:-./data}/media/anime:/media/anime
+      - ${DATA_PATH:-./data}/media/movies:/media/movies
+      - ${DATA_PATH:-./data}/media/tv:/media/tv
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.bazarr.rule: Host(`bazarr.${DOMAIN}`) || Host(`bazarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/bazarr`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/bazarr`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/bazarr`))
+      traefik.http.services.bazarr.loadbalancer.server.port: 6767
+      homepage.group: Media Management
+      homepage.name: Bazarr
+      homepage.icon: bazarr.png
+      homepage.href: https://bazarr.${DOMAIN}/
+      homepage.description: Companion application to Sonarr and Radarr for automatic subtitle downloading and management in multiple languages.
+      homepage.type: bazarr
+      homepage.url: https://bazarr.${DOMAIN}
+      homepage.key: ${BAZARR_API_KEY}
+    healthcheck:
+      test: curl -fs http://127.0.0.1:6767
+      interval: ${BAZARR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${BAZARR_HEALTHCHECK_TIMEOUT:-15s}
+      retries: ${BAZARR_HEALTHCHECK_RETRIES:-4}
+      start_period: ${BAZARR_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  bazarr-exporter:
+    # 🔹🔹 Bazarr Exporter 🔹🔹
+    image: ghcr.io/onedr0p/exportarr:v2.0
+    container_name: bazarr-exporter
+    hostname: bazarr-exporter
+    networks:
+      - publicnet
+    ports:
+      - ${BAZARR_EXPORTER_PORT:-9712}:${BAZARR_EXPORTER_PORT:-9712}
+    environment:
+      <<: *common-env
+      PORT: ${BAZARR_EXPORTER_PORT:-9712}
+      URL: "http://bazarr:6767"
+      APIKEY: ${BAZARR_API_KEY}
+    command: ["bazarr"]
+    restart: always
+
+  cadvisor:
+    # 🔹🔹 Cadvisor 🔹🔹  # https://github.com/google/cadvisor
+    depends_on:
+      - prometheus
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    hostname: cadvisor
+    networks:
+      - publicnet
+#    ports:
+#      - ${CADVISOR_PORT:-8071}:8080
+    security_opt:
+      - no-new-privileges:true
+    devices:
+      - /dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /var/run:/var/run:ro
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:ro
+    <<: [*common-logging, *resource-limits]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.cadvisor.rule: Host(`cadvisor.${DOMAIN}`) || Host(`cadvisor.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/cadvisor`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/cadvisor`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/cadvisor`))
+      traefik.http.services.cadvisor.loadbalancer.server.port: 8080
+      homepage.group: System Monitoring
+      homepage.name: Cadvisor
+      homepage.icon: cadvisor.png
+      homepage.href: https://cadvisor.${DOMAIN}/
+      homepage.description: A tool for monitoring and visualizing resource usage and performance metrics of Docker containers.
+    restart: always
+
+  checkrr:
+    # 🔹🔹 Checkrr 🔹🔹  https://github.com/aetaric/checkrr
+    # Scan your library files for corrupt media and replace the files via sonarr and radarr
+    image: aetaric/checkrr:3.4.0
+    container_name: checkrr
+    hostname: checkrr
+    networks:
+      - publicnet
+#    ports:
+#      - ${CHECKRR_PORT:-8585}:8585
+    volumes:
+      #      - ${CONFIG_PATH:-./configs}/certs:/certs
+      - ${CONFIG_PATH:-./configs}/checkrr/config/checkrr.db:/checkrr.db
+      - ${CONFIG_PATH:-./configs}/checkrr/config/checkrr.yaml:/checkrr.yaml
+      - ${CONFIG_PATH:-./configs}/checkrr/logs:/logs
+      - ${DATA_PATH:-./data}/media:/media
+    environment:
+      <<: *common-env
+      GIN_MODE: release
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.checkrr.rule: Host(`checkrr.${DOMAIN}`) || Host(`checkrr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/checkrr`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/checkrr`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/checkrr`))
+      traefik.http.services.checkrr.loadbalancer.server.port: 8585
+      homepage.group: System Monitoring
+      homepage.name: Checkrr
+      homepage.icon: checkrr.png
+      homepage.href: https://checkrr.${DOMAIN}/
+      homepage.description: A comprehensive system monitoring tool that checks the health and status of your various services and applications.
+    restart: always
+
+  code-demo:
+    # 🔹🔹 Code Server 🔹🔹
+    image: linuxserver/code-server:latest
+    container_name: code
+    hostname: code
+    <<: [*common-logging, *resource-limits]
+    networks:
+      - publicnet
+#    ports:
+#      - ${CODESERVER_DEMO_PORT:-8443}:8443
+    volumes:
+      - ${CONFIG_PATH:-./configs}/code-server/demo/config:/config
+      - ${CONFIG_PATH:-./configs}/code-server/demo/workspace:/workspace
+    env_file:
+      - ${CONFIG_PATH:-./configs}/code-server/host_config/.env
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.code.rule: Host(`code.${DOMAIN}`) || Host(`code.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/code`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/code`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/code`))
+      traefik.http.services.code.loadbalancer.server.port: 8443
+      homepage.group: Development
+      homepage.name: Code Server
+      homepage.icon: code-server.png
+      homepage.href: https://code.${DOMAIN}/
+      homepage.description: A web-based IDE for coding, editing, and debugging code, with support for multiple languages and frameworks.
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 512m
+    restart: always
+
+  code-dev:
+    # 🔹🔹 Code Server 🔹🔹
+    image: linuxserver/code-server:latest
+    container_name: code-dev
+    hostname: code-dev
+    <<: [*common-logging, *resource-limits]
+    networks:
+      - publicnet
+#    ports:
+#      - ${CODESERVER_DEV_PORT:-8441}:8443
+    volumes:
+      - ${CONFIG_PATH:-./configs}/code-server/dev/config:/config
+      - ${CONFIG_PATH:-./configs}/code-server/dev/workspace:/workspace
+      - ${ROOT_DIR:-.}:/workspace
+    env_file:
+      - ${CONFIG_PATH:-./configs}/code-server/host_config/.env
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.code-dev.rule: Host(`code-dev.${DOMAIN}`) || Host(`code-dev.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/code-dev`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/code-dev`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/code-dev`))
+      traefik.http.services.code-dev.loadbalancer.server.port: 8441
+    deploy:
+      resources:
+        limits:
+          cpus: '1.1'
+          memory: 1024m
+    restart: always
+
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    hostname: crowdsec
+    networks:
+      - publicnet
+    expose: 
+      - ${CROWDSEC_METRICS_PORT:-6060}
+      - 8080
+    environment:
+      <<: *common-env
+      # Configuration file location
+      CONFIG_FILE: ${CROWDSEC_CONFIG_FILE:-/etc/crowdsec/config.yaml}
+      # Disable the agent, run a LAPI-only container
+      DISABLE_AGENT: ${CROWDSEC_DISABLE_AGENT:-false}
+      # Disable LAPI, run an agent-only container
+      DISABLE_LOCAL_API: ${CROWDSEC_DISABLE_LOCAL_API:-false}
+      # Disable online API registration for signal sharing
+      DISABLE_ONLINE_API: ${CROWDSEC_DISABLE_ONLINE_API:-false}
+      # Don't run the service, only test the configuration
+      TEST_MODE: ${CROWDSEC_TEST_MODE:-false}
+      # The LAPI URL, change when DISABLE_LOCAL_API is true
+      LOCAL_API_URL: ${CROWDSEC_LOCAL_API_URL:-http://0.0.0.0:8080}
+      # Directory for plugins
+      PLUGIN_DIR: ${CROWDSEC_PLUGIN_DIR:-/usr/local/lib/crowdsec/plugins/}
+      # Port to expose Prometheus metrics
+      METRICS_PORT: ${CROWDSEC_METRICS_PORT:-6060}
+      # Enable Write-Ahead Logging with SQLite
+      USE_WAL: ${CROWDSEC_USE_WAL:-false}
+      # Name for the local agent (running in the container with LAPI)
+      CUSTOM_HOSTNAME: ${CROWDSEC_CUSTOM_HOSTNAME:-localhost}
+      # Path for capi_whitelists.yaml
+      CAPI_WHITELISTS_PATH: ${CROWDSEC_CAPI_WHITELISTS_PATH:-}
+      # Labels.type for file in time-machine
+      TYPE: ${CROWDSEC_TYPE:-}
+      # Process a single source in time-machine
+      DSN: ${CROWDSEC_DSN:-}
+      # Register a bouncer with the name TRAEFIK
+      BOUNCER_KEY_TRAEFIK: ${CROWDSEC_BOUNCER_API_KEY}
+      # Enroll key retrieved from the console to enroll the instance
+      ENROLL_KEY: ${CROWDSEC_ENROLL_KEY:-}
+      # Set an instance name for the console
+      ENROLL_INSTANCE_NAME: ${CROWDSEC_ENROLL_INSTANCE_NAME:-}
+      # Tags of the enrolled instance, for search and filter
+      ENROLL_TAGS: ${CROWDSEC_ENROLL_TAGS:-}
+      # Agent username
+      AGENT_USERNAME: ${CROWDSEC_AGENT_USERNAME:-}
+      # Agent password
+      AGENT_PASSWORD: ${CROWDSEC_AGENT_PASSWORD:-}
+      # Enable TLS encryption
+      USE_TLS: ${CROWDSEC_USE_TLS:-false}
+      # CA certificate bundle (for self-signed certificates)
+      CACERT_FILE: ${CROWDSEC_CACERT_FILE:-}
+      # Skip LAPI certificate validation
+      INSECURE_SKIP_VERIFY: ${CROWDSEC_INSECURE_SKIP_VERIFY:-}
+      # LAPI TLS Certificate path
+      LAPI_CERT_FILE: ${CROWDSEC_LAPI_CERT_FILE:-}
+      # LAPI TLS Key path
+      LAPI_KEY_FILE: ${CROWDSEC_LAPI_KEY_FILE:-}
+      # Client TLS Certificate path
+      CLIENT_CERT_FILE: ${CROWDSEC_CLIENT_CERT_FILE:-}
+      # Client TLS Key path
+      CLIENT_KEY_FILE: ${CROWDSEC_CLIENT_KEY_FILE:-}
+      # OU values allowed for agents, separated by comma
+      AGENTS_ALLOWED_OU: ${CROWDSEC_AGENTS_ALLOWED_OU:-agent-ou}
+      # OU values allowed for bouncers, separated by comma
+      BOUNCERS_ALLOWED_OU: ${CROWDSEC_BOUNCERS_ALLOWED_OU:-bouncer-ou}
+      # Skip hub update/upgrade when the container starts
+      NO_HUB_UPGRADE: ${CROWDSEC_NO_HUB_UPGRADE:-false}
+      # Collections to install, separated by space
+      COLLECTIONS: ${CROWDSEC_COLLECTIONS:-crowdsecurity/traefik}
+      # Parsers to install, separated by space
+      PARSERS: ${CROWDSEC_PARSERS:-}
+      # Scenarios to install, separated by space
+      SCENARIOS: ${CROWDSEC_SCENARIOS:-}
+      # Postoverflows to install, separated by space
+      POSTOVERFLOWS: ${CROWDSEC_POSTOVERFLOWS:-}
+      # Context files to install, separated by space
+      CONTEXTS: ${CROWDSEC_CONTEXTS:-}
+      # Appsec configs files to install, separated by space
+      APPSEC_CONFIGS: ${CROWDSEC_APPSEC_CONFIGS:-}
+      # Appsec rules files to install, separated by space
+      APPSEC_RULES: ${CROWDSEC_APPSEC_RULES:-}
+      # Collections to remove, separated by space
+      DISABLE_COLLECTIONS: ${CROWDSEC_DISABLE_COLLECTIONS:-}
+      # Parsers to remove, separated by space
+      DISABLE_PARSERS: ${CROWDSEC_DISABLE_PARSERS:-}
+      # Scenarios to remove, separated by space
+      DISABLE_SCENARIOS: ${CROWDSEC_DISABLE_SCENARIOS:-}
+      # Postoverflows to remove, separated by space
+      DISABLE_POSTOVERFLOWS: ${CROWDSEC_DISABLE_POSTOVERFLOWS:-}
+      # Context files to remove, separated by space
+      DISABLE_CONTEXTS: ${CROWDSEC_DISABLE_CONTEXTS:-}
+      # Appsec configs files to remove, separated by space
+      DISABLE_APPSEC_CONFIGS: ${CROWDSEC_DISABLE_APPSEC_CONFIGS:-}
+      # Appsec rules files to remove, separated by space
+      DISABLE_APPSEC_RULES: ${CROWDSEC_DISABLE_APPSEC_RULES:-}
+      # Force log levels for the container log
+      LEVEL_FATAL: ${CROWDSEC_LEVEL_FATAL:-false}
+      LEVEL_ERROR: ${CROWDSEC_LEVEL_ERROR:-false}
+      LEVEL_WARN: ${CROWDSEC_LEVEL_WARN:-false}
+      LEVEL_INFO: ${CROWDSEC_LEVEL_INFO:-false}
+      LEVEL_DEBUG: ${CROWDSEC_LEVEL_DEBUG:-false}
+      LEVEL_TRACE: ${CROWDSEC_LEVEL_TRACE:-false}
+      # Used during functional tests
+      CI_TESTING: ${CROWDSEC_CI_TESTING:-false}
+      # Trace the entrypoint
+      DEBUG: ${CROWDSEC_DEBUG:-false}
+    volumes:
+      - ${CONFIG_PATH:-./configs}/crowdsec/data:/var/lib/crowdsec/data
+      - ${CONFIG_PATH:-./configs}/crowdsec/etc/crowdsec:/etc/crowdsec
+      - ${CONFIG_PATH:-./configs}/crowdsec/plugins:/usr/local/lib/crowdsec/plugins/
+      - ${CONFIG_PATH:-./configs}/crowdsec/logs:/var/log
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.crowdsec.rule: Host(`crowdsec.${DOMAIN}`) || Host(`crowdsec.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/crowdsec`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/crowdsec`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/crowdsec`))
+      traefik.http.services.crowdsec.loadbalancer.server.port: 8080
+      homepage.group: Security
+      homepage.name: Crowdsec
+      homepage.icon: crowdsec.png
+      homepage.href: https://crowdsec.${DOMAIN}/
+      homepage.description: CrowdSec is an open-source, behavioral, intrusion detection system.
+      homepage.widget.type: crowdsec
+      homepage.widget.url: http://crowdsec:8080
+      homepage.widget.username: localhost # machine_id in crowdsec
+      homepage.widget.password: password
+    restart: always
+
+  ddns-updater:
+    image: qmcgaw/ddns-updater
+    container_name: ddns-updater
+    hostname: ddns-updater
+    networks:
+      - publicnet
+    ports:
+      - ${DDNS_UPDATER_PORT:-7998}:7998
+      - ${DDNS_UPDATER_PORT2:-8073}:8000
+    volumes:
+      - ${CONFIG_PATH:-./configs}/ddns-updater/updater/data:/updater/data
+    environment:
+      - CONFIG_FILEPATH=${DDNS_UPDATER_CONFIG_FILEPATH:-/updater/data/config.json}
+      - PERIOD=${DDNS_UPDATER_PERIOD:-5m}
+      - UPDATE_COOLDOWN_PERIOD=${DDNS_UPDATER_UPDATE_COOLDOWN_PERIOD:-5m}
+      - PUBLICIP_FETCHERS=${DDNS_UPDATER_PUBLICIP_FETCHERS:-all}
+      - PUBLICIP_HTTP_PROVIDERS=${DDNS_UPDATER_PUBLICIP_HTTP_PROVIDERS:-all}
+      - PUBLICIPV4_HTTP_PROVIDERS=${DDNS_UPDATER_PUBLICIPV4_HTTP_PROVIDERS:-all}
+      - PUBLICIPV6_HTTP_PROVIDERS=${DDNS_UPDATER_PUBLICIPV6_HTTP_PROVIDERS:-all}
+      - PUBLICIP_DNS_PROVIDERS=${DDNS_UPDATER_PUBLICIP_DNS_PROVIDERS:-all}
+      - PUBLICIP_DNS_TIMEOUT=${DDNS_UPDATER_PUBLICIP_DNS_TIMEOUT:-3s}
+      - HTTP_TIMEOUT=${DDNS_UPDATER_HTTP_TIMEOUT:-10s}
+
+      # Web UI
+      - LISTENING_ADDRESS=0.0.0.0:7998
+      - ROOT_URL=${DDNS_UPDATER_ROOT_URL:-/}
+
+      # Backup
+      - BACKUP_PERIOD=${DDNS_UPDATER_BACKUP_PERIOD:-1h} # 0 to disable
+      - BACKUP_DIRECTORY=${DDNS_UPDATER_BACKUP_DIRECTORY:-/updater/data}
+
+      # Other
+      - LOG_LEVEL=${DDNS_UPDATER_LOG_LEVEL:-info}
+      - LOG_CALLER=${DDNS_UPDATER_LOG_CALLER:-hidden}
+      - SHOUTRRR_ADDRESSES=${DDNS_UPDATER_SHOUTRRR_ADDRESSES:-}
+    restart: always
+
+  decluttarr:
+    # 🔹🔹 Decluttarr 🔹🔹  https://github.com/manimatter/decluttarr
+    # Watches radarr, sonarr, lidarr, readarr and whisparr download queues and removes downloads if they become stalled or no longer needed.
+    depends_on:
+      - lidarr
+      - qbittorrent
+      - radarr
+      - readarr
+      - sonarr
+      - whisparr
+    image: ghcr.io/manimatter/decluttarr
+    container_name: decluttarr
+    hostname: decluttarr
+    networks:
+      - publicnet
+    <<: *resource-limits
+    environment:
+      <<: *common-env
+      TEST_RUN: ${DECLUTTARR_TEST_RUN:-false}
+      SSL_VERIFICATION: ${DECLUTTARR_SSL_VERIFICATION:-false}
+      FAILED_IMPORT_MESSAGE_PATTERNS: '["Not a Custom Format upgrade for existing", "Not an upgrade for existing"]' # TODO: add more patterns
+      IGNORED_DOWNLOAD_CLIENTS: '["emulerr"]'
+      LOG_LEVEL: ${DECLUTTARR_LOG_LEVEL:-VERBOSE}
+      MIN_DOWNLOAD_SPEED: ${DECLUTTARR_MIN_DOWNLOAD_SPEED:-100} # 100 KB/s
+      NO_STALLED_REMOVAL_QBIT_TAG: ${DECLUTTARR_NO_STALLED_REMOVAL_QBIT_TAG:-Don't Kill}
+      PERMITTED_ATTEMPTS: ${DECLUTTARR_PERMITTED_ATTEMPTS:-3}
+      LIDARR_KEY: ${LIDARR_API_KEY}
+      LIDARR_URL: http://lidarr:${LIDARR_PORT:-8686}
+      # FIXME: radarr doesn't seem to work, but strangely the radarr service itself works?
+      #RADARR_KEY: ${RADARR_API_KEY}
+      #RADARR_URL: http://radarr:${RADARR_PORT:-7878}
+      READARR_KEY: ${READARR_API_KEY}
+      READARR_URL: http://readarr:${READARR_PORT:-8787}
+      SONARR_KEY: ${SONARR_API_KEY}
+      SONARR_URL: http://sonarr:${SONARR_PORT:-8989}
+      WHISPARR_URL: http://whisparr:${WHISPARR_PORT:-6969}
+      WHISPARR_KEY: ${WHISPARR_API_KEY}
+      QBITTORRENT_URL: http://gluetun-premiumize:${QBITTORRENT_PORT:-8084}
+      QBITTORRENT_USERNAME: ${QBITTORRENT_USERNAME:-admin}
+      QBITTORRENT_PASSWORD: ${QBITTORRENT_PASSWORD:-adminadmin}
+      REMOVE_TIMER: 10
+      REMOVE_FAILED: True
+      REMOVE_FAILED_IMPORTS: True
+      REMOVE_METADATA_MISSING: True
+      REMOVE_MISSING_FILES: True
+      REMOVE_ORPHANS: True
+      REMOVE_SLOW: True
+      REMOVE_STALLED: True
+      REMOVE_UNMONITORED: True
+      RUN_PERIODIC_RESCANS: '{
+        "RADARR": {"MISSING": true, "CUTOFF_UNMET": true, "MAX_CONCURRENT_SCANS": 3, "MIN_DAYS_BEFORE_RESCAN": 1},
+        "SONARR": {"MISSING": true, "CUTOFF_UNMET": true, "MAX_CONCURRENT_SCANS": 3, "MIN_DAYS_BEFORE_RESCAN": 1}
+        }'
+    restart: always
+
+  deluge:
+    # 🔹🔹 Deluge 🔹🔹
+    depends_on:
+      - gluetun-premiumize
+    image: linuxserver/deluge
+    container_name: deluge
+    network_mode: service:gluetun-premiumize
+    hostname: deluge
+#    ports:
+#      - ${DELUGE_PORT:-8112}:8112
+    volumes:
+      - ${DATA_PATH:-./data}/downloads:/downloads:rw
+      - ${CONFIG_PATH:-./configs}/deluge:/config:rw
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+      DELUGE_LOGLEVEL: ${DELUGE_LOGLEVEL:-info}
+    labels:
+#      traefik.enable: "true"
+#      traefik.http.routers.deluge.rule: Host(`deluge.${DOMAIN}`) || Host(`deluge.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/deluge`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/deluge`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/deluge`))
+#      traefik.http.services.deluge.loadbalancer.server.port: 8112
+      homepage.group: Download Clients
+      homepage.name: Deluge
+      homepage.icon: deluge.png
+      homepage.href: https://deluge.${DOMAIN}/
+      homepage.description: A lightweight, cross-platform BitTorrent client designed for downloading files efficiently and securely from the internet.
+      homepage.widget.type: deluge
+      homepage.widget.url: http://gluetun-premiumize:${DELUGE_PORT:-8112}
+      homepage.widget.password: ${DELUGE_PASSWORD} # webui password
+      homepage.widget.enableLeechProgress: true # optional, defaults to false
+    restart: always
+
+  deunhealth:
+    # 🔹🔹 DeUnhealth 🔹🔹
+    # Restart unhealthy containers marked with `deunhealth.restart.on.unhealthy=true` label
+    # Receive Docker events as stream instead of polling periodically
+    # Doesn't need network! (more secure)
+    # Compatible with amd64, 386, arm64, arm32v7, arm32v6, ppc64le, s390x and riscv64 CPU architectures
+    # Since Docker is written in Go, the program is also written in Go and uses the official Docker Go API⁠
+    # https://hub.docker.com/r/qmcgaw/deunhealth/tags  https://hub.docker.com/r/qmcgaw/deunhealth
+    image: qmcgaw/deunhealth
+    container_name: deunhealth
+    network_mode: none
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env # for TZ env var.
+      LOG_LEVEL: ${DEUNHEALTH_LOG_LEVEL:-debug} # debug, info, warning, error
+      HEALTH_SERVER_ADDRESS: ${DEUNHEALTH_HEALTH_SERVER_ADDRESS:-127.0.0.1:9999} # Internal health http server listening address. Nothing to do with restarting unhealthy containers.
+    restart: always
+
+  dozzle:
+    # 🔹🔹 Dozzle 🔹🔹
+    image: amir20/dozzle
+    container_name: dozzle
+    hostname: dozzle
+    networks:
+      - publicnet
+#    ports:
+#      - ${DOZZLE_PORT:-9997}:8080
+    volumes:
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
+    <<: [*common-logging, *resource-limits]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.dozzle.rule: Host(`dozzle.${DOMAIN}`) || Host(`dozzle.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.dozzle.loadbalancer.server.port: 8080
+      homepage.group: System Monitoring
+      homepage.name: Dozzle
+      homepage.icon: dozzle.png
+      homepage.href: https://dozzle.${DOMAIN}/
+      homepage.description: Real-time log viewer for Docker containers, providing an easy way to monitor application logs and troubleshoot issues.
+    restart: always
+
+  flaresolverr:
+    # 🔹🔹 Flaresolverr 🔹🔹  # https://github.com/flaresolverr/flaresolverr
+    #image: ghcr.io/flaresolverr/flaresolverr
+    image: ghcr.io/thephaseless/byparr:latest
+    container_name: flaresolverr
+    hostname: flaresolverr
+    networks:
+      publicnet:
+        ipv4_address: ${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
+    expose:
+      - ${FLARESOLVERR_PORT:-8191}
+    <<: *common-logging
+    environment:
+      <<: *common-env
+      # FlareSolverr Environment Variables
+      # Verbosity of the logging. Use LOG_LEVEL=debug for more information.
+      LOG_LEVEL: ${FLARESOLVERR_LOG_LEVEL:-info}
+      # Only for debugging. If true all HTML that passes through the proxy will be logged to the console in debug level.
+      LOG_HTML: ${FLARESOLVERR_LOG_HTML:-false}
+      # Captcha solving method. It is used when a captcha is encountered.
+      # Note: none of the captcha solvers work with the current version of Flaresolverr.
+      CAPTCHA_SOLVER: ${FLARESOLVERR_CAPTCHA_SOLVER:-none}
+      # Listening port. You don't need to change this if you are running on Docker.
+      PORT: ${FLARESOLVERR_PORT:-8191}
+      # Listening interface. You don't need to change this if you are running on Docker.
+      HOST: ${FLARESOLVERR_HOST:-0.0.0.0}
+      # Only for debugging. To run the web browser in headless mode or visible.
+      HEADLESS: ${FLARESOLVERR_HEADLESS:-true}
+      # If you are experiencing errors/timeouts because your system is slow, you can try to increase this value.
+      BROWSER_TIMEOUT: ${FLARESOLVERR_BROWSER_TIMEOUT:-120000}
+      # FlareSolverr makes a request on start to make sure the web browser is working.
+      TEST_URL: ${FLARESOLVERR_TEST_URL:-https://www.google.com}
+      # Enable Prometheus exporter
+      PROMETHEUS_ENABLED: ${FLARESOLVERR_PROMETHEUS_ENABLED:-true}
+      # Listening port for Prometheus exporter
+      PROMETHEUS_PORT: ${PROMETHEUS_PORT:-9090}
+#    labels:
+#      traefik.enable: "true"
+#      traefik.http.routers.flaresolverr.rule: Host(`flaresolverr.${DOMAIN}`) || Host( `flaresolverr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/flaresolverr`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/flaresolverr`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/flaresolverr`))
+#      traefik.http.services.flaresolverr.loadbalancer.server.port: 8191
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:${FLARESOLVERR_PORT:-8191}/health || exit 1"]
+      interval: ${FLARESOLVERR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${FLARESOLVERR_HEALTHCHECK_TIMEOUT:-15s}
+      retries: ${FLARESOLVERR_HEALTHCHECK_RETRIES:-3}
+      start_period: ${FLARESOLVERR_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  gluetun-airvpn:
+    # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
+    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
+    # use this one with arm:
+    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
+    image: ghcr.io/qdm12/gluetun
+    container_name: gluetun-airvpn
+    hostname: gluetun-airvpn
+    networks:
+      publicnet:
+        ipv4_address: ${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
+    extra_hosts:
+      - host.docker.internal=172.17.0.1
+      - flaresolverr:${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
+      - iphone172=100.97.148.14
+      - jellyfin:${JELLYFIN_IPV4_ADDRESS:-10.76.4.20}
+      - lidarr:${LIDARR_IPV4_ADDRESS:-10.76.4.2}
+      - micklethefickle=100.72.149.123
+      - micklethefickle3=100.72.149.123
+      - radarr:${RADARR_IPV4_ADDRESS:-10.76.4.3}
+      - readarr:${READARR_IPV4_ADDRESS:-10.76.4.4}
+      - sonarr:${SONARR_IPV4_ADDRESS:-10.76.4.5}
+      - whisparr:${WHISPARR_IPV4_ADDRESS:-10.76.4.6}
+      - wizard=100.119.187.62
+      - wizard-pc=100.119.187.62
+#      - 149-130-221-93.519b6502d940.stremio.rocks:${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
+      - gluetun-airvpn:${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
+      - gluetun-premiumize:${GLUETUN_PREMIUMIZE_IPV4_ADDRESS:-10.76.128.98}
+      - vpn-us.premiumize.me:199.58.86.204
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: ${DISABLE_IPV6:-1}
+    expose:
+      - 1080  # SOCKS5
+      - ${MEDIAFLOW_PROXY_PORT:-8888}  # Mediaflow proxy
+#      - ${QB_WEBUI_PORT:-8084}  # qBittorrent
+#      - ${QB_TORRENTING_PORT:-6881}
+#      - ${QB_TORRENTING_PORT:-6881}/udp
+#      - 8112  # Deluge
+#    ports:
+#      - "8009:8000"
+#      - "8890${GLUETUN_HTTPPROXY_LISTENING_ADDRESS:-:8888}"
+#      - "8388${GLUETUN_SHADOWSOCKS_LISTENING_ADDRESS:-:8388}/tcp"
+#      - "8388${GLUETUN_SHADOWSOCKS_LISTENING_ADDRESS:-:8388}/udp"
+#      - "9999${GLUETUN_HEALTH_SERVER_ADDRESS:-:9999}/tcp"
+#      - "1080:1080/tcp" # SOCKS5
+#      - "${MEDIAFLOW_PROXY_PORT:-8888}:${MEDIAFLOW_PROXY_PORT:-8888}"    # Mediaflow proxy
+#      - ${QB_TORRENTING_PORT:-6881}:${QB_TORRENTING_PORT:-6881}
+#      - ${QB_TORRENTING_PORT:-6881}:${QB_TORRENTING_PORT:-6881}/udp
+    devices:
+      - "${GLUETUN_TUN_DEVICE:-/dev/net/tun}:/dev/net/tun" # https://github.com/qdm12/gluetun-wiki/blob/main/errors/tun.md
+    volumes:
+      - ${CONFIG_PATH:-./configs}/gluetun/airvpn:/gluetun
+    env_file:
+      - ${CONFIG_PATH:-./configs}/gluetun/host_config/.env_airvpn
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: publicnet
+#      homepage.name: Gluetun AirVPN
+#      homepage.description: Gluetun AirVPN
+#      homepage.icon: https://airvpn.org/static/img/logo/web_header.png
+#      homepage.widget.type: gluetun
+#      homepage.widget.url: http://gluetun-airvpn.${DOMAIN}
+      # Gluetun AirVPN
+#      traefik.http.routers.gluetun-airvpn.service: gluetun-airvpn
+#      traefik.http.routers.gluetun-airvpn.rule: Host(`gluetun-airvpn.${DOMAIN}`) || Host(`gluetun-airvpn.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.services.gluetun-airvpn.loadbalancer.server.port: 8000
+      # Mediaflow proxy
+      traefik.http.routers.mediaflow.service: mediaflow
+      traefik.http.routers.mediaflow.rule: Host(`mediaflow-proxy.${DOMAIN}`) || Host(`mediaflow-proxy.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.mediaflow.loadbalancer.server.port: ${MEDIAFLOW_PROXY_PORT:-8888}
+      # qBittorrent
+#      traefik.http.routers.qbittorrent.service: qbittorrent
+#      traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.${DOMAIN}`) || Host(`qbittorrent.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.services.qbittorrent.loadbalancer.server.port: ${QB_WEBUI_PORT:-8084}
+#        post_start:
+#          - command: /bin/bash -c "rm -rf /gluetun/servers.json" # fixes occasional startup crashloop
+    restart: always
+    
+  gluetun-airvpn-socks5:
+    depends_on:
+       gluetun-airvpn:
+          condition: service_healthy
+    image: serjs/go-socks5-proxy
+    container_name: gluetun-airvpn-socks5
+    network_mode: container:gluetun-airvpn
+    restart: unless-stopped
+
+  gluetun-premiumize:
+    # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
+    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
+    # use this one with arm:
+    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
+    image: ghcr.io/qdm12/gluetun
+    container_name: gluetun-premiumize
+    hostname: gluetun-premiumize
+    networks:
+      publicnet:
+        ipv4_address: ${GLUETUN_PREMIUMIZE_IPV4_ADDRESS:-10.76.128.98}
+    extra_hosts:
+      - host.docker.internal=172.17.0.1
+      - flaresolverr:${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
+      - iphone172=100.97.148.14
+      - jellyfin:${JELLYFIN_IPV4_ADDRESS:-10.76.4.20}
+      - lidarr:${LIDARR_IPV4_ADDRESS:-10.76.4.2}
+      - micklethefickle=100.72.149.123
+      - micklethefickle3=100.72.149.123
+      - radarr:${RADARR_IPV4_ADDRESS:-10.76.4.3}
+      - readarr:${READARR_IPV4_ADDRESS:-10.76.4.4}
+      - sonarr:${SONARR_IPV4_ADDRESS:-10.76.4.5}
+      - whisparr:${WHISPARR_IPV4_ADDRESS:-10.76.4.6}
+      - wizard=100.119.187.62
+      - wizard-pc=100.119.187.62
+      - gluetun-airvpn:${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
+      - gluetun-premiumize:${GLUETUN_PREMIUMIZE_IPV4_ADDRESS:-10.76.128.98}
+      - vpn-us.premiumize.me:199.58.86.204
+      - stremio-web:${STREMIO_WEB_IPV4_ADDRESS:-10.76.128.94}
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: ${DISABLE_IPV6:-1}
+    expose:
+      - 1080  # SOCKS5
+      - 8080  # Stremio
+      - 11470 # Stremio HTTP Streaming Server
+      - 12470 # Stremio HTTPS Streaming Server
+      - 9117  # Jackett
+      - 9696  # Prowlarr
+    ports:
+#      - "8010${GLUETUN_PREMIUMIZE_HTTP_CONTROL_SERVER_ADDRESS:-:8000}"
+#      - "8887${GLUETUN_PREMIUMIZE_HTTPPROXY_LISTENING_ADDRESS:-:8888}"
+#      - "8387${GLUETUN_PREMIUMIZE_SHADOWSOCKS_LISTENING_ADDRESS:-:8388}/tcp"
+#      - "8387${GLUETUN_PREMIUMIZE_SHADOWSOCKS_LISTENING_ADDRESS:-:8388}/udp"
+#      - "9998${GLUETUN_PREMIUMIZE_HEALTH_SERVER_ADDRESS:-:9999}/tcp"
+#      - "1081:1080/tcp" # SOCKS5
+      - "8080:8080"     # Stremio Web UI
+      - "11470:11470"   # Stremio HTTP Streaming Server
+      - "12470:12470"   # Stremio HTTPS Streaming Server
+#      - "${JACKETT_PORT:-9117}:9117"    # Jackett
+#      - "${PROWLARR_PORT:-9696}:9696"    # Prowlarr
+    devices:
+      - "${GLUETUN_PREMIUMIZE_TUN_DEVICE:-/dev/net/tun}:/dev/net/tun" # https://github.com/qdm12/gluetun-wiki/blob/main/errors/tun.md
+    volumes:
+      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/gluetun
+      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/etc/openvpn:/etc/openvpn
+    env_file:
+      - ${CONFIG_PATH:-./configs}/gluetun/host_config/.env_premiumize
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: publicnet
+      # Jackett
+      traefik.http.routers.jackett.service: jackett
+      traefik.http.routers.jackett.rule: Host(`jackett.${DOMAIN}`) || Host(`jackett.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.jackett.loadbalancer.server.port: 9117
+      # Prowlarr
+      traefik.http.routers.prowlarr.service: prowlarr
+      traefik.http.routers.prowlarr.rule: Host(`prowlarr.${DOMAIN}`) || Host(`prowlarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.prowlarr.loadbalancer.server.port: 9696
+      # Stremio Web
+      traefik.http.routers.stremio-web.service: stremio-web
+      traefik.http.routers.stremio-web.rule: Host(`stremio-web.${DOMAIN}`) || Host(`stremio-web.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.routers.stremio-web.middlewares: "" # Set to empty string to disable default middlewares
+      traefik.http.services.stremio-web.loadbalancer.server.scheme: http
+      traefik.http.services.stremio-web.loadbalancer.server.port: 8080
+      # Stremio HTTPS Streaming Server
+      traefik.http.routers.stremio.service: stremio
+      traefik.http.routers.stremio.rule: Host(`stremio.${DOMAIN}`) || Host(`stremio.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.stremio.loadbalancer.server.scheme: https
+      traefik.http.services.stremio.loadbalancer.server.port: 12470
+      # Stremio HTTP Streaming Server
+#      traefik.http.routers.stremio-server.service: stremio-server
+#      traefik.http.routers.stremio-server.rule: Host(`stremio-server.${DOMAIN}`) || Host(`stremio-server.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.services.stremio-server.loadbalancer.server.port: 11470
+    restart: always
+    
+  gluetun-premiumize-socks5:
+    depends_on:
+       gluetun-premiumize:
+          condition: service_healthy
+    image: serjs/go-socks5-proxy
+    container_name: gluetun-premiumize-socks5
+    network_mode: container:gluetun-premiumize
+    restart: unless-stopped
+
+  gotify:
+    image: ghcr.io/gotify/server
+    container_name: gotify
+    hostname: gotify
+    networks:
+      - gotify-network
+#    ports:
+#      - "${GOTIFY_EXTERNAL_PORT:-8075}:${GOTIFY_SERVER_PORT:-80}" # Maps the container port to host port
+    volumes:
+      - ${CONFIG_PATH:-./configs}/gotify/data:/app/data # For persistent storage
+    environment:
+      - GOTIFY_SERVER_PORT=${GOTIFY_SERVER_PORT:-80} # Matches GOTIFY_SERVER_EXPOSE from build args
+      - TZ=${TZ:-America/Chicago} # Timezone setting, adjust as needed
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:${GOTIFY_SERVER_PORT:-80}/health"]
+      interval: ${GOTIFY_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${GOTIFY_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${GOTIFY_HEALTHCHECK_RETRIES:-3}
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.gotify.rule: Host(`gotify.${DOMAIN}`) || Host(`gotify.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.gotify.loadbalancer.server.port: ${GOTIFY_SERVER_PORT:-80}
+      homepage.group: Notifications
+      homepage.name: Gotify
+      homepage.icon: gotify.png
+      homepage.href: https://gotify.${DOMAIN}
+      homepage.description: Gotify is a simple server for sending and receiving messages, notifications, and events.
+      homepage.weight: 1
+      homepage.widget.type: gotify
+      homepage.widget.url: https://gotify.${DOMAIN}
+      homepage.widget.key: ${GOTIFY_CLIENT_TOKEN}
+    restart: always
+
+  homepage:
+    # 🔹🔹 Homepage 🔹🔹  # https://github.com/gethomepage/homepage
+    image: ghcr.io/gethomepage/homepage
+    container_name: homepage
+    hostname: homepage
+    networks:
+      - publicnet
+#    ports:
+#      - ${HOMEPAGE_PORT:-3000}:3000
+    volumes:
+      # DO NOT create a bind mount to the entire /app/public/ directory.
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
+      - ${CONFIG_PATH:-./configs}/homepage:/app/config
+    <<: [*common-logging, *resource-limits]
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS:-*}
+      HOMEPAGE_VAR_TITLE: ${HOMEPAGE_VAR_TITLE:-Bolabaden}
+      HOMEPAGE_VAR_SEARCH_PROVIDER: ${HOMEPAGE_VAR_SEARCH_PROVIDER:-google}
+      HOMEPAGE_VAR_HEADER_STYLE: ${HOMEPAGE_VAR_HEADER_STYLE:-}
+      HOMEPAGE_VAR_WEATHER_CITY: ${HOMEPAGE_VAR_WEATHER_CITY:-Chicago}
+      HOMEPAGE_VAR_WEATHER_LAT: ${HOMEPAGE_VAR_WEATHER_LAT:-41.8781}
+      HOMEPAGE_VAR_WEATHER_LONG: ${HOMEPAGE_VAR_WEATHER_LONG:--87.6298}
+      #      HOMEPAGE_VAR_WEATHER_TIME: ${HOMEPAGE_VAR_WEATHER_TIME:-}
+      HOMEPAGE_VAR_WEATHER_UNIT: ${HOMEPAGE_VAR_WEATHER_UNIT:-fahrenheit}
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.homepage.rule: Host(`homepage.${DOMAIN}`) || Host(`homepage.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/homepage`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/homepage`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/homepage`))
+      traefik.http.services.homepage.loadbalancer.server.port: 3000
+    restart: always
+
+  jackett:
+    # 🔹🔹 Jackett 🔹🔹
+    depends_on:
+      flaresolverr:
+        condition: service_healthy
+      gluetun-premiumize:
+        condition: service_healthy
+    image: linuxserver/jackett
+    container_name: jackett
+    network_mode: service:gluetun-premiumize
+    <<: [*common-uidgid, *common-logging, *resource-limits]
+    volumes:
+      - ${CONFIG_PATH:-./configs}/jackett/config:/config
+    environment:
+      <<: *common-env
+    labels:
+      homepage.group: Source Aggregator
+      homepage.name: Jackett Indexer
+      homepage.icon: jackett.png
+      homepage.href: https://jackett.${DOMAIN}/
+      homepage.description: Connects your download applications with various source providers and indexers, making it easier to find and download content through your download clients.
+      homepage.weight: 1
+      homepage.widget.type: jackett
+      homepage.widget.url: http://gluetun-premiumize:${JACKETT_PORT:-9117}
+      homepage.widget.key: ${JACKETT_API_KEY}
+    healthcheck:
+      test: curl -fs http://127.0.0.1:9117/api/v2.0/indexers/all/results/torznab?t=indexers&apikey=${JACKETT_API_KEY} || exit 1
+      interval: ${JACKETT_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${JACKETT_HEALTHCHECK_TIMEOUT:-10s}
+      start_period: ${JACKETT_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  jellyseerr:
+    # 🔹🔹 Jellyseerr 🔹🔹
+    image: fallenbagel/jellyseerr
+    container_name: jellyseerr
+    hostname: jellyseerr
+    networks:
+      - publicnet
+    ports:
+      - ${JELLYSEERR_PORT:-5055}:5055
+    volumes:
+      - ${CONFIG_PATH:-./configs}/jellyseerr/config:/app/config
+    environment:
+      <<: *common-env
+      LOG_LEVEL: ${LOG_LEVEL:-debug}
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.jellyseerr.rule: Host(`jellyseerr.${DOMAIN}`) || Host(`jellyseerr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/jellyseerr`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/jellyseerr`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/jellyseerr`))
+      traefik.http.services.jellyseerr.loadbalancer.server.port: 5055
+      homepage.group: Media Requests
+      homepage.name: Jellyseerr Requests
+      homepage.icon: jellyseerr.png
+      homepage.href: https://jellyseerr.${DOMAIN}/
+      homepage.description: Allows you and others to request new movies and TV shows to be added to your Jellyfin media server.
+      homepage.widget.type: jellyseerr
+      homepage.widget.url: https://jellyseerr.${DOMAIN}
+      homepage.widget.key: ${JELLYSEERR_API_KEY}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:5055 || exit 1"]
+      interval: ${JELLYSEERR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${JELLYSEERR_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${JELLYSEERR_HEALTHCHECK_RETRIES:-3}
+      start_period: ${JELLYSEERR_HEALTHCHECK_START_PERIOD:-240s}
+    restart: always
+
+  komga:
+    # 🔹🔹 Komga 🔹🔹
+    # Komga is a web application for managing your digital comic books.
+    image: gotson/komga
+    container_name: komga
+    hostname: komga
+    networks:
+      - publicnet
+    ports:
+      - ${KOMGA_PORT:-25600}:25600
+    volumes:
+      - ${CONFIG_PATH:-./configs}/komga:/config
+      - ${DATA_DIR:-./data}/media/books:/media/books
+      - ${DATA_DIR:-./data}/media/comics:/media/comics
+      - ${DATA_DIR:-./data}/media/manga:/media/manga
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.komga.rule: Host(`komga.${DOMAIN}`) || Host(`komga.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/komga`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/komga`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/komga`))
+      traefik.http.services.komga.loadbalancer.server.port: 25600
+      homepage.group: E-books & Comics
+      homepage.name: Komga Library
+      homepage.icon: komga.png
+      homepage.href: https://komga.${DOMAIN}/
+      homepage.description: Manages and streams your digital comics, manga, and books, providing a clean and organized reading experience.
+    restart: always
+
+  lidarr:
+    # 🔹🔹 Lidarr 🔹🔹
+    image: linuxserver/lidarr
+    container_name: lidarr
+    hostname: lidarr
+    networks:
+      publicnet:
+        ipv4_address: ${LIDARR_IPV4_ADDRESS:-10.76.4.2}
+    ports:
+      - ${LIDARR_PORT:-8686}:8686
+    volumes:
+      - ${DATA_PATH:-./data}/downloads/bazarr:/downloads
+      - ${DATA_PATH:-./data}/media/music:/media/music
+      - ${CONFIG_PATH:-./configs}/lidarr/config:/config
+    <<: [*common-uidgid, *common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.lidarr.rule: Host(`lidarr.${DOMAIN}`) || Host(`lidarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/lidarr`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/lidarr`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/lidarr`))
+      traefik.http.services.lidarr.loadbalancer.server.port: 8686
+      homepage.group: Music Management
+      homepage.name: Lidarr Music
+      homepage.icon: lidarr.png
+      homepage.href: https://lidarr.${DOMAIN}
+      homepage.description: Helps you automatically download and organize your music collection, ensuring correct metadata and album art.
+      homepage.weight: 2
+      homepage.widget.type: lidarr
+      homepage.widget.url: https://lidarr.${DOMAIN}
+      homepage.widget.key: ${LIDARR_API_KEY}
+    healthcheck:
+      test: curl -fs http://localhost:8686 > /dev/null || exit 1
+      interval: ${LIDARR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${LIDARR_HEALTHCHECK_TIMEOUT:-15s}
+      retries: ${LIDARR_HEALTHCHECK_RETRIES:-4}
+      start_period: ${LIDARR_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  lidarr-exporter:
+    # 🔹🔹 Lidarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Lidarr metrics for Prometheus
+    depends_on:
+      - lidarr
+      - prometheus
+    image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    # image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: lidarr-exporter
+    hostname: lidarr-exporter
+    networks:
+      - publicnet
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - ${LIDARR_EXPORTER_PORT:-9709}:${LIDARR_EXPORTER_PORT:-9709}
+    environment:
+      <<: *common-env
+      APIKEY: ${LIDARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${LIDARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+      PORT: ${LIDARR_EXPORTER_PORT:-9709}
+      URL: https://lidarr.${DOMAIN}
+    command: ["lidarr"]
+    restart: always
+
+  midarr:
+    depends_on:
+      midarr-postgres:
+        condition: service_healthy
+    image: ghcr.io/midarrlabs/midarr-server:latest
+    container_name: midarr
+    hostname: ${MIDARR_HOSTNAME:-midarr}
+    networks:
+      - publicnet
+#    ports:
+#      - ${MIDARR_PORT:-4001}:4000
+    volumes:
+      - ${DATA_PATH:-./data}/media:/media
+    environment:
+      <<: *common-env
+      # App config
+      APP_URL: https://${MIDARR_HOSTNAME:-midarr}.${DOMAIN}
+
+      # Database config
+      DB_USERNAME: ${MIDARR_DB_USERNAME:-postgres}
+      DB_PASSWORD: ${MIDARR_DB_PASSWORD:-postgres}
+      DB_DATABASE: ${MIDARR_DB_DATABASE:-midarr}
+      DB_HOSTNAME: ${MIDARR_DB_HOSTNAME:-midarr-postgres}
+
+      # Admin account
+      SETUP_ADMIN_EMAIL: ${MIDARR_SETUP_ADMIN_EMAIL:-boden.crouch@gmail.com}
+      SETUP_ADMIN_NAME: ${MIDARR_SETUP_ADMIN_NAME:-admin}
+      SETUP_ADMIN_PASSWORD: ${MIDARR_SETUP_ADMIN_PASSWORD:-h4L0m4St3R327} # minimum length 12
+
+      # Radarr integration
+      RADARR_BASE_URL: ${RADARR_HOSTNAME:-radarr}:${RADARR_PORT:-7878}
+      RADARR_API_KEY: ${RADARR_API_KEY}
+
+      # Sonarr integration
+      SONARR_BASE_URL: ${SONARR_HOSTNAME:-sonarr}:${SONARR_PORT:-8989}
+      SONARR_API_KEY: ${SONARR_API_KEY}
+      APP_MAILER_FROM: ${MIDARR_APP_MAILER_FROM:-boden.crouch@gmail.com}
+      SENDGRID_API_KEY: ${MIDARR_SENDGRID_API_KEY}
+      OAUTH_CLIENT_ID: ${MIDARR_OAUTH_CLIENT_ID}
+      OAUTH_CLIENT_SECRET: ${MIDARR_OAUTH_CLIENT_SECRET}
+      OAUTH_ISSUER_URL: ${MIDARR_OAUTH_ISSUER_URL}
+      OAUTH_AUTHORIZE_URL: ${MIDARR_OAUTH_AUTHORIZE_URL}
+      OAUTH_TOKEN_URL: ${MIDARR_OAUTH_TOKEN_URL}
+      OAUTH_REDIRECT_URI: ${MIDARR_OAUTH_REDIRECT_URI}
+      OAUTH_USER_URL: ${MIDARR_OAUTH_USER_URL}
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.midarr.rule: Host(`midarr.${DOMAIN}`) || Host(`midarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/midarr`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/midarr`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/midarr`))
+      traefik.http.services.midarr.loadbalancer.server.port: 4000
+      homepage.group: Backend Media Management
+      homepage.name: Midarr
+      homepage.icon: midarr.png
+      homepage.href: https://${MIDARR_HOSTNAME:-midarr}.${DOMAIN}
+      homepage.description: A modern, easy to use download automation for torrents and usenet.
+    healthcheck:
+      test: curl -fs http://localhost:4000 > /dev/null || exit 1
+      interval: ${MIDARR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${MIDARR_HEALTHCHECK_TIMEOUT:-15s}
+      start_period: ${MIDARR_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  midarr-postgres:
+    image: postgres:17.4
+    container_name: midarr-postgres
+    hostname: midarr-postgres
+    networks:
+      - publicnet
+    ports:
+      - ${MIDARR_POSTGRES_PORT:-5428}:5432
+    volumes:
+      - ${CONFIG_PATH:-./configs}/midarr/db/data:/var/lib/postgresql/data
+      - ${CONFIG_PATH:-./configs}/midarr/db/run/postgresql:/var/run/postgresql
+    <<: *resource-limits
+    environment:
+      <<: *common-env
+      POSTGRES_USER: ${MIDARR_DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${MIDARR_DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${MIDARR_DB_DATABASE:-midarr}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  myspeed:
+    # 🔹🔹 MySpeed 🔹🔹
+    image: germannewsmaker/myspeed
+    container_name: myspeed
+    hostname: myspeed
+    networks:
+      - publicnet
+#    ports:
+#      - ${MYSPEED_PORT:-5216}:5216
+    volumes:
+      - ${CONFIG_PATH:-./configs}/myspeed:/myspeed/data
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.myspeed.rule: Host(`myspeed.${DOMAIN}`) || Host(`myspeed.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.myspeed.loadbalancer.server.port: 5216
+    restart: always
+
+  navidrome:
+    # 🔹🔹 Navidrome 🔹🔹
+    # open source web-based music collection server and streamer.
+    # It gives you freedom to listen to your music collection from any browser or mobile device.
+    # It's like your personal Spotify!
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    hostname: navidrome
+    networks:
+      - publicnet
+#    ports:
+#      - ${NAVIDROME_PORT:-4533}:4533
+    volumes:
+      - ${CONFIG_PATH:-./configs}/navidrome:/data
+      - ${DATA_PATH:-./data}/media/music:/music:ro
+    <<: [*common-logging, *resource-limits]
+    environment:
+      ND_LOGLEVEL: ${NAVIDROME_LOGLEVEL:-debug}
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.navidrome.rule: Host(`navidrome.${DOMAIN}`) || Host(`navidrome.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.routers.navidrome.middlewares: navidrome-stripprefix
+#      traefik.http.middlewares.navidrome-stripprefix.stripprefix.prefixes: /navidrome
+      traefik.http.services.navidrome.loadbalancer.server.port: 4533
+      homepage.group: Media Streaming
+      homepage.name: Navidrome
+      homepage.icon: navidrome.png
+      homepage.href: https://navidrome.${DOMAIN}
+      homepage.description: Navidrome is a web-based music collection server and streamer.
+    restart: always
+
+  netalertx:
+    image: ghcr.io/jokob-sk/netalertx:latest
+    # use the below line if you want to test the latest dev image
+    # image: "ghcr.io/jokob-sk/netalertx-dev:latest" 
+    container_name: netalertx
+    hostname: netalertx
+    network_mode: host
+    # uncomment below two lines for swarm
+#    networks:
+#      - outside
+    privileged: true
+    volumes:
+      - ${CONFIG_PATH:-./configs}/netalertx/config:/app/config
+      - ${CONFIG_PATH:-./configs}/netalertx/db:/app/db
+      # (optional) useful for debugging if you have issues setting up the container
+      #- ${CONFIG_PATH:-./configs}/netalertx/logs:/app/log
+      # (API: OPTION 1) use for performance
+      - type: tmpfs
+        target: /app/api
+      # (API: OPTION 2) use when debugging issues 
+      # -  ${CONFIG_PATH:-./configs}/netalertx/api:/app/api
+    environment:
+      <<: *common-env
+      PORT: 20211
+    labels:
+      caddy: netalertx.${DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 20211}}"
+      traefik.enable: "true"
+      traefik.http.routers.netalertx.rule: Host(`netalertx.${DOMAIN}`) || Host(`netalertx.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.routers.netalertx.middlewares: netalertx-stripprefix
+      traefik.http.middlewares.netalertx-stripprefix.stripprefix.prefixes: /netalertx
+      traefik.http.services.netalertx.loadbalancer.server.port: 20211
+      homepage.group: Alerts
+      homepage.name: Netalertx
+      homepage.icon: netalertx.png
+      homepage.href: https://netalertx.${DOMAIN}
+      homepage.description: Netalertx is a tool for monitoring your network and alerting you when something is wrong.
+      homepage.widget.type: netalertx
+      homepage.widget.url: https://netalertx.${DOMAIN}
+      homepage.widget.key: ${NETALERTX_API_KEY}
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    restart: always
+
+  nextcloud:
+    depends_on:
+      - cloud-postgres
+    image: nextcloud:latest
+    container_name: cloud
+    hostname: cloud
+    networks:
+      - publicnet
+    ports:
+      - ${NEXTCLOUD_PORT:-8072}:80
+    volumes:
+      - ${CONFIG_PATH:-./configs}/nextcloud/var/www/html:/var/www/html
+      - ${DATABASES_PATH:-./databases}/nextcloud/var/lib/mysql:/var/lib/mysql
+      - ${DATABASES_PATH:-./databases}/nextcloud/var/postgresql/data:/var/postgresql/data
+      - ${DATA_PATH:-./data}/nextcloud/data:/data
+    environment:
+      - POSTGRES_HOST=${NEXTCLOUD_POSTGRES_HOST:-ep-dawn-tooth-a8audu8m-pooler.eastus2.azure.neon.tech}
+      - POSTGRES_DB=${NEXTCLOUD_POSTGRES_DB:-neondb}
+      - POSTGRES_USER=${NEXTCLOUD_POSTGRES_USER:-neondb_owner}
+      - POSTGRES_PASSWORD=${NEXTCLOUD_POSTGRES_PASSWORD:-npg_xAJ0mqdWFY7c}
+      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD:-nextcloud}
+      - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN_USER:-nextcloud}
+      #
+      - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES:-cloud.${DOMAIN},cloud.${DUCKDNS_SUBDOMAIN}.duckdns.org}
+      - OVERWRITECLIURL=${NEXTCLOUD_OVERWRITECLIURL:-https://cloud.${DOMAIN}}
+      - OVERWRITEPROTOCOL=${NEXTCLOUD_OVERWRITEPROTOCOL:-https}
+      - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_TRUSTED_DOMAINS:-cloud.${DOMAIN},cloud.${DUCKDNS_SUBDOMAIN}.duckdns.org}
+      - OVERWRITEHOST=${NEXTCLOUD_OVERWRITEHOST:-cloud.${DOMAIN}}
+      - NEXTCLOUD_DEFAULT_PHONE_REGION=${NEXTCLOUD_DEFAULT_PHONE_REGION:-US}
+      #
+      - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
+      - SMTP_PORT=${SMTP_PORT:-465}
+      - SMTP_SECURE=${SMTP_SECURE:-SSL}
+      - SMTP_AUTHTYPE=${SMTP_AUTHTYPE:-Login}
+      - SMTP_NAME=${SMTP_NAME:-bolabaden.duckdns@gmail.com}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-Hilogirl80!}
+      - MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS:-nextcloud}
+      - MAIL_DOMAIN=${MAIL_DOMAIN:-bolabaden.org}
+    labels:
+      caddy: cloud.${DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 80}}"
+      traefik.enable: "true"
+      traefik.http.routers.nextcloud.rule: Host(`cloud.${DOMAIN}`) || Host(`cloud.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.nextcloud.loadbalancer.server.port: 80
+      homepage.group: Web Services
+      homepage.name: Nextcloud
+      homepage.icon: nextcloud.png
+      homepage.href: https://cloud.${DOMAIN}/
+      homepage.description: Nextcloud is a suite of free and open-source client-server software for creating and using a personal cloud.
+    restart: always
+
+  cloud-postgres:
+    image: postgres:17.4
+    container_name: cloud-postgres
+    hostname: cloud-postgres
+    networks:
+      - publicnet
+    ports:
+      - ${NEXTCLOUD_POSTGRES_PORT:-5426}:5432
+    volumes:
+      - ${CONFIG_PATH:-./configs}/nextcloud/db/data:/var/lib/postgresql/data
+      - ${CONFIG_PATH:-./configs}/nextcloud/db/run/postgresql:/var/run/postgresql
+    environment:
+      <<: *common-env
+      POSTGRES_USER: ${NEXTCLOUD_DB_USERNAME:-nextcloud}
+      POSTGRES_PASSWORD: ${NEXTCLOUD_DB_PASSWORD:-nextcloud}
+      POSTGRES_DB: ${NEXTCLOUD_DB_DATABASE:-nextcloud}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -d ${NEXTCLOUD_DB_DATABASE:-nextcloud} -U ${NEXTCLOUD_DB_USERNAME:-nextcloud}",
+        ]
+      interval: ${NEXTCLOUD_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${NEXTCLOUD_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${NEXTCLOUD_HEALTHCHECK_RETRIES:-5}
+    restart: always
+
+  whoami:
+    image: containous/whoami:latest
+    container_name: whoami
+    hostname: whoami
+    networks:
+      - publicnet
+#    ports:
+#      - "3080:80"
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.whoami.rule: Host(`whoami.${DOMAIN}`) || Host(`whoami.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.whoami.loadbalancer.server.port: 80
+      homepage.group: Web Services
+      homepage.name: Whoami
+      homepage.icon: whoami.png
+      homepage.href: https://whoami.${DOMAIN}
+      homepage.description: Whoami is a simple web service that returns the client's IP address and hostname.
+    restart: always
+
+  prometheus:
+    # 🔹🔹 Prometheus 🔹🔹  https://github.com/prometheus/prometheus
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    <<: *resource-limits
+    networks:
+      - publicnet
+    ports:
+      - ${PROMETHEUS_PORT:-9090}:9090
+    volumes:
+      - ${CONFIG_PATH:-./configs}/prometheus:${PROMETHEUS_INTERNAL_CONFIG_PATH:-/etc/prometheus}
+      - ${CONFIG_PATH:-./configs}/prometheus/console_libraries:${PROMETHEUS_INTERNAL_WEB_CONSOLE_LIBRARIES:-/etc/prometheus/console_libraries}
+      - ${CONFIG_PATH:-./configs}/prometheus/consoles:${PROMETHEUS_INTERNAL_WEB_CONSOLE_TEMPLATES:-/etc/prometheus/consoles}
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.prometheus.rule: Host(`prometheus.${DOMAIN}`) || Host(`prometheus.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.prometheus.loadbalancer.server.port: 9090
+      homepage.group: System Monitoring
+      homepage.name: Prometheus
+      homepage.icon: prometheus.png
+      homepage.href: https://prometheus.${DOMAIN}/
+      homepage.description: A powerful and flexible monitoring system for metrics and alerting.
+      homepage.weight: 1
+      homepage.widget.type: prometheus
+      homepage.widget.url: https://prometheus.${DOMAIN}
+      homepage.widget.key: ${PROMETHEUS_API_KEY}
+    command: [
+        "--config.file=${PROMETHEUS_INTERNAL_CONFIG_PATH:-/etc/prometheus}/prometheus.yml", # Specifies the path to the Prometheus configuration file
+        "--storage.tsdb.retention.size=${PROMETHEUS_STORAGE_TSDB_RETENTION_SIZE:-1GB}", # Sets the maximum size of the time series database to 1GB
+        "--web.console.libraries=${PROMETHEUS_INTERNAL_WEB_CONSOLE_LIBRARIES:-/etc/prometheus/console_libraries}", # Path to console libraries for the web UI
+        "--web.console.templates=${PROMETHEUS_INTERNAL_WEB_CONSOLE_TEMPLATES:-/etc/prometheus/consoles}", # Path to console templates for the web UI
+        "--web.enable-lifecycle", # Enables lifecycle management for the web interface (e.g., for graceful shutdown)
+      ]
+    restart: always
+
+  prowlarr:
+    # 🔹🔹 Prowlarr 🔹🔹
+    image: linuxserver/prowlarr
+    container_name: prowlarr
+    network_mode: service:gluetun-premiumize
+#    hostname: prowlarr
+#    ports:
+#      - ${PROWLARR_PORT:-9696}:9696
+    volumes:
+      - ${CONFIG_PATH:-./configs}/prowlarr/config:/config
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+    labels:
+#      traefik.enable: "true"
+#      traefik.http.routers.prowlarr.rule: Host(`prowlarr.${DOMAIN}`) || Host(`prowlarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.services.prowlarr.loadbalancer.server.port: 9696
+      homepage.group: Indexers
+      homepage.name: Prowlarr
+      homepage.icon: prowlarr.png
+      homepage.href: https://prowlarr.${DOMAIN}/
+      homepage.description: An indexer manager/proxy for your Usenet and Torrent downloaders, integrating with PVR apps like Sonarr and Radarr.
+      homepage.weight: 1
+      homepage.widget.type: prowlarr
+      homepage.widget.url: https://prowlarr.${DOMAIN}
+      homepage.widget.key: ${PROWLARR_API_KEY}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:9696/api/v1/system/status || exit 1"]
+      interval: ${PROWLARR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${PROWLARR_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${PROWLARR_HEALTHCHECK_RETRIES:-3}
+      start_period: ${PROWLARR_HEALTHCHECK_START_PERIOD:-120s}
+    restart: always
+
+  prowlarr-exporter:
+    # 🔹🔹 Prowlarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Prowlarr metrics for Prometheus
+    depends_on:
+      - prowlarr
+      - prometheus
+    image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    # image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: prowlarr-exporter
+    hostname: prowlarr-exporter
+    networks:
+      - publicnet
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - ${PROWLARR_EXPORTER_PORT:-9710}:${PROWLARR_EXPORTER_PORT:-9710}
+    <<: [*common-uidgid, *common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+      PORT: ${PROWLARR_EXPORTER_PORT:-9710}
+      URL: "http://gluetun-premiumize:${PROWLARR_PORT:-9696}"
+      APIKEY: ${PROWLARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${PROWLARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+    command: "prowlarr"
+    restart: always
+
+  qbittorrent:
+    # 🔹🔹 qBittorrent 🔹🔹
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    network_mode: service:gluetun-airvpn
+    <<: *common-logging
+#    ports:
+#      - ${QB_WEBUI_PORT:-8084}:${QB_WEBUI_PORT:-8084}
+#      - ${QB_TORRENTING_PORT:-6881}:${QB_TORRENTING_PORT:-6881}
+#      - ${QB_TORRENTING_PORT:-6881}:${QB_TORRENTING_PORT:-6881}/udp
+    volumes:
+      - ${DATA_PATH:-./data}/downloads:/downloads
+      - ${CONFIG_PATH:-./configs}/qbittorrent/config:/config
+      - ${CONFIG_PATH:-./configs}/qbittorrent/scripts:/scripts
+    environment:
+      <<: *common-env
+      TORRENTING_PORT: ${QB_TORRENTING_PORT:-6881}
+      WEBUI_PORT: ${QB_WEBUI_PORT:-8084}
+    labels:
+#      traefik.enable: "true"
+#      traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.${DOMAIN}`) || Host(`qbittorrent.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.services.qbittorrent.loadbalancer.server.port: ${QB_WEBUI_PORT:-8084}
+      homepage.group: Download Clients
+      homepage.name: qBittorrent Downloader
+      homepage.icon: qbittorrent.png
+      homepage.href: https://qbittorrent.${DOMAIN}/
+      homepage.description: A user-friendly torrent client for downloading and managing files via BitTorrent, offering a clean interface and powerful features.
+      homepage.weight: 2
+      homepage.widget.type: qbittorrent
+      homepage.widget.url: http://gluetun-airvpn:${QB_WEBUI_PORT:-8084}
+      homepage.widget.username: ${QBITTORRENT_USERNAME:-admin}
+      homepage.widget.password: ${QBITTORRENT_PASSWORD:-adminadmin}
+      homepage.widget.fields: '["leech", "download", "seed", "upload"]'
+    restart: always
+
+  radarr:
+    # 🔹🔹 Radarr 🔹🔹
+    image: linuxserver/radarr
+    container_name: radarr
+    hostname: radarr
+    networks:
+      publicnet:
+        ipv4_address: ${RADARR_IPV4_ADDRESS:-10.76.4.3}
+#    ports:
+#      - ${RADARR_PORT:-7878}:7878
+    volumes:
+      - ${CONFIG_PATH:-./configs}/radarr/config:/config
+      - ${DATA_PATH:-./data}/downloads/movies:/downloads/movies
+      - ${DATA_PATH:-./data}/media/movies:/movies
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.radarr.rule: Host(`radarr.${DOMAIN}`) || Host(`radarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.radarr.loadbalancer.server.port: 7878
+      homepage.group: Movie Management
+      homepage.name: Radarr Movies
+      homepage.icon: radarr.png
+      homepage.href: https://radarr.${DOMAIN}/
+      homepage.description: Automates your movie downloads, finding and adding new releases to your collection as they become available.
+      homepage.weight: 1
+      homepage.widget.type: radarr
+      homepage.widget.url: https://radarr.${DOMAIN}
+      homepage.widget.key: ${RADARR_API_KEY}
+    healthcheck:
+      test: curl -fs http://localhost:7878 > /dev/null || exit 1
+      interval: ${RADARR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${RADARR_HEALTHCHECK_TIMEOUT:-15s}
+      retries: ${RADARR_HEALTHCHECK_RETRIES:-4}
+      start_period: ${RADARR_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  radarr-exporter:
+    # 🔹🔹 Radarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Radarr metrics for Prometheus
+    depends_on:
+      - radarr
+      - prometheus
+    image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    # image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: radarr-exporter
+    hostname: radarr-exporter
+    networks:
+      - publicnet
+#    ports:
+#      - ${RADARR_EXPORTER_PORT:-9708}:${RADARR_EXPORTER_PORT:-9708}
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      <<: *common-env
+      PORT: ${RADARR_EXPORTER_PORT:-9708}
+      URL: https://radarr:${RADARR_PORT:-7878}
+      APIKEY: ${RADARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${RADARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+    command: ["radarr"]
+    restart: "no"
+
+  rclone-webgui:
+    # 🔹🔹 Rclone Web GUI 🔹🔹
+    image: rclone/rclone:latest
+    container_name: rclone-webgui
+    hostname: rclone-webgui
+    networks:
+      - publicnet
+#    ports:
+#      - ${RCLONE_GUI_PORT:-5572}:5572
+    volumes:
+      - ${CONFIG_PATH:-./configs}/rclone/config/rclone:/config/rclone
+    environment:
+      <<: *common-env
+    command: rcd --rc-web-gui --rc-addr :5572 --config /config/rclone/rclone.conf
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.rclone-webgui.rule: Host(`rclone.${DOMAIN}`) || Host(`rclone.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.rclone-webgui.loadbalancer.server.port: 5572
+      homepage.group: Tools
+      homepage.name: Rclone Web GUI
+      homepage.icon: rclone.png
+      homepage.href: https://rclone.${DOMAIN}/
+      homepage.description: Web GUI for managing Rclone remotes and transfers
+    restart: always
+
+  readarr:
+    # 🔹🔹 Readarr 🔹🔹
+    image: linuxserver/readarr:develop
+    container_name: readarr
+    hostname: readarr
+    networks:
+      publicnet:
+        ipv4_address: ${READARR_IPV4_ADDRESS:-10.76.4.4}
+#    ports:
+#      - ${READARR_PORT:-8787}:8787
+    volumes:
+      - ${CONFIG_PATH:-./configs}/readarr/config:/config
+      - ${DATA_PATH:-./data}/media/books:/books
+      - ${DATA_PATH:-./data}/media/comics:/comics
+      - ${DATA_PATH:-./data}/media/manga:/manga
+      - ${DATA_PATH:-./data}/downloads:/downloads
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.readarr.rule: Host(`readarr.${DOMAIN}`) || Host(`readarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.readarr.loadbalancer.server.port: 8787
+      homepage.group: E-books & Comics
+      homepage.name: Readarr
+      homepage.icon: readarr.png
+      homepage.href: https://readarr.${DOMAIN}/
+      homepage.description: Manages and automates the downloading of ebooks and audiobooks, ensuring your digital library is always up-to-date.
+      homepage.weight: 5
+      homepage.widget.type: readarr
+      homepage.widget.url: https://readarr.${DOMAIN}
+      homepage.widget.key: ${READARR_API_KEY}
+    healthcheck:
+      test: curl -fs http://localhost:8787 > /dev/null || exit 1
+      interval: ${READARR_HEALTHCHECK_INTERVAL:-5s}
+      timeout: ${READARR_HEALTHCHECK_TIMEOUT:-4s}
+      retries: ${READARR_HEALTHCHECK_RETRIES:-4}
+      start_period: ${READARR_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  readarr-exporter:
+    # 🔹🔹 Readarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Readarr metrics for Prometheus
+    depends_on:
+      - readarr
+      - prometheus
+    image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    # image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: readarr-exporter
+    hostname: readarr-exporter
+    networks:
+      - publicnet
+#    ports:
+#      - ${READARR_EXPORTER_PORT:-9713}:${READARR_EXPORTER_PORT:-9713}
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      <<: *common-env
+      PORT: ${READARR_EXPORTER_PORT:-9713}
+      URL: https://readarr:${READARR_PORT:-8787}
+      APIKEY: ${READARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${READARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+    command: ["readarr"]
+    restart: "no"
+
+  recyclarr:
+    # 🔹🔹 Recyclarr 🔹🔹  # https://github.com/recyclarr/recyclarr
+    # command-line application that will automatically synchronize recommended settings from the TRaSH guides to your Sonarr/Radarr instances.
+    depends_on:
+      - radarr
+      - sonarr
+    image: ghcr.io/recyclarr/recyclarr
+    container_name: recyclarr
+    hostname: recyclarr
+    ports:
+      - ${RECYCLARR_PORT:-32888}:32888
+    init: true
+    volumes:
+      - ${CONFIG_PATH:-./configs}/recyclarr:/config
+    <<: *resource-limits
+    environment:
+      <<: *common-env
+      TINI_SUBREAPER: ${TINI_SUBREAPER:-true}
+      RADARR_API_KEY: ${RADARR_API_KEY}
+      RADARR_BASE_URL: http://radarr:${RADARR_PORT:-7878}
+      SONARR_API_KEY: ${SONARR_API_KEY}
+      SONARR_BASE_URL: http://sonarr:${SONARR_PORT:-8989}
+    restart: always
+
+  redis:
+    #image: redis:alpine
+    image: docker.io/library/redis:alpine
+    container_name: redis
+    hostname: ${REDIS_HOSTNAME:-redis}
+    networks:
+      - publicnet
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ${CONFIG_PATH:-./configs}/redis:/data
+    command: --save ${REDIS_SAVE:-60 1} --loglevel ${REDIS_LOGLEVEL:-debug}
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      start_period: ${REDIS_HEALTHCHECK_START_PERIOD:-20s}
+      interval: ${REDIS_HEALTHCHECK_INTERVAL:-30s}
+      retries: ${REDIS_HEALTHCHECK_RETRIES:-5}
+      timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
+    restart: always
+
+  remoteit:
+    image: remoteit/docker-extension:latest
+    container_name: remoteit_docker_jumpbox
+    hostname: remoteit
+    networks:
+      - publicnet
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - R3_REGISTRATION_CODE=${REMOTEIT_R3_REGISTRATION_CODE}
+    restart: always
+
+  sonarr:
+    # 🔹🔹 Sonarr 🔹🔹
+    # Sonarr is a PVR for Usenet and BitTorrent users. It's a sleek Web UI that integrates seamlessly with your various PVR apps.
+    image: linuxserver/sonarr
+    container_name: sonarr
+    hostname: sonarr
+    networks:
+      publicnet:
+        ipv4_address: ${SONARR_IPV4_ADDRESS:-10.76.4.5}
+#    ports:
+#      - ${SONARR_PORT:-8989}:8989
+    volumes:
+      - ${DATA_PATH:-./data}/media/anime:/anime
+      - ${DATA_PATH:-./data}/media/tv:/tv
+      - ${DATA_PATH:-./data}/downloads/anime:/downloads/anime
+      - ${DATA_PATH:-./data}/downloads/tv:/downloads/tv
+      - ${CONFIG_PATH:-./configs}/sonarr/config:/config
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.sonarr.rule: Host(`sonarr.${DOMAIN}`) || Host(`sonarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.sonarr.loadbalancer.server.port: 8989
+      homepage.group: TV Management
+      homepage.name: Sonarr TV
+      homepage.icon: sonarr.png
+      homepage.href: https://sonarr.${DOMAIN}/
+      homepage.description: Manages your TV show downloads, automatically finding and adding new episodes as they air, keeping your library organized.
+      homepage.weight: 0
+      homepage.widget.type: sonarr
+      homepage.widget.url: https://sonarr.${DOMAIN}
+      homepage.widget.key: ${SONARR_API_KEY}
+    healthcheck:
+      test: curl -fs http://localhost:8989 > /dev/null || exit 1
+      interval: ${SONARR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${SONARR_HEALTHCHECK_TIMEOUT:-15s}
+      start_period: ${SONARR_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  sonarr-exporter:
+    # 🔹🔹 Sonarr Exporter 🔹🔹  # https://github.com/onedr0p/exportarr
+    # Sonarr metrics for Prometheus
+    depends_on:
+      - sonarr
+      - prometheus
+    image: ghcr.io/onedr0p/exportarr
+    # use this one with arm:
+    # image: ghcr.io/onedr0p/exportarr:master@sha256:22bc953901430c69d4b489fe071b16c9eba9d80ed1963e1c5bf2d08e11b4e70a
+    container_name: sonarr-exporter
+    hostname: sonarr-exporter
+    networks:
+      - publicnet
+    security_opt:
+      - no-new-privileges:true
+#    ports:
+#      - ${SONARR_EXPORTER_PORT:-9707}:${SONARR_EXPORTER_PORT:-9707}
+    <<: [*common-uidgid, *common-logging, *resource-limits]
+    environment:
+      <<: *common-env
+      PORT: ${SONARR_EXPORTER_PORT:-9707}
+      URL: https://sonarr:${SONARR_PORT:-8989}
+      APIKEY: ${SONARR_API_KEY}
+      ENABLE_ADDITIONAL_METRICS: ${SONARR_EXPORTER_ENABLE_ADDITIONAL_METRICS:-true}
+    command: ["sonarr"]
+    restart: "no"
+
+  speedtest:
+    # 🔹🔹 Speedtest 🔹🔹
+    image: linuxserver/speedtest-tracker
+    container_name: speedtest
+    hostname: speedtest
+    networks:
+      - publicnet
+#    ports:
+#      - ${SPEEDTEST_TRACKER_PORT:-8765}:80
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ${CONFIG_PATH:-./configs}/speedtest-tracker/config:/config
+      - ${CERTS_PATH:-./certs}/speedtest-tracker/keys:/config/keys
+    <<: *resource-limits
+    environment:
+      <<: *common-env
+      ADMIN_EMAIL: ${SPEEDTEST_TRACKER_ADMIN_EMAIL} # Email of the initial admin user. Note: Only effective during initial setup.
+      ADMIN_NAME: ${SPEEDTEST_TRACKER_ADMIN_NAME} # Name of the initial admin user. Note: Only effective during initial setup.
+      ADMIN_PASSWORD: ${SPEEDTEST_TRACKER_ADMIN_PASSWORD:-b00tstr4p} # Password of the initial admin user. Note: Only effective during initial setup.
+      API_RATE_LIMIT: ${SPEEDTEST_TRACKER_API_RATE_LIMIT:-60} # Number of requests per minute to the API. Default: 60
+      APP_KEY: ${SPEEDTEST_TRACKER_APP_KEY} # Key used to encrypt and decrypt data. You can generate a key at https://speedtest-tracker.dev.
+      APP_NAME: ${SPEEDTEST_TRACKER_APP_NAME:-Speedtest Tracker} # Used to define the application's name in the dashboard and in notifications.
+      APP_TIMEZONE: ${SPEEDTEST_TRACKER_APP_TIMEZONE:-${TZ:-America/Chicago}} # Application timezone should be set if your database does not use UTC as its  timezone.
+      APP_URL: ${SPEEDTEST_TRACKER_APP_URL:-} # URL used for links in emails and notifications.
+      ASSET_URL: ${SPEEDTEST_TRACKER_ASSET_URL:-} # URL used for assets, needed when using a reverse proxy.
+      CHART_BEGIN_AT_ZERO: ${SPEEDTEST_TRACKER_CHART_BEGIN_AT_ZERO:-true} # Begin the dashboard axis charts at zero. Default: true
+      CHART_DATETIME_FORMAT: ${SPEEDTEST_TRACKER_CHART_DATETIME_FORMAT:-j/m G:i} # Set the formatting of timestamps in charts.
+      CONTENT_WIDTH: ${SPEEDTEST_TRACKER_CONTENT_WIDTH:-7xl} # Width of the content section of each page. Can be set to any value found in the Filament docs. Default: 7xl
+      DATETIME_FORMAT: ${SPEEDTEST_TRACKER_DATETIME_FORMAT:-j M Y, G:i:s} # Set the formatting of timestamps in tables and notifications.
+      DB_CONNECTION: ${SPEEDTEST_TRACKER_DB_CONNECTION:-sqlite}
+      DISPLAY_TIMEZONE: ${SPEEDTEST_TRACKER_DISPLAY_TIMEZONE:-${TZ:-America/Chicago}} # Display timestamps in your local time.
+      PRUNE_RESULTS_OLDER_THAN: ${SPEEDTEST_TRACKER_PRUNE_RESULTS_OLDER_THAN:-0} # Set the value to greater than zero to prune stored results. This value should be represented in days.
+      PUBLIC_DASHBOARD: ${SPEEDTEST_TRACKER_PUBLIC_DASHBOARD:-true} # Enables the public dashboard for guest (unauthenticated) users. Default: false
+      SPEEDTEST_BLOCKED_SERVERS: ${SPEEDTEST_TRACKER_BLOCKED_SERVERS:-} # Comma separated list of server IDs that should not be used when running speedtests.
+      SPEEDTEST_INTERFACE: ${SPEEDTEST_TRACKER_INTERFACE:-} # Set the network interface to use for the test. This need to be the network interface available inside the container
+      SPEEDTEST_SCHEDULE: ${SPEEDTEST_TRACKER_SCHEDULE:-0 * * * *} # Cron expression used to run speedtests on a scheduled basis.
+      SPEEDTEST_SERVERS: ${SPEEDTEST_TRACKER_SERVERS:-} # Comma separated list of server IDs to randomly use for speedtest.
+      SPEEDTEST_SKIP_IPS: ${SPEEDTEST_TRACKER_SKIP_IPS:-} # A comma separated list of public IP addresses where tests will be skipped when present.
+      THRESHOLD_DOWNLOAD: ${SPEEDTEST_TRACKER_THRESHOLD_DOWNLOAD:-900} # Set the Download Threshold. Note: Only effective during initial setup.
+      THRESHOLD_ENABLED: ${SPEEDTEST_TRACKER_THRESHOLD_ENABLED:-true} # Enable the thresholds. Note: Only effective during initial setup.
+      THRESHOLD_PING: ${SPEEDTEST_TRACKER_THRESHOLD_PING:-25} # Set the Ping Threshold. Note: Only effective during initial setup.
+      THRESHOLD_UPLOAD: ${SPEEDTEST_TRACKER_THRESHOLD_UPLOAD:-900} # Set the Upload Threshold. Note: Only effective during initial setup.
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.speedtest.rule: Host(`speedtest.${DOMAIN}`) || Host(`speedtest.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.speedtest.loadbalancer.server.port: 80
+      homepage.group: Network Monitoring
+      homepage.name: Speedtest
+      homepage.icon: speedtest.png
+      homepage.href: https://speedtest.${DOMAIN}/
+      homepage.description: Regularly tests your internet speed and tracks performance over time, helping you monitor your connection quality.
+      homepage.widget.type: speedtest
+      homepage.widget.url: https://speedtest.${DOMAIN}
+      homepage.widget.fields: '["download", "upload", "ping", "speedtest"]'
+    healthcheck:
+      test: curl -fs http://localhost:80 > /dev/null || exit 1
+      start_period: ${SPEEDTEST_TRACKER_HEALTHCHECK_START_PERIOD:-20s}
+      timeout: ${SPEEDTEST_TRACKER_HEALTHCHECK_TIMEOUT:-15s}
+      interval: ${SPEEDTEST_TRACKER_HEALTHCHECK_INTERVAL:-30s}
+    restart: always
+
+  stremio:
+    # 🔹🔹 Stremio 🔹🔹
+    # Stream Movies/TV over debrid instantly.
+    depends_on:
+      gluetun-premiumize:
+        condition: service_healthy
+      traefik:
+        condition: service_started
+    #build:
+    #  context: ${SRC_PATH:-./src}/stremio/stremio-docker
+    #  dockerfile: Dockerfile
+    image: tsaridas/stremio-docker:latest
+    #image: tsaridas/stremio-docker:nightly
+    #image: ghcr.io/tsaridas/stremio-docker:development
+    #image: th3w1zard1/stremio-docker:latest
+    container_name: stremio
+    network_mode: service:gluetun-premiumize
+    volumes:
+      - ${CONFIG_PATH:-./configs}/stremio/root/.stremio-server:/root/.stremio-server
+#      - ${CONFIG_PATH:-./configs}/stremio/srv/stremio-server:/srv/stremio-server
+    <<: [*common-logging, *resource-limits]
+    environment:
+#      IPADDRESS: 0.0.0.0
+      IPADDRESS: 149.130.221.93
+#      IPADDRESS: 199.58.86.204
+#     SERVER_URL: "https://0-0-0-0.519b6502d940.stremio.rocks:12470/"
+#      SERVER_URL: "https://stremio-server.${DOMAIN}:12470/"
+      SERVER_URL: "https://149-130-221-93.519b6502d940.stremio.rocks:12470/"
+#      SERVER_URL: "https://199-58-86-204.519b6502d940.stremio.rocks:12470/"
+      WEBUI_LOCATION: "https://app.strem.io/shell-v4.4/"
+#      WEBUI_LOCATION: "https://stremio-web.${DOMAIN}/"  # Where the streaming server will redirect to. Defaults to "https://app.strem.io/shell-v4.4/"
+      NO_CORS: 0
+      CASTING_DISABLED: 1
+    labels:
+#      traefik.enable: "true"
+#      traefik.http.routers.stremio.rule: Host(`stremio.${DOMAIN}`) || Host(`stremio.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.services.stremio.loadbalancer.server.port: 8080
+#      traefik.http.routers.stremio-server.rule: Host(`stremio-server.${DOMAIN}`) || Host(`stremio-server.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.services.stremio-server.loadbalancer.server.port: 11470
+#      traefik.http.routers.stremio-server2.rule: Host(`stremio-server2.${DOMAIN}`) || Host(`stremio-server2.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+#      traefik.http.services.stremio-server2.loadbalancer.server.port: 12470
+      homepage.group: Media Streaming
+      homepage.name: Stremio
+      homepage.icon: stremio.png
+      homepage.href: https://stremio.${DOMAIN}/
+      homepage.description: A one-stop hub for video content aggregation, allowing you to stream movies, series, and more from various sources.
+    restart: always
+
+  stremio-addon-aiostreams:
+    depends_on:
+      - traefik
+    #build:
+    #  context: src/stremio/addons/AIOStreams
+    #  dockerfile: Dockerfile
+    image: ghcr.io/th3w1zard1/aiostreams:latest # :dev for latest commit
+    container_name: aiostreams
+    hostname: aiostreams
+    networks:
+      - publicnet
+    expose:
+      - ${AIOSTREAMS_PORT:-3005}
+#    ports:
+#      - "${AIOSTREAMS_PORT:-3005}:${AIOSTREAMS_PORT:-3005}"
+    env_file:
+      - ${CONFIG_PATH:-./configs}/stremio/addons/aiostreams/config/.env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.aiostreams.rule: Host(`aiostreams.${DOMAIN}`) || Host(`aiostreams.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.aiostreams.loadbalancer.server.port: ${AIOSTREAMS_PORT:-3005}
+      homepage.group: Media Streaming
+      homepage.name: AIOStreams
+      homepage.icon: aiostreams.png
+      homepage.href: https://aiostreams.${DOMAIN}/
+    healthcheck:
+      test: wget -qO- http://localhost:${AIOSTREAMS_PORT:-3005}/health
+      interval: ${AIOSTREAMS_HEALTHCHECK_INTERVAL:-1m}
+      timeout: ${AIOSTREAMS_HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${AIOSTREAMS_HEALTHCHECK_RETRIES:-5}
+      start_period: ${AIOSTREAMS_HEALTHCHECK_START_PERIOD:-10s}
+    restart: always
+
+  stremio-addon-comet:
+    depends_on:
+      - prowlarr
+      - traefik
+    image: th3w1zard1/comet
+    container_name: comet
+    hostname: comet
+    networks:
+      - publicnet
+    expose:
+      - 8000
+#    ports:
+#      - ${COMET_FASTAPI_PORT:-8000}:8000
+    volumes:
+      - ${CONFIG_PATH:-./configs}/stremio/addons/comet/data:/data
+    <<: [*resource-limits, *common-logging]
+    env_file:
+      - ${CONFIG_PATH:-./configs}/stremio/addons/comet/config/.env
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.comet.rule: Host(`comet.${DOMAIN}`) || Host(`comet.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.comet.loadbalancer.server.port: 8000
+      homepage.group: Stremio Addons
+      homepage.name: Comet
+      homepage.icon: comet.png
+      homepage.href: https://comet.${DOMAIN}/
+    restart: always
+  stremio-addon-mediaflow-proxy:
+    depends_on:
+      - gluetun-airvpn
+      - traefik
+    image: mhdzumair/mediaflow-proxy
+    container_name: mediaflow-proxy
+    network_mode: service:gluetun-airvpn
+#    hostname: mediaflow-proxy
+#    networks:
+#      - publicnet
+#    expose:
+#      - ${MEDIAFLOW_PROXY_PORT:-8888}
+#    ports:
+#      - "${MEDIAFLOW_PROXY_PORT:-8888}:${MEDIAFLOW_PROXY_PORT:-8888}"
+    <<: [*resource-limits, *common-logging]
+    environment:
+      <<: *common-env
+      PORT: ${MEDIAFLOW_PROXY_PORT:-8888}
+      API_PASSWORD: ${MEDIAFLOW_PROXY_API_PASSWORD:-d468d92139047f1df5ba0fae9d998957c30834a386cd63d0472a7b044d42a96a}
+      ENABLE_STREAMING_PROGRESS: ${MEDIAFLOW_PROXY_ENABLE_STREAMING_PROGRESS:-true}
+    labels:
+      #traefik.enable: "true"
+      #traefik.http.routers.mediaflow-proxy.rule: Host(`mediaflow-proxy.${DOMAIN}`) || Host(`mediaflow-proxy.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      #traefik.http.services.mediaflow-proxy.loadbalancer.server.port: ${MEDIAFLOW_PROXY_PORT:-8888}
+      homepage.group: Stremio Addons
+      homepage.name: MediaFlow Proxy
+      homepage.icon: mediaflow.png
+      homepage.href: https://mediaflow-proxy.${DOMAIN}/
+
+  # Multiple DNS challenge provider are not supported with Traefik,
+  # but you can use CNAME to handle that. For example, if you have example.org (account foo) and
+  # example.com (account bar) you can create a CNAME on example.org called _acme-challenge.example.org
+  # pointing to challenge.example.com. This way, you can obtain certificates for example.org with the bar account.
+  traefik:
+    # 🔹🔹 Traefik 🔹🔹
+    depends_on:
+      - traefik-error-pages
+    image: traefik:latest
+    container_name: traefik
+    hostname: traefik
+    networks:
+      - publicnet
+    ports:
+      # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
+      - ${TRAEFIK_WEB_PORT:-80}:${TRAEFIK_WEB_PORT:-80}
+      # Listen on port 443, default for HTTPS
+      - ${TRAEFIK_WEBSECURE_PORT:-443}:${TRAEFIK_WEBSECURE_PORT:-443}
+      # Listen on port 8099 for the Traefik API and Dashboard
+      - ${TRAEFIK_DASHBOARD_PORT:-8099}:8080
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: ${DISABLE_IPV6:-1}
+    volumes:
+      - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
+      - ${CERTS_PATH:-./certs}:/certs
+      - ${CONFIG_PATH:-./configs}/traefik/config:/config
+      - ${CONFIG_PATH:-./configs}/traefik/etc/traefik:/etc/traefik
+      - ${CONFIG_PATH:-./configs}/traefik/plugins-local:/plugins-local
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
+    #      - /etc/localtime:/etc/localtime:ro
+    environment:
+      <<: *common-env
+      CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
+      CLOUDFLARE_DNS_API_TOKEN: ${CLOUDFLARE_DNS_API_TOKEN}
+      CLOUDFLARE_ZONE_API_TOKEN: ${CLOUDFLARE_ZONE_API_TOKEN}
+      LETS_ENCRYPT_EMAIL: ${LETS_ENCRYPT_EMAIL} # Email address used for Letsencrypt registration.
+      # CNAME are supported (and sometimes even encouraged), but there are a few cases where they can be problematic.
+      # If needed, CNAME support can be disabled with the following environment variable:
+      LEGO_DISABLE_CNAME_SUPPORT: ${LEGO_DISABLE_CNAME_SUPPORT:-false} # Disable CNAME support for DNS challenges. (Default: false)
+      DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
+      ZEROSSL_API_KEY: ${ZEROSSL_API_KEY:-} # ZeroSSL API key.
+    command: --configFile=/config/traefik.yaml
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.traefik.rule: Host(`traefik.${DOMAIN}`) || Host(`traefik.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.traefik.loadbalancer.server.port: 8080
+    restart: always
+
+  traefik-error-pages:
+    # 🔹🔹 Traefik Error Pages 🔹🔹
+    # Serves static HTML error pages used by Traefik's error middleware
+    image: httpd:alpine
+    container_name: traefik-error-pages
+    hostname: error-pages
+    networks:
+      - publicnet
+    volumes:
+      # Mount the directory containing error HTML files (e.g., 404.html, 5xx.html)
+      - ${CONFIG_PATH:-./configs}/traefik/error-pages:/usr/local/apache2/htdocs/:ro
+    restart: always
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+
+  whisparr:
+    # 🔹🔹 Whisparr 🔹🔹  https://github.com/thespad/whisparr
+    # Whisparr is a fork of Sonarr for managing and downloading adult content.
+    image: ghcr.io/thespad/whisparr
+    container_name: whisparr
+    hostname: whisparr
+    networks:
+      publicnet:
+        ipv4_address: ${WHISPARR_IPV4_ADDRESS:-10.76.4.6}
+    ports:
+      - ${WHISPARR_PORT:-6969}:6969
+    volumes:
+      - ${CONFIG_PATH:-./configs}/whisparr/config:/config
+      - ${DATA_PATH:-./data}/downloads/xxx:/downloads/xxx
+      - ${DATA_PATH:-./data}/media/xxx:/xxx
+    <<: [*resource-limits]
+    environment:
+      <<: *common-env
+    labels:
+      caddy: whisparr.${DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 6969}}"
+      traefik.enable: "true"
+      traefik.http.routers.whisparr.rule: Host(`whisparr.${DOMAIN}`) || Host(`whisparr.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.whisparr.loadbalancer.server.port: 6969
+    healthcheck:
+      test: curl -fs http://localhost:6969 > /dev/null || exit 1
+      interval: ${WHISPARR_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${WHISPARR_HEALTHCHECK_TIMEOUT:-15s}
+      start_period: ${WHISPARR_HEALTHCHECK_START_PERIOD:-60s}
+    restart: always
+
+  wizarr:
+    # 🔹🔹 Wizarr 🔹🔹  # https://github.com/wizarrrr/wizarr
+    # Advanced user invitation and management system for Jellyfin and Plex.
+    image: ghcr.io/wizarrrr/wizarr
+    container_name: wizarr
+    hostname: wizarr
+    networks:
+      - publicnet
+    ports:
+      - ${WIZARR_PORT:-5690}:5690
+    volumes:
+      - "${CONFIG_PATH:-./configs}/wizarr:/data/database"
+    <<: *resource-limits
+    environment:
+      <<: *common-env
+    labels:
+      caddy: wizarr.${DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 5690}}"
+      traefik.enable: "true"
+      traefik.http.routers.wizarr.rule: Host(`wizarr.${DOMAIN}`) || Host(`wizarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.wizarr.loadbalancer.server.port: 5690
+      homepage.group: User Management
+      homepage.name: Wizarr
+      homepage.icon: wizarr.png
+      homepage.href: https://wizarr.${DOMAIN}/
+      homepage.description: Advanced user invitation and management system for Jellyfin and Plex.
+    restart: always
+
+  zerotier:
+    image: zyclonite/zerotier
+    container_name: zerotier
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    # SYS_ADMIN is needed because NET_ADMIN does not include
+    # the ioctl() required to put /dev/net/tun in tap mode.
+    # This appears to be a bug in Linux's capability model but it would have to be fixed upstream.
+      - SYS_ADMIN
+    devices:
+      - /dev/net/tun
+    volumes:
+      - '/var/lib/zerotier-one:/var/lib/zerotier-one'
+
+networks:
+  gotify-network:
+    name: gotify-network
+    driver: bridge
+  firefly_iii:
+    name: firefly_iii
+    driver: bridge
+  publicnet:
+    #external: true  # docker network create --driver=bridge --attachable publicnet --subnet=${PUBLICNET_SUBNET:-10.76.0.0/16} --gateway=${PUBLICNET_GATEWAY:-10.76.0.1} --ip-range=${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+    attachable: true
+    name: publicnet
+    ipam:
+      config:
+        - subnet: ${PUBLICNET_SUBNET:-10.76.0.0/16}
+          gateway: ${PUBLICNET_GATEWAY:-10.76.0.1}
+          ip_range: ${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+  #outside:
+  #  external:
+  #    name: "host"
+#  meshnet:
+#    external: true # docker network create --driver=macvlan --attachable --subnet=${TAILSCALE_SUBNET:-100.64.0.0/10} --gateway=${TAILSCALE_GATEWAY:-100.64.0.1} --ip-range=${TAILSCALE_IP_RANGE:-100.64.2.0/24} -o parent=tailscale0 meshnet
+#    name: meshnet
+#    driver: macvlan
+#    driver_opts:
+#      parent: ${TAILSCALE_INTERFACE_NAME:-tailscale0}
+#    ipam:
+#      config:
+#        - subnet: ${TAILSCALE_SUBNET:-100.64.0.0/10}
+#          gateway: ${TAILSCALE_GATEWAY:-100.64.0.1}
+#          ip_range: ${TAILSCALE_IP_RANGE:-100.64.2.0/24}
+
+secrets:
+  authelia_jwt_secret:
+    file: ${SECRETS_PATH:-./secrets}/authelia_jwt_secret
+  authelia_session_secret:
+    file: ${SECRETS_PATH:-./secrets}/authelia_session_secret
+  authelia_storage_encryption_key:
+    file: ${SECRETS_PATH:-./secrets}/authelia_storage_encryption_key
+  authelia_storage_postgres_password:
+    file: ${SECRETS_PATH:-./secrets}/authelia_storage_postgres_password
+  authelia_session_redis_password:
+    file: ${SECRETS_PATH:-./secrets}/authelia_session_redis_password
+  authelia_duo_api_secret_key:
+    file: ${SECRETS_PATH:-./secrets}/authelia_duo_api_secret_key
+
+volumes: # If you want to store the data on a different drive, see https://github.com/nextcloud/all-in-one#how-to-store-the-filesinstallation-on-a-separate-drive
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer # This line is not allowed to be changed as otherwise the built-in backup solution will not work

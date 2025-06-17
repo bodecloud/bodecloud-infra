@@ -1,0 +1,136 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: stremio-jackett-7589f46dbc-
+  labels:
+    app: stremio-jackett
+    pod-template-hash: 7589f46dbc
+  name: stremio-jackett-7589f46dbc-v77xg
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: stremio-jackett-7589f46dbc
+spec:
+  containers:
+  - env:
+    - name: ADDON_NAME
+      value: stremio_jackett
+    - name: JACKETT_API_KEY
+      value: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+    - name: JACKETT_URL
+      value: https://jackett.my-media-stack.org
+    image: belmeg/stremio-addon-jackett:latest
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - curl -fs http://127.0.0.1:3000 || exit 1
+      failureThreshold: 5
+      initialDelaySeconds: 10
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: stremio-jackett
+    ports:
+    - containerPort: 3000
+      name: stremio-ja-3000
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-49slm
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: baden.vpshostingservice.co
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-49slm
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:41:37Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:20Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:41:37Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:41:37Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:40:20Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://3692b973a063f8f8be74af5bab71c1587e3e341e9a509ff2b4466f0c7f5c52a6
+    image: docker.io/belmeg/stremio-addon-jackett:latest
+    imageID: docker.io/belmeg/stremio-addon-jackett@sha256:63c66486f9ab0521acbd216140d35f80d06e5d02aa274be98cc55762ca2f569e
+    lastState: {}
+    name: stremio-jackett
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:41:37Z"
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-49slm
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 209.54.102.83
+  hostIPs:
+  - ip: 209.54.102.83
+  phase: Running
+  podIP: 10.42.3.55
+  podIPs:
+  - ip: 10.42.3.55
+  qosClass: Burstable
+  startTime: "2025-06-14T22:40:20Z"

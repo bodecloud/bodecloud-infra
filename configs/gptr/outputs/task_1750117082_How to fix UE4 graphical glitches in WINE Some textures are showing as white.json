@@ -1,0 +1,815 @@
+{
+  "timestamp": "2025-06-16T23:38:02.904387",
+  "events": [
+    {
+      "timestamp": "2025-06-16T23:38:07.890338",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "starting_research",
+        "output": "\ud83d\udd0d Starting the research task for 'How to fix UE4 graphical glitches in WINE? Some textures are showing as white.'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:07.891323",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "agent_generated",
+        "output": "",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:07.892845",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83c\udf10 Browsing the web to learn more about the task: How to fix UE4 graphical glitches in WINE? Some textures are showing as white....",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:10.390307",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83e\udd14 Planning the research strategy and subtasks...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:12.583234",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subqueries",
+        "output": "\ud83d\uddc2\ufe0f I will conduct my research based on the following queries: ['UE4 white texture glitch WINE fix', 'Unreal Engine 4 texture issues WINE compatibility', 'WINE graphics glitches UE4 white textures troubleshooting', 'UE4 rendering problems in WINE white textures AMD/Nvidia', 'How to fix UE4 graphical glitches in WINE? Some textures are showing as white.']...",
+        "metadata": [
+          "UE4 white texture glitch WINE fix",
+          "Unreal Engine 4 texture issues WINE compatibility",
+          "WINE graphics glitches UE4 white textures troubleshooting",
+          "UE4 rendering problems in WINE white textures AMD/Nvidia",
+          "How to fix UE4 graphical glitches in WINE? Some textures are showing as white."
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:12.584013",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'UE4 white texture glitch WINE fix'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.717324",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq\n",
+        "metadata": "https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.718098",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://polycount.com/discussion/230111/unreal-engine-4-texturing-glitch-distortion-help\n",
+        "metadata": "https://polycount.com/discussion/230111/unreal-engine-4-texturing-glitch-distortion-help"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.719230",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/textures-have-white-borders-around-them/327860\n",
+        "metadata": "https://forums.unrealengine.com/t/textures-have-white-borders-around-them/327860"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.720236",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.reallusion.com/443771/CC3-DH-skin-textures-look-overly-exposedwhite-in-Unreal-Engine-4\n",
+        "metadata": "https://forum.reallusion.com/443771/CC3-DH-skin-textures-look-overly-exposedwhite-in-Unreal-Engine-4"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.721195",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://manerosss.wordpress.com/2016/09/16/unreal-engine-games-on-linux-wine/\n",
+        "metadata": "https://manerosss.wordpress.com/2016/09/16/unreal-engine-games-on-linux-wine/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.722244",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/unrealengine/comments/rjnudb/every_texture_randomly_turned_blurry_please_help/\n",
+        "metadata": "https://www.reddit.com/r/unrealengine/comments/rjnudb/every_texture_randomly_turned_blurry_please_help/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.723212",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://gamedev.stackexchange.com/questions/205385/how-to-remove-flickering-white-pixels-fireflies-from-unreal-engine-render\n",
+        "metadata": "https://gamedev.stackexchange.com/questions/205385/how-to-remove-flickering-white-pixels-fireflies-from-unreal-engine-render"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.724116",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:13.725045",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:14.332353",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 7 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:14.333971",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 1 new images from 1 total images",
+        "metadata": [
+          {
+            "url": "https://us.v-cdn.net/5021068/uploads/YLUM9HJXLWCW/error-png.png",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:14.335211",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:14.336599",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: UE4 white texture glitch WINE fix (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:14.386072",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Unreal Engine 4 texture issues WINE compatibility'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.514722",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/EpicGamesExt/WineResources\n",
+        "metadata": "https://github.com/EpicGamesExt/WineResources"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.516055",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/running-windows-editor-through-wine-severe-graphical-issues/1320028\n",
+        "metadata": "https://forums.unrealengine.com/t/running-windows-editor-through-wine-severe-graphical-issues/1320028"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.517578",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://github.com/ptitSeb/box86-compatibility-list/issues/181\n",
+        "metadata": "https://github.com/ptitSeb/box86-compatibility-list/issues/181"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.518650",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forum.winehq.org/viewtopic.php?t=32996\n",
+        "metadata": "https://forum.winehq.org/viewtopic.php?t=32996"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.520083",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://dev.epicgames.com/documentation/en-us/unreal-engine/wine-enabled-containers-for-unreal-engine\n",
+        "metadata": "https://dev.epicgames.com/documentation/en-us/unreal-engine/wine-enabled-containers-for-unreal-engine"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.521374",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/unrealengine4/comments/zs3izx/textures_are_not_loading_at_all_in_games_made/\n",
+        "metadata": "https://www.reddit.com/r/unrealengine4/comments/zs3izx/textures_are_not_loading_at_all_in_games_made/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.522481",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-support-and-settings?application_version=4.27\n",
+        "metadata": "https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-support-and-settings?application_version=4.27"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.523974",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:15.525125",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:16.243416",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 7 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:16.244654",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:16.246586",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:16.247873",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Unreal Engine 4 texture issues WINE compatibility (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:16.372989",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'WINE graphics glitches UE4 white textures troubleshooting'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:18.785710",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/umg-texture-randomly-gets-white/408661\n",
+        "metadata": "https://forums.unrealengine.com/t/umg-texture-randomly-gets-white/408661"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:18.786803",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.tomshardware.com/threads/getting-desperate-in-game-graphics-keep-glitching-flickering-or-tearing-suspected-gpu-issue.3739133/\n",
+        "metadata": "https://forums.tomshardware.com/threads/getting-desperate-in-game-graphics-keep-glitching-flickering-or-tearing-suspected-gpu-issue.3739133/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:18.788621",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/tag/texture-problems\n",
+        "metadata": "https://forums.unrealengine.com/tag/texture-problems"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:18.790255",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/unrealengine/comments/zhoaqu/what_causes_this_graphics_glitch_it_started_when/\n",
+        "metadata": "https://www.reddit.com/r/unrealengine/comments/zhoaqu/what_causes_this_graphics_glitch_it_started_when/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:18.791551",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:18.793107",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 4 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:19.410656",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 4 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:19.411791",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:19.413350",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:19.414858",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: WINE graphics glitches UE4 white textures troubleshooting (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:19.453412",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'UE4 rendering problems in WINE white textures AMD/Nvidia'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:22.136035",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/unrealengine/comments/cnoeev/problems_with_washed_out_textures_and_srgb/\n",
+        "metadata": "https://www.reddit.com/r/unrealengine/comments/cnoeev/problems_with_washed_out_textures_and_srgb/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:22.137239",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/anyone-still-having-issues-rendering-video-textures-turning-white/1828911\n",
+        "metadata": "https://forums.unrealengine.com/t/anyone-still-having-issues-rendering-video-textures-turning-white/1828911"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:22.142177",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.developer.nvidia.com/t/materials-synced-from-substance-painter-to-unreal-engine-are-just-bright-white/233401\n",
+        "metadata": "https://forums.developer.nvidia.com/t/materials-synced-from-substance-painter-to-unreal-engine-are-just-bright-white/233401"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:22.143528",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://community.amd.com/t5/pc-graphics/unreal-engine-games-running-terrible-with-microstutter/td-p/361530\n",
+        "metadata": "https://community.amd.com/t5/pc-graphics/unreal-engine-games-running-terrible-with-microstutter/td-p/361530"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:22.144914",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.nvidia.com/en-us/drivers/\n",
+        "metadata": "https://www.nvidia.com/en-us/drivers/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:22.146328",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:22.147832",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:23.207271",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:23.208594",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:23.210247",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:23.211847",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: UE4 rendering problems in WINE white textures AMD/Nvidia (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:23.292591",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'How to fix UE4 graphical glitches in WINE? Some textures are showing as white.'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:24.846585",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://unix.stackexchange.com/questions/543015/winehq-gfx-problems-when-running-games-how-to-fixem\n",
+        "metadata": "https://unix.stackexchange.com/questions/543015/winehq-gfx-problems-when-running-games-how-to-fixem"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:24.847973",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/winehq/comments/16wci98/does_anyone_know_if_these_graphical_glitches_in/\n",
+        "metadata": "https://www.reddit.com/r/winehq/comments/16wci98/does_anyone_know_if_these_graphical_glitches_in/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:24.849977",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\n",
+        "metadata": "https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:24.851724",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://forums.unrealengine.com/t/textures-glitching-out-randomly-with-a-weird-pattern/617244\n",
+        "metadata": "https://forums.unrealengine.com/t/textures-glitching-out-randomly-with-a-weird-pattern/617244"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:24.853394",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/wine_gaming/comments/kufcbm/crossover_on_mac_games_load_but_only_show_black/\n",
+        "metadata": "https://www.reddit.com/r/wine_gaming/comments/kufcbm/crossover_on_mac_games_load_but_only_show_black/"
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:24.854986",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:24.856582",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:25.544053",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:25.545993",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 4 new images from 5 total images",
+        "metadata": [
+          {
+            "url": "https://d3kjluh73b9h9o.cloudfront.net/original/4X/9/0/a/90a6f285e03c6b12d69df1f1647533ab3de6afe3.gif",
+            "score": 1
+          },
+          {
+            "url": "https://d3kjluh73b9h9o.cloudfront.net/optimized/4X/2/b/8/2b8f17a3c513764d5fef8ba812b57eb4fb21d707_2_656x500.jpeg",
+            "score": 1
+          },
+          {
+            "url": "https://d3kjluh73b9h9o.cloudfront.net/optimized/4X/c/0/0/c003914c9111991f5c85509e2a032d11358b2565_2_531x500.jpeg",
+            "score": 1
+          },
+          {
+            "url": "https://d3kjluh73b9h9o.cloudfront.net/optimized/4X/5/9/e/59e8084002601c4a2ec75a132a90c5c87e23b8cb_2_562x500.jpeg",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:25.547562",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:25.549376",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: How to fix UE4 graphical glitches in WINE? Some textures are showing as white. (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:25.575463",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://forum.reallusion.com/443771/CC3-DH-skin-textures-look-overly-exposedwhite-in-Unreal-Engine-4\nTitle: \r\n\tCC3 DH skin textures look overly exposed/white in Unreal Engine 4\r\n\nContent: Home \u00bb 3D Pipelines \u00bb Unreal 4/5 \u00bb CC3 DH skin textures look overly exposed/white in Unreal Engine 4\nHome \u00bb 3D Pipelines \u00bb Unreal 4/5 \u00bb CC3 DH skin textures look overly exposed/white in Unreal Engine 4\nCC3 DH skin textures look overly exposed/white in Unreal Engine 4\n\nSource: https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq\nTitle: How to Fix White Textures Issue with FBX Files in Unreal Engine\nContent: How to Fix White Textures Issue with FBX Files in Unreal Engine\nAre you facing the frustrating problem of imported FBX files appearing as white textures in Unreal Engine? Don't worry; you're not alone. This common issue can be a real headache, but with the right know-how, you can quickly resolve it. In this guide, I'll walk you through the steps to troubleshoot and fix this issue effectively.\nIdentifying the Problem\nWhen you import FBX files into Unreal Engine, encountering white textures is a common issue that can occur. This problem usually arises when the textures associated with the model are not imported or linked correctly. However, fret not, as there are several solutions to tackle this vexing problem.\nSolution 1: Organize Texture Files\n\nSource: https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq\nTitle: How to Fix White Textures Issue with FBX Files in Unreal Engine\nContent: Solution 3: Troubleshooting Import Settings\nIf all else fails, you can troubleshoot the import settings to ensure that all necessary textures are included during the import process. Experiment with different import options such as importing from subdirectories or selecting the 'import all' function to see if it resolves the white texture issue.\nDealing with white textures in FBX files can be a frustrating experience, especially when working on projects in Unreal Engine. By following the solutions outlined in this guide, you can troubleshoot and fix this issue efficiently, ensuring that your models appear as intended with their textures applied correctly. Remember, a little troubleshooting and manual intervention can go a long way in ensuring a seamless workflow.\nRemember, practice makes perfect, and with these handy tips, you'll be well-equipped to tackle white texture issues in Unreal Engine effectively. Stay tuned for more helpful tips and tutorials, and happy modeling!\n\nSource: https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq\nTitle: How to Fix White Textures Issue with FBX Files in Unreal Engine\nContent: ProductEventPricingBlogCommunitySign up/Log inallPostsHow to Fix White Textures Issue with FBX Files in Unreal Engine Are you facing the frustrating problem of imported FBX files appearing as white textures in Unreal Engine? Don't worry; you're not alone. This common issue can be a real headache, but with the right know-how, you can quickly resolve it. In this guide, I'll walk you through the steps to troubleshoot and fix this issue effectively. Identifying the Problem When you import FBX files into Unreal Engine, encountering white textures is a common issue that can occur. This problem usually arises when the textures associated with the model are not imported or linked correctly. However, fret not, as there are several solutions to tackle this vexing problem. Solution 1: Organize Texture Files One primary reason for white textures is the misplacement of texture files. Ensure that the textures are located in the correct folder alongside the FBX file. By organizing your texture files\n\nSource: https://forum.reallusion.com/443771/CC3-DH-skin-textures-look-overly-exposedwhite-in-Unreal-Engine-4\nTitle: \r\n\tCC3 DH skin textures look overly exposed/white in Unreal Engine 4\r\n\nContent: CC3 DH skin textures look overly exposed/white in Unreal Engine 4 Posted By luis_paz1981 5 Years Ago You don't have permission to rate!\nCC3 DH skin textures look overly exposed/white in Unreal Engine 4 Posted By luis_paz1981 5 Years Ago You don't have permission to rate!\nCC3 DH skin textures look overly exposed/white in Unreal Engine 4\nCC3 DH skin textures look overly exposed/white in Unreal Engine 4\nCC3 DH skin textures look overly exposed/white in Unreal Engine 4\nPosted By luis_paz1981 5 Years Ago You don't have permission to rate!\n1 2 3\n1 2 3\n1 2 3\n\nSource: https://forum.reallusion.com/443771/CC3-DH-skin-textures-look-overly-exposedwhite-in-Unreal-Engine-4\nTitle: \r\n\tCC3 DH skin textures look overly exposed/white in Unreal Engine 4\r\n\nContent: CC3 DH skin textures look overly exposed/white in Unreal Engine 4 Posted By luis_paz1981 5 Years Ago You don't have permission to rate! 1 2 3 CC3 DH skin textures look overly exposed/white in Unreal Engine 4 View Flat Ascending Flat Descending Threaded Options Subscribe to topic Print This Topic Goto Topics Forum Author Message luis_paz1981 luis_paz1981 Posted 5 Years Ago Senior Member Group: Forum Members Last Active: 4 Years Ago Posts: 12, Visits: 43 Hi guys,I have recently exported my character to unreal, and unfortunately, I'm coming across an issue regarding the shaders/textures. When I place the character in my map, it looks like this:But inside Character Creator it looks fine:Any idea what could be wrong? I'm exporting using the pipeline Export FBX (Clothed Character), no LOD, export Mesh and embed textures. I'm also using the unreal plugin for auto setup and I have used the HQ shaders option.Thanks for your help beforehand. unit23 unit23 Posted 5 Years Ago Distinguished Member\n\nSource: https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq\nTitle: How to Fix White Textures Issue with FBX Files in Unreal Engine\nContent: experience, especially when working on projects in Unreal Engine. By following the solutions outlined in this guide, you can troubleshoot and fix this issue efficiently, ensuring that your models appear as intended with their textures applied correctly. Remember, a little troubleshooting and manual intervention can go a long way in ensuring a seamless workflow. Remember, practice makes perfect, and with these handy tips, you'll be well-equipped to tackle white texture issues in Unreal Engine effectively. Stay tuned for more helpful tips and tutorials, and happy modeling! Meta description: Learn how to troubleshoot and fix white texture issues with imported FBX files in Unreal Engine using these practical solutions. Ensure your models look flawless with the right texture application. Keywords: Unreal Engine, FBX files, white textures, troubleshooting, texture mapping, import settings, 3D modeling Meet Tripo Discover the capabilities of Tripo and unlock a world of possibilities: Draft\n\nSource: https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq\nTitle: How to Fix White Textures Issue with FBX Files in Unreal Engine\nContent: experience, especially when working on projects in Unreal Engine. By following the solutions outlined in this guide, you can troubleshoot and fix this issue efficiently, ensuring that your models appear as intended with their textures applied correctly. Remember, a little troubleshooting and manual intervention can go a long way in ensuring a seamless workflow. Remember, practice makes perfect, and with these handy tips, you'll be well-equipped to tackle white texture issues in Unreal Engine effectively. Stay tuned for more helpful tips and tutorials, and happy modeling! Meta description: Learn how to troubleshoot and fix white texture issues with imported FBX files in Unreal Engine using these practical solutions. Ensure your models look flawless with the right texture application. Keywords: Unreal Engine, FBX files, white textures, troubleshooting, texture mapping, import settings, 3D modeling Meet Tripo Discover the capabilities of Tripo and unlock a world of possibilities: Draft\n\nSource: https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq\nTitle: How to Fix White Textures Issue with FBX Files in Unreal Engine\nContent: allPostsHow to Fix White Textures Issue with FBX Files in Unreal Engine Are you facing the frustrating problem of imported FBX files appearing as white textures in Unreal Engine? Don't worry; you're not alone. This common issue can be a real headache, but with the right know-how, you can quickly resolve it. In this guide, I'll walk you through the steps to troubleshoot and fix this issue effectively. Identifying the Problem When you import FBX files into Unreal Engine, encountering white textures is a common issue that can occur. This problem usually arises when the textures associated with the model are not imported or linked correctly. However, fret not, as there are several solutions to tackle this vexing problem. Solution 1: Organize Texture Files One primary reason for white textures is the misplacement of texture files. Ensure that the textures are located in the correct folder alongside the FBX file. By organizing your texture files properly, you can help Unreal Engine locate\n\nSource: https://www.tripo3d.ai/blog/collect/how-to-fix-white-textures-issue-with-fbx-files-in-unreal-engine-nnofdumn6yq\nTitle: How to Fix White Textures Issue with FBX Files in Unreal Engine\nContent: allPostsHow to Fix White Textures Issue with FBX Files in Unreal Engine Are you facing the frustrating problem of imported FBX files appearing as white textures in Unreal Engine? Don't worry; you're not alone. This common issue can be a real headache, but with the right know-how, you can quickly resolve it. In this guide, I'll walk you through the steps to troubleshoot and fix this issue effectively. Identifying the Problem When you import FBX files into Unreal Engine, encountering white textures is a common issue that can occur. This problem usually arises when the textures associated with the model are not imported or linked correctly. However, fret not, as there are several solutions to tackle this vexing problem. Solution 1: Organize Texture Files One primary reason for white textures is the misplacement of texture files. Ensure that the textures are located in the correct folder alongside the FBX file. By organizing your texture files properly, you can help Unreal Engine locate\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:25.578292",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Unreal (WINE) #181New issueCopy linkNew issueCopy linkOpenOpenUnreal (WINE)#181Copy linkLabelsOpenGL 1.x/2.xUsing OpenGL 1.x or 2.xUsing OpenGL 1.x or 2.xWineUse Wine (x86) or Proton/SteamPlay to runUse Wine (x86) or Proton/SteamPlay to runWorkingTested on a platform and it was working fineTested on a platform and it was working finebox86Run with Box86Run with Box86DescriptionWaterkonijnopened on Aug 23, 2022Issue body actionsDescription Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance. Tested on Raspberry Pi 3B+ Status Previous behavior: None reported Current behavior: Use WINE and gl4es, changes to the INI file may be in order Screenshots OpenGL Additional Information If the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine]\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Unreal (WINE) #181New issueCopy linkNew issueCopy linkOpenOpenUnreal (WINE)#181Copy linkLabelsOpenGL 1.x/2.xUsing OpenGL 1.x or 2.xUsing OpenGL 1.x or 2.xWineUse Wine (x86) or Proton/SteamPlay to runUse Wine (x86) or Proton/SteamPlay to runWorkingTested on a platform and it was working fineTested on a platform and it was working finebox86Run with Box86Run with Box86DescriptionWaterkonijnopened on Aug 23, 2022Issue body actionsDescription Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance. Tested on Raspberry Pi 3B+ Status Previous behavior: None reported Current behavior: Use WINE and gl4es, changes to the INI file may be in order Screenshots OpenGL Additional Information If the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine]\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Unreal (WINE) #181New issueCopy linkNew issueCopy linkOpenOpenUnreal (WINE)#181Copy linkLabelsOpenGL 1.x/2.xUsing OpenGL 1.x or 2.xUsing OpenGL 1.x or 2.xWineUse Wine (x86) or Proton/SteamPlay to runUse Wine (x86) or Proton/SteamPlay to runWorkingTested on a platform and it was working fineTested on a platform and it was working finebox86Run with Box86Run with Box86DescriptionWaterkonijnopened on Aug 23, 2022Issue body actionsDescription Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance. Tested on Raspberry Pi 3B+ Status Previous behavior: None reported Current behavior: Use WINE and gl4es, changes to the INI file may be in order Screenshots OpenGL Additional Information If the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine]\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Unreal (WINE) #181New issueCopy linkNew issueCopy linkOpenOpenUnreal (WINE)#181Copy linkLabelsOpenGL 1.x/2.xUsing OpenGL 1.x or 2.xUsing OpenGL 1.x or 2.xWineUse Wine (x86) or Proton/SteamPlay to runUse Wine (x86) or Proton/SteamPlay to runWorkingTested on a platform and it was working fineTested on a platform and it was working finebox86Run with Box86Run with Box86DescriptionWaterkonijnopened on Aug 23, 2022Issue body actionsDescription Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance. Tested on Raspberry Pi 3B+ Status Previous behavior: None reported Current behavior: Use WINE and gl4es, changes to the INI file may be in order Screenshots OpenGL Additional Information If the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine]\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Unreal (WINE) #181New issueCopy linkNew issueCopy linkOpenOpenUnreal (WINE)#181Copy linkLabelsOpenGL 1.x/2.xUsing OpenGL 1.x or 2.xUsing OpenGL 1.x or 2.xWineUse Wine (x86) or Proton/SteamPlay to runUse Wine (x86) or Proton/SteamPlay to runWorkingTested on a platform and it was working fineTested on a platform and it was working finebox86Run with Box86Run with Box86DescriptionWaterkonijnopened on Aug 23, 2022Issue body actionsDescription Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance. Tested on Raspberry Pi 3B+ Status Previous behavior: None reported Current behavior: Use WINE and gl4es, changes to the INI file may be in order Screenshots OpenGL Additional Information If the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine]\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Description Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance. Tested on Raspberry Pi 3B+ Status Previous behavior: None reported Current behavior: Use WINE and gl4es, changes to the INI file may be in order Screenshots OpenGL Additional Information If the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine] GameRenderDevice=Class'OpenGLDrv.OpenGLRenderDevice' Inside of [WinDrv.WindowsClient] FullscreenViewportX=x FullscreenViewportY=y (if StartupFullscreen=True, where x and y are the width and height of your display) = OR = WindowedViewportX=x WindowedViewportY=y (if StartupFullscreen=False, where x and y are the width and height of your display) FullscreenColorBits=16 LowDetailTextures=True TextureDetail=Low Inside of [OpenGLDrv.OpenGLRenderDevice]\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Description Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance. Tested on Raspberry Pi 3B+ Status Previous behavior: None reported Current behavior: Use WINE and gl4es, changes to the INI file may be in order Screenshots OpenGL Additional Information If the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine] GameRenderDevice=Class'OpenGLDrv.OpenGLRenderDevice' Inside of [WinDrv.WindowsClient] FullscreenViewportX=x FullscreenViewportY=y (if StartupFullscreen=True, where x and y are the width and height of your display) = OR = WindowedViewportX=x WindowedViewportY=y (if StartupFullscreen=False, where x and y are the width and height of your display) FullscreenColorBits=16 LowDetailTextures=True TextureDetail=Low Inside of [OpenGLDrv.OpenGLRenderDevice]\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Description Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance. Tested on Raspberry Pi 3B+ Status Previous behavior: None reported Current behavior: Use WINE and gl4es, changes to the INI file may be in order Screenshots OpenGL Additional Information If the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine] GameRenderDevice=Class'OpenGLDrv.OpenGLRenderDevice' Inside of [WinDrv.WindowsClient] FullscreenViewportX=x FullscreenViewportY=y (if StartupFullscreen=True, where x and y are the width and height of your display) = OR = WindowedViewportX=x WindowedViewportY=y (if StartupFullscreen=False, where x and y are the width and height of your display) FullscreenColorBits=16 LowDetailTextures=True TextureDetail=Low Inside of [OpenGLDrv.OpenGLRenderDevice]\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Unreal (WINE) #181New issueCopy linkNew issueCopy link\nUnreal (WINE) #181New issueCopy linkNew issueCopy link\nUnreal (WINE) #181New issueCopy linkNew issueCopy link\nUnreal (WINE) #181\nUnreal (WINE) #181\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nNew issueCopy link\nOpenUnreal (WINE)#181Copy link\nOpenUnreal (WINE)#181Copy link\nOpenUnreal (WINE)#181Copy link\nLabelsOpenGL 1.x/2.xUsing OpenGL 1.x or 2.xUsing OpenGL 1.x or 2.xWineUse Wine (x86) or Proton/SteamPlay to runUse Wine (x86) or Proton/SteamPlay to runWorkingTested on a platform and it was working fineTested on a platform and it was working finebox86Run with Box86Run with Box86\nLabelsOpenGL 1.x/2.xUsing OpenGL 1.x or 2.xUsing OpenGL 1.x or 2.xWineUse Wine (x86) or Proton/SteamPlay to runUse Wine (x86) or Proton/SteamPlay to runWorkingTested on a platform and it was working fineTested on a platform and it was working finebox86Run with Box86Run with Box86\n\nSource: https://github.com/ptitSeb/box86-compatibility-list/issues/181\nTitle: Unreal (WINE) \u00b7 Issue #181 \u00b7 ptitSeb/box86-compatibility-list \u00b7 GitHub\nContent: Unreal / UnrealI running through WINE and box86 Requires the use of gl4es, it runs but it is running moderately slow on this machine, make sure to use the OpenGL renderer, turn off volumetrics, reflections and detail textures to improve performance.\nRaspberry Pi 3B+\nPrevious behavior: None reported\nCurrent behavior: Use WINE and gl4es, changes to the INI file may be in order\nIf the game does not start, open up the Unreal.ini file and set: Inside of [Engine.GameEngine] GameRenderDevice=Class'OpenGLDrv.OpenGLRenderDevice'\nInside of [WinDrv.WindowsClient] FullscreenViewportX=x FullscreenViewportY=y (if StartupFullscreen=True, where x and y are the width and height of your display) = OR = WindowedViewportX=x WindowedViewportY=y (if StartupFullscreen=False, where x and y are the width and height of your display)\nFullscreenColorBits=16 LowDetailTextures=True TextureDetail=Low\nInside of [OpenGLDrv.OpenGLRenderDevice] VolumetricLighting=False ShinySurfaces=False DetailTextures=False\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:25.581637",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://forums.unrealengine.com/t/umg-texture-randomly-gets-white/408661\nTitle: UMG Texture randomly gets white - Rendering - Epic Developer Community Forums\nContent: UMG Texture randomly gets white Development Rendering question, issue, UMG, UI, unreal-engine, UE4, Textures\nUMG Texture randomly gets white\nquestion, issue, UMG, UI, unreal-engine, UE4, Textures\nquestion, issue, UMG, UI, unreal-engine, UE4, Textures\n\nSource: https://forums.unrealengine.com/t/umg-texture-randomly-gets-white/408661\nTitle: UMG Texture randomly gets white - Rendering - Epic Developer Community Forums\nContent: UMG Texture randomly gets white Development Rendering question, issue, UMG, UI, unreal-engine, UE4, Textures Artur_G (Artur G.) November 3, 2017, 2:16pm 1 Hello there! First off I have to say that I digged trough houndreds of pages and found nothing (except of a fact, that it might be UE4 bug that is not resolved - yet no workaround can be found). Game works without ANY problems in editor and both - debug/development versions. Issue occurs only with Shipping version. We are using around 20 textures of scanned files (only one displayed at a time). Unreal randomly turns some of them into white blanks. Every time different textures are displayed correctly, so they are packed in a build. What is worse, when we save the game and load it - for a while all images are working correctly. After a while, when more textures are available, random \u201cblanking\u201d starts again. From our debug appears that these specific textures are becoming nulls for UMG, while on 3D mesh in front of our player we can\n\nSource: https://forums.unrealengine.com/t/umg-texture-randomly-gets-white/408661\nTitle: UMG Texture randomly gets white - Rendering - Epic Developer Community Forums\nContent: Artur_G (Artur G.) November 3, 2017, 2:16pm 1 Hello there! First off I have to say that I digged trough houndreds of pages and found nothing (except of a fact, that it might be UE4 bug that is not resolved - yet no workaround can be found). Game works without ANY problems in editor and both - debug/development versions. Issue occurs only with Shipping version. We are using around 20 textures of scanned files (only one displayed at a time). Unreal randomly turns some of them into white blanks. Every time different textures are displayed correctly, so they are packed in a build. What is worse, when we save the game and load it - for a while all images are working correctly. After a while, when more textures are available, random \u201cblanking\u201d starts again. From our debug appears that these specific textures are becoming nulls for UMG, while on 3D mesh in front of our player we can see texture very clearly working\u2026 Just to prove that it\u2019s not related to our game mechanic we made simple\n\nSource: https://forums.unrealengine.com/t/umg-texture-randomly-gets-white/408661\nTitle: UMG Texture randomly gets white - Rendering - Epic Developer Community Forums\nContent: Artur_G (Artur G.) November 3, 2017, 2:16pm 1 Hello there! First off I have to say that I digged trough houndreds of pages and found nothing (except of a fact, that it might be UE4 bug that is not resolved - yet no workaround can be found). Game works without ANY problems in editor and both - debug/development versions. Issue occurs only with Shipping version. We are using around 20 textures of scanned files (only one displayed at a time). Unreal randomly turns some of them into white blanks. Every time different textures are displayed correctly, so they are packed in a build. What is worse, when we save the game and load it - for a while all images are working correctly. After a while, when more textures are available, random \u201cblanking\u201d starts again. From our debug appears that these specific textures are becoming nulls for UMG, while on 3D mesh in front of our player we can see texture very clearly working\u2026 Just to prove that it\u2019s not related to our game mechanic we made simple\n\nSource: https://forums.unrealengine.com/t/umg-texture-randomly-gets-white/408661\nTitle: UMG Texture randomly gets white - Rendering - Epic Developer Community Forums\nContent: First off I have to say that I digged trough houndreds of pages and found nothing (except of a fact, that it might be UE4 bug that is not resolved - yet no workaround can be found).\nGame works without ANY problems in editor and both - debug/development versions. Issue occurs only with Shipping version.\nWe are using around 20 textures of scanned files (only one displayed at a time). Unreal randomly turns some of them into white blanks. Every time different textures are displayed correctly, so they are packed in a build. What is worse, when we save the game and load it - for a while all images are working correctly. After a while, when more textures are available, random \u201cblanking\u201d starts again.\nFrom our debug appears that these specific textures are becoming nulls for UMG, while on 3D mesh in front of our player we can see texture very clearly working\u2026\n\nSource: https://forums.unrealengine.com/t/umg-texture-randomly-gets-white/408661\nTitle: UMG Texture randomly gets white - Rendering - Epic Developer Community Forums\nContent: Hello there! First off I have to say that I digged trough houndreds of pages and found nothing (except of a fact, that it might be UE4 bug that is not resolved - yet no workaround can be found). Game works without ANY problems in editor and both - debug/development versions. Issue occurs only with Shipping version. We are using around 20 textures of scanned files (only one displayed at a time). Unreal randomly turns some of them into white blanks. Every time different textures are displayed correctly, so they are packed in a build. What is worse, when we save the game and load it - for a while all images are working correctly. After a while, when more textures are available, random \u201cblanking\u201d starts again. From our debug appears that these specific textures are becoming nulls for UMG, while on 3D mesh in front of our player we can see texture very clearly working\u2026 Just to prove that it\u2019s not related to our game mechanic we made simple test. We put all 20 textures into canvas (no\n\nSource: https://forums.unrealengine.com/tag/texture-problems\nTitle: Topics tagged texture-problems\nContent: UE4-27 , question , unreal-engine , scenecapture2d , texture-problems\nGetting Started & Setup question , UE4 , crash , compile , unreal-engine , compile-error , texture-problems\nGetting Started & Setup\nGetting Started & Setup\nquestion , UE4 , crash , compile , unreal-engine , compile-error , texture-problems\nHow do I pixelate a material in Unreal Engine?\nRendering question , Materials , Textures , texture , unreal-engine , Blender , texture-problems\nquestion , Materials , Textures , texture , unreal-engine , Blender , texture-problems\nHairdefaultmaterial UV edit (groom alembic)\nCharacter & Animation question , unreal-engine , texture-problems , Alembic , Groom\nCharacter & Animation\nCharacter & Animation\nquestion , unreal-engine , texture-problems , Alembic , Groom\nTexture coming jagged in viewport\nAsset Creation question , Textures , unreal-engine , texture-problems\nquestion , Textures , unreal-engine , texture-problems\nOut of video memory trying to allocate a texture\n\nSource: https://forums.unrealengine.com/tag/texture-problems\nTitle: Topics tagged texture-problems\nContent: Weird looking textures imported in UE\nAsset Creation question , texture , unreal-engine , texture-problems , materials-textures , texture-channel\nquestion , texture , unreal-engine , texture-problems , materials-textures , texture-channel\nMips from camera distance\nAsset Creation question , unreal-engine , texture-problems\nquestion , unreal-engine , texture-problems\nSome textures isn't working?\nAsset Creation question , UE4 , unreal-engine , texture-problems\nquestion , UE4 , unreal-engine , texture-problems\nWhy my Textures disappear?..\nRendering question , Shaders , Textures , viewport , texture , unreal-engine , texture-problems\nquestion , Shaders , Textures , viewport , texture , unreal-engine , texture-problems\nHow to fix UMAP textured red\nRendering question , texture , unreal-engine , umap , texture-problems\nquestion , texture , unreal-engine , umap , texture-problems\n\"See Power of Two Setting in Texture Editor\" replaces textures all around the scene when deploying to Android\n\nSource: https://forums.unrealengine.com/tag/texture-problems\nTitle: Topics tagged texture-problems\nContent: Out of video memory trying to allocate a texture\nAsset Creation question , UE4 , bug-report , bug , unreal-engine , load-level , texture-problems\nquestion , UE4 , bug-report , bug , unreal-engine , load-level , texture-problems\nPlatform & Builds question , unreal-engine , texture-problems\nPlatform & Builds\nPlatform & Builds\nquestion , unreal-engine , texture-problems\nTextures not fully loading on other devices after packaging\nWorld Creation question , package , unreal-engine , texture-problems , Texture-Streaming\nquestion , package , unreal-engine , texture-problems , Texture-Streaming\n[Help] Sampling a virtual textures is currently not supported when connected to the Opacity Mask material attribute\nAsset Creation question , error , error-compile , unreal-engine , opacity , texture-problems\nquestion , error , error-compile , unreal-engine , opacity , texture-problems\nWeird looking textures imported in UE\n\nSource: https://forums.unrealengine.com/tag/texture-problems\nTitle: Topics tagged texture-problems\nContent: Fuzzy/Blurry Widgets and Sprites\nAsset Creation Blueprint , question , sprites , 2D , unreal-engine , Widget , texture-problems\nBlueprint , question , sprites , 2D , unreal-engine , Widget , texture-problems\nHow to make material from image w/ transparency (lots of multicolored lines?)\nRendering question , UE4 , Materials , Textures , unreal-engine , texture-problems\nquestion , UE4 , Materials , Textures , unreal-engine , texture-problems\nTileable Normal Map Causing Hard Shadows on Beveled Edge with Static Lighting\nAsset Creation UE4-27 , question , texture-problems\nUE4-27 , question , texture-problems\nPackaging: How to fix Broken Texture Maps?\nAsset Creation question , texture-problems , UE5-0\nquestion , texture-problems , UE5-0\nImages from DataAsset are NULL\nRendering Blueprint , question , Textures , unreal-engine , data-asset , texture-problems\nBlueprint , question , Textures , unreal-engine , data-asset , texture-problems\nMy materials lost connection with the textures\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:26.326765",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://forums.unrealengine.com/t/anyone-still-having-issues-rendering-video-textures-turning-white/1828911\nTitle: Anyone still having issues rendering VIDEO TEXTURES, turning white? - Rendering - Epic Developer Community Forums\nContent: Anyone still having issues rendering VIDEO TEXTURES, turning white? Development Rendering question, twinmotion\nAnyone still having issues rendering VIDEO TEXTURES, turning white?\n\nSource: https://forums.unrealengine.com/t/anyone-still-having-issues-rendering-video-textures-turning-white/1828911\nTitle: Anyone still having issues rendering VIDEO TEXTURES, turning white? - Rendering - Epic Developer Community Forums\nContent: Knightfall0506 (Knightfall0506) April 29, 2024, 2:50pm 1 I have tried using 2022.1.2 as well as 2022.2 Preview 1. Video textures are still rendering solid white. Edit: Even tried creating a brand new file IN 2022.2 Preview 1 - see attachments. Image1 (1)1920\u00d71080 120 KB\nKnightfall0506 (Knightfall0506) April 29, 2024, 2:50pm 1\nApril 29, 2024, 2:50pm 1\nI have tried using 2022.1.2 as well as 2022.2 Preview 1. Video textures are still rendering solid white. Edit: Even tried creating a brand new file IN 2022.2 Preview 1 - see attachments. Image1 (1)1920\u00d71080 120 KB\nI have tried using 2022.1.2 as well as 2022.2 Preview 1. Video textures are still rendering solid white.\nEdit: Even tried creating a brand new file IN 2022.2 Preview 1 - see attachments.\nImage1 (1)1920\u00d71080 120 KB\nImage1 (1)1920\u00d71080 120 KB\n1920\u00d71080 120 KB\n\nSource: https://forums.developer.nvidia.com/t/materials-synced-from-substance-painter-to-unreal-engine-are-just-bright-white/233401\nTitle: Materials synced from Substance Painter to Unreal Engine are just bright white - Connectors - NVIDIA Developer Forums\nContent: 3dpxl November 10, 2022, 9:56am 1 I have tried the Substance Painter Connecter, that works quite well, props for that! When I add the Unreal Engine 5 connector into the mix, I\u2019m currently not able to proceed. All the matierials in UE5 are coming up as bright white. UE5766\u00d7509 112 KB Am I missing something, or is there a bug somewhere?\n3dpxl November 10, 2022, 9:56am 1\nNovember 10, 2022, 9:56am 1\nI have tried the Substance Painter Connecter, that works quite well, props for that! When I add the Unreal Engine 5 connector into the mix, I\u2019m currently not able to proceed. All the matierials in UE5 are coming up as bright white. UE5766\u00d7509 112 KB Am I missing something, or is there a bug somewhere?\nI have tried the Substance Painter Connecter, that works quite well, props for that! When I add the Unreal Engine 5 connector into the mix, I\u2019m currently not able to proceed. All the matierials in UE5 are coming up as bright white.\nUE5766\u00d7509 112 KB\nUE5766\u00d7509 112 KB\n766\u00d7509 112 KB\n\nSource: https://community.amd.com/t5/pc-graphics/unreal-engine-games-running-terrible-with-microstutter/td-p/361530\nTitle: \n\tUnreal Engine games running terrible with microstu... - AMD Community\n\nContent: Port 1.1 mode. 1 Like Reply hitbm47 Forerunner Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-26-2019 10:48 AM Hi gordonfreeman59\u200cThis has been a huge issue for Unreal Tournament 3 since the end of 2016, and they haven't applied a fix yet (although they apparently found the problem).Will try to link this thread on the appropriate developer forums.Kind regardsJacques 0 Likes Reply olegrus In response to hitbm47 Adept I Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-28-2019 03:51 AM Same problems with 19.10.2 driver.I understand that Unreal engine is too far from ideal, but as I said there were no problems with my RX 580 last half of the year since I disabled cache in Radeon settings. Think about it.And as I know Unreal developers dont like AMD hardware... Interesting, why...I think my RX 5700 is last red card that I buy. I tired from this misunderstanding after 19\n\nSource: https://community.amd.com/t5/pc-graphics/unreal-engine-games-running-terrible-with-microstutter/td-p/361530\nTitle: \n\tUnreal Engine games running terrible with microstu... - AMD Community\n\nContent: Port 1.1 mode. 1 Like Reply hitbm47 Forerunner Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-26-2019 10:48 AM Hi gordonfreeman59\u200cThis has been a huge issue for Unreal Tournament 3 since the end of 2016, and they haven't applied a fix yet (although they apparently found the problem).Will try to link this thread on the appropriate developer forums.Kind regardsJacques 0 Likes Reply olegrus In response to hitbm47 Adept I Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-28-2019 03:51 AM Same problems with 19.10.2 driver.I understand that Unreal engine is too far from ideal, but as I said there were no problems with my RX 580 last half of the year since I disabled cache in Radeon settings. Think about it.And as I know Unreal developers dont like AMD hardware... Interesting, why...I think my RX 5700 is last red card that I buy. I tired from this misunderstanding after 19\n\nSource: https://community.amd.com/t5/pc-graphics/unreal-engine-games-running-terrible-with-microstutter/td-p/361530\nTitle: \n\tUnreal Engine games running terrible with microstu... - AMD Community\n\nContent: Port 1.1 mode. 1 Like Reply hitbm47 Forerunner Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-26-2019 10:48 AM Hi gordonfreeman59\u200cThis has been a huge issue for Unreal Tournament 3 since the end of 2016, and they haven't applied a fix yet (although they apparently found the problem).Will try to link this thread on the appropriate developer forums.Kind regardsJacques 0 Likes Reply olegrus In response to hitbm47 Adept I Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-28-2019 03:51 AM Same problems with 19.10.2 driver.I understand that Unreal engine is too far from ideal, but as I said there were no problems with my RX 580 last half of the year since I disabled cache in Radeon settings. Think about it.And as I know Unreal developers dont like AMD hardware... Interesting, why...I think my RX 5700 is last red card that I buy. I tired from this misunderstanding after 19\n\nSource: https://forums.unrealengine.com/t/anyone-still-having-issues-rendering-video-textures-turning-white/1828911\nTitle: Anyone still having issues rendering VIDEO TEXTURES, turning white? - Rendering - Epic Developer Community Forums\nContent: Anyone still having issues rendering VIDEO TEXTURES, turning white? Development Rendering question, twinmotion Knightfall0506 (Knightfall0506) April 29, 2024, 2:50pm 1 I have tried using 2022.1.2 as well as 2022.2 Preview 1. Video textures are still rendering solid white. Edit: Even tried creating a brand new file IN 2022.2 Preview 1 - see attachments. Image1 (1)1920\u00d71080 120 KB MorganC (MorganC) April 30, 2024, 12:27am 2 Hello! Thank you for reaching out, for Video textures please use the Video sample material from the Twinmotion library as this will be set up specifically for use with video files and should render correctly. This will be located under Materials > Videos > Video sample and once applied please use Video > Open in the material to select your custom .avi, .wma, or .mp4 file. Best Regards,Morgan anonymous_user_756deb70 (anonymous_user_756deb70) April 30, 2024, 1:32am 3 Content removed by moderator. MisterSmile84 (Vincent Boutaud) April 30, 2024, 1:32am 4 Hello , Thank you\n\nSource: https://community.amd.com/t5/pc-graphics/unreal-engine-games-running-terrible-with-microstutter/td-p/361530\nTitle: \n\tUnreal Engine games running terrible with microstu... - AMD Community\n\nContent: Inappropriate Content \u200e10-28-2019 03:51 AM Same problems with 19.10.2 driver.I understand that Unreal engine is too far from ideal, but as I said there were no problems with my RX 580 last half of the year since I disabled cache in Radeon settings. Think about it.And as I know Unreal developers dont like AMD hardware... Interesting, why...I think my RX 5700 is last red card that I buy. I tired from this misunderstanding after 19 years. 1 Like Reply hitbm47 In response to olegrus Forerunner Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-28-2019 04:49 AM Hi olegrus\u200cI have disabled the shader cache for Unreal Tournament 3, but it did not improve performance at all. It still drops down to 40FPS with almost no GPU utilization on my RX 480 & Ryzen 5 1600, whereas testing my GTX 1060 in the same system maintains 120FPS+ in the exact same areas with better GPU utilization.The RX 480 doesn't have this problem with Unreal Tournament 3\n\nSource: https://community.amd.com/t5/pc-graphics/unreal-engine-games-running-terrible-with-microstutter/td-p/361530\nTitle: \n\tUnreal Engine games running terrible with microstu... - AMD Community\n\nContent: Inappropriate Content \u200e10-28-2019 03:51 AM Same problems with 19.10.2 driver.I understand that Unreal engine is too far from ideal, but as I said there were no problems with my RX 580 last half of the year since I disabled cache in Radeon settings. Think about it.And as I know Unreal developers dont like AMD hardware... Interesting, why...I think my RX 5700 is last red card that I buy. I tired from this misunderstanding after 19 years. 1 Like Reply hitbm47 In response to olegrus Forerunner Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-28-2019 04:49 AM Hi olegrus\u200cI have disabled the shader cache for Unreal Tournament 3, but it did not improve performance at all. It still drops down to 40FPS with almost no GPU utilization on my RX 480 & Ryzen 5 1600, whereas testing my GTX 1060 in the same system maintains 120FPS+ in the exact same areas with better GPU utilization.The RX 480 doesn't have this problem with Unreal Tournament 3\n\nSource: https://community.amd.com/t5/pc-graphics/unreal-engine-games-running-terrible-with-microstutter/td-p/361530\nTitle: \n\tUnreal Engine games running terrible with microstu... - AMD Community\n\nContent: developer forums.Kind regardsJacques 0 Likes Reply olegrus In response to hitbm47 Adept I Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-28-2019 03:51 AM Same problems with 19.10.2 driver.I understand that Unreal engine is too far from ideal, but as I said there were no problems with my RX 580 last half of the year since I disabled cache in Radeon settings. Think about it.And as I know Unreal developers dont like AMD hardware... Interesting, why...I think my RX 5700 is last red card that I buy. I tired from this misunderstanding after 19 years. 1 Like Reply hitbm47 In response to olegrus Forerunner Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e10-28-2019 04:49 AM Hi olegrus\u200cI have disabled the shader cache for Unreal Tournament 3, but it did not improve performance at all. It still drops down to 40FPS with almost no GPU utilization on my RX 480 & Ryzen 5 1600, whereas\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:26.685231",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: AMD UE4 glitch\nAMD UE4 glitch\nAMD UE4 glitch\nAMD UE4 glitch\nAMD UE4 glitch\nAMD UE4 glitch\nits a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games those I told you. and u have two options , one is run game as windowed or fullscreen windowed it means less FPS or use old driver (17.4.4) my amd card is HD8730m and I installed all drivers from 17.4.4 until now only 17.4.4 is ok and my windows is 10 (v1709 , b16299.309) , Im a new user here and only make account to share this with amd to fix it for us , pls put this in known issues and fix it in new whql driver\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n\nSource: https://community.amd.com/t5/pc-graphics/amd-ue4-glitch/td-p/283487\nTitle: \n\tAMD UE4 glitch - AMD Community\n\nContent: Browse AMD Community Communities PC Graphics PC Graphics AMD UE4 glitch All communityThis categoryThis boardKnowledge baseUsers cancel Turn on suggestions Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type. Showing results for Search instead for Did you mean: PC Graphics Options Subscribe to RSS Feed Mark Topic as New Mark Topic as Read Float this Topic for Current User Bookmark Subscribe Mute Printer Friendly Page a_jax Journeyman III Mark as New Bookmark Subscribe Mute Subscribe to RSS Feed Permalink Print Report Inappropriate Content \u200e03-14-2018 06:25 PM AMD UE4 glitch its a graphical glitch that is exist in drivers from version 17.4.4 until now 18.3.2 about one year I think , I saw some guys in reddit too , those have problem like me ; its about games those using Unreal Engine 4 like Ark , PUBG , Fortnite , Friday the 13th and ... . and the glitch is like this in picture below :in whole game u see textures like this all games\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:26.688989",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "research_step_finalized",
+        "output": "Finalized research step.\n\ud83d\udcb8 Total Research Costs: $0.0200711",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-06-16T23:38:26.695083",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "writing_report",
+        "output": "\u270d\ufe0f Writing report for 'How to fix UE4 graphical glitches in WINE? Some textures are showing as white.'...",
+        "metadata": null
+      }
+    }
+  ],
+  "content": {
+    "query": "",
+    "sources": [],
+    "context": [],
+    "report": "",
+    "costs": 0.0,
+    "type": "report",
+    "content": "selected_images",
+    "output": " replaced by the width and height of the display. You may want to tweak the specific configurations above based on your display/GPU.\n\n4.  **Driver Updates and Compatibility:**\n\n    *   Ensure that the latest graphics drivers are installed for the host operating system.\n    *   Test different driver versions to identify",
+    "metadata": [
+      {
+        "url": "https://us.v-cdn.net/5021068/uploads/YLUM9HJXLWCW/error-png.png",
+        "score": 2
+      },
+      {
+        "url": "https://d3kjluh73b9h9o.cloudfront.net/original/4X/9/0/a/90a6f285e03c6b12d69df1f1647533ab3de6afe3.gif",
+        "score": 1
+      },
+      {
+        "url": "https://d3kjluh73b9h9o.cloudfront.net/optimized/4X/2/b/8/2b8f17a3c513764d5fef8ba812b57eb4fb21d707_2_656x500.jpeg",
+        "score": 1
+      },
+      {
+        "url": "https://d3kjluh73b9h9o.cloudfront.net/optimized/4X/c/0/0/c003914c9111991f5c85509e2a032d11358b2565_2_531x500.jpeg",
+        "score": 1
+      },
+      {
+        "url": "https://d3kjluh73b9h9o.cloudfront.net/optimized/4X/5/9/e/59e8084002601c4a2ec75a132a90c5c87e23b8cb_2_562x500.jpeg",
+        "score": 1
+      }
+    ]
+  }
+}

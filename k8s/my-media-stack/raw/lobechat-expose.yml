@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lobechat
+  namespace: my-media-stack
+spec:
+  selector: {}
+  ports:
+    - name: lobechat-3210
+      port: 3210
+      targetPort: lobechat-3210

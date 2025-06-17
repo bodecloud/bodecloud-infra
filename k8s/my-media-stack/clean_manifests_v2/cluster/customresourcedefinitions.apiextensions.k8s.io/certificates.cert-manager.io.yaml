@@ -1,0 +1,122 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apiextensions.k8s.io/v1","kind":"CustomResourceDefinition","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/instance":"cert-manager","app.kubernetes.io/name":"cert-manager"},"name":"certificates.cert-manager.io"},"spec":{"group":"cert-manager.io","names":{"kind":"Certificate","listKind":"CertificateList","plural":"certificates","singular":"certificate"},"scope":"Namespaced","versions":[{"name":"v1","schema":{"openAPIV3Schema":{"properties":{"spec":{"properties":{"commonName":{"type":"string"},"dnsNames":{"items":{"type":"string"},"type":"array"},"duration":{"type":"string"},"isCA":{"type":"boolean"},"issuerRef":{"properties":{"group":{"type":"string"},"kind":{"type":"string"},"name":{"type":"string"}},"type":"object"},"keyAlgorithm":{"type":"string"},"keyEncoding":{"type":"string"},"keySize":{"type":"integer"},"renewBefore":{"type":"string"},"secretName":{"type":"string"},"usages":{"items":{"type":"string"},"type":"array"}},"type":"object"},"status":{"properties":{"conditions":{"items":{"properties":{"lastTransitionTime":{"format":"date-time","type":"string"},"message":{"type":"string"},"reason":{"type":"string"},"status":{"type":"string"},"type":{"type":"string"}},"type":"object"},"type":"array"},"notAfter":{"format":"date-time","type":"string"},"notBefore":{"format":"date-time","type":"string"},"renewalTime":{"format":"date-time","type":"string"}},"type":"object"}},"type":"object"}},"served":true,"storage":true}]}}
+    meta.helm.sh/release-name: cert-manager
+    meta.helm.sh/release-namespace: cert-manager
+  labels:
+    app: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/version: v1.14.0
+    helm.sh/chart: cert-manager-v1.14.0
+  name: certificates.cert-manager.io
+spec:
+  conversion:
+    strategy: None
+  group: cert-manager.io
+  names:
+    categories:
+    - cert-manager
+    kind: Certificate
+    listKind: CertificateList
+    plural: certificates
+    shortNames:
+    - cert
+    - certs
+    singular: certificate
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              commonName:
+                type: string
+              dnsNames:
+                items:
+                  type: string
+                type: array
+              duration:
+                type: string
+              isCA:
+                type: boolean
+              issuerRef:
+                properties:
+                  group:
+                    type: string
+                  kind:
+                    type: string
+                  name:
+                    type: string
+                type: object
+              keyAlgorithm:
+                type: string
+              keyEncoding:
+                type: string
+              keySize:
+                type: integer
+              renewBefore:
+                type: string
+              secretName:
+                type: string
+              usages:
+                items:
+                  type: string
+                type: array
+            type: object
+            properties:
+              conditions:
+                items:
+                  properties:
+                    lastTransitionTime:
+                      format: date-time
+                      type: string
+                    message:
+                      type: string
+                    reason:
+                      type: string
+                      type: string
+                    type:
+                      type: string
+                  type: object
+                type: array
+              notAfter:
+                format: date-time
+                type: string
+              notBefore:
+                format: date-time
+                type: string
+              renewalTime:
+                format: date-time
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+  acceptedNames:
+    categories:
+    - cert-manager
+    kind: Certificate
+    listKind: CertificateList
+    plural: certificates
+    shortNames:
+    - cert
+    - certs
+    singular: certificate
+  conditions:
+  - lastTransitionTime: "2025-06-14T14:48:11Z"
+    message: no conflicts found
+    reason: NoConflicts
+    type: NamesAccepted
+  - lastTransitionTime: "2025-06-14T14:48:11Z"
+    message: the initial names have been accepted
+    reason: InitialNamesAccepted
+    type: Established
+  storedVersions:
+  - v1

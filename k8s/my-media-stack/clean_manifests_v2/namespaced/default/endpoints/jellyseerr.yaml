@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T15:07:02Z"
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: jellyseerr
+  name: jellyseerr
+  namespace: default
+subsets:
+- addresses:
+  - ip: 10.42.3.23
+    nodeName: baden.vpshostingservice.co
+    targetRef:
+      kind: Pod
+      name: jellyseerr-8574d6486d-4nl2l
+      namespace: default
+  ports:
+  - name: http
+    port: 5055
+    protocol: TCP

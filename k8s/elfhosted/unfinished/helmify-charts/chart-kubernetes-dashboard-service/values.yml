@@ -1,0 +1,7 @@
+kubernetesClusterDomain: cluster.local
+kubernetesDashboard:
+  ports:
+  - name: http
+    port: 9090
+    targetPort: 0
+  type: ClusterIP

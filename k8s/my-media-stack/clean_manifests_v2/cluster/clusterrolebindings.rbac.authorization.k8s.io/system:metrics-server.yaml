@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4yRQU/jQAyF/8rK5yTbtN00ibSHwoEDtyJxQRycGbcdkowjexIEVf87SgsCodJynHl6n/38doCduydRxx5KkApNgn3YsrhXDI59UueaOP47pBBB7byFEq6bXgPJihu6ct46v4EIWgpoMSCUO0DvORzsOj65eiITlEIijhODITQ0Mt0Ig+hHnZ89SbwZaiihnukXZUijP7fO2/9La9lfRHhsaUxHyr0YioXQkvzKph2a0Vv3FcX6ooFa2EfQYEXN2XBb1C2UUGC2nud5+m9ipvMiT9OqsOvJgtI0m+aTRV5k07zIZjRC39c8TilbCuKMxkoykIy6cEMrWh8u3Lkb4b4719nJwuDyGO2PkaB82H0Q7kgGZ2hpDPc+fEK+uY//J2/2uH8LAAD//33DSMlsAgAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: resource-reader
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  labels:
+    objectset.rio.cattle.io/hash: 9a6f488150c249811b9df07e116280789628963e
+  name: system:metrics-server
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:metrics-server
+subjects:
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system

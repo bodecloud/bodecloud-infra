@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: dozzle-c9b48b94c-
+  labels:
+    app: dozzle
+    pod-template-hash: c9b48b94c
+  name: dozzle-c9b48b94c-v2h52
+  namespace: bolabaden
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: dozzle-c9b48b94c
+spec:
+  containers:
+  - image: amir20/dozzle:latest
+    imagePullPolicy: IfNotPresent
+    name: dozzle
+    ports:
+    - containerPort: 8080
+      name: dozzle-8080
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: var-run-docker-sock
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ktd7s
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: beatapostapita
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /var/run/docker.sock
+      type: Socket
+    name: var-run-docker-sock
+  - name: kube-api-access-ktd7s
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:31Z"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:27Z"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:31Z"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:31Z"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-14T22:32:26Z"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://e966d203c062fb96838ec59b3dde91b8323d3ea8f0300991fe039eeda141fe2f
+    image: docker.io/amir20/dozzle:latest
+    imageID: docker.io/amir20/dozzle@sha256:fb4a914897aafdf7af86ff6f8d8914241b580aeb56c781c848f411eb110fd77e
+    lastState: {}
+    name: dozzle
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-06-14T22:32:30Z"
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: var-run-docker-sock
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ktd7s
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.0.0.81
+  hostIPs:
+  - ip: 10.0.0.81
+  phase: Running
+  podIP: 10.42.0.72
+  podIPs:
+  - ip: 10.42.0.72
+  qosClass: Burstable
+  startTime: "2025-06-14T22:32:27Z"

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: terminal
+  namespace: vpn-gateway
+  labels:
+    app: terminal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: terminal
+  template:
+    metadata:
+      labels:
+        app: terminal
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          while true; do
+            sleep 600 &
+            wait $!;
+          done
+        imagePullPolicy: Always
+        resources: {}

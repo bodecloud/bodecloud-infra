@@ -1,0 +1,84 @@
+apiVersion: v1
+data:
+  traefik.yml: |
+    # yaml-language-server: $schema=https://json.schemastore.org/traefik-v3.json
+
+    global:
+      checkNewVersion: true
+      sendAnonymousUsage: false
+
+    providers:
+      kubernetesIngress: {}
+      kubernetesCRD: {}
+
+    log:
+      level: DEBUG
+
+    accessLog: true
+
+    api:
+      dashboard: true
+      debug: false
+      disableDashboardAd: true
+      insecure: true
+
+    ping:
+      terminatingStatusCode: 503
+
+    serversTransport:
+      insecureSkipVerify: true
+
+    entryPoints:
+      web:
+        address: :80
+        forwardedHeaders:
+          trustedIPs:
+            - "127.0.0.1/32"
+            - "::1/128"
+            - "172.16.0.0/12"
+            - "10.76.0.0/16"
+            - "100.64.0.0/10"
+        http:
+          redirections:
+            entryPoint:
+              to: websecure
+              scheme: https
+      websecure:
+        address: :443
+        forwardedHeaders:
+          trustedIPs:
+            - "127.0.0.1/32"
+            - "::1/128"
+            - "172.16.0.0/12"
+            - "10.76.0.0/16"
+            - "100.64.0.0/10"
+        http:
+          tls:
+            certResolver: letsencrypt
+            domains:
+              - main: "bolabaden.org"
+                sans:
+                  - "*.bolabaden.org"
+
+    certificatesResolvers:
+      letsencrypt:
+        acme:
+          email: boden.crouch@gmail.com
+          storage: /certs/acme.json
+          caServer: https://acme-v02.api.letsencrypt.org/directory
+          dnsChallenge:
+            provider: cloudflare
+            resolvers:
+              - dane.ns.cloudflare.com
+              - tori.ns.cloudflare.com
+              - 1.1.1.1
+              - 1.0.0.1
+              - 8.8.8.8
+              - 8.8.4.4
+          httpChallenge:
+            entryPoint: web
+          tlsChallenge: true
+kind: ConfigMap
+metadata:
+  name: traefik-config
+  namespace: my-media-stack

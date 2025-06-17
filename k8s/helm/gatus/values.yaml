@@ -1,0 +1,266 @@
+# Default values for gatus
+# This is a YAML-formatted file.
+
+# Global settings
+global:
+  imageRegistry: "ghcr.io/elfhosted"
+  imagePullSecrets: []
+  storageClass: "local-path"
+
+# Image configuration
+image:
+  repository: gatus
+  tag: "5.17.0"
+  digest: "sha256:e2752cf7e1781478b12e0ca48159a40549905195afe39fe0a5e39ac2c7256dac"
+  pullPolicy: IfNotPresent
+
+# Number of replicas
+replicaCount: 1
+
+# Service account
+serviceAccount:
+  create: false
+  name: "default"
+  automount: false
+  annotations: {}
+
+# Security context for the pod
+securityContext:
+  fsGroup: 568
+  seccompProfile:
+    type: RuntimeDefault
+
+# Container security context
+containerSecurityContext:
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
+
+# Environment variables
+env:
+  GATUS_CONFIG_PATH: "/config/config.yaml"
+  SMTP_FROM: "health@elfhosted.com"
+  SMTP_PORT: "587"
+
+# Environment variables from secrets
+envFrom:
+  - secretRef:
+      name: gatus-smtp-config
+
+# Resources for Gatus container
+resources:
+  limits:
+    cpu: "1"
+    memory: 128Mi
+  requests:
+    cpu: "0"
+    memory: 20Mi
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: http
+  annotations: {}
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: gatus.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Persistence configuration
+persistence:
+  config:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+
+# ConfigMap for Gatus configuration
+configMap:
+  enabled: true
+  data:
+    config.yaml: |
+      # Gatus configuration
+      metrics: true
+      
+      # Storage configuration
+      storage:
+        type: memory
+        # For persistent storage, uncomment below:
+        # type: sqlite
+        # path: /data/data.db
+      
+      # Web configuration
+      web:
+        port: 8080
+      
+      # Alerting configuration
+      alerting:
+        email:
+          from: "${SMTP_FROM}"
+          host: "${SMTP_HOST:-localhost}"
+          port: ${SMTP_PORT:-587}
+          username: "${SMTP_USERNAME}"
+          password: "${SMTP_PASSWORD}"
+          to: "${SMTP_TO}"
+          default-alert:
+            failure-threshold: 3
+            success-threshold: 2
+            send-on-resolved: true
+      
+      # Endpoints to monitor
+      endpoints:
+        - name: "Self Check"
+          url: "http://localhost:8080/health"
+          interval: 30s
+          conditions:
+            - "[STATUS] == 200"
+            - "[RESPONSE_TIME] < 1000"
+          alerts:
+            - type: email
+
+# Health probes
+livenessProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+startupProbe:
+  tcpSocket:
+    port: 8080
+  timeoutSeconds: 1
+  periodSeconds: 5
+  successThreshold: 1
+  failureThreshold: 30
+
+# Node selector and affinity
+nodeSelector: {}
+
+affinity:
+  podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.elfhosted.com/role
+              operator: In
+              values:
+                - nodefinder
+        topologyKey: kubernetes.io/hostname
+
+tolerations: []
+
+# Priority class
+priorityClassName: "tenant-normal"
+
+# Annotations for configmap reloader
+annotations:
+  configmap.reloader.stakater.com/reload: "gatus-config"
+
+# Enable service links
+enableServiceLinks: false
+
+# Deployment strategy
+strategy:
+  type: Recreate
+
+# Revision history limit
+revisionHistoryLimit: 3
+
+# Progress deadline
+progressDeadlineSeconds: 600
+
+# Secrets configuration
+secrets:
+  gatusSmtpConfig:
+    enabled: true
+    data: {}
+    # Uncomment and set these values:
+    # SMTP_HOST: ""
+    # SMTP_USERNAME: ""
+    # SMTP_PASSWORD: ""
+    # SMTP_TO: ""
+
+# SMTP Configuration (alternative to secrets)
+smtp:
+  enabled: false
+  host: ""
+  port: 587
+  username: ""
+  password: ""
+  from: "health@elfhosted.com"
+  to: ""
+  
+# Gatus specific configuration
+gatus:
+  # Metrics configuration
+  metrics:
+    enabled: true
+    
+  # Storage type: memory, sqlite, postgres
+  storage:
+    type: "memory"
+    # For sqlite:
+    # path: "/data/data.db"
+    # For postgres:
+    # host: "postgres"
+    # port: 5432
+    # database: "gatus"
+    # username: "gatus"
+    # password: "password"
+  
+  # UI Configuration
+  ui:
+    title: "ElfHosted Health Dashboard"
+    description: "Monitor your ElfHosted services"
+    logo: ""
+    link: "https://elfhosted.com"
+    
+  # Default alert settings
+  alerting:
+    email:
+      enabled: false
+      failureThreshold: 3
+      successThreshold: 2
+      sendOnResolved: true
+    
+    discord:
+      enabled: false
+      webhookUrl: ""
+      
+    slack:
+      enabled: false
+      webhookUrl: ""
+      
+    telegram:
+      enabled: false
+      token: ""
+      id: ""
+  
+  # Default endpoint settings
+  endpoints:
+    defaultInterval: "30s"
+    defaultTimeout: "10s"
+    defaultConditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1000" 

@@ -1,0 +1,25 @@
+issuer: http://dex:4190/dex
+storage:
+  type: etcd
+  config:
+    endpoints:
+      - http://etcd:2379
+web:
+  http: 0.0.0.0:4190
+logger:
+  level: "debug"
+  format: "text"
+oauth2:
+  skipApprovalScreen: true
+staticClients:
+- id: oauth2-proxy
+  redirectURIs:
+  - http://oauth2-proxy.localtest.me:4180/oauth2/callback
+  name: 'OAuth2 Proxy'
+  secret: b2F1dGgyLXByb3h5LWNsaWVudC1zZWNyZXQK
+enablePasswordDB: true
+staticPasswords:
+- email: "admin@example.com"
+  hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" # password: password
+  username: "admin"
+  userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"

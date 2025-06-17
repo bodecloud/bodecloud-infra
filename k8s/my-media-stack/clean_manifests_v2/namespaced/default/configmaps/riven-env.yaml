@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  RIVEN_BACKEND_URL: https://riven-backend.elfhosted.com
+  RIVEN_DATABASE_HOST: postgresql
+  RIVEN_DATABASE_NAME: riven
+  RIVEN_DATABASE_PASSWORD: riven-password
+  RIVEN_DATABASE_PORT: "5432"
+  RIVEN_DATABASE_USER: riven
+  RIVEN_FRONTEND_URL: https://riven.elfhosted.com
+  RIVEN_LOG_LEVEL: INFO
+  RIVEN_REDIS_HOST: redis
+  RIVEN_REDIS_PORT: "6379"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"RIVEN_BACKEND_URL":"https://riven-backend.elfhosted.com","RIVEN_DATABASE_HOST":"postgresql","RIVEN_DATABASE_NAME":"riven","RIVEN_DATABASE_PASSWORD":"riven-password","RIVEN_DATABASE_PORT":"5432","RIVEN_DATABASE_USER":"riven","RIVEN_FRONTEND_URL":"https://riven.elfhosted.com","RIVEN_LOG_LEVEL":"INFO","RIVEN_REDIS_HOST":"redis","RIVEN_REDIS_PORT":"6379"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"riven-env","namespace":"default"}}
+  name: riven-env
+  namespace: default

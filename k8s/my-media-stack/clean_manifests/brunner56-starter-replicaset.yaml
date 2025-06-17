@@ -1,0 +1,155 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: tooling-scripts
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/name: starter
+    pod-template-hash: 6b9c849db8
+  name: brunner56-starter-6b9c849db8
+  namespace: bolabaden
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: starter
+      pod-template-hash: 6b9c849db8
+  template:
+    metadata:
+      creationTimestamp: "2025-05-29T17:12:59Z"
+      labels:
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: starter
+        pod-template-hash: 6b9c849db8
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: true
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          echo "This pod simple reserves contended resources for a tenant"
+
+          sleep infinity
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: brunner56-starter
+        resources:
+          requests:
+            cpu: 250m
+            memory: 1Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - mountPath: /tooling-scripts
+          name: tooling-scripts
+      - command:
+        - /usr/bin/dumb-init
+        - /bin/bash
+        - -c
+        - /tooling-scripts/clean-up-dns-on-termination.sh
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: ELF_TENANT_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/instance']
+        envFrom:
+        - secretRef:
+            name: cloudflare-api-token
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: clean-up-dns
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tooling-scripts
+          name: tooling-scripts
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      initContainers:
+      - command:
+        - /usr/bin/dumb-init
+        - /bin/bash
+        - -c
+        - /tooling-scripts/update-dns-on-init.sh
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: ELF_TENANT_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/instance']
+        envFrom:
+        - secretRef:
+            name: cloudflare-api-token
+        image: alpine/k8s:1.29.1
+        imagePullPolicy: IfNotPresent
+        name: update-dns
+        securityContext:
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tooling-scripts
+          name: tooling-scripts
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 568
+        runAsNonRoot: true
+        runAsUser: 568
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - configMap:
+          defaultMode: 493
+          name: tooling-scripts
+        name: tooling-scripts

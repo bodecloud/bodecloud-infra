@@ -1,0 +1,40 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.88
+  conditions:
+    ready: false
+    serving: false
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: traefikforwardauth-traefik-forward-auth-588cd68c89-pdqtb
+    namespace: default
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:40:16Z"
+  generateName: traefikforwardauth-traefik-forward-auth-
+  labels:
+    app.kubernetes.io/instance: traefikforwardauth
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefik-forward-auth
+    app.kubernetes.io/service: traefikforwardauth-traefik-forward-auth
+    app.kubernetes.io/version: 2.2.0
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    helm.sh/chart: traefik-forward-auth-2.2.10
+    kubernetes.io/service-name: traefikforwardauth-traefik-forward-auth
+  name: traefikforwardauth-traefik-forward-auth-9whjk
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: traefikforwardauth-traefik-forward-auth
+ports:
+- name: http
+  port: 4181
+  protocol: TCP

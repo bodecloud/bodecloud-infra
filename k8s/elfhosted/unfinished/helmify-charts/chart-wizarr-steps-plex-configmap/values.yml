@@ -1,0 +1,36 @@
+kubernetesClusterDomain: cluster.local
+wizarrStepsPlex:
+  01DownloadMd: "---\ntitle: \"Join & download Plex\"\nrequire: true\n---\nYou're
+    in! \U0001F389\nGreat news! You've been granted access to brunner56's **ElfHosted
+    Plex Server**! \U0001F973"
+  02AboutMd: "---\ntitle: \"What is Plex?\"\n---\n## ℹ️ What's Plex?\nPlex lets people
+    share their film and TV libraries with friends.\nYou're here because brunner56's
+    invited you to theirs! \U0001F4FA\n## \U0001F37F How do I watch stuff?\nSearch
+    your phone, tablet, computer or smart-TV's app store for \"Plex\", or [download
+    on this device](https://www.plex.tv/en-gb/media-server-downloads/#plex-app){target=_blank
+    .btn}.\nSign in, search, push play. That’s it!"
+  03RequestsMd: "---\ntitle:  \"Automatic requests\"\nrequires: [overseerr_url]\n---\n#\"Request
+    mooar content \U0001F64B‍♀️\nCan’t find what you want to watch? Make a request
+    — robots will grab the film or episode automatically and add it to the library.\n[Make
+    a request]({{ overseerr_url }}){:target=_blank .btn}"
+  04DiscordMd: |-
+    ---
+    title:  "Discord community"
+    requires: [discord_id]
+    ---
+    <iframe src="https://discord.com/widget?id={{ discord_id }}&theme=dark"
+            width="350" height="500"
+            allowtransparency="true" frameborder="0"
+            sandbox="allow-popups allow-same-origin allow-scripts"></iframe>
+  05TipsMd: "---\ntitle: \"Tips for the best experience\"\n---\n## \U0001F39E Get
+    the best quality\nPlex sometimes defaults to low quality or shows its own adverts
+    first. \"\n      \"Here’s how to fix that:\n1. **Disable trailers & extras** –
+    Settings → Experience → untick *Show cinematic trailers*\n2. **Force original
+    quality** – Settings → Playback → set *Automatic* to *Original*\n3. **Use a wired
+    connection** if you’re on a smart-TV for stutter-free 4K.\n4. **Read the [Plex
+    Guide](https://plexguide.com/){target=_blank .btn}** to learn more\n*Happy viewing!*
+    \U0001F37F"
+  06ElfhostedMd: "---\ntitle: \"Get ElfHosted!\"\n---\n## \U0001F39E Want your **own**
+    Plex?\nReady to take it to the next level?\nGet your **own** Plex Server with
+    a [ElfHosted bundle](https://store.elfhosted.com/product-category/streaming-bundles/){target=_blank
+    .btn}, $1 7-day trials available!\nRock on! \U0001F918"

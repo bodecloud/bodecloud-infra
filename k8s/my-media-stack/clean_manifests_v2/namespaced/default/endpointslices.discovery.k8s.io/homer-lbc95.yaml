@@ -1,0 +1,36 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.3.18
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: baden.vpshostingservice.co
+  targetRef:
+    kind: Pod
+    name: homer-6d5977c66d-z7x28
+    namespace: default
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T15:04:50Z"
+  generateName: homer-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: homer
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: homer
+  name: homer-lbc95
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: homer
+ports:
+- name: http
+  port: 8080
+  protocol: TCP

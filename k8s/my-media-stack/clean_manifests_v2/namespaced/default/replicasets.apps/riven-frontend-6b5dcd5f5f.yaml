@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "3"
+  labels:
+    app.elfhosted.com/name: riven-frontend
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: riven-frontend
+    pod-template-hash: 6b5dcd5f5f
+  name: riven-frontend-6b5dcd5f5f
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: riven-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.elfhosted.com/name: riven-frontend
+      pod-template-hash: 6b5dcd5f5f
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-06-12T01:11:04Z"
+      labels:
+        app.elfhosted.com/name: riven-frontend
+        app.kubernetes.io/instance: myprecious
+        app.kubernetes.io/name: riven-frontend
+        pod-template-hash: 6b5dcd5f5f
+    spec:
+      containers:
+      - image: spoked/riven-frontend:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: riven-frontend
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /app/config
+          name: config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: riven-frontend-config
+        name: config
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1

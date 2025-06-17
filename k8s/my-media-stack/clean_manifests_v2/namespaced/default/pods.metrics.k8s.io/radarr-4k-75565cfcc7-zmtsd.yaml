@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: radarr-4k
+  usage:
+    cpu: 1637469n
+    memory: 109300Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: radarr-4k
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: radarr-4k
+    pod-template-hash: 75565cfcc7
+  name: radarr-4k-75565cfcc7-zmtsd
+  namespace: default
+timestamp: "2025-06-14T23:01:00Z"
+window: 29.09s

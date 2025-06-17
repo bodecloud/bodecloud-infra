@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    local.path.provisioner/selected-node: beatapostapita
+    pv.kubernetes.io/provisioned-by: rancher.io/local-path
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: pvc-8256148d-81be-426c-bc16-8ee27f289919
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: mongodb-data-mongodb-0
+    namespace: default
+  local:
+    path: /var/lib/rancher/k3s/storage/pvc-8256148d-81be-426c-bc16-8ee27f289919_default_mongodb-data-mongodb-0
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - beatapostapita
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-path
+  volumeMode: Filesystem
+  lastPhaseTransitionTime: "2025-06-14T15:02:59Z"
+  phase: Bound

@@ -1,0 +1,548 @@
+x-common-env: &common-env
+  TZ: ${TZ:-America/Chicago}
+  PUID: ${PUID:-1001}
+  PGID: ${PGID:-988}
+  UMASK: ${UMASK:-002}
+
+x-resource-limits: &resource-limits
+  labels:
+    autoheal: "true"
+
+x-common-logging: &common-logging
+  logging:
+    driver: "local"
+    options:
+      max-file: "5"
+      max-size: "10m"
+
+
+services:
+  code-dev:
+    # 🔹🔹 Code Server 🔹🔹
+    image: linuxserver/code-server:latest
+    container_name: code-dev
+    hostname: code-dev
+    <<: [*common-logging, *resource-limits]
+    networks:
+      - publicnet
+#    ports:
+#      - ${CODESERVER_DEV_PORT:-8441}:8443
+    volumes:
+      - ${CONFIG_PATH:-./configs}/code-server/dev/config:/config
+      - ${CONFIG_PATH:-./configs}/code-server/dev/workspace:/workspace
+      - ${ROOT_DIR:-.}:/workspace
+    env_file:
+      - ${CONFIG_PATH:-./configs}/code-server/host_config/.env
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.code-dev.rule: Host(`code-dev.${DOMAIN}`) || Host(`code-dev.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/code-dev`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/code-dev`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/code-dev`))
+      traefik.http.services.code-dev.loadbalancer.server.port: 8443
+    deploy:
+      resources:
+        limits:
+          cpus: '1.1'
+          memory: 1024m
+    restart: always
+
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    hostname: crowdsec
+    networks:
+      - publicnet
+    expose: 
+      - ${CROWDSEC_METRICS_PORT:-6060}
+      - 8080
+    environment:
+      <<: *common-env
+      # Configuration file location
+      CONFIG_FILE: ${CROWDSEC_CONFIG_FILE:-/etc/crowdsec/config.yaml}
+      # Disable the agent, run a LAPI-only container
+      DISABLE_AGENT: ${CROWDSEC_DISABLE_AGENT:-false}
+      # Disable LAPI, run an agent-only container
+      DISABLE_LOCAL_API: ${CROWDSEC_DISABLE_LOCAL_API:-false}
+      # Disable online API registration for signal sharing
+      DISABLE_ONLINE_API: ${CROWDSEC_DISABLE_ONLINE_API:-false}
+      # Don't run the service, only test the configuration
+      TEST_MODE: ${CROWDSEC_TEST_MODE:-false}
+      # The LAPI URL, change when DISABLE_LOCAL_API is true
+      LOCAL_API_URL: ${CROWDSEC_LOCAL_API_URL:-http://0.0.0.0:8080}
+      # Directory for plugins
+      PLUGIN_DIR: ${CROWDSEC_PLUGIN_DIR:-/usr/local/lib/crowdsec/plugins/}
+      # Port to expose Prometheus metrics
+      METRICS_PORT: ${CROWDSEC_METRICS_PORT:-6060}
+      # Enable Write-Ahead Logging with SQLite
+      USE_WAL: ${CROWDSEC_USE_WAL:-false}
+      # Name for the local agent (running in the container with LAPI)
+      CUSTOM_HOSTNAME: ${CROWDSEC_CUSTOM_HOSTNAME:-localhost}
+      # Path for capi_whitelists.yaml
+      CAPI_WHITELISTS_PATH: ${CROWDSEC_CAPI_WHITELISTS_PATH:-}
+      # Labels.type for file in time-machine
+      TYPE: ${CROWDSEC_TYPE:-}
+      # Process a single source in time-machine
+      DSN: ${CROWDSEC_DSN:-}
+      # Register a bouncer with the name TRAEFIK
+      BOUNCER_KEY_TRAEFIK: ${CROWDSEC_BOUNCER_API_KEY}
+      # Enroll key retrieved from the console to enroll the instance
+      ENROLL_KEY: ${CROWDSEC_ENROLL_KEY:-}
+      # Set an instance name for the console
+      ENROLL_INSTANCE_NAME: ${CROWDSEC_ENROLL_INSTANCE_NAME:-}
+      # Tags of the enrolled instance, for search and filter
+      ENROLL_TAGS: ${CROWDSEC_ENROLL_TAGS:-}
+      # Agent username
+      AGENT_USERNAME: ${CROWDSEC_AGENT_USERNAME:-}
+      # Agent password
+      AGENT_PASSWORD: ${CROWDSEC_AGENT_PASSWORD:-}
+      # Enable TLS encryption
+      USE_TLS: ${CROWDSEC_USE_TLS:-false}
+      # CA certificate bundle (for self-signed certificates)
+      CACERT_FILE: ${CROWDSEC_CACERT_FILE:-}
+      # Skip LAPI certificate validation
+      INSECURE_SKIP_VERIFY: ${CROWDSEC_INSECURE_SKIP_VERIFY:-}
+      # LAPI TLS Certificate path
+      LAPI_CERT_FILE: ${CROWDSEC_LAPI_CERT_FILE:-}
+      # LAPI TLS Key path
+      LAPI_KEY_FILE: ${CROWDSEC_LAPI_KEY_FILE:-}
+      # Client TLS Certificate path
+      CLIENT_CERT_FILE: ${CROWDSEC_CLIENT_CERT_FILE:-}
+      # Client TLS Key path
+      CLIENT_KEY_FILE: ${CROWDSEC_CLIENT_KEY_FILE:-}
+      # OU values allowed for agents, separated by comma
+      AGENTS_ALLOWED_OU: ${CROWDSEC_AGENTS_ALLOWED_OU:-agent-ou}
+      # OU values allowed for bouncers, separated by comma
+      BOUNCERS_ALLOWED_OU: ${CROWDSEC_BOUNCERS_ALLOWED_OU:-bouncer-ou}
+      # Skip hub update/upgrade when the container starts
+      NO_HUB_UPGRADE: ${CROWDSEC_NO_HUB_UPGRADE:-false}
+      # Collections to install, separated by space
+      COLLECTIONS: ${CROWDSEC_COLLECTIONS:-crowdsecurity/traefik}
+      # Parsers to install, separated by space
+      PARSERS: ${CROWDSEC_PARSERS:-}
+      # Scenarios to install, separated by space
+      SCENARIOS: ${CROWDSEC_SCENARIOS:-}
+      # Postoverflows to install, separated by space
+      POSTOVERFLOWS: ${CROWDSEC_POSTOVERFLOWS:-}
+      # Context files to install, separated by space
+      CONTEXTS: ${CROWDSEC_CONTEXTS:-}
+      # Appsec configs files to install, separated by space
+      APPSEC_CONFIGS: ${CROWDSEC_APPSEC_CONFIGS:-}
+      # Appsec rules files to install, separated by space
+      APPSEC_RULES: ${CROWDSEC_APPSEC_RULES:-}
+      # Collections to remove, separated by space
+      DISABLE_COLLECTIONS: ${CROWDSEC_DISABLE_COLLECTIONS:-}
+      # Parsers to remove, separated by space
+      DISABLE_PARSERS: ${CROWDSEC_DISABLE_PARSERS:-}
+      # Scenarios to remove, separated by space
+      DISABLE_SCENARIOS: ${CROWDSEC_DISABLE_SCENARIOS:-}
+      # Postoverflows to remove, separated by space
+      DISABLE_POSTOVERFLOWS: ${CROWDSEC_DISABLE_POSTOVERFLOWS:-}
+      # Context files to remove, separated by space
+      DISABLE_CONTEXTS: ${CROWDSEC_DISABLE_CONTEXTS:-}
+      # Appsec configs files to remove, separated by space
+      DISABLE_APPSEC_CONFIGS: ${CROWDSEC_DISABLE_APPSEC_CONFIGS:-}
+      # Appsec rules files to remove, separated by space
+      DISABLE_APPSEC_RULES: ${CROWDSEC_DISABLE_APPSEC_RULES:-}
+      # Force log levels for the container log
+      LEVEL_FATAL: ${CROWDSEC_LEVEL_FATAL:-false}
+      LEVEL_ERROR: ${CROWDSEC_LEVEL_ERROR:-false}
+      LEVEL_WARN: ${CROWDSEC_LEVEL_WARN:-false}
+      LEVEL_INFO: ${CROWDSEC_LEVEL_INFO:-false}
+      LEVEL_DEBUG: ${CROWDSEC_LEVEL_DEBUG:-false}
+      LEVEL_TRACE: ${CROWDSEC_LEVEL_TRACE:-false}
+      # Used during functional tests
+      CI_TESTING: ${CROWDSEC_CI_TESTING:-false}
+      # Trace the entrypoint
+      DEBUG: ${CROWDSEC_DEBUG:-false}
+    volumes:
+      - ${CONFIG_PATH:-./configs}/crowdsec/data:/var/lib/crowdsec/data
+      - ${CONFIG_PATH:-./configs}/crowdsec/etc/crowdsec:/etc/crowdsec
+      - ${CONFIG_PATH:-./configs}/crowdsec/plugins:/usr/local/lib/crowdsec/plugins/
+      - ${CONFIG_PATH:-./configs}/crowdsec/logs:/var/log
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.crowdsec.rule: Host(`crowdsec.${DOMAIN}`) || Host(`crowdsec.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || (Host(`${DOMAIN}`) && PathPrefix(`/crowdsec`)) || (Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) && PathPrefix(`/crowdsec`)) || (Host(`${TS_DOMAIN}`) && PathPrefix(`/crowdsec`))
+      traefik.http.services.crowdsec.loadbalancer.server.port: 8080
+      homepage.group: Security
+      homepage.name: Crowdsec
+      homepage.icon: crowdsec.png
+      homepage.href: https://crowdsec.${DOMAIN}/
+      homepage.description: CrowdSec is an open-source, behavioral, intrusion detection system.
+      homepage.widget.type: crowdsec
+      homepage.widget.url: http://crowdsec:8080
+      homepage.widget.username: localhost # machine_id in crowdsec
+      homepage.widget.password: password
+    restart: always
+
+  ddns-updater:
+    image: qmcgaw/ddns-updater
+    container_name: ddns-updater
+    hostname: ddns-updater
+    networks:
+      - publicnet
+    ports:
+      - ${DDNS_UPDATER_PORT:-7998}:7998
+      - ${DDNS_UPDATER_PORT2:-8073}:8000
+    volumes:
+      - ${CONFIG_PATH:-./configs}/ddns-updater/updater/data:/updater/data
+    environment:
+      - CONFIG_FILEPATH=${DDNS_UPDATER_CONFIG_FILEPATH:-/updater/data/config.json}
+      - PERIOD=${DDNS_UPDATER_PERIOD:-5m}
+      - UPDATE_COOLDOWN_PERIOD=${DDNS_UPDATER_UPDATE_COOLDOWN_PERIOD:-5m}
+      - PUBLICIP_FETCHERS=${DDNS_UPDATER_PUBLICIP_FETCHERS:-all}
+      - PUBLICIP_HTTP_PROVIDERS=${DDNS_UPDATER_PUBLICIP_HTTP_PROVIDERS:-all}
+      - PUBLICIPV4_HTTP_PROVIDERS=${DDNS_UPDATER_PUBLICIPV4_HTTP_PROVIDERS:-all}
+      - PUBLICIPV6_HTTP_PROVIDERS=${DDNS_UPDATER_PUBLICIPV6_HTTP_PROVIDERS:-all}
+      - PUBLICIP_DNS_PROVIDERS=${DDNS_UPDATER_PUBLICIP_DNS_PROVIDERS:-all}
+      - PUBLICIP_DNS_TIMEOUT=${DDNS_UPDATER_PUBLICIP_DNS_TIMEOUT:-3s}
+      - HTTP_TIMEOUT=${DDNS_UPDATER_HTTP_TIMEOUT:-10s}
+
+      # Web UI
+      - LISTENING_ADDRESS=0.0.0.0:7998
+      - ROOT_URL=${DDNS_UPDATER_ROOT_URL:-/}
+
+      # Backup
+      - BACKUP_PERIOD=${DDNS_UPDATER_BACKUP_PERIOD:-1h} # 0 to disable
+      - BACKUP_DIRECTORY=${DDNS_UPDATER_BACKUP_DIRECTORY:-/updater/data}
+
+      # Other
+      - LOG_LEVEL=${DDNS_UPDATER_LOG_LEVEL:-info}
+      - LOG_CALLER=${DDNS_UPDATER_LOG_CALLER:-hidden}
+      - SHOUTRRR_ADDRESSES=${DDNS_UPDATER_SHOUTRRR_ADDRESSES:-}
+    restart: always
+
+  deunhealth:
+    # 🔹🔹 DeUnhealth 🔹🔹
+    # Restart unhealthy containers marked with `deunhealth.restart.on.unhealthy=true` label
+    # Receive Docker events as stream instead of polling periodically
+    # Doesn't need network! (more secure)
+    # Compatible with amd64, 386, arm64, arm32v7, arm32v6, ppc64le, s390x and riscv64 CPU architectures
+    # Since Docker is written in Go, the program is also written in Go and uses the official Docker Go API⁠
+    # https://hub.docker.com/r/qmcgaw/deunhealth/tags  https://hub.docker.com/r/qmcgaw/deunhealth
+    image: qmcgaw/deunhealth
+    container_name: deunhealth
+    network_mode: none
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
+    <<: [*common-logging, *resource-limits]
+    environment:
+      <<: *common-env # for TZ env var.
+      LOG_LEVEL: ${DEUNHEALTH_LOG_LEVEL:-debug} # debug, info, warning, error
+      HEALTH_SERVER_ADDRESS: ${DEUNHEALTH_HEALTH_SERVER_ADDRESS:-127.0.0.1:9999} # Internal health http server listening address. Nothing to do with restarting unhealthy containers.
+    restart: always
+
+  dozzle:
+    # 🔹🔹 Dozzle 🔹🔹
+    image: amir20/dozzle
+    container_name: dozzle
+    hostname: dozzle
+    networks:
+      - publicnet
+#    ports:
+#      - ${DOZZLE_PORT:-9997}:8080
+    volumes:
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
+    <<: [*common-logging, *resource-limits]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.dozzle.rule: Host(`dozzle.${DOMAIN}`) || Host(`dozzle.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.dozzle.loadbalancer.server.port: 8080
+      homepage.group: System Monitoring
+      homepage.name: Dozzle
+      homepage.icon: dozzle.png
+      homepage.href: https://dozzle.${DOMAIN}/
+      homepage.description: Real-time log viewer for Docker containers, providing an easy way to monitor application logs and troubleshoot issues.
+    restart: always
+
+  homepage:
+    # 🔹🔹 Homepage 🔹🔹  # https://github.com/gethomepage/homepage
+    image: ghcr.io/gethomepage/homepage
+    container_name: homepage
+    hostname: homepage
+    networks:
+      - publicnet
+#    ports:
+#      - ${HOMEPAGE_PORT:-3000}:3000
+    volumes:
+      # DO NOT create a bind mount to the entire /app/public/ directory.
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
+      - ${CONFIG_PATH:-./configs}/homepage:/app/config
+    <<: [*common-logging, *resource-limits]
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS:-*}
+      HOMEPAGE_VAR_TITLE: ${HOMEPAGE_VAR_TITLE:-Bolabaden}
+      HOMEPAGE_VAR_SEARCH_PROVIDER: ${HOMEPAGE_VAR_SEARCH_PROVIDER:-google}
+      HOMEPAGE_VAR_HEADER_STYLE: ${HOMEPAGE_VAR_HEADER_STYLE:-}
+      HOMEPAGE_VAR_WEATHER_CITY: ${HOMEPAGE_VAR_WEATHER_CITY:-Chicago}
+      HOMEPAGE_VAR_WEATHER_LAT: ${HOMEPAGE_VAR_WEATHER_LAT:-41.8781}
+      HOMEPAGE_VAR_WEATHER_LONG: ${HOMEPAGE_VAR_WEATHER_LONG:--87.6298}
+      #      HOMEPAGE_VAR_WEATHER_TIME: ${HOMEPAGE_VAR_WEATHER_TIME:-}
+      HOMEPAGE_VAR_WEATHER_UNIT: ${HOMEPAGE_VAR_WEATHER_UNIT:-fahrenheit}
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.homepage.rule: Host(`homepage.${DOMAIN}`) || Host(`homepage.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.homepage.loadbalancer.server.port: 3000
+    restart: always
+
+  myspeed:
+    # 🔹🔹 MySpeed 🔹🔹
+    image: germannewsmaker/myspeed
+    container_name: myspeed
+    hostname: myspeed
+    networks:
+      - publicnet
+#    ports:
+#      - ${MYSPEED_PORT:-5216}:5216
+    volumes:
+      - ${CONFIG_PATH:-./configs}/myspeed:/myspeed/data
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.myspeed.rule: Host(`myspeed.${DOMAIN}`) || Host(`myspeed.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.myspeed.loadbalancer.server.port: 5216
+    restart: always
+
+  netalertx:
+    image: ghcr.io/jokob-sk/netalertx:latest
+    # use the below line if you want to test the latest dev image
+    # image: "ghcr.io/jokob-sk/netalertx-dev:latest" 
+    container_name: netalertx
+    hostname: netalertx
+    network_mode: host
+    # uncomment below two lines for swarm
+#    networks:
+#      - outside
+    privileged: true
+    volumes:
+      - ${CONFIG_PATH:-./configs}/netalertx/config:/app/config
+      - ${CONFIG_PATH:-./configs}/netalertx/db:/app/db
+      # (optional) useful for debugging if you have issues setting up the container
+      #- ${CONFIG_PATH:-./configs}/netalertx/logs:/app/log
+      # (API: OPTION 1) use for performance
+      - type: tmpfs
+        target: /app/api
+      # (API: OPTION 2) use when debugging issues 
+      # -  ${CONFIG_PATH:-./configs}/netalertx/api:/app/api
+    environment:
+      <<: *common-env
+      PORT: 20211
+    labels:
+      caddy: netalertx.${DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 20211}}"
+      traefik.enable: "true"
+      traefik.http.routers.netalertx.rule: Host(`netalertx.${DOMAIN}`) || Host(`netalertx.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.routers.netalertx.middlewares: netalertx-stripprefix
+      traefik.http.middlewares.netalertx-stripprefix.stripprefix.prefixes: /netalertx
+      traefik.http.services.netalertx.loadbalancer.server.port: 20211
+      homepage.group: Alerts
+      homepage.name: Netalertx
+      homepage.icon: netalertx.png
+      homepage.href: https://netalertx.${DOMAIN}
+      homepage.description: Netalertx is a tool for monitoring your network and alerting you when something is wrong.
+      homepage.widget.type: netalertx
+      homepage.widget.url: https://netalertx.${DOMAIN}
+      homepage.widget.key: ${NETALERTX_API_KEY}
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    restart: always
+
+  speedtest:
+    # 🔹🔹 Speedtest 🔹🔹
+    image: linuxserver/speedtest-tracker
+    container_name: speedtest
+    hostname: speedtest
+    networks:
+      - publicnet
+#    ports:
+#      - ${SPEEDTEST_TRACKER_PORT:-8765}:80
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ${CONFIG_PATH:-./configs}/speedtest-tracker/config:/config
+      - ${CERTS_PATH:-./certs}/speedtest-tracker/keys:/config/keys
+    <<: *resource-limits
+    environment:
+      <<: *common-env
+      ADMIN_EMAIL: ${SPEEDTEST_TRACKER_ADMIN_EMAIL} # Email of the initial admin user. Note: Only effective during initial setup.
+      ADMIN_NAME: ${SPEEDTEST_TRACKER_ADMIN_NAME} # Name of the initial admin user. Note: Only effective during initial setup.
+      ADMIN_PASSWORD: ${SPEEDTEST_TRACKER_ADMIN_PASSWORD:-b00tstr4p} # Password of the initial admin user. Note: Only effective during initial setup.
+      API_RATE_LIMIT: ${SPEEDTEST_TRACKER_API_RATE_LIMIT:-60} # Number of requests per minute to the API. Default: 60
+      APP_KEY: ${SPEEDTEST_TRACKER_APP_KEY} # Key used to encrypt and decrypt data. You can generate a key at https://speedtest-tracker.dev.
+      APP_NAME: ${SPEEDTEST_TRACKER_APP_NAME:-Speedtest Tracker} # Used to define the application's name in the dashboard and in notifications.
+      APP_TIMEZONE: ${SPEEDTEST_TRACKER_APP_TIMEZONE:-${TZ:-America/Chicago}} # Application timezone should be set if your database does not use UTC as its  timezone.
+      APP_URL: ${SPEEDTEST_TRACKER_APP_URL:-} # URL used for links in emails and notifications.
+      ASSET_URL: ${SPEEDTEST_TRACKER_ASSET_URL:-} # URL used for assets, needed when using a reverse proxy.
+      CHART_BEGIN_AT_ZERO: ${SPEEDTEST_TRACKER_CHART_BEGIN_AT_ZERO:-true} # Begin the dashboard axis charts at zero. Default: true
+      CHART_DATETIME_FORMAT: ${SPEEDTEST_TRACKER_CHART_DATETIME_FORMAT:-j/m G:i} # Set the formatting of timestamps in charts.
+      CONTENT_WIDTH: ${SPEEDTEST_TRACKER_CONTENT_WIDTH:-7xl} # Width of the content section of each page. Can be set to any value found in the Filament docs. Default: 7xl
+      DATETIME_FORMAT: ${SPEEDTEST_TRACKER_DATETIME_FORMAT:-j M Y, G:i:s} # Set the formatting of timestamps in tables and notifications.
+      DB_CONNECTION: ${SPEEDTEST_TRACKER_DB_CONNECTION:-sqlite}
+      DISPLAY_TIMEZONE: ${SPEEDTEST_TRACKER_DISPLAY_TIMEZONE:-${TZ:-America/Chicago}} # Display timestamps in your local time.
+      PRUNE_RESULTS_OLDER_THAN: ${SPEEDTEST_TRACKER_PRUNE_RESULTS_OLDER_THAN:-0} # Set the value to greater than zero to prune stored results. This value should be represented in days.
+      PUBLIC_DASHBOARD: ${SPEEDTEST_TRACKER_PUBLIC_DASHBOARD:-true} # Enables the public dashboard for guest (unauthenticated) users. Default: false
+      SPEEDTEST_BLOCKED_SERVERS: ${SPEEDTEST_TRACKER_BLOCKED_SERVERS:-} # Comma separated list of server IDs that should not be used when running speedtests.
+      SPEEDTEST_INTERFACE: ${SPEEDTEST_TRACKER_INTERFACE:-} # Set the network interface to use for the test. This need to be the network interface available inside the container
+      SPEEDTEST_SCHEDULE: ${SPEEDTEST_TRACKER_SCHEDULE:-0 * * * *} # Cron expression used to run speedtests on a scheduled basis.
+      SPEEDTEST_SERVERS: ${SPEEDTEST_TRACKER_SERVERS:-} # Comma separated list of server IDs to randomly use for speedtest.
+      SPEEDTEST_SKIP_IPS: ${SPEEDTEST_TRACKER_SKIP_IPS:-} # A comma separated list of public IP addresses where tests will be skipped when present.
+      THRESHOLD_DOWNLOAD: ${SPEEDTEST_TRACKER_THRESHOLD_DOWNLOAD:-900} # Set the Download Threshold. Note: Only effective during initial setup.
+      THRESHOLD_ENABLED: ${SPEEDTEST_TRACKER_THRESHOLD_ENABLED:-true} # Enable the thresholds. Note: Only effective during initial setup.
+      THRESHOLD_PING: ${SPEEDTEST_TRACKER_THRESHOLD_PING:-25} # Set the Ping Threshold. Note: Only effective during initial setup.
+      THRESHOLD_UPLOAD: ${SPEEDTEST_TRACKER_THRESHOLD_UPLOAD:-900} # Set the Upload Threshold. Note: Only effective during initial setup.
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.speedtest.rule: Host(`speedtest.${DOMAIN}`) || Host(`speedtest.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.speedtest.loadbalancer.server.port: 80
+      homepage.group: Network Monitoring
+      homepage.name: Speedtest
+      homepage.icon: speedtest.png
+      homepage.href: https://speedtest.${DOMAIN}/
+      homepage.description: Regularly tests your internet speed and tracks performance over time, helping you monitor your connection quality.
+      homepage.widget.type: speedtest
+      homepage.widget.url: https://speedtest.${DOMAIN}
+      homepage.widget.fields: '["download", "upload", "ping", "speedtest"]'
+    healthcheck:
+      test: curl -fs http://localhost:80 > /dev/null || exit 1
+      start_period: ${SPEEDTEST_TRACKER_HEALTHCHECK_START_PERIOD:-20s}
+      timeout: ${SPEEDTEST_TRACKER_HEALTHCHECK_TIMEOUT:-15s}
+      interval: ${SPEEDTEST_TRACKER_HEALTHCHECK_INTERVAL:-30s}
+    restart: always
+
+  # Multiple DNS challenge provider are not supported with Traefik,
+  # but you can use CNAME to handle that. For example, if you have example.org (account foo) and
+  # example.com (account bar) you can create a CNAME on example.org called _acme-challenge.example.org
+  # pointing to challenge.example.com. This way, you can obtain certificates for example.org with the bar account.
+  traefik:
+    # 🔹🔹 Traefik 🔹🔹
+    depends_on:
+      - traefik-error-pages
+    image: traefik:latest
+    container_name: traefik
+    hostname: traefik
+    networks:
+      - publicnet
+    ports:
+      # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
+      - ${TRAEFIK_WEB_PORT:-80}:${TRAEFIK_WEB_PORT:-80}
+      # Listen on port 443, default for HTTPS
+      - ${TRAEFIK_WEBSECURE_PORT:-443}:${TRAEFIK_WEBSECURE_PORT:-443}
+      # Listen on port 8099 for the Traefik API and Dashboard
+#      - ${TRAEFIK_DASHBOARD_PORT:-8099}:8080
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: ${DISABLE_IPV6:-1}
+    volumes:
+      - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
+      - ${CERTS_PATH:-./certs}:/certs
+      - ${CONFIG_PATH:-./configs}/traefik/config:/config
+      - ${CONFIG_PATH:-./configs}/traefik/etc/traefik:/etc/traefik
+      - ${CONFIG_PATH:-./configs}/traefik/plugins-local:/plugins-local
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
+    #      - /etc/localtime:/etc/localtime:ro
+    environment:
+      <<: *common-env
+      CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
+      CLOUDFLARE_DNS_API_TOKEN: ${CLOUDFLARE_DNS_API_TOKEN}
+      CLOUDFLARE_ZONE_API_TOKEN: ${CLOUDFLARE_ZONE_API_TOKEN}
+      LETS_ENCRYPT_EMAIL: ${LETS_ENCRYPT_EMAIL} # Email address used for Letsencrypt registration.
+      # CNAME are supported (and sometimes even encouraged), but there are a few cases where they can be problematic.
+      # If needed, CNAME support can be disabled with the following environment variable:
+      LEGO_DISABLE_CNAME_SUPPORT: ${LEGO_DISABLE_CNAME_SUPPORT:-false} # Disable CNAME support for DNS challenges. (Default: false)
+      DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
+      ZEROSSL_API_KEY: ${ZEROSSL_API_KEY:-} # ZeroSSL API key.
+    command: --configFile=/config/traefik.yaml
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.traefik.rule: Host(`traefik.${DOMAIN}`) || Host(`traefik.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.traefik.loadbalancer.server.port: 8080
+    restart: always
+
+  traefik-error-pages:
+    # 🔹🔹 Traefik Error Pages 🔹🔹
+    # Serves static HTML error pages used by Traefik's error middleware
+    image: httpd:alpine
+    container_name: traefik-error-pages
+    hostname: error-pages
+    networks:
+      - publicnet
+    volumes:
+      # Mount the directory containing error HTML files (e.g., 404.html, 5xx.html)
+      - ${CONFIG_PATH:-./configs}/traefik/error-pages:/usr/local/apache2/htdocs/:ro
+    restart: always
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+
+  whoami:
+    image: traefik/whoami:latest
+    container_name: whoami
+    hostname: whoami
+    networks:
+      - publicnet
+#    ports:
+#      - "3080:80"
+    environment:
+      <<: *common-env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.whoami.rule: Host(`whoami.${DOMAIN}`) || Host(`whoami.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.whoami.loadbalancer.server.port: 80
+      homepage.group: Web Services
+      homepage.name: Whoami
+      homepage.icon: whoami.png
+      homepage.href: https://whoami.${DOMAIN}
+      homepage.description: Whoami is a simple web service that returns the client's IP address and hostname.
+    restart: always
+
+networks:
+  gotify-network:
+    name: gotify-network
+    driver: bridge
+  firefly_iii:
+    name: firefly_iii
+    driver: bridge
+  publicnet:
+#    external: true  # docker network create --driver=bridge --attachable publicnet --subnet=${PUBLICNET_SUBNET:-10.76.0.0/16} --gateway=${PUBLICNET_GATEWAY:-10.76.0.1} --ip-range=${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+    attachable: true
+    name: publicnet
+    ipam:
+      config:
+        - subnet: ${PUBLICNET_SUBNET:-10.76.0.0/16}
+          gateway: ${PUBLICNET_GATEWAY:-10.76.0.1}
+          ip_range: ${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+  meshnet:
+#    external: true # docker network create --attachable --subnet=${MESHNET_SUBNET:-100.64.0.0/10} --gateway=${MESHNET_GATEWAY:-192.168.1.1} --ip-range=${MESHNET_IP_RANGE:-192.168.1.0/24} meshnet
+    name: meshnet
+    ipam:
+      config:
+        - subnet: ${MESHNET_SUBNET:-192.168.1.0/24}
+          gateway: ${MESHNET_GATEWAY:-192.168.1.1}
+          ip_range: ${MESHNET_IP_RANGE:-192.168.1.0/24}
+  #outside:
+  #  external:
+  #    name: "host"
+#  meshnet:
+#    external: true # docker network create --driver=macvlan --attachable --subnet=${MESHNET_SUBNET:-100.64.0.0/10} --gateway=${MESHNET_GATEWAY:-100.64.0.1} --ip-range=${MESHNET_IP_RANGE:-100.64.2.0/24} -o parent=tailscale0 meshnet
+#    name: meshnet
+#    driver: macvlan
+#    driver_opts:
+#      parent: ${MESHNET_INTERFACE_NAME:-tailscale0}
+#    ipam:
+#      config:
+#        - subnet: ${MESHNET_SUBNET:-100.64.0.0/10}
+#          gateway: ${MESHNET_GATEWAY:-100.64.0.1}
+#          ip_range: ${MESHNET_IP_RANGE:-100.64.2.0/24}
+
+volumes: # If you want to store the data on a different drive, see https://github.com/nextcloud/all-in-one#how-to-store-the-filesinstallation-on-a-separate-drive
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer # This line is not allowed to be changed as otherwise the built-in backup solution will not work

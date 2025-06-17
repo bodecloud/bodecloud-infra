@@ -1,0 +1,46 @@
+brunner56Kubernetesdashboard:
+  dashboardMetricsScraper:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsGroup: 2001
+      runAsUser: 1001
+    image:
+      repository: kubernetesui/metrics-scraper
+      tag: v1.0.9
+    imagePullPolicy: IfNotPresent
+  kubernetesdashboard:
+    args:
+    - --namespace=bolabaden
+    - --sidecar-host=http://127.0.0.1:8000
+    - --enable-skip-login
+    - --enable-insecure-login
+    - --system-banner=Built</A> with ❤️ by <A HREF="https://funkypenguin.co.nz">@funkypenguin</A>
+      and friends (<I><A HREF="https://chat.funkypenguin.co.nz">join us!</A></I>)
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsGroup: 2001
+      runAsUser: 1001
+    image:
+      repository: kubernetesui/dashboard
+      tag: v2.6.1
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: "1"
+        memory: 256Mi
+      requests:
+        cpu: "0"
+        memory: 64Mi
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+kubernetesClusterDomain: cluster.local

@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "elfhosted-neat-final.fullname" . }}-brunner56-gatus
+  labels:
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: my-media-stack
+  {{- include "elfhosted-neat-final.labels" . | nindent 4 }}
+  annotations:
+    configmap.reloader.stakater.com/reload: gatus-config
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: my-media-stack
+spec:
+  replicas: {{ .Values.brunner56Gatus.replicas }}
+  revisionHistoryLimit: {{ .Values.brunner56Gatus.revisionHistoryLimit }}
+  strategy:
+    type: {{ .Values.brunner56Gatus.strategy.type | quote }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: brunner56
+      app.kubernetes.io/name: gatus
+    {{- include "elfhosted-neat-final.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: brunner56
+        app.kubernetes.io/name: gatus
+      {{- include "elfhosted-neat-final.selectorLabels" . | nindent 8 }}
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.elfhosted.com/role
+                operator: In
+                values:
+                - nodefinder
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: GATUS_CONFIG_PATH
+          value: {{ quote .Values.brunner56Gatus.brunner56Gatus.env.gatusConfigPath }}
+        - name: SMTP_FROM
+          value: {{ quote .Values.brunner56Gatus.brunner56Gatus.env.smtpFrom }}
+        - name: SMTP_PORT
+          value: {{ quote .Values.brunner56Gatus.brunner56Gatus.env.smtpPort }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        envFrom:
+        - secretRef:
+            name: gatus-smtp-config
+        image: {{ .Values.brunner56Gatus.brunner56Gatus.image.repository }}:{{ .Values.brunner56Gatus.brunner56Gatus.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.brunner56Gatus.brunner56Gatus.imagePullPolicy }}
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        name: brunner56-gatus
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        resources: {{- toYaml .Values.brunner56Gatus.brunner56Gatus.resources | nindent
+          10 }}
+        securityContext: {{- toYaml .Values.brunner56Gatus.brunner56Gatus.containerSecurityContext
+          | nindent 10 }}
+        startupProbe:
+          failureThreshold: 30
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data/
+          name: config
+          subPath: gatus
+        - mountPath: /config
+          name: gatus-config
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      priorityClassName: tenant-normal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {{- toYaml .Values.brunner56Gatus.podSecurityContext | nindent 8
+        }}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ include "elfhosted-neat-final.fullname" . }}-config
+      - configMap:
+          defaultMode: 420
+          name: {{ include "elfhosted-neat-final.fullname" . }}-gatus-config
+        name: gatus-config

@@ -1,0 +1,17 @@
+apiVersion: metrics.k8s.io/v1beta1
+containers:
+- name: lidarr
+  usage:
+    cpu: 1406065n
+    memory: 142908Ki
+kind: PodMetrics
+metadata:
+  labels:
+    app.elfhosted.com/name: lidarr
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: lidarr
+    pod-template-hash: 77fc4cd668
+  name: lidarr-77fc4cd668-5wvtl
+  namespace: default
+timestamp: "2025-06-14T23:00:32Z"
+window: 11.705s

@@ -1,0 +1,34 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.42.0.245
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: beatapostapita
+  targetRef:
+    kind: Pod
+    name: filebrowser-5fb5648dcf-8pdnt
+    namespace: default
+kind: EndpointSlice
+metadata:
+  generateName: filebrowser-
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: filebrowser
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: filebrowser
+  name: filebrowser-dcbjs
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: filebrowser
+ports:
+- name: http
+  port: 80
+  protocol: TCP

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T17:44:21Z"
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: zurg
+  name: zurg
+  namespace: default
+subsets:
+- notReadyAddresses:
+  - ip: 10.42.0.43
+    nodeName: beatapostapita
+    targetRef:
+      kind: Pod
+      name: zurg-7cf85665db-d86gz
+      namespace: default
+  ports:
+  - name: http
+    port: 9999
+    protocol: TCP

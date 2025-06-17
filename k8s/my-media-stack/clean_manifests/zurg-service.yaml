@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: brunner56
+    meta.helm.sh/release-namespace: bolabaden
+  labels:
+    app.kubernetes.io/instance: brunner56
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: zurg
+    helm.toolkit.fluxcd.io/name: brunner56
+    helm.toolkit.fluxcd.io/namespace: bolabaden
+    zilean.elfhosted.com/scrape: "true"
+  name: zurg
+  namespace: bolabaden
+spec:
+  clusterIP: 10.43.44.92
+  clusterIPs:
+  - 10.43.44.92
+  internalTrafficPolicy: Local
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 9999
+  selector:
+    app.elfhosted.com/name: zurg
+    app.kubernetes.io/instance: brunner56

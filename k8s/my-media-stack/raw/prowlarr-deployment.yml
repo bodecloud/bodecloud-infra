@@ -1,0 +1,60 @@
+#! prowlarr-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  namespace: my-media-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: prowlarr
+          image: linuxserver/prowlarr
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1001"
+            - name: TZ
+              value: "America/Chicago"
+            - name: UMASK
+              value: "002"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - 'curl -fs -H "Authorization: Bearer 29440a82740d475cacb35327c62c87a1" http://127.0.0.1:9696/api/v1/system/status || exit 1'
+            periodSeconds: 30
+            initialDelaySeconds: 120
+            timeoutSeconds: 10
+            failureThreshold: 3
+          ports:
+            - name: prowlarr-9696
+              containerPort: 9696
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: config
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/prowlarr/config

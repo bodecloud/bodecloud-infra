@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2025-06-14T22:04:24Z"
+  labels:
+    app.kubernetes.io/instance: myprecious
+    app.kubernetes.io/name: radarr-4k
+  name: radarr-4k
+  namespace: default
+subsets:
+- addresses:
+  - ip: 10.42.0.2
+    nodeName: beatapostapita
+    targetRef:
+      kind: Pod
+      name: radarr-4k-75565cfcc7-zmtsd
+      namespace: default
+  ports:
+  - name: http
+    port: 7878
+    protocol: TCP
