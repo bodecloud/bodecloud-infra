@@ -40,6 +40,10 @@ x-common-hostname-aliases: &common-hostname-aliases
   - stremio:${WARP_IPV4_ADDRESS:-10.76.128.97}
   - stremio-jackett:${WARP_IPV4_ADDRESS:-10.76.128.97}
   - stremio-web:${WARP_IPV4_ADDRESS:-10.76.128.97}
+# Warp2
+  - warp2:${WARP2_IPV4_ADDRESS:-10.76.128.98}
+  - stremthru:${WARP2_IPV4_ADDRESS:-10.76.128.98}
+  - gptr:${WARP2_IPV4_ADDRESS:-10.76.128.98}
 
 x-gluetun-hosts-workaround: &gluetun-hosts-workaround
   - host.docker.internal:host-gateway  # doesn't exist with docker desktop, let's create it.
@@ -63,10 +67,15 @@ x-gluetun-hosts-workaround: &gluetun-hosts-workaround
   - stremio:${WARP_IPV4_ADDRESS:-10.76.128.97}
   - stremio-jackett:${WARP_IPV4_ADDRESS:-10.76.128.97}
   - stremio-web:${WARP_IPV4_ADDRESS:-10.76.128.97}
+  - mediaflow-proxy:${WARP_IPV4_ADDRESS:-10.76.128.97}
+# Warp2
+  - warp2:${WARP2_IPV4_ADDRESS:-10.76.128.98}
+  - stremthru:${WARP2_IPV4_ADDRESS:-10.76.128.98}
+  - gptr:${WARP2_IPV4_ADDRESS:-10.76.128.98}
 # Docker containers:
   - dash:${DASH_IPV4_ADDRESS:-10.76.128.23}
   - gpt-researcher:${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
-  - gptr:${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
+#  - gptr:${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
   - lobechat:${LOBECHAT_IPV4_ADDRESS:-10.76.128.46}
   - mongodb:${MONGODB_IPV4_ADDRESS:-10.76.0.50}
   - code-demo:${CODE_DEMO_IPV4_ADDRESS:-10.76.128.80}
@@ -81,10 +90,11 @@ x-gluetun-hosts-workaround: &gluetun-hosts-workaround
   - dozzle:${DOZZLE_IPV4_ADDRESS:-10.76.128.89}
   - searxng:${SEARXNG_IPV4_ADDRESS:-10.76.128.90}
   - code-dev:${CODE_DEV_IPV4_ADDRESS:-10.76.128.92}
-  - code:${CODE_DEV_IPV4_ADDRESS:-10.76.128.92}
+  - code:${CODE_DEMO_IPV4_ADDRESS:-10.76.128.96}
   - byparr:${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
   - flaresolverr:${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
   - nginx-auth:${NGINX_AUTH_IPV4_ADDRESS:-10.76.128.94}
+  - stremthru-redis:${STREMTHRU_REDIS_IPV4_ADDRESS:-10.76.128.95}
 
 services:
   mongodb:
@@ -169,6 +179,56 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    restart: always
+  warp2:
+    # 🔹🔹 Cloudflare WARP 🔹🔹
+    # Cloudflare WARP is a VPN service that allows you to bypass censorship and access the internet privately.
+    # Use this for all services that don't need listening ports exposed
+    image: caomingjun/warp:latest
+    container_name: warp2
+    extra_hosts: *gluetun-hosts-workaround
+    networks:
+      publicnet:
+        ipv4_address: ${WARP2_IPV4_ADDRESS:-10.76.128.98}
+    # add removed rule back (https://github.com/opencontainers/runc/pull/3468)
+    device_cgroup_rules:
+      - 'c 10:200 rwm'
+    expose:
+      - 3000  # gptr (nginx) 
+      - 3001  # gptr (nextjs)
+      - 8000  # gptr (uvicorn backend)
+    ports:
+      - 8000:8000  # gptr (uvicorn backend)
+    environment:
+      - WARP_SLEEP=2
+      - WARP_LICENSE_KEY=eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+      # - WARP_ENABLE_NAT=1 # enable nat
+      - TUNNEL_TOKEN=eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+    cap_add:
+      # Docker already have them, these are for podman users
+      - MKNOD
+      - AUDIT_WRITE
+      # additional required cap for warp, both for podman and docker
+      - NET_ADMIN
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
+      - net.ipv4.conf.all.src_valid_mark=1
+      # uncomment for nat
+      # - net.ipv4.ip_forward=1
+      # - net.ipv6.conf.all.forwarding=1
+      # - net.ipv6.conf.all.accept_ra=2
+    volumes:
+      - ${CONFIG_PATH:-./configs}/warp2/data:/var/lib/cloudflare-warp
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      # AI ResearchWizard
+      traefik.http.routers.gptr.service: gptr
+      traefik.http.routers.gptr.rule: Host(`${DOMAIN}`) || Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`${TS_HOSTNAME}.duckdns.org`) || Host(`${TS_HOSTNAME}.${DOMAIN}`) || Host(`${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr.${DOMAIN}`) || Host(`gptr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr.${TS_HOSTNAME}.duckdns.org`) || Host(`gptr.${TS_HOSTNAME}.${DOMAIN}`) || Host(`gptr.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.gptr.loadbalancer.server.port: 3000
+      traefik.http.routers.gptr-legacy.service: gptr-legacy
+      traefik.http.routers.gptr-legacy.rule: Host(`gptr-legacy.${DOMAIN}`) || Host(`gptr-legacy.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr-legacy.${TS_HOSTNAME}.duckdns.org`) || Host(`gptr-legacy.${TS_HOSTNAME}.${DOMAIN}`) || Host(`gptr-legacy.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}`)
+      traefik.http.services.gptr-legacy.loadbalancer.server.port: 8000
     restart: always
   warp:
     # 🔹🔹 Cloudflare WARP 🔹🔹
@@ -269,6 +329,15 @@ services:
       traefik.http.routers.stremio-https-server.rule: Host(`stremio.${DOMAIN}`) || Host(`stremio.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`stremio.${TS_HOSTNAME}.duckdns.org`) || Host(`stremio.${TS_HOSTNAME}.${DOMAIN}`) || Host(`stremio.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
       traefik.http.services.stremio-https-server.loadbalancer.server.scheme: https
       traefik.http.services.stremio-https-server.loadbalancer.server.port: 12470
+      # Stremthru
+      traefik.http.routers.stremthru.service: stremthru
+      traefik.http.routers.stremthru.rule: Host(`stremthru.${DOMAIN}`) || Host(`stremthru.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`stremthru.${TS_HOSTNAME}.duckdns.org`) || Host(`stremthru.${TS_HOSTNAME}.${DOMAIN}`) || Host(`stremthru.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.routers.stremthru.middlewares: nginx-auth@file
+      traefik.http.services.stremthru.loadbalancer.server.port: 8080
+      # Mediaflow Proxy
+      traefik.http.routers.mediaflow-proxy.service: mediaflow-proxy
+      traefik.http.routers.mediaflow-proxy.rule: Host(`mediaflow-proxy.${DOMAIN}`) || Host(`mediaflow-proxy.${DUCKDNS_DOMAIN}`) || Host(`mediaflow-proxy.${TS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.services.mediaflow-proxy.loadbalancer.server.port: ${MEDIAFLOW_PROXY_PORT:-8888}
     restart: always
   warp-fetch-proxy:
     build:
@@ -461,7 +530,6 @@ services:
     volumes:
       - ${CONFIG_PATH:-./configs}/speedtest-tracker/config:/config
       - ${CERTS_PATH:-./certs}/speedtest-tracker/keys:/config/keys
-    <<: *resource-limits
     environment:
       <<: *common-env
       ADMIN_EMAIL: ${SPEEDTEST_TRACKER_ADMIN_EMAIL} # Email of the initial admin user. Note: Only effective during initial setup.
@@ -759,7 +827,6 @@ services:
         ipv4_address: ${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
     expose:
       - ${FLARESOLVERR_PORT:-8191}
-    <<: *common-logging
     environment:
       <<: *common-env
       # FlareSolverr Environment Variables
@@ -1139,7 +1206,6 @@ services:
     image: g0ldyy/comet
     container_name: comet
     network_mode: service:warp
-    <<: [*common-logging, *resource-limits]
     volumes:
       - ${CONFIG_PATH:-./configs}/stremio/addons/comet/data:/data
     environment:
@@ -1187,9 +1253,9 @@ services:
     healthcheck:  # docker exec comet ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:${COMET_PORT:-2020}/health > /dev/null 2>&1 || exit 1"]
       interval: 1m
-      timeout: 10s
-      retries: 5
-      start_period: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
     restart: always
   mediafusion:
     depends_on:
@@ -1328,6 +1394,64 @@ services:
       retries: 5
       start_period: "1m"
     restart: always
+  mediaflow-proxy:
+    depends_on:
+      - warp
+    image: mhdzumair/mediaflow-proxy
+    network_mode: service:warp
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      PUID: ${PUID:-1001}
+      PGID: ${PGID:-989}
+      UMASK: ${UMASK:-002}
+      PORT: ${MEDIAFLOW_PROXY_PORT:-8888}
+      API_PASSWORD: ${MEDIAFLOW_PROXY_API_PASSWORD:-${DEFAULT_MEDIAFLOW_API_PASSWORD:-d468d92139047f1df5ba0fae9d998957c30834a386cd63d0472a7b044d42a96a}}
+      ENABLE_STREAMING_PROGRESS: ${MEDIAFLOW_PROXY_ENABLE_STREAMING_PROGRESS:-true}
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.group: Stremio Addons
+      homepage.name: MediaFlow Proxy
+      homepage.icon: mediaflow.png
+      homepage.href: https://mediaflow-proxy.${DOMAIN}/
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import socket; s=socket.socket(); s.connect(('127.0.0.1', ${MEDIAFLOW_PROXY_PORT:-8888})); print('Healthcheck passed')"]
+      interval: 1m
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+  stremthru:
+    depends_on:
+      stremthru-redis:
+        condition: service_healthy
+    image: muniftanjim/stremthru:latest
+    container_name: stremthru
+    network_mode: service:warp2
+    env_file:
+      - .env
+    volumes:
+      - ${DOCKER_DATA_DIR}/stremthru:/app/data
+    restart: always
+
+  stremthru-redis:
+    image: redis:latest
+    container_name: stremthru-redis
+    expose:
+      - 6379
+    volumes:
+      - ${DOCKER_DATA_DIR}/stremthru/cache:/data
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.stremthru-redis.rule: Host(`stremthru-redis.${DOMAIN}`) || Host(`stremthru-redis.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`stremthru-redis.${TS_HOSTNAME}.duckdns.org`) || Host(`stremthru-redis.${TS_HOSTNAME}.${DOMAIN}`) || Host(`stremthru-redis.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.routers.stremthru-redis.middlewares: nginx-auth@file
+      traefik.http.services.stremthru-redis.loadbalancer.server.port: 6379
+    command: redis-server --appendonly yes --save 60 1
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
   gptr:
     build:
       context: https://github.com/th3w1zard1/gpt-researcher.git#master  # :/frontend/nextjs
@@ -1335,17 +1459,18 @@ services:
     image: th3w1zard1/ai-researchwizard:latest
     stdin_open: true
     container_name: gptr
-    hostname: ${GPT_RESEARCHER_HOSTNAME:-gptr}
-    extra_hosts: *common-hostname-aliases
-    networks:
-      publicnet:
-        ipv4_address: ${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
-    expose:
-      - 80
-      - 3000
-      - 8000
-    ports:
-      - 8000:8000
+    network_mode: service:warp2
+#    hostname: ${GPT_RESEARCHER_HOSTNAME:-gptr}
+#    extra_hosts: *common-hostname-aliases
+#    networks:
+#      publicnet:
+#        ipv4_address: ${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
+#    expose:
+#      - 3000
+#      - 3001
+#      - 8000
+#    ports:
+#      - 8000:8000
     volumes:
       - ${CONFIG_PATH:-./configs}/gptr/logs:/usr/src/app/logs
       - ${CONFIG_PATH:-./configs}/gptr/outputs:/usr/src/app/outputs
@@ -1385,6 +1510,9 @@ services:
       - LOGGING_LEVEL=DEBUG
       - NEXT_PUBLIC_GA_MEASUREMENT_ID=${NEXT_PUBLIC_GA_MEASUREMENT_ID}
       - NEXT_PUBLIC_GPTR_API_URL=https://gptr.${DOMAIN}
+      - LANGSMITH_TRACING=true
+      - LANGSMITH_ENDPOINT=https://api.smith.langchain.com
+      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
     labels:
       deunhealth.restart.on.unhealthy: "true"
       traefik.enable: "true"

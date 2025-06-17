@@ -6,6 +6,5 @@
         "reportUnusedImport": "none",
         "reportOptionalMemberAccess": "none"
     },
-    "python.analysis.typeCheckingMode": "basic",
-    "git.ignoreLimitWarning": true
+    "python.analysis.typeCheckingMode": "basic"
 }

@@ -1,7 +1,0 @@
-# This file contains the Traefik CRDs that need to be installed
-# Run: kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v3.0/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
-
-# Note: You need to install Traefik CRDs before deploying Traefik
-# The CRDs are too large to include directly in this file
-# Please run the following command to install them:
-# kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v3.0/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml 

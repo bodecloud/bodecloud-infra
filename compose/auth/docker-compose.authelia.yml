@@ -1,52 +1,10 @@
-x-common-env: &common-env
-  TZ: ${TZ:-America/Chicago} # Your Timezone
-  PUID: ${PUID:-1001}
-  PGID: ${PGID:-988}
-  UMASK: ${UMASK:-002}
 
-x-common-uidgid: &common-uidgid
-  user: ${PUID:-1001}:${PGID:-988}
-
-x-resource-limits: &resource-limits
-  cpu_shares: 1024
-  labels:
-    autoheal: "true"
-
-x-common-deploy: &common-deploy
-  restart_policy:
-    condition: on-failure
-    delay: 5s
-    window: 120s
-  labels:
-    autoheal: "true"
-    swarm.autoscaler: "true"
-
-x-swarm-resource-limits: &swarm-resource-limits
-  resources:
-    limits:
-      cpus: "0.10"
-      memory: 512M
-
-x-swarm-preferences-worker-priority: &swarm-preferences-worker-priority
-  placement:
-    preferences:
-      - spread: node.labels.worker_priority
-
-x-swarm-constraints-worker-only: &swarm-constraints-worker-only
-  placement:
-    constraints:
-      - node.role == worker
-
-x-swarm-constraints-manager-only: &swarm-constraints-manager-only
-  placement:
-    constraints:
-      - node.role == manager
 
 x-authelia-labels: &authelia-labels
   traefik.enable: "true"
-  traefik.http.middlewares.authelia.forwardauth.address: "http://authelia:${AUTHELIA_PORT:-9091}/api/authz/forward-auth" # yamllint disable-line rule:line-length
+  traefik.http.middlewares.authelia.forwardauth.address: "http://authelia:${AUTHELIA_PORT:-9091}/api/authz/forward-auth"  # yamllint disable-line rule:line-length
   traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: "true"
-  traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: "Remote-User,Remote-Groups,Remote-Name,Remote-Email" # yamllint disable-line rule:line-length
+  traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: "Remote-User,Remote-Groups,Remote-Name,Remote-Email"  # yamllint disable-line rule:line-length
   traefik.http.services.authelia.loadbalancer.server.port: 9091
 
 x-keycloak-labels: &keycloak-labels
@@ -56,14 +14,14 @@ x-keycloak-labels: &keycloak-labels
 services:
   # Authelia (Lite) - Self-Hosted Single Sign-On and Two-Factor Authentication
   authelia:
-    # 🔹🔹 Authelia 🔹🔹
     depends_on:
       redis:
         condition: service_healthy
     image: authelia/authelia
     container_name: authelia
     hostname: authelia
-    <<: [*common-uidgid, *common-logging, *resource-limits]
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
     security_opt:
       - no-new-privileges:true
     networks:
@@ -72,63 +30,105 @@ services:
     ports:
       - ${AUTHELIA_PORT:-9091}:9091
     volumes:
-      - ${CONFIG_DIR:-./configs}/authelia:/config
+      - ${ROOT_DIR:-.}/configs/authelia:/config
     environment:
       <<: *common-env
-      AUTHELIA_DUO_API_SECRET_KEY_FILE: /run/secrets/authelia_duo_api_secret_key
       AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: /run/secrets/authelia_jwt_secret
       AUTHELIA_SESSION_SECRET_FILE: /run/secrets/authelia_session_secret
       AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: /run/secrets/authelia_storage_encryption_key
-      AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE: /run/secrets/authelia_notifier_smtp_password
-      AUTHELIA_SESSION_REDIS_PASSWORD_FILE: /run/secrets/authelia_session_redis_password
       AUTHELIA_STORAGE_MYSQL_PASSWORD_FILE: /run/secrets/authelia_storage_mysql_password
+      AUTHELIA_SESSION_REDIS_PASSWORD_FILE: /run/secrets/authelia_session_redis_password
+      AUTHELIA_DUO_API_SECRET_KEY_FILE: /run/secrets/authelia_duo_api_secret_key
     secrets:
-      - authelia_duo_api_secret_key
       - authelia_jwt_secret
       - authelia_session_secret
       - authelia_storage_encryption_key
-      - authelia_notifier_smtp_password
-      - authelia_session_redis_password
       - authelia_storage_mysql_password
+      - authelia_notifier_smtp_password
+      - authelia_duo_api_secret_key
     labels:
       <<: *authelia-labels
+    <<: *resource-limits
     deploy:
       <<: [*common-deploy, *swarm-resource-limits]
       labels:
         <<: *authelia-labels
     restart: unless-stopped
 
-secrets:
-  authelia_jwt_secret:
-    file: ${SECRETS_DIR:-./secrets}/authelia_jwt_secret
-  authelia_session_secret:
-    file: ${SECRETS_DIR:-./secrets}/authelia_session_secret
-  authelia_storage_encryption_key:
-    file: ${SECRETS_DIR:-./secrets}/authelia_storage_encryption_key
-  authelia_storage_mysql_password:
-    file: ${SECRETS_DIR:-./secrets}/authelia_storage_mysql_password
-  authelia_notifier_smtp_password:
-    file: ${SECRETS_DIR:-./secrets}/authelia_notifier_smtp_password
-  authelia_duo_api_secret_key:
-    file: ${SECRETS_DIR:-./secrets}/authelia_duo_api_secret_key
-  authelia_session_redis_password:
-    file: ${SECRETS_DIR:-./secrets}/authelia_session_redis_password
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    depends_on: 
+      keycloak-db:
+        condition: service_healthy
+      traefik:
+        condition: service_started
+    container_name: keycloak
+    hostname: keycloak
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    command: start-dev
+    networks:
+      - auth-net
+      - traefik_public
+    ports:
+      - ${KEYCLOAK_PORT:-8075}:8080
+    volumes:
+      - ${ROOT_DIR:-.}/configs/keycloak/realm.json:/opt/keycloak/data/import/realm.json:ro
+    environment:
+      <<: *common-env
+      KC_DB_URL: "jdbc:postgresql://keycloak-db:${KEYCLOAK_POSTGRES_PORT:-5431}/${KEYCLOAK_POSTGRES_DB:-keycloak}"
+      KC_DB: ${KEYCLOAK_DB:-postgres}
+      KC_HOSTNAME: "keycloak.${DOMAIN}"
+      KC_LOG_LEVEL: ${KEYCLOAK_LOGLEVEL:-DEBUG}
+      KC_PROXY: ${KEYCLOAK_PROXY:-edge}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      PROXY_ADDRESS_FORWARDING: ${KEYCLOAK_PROXY_ADDRESS_FORWARDING:-true}
+    labels:
+      <<: *keycloak-labels
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+      placement:
+        constraints: [node.role == manager]
+      labels:
+        <<: *keycloak-labels
+    restart: unless-stopped
 
-networks:
-  auth-net:
-    external: "true"
+  keycloak-db:
+    image: postgres:17.4
+    container_name: keycloak-db
+    hostname: keycloak-db
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    environment:
+      <<: *common-env
+      POSTGRES_DB: ${KEYCLOAK_POSTGRES_DB:-keycloak}
+      POSTGRES_USER: ${KEYCLOAK_POSTGRES_USER:-keycloak}
+      POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD:?KEYCLOAK_POSTGRES_PASSWORD is required}
+      POSTGRES_ROOT_PASSWORD: ${KEYCLOAK_POSTGRES_ROOT_PASSWORD:?KEYCLOAK_POSTGRES_ROOT_PASSWORD is required}
+    networks:
+      - auth-net
+    ports:
+      - ${KEYCLOAK_POSTGRES_PORT:-5431}:5432
+    volumes:
+      - ${ROOT_DIR:-.}/configs/keycloak/db:/var/lib/postgresql/data
+    labels:
+      traefik.enable: "false"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    <<: *resource-limits
+    deploy:
+      <<: [*common-deploy, *swarm-resource-limits]
+    restart: unless-stopped
 
-# Generate secrets.
-# mkdir -p ${SECRETS_DIR:-./secrets}
-# openssl rand -base64 12 | tr -d '/+=' | cut -c1-64 > ${SECRETS_DIR:-./secrets}/authelia_notifier_smtp_password
-# openssl rand -base64 12 | tr -d '/+=' | cut -c1-64 > ${SECRETS_DIR:-./secrets}/authelia_storage_mysql_password
-# openssl rand -base64 12 | tr -d '/+=' | cut -c1-64 > ${SECRETS_DIR:-./secrets}/authelia_storage_redis_password
-# or to obfuscate your passwords:
-# htpasswd -B -C 10 -c ${SECRETS_DIR:-./secrets}/authelia_notifier_smtp_password your_notifier_smtp_password | sed -e s/\\$/\\$\\$/g > ${SECRETS_DIR:-./secrets}/authelia_notifier_smtp_password
-# htpasswd -B -C 10 -c ${SECRETS_DIR:-./secrets}/authelia_storage_mysql_password your_storage_mysql_password | sed -e s/\\$/\\$\\$/g > ${SECRETS_DIR:-./secrets}/authelia_storage_mysql_password
-# htpasswd -B -C 10 -c ${SECRETS_DIR:-./secrets}/authelia_storage_redis_password your_storage_redis_password | sed -e s/\\$/\\$\\$/g > ${SECRETS_DIR:-./secrets}/authelia_storage_redis_password
-# other secrets i cbf explaining:
-# openssl rand -base64 32 | tr -d '/+=' | cut -c1-64 > ${SECRETS_DIR:-./secrets}/authelia_duo_api_secret_key
-# openssl rand -base64 32 | tr -d '/+=' | cut -c1-64 > ${SECRETS_DIR:-./secrets}/authelia_jwt_secret
-# openssl rand -base64 32 | tr -d '/+=' | cut -c1-64 > ${SECRETS_DIR:-./secrets}/authelia_session_secret
-# openssl rand -base64 32 | tr -d '/+=' | cut -c1-64 > ${SECRETS_DIR:-./secrets}/authelia_storage_encryption_key
+
+# to build the secrets:
+# docker secret create authelia_duo_api_secret_key <(openssl rand -base64 32) >> ${SECRETS_DIR:-./secrets}/authelia_duo_api_secret_key
+# docker secret create authelia_jwt_secret <(openssl rand -base64 32) >> ${SECRETS_DIR:-./secrets}/authelia_jwt_secret
+# docker secret create authelia_notifier_smtp_password <(openssl rand -base64 16) >> ${SECRETS_DIR:-./secrets}/authelia_notifier_smtp_password
+# docker secret create authelia_session_secret <(openssl rand -base64 32) >> ${SECRETS_DIR:-./secrets}/authelia_session_secret
+# docker secret create authelia_storage_encryption_key <(openssl rand -base64 32) >> ${SECRETS_DIR:-./secrets}/authelia_storage_encryption_key
+# docker secret create authelia_storage_mysql_password <(openssl rand -base64 16) >> ${SECRETS_DIR:-./secrets}/authelia_storage_mysql_password

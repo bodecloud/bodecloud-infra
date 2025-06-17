@@ -10,7 +10,7 @@ The conversion process has transformed 60+ Docker Compose services into organize
 
 ### 1. `nomad-additional-services.hcl`
 
-**Core media management and security services**
+#### Core media management and security services
 
 - **Media Management Group:**
   - Jellyseerr (Request management)
@@ -24,7 +24,7 @@ The conversion process has transformed 60+ Docker Compose services into organize
 
 ### 2. `nomad-stremio-addons.hcl`
 
-**Stremio addon ecosystem**
+#### Stremio addon ecosystem
 
 - Addon Manager (Stremio addon management)
 - StremThru (Debrid proxy service)
@@ -35,7 +35,7 @@ The conversion process has transformed 60+ Docker Compose services into organize
 
 ### 3. `nomad-servarr-services.hcl`
 
-**Servarr ecosystem for media automation**
+#### Servarr ecosystem for media automation
 
 - Radarr (Movie management)
 - Sonarr (TV series management)
@@ -47,7 +47,7 @@ The conversion process has transformed 60+ Docker Compose services into organize
 
 ### 4. `nomad-utility-debrid-services.hcl`
 
-**Utility services and debrid management**
+#### Utility services and debrid management
 
 - **Utility Services:**
   - Cloudflare DDNS (Dynamic DNS)

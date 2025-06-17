@@ -1,0 +1,873 @@
+(N) 2025-06-12T01:28:38 - qBittorrent v5.1.0 started. Process ID: 148
+(N) 2025-06-12T01:28:38 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T01:28:38 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T01:28:38 - Peer ID: "-qB5100-"
+(I) 2025-06-12T01:28:38 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T01:28:38 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T01:28:38 - Local Peer Discovery support: ON
+(I) 2025-06-12T01:28:38 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T01:28:38 - Anonymous mode: OFF
+(I) 2025-06-12T01:28:38 - Encryption support: ON
+(I) 2025-06-12T01:28:38 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T01:28:38 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T01:28:38 - Successfully listening on IP. IP: "10.42.0.103". Port: "TCP/6881"
+(I) 2025-06-12T01:28:38 - Successfully listening on IP. IP: "10.42.0.103". Port: "UTP/6881"
+(I) 2025-06-12T01:28:38 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T01:28:38 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T01:28:38 - Successfully listening on IP. IP: "fe80::5cf5:85ff:feb7:31cf%eth0". Port: "TCP/6881"
+(I) 2025-06-12T01:28:38 - Successfully listening on IP. IP: "fe80::5cf5:85ff:feb7:31cf%eth0". Port: "UTP/6881"
+(W) 2025-06-12T01:28:38 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T01:28:39 - Using built-in WebUI.
+(W) 2025-06-12T01:28:39 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T01:28:39 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T01:28:43 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T01:30:14 - qBittorrent termination initiated
+(N) 2025-06-12T01:30:14 - Saving resume data completed.
+(N) 2025-06-12T01:30:14 - BitTorrent session successfully finished.
+(N) 2025-06-12T01:30:14 - qBittorrent is now ready to exit
+(N) 2025-06-12T01:37:21 - qBittorrent v5.1.0 started. Process ID: 148
+(N) 2025-06-12T01:37:21 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T01:37:21 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T01:37:22 - Peer ID: "-qB5100-"
+(I) 2025-06-12T01:37:22 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T01:37:22 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T01:37:22 - Local Peer Discovery support: ON
+(I) 2025-06-12T01:37:22 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T01:37:22 - Anonymous mode: OFF
+(I) 2025-06-12T01:37:22 - Encryption support: ON
+(I) 2025-06-12T01:37:22 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T01:37:22 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T01:37:22 - Successfully listening on IP. IP: "10.42.0.128". Port: "TCP/6881"
+(I) 2025-06-12T01:37:22 - Successfully listening on IP. IP: "10.42.0.128". Port: "UTP/6881"
+(I) 2025-06-12T01:37:22 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T01:37:22 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T01:37:22 - Successfully listening on IP. IP: "fe80::48fc:bff:fe7a:5988%eth0". Port: "TCP/6881"
+(I) 2025-06-12T01:37:22 - Successfully listening on IP. IP: "fe80::48fc:bff:fe7a:5988%eth0". Port: "UTP/6881"
+(W) 2025-06-12T01:37:22 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T01:37:22 - Using built-in WebUI.
+(W) 2025-06-12T01:37:22 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T01:37:22 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T01:37:27 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T01:38:39 - qBittorrent termination initiated
+(N) 2025-06-12T01:38:39 - Saving resume data completed.
+(N) 2025-06-12T01:38:39 - BitTorrent session successfully finished.
+(N) 2025-06-12T01:38:39 - qBittorrent is now ready to exit
+(N) 2025-06-12T01:47:02 - qBittorrent v5.1.0 started. Process ID: 147
+(N) 2025-06-12T01:47:02 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T01:47:02 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T01:47:02 - Peer ID: "-qB5100-"
+(I) 2025-06-12T01:47:02 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T01:47:02 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T01:47:02 - Local Peer Discovery support: ON
+(I) 2025-06-12T01:47:02 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T01:47:02 - Anonymous mode: OFF
+(I) 2025-06-12T01:47:02 - Encryption support: ON
+(W) 2025-06-12T01:47:02 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T01:47:03 - Using built-in WebUI.
+(W) 2025-06-12T01:47:03 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T01:47:03 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T01:47:03 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T01:47:03 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T01:47:03 - Successfully listening on IP. IP: "10.42.0.170". Port: "TCP/6881"
+(I) 2025-06-12T01:47:03 - Successfully listening on IP. IP: "10.42.0.170". Port: "UTP/6881"
+(I) 2025-06-12T01:47:03 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T01:47:03 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T01:47:03 - Successfully listening on IP. IP: "fe80::5c3a:7bff:fef3:47bd%eth0". Port: "TCP/6881"
+(I) 2025-06-12T01:47:03 - Successfully listening on IP. IP: "fe80::5c3a:7bff:fef3:47bd%eth0". Port: "UTP/6881"
+(W) 2025-06-12T01:47:07 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T01:49:47 - qBittorrent termination initiated
+(N) 2025-06-12T01:49:47 - Saving resume data completed.
+(N) 2025-06-12T01:49:47 - BitTorrent session successfully finished.
+(N) 2025-06-12T01:49:47 - qBittorrent is now ready to exit
+(N) 2025-06-12T01:58:20 - qBittorrent v5.1.0 started. Process ID: 144
+(N) 2025-06-12T01:58:20 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T01:58:20 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T01:58:21 - Peer ID: "-qB5100-"
+(I) 2025-06-12T01:58:21 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T01:58:21 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T01:58:21 - Local Peer Discovery support: ON
+(I) 2025-06-12T01:58:21 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T01:58:21 - Anonymous mode: OFF
+(I) 2025-06-12T01:58:21 - Encryption support: ON
+(I) 2025-06-12T01:58:21 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T01:58:21 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T01:58:21 - Successfully listening on IP. IP: "10.42.0.208". Port: "TCP/6881"
+(I) 2025-06-12T01:58:21 - Successfully listening on IP. IP: "10.42.0.208". Port: "UTP/6881"
+(I) 2025-06-12T01:58:21 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T01:58:21 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T01:58:21 - Successfully listening on IP. IP: "fe80::24ab:bdff:fe5c:60f4%eth0". Port: "TCP/6881"
+(I) 2025-06-12T01:58:21 - Successfully listening on IP. IP: "fe80::24ab:bdff:fe5c:60f4%eth0". Port: "UTP/6881"
+(W) 2025-06-12T01:58:21 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T01:58:21 - Using built-in WebUI.
+(W) 2025-06-12T01:58:21 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T01:58:21 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T01:58:26 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T01:59:41 - qBittorrent termination initiated
+(N) 2025-06-12T01:59:41 - Saving resume data completed.
+(N) 2025-06-12T01:59:41 - BitTorrent session successfully finished.
+(N) 2025-06-12T01:59:41 - qBittorrent is now ready to exit
+(N) 2025-06-12T02:07:08 - qBittorrent v5.1.0 started. Process ID: 148
+(N) 2025-06-12T02:07:08 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T02:07:08 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T02:07:08 - Peer ID: "-qB5100-"
+(I) 2025-06-12T02:07:08 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T02:07:08 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T02:07:08 - Local Peer Discovery support: ON
+(I) 2025-06-12T02:07:08 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T02:07:08 - Anonymous mode: OFF
+(I) 2025-06-12T02:07:08 - Encryption support: ON
+(W) 2025-06-12T02:07:09 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T02:07:09 - Using built-in WebUI.
+(W) 2025-06-12T02:07:09 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T02:07:09 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T02:07:09 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T02:07:09 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T02:07:09 - Successfully listening on IP. IP: "10.42.0.232". Port: "TCP/6881"
+(I) 2025-06-12T02:07:09 - Successfully listening on IP. IP: "10.42.0.232". Port: "UTP/6881"
+(I) 2025-06-12T02:07:09 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T02:07:09 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T02:07:09 - Successfully listening on IP. IP: "fe80::1cdd:d4ff:fefd:6187%eth0". Port: "TCP/6881"
+(I) 2025-06-12T02:07:09 - Successfully listening on IP. IP: "fe80::1cdd:d4ff:fefd:6187%eth0". Port: "UTP/6881"
+(W) 2025-06-12T02:07:14 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T02:08:31 - qBittorrent termination initiated
+(N) 2025-06-12T02:08:31 - Saving resume data completed.
+(N) 2025-06-12T02:08:31 - BitTorrent session successfully finished.
+(N) 2025-06-12T02:08:31 - qBittorrent is now ready to exit
+(N) 2025-06-12T02:16:41 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T02:16:41 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T02:16:41 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T02:16:41 - Peer ID: "-qB5100-"
+(I) 2025-06-12T02:16:41 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T02:16:41 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T02:16:41 - Local Peer Discovery support: ON
+(I) 2025-06-12T02:16:41 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T02:16:41 - Anonymous mode: OFF
+(I) 2025-06-12T02:16:41 - Encryption support: ON
+(I) 2025-06-12T02:16:41 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T02:16:41 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T02:16:41 - Successfully listening on IP. IP: "10.42.0.20". Port: "TCP/6881"
+(I) 2025-06-12T02:16:41 - Successfully listening on IP. IP: "10.42.0.20". Port: "UTP/6881"
+(I) 2025-06-12T02:16:41 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T02:16:41 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T02:16:41 - Successfully listening on IP. IP: "fe80::a0d1:6cff:fee8:3cdc%eth0". Port: "TCP/6881"
+(I) 2025-06-12T02:16:41 - Successfully listening on IP. IP: "fe80::a0d1:6cff:fee8:3cdc%eth0". Port: "UTP/6881"
+(W) 2025-06-12T02:16:42 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T02:16:42 - Using built-in WebUI.
+(W) 2025-06-12T02:16:42 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T02:16:42 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T02:16:47 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T02:17:53 - qBittorrent termination initiated
+(N) 2025-06-12T02:17:53 - Saving resume data completed.
+(N) 2025-06-12T02:17:53 - BitTorrent session successfully finished.
+(N) 2025-06-12T02:17:53 - qBittorrent is now ready to exit
+(N) 2025-06-12T02:26:59 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T02:26:59 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T02:26:59 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T02:26:59 - Peer ID: "-qB5100-"
+(I) 2025-06-12T02:26:59 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T02:26:59 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T02:26:59 - Local Peer Discovery support: ON
+(I) 2025-06-12T02:26:59 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T02:26:59 - Anonymous mode: OFF
+(I) 2025-06-12T02:26:59 - Encryption support: ON
+(W) 2025-06-12T02:26:59 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T02:26:59 - Using built-in WebUI.
+(W) 2025-06-12T02:26:59 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T02:26:59 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T02:26:59 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T02:26:59 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T02:26:59 - Successfully listening on IP. IP: "10.42.0.47". Port: "TCP/6881"
+(I) 2025-06-12T02:26:59 - Successfully listening on IP. IP: "10.42.0.47". Port: "UTP/6881"
+(I) 2025-06-12T02:26:59 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T02:26:59 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T02:26:59 - Successfully listening on IP. IP: "fe80::5030:44ff:fe02:7361%eth0". Port: "TCP/6881"
+(I) 2025-06-12T02:26:59 - Successfully listening on IP. IP: "fe80::5030:44ff:fe02:7361%eth0". Port: "UTP/6881"
+(W) 2025-06-12T02:27:04 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T02:29:04 - qBittorrent termination initiated
+(N) 2025-06-12T02:29:04 - Saving resume data completed.
+(N) 2025-06-12T02:29:04 - BitTorrent session successfully finished.
+(N) 2025-06-12T02:29:04 - qBittorrent is now ready to exit
+(N) 2025-06-12T02:38:07 - qBittorrent v5.1.0 started. Process ID: 144
+(N) 2025-06-12T02:38:07 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T02:38:07 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T02:38:07 - Peer ID: "-qB5100-"
+(I) 2025-06-12T02:38:07 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T02:38:07 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T02:38:07 - Local Peer Discovery support: ON
+(I) 2025-06-12T02:38:07 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T02:38:07 - Anonymous mode: OFF
+(I) 2025-06-12T02:38:07 - Encryption support: ON
+(I) 2025-06-12T02:38:07 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T02:38:07 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T02:38:07 - Successfully listening on IP. IP: "10.42.0.97". Port: "TCP/6881"
+(I) 2025-06-12T02:38:07 - Successfully listening on IP. IP: "10.42.0.97". Port: "UTP/6881"
+(I) 2025-06-12T02:38:07 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T02:38:07 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T02:38:07 - Successfully listening on IP. IP: "fe80::4ac:94ff:fed5:b1e8%eth0". Port: "TCP/6881"
+(I) 2025-06-12T02:38:07 - Successfully listening on IP. IP: "fe80::4ac:94ff:fed5:b1e8%eth0". Port: "UTP/6881"
+(W) 2025-06-12T02:38:07 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T02:38:08 - Using built-in WebUI.
+(W) 2025-06-12T02:38:08 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T02:38:08 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T02:38:12 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T02:40:07 - qBittorrent termination initiated
+(N) 2025-06-12T02:40:07 - Saving resume data completed.
+(N) 2025-06-12T02:40:07 - BitTorrent session successfully finished.
+(N) 2025-06-12T02:40:07 - qBittorrent is now ready to exit
+(N) 2025-06-12T02:48:31 - qBittorrent v5.1.0 started. Process ID: 148
+(N) 2025-06-12T02:48:31 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T02:48:31 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T02:48:31 - Peer ID: "-qB5100-"
+(I) 2025-06-12T02:48:31 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T02:48:31 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T02:48:31 - Local Peer Discovery support: ON
+(I) 2025-06-12T02:48:31 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T02:48:31 - Anonymous mode: OFF
+(I) 2025-06-12T02:48:31 - Encryption support: ON
+(I) 2025-06-12T02:48:31 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T02:48:31 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T02:48:31 - Successfully listening on IP. IP: "10.42.0.123". Port: "TCP/6881"
+(I) 2025-06-12T02:48:31 - Successfully listening on IP. IP: "10.42.0.123". Port: "UTP/6881"
+(I) 2025-06-12T02:48:31 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T02:48:31 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T02:48:31 - Successfully listening on IP. IP: "fe80::c0cf:30ff:fe74:d35c%eth0". Port: "TCP/6881"
+(I) 2025-06-12T02:48:31 - Successfully listening on IP. IP: "fe80::c0cf:30ff:fe74:d35c%eth0". Port: "UTP/6881"
+(W) 2025-06-12T02:48:31 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T02:48:31 - Using built-in WebUI.
+(W) 2025-06-12T02:48:31 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T02:48:31 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T02:48:36 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T02:51:19 - qBittorrent termination initiated
+(N) 2025-06-12T02:51:19 - Saving resume data completed.
+(N) 2025-06-12T02:51:19 - BitTorrent session successfully finished.
+(N) 2025-06-12T02:51:19 - qBittorrent is now ready to exit
+(N) 2025-06-12T03:00:48 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T03:00:48 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T03:00:48 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T03:00:48 - Peer ID: "-qB5100-"
+(I) 2025-06-12T03:00:48 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T03:00:48 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T03:00:48 - Local Peer Discovery support: ON
+(I) 2025-06-12T03:00:48 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T03:00:48 - Anonymous mode: OFF
+(I) 2025-06-12T03:00:48 - Encryption support: ON
+(W) 2025-06-12T03:00:48 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T03:00:48 - Using built-in WebUI.
+(W) 2025-06-12T03:00:48 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T03:00:48 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T03:00:48 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T03:00:48 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T03:00:48 - Successfully listening on IP. IP: "10.42.0.158". Port: "TCP/6881"
+(I) 2025-06-12T03:00:48 - Successfully listening on IP. IP: "10.42.0.158". Port: "UTP/6881"
+(I) 2025-06-12T03:00:48 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T03:00:48 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T03:00:48 - Successfully listening on IP. IP: "fe80::7476:20ff:fed6:e102%eth0". Port: "TCP/6881"
+(I) 2025-06-12T03:00:48 - Successfully listening on IP. IP: "fe80::7476:20ff:fed6:e102%eth0". Port: "UTP/6881"
+(W) 2025-06-12T03:00:53 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T03:02:32 - qBittorrent termination initiated
+(N) 2025-06-12T03:02:32 - Saving resume data completed.
+(N) 2025-06-12T03:02:32 - BitTorrent session successfully finished.
+(N) 2025-06-12T03:02:32 - qBittorrent is now ready to exit
+(N) 2025-06-12T03:11:31 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T03:11:31 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T03:11:31 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T03:11:31 - Peer ID: "-qB5100-"
+(I) 2025-06-12T03:11:31 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T03:11:31 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T03:11:31 - Local Peer Discovery support: ON
+(I) 2025-06-12T03:11:31 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T03:11:31 - Anonymous mode: OFF
+(I) 2025-06-12T03:11:31 - Encryption support: ON
+(W) 2025-06-12T03:11:31 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T03:11:31 - Using built-in WebUI.
+(W) 2025-06-12T03:11:31 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T03:11:31 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T03:11:31 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T03:11:31 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T03:11:31 - Successfully listening on IP. IP: "10.42.0.175". Port: "TCP/6881"
+(I) 2025-06-12T03:11:31 - Successfully listening on IP. IP: "10.42.0.175". Port: "UTP/6881"
+(I) 2025-06-12T03:11:31 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T03:11:31 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T03:11:31 - Successfully listening on IP. IP: "fe80::24c4:1cff:fe18:c0fa%eth0". Port: "TCP/6881"
+(I) 2025-06-12T03:11:31 - Successfully listening on IP. IP: "fe80::24c4:1cff:fe18:c0fa%eth0". Port: "UTP/6881"
+(W) 2025-06-12T03:11:36 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T03:12:19 - qBittorrent termination initiated
+(N) 2025-06-12T03:12:19 - Saving resume data completed.
+(N) 2025-06-12T03:12:19 - BitTorrent session successfully finished.
+(N) 2025-06-12T03:12:19 - qBittorrent is now ready to exit
+(N) 2025-06-12T03:21:16 - qBittorrent v5.1.0 started. Process ID: 149
+(N) 2025-06-12T03:21:16 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T03:21:16 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T03:21:16 - Peer ID: "-qB5100-"
+(I) 2025-06-12T03:21:16 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T03:21:16 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T03:21:16 - Local Peer Discovery support: ON
+(I) 2025-06-12T03:21:16 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T03:21:16 - Anonymous mode: OFF
+(I) 2025-06-12T03:21:16 - Encryption support: ON
+(W) 2025-06-12T03:21:16 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T03:21:17 - Using built-in WebUI.
+(W) 2025-06-12T03:21:17 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T03:21:17 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T03:21:17 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T03:21:17 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T03:21:17 - Successfully listening on IP. IP: "10.42.0.229". Port: "TCP/6881"
+(I) 2025-06-12T03:21:17 - Successfully listening on IP. IP: "10.42.0.229". Port: "UTP/6881"
+(I) 2025-06-12T03:21:17 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T03:21:17 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T03:21:17 - Successfully listening on IP. IP: "fe80::bcc6:adff:fe5c:180%eth0". Port: "TCP/6881"
+(I) 2025-06-12T03:21:17 - Successfully listening on IP. IP: "fe80::bcc6:adff:fe5c:180%eth0". Port: "UTP/6881"
+(W) 2025-06-12T03:21:22 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T03:22:40 - qBittorrent termination initiated
+(N) 2025-06-12T03:22:40 - Saving resume data completed.
+(N) 2025-06-12T03:22:40 - BitTorrent session successfully finished.
+(N) 2025-06-12T03:22:40 - qBittorrent is now ready to exit
+(N) 2025-06-12T03:30:50 - qBittorrent v5.1.0 started. Process ID: 145
+(N) 2025-06-12T03:30:50 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T03:30:50 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T03:30:50 - Peer ID: "-qB5100-"
+(I) 2025-06-12T03:30:50 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T03:30:50 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T03:30:50 - Local Peer Discovery support: ON
+(I) 2025-06-12T03:30:50 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T03:30:50 - Anonymous mode: OFF
+(I) 2025-06-12T03:30:50 - Encryption support: ON
+(I) 2025-06-12T03:30:50 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T03:30:50 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T03:30:50 - Successfully listening on IP. IP: "10.42.0.2". Port: "TCP/6881"
+(I) 2025-06-12T03:30:50 - Successfully listening on IP. IP: "10.42.0.2". Port: "UTP/6881"
+(I) 2025-06-12T03:30:50 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T03:30:50 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T03:30:50 - Successfully listening on IP. IP: "fe80::9024:e3ff:fec8:9059%eth0". Port: "TCP/6881"
+(I) 2025-06-12T03:30:50 - Successfully listening on IP. IP: "fe80::9024:e3ff:fec8:9059%eth0". Port: "UTP/6881"
+(W) 2025-06-12T03:30:50 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T03:30:51 - Using built-in WebUI.
+(W) 2025-06-12T03:30:51 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T03:30:51 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T03:30:55 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T05:49:27 - qBittorrent termination initiated
+(N) 2025-06-12T05:49:27 - Saving resume data completed.
+(N) 2025-06-12T05:49:27 - BitTorrent session successfully finished.
+(N) 2025-06-12T05:49:27 - qBittorrent is now ready to exit
+(N) 2025-06-12T05:56:18 - qBittorrent v5.1.0 started. Process ID: 148
+(N) 2025-06-12T05:56:18 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T05:56:18 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T05:56:18 - Peer ID: "-qB5100-"
+(I) 2025-06-12T05:56:18 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T05:56:18 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T05:56:18 - Local Peer Discovery support: ON
+(I) 2025-06-12T05:56:18 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T05:56:18 - Anonymous mode: OFF
+(I) 2025-06-12T05:56:18 - Encryption support: ON
+(I) 2025-06-12T05:56:18 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T05:56:18 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T05:56:18 - Successfully listening on IP. IP: "10.42.0.81". Port: "TCP/6881"
+(I) 2025-06-12T05:56:18 - Successfully listening on IP. IP: "10.42.0.81". Port: "UTP/6881"
+(I) 2025-06-12T05:56:18 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T05:56:18 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T05:56:18 - Successfully listening on IP. IP: "fe80::94d4:28ff:fe08:1182%eth0". Port: "TCP/6881"
+(I) 2025-06-12T05:56:18 - Successfully listening on IP. IP: "fe80::94d4:28ff:fe08:1182%eth0". Port: "UTP/6881"
+(W) 2025-06-12T05:56:18 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T05:56:18 - Using built-in WebUI.
+(W) 2025-06-12T05:56:18 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T05:56:18 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T05:56:23 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T06:23:13 - qBittorrent termination initiated
+(N) 2025-06-12T06:23:13 - Saving resume data completed.
+(N) 2025-06-12T06:23:13 - BitTorrent session successfully finished.
+(N) 2025-06-12T06:23:13 - qBittorrent is now ready to exit
+(N) 2025-06-12T06:30:15 - qBittorrent v5.1.0 started. Process ID: 145
+(N) 2025-06-12T06:30:15 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T06:30:15 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T06:30:15 - Peer ID: "-qB5100-"
+(I) 2025-06-12T06:30:15 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T06:30:15 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T06:30:15 - Local Peer Discovery support: ON
+(I) 2025-06-12T06:30:15 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T06:30:15 - Anonymous mode: OFF
+(I) 2025-06-12T06:30:15 - Encryption support: ON
+(I) 2025-06-12T06:30:15 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T06:30:15 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T06:30:15 - Successfully listening on IP. IP: "10.42.0.105". Port: "TCP/6881"
+(I) 2025-06-12T06:30:15 - Successfully listening on IP. IP: "10.42.0.105". Port: "UTP/6881"
+(I) 2025-06-12T06:30:15 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T06:30:15 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T06:30:15 - Successfully listening on IP. IP: "fe80::901f:4bff:fec9:e1b3%eth0". Port: "TCP/6881"
+(I) 2025-06-12T06:30:15 - Successfully listening on IP. IP: "fe80::901f:4bff:fec9:e1b3%eth0". Port: "UTP/6881"
+(W) 2025-06-12T06:30:15 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T06:30:15 - Using built-in WebUI.
+(W) 2025-06-12T06:30:15 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T06:30:15 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T06:30:20 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T06:40:49 - qBittorrent termination initiated
+(N) 2025-06-12T06:40:49 - Saving resume data completed.
+(N) 2025-06-12T06:40:49 - BitTorrent session successfully finished.
+(N) 2025-06-12T06:40:49 - qBittorrent is now ready to exit
+(N) 2025-06-12T06:48:02 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T06:48:02 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T06:48:02 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T06:48:02 - Peer ID: "-qB5100-"
+(I) 2025-06-12T06:48:02 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T06:48:02 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T06:48:02 - Local Peer Discovery support: ON
+(I) 2025-06-12T06:48:02 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T06:48:02 - Anonymous mode: OFF
+(I) 2025-06-12T06:48:02 - Encryption support: ON
+(I) 2025-06-12T06:48:02 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T06:48:02 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T06:48:02 - Successfully listening on IP. IP: "10.42.0.137". Port: "TCP/6881"
+(I) 2025-06-12T06:48:02 - Successfully listening on IP. IP: "10.42.0.137". Port: "UTP/6881"
+(I) 2025-06-12T06:48:02 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T06:48:02 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T06:48:02 - Successfully listening on IP. IP: "fe80::105a:eaff:fee5:78d%eth0". Port: "TCP/6881"
+(I) 2025-06-12T06:48:02 - Successfully listening on IP. IP: "fe80::105a:eaff:fee5:78d%eth0". Port: "UTP/6881"
+(W) 2025-06-12T06:48:02 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T06:48:02 - Using built-in WebUI.
+(W) 2025-06-12T06:48:02 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T06:48:02 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T06:48:07 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T06:59:13 - qBittorrent termination initiated
+(N) 2025-06-12T06:59:13 - Saving resume data completed.
+(N) 2025-06-12T06:59:13 - BitTorrent session successfully finished.
+(N) 2025-06-12T06:59:13 - qBittorrent is now ready to exit
+(N) 2025-06-12T07:06:46 - qBittorrent v5.1.0 started. Process ID: 147
+(N) 2025-06-12T07:06:46 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T07:06:46 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T07:06:46 - Peer ID: "-qB5100-"
+(I) 2025-06-12T07:06:46 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T07:06:46 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T07:06:46 - Local Peer Discovery support: ON
+(I) 2025-06-12T07:06:46 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T07:06:46 - Anonymous mode: OFF
+(I) 2025-06-12T07:06:46 - Encryption support: ON
+(I) 2025-06-12T07:06:46 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T07:06:46 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T07:06:46 - Successfully listening on IP. IP: "10.42.0.188". Port: "TCP/6881"
+(I) 2025-06-12T07:06:46 - Successfully listening on IP. IP: "10.42.0.188". Port: "UTP/6881"
+(I) 2025-06-12T07:06:46 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T07:06:46 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T07:06:46 - Successfully listening on IP. IP: "fe80::6cae:7eff:feb2:d279%eth0". Port: "TCP/6881"
+(I) 2025-06-12T07:06:46 - Successfully listening on IP. IP: "fe80::6cae:7eff:feb2:d279%eth0". Port: "UTP/6881"
+(W) 2025-06-12T07:06:46 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T07:06:46 - Using built-in WebUI.
+(W) 2025-06-12T07:06:46 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T07:06:46 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T07:06:51 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T07:17:30 - qBittorrent termination initiated
+(N) 2025-06-12T07:17:30 - Saving resume data completed.
+(N) 2025-06-12T07:17:30 - BitTorrent session successfully finished.
+(N) 2025-06-12T07:17:30 - qBittorrent is now ready to exit
+(N) 2025-06-12T07:24:44 - qBittorrent v5.1.0 started. Process ID: 145
+(N) 2025-06-12T07:24:44 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T07:24:44 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T07:24:44 - Peer ID: "-qB5100-"
+(I) 2025-06-12T07:24:44 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T07:24:44 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T07:24:44 - Local Peer Discovery support: ON
+(I) 2025-06-12T07:24:44 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T07:24:44 - Anonymous mode: OFF
+(I) 2025-06-12T07:24:44 - Encryption support: ON
+(I) 2025-06-12T07:24:44 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T07:24:44 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T07:24:44 - Successfully listening on IP. IP: "10.42.0.218". Port: "TCP/6881"
+(I) 2025-06-12T07:24:44 - Successfully listening on IP. IP: "10.42.0.218". Port: "UTP/6881"
+(I) 2025-06-12T07:24:44 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T07:24:44 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T07:24:44 - Successfully listening on IP. IP: "fe80::b85d:b5ff:fe23:37d8%eth0". Port: "TCP/6881"
+(I) 2025-06-12T07:24:44 - Successfully listening on IP. IP: "fe80::b85d:b5ff:fe23:37d8%eth0". Port: "UTP/6881"
+(W) 2025-06-12T07:24:44 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T07:24:45 - Using built-in WebUI.
+(W) 2025-06-12T07:24:45 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T07:24:45 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T07:24:49 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T07:35:43 - qBittorrent termination initiated
+(N) 2025-06-12T07:35:43 - Saving resume data completed.
+(N) 2025-06-12T07:35:44 - BitTorrent session successfully finished.
+(N) 2025-06-12T07:35:44 - qBittorrent is now ready to exit
+(N) 2025-06-12T07:42:27 - qBittorrent v5.1.0 started. Process ID: 148
+(N) 2025-06-12T07:42:27 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T07:42:27 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T07:42:27 - Peer ID: "-qB5100-"
+(I) 2025-06-12T07:42:27 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T07:42:27 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T07:42:27 - Local Peer Discovery support: ON
+(I) 2025-06-12T07:42:27 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T07:42:27 - Anonymous mode: OFF
+(I) 2025-06-12T07:42:27 - Encryption support: ON
+(I) 2025-06-12T07:42:27 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T07:42:27 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T07:42:27 - Successfully listening on IP. IP: "10.42.0.250". Port: "TCP/6881"
+(I) 2025-06-12T07:42:27 - Successfully listening on IP. IP: "10.42.0.250". Port: "UTP/6881"
+(I) 2025-06-12T07:42:27 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T07:42:27 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T07:42:27 - Successfully listening on IP. IP: "fe80::9491:4ff:fe1c:bf25%eth0". Port: "TCP/6881"
+(I) 2025-06-12T07:42:27 - Successfully listening on IP. IP: "fe80::9491:4ff:fe1c:bf25%eth0". Port: "UTP/6881"
+(W) 2025-06-12T07:42:27 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T07:42:27 - Using built-in WebUI.
+(W) 2025-06-12T07:42:27 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T07:42:27 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T07:42:32 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T07:53:57 - qBittorrent termination initiated
+(N) 2025-06-12T07:53:57 - Saving resume data completed.
+(N) 2025-06-12T07:53:57 - BitTorrent session successfully finished.
+(N) 2025-06-12T07:53:57 - qBittorrent is now ready to exit
+(N) 2025-06-12T08:01:14 - qBittorrent v5.1.0 started. Process ID: 147
+(N) 2025-06-12T08:01:14 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T08:01:14 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T08:01:14 - Peer ID: "-qB5100-"
+(I) 2025-06-12T08:01:14 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T08:01:14 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T08:01:14 - Local Peer Discovery support: ON
+(I) 2025-06-12T08:01:14 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T08:01:14 - Anonymous mode: OFF
+(I) 2025-06-12T08:01:14 - Encryption support: ON
+(I) 2025-06-12T08:01:14 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T08:01:14 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T08:01:14 - Successfully listening on IP. IP: "10.42.0.28". Port: "TCP/6881"
+(I) 2025-06-12T08:01:14 - Successfully listening on IP. IP: "10.42.0.28". Port: "UTP/6881"
+(I) 2025-06-12T08:01:14 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T08:01:14 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T08:01:14 - Successfully listening on IP. IP: "fe80::9416:82ff:fe2e:4c40%eth0". Port: "TCP/6881"
+(I) 2025-06-12T08:01:14 - Successfully listening on IP. IP: "fe80::9416:82ff:fe2e:4c40%eth0". Port: "UTP/6881"
+(W) 2025-06-12T08:01:14 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T08:01:15 - Using built-in WebUI.
+(W) 2025-06-12T08:01:15 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T08:01:15 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T08:01:19 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T08:22:03 - qBittorrent termination initiated
+(N) 2025-06-12T08:22:03 - Saving resume data completed.
+(N) 2025-06-12T08:22:03 - BitTorrent session successfully finished.
+(N) 2025-06-12T08:22:03 - qBittorrent is now ready to exit
+(N) 2025-06-12T08:29:10 - qBittorrent v5.1.0 started. Process ID: 147
+(N) 2025-06-12T08:29:10 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T08:29:10 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T08:29:10 - Peer ID: "-qB5100-"
+(I) 2025-06-12T08:29:10 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T08:29:10 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T08:29:10 - Local Peer Discovery support: ON
+(I) 2025-06-12T08:29:10 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T08:29:10 - Anonymous mode: OFF
+(I) 2025-06-12T08:29:10 - Encryption support: ON
+(W) 2025-06-12T08:29:10 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T08:29:10 - Using built-in WebUI.
+(W) 2025-06-12T08:29:10 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T08:29:10 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T08:29:10 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T08:29:10 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T08:29:10 - Successfully listening on IP. IP: "10.42.0.67". Port: "TCP/6881"
+(I) 2025-06-12T08:29:10 - Successfully listening on IP. IP: "10.42.0.67". Port: "UTP/6881"
+(I) 2025-06-12T08:29:10 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T08:29:10 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T08:29:10 - Successfully listening on IP. IP: "fe80::1c90:9aff:fe47:930b%eth0". Port: "TCP/6881"
+(I) 2025-06-12T08:29:10 - Successfully listening on IP. IP: "fe80::1c90:9aff:fe47:930b%eth0". Port: "UTP/6881"
+(W) 2025-06-12T08:29:15 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T08:45:17 - qBittorrent termination initiated
+(N) 2025-06-12T08:45:17 - Saving resume data completed.
+(N) 2025-06-12T08:45:17 - BitTorrent session successfully finished.
+(N) 2025-06-12T08:45:17 - qBittorrent is now ready to exit
+(N) 2025-06-12T08:51:47 - qBittorrent v5.1.0 started. Process ID: 145
+(N) 2025-06-12T08:51:47 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T08:51:47 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T08:51:47 - Peer ID: "-qB5100-"
+(I) 2025-06-12T08:51:47 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T08:51:47 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T08:51:47 - Local Peer Discovery support: ON
+(I) 2025-06-12T08:51:47 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T08:51:47 - Anonymous mode: OFF
+(I) 2025-06-12T08:51:47 - Encryption support: ON
+(I) 2025-06-12T08:51:47 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T08:51:47 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T08:51:47 - Successfully listening on IP. IP: "10.42.0.86". Port: "TCP/6881"
+(I) 2025-06-12T08:51:47 - Successfully listening on IP. IP: "10.42.0.86". Port: "UTP/6881"
+(I) 2025-06-12T08:51:47 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T08:51:47 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T08:51:47 - Successfully listening on IP. IP: "fe80::e8e8:2dff:fe0e:5471%eth0". Port: "TCP/6881"
+(I) 2025-06-12T08:51:47 - Successfully listening on IP. IP: "fe80::e8e8:2dff:fe0e:5471%eth0". Port: "UTP/6881"
+(W) 2025-06-12T08:51:47 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T08:51:47 - Using built-in WebUI.
+(W) 2025-06-12T08:51:47 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T08:51:47 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T08:51:52 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T09:08:21 - qBittorrent termination initiated
+(N) 2025-06-12T09:08:21 - Saving resume data completed.
+(N) 2025-06-12T09:08:21 - BitTorrent session successfully finished.
+(N) 2025-06-12T09:08:21 - qBittorrent is now ready to exit
+(N) 2025-06-12T09:15:50 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T09:15:50 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T09:15:50 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T09:15:50 - Peer ID: "-qB5100-"
+(I) 2025-06-12T09:15:50 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T09:15:50 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T09:15:50 - Local Peer Discovery support: ON
+(I) 2025-06-12T09:15:50 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T09:15:50 - Anonymous mode: OFF
+(I) 2025-06-12T09:15:50 - Encryption support: ON
+(I) 2025-06-12T09:15:50 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T09:15:50 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T09:15:50 - Successfully listening on IP. IP: "10.42.0.142". Port: "TCP/6881"
+(I) 2025-06-12T09:15:50 - Successfully listening on IP. IP: "10.42.0.142". Port: "UTP/6881"
+(I) 2025-06-12T09:15:50 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T09:15:50 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T09:15:50 - Successfully listening on IP. IP: "fe80::831:c1ff:feca:855f%eth0". Port: "TCP/6881"
+(I) 2025-06-12T09:15:50 - Successfully listening on IP. IP: "fe80::831:c1ff:feca:855f%eth0". Port: "UTP/6881"
+(W) 2025-06-12T09:15:50 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T09:15:50 - Using built-in WebUI.
+(W) 2025-06-12T09:15:50 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T09:15:50 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T09:15:55 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T09:36:34 - qBittorrent termination initiated
+(N) 2025-06-12T09:36:34 - Saving resume data completed.
+(N) 2025-06-12T09:36:34 - BitTorrent session successfully finished.
+(N) 2025-06-12T09:36:34 - qBittorrent is now ready to exit
+(N) 2025-06-12T09:42:50 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T09:42:50 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T09:42:50 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T09:42:50 - Peer ID: "-qB5100-"
+(I) 2025-06-12T09:42:50 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T09:42:50 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T09:42:50 - Local Peer Discovery support: ON
+(I) 2025-06-12T09:42:50 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T09:42:50 - Anonymous mode: OFF
+(I) 2025-06-12T09:42:50 - Encryption support: ON
+(I) 2025-06-12T09:42:50 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T09:42:50 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T09:42:50 - Successfully listening on IP. IP: "10.42.0.170". Port: "TCP/6881"
+(I) 2025-06-12T09:42:50 - Successfully listening on IP. IP: "10.42.0.170". Port: "UTP/6881"
+(I) 2025-06-12T09:42:50 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T09:42:50 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T09:42:50 - Successfully listening on IP. IP: "fe80::9006:d9ff:fe63:6750%eth0". Port: "TCP/6881"
+(I) 2025-06-12T09:42:50 - Successfully listening on IP. IP: "fe80::9006:d9ff:fe63:6750%eth0". Port: "UTP/6881"
+(W) 2025-06-12T09:42:50 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T09:42:50 - Using built-in WebUI.
+(W) 2025-06-12T09:42:50 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T09:42:50 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T09:42:55 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T10:10:10 - qBittorrent termination initiated
+(N) 2025-06-12T10:10:10 - Saving resume data completed.
+(N) 2025-06-12T10:10:10 - BitTorrent session successfully finished.
+(N) 2025-06-12T10:10:10 - qBittorrent is now ready to exit
+(N) 2025-06-12T10:17:17 - qBittorrent v5.1.0 started. Process ID: 147
+(N) 2025-06-12T10:17:17 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T10:17:17 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T10:17:18 - Peer ID: "-qB5100-"
+(I) 2025-06-12T10:17:18 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T10:17:18 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T10:17:18 - Local Peer Discovery support: ON
+(I) 2025-06-12T10:17:18 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T10:17:18 - Anonymous mode: OFF
+(I) 2025-06-12T10:17:18 - Encryption support: ON
+(I) 2025-06-12T10:17:18 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T10:17:18 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T10:17:18 - Successfully listening on IP. IP: "10.42.0.203". Port: "TCP/6881"
+(I) 2025-06-12T10:17:18 - Successfully listening on IP. IP: "10.42.0.203". Port: "UTP/6881"
+(I) 2025-06-12T10:17:18 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T10:17:18 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T10:17:18 - Successfully listening on IP. IP: "fe80::9080:9dff:feec:9c70%eth0". Port: "TCP/6881"
+(I) 2025-06-12T10:17:18 - Successfully listening on IP. IP: "fe80::9080:9dff:feec:9c70%eth0". Port: "UTP/6881"
+(W) 2025-06-12T10:17:18 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T10:17:18 - Using built-in WebUI.
+(W) 2025-06-12T10:17:18 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T10:17:18 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T10:17:23 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T11:19:23 - qBittorrent termination initiated
+(N) 2025-06-12T11:19:23 - Saving resume data completed.
+(N) 2025-06-12T11:19:23 - BitTorrent session successfully finished.
+(N) 2025-06-12T11:19:23 - qBittorrent is now ready to exit
+(N) 2025-06-12T11:25:53 - qBittorrent v5.1.0 started. Process ID: 144
+(N) 2025-06-12T11:25:53 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T11:25:53 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T11:25:53 - Peer ID: "-qB5100-"
+(I) 2025-06-12T11:25:53 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T11:25:53 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T11:25:53 - Local Peer Discovery support: ON
+(I) 2025-06-12T11:25:53 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T11:25:53 - Anonymous mode: OFF
+(I) 2025-06-12T11:25:53 - Encryption support: ON
+(I) 2025-06-12T11:25:53 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T11:25:53 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T11:25:53 - Successfully listening on IP. IP: "10.42.0.231". Port: "TCP/6881"
+(I) 2025-06-12T11:25:53 - Successfully listening on IP. IP: "10.42.0.231". Port: "UTP/6881"
+(I) 2025-06-12T11:25:53 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T11:25:53 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T11:25:53 - Successfully listening on IP. IP: "fe80::3823:18ff:fed1:2f69%eth0". Port: "TCP/6881"
+(I) 2025-06-12T11:25:53 - Successfully listening on IP. IP: "fe80::3823:18ff:fed1:2f69%eth0". Port: "UTP/6881"
+(W) 2025-06-12T11:25:53 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T11:25:54 - Using built-in WebUI.
+(W) 2025-06-12T11:25:54 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T11:25:54 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T11:25:58 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T11:47:36 - qBittorrent termination initiated
+(N) 2025-06-12T11:47:36 - Saving resume data completed.
+(N) 2025-06-12T11:47:36 - BitTorrent session successfully finished.
+(N) 2025-06-12T11:47:36 - qBittorrent is now ready to exit
+(N) 2025-06-12T11:54:37 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T11:54:37 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T11:54:37 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T11:54:37 - Peer ID: "-qB5100-"
+(I) 2025-06-12T11:54:37 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T11:54:37 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T11:54:37 - Local Peer Discovery support: ON
+(I) 2025-06-12T11:54:37 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T11:54:37 - Anonymous mode: OFF
+(I) 2025-06-12T11:54:37 - Encryption support: ON
+(I) 2025-06-12T11:54:37 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T11:54:37 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T11:54:37 - Successfully listening on IP. IP: "10.42.0.33". Port: "TCP/6881"
+(I) 2025-06-12T11:54:37 - Successfully listening on IP. IP: "10.42.0.33". Port: "UTP/6881"
+(I) 2025-06-12T11:54:37 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T11:54:37 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T11:54:37 - Successfully listening on IP. IP: "fe80::c8ed:c9ff:fe43:9245%eth0". Port: "TCP/6881"
+(I) 2025-06-12T11:54:37 - Successfully listening on IP. IP: "fe80::c8ed:c9ff:fe43:9245%eth0". Port: "UTP/6881"
+(W) 2025-06-12T11:54:37 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T11:54:38 - Using built-in WebUI.
+(W) 2025-06-12T11:54:38 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T11:54:38 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T11:54:42 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T12:05:45 - qBittorrent termination initiated
+(N) 2025-06-12T12:05:45 - Saving resume data completed.
+(N) 2025-06-12T12:05:45 - BitTorrent session successfully finished.
+(N) 2025-06-12T12:05:45 - qBittorrent is now ready to exit
+(N) 2025-06-12T12:12:22 - qBittorrent v5.1.0 started. Process ID: 148
+(N) 2025-06-12T12:12:22 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T12:12:22 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T12:12:22 - Peer ID: "-qB5100-"
+(I) 2025-06-12T12:12:22 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T12:12:22 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T12:12:22 - Local Peer Discovery support: ON
+(I) 2025-06-12T12:12:22 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T12:12:22 - Anonymous mode: OFF
+(I) 2025-06-12T12:12:22 - Encryption support: ON
+(I) 2025-06-12T12:12:22 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T12:12:22 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T12:12:22 - Successfully listening on IP. IP: "10.42.0.65". Port: "TCP/6881"
+(I) 2025-06-12T12:12:22 - Successfully listening on IP. IP: "10.42.0.65". Port: "UTP/6881"
+(I) 2025-06-12T12:12:22 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T12:12:22 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T12:12:22 - Successfully listening on IP. IP: "fe80::428:2dff:fe6a:21e3%eth0". Port: "TCP/6881"
+(I) 2025-06-12T12:12:22 - Successfully listening on IP. IP: "fe80::428:2dff:fe6a:21e3%eth0". Port: "UTP/6881"
+(W) 2025-06-12T12:12:22 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T12:12:22 - Using built-in WebUI.
+(W) 2025-06-12T12:12:22 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T12:12:22 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T12:12:27 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T12:18:30 - qBittorrent termination initiated
+(N) 2025-06-12T12:18:30 - Saving resume data completed.
+(N) 2025-06-12T12:18:30 - BitTorrent session successfully finished.
+(N) 2025-06-12T12:18:30 - qBittorrent is now ready to exit
+(N) 2025-06-12T12:25:31 - qBittorrent v5.1.0 started. Process ID: 147
+(N) 2025-06-12T12:25:31 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T12:25:31 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T12:25:31 - Peer ID: "-qB5100-"
+(I) 2025-06-12T12:25:31 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T12:25:31 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T12:25:31 - Local Peer Discovery support: ON
+(I) 2025-06-12T12:25:31 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T12:25:31 - Anonymous mode: OFF
+(I) 2025-06-12T12:25:31 - Encryption support: ON
+(I) 2025-06-12T12:25:31 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T12:25:31 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T12:25:31 - Successfully listening on IP. IP: "10.42.0.106". Port: "TCP/6881"
+(I) 2025-06-12T12:25:31 - Successfully listening on IP. IP: "10.42.0.106". Port: "UTP/6881"
+(I) 2025-06-12T12:25:31 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T12:25:31 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T12:25:31 - Successfully listening on IP. IP: "fe80::6425:1fff:febe:6582%eth0". Port: "TCP/6881"
+(I) 2025-06-12T12:25:31 - Successfully listening on IP. IP: "fe80::6425:1fff:febe:6582%eth0". Port: "UTP/6881"
+(W) 2025-06-12T12:25:31 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T12:25:31 - Using built-in WebUI.
+(W) 2025-06-12T12:25:31 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T12:25:31 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T12:25:36 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T12:41:36 - qBittorrent termination initiated
+(N) 2025-06-12T12:41:36 - Saving resume data completed.
+(N) 2025-06-12T12:41:36 - BitTorrent session successfully finished.
+(N) 2025-06-12T12:41:36 - qBittorrent is now ready to exit
+(N) 2025-06-12T12:48:39 - qBittorrent v5.1.0 started. Process ID: 146
+(N) 2025-06-12T12:48:39 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T12:48:39 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T12:48:39 - Peer ID: "-qB5100-"
+(I) 2025-06-12T12:48:39 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T12:48:39 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T12:48:39 - Local Peer Discovery support: ON
+(I) 2025-06-12T12:48:39 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T12:48:39 - Anonymous mode: OFF
+(I) 2025-06-12T12:48:39 - Encryption support: ON
+(I) 2025-06-12T12:48:40 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T12:48:40 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T12:48:40 - Successfully listening on IP. IP: "10.42.0.138". Port: "TCP/6881"
+(I) 2025-06-12T12:48:40 - Successfully listening on IP. IP: "10.42.0.138". Port: "UTP/6881"
+(I) 2025-06-12T12:48:40 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T12:48:40 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T12:48:40 - Successfully listening on IP. IP: "fe80::bc0e:5bff:fe12:4656%eth0". Port: "TCP/6881"
+(I) 2025-06-12T12:48:40 - Successfully listening on IP. IP: "fe80::bc0e:5bff:fe12:4656%eth0". Port: "UTP/6881"
+(W) 2025-06-12T12:48:40 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T12:48:40 - Using built-in WebUI.
+(W) 2025-06-12T12:48:40 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T12:48:40 - WebUI: Now listening on IP: *, port: 8080
+(W) 2025-06-12T12:48:45 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T12:50:25 - qBittorrent termination initiated
+(N) 2025-06-12T12:50:25 - Saving resume data completed.
+(N) 2025-06-12T12:50:25 - BitTorrent session successfully finished.
+(N) 2025-06-12T12:50:25 - qBittorrent is now ready to exit
+(N) 2025-06-12T12:58:17 - qBittorrent v5.1.0 started. Process ID: 147
+(N) 2025-06-12T12:58:17 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T12:58:17 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T12:58:17 - Peer ID: "-qB5100-"
+(I) 2025-06-12T12:58:17 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T12:58:17 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T12:58:17 - Local Peer Discovery support: ON
+(I) 2025-06-12T12:58:17 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T12:58:17 - Anonymous mode: OFF
+(I) 2025-06-12T12:58:17 - Encryption support: ON
+(W) 2025-06-12T12:58:17 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T12:58:17 - Using built-in WebUI.
+(W) 2025-06-12T12:58:17 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T12:58:17 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T12:58:17 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T12:58:17 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T12:58:17 - Successfully listening on IP. IP: "10.42.0.174". Port: "TCP/6881"
+(I) 2025-06-12T12:58:17 - Successfully listening on IP. IP: "10.42.0.174". Port: "UTP/6881"
+(I) 2025-06-12T12:58:17 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T12:58:17 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T12:58:17 - Successfully listening on IP. IP: "fe80::34e2:3eff:fec6:2c3d%eth0". Port: "TCP/6881"
+(I) 2025-06-12T12:58:17 - Successfully listening on IP. IP: "fe80::34e2:3eff:fec6:2c3d%eth0". Port: "UTP/6881"
+(W) 2025-06-12T12:58:22 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T14:47:33 - qBittorrent termination initiated
+(N) 2025-06-12T14:47:33 - Saving resume data completed.
+(N) 2025-06-12T14:47:33 - BitTorrent session successfully finished.
+(N) 2025-06-12T14:47:33 - qBittorrent is now ready to exit
+(N) 2025-06-12T14:53:32 - qBittorrent v5.1.0 started. Process ID: 148
+(N) 2025-06-12T14:53:32 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T14:53:32 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T14:53:32 - Peer ID: "-qB5100-"
+(I) 2025-06-12T14:53:32 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T14:53:32 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T14:53:32 - Local Peer Discovery support: ON
+(I) 2025-06-12T14:53:32 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T14:53:32 - Anonymous mode: OFF
+(I) 2025-06-12T14:53:32 - Encryption support: ON
+(W) 2025-06-12T14:53:32 - Couldn't load IP geolocation database. Reason: No such file or directory
+(N) 2025-06-12T14:53:33 - Using built-in WebUI.
+(W) 2025-06-12T14:53:33 - Couldn't load WebUI translation for selected locale (C).
+(N) 2025-06-12T14:53:33 - WebUI: Now listening on IP: *, port: 8080
+(I) 2025-06-12T14:53:33 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/6881"
+(I) 2025-06-12T14:53:33 - Successfully listening on IP. IP: "127.0.0.1". Port: "UTP/6881"
+(I) 2025-06-12T14:53:33 - Successfully listening on IP. IP: "10.42.0.206". Port: "TCP/6881"
+(I) 2025-06-12T14:53:33 - Successfully listening on IP. IP: "10.42.0.206". Port: "UTP/6881"
+(I) 2025-06-12T14:53:33 - Successfully listening on IP. IP: "::1". Port: "TCP/6881"
+(I) 2025-06-12T14:53:33 - Successfully listening on IP. IP: "::1". Port: "UTP/6881"
+(I) 2025-06-12T14:53:33 - Successfully listening on IP. IP: "fe80::e0ab:9ff:fe78:2dcd%eth0". Port: "TCP/6881"
+(I) 2025-06-12T14:53:33 - Successfully listening on IP. IP: "fe80::e0ab:9ff:fe78:2dcd%eth0". Port: "UTP/6881"
+(W) 2025-06-12T14:53:37 - Couldn't download IP geolocation database file. Reason: The remote host name was not found (invalid hostname)
+(N) 2025-06-12T15:10:46 - qBittorrent termination initiated
+(N) 2025-06-12T15:10:46 - Saving resume data completed.
+(N) 2025-06-12T15:10:46 - BitTorrent session successfully finished.
+(N) 2025-06-12T15:10:46 - qBittorrent is now ready to exit
+(N) 2025-06-12T15:17:16 - qBittorrent v5.1.0 started. Process ID: 147
+(N) 2025-06-12T15:17:16 - Using config directory: /config/qBittorrent
+(N) 2025-06-12T15:17:16 - Trying to listen on the following list of IP addresses: "0.0.0.0:6881,[::]:6881"
+(I) 2025-06-12T15:17:16 - Peer ID: "-qB5100-"
+(I) 2025-06-12T15:17:16 - HTTP User-Agent: "qBittorrent/5.1.0"
+(I) 2025-06-12T15:17:16 - Distributed Hash Table (DHT) support: ON
+(I) 2025-06-12T15:17:16 - Local Peer Discovery support: ON
+(I) 2025-06-12T15:17:16 - Peer Exchange (PeX) support: ON
+(I) 2025-06-12T15:17:16 - Anonymous mode: OFF

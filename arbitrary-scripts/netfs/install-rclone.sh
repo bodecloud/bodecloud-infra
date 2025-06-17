@@ -85,7 +85,7 @@ check_hardlinks() {
 
 # Function to handle rclone config hardlinking
 setup_rclone_config() {
-    local user_config="/home/ubuntu/.config/rclone/rclone.conf"
+    local user_config="/home/brunner56/.config/rclone/rclone.conf"
     local root_config="/root/.config/rclone/rclone.conf"
     local project_config="$PROJECT_ROOT/configs/rclone/config/rclone/rclone.conf"
     
@@ -215,45 +215,42 @@ create_mount_service() {
         /usr/bin/rclone mount "${remote}" "${mount_point}"
         --allow-other
         --attr-timeout 1s
-        --buffer-size=0
         --cache-dir "/tmp/rclone-cache/${name}"
-        --cutoff-mode=cautious
-        --dir-cache-time 10s
+        --dir-cache-time 5m
         --log-level DEBUG
-        --multi-thread-streams=0
-        --network-mode
         --poll-interval 10s
         --umask 002
-        --vfs-cache-mode minimal
-        --exclude "*.accdb"
-        --exclude "*.cdb"
+        --vfs-cache-mode full
+        --vfs-case-insensitive
         --exclude "*.db"
-        --exclude "*.dbf"
-        --exclude "*.dta"
-        --exclude "*.fdb"
-        --exclude "*.frm"
-        --exclude "*.gdb"
-        --exclude "*.h2.db"
-        --exclude "*.ibd"
-        --exclude "*.kexi"
-        --exclude "*.ldf"
-        --exclude "*.mdb"
-        --exclude "*.mdf"
-        --exclude "*.mv.db"
-        --exclude "*.myd"
-        --exclude "*.myi"
-        --exclude "*.ndf"
-        --exclude "*.nsf"
-        --exclude "*.odb"
-        --exclude "*.ora"
-        --exclude "*.pdx"
-        --exclude "*.rdb"
-        --exclude "*.sdb"
-        --exclude "*.sdf"
         --exclude "*.sqlite"
         --exclude "*.sqlite3"
-        --exclude "*.sqlitedb"
+        --exclude "*.mdb"
+        --exclude "*.accdb"
+        --exclude "*.mdf"
+        --exclude "*.ndf"
+        --exclude "*.ldf"
+        --exclude "*.ora"
+        --exclude "*.dbf"
+        --exclude "*.gdb"
+        --exclude "*.fdb"
+        --exclude "*.odb"
+        --exclude "*.kexi"
+        --exclude "*.pdx"
+        --exclude "*.cdb"
         --exclude "*.wdb"
+        --exclude "*.sqlitedb"
+        --exclude "*.dta"
+        --exclude "*.rdb"
+        --exclude "*.mv.db"
+        --exclude "*.h2.db"
+        --exclude "*.ibd"
+        --exclude "*.frm"
+        --exclude "*.myi"
+        --exclude "*.myd"
+        --exclude "*.nsf"
+        --exclude "*.sdb"
+        --exclude "*.sdf"
     )
     echo "Mount command: ${rclone_command[*]}"
     echo ""

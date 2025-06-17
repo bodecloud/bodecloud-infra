@@ -1,0 +1,74 @@
+{{- if .Values.vpnController.enabled -}}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "vpn-gateway.fullname" . }}-controller
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "vpn-gateway.labels" . | nindent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "vpn-gateway.fullname" . }}-controller
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "vpn-gateway.labels" . | nindent 4 }}
+rules:
+- apiGroups: ["", "apps"]
+  resources: ["pods", "deployments", "configmaps"]
+  verbs: ["get", "list", "watch", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "vpn-gateway.fullname" . }}-controller
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "vpn-gateway.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "vpn-gateway.fullname" . }}-controller
+subjects:
+- kind: ServiceAccount
+  name: {{ include "vpn-gateway.fullname" . }}-controller
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vpn-gateway.fullname" . }}-controller
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "vpn-gateway.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "vpn-gateway.name" . }}-controller
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "vpn-gateway.name" . }}-controller
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ include "vpn-gateway.fullname" . }}-controller
+      containers:
+        - name: controller
+          image: "{{ .Values.vpnController.image.repository }}:{{ .Values.vpnController.image.tag }}"
+          command: ["/bin/sh", "-c"]
+          args:
+            - "pip install kubernetes aiohttp && python /app/controller.py"
+          env:
+            - name: RELEASE_NAME
+              value: {{ .Release.Name }}
+          volumeMounts:
+            - name: script
+              mountPath: /app
+      volumes:
+        - name: script
+          configMap:
+            name: {{ include "vpn-gateway.fullname" . }}-controller
+{{- end }}
