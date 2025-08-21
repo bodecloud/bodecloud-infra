@@ -1,0 +1,175 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.routers.gptr-legacy.rule: Host(`gptr-legacy.bolabaden.org`) || Host(`gptr-legacy.bolabaden.duckdns.org`) || Host(`gptr-legacy.micklethefickle.duckdns.org`) || Host(`gptr-legacy.micklethefickle.bolabaden.org`) || Host(`gptr-legacy.micklethefickle.bolabaden`)
+    traefik.http.routers.gptr-legacy.service: gptr-legacy
+    traefik.http.routers.gptr.rule: Host(`bolabaden.org`) || Host(`bolabaden.duckdns.org`) || Host(`micklethefickle.duckdns.org`) || Host(`micklethefickle.bolabaden.org`) || Host(`micklethefickle.bolabaden.duckdns.org`) || Host(`gptr.bolabaden.org`) || Host(`gptr.bolabaden.duckdns.org`) || Host(`gptr.micklethefickle.duckdns.org`) || Host(`gptr.micklethefickle.bolabaden.org`) || Host(`gptr.micklethefickle.bolabaden.duckdns.org`)
+    traefik.http.routers.gptr.service: gptr
+    traefik.http.services.gptr-legacy.loadbalancer.server.port: "8000"
+    traefik.http.services.gptr.loadbalancer.server.port: "3000"
+  labels:
+    io.kompose.service: warp2
+  name: warp2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: warp2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+        traefik.enable: "true"
+        traefik.http.routers.gptr-legacy.rule: Host(`gptr-legacy.bolabaden.org`) || Host(`gptr-legacy.bolabaden.duckdns.org`) || Host(`gptr-legacy.micklethefickle.duckdns.org`) || Host(`gptr-legacy.micklethefickle.bolabaden.org`) || Host(`gptr-legacy.micklethefickle.bolabaden`)
+        traefik.http.routers.gptr-legacy.service: gptr-legacy
+        traefik.http.routers.gptr.rule: Host(`bolabaden.org`) || Host(`bolabaden.duckdns.org`) || Host(`micklethefickle.duckdns.org`) || Host(`micklethefickle.bolabaden.org`) || Host(`micklethefickle.bolabaden.duckdns.org`) || Host(`gptr.bolabaden.org`) || Host(`gptr.bolabaden.duckdns.org`) || Host(`gptr.micklethefickle.duckdns.org`) || Host(`gptr.micklethefickle.bolabaden.org`) || Host(`gptr.micklethefickle.bolabaden.duckdns.org`)
+        traefik.http.routers.gptr.service: gptr
+        traefik.http.services.gptr-legacy.loadbalancer.server.port: "8000"
+        traefik.http.services.gptr.loadbalancer.server.port: "3000"
+      labels:
+        io.kompose.service: warp2
+    spec:
+      containers:
+        - env:
+            - name: TUNNEL_TOKEN
+              value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+            - name: WARP_LICENSE_KEY
+              value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+            - name: WARP_SLEEP
+              value: "2"
+          image: caomingjun/warp:latest
+          name: warp2
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+            - containerPort: 3000
+              protocol: TCP
+            - containerPort: 3001
+              protocol: TCP
+          securityContext:
+            capabilities:
+              add:
+                - MKNOD
+                - AUDIT_WRITE
+                - NET_ADMIN
+          volumeMounts:
+            - mountPath: /var/lib/cloudflare-warp
+              name: warp2-claim0
+        - envFrom:
+            - configMapRef:
+                name: env
+          image: muniftanjim/stremthru:latest
+          name: stremthru
+          volumeMounts:
+            - mountPath: /app/data
+              name: stremthru-claim0
+        - env:
+            - name: ANTHROPIC_API_KEY
+              value: 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
+            - name: BRAVE_API_KEY
+              value: BSAJvM6qIvGJL90Z5T8c8jUHDf4CAE0
+            - name: CHOKIDAR_USEPOLLING
+              value: "true"
+            - name: DEEPSEEK_API_KEY
+              value: sk-d6c4fe1d5db945ba8547fc348df03833
+            - name: EXA_API_KEY
+              value: 4f304bea-22a0-4473-bc38-21114d0f8aaf
+            - name: FIRECRAWL_API_KEY
+              value: fc-e0e316bead3d497fb24d42ea21d5daf6
+            - name: FIRE_CRAWL_API_KEY
+              value: fc-e0e316bead3d497fb24d42ea21d5daf6
+            - name: GEMINI_API_KEY
+              value: AIzaSyB-1aUePBQbb7_rpIDz5kY7AMWxguMq7Y8
+            - name: GLAMA_API_KEY
+              value: glama_eyJhcGlLZXkiOiI4YTc1MWRkYi0xNGNjLTQyNTctOTgzMS05OTMyNDQyNGY4NDQifQ
+            - name: GROQ_API_KEY
+              value: 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
+            - name: HF_TOKEN
+              value: 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
+            - name: HUGGINGFACE_ACCESS_TOKEN
+              value: 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
+            - name: HUGGINGFACE_API_TOKEN
+              value: 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
+            - name: LANGCHAIN_API_KEY
+              value: lsv2_0123456789012345678901234567890123456789
+            - name: LANGSMITH_API_KEY
+              value: lsv2_0123456789012345678901234567890123456789
+            - name: LANGSMITH_ENDPOINT
+              value: https://api.smith.langchain.com
+            - name: LANGSMITH_TRACING
+              value: "true"
+            - name: LOGGING_LEVEL
+              value: DEBUG
+            - name: MISTRALAI_API_KEY
+              value: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+            - name: MISTRAL_API_KEY
+              value: rNZOe7bauJwpknHvDjOtnXV6iaKHzEt1
+            - name: NEXT_PUBLIC_GA_MEASUREMENT_ID
+            - name: NEXT_PUBLIC_GPTR_API_URL
+              value: https://gptr.bolabaden.org
+            - name: OPENAI_API_KEY
+              value: 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
+            - name: OPENROUTER_API_KEY
+              value: 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
+            - name: PERPLEXITYAI_API_KEY
+              value: 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
+            - name: PERPLEXITY_API_KEY
+              value: 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
+            - name: REPLICATE_API_KEY
+              value: r8_8ktlYwwthNrp8pPSLZF1DD7507tku082y7ptd
+            - name: REVID_API_KEY
+              value: 9a9884c5-6cb6-4ea9-aadc-91b31de76653
+            - name: SAMBANOVA_API_KEY
+              value: f3f47213-2123-4408-8247-816319bc1e84
+            - name: SEARCH1API_KEY
+              value: DE721F1D-498C-4DBF-843C-B72A75DAFD14
+            - name: SERPAPI_API_KEY
+              value: dfc64bfdf77ccdde0196b0fde7848a8ebc04e520
+            - name: TAVILY_API_KEY
+              value: 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
+            - name: TOGETHERAI_API_KEY
+              value: 3bf6c62c61e9dbfbe4e947bd7e0ec876188e41916fbd622877018188f84ab2f2
+            - name: UNIFY_API_KEY
+              value: XeFNQpisNryyS6NrlnDEAK7D-aE0mAq4JCkwsfeDa90=
+            - name: UPSTAGEAI_API_KEY
+              value: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+            - name: UPSTAGE_API_KEY
+              value: up_uPJNmSkziDbrTi75fQ7fFOkOcCTSC
+            - name: YOU_API_KEY
+              value: cbee3356-84ed-40ea-9d09-ce3d0afcb340<__>1QKC7nETU8N2v5f46hH6l6ax
+          image: th3w1zard1/ai-researchwizard:latest
+          name: gptr
+          stdin: true
+          volumeMounts:
+            - mountPath: /usr/src/app/logs
+              name: gptr-logs
+            - mountPath: /usr/src/app/outputs
+              name: gptr-outputs
+            - mountPath: /usr/src/app/reports
+              name: gptr-claim2
+      restartPolicy: Always
+      volumes:
+        - name: warp2-claim0
+          persistentVolumeClaim:
+            claimName: warp2-claim0
+        - name: stremthru-claim0
+          persistentVolumeClaim:
+            claimName: stremthru-claim0
+        - name: gptr-logs
+          persistentVolumeClaim:
+            claimName: gptr-logs
+        - name: gptr-outputs
+          persistentVolumeClaim:
+            claimName: gptr-outputs
+        - name: gptr-claim2
+          persistentVolumeClaim:
+            claimName: gptr-claim2

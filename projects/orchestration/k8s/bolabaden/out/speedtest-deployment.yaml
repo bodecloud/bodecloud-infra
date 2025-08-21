@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    homepage.description: Regularly tests your internet speed and tracks performance over time, helping you monitor your connection quality.
+    homepage.group: Network Monitoring
+    homepage.href: https://speedtest.bolabaden.org/
+    homepage.icon: speedtest.png
+    homepage.name: Speedtest
+    homepage.widget.fields: '["download", "upload", "ping", "speedtest"]'
+    homepage.widget.type: speedtest
+    homepage.widget.url: https://speedtest.bolabaden.org
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.routers.speedtest.rule: Host(`speedtest.bolabaden.org`) || Host(`speedtest.bolabaden.duckdns.org`) || Host(`speedtest.micklethefickle.duckdns.org`) || Host(`speedtest.micklethefickle.bolabaden.org`) || Host(`speedtest.micklethefickle.bolabaden.duckdns.org`)
+    traefik.http.services.speedtest.loadbalancer.server.port: "80"
+  labels:
+    io.kompose.service: speedtest
+  name: speedtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: speedtest
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        homepage.description: Regularly tests your internet speed and tracks performance over time, helping you monitor your connection quality.
+        homepage.group: Network Monitoring
+        homepage.href: https://speedtest.bolabaden.org/
+        homepage.icon: speedtest.png
+        homepage.name: Speedtest
+        homepage.widget.fields: '["download", "upload", "ping", "speedtest"]'
+        homepage.widget.type: speedtest
+        homepage.widget.url: https://speedtest.bolabaden.org
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+        traefik.enable: "true"
+        traefik.http.routers.speedtest.rule: Host(`speedtest.bolabaden.org`) || Host(`speedtest.bolabaden.duckdns.org`) || Host(`speedtest.micklethefickle.duckdns.org`) || Host(`speedtest.micklethefickle.bolabaden.org`) || Host(`speedtest.micklethefickle.bolabaden.duckdns.org`)
+        traefik.http.services.speedtest.loadbalancer.server.port: "80"
+      labels:
+        io.kompose.service: speedtest
+    spec:
+      containers:
+        - env:
+            - name: ADMIN_EMAIL
+              value: boden.crouch@gmail.com
+            - name: ADMIN_NAME
+              value: ubuntu
+            - name: ADMIN_PASSWORD
+              value: h4L0m4St3R327
+            - name: API_RATE_LIMIT
+              value: "60"
+            - name: APP_KEY
+              value: base64:OZVnVd3/7lJTtOTtVZ0YqxXJKtle2R48NIrfFv11CkM=
+            - name: APP_NAME
+              value: Speedtest Tracker
+            - name: APP_TIMEZONE
+              value: America/Chicago
+            - name: APP_URL
+            - name: ASSET_URL
+            - name: CHART_BEGIN_AT_ZERO
+              value: "true"
+            - name: CHART_DATETIME_FORMAT
+              value: j/m G:i
+            - name: CONTENT_WIDTH
+              value: 7xl
+            - name: DATETIME_FORMAT
+              value: j M Y, G:i:s
+            - name: DB_CONNECTION
+              value: sqlite
+            - name: DISPLAY_TIMEZONE
+              value: America/Chicago
+            - name: PGID
+              value: "988"
+            - name: PRUNE_RESULTS_OLDER_THAN
+              value: "0"
+            - name: PUBLIC_DASHBOARD
+              value: "true"
+            - name: PUID
+              value: "1001"
+            - name: SPEEDTEST_BLOCKED_SERVERS
+            - name: SPEEDTEST_INTERFACE
+            - name: SPEEDTEST_SCHEDULE
+              value: 0 * * * *
+            - name: SPEEDTEST_SERVERS
+            - name: SPEEDTEST_SKIP_IPS
+            - name: THRESHOLD_DOWNLOAD
+              value: "900"
+            - name: THRESHOLD_ENABLED
+              value: "true"
+            - name: THRESHOLD_PING
+              value: "25"
+            - name: THRESHOLD_UPLOAD
+              value: "900"
+            - name: TZ
+              value: America/Chicago
+            - name: UMASK
+              value: "002"
+          image: linuxserver/speedtest-tracker
+          livenessProbe:
+            exec:
+              command:
+                - curl -fs http://127.0.0.1:80 > /dev/null || exit 1
+            initialDelaySeconds: 20
+            periodSeconds: 30
+            timeoutSeconds: 15
+          name: speedtest
+          volumeMounts:
+            - mountPath: /config/keys
+              name: speedtest-cm1
+      hostname: speedtest
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: speedtest-cm1
+          name: speedtest-cm1

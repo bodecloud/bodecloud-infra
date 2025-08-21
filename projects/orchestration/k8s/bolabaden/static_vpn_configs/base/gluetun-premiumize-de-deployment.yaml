@@ -1,0 +1,110 @@
+#! gluetun-premiumize-de-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: gluetun-premiumize-de
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: gluetun-premiumize-de
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: boden
+            com.docker.compose.service: gluetun-premiumize-de
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: boden
+                com.docker.compose.service: gluetun-premiumize-de
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: gluetun-premiumize-de
+                  image: ghcr.io/qdm12/gluetun
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: BLOCK_ADS
+                      value: "on"
+                    - name: BLOCK_MALICIOUS
+                      value: "on"
+                    - name: BLOCK_SURVEILLANCE
+                      value: "on"
+                    - name: FIREWALL_OUTBOUND_SUBNETS
+                      value: "10.76.0.0/16,172.16.0.0/16,100.64.0.0/10"
+                    - name: HEALTH_SERVER_ADDRESS
+                      value: "127.0.0.1:9999"
+                    - name: HEALTH_SUCCESS_WAIT_DURATION
+                      value: "5s"
+                    - name: HEALTH_TARGET_ADDRESS
+                      value: "cloudflare.com:443"
+                    - name: HEALTH_VPN_DURATION_ADDITION
+                      value: "5s"
+                    - name: HEALTH_VPN_DURATION_INITIAL
+                      value: "6s"
+                    - name: OPENVPN_CIPHERS
+                      value: "AES-256-CBC"
+                    - name: OPENVPN_CUSTOM_CONFIG
+                      value: "/etc/openvpn/target.ovpn"
+                    - name: OPENVPN_FLAGS
+                      value: "--auth-user-pass /config/auth.conf"
+                    - name: OPENVPN_IPV6
+                      value: "off"
+                    - name: STORAGE_FILEPATH
+                      value: "/gluetun/servers.json"
+                    - name: VERSION_INFORMATION
+                      value: "on"
+                    - name: VPN_SERVICE_PROVIDER
+                      value: "custom"
+                    - name: VPN_TYPE
+                      value: "openvpn"
+                  securityContext:
+                    sysctls:
+                        name: net.ipv6.conf.all.disable_ipv6
+                        value: 1
+                    capabilities:
+                        add: [NET_ADMIN]
+                  ports:
+                    - name: gluetun-pr-9999
+                      containerPort: 9999
+                    - name: gluetun-pr-1066
+                      containerPort: 1066
+                    - name: gluetun-pr-8898
+                      containerPort: 8898
+                    - name: gluetun-p-41652
+                      containerPort: 41652
+                    - name: gluetun-pr-8000
+                      containerPort: 8000
+                    - name: gluetun-pr-8388
+                      containerPort: 8388
+                    - name: gluetun-pr-8888
+                      containerPort: 8888
+                    - name: gluetun-pr-8001
+                      containerPort: 8001
+                  volumeMounts:
+                    - name: config-auth-conf
+                      mountPath: /config/auth.conf
+                      subPath: premiumize-auth
+                      readOnly: true
+                    - name: etc-openvpn-target-ovpn
+                      mountPath: /etc/openvpn/target.ovpn
+                      subPath: vpn-de.premiumize.me
+                      readOnly: true
+            volumes:
+                - name: config-auth-conf
+                  configMap:
+                    name: boden
+                    items:
+                        - key: premiumize-auth
+                          path: premiumize-auth
+                - name: etc-openvpn-target-ovpn
+                  configMap:
+                    name: boden
+                    items:
+                        - key: vpn-de.premiumize.me
+                          path: vpn-de.premiumize.me

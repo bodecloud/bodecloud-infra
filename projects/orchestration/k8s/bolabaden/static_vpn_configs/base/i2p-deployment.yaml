@@ -1,0 +1,62 @@
+#! i2p-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: i2p
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: i2p
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: boden
+            com.docker.compose.service: i2p
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: boden
+                com.docker.compose.service: i2p
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: unless-stopped
+            containers:
+                - name: i2p
+                  image: ghcr.io/purplei2p/i2pd
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: EXT_PORT
+                      value: "7661"
+                  ports:
+                    - name: i2p-7650
+                      containerPort: 7650
+                    - name: i2p-7658
+                      containerPort: 7658
+                    - name: i2p-7654
+                      containerPort: 7654
+                    - name: i2p-7656
+                      containerPort: 7656
+                    - name: i2p-2827
+                      containerPort: 2827
+                    - name: i2p-4444
+                      containerPort: 4444
+                    - name: i2p-4447
+                      containerPort: 4447
+                    - name: i2p-7070
+                      containerPort: 7070
+                  volumeMounts:
+                    - name: i2p--i2p
+                      mountPath: /i2p/.i2p
+                    - name: i2psnark
+                      mountPath: /i2psnark
+            volumes:
+                - name: i2p--i2p
+                  hostPath:
+                    path: /home/boden/configs/i2p
+                - name: i2psnark
+                  hostPath:
+                    path: /home/boden/downloads

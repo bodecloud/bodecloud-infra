@@ -1,0 +1,651 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+name: coolify-proxy
+networks:
+  coolify:
+    external: true
+    attachable: true
+services:
+  cloudflare-ddns:
+    image: favonia/cloudflare-ddns:1  # - "1" for the latest stable version whose major version is 1
+    #image: favonia/cloudflare-ddns:latest  # - "latest" for the latest stable version (which could become 2.x.y in the future and break things)
+    container_name: cloudflare-ddns
+    network_mode: host  # This bypasses network isolation and makes IPv6 easier (optional; see below)
+    read_only: true  # Make the container filesystem read-only (optional but recommended)
+    cap_drop: [all]  # Drop all Linux capabilities (optional but recommended)
+    security_opt: [no-new-privileges:true]  # Another protection to restrict superuser privileges (optional but recommended)
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      # The value of CLOUDFLARE_API_TOKEN should be an API token (not an API key), which can be obtained from the API Tokens page.
+      # Use the Edit zone DNS template to create a token. The less secure API key authentication is deliberately not supported.
+      CLOUDFLARE_API_TOKEN: '${CLOUDFLARE_API_TOKEN:?}'  # Your Cloudflare API token
+
+      # There is an optional feature (available since version 1.14.0) that lets you maintain a WAF list of detected IP addresses.
+      # To use this feature, edit the token and grant it the Account - Account Filter Lists - Edit permission.
+      # If you only need to update WAF lists, not DNS records, you can remove the Zone - DNS - Edit permission.
+      # Refer to the detailed documentation below for information on updating WAF lists.
+      #CLOUDFLARE_WAF_LIST_TOKEN: ${CLOUDFLARE_WAF_LIST_TOKEN}  # Your Cloudflare WAF list token
+
+      # The value of DOMAINS should be a list of fully qualified domain names (FQDNs) separated by commas.
+      # For example, DOMAINS=example.org,www.example.org,example.io instructs the updater to manage the domains example.org, www.example.org, and example.io.
+      # These domains do not have to share the same DNS zone---the updater will take care of the DNS zones behind the scene.
+      DOMAINS: '${DOMAIN},*.${DOMAIN},*.${TS_HOSTNAME}.${DOMAIN}'  # Your domains (separated by commas)
+
+      # PROXIED=true enables Cloudflare proxying (caches webpages, hides your IP).
+      # Remove PROXIED=true to expose your real IP or if your traffic isn't HTTP(S).
+      # Default: false. Accepts any boolean (true, false, 0, 1).
+      # Advanced: PROXIED can be a domain-based boolean expression, e.g.:
+      #   PROXIED=is(example.org)           # only example.org proxied
+      #   PROXIED=sub(example.org)          # only subdomains of example.org proxied
+      #   PROXIED=!is(example.org)          # all except example.org proxied
+      #   PROXIED=is(a.org)||is(b.org)      # only a.org and b.org proxied
+      # See https://pkg.go.dev/strconv#ParseBool for more advanced usage.
+      PROXIED: is(${DOMAIN})||sub(${DOMAIN})
+
+      # The time-to-live (TTL) (in seconds) of new DNS records.
+      # Default is 1, meaning 'automatic' in CloudFlare.
+      TTL: '1'
+
+      # The comment of new DNS records.
+      RECORD_COMMENT: 'Updated by Cloudflare DDNS on server `${TS_HOSTNAME}.${DOMAIN}`'
+
+      # 🧪 The text description of new WAF lists.
+      #WAF_LIST_DESCRIPTION: 
+
+      # The Healthchecks ping URL to ping when the updater successfully updates
+      # IP addresses, such as `https://hc-ping.com/<uuid>` or `https://hc-ping.com/<project-ping-key>/<name-slug>`.
+      # ⚠️ The ping schedule should match the update schedule specified by UPDATE_CRON.
+      # 🤖 The updater can work with any server following the [same Healthchecks protocol](https://healthchecks.io/docs/http_api/)
+      # This includes self-hosted instances of [Healthchecks](https://github.com/healthchecks/healthchecks).
+      # Both UUID and Slug URLs are supported, and the updater works regardless whether the POST-only mode is enabled.
+      #HEALTHCHECKS: 
+
+      # The Uptime Kuma’s Push URL to ping when the updater successfully updates IP addresses, such as `https://<host>/push/<id>`.
+      # You can directly copy the “Push URL” from the Uptime Kuma configuration page.
+      # ⚠️ The “Heartbeat Interval” should match the update schedule specified by `UPDATE_CRON`.
+      #UPTIMEKUMA: 'https://uptimekuma.${DOMAIN}/push/1234567890'
+
+      # Newline-separated [shoutrrr URLs](https://containrrr.dev/shoutrrr/latest/services/overview/) to which the updater sends notifications of IP address changes and other events.
+      # Each shoutrrr URL represents a notification service; for example, discord://<token>@<id> means sending messages to Discord.
+      # See https://github.com/containrrr/shoutrrr for more information.
+      #SHOUTRRR: discord://${SHOUTRRR_DISCORD_TOKEN}@${SHOUTRRR_DISCORD_CHANNEL_ID}
+
+      # The updater, by default, will attempt to update DNS records for both IPv4 and IPv6, and there is no
+      # harm in leaving the automatic detection on even if your network does not work for one of them.
+      # However, if you want to disable IPv6 entirely (perhaps to avoid seeing the detection errors), add IP6_PROVIDER=none.
+      #IP6_PROVIDER: 'none'
+    restart: always
+  nginx-auth:
+    # 🔹🔹 Nginx Authentication Middleware 🔹🔹
+    # Acts as forwardAuth service for traefik middleware
+    image: nginx:alpine
+    container_name: nginx-auth
+    hostname: nginx-auth
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    networks:
+      - coolify
+    configs:
+      - source: nginx-auth.conf
+        target: /etc/nginx/nginx.conf
+        mode: 0644
+    volumes:
+      - /data/coolify/proxy/nginx-middlewares/auth:/etc/nginx/auth:ro
+#      - /data/coolify/proxy/nginx-middlewares/cache:/var/cache/nginx
+#      - /data/coolify/proxy/nginx-middlewares/logs:/var/log/nginx
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      NGINX_ACCESS_LOG: /dev/stdout
+      NGINX_ERROR_LOG: /dev/stderr
+      NGINX_LOG_LEVEL: warn
+    labels:
+      traefik.enable: "true"
+      # HTTP
+      traefik.http.routers.nginx-auth.service: nginx-auth
+      traefik.http.routers.nginx-auth.rule: 'Host(`nginx-auth.${DOMAIN}`) || Host(`nginx-auth.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.nginx-auth.loadbalancer.server.port: 80
+      traefik.http.middlewares.nginx-auth.forwardAuth.address: "http://nginx-auth:80/auth"
+      traefik.http.middlewares.nginx-auth.forwardAuth.trustForwardHeader: "true"
+      traefik.http.middlewares.nginx-auth.forwardAuth.authResponseHeaders: "X-Auth-Method,X-Auth-Passed,X-Middleware-Name"
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.01
+          memory: 6M
+        limits:
+          cpus: 1
+          memory: 1G
+    healthcheck:
+      # test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/health > /dev/null 2>&1 && wget -qO- https://127.0.0.1:443/health > /dev/null 2>&1 || exit 1"]
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/health > /dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: always
+  tinyauth:
+    # 🔹🔹 TinyAuth 🔹🔹
+    image: ghcr.io/steveiliop56/tinyauth:v3
+    container_name: tinyauth
+    hostname: auth
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    networks:
+      - coolify
+    volumes:
+      - /data/coolify/proxy/tinyauth:/data
+    environment:
+      SECRET: b9a4ZxFNBbyR9KdTAf2kSciI5jUCQLzE
+      APP_URL: https://auth.${DOMAIN}
+      USERS: ${TINYAUTH_USERS:?}
+      # Google OAuth Configuration
+      GOOGLE_CLIENT_ID: ${TINYAUTH_GOOGLE_CLIENT_ID:?}
+      GOOGLE_CLIENT_SECRET: ${TINYAUTH_GOOGLE_CLIENT_SECRET:?}
+      # GitHub OAuth Configuration
+      GITHUB_CLIENT_ID: ${TINYAUTH_GITHUB_CLIENT_ID:?}
+      GITHUB_CLIENT_SECRET: ${TINYAUTH_GITHUB_CLIENT_SECRET:?}
+      # Additional recommended settings
+      SESSION_EXPIRY: 604800 # 2 weeks session expiry
+      COOKIE_SECURE: true # Send cookie only with HTTPS
+      APP_TITLE: Bolabaden # Customize login page title
+      LOGIN_MAX_RETRIES: 15 # Maximum login attempts before account lockout
+      LOGIN_TIMEOUT: 300 # Lock account for 5 minutes after too many failed attempts
+      OAUTH_AUTO_REDIRECT: none # Options: none, github, google, or generic
+      # Uncomment below if you want to restrict OAuth login to specific users
+      OAUTH_WHITELIST: boden.crouch@gmail.com,halomastar@gmail.com,athenajaguiar@gmail.com,dgorsch2@gmail.com,dgorsch4@gmail.com  # e.g. user1,user2,/^admin.>
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.tinyauth.rule: 'Host(`auth.${DOMAIN}`) || Host(`auth.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.middlewares.tinyauth.forwardAuth.address: http://auth:3000/api/auth/traefik
+      homepage.group: Security
+      homepage.name: TinyAuth
+      homepage.icon: https://tinyauth.app/img/logo.png
+      homepage.href: https://auth.${DOMAIN}/
+      homepage.description: Authentication service for securing your applications
+    restart: always
+
+  crowdsec:
+    # 🔹🔹 CrowdSec 🔹🔹
+    # Highly recommend this guide: https://blog.lrvt.de/configuring-crowdsec-with-traefik/
+    image: docker.io/crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    hostname: crowdsec
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    networks:
+      - coolify
+    ports:
+      - 127.0.0.1:9876:8080  # Port mapping for local firewall bouncers
+    expose:
+      - 8080  # HTTP API for bouncers
+      - 6060  # Metrics endpoint for prometheus
+      - 7422  # AppSec WAF endpoint
+    environment:
+      GID: 1000
+      ## Please note the spaces between the collections names (hence why the quotes are needed)
+      COLLECTIONS: "crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/base-http-scenarios crowdsecurity/sshd crowdsecurity/linux crowdsecurity/appsec-generic-rules crowdsecurity/appsec-virtual-patching crowdsecurity/appsec-crs"
+    configs:
+      - source: crowdsec-appsec.yaml
+        target: /etc/crowdsec/acquis.d/appsec.yaml
+        mode: 0644
+      - source: acquis.yaml
+        target: /etc/acquis.yaml
+        mode: 0644
+    volumes:
+      # CrowdSec container data
+      - /data/coolify/proxy/crowdsec/data:/var/lib/crowdsec/data
+      - /data/coolify/proxy/crowdsec/etc/crowdsec:/etc/crowdsec
+      - /data/coolify/proxy/crowdsec/plugins:/usr/local/lib/crowdsec/plugins/
+      # Log bind mounts into crowdsec
+      - /data/coolify/proxy/crowdsec/var/log/auth.log:/var/log/auth.log:ro
+      - /data/coolify/proxy/crowdsec/var/log/syslog:/var/log/syslog:ro
+      - /data/coolify/proxy/logs:/var/log/traefik:ro
+    labels:
+      traefik.enable: "true"
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.forwardedHeadersTrustedIPs: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,169.254.0.0/16,127.0.0.0/8,100.64.0.0/10,192.0.0.0/24,192.0.2.0/24,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,240.0.0.0/4,255.255.255.255/32,fc00::/7,fd00::/8,fe80::/10,::1/128,2002::/16"
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.clientTrustedIPs: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,169.254.0.0/16,127.0.0.0/8,100.64.0.0/10,192.0.0.0/24,192.0.2.0/24,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,240.0.0.0/4,255.255.255.255/32,fc00::/7,fd00::/8,fe80::/10,::1/128,2002::/16"
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.enabled: true
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.defaultDecisionSeconds: 60
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecMode: live
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecAppsecEnabled: false  # <--- here you can enable appsec waf
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecAppsecHost: crowdsec:7422
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecAppsecFailureBlock: true
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecAppsecUnreachableBlock: true
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecLapiKey: "${CROWDSEC_LAPI_KEY}"
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecLapiScheme: http
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecLapiHost: crowdsec:8080
+      traefik.http.middlewares.crowdsec.plugin.crowdsec-bouncer-traefik-plugin.crowdsecLapiTLSInsecureVerify: false
+      traefik.http.routers.crowdsec.rule: 'Host(`crowdsec.${DOMAIN}`) || Host(`crowdsec.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.crowdsec.loadbalancer.server.port: 8080
+      homepage.group: Security
+      homepage.name: CrowdSec
+      homepage.icon: crowdsec.png
+      homepage.href: https://crowdsec.${DOMAIN}/
+      homepage.description: CrowdSec is an open-source, behavioral, intrusion detection system.
+      homepage.widget.type: crowdsec
+      homepage.widget.url: http://crowdsec:8080
+      homepage.widget.username: brunner56  # machine_id in crowdsec
+      homepage.widget.password: h4L0m4St3R327
+    restart: always
+  traefik:
+    # 🔹🔹 Traefik 🔹🔹
+    depends_on:
+      - crowdsec
+      - nginx-auth
+    image: traefik:latest
+    container_name: coolify-proxy
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    networks:
+      - coolify
+    expose:
+      - 8080
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /data/coolify/proxy:/traefik
+      - /data/coolify/proxy/certs:/certs
+      - /data/coolify/proxy/traefik/config:/config
+      - /data/coolify/proxy/traefik/plugins-local:/plugins-local
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # ro = read-only access to the docker.sock
+      - /data/coolify/proxy/traefik/etc/traefik:/etc/traefik/  # Put the provided fileConfig.yml files at this location
+      - /data/coolify/proxy/logs:/logs
+    #      - /etc/localtime:/etc/localtime:ro
+    configs:
+      - source: traefik-dynamic.yaml
+        target: /traefik/dynamic/dynamic.yaml
+        mode: 0644
+    environment:
+      LETS_ENCRYPT_EMAIL: 'boden.crouch@gmail.com'
+      CLOUDFLARE_EMAIL: 'boden.crouch@gmail.com'
+      CLOUDFLARE_DNS_API_TOKEN: '${CLOUDFLARE_API_TOKEN}'
+      CLOUDFLARE_ZONE_API_TOKEN: '${CLOUDFLARE_API_TOKEN}'
+      DUCKDNS_TOKEN: '2c18769a-2889-4648-a70c-2fe44dd10f20'
+    command: 
+      - '--accessLog=true'
+      - '--accessLog.bufferingSize=0'
+      - '--accessLog.fields.headers.defaultMode=drop'
+      - '--accessLog.fields.headers.names.User-Agent=keep'
+      - '--accessLog.filePath=/logs/traefik.log'
+      - '--accessLog.filters.statusCodes=200-299,400-599'
+      - '--accessLog.format=json'
+      - '--metrics.prometheus.buckets=0.1,0.3,1.2,5.0'
+      - '--api.dashboard=true'
+      - '--api.debug=true'
+      - '--api.disableDashboardAd=true'
+      - '--api.insecure=false'
+      - '--certificatesResolvers.letsencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory'
+      - '--certificatesResolvers.letsencrypt.acme.dnsChallenge.provider=cloudflare'
+      - '--certificatesResolvers.letsencrypt.acme.dnsChallenge.resolvers=1.1.1.1,8.8.8.8,1.0.0.1'
+      - '--certificatesResolvers.letsencrypt.acme.dnsChallenge=true'
+      - '--certificatesResolvers.letsencrypt.acme.email=boden.crouch@gmail.com'
+      - '--certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=http'
+      - '--certificatesResolvers.letsencrypt.acme.httpChallenge=true'
+      - '--certificatesResolvers.letsencrypt.acme.storage=/certs/acme.json'
+      - '--certificatesResolvers.letsencrypt.acme.tlsChallenge=true'
+      - '--entryPoints.http.address=:80'
+      - '--entryPoints.http.forwardedHeaders.trustedIPs=103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32'
+      - '--entryPoints.http.http.encodeQuerySemiColons=true'
+      - '--entryPoints.http.http2.maxConcurrentStreams=250'
+      - '--entryPoints.http.http.middlewares=crowdsec@file'
+      - '--entrypoints.http.http.redirections.entrypoint.scheme=https'
+      - '--entrypoints.http.http.redirections.entrypoint.to=https'
+      - '--entryPoints.https.address=:443'
+      - '--entryPoints.https.forwardedHeaders.trustedIPs=103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32'
+      - '--entryPoints.https.http.encodeQuerySemiColons=true'
+      - '--entryPoints.https.http.tls.certResolver=letsencrypt'
+      - '--entryPoints.https.http.tls.domains[0].main=${DOMAIN}'
+      - '--entryPoints.https.http.tls.domains[0].sans=*.${DOMAIN},*.${TS_HOSTNAME}.${DOMAIN}'
+      - '--entryPoints.https.http.tls=true'
+      - '--entryPoints.https.http2.maxConcurrentStreams=250'
+      - '--entryPoints.https.http3'
+      - '--entryPoints.https.http.middlewares=crowdsec@file'
+      - '--global.checkNewVersion=true'
+      - '--global.sendAnonymousUsage=false'
+      - '--log.level=INFO'
+      - '--ping.terminatingStatusCode=503'
+      - '--ping=true'
+      - '--providers.docker.defaultRule=Host(`{{ normalize .ContainerName }}.${DOMAIN}`) || Host(`{{ normalize .ContainerName }}.${TS_HOSTNAME}.${DOMAIN}`)'
+      - '--providers.docker.exposedByDefault=false'
+      - '--providers.docker=true'
+      - '--providers.file.directory=/traefik/dynamic/'
+      - '--providers.file.watch=true'
+      - '--serversTransport.insecureSkipVerify=true'
+      - '--experimental.plugins.crowdsec-bouncer-traefik-plugin.modulename=github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin'
+      - '--experimental.plugins.crowdsec-bouncer-traefik-plugin.version=v1.4.2'
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.traefik.service: api@internal
+      traefik.http.routers.traefik.rule: 'Host(`traefik.${DOMAIN}`) || Host(`traefik.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.traefik.loadbalancer.server.port: 8080
+      homepage.group: Infrastructure
+      homepage.name: Traefik
+      homepage.icon: traefik.png
+      homepage.href: https://traefik.${DOMAIN}/api
+      homepage.widget.type: traefik
+      homepage.description: Traefik is a modern HTTP reverse proxy and load balancer.
+    restart: always
+
+configs:
+  crowdsec-appsec.yaml:
+    content: |
+      appsec_config: crowdsecurity/appsec-default
+      labels:
+        type: appsec
+      listen_addr: 0.0.0.0:7422
+      source: appsec
+
+  traefik-dynamic.yaml:
+    content: |
+      # yaml-language-server: $$schema=https://www.schemastore.org/traefik-v3-file-provider.json
+      http:
+        routers:
+          catchall:
+            entryPoints: [http, https]
+            service: noop
+            rule: HostRegexp(`^(.+)$$`)
+            tls:
+              certResolver: letsencrypt
+            priority: -500
+            middlewares:
+              - redirect-regexp
+        services:
+          noop:
+            loadBalancer:
+              servers:
+                - url: ''
+        middlewares:
+          redirect-regexp:
+            redirectRegex:
+              regex: '^(http|https)://(www\.)?([^.]+\.)?bolabaden\.org(.*)$$'
+              replacement: 'https://$${3}.${DOMAIN}$${4}'
+              permanent: true
+          http-to-https-redirect-simple:
+            redirectScheme:
+              scheme: https
+              permanent: true
+          crowdsec:
+            plugin:
+              crowdsec-bouncer-traefik-plugin:
+                enabled: true
+                defaultDecisionSeconds: 60
+                crowdsecMode: live
+                crowdsecAppsecEnabled: false  # <--- here you can enable appsec waf
+                crowdsecAppsecHost: crowdsec:7422
+                crowdsecAppsecFailureBlock: true
+                crowdsecAppsecUnreachableBlock: true
+                crowdsecLapiKey: h6oH8mtQznVOPCwb7NqXwvTG20BqcPzREGNMAYdPQww
+                crowdsecLapiHost: crowdsec:8080
+                crowdsecLapiScheme: http
+                crowdsecLapiTLSInsecureVerify: false
+                forwardedHeadersTrustedIPs: &trustedIps
+                  - "10.0.0.0/8"
+                  - "100.64.0.0/10"
+                  - "103.21.244.0/22"
+                  - "103.22.200.0/22"
+                  - "103.31.4.0/22"
+                  - "104.16.0.0/13"
+                  - "104.24.0.0/14"
+                  - "108.162.192.0/18"
+                  - "127.0.0.0/8"
+                  - "131.0.72.0/22"
+                  - "141.101.64.0/18"
+                  - "162.158.0.0/15"
+                  - "169.254.0.0/16"
+                  - "172.16.0.0/12"
+                  - "172.64.0.0/13"
+                  - "173.245.48.0/20"
+                  - "188.114.96.0/20"
+                  - "190.93.240.0/20"
+                  - "192.168.0.0/16"
+                  - "197.234.240.0/22"
+                  - "198.41.128.0/17"
+                  - "::1/128"
+                  - "2002::/16"
+                  - "2400:cb00::/32"
+                  - "2405:8100::/32"
+                  - "2405:b500::/32"
+                  - "2606:4700::/32"
+                  - "2803:f800::/32"
+                  - "2a06:98c0::/29"
+                  - "2c0f:f248::/32"
+                  - "fc00::/7"
+                  - "fe80::/10"
+                clientTrustedIPs: *trustedIps
+  traefik-logrotate:
+    content: |
+      # Place this example code at /etc/logrotate.d/traefik in your docker host server
+      # Please adjust the custom file path below, where your traefik logs are stored
+      # Please adjust the below traefik container name to send the USR1 signal for log rotation
+
+      compress
+      /data/coolify/proxy/logs/*.log {
+        size 20M
+        daily
+        rotate 14
+        missingok
+        notifempty postrotate
+        docker kill --signal="USR1" traefik-coolify-proxy
+        endscript
+      }
+  acquis.yaml:
+    content: |
+      filenames:
+        - /var/log/auth.log
+        - /var/log/syslog
+      labels:
+        type: syslog
+      ---
+      poll_without_inotify: false
+      filenames:
+        - /var/log/traefik/*.log
+      labels:
+        type: traefik
+      ---
+      listen_addr: 0.0.0.0:7422
+      appsec_config: crowdsecurity/appsec-default
+      name: coolify-proxy-crowdsec-appsec
+      source: appsec
+      labels:
+        type: appsec
+  nginx-auth.conf:
+    content: |
+      user nginx;
+      worker_processes auto;
+      error_log /var/log/nginx/error.log warn;
+      pid /var/run/nginx.pid;
+
+      events {
+          worker_connections 1024;
+          use epoll;
+          multi_accept on;
+      }
+
+      http {
+          include /etc/nginx/mime.types;
+          default_type application/octet-stream;
+
+          access_log /dev/stdout combined;
+          error_log /dev/stderr warn;
+          log_format main '$$remote_addr - $$remote_user [$$time_local] "$$request" '
+                          '$$status $$body_bytes_sent "$$http_referer" '
+                          '"$$http_user_agent" "$$http_x_forwarded_for" '
+                          'auth_method="$$auth_method" original_uri="$$http_x_original_uri" '
+                          'middleware="$$middleware_name"';
+          limit_req_zone $$binary_remote_addr zone=auth:10m rate=20r/s;  # Rate limit zone used by `location /auth`
+          limit_req_status 429;  # Optional: return 429 instead of default 503 so your 429 error_page is used
+          access_log /var/log/nginx/access.log main;
+          sendfile on;
+          tcp_nopush on;
+          tcp_nodelay on;
+          keepalive_timeout 65;
+          types_hash_max_size 2048;
+          server_tokens off;
+          map_hash_bucket_size 128;
+          set_real_ip_from 10.0.0.0/8;
+          set_real_ip_from 100.64.0.0/10;
+          set_real_ip_from 127.0.0.0/8;
+          set_real_ip_from 169.254.0.0/16;
+          set_real_ip_from 172.16.0.0/12;
+          set_real_ip_from 192.0.0.0/24;
+          set_real_ip_from 192.0.2.0/24;
+          set_real_ip_from 192.168.0.0/16;
+          set_real_ip_from 198.18.0.0/15;
+          set_real_ip_from 198.51.100.0/24;
+          set_real_ip_from 203.0.113.0/24;
+          set_real_ip_from 224.0.0.0/4;
+          set_real_ip_from 240.0.0.0/4;
+          set_real_ip_from 255.255.255.255/32;
+          set_real_ip_from 2002::/16;
+          set_real_ip_from fc00::/7;
+          set_real_ip_from fd00::/8;
+          set_real_ip_from fe80::/10;
+          set_real_ip_from ::1/128;
+          real_ip_header X-Forwarded-For;
+          real_ip_recursive on;
+          geo $$ip_whitelisted {
+              default 0;
+              10.0.0.0/8           1;
+              100.64.0.0/10        1;
+              127.0.0.0/8          1;
+              169.254.0.0/16       1;
+              172.16.0.0/12        1;
+              192.0.0.0/24         1;
+              192.0.2.0/24         1;
+              192.168.0.0/16       1;
+              198.18.0.0/15        1;
+              198.51.100.0/24      1;
+              203.0.113.0/24       1;
+              224.0.0.0/4          1;
+              240.0.0.0/4          1;
+              255.255.255.255/32   1;
+              2002::/16            1;
+              fc00::/7             1;
+              fd00::/8             1;
+              fe80::/10            1;
+              ::1/128              1;
+          }
+
+          # API Keys list (easier to manage)
+          map $$http_x_api_key $$api_key_valid {
+              default 0;
+              
+              # Valid API keys
+              "${NGINX_AUTH_API_KEY:?}" 1;
+              # Add more API keys here as needed
+          }
+
+          # Upstream for tinyauth
+          upstream tinyauth {
+              server tinyauth:3000;
+          }
+
+          # Multi-Middleware Authentication Server for HTTP
+          server {
+              listen 80 default_server;
+              server_name _;
+
+              # Variables for authentication (geo and map modules set $$ip_whitelisted and $$api_key_valid)
+              set $$auth_passed 0;
+              set $$auth_method "none";
+              set $$middleware_name "unknown";
+
+              # Step 1: Check API key authentication (handled by map module)
+              if ($$api_key_valid = 1) {
+                  set $$auth_passed 1;
+                  set $$auth_method "api_key";
+              }
+
+              # Step 2: Check IP whitelist (handled by geo module)
+              if ($$ip_whitelisted = 1) {
+                  set $$auth_passed 1;
+                  set $$auth_method "ip_whitelist";
+              }
+
+              # ========================================
+              # MAIN AUTH ENDPOINT: API key OR IP whitelist OR tinyauth
+              # ========================================
+              location /auth {
+                  set $$middleware_name "auth";
+                  
+                  # Rate limiting for auth requests
+                  limit_req zone=auth burst=20 nodelay;
+
+                  # If API key or IP whitelist passed, return success immediately
+                  if ($$auth_passed = 1) {
+                      add_header X-Auth-Method "$$auth_method" always;
+                      add_header X-Auth-Passed "true" always;
+                      add_header X-Middleware-Name "$$middleware_name" always;
+                      return 200 "OK";
+                  }
+
+                  # If neither API key nor IP whitelist passed, proxy to tinyauth
+                  proxy_pass http://tinyauth/api/auth/traefik;
+                  proxy_pass_request_body off;
+                  proxy_set_header Content-Length "";
+                  proxy_set_header X-Original-URI $$http_x_original_uri;
+                  proxy_set_header X-Original-Method $$http_x_original_method;
+                  proxy_set_header X-Real-IP $$remote_addr;
+                  proxy_set_header X-Forwarded-For $$proxy_add_x_forwarded_for;
+                  proxy_set_header X-Forwarded-Proto $$scheme;
+                  proxy_set_header X-Forwarded-Host $$http_x_forwarded_host;
+                  
+                  # Add custom headers to indicate tinyauth was used
+                  add_header X-Auth-Method "tinyauth" always;
+                  add_header X-Middleware-Name "$$middleware_name" always;
+                  
+                  # Log the auth decision
+                  access_log /var/log/nginx/auth.log main;
+              }
+
+              # Health check endpoint
+              location /health {
+                  access_log off;
+                  return 200 "nginx auth service healthy\n";
+                  add_header Content-Type text/plain;
+              }
+
+              # Middleware info endpoint
+              location /middlewares {
+                  access_log off;
+                  return 200 '{
+                      "available_middlewares": [
+                          {"path": "/auth", "description": "Standard auth (API key OR IP whitelist OR tinyauth)"}
+                      ],
+                      "usage": "Use traefik.http.routers.<service>.middlewares: nginx-<middleware>@file"
+                  }';
+                  add_header Content-Type application/json;
+              }
+
+              # Default location for any other requests
+              location / {
+                  return 404 '{
+                      "error": "Not found", 
+                      "hint": "This is an auth service",
+                      "available_endpoints": ["/auth", "/health", "/middlewares"]
+                  }';
+                  add_header Content-Type application/json;
+              }
+
+              # Custom error pages for auth failures
+              error_page 401 /401.html;
+              error_page 403 /403.html;
+              error_page 429 /429.html;
+              
+              location = /401.html {
+                  internal;
+                  return 401 '{"error": "Authentication required", "methods": ["api_key", "ip_whitelist", "tinyauth"]}';
+                  add_header Content-Type application/json;
+              }
+              
+              location = /403.html {
+                  internal;
+                  return 403 '{"error": "Access forbidden"}';
+                  add_header Content-Type application/json;
+              }
+          }
+      }

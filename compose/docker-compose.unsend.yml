@@ -1,0 +1,90 @@
+services:
+  unsend-postgres:
+    image: 'docker.io/postgres:16.3-alpine'
+    container_name: unsend-postgres
+    hostname: unsend-postgres
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    volumes:
+      - '${CONFIG_PATH:-./configs}/unsend/postgres:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'unsend'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 20s
+      retries: 10
+    restart: always
+  unsend-redis:
+    image: 'docker.io/redis:alpine'
+    container_name: unsend-redis
+    hostname: unsend-redis
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    volumes:
+      - '${CONFIG_PATH:-./configs}/unsend/redis:/data'
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+    command: ["redis-server", "--maxmemory-policy", "noeviction"]
+    restart: always
+  unsend:
+    depends_on:
+      unsend-postgres:
+        condition: service_healthy
+      unsend-redis:
+        condition: service_healthy
+    image: 'docker.io/unsend/unsend:latest'
+    container_name: unsend
+    hostname: unsend
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    expose:
+      - 3000
+    environment:
+      API_RATE_LIMIT: '${API_RATE_LIMIT:-1}'
+      AWS_ACCESS_KEY: '${AWS_ACCESS_KEY:?}'
+      AWS_DEFAULT_REGION: '${AWS_DEFAULT_REGION:-us-east-1}'
+      AWS_SECRET_KEY: '${AWS_SECRET_KEY:?}'
+      DATABASE_URL: '${UNSEND_POSTGRES_URL:-postgresql://postgres:postgres@unsend-postgres:5432/unsend}'
+      GITHUB_ID: '${UNSEND_GITHUB_ID}'
+      GITHUB_SECRET: '${UNSEND_GITHUB_SECRET}'
+      HOSTNAME: 0.0.0.0
+      NEXT_PUBLIC_IS_CLOUD: '${NEXT_PUBLIC_IS_CLOUD:-false}'
+      NEXTAUTH_SECRET: '${NEXTAUTH_SECRET:?}'
+      REDIS_URL: '${UNSEND_REDIS_URL:-redis://unsend-redis:6379}'
+    labels:
+      traefik.enable: true
+      traefik.http.middlewares.gzip.compress: true
+      traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: https
+      traefik.http.routers.http-unsend.entryPoints: web
+      traefik.http.routers.http-unsend.middlewares: redirect-to-https
+      traefik.http.routers.http-unsend.rule: Host(`unsend.${DOMAIN}`) || Host(`unsend.${TS_HOSTNAME}.${DOMAIN}`) && PathPrefix(`/`)
+      traefik.http.routers.http-unsend.service: http-unsend
+      traefik.http.routers.https-unsend.entryPoints: websecure
+      traefik.http.routers.https-unsend.middlewares: gzip
+      traefik.http.routers.https-unsend.rule: Host(`unsend.${DOMAIN}`) || Host(`unsend.${TS_HOSTNAME}.${DOMAIN}`) && PathPrefix(`/`)
+      traefik.http.routers.https-unsend.service: https-unsend
+      traefik.http.routers.https-unsend.tls.certresolver: letsencrypt
+      traefik.http.routers.https-unsend.tls: true
+      traefik.http.services.http-unsend.loadbalancer.server.port: 3000
+      traefik.http.services.https-unsend.loadbalancer.server.port: 3000
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://unsend:3000 > /dev/null 2>&1 || exit 1"]
+      interval: 5s
+      retries: 10
+      timeout: 2s
+    restart: always
+configs: {  }
+secrets: {  }
+volumes: {  }

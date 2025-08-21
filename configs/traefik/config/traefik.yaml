@@ -1,36 +1,80 @@
 # yaml-language-server: $schema=https://json.schemastore.org/traefik-v3.json
 
+
+# Ignore the error here, it's a bug in the yaml-language-server
+x-local-ips: &local-ips
+  # RFC 1918 Private Networks (IPv4)
+  - "10.0.0.0/8"
+  - "172.16.0.0/12"
+  - "192.168.0.0/16"
+  # RFC 3927 Link-Local (IPv4)
+  - "169.254.0.0/16"
+  # RFC 5735 Loopback (IPv4)
+  - "127.0.0.0/8"
+  # RFC 4193 Unique Local (IPv6)
+  - "fc00::/7"
+  # RFC 4291 Link-Local (IPv6)
+  - "fe80::/10"
+  # RFC 4291 Loopback (IPv6)
+  - "::1/128"
+  # RFC 3056 6to4 (IPv6)
+  - "2002::/16"
+  # Tailscale CGNAT range
+  - "100.64.0.0/10"
+
+
+# Ignore the error here, it's a bug in the yaml-language-server
+x-cloudflare-ips: &cloudflare-ips
+  - "103.21.244.0/22"
+  - "103.22.200.0/22"
+  - "103.31.4.0/22"
+  - "104.16.0.0/13"
+  - "104.24.0.0/14"
+  - "108.162.192.0/18"
+  - "131.0.72.0/22"
+  - "141.101.64.0/18"
+  - "162.158.0.0/15"
+  - "172.64.0.0/13"
+  - "173.245.48.0/20"
+  - "188.114.96.0/20"
+  - "190.93.240.0/20"
+  - "197.234.240.0/22"
+  - "198.41.128.0/17"
+  - "2400:cb00::/32"
+  - "2405:8100::/32"
+  - "2405:b500::/32"
+  - "2606:4700::/32"
+  - "2803:f800::/32"
+  - "2a06:98c0::/29"
+  - "2c0f:f248::/32"
+
+
 global:
   checkNewVersion: true
   sendAnonymousUsage: false
 
 providers:
-  file:
-    directory: /config # /config/traefik.yaml (this file)
-    watch: true
   docker:
+    endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
     watch: true
-    network: publicnet
-    #        useBindPortIP: true
-#  swarm:
-#    exposedByDefault: false
-#    watch: true
-#    network: swarmnet
-#        useBindPortIP: true
-#  kubernetesIngress: {}
+
+  file:
+    directory: /config
+    watch: true
 
 log:
   level: DEBUG
 
 api:
   dashboard: true
-  debug: false # Enable additional endpoints for debugging and profiling (default: false)
-  disableDashboardAd: true # Disable the advertisement from the dashboard (default: false)
-  insecure: true # Enable the API and the dashboard on the entryPoint named traefik (default: false)
+  debug: true
+  disableDashboardAd: true
+  insecure: true
 
 ping:
-  terminatingStatusCode: 503 # Terminating status code (Default: 503)
+  terminatingStatusCode: 503
+
 serversTransport:
   insecureSkipVerify: true
 
@@ -40,99 +84,88 @@ entryPoints:
   web:
     address: :80
     forwardedHeaders:
-      trustedIPs:
-        - "127.0.0.1/32"     # localhost (ipv4)
-        - "::1/128"          # localhost (ipv6)
-        - "172.16.0.0/12"    # docker network
-        - "10.76.0.0/16"     # docker 'publicnet' network
-        - "100.64.0.0/10"    # tailscale network
-#        - "149.130.221.93"   # micklethefickle oracle cloud vps
-#        - "207.211.189.95"   # beatapostapita oracle cloud vps
-#        - "152.117.108.32"   # wizard-pc
+      trustedIPs: &trusted-ips
+        - "10.0.0.0/8"
+        - "172.16.0.0/12"
+        - "192.168.0.0/16"
+        - "169.254.0.0/16"
+        - "127.0.0.0/8"
+        - "fc00::/7"
+        - "fe80::/10"
+        - "::1/128"
+        - "2002::/16"
+        - "100.64.0.0/10"
+        - "103.21.244.0/22"
+        - "103.22.200.0/22"
+        - "103.31.4.0/22"
+        - "104.16.0.0/13"
+        - "104.24.0.0/14"
+        - "108.162.192.0/18"
+        - "131.0.72.0/22"
+        - "141.101.64.0/18"
+        - "162.158.0.0/15"
+        - "172.64.0.0/13"
+        - "173.245.48.0/20"
+        - "188.114.96.0/20"
+        - "190.93.240.0/20"
+        - "197.234.240.0/22"
+        - "198.41.128.0/17"
+        - "2400:cb00::/32"
+        - "2405:8100::/32"
+        - "2405:b500::/32"
+        - "2606:4700::/32"
+        - "2803:f800::/32"
+        - "2a06:98c0::/29"
+        - "2c0f:f248::/32"
     http:
       redirections:
         entryPoint:
           to: websecure
           scheme: https
+          permanent: false
+    observability:
+      accessLogs: true
+      metrics: true
+      tracing: true
   websecure:
     address: :443
     forwardedHeaders:
-      trustedIPs:
-        - "127.0.0.1/32"     # localhost (ipv4)
-        - "::1/128"          # localhost (ipv6)
-        - "172.16.0.0/12"    # docker network
-        - "10.76.0.0/16"     # docker 'publicnet' network
-        - "100.64.0.0/10"    # tailscale network
-#        - "149.130.221.93"   # micklethefickle oracle cloud vps
-#        - "207.211.189.95"   # beatapostapita oracle cloud vps
-#        - "152.117.108.32"   # wizard-pc
+      trustedIPs: *trusted-ips
     http:
+      middlewares:
+        - error-pages@file
       tls:
         certResolver: letsencrypt
         domains:
           - main: "bolabaden.org"
             sans:
               - "*.bolabaden.org"
-#          - main: "bolabaden.duckdns.org"
-#            sans:
-#              - "*.bolabaden.duckdns.org"
-#          - main: "micklethefickle.duckdns.org"
-#            sans:
-#              - "*.micklethefickle.duckdns.org"
-#          - main: "beatapostapita.duckdns.org"
-#            sans:
-#              - "*.beatapostapita.duckdns.org"
-#          - main: "wizard-pc.duckdns.org"
-#            sans:
-#              - "*.wizard-pc.duckdns.org"
-
-# Multiple DNS challenge provider are not supported with Traefik, but you can use CNAME to handle that.
-# For example, if you have example.org (account foo) and example.com (account bar) you can create a CNAME on
-# example.org called _acme-challenge.example.org pointing to challenge.example.com. This way, you can obtain
-# certificates for example.org with the bar account.
-
-# Define common DNS resolvers at the top of your file
-x-dns-resolvers: &dns-resolvers
-  - dane.ns.cloudflare.com
-  - tori.ns.cloudflare.com
-  - 1.1.1.1
-  - 1.0.0.1
-  - 8.8.8.8
-  - 8.8.4.4
+          - main: "micklethefickle.bocloud.org"
+            sans:
+              - "*.micklethefickle.bocloud.org"
+    observability:
+      accessLogs: true
+      metrics: true
+      tracing: true
 
 certificatesResolvers:
   letsencrypt:
     acme:
-      email: boden.crouch@gmail.com # Email address used for registration.
+      email: boden.crouch@gmail.com
       storage: /certs/acme.json
       dnsChallenge:
         provider: cloudflare
-        resolvers: *dns-resolvers
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
       httpChallenge:
         entryPoint: web
       tlsChallenge: {}
       caServer: https://acme-v02.api.letsencrypt.org/directory
+      certificatesDuration: 2160
 
-  bolabaden_duckdns_letsencrypt:
-    acme:
-      email: boden.crouch@gmail.com
-      storage: /certs/acme_duckdns.json
-      dnsChallenge:
-        provider: duckdns
-        resolvers: *dns-resolvers
-      httpChallenge:
-        entryPoint: web
-      tlsChallenge: {}
-      caServer: https://acme-v02.api.letsencrypt.org/directory
-
-  athena_duckdns_letsencrypt:
-    acme:
-      email: boden.crouch@gmail.com
-      storage: /certs/acme_athena_duckdns_letsencrypt.json
-      dnsChallenge:
-        provider: duckdns
-        resolvers: *dns-resolvers
-      httpChallenge:
-        entryPoint: web
-      tlsChallenge: {}
-      caServer: https://acme-v02.api.letsencrypt.org/directory
+experimental:
+  plugins:
+    crowdsec-bouncer-traefik-plugin:
+      moduleName: github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin
+      version: v1.4.2

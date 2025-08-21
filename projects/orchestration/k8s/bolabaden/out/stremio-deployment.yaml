@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: stremio
+  name: stremio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: stremio
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: stremio
+    spec:
+      containers:
+        - env:
+            - name: IPADDRESS
+              value: 149.130.221.93
+            - name: SERVER_URL
+              value: https://stremio.bolabaden.org
+            - name: WEBUI_LOCATION
+              value: https://stremio-web.bolabaden.org/
+            - name: NO_CORS
+              value: "0"
+            - name: CASTING_DISABLED
+              value: "1"
+          image: tsaridas/stremio-docker:latest
+          livenessProbe:
+            exec:
+              command:
+                - curl -fs http://127.0.0.1:11470 || curl -fs http://127.0.0.1:12470
+            failureThreshold: 3
+            initialDelaySeconds: 40
+            periodSeconds: 30
+            timeoutSeconds: 10
+          name: stremio
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 11470
+              protocol: TCP
+            - containerPort: 12470
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /root/.stremio-server
+              name: stremio-config
+      restartPolicy: Always
+      volumes:
+        - name: stremio-config
+          persistentVolumeClaim:
+            claimName: stremio-config 

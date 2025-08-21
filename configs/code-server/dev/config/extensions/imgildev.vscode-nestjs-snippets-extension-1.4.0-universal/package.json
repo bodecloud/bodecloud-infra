@@ -1,0 +1,124 @@
+{
+	"name": "vscode-nestjs-snippets-extension",
+	"displayName": "NestJS Snippets for VSCode Editor",
+	"description": "This extension for Visual Studio Code adds snippets for NestJS Framework in VSCode editor. Now you can create your NestJS applications even faster.",
+	"version": "1.4.0",
+	"icon": "icon.png",
+	"license": "MIT",
+	"publisher": "imgildev",
+	"author": {
+		"name": "Manuel Gil",
+		"url": "https://github.com/ManuelGil"
+	},
+	"sponsor": {
+		"url": "https://github.com/sponsors/manuelgil"
+	},
+	"engines": {
+		"vscode": "^1.46.0"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"keywords": [
+		"autocomplete-functionality",
+		"autocomplete",
+		"boilerplate",
+		"commands",
+		"express",
+		"extension",
+		"grammars-utility",
+		"grammars",
+		"graphql",
+		"intellisense",
+		"javascript",
+		"js",
+		"nest",
+		"nestjs-snippet",
+		"nestjs-snippets",
+		"nestjs",
+		"node",
+		"nodejs",
+		"snippet",
+		"snippets-collection",
+		"snippets-collections",
+		"snippets-library",
+		"snippets-plugin",
+		"snippets",
+		"ts",
+		"typescript",
+		"vscode-extension",
+		"vscode",
+		"websockets"
+	],
+	"homepage": "https://github.com/ManuelGil/vscode-nestjs-snippets",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ManuelGil/vscode-nestjs-snippets"
+	},
+	"bugs": {
+		"url": "https://github.com/ManuelGil/vscode-nestjs-snippets/issues"
+	},
+	"contributes": {
+		"snippets": [
+			{
+				"path": "./snippets/common/interfaces/exceptions.code-snippets"
+			},
+			{
+				"path": "./snippets/common/interfaces/features.code-snippets"
+			},
+			{
+				"path": "./snippets/common/interfaces/modules.code-snippets"
+			},
+			{
+				"path": "./snippets/common/services/logger.code-snippets"
+			},
+			{
+				"path": "./snippets/common/decorators.code-snippets"
+			},
+			{
+				"path": "./snippets/common/exceptions.code-snippets"
+			},
+			{
+				"path": "./snippets/common/pipes.code-snippets"
+			},
+			{
+				"path": "./snippets/config/module.code-snippets"
+			},
+			{
+				"path": "./snippets/core/application.code-snippets"
+			},
+			{
+				"path": "./snippets/graphql/decorators.code-snippets"
+			},
+			{
+				"path": "./snippets/graphql/graphql.code-snippets"
+			},
+			{
+				"path": "./snippets/jwt/module.code-snippets"
+			},
+			{
+				"path": "./snippets/jwt/service.code-snippets"
+			},
+			{
+				"path": "./snippets/passport/module.code-snippets"
+			},
+			{
+				"path": "./snippets/websockets/decorators.code-snippets"
+			},
+			{
+				"path": "./snippets/websockets/interfaces.code-snippets"
+			},
+			{
+				"path": "./snippets/custom.code-snippets"
+			},
+			{
+				"path": "./snippets/testing.code-snippets"
+			}
+		]
+	},
+	"__metadata": {
+		"installedTimestamp": 1752874620728,
+		"targetPlatform": "universal",
+		"size": 631496
+	}
+}

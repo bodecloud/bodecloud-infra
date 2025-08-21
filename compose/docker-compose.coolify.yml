@@ -1,0 +1,144 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+services:
+  coolify:
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      soketi:
+        condition: service_healthy
+    build:
+      context: /home/ubuntu/my-media-stack/src/coolify/
+      dockerfile: /home/ubuntu/my-media-stack/src/coolify/docker/production/Dockerfile
+      args:
+        - USER_ID=${USERID:-1000}
+        - GROUP_ID=${GROUPID:-1000}
+    image: "${REGISTRY_URL:-ghcr.io}/coollabsio/coolify:${LATEST_IMAGE:-latest}"
+    container_name: coolify
+    networks:
+      - coolify
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - "8080:8080"
+    working_dir: /var/www/html
+    volumes:
+      - /data/coolify/source/.env:/var/www/html/.env:ro
+      - /data/coolify/ssh:/var/www/html/storage/app/ssh
+      - /data/coolify/applications:/var/www/html/storage/app/applications
+      - /data/coolify/databases:/var/www/html/storage/app/databases
+      - /data/coolify/services:/var/www/html/storage/app/services
+      - /data/coolify/backups:/var/www/html/storage/app/backups
+      - /data/coolify/webhooks-during-maintenance:/var/www/html/storage/app/webhooks-during-maintenance
+    env_file:
+      - /data/coolify/source/.env
+    environment:
+      - APP_ENV=${APP_ENV:-production}
+      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-256M}
+      - PHP_FPM_PM_CONTROL=${PHP_FPM_PM_CONTROL:-dynamic}
+      - PHP_FPM_PM_START_SERVERS=${PHP_FPM_PM_START_SERVERS:-1}
+      - PHP_FPM_PM_MIN_SPARE_SERVERS=${PHP_FPM_PM_MIN_SPARE_SERVERS:-1}
+      - PHP_FPM_PM_MAX_SPARE_SERVERS=${PHP_FPM_PM_MAX_SPARE_SERVERS:-10}
+    healthcheck:
+      test: curl --fail http://127.0.0.1:8080/api/health || exit 1
+      interval: 5s
+      retries: 10
+      timeout: 2s
+    restart: always
+  postgres:
+    image: postgres:15-alpine
+    container_name: coolify-db
+    networks:
+      - coolify
+    volumes:
+      - coolify-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "${DB_USERNAME}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_DATABASE:-coolify}"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME}", "-d", "${DB_DATABASE:-coolify}" ]
+      interval: 5s
+      retries: 10
+      timeout: 2s
+    restart: always
+  redis:
+    image: redis:7-alpine
+    container_name: coolify-redis
+    networks:
+        - coolify
+    volumes:
+      - coolify-redis:/data
+    environment:
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
+    healthcheck:
+      test: redis-cli ping
+      interval: 5s
+      retries: 10
+      timeout: 2s
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
+    restart: always
+  soketi:
+    image: '${REGISTRY_URL:-ghcr.io}/coollabsio/coolify-realtime:1.0.9'
+    build:
+      context: /home/ubuntu/my-media-stack/src/coolify/
+      dockerfile: /home/ubuntu/my-media-stack/src/coolify/docker/coolify-realtime/Dockerfile
+    container_name: coolify-realtime
+    networks:
+        - coolify
+    extra_hosts:
+        - host.docker.internal:host-gateway
+    volumes:
+      - /data/coolify/ssh:/var/www/html/storage/app/ssh
+    environment:
+      APP_NAME: "${APP_NAME:-Coolify}"
+      SOKETI_DEBUG: "${SOKETI_DEBUG:-false}"
+      SOKETI_DEFAULT_APP_ID: "${PUSHER_APP_ID}"
+      SOKETI_DEFAULT_APP_KEY: "${PUSHER_APP_KEY}"
+      SOKETI_DEFAULT_APP_SECRET: "${PUSHER_APP_SECRET}"
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -qO- http://127.0.0.1:6001/ready && wget -qO- http://127.0.0.1:6002/ready || exit 1" ]
+      interval: 5s
+      retries: 10
+      timeout: 2s
+    restart: always
+  mailpit:
+    image: axllent/mailpit:latest
+    pull_policy: always
+    container_name: coolify-mail
+    networks:
+      - coolify
+    ports:
+      - "${FORWARD_MAILPIT_PORT:-1025}:1025"
+      - "${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025"
+  minio:
+    image: minio/minio:latest
+    pull_policy: always
+    container_name: coolify-minio
+    networks:
+      - coolify
+    ports:
+      - "${FORWARD_MINIO_PORT:-9000}:9000"
+      - "${FORWARD_MINIO_PORT_CONSOLE:-9001}:9001"
+    volumes:
+      - /data/coolify/_volumes/minio:/data
+    environment:
+      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY:-minioadmin}"
+      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY:-minioadmin}"
+    command: server /data --console-address ":9001"
+
+networks:
+  coolify:
+    name: coolify
+    driver: bridge
+    external: true
+    driver_opts:
+      com.docker.compose.network: coolify
+
+volumes:
+  coolify-db:
+    name: coolify-db
+  coolify-redis:
+    name: coolify-redis

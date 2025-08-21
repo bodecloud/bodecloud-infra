@@ -1,0 +1,20 @@
+{
+  "lastSelectedProfileForWorkspace": {
+    "file:///workspace:::personal": "local"
+  },
+  "lastSelectedOrgIdForWorkspace": {
+    "file:///workspace": "personal"
+  },
+  "selectedModelsByProfileId": {
+    "local": {
+      "chat": null,
+      "edit": null,
+      "apply": null,
+      "embed": "Transformers.js (Built-In)",
+      "autocomplete": null,
+      "rerank": null,
+      "summarize": null
+    }
+  },
+  "isSupportedLanceDbCpuTargetForLinux": true
+}

@@ -1,0 +1,140 @@
+{
+	"name": "vscode-nestjs-snippets-extension",
+	"displayName": "NestJS Snippets - NestJS Tools Collection",
+	"description": "Fast, TypeScript-first NestJS snippets for VS Code: controllers, modules, providers, GraphQL, JWT, WebSockets, and testing with smart placeholders and scopes.",
+	"version": "1.5.0",
+	"icon": "icon.png",
+	"license": "MIT",
+	"publisher": "imgildev",
+	"author": {
+		"name": "Manuel Gil",
+		"url": "https://github.com/ManuelGil"
+	},
+	"sponsor": {
+		"url": "https://github.com/sponsors/manuelgil"
+	},
+	"engines": {
+		"vscode": "^1.46.0"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"keywords": [
+		"nestjs",
+		"nest",
+		"nestjs-snippets",
+		"typescript",
+		"ts",
+		"snippets",
+		"snippet",
+		"intellisense",
+		"autocomplete",
+		"decorators",
+		"controller",
+		"module",
+		"provider",
+		"pipes",
+		"guards",
+		"interceptors",
+		"exceptions",
+		"logger",
+		"config",
+		"graphql",
+		"apollo",
+		"websockets",
+		"jwt",
+		"passport",
+		"testing",
+		"jest",
+		"microservices",
+		"fastify",
+		"express"
+	],
+	"homepage": "https://github.com/ManuelGil/vscode-nestjs-snippets",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ManuelGil/vscode-nestjs-snippets"
+	},
+	"bugs": {
+		"url": "https://github.com/ManuelGil/vscode-nestjs-snippets/issues"
+	},
+	"contributes": {
+		"snippets": [
+			{
+				"path": "./snippets/common/interfaces/exceptions.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/common/interfaces/features.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/common/interfaces/modules.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/common/services/logger.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/common/decorators.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/common/exceptions.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/common/pipes.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/config/module.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/core/application.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/graphql/decorators.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/graphql/graphql.code-snippets"
+			},
+			{
+				"path": "./snippets/jwt/module.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/jwt/service.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/passport/module.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/websockets/decorators.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/websockets/interfaces.code-snippets",
+				"language": "typescript"
+			},
+			{
+				"path": "./snippets/custom.code-snippets"
+			},
+			{
+				"path": "./snippets/testing.code-snippets",
+				"language": "typescript"
+			}
+		]
+	},
+	"__metadata": {
+		"installedTimestamp": 1755066052983,
+		"targetPlatform": "universal",
+		"size": 637380
+	}
+}

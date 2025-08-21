@@ -1,0 +1,37 @@
+# CoreDNS Configuration for *.bolabaden.org
+. {
+    # Load zone files
+    file /etc/coredns/zones/bolabaden.org.db
+    
+    # Forward other queries to upstream DNS
+    forward . 8.8.8.8 1.1.1.1
+    
+    # Enable logging
+    log
+    
+    # Enable health checks
+    health
+    
+    # Enable metrics
+    prometheus :9153
+    
+    # Enable cache
+    cache
+    
+    # Enable errors
+    errors
+}
+
+# Headscale API endpoint
+headscale.bolabaden.org {
+    forward . 172.20.0.2:50443
+    log
+}
+
+# VIP routing for services
+*.bolabaden.org {
+    # Round-robin load balancing across all servers
+    forward . 172.20.0.2:50443 172.20.0.3:50443 172.20.0.4:50443 172.20.0.5:50443 172.20.0.6:50443 172.20.0.7:50443 172.20.0.8:50443 172.20.0.9:50443 172.20.0.10:50443 172.20.0.11:50443 172.20.0.12:50443 172.20.0.13:50443
+    log
+    health
+} 

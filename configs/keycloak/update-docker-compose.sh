@@ -105,7 +105,7 @@ else
       traefik.enable: "true"
       traefik.http.routers.keycloak.entrypoints: websecure
       traefik.http.routers.keycloak.tls: true
-      traefik.http.routers.keycloak.rule: Host(`auth.${DOMAIN}`) || Host(`auth.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.routers.keycloak.rule: Host(`auth.${DOMAIN}`) || Host(`auth.${DUCKDNS_DOMAIN}`)
       traefik.http.routers.keycloak.tls.certresolver: default
       traefik.http.services.keycloak.loadbalancer.server.port: 8080
       traefik.http.middlewares.keycloak-rate-limit.ratelimit.average: 100

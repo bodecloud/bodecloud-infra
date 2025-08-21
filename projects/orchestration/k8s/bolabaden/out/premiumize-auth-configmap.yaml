@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  auth.conf: |
+    117274388
+    6i6zgswm35baj3ur
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: gluetun-premiumize-at
+  name: premiumize-auth

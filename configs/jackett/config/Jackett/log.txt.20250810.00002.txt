@@ -1,0 +1,83 @@
+2025-08-10 19:05:26.8597 Warn As of "08/11/2025 00:05:25 +00:00", the heartbeat has been running for "00:00:01.0673364" which is longer than "00:00:01". This could be caused by thread pool starvation.
+2025-08-10 19:05:34.6863 Info Torznab search in EZTV for Kaiju No. 8 S01E13 => Found 0 releases [6889ms]
+2025-08-10 19:05:34.6909 Info Torznab search in Torrent Downloads for Kaiju No. 8 S01E13 => Found 0 releases [6892ms]
+2025-08-10 19:05:34.7996 Info Torznab search in Tokyo Toshokan for Kaiju No. 8 S01E13 => Found 0 releases [7002ms]
+2025-08-10 19:05:35.3939 Info Torznab search in BitSearch for Kaiju No. 8 S01E13 => Found 0 releases [4274ms]
+2025-08-10 19:05:36.3766 Info Torznab search in Anime Time for Kaiju No. 8 S01E13 => Found 24 releases [8580ms]
+2025-08-10 19:05:36.5801 Info Torznab search in Nyaa.si for Kaiju No. 8 S01E13 => Found 0 releases [8779ms]
+2025-08-10 19:05:37.2920 Info Torznab search in BitSearch for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [121ms]
+2025-08-10 19:05:37.2973 Info Torznab search in Tokyo Toshokan for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [125ms]
+2025-08-10 19:05:37.2973 Info Torznab search in EZTV for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [126ms]
+2025-08-10 19:05:37.2983 Info Torznab search in Anime Time for Kaiju No. 8 S01E13 => Found 24 releases (from cache) [128ms]
+2025-08-10 19:05:37.4640 Info Torznab search in Torrent Downloads for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [291ms]
+2025-08-10 19:05:37.4640 Info Torznab search in Nyaa.si for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [291ms]
+2025-08-10 19:05:37.9459 Info Torznab search in EZTV for Below Deck S07 => Found 1000 releases [400525ms]
+2025-08-10 19:05:38.2692 Info Torznab search in NyaaPantsu for Kaiju No. 8 S01E13 => Found 0 releases [1096ms]
+2025-08-10 19:05:47.4829 Info Torznab search in AniRena for Kaiju No. 8 S01E13 => Found 73 releases [10312ms]
+2025-08-10 19:05:47.4885 Info Torznab search in Anime Time for Kaiju No. 8 S01E13 => Found 24 releases (from cache) [1ms]
+2025-08-10 19:05:47.5050 Info Torznab search in BitSearch for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [0ms]
+2025-08-10 19:05:47.5557 Info Torznab search in NyaaPantsu for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [50ms]
+2025-08-10 19:05:47.5557 Info Torznab search in EZTV for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [50ms]
+2025-08-10 19:05:47.5590 Info Torznab search in Tokyo Toshokan for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [0ms]
+2025-08-10 19:05:47.5647 Info Torznab search in Torrent Downloads for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [0ms]
+2025-08-10 19:05:47.9998 Info Torznab search in Nyaa.si for Kaiju No. 8 S01E13 => Found 0 releases (from cache) [0ms]
+2025-08-10 19:05:47.9998 Info Torznab search in AniRena for Kaiju No. 8 S01E13 => Found 73 releases (from cache) [494ms]
+2025-08-10 19:05:48.0764 Info Torznab search in AniRena for Kaiju No. 8 S01E13 => Found 73 releases [20279ms]
+2025-08-10 19:06:12.9620 Error Jackett.Common.IndexerException: Exception (1337x): Received an unexpected EOF or 0 bytes from the transport stream.
+
+[v0.22.2256.0] Jackett.Common.IndexerException: Exception (1337x): Received an unexpected EOF or 0 bytes from the transport stream.
+ ---> System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at FlareSolverrSharp.ClearanceHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Jackett.Common.Utils.Clients.HttpWebClient2.Run(WebRequest webRequest) in ./Jackett.Common/Utils/Clients/HttpWebClient2.cs:line 180
+   at Jackett.Common.Utils.Clients.WebClient.GetResultAsync(WebRequest request) in ./Jackett.Common/Utils/Clients/WebClient.cs:line 188
+   at Jackett.Common.Indexers.BaseWebIndexer.RequestWithCookiesAsync(String url, String cookieOverride, RequestType method, String referer, IEnumerable`1 data, Dictionary`2 headers, String rawbody, Nullable`1 emulateBrowser) in ./Jackett.Common/Indexers/BaseIndexer.cs:line 617
+   at Jackett.Common.Indexers.Definitions.CardigannIndexer.PerformQuery(TorznabQuery query) in ./Jackett.Common/Indexers/Definitions/CardigannIndexer.cs:line 1563
+   at Jackett.Common.Indexers.BaseIndexer.ResultsForQuery(TorznabQuery query, Boolean isMetaIndexer) in ./Jackett.Common/Indexers/BaseIndexer.cs:line 378
+   --- End of inner exception stack trace ---
+   at Jackett.Common.Indexers.BaseIndexer.ResultsForQuery(TorznabQuery query, Boolean isMetaIndexer) in ./Jackett.Common/Indexers/BaseIndexer.cs:line 403
+   at Jackett.Common.Indexers.BaseWebIndexer.ResultsForQuery(TorznabQuery query, Boolean isMetaIndexer) in ./Jackett.Common/Indexers/BaseIndexer.cs:line 816
+   at Jackett.Server.Controllers.ResultsController.Torznab(TorznabRequest request) in ./Jackett.Server/Controllers/ResultsController.cs:line 437
+
+2025-08-10 19:07:03.2733 Error Jackett.Common.IndexerException: Exception (extratorrent-st): Received an unexpected EOF or 0 bytes from the transport stream.
+
+[v0.22.2256.0] Jackett.Common.IndexerException: Exception (extratorrent-st): Received an unexpected EOF or 0 bytes from the transport stream.
+ ---> System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at FlareSolverrSharp.ClearanceHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Jackett.Common.Utils.Clients.HttpWebClient2.Run(WebRequest webRequest) in ./Jackett.Common/Utils/Clients/HttpWebClient2.cs:line 180
+   at Jackett.Common.Utils.Clients.WebClient.GetResultAsync(WebRequest request) in ./Jackett.Common/Utils/Clients/WebClient.cs:line 188
+   at Jackett.Common.Indexers.BaseWebIndexer.RequestWithCookiesAsync(String url, String cookieOverride, RequestType method, String referer, IEnumerable`1 data, Dictionary`2 headers, String rawbody, Nullable`1 emulateBrowser) in ./Jackett.Common/Indexers/BaseIndexer.cs:line 617
+   at Jackett.Common.Indexers.Definitions.CardigannIndexer.PerformQuery(TorznabQuery query) in ./Jackett.Common/Indexers/Definitions/CardigannIndexer.cs:line 1563
+   at Jackett.Common.Indexers.BaseIndexer.ResultsForQuery(TorznabQuery query, Boolean isMetaIndexer) in ./Jackett.Common/Indexers/BaseIndexer.cs:line 378
+   --- End of inner exception stack trace ---
+   at Jackett.Common.Indexers.BaseIndexer.ResultsForQuery(TorznabQuery query, Boolean isMetaIndexer) in ./Jackett.Common/Indexers/BaseIndexer.cs:line 403
+   at Jackett.Common.Indexers.BaseWebIndexer.ResultsForQuery(TorznabQuery query, Boolean isMetaIndexer) in ./Jackett.Common/Indexers/BaseIndexer.cs:line 816
+   at Jackett.Server.Controllers.ResultsController.Torznab(TorznabRequest request) in ./Jackett.Server/Controllers/ResultsController.cs:line 437
+

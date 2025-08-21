@@ -1,11 +1,11 @@
 x-common-env: &common-env
   TZ: ${TZ:-America/Chicago} # Your Timezone
-  PUID: ${PUID:-1001}
+  PUID: ${PUID:-1002}
   PGID: ${PGID:-988}
   UMASK: ${UMASK:-002}
 
 x-common-uidgid: &common-uidgid
-  user: ${PUID:-1001}:${PGID:-988}
+  user: ${PUID:-1002}:${PGID:-988}
 
 x-resource-limits: &resource-limits
   cpu_shares: 1024
@@ -315,7 +315,7 @@ services:
     environment:
       <<: *common-env
       APP_GID: ${PGID:-988}
-      APP_UID: ${PUID:-1001}
+      APP_UID: ${PUID:-1002}
     labels:
       <<: *sickgear-labels
       homepage.group: TV Management

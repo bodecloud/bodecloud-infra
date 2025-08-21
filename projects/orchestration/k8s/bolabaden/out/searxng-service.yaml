@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    homepage.group: Search
+    homepage.href: https://searxng.bolabaden.org/
+    homepage.icon: searxng.png
+    homepage.name: SearxNG
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: searxng
+  name: searxng
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: searxng

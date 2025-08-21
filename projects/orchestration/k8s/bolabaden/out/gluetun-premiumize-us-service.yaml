@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f compose/docker-compose.networks-inline.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: gluetun-premiumize-us
+  name: gluetun-premiumize-us
+spec:
+  ports:
+    - name: "8000"
+      port: 8000
+      targetPort: 8000
+    - name: "8001"
+      port: 8001
+      targetPort: 8001
+    - name: "9999"
+      port: 9999
+      targetPort: 9999
+  selector:
+    io.kompose.service: gluetun-premiumize-us

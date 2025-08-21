@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    homepage.description: A web-based IDE for coding, editing, and debugging code, with support for multiple languages and frameworks.
+    homepage.group: Development
+    homepage.href: https://code.bolabaden.org/
+    homepage.icon: code-server.png
+    homepage.name: Code Server
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.routers.code.rule: Host(`code.bolabaden.org`) || Host(`code.bolabaden.duckdns.org`) || Host(`code.micklethefickle.duckdns.org`) || Host(`code.micklethefickle.bolabaden.org`) || Host(`code.micklethefickle.bolabaden.duckdns.org`)
+    traefik.http.services.code.loadbalancer.server.port: "8443"
+  labels:
+    io.kompose.service: code-demo
+  name: code-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: code-demo
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        homepage.description: A web-based IDE for coding, editing, and debugging code, with support for multiple languages and frameworks.
+        homepage.group: Development
+        homepage.href: https://code.bolabaden.org/
+        homepage.icon: code-server.png
+        homepage.name: Code Server
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+        traefik.enable: "true"
+        traefik.http.routers.code.rule: Host(`code.bolabaden.org`) || Host(`code.bolabaden.duckdns.org`) || Host(`code.micklethefickle.duckdns.org`) || Host(`code.micklethefickle.bolabaden.org`) || Host(`code.micklethefickle.bolabaden.duckdns.org`)
+        traefik.http.services.code.loadbalancer.server.port: "8443"
+      labels:
+        io.kompose.service: code-demo
+    spec:
+      containers:
+        - env:
+            - name: CODESERVER_DEFAULT_WORKSPACE
+              value: /workspace
+            - name: CODESERVER_SUDO_PASSWORD
+              value: h4L0m4St3R327
+            - name: DEFAULT_WORKSPACE
+              value: /workspace
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1001"
+            - name: SUDO_PASSWORD
+              value: h4L0m4St3R327
+            - name: TZ
+              value: America/Chicago
+            - name: UMASK
+              value: "002"
+          image: linuxserver/code-server:latest
+          name: code
+          ports:
+            - containerPort: 8443
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: code-demo-cm0
+            - mountPath: /workspace
+              name: code-demo-claim1
+      hostname: code
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: code-demo-cm0
+          name: code-demo-cm0
+        - name: code-demo-claim1
+          persistentVolumeClaim:
+            claimName: code-demo-claim1

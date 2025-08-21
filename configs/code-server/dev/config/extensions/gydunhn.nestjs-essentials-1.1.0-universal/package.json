@@ -1,0 +1,74 @@
+{
+	"name": "nestjs-essentials",
+	"displayName": "NestJS-Essentials",
+	"description": "NestJS essential extensions for visual studio code",
+	"icon": "img/essentials.png",
+	"galleryBanner": {
+		"color": "#53595e",
+		"theme": "dark"
+	},
+	"license": "LICENSE.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Gydunhn/NestJS-Essentials.git"
+	},
+	"keywords": [
+		"VSC",
+		"VSCode",
+		"Visual Studio",
+		"Visual Studio Code",
+		"VSC Essentials",
+		"Essentials",
+		"Esenciales",
+		"Essenciais",
+		"Essentiel",
+		"Essenziali",
+		"Essentielles",
+		"Esencajoj",
+		"必需品",
+		"골자",
+		"अत्यावश्यकम्",
+		"ملزومات",
+		"Javascript",
+		"Lint",
+		"Snippets",
+		"Nest",
+		"NestJS",
+		"TypeScript",
+		"Docker",
+		"Jest",
+		"Environment",
+		"dotenv",
+		"Dockerfile",
+		"Swagger",
+		"Debugger",
+		"Gydunhn",
+		"Core",
+		"Elite"
+	],
+	"version": "1.1.0",
+	"publisher": "Gydunhn",
+	"engines": {
+		"vscode": "^1.35.0"
+	},
+	"categories": [
+		"Extension Packs"
+	],
+	"extensionPack": [
+		"Gydunhn.vsc-essentials",
+		"Gydunhn.typescript-essentials",
+		"imgildev.vscode-nestjs-generator",
+		"imgildev.vscode-nestjs-snippets-extension",
+		"imgildev.vscode-nestjs-swagger-snippets",
+		"Orta.vscode-jest",
+		"mikestead.dotenv",
+		"Arjun.swagger-viewer",
+		"jeff-hykin.better-dockerfile-syntax",
+		"ms-azuretools.vscode-docker"
+	],
+	"__metadata": {
+		"installedTimestamp": 1752874618616,
+		"targetPlatform": "universal",
+		"size": 56172
+	}
+}

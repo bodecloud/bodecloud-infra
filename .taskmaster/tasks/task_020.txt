@@ -1,0 +1,88 @@
+# Task ID: 20
+# Title: Refactor Website Theme and Messaging for Personal Portfolio
+# Status: pending
+# Dependencies: 2, 4, 6, 7, 8
+# Priority: high
+# Description: Transform the website from a generic business service to a personal developer portfolio by implementing a modern dark theme and rewriting copy to use a first-person perspective.
+# Details:
+1. Theme Implementation:
+   - Replace the current light theme with a modern dark theme
+   - Define a new color palette with dark backgrounds and high-contrast text
+   - Update Tailwind configuration with new color variables:
+     ```js
+     // tailwind.config.js
+     module.exports = {
+       theme: {
+         extend: {
+           colors: {
+             'primary': '#0f172a',
+             'secondary': '#1e293b',
+             'accent': '#3b82f6',
+             'text-primary': '#f8fafc',
+             'text-secondary': '#cbd5e1',
+           }
+         }
+       }
+     }
+     ```
+   - Create a ThemeProvider component to manage theme state
+   - Implement smooth transitions between theme states
+   - Ensure proper color contrast ratios (WCAG AA compliance)
+
+2. Content Rewriting:
+   - Audit all website copy to identify corporate/impersonal language
+   - Rewrite main navigation items:
+     - Change "Services" to "Areas of Expertise"
+     - Replace "Get Started" with "Let's Connect" or "Contact Me"
+   - Update all button text to reflect personal voice
+   - Rewrite section headers and introductory text in first-person perspective
+   - Create a style guide for consistent personal voice throughout the site
+   - Update meta descriptions and page titles to reflect personal branding
+
+3. Component Updates:
+   - Modify Header component to reflect personal branding
+   - Update Footer with personal copyright notice
+   - Redesign call-to-action buttons with new styling and text
+   - Ensure all components properly implement the new theme variables
+   - Add personal touches like a signature or personal logo
+
+4. Technical Implementation:
+   - Use CSS variables or Tailwind theme extension for consistent theming
+   - Implement theme toggle with localStorage persistence
+   - Ensure theme respects user's system preferences (prefers-color-scheme)
+   - Optimize dark theme for reduced eye strain with appropriate contrast
+   - Test theme across all components for consistency
+
+# Test Strategy:
+1. Theme Testing:
+   - Verify dark theme implementation across all pages and components
+   - Test theme toggle functionality and persistence across page refreshes
+   - Validate color contrast meets WCAG 2.1 AA standards using axe-core
+   - Test theme appearance across different browsers and devices
+   - Verify system preference detection works correctly
+   - Test transition animations for smoothness and performance
+
+2. Content Testing:
+   - Review all text content to ensure first-person perspective is consistently applied
+   - Verify all instances of corporate language have been replaced
+   - Test readability of new content on both desktop and mobile devices
+   - Conduct user testing to gather feedback on the personal tone and messaging
+   - Verify meta descriptions and page titles reflect the updated personal branding
+
+3. Visual Regression Testing:
+   - Create before/after screenshots of key pages
+   - Use visual comparison tools to identify unintended layout changes
+   - Test responsive behavior with the new theme across breakpoints
+   - Verify all interactive elements maintain proper states (hover, focus, active)
+
+4. Performance Testing:
+   - Measure and compare page load times before and after theme changes
+   - Test for any CSS bloat introduced by theme changes
+   - Verify smooth rendering without flash of unstyled content
+   - Test performance on lower-end devices to ensure theme doesn't impact usability
+
+5. Accessibility Testing:
+   - Verify keyboard navigation works with the new theme
+   - Test screen reader compatibility with updated content
+   - Validate that focus indicators are visible in the dark theme
+   - Check that all text meets minimum contrast requirements

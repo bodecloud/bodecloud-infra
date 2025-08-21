@@ -1,1992 +1,606 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 
-x-common-env: &common-env
-  PGID: ${PGID:-988} # 'docker' Group ID
-  PUID: ${PUID:-1002} # A non-root user ID
-  TZ: ${TZ:-America/Chicago} # Your Timezone
-
-x-resource-limits: &resource-limits
-  cpu_shares: 1024 # CPU share weight (relative, 2-262144). Higher = more CPU *if competing*.
-  #  mem_limit: 512m        # Max RAM usage (e.g., 64m, 1g). Exceeding = container kill.
-  #  mem_reservation: 325m  # Soft RAM limit (e.g., 32m, 512m).  Best effort, not guaranteed.
-  #  mem_swappiness: 30      # Swap usage (0-100). 0 = off. Higher = more swap, may slow down container.
-  #memswap_limit: 1024m    # Max RAM + Swap.  Usually same as mem_limit.
-  labels:
-    autoheal: "true"
-
-x-swarm-resource-limits: &swarm-resource-limits
-  resources:
-    limits:
-      cpus: "0.10"
-      memory: 1024M
-#    reservations:
-#     cpus: '0.05'
-#    memory:  256M
-
-x-common-deploy: &common-deploy
-  placement:
-    preferences:
-      - spread: node.labels.worker_priority
-  restart_policy:
-    condition: on-failure
-    delay: 5s
-    window: 120s
-  labels:
-    swarm.autoscaler: "true"
-#  resources:
-#    limits:
-#      cpus: '0.10'
-#      memory: 128M
-#    reservations:
-#      cpus: '0.10'
-#      memory: 64M
-
-x-common-hostname-aliases: &common-hostname-aliases
-  - host.docker.internal:host-gateway  # doesn't exist with docker desktop, let's create it.
-# Tailscale
-  - boden-iphone:100.97.148.14
-  - beatapostapita:100.99.45.35
-  - micklethefickle:100.72.149.123
-  - micklethefickle3:100.72.149.123
-  - wizard:100.119.187.62
-  - wizard-pc:100.119.187.62
-# Gluetun AirVPN
-  - gluetun-airvpn:${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
-  - tailscale-airvpn:${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
-# Gluetun Premiumize AT
-  - vpn-at.premiumize.me:${VPN_PREMIUMIZE_AT_IPV4_ADDRESS:-45.76.123.162}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-at:${GLUETUN_PREMIUMIZE_AT_IPV4_ADDRESS:-10.76.128.101}
-  - tailscale-premiumize-at:${GLUETUN_PREMIUMIZE_AT_IPV4_ADDRESS:-10.76.128.101}
-# Gluetun Premiumize AU
-  - vpn-au.premiumize.me:${VPN_PREMIUMIZE_AU_IPV4_ADDRESS:-149.28.167.147}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-au:${GLUETUN_PREMIUMIZE_AU_IPV4_ADDRESS:-10.76.128.102}
-  - tailscale-premiumize-au:${GLUETUN_PREMIUMIZE_AU_IPV4_ADDRESS:-10.76.128.102}
-# Gluetun Premiumize BE
-  - vpn-be.premiumize.me:${VPN_PREMIUMIZE_BE_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-be:${GLUETUN_PREMIUMIZE_BE_IPV4_ADDRESS:-10.76.128.103}
-  - tailscale-premiumize-be:${GLUETUN_PREMIUMIZE_BE_IPV4_ADDRESS:-10.76.128.103}
-# Gluetun Premiumize CA
-  - vpn-ca.premiumize.me:${VPN_PREMIUMIZE_CA_IPV4_ADDRESS:-192.71.227.91}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-ca:${GLUETUN_PREMIUMIZE_CA_IPV4_ADDRESS:-10.76.128.104}
-  - tailscale-premiumize-ca:${GLUETUN_PREMIUMIZE_CA_IPV4_ADDRESS:-10.76.128.104}
-# Gluetun Premiumize CH
-  - vpn-ch.premiumize.me:${VPN_PREMIUMIZE_CH_IPV4_ADDRESS:-176.10.104.94}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-ch:${GLUETUN_PREMIUMIZE_CH_IPV4_ADDRESS:-10.76.128.105}
-  - tailscale-premiumize-ch:${GLUETUN_PREMIUMIZE_CH_IPV4_ADDRESS:-10.76.128.105}
-# Gluetun Premiumize CZ
-  - vpn-cz.premiumize.me:${VPN_PREMIUMIZE_CZ_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-cz:${GLUETUN_PREMIUMIZE_CZ_IPV4_ADDRESS:-10.76.128.106}
-  - tailscale-premiumize-cz:${GLUETUN_PREMIUMIZE_CZ_IPV4_ADDRESS:-10.76.128.106}
-# Gluetun Premiumize DE
-  - vpn-de.premiumize.me:${VPN_PREMIUMIZE_DE_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-de:${GLUETUN_PREMIUMIZE_DE_IPV4_ADDRESS:-10.76.128.107}
-  - tailscale-premiumize-de:${GLUETUN_PREMIUMIZE_DE_IPV4_ADDRESS:-10.76.128.107}
-# Gluetun Premiumize ES
-  - vpn-es.premiumize.me:${VPN_PREMIUMIZE_ES_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-es:${GLUETUN_PREMIUMIZE_ES_IPV4_ADDRESS:-10.76.128.108}
-  - tailscale-premiumize-es:${GLUETUN_PREMIUMIZE_ES_IPV4_ADDRESS:-10.76.128.108}
-# Gluetun Premiumize FI
-  - vpn-fi.premiumize.me:${VPN_PREMIUMIZE_FI_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-fi:${GLUETUN_PREMIUMIZE_FI_IPV4_ADDRESS:-10.76.128.109}
-  - tailscale-premiumize-fi:${GLUETUN_PREMIUMIZE_FI_IPV4_ADDRESS:-10.76.128.109}
-# Gluetun Premiumize FR
-  - vpn-fr.premiumize.me:${VPN_PREMIUMIZE_FR_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-fr:${GLUETUN_PREMIUMIZE_FR_IPV4_ADDRESS:-10.76.128.110}
-  - tailscale-premiumize-fr:${GLUETUN_PREMIUMIZE_FR_IPV4_ADDRESS:-10.76.128.110}
-# Gluetun Premiumize GB
-  - vpn-gb.premiumize.me:${VPN_PREMIUMIZE_GB_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-gb:${GLUETUN_PREMIUMIZE_GB_IPV4_ADDRESS:-10.76.128.111}
-  - tailscale-premiumize-gb:${GLUETUN_PREMIUMIZE_GB_IPV4_ADDRESS:-10.76.128.111}
-# Gluetun Premiumize GR
-  - vpn-gr.premiumize.me:${VPN_PREMIUMIZE_GR_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-gr:${GLUETUN_PREMIUMIZE_GR_IPV4_ADDRESS:-10.76.128.112}
-  - tailscale-premiumize-gr:${GLUETUN_PREMIUMIZE_GR_IPV4_ADDRESS:-10.76.128.112}
-# Gluetun Premiumize IT
-  - vpn-it.premiumize.me:${VPN_PREMIUMIZE_IT_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-it:${GLUETUN_PREMIUMIZE_IT_IPV4_ADDRESS:-10.76.128.113}
-  - tailscale-premiumize-it:${GLUETUN_PREMIUMIZE_IT_IPV4_ADDRESS:-10.76.128.113}
-# Gluetun Premiumize JP
-  - vpn-jp.premiumize.me:${VPN_PREMIUMIZE_JP_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-jp:${GLUETUN_PREMIUMIZE_JP_IPV4_ADDRESS:-10.76.128.114}
-  - tailscale-premiumize-jp:${GLUETUN_PREMIUMIZE_JP_IPV4_ADDRESS:-10.76.128.114}
-# Gluetun Premiumize NL
-  - vpn-nl.premiumize.me:${VPN_PREMIUMIZE_NL_IPV4_ADDRESS:-185.107.94.249}  # P2P traffic okay.
-  - gluetun-premiumize-nl:${GLUETUN_PREMIUMIZE_NL_IPV4_ADDRESS:-10.76.128.99}
-  - tailscale-premiumize-nl:${GLUETUN_PREMIUMIZE_NL_IPV4_ADDRESS:-10.76.128.99}
-# Gluetun Premiumize PL
-  - vpn-pl.premiumize.me:${VPN_PREMIUMIZE_PL_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-pl:${GLUETUN_PREMIUMIZE_PL_IPV4_ADDRESS:-10.76.128.115}
-  - tailscale-premiumize-pl:${GLUETUN_PREMIUMIZE_PL_IPV4_ADDRESS:-10.76.128.115}
-# Gluetun Premiumize SG
-  - vpn-sg.premiumize.me:${VPN_PREMIUMIZE_SG_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-sg:${GLUETUN_PREMIUMIZE_SG_IPV4_ADDRESS:-10.76.128.116}
-  - tailscale-premiumize-sg:${GLUETUN_PREMIUMIZE_SG_IPV4_ADDRESS:-10.76.128.116}
-# Gluetun Premiumize US
-  - vpn-us.premiumize.me:${VPN_PREMIUMIZE_US_IPV4_ADDRESS:-199.58.86.204}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-us:${GLUETUN_PREMIUMIZE_US_IPV4_ADDRESS:-10.76.128.98}
-  - tailscale-premiumize-us:${GLUETUN_PREMIUMIZE_US_IPV4_ADDRESS:-10.76.128.98}
-# Warp
-  - warp:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - tailscale-warp:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - warp-fetch-proxy:${WARP_IPV4_ADDRESS:-10.76.128.97}
-
-x-gluetun-hosts-workaround: &gluetun-hosts-workaround
-  - host.docker.internal:host-gateway  # doesn't exist with docker desktop, let's create it.
-# Tailscale
-  - boden-iphone:100.97.148.14
-  - beatapostapita:100.99.45.35
-  - micklethefickle:100.72.149.123
-  - micklethefickle3:100.72.149.123
-  - wizard:100.119.187.62
-  - wizard-pc:100.119.187.62
-# Gluetun AirVPN
-  - gluetun-airvpn:${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
-  - tailscale-airvpn:${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
-# Gluetun Premiumize AT
-  - vpn-at.premiumize.me:${VPN_PREMIUMIZE_AT_IPV4_ADDRESS:-45.76.123.162}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-at:${GLUETUN_PREMIUMIZE_AT_IPV4_ADDRESS:-10.76.128.101}
-  - tailscale-premiumize-at:${GLUETUN_PREMIUMIZE_AT_IPV4_ADDRESS:-10.76.128.101}
-# Gluetun Premiumize AU
-  - vpn-au.premiumize.me:${VPN_PREMIUMIZE_AU_IPV4_ADDRESS:-149.28.167.147}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-au:${GLUETUN_PREMIUMIZE_AU_IPV4_ADDRESS:-10.76.128.102}
-  - tailscale-premiumize-au:${GLUETUN_PREMIUMIZE_AU_IPV4_ADDRESS:-10.76.128.102}
-# Gluetun Premiumize BE
-  - vpn-be.premiumize.me:${VPN_PREMIUMIZE_BE_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-be:${GLUETUN_PREMIUMIZE_BE_IPV4_ADDRESS:-10.76.128.103}
-  - tailscale-premiumize-be:${GLUETUN_PREMIUMIZE_BE_IPV4_ADDRESS:-10.76.128.103}
-# Gluetun Premiumize CA
-  - vpn-ca.premiumize.me:${VPN_PREMIUMIZE_CA_IPV4_ADDRESS:-192.71.227.91}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-ca:${GLUETUN_PREMIUMIZE_CA_IPV4_ADDRESS:-10.76.128.104}
-  - tailscale-premiumize-ca:${GLUETUN_PREMIUMIZE_CA_IPV4_ADDRESS:-10.76.128.104}
-# Gluetun Premiumize CH
-  - vpn-ch.premiumize.me:${VPN_PREMIUMIZE_CH_IPV4_ADDRESS:-176.10.104.94}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-ch:${GLUETUN_PREMIUMIZE_CH_IPV4_ADDRESS:-10.76.128.105}
-  - tailscale-premiumize-ch:${GLUETUN_PREMIUMIZE_CH_IPV4_ADDRESS:-10.76.128.105}
-# Gluetun Premiumize CZ
-  - vpn-cz.premiumize.me:${VPN_PREMIUMIZE_CZ_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-cz:${GLUETUN_PREMIUMIZE_CZ_IPV4_ADDRESS:-10.76.128.106}
-  - tailscale-premiumize-cz:${GLUETUN_PREMIUMIZE_CZ_IPV4_ADDRESS:-10.76.128.106}
-# Gluetun Premiumize DE
-  - vpn-de.premiumize.me:${VPN_PREMIUMIZE_DE_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-de:${GLUETUN_PREMIUMIZE_DE_IPV4_ADDRESS:-10.76.128.107}
-  - tailscale-premiumize-de:${GLUETUN_PREMIUMIZE_DE_IPV4_ADDRESS:-10.76.128.107}
-# Gluetun Premiumize ES
-  - vpn-es.premiumize.me:${VPN_PREMIUMIZE_ES_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-es:${GLUETUN_PREMIUMIZE_ES_IPV4_ADDRESS:-10.76.128.108}
-  - tailscale-premiumize-es:${GLUETUN_PREMIUMIZE_ES_IPV4_ADDRESS:-10.76.128.108}
-# Gluetun Premiumize FI
-  - vpn-fi.premiumize.me:${VPN_PREMIUMIZE_FI_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-fi:${GLUETUN_PREMIUMIZE_FI_IPV4_ADDRESS:-10.76.128.109}
-  - tailscale-premiumize-fi:${GLUETUN_PREMIUMIZE_FI_IPV4_ADDRESS:-10.76.128.109}
-# Gluetun Premiumize FR
-  - vpn-fr.premiumize.me:${VPN_PREMIUMIZE_FR_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-fr:${GLUETUN_PREMIUMIZE_FR_IPV4_ADDRESS:-10.76.128.110}
-  - tailscale-premiumize-fr:${GLUETUN_PREMIUMIZE_FR_IPV4_ADDRESS:-10.76.128.110}
-# Gluetun Premiumize GB
-  - vpn-gb.premiumize.me:${VPN_PREMIUMIZE_GB_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-gb:${GLUETUN_PREMIUMIZE_GB_IPV4_ADDRESS:-10.76.128.111}
-  - tailscale-premiumize-gb:${GLUETUN_PREMIUMIZE_GB_IPV4_ADDRESS:-10.76.128.111}
-# Gluetun Premiumize GR
-  - vpn-gr.premiumize.me:${VPN_PREMIUMIZE_GR_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-gr:${GLUETUN_PREMIUMIZE_GR_IPV4_ADDRESS:-10.76.128.112}
-  - tailscale-premiumize-gr:${GLUETUN_PREMIUMIZE_GR_IPV4_ADDRESS:-10.76.128.112}
-# Gluetun Premiumize IT
-  - vpn-it.premiumize.me:${VPN_PREMIUMIZE_IT_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-it:${GLUETUN_PREMIUMIZE_IT_IPV4_ADDRESS:-10.76.128.113}
-  - tailscale-premiumize-it:${GLUETUN_PREMIUMIZE_IT_IPV4_ADDRESS:-10.76.128.113}
-# Gluetun Premiumize JP
-  - vpn-jp.premiumize.me:${VPN_PREMIUMIZE_JP_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-jp:${GLUETUN_PREMIUMIZE_JP_IPV4_ADDRESS:-10.76.128.114}
-  - tailscale-premiumize-jp:${GLUETUN_PREMIUMIZE_JP_IPV4_ADDRESS:-10.76.128.114}
-# Gluetun Premiumize NL
-  - vpn-nl.premiumize.me:${VPN_PREMIUMIZE_NL_IPV4_ADDRESS:-185.107.94.249}  # P2P traffic okay.
-  - gluetun-premiumize-nl:${GLUETUN_PREMIUMIZE_NL_IPV4_ADDRESS:-10.76.128.99}
-  - tailscale-premiumize-nl:${GLUETUN_PREMIUMIZE_NL_IPV4_ADDRESS:-10.76.128.99}
-# Gluetun Premiumize PL
-  - vpn-pl.premiumize.me:${VPN_PREMIUMIZE_PL_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-pl:${GLUETUN_PREMIUMIZE_PL_IPV4_ADDRESS:-10.76.128.115}
-  - tailscale-premiumize-pl:${GLUETUN_PREMIUMIZE_PL_IPV4_ADDRESS:-10.76.128.115}
-# Gluetun Premiumize SG
-  - vpn-sg.premiumize.me:${VPN_PREMIUMIZE_SG_IPV4_ADDRESS:-194.71.227.198}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-sg:${GLUETUN_PREMIUMIZE_SG_IPV4_ADDRESS:-10.76.128.116}
-  - tailscale-premiumize-sg:${GLUETUN_PREMIUMIZE_SG_IPV4_ADDRESS:-10.76.128.116}
-# Gluetun Premiumize US
-  - vpn-us.premiumize.me:${VPN_PREMIUMIZE_US_IPV4_ADDRESS:-199.58.86.204}  # P2P NOT ALLOWED.
-  - gluetun-premiumize-us:${GLUETUN_PREMIUMIZE_US_IPV4_ADDRESS:-10.76.128.98}
-  - tailscale-premiumize-us:${GLUETUN_PREMIUMIZE_US_IPV4_ADDRESS:-10.76.128.98}
-# Warp
-  - warp:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - tailscale-warp:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - warp-fetch-proxy:${WARP_IPV4_ADDRESS:-10.76.128.97}
-
 services:
-  gluetun-airvpn:
+  gluetun-pia:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    image: ghcr.io/qdm12/gluetun
-    container_name: gluetun-airvpn
-    hostname: gluetun-airvpn
-    extra_hosts: *gluetun-hosts-workaround
+    image: qmcgaw/gluetun
+    container_name: gluetun-pia
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_AIRVPN_IPV4_ADDRESS:-10.76.89.128}
+      - publicnet
     cap_add:
       - NET_ADMIN
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
-    expose:
-      - 8000  # Gluetun WebUI
-      - 9999  # Gluetun Health Check
-      - 1055  # Tailscale SOCKS5
-      - 8885  # Tailscale HTTP Proxy
-      - 41641  # Tailscale Health Check
     devices:
-      # https://github.com/qdm12/gluetun-wiki/blob/main/errors/tun.md
-      - "${GLUETUN_AIRVPN_TUN_DEVICE:-/dev/net/tun}:/dev/net/tun"
+      - /dev/net/tun:/dev/net/tun
     volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/airvpn:/gluetun
+      - ${CONFIG_PATH:-./configs}/gluetun/pia:/gluetun
     environment:
-      <<: *common-env
-      OPENVPN_CIPHERS: aes-256-gcm
-      FIREWALL_VPN_INPUT_PORTS: 20027,23936,36175,42162,52065
-      SERVER_COUNTRIES: Austria,Belgium,Brazil,Bulgaria,Canada,Czech Republic,Estonia,Germany,Ireland,Japan,Latvia,Netherlands,New Zealand,Norway,Romania,Serbia,Singapore,Spain,Sweden,Switzerland,United Kingdom,United States,China,Isle of Man
-      VPN_SERVICE_PROVIDER: airvpn
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:9999 > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    restart: always
-
-  tailscale-airvpn:
-    depends_on:
-      gluetun-airvpn:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-airvpn
-    network_mode: service:gluetun-airvpn
-    devices:
-      - ${GLUETUN_AIRVPN_TUN_DEVICE:-/dev/net/tun}:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/airvpn/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/airvpn/volumes/tmp:/tmp
-    environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"  # Accept DNS configuration from the admin console. Not accepted by default.
-      TS_AUTH_ONCE: "true"  # Attempt to log in only if not already logged in. False by default, to forcibly log in every time the container starts.
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}  # An auth key used to authenticate the container. This is equivalent to what you'd pass to tailscale login --auth-key=.
-#      TS_DEST_IP: ${TS_DEST_IP:-}  # Proxy all incoming Tailscale traffic to the specified destination IP.
-      TS_ENABLE_HEALTH_CHECK: "true"  # Set to true to enable an unauthenticated /healthz endpoint at the address specified by TS_LOCAL_ADDR_PORT.
-      TS_ENABLE_METRICS: "true"  # Set to true to enable an unauthenticated /metrics endpoint at the address specified by TS_LOCAL_ADDR_PORT.
-      TS_HOSTNAME: tailscale-airvpn-${TS_HOSTNAME}-docker  # Use the specified hostname for the node. This is equivalent to tailscale set --hostname=.
-#      TS_KUBE_SECRET: ${TS_KUBE_SECRET:-}  # If running in Kubernetes, the Kubernetes secret name where Tailscale state is stored. The default is tailscale.
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41641"  # Specifies the [<addr>]:<port> on which to serve local metrics and health check HTTP endpoints if enabled through TS_ENABLE_METRICS or TS_ENABLE_HEALTH_CHECK.
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8885"  # Set an address and port for the HTTP proxy. This will be passed to tailscaled --outbound-http-proxy-listen=.
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"  # Advertise subnet routes. This is equivalent to tailscale set --advertise-routes=.
-#      TS_SERVE_CONFIG: ${TS_SERVE_CONFIG:-}  # Accepts a JSON file to programmatically configure Serve and Funnel functionality.
-      TS_SOCKET: "/tmp/tailscaled.sock"  # Unix socket path used by the Tailscale binary, where the tailscaled LocalAPI socket is created.
-      TS_SOCKS5_SERVER: ":1055"  # Set an address and port for the SOCKS5 proxy. This will be passed to tailscaled --socks5-server=.
-      TS_STATE_DIR: "/var/lib/tailscale"  # Directory where the state of tailscaled is stored. This needs to persist across container restarts.
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"  # Any other flags to pass in to the Tailscale CLI in a tailscale up command.
-#      TS_TAILSCALED_EXTRA_ARGS: ${TS_TAILSCALED_EXTRA_ARGS:-}  # Any other flags to pass in to tailscaled.
-      TS_USERSPACE: "true"  # Enable userspace networking, instead of kernel networking. Enabled by default.
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41641/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
+      - VPN_SERVICE_PROVIDER=private internet access
+      - OPENVPN_USER=p6969448
+      - OPENVPN_PASSWORD=3trzYcgdSw
     restart: always
 
   gluetun-premiumize-at:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    # use this one with arm:
-    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-at
-    hostname: gluetun-premiumize-at
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_AT_IPV4_ADDRESS:-10.76.128.101}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/at/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1057   # Tailscale SOCKS5
-      - 8887   # Tailscale HTTP Proxy
-      - 41643  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-at:
-    depends_on:
-      gluetun-premiumize-at:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-at
-    network_mode: service:gluetun-premiumize-at
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/at/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/at/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-at-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41643"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8887"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1057"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41643/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser  # user: ${OPENVPN_PROCESS_USER:-root}
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-at.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-au:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    # use this one with arm:
-    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-au
-    hostname: gluetun-premiumize-au
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_AU_IPV4_ADDRESS:-10.76.128.102}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/au/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1059   # Tailscale SOCKS5
-      - 8891   # Tailscale HTTP Proxy
-      - 41645  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-au:
-    depends_on:
-      gluetun-premiumize-au:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-au
-    network_mode: service:gluetun-premiumize-au
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/au/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/au/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-au-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41645"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8891"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1059"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41645/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-au.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-be:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    # use this one with arm:
-    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-be
-    hostname: gluetun-premiumize-be
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_BE_IPV4_ADDRESS:-10.76.128.103}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/be/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1060   # Tailscale SOCKS5
-      - 8892   # Tailscale HTTP Proxy
-      - 41646  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-be:
-    depends_on:
-      gluetun-premiumize-be:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-be
-    network_mode: service:gluetun-premiumize-be
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/be/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/be/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-be-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41646"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8892"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1060"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41646/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-be.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-ca:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    # use this one with arm:
-    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-ca
-    hostname: gluetun-premiumize-ca
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_CA_IPV4_ADDRESS:-10.76.128.104}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/ca/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1061   # Tailscale SOCKS5
-      - 8893   # Tailscale HTTP Proxy
-      - 41647  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-ca:
-    depends_on:
-      gluetun-premiumize-ca:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-ca
-    network_mode: service:gluetun-premiumize-ca
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/ca/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/ca/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-ca-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41647"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8893"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1061"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41647/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-ca.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-ch:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    # use this one with arm:
-    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-ch
-    hostname: gluetun-premiumize-ch
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_CH_IPV4_ADDRESS:-10.76.128.105}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/ch/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1062   # Tailscale SOCKS5
-      - 8894   # Tailscale HTTP Proxy
-      - 41648  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-ch:
-    depends_on:
-      gluetun-premiumize-ch:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-ch
-    network_mode: service:gluetun-premiumize-ch
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/ch/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/ch/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-ch-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41648"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8894"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1062"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41648/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-ch.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-cz:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    # use this one with arm:
-    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-cz
-    hostname: gluetun-premiumize-cz
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_CZ_IPV4_ADDRESS:-10.76.128.106}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/cz/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1064   # Tailscale SOCKS5
-      - 8896   # Tailscale HTTP Proxy
-      - 41650  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-cz:
-    depends_on:
-      gluetun-premiumize-cz:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-cz
-    network_mode: service:gluetun-premiumize-cz
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/cz/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/cz/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-cz-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41650"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8896"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1064"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41650/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-cz.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-de:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    # use this one with arm:
-    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-de
-    hostname: gluetun-premiumize-de
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_DE_IPV4_ADDRESS:-10.76.128.107}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/de/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1066   # Tailscale SOCKS5
-      - 8898   # Tailscale HTTP Proxy
-      - 41652  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-de:
-    depends_on:
-      gluetun-premiumize-de:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-de
-    network_mode: service:gluetun-premiumize-de
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/de/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/de/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-de-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41652"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8898"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1066"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41652/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-de.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-es:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-es
-    hostname: gluetun-premiumize-es
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_ES_IPV4_ADDRESS:-10.76.128.108}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/es/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1067   # Tailscale SOCKS5
-      - 8899   # Tailscale HTTP Proxy
-      - 41653  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-es:
-    depends_on:
-      gluetun-premiumize-es:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-es
-    network_mode: service:gluetun-premiumize-es
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/es/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/es/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-es-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41653"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8899"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1067"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41653/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-es.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-fi:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-fi
-    hostname: gluetun-premiumize-fi
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_FI_IPV4_ADDRESS:-10.76.128.109}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/fi/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1068   # Tailscale SOCKS5
-      - 8900   # Tailscale HTTP Proxy
-      - 41654  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-fi:
-    depends_on:
-      gluetun-premiumize-fi:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-fi
-    network_mode: service:gluetun-premiumize-fi
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/fi/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/fi/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-fi-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41654"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8900"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1068"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41654/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-fi.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-fr:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-fr
-    hostname: gluetun-premiumize-fr
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_FR_IPV4_ADDRESS:-10.76.128.110}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/fr/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1069   # Tailscale SOCKS5
-      - 8901   # Tailscale HTTP Proxy
-      - 41655  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-fr:
-    depends_on:
-      gluetun-premiumize-fr:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-fr
-    network_mode: service:gluetun-premiumize-fr
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/fr/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/fr/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-fr-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41655"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8901"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1069"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41655/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-fr.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-gb:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-gb
-    hostname: gluetun-premiumize-gb
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_GB_IPV4_ADDRESS:-10.76.128.111}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gb/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1070   # Tailscale SOCKS5
-      - 8902   # Tailscale HTTP Proxy
-      - 41656  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-gb:
-    depends_on:
-      gluetun-premiumize-gb:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-gb
-    network_mode: service:gluetun-premiumize-gb
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/gb/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/gb/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-gb-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41656"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8902"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1070"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41656/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-gb.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-gr:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-gr
-    hostname: gluetun-premiumize-gr
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_GR_IPV4_ADDRESS:-10.76.128.112}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gr/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1071   # Tailscale SOCKS5
-      - 8903   # Tailscale HTTP Proxy
-      - 41657  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-gr:
-    depends_on:
-      gluetun-premiumize-gr:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-gr
-    network_mode: service:gluetun-premiumize-gr
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/gr/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/gr/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-gr-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41657"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8903"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1071"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41657/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-gr.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-it:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-it
-    hostname: gluetun-premiumize-it
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_IT_IPV4_ADDRESS:-10.76.128.113}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/it/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1072   # Tailscale SOCKS5
-      - 8904   # Tailscale HTTP Proxy
-      - 41658  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-it:
-    depends_on:
-      gluetun-premiumize-it:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-it
-    network_mode: service:gluetun-premiumize-it
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/it/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/it/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-it-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41658"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8904"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1072"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41658/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-it.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-jp:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-jp
-    hostname: gluetun-premiumize-jp
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_JP_IPV4_ADDRESS:-10.76.128.114}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/jp/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1073   # Tailscale SOCKS5
-      - 8905   # Tailscale HTTP Proxy
-      - 41659  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-jp:
-    depends_on:
-      gluetun-premiumize-jp:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-jp
-    network_mode: service:gluetun-premiumize-jp
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/jp/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/jp/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-jp-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41659"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8905"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1073"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41659/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-jp.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-nl:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
-    # use this one with arm:
-    # image: ghcr.io/qdm12/gluetun:latest@sha256:f035267182d3928d6d8351eb1b21f74dce0f97c1a521ffe4c18ce6376614806d
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-nl
-    hostname: gluetun-premiumize-nl
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_NL_IPV4_ADDRESS:-10.76.128.99}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/nl/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1063   # Tailscale SOCKS5
-      - 8895   # Tailscale HTTP Proxy
-      - 41649  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-nl:
-    depends_on:
-      gluetun-premiumize-nl:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-nl
-    network_mode: service:gluetun-premiumize-nl
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/nl/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/nl/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-nl-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41649"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8895"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1063"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41649/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-nl.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-pl:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-pl
-    hostname: gluetun-premiumize-pl
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_PL_IPV4_ADDRESS:-10.76.128.115}
+      - publicnet
     cap_add:
       - NET_ADMIN
-    environment:
-      <<: *common-env
-      VPN_SERVICE_PROVIDER: custom
-      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: AES-256-CBC
-      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
-      VPN_TYPE: openvpn
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/pl/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1074   # Tailscale SOCKS5
-      - 8906   # Tailscale HTTP Proxy
-      - 41660  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-pl:
-    depends_on:
-      gluetun-premiumize-pl:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-pl
-    network_mode: service:gluetun-premiumize-pl
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/pl/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/pl/volumes/tmp:/tmp
     environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-pl-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41660"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8906"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1074"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41660/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      VPN_SERVICE_PROVIDER: custom
+      OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
+      OPENVPN_CIPHERS: AES-256-CBC
+      OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
+      VPN_TYPE: openvpn
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-pl.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-sg:
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-sg
-    hostname: gluetun-premiumize-sg
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_SG_IPV4_ADDRESS:-10.76.128.116}
+      - publicnet
     cap_add:
       - NET_ADMIN
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: 1
+    devices:
+      - /dev/net/tun:/dev/net/tun
     environment:
-      <<: *common-env
       VPN_SERVICE_PROVIDER: custom
       OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
       OPENVPN_CIPHERS: AES-256-CBC
       OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: on
-      BLOCK_MALICIOUS: on
-      BLOCK_SURVEILLANCE: on
-      STORAGE_FILEPATH: /gluetun/servers.json
-      FIREWALL_OUTBOUND_SUBNETS: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
-      HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
-      HEALTH_SUCCESS_WAIT_DURATION: 5s
-      HEALTH_TARGET_ADDRESS: cloudflare.com:443
-      HEALTH_VPN_DURATION_ADDITION: 5s
-      HEALTH_VPN_DURATION_INITIAL: 6s
-      #HTTP_CONTROL_SERVER_ADDRESS: :8000
-      #HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: /gluetun/auth/config.toml
-      #HTTP_CONTROL_SERVER_LOG: on
-      OPENVPN_IPV6: off
-      VERSION_INFORMATION: on
+      FIREWALL_OUTBOUND_SUBNETS: ${PUBLICNET_SUBNET:-10.76.0.0/16},172.16.0.0/16,172.17.0.0/16,100.64.0.0/10
       VPN_TYPE: openvpn
-    sysctls:
-      net.ipv6.conf.all.disable_ipv6: 1
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/sg/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    expose:
-      - 8001   # Gluetun WebUI
-      - 9999   # Gluetun Health Check
-      - 1075   # Tailscale SOCKS5
-      - 8907   # Tailscale HTTP Proxy
-      - 41661  # Tailscale Health Check
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-    restart: always
-
-  tailscale-premiumize-sg:
-    depends_on:
-      gluetun-premiumize-sg:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-sg
-    network_mode: service:gluetun-premiumize-sg
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/sg/volumes/var/lib/tailscale:/var/lib/tailscale
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/sg/volumes/tmp:/tmp
-    environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-sg-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41661"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8907"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1075"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41661/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      OPENVPN_PROCESS_USER: nonrootuser
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-sg.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
 
   gluetun-premiumize-us:  # United States, P2P NOT ALLOWED.
     # 🔹🔹 Gluetun 🔹🔹  # https://github.com/qdm12/gluetun
-    # Gluetun is a VPN client that supports various VPN protocols, providing secure and private internet access for your applications.
     image: ghcr.io/qdm12/gluetun
     container_name: gluetun-premiumize-us
-    hostname: gluetun-premiumize-us
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${GLUETUN_PREMIUMIZE_US_IPV4_ADDRESS:-10.76.128.98}
+      - publicnet
     expose:
       - 8001  # Gluetun WebUI
       - 9999  # Gluetun Health Check
-      - 1056  # Tailscale SOCKS5
-      - 8886  # Tailscale HTTP Proxy
-      - 41642  # Tailscale Health Check
     cap_add:
       - NET_ADMIN
     environment:
-      <<: *common-env
-      # VPN provider to use.
       VPN_SERVICE_PROVIDER: "custom"
       OPENVPN_CUSTOM_CONFIG: /etc/openvpn/target.ovpn
-      OPENVPN_CIPHERS: "AES-256-CBC"
+      OPENVPN_CIPHERS: AES-256-CBC
       OPENVPN_FLAGS: --auth-user-pass /config/auth.conf
-      BLOCK_ADS: "on"  # Uses ads hostnames and IP addresses block lists for Unbound: https://github.com/qdm12/files
-      BLOCK_MALICIOUS: "on"  # Uses malicious hostnames and IP addresses block lists for Unbound: https://github.com/qdm12/files
-      BLOCK_SURVEILLANCE: "on"  # Uses surveillance hostnames and IP addresses block lists for Unbound: https://github.com/qdm12/files
-      DNS_ADDRESS: "127.0.0.1"  # IP address to use as DNS resolver. It defaults to localhost to use the DNS over TLS Unbound server. Tip: use 127.0.0.11 to use the Docker DNS server.
-      DOT_IPV6: "off"  # DNS IPv6 resolution
-      # firewall references:
-      # https://github.com/qdm12/gluetun-wiki/blob/main/setup/options/firewall.md
-      # https://github.com/qdm12/gluetun-wiki/blob/main/errors/firewall.md
-      # https://github.com/qdm12/gluetun-wiki/blob/main/errors/routing.md
-      FIREWALL_OUTBOUND_SUBNETS: "10.76.0.0/16,172.17.0.0/16,100.72.149.123/32"  # Comma separated subnets that Gluetun and the containers sharing its network stack are allowed to access. This involves firewall and routing modifications.
-      OPENVPN_IPV6: "off"  # Enable/disable IPv6
-      VERSION_INFORMATION: "on"  # Logs a message indicating if a newer version is available once the VPN is connected
-      VPN_TYPE: "openvpn"  # VPN type to use, only two choices available: `openvpn` and `wireguard`
+      DNS_ADDRESS: "127.0.0.1"
+      DOT_IPV6: "off"
+      FIREWALL_OUTBOUND_SUBNETS: "${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,100.72.149.123/32"
+      OPENVPN_IPV6: "off"
+      VERSION_INFORMATION: "on"
+      VPN_TYPE: "openvpn"
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     devices:
       - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/gluetun/auth:/gluetun/auth
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/us/etc/openvpn:/etc/openvpn
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/gluetun:/gluetun
-      - ${CONFIG_PATH:-./configs}/gluetun/premiumize/config:/config
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    restart: always
-
-  tailscale-premiumize-us:
-    depends_on:
-      gluetun-premiumize-us:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-premiumize-us
-    network_mode: service:gluetun-premiumize-us
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/us/volumes/var/lib/tailscale:${TS_STATE_DIR:-/var/lib/tailscale}
-      - ${CONFIG_PATH:-./configs}/tailscale/premiumize/us/volumes/tmp:/tmp
-    environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-premiumize-us-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41642"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8886"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1056"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41642/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+    configs:
+      - source: premiumize-auth
+        target: /config/auth.conf
+        mode: 0600
+      - source: premiumize-ca.pem
+        target: /etc/openvpn/premiumize-ca.pem
+        mode: 0600
+      - source: vpn-us.premiumize.me
+        target: /etc/openvpn/target.ovpn
+        mode: 0600
     restart: always
   warp:
     # 🔹🔹 Cloudflare WARP 🔹🔹
@@ -2001,36 +615,20 @@ services:
     image: caomingjun/warp:latest
     container_name: warp
     hostname: warp
-    extra_hosts: *gluetun-hosts-workaround
     networks:
-      publicnet:
-        ipv4_address: ${WARP_IPV4_ADDRESS:-10.76.128.97}
+      - publicnet
     # add removed rule back (https://github.com/opencontainers/runc/pull/3468)
     device_cgroup_rules:
       - 'c 10:200 rwm'
     expose:
-      - 3000  # Stremio-Jackett
-      - 8080   # Stremio WebUI
-      - 11470  # Stremio HTTP Streaming Server
-      - 12470  # Stremio HTTPS Streaming Server
-      - 443
       - 1080  # WARP SOCKS5 Proxy
-      - ${AIOSTREAMS_PORT:-3005}  # AIOStreams
-      - 8000  # MediaFusion
-      - 4000  # Jackettio
-      - 9117  # Jackett
-      - 9696  # Prowlarr
-      - ${COMET_PORT:-2020}  # Comet
     ports:
       - 1080:1080  # WARP SOCKS5 Proxy
-      - 11470:11470  # Stremio HTTP Streaming Server (HTTP)
-      - 12470:12470  # Stremio HTTPS Streaming Server (HTTPS)
-      - 443:443/udp
     environment:
       - WARP_SLEEP=2
-      - WARP_LICENSE_KEY=eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+      - WARP_LICENSE_KEY=${WARP_LICENSE_KEY}
       # - WARP_ENABLE_NAT=1 # enable nat
-      - TUNNEL_TOKEN=eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     cap_add:
       # Docker already have them, these are for podman users
       - MKNOD
@@ -2046,94 +644,381 @@ services:
       # - net.ipv6.conf.all.accept_ra=2
     volumes:
       - ${CONFIG_PATH:-./configs}/warp/data:/var/lib/cloudflare-warp
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      # Warp Fetch Proxy
-      traefik.http.routers.warp-proxy.service: warp-proxy
-      traefik.http.routers.warp-proxy.middlewares: nginx-auth@file
-      traefik.http.routers.warp-proxy.rule: Host(`warp-proxy.${DOMAIN}`) || Host(`warp-proxy.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`warp-proxy.${TS_HOSTNAME}.duckdns.org`)
-      traefik.http.services.warp-proxy.loadbalancer.server.port: 3128
-    restart: always
-  tailscale-warp:
-    depends_on:
-      warp:
-        condition: service_healthy
-    image: tailscale/tailscale
-    container_name: tailscale-warp
-    network_mode: service:warp
-    devices:
-      - ${WARP_TUN_DEVICE:-/dev/net/tun}:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/warp/volumes/var/lib/tailscale:${TS_STATE_DIR:-/var/lib/tailscale}
-      - ${CONFIG_PATH:-./configs}/tailscale/warp/volumes/tmp:/tmp
-    environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-warp-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41641"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8885"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1055"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41641/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
     restart: always
 
-  i2p:
-    # 🔹🔹 I2P 🔹🔹
-    # image: geti2p/i2p
-    # use this one with arm:
-    image: ghcr.io/purplei2p/i2pd
-    container_name: i2p
-    hostname: i2p
-    extra_hosts: *gluetun-hosts-workaround
-    networks:
-      publicnet:
-        ipv4_address: ${I2P_IPV4_ADDRESS:-10.76.128.96}
-    ports:
-      #      - ${I2P_HTTP_PROXY_PORT:-4444}:4444   # HTTP Proxy (optional)
-      #      - ${I2P_HTTPS_PROXY_PORT:-4445}:4445   # HTTPS Proxy (optional)
-      #      - ${I2P_IRC_PROXY_PORT:-6668}:6668   # IRC Proxy (optional)
-      #      - ${I2P_LAN_INTERFACE_TCP_PORT:-7652}:7652   # LAN interface TCP
-      #      - ${I2P_LAN_INTERFACE_UDP_PORT:-7653}:7653/udp   # LAN interface UDP
-      #      - ${I2P_I2CP_PROTOCOL_PORT:-7654}:7654   # I2CP Protocol
-      #      - ${I2P_SAM_BRIDGE_TCP_PORT:-7656}:7656   # I2P SAM Bridge TCP
-      #      - ${I2P_ROUTER_CONSOLE_PORT:-7657}:7657   # Router Console
-      - ${I2P_SITE_PORT:-7658}:7658 # I2P Site
-    #      - ${I2P_SMTP_PROXY_PORT:-7659}:7659   # SMTP Proxy
-    #      - ${I2P_POP3_PROXY_PORT:-7660}:7660   # POP3 Proxy
-    #      - ${I2P_EXT_PORT:-7661}:${I2P_EXT_PORT:-7661}   # I2P external port
-    #      - ${I2P_I2NP_PORT:-24531}:12345  # I2NP Protocol
-    #      - ${I2P_I2NP_PORT:-24531}:12345/udp  # I2NP Protocol UDP
-    volumes:
-      - ${ROOT_DIR:-.}/configs/i2p:/i2p/.i2p
-      - ${ROOT_DIR:-.}/downloads:/i2psnark
-    environment:
-      EXT_PORT: ${I2P_EXT_PORT:-7661}
-    <<: *resource-limits
-    deploy:
-      <<: [*common-deploy, *swarm-resource-limits]
-    restart: unless-stopped
+configs:
+  vpn-at.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_AT_VPN_HOSTNAME:-vpn-at.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_AT_IPV4_ADDRESS:-149.154.152.197} 1194
+      persist-tun
+      persist-key
+
+  vpn-au.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_AU_VPN_HOSTNAME:-vpn-au.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_AU_IPV4_ADDRESS:-149.28.167.147} 1194
+      persist-tun
+      persist-key
+
+  vpn-be.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_BE_VPN_HOSTNAME:-vpn-be.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_BE_IPV4_ADDRESS:-194.71.227.198} 1194
+      persist-tun
+      persist-key
+
+  vpn-ca.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_CA_VPN_HOSTNAME:-vpn-ca.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_CA_IPV4_ADDRESS:-192.71.227.91} 1194
+      persist-tun
+      persist-key
+
+  vpn-ch.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_CH_VPN_HOSTNAME:-vpn-ch.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_CH_IPV4_ADDRESS:-176.10.104.94} 1194
+      persist-tun
+      persist-key
+
+  vpn-cz.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_CZ_VPN_HOSTNAME:-vpn-cz.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_CZ_IPV4_ADDRESS:-193.235.207.84} 1194
+      persist-tun
+      persist-key
+
+  vpn-de.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_DE_VPN_HOSTNAME:-vpn-de.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_DE_IPV4_ADDRESS:-62.113.194.88} 1194
+      persist-tun
+      persist-key
+
+  vpn-es.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_ES_VPN_HOSTNAME:-vpn-es.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_ES_IPV4_ADDRESS:-37.235.53.176} 1194
+      persist-tun
+      persist-key
+
+  vpn-fi.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_FI_VPN_HOSTNAME:-vpn-fi.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_FI_IPV4_ADDRESS:-89.40.105.107} 1194
+      persist-tun
+      persist-key
+
+  vpn-fr.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_FR_VPN_HOSTNAME:-vpn-fr.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_FR_IPV4_ADDRESS:-158.255.215.67} 1194
+      persist-tun
+      persist-key
+
+  vpn-gb.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_GB_VPN_HOSTNAME:-vpn-gb.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_GB_IPV4_ADDRESS:-23.106.38.143} 1194
+      persist-tun
+      persist-key
+
+  vpn-gr.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_GR_VPN_HOSTNAME:-vpn-gr.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_GR_IPV4_ADDRESS:-192.71.166.71} 1194
+      persist-tun
+      persist-key
+
+  vpn-it.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_IT_VPN_HOSTNAME:-vpn-it.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_IT_IPV4_ADDRESS:-149.154.157.93} 1194
+      persist-tun
+      persist-key
+
+  vpn-jp.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_JP_VPN_HOSTNAME:-vpn-jp.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_JP_IPV4_ADDRESS:-45.77.132.110} 1194
+      persist-tun
+      persist-key
+
+  vpn-nl.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_NL_VPN_HOSTNAME:-vpn-nl.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_NL_IPV4_ADDRESS:-185.107.94.249} 1194
+      persist-tun
+      persist-key
+
+  vpn-pl.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_PL_VPN_HOSTNAME:-vpn-pl.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_PL_IPV4_ADDRESS:-37.235.48.197} 1194
+      persist-tun
+      persist-key
+
+  vpn-sg.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_SG_VPN_HOSTNAME:-vpn-sg.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_SG_IPV4_ADDRESS:-43.249.38.205} 1194
+      persist-tun
+      persist-key
+
+  vpn-us.premiumize.me:
+    content: |
+      verify-x509-name CN=${PREMIUMIZE_US_VPN_HOSTNAME:-vpn-us.premiumize.me}
+      client
+      resolv-retry infinite
+      nobind
+      reneg-sec 0
+      setenv CLIENT_CERT 0
+      ignore-unknown-option block-outside-dns
+      ca /etc/openvpn/premiumize-ca.pem
+      proto udp
+      pull-filter ignore "route-ipv6"
+      pull-filter ignore "ifconfig-ipv6"
+      remote ${PREMIUMIZE_US_IPV4_ADDRESS:-199.58.86.204} 1194
+      persist-tun
+      persist-key
+
+  # Premiumize authentication file (shared across all Premiumize VPN endpoints)
+  premiumize-auth:
+    content: |
+      ${PREMIUMIZE_CUSTOMER_ID:-117274388}
+      ${PREMIUMIZE_API_KEY:-6i6zgswm35baj3ur}
+
+  # Gluetun auth configuration
+  gluetun-auth-config:
+    content: |
+      [[roles]]
+      name = "public"
+      routes = [
+        "GET /v1/openvpn/status",
+        "PUT /v1/openvpn/status",
+        "GET /v1/openvpn/portforwarded",
+        "GET /v1/openvpn/settings",
+        "GET /v1/dns/status",
+        "PUT /v1/dns/status",
+        "GET /v1/updater/status",
+        "PUT /v1/updater/status",
+        "GET /v1/publicip/ip"
+      ]
+      auth = "none"
+
+  # Premiumize CA certificate (shared across all Premiumize VPN endpoints)
+  premiumize-ca.pem:
+    content: |
+      -----BEGIN CERTIFICATE-----
+      MIIFJTCCAw2gAwIBAgIRAPAmbQRNE+PBqvFyFG8GOSIwDQYJKoZIhvcNAQELBQAw
+      LDEYMBYGA1UECgwPU2VjdXJlIFNlcnZpY2VzMRAwDgYDVQQDDAdSb290IFgxMB4X
+      DTIxMDEwNDE1MjEwM1oXDTQwMTIzMDE1MjEwM1owLDEYMBYGA1UECgwPU2VjdXJl
+      IFNlcnZpY2VzMRAwDgYDVQQDDAdSb290IFgxMIICIjANBgkqhkiG9w0BAQEFAAOC
+      Ag8AMIICCgKCAgEAvuhFcbO0Y5SXBr+h/XU1sPXo/OSjN4W32jzVZ3jmkqA2nH5D
+      dI5XYHYB9JkW23K37zOlvOWj9J3HiV6WYk0uqQ3cpqDMnIpi1MJCtSRxiaD7LTNO
+      XrvLpsREq9Vf+lN+zxFxhINv3W4jUyfx5zIjPyjY+vFgH5G56b12EeLKFLYUWwgF
+      9vTicXJvlV1h+TJVF8wZ5DugrgNZhSZ6QZzda0Zdu1dCwZOafd1GGDWPubgZ8enF
+      b9gWPGZmS59ZvlLsLQmtLvCEegELzRR5G/OI1CIntcImcKO9ZDdWP+HmqJ4Ss7Ng
+      0g5xQVx9VgMxwpHw4h/tMV8q1vQQZJXJHdoDRQr5RzVnMjq90FFMd3nfX1B6cheH
+      cBq31J84ifxcO2vIz/eK/6zNyynuj2+99Yz7MsYI+sfGznngglpYo9u3xNkRfRPP
+      TA/tXAzrGRqlHmJmMStfutIfHxea4jJCGOeb5eUETQ1kXf5sMSdf0+Ya64h9Kcxw
+      afMzU8qUAMk4ei+jTEAuUQ25Jq0orFc5D2Pv7RbU9CCzIML2KqqWTThKSSVQbW0x
+      ufQDxcFZKSKL03484zVPBDMQ65enBUC+9Or9YKT0S0F1IdOX4EUGpqzQAocHFF3u
+      G1zYz5cjYq2xHRBZAYs6SQH6f16bPrk66uA2B/vZJm5L9Kzni5q46IGsCUsCAwEA
+      AaNCMEAwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYE
+      FETGtuYkU3IlxCvmtkAzpP5Xuf+DMA0GCSqGSIb3DQEBCwUAA4ICAQBdTlQtxa6a
+      PXaZpzsi5gLGrDUhnoTF5cVvt9vYa6c7IaAuYIUMGN1WiwHUL0g1udxi7iC3oBzM
+      Mc6shYMijEMG9SvC0RJOky1BCPbKdlsRDQbYLgjN5X1fEDDu1cR/vInt/K6vTcLf
+      1ud6VFgDv8uYG1X9GVs6foAqjYTLt1A99cwHtyCZRxrBLyjgE8S2U07FDpakqlMo
+      j4S1lgvw4EuEN54Yo55wLv9J0pZ1w9LEpZ4VdEVzLmwYMPG25Ow7HFZDK7j0TZkA
+      ByvxUvNGWDk5MS71BtWzhrmmPh9kN3HobkfOllqUsE03QaLggg+pe+OYNdIlCBRz
+      9QJeMtGP7afdBZ5UUL8df0fWL0adUzk1N/1kvAmbvccNu7tej/4LLVv9j1aQtI76
+      iEXh0WIWTAOz9IsQyP21PhxG01Y3ScIrbOsP+IX+RL/VK4yfTZ2jICj7js8vm6ut
+      qw3FPyZgeZuBe0gk0cF4vPuFacS23PkEFXbVnt4h40xKwR5ezGshS5I36nXowTdh
+      uJPLnZaLGjsiFpprztwwDZkDLu5uT6YhT/M6Kb0V3s3a2W1N90eNjo5WEe/poCgr
+      1+NVJNJQ71s3kodfghA/t1iivJEl58scVLxxJXyhCK+k5IPAB0syq2cR4AKnr/fe
+      9WFpWZc7lKeI4rwzGej+kMCQ6ujinVPyRA==
+      -----END CERTIFICATE-----
 
 networks:
   publicnet:  # https://docs.docker.com/engine/network/drivers/bridge/#differences-between-user-defined-bridges-and-the-default-bridge
-#    external: true  # docker network create --driver=bridge --attachable publicnet --subnet=${PUBLICNET_SUBNET:-10.76.0.0/16} --gateway=${PUBLICNET_GATEWAY:-10.76.0.1} --ip-range=${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+    external: true  # docker network create --driver=bridge --attachable publicnet --subnet=${PUBLICNET_SUBNET:-10.76.0.0/16} --gateway=${PUBLICNET_GATEWAY:-10.76.0.1} --ip-range=${PUBLICNET_IP_RANGE:-10.76.0.0/16}
     attachable: true
     name: publicnet
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: "br_publicnet"
     ipam:
       config:
         - subnet: ${PUBLICNET_SUBNET:-10.76.0.0/16}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+		<Metadata>
+			<Identity Language="en-US" Id="javascript-essentials" Version="0.3.0" Publisher="Gydunhn" />
+			<DisplayName>Javascript-Essentials</DisplayName>
+			<Description xml:space="preserve">Javascript essential extensions for visual studio code</Description>
+			<Tags>VSC,Code,VSCode,Visual Studio,Visual Studio Code,VSC Essentials,Essentials,Esenciales,Essenciais,Essentiel,Essenziali,Essentielles,Esencajoj,必需品,골자,अत्यावश्यकम्,ملزومات,Frontend,Web,Developer,Web Developer,Javascript,Lint,ESLint,npm,Intellisense,Visual Studio IntelliCode,IntelliCode,ES6,Snippets,JavaScript (ES6) code snippets,Debugger,Firefox,Debugger for Firefox,Gydunhn,Elite,javascript,__web_extension</Tags>
+			<Categories>Extension Packs</Categories>
+			<GalleryFlags>Public</GalleryFlags>
+			
+			<Properties>
+				<Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.35.0" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="Gydunhn.vsc-essentials-core,dbaeumer.vscode-eslint,christian-kohler.npm-intellisense,VisualStudioExptTeam.vscodeintellicode,fractalbrew.backticks,xabikos.JavaScriptSnippets,firefox-devtools.vscode-firefox-debug" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace,web" />
+				<Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
+				
+				
+				<Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/Gydunhn/Javascript-Essentials.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/Gydunhn/Javascript-Essentials.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/Gydunhn/Javascript-Essentials.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/Gydunhn/Javascript-Essentials/issues" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/Gydunhn/Javascript-Essentials#readme" />
+				<Property Id="Microsoft.VisualStudio.Services.Branding.Color" Value="#53595e" />
+				<Property Id="Microsoft.VisualStudio.Services.Branding.Theme" Value="dark" />
+				<Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
+				<Property Id="Microsoft.VisualStudio.Services.Content.Pricing" Value="Free"/>
+
+				
+				
+			</Properties>
+			<License>extension/LICENSE.txt</License>
+			<Icon>extension/img/essentials.png</Icon>
+		</Metadata>
+		<Installation>
+			<InstallationTarget Id="Microsoft.VisualStudio.Code"/>
+		</Installation>
+		<Dependencies/>
+		<Assets>
+			<Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
+			<Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
+<Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+<Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
+<Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/img/essentials.png" Addressable="true" />
+		</Assets>
+	</PackageManifest>

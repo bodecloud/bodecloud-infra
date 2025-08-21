@@ -1,0 +1,52 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - 0-boden-namespace.yaml
+    - boden-configs.yaml
+    - gluetun-airvpn-deployment.yaml
+    - gluetun-airvpn-expose.yaml
+    - gluetun-premiumize-at-deployment.yaml
+    - gluetun-premiumize-at-expose.yaml
+    - gluetun-premiumize-au-deployment.yaml
+    - gluetun-premiumize-au-expose.yaml
+    - gluetun-premiumize-be-deployment.yaml
+    - gluetun-premiumize-be-expose.yaml
+    - gluetun-premiumize-ca-deployment.yaml
+    - gluetun-premiumize-ca-expose.yaml
+    - gluetun-premiumize-ch-deployment.yaml
+    - gluetun-premiumize-ch-expose.yaml
+    - gluetun-premiumize-cz-deployment.yaml
+    - gluetun-premiumize-cz-expose.yaml
+    - gluetun-premiumize-de-deployment.yaml
+    - gluetun-premiumize-de-expose.yaml
+    - gluetun-premiumize-es-deployment.yaml
+    - gluetun-premiumize-es-expose.yaml
+    - gluetun-premiumize-fi-deployment.yaml
+    - gluetun-premiumize-fi-expose.yaml
+    - gluetun-premiumize-fr-deployment.yaml
+    - gluetun-premiumize-fr-expose.yaml
+    - gluetun-premiumize-gb-deployment.yaml
+    - gluetun-premiumize-gb-expose.yaml
+    - gluetun-premiumize-gr-deployment.yaml
+    - gluetun-premiumize-gr-expose.yaml
+    - gluetun-premiumize-it-deployment.yaml
+    - gluetun-premiumize-it-expose.yaml
+    - gluetun-premiumize-jp-deployment.yaml
+    - gluetun-premiumize-jp-expose.yaml
+    - gluetun-premiumize-nl-deployment.yaml
+    - gluetun-premiumize-nl-expose.yaml
+    - gluetun-premiumize-pl-deployment.yaml
+    - gluetun-premiumize-pl-expose.yaml
+    - gluetun-premiumize-sg-deployment.yaml
+    - gluetun-premiumize-sg-expose.yaml
+    - gluetun-premiumize-us-deployment.yaml
+    - gluetun-premiumize-us-expose.yaml
+    - i2p-deployment.yaml
+    - i2p-expose.yaml
+    - i2p-service.yaml
+    - publicnet-network-policy.yaml
+    - warp-deployment.yaml
+    - warp-expose.yaml
+    - warp-service.yaml

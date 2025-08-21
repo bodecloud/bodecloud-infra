@@ -1,0 +1,393 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vpn-ip-resolver
+  namespace: default
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      serviceAccountName: vpn-resolver
+      containers:
+      - name: ip-resolver
+        image: alpine:latest
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - |
+            set -euo pipefail
+
+            # Install required tools
+            apk add --no-cache bind-tools curl
+
+            echo "🔍 Starting VPN hostname resolution..."
+
+            # VPN hostnames to resolve
+            HOSTNAMES="vpn-at.premiumize.me vpn-au.premiumize.me vpn-be.premiumize.me vpn-ca.premiumize.me vpn-ch.premiumize.me vpn-cz.premiumize.me vpn-de.premiumize.me vpn-es.premiumize.me vpn-fi.premiumize.me vpn-fr.premiumize.me vpn-gb.premiumize.me vpn-gr.premiumize.me vpn-it.premiumize.me vpn-jp.premiumize.me vpn-nl.premiumize.me vpn-pl.premiumize.me vpn-sg.premiumize.me vpn-us.premiumize.me"
+
+            # Start building ConfigMap YAML
+            cat > /tmp/resolved-configs.yaml <<EOF
+            apiVersion: v1
+            kind: ConfigMap
+            metadata:
+              name: resolved-vpn-configs
+              namespace: default
+            data:
+            EOF
+
+            # Process each hostname
+            for hostname in $HOSTNAMES; do
+              echo "🔍 Resolving: $hostname"
+
+              # Resolve with retries
+              IP=""
+              for attempt in 1 2 3; do
+                IP=$(dig +short "$hostname" | head -n1)
+                if [ -n "$IP" ] && echo "$IP" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' > /dev/null; then
+                  break
+                fi
+                echo "⏳ Attempt $attempt failed, retrying..."
+                sleep 5
+              done
+
+              if [ -z "$IP" ]; then
+                echo "❌ Failed to resolve $hostname"
+                exit 1
+              fi
+
+              echo "✅ Resolved $hostname to $IP"
+
+              # Read template and create resolved config
+              TEMPLATE_FILE="/etc/vpn-templates/${hostname}.ovpn"
+              if [ -f "$TEMPLATE_FILE" ]; then
+                echo "  ${hostname}.ovpn: |" >> /tmp/resolved-configs.yaml
+                sed "s/remote $hostname 1194/remote $IP 1194/" "$TEMPLATE_FILE" | sed 's/^/    /' >> /tmp/resolved-configs.yaml
+              else
+                echo "⚠️  Template not found: $TEMPLATE_FILE"
+              fi
+            done
+
+            echo "📝 Generated ConfigMap:"
+            cat /tmp/resolved-configs.yaml
+
+            # Apply the ConfigMap using kubectl
+            echo "🚀 Applying ConfigMap..."
+            kubectl apply -f /tmp/resolved-configs.yaml
+
+            echo "✅ VPN IP resolution completed successfully!"
+        volumeMounts:
+        - name: vpn-templates
+          mountPath: /etc/vpn-templates
+          readOnly: true
+      volumes:
+      - name: vpn-templates
+        configMap:
+          name: vpn-templates
+  backoffLimit: 3
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vpn-resolver
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: configmap-manager
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get", "list", "create", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: vpn-resolver-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: vpn-resolver
+  namespace: default
+roleRef:
+  kind: Role
+  name: configmap-manager
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vpn-templates
+  namespace: default
+data:
+  vpn-at.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-at.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-au.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-au.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-be.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-be.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-ca.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-ca.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-ch.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-ch.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-cz.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-cz.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-de.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-de.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-es.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-es.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-fi.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-fi.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-fr.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-fr.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-gb.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-gb.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-gr.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-gr.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-it.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-it.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-jp.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-jp.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-nl.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-nl.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-pl.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-pl.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-sg.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-sg.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf
+  vpn-us.premiumize.me.ovpn: |
+    client
+    dev tun
+    proto udp
+    remote vpn-us.premiumize.me 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    ca premiumize-ca.pem
+    cipher AES-256-CBC
+    auth SHA256
+    comp-lzo
+    verb 3
+    auth-user-pass auth.conf

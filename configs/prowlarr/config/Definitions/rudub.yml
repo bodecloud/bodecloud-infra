@@ -9,53 +9,45 @@ type: semi-private
 encoding: windows-1251
 followredirect: true
 links:
-  - https://jun16.rudub.icu/
+  - https://aug18.rudub.club/
 legacylinks:
-  - http://may31.rudub.run/
-  - https://may31.rudub.run/
-  - http://jun01.rudub.run/
-  - https://jun01.rudub.run/
-  - http://jun02.rudub.run/
-  - https://jun02.rudub.run/
-  - http://jun03.rudub.run/
-  - https://jun03.rudub.run/
-  - http://jun04.rudub.run/
-  - https://jun04.rudub.run/
-  - http://jun05.rudub.run/
-  - https://jun05.rudub.run/
-  - http://jun06.rudub.run/
-  - https://jun06.rudub.run/
-  - http://jun07.rudub.run/
-  - https://jun07.rudub.run/
-  - http://jun08.rudub.run/
-  - https://jun08.rudub.run/
-  - http://jun09.rudub.run/
-  - https://jun09.rudub.run/
-  - http://jun10.rudub.run/
-  - https://jun10.rudub.run/
-  - http://jun10.rudub.icu/
-  - https://jun10.rudub.icu/
-  - http://jun11.rudub.icu/
-  - https://jun11.rudub.icu/
-  - http://jun12.rudub.icu/
-  - https://jun12.rudub.icu/
-  - http://jun13.rudub.icu/
-  - https://jun13.rudub.icu/
-  - http://jun14.rudub.icu/
-  - https://jun14.rudub.icu/
-  - http://jun15.rudub.icu/
-  - https://jun15.rudub.icu/
-  - http://jun16.rudub.icu/
-
+  - https://aug04.rudub.top/
+  - http://aug04.rudub.club/
+  - https://aug04.rudub.club/
+  - http://aug05.rudub.club/
+  - https://aug05.rudub.club/
+  - http://aug06.rudub.club/
+  - https://aug06.rudub.club/
+  - http://aug07.rudub.club/
+  - https://aug07.rudub.club/
+  - http://aug08.rudub.club/
+  - https://aug08.rudub.club/
+  - http://aug09.rudub.club/
+  - https://aug09.rudub.club/
+  - http://aug10.rudub.club/
+  - https://aug10.rudub.club/
+  - http://aug11.rudub.club/
+  - https://aug11.rudub.club/
+  - http://aug12.rudub.club/
+  - https://aug12.rudub.club/
+  - http://aug13.rudub.club/
+  - https://aug13.rudub.club/
+  - http://aug14.rudub.club/
+  - https://aug14.rudub.club/
+  - http://aug15.rudub.club/
+  - https://aug15.rudub.club/
+  - http://aug16.rudub.club/
+  - https://aug16.rudub.club/
+  - http://aug17.rudub.club/
+  - https://aug17.rudub.club/
+  - http://aug18.rudub.club/
 caps:
   categorymappings:
     - {id: 1, cat: TV, desc: "TV"}
-
   modes:
     search: [q]
     tv-search: [q, season, ep]
   allowrawsearch: true
-
 settings:
   - name: username
     type: text
@@ -91,7 +83,6 @@ settings:
     options:
       desc: desc
       asc: asc
-
 login:
   path: takelogin.php
   method: post
@@ -103,7 +94,6 @@ login:
   test:
     path: browse.php
     selector: a[href="logout.php"]
-
 search:
   paths:
     # http://rudub.tv/browse.php?search=&incldead=1&sort=4&type=desc
@@ -114,15 +104,12 @@ search:
     incldead: "{{ if .Config.freeleech }}3{{ else }}0{{ end }}"
     sort: "{{ .Config.sort }}"
     type: "{{ .Config.type }}"
-
   keywordsfilters:
     # strip season and/or ep
     - name: re_replace
       args: ["(?i)\\b(?:[SE]\\d{1,4}){1,2}\\b\\s?", ""]
-
   rows:
     selector: div.card__torlist__browse_2
-
   fields:
     category:
       text: 1

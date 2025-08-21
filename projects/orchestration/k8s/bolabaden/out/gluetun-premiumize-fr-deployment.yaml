@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f compose/docker-compose.networks-inline.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: gluetun-premiumize-fr
+  name: gluetun-premiumize-fr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: gluetun-premiumize-fr
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f compose/docker-compose.networks-inline.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: gluetun-premiumize-fr
+    spec:
+      containers:
+        - env:
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: 10.76.0.0/16,172.16.0.0/16,100.64.0.0/10
+            - name: OPENVPN_CUSTOM_CONFIG
+              value: /etc/openvpn/target.ovpn
+            - name: OPENVPN_FLAGS
+              value: --auth-user-pass /config/auth.conf
+            - name: OPENVPN_IPV6
+              value: "off"
+            - name: VPN_SERVICE_PROVIDER
+              value: custom
+            - name: VPN_TYPE
+              value: openvpn
+          image: ghcr.io/qdm12/gluetun
+          name: gluetun-premiumize-fr
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          volumeMounts:
+            - mountPath: /config/auth.conf
+              name: premiumize-auth
+              subPath: auth.conf
+            - mountPath: /etc/openvpn/premiumize-ca.pem
+              name: premiumize-ca
+              subPath: premiumize-ca.pem
+            - mountPath: /etc/openvpn/target.ovpn
+              name: vpn-fr.premiumize.me
+              subPath: target.ovpn
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            defaultMode: 384
+            items:
+              - key: auth.conf
+                path: auth.conf
+            name: premiumize-auth
+          name: premiumize-auth
+        - configMap:
+            defaultMode: 384
+            items:
+              - key: premiumize-ca.pem
+                path: premiumize-ca.pem
+            name: premiumize-ca
+          name: premiumize-ca
+        - configMap:
+            defaultMode: 384
+            items:
+              - key: target.ovpn
+                path: target.ovpn
+            name: vpn-fr.premiumize.me
+          name: vpn-fr.premiumize.me

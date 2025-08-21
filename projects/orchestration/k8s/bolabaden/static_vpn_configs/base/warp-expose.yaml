@@ -1,0 +1,51 @@
+#! warp-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: warp
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: warp
+spec:
+    selector:
+        com.docker.compose.project: boden
+        com.docker.compose.service: warp
+    ports:
+        - name: warp-8080
+          port: 8080
+          targetPort: warp-8080
+        - name: warp-12470
+          port: 12470
+          targetPort: warp-12470
+        - name: warp-4000
+          port: 4000
+          targetPort: warp-4000
+        - name: warp-9117
+          port: 9117
+          targetPort: warp-9117
+        - name: warp-9696
+          port: 9696
+          targetPort: warp-9696
+        - name: warp-3000
+          port: 3000
+          targetPort: warp-3000
+        - name: warp-11470
+          port: 11470
+          targetPort: warp-11470
+        - name: warp-443
+          port: 443
+          targetPort: warp-443
+        - name: warp-1080
+          port: 1080
+          targetPort: warp-1080
+        - name: warp-3005
+          port: 3005
+          targetPort: warp-3005
+        - name: warp-8000
+          port: 8000
+          targetPort: warp-8000
+        - name: warp-2020
+          port: 2020
+          targetPort: warp-2020

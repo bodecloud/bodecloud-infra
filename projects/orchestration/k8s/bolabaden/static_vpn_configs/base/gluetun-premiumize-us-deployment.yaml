@@ -1,0 +1,102 @@
+#! gluetun-premiumize-us-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: gluetun-premiumize-us
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: gluetun-premiumize-us
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: boden
+            com.docker.compose.service: gluetun-premiumize-us
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: boden
+                com.docker.compose.service: gluetun-premiumize-us
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: gluetun-premiumize-us
+                  image: ghcr.io/qdm12/gluetun
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: BLOCK_ADS
+                      value: "on"
+                    - name: BLOCK_MALICIOUS
+                      value: "on"
+                    - name: BLOCK_SURVEILLANCE
+                      value: "on"
+                    - name: DNS_ADDRESS
+                      value: "127.0.0.1"
+                    - name: DOT_IPV6
+                      value: "off"
+                    - name: FIREWALL_OUTBOUND_SUBNETS
+                      value: "10.76.0.0/16,172.17.0.0/16,100.72.149.123/32"
+                    - name: OPENVPN_CIPHERS
+                      value: "AES-256-CBC"
+                    - name: OPENVPN_CUSTOM_CONFIG
+                      value: "/etc/openvpn/target.ovpn"
+                    - name: OPENVPN_FLAGS
+                      value: "--auth-user-pass /config/auth.conf"
+                    - name: OPENVPN_IPV6
+                      value: "off"
+                    - name: VERSION_INFORMATION
+                      value: "on"
+                    - name: VPN_SERVICE_PROVIDER
+                      value: "custom"
+                    - name: VPN_TYPE
+                      value: "openvpn"
+                  securityContext:
+                    sysctls:
+                        name: net.ipv6.conf.all.disable_ipv6
+                        value: 1
+                    capabilities:
+                        add: [NET_ADMIN]
+                  ports:
+                    - name: gluetun-p-41642
+                      containerPort: 41642
+                    - name: gluetun-pr-8388
+                      containerPort: 8388
+                    - name: gluetun-pr-8888
+                      containerPort: 8888
+                    - name: gluetun-pr-8000
+                      containerPort: 8000
+                    - name: gluetun-pr-8001
+                      containerPort: 8001
+                    - name: gluetun-pr-9999
+                      containerPort: 9999
+                    - name: gluetun-pr-1056
+                      containerPort: 1056
+                    - name: gluetun-pr-8886
+                      containerPort: 8886
+                  volumeMounts:
+                    - name: config-auth-conf
+                      mountPath: /config/auth.conf
+                      subPath: premiumize-auth
+                      readOnly: true
+                    - name: etc-openvpn-target-ovpn
+                      mountPath: /etc/openvpn/target.ovpn
+                      subPath: vpn-us.premiumize.me
+                      readOnly: true
+            volumes:
+                - name: config-auth-conf
+                  configMap:
+                    name: boden
+                    items:
+                        - key: premiumize-auth
+                          path: premiumize-auth
+                - name: etc-openvpn-target-ovpn
+                  configMap:
+                    name: boden
+                    items:
+                        - key: vpn-us.premiumize.me
+                          path: vpn-us.premiumize.me

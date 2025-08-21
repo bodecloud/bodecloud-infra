@@ -1,0 +1,845 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Next.js Project with TypeScript and Tailwind CSS",
+        "description": "Initialize the project repository with Next.js, TypeScript, and Tailwind CSS to establish the foundation for the portfolio website.",
+        "details": "1. Create a new Next.js project using the latest version (Next.js 14.0.2): `npx create-next-app@latest bocloud-portfolio --typescript --tailwind --eslint`\n2. Configure the project structure following Next.js App Router architecture\n3. Set up Tailwind CSS with a custom configuration for the minimalist design\n4. Configure TypeScript with strict mode enabled\n5. Set up ESLint and Prettier for code quality\n6. Initialize Git repository with appropriate .gitignore\n7. Create a README.md with project documentation\n8. Set up environment variables configuration (.env.local, .env.example)\n9. Configure basic folder structure: app/, components/, lib/, styles/, public/\n10. Install additional core dependencies: `npm install react-icons framer-motion next-seo`",
+        "testStrategy": "1. Verify project builds without errors: `npm run build`\n2. Ensure development server runs correctly: `npm run dev`\n3. Validate TypeScript configuration with `tsc --noEmit`\n4. Test Tailwind CSS compilation\n5. Verify ESLint runs without critical issues: `npm run lint`",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Next.js Project with TypeScript",
+            "description": "Create a new Next.js project with TypeScript support and set up the basic project configuration.",
+            "dependencies": [],
+            "details": "Run `npx create-next-app@latest bocloud-portfolio --typescript --tailwind --eslint` to create the project. Verify the installation by running `npm run dev` and accessing localhost:3000. Configure tsconfig.json with strict mode by setting `\"strict\": true` and other TypeScript options as needed. Initialize Git repository with `git init` and create a .gitignore file that excludes node_modules, .next, and environment files.",
+            "status": "done",
+            "testStrategy": "Verify the project runs without errors and TypeScript compilation works correctly."
+          },
+          {
+            "id": 2,
+            "title": "Configure Tailwind CSS with Custom Design System",
+            "description": "Set up Tailwind CSS with custom configuration to implement the minimalist design system for the portfolio.",
+            "dependencies": [
+              1
+            ],
+            "details": "Customize the tailwind.config.js file to include project-specific colors, fonts, and spacing. Add custom theme extensions for the minimalist design. Configure the typography plugin if needed. Create a base CSS file in styles/ directory with global styles and Tailwind directives. Test the configuration by adding some Tailwind classes to the home page.",
+            "status": "done",
+            "testStrategy": "Create a test component with various Tailwind classes to verify custom configuration is working properly."
+          },
+          {
+            "id": 3,
+            "title": "Set up Project Structure and Core Components",
+            "description": "Establish the folder structure following Next.js App Router architecture and create base component templates.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Create the following directory structure: app/ (for pages), components/ (reusable UI components), lib/ (utility functions), styles/ (CSS files), and public/ (static assets). In the components folder, create subdirectories for layout components, UI elements, and sections. Set up a basic layout component with header, main content area, and footer. Create placeholder files for key pages based on the portfolio requirements.",
+            "status": "done",
+            "testStrategy": "Verify the folder structure is correctly set up and components can be imported across the application."
+          },
+          {
+            "id": 4,
+            "title": "Install and Configure Additional Dependencies",
+            "description": "Install required third-party packages and set up their configurations for the portfolio website.",
+            "dependencies": [
+              1
+            ],
+            "details": "Run `npm install react-icons framer-motion next-seo` to add the core dependencies. Set up framer-motion with basic animations for page transitions. Configure next-seo for proper SEO metadata. Create utility files in the lib/ directory to handle animations and other shared functionality. Set up any required context providers in a providers.tsx file.",
+            "status": "done",
+            "testStrategy": "Import and use each package in a test component to verify they're correctly installed and configured."
+          },
+          {
+            "id": 5,
+            "title": "Create Documentation and Environment Configuration",
+            "description": "Set up project documentation and environment variable configuration for development.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Create a comprehensive README.md with project overview, setup instructions, folder structure explanation, and development guidelines. Set up .env.local for local development variables and create .env.example as a template for required environment variables. Document any special configuration needed for deployment. Create a CONTRIBUTING.md file if the project will have multiple contributors. Add comments to key configuration files explaining important settings.",
+            "status": "done",
+            "testStrategy": "Have another team member follow the README instructions to verify they can set up the project successfully."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Implement Core Layout Components",
+        "description": "Create the foundational layout components including header, footer, navigation, and responsive container components.",
+        "details": "1. Create a responsive layout component using Tailwind CSS grid/flexbox\n2. Implement Header component with:\n   - Professional logo/name\n   - Navigation links to main sections\n   - Mobile-responsive hamburger menu using headlessUI (v1.7.17)\n3. Create Footer component with:\n   - Copyright information\n   - Links to GitHub, contact\n   - Tech stack acknowledgment\n4. Implement main navigation component with smooth scrolling\n5. Create container components for consistent section layouts\n6. Implement dark/light mode toggle using next-themes (v0.2.1)\n7. Ensure all components are fully typed with TypeScript interfaces\n8. Use CSS variables for theme colors in Tailwind config\n9. Implement responsive breakpoints following Tailwind defaults\n10. Create reusable UI components (Button, Card, Section)",
+        "testStrategy": "1. Test responsive behavior across multiple viewport sizes (320px, 768px, 1024px, 1440px)\n2. Verify navigation links work correctly\n3. Test mobile menu open/close functionality\n4. Validate accessibility using axe-core: `npm install -D @axe-core/react`\n5. Verify dark/light mode toggle functions correctly\n6. Test keyboard navigation for accessibility",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Setup Content Management System with Markdown",
+        "description": "Implement a markdown-based content management system to allow easy updates to the portfolio content without requiring full deployments.",
+        "details": "1. Install necessary packages: `npm install gray-matter remark remark-html next-mdx-remote`\n2. Create a content directory structure:\n   - `/content/projects/`\n   - `/content/tools/`\n   - `/content/about/`\n3. Implement utility functions to parse markdown content with frontmatter\n4. Create TypeScript interfaces for different content types\n5. Set up dynamic routing for content pages\n6. Implement MDX components for enhanced markdown (code blocks, callouts)\n7. Create a content caching strategy for performance\n8. Add syntax highlighting with Prism.js or highlight.js\n9. Implement image optimization for markdown content using Next.js Image component\n10. Create helper functions for content sorting and filtering\n11. Set up Git-based workflow for content updates\n<info added on 2025-07-12T11:26:24.787Z>\n## Progress Update: Content Management System Implementation\n\n**Completed Items:**\n- Installed all required dependencies (gray-matter, remark, remark-html, @next/mdx)\n- Added additional dependencies: framer-motion for animations, lucide-react for icons\n- Created TypeScript interfaces for different content types (ContentFrontmatter, ProjectFrontmatter, ToolFrontmatter)\n- Implemented content directory structure with /content/projects/, /content/tools/, /content/about/, and added /content/pages/\n- Developed utility functions for content management:\n  - Generic content fetching with getContentItems<T>() and getContentItem<T>()\n  - Specialized functions: getProjects(), getTools(), getAboutContent()\n  - Content filtering and search capabilities\n  - Excerpt generation and slug creation utilities\n- Implemented content caching strategy for performance\n- Created sample content (CloudCradle project) with full frontmatter and markdown\n\n**Next Steps:**\n- Improve the Hero section to match professional template quality\n- Enhance homepage design with modern aesthetics, animations, and proper content structure\n- Complete remaining implementation tasks from the original list\n</info added on 2025-07-12T11:26:24.787Z>",
+        "testStrategy": "1. Test markdown parsing with sample content\n2. Verify frontmatter extraction works correctly\n3. Test dynamic routing with different content types\n4. Validate MDX component rendering\n5. Test code syntax highlighting\n6. Verify image optimization works in markdown content\n7. Test content sorting and filtering functions",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Develop Core Content Parsing Utilities",
+            "description": "Create utilities for parsing and processing markdown and MDX content files",
+            "dependencies": [],
+            "details": "Implement functions for reading content files from the filesystem, parsing frontmatter metadata, extracting content body, and handling different content formats. Include utilities for validating content structure and transforming content between formats.",
+            "status": "in-progress",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Define Content Type Interfaces and Models",
+            "description": "Create TypeScript interfaces and models for different content types",
+            "dependencies": [
+              1
+            ],
+            "details": "Define comprehensive TypeScript interfaces for blog posts, projects, pages, and other content types. Implement validation functions to ensure content adheres to the defined schemas. Create utility functions for type conversion and content normalization.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Dynamic Routing System",
+            "description": "Develop a system for dynamically routing to content based on file structure",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Create a routing system that maps URL paths to content files, handles nested routes, implements pagination for content collections, and provides fallback/404 handling. Include support for dynamic segments and route parameters.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop MDX Component System",
+            "description": "Create a system for custom MDX components with syntax highlighting",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Implement custom MDX components for code blocks with syntax highlighting, callouts, tables, image galleries, and interactive elements. Create a component mapping system and develop a consistent styling approach for all MDX components.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Content Caching and Optimization",
+            "description": "Develop strategies for content caching and performance optimization",
+            "dependencies": [
+              1,
+              3,
+              4
+            ],
+            "details": "Implement efficient caching mechanisms for parsed content, optimize content loading with incremental static regeneration, add support for content preloading, and develop strategies for handling content updates from Git. Include image optimization for embedded media.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Develop Hero Section",
+        "description": "Create an impactful hero section that clearly communicates professional identity and technical focus with immediate access to key areas.",
+        "status": "done",
+        "dependencies": [
+          2,
+          19
+        ],
+        "priority": "high",
+        "details": "1. Design a clean, minimalist hero section with:\n   - Professional name and title\n   - Brief technical focus statement (backend, infrastructure, AI)\n   - Call-to-action buttons for key sections\n2. Implement subtle animations using Framer Motion (v10.16.4)\n3. Optimize for both desktop and mobile layouts\n4. Include a professional headshot or abstract technical graphic\n5. Create a TypeWriter effect for technical keywords using a custom hook\n6. Implement scroll indicator for better UX\n7. Ensure text is crisp and readable with appropriate contrast\n8. Add subtle particle or network visualization background using tsParticles (v2.12.0) or react-particles (v2.12.2)\n9. Optimize animations for performance and reduced motion preferences\n10. Implement lazy loading for any hero graphics\n<info added on 2025-07-12T11:05:35.394Z>\n11. Ensure hero section explicitly communicates self-taught software engineer identity\n12. Highlight specific technical focus areas: infrastructure, AI tools, and backend development\n13. Include work preference indicators (remote, async, text-based communication)\n14. Design content specifically for technical hiring managers, CTOs, and contract providers\n15. Balance technical authority with authentic voice (avoid corporate jargon)\n16. Ensure CTA buttons provide immediate access to tools, projects, and contact information\n17. Implement A/B testing to measure engagement with different hero section elements\n18. Create visual hierarchy that emphasizes professional credibility elements\n19. Add subtle visual cues that reinforce technical competency\n20. Ensure all hero section elements directly support hiring facilitation objective\n</info added on 2025-07-12T11:05:35.394Z>\n21. Utilize @21st-dev/magic components from task 19 (Modern UI Components) for professional appearance and animations",
+        "testStrategy": "1. Test responsive layout across device sizes\n2. Verify animations perform well on lower-end devices\n3. Test accessibility of all interactive elements\n4. Validate color contrast meets WCAG 2.1 AA standards\n5. Test reduced motion settings respect user preferences\n6. Verify load time is under 1 second for the hero section\n7. Test integration with @21st-dev/magic components for proper functionality",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Core Layout and Responsive Design Implementation",
+            "description": "Develop the foundational structure of the Hero Section with responsive design principles",
+            "status": "done",
+            "dependencies": [],
+            "details": "Create the HTML/CSS framework for the Hero Section ensuring it works across all device sizes. Implement grid/flexbox layout, establish breakpoints for mobile, tablet, and desktop views. Set up the container structure that will house the animated elements, content blocks, and call-to-action components. Include placeholder elements for content that will be refined later.",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Animation Implementation with Framer Motion",
+            "description": "Integrate advanced animations including TypeWriter effects and particle visualizations",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement Framer Motion animations for the Hero Section. Create the TypeWriter effect for dynamic text display. Develop particle visualization system that responds to user interaction. Ensure animations are performant and don't interfere with page load times. Include subtle entrance animations for key content elements and implement animation sequencing for a cohesive experience.",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Content Strategy for Technical Audience",
+            "description": "Refine hero content to specifically appeal to technical hiring managers",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "details": "Develop compelling headline copy and supporting text that resonates with technical hiring managers. Highlight technical skills and achievements prominently. Create A/B testing variants of content to determine most effective messaging. Ensure language is precise, technically accurate, and demonstrates depth of expertise while remaining concise and impactful.",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Performance Optimization and Accessibility Compliance",
+            "description": "Optimize Hero Section for performance metrics and ensure WCAG compliance",
+            "status": "done",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Implement performance optimizations including lazy loading for non-critical elements, code splitting for animations, and asset optimization. Conduct accessibility audit ensuring proper contrast ratios, keyboard navigation, screen reader compatibility, and semantic HTML structure. Test performance using Lighthouse and WebPageTest, aiming for >90 performance score. Document all accessibility features implemented and their compliance with WCAG 2.1 AA standards.",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Integration of @21st-dev/magic Components",
+            "description": "Implement Modern UI Components from task 19 for enhanced visual appeal and functionality",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "details": "Integrate the @21st-dev/magic component library into the hero section. Replace or enhance existing UI elements with corresponding magic components. Ensure consistent styling and behavior between custom components and magic components. Leverage the library's built-in animations and interactions to create a more polished user experience. Test integration points thoroughly to ensure seamless operation.",
+            "testStrategy": "Verify all @21st-dev/magic components render correctly across browsers and devices. Test component interactions and animations for smoothness and performance. Ensure theme consistency between magic components and custom elements."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Implement Technical Infrastructure Showcase",
+        "description": "Create a visual representation of the infrastructure setup including Kubernetes, Tailscale, and Oracle Cloud with real-time service status indicators.",
+        "details": "1. Design an interactive architecture diagram using React Flow (v11.9.4) or reactflow\n2. Implement components for different infrastructure elements:\n   - Kubernetes clusters\n   - Tailscale mesh network\n   - Oracle Cloud resources\n   - Load balancers and ingress\n3. Create a real-time status indicator system:\n   - Set up API endpoints to check service status\n   - Implement status badges with appropriate colors\n   - Add tooltips with detailed status information\n4. Create a simple API client to fetch status data\n5. Implement caching for status data with SWR (v2.2.4)\n6. Add interactive elements to diagram (hover, click for details)\n7. Include brief technical descriptions for each component\n8. Make diagram responsive for different screen sizes\n9. Implement fallback for when status API is unavailable\n10. Add legend explaining the infrastructure components",
+        "testStrategy": "1. Test diagram rendering across browsers\n2. Verify status indicators update correctly\n3. Test API error handling and fallbacks\n4. Validate interactive elements work on touch devices\n5. Test accessibility of the diagram\n6. Verify responsive behavior on different screen sizes",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Architecture Diagram Design with React Flow",
+            "description": "Create a comprehensive architecture diagram using React Flow to visualize the technical infrastructure",
+            "dependencies": [],
+            "details": "Set up React Flow library, design node and edge templates for infrastructure components, implement custom connectors, create the overall layout structure, and establish the base canvas with zoom/pan capabilities",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Infrastructure Component Development",
+            "description": "Develop reusable components representing different infrastructure elements",
+            "dependencies": [
+              1
+            ],
+            "details": "Create component library for servers, databases, networks, load balancers, etc. Each component should have consistent styling, appropriate icons, and the ability to display metadata. Implement component grouping for related infrastructure elements",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Status Indicator System and API Integration",
+            "description": "Implement real-time status indicators and connect to backend APIs",
+            "dependencies": [
+              2
+            ],
+            "details": "Design status indicator system (healthy, warning, error, etc.), create API service for fetching infrastructure status data, implement polling or WebSocket for real-time updates, and handle loading/error states appropriately",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Interactive Elements and Tooltips",
+            "description": "Add interactive features and informational tooltips to enhance user experience",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Implement tooltips showing detailed component information, create interactive elements for component inspection, add click/hover behaviors, implement drill-down capabilities for nested infrastructure, and create a component details panel",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Responsive Design and Fallback Mechanisms",
+            "description": "Ensure the infrastructure showcase works across different devices and has appropriate fallbacks",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Implement responsive layout adjustments, create simplified views for mobile devices, add graceful degradation for browsers without full support, implement performance optimizations for complex diagrams, and create static fallback views when interactive elements aren't suitable",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Build Projects Portfolio Section",
+        "description": "Create a comprehensive projects portfolio section showcasing CloudCradle, AI Research Wizard, Cloudflare Load Balancer, Constellation, and other GitHub projects.",
+        "status": "pending",
+        "dependencies": [
+          2,
+          3,
+          19
+        ],
+        "priority": "high",
+        "details": "1. Design a project card component with:\n   - Project title and description\n   - Technologies used (badges)\n   - Screenshot or illustration\n   - Links to live demo and GitHub\n2. Implement filtering and sorting options for projects\n3. Create detailed project pages with:\n   - Problem statement\n   - Solution approach\n   - Technical architecture\n   - Key features\n   - Challenges and solutions\n4. Integrate with GitHub API to show real stats:\n   - Star count\n   - Last updated\n   - Language breakdown\n5. Implement GitHub API caching with SWR\n6. Add pagination or infinite scroll for projects\n7. Create image carousel for project screenshots using react-slick (v0.29.0)\n8. Implement lazy loading for project images\n9. Add search functionality for projects\n10. Include tags for technology categories\n11. Add related infrastructure guides links for projects that are part of the infrastructure stack\n12. Create connections between projects and their corresponding service documentation\n<info added on 2025-07-12T11:05:53.512Z>\n13. Project Showcase Requirements (PRD Alignment):\n   - Ensure each project demonstrates specific technical competencies\n   - Include architecture diagrams with plain language explanations\n   - Document technical decisions and trade-offs for each implementation\n   - Provide direct links to live deployments where applicable\n\n14. Project-Specific Documentation:\n   - CloudCradle: Detail Oracle Cloud deployment automation processes\n   - AI Research Wizard: Explain modifications to GPT-researcher\n   - Cloudflare Load Balancer: Document configuration and implementation\n   - Constellation: Showcase orchestration capabilities and use cases\n   - Other GitHub projects: Provide clear technical descriptions\n\n15. Technical Credibility Elements:\n   - Integrate GitHub activity metrics to demonstrate ongoing development\n   - Include code quality indicators where relevant\n   - Document real-world problem statements addressed by each project\n   - Highlight specific infrastructure skills demonstrated in each project\n\n16. Target Audience Considerations:\n   - Technical hiring managers: Emphasize practical implementation skills\n   - CTOs: Showcase problem-solving approaches and solutions\n   - Contract providers: Demonstrate technical depth and expertise\n</info added on 2025-07-12T11:05:53.512Z>\n\n17. Utilize @21st-dev/magic UI components from task 19 (Modern UI Components) for:\n   - Professional project cards with consistent styling\n   - Interactive image carousels and galleries\n   - Filter and search interface elements\n   - Technology tag badges and indicators",
+        "testStrategy": "1. Test project card rendering with various content lengths\n2. Verify GitHub API integration and error handling\n3. Test filtering and sorting functionality\n4. Validate responsive behavior of project cards\n5. Test image carousel navigation\n6. Verify search functionality works correctly\n7. Test accessibility of interactive elements\n8. Verify links to related infrastructure guides work correctly\n9. Test integration between projects and service documentation\n10. Verify proper implementation of @21st-dev/magic UI components\n11. Test component behavior across different viewport sizes",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Project Card Component Design and Implementation",
+            "description": "Create reusable project card components that showcase projects with thumbnails, titles, descriptions, and technology tags",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Design and implement responsive project cards that display project information in an attractive format. Include hover effects, technology tag pills, and a consistent layout that works across device sizes. Ensure the component is reusable and accepts standardized data structure from the GitHub API. Utilize @21st-dev/magic UI components for professional styling and interactions.",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "GitHub API Integration and Caching",
+            "description": "Implement GitHub API integration to fetch project data and implement caching to improve performance",
+            "status": "pending",
+            "dependencies": [
+              1
+            ],
+            "details": "Set up GitHub API authentication, create services to fetch repository data, READMEs, and other project metadata. Implement a caching layer to prevent excessive API calls and improve load times. Handle rate limiting gracefully and implement error states for failed API requests.",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Detailed Project Page Templates",
+            "description": "Create detailed project page templates with image carousels, technical details, and links to live demos",
+            "status": "pending",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Design and implement detailed project page templates that showcase projects in depth. Include image carousels for screenshots, technical details sections, challenge/solution narratives, and prominent links to live demos and source code. Ensure responsive design across all device sizes. Leverage @21st-dev/magic components for carousels and interactive elements.",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Filtering, Sorting, and Search Functionality",
+            "description": "Implement filtering by technology, sorting options, and search functionality for the projects portfolio",
+            "status": "pending",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Create UI controls for filtering projects by technology stack, sorting by date/complexity/name, and a search bar for finding specific projects. Implement the filtering and search logic with proper state management. Ensure the UI updates dynamically without page reloads. Use @21st-dev/magic UI components for filter controls and search interface.",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Technical Documentation Integration",
+            "description": "Integrate technical documentation including architecture diagrams and code explanations for each project",
+            "status": "pending",
+            "dependencies": [
+              3
+            ],
+            "details": "Create a system to display technical documentation for each project, including architecture diagrams, code snippets with syntax highlighting, and technical explanations. Parse markdown from GitHub READMEs where possible, and supplement with additional documentation as needed. Use @21st-dev/magic components for documentation display and interactive elements.",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Integration with Modern UI Components",
+            "description": "Integrate @21st-dev/magic UI components throughout the projects portfolio section",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Ensure consistent use of @21st-dev/magic UI components across the entire projects portfolio section. This includes project cards, carousels, filter controls, search interfaces, and documentation displays. Follow the component library's best practices for implementation and styling. Test all components for proper responsiveness and accessibility.",
+            "testStrategy": "Verify all @21st-dev/magic components render correctly and maintain consistent styling. Test component behavior across different viewport sizes. Ensure accessibility standards are maintained with the integrated components."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Develop About Section",
+        "description": "Create an authentic About section that emphasizes self-taught expertise, technical philosophy, skills, and work preferences.",
+        "status": "pending",
+        "dependencies": [
+          2,
+          3
+        ],
+        "priority": "medium",
+        "details": "1. Design a clean, readable About section layout\n2. Create content subsections:\n   - Professional background\n   - Technical philosophy\n   - Skills and technologies\n   - Work preferences (remote, async, text-based)\n3. Implement skill visualization using:\n   - Grouped skill categories\n   - Progress bars or radar charts with react-chartjs-2 (v5.2.0)\n   - Tooltips with experience details\n4. Create a timeline component for career progression\n5. Add subtle animations for section transitions\n6. Include personality insights that humanize without oversharing\n7. Implement expandable sections for detailed information\n8. Create a downloadable resume/CV option\n9. Add links to relevant profiles (GitHub, LinkedIn)\n10. Ensure content is authentic and avoids corporate jargon\n11. Add section highlighting knowledge sharing philosophy and approach\n12. Include references to infrastructure expertise and documentation contributions\n<info added on 2025-07-12T11:06:14.885Z>\n13. Craft a professional narrative that:\n   - Tells the story of self-taught journey with specific milestones and challenges overcome\n   - Explains how ADHD has influenced problem-solving approaches and technical strengths\n   - Demonstrates infrastructure expertise through concrete examples\n   - Balances technical depth with accessibility for non-technical hiring managers\n\n14. Include a \"Work Style\" section that clearly articulates:\n   - Remote work capabilities with examples of successful async collaboration\n   - Communication preferences with emphasis on text-based efficiency\n   - Documentation and knowledge-sharing approach\n   - Self-management strategies that ensure reliability despite non-traditional background\n\n15. Create a \"Technical Philosophy\" component that:\n   - Articulates core principles without buzzwords\n   - Shows practical problem-solving orientation\n   - Demonstrates commitment to maintainable, documented solutions\n   - Explains approach to continuous learning and adaptation\n\n16. Develop content that directly addresses transition from gig work to stable employment:\n   - Highlight transferable skills from diverse project experience\n   - Demonstrate consistency and reliability despite varied work history\n   - Show how self-hosted infrastructure represents commitment to technical excellence\n   - Frame self-taught background as evidence of initiative and determination\n</info added on 2025-07-12T11:06:14.885Z>",
+        "testStrategy": "1. Test readability of text content\n2. Verify responsive layout of skill visualizations\n3. Test expandable sections functionality\n4. Validate PDF generation for resume\n5. Test animations for performance\n6. Verify external links open correctly\n7. Test accessibility of all interactive elements\n8. Verify knowledge sharing section content is properly displayed",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Implement Contact and Availability Section",
+        "description": "Create a professional contact section with email contact, GitHub profile link, availability status, and preferred communication methods.",
+        "status": "pending",
+        "dependencies": [
+          2
+        ],
+        "priority": "medium",
+        "details": "1. Design a clean contact form with:\n   - Name, email, and message fields\n   - Purpose selection (job opportunity, collaboration, etc.)\n   - Anti-spam measures (honeypot, reCAPTCHA v3)\n2. Implement form validation using react-hook-form (v7.48.2)\n3. Set up serverless function for form submission:\n   - Create API route in Next.js\n   - Implement email sending with Nodemailer or SendGrid\n   - Add rate limiting and validation\n4. Create availability indicator showing current status\n5. Add preferred communication methods section\n6. Implement contact success/error notifications\n7. Create animations for form submission states\n8. Add GitHub profile card with stats\n9. Implement copy-to-clipboard for email address\n10. Ensure all form fields are accessible with proper labels\n11. Add option for technical assistance requests related to infrastructure guides\n12. Include field for specifying which service documentation the inquiry relates to",
+        "testStrategy": "1. Test form validation with various inputs\n2. Verify email sending functionality\n3. Test anti-spam measures\n4. Validate error handling for form submission\n5. Test copy-to-clipboard functionality\n6. Verify form accessibility with keyboard navigation\n7. Test responsive layout on mobile devices\n8. Test technical assistance request form fields and validation\n9. Verify service-specific inquiries are properly categorized",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Implement SEO and Analytics",
+        "description": "Set up comprehensive SEO optimization and analytics to track performance and improve visibility for technical keywords.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          2,
+          3
+        ],
+        "priority": "medium",
+        "details": "1. Install and configure next-seo package\n2. Create SEO component with:\n   - Dynamic title and meta descriptions\n   - Open Graph and Twitter card metadata\n   - Canonical URLs\n   - JSON-LD structured data for projects and person\n3. Implement sitemap generation with next-sitemap (v4.1.8)\n4. Create robots.txt file\n5. Set up Google Analytics 4 with consent management\n6. Implement event tracking for key interactions\n7. Add schema.org markup for:\n   - Person\n   - WebSite\n   - SoftwareApplication (for projects)\n   - TechArticle (for infrastructure guides)\n8. Optimize for technical keywords related to skills\n9. Implement performance monitoring with web-vitals\n10. Create custom 404 page with helpful navigation\n11. Add meta tags for technical skills and specialties\n12. Implement SEO strategy for infrastructure guides with relevant technical keywords\n13. Create breadcrumb navigation for deep documentation pages",
+        "testStrategy": "1. Validate SEO metadata using tools like Lighthouse\n2. Test structured data with Google's Rich Results Test\n3. Verify analytics tracking is working correctly\n4. Test sitemap.xml generation\n5. Validate robots.txt configuration\n6. Test custom 404 page behavior\n7. Verify Core Web Vitals metrics\n8. Test TechArticle schema implementation for guides\n9. Verify breadcrumb navigation and structured data",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Implement Tool Demonstrations and Live Service Integration",
+        "description": "Create interactive demonstrations of hosted tools and services from bocloud.org with live integration to showcase real technical capabilities.",
+        "status": "pending",
+        "dependencies": [
+          2,
+          5
+        ],
+        "priority": "medium",
+        "details": "1. Design a tools showcase section with:\n   - Tool cards with descriptions for the 5 approved bocloud.org services\n   - Live demo embeds or screenshots\n   - Technical stack information\n2. Implement API integration for tool status checks\n3. Create iframe or embedded demos for each approved service\n4. Add interactive elements to demonstrate functionality of Speedtest Tracker, LobeChat, AI Research Wizard, TinyAuth, and Homepage Dashboard\n5. Implement authentication for protected tool demos, especially for Homepage Dashboard\n6. Create detailed documentation for each approved tool\n7. Add usage statistics where available\n8. Implement lazy loading for tool demos\n9. Create fallback content for when tools are unavailable\n10. Add links to GitHub repositories for open-source tools\n11. Organize tools by categories: Network Monitoring, AI, Security, and Dashboards\n12. Create connections between tools and their corresponding documentation\n13. Ensure TinyAuth demo includes a Login button redirecting to homepage.bocloud.org",
+        "testStrategy": "1. Test API integrations with each bocloud.org service\n2. Verify iframe loading and security for all 5 approved services\n3. Test interactive elements in tool demos\n4. Validate authentication flows, especially for TinyAuth and Homepage Dashboard\n5. Test fallback behavior when services are down\n6. Verify responsive layout of tool demonstrations\n7. Test performance impact of embedded tools\n8. Verify proper categorization of tools\n9. Test links between tools and their documentation\n10. Verify TinyAuth login redirect functionality",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Tool Showcase Section",
+            "description": "Create the UI layout and components for the tool demonstrations section",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Design and implement the UI components for the tool showcase section including layout, navigation, and visual hierarchy. Create reusable components for tool cards, status indicators, and category filters (Network Monitoring, AI, Security, and Dashboards). Ensure responsive design across device sizes and implement accessibility features. Include placeholders for live status indicators and interactive elements that will be connected later. Design specific card layouts for the 5 approved bocloud.org services: Speedtest Tracker, LobeChat, AI Research Wizard, TinyAuth, and Homepage Dashboard.",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement API Integration for Status Checks",
+            "description": "Build backend services to check and display tool availability status",
+            "status": "pending",
+            "dependencies": [
+              1
+            ],
+            "details": "Develop API integration to fetch real-time status of the 5 approved bocloud.org services (speedtest.bocloud.org, lobechat.bocloud.org, gptr.bocloud.org, auth.bocloud.org, homepage.bocloud.org). Implement polling mechanism for status updates with appropriate caching. Create error handling and fallback mechanisms for when services are unavailable. Design status indicators that clearly communicate availability, maintenance, or offline states to users. Include logging for monitoring API performance and reliability.",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Interactive Demo Components with Authentication",
+            "description": "Create interactive demo components that handle user authentication",
+            "status": "pending",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Implement interactive demo components for each approved service: Speedtest Tracker widget showing download/upload/ping data, LobeChat interface with multiple LLM providers, AI Research Wizard with web scraping capabilities (including legacy version link), TinyAuth with Login button redirecting to homepage.bocloud.org, and Homepage Dashboard preview. Integrate authentication flow for secured tools, especially Homepage Dashboard protected by nginx-auth middleware. Create sandboxed environments for tool testing that don't affect production data. Implement session management and secure credential handling. Design clear user feedback for authentication states and error conditions.",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Integrate Service Documentation and Categorization",
+            "description": "Connect tool demos with relevant documentation and organize by categories",
+            "status": "pending",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Organize the 5 approved services into their respective categories: Speedtest Tracker (Network Monitoring), LobeChat (AI), AI Research Wizard (AI), TinyAuth (Security), and Homepage Dashboard (Dashboards). Implement contextual documentation links that guide users to relevant resources for each tool. Create a system for handling tool versioning and compatibility information, especially for AI Research Wizard with its legacy version. Design a feedback mechanism for users to report issues with specific tools. Ensure all documentation links are validated and implement redirects for deprecated resources. Focus on showcasing technical capabilities without exposing sensitive infrastructure details.",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Implement Performance Optimization",
+        "description": "Optimize the website for fast loading times, efficient rendering, and overall performance to ensure a smooth user experience.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "priority": "high",
+        "details": "1. Implement code splitting and dynamic imports\n2. Set up image optimization with Next.js Image component\n3. Configure font loading optimization with next/font\n4. Implement caching strategies:\n   - Static generation for content pages\n   - Incremental Static Regeneration for dynamic content\n   - SWR for client-side data fetching\n5. Optimize JavaScript bundles:\n   - Tree shaking\n   - Minification\n   - Compression\n6. Implement lazy loading for off-screen content\n7. Set up CDN integration for static assets\n8. Optimize CSS with PurgeCSS (built into Tailwind)\n9. Implement preloading for critical resources\n10. Add service worker for offline capabilities using next-pwa (v5.6.0)\n11. Optimize third-party script loading with next/script\n12. Implement efficient loading strategies for infrastructure guides content\n13. Set up MDX bundling optimization for technical documentation\n14. Configure caching for service discovery API responses",
+        "testStrategy": "1. Measure performance using Lighthouse and WebPageTest\n2. Test Core Web Vitals (LCP, FID, CLS)\n3. Verify bundle sizes with tools like Webpack Bundle Analyzer\n4. Test loading performance on slow connections\n5. Validate image optimization effectiveness\n6. Test offline capabilities with service worker\n7. Measure Time to Interactive on various devices\n8. Test performance of infrastructure guides section with many pages\n9. Verify MDX rendering performance",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Implement Accessibility Compliance",
+        "description": "Ensure the website meets WCAG 2.1 accessibility standards to make it usable by all visitors regardless of abilities.",
+        "status": "pending",
+        "dependencies": [
+          2,
+          4,
+          6,
+          7,
+          8
+        ],
+        "priority": "high",
+        "details": "1. Implement proper semantic HTML throughout the site\n2. Add ARIA attributes where necessary\n3. Ensure proper keyboard navigation:\n   - Focus indicators\n   - Tab order\n   - Keyboard shortcuts\n4. Implement color contrast compliance:\n   - Minimum 4.5:1 for normal text\n   - Minimum 3:1 for large text\n5. Add skip navigation links\n6. Ensure all images have alt text\n7. Implement form accessibility:\n   - Labels for all inputs\n   - Error messages\n   - Required field indicators\n8. Add screen reader announcements for dynamic content\n9. Implement reduced motion options\n10. Test with screen readers (NVDA, VoiceOver)\n11. Add accessibility statement page\n12. Ensure technical documentation is accessible with proper heading structure\n13. Add accessible navigation for complex infrastructure guides\n14. Implement accessible code snippets with proper syntax highlighting",
+        "testStrategy": "1. Run automated accessibility tests with axe-core\n2. Perform keyboard navigation testing\n3. Test with screen readers on multiple browsers\n4. Validate color contrast with tools like Contrast Checker\n5. Perform manual WCAG 2.1 AA checklist review\n6. Test with reduced motion preferences enabled\n7. Validate form accessibility with keyboard only\n8. Test technical documentation navigation with screen readers\n9. Verify code snippet accessibility",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Setup CI/CD Pipeline",
+        "description": "Implement a continuous integration and deployment pipeline for automated testing, building, and deployment to the Kubernetes infrastructure.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          11
+        ],
+        "priority": "medium",
+        "details": "1. Set up GitHub Actions workflow with:\n   - Linting and type checking\n   - Unit and integration testing\n   - Build process\n   - Deployment to staging/production\n2. Create Dockerfile for containerization:\n   - Multi-stage build for optimization\n   - Node.js 20 LTS base image\n   - Production-optimized configuration\n3. Implement Kubernetes manifests:\n   - Deployment configuration\n   - Service definition\n   - Ingress rules\n   - ConfigMaps and Secrets\n4. Set up environment-specific configurations\n5. Implement automated testing in CI pipeline\n6. Add deployment notifications (Slack, email)\n7. Configure rollback mechanisms\n8. Implement secret management with sealed-secrets or external-secrets\n9. Set up monitoring and logging integration\n10. Create documentation for the CI/CD process\n11. Configure automated service discovery for infrastructure guides\n12. Set up CI/CD for documentation updates when services change\n13. Implement validation for technical documentation",
+        "testStrategy": "1. Test CI pipeline with sample commits\n2. Verify Docker image builds correctly\n3. Test Kubernetes deployments in staging environment\n4. Validate rollback functionality\n5. Test secret management\n6. Verify notification systems\n7. Test deployment to production environment\n8. Verify service discovery automation\n9. Test documentation CI/CD pipeline",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Configure GitHub Actions Workflow",
+            "description": "Set up GitHub Actions workflow files to automate the CI/CD pipeline",
+            "dependencies": [],
+            "details": "Create .github/workflows directory and YAML configuration files that define the CI/CD pipeline stages including build, test, and deployment triggers. Configure workflow to run on specific branches and pull requests. Set up caching for dependencies to improve build times.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Docker Containerization",
+            "description": "Create Docker configuration for containerizing the application",
+            "dependencies": [
+              1
+            ],
+            "details": "Create Dockerfile with appropriate base image, dependencies, and application code. Optimize Docker image size and layers for faster builds and deployments. Set up Docker Compose for local development and testing. Configure multi-stage builds to separate build and runtime environments.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Develop Kubernetes Deployment Manifests",
+            "description": "Create Kubernetes configuration files for deploying the application",
+            "dependencies": [
+              2
+            ],
+            "details": "Create YAML manifests for Deployments, Services, Ingress, ConfigMaps, and other necessary Kubernetes resources. Configure resource requests and limits, health checks, and scaling policies. Set up namespaces for different environments (dev, staging, production).",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Secret Management and Environment Configuration",
+            "description": "Set up secure handling of secrets and environment-specific configurations",
+            "dependencies": [
+              3
+            ],
+            "details": "Configure GitHub Secrets for sensitive information. Set up environment variables for different deployment environments. Implement a secure method for injecting secrets into Kubernetes (using Sealed Secrets, Vault, or similar tools). Create documentation for secret rotation and management procedures.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Configure Monitoring and Notification Integration",
+            "description": "Set up monitoring for the CI/CD pipeline and configure notifications",
+            "dependencies": [
+              1,
+              4
+            ],
+            "details": "Integrate pipeline status notifications with Slack, email, or other communication channels. Set up monitoring for pipeline performance and success rates. Configure alerts for pipeline failures. Implement logging for debugging failed pipeline runs. Create dashboards for visualizing pipeline metrics.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "title": "Implement Monitoring and Analytics Dashboard",
+        "description": "Create a monitoring and analytics dashboard to track website performance, user engagement, and service status.",
+        "status": "pending",
+        "dependencies": [
+          11,
+          13
+        ],
+        "priority": "low",
+        "details": "1. Set up Prometheus and Grafana for monitoring:\n   - Server metrics\n   - Application metrics\n   - Service health\n2. Implement custom Next.js metrics:\n   - Page load times\n   - API response times\n   - Error rates\n3. Create custom Grafana dashboards\n4. Set up alerting for critical issues\n5. Implement user analytics dashboard with:\n   - Visitor demographics\n   - Page popularity\n   - Conversion metrics\n   - Engagement statistics\n6. Add real-time visitor tracking\n7. Implement A/B testing framework\n8. Create performance budget monitoring\n9. Set up automated reporting\n10. Implement privacy-focused analytics with Plausible or Fathom\n11. Add documentation usage analytics to track most viewed guides\n12. Implement feedback collection for infrastructure guides\n13. Create dashboard for service health status integrated with documentation",
+        "testStrategy": "1. Verify metrics collection is working\n2. Test alerting functionality\n3. Validate dashboard visualizations\n4. Test real-time data updates\n5. Verify report generation\n6. Test A/B testing framework\n7. Validate privacy compliance of analytics\n8. Test documentation analytics collection\n9. Verify service health status integration",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Final Testing, Documentation, and Launch",
+        "description": "Perform comprehensive testing, create documentation, and prepare for the official launch of the portfolio website.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "priority": "high",
+        "details": "1. Conduct comprehensive testing:\n   - Cross-browser testing (Chrome, Firefox, Safari, Edge)\n   - Mobile device testing\n   - Performance testing\n   - Accessibility testing\n   - Security testing\n2. Create documentation:\n   - README with setup instructions\n   - Architecture overview\n   - Content update guide\n   - Deployment procedures\n3. Prepare for launch:\n   - DNS configuration\n   - SSL certificate setup\n   - Final content review\n   - Backup procedures\n4. Implement pre-launch checklist:\n   - 404 page testing\n   - Link validation\n   - Form submission testing\n   - SEO verification\n5. Create maintenance plan:\n   - Update schedule\n   - Monitoring procedures\n   - Backup strategy\n6. Conduct final security review:\n   - Dependency scanning\n   - HTTPS configuration\n   - Content Security Policy\n7. Prepare launch announcement\n8. Test infrastructure guides section thoroughly\n9. Verify service discovery system is working correctly\n10. Validate all documentation links and references",
+        "testStrategy": "1. Execute full test suite before launch\n2. Perform manual testing of critical paths\n3. Validate documentation accuracy\n4. Test DNS and SSL configuration\n5. Verify backup and restore procedures\n6. Conduct final accessibility audit\n7. Test site on low-bandwidth connections\n8. Test infrastructure guides navigation and content\n9. Verify service discovery functionality\n10. Test search functionality across documentation",
+        "subtasks": []
+      },
+      {
+        "id": 16,
+        "title": "Implement Docker Compose Service Discovery System",
+        "description": "Build a system that automatically parses the docker-compose.yml file to discover and categorize all services running in the infrastructure, enabling dynamic service exploration and status monitoring.",
+        "details": "1. Create a service parser module:\n   - Implement YAML parsing using js-yaml: `npm install js-yaml`\n   - Build functions to extract service definitions from docker-compose.yml\n   - Handle large file processing (6000+ lines) with streaming or chunking\n   - Create TypeScript interfaces for service metadata\n\n2. Develop service categorization system:\n   - Define category taxonomy (Media, Monitoring, AI/ML, Development, etc.)\n   - Implement categorization logic based on service names, labels, and configurations\n   - Create a mapping system for automatic categorization\n   - Allow manual category overrides via configuration\n\n3. Implement metadata extraction:\n   - Extract exposed ports and map to services\n   - Parse environment variables with sensitive data masking\n   - Identify service dependencies and relationships\n   - Extract volume mounts and network configurations\n\n4. Create service health monitoring:\n   - Implement health check endpoints for each service type\n   - Set up polling mechanism for status updates\n   - Define service status indicators (healthy, degraded, offline)\n   - Create alerting for critical service failures\n\n5. Build dynamic service explorer interface:\n   - Design a responsive UI component for service browsing\n   - Implement filtering and search functionality\n   - Create detailed service view with metadata display\n   - Add visual indicators for service health status\n\n6. Implement real-time status integration:\n   - Set up WebSocket connection for live updates\n   - Create API endpoints for service status queries\n   - Implement caching layer for performance optimization\n   - Add service metrics collection and display\n\n7. Integrate with documentation system:\n   - Generate service documentation templates\n   - Link services to relevant technical guides\n   - Create API for guide generation based on service metadata\n   - Implement documentation versioning tied to service versions",
+        "testStrategy": "1. Unit test the YAML parser:\n   - Test with sample docker-compose files of varying complexity\n   - Verify correct extraction of service definitions\n   - Test error handling with malformed YAML\n   - Benchmark performance with large files\n\n2. Validate service categorization:\n   - Test automatic categorization against known services\n   - Verify category assignment logic\n   - Test manual override functionality\n   - Validate category hierarchy display\n\n3. Test metadata extraction:\n   - Verify port mapping extraction accuracy\n   - Test environment variable parsing and masking\n   - Validate dependency relationship mapping\n   - Test with various service configuration patterns\n\n4. Verify health monitoring:\n   - Test health check endpoints with mock services\n   - Verify status indicator accuracy\n   - Test polling mechanism under load\n   - Validate alerting triggers and notifications\n\n5. Test service explorer UI:\n   - Verify responsive behavior across device sizes\n   - Test filtering and search functionality\n   - Validate detailed view displays all metadata correctly\n   - Test accessibility of the explorer interface\n\n6. Validate real-time updates:\n   - Test WebSocket connection stability\n   - Verify update propagation speed\n   - Test system behavior during service restarts\n   - Validate caching mechanism effectiveness\n\n7. Integration testing:\n   - Test end-to-end workflow from service discovery to documentation\n   - Verify correct integration with existing systems\n   - Test performance under production-like conditions\n   - Validate error handling and recovery scenarios",
+        "status": "deferred",
+        "dependencies": [
+          1,
+          5,
+          14
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Docker Compose YAML Parser Module",
+            "description": "Develop a module that can parse and extract service definitions from docker-compose.yml files, handling large files efficiently.",
+            "dependencies": [],
+            "details": "Implement YAML parsing using js-yaml library. Create TypeScript interfaces for service metadata. Build functions to extract service names, ports, environment variables, and other configurations. Implement streaming or chunking for efficient processing of large files (6000+ lines). Add error handling for malformed YAML files.\n<info added on 2025-07-12T10:59:25.983Z>\n✅ COMPLETED: Docker Compose YAML Parser Module\n\nSuccessfully implemented a comprehensive parser module with the following features:\n\n**Core Implementation:**\n- Created TypeScript interfaces for all Docker Compose service metadata\n- Implemented DockerComposeParser class with full YAML parsing capabilities\n- Added support for large file processing (tested with 6000+ line files)\n- Included comprehensive error handling and validation\n\n**Key Features:**\n- **Service Metadata Extraction**: Ports, environment variables, volumes, networks, dependencies, labels\n- **Sensitive Data Masking**: Automatically masks passwords, secrets, tokens, and API keys\n- **Multiple Format Support**: Handles both array and object formats for all configurations\n- **Performance Optimized**: File size limits and efficient parsing for large compose files\n- **Type Safety**: Full TypeScript interfaces for all data structures\n\n**API Integration:**\n- Created `/api/services/parse` endpoint for testing and integration\n- GET endpoint provides service statistics and sample data\n- POST endpoint allows querying specific services\n- Proper error handling and response formatting\n\n**Testing:**\n- Project builds successfully with TypeScript validation\n- Parser handles the complex docker-compose.yml structure\n- API endpoints are properly configured and accessible\n\n**Next Steps:**\nReady to move to service categorization system (subtask 16.2)\n</info added on 2025-07-12T10:59:25.983Z>\n<info added on 2025-07-12T11:01:44.548Z>\n✅ COMPLETED: Docker Compose YAML Parser Module\n\nSuccessfully implemented a comprehensive parser module with the following features:\n\n**Core Implementation:**\n- Created TypeScript interfaces for all Docker Compose service metadata\n- Implemented DockerComposeParser class with full YAML parsing capabilities\n- Added support for large file processing (tested with 6000+ line files)\n- Included comprehensive error handling and validation\n\n**Key Features:**\n- **Service Metadata Extraction**: Ports, environment variables, volumes, networks, dependencies, labels\n- **Sensitive Data Masking**: Automatically masks passwords, secrets, tokens, and API keys\n- **Multiple Format Support**: Handles both array and object formats for all configurations\n- **Performance Optimized**: File size limits and efficient parsing for large compose files\n- **Type Safety**: Full TypeScript interfaces for all data structures\n\n**API Integration:**\n- Created `/api/services/parse` endpoint for testing and integration\n- GET endpoint provides service statistics and sample data\n- POST endpoint allows querying specific services\n- Proper error handling and response formatting\n\n**Testing:**\n- Project builds successfully with TypeScript validation\n- Parser handles the complex docker-compose.yml structure\n- API endpoints are properly configured and accessible\n\n**Next Steps:**\nReady to move to service categorization system (subtask 16.2)\n</info added on 2025-07-12T11:01:44.548Z>",
+            "status": "done",
+            "testStrategy": "Write unit tests with sample docker-compose files of varying complexity. Test performance with large files to ensure efficient parsing."
+          },
+          {
+            "id": 2,
+            "title": "Develop Service Categorization System",
+            "description": "Create a system to automatically categorize services based on their configuration and allow for manual overrides.",
+            "dependencies": [
+              1
+            ],
+            "details": "Define a comprehensive category taxonomy (Media, Monitoring, AI/ML, Development, etc.). Implement logic to categorize services based on service names, labels, and configurations. Create a mapping system for automatic categorization. Develop configuration options for manual category overrides. Store categorization data in a structured format.",
+            "status": "pending",
+            "testStrategy": "Test with a diverse set of service configurations to verify correct categorization. Verify that manual overrides correctly supersede automatic categorization."
+          },
+          {
+            "id": 3,
+            "title": "Implement Service Metadata Extraction",
+            "description": "Extract and organize detailed metadata from services including ports, environment variables, dependencies, and network configurations.",
+            "dependencies": [
+              1
+            ],
+            "details": "Extract exposed ports and map them to services. Parse environment variables with sensitive data masking functionality. Identify and map service dependencies and relationships. Extract and organize volume mounts and network configurations. Create a structured data model to represent the complete service metadata.",
+            "status": "pending",
+            "testStrategy": "Create tests with mock docker-compose files containing various metadata configurations. Verify sensitive data is properly masked and all metadata is correctly extracted."
+          },
+          {
+            "id": 4,
+            "title": "Build Service Health Monitoring System",
+            "description": "Create a system to monitor the health status of all discovered services with appropriate alerting mechanisms.",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "Implement health check endpoints for each service type. Set up a polling mechanism for regular status updates. Define service status indicators (healthy, degraded, offline). Create an alerting system for critical service failures. Implement a caching layer for performance optimization. Add service metrics collection and storage.",
+            "status": "pending",
+            "testStrategy": "Test with simulated service failures to verify proper status detection. Verify alerting triggers work correctly for different failure scenarios."
+          },
+          {
+            "id": 5,
+            "title": "Develop Dynamic Service Explorer Interface",
+            "description": "Create a responsive UI component that allows users to browse, search, and view detailed information about all services.",
+            "dependencies": [
+              2,
+              3,
+              4
+            ],
+            "details": "Design a responsive UI component for service browsing with filtering and search functionality. Create detailed service views displaying all relevant metadata. Add visual indicators for service health status. Implement real-time updates via WebSocket connections. Create API endpoints for service queries. Integrate with the documentation system to link services to relevant technical guides.",
+            "status": "pending",
+            "testStrategy": "Perform UI testing across different devices and screen sizes. Test search and filtering functionality with various queries. Verify real-time updates are correctly displayed when service status changes."
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "title": "Implement Infrastructure Guides Section",
+        "description": "Create a comprehensive guides section that provides step-by-step instructions for deploying and managing the entire infrastructure stack with service categories, deployment guides, and interactive documentation.",
+        "details": "1. Design and implement the guides section architecture:\n   - Create a hierarchical navigation structure for service categories\n   - Implement breadcrumb navigation for deep documentation pages\n   - Design consistent page templates for different guide types\n\n2. Develop service category pages:\n   - Media Stack (Plex, Jellyfin, Sonarr, etc.)\n   - Monitoring (Prometheus, Grafana, Uptime Kuma)\n   - AI/ML services (Ollama, LLM APIs)\n   - Development tools (GitLab, Harbor, etc.)\n   - Networking (Tailscale, Traefik, etc.)\n\n3. Create individual service deployment guides:\n   - Step-by-step installation instructions\n   - Real configuration examples with code blocks\n   - Environment variable explanations\n   - Volume mounting and persistence configuration\n   - Security considerations and best practices\n\n4. Implement architecture deep-dive sections:\n   - Service interaction diagrams using Mermaid.js\n   - Network flow visualizations\n   - Component dependency graphs\n   - Sequence diagrams for complex operations\n\n5. Develop prerequisite and setup guides:\n   - Oracle Cloud account setup and configuration\n   - Tailscale network configuration\n   - Domain registration and DNS configuration\n   - SSL certificate management\n\n6. Create troubleshooting guides:\n   - Common error scenarios and solutions\n   - Log analysis techniques\n   - Debugging strategies\n   - Performance optimization tips\n\n7. Implement maintenance documentation:\n   - Update procedures for each service\n   - Backup and restore instructions\n   - Migration guides between versions\n   - Health check procedures\n\n8. Develop an interactive service explorer:\n   - Live status indicators integrated with monitoring\n   - Quick access to relevant documentation\n   - Service dependency visualization\n   - Resource usage statistics\n\n9. Implement searchable documentation system:\n   - Full-text search functionality\n   - Tag-based filtering\n   - Related content suggestions\n   - Recently updated content highlighting\n\n10. Integrate with existing infrastructure:\n    - Connect to Docker Compose Service Discovery (Task #16)\n    - Pull real configuration examples from running services\n    - Link to monitoring dashboards (Task #14)\n    - Implement authentication for sensitive documentation",
+        "testStrategy": "1. Content validation testing:\n   - Verify all guide sections contain accurate and complete information\n   - Validate code examples and configuration snippets\n   - Check for broken links and references\n   - Ensure all images and diagrams render correctly\n\n2. Navigation and structure testing:\n   - Test breadcrumb navigation paths\n   - Verify category organization is intuitive\n   - Test responsive behavior of navigation elements\n   - Validate search functionality with various queries\n\n3. Interactive elements testing:\n   - Test service explorer functionality\n   - Verify live status indicators update correctly\n   - Test filtering and sorting options\n   - Validate interactive diagrams render properly\n\n4. Integration testing:\n   - Verify connection to Docker Compose Service Discovery\n   - Test monitoring dashboard links\n   - Validate authentication for protected content\n   - Test real-time data updates\n\n5. Usability testing:\n   - Conduct user testing with sample infrastructure tasks\n   - Measure time to complete common procedures\n   - Gather feedback on documentation clarity\n   - Test with users of varying technical expertise\n\n6. Accessibility testing:\n   - Verify documentation meets WCAG 2.1 standards\n   - Test keyboard navigation through documentation\n   - Validate screen reader compatibility\n   - Check color contrast for code examples and diagrams\n\n7. Performance testing:\n   - Measure page load times for documentation pages\n   - Test search response times with large query sets\n   - Verify documentation loads efficiently on mobile devices\n   - Test PDF generation and download functionality",
+        "status": "deferred",
+        "dependencies": [
+          2,
+          3,
+          5,
+          14,
+          16
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 18,
+        "title": "Implement GitHub API Integration for Project Showcase",
+        "description": "Develop a dynamic GitHub integration that fetches and displays repository data from the bolabaden GitHub profile, showcasing pinned repositories with detailed project information and statistics.",
+        "details": "1. Set up GitHub API client with authentication:\n   - Install required packages: `npm install octokit axios`\n   - Create API utility functions for fetching repository data\n   - Implement rate limiting and caching to avoid API limits\n   - Set up environment variables for GitHub API tokens\n\n2. Create data fetching services:\n   - Implement function to fetch pinned repositories from bolabaden profile\n   - Create service to retrieve repository details (stars, forks, languages)\n   - Build function to extract README content and parse markdown\n   - Implement commit activity and contribution graph data fetching\n\n3. Develop repository display components:\n   - Create a featured repository grid component\n   - Implement repository card with stats visualization\n   - Build language distribution chart using react-chartjs-2\n   - Create commit activity timeline component\n\n4. Build detailed project page templates:\n   - Design layout for individual project pages\n   - Implement README content rendering with proper formatting\n   - Create architecture diagram display component\n   - Add live demo linking where available\n\n5. Implement automatic data refresh:\n   - Set up incremental static regeneration for project pages\n   - Implement webhook endpoint for GitHub events\n   - Create background refresh mechanism for latest data\n\n6. Integrate with existing components:\n   - Connect to Projects Portfolio section\n   - Link with Technical Infrastructure Showcase\n   - Integrate with Technical Guides section for related projects\n\n7. Key projects to highlight with special formatting:\n   - CloudCradle (Oracle Cloud deployment automation)\n   - ai-researchwizard (modified GPT-researcher)\n   - cloudflare-load-balancer\n   - constellation (orchestrator project)\n   - bocloud-site (this website itself)",
+        "testStrategy": "1. API integration testing:\n   - Verify GitHub API authentication works correctly\n   - Test error handling for API rate limits and failures\n   - Validate data parsing from API responses\n   - Test caching mechanism effectiveness\n\n2. Component rendering tests:\n   - Verify repository cards display correct information\n   - Test language distribution charts with various repository data\n   - Validate commit activity visualization\n   - Test responsive behavior of repository grid\n\n3. Data accuracy verification:\n   - Compare displayed repository data with actual GitHub data\n   - Verify README content is properly rendered\n   - Test markdown parsing for various formatting elements\n   - Validate statistics calculations\n\n4. Integration testing:\n   - Test integration with Projects Portfolio section\n   - Verify links between GitHub projects and technical guides\n   - Test navigation between project listings and detailed pages\n\n5. Performance testing:\n   - Measure load time impact of GitHub API integration\n   - Test performance with large repositories\n   - Verify caching improves subsequent load times\n\n6. Automated testing:\n   - Create unit tests for API utility functions\n   - Implement component tests for repository display\n   - Set up integration tests for data flow",
+        "status": "pending",
+        "dependencies": [
+          1,
+          3,
+          6
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 19,
+        "title": "Implement Modern UI Components with @21st-dev/magic",
+        "description": "Integrate the @21st-dev/magic component library to create modern, professional UI components for the portfolio site while maintaining a minimalist, authentic aesthetic.",
+        "status": "done",
+        "dependencies": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          12
+        ],
+        "priority": "high",
+        "details": "1. Install and configure @21st-dev/magic component library:\n   - Add to project: `npm install @21st-dev/magic`\n   - Configure theme settings to match portfolio design system\n   - Set up provider component in the application root\n\n2. Implement hero section components:\n   - Create animated headline component with TypeWriter effect\n   - Design call-to-action buttons with hover animations\n   - Implement background elements with subtle animations\n\n3. Develop project card components:\n   - Create interactive card components with hover effects\n   - Implement image gallery/carousel for project screenshots\n   - Add technology badge components for tech stack display\n   - Design expandable detail sections\n\n4. Build service showcase components:\n   - Create service feature cards with icons\n   - Implement tabbed interface for service categories\n   - Design progress/status indicators for services\n\n5. Create interactive UI elements:\n   - Implement custom button components with various states\n   - Design modal components for detailed information\n   - Create form components with validation states\n   - Build toast/notification components for feedback\n\n6. Add animation and transition components:\n   - Implement scroll-triggered animations\n   - Create page transition effects\n   - Design loading state animations\n   - Build micro-interactions for interactive elements\n\n7. Ensure responsive design across all components:\n   - Implement responsive variants for all UI components\n   - Create adaptive layouts for different viewport sizes\n   - Test and optimize touch interactions for mobile\n\n8. Apply professional styling aligned with minimalist principles:\n   - Maintain consistent spacing, typography, and color usage\n   - Implement subtle shadows and depth effects\n   - Use animation sparingly for meaningful interactions\n\n9. Implement accessibility features:\n   - Add proper ARIA attributes to all components\n   - Ensure keyboard navigation support\n   - Implement focus states for interactive elements\n   - Test with screen readers and assistive technologies\n\n10. Create a component documentation page:\n    - Document all available components with examples\n    - Show usage patterns and prop options\n    - Include accessibility guidelines for each component\n\n11. Integrate with Content Management System:\n    - Ensure components can render dynamic content from CMS\n    - Create content-aware components that adapt to CMS data structures\n    - Implement loading states for content-dependent components\n    - Test components with various content scenarios from the CMS",
+        "testStrategy": "1. Component unit testing:\n   - Write Jest tests for each component\n   - Test component rendering in different states\n   - Verify prop validation and default behaviors\n   - Test component interactions and state changes\n\n2. Visual regression testing:\n   - Set up Storybook for component visualization\n   - Implement visual regression tests with Chromatic\n   - Create stories for each component variant\n   - Document component usage patterns\n\n3. Accessibility testing:\n   - Run automated tests with axe-core\n   - Test keyboard navigation for all interactive components\n   - Verify screen reader compatibility\n   - Check color contrast ratios meet WCAG 2.1 AA standards\n\n4. Responsive design testing:\n   - Test components at various viewport sizes (320px, 768px, 1024px, 1440px)\n   - Verify touch interactions on mobile devices\n   - Test orientation changes on tablet devices\n   - Validate component behavior in responsive layouts\n\n5. Performance testing:\n   - Measure component render performance\n   - Test animation frame rates on low-end devices\n   - Verify bundle size impact of component imports\n   - Implement code splitting for larger components\n\n6. Cross-browser testing:\n   - Test in Chrome, Firefox, Safari, and Edge\n   - Verify consistent appearance and behavior\n   - Check for browser-specific issues\n   - Test with different OS themes (light/dark mode)\n\n7. Integration testing:\n   - Verify components work together in page layouts\n   - Test component interactions within sections\n   - Validate data flow between components\n   - Check for styling conflicts or layout issues\n\n8. CMS integration testing:\n   - Test components with real CMS data\n   - Verify handling of edge cases (missing data, long content)\n   - Test loading states and error handling\n   - Validate component behavior with different content types",
+        "subtasks": []
+      },
+      {
+        "id": 20,
+        "title": "Refactor Website Theme and Messaging for Personal Portfolio",
+        "description": "Transform the website from a generic business service to a personal developer portfolio by implementing a modern dark theme and rewriting copy to use a first-person perspective.",
+        "details": "1. Theme Implementation:\n   - Replace the current light theme with a modern dark theme\n   - Define a new color palette with dark backgrounds and high-contrast text\n   - Update Tailwind configuration with new color variables:\n     ```js\n     // tailwind.config.js\n     module.exports = {\n       theme: {\n         extend: {\n           colors: {\n             'primary': '#0f172a',\n             'secondary': '#1e293b',\n             'accent': '#3b82f6',\n             'text-primary': '#f8fafc',\n             'text-secondary': '#cbd5e1',\n           }\n         }\n       }\n     }\n     ```\n   - Create a ThemeProvider component to manage theme state\n   - Implement smooth transitions between theme states\n   - Ensure proper color contrast ratios (WCAG AA compliance)\n\n2. Content Rewriting:\n   - Audit all website copy to identify corporate/impersonal language\n   - Rewrite main navigation items:\n     - Change \"Services\" to \"Areas of Expertise\"\n     - Replace \"Get Started\" with \"Let's Connect\" or \"Contact Me\"\n   - Update all button text to reflect personal voice\n   - Rewrite section headers and introductory text in first-person perspective\n   - Create a style guide for consistent personal voice throughout the site\n   - Update meta descriptions and page titles to reflect personal branding\n\n3. Component Updates:\n   - Modify Header component to reflect personal branding\n   - Update Footer with personal copyright notice\n   - Redesign call-to-action buttons with new styling and text\n   - Ensure all components properly implement the new theme variables\n   - Add personal touches like a signature or personal logo\n\n4. Technical Implementation:\n   - Use CSS variables or Tailwind theme extension for consistent theming\n   - Implement theme toggle with localStorage persistence\n   - Ensure theme respects user's system preferences (prefers-color-scheme)\n   - Optimize dark theme for reduced eye strain with appropriate contrast\n   - Test theme across all components for consistency",
+        "testStrategy": "1. Theme Testing:\n   - Verify dark theme implementation across all pages and components\n   - Test theme toggle functionality and persistence across page refreshes\n   - Validate color contrast meets WCAG 2.1 AA standards using axe-core\n   - Test theme appearance across different browsers and devices\n   - Verify system preference detection works correctly\n   - Test transition animations for smoothness and performance\n\n2. Content Testing:\n   - Review all text content to ensure first-person perspective is consistently applied\n   - Verify all instances of corporate language have been replaced\n   - Test readability of new content on both desktop and mobile devices\n   - Conduct user testing to gather feedback on the personal tone and messaging\n   - Verify meta descriptions and page titles reflect the updated personal branding\n\n3. Visual Regression Testing:\n   - Create before/after screenshots of key pages\n   - Use visual comparison tools to identify unintended layout changes\n   - Test responsive behavior with the new theme across breakpoints\n   - Verify all interactive elements maintain proper states (hover, focus, active)\n\n4. Performance Testing:\n   - Measure and compare page load times before and after theme changes\n   - Test for any CSS bloat introduced by theme changes\n   - Verify smooth rendering without flash of unstyled content\n   - Test performance on lower-end devices to ensure theme doesn't impact usability\n\n5. Accessibility Testing:\n   - Verify keyboard navigation works with the new theme\n   - Test screen reader compatibility with updated content\n   - Validate that focus indicators are visible in the dark theme\n   - Check that all text meets minimum contrast requirements",
+        "status": "done",
+        "dependencies": [
+          2,
+          4,
+          6,
+          7,
+          8
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 21,
+        "title": "Redesign Landing Page with Dark Theme and Technical Focus",
+        "description": "Completely redesign the bolabaden.org landing page with a professional, dark-themed design that emphasizes technical depth and authenticity, removing all business/agency language and implementing specified sections.",
+        "details": "1. Design Implementation:\n   - Create a professional, non-corporate dark-themed design system\n   - Define color palette with dark backgrounds and high-contrast text\n   - Update Tailwind configuration with new color variables:\n     ```js\n     // tailwind.config.js\n     module.exports = {\n       theme: {\n         extend: {\n           colors: {\n             'bg-primary': '#121212',\n             'bg-secondary': '#1e1e1e',\n             'accent': '#6366f1',\n             'text-primary': '#f8fafc',\n             'text-secondary': '#cbd5e1',\n           }\n         }\n       }\n     }\n     ```\n\n2. Hero Section:\n   - Implement minimalist hero with name/handle and tagline\n   - Add 1-2 sentence technical summary\n   - Create prominent 'Login' button redirecting to https://homer.bocloud.org\n   - Use @21st-dev/magic components for animations and styling\n\n3. 'What is this site?' Section:\n   - Write honest, technical explanation of public infrastructure\n   - Focus on authenticity and technical depth\n   - Remove all business/service language\n   - Implement clean, readable typography\n\n4. Live Tools/Projects Showcase:\n   - Create responsive grid/list of approved public-facing apps\n   - Include: Speedtest, LobeChat, AI Research Wizard, TinyAuth, Homepage Dashboard\n   - Design consistent project cards with technical details\n   - Implement filtering/sorting capabilities\n\n5. Infrastructure/Architecture Section:\n   - Create high-level architecture diagram using Mermaid.js\n   - Add detailed stack summary with technologies used\n   - Implement interactive elements to explore infrastructure components\n\n6. About Me Section:\n   - Write authentic personal bio highlighting self-taught background, ADHD\n   - Emphasize remote/async work preference\n   - List skills and technical stack\n   - Add 'what I'm looking for' section for potential collaborations\n\n7. Guides/Resources Section:\n   - Implement organized, searchable technical guides\n   - Create documentation browser with categories\n   - Add syntax highlighting for code examples\n   - Ensure mobile-friendly documentation viewing\n\n8. Contact Section:\n   - Add direct contact options (email, GitHub)\n   - Create 'Available for remote work' badge\n   - Implement contact form with validation\n\n9. Footer:\n   - Design minimal footer with copyright information\n   - Add dark/light theme toggle\n   - Implement optional uptime badge\n   - Include minimal navigation links\n\n10. Technical Implementation:\n    - Use @21st-dev/magic for all major UI sections\n    - Ensure responsive design across all device sizes\n    - Implement smooth animations and transitions\n    - Optimize for performance and accessibility\n    - Remove all business/industry/agency/service language",
+        "testStrategy": "1. Visual Design Testing:\n   - Verify dark theme implementation across all sections\n   - Validate color contrast meets WCAG 2.1 AA standards\n   - Test responsive layout on multiple device sizes (mobile, tablet, desktop)\n   - Ensure consistent typography and spacing throughout\n\n2. Functional Testing:\n   - Verify 'Login' button correctly redirects to https://homer.bocloud.org\n   - Test navigation between all sections\n   - Validate project showcase filtering and sorting\n   - Test dark/light theme toggle functionality\n   - Ensure all links to external resources work correctly\n\n3. Content Validation:\n   - Review all text content to ensure removal of business/agency language\n   - Verify technical accuracy of infrastructure diagram and stack descriptions\n   - Check for spelling and grammar errors\n   - Ensure consistent tone and voice throughout\n\n4. Performance Testing:\n   - Run Lighthouse performance audits\n   - Test page load times on various connection speeds\n   - Verify image optimization\n   - Test animations for smoothness and performance impact\n\n5. Accessibility Testing:\n   - Validate semantic HTML structure\n   - Test keyboard navigation through all interactive elements\n   - Verify screen reader compatibility\n   - Check focus states for all interactive elements\n\n6. Cross-browser Testing:\n   - Test on Chrome, Firefox, Safari, and Edge\n   - Verify consistent appearance and functionality across browsers\n   - Test on both desktop and mobile browsers\n\n7. User Acceptance Testing:\n   - Gather feedback on the redesign from technical users\n   - Verify the site effectively communicates technical depth and authenticity\n   - Test with users to ensure the site meets expectations for a personal technical portfolio",
+        "status": "done",
+        "dependencies": [
+          1,
+          2,
+          4,
+          6,
+          12,
+          19,
+          20
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Dark Theme Design System",
+            "description": "Create a professional dark-themed design system with defined color palette, typography, and Tailwind configuration",
+            "dependencies": [],
+            "details": "Define and implement the dark theme color palette with variables for bg-primary (#121212), bg-secondary (#1e1e1e), accent (#6366f1), text-primary (#f8fafc), and text-secondary (#cbd5e1). Update the Tailwind configuration file with these new color variables. Establish typography guidelines for headings and body text that emphasize technical depth. Create reusable UI components that follow the dark theme aesthetic. Ensure all design elements maintain high contrast for readability and accessibility.",
+            "status": "done",
+            "testStrategy": "Verify color contrast meets WCAG AA standards. Test the design system across different viewport sizes to ensure responsive behavior. Confirm Tailwind configuration properly applies the new color variables throughout the site."
+          },
+          {
+            "id": 2,
+            "title": "Develop Hero and 'What is this site?' Sections",
+            "description": "Create minimalist hero section with name/handle, tagline, and technical summary, plus an authentic explanation section",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement a clean, minimalist hero section featuring name/handle and a concise technical tagline. Add a 1-2 sentence technical summary that clearly communicates the site's purpose. Create a prominent 'Login' button that redirects to https://homer.bocloud.org. Use @21st-dev/magic components for animations and styling. For the 'What is this site?' section, write an honest, technical explanation of the public infrastructure, focusing on authenticity and technical depth while completely removing any business/service language. Implement clean, readable typography for this explanatory content.",
+            "status": "done",
+            "testStrategy": "Test login button functionality to ensure proper redirection. Verify animations work correctly across browsers. Review content to confirm all business/agency language has been removed."
+          },
+          {
+            "id": 3,
+            "title": "Build Projects Showcase and Infrastructure Sections",
+            "description": "Create responsive grid of public-facing apps and implement architecture diagram with technical stack details",
+            "dependencies": [
+              1
+            ],
+            "details": "Design and implement a responsive grid/list showcasing approved public-facing applications including Speedtest, LobeChat, AI Research Wizard, TinyAuth, and Homepage Dashboard. Create consistent project cards with technical details for each application. Add filtering/sorting capabilities. For the Infrastructure/Architecture section, create a high-level architecture diagram using Mermaid.js that illustrates the system components. Add a detailed stack summary listing all technologies used. Implement interactive elements that allow users to explore different infrastructure components in more detail.",
+            "status": "done",
+            "testStrategy": "Test responsive behavior of the project grid across different device sizes. Verify Mermaid.js diagram renders correctly. Ensure interactive elements function properly and provide accurate information."
+          },
+          {
+            "id": 4,
+            "title": "Develop About Me and Guides/Resources Sections",
+            "description": "Create authentic personal bio section and implement searchable technical guides with documentation browser",
+            "dependencies": [
+              1
+            ],
+            "details": "Write and implement an authentic personal bio highlighting self-taught background and ADHD. Emphasize remote/async work preferences. Create a comprehensive list of skills and technical stack. Add a 'what I'm looking for' section detailing potential collaborations. For the Guides/Resources section, implement an organized, searchable collection of technical guides. Create a documentation browser with clear categories. Add syntax highlighting for all code examples. Ensure the documentation viewing experience is mobile-friendly and accessible.",
+            "status": "done",
+            "testStrategy": "Review bio content for authenticity and technical focus. Test search functionality in the guides section. Verify syntax highlighting works for different programming languages. Test documentation browser on mobile devices."
+          },
+          {
+            "id": 5,
+            "title": "Implement Contact Section and Footer",
+            "description": "Create contact options with remote work badge and design minimal footer with theme toggle and navigation",
+            "dependencies": [
+              1
+            ],
+            "details": "Add direct contact options including email and GitHub links. Create and implement a visible 'Available for remote work' badge. Develop a contact form with proper validation. For the footer, design a minimal layout with copyright information. Implement a dark/light theme toggle functionality. Add an optional uptime badge showing system status. Include minimal but useful navigation links. Ensure all components are built using @21st-dev/magic for consistency with the rest of the site. Optimize all elements for performance and accessibility.",
+            "status": "done",
+            "testStrategy": "Test contact form validation with various input scenarios. Verify theme toggle correctly switches between dark and light modes. Check that all links in the footer work correctly. Test accessibility of all interactive elements."
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-12T10:24:24.278Z",
+      "updated": "2025-07-12T13:14:42.372Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

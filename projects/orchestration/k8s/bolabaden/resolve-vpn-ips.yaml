@@ -1,0 +1,71 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: resolve-vpn-ips
+  namespace: default
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: dns-resolver
+        image: nicolaka/netshoot:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            set -x
+            echo "Starting VPN hostname resolution..."
+            ls -lR /etc/openvpn/templates/
+
+            VPN_HOSTNAMES="vpn-at.premiumize.me vpn-au.premiumize.me vpn-be.premiumize.me vpn-ca.premiumize.me vpn-ch.premiumize.me vpn-cz.premiumize.me vpn-de.premiumize.me vpn-es.premiumize.me vpn-fi.premiumize.me vpn-fr.premiumize.me vpn-gb.premiumize.me vpn-gr.premiumize.me vpn-it.premiumize.me vpn-jp.premiumize.me vpn-nl.premiumize.me vpn-pl.premiumize.me vpn-sg.premiumize.me vpn-us.premiumize.me"
+            CONFIG_MAP_DATA=""
+
+            for hostname in $VPN_HOSTNAMES; do
+              echo "Resolving hostname: $hostname"
+              IP_ADDRESS=$(dig +short $hostname | head -n1)
+
+              if [ -z "$IP_ADDRESS" ]; then
+                echo "Failed to resolve $hostname, trying again..."
+                sleep 5
+                IP_ADDRESS=$(dig +short $hostname | head -n1)
+                if [ -z "$IP_ADDRESS" ]; then
+                  echo "Still failed to resolve $hostname. Exiting."
+                  exit 1
+                fi
+              fi
+
+              echo "Resolved $hostname to $IP_ADDRESS"
+
+              # Read the template file and replace hostname with IP
+              TEMPLATE_FILE="/etc/openvpn/templates/${hostname}.ovpn.template"
+              if [ -f "$TEMPLATE_FILE" ]; then
+                ORIGINAL_OVPN_CONTENT=$(cat "$TEMPLATE_FILE")
+                UPDATED_OVPN_CONTENT=$(echo "$ORIGINAL_OVPN_CONTENT" | sed "s/remote $hostname 1194/remote $IP_ADDRESS 1194/")
+
+                # Add to ConfigMap data with proper YAML formatting
+                CONFIG_MAP_DATA="${CONFIG_MAP_DATA}  ${hostname}.ovpn: |\n"
+                CONFIG_MAP_DATA="${CONFIG_MAP_DATA}$(echo "$UPDATED_OVPN_CONTENT" | sed 's/^/    /')\n"
+              else
+                echo "Template file not found: $TEMPLATE_FILE"
+                ls -la /etc/openvpn/templates/
+              fi
+            done
+
+            # Generate the ConfigMap YAML
+            # Write the ConfigMap YAML header using echo -e and explicit \n for newlines
+            echo -e "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: resolved-vpn-configs\n  namespace: default\ndata:" > /tmp/resolved-vpn-configs.yaml
+            echo -e "$CONFIG_MAP_DATA" >> /tmp/resolved-vpn-configs.yaml
+
+            echo "Generated ConfigMap:"
+            cat /tmp/resolved-vpn-configs.yaml
+
+            # Note: kubectl is not available in this container
+            # The ConfigMap will need to be applied externally
+      volumeMounts:
+        - name: openvpn-templates
+          mountPath: /etc/openvpn/templates/
+      volumes:
+      - name: openvpn-templates
+        configMap:
+          name: openvpn-templates
+  backoffLimit: 4

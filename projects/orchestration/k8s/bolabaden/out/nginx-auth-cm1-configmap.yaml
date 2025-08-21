@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  .htpasswd: |
+    admin:$apr1$q87tRxUM$/QDabWcyIZUhTZ5kj/eT..
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: nginx-auth
+  name: nginx-auth-cm1

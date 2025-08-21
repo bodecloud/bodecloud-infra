@@ -1,0 +1,13 @@
+# check if there is at least one published port
+
+#! i2p-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: i2p-published
+    namespace: boden
+spec:
+    type: LoadBalancer
+
+# check if there is at least one published port

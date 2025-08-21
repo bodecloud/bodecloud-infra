@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.services.nginx-auth.loadbalancer.server.port: "80"
+  labels:
+    io.kompose.service: nginx-auth
+  name: nginx-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nginx-auth
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+        traefik.enable: "true"
+        traefik.http.services.nginx-auth.loadbalancer.server.port: "80"
+      labels:
+        io.kompose.service: nginx-auth
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1001"
+            - name: TZ
+              value: America/Chicago
+            - name: UMASK
+              value: "002"
+          image: nginx:alpine
+          livenessProbe:
+            exec:
+              command:
+                - wget -qO- http://127.0.0.1:80/health > /dev/null 2>&1 || exit 1
+            failureThreshold: 3
+            initialDelaySeconds: 20
+            periodSeconds: 30
+            timeoutSeconds: 10
+          name: nginx-auth
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/nginx/nginx.conf
+              name: nginx-auth-cm0
+              readOnly: true
+              subPath: nginx.conf
+            - mountPath: /etc/nginx/auth
+              name: nginx-auth-cm1
+              readOnly: true
+            - mountPath: /var/log/nginx
+              name: nginx-auth-cm3
+      hostname: nginx-auth
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+            name: nginx-auth-cm0
+          name: nginx-auth-cm0
+        - configMap:
+            name: nginx-auth-cm1
+          name: nginx-auth-cm1
+        - configMap:
+            name: nginx-auth-cm3
+          name: nginx-auth-cm3

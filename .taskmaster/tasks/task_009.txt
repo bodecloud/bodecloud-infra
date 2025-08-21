@@ -1,0 +1,39 @@
+# Task ID: 9
+# Title: Implement SEO and Analytics
+# Status: pending
+# Dependencies: 1, 2, 3
+# Priority: medium
+# Description: Set up comprehensive SEO optimization and analytics to track performance and improve visibility for technical keywords.
+# Details:
+1. Install and configure next-seo package
+2. Create SEO component with:
+   - Dynamic title and meta descriptions
+   - Open Graph and Twitter card metadata
+   - Canonical URLs
+   - JSON-LD structured data for projects and person
+3. Implement sitemap generation with next-sitemap (v4.1.8)
+4. Create robots.txt file
+5. Set up Google Analytics 4 with consent management
+6. Implement event tracking for key interactions
+7. Add schema.org markup for:
+   - Person
+   - WebSite
+   - SoftwareApplication (for projects)
+   - TechArticle (for infrastructure guides)
+8. Optimize for technical keywords related to skills
+9. Implement performance monitoring with web-vitals
+10. Create custom 404 page with helpful navigation
+11. Add meta tags for technical skills and specialties
+12. Implement SEO strategy for infrastructure guides with relevant technical keywords
+13. Create breadcrumb navigation for deep documentation pages
+
+# Test Strategy:
+1. Validate SEO metadata using tools like Lighthouse
+2. Test structured data with Google's Rich Results Test
+3. Verify analytics tracking is working correctly
+4. Test sitemap.xml generation
+5. Validate robots.txt configuration
+6. Test custom 404 page behavior
+7. Verify Core Web Vitals metrics
+8. Test TechArticle schema implementation for guides
+9. Verify breadcrumb navigation and structured data

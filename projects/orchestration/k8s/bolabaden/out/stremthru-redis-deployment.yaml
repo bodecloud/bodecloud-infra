@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.routers.stremthru-redis.middlewares: nginx-auth@file
+    traefik.http.routers.stremthru-redis.rule: Host(`stremthru-redis.bolabaden.org`) || Host(`stremthru-redis.bolabaden.duckdns.org`) || Host(`stremthru-redis.micklethefickle.duckdns.org`) || Host(`stremthru-redis.micklethefickle.bolabaden.org`) || Host(`stremthru-redis.micklethefickle.bolabaden.duckdns.org`)
+    traefik.http.services.stremthru-redis.loadbalancer.server.port: "6379"
+  labels:
+    io.kompose.service: stremthru-redis
+  name: stremthru-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: stremthru-redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+        traefik.enable: "true"
+        traefik.http.routers.stremthru-redis.middlewares: nginx-auth@file
+        traefik.http.routers.stremthru-redis.rule: Host(`stremthru-redis.bolabaden.org`) || Host(`stremthru-redis.bolabaden.duckdns.org`) || Host(`stremthru-redis.micklethefickle.duckdns.org`) || Host(`stremthru-redis.micklethefickle.bolabaden.org`) || Host(`stremthru-redis.micklethefickle.bolabaden.duckdns.org`)
+        traefik.http.services.stremthru-redis.loadbalancer.server.port: "6379"
+      labels:
+        io.kompose.service: stremthru-redis
+    spec:
+      containers:
+        - args:
+            - redis-server
+            - --appendonly
+            - "yes"
+            - --save
+            - "60"
+            - "1"
+          image: redis:latest
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            failureThreshold: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+          name: stremthru-redis
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: stremthru-redis-claim0
+      restartPolicy: Always
+      volumes:
+        - name: stremthru-redis-claim0
+          persistentVolumeClaim:
+            claimName: stremthru-redis-claim0

@@ -1,0 +1,939 @@
+{
+  "timestamp": "2025-08-12T00:33:00.099408",
+  "events": [
+    {
+      "timestamp": "2025-08-12T00:33:05.199971",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "starting_research",
+        "output": "\ud83d\udd0d Starting the research task for 'Help me plan an adventure to Hawaii'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:05.200783",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "agent_generated",
+        "output": "",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:05.202783",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83c\udf10 Browsing the web to learn more about the task: Help me plan an adventure to Hawaii...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:06.604339",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83e\udd14 Planning the research strategy and subtasks...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:08.821884",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subqueries",
+        "output": "\ud83d\uddc2\ufe0f I will conduct my research based on the following queries: ['Hawaii adventure activities 2025 helicopter tours jet ski parasailing', 'Hawaii island hopping itinerary adventurous activities secluded waterfalls', 'Best time to visit Hawaii for adventure sports August 2025', 'Hawaii adventure travel planning tips hidden gems local insights', 'Help me plan an adventure to Hawaii']...",
+        "metadata": [
+          "Hawaii adventure activities 2025 helicopter tours jet ski parasailing",
+          "Hawaii island hopping itinerary adventurous activities secluded waterfalls",
+          "Best time to visit Hawaii for adventure sports August 2025",
+          "Hawaii adventure travel planning tips hidden gems local insights",
+          "Help me plan an adventure to Hawaii"
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:08.823125",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Hawaii adventure activities 2025 helicopter tours jet ski parasailing'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.162076",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://gohawaiiwatersports.com/\n",
+        "metadata": "https://gohawaiiwatersports.com/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.162926",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.getyourguide.com/hawaii-l85/extreme-sports-adrenaline-tc85/\n",
+        "metadata": "https://www.getyourguide.com/hawaii-l85/extreme-sports-adrenaline-tc85/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.164302",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.yelp.com/search?find_desc=Adventure+Activities&find_loc=Honolulu%2C+HI\n",
+        "metadata": "https://www.yelp.com/search?find_desc=Adventure+Activities&find_loc=Honolulu%2C+HI"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.165323",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\n",
+        "metadata": "https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.166359",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.hawaiiactivities.com/en/hawaii/oahu/ctg/192287:value_combos/\n",
+        "metadata": "https://www.hawaiiactivities.com/en/hawaii/oahu/ctg/192287:value_combos/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.167060",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.hawaiitours.com/to-do/jet-ski-parasail-combo/\n",
+        "metadata": "https://www.hawaiitours.com/to-do/jet-ski-parasail-combo/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.168096",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.hawaiitours.com/all-activities/\n",
+        "metadata": "https://www.hawaiitours.com/all-activities/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.169310",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:10.170609",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:11.922327",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:11.923405",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 1 new images from 1 total images",
+        "metadata": [
+          {
+            "url": "https://gohawaiiwatersports.com/wp-content/plugins/revslider/public/assets/assets/dummy.png",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:11.924716",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:11.925943",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Hawaii adventure activities 2025 helicopter tours jet ski parasailing (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:12.085489",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Hawaii island hopping itinerary adventurous activities secluded waterfalls'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.393981",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://apassionandapassport.com/hawaii-island-hopping-itinerary-10-days/\n",
+        "metadata": "https://apassionandapassport.com/hawaii-island-hopping-itinerary-10-days/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.395248",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/\n",
+        "metadata": "https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.397071",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://thehawaiivacationguide.com/activities/big-island-waterfall-tour/\n",
+        "metadata": "https://thehawaiivacationguide.com/activities/big-island-waterfall-tour/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.398250",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://uncruise.com/blogs/hawaii/island-bliss-dive-into-the-ultimate-hawaii-island-hopping-cruise-adventure\n",
+        "metadata": "https://uncruise.com/blogs/hawaii/island-bliss-dive-into-the-ultimate-hawaii-island-hopping-cruise-adventure"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.399889",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.getyourguide.com/island-of-hawaii-l661/waterfalls-tours-tc2079/\n",
+        "metadata": "https://www.getyourguide.com/island-of-hawaii-l661/waterfalls-tours-tc2079/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.404265",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.outrigger.com/stories/2024/november/island-hopping-in-hawaii-your-itinerary-for-adventure-culture-and-relaxation\n",
+        "metadata": "https://www.outrigger.com/stories/2024/november/island-hopping-in-hawaii-your-itinerary-for-adventure-culture-and-relaxation"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.405574",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.guidedbydestiny.com/2-weeks-in-hawaii-island-hopping/\n",
+        "metadata": "https://www.guidedbydestiny.com/2-weeks-in-hawaii-island-hopping/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.406631",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:15.408081",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:16.889408",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 7 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:16.891969",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 4 new images from 30 total images",
+        "metadata": [
+          {
+            "url": "https://apassionandapassport.com/wp-content/uploads/2019/11/22.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://apassionandapassport.com/wp-content/uploads/2019/09/kauai-hawaii-159-750x1125.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://apassionandapassport.com/wp-content/uploads/2025/02/oahu-hawaii-2-750x1000.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://apassionandapassport.com/wp-content/uploads/2025/02/oahu-hawaii-1-750x1000.jpg",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:16.893577",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:16.895093",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Hawaii island hopping itinerary adventurous activities secluded waterfalls (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:17.013257",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Best time to visit Hawaii for adventure sports August 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.208009",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.esim4.com/blog/best-time-to-visit-hawaii/?srsltid=AfmBOooKp8yQ73yhBpmJEQPsGixX2N-7A3Fv8eKjmfQxv3T3iGI9yhg4\n",
+        "metadata": "https://www.esim4.com/blog/best-time-to-visit-hawaii/?srsltid=AfmBOooKp8yQ73yhBpmJEQPsGixX2N-7A3Fv8eKjmfQxv3T3iGI9yhg4"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.211958",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://thehawaiivacationguide.com/best-time-to-visit-hawaii/\n",
+        "metadata": "https://thehawaiivacationguide.com/best-time-to-visit-hawaii/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.274745",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.sno.com/holidays/usa/hawaii/best-time-to-visit/\n",
+        "metadata": "https://www.sno.com/holidays/usa/hawaii/best-time-to-visit/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.284902",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\n",
+        "metadata": "https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.287722",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.tripadvisor.com/ShowTopic-g28932-i36-k14917487-Help_Hawaii_August_2025-Hawaii.html\n",
+        "metadata": "https://www.tripadvisor.com/ShowTopic-g28932-i36-k14917487-Help_Hawaii_August_2025-Hawaii.html"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.290253",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.enchantingtravels.com/destinations/north-america/hawaii/best-time-to-visit-hawaii/\n",
+        "metadata": "https://www.enchantingtravels.com/destinations/north-america/hawaii/best-time-to-visit-hawaii/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.291980",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.hawaii-guide.com/best-time-to-visit-hawaii?srsltid=AfmBOorr6cVLba89HJl3cIL0iaRMaLuJeTAsY28p3aefL4sF768_Ijo6\n",
+        "metadata": "https://www.hawaii-guide.com/best-time-to-visit-hawaii?srsltid=AfmBOorr6cVLba89HJl3cIL0iaRMaLuJeTAsY28p3aefL4sF768_Ijo6"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.293739",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:19.295752",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:21.100600",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:21.102083",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 4 new images from 21 total images",
+        "metadata": [
+          {
+            "url": "https://res.cloudinary.com/enchanting/q_auto:best,f_auto,c_fit,w_800,h_800/enchanting-web/2020/09/Kii-Puuhonua-O-Honaunau-National-Park-on-the-Big-Island-of-Hawaii.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://res.cloudinary.com/enchanting/q_auto:best,f_auto,c_fit,w_800,h_800/enchanting-web/2020/09/Shave-ice-hawaiian-shaved-ice-dessert-Close-up-of-traditional-local-Hawaii-dessert-food.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://res.cloudinary.com/enchanting/q_auto:best,f_auto,c_fit,w_800,h_800/enchanting-web/2020/09/Stairway-to-Heaven-Haiku-Stairs-Hawaii-Oahu-USA.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://res.cloudinary.com/enchanting/q_70,f_auto,w_800,h_800,c_fill,g_face/enchanting-web/2023/09/A-humpback-whale-off-the-coast-of-Maui-in-Hawaii-1-1.jpg",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:21.103789",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:21.105272",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Best time to visit Hawaii for adventure sports August 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:21.290517",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Hawaii adventure travel planning tips hidden gems local insights'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:22.991780",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.amazon.com/Hawaii-travel-guide-2025-Adventures/dp/B0F79C4YXR\n",
+        "metadata": "https://www.amazon.com/Hawaii-travel-guide-2025-Adventures/dp/B0F79C4YXR"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:22.993938",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.lemon8-app.com/@markscrazyadventure/7459831504097641002?region=us\n",
+        "metadata": "https://www.lemon8-app.com/@markscrazyadventure/7459831504097641002?region=us"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:22.995815",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.facebook.com/groups/3234576939938065/\n",
+        "metadata": "https://www.facebook.com/groups/3234576939938065/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:22.997707",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.amazon.com/Hawaii-Travel-Guides-Harrison-Walshaw-US/s?rh=n%3A17313%2Cp_lbr_one_browse-bin%3AHarrison%2BWalshaw\n",
+        "metadata": "https://www.amazon.com/Hawaii-Travel-Guides-Harrison-Walshaw-US/s?rh=n%3A17313%2Cp_lbr_one_browse-bin%3AHarrison%2BWalshaw"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:22.999436",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.lemon8-app.com/@christybarre/7527097557467251230?region=us\n",
+        "metadata": "https://www.lemon8-app.com/@christybarre/7527097557467251230?region=us"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:23.001253",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.thisweekhawaii.com/hawaii-travel-tips-guides\n",
+        "metadata": "https://www.thisweekhawaii.com/hawaii-travel-tips-guides"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:23.003092",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618\n",
+        "metadata": "https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:23.004980",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:23.006841",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:24.930297",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:24.932214",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:24.934146",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:24.936082",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Hawaii adventure travel planning tips hidden gems local insights (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:25.050334",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Help me plan an adventure to Hawaii'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:26.659968",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/VisitingHawaii/comments/1ilvh2r/planning_hawaii_trip/\n",
+        "metadata": "https://www.reddit.com/r/VisitingHawaii/comments/1ilvh2r/planning_hawaii_trip/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:26.661519",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/c/TheHawaiiVacationGuide\n",
+        "metadata": "https://www.youtube.com/c/TheHawaiiVacationGuide"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:26.663421",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://thehawaiivacationguide.com/\n",
+        "metadata": "https://thehawaiivacationguide.com/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:26.665080",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://vacationmavens.com/hawaii-trip/\n",
+        "metadata": "https://vacationmavens.com/hawaii-trip/"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:26.666961",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.tripadvisor.com/ShowTopic-g28932-i36-k14712948-Just_starting_to_plan_Hawaiian_vacation_help-Hawaii.html\n",
+        "metadata": "https://www.tripadvisor.com/ShowTopic-g28932-i36-k14712948-Just_starting_to_plan_Hawaiian_vacation_help-Hawaii.html"
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:26.668647",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:26.670233",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 5 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:27.207584",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 3 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:27.209237",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 4 new images from 10 total images",
+        "metadata": [
+          {
+            "url": "https://thehawaiivacationguide.com/wp-content/uploads/2022/07/Meet-Jordan-Erica-TheHawaiiVacationGuide.com-1.png",
+            "score": 2
+          },
+          {
+            "url": "https://thehawaiivacationguide.com/wp-content/uploads/2021/11/The-Hawaii-Vacation-Guide-Itinerary-Oahu-1200x1200.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://thehawaiivacationguide.com/wp-content/uploads/2021/11/The-Hawaii-Vacation-Guide-Itinerary-Maui-1200x1200.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://thehawaiivacationguide.com/wp-content/uploads/2021/11/The-Hawaii-Vacation-Guide-Itinerary-Big-Island-1200x1200.jpg",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:27.211071",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:27.212943",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Help me plan an adventure to Hawaii (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:27.245383",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay Join H2O Sports on Hawaii's best Jet Ski and Parasail adventure tour. Get two thrilling Oahu ocean activities for one great price! Play at the protected and beautiful waters of Maunalua Bay and enjoy beautiful views of Koko Head & Ko\u2019olau Mountains. Hawaii Oahu Watersports & Ocean Adventures Parasailing Tours Activity Detail Page Top\n\nSource: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: Water Sports Adventures Unforgettable Turtle Snorkeling Adventures from Waikiki! Dolphins Watching Experiences & Snorkel Tours from Ko Olina! Embrace the Aloha Spirit: Connect with Hawaiian Culture Exploring History: A Memorable Day at Pearl Harbor Get Around Oahu: Best Island Tours with Local Guides Island Hopping: One-Day Getaways to Kauai, Maui & Big Island Only in Hawaii! Discover Hidden Gems & Unique Experiences Indoor Activities and Tours Book Early! Secure Your Spot at the Hottest Attractions! Uncover Honolulu's Exciting Nightlife: Music, Food & Fun! Great Value! Tours with Complimentary Meals Discover the best Adventure Parks in Hawaii Parasailing Tours other tours and activities Hawaiian Parasailing Tour & Adventure from Waikiki Beach [800ft & 1000ft Lines] From USD 83.87 (2158) H2O Hawaii Watersports Adventure - Parasail, Jet Ski, Banana Boat & Bumper Tube USD 198.95 (46) Waikiki Parasailing Hawaii Tour Adventure [600ft, 800ft & 1000ft lines] From USD 85.53 (12) H2O Sports\n\nSource: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: Water Sports Adventures Unforgettable Turtle Snorkeling Adventures from Waikiki! Dolphins Watching Experiences & Snorkel Tours from Ko Olina! Embrace the Aloha Spirit: Connect with Hawaiian Culture Exploring History: A Memorable Day at Pearl Harbor Get Around Oahu: Best Island Tours with Local Guides Island Hopping: One-Day Getaways to Kauai, Maui & Big Island Only in Hawaii! Discover Hidden Gems & Unique Experiences Indoor Activities and Tours Book Early! Secure Your Spot at the Hottest Attractions! Uncover Honolulu's Exciting Nightlife: Music, Food & Fun! Great Value! Tours with Complimentary Meals Discover the best Adventure Parks in Hawaii Parasailing Tours other tours and activities Hawaiian Parasailing Tour & Adventure from Waikiki Beach [800ft & 1000ft Lines] From USD 83.87 (2158) H2O Hawaii Watersports Adventure - Parasail, Jet Ski, Banana Boat & Bumper Tube USD 198.95 (46) Waikiki Parasailing Hawaii Tour Adventure [600ft, 800ft & 1000ft lines] From USD 85.53 (12) H2O Sports\n\nSource: https://gohawaiiwatersports.com/\nTitle: Go Hawaii Watersports \u2013 Parasailing and Water Activities in Honolulu, Hawaii. Call (808) 582-9386\nContent: 5 Quality5Location5Amenities5Services5Price5 19 Parasailing From $80.00 Whale Watching tour is coming back on December 15, 2025. \u26f5 Embark on a Hawaiian Adventure! \ud83e\ude82 Book Your Dream Tour Today Book Your Tour Now Customer Reviews Rated 4.9 out of 5 stars based on 829 customer reviews Adventure67941144655 Recommend! Very Fun! sunset and fireworks were amazing. Friendly crew on board. I booked this while traveling solo in Hawaii. Definitely recommend. \u2013 8/09/2025 Jiacheng C Very good experience. The experience is very good and memorable. Captain Daniel and Cameraman Nick are very friendly. I would go with them if I wanna do activities again. \u2013 8/09/2025 Karen Leung Thank you Whitney and Dinello! We had such a wonderful time and they made it memorable for us. Super easy, relaxing and soooo much fun!!! Honestly, even my 9 year old girl loved it! I wish we were up there longer\u2026 What a beautiful view and we also purchased their photo service. Can\u2019t wait to check those out! \u2013 8/08/2025\n\nSource: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: Search Activities OahuParasailing Tours\n\nSource: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: Categories OahuParasailing Tours Search Activities OahuParasailing Tours Currently Viewing Watersports & Ocean Adventures (74) Parasailing Tours (9) Jet Ski (4) Surfing Lessons & Wave Pools (9) Stand Up Paddle Rental & Lessons (14) Kayaking Tours & Canoe Paddling (14) Scuba Diving (13) Underwater Scooter (4) Watersports Adventures (43) Most Popular Top Oahu Sights & Attractions (288) Luau, Shows & Events (26) Snorkeling Cruises & Tours (51) Kaneohe Sandbar Tours & Cruises / Hanauma Bay Snorkeling Tours / Turtle Snorkeling Cruises & Tours / Snorkel Gear Rental & Beach Shuttle / Speed Boat & Ocean Raft Adventure Helicopter & Airplane Tours (14) Helicopter Sightseeing Tours / Doors-Off Helicopter Flights / Airplane Tours / Skydiving Hawaii & Air Adventures Sunset Cruises (64) Sunset Cocktail Cruises / Sunset Dinner Cruises / Private Sunset Cruises Other Interests Outdoor Adventures (76) ATV Tours & Off-Road Adventures / Zipline & Climbing Adventures / Horseback Riding Tours / Hiking\n\nSource: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay\nJoin H2O Sports on Hawaii's best Jet Ski and Parasail adventure tour. Get two thrilling Oahu ocean activities for one great price! Play at the protected and beautiful waters of Maunalua Bay and enjoy beautiful views of Koko Head & Ko\u2019olau Mountains.\nHawaii Oahu Watersports & Ocean Adventures Parasailing Tours Activity Detail\nWatersports & Ocean Adventures\n\nSource: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: Search Activities OahuParasailing Tours Currently Viewing Watersports & Ocean Adventures (74) Parasailing Tours (9) Jet Ski (4) Surfing Lessons & Wave Pools (9) Stand Up Paddle Rental & Lessons (14) Kayaking Tours & Canoe Paddling (14) Scuba Diving (13) Underwater Scooter (4) Watersports Adventures (43) Most Popular Top Oahu Sights & Attractions (288) Luau, Shows & Events (26) Snorkeling Cruises & Tours (51) Kaneohe Sandbar Tours & Cruises / Hanauma Bay Snorkeling Tours / Turtle Snorkeling Cruises & Tours / Snorkel Gear Rental & Beach Shuttle / Speed Boat & Ocean Raft Adventure Helicopter & Airplane Tours (14) Helicopter Sightseeing Tours / Doors-Off Helicopter Flights / Airplane Tours / Skydiving Hawaii & Air Adventures Sunset Cruises (64) Sunset Cocktail Cruises / Sunset Dinner Cruises / Private Sunset Cruises Other Interests Outdoor Adventures (76) ATV Tours & Off-Road Adventures / Zipline & Climbing Adventures / Horseback Riding Tours / Hiking Tours / Bicycle Tours & Electric\n\nSource: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: - 3.5 hour(s) Available Weekday Pick-up not available Not Accessible 8414 50112 Coupons Share this experience Facebook Twitter LINE Email What to expect Join H2O Sports on Hawaii's best Jet Ski and Parasail adventure tour. Get two thrilling Oahu ocean activities for one great price! Play at the protected and beautiful waters of Maunalua Bay and enjoy beautiful views of Koko Head & Ko\u2019olau Mountains. View details Embark on two of East Oahu's most exciting offerings, jet skiing and parasailing in Hawaii Kai's Maunalua Bay, between Diamond Head and Koko Head! Soar through the island skies as the cool and calm breeze rustles your hair. Pick your desired line length\u2014either a standard 600 ft parasail or 800 ft for high-flyers. Each parasailing group is kept small to ensure maximum comfort and fun aboard the boat. After your flight, rent a jet ski for an exhilarating 30-minute solo or tandem thrill ride on the state-of-the-art Yamaha 1200 series Waverunner Jet Ski in Hawaii Kai! This\n\nSource: https://www.hawaiiactivities.com/en/hawaii/oahu/a/8414\nTitle: Parasail Hawaii Tour & Jet Ski Ride Watersports Adventure Combo at Maunalua Bay tours, activities, fun things to do in Oahu(Hawaii)\uff5cVELTRA\nContent: Highlights Save money by bundling your parasailing tour and jet ski ride! Enjoy a thrilling parasail adventure and soar above Maunalua Bay. Fly up to 600\u2032 or 800\u2032! Speed around Maunalua Bay on a 30-min Jet Ski ride (Yamaha VX110) Great photo opportunities of the Hawai\u2019i Kai coastline, Koko Head & Ko\u2019olau Mountain Range Available Mon-Fri. Departs from Hawai\u2019i Kai Shopping Center, near Hanauma Bay View details Awesome adventure with local business 2024/08/24 Families with Young Children Al This was an amazing adventure to do with the whole family, and the host were great Read all 50 reviews Read all 50 reviews Overview Oahu 3 - 3.5 hour(s) Available Weekday Pick-up not available Not Accessible\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:27.248573",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/\nTitle: Waterfall  Tour Adventures | Book Big Island Tours, Activities & Things to Do with HawaiiActivities.com\nContent: Outdoor AdventuresWaterfall Tour Adventures 4.75 (114) The arid, volcanic landscape of the west side of the Big Island exists in contrast to the lush, green eastern side, where waterfalls plunge off sea cliffs and flow through lush valleys. See famous waterfalls such as stunning Rainbow Falls, majestic Akaka, or towering Hiilawe. These waterfall tours are the best way for you to see the beauty of the Hilo side, whether you're exploring Waipio Valley, doing a nature walk, or flying to a secluded pool via helicopter. ... More Close You can only add up to 10 items in the list. Please reduce items in the list. Close Top-Rated Activities for Big Island 1 Dolphin Quest Hawaii - Dolphin Swim & Encounter at Hilton Waikoloa Village From USD 240.84 (51) 2 Legends of Hawaii Luau Dinner Show with Open Bar at Hilton Waikoloa Village From USD 225.13 (109) 3 Waipio Shuttle - An Exceptional Guided Sightseeing Tour of Waipio Valley USD 75.39 (95) 4 Mauna Kea Summit Sunset & Stargazing Tour with Meal,\n\nSource: https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/\nTitle: Waterfall  Tour Adventures | Book Big Island Tours, Activities & Things to Do with HawaiiActivities.com\nContent: Outdoor AdventuresWaterfall Tour Adventures 4.75 (114) The arid, volcanic landscape of the west side of the Big Island exists in contrast to the lush, green eastern side, where waterfalls plunge off sea cliffs and flow through lush valleys. See famous waterfalls such as stunning Rainbow Falls, majestic Akaka, or towering Hiilawe. These waterfall tours are the best way for you to see the beauty of the Hilo side, whether you're exploring Waipio Valley, doing a nature walk, or flying to a secluded pool via helicopter. ... More Close You can only add up to 10 items in the list. Please reduce items in the list. Close Top-Rated Activities for Big Island 1 Dolphin Quest Hawaii - Dolphin Swim & Encounter at Hilton Waikoloa Village From USD 240.84 (51) 2 Legends of Hawaii Luau Dinner Show with Open Bar at Hilton Waikoloa Village From USD 225.13 (109) 3 Waipio Shuttle - An Exceptional Guided Sightseeing Tour of Waipio Valley USD 75.39 (95) 4 Mauna Kea Summit Sunset & Stargazing Tour with Meal,\n\nSource: https://uncruise.com/blogs/hawaii/island-bliss-dive-into-the-ultimate-hawaii-island-hopping-cruise-adventure\nTitle: \n      Island Bliss: Dive into the Ultimate Hawaii Island Hopping Cruise Adve\n \u2013 UnCruise Adventures \nContent: stroke brings a new vista into view. Experience the beauty of the island from the water and get up close to its stunning coastline. Water Sports and Underwater Marvels The water sports don't end with kayaking. Cruise along and take a crack at snorkeling or stand-up paddle boarding. Dive into the crystal-clear waters and discover Hawaii's underwater marvels. Exploring Hidden Waterfalls The magic isn\u2019t confined to the water alone. Join thrilling hikes through lush forests and uncover hidden waterfalls that tumble from great heights. Witness nature's grand performance as you explore these breathtaking natural wonders. Immersing in Local Customs These shore excursions not only offer stunning sights but also provide opportunities to immerse yourself in local customs. Learn about traditional fishing methods, savor freshly prepared poke bowls, and get a taste of authentic Hawaii. Unforgettable Experiences on Lanai and Other Islands When it comes to Hawaiian island hopping, venturing beyond\n\nSource: https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/\nTitle: Waterfall  Tour Adventures | Book Big Island Tours, Activities & Things to Do with HawaiiActivities.com\nContent: Outdoor AdventuresWaterfall Tour Adventures 4.75 (114) The arid, volcanic landscape of the west side of the Big Island exists in contrast to the lush, green eastern side, where waterfalls plunge off sea cliffs and flow through lush valleys. See famous waterfalls such as stunning Rainbow Falls, majestic Akaka, or towering Hiilawe. These waterfall tours are the best way for you to see the beauty of the Hilo side, whether you're exploring Waipio Valley, doing a nature walk, or flying to a secluded pool via helicopter. ... More Close\nWaterfall Tour Adventures\n\nSource: https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/\nTitle: Waterfall  Tour Adventures | Book Big Island Tours, Activities & Things to Do with HawaiiActivities.com\nContent: Outdoor AdventuresWaterfall Tour Adventures 4.75 (114) The arid, volcanic landscape of the west side of the Big Island exists in contrast to the lush, green eastern side, where waterfalls plunge off sea cliffs and flow through lush valleys. See famous waterfalls such as stunning Rainbow Falls, majestic Akaka, or towering Hiilawe. These waterfall tours are the best way for you to see the beauty of the Hilo side, whether you're exploring Waipio Valley, doing a nature walk, or flying to a secluded pool via helicopter. ... More Close\n\nSource: https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/\nTitle: Waterfall  Tour Adventures | Book Big Island Tours, Activities & Things to Do with HawaiiActivities.com\nContent: Outdoor AdventuresWaterfall Tour Adventures 4.75 (114) The arid, volcanic landscape of the west side of the Big Island exists in contrast to the lush, green eastern side, where waterfalls plunge off sea cliffs and flow through lush valleys. See famous waterfalls such as stunning Rainbow Falls, majestic Akaka, or towering Hiilawe. These waterfall tours are the best way for you to see the beauty of the Hilo side, whether you're exploring Waipio Valley, doing a nature walk, or flying to a secluded pool via helicopter. ... More Close\n\nSource: https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/\nTitle: Waterfall  Tour Adventures | Book Big Island Tours, Activities & Things to Do with HawaiiActivities.com\nContent: Outdoor AdventuresWaterfall Tour Adventures 4.75 (114) The arid, volcanic landscape of the west side of the Big Island exists in contrast to the lush, green eastern side, where waterfalls plunge off sea cliffs and flow through lush valleys. See famous waterfalls such as stunning Rainbow Falls, majestic Akaka, or towering Hiilawe. These waterfall tours are the best way for you to see the beauty of the Hilo side, whether you're exploring Waipio Valley, doing a nature walk, or flying to a secluded pool via helicopter. ... More Close\n\nSource: https://www.hawaiiactivities.com/en/hawaii/big_island/ctg/192114:hawaii_waterfall_swim_adventures/\nTitle: Waterfall  Tour Adventures | Book Big Island Tours, Activities & Things to Do with HawaiiActivities.com\nContent: Outdoor AdventuresWaterfall Tour Adventures 4.75 (114) The arid, volcanic landscape of the west side of the Big Island exists in contrast to the lush, green eastern side, where waterfalls plunge off sea cliffs and flow through lush valleys. See famous waterfalls such as stunning Rainbow Falls, majestic Akaka, or towering Hiilawe. These waterfall tours are the best way for you to see the beauty of the Hilo side, whether you're exploring Waipio Valley, doing a nature walk, or flying to a secluded pool via helicopter. ... More Close\n\nSource: https://thehawaiivacationguide.com/activities/big-island-waterfall-tour/\nTitle: Big Island Waterfalls Adventure Guided Tour - The Hawaii Vacation Guide\nContent: Skip to content Search Start Here Island GuidesExpand Oahu Travel Guide Maui Travel Guide Hawai\u2019i (Big Island) Travel Guide Kauai Travel Guide Hawaii Cruise Travel Guide Book Tours Where to Stay Planning ResourcesExpand Free Island Cheat Sheets How We Book Travel Discount Car Rentals Planning Your Trip Top Travel Gear Best Travel Cards Shop Itineraries Shopping Cart 0 Search Toggle Menu Home \u00bb Activities Guided Tour Hawai'i Big Island Activities Waterfall Swim Big Island Waterfalls Adventure Guided Tour See the island, swim beneath a 120 foot waterfall, and meander through incredibly beautiful scenery on this Big Island waterfall tour. Everything is taken care of for you on this tour from pickup and drop off at your hotel, to snacks and lunch, to the permits for your waterfall swim. Just kick back and let the guides do the work. Disclosure: This post may contain affiliate links, meaning if you decide to make a purchase through my links we may earn a commission at no additional cost to\n\nSource: https://apassionandapassport.com/hawaii-island-hopping-itinerary-10-days/\nTitle: Island Hopping in Hawaii: Planning an Epic 10-Day Hawaii Itinerary\nContent: 9. Wailua River Kayak and Secret Falls: For those who crave a bit of adventure and epic exploration, the unforgettable trek towards secrets falls will keep you captivated. While on your voyage, you\u2019ll paddle through the sacred Wailua River Valley by kayak, and hike along dirt paths while surrounded by tropical wildlife.\nFor those who crave a bit of adventure and epic exploration, the unforgettable trek towards secrets falls will keep you captivated. While on your voyage, you\u2019ll paddle through the sacred Wailua River Valley by kayak, and hike along dirt paths while surrounded by tropical wildlife.\nSecret Falls itself is a magical lagoon stolen straight out of a fairy tale, where you can soak in the crystal water and be blown away by one of the monumental waterfalls on the island.\nSecret Falls itself is a magical lagoon stolen straight out of a fairy tale, where you can soak in the crystal water and be blown away by one of the monumental waterfalls on the island.\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:28.457738",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://www.lemon8-app.com/@christybarre/7527097557467251230?region=us\nTitle: Plan Your Ultimate Trip to Hawaii: Adventure, Travel Tips & Inspiration\nContent: local eateries, off-the-beaten-path attractions, and packing essentials for island adventures. An essential aspect of planning includes arranging accommodations that fit your travel style\u2014whether it\u2019s luxury resorts, cozy cottages, or budget-friendly hostels\u2014and securing transportation like rental cars for island hopping. Moreover, responsible travel practices are paramount to preserving Hawaii\u2019s natural beauty, so visitors are encouraged to follow guidelines that protect coral reefs and wildlife. With the rise of social media travel communities, sharing your journey and gaining insights from other travelers can enrich the overall experience. For anyone thinking, 'The person who sent you this wants to plan a trip to Hawaii with you,' now is the perfect time to turn that dream into reality by preparing an itinerary full of adventure, culture, and unforgettable moments.\n\nSource: https://www.lemon8-app.com/@christybarre/7527097557467251230?region=us\nTitle: Plan Your Ultimate Trip to Hawaii: Adventure, Travel Tips & Inspiration\nContent: local eateries, off-the-beaten-path attractions, and packing essentials for island adventures. An essential aspect of planning includes arranging accommodations that fit your travel style\u2014whether it\u2019s luxury resorts, cozy cottages, or budget-friendly hostels\u2014and securing transportation like rental cars for island hopping. Moreover, responsible travel practices are paramount to preserving Hawaii\u2019s natural beauty, so visitors are encouraged to follow guidelines that protect coral reefs and wildlife. With the rise of social media travel communities, sharing your journey and gaining insights from other travelers can enrich the overall experience. For anyone thinking, 'The person who sent you this wants to plan a trip to Hawaii with you,' now is the perfect time to turn that dream into reality by preparing an itinerary full of adventure, culture, and unforgettable moments.\n\nSource: https://www.lemon8-app.com/@christybarre/7527097557467251230?region=us\nTitle: Plan Your Ultimate Trip to Hawaii: Adventure, Travel Tips & Inspiration\nContent: local eateries, off-the-beaten-path attractions, and packing essentials for island adventures. An essential aspect of planning includes arranging accommodations that fit your travel style\u2014whether it\u2019s luxury resorts, cozy cottages, or budget-friendly hostels\u2014and securing transportation like rental cars for island hopping. Moreover, responsible travel practices are paramount to preserving Hawaii\u2019s natural beauty, so visitors are encouraged to follow guidelines that protect coral reefs and wildlife. With the rise of social media travel communities, sharing your journey and gaining insights from other travelers can enrich the overall experience. For anyone thinking, 'The person who sent you this wants to plan a trip to Hawaii with you,' now is the perfect time to turn that dream into reality by preparing an itinerary full of adventure, culture, and unforgettable moments.\n\nSource: https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618\nTitle: Hawaii's Best | Travel Tips and Things to Do in Hawaii for Your Hawaii Vacation - Podcast - Apple Podcasts\nContent: you\u00e2\u0080\u0099re planning a vacation to the Hawaiian islands, dreaming of a Hawaiian getaway, or visiting Honolulu, Maui, Kauai, Oahu, or Big Island we\u00e2\u0080\u0099ll help you travel with aloha. Edge of the Ocean, Stick Figure (w/ permission) Ukulele and Chill, Coby G (w/ permission) 14 min JUL 31 Skip These Hawaii Tourist Traps: Travelers Share What\u00e2\u0080\u0099s Not Worth It Ever found yourself stuck in a long line at a Hawaii \u00e2\u0080\u009cmust-see\u00e2\u0080\u009d and wondered if you\u00e2\u0080\u0099re missing out on the real magic of the islands? For many travelers, Hawaii\u00e2\u0080\u0099s top attractions seem like a dream come true, but beneath the hype, it\u00e2\u0080\u0099s easy to get caught up in crowded spots and miss what makes the islands special. \u00f0\u009f\u0091\u0089 Unlock exclusive travel tips and bonus content\u00e2\u0080\u0094join Hawaii\u00e2\u0080\u0099s Best Premium today! If you want to skip the overrated and discover the authentic side of Hawaii, this episode is for you. Hear the most common mistakes visitors make and find out which tourist traps you can confidently avoid\u00e2\u0080\u0094so you can spend more time\n\nSource: https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618\nTitle: Hawaii's Best | Travel Tips and Things to Do in Hawaii for Your Hawaii Vacation - Podcast - Apple Podcasts\nContent: you\u00e2\u0080\u0099re planning a vacation to the Hawaiian islands, dreaming of a Hawaiian getaway, or visiting Honolulu, Maui, Kauai, Oahu, or Big Island we\u00e2\u0080\u0099ll help you travel with aloha. Edge of the Ocean, Stick Figure (w/ permission) Ukulele and Chill, Coby G (w/ permission) 14 min JUL 31 Skip These Hawaii Tourist Traps: Travelers Share What\u00e2\u0080\u0099s Not Worth It Ever found yourself stuck in a long line at a Hawaii \u00e2\u0080\u009cmust-see\u00e2\u0080\u009d and wondered if you\u00e2\u0080\u0099re missing out on the real magic of the islands? For many travelers, Hawaii\u00e2\u0080\u0099s top attractions seem like a dream come true, but beneath the hype, it\u00e2\u0080\u0099s easy to get caught up in crowded spots and miss what makes the islands special. \u00f0\u009f\u0091\u0089 Unlock exclusive travel tips and bonus content\u00e2\u0080\u0094join Hawaii\u00e2\u0080\u0099s Best Premium today! If you want to skip the overrated and discover the authentic side of Hawaii, this episode is for you. Hear the most common mistakes visitors make and find out which tourist traps you can confidently avoid\u00e2\u0080\u0094so you can spend more time\n\nSource: https://www.lemon8-app.com/@christybarre/7527097557467251230?region=us\nTitle: Plan Your Ultimate Trip to Hawaii: Adventure, Travel Tips & Inspiration\nContent: off-the-beaten-path attractions, and packing essentials for island adventures. An essential aspect of planning includes arranging accommodations that fit your travel style\u2014whether it\u2019s luxury resorts, cozy cottages, or budget-friendly hostels\u2014and securing transportation like rental cars for island hopping. Moreover, responsible travel practices are paramount to preserving Hawaii\u2019s natural beauty, so visitors are encouraged to follow guidelines that protect coral reefs and wildlife. With the rise of social media travel communities, sharing your journey and gaining insights from other travelers can enrich the overall experience. For anyone thinking, 'The person who sent you this wants to plan a trip to Hawaii with you,' now is the perfect time to turn that dream into reality by preparing an itinerary full of adventure, culture, and unforgettable moments.\n\nSource: https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618\nTitle: Hawaii's Best | Travel Tips and Things to Do in Hawaii for Your Hawaii Vacation - Podcast - Apple Podcasts\nContent: surprising facts about Hawaii that reveal the hidden truths most visitors never discover, from the world's tallest mountain to phenomena that happen nowhere else in America. This episode uncovers essential travel insights about Hawaii's unique microclimates, geography, and cultural heritage that could completely change how you pack and plan your island getaway. Become a member to listen to this and so many more: hawaiisbesttravel.com/members Support the show \u00f0\u009f\u00a4\u0099Become a Premium Member \u00e2\u008e\u00af \u00f0\u009f\u0093\u00b2Connect Facebook Group Business Sponsor Inquiry (let's work together!) \u00e2\u008e\u00af This podcast is for travelers looking to plan a trip to Hawaii. Discover travel tips, itineraries, and traveling tips & hacks with guides to help you explore Hawaii. Whether you\u00e2\u0080\u0099re planning a vacation to the Hawaiian islands, dreaming of a Hawaiian getaway, or visiting Honolulu, Maui, Kauai, Oahu, or Big Island we\u00e2\u0080\u0099ll help you travel with aloha. Edge of the Ocean, Stick Figure (w/ permission) Ukulele and Chill, Coby G\n\nSource: https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618\nTitle: Hawaii's Best | Travel Tips and Things to Do in Hawaii for Your Hawaii Vacation - Podcast - Apple Podcasts\nContent: surprising facts about Hawaii that reveal the hidden truths most visitors never discover, from the world's tallest mountain to phenomena that happen nowhere else in America. This episode uncovers essential travel insights about Hawaii's unique microclimates, geography, and cultural heritage that could completely change how you pack and plan your island getaway. Become a member to listen to this and so many more: hawaiisbesttravel.com/members Support the show \u00f0\u009f\u00a4\u0099Become a Premium Member \u00e2\u008e\u00af \u00f0\u009f\u0093\u00b2Connect Facebook Group Business Sponsor Inquiry (let's work together!) \u00e2\u008e\u00af This podcast is for travelers looking to plan a trip to Hawaii. Discover travel tips, itineraries, and traveling tips & hacks with guides to help you explore Hawaii. Whether you\u00e2\u0080\u0099re planning a vacation to the Hawaiian islands, dreaming of a Hawaiian getaway, or visiting Honolulu, Maui, Kauai, Oahu, or Big Island we\u00e2\u0080\u0099ll help you travel with aloha. Edge of the Ocean, Stick Figure (w/ permission) Ukulele and Chill, Coby G\n\nSource: https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618\nTitle: Hawaii's Best | Travel Tips and Things to Do in Hawaii for Your Hawaii Vacation - Podcast - Apple Podcasts\nContent: make and find out which tourist traps you can confidently avoid\u00e2\u0080\u0094so you can spend more time making real memories. In this episode of Hawaii\u00e2\u0080\u0099s Best, we reveal the hidden gems, local food spots, and culture-rich experiences that will transform your trip from ordinary to unforgettable. \u00f0\u009f\u0091\u0089 In this episode, you will: Get the inside scoop on Hawaii\u00e2\u0080\u0099s most overrated attractions\u00e2\u0080\u0094and discover what to do instead.Learn how to avoid the biggest travel mistakes that leave visitors disappointed.Walk away with a list of secret beaches, local eats, and authentic adventures that locals love.\u00e2\u008e\u00af Scroll up \u00e2\u00ac\u0086\u00ef\u00b8\u008f and hit play now to unlock the secrets to an authentic Hawaii experience\u00e2\u0080\u0094and make every moment of your trip count. \u00f0\u009f\u008e\u00a7Related episodes: Should you drive the Road to Hana?5 Mistakes When Planning a Trip to Hawaii\u00e2\u008e\u00af \u00f0\u009f\u0092\u00bbRelated blog posts: What Not to Do in HawaiiThe Top 10 Best Places to Visit on Oahu (Besides Waikiki)\u00e2\u008e\u00af \u00f0\u009f\u00a4\u0093Chapters: 1:34 Personal Experience: The Dole Plantation\n\nSource: https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618\nTitle: Hawaii's Best | Travel Tips and Things to Do in Hawaii for Your Hawaii Vacation - Podcast - Apple Podcasts\nContent: make and find out which tourist traps you can confidently avoid\u00e2\u0080\u0094so you can spend more time making real memories. In this episode of Hawaii\u00e2\u0080\u0099s Best, we reveal the hidden gems, local food spots, and culture-rich experiences that will transform your trip from ordinary to unforgettable. \u00f0\u009f\u0091\u0089 In this episode, you will: Get the inside scoop on Hawaii\u00e2\u0080\u0099s most overrated attractions\u00e2\u0080\u0094and discover what to do instead.Learn how to avoid the biggest travel mistakes that leave visitors disappointed.Walk away with a list of secret beaches, local eats, and authentic adventures that locals love.\u00e2\u008e\u00af Scroll up \u00e2\u00ac\u0086\u00ef\u00b8\u008f and hit play now to unlock the secrets to an authentic Hawaii experience\u00e2\u0080\u0094and make every moment of your trip count. \u00f0\u009f\u008e\u00a7Related episodes: Should you drive the Road to Hana?5 Mistakes When Planning a Trip to Hawaii\u00e2\u008e\u00af \u00f0\u009f\u0092\u00bbRelated blog posts: What Not to Do in HawaiiThe Top 10 Best Places to Visit on Oahu (Besides Waikiki)\u00e2\u008e\u00af \u00f0\u009f\u00a4\u0093Chapters: 1:34 Personal Experience: The Dole Plantation\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:30.682344",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://vacationmavens.com/hawaii-trip/\nTitle: How to Plan Your First Trip to Hawaii - Vacation Mavens Travel Podcast\nContent: How to Plan Your First Trip to Hawaii\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: PLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries wE\u2019RE Jordan & Erica When we moved to Maui, our friends started asking for Hawaii travel advice. We realized there wasn\u2019t one great resource we could point them to, so we set out to create it! Now, we get to explore the islands with our two kids and proudly share our adventures along with our best tips and secrets so you can plan your dream Hawaii vacation. Check out our comprehensive travel guides by island\u2026 Oahu Travel Guide Maui Travel Guide Big Island Travel Guide Kauai Travel Guide Get A Hawaii Itinerary \u2013 your Vacation Planning Shortcut! We\u2019ve vetted the best accommodations, things to do, and more so you can ditch the stress of vacation planning and maximize your experience. Oahu Wayfinder Itinerary $37.00 Add to cartLoading Done Maui Wayfinder Itinerary $37.00 Add to cartLoading Done Big Island Wayfinder Itinerary $37.00\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: PLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries wE\u2019RE Jordan & Erica When we moved to Maui, our friends started asking for Hawaii travel advice. We realized there wasn\u2019t one great resource we could point them to, so we set out to create it! Now, we get to explore the islands with our two kids and proudly share our adventures along with our best tips and secrets so you can plan your dream Hawaii vacation. Check out our comprehensive travel guides by island\u2026 Oahu Travel Guide Maui Travel Guide Big Island Travel Guide Kauai Travel Guide Get A Hawaii Itinerary \u2013 your Vacation Planning Shortcut! We\u2019ve vetted the best accommodations, things to do, and more so you can ditch the stress of vacation planning and maximize your experience. Oahu Wayfinder Itinerary $37.00 Add to cartLoading Done Maui Wayfinder Itinerary $37.00 Add to cartLoading Done Big Island Wayfinder Itinerary $37.00\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: PLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries wE\u2019RE Jordan & Erica When we moved to Maui, our friends started asking for Hawaii travel advice. We realized there wasn\u2019t one great resource we could point them to, so we set out to create it! Now, we get to explore the islands with our two kids and proudly share our adventures along with our best tips and secrets so you can plan your dream Hawaii vacation. Check out our comprehensive travel guides by island\u2026 Oahu Travel Guide Maui Travel Guide Big Island Travel Guide Kauai Travel Guide Get A Hawaii Itinerary \u2013 your Vacation Planning Shortcut! We\u2019ve vetted the best accommodations, things to do, and more so you can ditch the stress of vacation planning and maximize your experience. Oahu Wayfinder Itinerary $37.00 Add to cartLoading Done Maui Wayfinder Itinerary $37.00 Add to cartLoading Done Big Island Wayfinder Itinerary $37.00\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: PLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries wE\u2019RE Jordan & Erica When we moved to Maui, our friends started asking for Hawaii travel advice. We realized there wasn\u2019t one great resource we could point them to, so we set out to create it! Now, we get to explore the islands with our two kids and proudly share our adventures along with our best tips and secrets so you can plan your dream Hawaii vacation. Check out our comprehensive travel guides by island\u2026 Oahu Travel Guide Maui Travel Guide Big Island Travel Guide Kauai Travel Guide Get A Hawaii Itinerary \u2013 your Vacation Planning Shortcut! We\u2019ve vetted the best accommodations, things to do, and more so you can ditch the stress of vacation planning and maximize your experience. Oahu Wayfinder Itinerary $37.00 Add to cartLoading Done Maui Wayfinder Itinerary $37.00 Add to cartLoading Done Big Island Wayfinder Itinerary $37.00\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: PLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries wE\u2019RE Jordan & Erica When we moved to Maui, our friends started asking for Hawaii travel advice. We realized there wasn\u2019t one great resource we could point them to, so we set out to create it! Now, we get to explore the islands with our two kids and proudly share our adventures along with our best tips and secrets so you can plan your dream Hawaii vacation. Check out our comprehensive travel guides by island\u2026 Oahu Travel Guide Maui Travel Guide Big Island Travel Guide Kauai Travel Guide Get A Hawaii Itinerary \u2013 your Vacation Planning Shortcut! We\u2019ve vetted the best accommodations, things to do, and more so you can ditch the stress of vacation planning and maximize your experience. Oahu Wayfinder Itinerary $37.00 Add to cartLoading Done Maui Wayfinder Itinerary $37.00 Add to cartLoading Done Big Island Wayfinder Itinerary $37.00\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: PLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries wE\u2019RE Jordan & Erica When we moved to Maui, our friends started asking for Hawaii travel advice. We realized there wasn\u2019t one great resource we could point them to, so we set out to create it! Now, we get to explore the islands with our two kids and proudly share our adventures along with our best tips and secrets so you can plan your dream Hawaii vacation. Check out our comprehensive travel guides by island\u2026 Oahu Travel Guide Maui Travel Guide Big Island Travel Guide Kauai Travel Guide Get A Hawaii Itinerary \u2013 your Vacation Planning Shortcut! We\u2019ve vetted the best accommodations, things to do, and more so you can ditch the stress of vacation planning and maximize your experience. Oahu Wayfinder Itinerary $37.00 Add to cartLoading Done Maui Wayfinder Itinerary $37.00 Add to cartLoading Done Big Island Wayfinder Itinerary $37.00\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: Planning A Trip To HawaiiOahu Island GuideMaui Island GuideHawai\u2019i (Big Island) GuideKauai Island Guide\nPlanning A Trip To Hawaii\nPlanning A Trip To Hawaii\nOahu Island Guide\nOahu Island Guide\nMaui Island Guide\nMaui Island Guide\nHawai\u2019i (Big Island) Guide\nHawai\u2019i (Big Island) Guide\nKauai Island Guide\nKauai Island Guide\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: PLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries\nPLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries\nPLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries\nPLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries\nPLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries\nPLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries\n\nSource: https://thehawaiivacationguide.com/\nTitle: The Hawaii Vacation Guide Home - The Hawaii Vacation Guide\nContent: Skip to content Search Start Here Island GuidesExpand Oahu Travel Guide Maui Travel Guide Hawai\u2019i (Big Island) Travel Guide Kauai Travel Guide Hawaii Cruise Travel Guide Book Tours Where to Stay Planning ResourcesExpand Free Island Cheat Sheets How We Book Travel Discount Car Rentals Planning Your Trip Top Travel Gear Best Travel Cards Shop Itineraries Shopping Cart 0 Search Toggle Menu PLAN YOUR BUCKET-LIST Hawai\u2019i VACATION We\u2019ve helped thousands of people plan successful Hawaii getaways. Now it\u2019s your turn! New? Start Here! shop itineraries wE\u2019RE Jordan & Erica When we moved to Maui, our friends started asking for Hawaii travel advice. We realized there wasn\u2019t one great resource we could point them to, so we set out to create it! Now, we get to explore the islands with our two kids and proudly share our adventures along with our best tips and secrets so you can plan your dream Hawaii vacation. Check out our comprehensive travel guides by island\u2026 Oahu Travel Guide Maui Travel Guide\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:30.783250",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: When is the best time to visit Hawaii in 2025?\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: in 2025? The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to enjoy the natural beauty of the islands. If you're interested in whale watching, the winter season (December to February) is the best time to visit. During this time,\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: in 2025? The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to enjoy the natural beauty of the islands. If you're interested in whale watching, the winter season (December to February) is the best time to visit. During this time,\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: in 2025? The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to enjoy the natural beauty of the islands. If you're interested in whale watching, the winter season (December to February) is the best time to visit. During this time,\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: in 2025? The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to enjoy the natural beauty of the islands. If you're interested in whale watching, the winter season (December to February) is the best time to visit. During this time,\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: heading out and to be prepared for changing weather conditions by bringing appropriate clothing and gear. When is the best time to visit Hawaii in 2025? The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to enjoy the natural beauty\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: When is the best time to visit Hawaii in 2025? The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to enjoy the natural beauty of the islands. If you're interested in whale watching, the winter season (December to February) is the\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: weather forecast before heading out and to be prepared for changing weather conditions by bringing appropriate clothing and gear. When is the best time to visit Hawaii in 2025? The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: appropriate clothing and gear. When is the best time to visit Hawaii in 2025? The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to enjoy the natural beauty of the islands. If you're interested in whale watching, the winter season\n\nSource: https://www.planettraveladvisor.com/north-america/hawaii-travel-guide/hawaii-Seasons/\nTitle: Hawaii Seasons 2025 - Planet Travel Advisor\nContent: The best time to visit Hawaii in 2025 depends on your personal preferences and travel priorities. Hawaii has a pleasant climate year-round, so there isn't necessarily a bad time to visit. However, certain times of the year may be better suited for specific activities or interests. If you're interested in outdoor activities like swimming, snorkeling, and surfing, the summer season (June to August) generally offers the warmest temperatures and calmest ocean conditions. However, this is also the peak tourist season, so prices may be higher and crowds may be larger. For those interested in hiking and exploring the islands' natural beauty, the spring and fall seasons (March to May and September to November) are great options. These seasons offer milder temperatures and less crowded attractions, making it easier to enjoy the natural beauty of the islands. If you're interested in whale watching, the winter season (December to February) is the best time to visit. During this time, humpback\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:30.790135",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "research_step_finalized",
+        "output": "Finalized research step.\n\ud83d\udcb8 Total Research Costs: $0.028068460000000003",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:30.798020",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "writing_report",
+        "output": "\u270d\ufe0f Writing report for 'Help me plan an adventure to Hawaii'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:54.814395",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "report_written",
+        "output": "\ud83d\udcdd Report written for 'Help me plan an adventure to Hawaii' (14863 characters)",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-08-12T00:33:54.817226",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "llm_flow_diagram",
+        "output": "\ud83c\udfa8 LLM Interaction Flow:\ngraph TB\n    classDef startEnd fill:#e1f5fe,stroke:#0277bd,stroke-width:2px\n    classDef success fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px\n    classDef failure fill:#ffebee,stroke:#c62828,stroke-width:2px\n    classDef retry fill:#fff3e0,stroke:#ef6c00,stroke-width:2px\n    classDef decision fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px\n    Start[\"\ud83c\udfac Report Generation<br/>Help me plan an adventure to Hawaii<br/>\ud83d\udccb research_report\"]\n    Step1[\"\u2705 LLM Interaction<br/>chat_completion<br/>\ud83e\udd16 google/gemini-2.5-pro-exp-03-25<br/>\u23f1\ufe0f 24.0s<br/>\ud83d\udd22 19644 tokens<br/>\ud83d\udccd #1\"]\n    Start --> Step1\n    Step2[\"\u2705 Generate Main Report<br/>Main Report (research_report)<br/>\ud83e\udd16 google/gemini-2.5-pro-exp-03-25<br/>\u23f1\ufe0f 24.0s<br/>\ud83d\udd22 19644 tokens<br/>\ud83d\udccd #2\"]\n    Step1 --> Step2\n    End[\"\ud83c\udfc1 Report Complete<br/>\u2705 2/2 Success<br/>\ud83d\udcc8 100% Rate\"]\n    Step2 --> End\n    class Start,End startEnd\n    class Step1,Step2 success",
+        "metadata": null
+      }
+    }
+  ],
+  "content": {
+    "query": "",
+    "sources": [],
+    "context": [],
+    "report": "",
+    "costs": 0.0,
+    "type": "report",
+    "content": "selected_images",
+    "output": "/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618](https://podcasts.apple.com/ca/podcast/hawaiis-best-travel-tips-and-guides-for-your-hawaii/id1455785618).\n",
+    "metadata": [
+      {
+        "url": "https://gohawaiiwatersports.com/wp-content/plugins/revslider/public/assets/assets/dummy.png",
+        "score": 2
+      },
+      {
+        "url": "https://apassionandapassport.com/wp-content/uploads/2019/11/22.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://apassionandapassport.com/wp-content/uploads/2019/09/kauai-hawaii-159-750x1125.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://apassionandapassport.com/wp-content/uploads/2025/02/oahu-hawaii-2-750x1000.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://apassionandapassport.com/wp-content/uploads/2025/02/oahu-hawaii-1-750x1000.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://res.cloudinary.com/enchanting/q_auto:best,f_auto,c_fit,w_800,h_800/enchanting-web/2020/09/Kii-Puuhonua-O-Honaunau-National-Park-on-the-Big-Island-of-Hawaii.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://res.cloudinary.com/enchanting/q_auto:best,f_auto,c_fit,w_800,h_800/enchanting-web/2020/09/Shave-ice-hawaiian-shaved-ice-dessert-Close-up-of-traditional-local-Hawaii-dessert-food.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://res.cloudinary.com/enchanting/q_auto:best,f_auto,c_fit,w_800,h_800/enchanting-web/2020/09/Stairway-to-Heaven-Haiku-Stairs-Hawaii-Oahu-USA.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://res.cloudinary.com/enchanting/q_70,f_auto,w_800,h_800,c_fill,g_face/enchanting-web/2023/09/A-humpback-whale-off-the-coast-of-Maui-in-Hawaii-1-1.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://thehawaiivacationguide.com/wp-content/uploads/2022/07/Meet-Jordan-Erica-TheHawaiiVacationGuide.com-1.png",
+        "score": 2
+      }
+    ]
+  }
+}

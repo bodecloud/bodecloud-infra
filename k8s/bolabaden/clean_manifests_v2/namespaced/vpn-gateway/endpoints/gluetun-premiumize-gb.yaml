@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Endpoints
-metadata:
-  labels:
-    app: gluetun-premiumize-gb
-    component: vpn-gateway
-  name: gluetun-premiumize-gb
-  namespace: vpn-gateway

@@ -1,699 +1,667 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+
 x-common-env: &common-env
   TZ: ${TZ:-America/Chicago}
-  PUID: ${PUID:-1002}
-  PGID: ${PGID:-988}
+  PUID: ${PUID:-1001}
+  PGID: ${PGID:-121}
   UMASK: ${UMASK:-002}
 
-x-common-uidgid: &common-uidgid
-  user: ${PUID:-1002}:${PGID:-988}
 
-x-resource-limits: &resource-limits
-  labels:
-    autoheal: "true"
 
-x-common-logging: &common-logging
-  logging:
-    driver: "local"
-    options:
-      max-file: "5"
-      max-size: "10m"
+include:
+#  - compose/docker-compose.authentik.yml
+#  - compose/docker-compose.coolify-proxy.yml
+  - compose/docker-compose.firecrawl.yml
+  - compose/docker-compose.headscale.yml
+  - compose/docker-compose.llm.yml
+#  - compose/docker-compose.plex.yml
+#  - compose/docker-compose.unsend.yml
+  - compose/docker-compose.stremio-group.yml
+#  - compose/docker-compose.wordpress.yml
 
-x-common-hostname-aliases: &common-hostname-aliases
-  - host.docker.internal:host-gateway  # doesn't exist with docker desktop, let's create it.
-# Tailscale
-  - boden-iphone:100.97.148.14
-  - beatapostapita:100.99.45.35
-  - micklethefickle:100.72.149.123
-  - micklethefickle3:100.72.149.123
-  - wizard:100.119.187.62
-  - wizard-pc:100.119.187.62
-# Warp
-  - warp:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - tailscale-warp:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - aiostreams:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - comet:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - jackett:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - jackettio:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - localhost:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - mediafusion:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - prowlarr:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - stremio:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - stremio-jackett:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - stremio-web:${WARP_IPV4_ADDRESS:-10.76.128.97}
-# Warp2
-  - warp2:${WARP2_IPV4_ADDRESS:-10.76.128.98}
-  - stremthru:${WARP2_IPV4_ADDRESS:-10.76.128.98}
-  - gptr:${WARP2_IPV4_ADDRESS:-10.76.128.98}
 
-x-gluetun-hosts-workaround: &gluetun-hosts-workaround
-  - host.docker.internal:host-gateway  # doesn't exist with docker desktop, let's create it.
-# Tailscale
-  - boden-iphone:100.97.148.14
-  - beatapostapita:100.99.45.35
-  - micklethefickle:100.72.149.123
-  - micklethefickle3:100.72.149.123
-  - wizard:100.119.187.62
-  - wizard-pc:100.119.187.62
-# Warp
-  - warp:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - tailscale-warp:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - aiostreams:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - comet:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - jackett:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - jackettio:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - localhost:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - mediafusion:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - prowlarr:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - stremio:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - stremio-jackett:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - stremio-web:${WARP_IPV4_ADDRESS:-10.76.128.97}
-  - mediaflow-proxy:${WARP_IPV4_ADDRESS:-10.76.128.97}
-# Warp2
-  - warp2:${WARP2_IPV4_ADDRESS:-10.76.128.98}
-  - stremthru:${WARP2_IPV4_ADDRESS:-10.76.128.98}
-  - gptr:${WARP2_IPV4_ADDRESS:-10.76.128.98}
-# Docker containers:
-  - dash:${DASH_IPV4_ADDRESS:-10.76.128.23}
-  - gpt-researcher:${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
-#  - gptr:${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
-  - lobechat:${LOBECHAT_IPV4_ADDRESS:-10.76.128.46}
-  - mongodb:${MONGODB_IPV4_ADDRESS:-10.76.0.50}
-  - code-demo:${CODE_DEMO_IPV4_ADDRESS:-10.76.128.80}
-  - whoami:${WHOAMI_IPV4_ADDRESS:-10.76.128.81}
-  - tinyauth:${TINYAUTH_IPV4_ADDRESS:-10.76.128.82}
-  - watchtower:${WATCHTOWER_IPV4_ADDRESS:-10.76.128.83}
-  - error-pages:${TRAEFIK_ERROR_PAGES_IPV4_ADDRESS:-10.76.128.84}
-  - traefik:${TRAEFIK_IPV4_ADDRESS:-10.76.128.85}
-  - speedtest:${SPEEDTEST_IPV4_ADDRESS:-10.76.128.86}
-  - redis:${REDIS_IPV4_ADDRESS:-10.76.128.87}
-  - homepage:${HOMEPAGE_IPV4_ADDRESS:-10.76.128.88}
-  - dozzle:${DOZZLE_IPV4_ADDRESS:-10.76.128.89}
-  - searxng:${SEARXNG_IPV4_ADDRESS:-10.76.128.90}
-  - code-dev:${CODE_DEV_IPV4_ADDRESS:-10.76.128.92}
-  - code:${CODE_DEMO_IPV4_ADDRESS:-10.76.128.96}
-  - byparr:${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
-  - flaresolverr:${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
-  - nginx-auth:${NGINX_AUTH_IPV4_ADDRESS:-10.76.128.94}
-  - stremthru-redis:${STREMTHRU_REDIS_IPV4_ADDRESS:-10.76.128.95}
+
+configs:
+  gethomepage-custom.css:
+    content: |
+      /* Custom CSS for ${DOMAIN} - ${TS_HOSTNAME} */
+      :root {
+        --bb-bg: #0b0b0c;
+        --bb-card: rgba(255,255,255,0.05);
+        --bb-border: rgba(255,255,255,0.08);
+        --bb-text: rgba(255,255,255,0.92);
+        --bb-muted: rgba(255,255,255,0.6);
+        --bb-primary: #6EE7F9;
+        --bb-accent: #A78BFA;
+      }
+
+      body {
+        background: radial-gradient(1200px 800px at 10% -10%, rgba(167,139,250,0.15), transparent),
+                    radial-gradient(1200px 800px at 110% 10%, rgba(110,231,249,0.12), transparent),
+                    var(--bb-bg) !important;
+        color: var(--bb-text) !important;
+      }
+
+      a { color: var(--bb-primary) !important; }
+      a:hover { color: #8EEAFB !important; }
+
+      .card, .item, .quicklaunch, .services-group, .service {
+        background: var(--bb-card) !important;
+        border: 1px solid var(--bb-border) !important;
+        backdrop-filter: blur(8px);
+      }
+
+      .header, .navbar, .searchbar, .footer {
+        background: rgba(12,12,14,0.6) !important;
+        border-bottom: 1px solid var(--bb-border) !important;
+        backdrop-filter: blur(8px);
+      }
+  gethomepage-custom.js:
+    content: |
+      /* Custom JavaScript for Bolabaden */
+      ;(function(){
+        // Ensure external links open in new tabs
+        document.addEventListener('click', (e) => {
+          const a = e.target.closest('a');
+          if (!a) return;
+          const isExternal = a.hostname && a.hostname !== window.location.hostname
+          if (isExternal) {
+            a.setAttribute('target', '_blank')
+            a.setAttribute('rel', 'noopener noreferrer')
+          }
+        })
+      })();
+  gethomepage-docker.yaml:
+    content: |
+      ---
+      # For configuration options and examples, please see:
+      # https://gethomepage.dev/configs/docker/
+
+      my-docker:
+        socket: /var/run/docker.sock
+      #  host: dockerproxy
+      #  port: 2375
+  gethomepage-widgets.yaml:
+    content: |
+      ---
+      # For configuration options and examples, please see:
+      # https://gethomepage.dev/configs/info-widgets/
+
+      - resources:
+        cpu: true
+        memory: true
+        disk: /
+
+      - search:
+        provider: duckduckgo
+        target: _blank
+  gethomepage-settings.yaml:
+    content: |
+      ---
+      # For configuration options and examples, please see:
+      # https://gethomepage.dev/configs/settings/
+
+      providers:
+        openweathermap: openweathermapapikey
+        weatherapi: weatherapiapikey
+  gethomepage-bookmarks.yaml:
+    content: |
+      ---
+      # For configuration options and examples, please see:
+      # https://gethomepage.dev/configs/bookmarks
+
+      - Developer:
+        - Github:
+          - abbr: GH
+            href: https://github.com/bolabaden
+
+      - Portfolio:
+        - ${DOMAIN}:
+          - abbr: BO
+            href: https://${DOMAIN}/
+        - LinkedIn:
+          - abbr: LI
+            href: https://www.linkedin.com/in/boden-crouch-555897193/
+
+      - Entertainment:
+        - Homer:
+          - abbr: HM
+            href: https://homer.${DOMAIN}/
+
+      - Social:
+        - Reddit:
+          - abbr: RE
+            href: https://reddit.com/
+
+  prometheus.yml:
+    content: |
+      # yaml-language-server: $$schema=https://raw.githubusercontent.com/prometheus/prometheus/main/docs/prometheus-monitoring-dashboard.json
+
+      # my global config
+      global:
+        scrape_interval:     15s # By default, scrape targets every 15 seconds.
+        evaluation_interval: 15s # By default, scrape targets every 15 seconds.
+        # scrape_timeout is set to the global default (10s).
+        # Attach these labels to any time series or alerts when communicating with
+        # external systems (federation, remote storage, Alertmanager).
+        external_labels:
+            monitor: 'my-project'
+      # Load and evaluate rules in this file every 'evaluation_interval' seconds.
+      rule_files:
+        - 'alert.rules'
+        # - "first.rules"
+        # - "second.rules"
+      # alert
+      # alerting:
+      #   alertmanagers:
+      #   - scheme: http
+      #     static_configs:
+      #     - targets:
+      #       - "alertmanager:9093"
+      # A scrape configuration containing exactly one endpoint to scrape:
+      # Here it's Prometheus itself.
+      scrape_configs:
+        - job_name: 'traefik'
+          # Override the global default and scrape targets from this job every 5 seconds.
+          scrape_interval: 5s
+          dns_sd_configs:
+          - names:
+            - 'tasks.traefik'
+            type: 'A'
+            port: 8080
+        - job_name: 'envoy_failover_proxy'
+          metrics_path: /stats/prometheus
+          scheme: https
+          static_configs:
+            - targets: ['failover-proxy-admin.${DOMAIN}']   # hostname only
+  alert.rules:
+    content: |
+      # yaml-language-server: $$schema=https://raw.githubusercontent.com/prometheus/prometheus/main/docs/prometheus-monitoring-dashboard.json
+
+      groups:
+        - name: bolabaden
+          rules:
+
+          # Alert for any instance that is unreachable for >2 minutes.
+          - alert: service_down
+            expr: up == 0
+            for: 2m
+            labels:
+              severity: page
+            annotations:
+              summary: "Instance {{ $$labels.instance }} down"
+              description: "{{ $$labels.instance }} of job {{ $$labels.job }} has been down for more than 2 minutes."
+
+          - alert: high_load
+            expr: node_load1 > 0.5
+            for: 2m
+            labels:
+              severity: page
+            annotations:
+              summary: "Instance {{ $$labels.instance }} under high load"
+              description: "{{ $$labels.instance }} of job {{ $$labels.job }} is under high load."
+
+  #######################################################################################
+  # Mattermost Backup Configuration
+  #######################################################################################
+  mattermost-backup-daily.sh:
+    content: |
+      #!/bin/sh
+      now=$$(date +"%s_%Y-%m-%d")
+      /usr/bin/mysqldump --opt -h $${MYSQL_HOST} -u $${MYSQL_USER} -p $${MYSQL_PASSWORD} $${MYSQL_DATABASE} > "/backup/$${now}_$${MYSQL_DATABASE}.sql"
+
+  # Backup configuration script
+  backup-configs.sh:
+    content: |
+      #!/bin/bash
+      # Backup configuration files
+
+      BACKUP_DIR="${BACKUP_PATH:-/mnt/local/backups}/$$(date +%Y%m%d_%H%M%S)"
+      CONFIG_PATH="${CONFIG_PATH:-./configs}"
+      echo "Config path: $${CONFIG_PATH}"
+
+      echo "Creating backup directory: ${BACKUP_DIR}"
+      mkdir -p "$${BACKUP_DIR}"
+
+      echo "Backing up configuration files..."
+      if [ -d "$${CONFIG_PATH}" ]; then
+        cp -rv "$${CONFIG_PATH}" "$${BACKUP_DIR}/"
+        echo "Backup completed: $${BACKUP_DIR}"
+      else
+        echo "Config directory not found: $${CONFIG_PATH}"
+        exit 1
+      fi
+
+      # Keep only last 7 days of backups
+      find "$${BACKUP_PATH}" -type d -mtime +7 -exec rm -rf {} + 2>/dev/null || true
+
+      echo "Backup process complete"
+
 
 services:
+  hedgedoc:
+    depends_on:
+      - hedgedoc-db
+    image: quay.io/hedgedoc/hedgedoc:latest
+    container_name: hedgedoc
+    hostname: hedgedoc
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    expose:
+      - 3000
+    environment:
+      CMD_DB_URL: postgres://${HEGEDOC_DB_USER:-hedgedoc}:${HEGEDOC_DB_PASSWORD:-password}@hedgedoc-db:${HEGEDOC_DB_PORT:-5432}/${HEGEDOC_DB_NAME:-hedgedoc}
+      CMD_DOMAIN: hedgedoc.${DOMAIN}
+      CMD_URL_ADDPORT: false
+      CMD_PROTOCOL_USESSL: true
+      CMD_SESSION_SECRET: "discolor-subtitle-seducing-result-ceramics"  # Define secret
+      CMD_ALLOW_EMAIL_REGISTER: "true"  # Allow registration
+      CMD_EMAIL: "true"  # Allow login; only guest notes
+      # ------- OAUTH SSO -------
+      # see https://docs.goauthentik.io/integrations/services/hedgedoc/
+      #- CMD_ALLOW_ANONYMOUS_EDITS=False
+      #- CMD_OAUTH2_USER_PROFILE_URL=https://authentik.${DOMAIN}/application/o/userinfo/
+      #- CMD_OAUTH2_USER_PROFILE_USERNAME_ATTR=preferred_username
+      #- CMD_OAUTH2_USER_PROFILE_DISPLAY_NAME_ATTR=name
+      #- CMD_OAUTH2_USER_PROFILE_EMAIL_ATTR=email
+      #- CMD_OAUTH2_TOKEN_URL=https://authentik.${DOMAIN}/application/o/token/
+      #- CMD_OAUTH2_AUTHORIZATION_URL=https://authentik.${DOMAIN}/application/o/authorize/
+      #- CMD_OAUTH2_CLIENT_ID=<ID>
+      #- CMD_OAUTH2_CLIENT_SECRET=<SECRET>
+      #- CMD_OAUTH2_PROVIDERNAME=Authentik
+      #- CMD_OAUTH2_SCOPE=openid email profile
+    volumes:
+      - ${CONFIG_PATH:-./configs}/hedgedoc/uploads:/hedgedoc/public/uploads
+    labels:
+      traefik.enable: "true"
+      traefik.http.middlewares.add-hedgedoc-metrics-prefix.addPrefix.prefix: /metrics
+      traefik.http.routers.hedgedoc-direct.service: hedgedoc@docker
+      traefik.http.routers.hedgedoc-direct.rule: Host(`hedgedoc.${DOMAIN}`) || Host(`hedgedoc.${TS_HOSTNAME}.${DOMAIN}`)
+      traefik.http.services.hedgedoc.loadbalancer.server.port: 3000
+      # Hedgedoc Homepage rendering
+      homepage.group: Dashboards
+      homepage.name: Hedgedoc
+      homepage.icon: hedgedoc.png
+      homepage.href: https://hedgedoc.${DOMAIN}/
+      homepage.description: Collaborative, open-source note-taking platform
+    restart: always
+
+  hedgedoc-db:
+    image: docker.io/postgres:16.3-alpine
+    container_name: hedgedoc-db
+    hostname: hedgedoc-db
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    expose:
+      - ${HEGEDOC_DB_PORT:-5432}
+    volumes:
+      - ${CONFIG_PATH:-./configs}/hedgedoc/database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${HEGEDOC_DB_USER:-hedgedoc}
+      POSTGRES_PASSWORD: ${HEGEDOC_DB_PASSWORD:-password}
+      POSTGRES_DB: ${HEGEDOC_DB_NAME:-hedgedoc}
+      POSTGRES_PORT: ${HEGEDOC_DB_PORT:-5432}
+    restart: always
+
   mongodb:
-    image: mongo:latest
+    # 🔹🔹 MongoDB 🔹🔹
+    image: docker.io/mongo:latest
     container_name: mongodb
     hostname: ${MONGODB_HOSTNAME:-mongodb}
-    extra_hosts: *common-hostname-aliases
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${MONGODB_IPV4_ADDRESS:-10.76.0.50}
+      - publicnet
     expose:
       - 27017
     volumes:
       - ${CONFIG_PATH:-./configs}/mongodb/data:/data/db
-    environment:
-      <<: *common-env
     healthcheck:
       test: ["CMD-SHELL", "mongosh 127.0.0.1:27017/test --quiet --eval 'db.runCommand(\"ping\").ok' > /dev/null 2>&1 || exit 1"]
       interval: 10s
       timeout: 10s
       retries: 5
       start_period: 40s
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      traefik.http.routers.mongodb.middlewares: nginx-auth@file
-      traefik.http.routers.mongodb.rule: Host(`mongodb.${DOMAIN}`) || Host(`mongodb.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`mongodb.${TS_HOSTNAME}.duckdns.org`)
-      traefik.http.services.mongodb.loadbalancer.server.port: 27017
     restart: always
 
-  redis:
-    image: redis:latest
-    container_name: redis
-    hostname: redis
-    extra_hosts: *common-hostname-aliases
-    networks:
-      publicnet:
-        ipv4_address: ${REDIS_IPV4_ADDRESS:-10.76.128.87}
-    expose:
-      - 6379
-    volumes:
-      - ${CONFIG_PATH:-./configs}/redis:/data
-    command: redis-server --appendonly yes --save 60 1
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      traefik.http.routers.redis.middlewares: nginx-auth@file
-      traefik.http.routers.redis.rule: Host(`redis.${DOMAIN}`) || Host(`redis.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`redis.${TS_HOSTNAME}.duckdns.org`)
-      traefik.http.services.redis.loadbalancer.server.port: 6379
-    healthcheck:
-      test: ["CMD-SHELL", "redis-cli ping > /dev/null 2>&1 || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: always
   searxng:
     # 🔹🔹 SearxNG 🔹🔹  # https://hub.docker.com/r/searxng/searxng
     # SearxNG is a privacy-respecting, hackable, open-source metasearch engine.
-    image: searxng/searxng:latest
+    image: docker.io/searxng/searxng:latest
     container_name: searxng
-    hostname: ${SEARXNG_HOSTNAME:-searxng}
-    extra_hosts: *common-hostname-aliases
+    hostname: searxng
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${SEARXNG_IPV4_ADDRESS:-10.76.128.90}
-    expose:
-      - 8080
+      - publicnet
     volumes:
       # touch ${CONFIG_PATH:-./configs}/searxng/limiter.toml
       - ${CONFIG_PATH:-./configs}/searxng:/etc/searxng
     environment:
-      <<: *common-env
-      SEARXNG_BASE_URL: ${SEARXNG_URL:-http://${SEARXNG_HOSTNAME:-searxng}:8080}
+      SEARXNG_BASE_URL: ${SEARXNG_INTERNAL_URL:-http://searxng:8080}
     labels:
-      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.searxng.rule: 'Host(`searxng.${DOMAIN}`) || Host(`searxng.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.routers.searxng.service: searxng@docker
+      traefik.http.services.searxng.loadbalancer.server.port: 8080
       homepage.group: Search
       homepage.name: SearxNG
       homepage.icon: searxng.png
       homepage.href: https://searxng.${DOMAIN}/
+      homepage.description: Privacy-focused metasearch that aggregates results from many sources without tracking
     healthcheck:
       test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://127.0.0.1:8080/ || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
     restart: always
-  warp2:
-    # 🔹🔹 Cloudflare WARP 🔹🔹
-    # Cloudflare WARP is a VPN service that allows you to bypass censorship and access the internet privately.
-    # Use this for all services that don't need listening ports exposed
-    image: caomingjun/warp:latest
-    container_name: warp2
-    extra_hosts: *gluetun-hosts-workaround
-    networks:
-      publicnet:
-        ipv4_address: ${WARP2_IPV4_ADDRESS:-10.76.128.98}
-    # add removed rule back (https://github.com/opencontainers/runc/pull/3468)
-    device_cgroup_rules:
-      - 'c 10:200 rwm'
-    expose:
-      - 3000  # gptr (nginx) 
-      - 3001  # gptr (nextjs)
-      - 8000  # gptr (uvicorn backend)
-    ports:
-      - 8000:8000  # gptr (uvicorn backend)
-    environment:
-      - WARP_SLEEP=2
-      - WARP_LICENSE_KEY=eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
-      # - WARP_ENABLE_NAT=1 # enable nat
-      - TUNNEL_TOKEN=eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
-    cap_add:
-      # Docker already have them, these are for podman users
-      - MKNOD
-      - AUDIT_WRITE
-      # additional required cap for warp, both for podman and docker
-      - NET_ADMIN
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=1
-      - net.ipv4.conf.all.src_valid_mark=1
-      # uncomment for nat
-      # - net.ipv4.ip_forward=1
-      # - net.ipv6.conf.all.forwarding=1
-      # - net.ipv6.conf.all.accept_ra=2
-    volumes:
-      - ${CONFIG_PATH:-./configs}/warp2/data:/var/lib/cloudflare-warp
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      # AI ResearchWizard
-      traefik.http.routers.gptr.service: gptr
-      traefik.http.routers.gptr.rule: Host(`${DOMAIN}`) || Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`${TS_HOSTNAME}.duckdns.org`) || Host(`${TS_HOSTNAME}.${DOMAIN}`) || Host(`${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr.${DOMAIN}`) || Host(`gptr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr.${TS_HOSTNAME}.duckdns.org`) || Host(`gptr.${TS_HOSTNAME}.${DOMAIN}`) || Host(`gptr.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.gptr.loadbalancer.server.port: 3000
-      traefik.http.routers.gptr-legacy.service: gptr-legacy
-      traefik.http.routers.gptr-legacy.rule: Host(`gptr-legacy.${DOMAIN}`) || Host(`gptr-legacy.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr-legacy.${TS_HOSTNAME}.duckdns.org`) || Host(`gptr-legacy.${TS_HOSTNAME}.${DOMAIN}`) || Host(`gptr-legacy.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}`)
-      traefik.http.services.gptr-legacy.loadbalancer.server.port: 8000
-    restart: always
-  warp:
-    # 🔹🔹 Cloudflare WARP 🔹🔹
-    # Cloudflare WARP is a VPN service that allows you to bypass censorship and access the internet privately.
-    # Use this for all services that don't need listening ports exposed
-    image: caomingjun/warp:latest
-    container_name: warp
-    extra_hosts: *gluetun-hosts-workaround
-    networks:
-      publicnet:
-        ipv4_address: ${WARP_IPV4_ADDRESS:-10.76.128.97}
-    # add removed rule back (https://github.com/opencontainers/runc/pull/3468)
-    device_cgroup_rules:
-      - 'c 10:200 rwm'
-    expose:
-      - 443
-      - 1080  # WARP SOCKS5 Proxy
-      - 3128  # warp-fetch-proxy
-      - 8080   # Stremio WebUI
-      - 11470  # Stremio HTTP Streaming Server
-      - 12470  # Stremio HTTPS Streaming Server
-      - ${COMET_PORT:-2020}  # Comet
-      - 3000  # Stremio-Jackett
-      - ${AIOSTREAMS_PORT:-3005}  # AIOStreams
-      - 4000  # Jackettio
-      - 8000  # MediaFusion
-      - 9117  # Jackett
-      - 9696  # Prowlarr
-    ports:
-      - 1080:1080  # WARP SOCKS5 Proxy
-      - 11470:11470  # Stremio HTTP Streaming Server (HTTP)
-      - 12470:12470  # Stremio HTTPS Streaming Server (HTTPS)
-      - 443:443/udp
-      - 9696:9696  # Prowlarr
-    environment:
-      - WARP_SLEEP=2
-      - WARP_LICENSE_KEY=eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
-      # - WARP_ENABLE_NAT=1 # enable nat
-      - TUNNEL_TOKEN=eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
-    cap_add:
-      # Docker already have them, these are for podman users
-      - MKNOD
-      - AUDIT_WRITE
-      # additional required cap for warp, both for podman and docker
-      - NET_ADMIN
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=1
-      - net.ipv4.conf.all.src_valid_mark=1
-      # uncomment for nat
-      # - net.ipv4.ip_forward=1
-      # - net.ipv6.conf.all.forwarding=1
-      # - net.ipv6.conf.all.accept_ra=2
-    volumes:
-      - ${CONFIG_PATH:-./configs}/warp/data:/var/lib/cloudflare-warp
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      # Warp Fetch Proxy
-      traefik.http.routers.warp-proxy.service: warp-proxy
-      traefik.http.routers.warp-proxy.middlewares: nginx-auth@file
-      traefik.http.routers.warp-proxy.rule: Host(`warp-proxy.${DOMAIN}`) || Host(`warp-proxy.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`warp-proxy.${TS_HOSTNAME}.duckdns.org`) || Host(`warp-proxy.${TS_HOSTNAME}.${DOMAIN}`) || Host(`warp-proxy.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.warp-proxy.loadbalancer.server.port: 3128
-      # AIOStreams
-      traefik.http.routers.aiostreams.service: aiostreams
-      traefik.http.routers.aiostreams.rule: Host(`aiostreams.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`aiostreams.${TS_HOSTNAME}.duckdns.org`) || Host(`aiostreams.${TS_HOSTNAME}.${DOMAIN}`) || Host(`aiostreams.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.aiostreams.loadbalancer.server.port: ${AIOSTREAMS_PORT:-3005}
-      # Comet
-      traefik.http.routers.comet.service: comet
-      traefik.http.routers.comet.middlewares: nginx-auth@file
-      traefik.http.routers.comet.rule: Host(`comet.${DOMAIN}`) || Host(`comet.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`comet.${TS_HOSTNAME}.duckdns.org`) || Host(`comet.${TS_HOSTNAME}.${DOMAIN}`) || Host(`comet.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.comet.loadbalancer.server.port: ${COMET_PORT:-2020}
-      # Jackett
-      traefik.http.routers.jackett.service: jackett
-      traefik.http.routers.jackett.middlewares: nginx-auth@file
-      traefik.http.routers.jackett.rule: Host(`jackett.${DOMAIN}`) || Host(`jackett.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`jackett.${TS_HOSTNAME}.duckdns.org`) || Host(`jackett.${TS_HOSTNAME}.${DOMAIN}`) || Host(`jackett.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.jackett.loadbalancer.server.port: 9117
-      # Mediafusion
-      traefik.http.routers.mediafusion.rule: Host(`mediafusion.${DOMAIN}`) || Host(`mediafusion.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`mediafusion.${TS_HOSTNAME}.duckdns.org`) || Host(`mediafusion.${TS_HOSTNAME}.${DOMAIN}`) || Host(`mediafusion.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.routers.mediafusion.service: mediafusion
-      traefik.http.services.mediafusion.loadbalancer.server.port: 8000
-      # Prowlarr
-      traefik.http.routers.prowlarr.service: prowlarr
-      traefik.http.routers.prowlarr.middlewares: nginx-auth@file
-      traefik.http.routers.prowlarr.rule: Host(`prowlarr.${DOMAIN}`) || Host(`prowlarr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`prowlarr.${TS_HOSTNAME}.duckdns.org`) || Host(`prowlarr.${TS_HOSTNAME}.${DOMAIN}`) || Host(`prowlarr.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.prowlarr.loadbalancer.server.port: 9696
-      # Stremio Web
-      traefik.http.routers.stremio-web.service: stremio-web
-      traefik.http.routers.stremio-web.rule: Host(`stremio-web.${DOMAIN}`) || Host(`stremio-web.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`stremio-web.${TS_HOSTNAME}.duckdns.org`) || Host(`stremio-web.${TS_HOSTNAME}.${DOMAIN}`) || Host(`stremio-web.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.stremio-web.loadbalancer.server.scheme: https
-      traefik.http.services.stremio-web.loadbalancer.server.port: 8080
-      # Stremio HTTP Streaming Server
-      traefik.http.routers.stremio-http-server.service: stremio-http-server
-      traefik.http.routers.stremio-http-server.rule: Host(`stremio-fallback.${DOMAIN}`) || Host(`stremio-fallback.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`stremio-fallback.${TS_HOSTNAME}.duckdns.org`) || Host(`stremio-fallback.${TS_HOSTNAME}.${DOMAIN}`) || Host(`stremio-fallback.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.stremio-http-server.loadbalancer.server.scheme: http
-      traefik.http.services.stremio-http-server.loadbalancer.server.port: 11470
-      # Stremio HTTPS Streaming Server
-      traefik.http.routers.stremio-https-server.service: stremio-https-server
-      traefik.http.routers.stremio-https-server.rule: Host(`stremio.${DOMAIN}`) || Host(`stremio.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`stremio.${TS_HOSTNAME}.duckdns.org`) || Host(`stremio.${TS_HOSTNAME}.${DOMAIN}`) || Host(`stremio.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.stremio-https-server.loadbalancer.server.scheme: https
-      traefik.http.services.stremio-https-server.loadbalancer.server.port: 12470
-      # Stremthru
-      traefik.http.routers.stremthru.service: stremthru
-      traefik.http.routers.stremthru.rule: Host(`stremthru.${DOMAIN}`) || Host(`stremthru.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`stremthru.${TS_HOSTNAME}.duckdns.org`) || Host(`stremthru.${TS_HOSTNAME}.${DOMAIN}`) || Host(`stremthru.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.routers.stremthru.middlewares: nginx-auth@file
-      traefik.http.services.stremthru.loadbalancer.server.port: 8080
-      # Mediaflow Proxy
-      traefik.http.routers.mediaflow-proxy.service: mediaflow-proxy
-      traefik.http.routers.mediaflow-proxy.rule: Host(`mediaflow-proxy.${DOMAIN}`) || Host(`mediaflow-proxy.${DUCKDNS_DOMAIN}`) || Host(`mediaflow-proxy.${TS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.mediaflow-proxy.loadbalancer.server.port: ${MEDIAFLOW_PROXY_PORT:-8888}
-    restart: always
-  warp-fetch-proxy:
+
+  ip-checker-warp:
     build:
-      context: ${SRC_PATH:-./src}/fetch-proxy
-      dockerfile: Dockerfile
-    container_name: warp-fetch-proxy
-#    hostname: warp-fetch-proxy
-#    extra_hosts: *common-hostname-aliases
-#    networks:
-#      warpnet:
-#        ipv4_address: ${WARP_FETCH_PROXY_IPV4_WARPNET_ADDRESS:-172.20.0.9}
-#    expose:
-#      - 3128  # warp-fetch-proxy
-    network_mode: service:warp
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-#      traefik.enable: "true"
-      # Warp Fetch Proxy
-#      traefik.http.routers.warp-proxy.service: warp-proxy
-#      traefik.http.routers.warp-proxy.middlewares: nginx-auth@file
-#      traefik.http.routers.warp-proxy.rule: Host(`warp-proxy.${DOMAIN}`) || Host(`warp-proxy.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`warp-proxy.${TS_HOSTNAME}.duckdns.org`) || Host(`warp-proxy.${TS_HOSTNAME}.${DOMAIN}`) || Host(`warp-proxy.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-#      traefik.http.services.warp-proxy.loadbalancer.server.port: 3128
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3128/health > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    restart: always
-  tailscale-warp:
-    image: tailscale/tailscale
-    container_name: tailscale-warp
-    network_mode: service:warp
-    devices:
-      - ${WARP_TUN_DEVICE:-/dev/net/tun}:/dev/net/tun
-    volumes:
-      - ${CONFIG_PATH:-./configs}/tailscale/warp/volumes/var/lib/tailscale:${TS_STATE_DIR:-/var/lib/tailscale}
-      - ${CONFIG_PATH:-./configs}/tailscale/warp/volumes/tmp:/tmp
-    environment:
-      <<: *common-env
-      TS_ACCEPT_DNS: "false"
-      TS_AUTH_ONCE: "true"
-      TS_AUTHKEY: ${TS_AUTHKEY:?not set}
-      TS_ENABLE_HEALTH_CHECK: true
-      TS_ENABLE_METRICS: true
-      TS_HOSTNAME: tailscale-warp-${TS_HOSTNAME}-docker
-      TS_LOCAL_ADDR_PORT: "0.0.0.0:41641"
-      TS_OUTBOUND_HTTP_PROXY_LISTEN: "0.0.0.0:8885"
-      TS_ROUTES: "${TS_ROUTES:-${PUBLICNET_SUBNET:-10.76.0.0/16},172.17.0.0/16,${TAILSCALE_CIDR:-100.64.0.0/10}}"
-      TS_SOCKET: "/tmp/tailscaled.sock"
-      TS_SOCKS5_SERVER: ":1055"
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-routes --advertise-exit-node"
-      TS_USERSPACE: "true"
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:41641/healthz > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    restart: always
-  code-dev:
-    # 🔹🔹 Code Server 🔹🔹
-    image: linuxserver/code-server:latest
-    container_name: code-dev
-    hostname: code-dev
-    extra_hosts: *common-hostname-aliases
+      dockerfile_inline: |
+        FROM alpine:latest
+        RUN apk add --no-cache curl
+        CMD ["/bin/sh", "-c", "while true; do echo \"$(date): $(curl -s ifconfig.me)\"; sleep 60; done"]
+    container_name: ip-checker-warp
+    hostname: ip-checker-warp
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${CODE_DEV_IPV4_ADDRESS:-10.76.128.92}
-    expose:
-      - 8443
+      - warp-network
+    command: "/bin/sh -c 'while true; do echo \"$(date): $(curl -s ifconfig.me)\"; sleep 60; done'"
+    restart: no
+  code-server:
+    # 🔹🔹 Code Server 🔹🔹
+    image: docker.io/linuxserver/code-server:latest
+    container_name: code-server
+    hostname: code-server
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
     volumes:
       - ${CONFIG_PATH:-./configs}/code-server/dev/config:/config
       - ${CONFIG_PATH:-./configs}/code-server/dev/workspace:/workspace
-      - ${ROOT_DIR:-.}:/workspace
+      - ${ROOT_PATH:-.}:/workspace
+    user: ${PUID:-1001}:${PGID:-988}
     environment:
       <<: *common-env
-      CODESERVER_PASSWORD: ${CODESERVER_PASSWORD}
-      PASSWORD: ${CODESERVER_PASSWORD}
-      CODESERVER_SUDO_PASSWORD: ${CODESERVER_SUDO_PASSWORD}
-      SUDO_PASSWORD: ${CODESERVER_SUDO_PASSWORD}
-      CODESERVER_DEFAULT_WORKSPACE: ${CODESERVER_DEFAULT_WORKSPACE:-/workspace}
+      PASSWORD: ${SUDO_PASSWORD}
+      SUDO_PASSWORD: ${SUDO_PASSWORD}
       DEFAULT_WORKSPACE: ${CODESERVER_DEFAULT_WORKSPACE:-/workspace}
     labels:
-      deunhealth.restart.on.unhealthy: "true"
       traefik.enable: "true"
-      traefik.http.routers.code-dev.middlewares: nginx-auth@file
-      traefik.http.routers.code-dev.rule: Host(`code-dev.${DOMAIN}`) || Host(`code-dev.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`code-dev.${TS_HOSTNAME}.duckdns.org`) || Host(`code-dev.${TS_HOSTNAME}.${DOMAIN}`) || Host(`code-dev.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.code-dev.loadbalancer.server.port: 8443
+      traefik.http.routers.code-server.rule: Host(`code-server.${DOMAIN}`) || Host(`code-server.${TS_HOSTNAME}.${DOMAIN}`)
+      traefik.http.routers.code-server.service: code-server@docker
+      traefik.http.services.code-server.loadBalancer.server.port: 8443
+      # Homepage definitions for code-server
+      homepage.group: Infrastructure
+      homepage.name: Code Dev
+      homepage.icon: code-server.png
+      homepage.href: https://code-server.${DOMAIN}/
+      homepage.description: In-browser VS Code environment for editing and managing code on this server
+    cpu_shares: 10
+    mem_reservation: 200M
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.15
+          memory: 200M
+        limits:
+          cpus: 2
+          memory: 4G
     restart: always
 
-  deunhealth:
-    # 🔹🔹 DeUnhealth 🔹🔹
-    # Restart unhealthy containers marked with `deunhealth.restart.on.unhealthy=true` label
-    # Receive Docker events as stream instead of polling periodically
-    # Doesn't need network! (more secure)
-    # Compatible with amd64, 386, arm64, arm32v7, arm32v6, ppc64le, s390x and riscv64 CPU architectures
-    # Since Docker is written in Go, the program is also written in Go and uses the official Docker Go API⁠
-    # https://hub.docker.com/r/qmcgaw/deunhealth/tags  https://hub.docker.com/r/qmcgaw/deunhealth
-    image: qmcgaw/deunhealth
-    container_name: deunhealth
-    network_mode: none
-    security_opt:
-      - no-new-privileges:true
+  init_prometheus:
+    image: docker.io/prom/prometheus:latest
+    container_name: init_prometheus
+    hostname: init_prometheus
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    user: root
+    entrypoint: /bin/sh -c "chown -R 65534:65534 /prometheus"
     volumes:
-      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
-    environment:
-      <<: *common-env # for TZ env var.
-      LOG_LEVEL: ${DEUNHEALTH_LOG_LEVEL:-debug} # debug, info, warning, error
-      HEALTH_SERVER_ADDRESS: ${DEUNHEALTH_HEALTH_SERVER_ADDRESS:-127.0.0.1:9999} # Internal health http server listening address. Nothing to do with restarting unhealthy containers.
+      - ${CONFIG_PATH:-./configs}/prometheus/data:/prometheus
+    restart: "no"
+
+  prometheus:
+    depends_on:
+      init_prometheus:
+        condition: service_completed_successfully
+    image: docker.io/prom/prometheus:latest
+    container_name: prometheus
+    hostname: prometheus
+    networks:
+      - publicnet
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ${CONFIG_PATH:-./configs}/prometheus/data:/prometheus
+    configs:
+      - source: prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        mode: 0777
+      - source: alert.rules
+        target: /etc/prometheus/alert.rules
+        mode: 0777
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.enable-lifecycle'
     labels:
-      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "true"
+      traefik.http.routers.prometheus-direct.service: prometheus@docker
+      traefik.http.routers.prometheus-direct.rule: 'Host(`prometheus.${DOMAIN}`) || Host(`prometheus.${TS_HOSTNAME}.${DOMAIN}`)'  #  || HostRegexp(`^(www\.)?prometheus\.${DOMAIN}$`) || HostRegexp(`^(www\.)?prometheus\.${TS_HOSTNAME}\.${DOMAIN}$`)
+      traefik.http.routers.prometheus-direct.middlewares: nginx-auth@docker
+      traefik.http.services.prometheus.loadbalancer.server.port: 9090
+    restart: always
+
+  bolabaden-nextjs:
+    # 🔹🔹 bolabaden nextJS main website with integrated auth 🔹🔹
+    build:
+      context: ${SRC_PATH:-./src}/website/bolabaden-site
+      dockerfile: Dockerfile
+    image: docker.io/th3w1zard1/bolabaden-nextjs:latest
+    container_name: bolabaden-nextjs
+    hostname: bolabaden-nextjs
+    networks:
+      warp-network:
+        gw_priority: 1
+      publicnet: {}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ${CONFIG_PATH:-./configs}/tinyauth:/data
+    environment:
+      <<: *common-env
+      NODE_ENV: production
+      PORT: ${BOLABADEN_NEXTJS_PORT:-3000}
+      HOSTNAME: ${BOLABADEN_NEXTJS_HOSTNAME:-0.0.0.0}
+      # NextAuth.js Configuration (compatible with TinyAuth)
+      SECRET: ${TINYAUTH_SECRET?}
+      NEXTAUTH_URL: https://${DOMAIN}
+      NEXTAUTH_SECRET: ${TINYAUTH_SECRET?}
+      APP_URL: https://auth.${DOMAIN}
+      USERS: ${TINYAUTH_USERS}
+      # Google OAuth Configuration
+      GOOGLE_CLIENT_ID: ${TINYAUTH_GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${TINYAUTH_GOOGLE_CLIENT_SECRET}
+      # GitHub OAuth Configuration
+      GITHUB_CLIENT_ID: ${TINYAUTH_GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${TINYAUTH_GITHUB_CLIENT_SECRET}
+      # Additional settings (TinyAuth compatible)
+      SESSION_EXPIRY: ${TINYAUTH_SESSION_EXPIRY:-604800} # 2 weeks session expiry
+      COOKIE_SECURE: ${TINYAUTH_COOKIE_SECURE:-true} # Send cookie only with HTTPS
+      APP_TITLE: ${TINYAUTH_APP_TITLE:-Bolabaden} # Customize login page title
+      NEXT_PUBLIC_APP_TITLE: ${TINYAUTH_APP_TITLE:-Bolabaden} # For client-side access
+      LOGIN_MAX_RETRIES: ${TINYAUTH_LOGIN_MAX_RETRIES:-15} # Maximum login attempts before account lockout
+      LOGIN_TIMEOUT: ${TINYAUTH_LOGIN_TIMEOUT:-300} # Lock account for 5 minutes after too many failed attempts
+      OAUTH_AUTO_REDIRECT: ${TINYAUTH_OAUTH_AUTO_REDIRECT:-none} # Options: none, github, google, or credentials
+      OAUTH_WHITELIST: ${TINYAUTH_OAUTH_WHITELIST:-boden.crouch@gmail.com} # e.g. user1,user2,/^admin.*/
+      # User level configuration
+      ADMIN_ACCOUNTS: ${TINYAUTH_ADMIN_ACCOUNTS:-boden.crouch@gmail.com} # Comma-separated list of admin emails
+      OWNER_ACCOUNTS: ${TINYAUTH_OWNER_ACCOUNTS:-boden.crouch@gmail.com} # Comma-separated list of owner emails
+      # Stripe Payment Integration
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      STRIPE_PRICE_VERIFIED: ${STRIPE_PRICE_VERIFIED}
+      STRIPE_PRICE_MODERATOR: ${STRIPE_PRICE_MODERATOR}
+      STRIPE_PRICE_ADMIN: ${STRIPE_PRICE_ADMIN}
+      NEXT_PUBLIC_STRIPE_PRICE_VERIFIED: ${STRIPE_PRICE_VERIFIED}
+      NEXT_PUBLIC_STRIPE_PRICE_MODERATOR: ${STRIPE_PRICE_MODERATOR}
+      NEXT_PUBLIC_STRIPE_PRICE_ADMIN: ${STRIPE_PRICE_ADMIN}
+      # Proxy upstream configurations (for iframe embedding)
+      PROXY_GRAFANA_UPSTREAM: http://grafana:3000
+      PROXY_PROMETHEUS_UPSTREAM: http://prometheus:9090
+      PROXY_HOMEPAGE_UPSTREAM: http://homepage:3000
+      PROXY_DASHY_UPSTREAM: http://dashy:80
+      PROXY_HOMER_UPSTREAM: http://homer:8080
+      # Traefik middleware generation
+      TRAEFIK_MIDDLEWARE_DIR: /data/traefik/middlewares
+      # For Next.js API to fetch live metrics and containers
+      PROMETHEUS_URL: http://prometheus:9090
+      DOCKER_PROXY_URL: http://dockerproxy:2375
+      DOMAIN: ${DOMAIN}
+    labels:
+      traefik.enable: "true"
+      # Error pages
+      traefik.http.middlewares.bolabaden-error-pages.errors.status: 400-599
+      traefik.http.middlewares.bolabaden-error-pages.errors.service: bolabaden-nextjs@docker
+      traefik.http.middlewares.bolabaden-error-pages.errors.query: /api/error/{status}
+      # Router for bolabaden-nextjs
+      traefik.http.routers.bolabaden-nextjs.service: bolabaden-nextjs@docker
+      traefik.http.routers.bolabaden-nextjs.rule: 'Host(`${DOMAIN}`) || Host(`${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.routers.bolabaden-nextjs.middlewares: bolabaden-error-pages@docker
+      # bolabaden-nextjs Service definition
+      traefik.http.services.bolabaden-nextjs.loadbalancer.server.port: ${BOLABADEN_NEXTJS_PORT:-3000}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:$${PORT:-3000} > /dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30s
     restart: always
 
   dozzle:
     # 🔹🔹 Dozzle 🔹🔹
-    image: amir20/dozzle
+    image: docker.io/amir20/dozzle:latest
     container_name: dozzle
     hostname: dozzle
-    extra_hosts: *common-hostname-aliases
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${DOZZLE_IPV4_ADDRESS:-10.76.128.89}
+      - publicnet
     expose:
       - 8080
     volumes:
-      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
+      - /var/run/docker.sock:/var/run/docker.sock:z
     labels:
-      deunhealth.restart.on.unhealthy: "true"
       traefik.enable: "true"
-      traefik.http.routers.dozzle.middlewares: nginx-auth@file
-      traefik.http.routers.dozzle.rule: Host(`dozzle.${DOMAIN}`) || Host(`dozzle.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`dozzle.${TS_HOSTNAME}.duckdns.org`) || Host(`dozzle.${TS_HOSTNAME}.${DOMAIN}`) || Host(`dozzle.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      # Router for dozzle
+      traefik.http.routers.dozzle.service: dozzle@docker
+      traefik.http.routers.dozzle.rule: 'Host(`dozzle.${DOMAIN}`) || Host(`dozzle.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.routers.dozzle.middlewares: nginx-auth@docker
+      # Service definition for dozzle
       traefik.http.services.dozzle.loadbalancer.server.port: 8080
       homepage.group: System Monitoring
       homepage.name: Dozzle
       homepage.icon: dozzle.png
       homepage.href: https://dozzle.${DOMAIN}/
-      homepage.description: Real-time log viewer for Docker containers, providing an easy way to monitor application logs and troubleshoot issues.
+      homepage.description: Real-time web UI for viewing Docker container logs across the host
     restart: always
+
   homepage:
     # 🔹🔹 Homepage 🔹🔹  # https://github.com/gethomepage/homepage
     image: ghcr.io/gethomepage/homepage
     container_name: homepage
     hostname: homepage
-    extra_hosts: *common-hostname-aliases
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${HOMEPAGE_IPV4_ADDRESS:-10.76.128.88}
+      - publicnet
+    configs:
+      - source: gethomepage-custom.css
+        target: /app/config/custom.css
+        mode: 0777
+      - source: gethomepage-custom.js
+        target: /app/config/custom.js
+        mode: 0777
+      - source: gethomepage-docker.yaml
+        target: /app/config/docker.yaml
+        mode: 0777
+      - source: gethomepage-widgets.yaml
+        target: /app/config/widgets.yaml
+        mode: 0777
+      - source: gethomepage-settings.yaml
+        target: /app/config/settings.yaml
+        mode: 0777
+      - source: gethomepage-bookmarks.yaml
+        target: /app/config/bookmarks.yaml
+        mode: 0777
     volumes:
       # DO NOT create a bind mount to the entire /app/public/ directory.
-      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock:z
+      - /var/run/docker.sock:/var/run/docker.sock:z  # we don't need this since we use the proxy
       - ${CONFIG_PATH:-./configs}/homepage:/app/config
     environment:
-      TZ: ${TZ:-America/Chicago}
-      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS:-*}
-      HOMEPAGE_VAR_TITLE: ${HOMEPAGE_VAR_TITLE:-Bolabaden}
-      HOMEPAGE_VAR_SEARCH_PROVIDER: ${HOMEPAGE_VAR_SEARCH_PROVIDER:-google}
-      HOMEPAGE_VAR_HEADER_STYLE: ${HOMEPAGE_VAR_HEADER_STYLE:-}
-      HOMEPAGE_VAR_WEATHER_CITY: ${HOMEPAGE_VAR_WEATHER_CITY:-Chicago}
-      HOMEPAGE_VAR_WEATHER_LAT: ${HOMEPAGE_VAR_WEATHER_LAT:-41.8781}
-      HOMEPAGE_VAR_WEATHER_LONG: ${HOMEPAGE_VAR_WEATHER_LONG:--87.6298}
-      #      HOMEPAGE_VAR_WEATHER_TIME: ${HOMEPAGE_VAR_WEATHER_TIME:-}
-      HOMEPAGE_VAR_WEATHER_UNIT: ${HOMEPAGE_VAR_WEATHER_UNIT:-fahrenheit}
+      HOMEPAGE_ALLOWED_HOSTS: "*"
+      HOMEPAGE_VAR_TITLE: "Bolabaden"
+      HOMEPAGE_VAR_SEARCH_PROVIDER: "duckduckgo"
+      HOMEPAGE_VAR_HEADER_STYLE: "glass"
+      HOMEPAGE_VAR_THEME: "dark"
+      HOMEPAGE_CUSTOM_CSS: "/app/config/custom.css"
+      HOMEPAGE_CUSTOM_JS: "/app/config/custom.js"
+      HOMEPAGE_VAR_WEATHER_CITY: "Iowa City"
+      HOMEPAGE_VAR_WEATHER_LAT: 41.6611
+      HOMEPAGE_VAR_WEATHER_LONG: -91.5302
+      #      HOMEPAGE_VAR_WEATHER_TIME: ""
+      HOMEPAGE_VAR_WEATHER_UNIT: fahrenheit
     labels:
-      deunhealth.restart.on.unhealthy: "true"
       traefik.enable: "true"
-      traefik.http.routers.homepage.middlewares: nginx-auth@file
-      traefik.http.routers.homepage.rule: Host(`homepage.${DOMAIN}`) || Host(`homepage.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`homepage.${TS_HOSTNAME}.duckdns.org`) || Host(`homepage.${TS_HOSTNAME}.${DOMAIN}`) || Host(`homepage.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
+      traefik.http.routers.homepage.service: homepage@docker
+      traefik.http.routers.homepage.rule: 'Host(`homepage.${DOMAIN}`) || Host(`homepage.${TS_HOSTNAME}.${DOMAIN}`)'
       traefik.http.services.homepage.loadbalancer.server.port: 3000
     healthcheck:  # docker exec homepage ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000 > /dev/null 2>&1 || exit 1"]
       interval: 30s
       timeout: 15s
       retries: 3
-    restart: always
-  speedtest:
-    # 🔹🔹 Speedtest 🔹🔹
-    image: linuxserver/speedtest-tracker
-    container_name: speedtest
-    hostname: speedtest
-    extra_hosts: *common-hostname-aliases
-    networks:
-      publicnet:
-        ipv4_address: ${SPEEDTEST_IPV4_ADDRESS:-10.76.128.86}
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - ${CONFIG_PATH:-./configs}/speedtest-tracker/config:/config
-      - ${CERTS_PATH:-./certs}/speedtest-tracker/keys:/config/keys
-    environment:
-      <<: *common-env
-      ADMIN_EMAIL: ${SPEEDTEST_TRACKER_ADMIN_EMAIL} # Email of the initial admin user. Note: Only effective during initial setup.
-      ADMIN_NAME: ${SPEEDTEST_TRACKER_ADMIN_NAME} # Name of the initial admin user. Note: Only effective during initial setup.
-      ADMIN_PASSWORD: ${SPEEDTEST_TRACKER_ADMIN_PASSWORD:-b00tstr4p} # Password of the initial admin user. Note: Only effective during initial setup.
-      API_RATE_LIMIT: ${SPEEDTEST_TRACKER_API_RATE_LIMIT:-60} # Number of requests per minute to the API. Default: 60
-      APP_KEY: ${SPEEDTEST_TRACKER_APP_KEY} # Key used to encrypt and decrypt data. You can generate a key at https://speedtest-tracker.dev.
-      APP_NAME: ${SPEEDTEST_TRACKER_APP_NAME:-Speedtest Tracker} # Used to define the application's name in the dashboard and in notifications.
-      APP_TIMEZONE: ${SPEEDTEST_TRACKER_APP_TIMEZONE:-${TZ:-America/Chicago}} # Application timezone should be set if your database does not use UTC as its  timezone.
-      APP_URL: ${SPEEDTEST_TRACKER_APP_URL:-} # URL used for links in emails and notifications.
-      ASSET_URL: ${SPEEDTEST_TRACKER_ASSET_URL:-} # URL used for assets, needed when using a reverse proxy.
-      CHART_BEGIN_AT_ZERO: ${SPEEDTEST_TRACKER_CHART_BEGIN_AT_ZERO:-true} # Begin the dashboard axis charts at zero. Default: true
-      CHART_DATETIME_FORMAT: ${SPEEDTEST_TRACKER_CHART_DATETIME_FORMAT:-j/m G:i} # Set the formatting of timestamps in charts.
-      CONTENT_WIDTH: ${SPEEDTEST_TRACKER_CONTENT_WIDTH:-7xl} # Width of the content section of each page. Can be set to any value found in the Filament docs. Default: 7xl
-      DATETIME_FORMAT: ${SPEEDTEST_TRACKER_DATETIME_FORMAT:-j M Y, G:i:s} # Set the formatting of timestamps in tables and notifications.
-      DB_CONNECTION: ${SPEEDTEST_TRACKER_DB_CONNECTION:-sqlite}
-      DISPLAY_TIMEZONE: ${SPEEDTEST_TRACKER_DISPLAY_TIMEZONE:-${TZ:-America/Chicago}} # Display timestamps in your local time.
-      PRUNE_RESULTS_OLDER_THAN: ${SPEEDTEST_TRACKER_PRUNE_RESULTS_OLDER_THAN:-0} # Set the value to greater than zero to prune stored results. This value should be represented in days.
-      PUBLIC_DASHBOARD: ${SPEEDTEST_TRACKER_PUBLIC_DASHBOARD:-true} # Enables the public dashboard for guest (unauthenticated) users. Default: false
-      SPEEDTEST_BLOCKED_SERVERS: ${SPEEDTEST_TRACKER_BLOCKED_SERVERS:-} # Comma separated list of server IDs that should not be used when running speedtests.
-      SPEEDTEST_INTERFACE: ${SPEEDTEST_TRACKER_INTERFACE:-} # Set the network interface to use for the test. This need to be the network interface available inside the container
-      SPEEDTEST_SCHEDULE: ${SPEEDTEST_TRACKER_SCHEDULE:-0 * * * *} # Cron expression used to run speedtests on a scheduled basis.
-      SPEEDTEST_SERVERS: ${SPEEDTEST_TRACKER_SERVERS:-} # Comma separated list of server IDs to randomly use for speedtest.
-      SPEEDTEST_SKIP_IPS: ${SPEEDTEST_TRACKER_SKIP_IPS:-} # A comma separated list of public IP addresses where tests will be skipped when present.
-      THRESHOLD_DOWNLOAD: ${SPEEDTEST_TRACKER_THRESHOLD_DOWNLOAD:-900} # Set the Download Threshold. Note: Only effective during initial setup.
-      THRESHOLD_ENABLED: ${SPEEDTEST_TRACKER_THRESHOLD_ENABLED:-true} # Enable the thresholds. Note: Only effective during initial setup.
-      THRESHOLD_PING: ${SPEEDTEST_TRACKER_THRESHOLD_PING:-25} # Set the Ping Threshold. Note: Only effective during initial setup.
-      THRESHOLD_UPLOAD: ${SPEEDTEST_TRACKER_THRESHOLD_UPLOAD:-900} # Set the Upload Threshold. Note: Only effective during initial setup.
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      traefik.http.routers.speedtest.rule: Host(`speedtest.${DOMAIN}`) || Host(`speedtest.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`speedtest.${TS_HOSTNAME}.duckdns.org`) || Host(`speedtest.${TS_HOSTNAME}.${DOMAIN}`) || Host(`speedtest.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.speedtest.loadbalancer.server.port: 80
-      homepage.group: Network Monitoring
-      homepage.name: Speedtest
-      homepage.icon: speedtest.png
-      homepage.href: https://speedtest.${DOMAIN}/
-      homepage.description: Regularly tests your internet speed and tracks performance over time, helping you monitor your connection quality.
-      homepage.widget.type: speedtest
-      homepage.widget.url: https://speedtest.${DOMAIN}
-      homepage.widget.fields: '["download", "upload", "ping", "speedtest"]'
-    healthcheck:  # docker exec speedtest ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
-      test: ["CMD-SHELL", "curl -fs http://127.0.0.1:80 > /dev/null || exit 1"]
-      start_period: 20s
-      timeout: 15s
-      interval: 30s
-    restart: always
-
-  # Multiple DNS challenge provider are not supported with Traefik,
-  # but you can use CNAME to handle that. For example, if you have example.org (account foo) and
-  # example.com (account bar) you can create a CNAME on example.org called _acme-challenge.example.org
-  # pointing to challenge.example.com. This way, you can obtain certificates for example.org with the bar account.
-  traefik:
-    # 🔹🔹 Traefik 🔹🔹
-    depends_on:
-      - error-pages
-    image: traefik:latest
-    container_name: traefik
-    hostname: traefik
-    extra_hosts: *common-hostname-aliases
-    networks:
-      publicnet:
-        ipv4_address: ${TRAEFIK_IPV4_ADDRESS:-10.76.128.85}
-    ports:
-      - 80:80    # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
-      - 443:443  # Listen on port 443, default for HTTPS
-    cap_add:
-      - NET_ADMIN
-    sysctls:
-      net.ipv6.conf.all.disable_ipv6: 1
-    volumes:
-      - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
-      - ${CERTS_PATH:-./certs}:/certs
-      - ${CONFIG_PATH:-./configs}/traefik/config:/config
-      - ${CONFIG_PATH:-./configs}/traefik/plugins-local:/plugins-local
-      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
-    #      - /etc/localtime:/etc/localtime:ro
-    environment:
-      <<: *common-env
-      CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
-      CLOUDFLARE_DNS_API_TOKEN: ${CLOUDFLARE_DNS_API_TOKEN}
-      CLOUDFLARE_ZONE_API_TOKEN: ${CLOUDFLARE_ZONE_API_TOKEN}
-      LETS_ENCRYPT_EMAIL: ${LETS_ENCRYPT_EMAIL?} # Email address used for Letsencrypt registration.
-      DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
-#    command: --configFile=/config/traefik.yaml
-    command:
-      - --accesslog=true # Enable the access log, with HTTP requests
-      - --api.dashboard=true
-      - --api.debug=false # Enable additional endpoints for debugging and profiling (default: false)
-      - --api.disableDashboardAd=true # Disable the advertisement from the dashboard (default: false)
-      - --api.insecure=true # Enable the API and the dashboard on the entryPoint named traefik (default: false)
-      - --certificatesresolvers.letsencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory
-      - --certificatesresolvers.letsencrypt.acme.dnsChallenge.provider=duckdns
-      - --certificatesresolvers.letsencrypt.acme.dnsChallenge.resolvers=8.8.8.8,8.8.4.4
-      - --certificatesresolvers.letsencrypt.acme.dnsChallenge=true
-      - --certificatesresolvers.letsencrypt.acme.email=${LETS_ENCRYPT_EMAIL?} # Email address used for registration.
-      - --certificatesresolvers.letsencrypt.acme.httpChallenge.entryPoint=web
-      - --certificatesresolvers.letsencrypt.acme.httpChallenge=true
-      - --certificatesresolvers.letsencrypt.acme.storage=/certs/acme.json
-      - --certificatesresolvers.letsencrypt.acme.tlsChallenge=true
-      - --entrypoints.web.address=:80
-      - --entrypoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,::1/128,172.17.0.0/12,${PUBLICNET_SUBNET:-10.76.0.0/16},${TAILSCALE_CIDR:-100.64.0.0/10}
-      - --entrypoints.web.http.redirections.entryPoint.scheme=https
-      - --entrypoints.web.http.redirections.entryPoint.to=websecure
-      - --entrypoints.websecure.address=:443
-      - --entrypoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,::1/128,172.17.0.0/12,${PUBLICNET_SUBNET:-10.76.0.0/16},${TAILSCALE_CIDR:-100.64.0.0/10}
-      - --entrypoints.websecure.http.tls.certResolver=letsencrypt
-#      - --entrypoints.websecure.http.tls.domains[0].main=${DOMAIN}
-#      - --entrypoints.websecure.http.tls.domains[0].sans=*.${DOMAIN}
-      - --entrypoints.websecure.http.tls.domains[0].main=${DOMAIN}
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.${DOMAIN}
-      - --entrypoints.websecure.http.tls=true
-#      - --entrypoints.websecure.http.middlewares=nginx-auth@file
-      - --global.checkNewVersion=true
-      - --global.sendAnonymousUsage=false
-      - --log.level=DEBUG
-      - --ping.terminatingStatusCode=503
-      - --ping=true
-      - --providers.docker.defaultRule=Host(`{{ .ContainerName }}.${DOMAIN}`) || Host(`{{ .ContainerName }}.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`{{ .ContainerName }}.${TS_HOSTNAME}.duckdns.org`) || Host(`{{ .ContainerName }}.${TS_HOSTNAME}.${DOMAIN}`) || Host(`{{ .ContainerName }}.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`) # Default: "Host(`{{ normalize .Name }}`"
-      - --providers.docker.exposedByDefault=false
-      - --providers.docker.network=publicnet
-      - --providers.docker=true
-      - --providers.file.directory=/config
-      - --providers.file.watch=true
-      - --serversTransport.insecureSkipVerify=true
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      traefik.http.routers.traefik.middlewares: nginx-auth@file
-      traefik.http.routers.traefik.rule: Host(`traefik.${DOMAIN}`) || Host(`traefik.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`traefik.${TS_HOSTNAME}.duckdns.org`) || Host(`traefik.${TS_HOSTNAME}.${DOMAIN}`) || Host(`traefik.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.traefik.loadbalancer.server.port: 8080
-    restart: always
-
-  error-pages:
-    # 🔹🔹 Traefik Error Pages 🔹🔹
-    # Serves static HTML error pages used by Traefik's error middleware
-    image: httpd:alpine
-    container_name: error-pages
-    hostname: error-pages
-    extra_hosts: *common-hostname-aliases
-    networks:
-      publicnet:
-        ipv4_address: ${TRAEFIK_ERROR_PAGES_IPV4_ADDRESS:-10.76.128.84}
-    volumes:
-      # Mount the directory containing error HTML files (e.g., 404.html, 5xx.html)
-      - ${CONFIG_PATH:-./configs}/traefik/error-pages:/usr/local/apache2/htdocs/:ro
+    cpu_shares: 10
+    mem_reservation: 128M
+    deploy:
+      resources:
+        reservations:
+          cpus: 0
+          memory: 128M
+        limits:
+          cpus: 0.25 # deliberately hobble the CPU in favor of GPU transcoding
+          memory: 1G
     restart: always
 
   watchtower:
-    image: containrrr/watchtower:latest
+    # 🔹🔹 Watchtower 🔹🔹
+    image: docker.io/containrrr/watchtower:latest
     container_name: watchtower
     hostname: watchtower
-    extra_hosts: *common-hostname-aliases
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${WATCHTOWER_IPV4_ADDRESS:-10.76.128.83}
+      - publicnet
     volumes:
-      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
+#      - ${CONFIG_PATH:-./configs}/watchtower/data:/data
     environment:
-      <<: *common-env
       WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP:-true}
       WATCHTOWER_SCHEDULE: ${WATCHTOWER_SCHEDULE:-0 0 6 * * *} # Run at 6am daily
       WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL:-}
       WATCHTOWER_NOTIFICATION_REPORT: ${WATCHTOWER_NOTIFICATION_REPORT:-true}
+      WATCHTOWER_DEBUG: ${WATCHTOWER_DEBUG:-true}
+      WATCHTOWER_LOG_LEVEL: ${WATCHTOWER_LOG_LEVEL:-debug}
       WATCHTOWER_NOTIFICATION_TEMPLATE: |
         {{- if .Report -}}
           {{- with .Report -}}
@@ -715,904 +683,174 @@ services:
         {{- end -}}
     restart: always
 
-  tinyauth:
-    image: ghcr.io/steveiliop56/tinyauth:v3
-    container_name: tinyauth
-    hostname: auth
-    extra_hosts: *common-hostname-aliases
+  dockerproxy:
+    # 🔹🔹 Docker Socket Proxy 🔹🔹
+    image: docker.io/tecnativa/docker-socket-proxy:latest
+    container_name: dockerproxy
+    hostname: dockerproxy
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${TINYAUTH_IPV4_ADDRESS:-10.76.128.82}
-    environment:
-      - SECRET=${TINYAUTH_SECRET?}
-      - APP_URL=${TINYAUTH_APP_URL:-https://auth.${DOMAIN}}
-      - USERS=${TINYAUTH_USERS}
-      # Google OAuth Configuration
-      - GOOGLE_CLIENT_ID=${TINYAUTH_GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${TINYAUTH_GOOGLE_CLIENT_SECRET}
-      # GitHub OAuth Configuration
-      - GITHUB_CLIENT_ID=${TINYAUTH_GITHUB_CLIENT_ID}
-      - GITHUB_CLIENT_SECRET=${TINYAUTH_GITHUB_CLIENT_SECRET}
-      # Additional recommended settings
-      - SESSION_EXPIRY=${TINYAUTH_SESSION_EXPIRY:-604800} # 2 weeks session expiry
-      - COOKIE_SECURE=${TINYAUTH_COOKIE_SECURE:-true} # Send cookie only with HTTPS
-      - APP_TITLE=${TINYAUTH_APP_TITLE:-Bolabaden} # Customize login page title
-      - LOGIN_MAX_RETRIES=${TINYAUTH_LOGIN_MAX_RETRIES:-15} # Maximum login attempts before account lockout
-      - LOGIN_TIMEOUT=${TINYAUTH_LOGIN_TIMEOUT:-300} # Lock account for 5 minutes after too many failed attempts
-      - OAUTH_AUTO_REDIRECT=${TINYAUTH_OAUTH_AUTO_REDIRECT:-none} # Options: none, github, google, or generic
-      # Uncomment below if you want to restrict OAuth login to specific users
-      - OAUTH_WHITELIST=${TINYAUTH_OAUTH_WHITELIST:-boden.crouch@gmail.com,halomastar@gmail.com,athenajaguiar@gmail.com,bolabaden.duckdns@gmail.com}  # e.g. user1,user2,/^admin.*/
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: true
-      traefik.http.routers.tinyauth.rule: Host(`auth.${DOMAIN}`) || Host(`auth.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`auth.${TS_HOSTNAME}.duckdns.org`) || Host(`auth.${TS_HOSTNAME}.${DOMAIN}`) || Host(`auth.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.middlewares.tinyauth.forwardauth.address: http://auth:3000/api/auth/traefik
-      homepage.group: Security
-      homepage.name: TinyAuth
-      homepage.icon: shield-lock.png
-      homepage.href: https://auth.${DOMAIN}/
-      homepage.description: Authentication service for securing your applications
+      - publicnet
+    privileged: true
+    ports:
+        - 127.0.0.1:2375:2375
     volumes:
-      - ${CONFIG_PATH:-./configs}/tinyauth:/data
-    restart: unless-stopped
-
-  whoami:
-    image: traefik/whoami:latest
-    container_name: whoami
-    hostname: whoami
-    extra_hosts: *common-hostname-aliases
-    networks:
-      publicnet:
-        ipv4_address: ${WHOAMI_IPV4_ADDRESS:-10.76.128.81}
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      # Example 1: Use nginx auth middleware (API key OR IP whitelist OR TinyAuth)
-      traefik.http.routers.whoami-nginx.middlewares: nginx-auth@file
-      traefik.http.routers.whoami-nginx.rule: Host(`whoami-nginx.${DOMAIN}`) || Host(`whoami-nginx.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`whoami-nginx.${TS_HOSTNAME}.duckdns.org`) || Host(`whoami-nginx.${TS_HOSTNAME}.${DOMAIN}`) || Host(`whoami-nginx.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      # Example 2: Direct access (no authentication) 
-      traefik.http.routers.whoami.rule: Host(`whoami.${DOMAIN}`) || Host(`whoami.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`whoami.${TS_HOSTNAME}.duckdns.org`) || Host(`whoami.${TS_HOSTNAME}.${DOMAIN}`) || Host(`whoami.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      homepage.group: Web Services
-      homepage.name: Whoami
-      homepage.icon: whoami.png
-      homepage.href: https://whoami-nginx.${DOMAIN}
-      homepage.description: Whoami service with multiple auth examples - nginx auth (API key OR IP OR TinyAuth), direct access, and TinyAuth only.
+        - /var/run/docker.sock:/var/run/docker.sock
     restart: always
-  code-demo:
-    # 🔹🔹 Code Server 🔹🔹
-    image: linuxserver/code-server:latest
-    container_name: code
-    hostname: code
-    extra_hosts: *common-hostname-aliases
+
+  redis:
+    # 🔹🔹 Redis 🔹🔹
+    # NOTE: If you want to use Valkey (open source) instead of Redis (source available),
+    # uncomment the Valkey statement and comment out the Redis statement.
+    # Using Valkey with Firecrawl is untested and not guaranteed to work. Use with caution.
+    image: docker.io/redis:alpine
+    # image: valkey/valkey:alpine
+    container_name: redis
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${CODE_DEMO_IPV4_ADDRESS:-10.76.128.80}
+      - backend
+      - publicnet
     expose:
-      - 8443
+      - ${REDIS_PORT:-6379}
     volumes:
-      - ${CONFIG_PATH:-./configs}/code-server/demo/config:/config
-      - ${CONFIG_PATH:-./configs}/code-server/demo/workspace:/workspace
+      - ${CONFIG_PATH:-./configs}/redis:/data
     environment:
-      <<: *common-env
-      CODESERVER_SUDO_PASSWORD: ${CODESERVER_SUDO_PASSWORD}
-      SUDO_PASSWORD: ${CODESERVER_SUDO_PASSWORD}
-      CODESERVER_DEFAULT_WORKSPACE: ${CODESERVER_DEFAULT_WORKSPACE:-/workspace}
-      DEFAULT_WORKSPACE: ${CODESERVER_DEFAULT_WORKSPACE:-/workspace}
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      traefik.http.routers.code.rule: Host(`code.${DOMAIN}`) || Host(`code.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`code.${TS_HOSTNAME}.duckdns.org`) || Host(`code.${TS_HOSTNAME}.${DOMAIN}`) || Host(`code.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.code.loadbalancer.server.port: 8443
-      homepage.group: Development
-      homepage.name: Code Server
-      homepage.icon: code-server.png
-      homepage.href: https://code.${DOMAIN}/
-      homepage.description: A web-based IDE for coding, editing, and debugging code, with support for multiple languages and frameworks.
-    deploy:
-      resources:
-        limits:
-          cpus: '0.2'
-          memory: 512m
-    restart: always
-
-  flaresolverr:
-    # 🔹🔹 Flaresolverr 🔹🔹  # https://github.com/flaresolverr/flaresolverr
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    #image: ghcr.io/thephaseless/byparr:latest
-    container_name: flaresolverr
-    hostname: flaresolverr
-    extra_hosts: *common-hostname-aliases
-    networks:
-      publicnet:
-        ipv4_address: ${FLARESOLVERR_IPV4_ADDRESS:-10.76.128.93}
-    expose:
-      - ${FLARESOLVERR_PORT:-8191}
-    environment:
-      <<: *common-env
-      # FlareSolverr Environment Variables
-      # Verbosity of the logging. Use LOG_LEVEL=debug for more information.
-      LOG_LEVEL: ${LOG_LEVEL:-${FLARESOLVERR_LOG_LEVEL:-info}}  # Only for debugging. If true all HTML that passes through the proxy will be logged to the console in debug level.
-      LOG_HTML: ${FLARESOLVERR_LOG_HTML:-false}  # Captcha solving method. It is used when a captcha is encountered.
-      CAPTCHA_SOLVER: ${FLARESOLVERR_CAPTCHA_SOLVER:-none}  # Note: none of the captcha solvers work with the current version of Flaresolverr.
-      PORT: ${FLARESOLVERR_PORT:-8191}  # Listening port.
-      HOST: ${FLARESOLVERR_HOST:-0.0.0.0}  # Listening interface.
-      HEADLESS: ${FLARESOLVERR_HEADLESS:-true}  # Only for debugging. To run the web browser in headless mode or visible.
-      BROWSER_TIMEOUT: ${FLARESOLVERR_BROWSER_TIMEOUT:-120000}  # If you are experiencing errors/timeouts because your system is slow, you can try to increase this value.
-      TEST_URL: ${FLARESOLVERR_TEST_URL:-https://www.google.com}  # FlareSolverr makes a request on start to make sure the web browser is working.
-      PROMETHEUS_ENABLED: ${FLARESOLVERR_PROMETHEUS_ENABLED:-false}  # Enable Prometheus exporter
-      PROMETHEUS_PORT: ${PROMETHEUS_PORT:-9090}  # Listening port for Prometheus exporter
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      traefik.http.routers.flaresolverr.middlewares: nginx-auth@file
-      traefik.http.routers.flaresolverr.rule: Host(`flaresolverr.${DOMAIN}`) || Host( `flaresolverr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`flaresolverr.${TS_HOSTNAME}.duckdns.org`) || Host(`flaresolverr.${TS_HOSTNAME}.${DOMAIN}`) || Host(`flaresolverr.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.flaresolverr.loadbalancer.server.port: ${FLARESOLVERR_PORT:-8191}
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+      REDIS_DATABASE: ${REDIS_DATABASE:-0}
+      REDIS_USERNAME: ${REDIS_USERNAME:-default}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis}
+    command: redis-server --appendonly yes --save 60 1 --bind 0.0.0.0
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://127.0.0.1:${FLARESOLVERR_PORT:-8191}/health > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 15s
-      retries: 3
-      start_period: 60s
-    restart: always
-
-  stremio:
-    # 🔹🔹 Stremio 🔹🔹
-    # Stream Movies/TV over debrid instantly.
-#    build:
-#      context: ${SRC_PATH:-./src}/stremio/stremio-docker
-#      context: https://github.com/tsaridas/stremio-docker.git#main
-#      dockerfile: Dockerfile
-#    image: tsaridas/stremio-docker:latest
-    image: tsaridas/stremio-docker:latest
-    container_name: stremio
-    network_mode: service:warp
-    volumes:
-      - ${CONFIG_PATH:-./configs}/stremio/root/.stremio-server:/root/.stremio-server
-#      - ${CONFIG_PATH:-./configs}/stremio/srv/stremio-server:/srv/stremio-server
-    environment:
-#      Don't use IPADDRESS auto-discovery when routing through a VPN/tunnel.
-#      IPADDRESS: 0.0.0.0
-      IPADDRESS: ${EXTERNAL_IP:-149.130.221.93}
-#     SERVER_URL: "https://0-0-0-0.519b6502d940.stremio.rocks:12470/"
-#      SERVER_URL: "https://149-130-221-93.519b6502d940.stremio.rocks:12470/"
-      SERVER_URL: "${STREMIO_SERVER_URL:-https://stremio.${DOMAIN}}"
-#      WEBUI_LOCATION: "https://app.strem.io/shell-v4.4/"  # Where the streaming server will redirect to. Defaults to "https://app.strem.io/shell-v4.4/"
-      WEBUI_LOCATION: "${STREMIO_WEBUI_LOCATION:-https://stremio-web.${DOMAIN}/}"
-#      WEBUI_LOCATION: "https://stremio-web.${DOMAIN}/shell/"
-      NO_CORS: 0
-      CASTING_DISABLED: 1
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      homepage.group: Media Streaming Platforms
-      homepage.name: Stremio
-      homepage.icon: stremio.png
-      homepage.href: https://stremio.${DOMAIN}/
-      homepage.description: A one-stop hub for video content aggregation, allowing you to stream movies, series, and more from various sources.
-    healthcheck:
-      test: ["CMD-SHELL", "curl -fs http://127.0.0.1:11470 || curl -fs http://127.0.0.1:12470"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    restart: always
-  aiostreams:
-    # 🔹🔹 AIOStreams 🔹🔹
-    depends_on:
-      warp:
-        condition: service_started
-    build:
-      context: https://github.com/viren070/aiostreams.git#main
-      dockerfile: Dockerfile
-    image: ghcr.io/viren070/aiostreams:latest
-    container_name: aiostreams
-    network_mode: service:warp
-    env_file:
-      - ${CONFIG_PATH:-./configs}/stremio/addons/aiostreams/config/.env
-    environment:
-      - TZ=${TZ:-America/Chicago}
-      # ==============================================================================
-      #                             GENERAL ADDON CONFIGURATION
-      # ==============================================================================
-      - ADDON_NAME=BadenAIO
-      - ADDON_ID=aiostreams.${DOMAIN}
-      # Set to true to generate a deterministic addon ID based on the configuration, useful for apps like Vidi that require a different addon ID for multiple installations
-      - DETERMINISTIC_ADDON_ID=false
-      # The port on which the addon will listen on
-      - PORT=${AIOSTREAMS_PORT:-3005}
-      # The secret key used for encrypting the addon's configuration
-      # You must use a 64 character **hex** string, use the following commands to generate one:
-      # Linux: openssl rand -hex 32
-      # Windows: [System.Guid]::NewGuid().ToString("N").Substring(0, 32) + [System.Guid]::NewGuid().ToString("N").Substring(0, 32) 
-      - SECRET_KEY=${AIOSTREAMS_SECRET_KEY:-1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82}
-      # The API key used to install and use the addon, leave empty to disable API key requirement
-      # Can be set to any string
-      - API_KEY=${AIOSTREAMS_API_KEY:-sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9}
-      # Controls whether the addon shows a dice emoji in its stream results
-      - SHOW_DIE=false
-      # The log level of the addon, can be set to "debug", "info", "warn", "error"
-      - LOG_LEVEL=debug
-      # The log format of the addon, can be set to "json" or "text"
-      - LOG_FORMAT=text
-      # Whether to log sensitive information like API keys
-      - LOG_SENSITIVE_INFO=true
-      # ==============================================================================
-      # ==============================================================================
-      #                             PROXY CONFIGURATION
-      # ==============================================================================
-      # The proxy URL to use for all requests made to upstream addons
-      # You only need to configure this if the server you are hosting the addon on
-      # is blocked by Torrentio. 
-      # 
-      # e.g. from https://github.com/cmj2002/warp-docker
-      #- ADDON_PROXY=http://warp:1080/
-      #
-      # Optionally, configure what domains to proxy
-      # Use a comma separated list of rules in the format string:boolean. 
-      # The later in the list, the higher the priority.
-      # You can use wildcards (*) to match multiple domains
-      # e.g. ADDON_PROXY_CONFIG="*:false,*.strem.fun:true"
-      # This would only proxy requests to the strem.fun domain and any subdomains of it
-      #- ADDON_PROXY_CONFIG=
-      # ==============================================================================
-      #                         CONFIGURATION LIMITS
-      # ==============================================================================
-      # The max number of addons that are allowed to be used through a single instance of the addon
-      - MAX_ADDONS=50
-      # The maximum number of keyword filters that can be used in a single instance of the addon
-      - MAX_KEYWORD_FILTERS=30
-      # The maximum number of regexes that can be used for sorting in a single instance of the addon
-      - MAX_REGEX_SORT_PATTERNS=30
-      # To control the maximum size the size filter sliders can go up to in bytes
-      - MAX_MOVIE_SIZE=161061273600
-      - MAX_EPISODE_SIZE=161061273600
-      # The maximum timeout that can be set for an addon through the override option
-      - MAX_TIMEOUT=50000
-      - MIN_TIMEOUT=1000
-      # ==============================================================================
-      # ==============================================================================
-      #                         MEDIAFLOW CONFIGURATION
-      # ==============================================================================
-      # The timeout for requesting the IP from MediaFlow
-      # When we fail to get the IP from MediaFlow, no streams will be fetched and only an error message will be shown
-      - MEDIAFLOW_IP_TIMEOUT=30000
-      # If you set a default mediaflow configuration, it will force the addon to use MediaFlow for all instances
-      # A user can override the mediaflow instance to use a different one
-      #- DEFAULT_MEDIAFLOW_URL=https://mediaflow-proxy.${DOMAIN}/
-      #- DEFAULT_MEDIAFLOW_API_PASSWORD=${MEDIAFLOW_PROXY_API_PASSWORD}
-      #- DEFAULT_MEDIAFLOW_PUBLIC_IP=149.130.221.93  # micklethefickle
-      #- DEFAULT_MEDIAFLOW_PUBLIC_IP=207.211.189.95  # beatapostapita
-      # Whether to encrypt each mediaflow URL. This improves compatability with external players.
-      - ENCRYPT_MEDIAFLOW_URLS=true
-      # ==============================================================================
-      # ==============================================================================
-      #                        STREMTHRU (PROXY) CONFIGURATION
-      # ==============================================================================
-      # The timeout for requests to the StremThru instance
-      - STREMTHRU_TIMEOUT=30000
-      # If you set a default stremthru configuration, it will force the addon to use StremThru for all instances
-      # A user can override the stremthru instance to use a different one
-      #- DEFAULT_STREMTHRU_URL=https://stremthru.elfhosted.com/
-      #- DEFAULT_STREMTHRU_URL=https://stremthru.13377001.xyz/
-      - DEFAULT_STREMTHRU_URL=https://stremthru.${DOMAIN}/
-      # The default credential used (either plain-text or base64 encoded of a username:password pair)
-      - DEFAULT_STREMTHRU_CREDENTIAL=${DEFAULT_STREMTHRU_CREDENTIAL}
-      - ENCRYPT_STREMTHRU_URLS=true
-      # ==============================================================================
-      #                         ADDON CONSTANTS
-      # ==============================================================================
-      # Default regex patterns for filtering and sorting
-      # These are used as defaults, and can be overridden in the addon configuration page
-      #
-      # NOTE: You MUST provide the regex between 2 single quotes ('), not double quotes or no quotes, otherwise it will NOT work.
-      # 
-      # Example Exclude Pattern: `/b(0neshot)\b` will exclude streams with the word "0neshot" in them
-      #- DEFAULT_REGEX_EXCLUDE_PATTERN=''
-      # Example Include Pattern: `/b(3L)\b` will include only streams with the word "3L" in them
-      #- DEFAULT_REGEX_INCLUDE_PATTERN=''
-      # Example Sort Patterns: `/b(3L|BiZKiT)\b \b(FraMeSToR)\b \b(TRiToN)\b` will sort streams with the word "3L" or "BiZKiT" in them, followed by "FraMeSToR", followed by "TRiToN"
-      #- DEFAULT_REGEX_SORT_PATTERNS=''
-      # The default timeout for all requests. If other timeouts are not set, this will be used
-      - DEFAULT_TIMEOUT=15000
-      # Note: all URLs must end in a trailing slash
-      # ----------- COMET ------------
-      # COMET_URL=https://comet.elfhosted.com/
-      # COMET_URL=https://comet.${DOMAIN}/
-      - COMET_URL=http://comet:2020/
-      # The default timeout for all requests to the Comet API. If left empty, either the DEFAULT_TIMEOUT or the overriden timeout will be used
-      #- DEFAULT_COMET_TIMOUT=
-      # The following environment variables should only be set if you are using an internal URL for 'COMET_URL' e.g. http://comet:3000/
-      # and want the comet streams to be accessible from outside the network
-      # i.e. you would set these to the public URL of the comet instance
-      # Do not uncomment these if you don't want to use them, as these don't accept empty strings and your comet streams will NOT work 
-      # Example scenarios: 
-      # 1. Your COMET_URL is an internal URL (e.g. http://comet:3000), you would need to set FORCE_COMET_HOSTNAME to your publicly accessible host, set FORCE_COMET_PROTOCOL as needed
-      #    and make sure to set FORCE_COMET_PROTOCOL to an empty value
-      # 2. Same as scenario 1, but you are using mediaflow proxy on the same docker network. In this case, it is better for MediaFlow proxy to use the internal URL so leave these
-      #    commented out. 
-      # 3. You set COMET_URL to a publicly accessible URL. No further actions are required. 
-      - FORCE_COMET_HOSTNAME=comet.${DOMAIN}
-      - FORCE_COMET_PORT=443
-      - FORCE_COMET_PROTOCOL=https
-      # -------------------------------------
-      # ----------- MEDIAFUSION ------------
-      #- MEDIAFUSION_URL=https://mediafusion.elfhosted.com/
-      #- MEDIAFUSION_URL=https://mediafusion.${DOMAIN}/
-      - MEDIAFUSION_URL=http://mediafusion:8000/
-      #- DEFAULT_MEDIAFUSION_TIMEOUT=
-      # The timeout applied to the /encrypt-user-data endpoint of MediaFusion when auto generating the configuration
-      - MEDIAFUSION_CONFIG_TIMEOUT=5000
-      # If you are using a self hosted instance of MediaFusion protected with a 'API_PASSWORD', you must provide it here
-      # If you want to be able to make use of the auto configuration. If you are planning on overriding the URL at the config page, you can leave this empty
-      - MEDIAFUSION_API_PASSWORD=${SUDO_PASSWORD}
-      # ------------------------------------- 
-      # ----------- JACKETTIO -------------
-      - JACKETTIO_URL=https://jackettio.elfhosted.com/
-      #- JACKETTIO_URL=https://jackettio.${DOMAIN}/
-      #- JACKETTIO_URL=http://jackettio:4000/
-      # The default indexers used when auto generating the configuration. Change if using a custom Jackettio instance, and you have different indexers 
-      - DEFAULT_JACKETTIO_INDEXERS=["1337x", "animetosho", "anirena", "limetorrents", "nyaasi", "solidtorrents", "thepiratebay", "torlock", "yts"]
-      #- DEFAULT_JACKETTIO_TIMEOUT=
-      # The default URL used for the stremthru instance. 
-      - DEFAULT_JACKETTIO_STREMTHRU_URL=https://stremthru.13377001.xyz  # default in AIOStreams
-      #- DEFAULT_JACKETTIO_STREMTHRU_URL=https://stremthru.${DOMAIN}
-      # You may also provide a selfhosted instance of StremThru here.
-      #- DEFAULT_JACKETTIO_STREMTHRU_URL=http://stremthru:8080
-      # These values work the same as the comet ones, but for Jackettio
-      #- FORCE_JACKETTIO_HOSTNAME=jackettio.${DOMAIN}
-      #- FORCE_JACKETTIO_PORT=443
-      #- FORCE_JACKETTIO_PROTOCOL=https
-      # -------------------------------------
-      # ---------- STREMIO-JACKETT ----------
-      - STREMIO_JACKETT_URL=https://stremio-jackett.elfhosted.com/
-      #- STREMIO_JACKETT_URL=https://stremio-jackett.${DOMAIN}/
-      #- STREMIO_JACKETT_URL=http://stremio-jackett:3000/
-      # If using a self hosted instance, provide the Jackett URL and API key here
-      #- DEFAULT_STREMIO_JACKETT_JACKETT_URL=http://jackett:9117/
-      #- DEFAULT_STREMIO_JACKETT_JACKETT_API_KEY=${JACKETT_API_KEY}
-      # The default API key used in Stremio Jackett configurations.
-      - DEFAULT_STREMIO_JACKETT_TMDB_API_KEY=${TMDB_API_KEY}
-      # Whether to enable the cache option for auto configurations
-      - STREMIO_JACKETT_CACHE_ENABLED=true
-      #- DEFAULT_STREMIO_JACKETT_TIMEOUT=
-      # -------------------------------------
-      # --------- STREMTHRU-STORE ---------
-      - STREMTHRU_STORE_URL=https://stremthru.elfhosted.com/stremio/store/  # default in AIOStreams
-      #- STREMTHRU_STORE_URL=https://stremthru.13377001.xyz/stremio/store/
-      #- STREMTHRU_STORE_URL=https://stremthru.${DOMAIN}/stremio/store/
-      #- STREMTHRU_STORE_URL=http://stremthru:8080/stremio/store/
-      #- DEFAULT_STREMTHRU_STORE_TIMEOUT=
-      # --------------------------------------
-      # --------- EASYNEWS+ ADDON ---------
-      # The URL of the EasyNews+ instance to use. You can provide a url to a self hosted instance of EasyNews+ or the public instance
-      - EASYNEWS_PLUS_URL=https://b89262c192b0-stremio-easynews-addon.baby-beamup.club/
-      #- DEFAULT_EASYNEWS_PLUS_TIMEOUT=
-      # -------------------------------------
-      # -------- EASYNEWS++ ADDON ---------
-      - EASYNEWS_PLUS_PLUS_URL=https://easynews-cloudflare-worker.jqrw92fchz.workers.dev/
-      #- DEFAULT_EASYNEWS_PLUS_PLUS_TIMEOUT=
-      # -------------------------------------
-      # ----------- TORRENTIO -------------
-      - DISABLE_TORRENTIO_MESSAGE=
-      - TORRENTIO_URL=https://torrentio.strem.fun/
-      #- DEFAULT_TORRENTIO_TIMEOUT=
-      # -------------------------------------
-      # -------- ORION STREMIO ADDON --------
-      - ORION_STREMIO_ADDON_URL=https://5a0d1888fa64-orion.baby-beamup.club/
-      #- DEFAULT_ORION_STREMIO_ADDON_TIMEOUT=
-      # -------------------------------------
-      # ------------ PEERFLIX --------------
-      - PEERFLIX_URL=https://peerflix-addon.onrender.com/
-      #- DEFAULT_PEERFLIX_TIMEOUT=
-      # -------------------------------------
-      # -------- TORBOX STREMIO ADDON --------
-      - TORBOX_STREMIO_URL=https://stremio.torbox.app/
-      #- DEFAULT_TORBOX_STREMIO_TIMEOUT=
-      # --------------------------------------
-      # -------- EASYNEWS ADDON --------
-      - EASYNEWS_URL=https://ea627ddf0ee7-easynews.baby-beamup.club/
-      #- DEFAULT_EASYNEWS_TIMEOUT=
-      # --------------------------------------
-      # ------------ DEBRIDIO -----------
-      - DEBRIDIO_URL=https://debridio.adobotec.com/
-      #- DEFAULT_DEBRIDIO_TIMEOUT=
-      # --------------------------------------
-      # ------------- DMM Cast ----------------
-      #- DEFAULT_DMM_CAST_TIMEOUT=
-      # --------------------------------------
-      # -------------- STREMIO GDRIVE ----------------
-      #- DEFAULT_STREMIO_GDRIVE_TIMEOUT=
-      # --------------------------------------
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      homepage.group: Stremio Addons
-      homepage.name: AIOStreams
-      homepage.icon: aiostreams.png
-      homepage.href: https://aiostreams.${DOMAIN}/
-      homepage.description: AIOStreams is a stremio addon that combines multiple stremio addons into one, providing additional functionality that can be used for all these addons that may not natively otherwise support them.
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:${AIOSTREAMS_PORT:-3005}/health || exit 1"]
-      interval: 1m
-      timeout: 10s
-      retries: 5
-      start_period: 10s
-    restart: always
-  jackett:
-    # 🔹🔹 Jackett 🔹🔹
-    depends_on:
-      flaresolverr:
-        condition: service_healthy
-      warp:
-        condition: service_healthy
-    image: linuxserver/jackett
-    container_name: jackett
-    network_mode: service:warp
-    <<: [*common-uidgid, *common-logging, *resource-limits]
-    volumes:
-      - ${CONFIG_PATH:-./configs}/jackett/config:/config
-      - ${CONFIG_PATH:-./configs}/jackett/blackhole:/downloads
-    environment:
-      <<: *common-env
-      AUTO_UPDATE: "true" #optional
-      RUN_OPTS: "" #optional
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      homepage.group: Source Aggregator
-      homepage.name: Jackett Indexer
-      homepage.icon: jackett.png
-      homepage.href: https://jackett.${DOMAIN}/
-      homepage.description: Connects your download applications with various source providers and indexers, making it easier to find and download content through your download clients.
-      homepage.weight: 1
-      homepage.widget.type: jackett
-      homepage.widget.url: http://jackett:${JACKETT_PORT:-9117}
-      homepage.widget.key: ${JACKETT_API_KEY}
-    healthcheck:
-      test: ["CMD-SHELL", "curl -fs http://127.0.0.1:9117/api/v2.0/indexers/all/results/torznab?t=indexers&apikey=${JACKETT_API_KEY} || exit 1"]
-      interval: 30s
-      timeout: 10s
-      start_period: 60s
-    restart: always
-  prowlarr:
-    # 🔹🔹 Prowlarr 🔹🔹
-    image: linuxserver/prowlarr
-    container_name: prowlarr
-    network_mode: service:warp
-    volumes:
-      - ${CONFIG_PATH:-./configs}/prowlarr/config:/config
-    environment:
-      <<: *common-env
-      PROWLARR_API_KEY: ${PROWLARR_API_KEY}
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      homepage.group: Indexers
-      homepage.name: Prowlarr
-      homepage.icon: prowlarr.png
-      homepage.href: https://prowlarr.${DOMAIN}/
-      homepage.description: An indexer manager/proxy for your Usenet and Torrent downloaders, integrating with PVR apps like Sonarr and Radarr.
-      homepage.weight: 1
-      homepage.widget.type: prowlarr
-      homepage.widget.url: http://prowlarr:${PROWLARR_PORT:-9696}
-      homepage.widget.key: ${PROWLARR_API_KEY}
-    healthcheck:  # docker exec prowlarr ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
-      test: ["CMD-SHELL", "curl -fs -H \"Authorization: Bearer ${PROWLARR_API_KEY}\" http://127.0.0.1:9696/api/v1/system/status || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 120s
-    restart: always
-  comet:
-    depends_on:
-      - prowlarr
-      - warp
-    image: g0ldyy/comet
-    container_name: comet
-    network_mode: service:warp
-    volumes:
-      - ${CONFIG_PATH:-./configs}/stremio/addons/comet/data:/data
-    environment:
-      - TZ=${TZ:-America/Chicago}
-      - ADDON_ID=comet.${DOMAIN}
-      - ADDON_NAME=Comet
-      - FASTAPI_HOST=0.0.0.0
-      - FASTAPI_PORT=${COMET_PORT:-2020}
-      - FASTAPI_WORKERS=4
-      - USE_GUNICORN=True
-      - DASHBOARD_ADMIN_PASSWORD=${SUDO_PASSWORD}
-      - DATABASE_TYPE=sqlite
-      - DATABASE_PATH=/data/comet.db
-      - METADATA_CACHE_TTL=2592000
-      - TORRENT_CACHE_TTL=1296000
-      - DEBRID_CACHE_TTL=86400
-      - INDEXER_MANAGER_TYPE=${COMET_INDEXER_MANAGER_TYPE:-prowlarr}  # jackett, prowlarr, none
-      - INDEXER_MANAGER_URL=${COMET_INDEXER_MANAGER_URL:-http://prowlarr:9696}  # http://jackett:9117, http://prowlarr:9696
-      - INDEXER_MANAGER_API_KEY=${COMET_INDEXER_MANAGER_API_KEY:-${PROWLARR_API_KEY}}  # ${JACKETT_API_KEY}, ${PROWLARR_API_KEY}
-      - INDEXER_MANAGER_TIMEOUT=60
-      - INDEXER_MANAGER_INDEXERS=["1337x", "animetosho", "anirena", "limetorrents", "nyaasi", "thepiratebay", "torlock", "yts"]
-      - GET_TORRENT_TIMEOUT=2
-      - DOWNLOAD_TORRENT_FILES=False
-      - SCRAPE_COMET=false
-      - COMET_URL=https://comet.elfhosted.com
-      - SCRAPE_ZILEAN=true
-      - ZILEAN_URL=https://zilean.elfhosted.com
-      - SCRAPE_TORRENTIO=false
-      - TORRENTIO_URL=https://torrentio.strem.fun
-      - SCRAPE_MEDIAFUSION=false
-      - MEDIAFUSION_URL=https://mediafusion.elfhosted.com
-      - STREMTHRU_URL=https://stremthru.${DOMAIN}
-      - PROXY_DEBRID_STREAM=True
-      - PROXY_DEBRID_STREAM_PASSWORD=${SUDO_PASSWORD}
-      - PROXY_DEBRID_STREAM_MAX_CONNECTIONS=-1
-      - PROXY_DEBRID_STREAM_DEBRID_DEFAULT_SERVICE=premiumize
-      - PROXY_DEBRID_STREAM_DEBRID_DEFAULT_APIKEY=${PREMIUMIZE_API_KEY}
-      - REMOVE_ADULT_CONTENT=True
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      homepage.group: Stremio Addons
-      homepage.name: Comet
-      homepage.icon: comet.png
-      homepage.href: https://comet.${DOMAIN}/
-    healthcheck:  # docker exec comet ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:${COMET_PORT:-2020}/health > /dev/null 2>&1 || exit 1"]
-      interval: 1m
-      timeout: 5s
-      retries: 3
-      start_period: 15s
-    restart: always
-  mediafusion:
-    depends_on:
-      warp:
-        condition: service_started
-      mongodb:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    image: mhdzumair/mediafusion:latest
-    container_name: mediafusion
-    network_mode: service:warp
-    environment:
-      TZ: ${TZ:-America/Chicago}
-      # CORE APPLICATION SETTINGS
-      ADDON_NAME: "${MEDIAFUSION_ADDON_NAME:-MediaFusion}"  # The name of the MediaFusion addon
-      VERSION: "${MEDIAFUSION_VERSION:-1.0.0}"  # The version of the MediaFusion addon
-      DESCRIPTION: "${MEDIAFUSION_DESCRIPTION:-MediaFusion Stremio Addon}"  # A brief description of the MediaFusion addon to show on Stremio Addon page
-      BRANDING_DESCRIPTION: "${MEDIAFUSION_BRANDING_DESCRIPTION:-}"  # Additional branding description text
-      CONTACT_EMAIL: "${MEDIAFUSION_CONTACT_EMAIL:-mhdzumair@gmail.com}"  # The contact email for the MediaFusion addon
-      HOST_URL: https://mediafusion.${DOMAIN}  # The URL where MediaFusion is hosted (required)
-      POSTER_HOST_URL: "${MEDIAFUSION_POSTER_HOST_URL:-https://mediafusion.${DOMAIN}}"  # The URL where poster images are served from (default: Same as host_url)
-      SECRET_KEY: "${MEDIAFUSION_SECRET_KEY?}"  # A 32-character secret key for securely signing the session (required)
-      API_PASSWORD: "${SUDO_PASSWORD}"  # The password for accessing the API endpoints (required)
-      LOGGING_LEVEL: "DEBUG"  # The logging level of the application (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-      LOGO_URL: "${MEDIAFUSION_LOGO_URL:-}"  # The URL of the MediaFusion logo
-      IS_PUBLIC_INSTANCE: "${MEDIAFUSION_IS_PUBLIC_INSTANCE:-False}"  # Set to True for community instances that don't require authentication except for /scraper endpoint
-      MIN_SCRAPING_VIDEO_SIZE: "${MEDIAFUSION_MIN_SCRAPING_VIDEO_SIZE:-26214400}"  # Minimum video size in bytes (25 MB) for scraping
-      METADATA_PRIMARY_SOURCE: "${MEDIAFUSION_METADATA_PRIMARY_SOURCE:-imdb}"  # Primary source for metadata. Options: "imdb" or "tmdb"
-      # STREAMING PROVIDER SETTINGS
-      DISABLED_PROVIDERS: "${MEDIAFUSION_DISABLED_PROVIDERS:-[]}"  # List of disabled streaming providers (p2p, realdebrid, seedr, debridlink, alldebrid, offcloud, pikpak, torbox, premiumize, qbittorrent, stremthru, easydebrid)
-      # DATABASE AND CACHE SETTINGS
-      MONGO_URI: "${MEDIAFUSION_MONGO_URI:-mongodb://${MONGODB_HOSTNAME:-mongodb}:27017/mediafusion}"  # MongoDB connection URI (required)
-      DB_MAX_CONNECTIONS: "${MEDIAFUSION_DB_MAX_CONNECTIONS:-50}"  # Maximum database connections
-      REDIS_URL: "${MEDIAFUSION_REDIS_URL:-redis://${REDIS_HOSTNAME:-redis}:6379}"  # Redis service URL for caching and tasks
-      REDIS_MAX_CONNECTIONS: "${MEDIAFUSION_REDIS_MAX_CONNECTIONS:-100}"  # Maximum Redis connections
-      # EXTERNAL SERVICE SETTINGS
-#      REQUESTS_PROXY_URL: "${MEDIAFUSION_REQUESTS_PROXY_URL:-}"  # Optional proxy URL for requests
-      PLAYWRIGHT_CDP_URL: "${MEDIAFUSION_PLAYWRIGHT_CDP_URL:-ws://browserless:3000?blockAds=true&stealth=true}"  # Playwright CDP service URL
-      FLARESOLVERR_URL: "${MEDIAFUSION_FLARESOLVERR_URL:-http://flaresolverr:8191/v1}"  # FlareSolverr service URL
-      TMDB_API_KEY: "${TMDB_API_KEY}"  # TMDB API key for metadata fetching
-      # PROWLARR SETTINGS
-      IS_SCRAP_FROM_PROWLARR: "True"  # Enable/disable Prowlarr scraping
-      PROWLARR_API_KEY: "${PROWLARR_API_KEY}"  # Prowlarr API key
-      PROWLARR_URL: "${PROWLARR_URL:-http://prowlarr:9696}"  # Prowlarr service URL
-      PROWLARR_LIVE_TITLE_SEARCH: "${MEDIAFUSION_PROWLARR_LIVE_TITLE_SEARCH:-False}"  # Enable live title search in Prowlarr
-      PROWLARR_BACKGROUND_TITLE_SEARCH: "${MEDIAFUSION_PROWLARR_BACKGROUND_TITLE_SEARCH:-True}"  # Enable background title search
-      PROWLARR_SEARCH_QUERY_TIMEOUT: "${MEDIAFUSION_PROWLARR_SEARCH_QUERY_TIMEOUT:-30}"  # Search query timeout in seconds
-      PROWLARR_IMMEDIATE_MAX_PROCESS: "${MEDIAFUSION_PROWLARR_IMMEDIATE_MAX_PROCESS:-10}"  # Max immediate processes
-      PROWLARR_IMMEDIATE_MAX_PROCESS_TIME: "${MEDIAFUSION_PROWLARR_IMMEDIATE_MAX_PROCESS_TIME:-15}"  # Max process time in seconds
-      PROWLARR_SEARCH_INTERVAL_HOUR: "${MEDIAFUSION_PROWLARR_SEARCH_INTERVAL_HOUR:-72}"  # Search interval in hours
-      PROWLARR_FEED_SCRAPE_INTERVAL_HOUR: "${MEDIAFUSION_PROWLARR_FEED_SCRAPE_INTERVAL_HOUR:-3}"  # Feed scraping interval in hours
-      # JACKETT SETTINGS
-      IS_SCRAP_FROM_JACKETT: "True"  # Enable/disable Jackett scraping
-      JACKETT_URL: "${JACKETT_URL:-http://jackett:9117}"  # Jackett service URL
-      JACKETT_API_KEY: "${JACKETT_API_KEY}"  # Jackett API key
-      JACKETT_SEARCH_INTERVAL_HOUR: "${MEDIAFUSION_JACKETT_SEARCH_INTERVAL_HOUR:-72}"  # Search interval in hours
-      JACKETT_SEARCH_QUERY_TIMEOUT: "${MEDIAFUSION_JACKETT_SEARCH_QUERY_TIMEOUT:-30}"  # Search query timeout in seconds
-      JACKETT_IMMEDIATE_MAX_PROCESS: "${MEDIAFUSION_JACKETT_IMMEDIATE_MAX_PROCESS:-10}"  # Max immediate processes
-      JACKETT_IMMEDIATE_MAX_PROCESS_TIME: "${MEDIAFUSION_JACKETT_IMMEDIATE_MAX_PROCESS_TIME:-15}"  # Max process time in seconds
-      JACKETT_LIVE_TITLE_SEARCH: "${MEDIAFUSION_JACKETT_LIVE_TITLE_SEARCH:-False}"  # Enable live title search
-      JACKETT_BACKGROUND_TITLE_SEARCH: "${MEDIAFUSION_JACKETT_BACKGROUND_TITLE_SEARCH:-True}"  # Enable background title search
-      JACKETT_FEED_SCRAPE_INTERVAL_HOUR: "${MEDIAFUSION_JACKETT_FEED_SCRAPE_INTERVAL_HOUR:-3}"  # Feed scraping interval in hours
-      # ZILEAN SETTINGS
-      IS_SCRAP_FROM_ZILEAN: "True"  # Enable/disable Zilean scraping
-      ZILEAN_SEARCH_INTERVAL_HOUR: "${MEDIAFUSION_ZILEAN_SEARCH_INTERVAL_HOUR:-24}"  # Search interval in hours
-      ZILEAN_URL: "${ZILEAN_URL:-https://zilean.elfhosted.com}"  # Zilean service URL (https://zilean.elfhosted.com has zero rate limits)
-      # TORRENTIO SETTINGS
-      IS_SCRAP_FROM_TORRENTIO: "True"  # Enable/disable Torrentio scraping
-      TORRENTIO_SEARCH_INTERVAL_DAYS: "${MEDIAFUSION_TORRENTIO_SEARCH_INTERVAL_DAYS:-3}"  # Search interval in days
-      TORRENTIO_URL: "${TORRENTIO_URL:-https://torrentio.strem.fun}"  # Torrentio service URL
-      # MEDIAFUSION SETTINGS
-      IS_SCRAP_FROM_MEDIAFUSION: "True"  # Enable/disable MediaFusion scraping
-      MEDIAFUSION_SEARCH_INTERVAL_DAYS: "${MEDIAFUSION_MEDIAFUSION_SEARCH_INTERVAL_DAYS:-3}"  # Search interval in days
-      MEDIAFUSION_URL: "${MEDIAFUSION_URL:-https://mediafusion.elfhosted.com}"  # MediaFusion service URL
-      SYNC_DEBRID_CACHE_STREAMS: "${MEDIAFUSION_SYNC_DEBRID_CACHE_STREAMS:-True}"  # Enable syncing debrid cache streams
-      # BT4G SETTINGS
-      IS_SCRAP_FROM_BT4G: "True"  # Enable/disable BT4G scraping
-      BT4G_URL: "${BT4G_URL:-https://bt4gprx.com}"  # BT4G service URL
-      BT4G_SEARCH_INTERVAL_HOUR: "${MEDIAFUSION_BT4G_SEARCH_INTERVAL_HOUR:-72}"  # Search interval in hours
-      BT4G_SEARCH_TIMEOUT: "${MEDIAFUSION_BT4G_SEARCH_TIMEOUT:-10}"  # Search timeout in seconds
-      BT4G_IMMEDIATE_MAX_PROCESS: "${MEDIAFUSION_BT4G_IMMEDIATE_MAX_PROCESS:-15}"  # Max immediate processes
-      BT4G_IMMEDIATE_MAX_PROCESS_TIME: "${MEDIAFUSION_BT4G_IMMEDIATE_MAX_PROCESS_TIME:-15}"  # Max process time in seconds
-      # PREMIUMIZE SETTINGS
-      #PREMIUMIZE_OAUTH_CLIENT_ID: "${PREMIUMIZE_OAUTH_CLIENT_ID:-}"  # Premiumize OAuth client ID
-      #PREMIUMIZE_OAUTH_CLIENT_SECRET: "${PREMIUMIZE_OAUTH_CLIENT_SECRET:-}"  # Premiumize OAuth client secret
-      # TELEGRAM SETTINGS
-      TELEGRAM_BOT_TOKEN: "${TELEGRAM_BOT_TOKEN:-}"  # Telegram bot token for notifications about contribution streams
-      TELEGRAM_CHAT_ID: "${TELEGRAM_CHAT_ID:-}"  # Telegram chat ID for notifications
-      # CONTENT FILTERING SETTINGS
-      ADULT_CONTENT_REGEX_KEYWORDS: "${MEDIAFUSION_ADULT_CONTENT_REGEX_KEYWORDS:-\\b(porn|xxx|sex|nude|naked|erotic|fetish|bdsm|milf|anal|oral|gangbang|threesome|masturbat|orgasm|cumshot|blowjob|handjob|footjob|creampie|facial|bukkake|hentai|yaoi|yuri|ecchi|doujin|camgirl|webcam|stripper|escort|prostitut|brothel|redlight|peepshow|voyeur|exhibitionist|swinger|orgy|hardcore|softcore|playboy|penthouse|hustler|brazzers|bangbros|realitykings|naughtyamerica|digitalplayground|wickedpictures|evilangel|kink|publicagent|fakehub|teamskeet|mofos|twistys|metart|sexart|x-art|joymii|nubiles|18eighteen|lolita|incest|taboo|kinky|slutty|horny|sexy|sensual|seductive|raw|perverted|depraved)\\b}"  # Regex pattern for filtering adult content
-      ADULT_CONTENT_FILTER_IN_TORRENT_TITLE: ${MEDIAFUSION_ADULT_CONTENT_FILTER_IN_TORRENT_TITLE:-True}  # Enable adult content filtering in torrent titles
-      # FEATURE TOGGLES
-      IS_SCRAP_FROM_YTS: "True"  # Enable/disable YTS scraping
-      ENABLE_RATE_LIMIT: "${MEDIAFUSION_ENABLE_RATE_LIMIT:-False}"  # Enable/disable rate limiting
-      VALIDATE_M3U8_URLS_LIVENESS: "${MEDIAFUSION_VALIDATE_M3U8_URLS_LIVENESS:-True}"  # Validate M3U8 URLs for liveness
-      STORE_STREMTHRU_MAGNET_CACHE: "${MEDIAFUSION_STORE_STREMTHRU_MAGNET_CACHE:-False}"  # Store StremThru magnet cache
-      SCRAPE_WITH_AKA_TITLES: "${MEDIAFUSION_SCRAPE_WITH_AKA_TITLES:-True}"  # Include alternative titles in scraping
-      ENABLE_FETCHING_TORRENT_METADATA_FROM_P2P: "${MEDIAFUSION_ENABLE_FETCHING_TORRENT_METADATA_FROM_P2P:-True}"  # Enable fetching torrent metadata from P2P (Caution: may raise DMCA issues)
-      # TIME-RELATED SETTINGS
-      META_CACHE_TTL: "${MEDIAFUSION_META_CACHE_TTL:-1800}"  # Metadata cache TTL in seconds (30 minutes)
-      WORKER_MAX_TASKS_PER_CHILD: "${MEDIAFUSION_WORKER_MAX_TASKS_PER_CHILD:-20}"  # Max tasks per worker child process
-      # SCHEDULER SETTINGS
-      DISABLE_ALL_SCHEDULER: "${MEDIAFUSION_DISABLE_ALL_SCHEDULER:-False}"  # Disable all schedulers
-      BACKGROUND_SEARCH_INTERVAL_HOURS: "${MEDIAFUSION_BACKGROUND_SEARCH_INTERVAL_HOURS:-72}"  # Background search interval in hours
-      BACKGROUND_SEARCH_CRONTAB: "${MEDIAFUSION_BACKGROUND_SEARCH_CRONTAB:-*/5 * * * *}"  # Background search schedule
-      TAMILMV_SCHEDULER_CRONTAB: "${MEDIAFUSION_TAMILMV_SCHEDULER_CRONTAB:-0 */3 * * *}"  # TamilMV scheduler crontab expression
-      TAMIL_BLASTERS_SCHEDULER_CRONTAB: "${MEDIAFUSION_TAMIL_BLASTERS_SCHEDULER_CRONTAB:-0 */6 * * *}"  # Tamil Blasters scheduler crontab expression
-      FORMULA_TGX_SCHEDULER_CRONTAB: "${MEDIAFUSION_FORMULA_TGX_SCHEDULER_CRONTAB:-*/30 * * * *}"  # Formula TGX scheduler crontab expression
-      NOWMETV_SCHEDULER_CRONTAB: "${MEDIAFUSION_NOWMETV_SCHEDULER_CRONTAB:-0 0 * * *}"  # NowMeTV scheduler crontab expression
-      NOWSPORTS_SCHEDULER_CRONTAB: "${MEDIAFUSION_NOWSPORTS_SCHEDULER_CRONTAB:-0 10 * * *}"  # NowSports scheduler crontab expression
-      TAMILULTRA_SCHEDULER_CRONTAB: "${MEDIAFUSION_TAMILULTRA_SCHEDULER_CRONTAB:-0 8 * * *}"  # TamilUltra scheduler crontab expression
-      VALIDATE_TV_STREAMS_IN_DB_CRONTAB: "${MEDIAFUSION_VALIDATE_TV_STREAMS_IN_DB_CRONTAB:-0 */6 * * *}"  # Validate TV streams in DB crontab expression
-      SPORT_VIDEO_SCHEDULER_CRONTAB: "${MEDIAFUSION_SPORT_VIDEO_SCHEDULER_CRONTAB:-*/20 * * * *}"  # Sport video scheduler crontab expression
-      DLHD_SCHEDULER_CRONTAB: "${MEDIAFUSION_DLHD_SCHEDULER_CRONTAB:-25 * * * *}"  # DLHD scheduler crontab expression
-      MOTOGP_TGX_SCHEDULER_CRONTAB: "${MEDIAFUSION_MOTOGP_TGX_SCHEDULER_CRONTAB:-0 5 * * *}"  # MotoGP TGX scheduler crontab expression
-      UPDATE_SEEDERS_CRONTAB: "${MEDIAFUSION_UPDATE_SEEDERS_CRONTAB:-0 0 * * *}"  # Update seeders crontab expression
-      ARAB_TORRENTS_SCHEDULER_CRONTAB: "${MEDIAFUSION_ARAB_TORRENTS_SCHEDULER_CRONTAB:-0 0 * * *}"  # Arab Torrents scheduler crontab expression
-      WWE_TGX_SCHEDULER_CRONTAB: "${MEDIAFUSION_WWE_TGX_SCHEDULER_CRONTAB:-10 */3 * * *}"  # WWE TGX scheduler crontab expression
-      UFC_TGX_SCHEDULER_CRONTAB: "${MEDIAFUSION_UFC_TGX_SCHEDULER_CRONTAB:-30 */3 * * *}"  # UFC TGX scheduler crontab expression
-      MOVIES_TV_TGX_SCHEDULER_CRONTAB: "${MEDIAFUSION_MOVIES_TV_TGX_SCHEDULER_CRONTAB:-0 * * * *}"  # Movies TV TGX scheduler crontab expression
-      PROWLARR_FEED_SCRAPER_CRONTAB: "${MEDIAFUSION_PROWLARR_FEED_SCRAPER_CRONTAB:-0 */3 * * *}"  # Prowlarr feed scraper crontab expression
-      JACKETT_FEED_SCRAPER_CRONTAB: "${MEDIAFUSION_JACKETT_FEED_SCRAPER_CRONTAB:-0 */3 * * *}"  # Jackett feed scraper crontab expression
-      CLEANUP_EXPIRED_SCRAPER_TASK_CRONTAB: "${MEDIAFUSION_CLEANUP_EXPIRED_SCRAPER_TASK_CRONTAB:-0 * * * *}"  # Cleanup expired scraper task crontab expression
-      CLEANUP_EXPIRED_CACHE_TASK_CRONTAB: "${MEDIAFUSION_CLEANUP_EXPIRED_CACHE_TASK_CRONTAB:-0 0 * * *}"  # Cleanup expired cache task crontab expression
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      homepage.group: Stremio Addons
-      homepage.name: MediaFusion
-      homepage.icon: mediafusion.png
-      homepage.href: https://mediafusion.${DOMAIN}/
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8000/health > /dev/null 2>&1 || exit 1"]
-      interval: 1m
-      timeout: 10s
-      retries: 5
-      start_period: "1m"
-    restart: always
-  mediaflow-proxy:
-    depends_on:
-      - warp
-    image: mhdzumair/mediaflow-proxy
-    network_mode: service:warp
-    environment:
-      TZ: ${TZ:-America/Chicago}
-      PUID: ${PUID:-1001}
-      PGID: ${PGID:-989}
-      UMASK: ${UMASK:-002}
-      PORT: ${MEDIAFLOW_PROXY_PORT:-8888}
-      API_PASSWORD: ${MEDIAFLOW_PROXY_API_PASSWORD:-${DEFAULT_MEDIAFLOW_API_PASSWORD:-d468d92139047f1df5ba0fae9d998957c30834a386cd63d0472a7b044d42a96a}}
-      ENABLE_STREAMING_PROGRESS: ${MEDIAFLOW_PROXY_ENABLE_STREAMING_PROGRESS:-true}
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      homepage.group: Stremio Addons
-      homepage.name: MediaFlow Proxy
-      homepage.icon: mediaflow.png
-      homepage.href: https://mediaflow-proxy.${DOMAIN}/
-    healthcheck:
-      test: ["CMD", "python3", "-c", "import socket; s=socket.socket(); s.connect(('127.0.0.1', ${MEDIAFLOW_PROXY_PORT:-8888})); print('Healthcheck passed')"]
-      interval: 1m
-      timeout: 10s
-      retries: 5
-      start_period: 10s
-  stremthru:
-    depends_on:
-      stremthru-redis:
-        condition: service_healthy
-    image: muniftanjim/stremthru:latest
-    container_name: stremthru
-    network_mode: service:warp2
-    env_file:
-      - .env
-    volumes:
-      - ${DOCKER_DATA_DIR}/stremthru:/app/data
-    restart: always
-
-  stremthru-redis:
-    image: redis:latest
-    container_name: stremthru-redis
-    expose:
-      - 6379
-    volumes:
-      - ${DOCKER_DATA_DIR}/stremthru/cache:/data
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      traefik.http.routers.stremthru-redis.rule: Host(`stremthru-redis.${DOMAIN}`) || Host(`stremthru-redis.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`stremthru-redis.${TS_HOSTNAME}.duckdns.org`) || Host(`stremthru-redis.${TS_HOSTNAME}.${DOMAIN}`) || Host(`stremthru-redis.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.routers.stremthru-redis.middlewares: nginx-auth@file
-      traefik.http.services.stremthru-redis.loadbalancer.server.port: 6379
-    command: redis-server --appendonly yes --save 60 1
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD-SHELL", "redis-cli ping > /dev/null 2>&1 || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
+    cpu_shares: 10
+    mem_reservation: 200M
+    deploy:
+      resources:
+        reservations:
+          cpus: 0
+          memory: 200M
+        limits:
+          cpus: 0.5
+          memory: 4G
+    restart: always
+
   gptr:
     build:
-      context: https://github.com/th3w1zard1/gpt-researcher.git#master  # :/frontend/nextjs
+      #context: https://github.com/bolabaden/ai-researchwizard.git#master  # :/frontend/nextjs
+      context: ${SRC_PATH:-./src}/gpt-researcher
       dockerfile: Dockerfile.fullstack
-    image: th3w1zard1/ai-researchwizard:latest
-    stdin_open: true
+    image: docker.io/th3w1zard1/gpt-researcher:latest
     container_name: gptr
-    network_mode: service:warp2
-#    hostname: ${GPT_RESEARCHER_HOSTNAME:-gptr}
-#    extra_hosts: *common-hostname-aliases
-#    networks:
-#      publicnet:
-#        ipv4_address: ${GPT_RESEARCHER_IPV4_ADDRESS:-10.76.128.43}
-#    expose:
-#      - 3000
-#      - 3001
-#      - 8000
-#    ports:
-#      - 8000:8000
+    hostname: gptr
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    expose:
+      - 3000  # Nginx-proxied access to GPTR.
+      - 3001  # Internal NextJS GPTR site
+      - 8000  # Static GPTR
+      - 8080  # MCP Server Port
     volumes:
       - ${CONFIG_PATH:-./configs}/gptr/logs:/usr/src/app/logs
       - ${CONFIG_PATH:-./configs}/gptr/outputs:/usr/src/app/outputs
       - ${CONFIG_PATH:-./configs}/gptr/reports:/usr/src/app/reports
+    stdin_open: true
     environment:
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - BRAVE_API_KEY=${BRAVE_API_KEY}
-      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
-      - EXA_API_KEY=${EXA_API_KEY}
-      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
-      - FIRE_CRAWL_API_KEY=${FIRE_CRAWL_API_KEY}
-      - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - GLAMA_API_KEY=${GLAMA_API_KEY}
-      - GROQ_API_KEY=${GROQ_API_KEY}
-      - HF_TOKEN=${HF_TOKEN}
-      - HUGGINGFACE_ACCESS_TOKEN=${HUGGINGFACE_ACCESS_TOKEN}
-      - HUGGINGFACE_API_TOKEN=${HUGGINGFACE_API_TOKEN}
-      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
-      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
-      - MISTRALAI_API_KEY=${MISTRALAI_API_KEY}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
-      - PERPLEXITY_API_KEY=${PERPLEXITY_API_KEY}
-      - PERPLEXITYAI_API_KEY=${PERPLEXITYAI_API_KEY}
-      - REPLICATE_API_KEY=${REPLICATE_API_KEY}
-      - REVID_API_KEY=${REVID_API_KEY}
-      - SAMBANOVA_API_KEY=${SAMBANOVA_API_KEY}
-      - SEARCH1API_KEY=${SEARCH1API_KEY}
-      - SERPAPI_API_KEY=${SERPAPI_API_KEY}
-      - TAVILY_API_KEY=${TAVILY_API_KEY}
-      - TOGETHERAI_API_KEY=${TOGETHERAI_API_KEY}
-      - UNIFY_API_KEY=${UNIFY_API_KEY}
-      - UPSTAGE_API_KEY=${UPSTAGE_API_KEY}
-      - UPSTAGEAI_API_KEY=${UPSTAGEAI_API_KEY}
-      - YOU_API_KEY=${YOU_API_KEY}
-      - CHOKIDAR_USEPOLLING=true
-      - LOGGING_LEVEL=DEBUG
-      - NEXT_PUBLIC_GA_MEASUREMENT_ID=${NEXT_PUBLIC_GA_MEASUREMENT_ID}
-      - NEXT_PUBLIC_GPTR_API_URL=https://gptr.${DOMAIN}
-      - LANGSMITH_TRACING=true
-      - LANGSMITH_ENDPOINT=https://api.smith.langchain.com
-      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      BRAVE_API_KEY: ${BRAVE_API_KEY}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
+      EXA_API_KEY: ${EXA_API_KEY}
+      FIRECRAWL_API_KEY: ${FIRECRAWL_API_KEY}
+      FIRE_CRAWL_API_KEY: ${FIRE_CRAWL_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GLAMA_API_KEY: ${GLAMA_API_KEY}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      HF_TOKEN: ${HF_TOKEN}
+      HUGGINGFACE_ACCESS_TOKEN: ${HUGGINGFACE_ACCESS_TOKEN}
+      HUGGINGFACE_API_TOKEN: ${HUGGINGFACE_API_TOKEN}
+      LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY}
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY}
+      MISTRALAI_API_KEY: ${MISTRALAI_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      PERPLEXITY_API_KEY: ${PERPLEXITY_API_KEY}
+      PERPLEXITYAI_API_KEY: ${PERPLEXITYAI_API_KEY}
+      REPLICATE_API_KEY: ${REPLICATE_API_KEY}
+      REVID_API_KEY: ${REVID_API_KEY}
+      SAMBANOVA_API_KEY: ${SAMBANOVA_API_KEY}
+      SEARCH1API_KEY: ${SEARCH1API_KEY}
+      SERPAPI_API_KEY: ${SERPAPI_API_KEY}
+      TAVILY_API_KEY: ${TAVILY_API_KEY}
+      TOGETHERAI_API_KEY: ${TOGETHERAI_API_KEY}
+      UNIFY_API_KEY: ${UNIFY_API_KEY}
+      UPSTAGE_API_KEY: ${UPSTAGE_API_KEY}
+      UPSTAGEAI_API_KEY: ${UPSTAGEAI_API_KEY}
+      YOU_API_KEY: ${YOU_API_KEY}
+      CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING:-true}
+      LOGGING_LEVEL: ${GPTR_LOGGING_LEVEL:-DEBUG}
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: ${NEXT_PUBLIC_GA_MEASUREMENT_ID}
+      NEXT_PUBLIC_GPTR_API_URL: https://gptr.${DOMAIN}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING:-true}
+      LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT:-https://api.smith.langchain.com}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
     labels:
-      deunhealth.restart.on.unhealthy: "true"
       traefik.enable: "true"
-      traefik.http.routers.gptr.service: gptr
-      traefik.http.routers.gptr.rule: Host(`${DOMAIN}`) || Host(`${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`${TS_HOSTNAME}.duckdns.org`) || Host(`${TS_HOSTNAME}.${DOMAIN}`) || Host(`${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr.${DOMAIN}`) || Host(`gptr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr.${TS_HOSTNAME}.duckdns.org`) || Host(`gptr.${TS_HOSTNAME}.${DOMAIN}`) || Host(`gptr.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.gptr.loadbalancer.server.port: 3000
-      traefik.http.routers.gptr-legacy.service: gptr-legacy
-      traefik.http.routers.gptr-legacy.rule: Host(`gptr-legacy.${DOMAIN}`) || Host(`gptr-legacy.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr-legacy.${TS_HOSTNAME}.duckdns.org`) || Host(`gptr-legacy.${TS_HOSTNAME}.${DOMAIN}`) || Host(`gptr-legacy.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}`)
+      traefik.http.routers.gptr-nextjs.service: gptr-nextjs@docker
+      traefik.http.routers.gptr-nextjs.rule: 'Host(`gptr-nextjs.${DOMAIN}`) || Host(`gptr-nextjs.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.gptr-nextjs.loadbalancer.server.port: 3000
+      traefik.http.routers.gptr-legacy.service: gptr-legacy@docker
+      traefik.http.routers.gptr-legacy.rule: 'Host(`gptr.${DOMAIN}`) || Host(`gptr.${TS_HOSTNAME}.${DOMAIN}`)'
       traefik.http.services.gptr-legacy.loadbalancer.server.port: 8000
-#      traefik.http.routers.gptr-backend.service: gptr-legacy
-#      traefik.http.routers.gptr-backend.rule: (Host(`gptr.${DOMAIN}`) || Host(`gptr.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`gptr.${TS_HOSTNAME}.duckdns.org`) || Host(`gptr.${TS_HOSTNAME}.${DOMAIN}`) || Host(`gptr.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)) && (PathPrefix(`/ws`) || PathPrefix(`/outputs`) || PathPrefix(`/reports`))
-#    healthcheck:  # docker exec gptr ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
-#      test: ["CMD-SHELL", "(wget -qO- http://127.0.0.1:3000 > /dev/null 2>&1 || exit 1) && (wget -qO- http://127.0.0.1:8000 > /dev/null 2>&1 || exit 1)"]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 3
-#      start_period: 2m
-    restart: always
-  qdrant:
-    image: qdrant/qdrant:latest
-    container_name: qdrant
-    networks:
-      publicnet:
-        ipv4_address: ${QDRANT_IPV4_ADDRESS:-10.76.128.44}
-    restart: unless-stopped
-    ports:
-      - "6333:6333"
-    volumes:
-      - qdrant_storage:/qdrant/storage
-  lobechat:
-    image: lobehub/lobe-chat:latest
-    container_name: lobechat
-    hostname: ${LOBECHAT_HOSTNAME:-lobechat}
-    extra_hosts: *common-hostname-aliases
-    networks:
-      publicnet:
-        ipv4_address: ${LOBECHAT_IPV4_ADDRESS:-10.76.128.46}
-    expose:
-      - 3210
-    volumes:
-      - ${CONFIG_PATH:-./configs}/lobechat/host_config:/configs/lobechat/host_config
-    env_file:
-      - ${ROOT_DIR:-.}/.env
-    environment:
-      <<: *common-env
-      ACCESS_CODE: ${LOBECHAT_ACCESS_CODE:-brunner56}
-    labels:
-      deunhealth.restart.on.unhealthy: "true"
-      traefik.enable: "true"
-      traefik.http.routers.lobechat.middlewares: nginx-auth@file
-      traefik.http.routers.lobechat.rule: Host(`lobechat.${DOMAIN}`) || Host(`lobechat.${DUCKDNS_SUBDOMAIN}.duckdns.org`) || Host(`lobechat.${TS_HOSTNAME}.duckdns.org`) || Host(`lobechat.${TS_HOSTNAME}.${DOMAIN}`) || Host(`lobechat.${TS_HOSTNAME}.${DUCKDNS_SUBDOMAIN}.duckdns.org`)
-      traefik.http.services.lobechat.loadbalancer.server.port: 3210
+      traefik.http.routers.gptr-mcp.service: gptr-mcp@docker
+      traefik.http.routers.gptr-mcp.rule: 'Host(`gptr-mcp.${DOMAIN}`) || Host(`gptr-mcp.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.gptr-mcp.loadbalancer.server.port: 8080
       homepage.group: AI
-      homepage.name: Lobe Chat
-      homepage.icon: lobechat.png
-      homepage.href: https://lobechat.${DOMAIN}/
-      homepage.description: A chatbot for your applications.
-    healthcheck:  # docker exec lobechat ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3210 || exit 1"]
+      homepage.name: AI Research Wizard
+      homepage.description: Full-stack AI research and scraping toolkit with Next.js UI is a web scraper and researcher that uses AI to help you find information quickly.
+      homepage.icon: gptr.png
+      homepage.href: https://gptr.${DOMAIN}/
+    healthcheck:  # docker exec gptr ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "(wget -qO- http://127.0.0.1:3000 > /dev/null 2>&1 && wget -qO- http://127.0.0.1:8000 > /dev/null 2>&1) || exit 1"]  # && (wget -qO- http://127.0.0.1:8080 > /dev/null 2>&1) || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 2m
     restart: always
-  nginx-auth:
-    # 🔹🔹 Nginx Authentication Middleware 🔹🔹
-    # Acts as forwardAuth service for traefik middleware
-    image: nginx:alpine
-    container_name: nginx-auth
-    hostname: nginx-auth
-    extra_hosts: *common-hostname-aliases
+
+  portainer:
+    image: 'docker.io/portainer/portainer-ce:latest'
+    container_name: portainer
+    hostname: portainer
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
-      publicnet:
-        ipv4_address: ${NGINX_AUTH_IPV4_ADDRESS:-10.76.128.94}
+      - publicnet
     expose:
-      - 80
+      - 8000
+      - 9000
+      - 9443
     volumes:
-      - ${CONFIG_PATH:-./configs}/nginx-middlewares/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ${CONFIG_PATH:-./configs}/nginx-middlewares/auth:/etc/nginx/auth:ro
-      - ${CONFIG_PATH:-./configs}/nginx-middlewares/cache:/var/cache/nginx
-      - ${CONFIG_PATH:-./configs}/nginx-middlewares/logs:/var/log/nginx
-    environment:
-      <<: *common-env
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '${CONFIG_PATH:-./configs}/portainer/data:/data'
     labels:
-      deunhealth.restart.on.unhealthy: "true"
       traefik.enable: "true"
-      traefik.http.services.nginx-auth.loadbalancer.server.port: 80
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/health > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 20s
+      traefik.http.routers.portainer.service: portainer@docker
+      traefik.http.routers.portainer.rule: 'Host(`portainer.${DOMAIN}`) || Host(`portainer.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.portainer.loadbalancer.server.port: 9000
     restart: always
 
 networks:
   publicnet:  # https://docs.docker.com/engine/network/drivers/bridge/#differences-between-user-defined-bridges-and-the-default-bridge
-#    external: true  # docker network create --driver=bridge --attachable publicnet --subnet=${PUBLICNET_SUBNET:-10.76.0.0/16} --gateway=${PUBLICNET_GATEWAY:-10.76.0.1} --ip-range=${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+    external: true  # docker network create --driver=bridge --attachable publicnet --subnet=${PUBLICNET_SUBNET:-10.76.0.0/16} --gateway=${PUBLICNET_GATEWAY:-10.76.0.1} --ip-range=${PUBLICNET_IP_RANGE:-10.76.0.0/16} -o com.docker.network.bridge.name=br_publicnet
     attachable: true
-    name: publicnet
-    driver: bridge
+    # uncomment below part of publicnet if you aren't creating it externally.
     driver_opts:
       com.docker.network.bridge.name: "br_publicnet"
     ipam:
@@ -1620,9 +858,15 @@ networks:
         - subnet: ${PUBLICNET_SUBNET:-10.76.0.0/16}
           gateway: ${PUBLICNET_GATEWAY:-10.76.0.1}
           ip_range: ${PUBLICNET_IP_RANGE:-10.76.0.0/16}
+  warp-network:
+    external: true
+    attachable: true
+    driver_opts:
+      com.docker.network.bridge.name: "br_warp-network"
+  backend:
+    attachable: true
+    driver_opts:
+      com.docker.network.bridge.name: "br_backend"
 
 volumes:
-  github-runner-arm64-work:
-    driver: local
-  qdrant_storage:
-    driver: local
+  portainer_data:

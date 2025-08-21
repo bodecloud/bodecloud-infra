@@ -1,0 +1,66 @@
+{
+	"name": "vscode-nestjs-swagger-snippets",
+	"displayName": "NestJS Swagger (OpenAPI) Snippets - NestJS Tools Collection",
+	"description": "VS Code snippets for NestJS Swagger (OpenAPI). Quickly insert @nestjs/swagger decorators and DocumentBuilder methods to document APIs faster.",
+	"version": "1.2.0",
+	"icon": "icon.png",
+	"license": "MIT",
+	"publisher": "imgildev",
+	"author": {
+		"name": "Manuel Gil",
+		"url": "https://github.com/ManuelGil"
+	},
+	"sponsor": {
+		"url": "https://github.com/sponsors/manuelgil"
+	},
+	"engines": {
+		"vscode": "^1.46.0"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"keywords": [
+		"nest",
+		"nestjs-snippet",
+		"nestjs-snippets",
+		"nestjs",
+		"snippet",
+		"snippets",
+		"swagger-snippet",
+		"swagger-snippets",
+		"swagger",
+		"openapi",
+		"documentbuilder",
+		"decorators",
+		"vscode-extension",
+		"vscode-nestjs-snippets",
+		"vscode-nestjs-swagger-snippets",
+		"vscode"
+	],
+	"homepage": "https://github.com/ManuelGil/vscode-nestjs-swagger-snippets",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ManuelGil/vscode-nestjs-swagger-snippets"
+	},
+	"bugs": {
+		"url": "https://github.com/ManuelGil/vscode-nestjs-swagger-snippets/issues"
+	},
+	"extensionPack": [
+		"imgildev.vscode-nestjs-snippets-extension"
+	],
+	"contributes": {
+		"snippets": [
+			{
+				"path": "./snippets/decorators.code-snippets"
+			},
+			{
+				"path": "./snippets/document.code-snippets"
+			}
+		]
+	},
+	"__metadata": {
+		"installedTimestamp": 1755066051811,
+		"targetPlatform": "universal",
+		"size": 122312
+	}
+}

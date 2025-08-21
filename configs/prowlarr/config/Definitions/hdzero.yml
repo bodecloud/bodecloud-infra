@@ -22,6 +22,7 @@ caps:
     - {id: 12, cat: TV, desc: "Programas TV"}
     - {id: 13, cat: TV, desc: "Telenovelas"}
     - {id: 3, cat: Other, desc: "Delete"}
+
   modes:
     search: [q]
     tv-search: [q, season, ep, imdbid, tvdbid, tmdbid]
@@ -71,8 +72,8 @@ login:
 
 search:
   paths:
-    # https://github.com/HDInnovations/UNIT3D-Community-Edition/wiki/Torrent-API-(UNIT3D-v8.x.x)
-    # https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/master/app/Http/Controllers/API/TorrentController.php#L476
+    # https://hdinnovations.github.io/UNIT3D/torrent_api.html
+    # https://github.com/HDInnovations/UNIT3D/blob/master/app/Http/Controllers/API/TorrentController.php#L657
     - path: api/torrents/filter
       response:
         type: json
@@ -184,4 +185,4 @@ search:
     minimumseedtime:
       # 5 days (as seconds = 5 x 24 x 60 x 60)
       text: 432000
-# json UNIT3D 9.0.7 (custom)
+# json UNIT3D 9.1.2 (custom)

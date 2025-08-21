@@ -1,0 +1,543 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIBeDCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy
+      dmVyLWNhQDE3NDk2MjM3ODYwHhcNMjUwNjExMDYzNjI2WhcNMzUwNjA5MDYzNjI2
+      WjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE3NDk2MjM3ODYwWTATBgcqhkjO
+      PQIBBggqhkjOPQMBBwNCAARlkcX/Ap3n2hasgAgZIGIr5A16lTgadUb3XnMBHjVG
+      qKB52KBtVEAGnJEkN2zhimldwmZLOgKqkldWRw17DU9Ko0IwQDAOBgNVHQ8BAf8E
+      BAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUJ1GNiFX/raoks5oUJMFy
+      alRV0nswCgYIKoZIzj0EAwIDSQAwRgIhAMrZH69qb4hQnu8htXR7/qE3snsmBx3t
+      lwvfHonkc0CaAiEAqgHW+hRy7JwnmV4KoKHaL9NLs4vmvcuxz1w+B4mDGN4=
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"ca.crt":"-----BEGIN CERTIFICATE-----\nMIIBeDCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy\ndmVyLWNhQDE3NDk2MjM3ODYwHhcNMjUwNjExMDYzNjI2WhcNMzUwNjA5MDYzNjI2\nWjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE3NDk2MjM3ODYwWTATBgcqhkjO\nPQIBBggqhkjOPQMBBwNCAARlkcX/Ap3n2hasgAgZIGIr5A16lTgadUb3XnMBHjVG\nqKB52KBtVEAGnJEkN2zhimldwmZLOgKqkldWRw17DU9Ko0IwQDAOBgNVHQ8BAf8E\nBAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUJ1GNiFX/raoks5oUJMFy\nalRV0nswCgYIKoZIzj0EAwIDSQAwRgIhAMrZH69qb4hQnu8htXR7/qE3snsmBx3t\nlwvfHonkc0CaAiEAqgHW+hRy7JwnmV4KoKHaL9NLs4vmvcuxz1w+B4mDGN4=\n-----END CERTIFICATE-----\n"},"kind":"ConfigMap","metadata":{"annotations":{"kubernetes.io/description":"Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."},"name":"kube-root-ca.crt","namespace":"vpn-gateway"}}
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2025-06-11T23:32:28Z"
+    name: kube-root-ca.crt
+    namespace: vpn-gateway
+    resourceVersion: "606569"
+    uid: 1148f846-d125-4c12-a714-794d58ea2368
+- apiVersion: v1
+  data:
+    client_init.sh: |
+      #!/bin/bash
+      set -euo pipefail
+
+      source /config/settings.sh
+
+      echo "=== Initializing Pod-Gateway Client ==="
+
+      # Remove existing VXLAN if present
+      if ip link show vxlan0 >/dev/null 2>&1; then
+          ip link del vxlan0
+      fi
+
+      # Set up routes for local traffic (before removing default route)
+      K8S_GW_IP=$(ip route | awk '/default/ { print $3 }')
+      for local_cidr in $NOT_ROUTED_TO_GATEWAY_CIDRS; do
+          ip route add $local_cidr via $K8S_GW_IP || true
+      done
+
+      # Remove default routes to force traffic through gateway
+      ip route del default || true
+      ip -6 route del default || true
+
+      # Verify we can't reach external IPs directly
+      if timeout 2 ping -c 1 8.8.8.8 >/dev/null 2>&1; then
+          echo "❌ ERROR: Can still reach external IPs directly!"
+          exit 1
+      fi
+
+      # Resolve gateway IP
+      K8S_DNS_IP=$(echo $K8S_DNS_IPS | cut -d' ' -f1)
+      GATEWAY_IP=$(dig +short $GATEWAY_NAME @$K8S_DNS_IP)
+
+      if [[ -z "$GATEWAY_IP" ]]; then
+          echo "❌ ERROR: Could not resolve gateway $GATEWAY_NAME"
+          exit 1
+      fi
+
+      echo "Gateway resolved: $GATEWAY_NAME -> $GATEWAY_IP"
+
+      # Add route to gateway
+      ip route add $GATEWAY_IP via $K8S_GW_IP
+
+      # Test connectivity to gateway
+      if ! timeout 10 ping -c 3 $GATEWAY_IP; then
+          echo "❌ ERROR: Cannot reach gateway at $GATEWAY_IP"
+          exit 1
+      fi
+
+      # Create VXLAN tunnel to gateway
+      ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT
+      bridge fdb append to 00:00:00:00:00:00 dst $GATEWAY_IP dev vxlan0
+      ip link set up dev vxlan0
+      ip link set mtu $VPN_INTERFACE_MTU dev vxlan0
+
+      # Get IP via DHCP or use static IP
+      HOSTNAME_REAL=$(hostname | cut -d'-' -f1)
+      NAT_ENTRY=$(grep "^$HOSTNAME_REAL " /config/nat.conf || true)
+
+      if [[ -z "$NAT_ENTRY" ]]; then
+          echo "Getting dynamic IP via DHCP..."
+          killall udhcpc || true
+          udhcpc --now --interface=vxlan0 --script=/usr/share/udhcpc/default.script
+      else
+          IP=$(echo $NAT_ENTRY | cut -d' ' -f2)
+          VXLAN_IP="${VXLAN_IP_NETWORK}.${IP}"
+          echo "Using static IP: $VXLAN_IP"
+          ip addr add ${VXLAN_IP}/24 dev vxlan0
+          ip route add default via ${VXLAN_IP_NETWORK}.1
+      fi
+
+      # Test connectivity through gateway
+      VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+      if ! timeout 10 ping -c 3 $VXLAN_GATEWAY_IP; then
+          echo "❌ ERROR: Cannot reach gateway via VXLAN"
+          exit 1
+      fi
+
+      echo "✅ Pod-Gateway client initialization complete"
+    client_sidecar.sh: |
+      #!/bin/bash
+      set -euo pipefail
+      source /config/settings.sh
+      echo "=== Starting Pod-Gateway Client Sidecar ==="
+      while true; do
+          # Check VXLAN connectivity to gateway
+          VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+          if ! timeout 5 ping -c 1 $VXLAN_GATEWAY_IP >/dev/null 2>&1; then
+              echo "$(date): VXLAN connection lost, reinitializing..."
+              /config/client_init.sh
+          else
+              echo "$(date): VXLAN connection healthy"
+          fi
+          sleep 30
+      done
+    gateway_init.sh: |
+      #!/bin/bash
+      set -euo pipefail
+      # Load settings
+      source /config/settings.sh
+      echo "=== Initializing VPN Gateway Pod-Gateway ==="
+      
+      # Enable IP forwarding
+      echo 1 > /proc/sys/net/ipv4/ip_forward
+      echo 0 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+      
+      # Create VXLAN interface
+      VXLAN_GATEWAY_IP="${VXLAN_IP_NETWORK}.1"
+      if ip link show vxlan0 >/dev/null 2>&1; then
+          ip link del vxlan0
+      fi
+      ip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT
+      ip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0
+      ip link set up dev vxlan0
+      ip link set mtu $VPN_INTERFACE_MTU dev vxlan0
+      
+      # Set routing rules
+      ip rule add from all lookup main suppress_prefixlength 0 preference 50 || true
+      
+      # Configure iptables for NAT and forwarding
+      iptables -t nat -A POSTROUTING -j MASQUERADE
+      iptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT
+      iptables -A OUTPUT -o eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT
+      iptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT
+      
+      # Configure VPN-specific rules if VPN interface exists
+      if [[ -n "$VPN_INTERFACE" ]] && ip link show $VPN_INTERFACE >/dev/null 2>&1; then
+          echo "Configuring iptables for VPN interface: $VPN_INTERFACE"
+          
+          # Forward established connections
+          iptables -A FORWARD -i $VPN_INTERFACE -m state --state ESTABLISHED,RELATED -j ACCEPT
+          iptables -A FORWARD -i $VPN_INTERFACE -j REJECT
+          
+          if [[ "$VPN_BLOCK_OTHER_TRAFFIC" == "true" ]]; then
+              # Block non-VPN traffic
+              iptables -P FORWARD DROP
+              iptables -I FORWARD -o $VPN_INTERFACE -j ACCEPT
+              
+              iptables -P OUTPUT DROP
+              iptables -A OUTPUT -p udp --dport $VPN_TRAFFIC_PORT -j ACCEPT
+              for local_cidr in $VPN_LOCAL_CIDRS; do
+                  iptables -A OUTPUT -d $local_cidr -j ACCEPT
+              done
+              iptables -A OUTPUT -o $VPN_INTERFACE -j ACCEPT
+              iptables -A OUTPUT -o vxlan0 -j ACCEPT
+          fi
+          
+          # Add routes for local networks
+          K8S_GW_IP=$(ip route | awk '/default/ { print $3 }')
+          for local_cidr in $VPN_LOCAL_CIDRS; do
+            ip route add $local_cidr via $K8S_GW_IP || true
+          done
+      fi
+      
+      echo "✅ VPN Gateway Pod-Gateway initialization complete"
+    gateway_sidecar.sh: |
+      #!/bin/bash
+      set -euo pipefail
+
+      source /config/settings.sh
+
+      echo "=== Starting VPN Gateway Sidecar Services ==="
+
+      # Start DHCP server for VXLAN clients
+      cat > /tmp/dnsmasq.conf << EOF
+      interface=vxlan0
+      bind-interfaces
+      dhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h
+      dhcp-option=3,${VXLAN_IP_NETWORK}.1
+      dhcp-option=6,${VXLAN_IP_NETWORK}.1
+      server=10.96.0.10
+      EOF
+
+      # Start dnsmasq for DHCP and DNS
+      dnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon &
+      DNSMASQ_PID=$!
+
+      # Health check endpoint
+      while true; do
+          # Check if VPN is connected
+          if [[ -n "$VPN_INTERFACE" ]] && ip link show $VPN_INTERFACE >/dev/null 2>&1; then
+              # Test external connectivity through VPN
+              if timeout 5 curl -s --interface $VPN_INTERFACE http://httpbin.org/ip >/dev/null 2>&1; then
+                  echo "$(date): VPN Gateway healthy - $VPN_INTERFACE connected"
+              else
+                  echo "$(date): VPN Gateway unhealthy - no external connectivity"
+              fi
+          else
+              echo "$(date): VPN Gateway unhealthy - $VPN_INTERFACE not found"
+          fi
+          sleep 30
+      done
+    nat.conf: |
+      # Static NAT configuration for port forwarding
+      # Format: hostname ip_suffix ports
+      # Example: myapp 100 tcp:8080,udp:9090
+    settings.sh: |
+      #!/bin/bash
+      # Pod-Gateway Settings for VPN Integration
+
+      # Gateway hostname (will be set dynamically by controller)
+      GATEWAY_NAME="${ACTIVE_VPN_GATEWAY:-gluetun-premiumize-us}"
+
+      # K8S DNS configuration
+      K8S_DNS_IPS="10.96.0.10"
+      NOT_ROUTED_TO_GATEWAY_CIDRS="10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
+
+      # VXLAN Configuration
+      VXLAN_ID="42"
+      VXLAN_PORT="4789"
+      VXLAN_IP_NETWORK="172.16.1"
+      VXLAN_GATEWAY_FIRST_DYNAMIC_IP=20
+
+      # VPN Interface Configuration
+      VPN_INTERFACE="tun0"
+      VPN_BLOCK_OTHER_TRAFFIC=true
+      VPN_TRAFFIC_PORT="1194"
+      VPN_LOCAL_CIDRS="10.0.0.0/8 192.168.0.0/16 172.16.0.0/12"
+
+      # DNS Configuration
+      DNS_LOCAL_CIDRS="cluster.local svc.cluster.local"
+      RESOLV_CONF_COPY="/etc/resolv_copy.conf"
+
+      # Health and Connection Settings
+      CONNECTION_RETRY_COUNT=3
+      GATEWAY_ENABLE_DNSSEC=true
+      IPTABLES_NFT=no
+
+      # VPN Interface MTU
+      VPN_INTERFACE_MTU="1420"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"client_init.sh":"#!/bin/bash\nset -euo pipefail\n\nsource /config/settings.sh\n\necho \"=== Initializing Pod-Gateway Client ===\"\n\n# Remove existing VXLAN if present\nif ip link show vxlan0 \u003e/dev/null 2\u003e\u00261; then\n    ip link del vxlan0\nfi\n\n# Set up routes for local traffic (before removing default route)\nK8S_GW_IP=$(ip route | awk '/default/ { print $3 }')\nfor local_cidr in $NOT_ROUTED_TO_GATEWAY_CIDRS; do\n    ip route add $local_cidr via $K8S_GW_IP || true\ndone\n\n# Remove default routes to force traffic through gateway\nip route del default || true\nip -6 route del default || true\n\n# Verify we can't reach external IPs directly\nif timeout 2 ping -c 1 8.8.8.8 \u003e/dev/null 2\u003e\u00261; then\n    echo \"❌ ERROR: Can still reach external IPs directly!\"\n    exit 1\nfi\n\n# Resolve gateway IP\nK8S_DNS_IP=$(echo $K8S_DNS_IPS | cut -d' ' -f1)\nGATEWAY_IP=$(dig +short $GATEWAY_NAME @$K8S_DNS_IP)\n\nif [[ -z \"$GATEWAY_IP\" ]]; then\n    echo \"❌ ERROR: Could not resolve gateway $GATEWAY_NAME\"\n    exit 1\nfi\n\necho \"Gateway resolved: $GATEWAY_NAME -\u003e $GATEWAY_IP\"\n\n# Add route to gateway\nip route add $GATEWAY_IP via $K8S_GW_IP\n\n# Test connectivity to gateway\nif ! timeout 10 ping -c 3 $GATEWAY_IP; then\n    echo \"❌ ERROR: Cannot reach gateway at $GATEWAY_IP\"\n    exit 1\nfi\n\n# Create VXLAN tunnel to gateway\nip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT\nbridge fdb append to 00:00:00:00:00:00 dst $GATEWAY_IP dev vxlan0\nip link set up dev vxlan0\nip link set mtu $VPN_INTERFACE_MTU dev vxlan0\n\n# Get IP via DHCP or use static IP\nHOSTNAME_REAL=$(hostname | cut -d'-' -f1)\nNAT_ENTRY=$(grep \"^$HOSTNAME_REAL \" /config/nat.conf || true)\n\nif [[ -z \"$NAT_ENTRY\" ]]; then\n    echo \"Getting dynamic IP via DHCP...\"\n    killall udhcpc || true\n    udhcpc --now --interface=vxlan0 --script=/usr/share/udhcpc/default.script\nelse\n    IP=$(echo $NAT_ENTRY | cut -d' ' -f2)\n    VXLAN_IP=\"${VXLAN_IP_NETWORK}.${IP}\"\n    echo \"Using static IP: $VXLAN_IP\"\n    ip addr add ${VXLAN_IP}/24 dev vxlan0\n    ip route add default via ${VXLAN_IP_NETWORK}.1\nfi\n\n# Test connectivity through gateway\nVXLAN_GATEWAY_IP=\"${VXLAN_IP_NETWORK}.1\"\nif ! timeout 10 ping -c 3 $VXLAN_GATEWAY_IP; then\n    echo \"❌ ERROR: Cannot reach gateway via VXLAN\"\n    exit 1\nfi\n\necho \"✅ Pod-Gateway client initialization complete\"\n","client_sidecar.sh":"#!/bin/bash\nset -euo pipefail\n\nsource /config/settings.sh\n\necho \"=== Starting Pod-Gateway Client Sidecar ===\"\n\nwhile true; do\n    # Check VXLAN connectivity to gateway\n    VXLAN_GATEWAY_IP=\"${VXLAN_IP_NETWORK}.1\"\n    \n    if ! timeout 5 ping -c 1 $VXLAN_GATEWAY_IP \u003e/dev/null 2\u003e\u00261; then\n        echo \"$(date): VXLAN connection lost, reinitializing...\"\n        /config/client_init.sh\n    else\n        echo \"$(date): VXLAN connection healthy\"\n    fi\n    \n    sleep 30\ndone\n","gateway_init.sh":"#!/bin/bash\nset -euo pipefail\n\n# Load settings\nsource /config/settings.sh\n\necho \"=== Initializing VPN Gateway Pod-Gateway ===\"\n\n# Enable IP forwarding\necho 1 \u003e /proc/sys/net/ipv4/ip_forward\necho 0 \u003e /proc/sys/net/ipv6/conf/all/disable_ipv6\n\n# Create VXLAN interface\nVXLAN_GATEWAY_IP=\"${VXLAN_IP_NETWORK}.1\"\n\nif ip link show vxlan0 \u003e/dev/null 2\u003e\u00261; then\n    ip link del vxlan0\nfi\n\nip link add vxlan0 type vxlan id $VXLAN_ID dev eth0 dstport $VXLAN_PORT\nip addr add ${VXLAN_GATEWAY_IP}/24 dev vxlan0\nip link set up dev vxlan0\nip link set mtu $VPN_INTERFACE_MTU dev vxlan0\n\n# Set routing rules\nip rule add from all lookup main suppress_prefixlength 0 preference 50 || true\n\n# Configure iptables for NAT and forwarding\niptables -t nat -A POSTROUTING -j MASQUERADE\n\n# Allow VXLAN traffic\niptables -A INPUT -i eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT\niptables -A OUTPUT -o eth0 -p udp --dport=$VXLAN_PORT -j ACCEPT\n\n# Allow DHCP traffic from VXLAN\niptables -A INPUT -i vxlan0 -p udp --sport=68 --dport=67 -j ACCEPT\n\n# Configure VPN-specific rules if VPN interface exists\nif [[ -n \"$VPN_INTERFACE\" ]] \u0026\u0026 ip link show $VPN_INTERFACE \u003e/dev/null 2\u003e\u00261; then\n    echo \"Configuring iptables for VPN interface: $VPN_INTERFACE\"\n    \n    # Forward established connections\n    iptables -A FORWARD -i $VPN_INTERFACE -m state --state ESTABLISHED,RELATED -j ACCEPT\n    iptables -A FORWARD -i $VPN_INTERFACE -j REJECT\n    \n    if [[ \"$VPN_BLOCK_OTHER_TRAFFIC\" == \"true\" ]]; then\n        # Block non-VPN traffic\n        iptables -P FORWARD DROP\n        iptables -I FORWARD -o $VPN_INTERFACE -j ACCEPT\n        \n        iptables -P OUTPUT DROP\n        iptables -A OUTPUT -p udp --dport $VPN_TRAFFIC_PORT -j ACCEPT\n        iptables -A OUTPUT -p tcp --dport $VPN_TRAFFIC_PORT -j ACCEPT\n        \n        # Allow local traffic\n        for local_cidr in $VPN_LOCAL_CIDRS; do\n            iptables -A OUTPUT -d $local_cidr -j ACCEPT\n        done\n        \n        iptables -A OUTPUT -o $VPN_INTERFACE -j ACCEPT\n        iptables -A OUTPUT -o vxlan0 -j ACCEPT\n    fi\n    \n    # Add routes for local networks\n    K8S_GW_IP=$(ip route | awk '/default/ { print $3 }')\n    for local_cidr in $VPN_LOCAL_CIDRS; do\n        ip route add $local_cidr via $K8S_GW_IP || true\n    done\nfi\n\necho \"✅ VPN Gateway Pod-Gateway initialization complete\"\n","gateway_sidecar.sh":"#!/bin/bash\nset -euo pipefail\n\nsource /config/settings.sh\n\necho \"=== Starting VPN Gateway Sidecar Services ===\"\n\n# Start DHCP server for VXLAN clients\ncat \u003e /tmp/dnsmasq.conf \u003c\u003c EOF\ninterface=vxlan0\nbind-interfaces\ndhcp-range=${VXLAN_IP_NETWORK}.${VXLAN_GATEWAY_FIRST_DYNAMIC_IP},${VXLAN_IP_NETWORK}.254,12h\ndhcp-option=3,${VXLAN_IP_NETWORK}.1\ndhcp-option=6,${VXLAN_IP_NETWORK}.1\nserver=10.96.0.10\nEOF\n\n# Start dnsmasq for DHCP and DNS\ndnsmasq --conf-file=/tmp/dnsmasq.conf --no-daemon \u0026\nDNSMASQ_PID=$!\n\n# Health check endpoint\nwhile true; do\n    # Check if VPN is connected\n    if [[ -n \"$VPN_INTERFACE\" ]] \u0026\u0026 ip link show $VPN_INTERFACE \u003e/dev/null 2\u003e\u00261; then\n        # Test external connectivity through VPN\n        if timeout 5 curl -s --interface $VPN_INTERFACE http://httpbin.org/ip \u003e/dev/null 2\u003e\u00261; then\n            echo \"$(date): VPN Gateway healthy - $VPN_INTERFACE connected\"\n        else\n            echo \"$(date): VPN Gateway unhealthy - no external connectivity\"\n        fi\n    else\n        echo \"$(date): VPN Gateway unhealthy - $VPN_INTERFACE not found\"\n    fi\n    sleep 30\ndone\n","nat.conf":"# Static NAT configuration for port forwarding\n# Format: hostname ip_suffix ports\n# Example: myapp 100 tcp:8080,udp:9090\n","settings.sh":"#!/bin/bash\n# Pod-Gateway Settings for VPN Integration\n\n# Gateway hostname (will be set dynamically by controller)\nGATEWAY_NAME=\"${ACTIVE_VPN_GATEWAY:-gluetun-premiumize-us}\"\n\n# K8S DNS configuration\nK8S_DNS_IPS=\"10.96.0.10\"\nNOT_ROUTED_TO_GATEWAY_CIDRS=\"10.0.0.0/8 172.16.0.0/12 192.168.0.0/16\"\n\n# VXLAN Configuration\nVXLAN_ID=\"42\"\nVXLAN_PORT=\"4789\"\nVXLAN_IP_NETWORK=\"172.16.1\"\nVXLAN_GATEWAY_FIRST_DYNAMIC_IP=20\n\n# VPN Interface Configuration\nVPN_INTERFACE=\"tun0\"\nVPN_BLOCK_OTHER_TRAFFIC=true\nVPN_TRAFFIC_PORT=\"1194\"\nVPN_LOCAL_CIDRS=\"10.0.0.0/8 192.168.0.0/16 172.16.0.0/12\"\n\n# DNS Configuration\nDNS_LOCAL_CIDRS=\"cluster.local svc.cluster.local\"\nRESOLV_CONF_COPY=\"/etc/resolv_copy.conf\"\n\n# Health and Connection Settings\nCONNECTION_RETRY_COUNT=3\nGATEWAY_ENABLE_DNSSEC=true\nIPTABLES_NFT=no\n\n# VPN Interface MTU\nVPN_INTERFACE_MTU=\"1420\"\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"pod-gateway-config","namespace":"vpn-gateway"}}
+    creationTimestamp: "2025-06-11T23:32:42Z"
+    name: pod-gateway-config
+    namespace: vpn-gateway
+    resourceVersion: "457751"
+    uid: 4800b8d2-2580-4b80-aa17-2dab9b7bddb6
+- apiVersion: v1
+  data:
+    inject.py: |
+      #!/usr/bin/env python3
+      import json
+      import base64
+      import random
+      from http.server import HTTPServer, BaseHTTPRequestHandler
+      import ssl
+
+      # VPN Gateway endpoints
+      VPN_GATEWAYS = [
+          "http://gluetun-airvpn.vpn-gateway.svc.cluster.local:8888",
+          "http://gluetun-premiumize-nl.vpn-gateway.svc.cluster.local:8888", 
+          "http://gluetun-premiumize-us.vpn-gateway.svc.cluster.local:8888",
+          "socks5://warp-gateway.vpn-gateway.svc.cluster.local:1080"
+      ]
+
+      # Namespaces that should use VPN (all except system namespaces)
+      EXCLUDED_NAMESPACES = {
+          "kube-system", "kube-public", "kube-node-lease", 
+          "vpn-gateway", "metallb-system", "cert-manager"
+      }
+
+      class ProxyInjectorHandler(BaseHTTPRequestHandler):
+          def do_GET(self):
+              # Health check endpoint
+              self.send_response(200)
+              self.send_header('Content-Type', 'text/plain')
+              self.end_headers()
+              self.wfile.write(b'OK')
+              
+          def do_POST(self):
+              content_length = int(self.headers['Content-Length'])
+              body = self.rfile.read(content_length)
+              
+              try:
+                  admission_review = json.loads(body.decode('utf-8'))
+                  response = self.mutate(admission_review)
+                  
+                  self.send_response(200)
+                  self.send_header('Content-Type', 'application/json')
+                  self.end_headers()
+                  self.wfile.write(json.dumps(response).encode('utf-8'))
+                  
+              except Exception as e:
+                  print(f"Error processing admission review: {e}")
+                  self.send_response(500)
+                  self.end_headers()
+
+          def mutate(self, admission_review):
+              request = admission_review["request"]
+              pod = request["object"]
+              namespace = pod.get("metadata", {}).get("namespace", "default")
+              
+              # Skip system namespaces
+              if namespace in EXCLUDED_NAMESPACES:
+                  return self.create_response(request["uid"], allowed=True)
+              
+              # Skip if pod already has proxy configuration
+              if self.has_proxy_config(pod):
+                  return self.create_response(request["uid"], allowed=True)
+              
+              # Create patches to inject proxy configuration
+              patches = self.create_proxy_patches(pod)
+              
+              if not patches:
+                  return self.create_response(request["uid"], allowed=True)
+              
+              return self.create_response(
+                  request["uid"], 
+                  allowed=True, 
+                  patches=patches
+              )
+
+          def has_proxy_config(self, pod):
+              """Check if pod already has proxy configuration"""
+              containers = pod.get("spec", {}).get("containers", [])
+              for container in containers:
+                  env = container.get("env", [])
+                  for env_var in env:
+                      if env_var.get("name") in ["HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY"]:
+                          return True
+              return False
+
+          def create_proxy_patches(self, pod):
+              """Create JSON patches to inject proxy configuration"""
+              patches = []
+              containers = pod.get("spec", {}).get("containers", [])
+              
+              # Select random VPN gateway
+              selected_gateway = random.choice(VPN_GATEWAYS)
+              
+              # Determine proxy URLs based on gateway type
+              if selected_gateway.startswith("socks5://"):
+                  http_proxy = selected_gateway
+                  https_proxy = selected_gateway
+                  all_proxy = selected_gateway
+              else:
+                  http_proxy = selected_gateway
+                  https_proxy = selected_gateway
+                  all_proxy = selected_gateway
+              
+              # Proxy environment variables
+              proxy_env_vars = [
+                  {"name": "HTTP_PROXY", "value": http_proxy},
+                  {"name": "HTTPS_PROXY", "value": https_proxy},
+                  {"name": "ALL_PROXY", "value": all_proxy},
+                  {"name": "NO_PROXY", "value": "localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.cluster.local,.svc"},
+                  {"name": "VPN_GATEWAY_SELECTED", "value": selected_gateway}
+              ]
+              
+              # Add proxy env vars to each container
+              for i, container in enumerate(containers):
+                  existing_env = container.get("env", [])
+                  
+                  # Add proxy environment variables
+                  for env_var in proxy_env_vars:
+                      patches.append({
+                          "op": "add",
+                          "path": f"/spec/containers/{i}/env/-",
+                          "value": env_var
+                      })
+                  
+                  # If no env exists, create it first
+                  if not existing_env:
+                      patches.insert(-len(proxy_env_vars), {
+                          "op": "add",
+                          "path": f"/spec/containers/{i}/env",
+                          "value": []
+                      })
+              
+              # Add init container for gateway health check
+              init_container = {
+                  "name": "vpn-gateway-check",
+                  "image": "alpine/curl:latest",
+                  "command": [
+                      "/bin/sh", "-c",
+                      f"""
+                      echo "Testing VPN gateway: {selected_gateway}"
+                      if echo "{selected_gateway}" | grep -q "socks5://"; then
+                          # Test SOCKS5 proxy
+                          timeout 30 curl -s --socks5-hostname {selected_gateway.replace('socks5://', '')} http://httpbin.org/ip
+                      else
+                          # Test HTTP proxy  
+                          timeout 30 curl -s --proxy {selected_gateway} http://httpbin.org/ip
+                      fi
+                      if [ $? -eq 0 ]; then
+                          echo "VPN gateway is healthy"
+                      else
+                          echo "VPN gateway failed, trying fallback..."
+                          # Try other gateways as fallback
+                          for gateway in {' '.join(VPN_GATEWAYS)}; do
+                              if [ "$gateway" != "{selected_gateway}" ]; then
+                                  echo "Testing fallback: $gateway"
+                                  if echo "$gateway" | grep -q "socks5://"; then
+                                      timeout 10 curl -s --socks5-hostname $(echo $gateway | sed 's|socks5://||') http://httpbin.org/ip && break
+                                  else
+                                      timeout 10 curl -s --proxy $gateway http://httpbin.org/ip && break
+                                  fi
+                              fi
+                          done
+                      fi
+                      """
+                  ],
+                  "resources": {
+                      "requests": {"memory": "32Mi", "cpu": "10m"},
+                      "limits": {"memory": "64Mi", "cpu": "50m"}
+                  }
+              }
+              
+              # Add init container
+              if not pod.get("spec", {}).get("initContainers"):
+                  patches.append({
+                      "op": "add",
+                      "path": "/spec/initContainers",
+                      "value": [init_container]
+                  })
+              else:
+                  patches.append({
+                      "op": "add", 
+                      "path": "/spec/initContainers/-",
+                      "value": init_container
+                  })
+              
+              return patches
+
+          def create_response(self, uid, allowed=True, patches=None):
+              """Create admission response"""
+              response = {
+                  "apiVersion": "admission.k8s.io/v1",
+                  "kind": "AdmissionReview",
+                  "response": {
+                      "uid": uid,
+                      "allowed": allowed
+                  }
+              }
+              
+              if patches:
+                  response["response"]["patchType"] = "JSONPatch"
+                  response["response"]["patch"] = base64.b64encode(
+                      json.dumps(patches).encode('utf-8')
+                  ).decode('utf-8')
+              
+              return response
+
+      if __name__ == "__main__":
+          server = HTTPServer(('0.0.0.0', 8443), ProxyInjectorHandler)
+          
+          # Configure TLS with error handling
+          try:
+              context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+              context.load_cert_chain('/etc/certs/tls.crt', '/etc/certs/tls.key')
+              server.socket = context.wrap_socket(server.socket, server_side=True)
+              print("Proxy injector webhook server starting on port 8443 with TLS...")
+          except ssl.SSLError as e:
+              print(f"SSL Certificate error: {e}")
+              print("Waiting for cert-manager to generate certificates...")
+              import time
+              time.sleep(30)  # Wait for cert-manager to generate certs
+              try:
+                  context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+                  context.load_cert_chain('/etc/certs/tls.crt', '/etc/certs/tls.key')
+                  server.socket = context.wrap_socket(server.socket, server_side=True)
+                  print("TLS certificates loaded successfully on retry")
+              except Exception as retry_error:
+                  print(f"Failed to load certificates after retry: {retry_error}")
+                  print("Please check cert-manager installation and certificate generation")
+                  exit(1)
+          except Exception as e:
+              print(f"Failed to configure TLS: {e}")
+              exit(1)
+          
+          server.serve_forever()
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"failover-controller.sh":"#!/bin/bash\nset -euo pipefail\n\n# VPN Gateway priority order (first = highest priority)\nVPN_GATEWAYS=(\n  \"gluetun-premiumize-us:8888:http\"\n  \"gluetun-premiumize-nl:8888:http\"\n  \"gluetun-premiumize-gb:8888:http\"\n  \"gluetun-premiumize-de:8888:http\"\n  \"gluetun-premiumize-ca:8888:http\"\n  \"gluetun-airvpn:8888:http\"\n  \"warp-gateway:1080:socks5\"\n)\n\n# Function to test gateway connectivity\ntest_gateway() {\n  local gateway_info=\"$1\"\n  IFS=':' read -r gateway port type \u003c\u003c\u003c \"$gateway_info\"\n  \n  local proxy_url\n  if [[ \"$type\" == \"socks5\" ]]; then\n    proxy_url=\"socks5://${gateway}.vpn-gateway.svc.cluster.local:${port}\"\n  else\n    proxy_url=\"http://${gateway}.vpn-gateway.svc.cluster.local:${port}\"\n  fi\n  \n  timeout 10 curl -s --max-time 5 --proxy \"$proxy_url\" http://httpbin.org/ip \u003e/dev/null 2\u003e\u00261\n  return $?\n}\n\n# Function to scale deployment\nscale_deployment() {\n  local deployment=\"$1\"\n  local replicas=\"$2\"\n  kubectl scale deployment \"$deployment\" --replicas=\"$replicas\" -n vpn-gateway \u003e/dev/null 2\u003e\u00261 || true\n}\n\n# Function to get current active gateway\nget_active_gateway() {\n  for gateway_info in \"${VPN_GATEWAYS[@]}\"; do\n    IFS=':' read -r gateway port type \u003c\u003c\u003c \"$gateway_info\"\n    local replicas=$(kubectl get deployment \"$gateway\" -n vpn-gateway -o jsonpath='{.spec.replicas}' 2\u003e/dev/null || echo \"0\")\n    if [[ \"$replicas\" -gt 0 ]]; then\n      echo \"$gateway_info\"\n      return\n    fi\n  done\n  echo \"\"\n}\n\n# Main failover logic\nwhile true; do\n  echo \"=== VPN Gateway Failover Check $(date) ===\"\n  \n  current_active=$(get_active_gateway)\n  \n  if [[ -n \"$current_active\" ]]; then\n    IFS=':' read -r current_gateway current_port current_type \u003c\u003c\u003c \"$current_active\"\n    echo \"Current active gateway: $current_gateway\"\n    \n    # Test current gateway\n    if test_gateway \"$current_active\"; then\n      echo \"✓ Current gateway $current_gateway is healthy\"\n      sleep 30\n      continue\n    else\n      echo \"✗ Current gateway $current_gateway is unhealthy, initiating failover\"\n      scale_deployment \"$current_gateway\" 0\n    fi\n  else\n    echo \"No active gateway found, starting failover\"\n  fi\n  \n  # Find next working gateway\n  new_gateway_found=false\n  for gateway_info in \"${VPN_GATEWAYS[@]}\"; do\n    IFS=':' read -r gateway port type \u003c\u003c\u003c \"$gateway_info\"\n    \n    echo \"Testing failover candidate: $gateway\"\n    \n    # Scale up the candidate\n    scale_deployment \"$gateway\" 1\n    \n    # Wait for pod to be ready\n    echo \"Waiting for $gateway to be ready...\"\n    kubectl wait --for=condition=ready pod -l app=\"$gateway\" -n vpn-gateway --timeout=120s \u003e/dev/null 2\u003e\u00261 || continue\n    \n    # Test the gateway\n    sleep 10  # Give it a moment to fully initialize\n    if test_gateway \"$gateway_info\"; then\n      echo \"✅ Failover successful to $gateway\"\n      new_gateway_found=true\n      break\n    else\n      echo \"✗ $gateway failed health check, trying next\"\n      scale_deployment \"$gateway\" 0\n    fi\n  done\n  \n  if [[ \"$new_gateway_found\" == false ]]; then\n    echo \"❌ All VPN gateways failed! No connectivity available.\"\n  fi\n  \n  echo \"=== End Failover Check ===\"\n  sleep 30\ndone\n","resolve-premiumize.sh":"#!/bin/bash\nset -euo pipefail\n\nCOUNTRY=\"$1\"\nHOSTNAME=\"vpn-${COUNTRY}.premiumize.me\"\nCONFIG_FILE=\"/gluetun/premiumize-${COUNTRY}.ovpn\"\nAUTH_FILE=\"/gluetun/auth.conf\"\n\necho \"=== Dynamic VPN Configuration for Premiumize ${COUNTRY^^} ===\"\necho \"Hostname: $HOSTNAME\"\n\n# Resolve hostname with retries\necho \"Resolving $HOSTNAME...\"\nIP=\"\"\nfor i in {1..10}; do\n  if IP=$(getent hosts \"$HOSTNAME\" | awk '{print $1}' | head -1); then\n    if [[ \"$IP\" =~ ^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$ ]]; then\n      echo \"✓ Resolved $HOSTNAME -\u003e $IP (attempt $i)\"\n      break\n    fi\n  fi\n  echo \"Resolution attempt $i failed, retrying in 2s...\"\n  sleep 2\ndone\n\nif [[ -z \"$IP\" ]]; then\n  echo \"❌ Failed to resolve $HOSTNAME after 10 attempts\"\n  exit 1\nfi\n\n# Create OpenVPN config with resolved IP\ncat \u003e \"$CONFIG_FILE\" \u003c\u003c EOF\nremote $IP 1194\nverify-x509-name CN=$HOSTNAME\nclient\ndev tun\nproto udp\ncipher AES-256-CBC\nresolv-retry infinite\nnobind\npersist-key\npersist-tun\nauth-user-pass /gluetun/auth.conf\nverb 3\nauth SHA256\nkey-direction 1\n\u003cca\u003e\n-----BEGIN CERTIFICATE-----\nMIIFqzCCA5OgAwIBAgIJAKZ7D5Kv2XSUMA0GCSqGSIb3DQEBCwUAMGwxCzAJBgNV\nBAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMQ8wDQYDVQQHDAZNdW5pY2gxEzARBgNV\nBAoMClByZW1pdW1pemUxJTAjBgNVBAMMHFByZW1pdW1pemUgQ2VydGlmaWNhdGUg\nQXV0aG9yaXR5MB4XDTE5MDkxOTE0NDUwNFoXDTI5MDkxNjE0NDUwNFowbDELMAkG\nA1UEBhMCREUxEDAOBgNVBAgMB0JhdmFyaWExDzANBgNVBAcMBk11bmljaDETMBEG\nA1UECgwKUHJlbWl1bWl6ZTElMCMGA1UEAwwcUHJlbWl1bWl6ZSBDZXJ0aWZpY2F0\nZSBBdXRob3JpdHkwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDMsJwI\n-----END CERTIFICATE-----\n\u003c/ca\u003e\n\u003ctls-auth\u003e\n-----BEGIN OpenVPN Static key V1-----\n# Add your actual tls-auth key here\n-----END OpenVPN Static key V1-----\n\u003c/tls-auth\u003e\nEOF\n\n# Create auth file\necho \"117274388\" \u003e \"$AUTH_FILE\"\necho \"6i6zgswm35baj3ur\" \u003e\u003e \"$AUTH_FILE\"\n\necho \"✅ Configuration complete for ${COUNTRY^^}\"\necho \"   Config: $CONFIG_FILE\"\necho \"   Remote: $IP (resolved from $HOSTNAME)\"\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"vpn-failover-config","namespace":"vpn-gateway"}}
+    creationTimestamp: "2025-06-14T17:40:42Z"
+    name: vpn-failover-config
+    namespace: vpn-gateway
+    resourceVersion: "457721"
+    uid: bee366ea-5094-4533-bc67-4a339a6adc4b
+- apiVersion: v1
+  data:
+    ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCekNDQWUrZ0F3SUJBZ0lSQUtNY251VFJiYWtyUG41NWt3NUczRVV3RFFZSktvWklodmNOQVFFTEJRQXcKQURBZUZ3MHlOVEEyTVRReE5UQXdNakphRncweU5UQTVNVEl4TlRBd01qSmFNQUF3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURoVFJnSitVWjRLVkUyeStTc1BiN3NrV3c3YkFpa1VoemFDdXVrCjI4V2RtcjlVSXB6Z01QMUdHS2hqKzZVU0czRjlFMlhnd2lyRUN3RWZ1VkVndUdPdjNxYm10WW8xWlNubVAvZWQKQTRwbG1YMDZkZXhHUStXTnRxNGIyOE1yLzNDT3JsWDVMNkpNelpmODJVaTB6Z2Y5MWY4bVljZE0xeGFyamtUNgpFcndqUkhOVkVCbFNXTmlnZjJXTHN4S0c5SEtDZktaZ3YrQUMxbXhyc2NSNm80K2dVaThNWENLR0VYUHlYQnk0Cm00QTB2aW1TUW1PN1ZFOENKeDN5ZzFTOGhlNVNWWXE5SEo4ZWtzdVc4NWhWTE83cEg3bnh2b3BHMEV6ZlBxMDEKUytFMHQzeEpPQXIwWkU0UG5PZ2Viemd1aFlyK3RPbmFvUkYxQld4NlQxb1h1RXluQWdNQkFBR2pmREI2TUE0RwpBMVVkRHdFQi93UUVBd0lGb0RBTUJnTlZIUk1CQWY4RUFqQUFNRm9HQTFVZEVRRUIvd1JRTUU2Q0huQnliM2g1CkxXbHVhbVZqZEc5eUxuWndiaTFuWVhSbGQyRjVMbk4yWTRJc2NISnZlSGt0YVc1cVpXTjBiM0l1ZG5CdUxXZGgKZEdWM1lYa3VjM1pqTG1Oc2RYTjBaWEl1Ykc5allXd3dEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBTXdWNldnYgo1TUYxaWt4cjB4aTZhMnhrQ3Z2TWkvZlZhZ0VVWlphSUFQZS9kd1ZEaUcwK3E2MUllTEN6TlZWNktPZXBORE0yCmFLNGJYU0tRbkN6a0lPMk01dkgzTWlFMVR5aFk3ZTRrNWVkRkIrdlFFVmN0Q1MyNWREMnhZcHgvd3hVVkhJamoKTjVza0pxTU8wMFh1VGsrNmQ4cytGTnRzNHpNb3hFejJXTGVUNUZZS0Z2T0VxSGNqYmN3QTVNRXNGTGRaL0J5ZQowQytia25xNUNETE1zRkp6NkRVVE1jeGhSN20xSlI1NGlwNUVJTkVLT3dKK0JwZ2pXVDJWTXhSL1VIMUhxOEp2CmFWM25yRG9sNnVGU3QxdEwyZkZ1aGk4MlVENmd4SFNaTlh4UW9RMUxGY01oQkxEZytqeW1PcEtWQjJBTGVLQ2sKQU9xRll3c1VHNFZFcE5VPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCekNDQWUrZ0F3SUJBZ0lSQUtNY251VFJiYWtyUG41NWt3NUczRVV3RFFZSktvWklodmNOQVFFTEJRQXcKQURBZUZ3MHlOVEEyTVRReE5UQXdNakphRncweU5UQTVNVEl4TlRBd01qSmFNQUF3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURoVFJnSitVWjRLVkUyeStTc1BiN3NrV3c3YkFpa1VoemFDdXVrCjI4V2RtcjlVSXB6Z01QMUdHS2hqKzZVU0czRjlFMlhnd2lyRUN3RWZ1VkVndUdPdjNxYm10WW8xWlNubVAvZWQKQTRwbG1YMDZkZXhHUStXTnRxNGIyOE1yLzNDT3JsWDVMNkpNelpmODJVaTB6Z2Y5MWY4bVljZE0xeGFyamtUNgpFcndqUkhOVkVCbFNXTmlnZjJXTHN4S0c5SEtDZktaZ3YrQUMxbXhyc2NSNm80K2dVaThNWENLR0VYUHlYQnk0Cm00QTB2aW1TUW1PN1ZFOENKeDN5ZzFTOGhlNVNWWXE5SEo4ZWtzdVc4NWhWTE83cEg3bnh2b3BHMEV6ZlBxMDEKUytFMHQzeEpPQXIwWkU0UG5PZ2Viemd1aFlyK3RPbmFvUkYxQld4NlQxb1h1RXluQWdNQkFBR2pmREI2TUE0RwpBMVVkRHdFQi93UUVBd0lGb0RBTUJnTlZIUk1CQWY4RUFqQUFNRm9HQTFVZEVRRUIvd1JRTUU2Q0huQnliM2g1CkxXbHVhbVZqZEc5eUxuWndiaTFuWVhSbGQyRjVMbk4yWTRJc2NISnZlSGt0YVc1cVpXTjBiM0l1ZG5CdUxXZGgKZEdWM1lYa3VjM1pqTG1Oc2RYTjBaWEl1Ykc5allXd3dEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBTXdWNldnYgo1TUYxaWt4cjB4aTZhMnhrQ3Z2TWkvZlZhZ0VVWlphSUFQZS9kd1ZEaUcwK3E2MUllTEN6TlZWNktPZXBORE0yCmFLNGJYU0tRbkN6a0lPMk01dkgzTWlFMVR5aFk3ZTRrNWVkRkIrdlFFVmN0Q1MyNWREMnhZcHgvd3hVVkhJamoKTjVza0pxTU8wMFh1VGsrNmQ4cytGTnRzNHpNb3hFejJXTGVUNUZZS0Z2T0VxSGNqYmN3QTVNRXNGTGRaL0J5ZQowQytia25xNUNETE1zRkp6NkRVVE1jeGhSN20xSlI1NGlwNUVJTkVLT3dKK0JwZ2pXVDJWTXhSL1VIMUhxOEp2CmFWM25yRG9sNnVGU3QxdEwyZkZ1aGk4MlVENmd4SFNaTlh4UW9RMUxGY01oQkxEZytqeW1PcEtWQjJBTGVLQ2sKQU9xRll3c1VHNFZFcE5VPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBNFUwWUNmbEdlQ2xSTnN2a3JEMis3SkZzTzJ3SXBGSWMyZ3JycE52Rm5acS9WQ0tjCjRERDlSaGlvWS91bEVodHhmUk5sNE1JcXhBc0JIN2xSSUxoanI5Nm01cldLTldVcDVqLzNuUU9LWlpsOU9uWHMKUmtQbGpiYXVHOXZESy85d2pxNVYrUytpVE0yWC9ObEl0TTRIL2RYL0ptSEhUTmNXcTQ1RStoSzhJMFJ6VlJBWgpVbGpZb0g5bGk3TVNodlJ5Z255bVlML2dBdFpzYTdIRWVxT1BvRkl2REZ3aWhoRno4bHdjdUp1QU5MNHBra0pqCnUxUlBBaWNkOG9OVXZJWHVVbFdLdlJ5ZkhwTExsdk9ZVlN6dTZSKzU4YjZLUnRCTTN6NnROVXZoTkxkOFNUZ0sKOUdST0Q1em9IbTg0TG9XSy9yVHAycUVSZFFWc2VrOWFGN2hNcHdJREFRQUJBb0lCQUY5RWVpVzlnazdOS2NwQgo3Uy9uN0JPY2FtZTJCdkYweHo1cjM3aVdOYm11OWJoZDZuZmlQemFrdG8rUW1QeFBIbTRGQmM5RVMxRWFWaDlUCi9Ub1l2ZzVmMTdNMmtIcURqSFFRR0dRTVd6a2E3aGtLUkI1eUYxOFZJQW9ub3grM282Q3hseWtITzFtK2xjWVYKR3VsWk5ZZmdOVVBGbE1DcE1xellPOUtDbVl0UFcxVUhOVkNvVVhGbzd1QW02U2RBaGphNG1GU2JKV1ZSdGFkSAp5KzNJSEF5MUZ5aHMwMDN6RDdRNXJpVFc3aFdpRFNNU1R3OXE2ZCtiYVRrQ2p4UmV1bDVSNTRyaytiWXE3NGE0ClB6V28rczJrMFpBaWdqaEZIaWhLazFCR1IxZG1XYjUxZHR6bDNUV1pZYTR6c0xhL2VEeUUydWdzS3F0WVJRbSsKeHVEVjVBRUNnWUVBODdQanoyK2YyWUx2aUFxcG1tWVVoTmc0VFdzbVBQZzA0WkN6cy9ZVjUwd2hVTHp6NFBubQpCVlNoaWJ0N3drVUR3SjBEMDdLZGxHNHhpemd0VjZIRVgxelpYak1JT2YvVy9LTWFPRmU1MXBjSVFlTFBqY3IwCitmQ29uUTJxTm9sTmh5S0E3V2J4ZnFaZndBOXlhdFNSb3FDVDllNWt1OVU2V0xsU2NNSHFXRGtDZ1lFQTdLdCsKOXVUUVZKcjBFemkwMXBmcXZkdFpmaFdrVlpZOTk3U1dJSk85ZExNNE9SWUZqNk1yS0gwZjhud3d0bTRaM2ZrWApxNEtQeFI5d2QxZkp5enJacVpkZDk2ZUdkV3h2eUpUaXg1OFMzbmVqVFFCRFhKc2ZzdUhMVUZtbUxhV3J1SUdmCmtLdnRQMzF0YS9xd1A2Z2o5RHF1b1ZPaWNUSE1aMlM0eEdNakM5OENnWUE1dzVQbDRVRjBYeExEbmpOaFEzenQKbUFxUVh5dHJIREg4blQzYkZDTlE5YnlYMUpIQjY3blgzWjJFZGduNW5ENHRjNG9xclpXb1R3NHpQNWVQdytvMQo2RjRsYzljcFdEanZIUUhrQlBjcHBCYnk5djNYVUJvTS9Ed2JMZGdBb1Q3ZEh4S01NdkJlNHJTalk0WHRTSUZVCm1OYzVYYzVHcjEzckZkSXlvK1FXRVFLQmdRRE1KcEw2dmgzSEhYTDFNYkVzZXhjT2Rxd1h5dXRhdUtMempWOEMKOHU0MlFISjdLN2ZZVTFQak5TdmRxNnNKY3FmMWhlMFpFU0tiVTZkY0N1b1MyTXp4TVpUcEVDVTRIVFcvdkU1egpDNURuUGlRclE5TFhpeWdvMGdUalpyR21Kb2FlUFpJNjVWTmR0UUF5YUtpb0FJNGpHb3VRdGVnbDVHTUJ2U3gwCm0xK2IyUUtCZ0RxMjFkUE5TWmpxcjQ3TGw5eGE0anAvalFZeVFrSXBRZFRsU0lXTStIdWR4d3BkL0VTdXFCY3kKMGdSck5aRmxNVER0b2EzU29UUVpIenVmV0psQ1ZUSC9iMThDcGFZKzRoK0NvUy95ZTF4cDJoMzV3aDBWUzloVwpyVUFDbkRqUWNTSUdNeHQ4Nyt0OUhzcFljRDJRU2EyY1dJdGZTMitMajJVUjg0VmlTRlFOCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+  kind: Secret
+  metadata:
+    annotations:
+      cert-manager.io/alt-names: proxy-injector.vpn-gateway.svc,proxy-injector.vpn-gateway.svc.cluster.local
+      cert-manager.io/certificate-name: proxy-injector-cert
+      cert-manager.io/common-name: ""
+      cert-manager.io/ip-sans: ""
+      cert-manager.io/issuer-group: ""
+      cert-manager.io/issuer-kind: ClusterIssuer
+      cert-manager.io/issuer-name: selfsigned-issuer
+      cert-manager.io/uri-sans: ""
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"ca.crt":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCekNDQWUrZ0F3SUJBZ0lSQUtNY251VFJiYWtyUG41NWt3NUczRVV3RFFZSktvWklodmNOQVFFTEJRQXcKQURBZUZ3MHlOVEEyTVRReE5UQXdNakphRncweU5UQTVNVEl4TlRBd01qSmFNQUF3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURoVFJnSitVWjRLVkUyeStTc1BiN3NrV3c3YkFpa1VoemFDdXVrCjI4V2RtcjlVSXB6Z01QMUdHS2hqKzZVU0czRjlFMlhnd2lyRUN3RWZ1VkVndUdPdjNxYm10WW8xWlNubVAvZWQKQTRwbG1YMDZkZXhHUStXTnRxNGIyOE1yLzNDT3JsWDVMNkpNelpmODJVaTB6Z2Y5MWY4bVljZE0xeGFyamtUNgpFcndqUkhOVkVCbFNXTmlnZjJXTHN4S0c5SEtDZktaZ3YrQUMxbXhyc2NSNm80K2dVaThNWENLR0VYUHlYQnk0Cm00QTB2aW1TUW1PN1ZFOENKeDN5ZzFTOGhlNVNWWXE5SEo4ZWtzdVc4NWhWTE83cEg3bnh2b3BHMEV6ZlBxMDEKUytFMHQzeEpPQXIwWkU0UG5PZ2Viemd1aFlyK3RPbmFvUkYxQld4NlQxb1h1RXluQWdNQkFBR2pmREI2TUE0RwpBMVVkRHdFQi93UUVBd0lGb0RBTUJnTlZIUk1CQWY4RUFqQUFNRm9HQTFVZEVRRUIvd1JRTUU2Q0huQnliM2g1CkxXbHVhbVZqZEc5eUxuWndiaTFuWVhSbGQyRjVMbk4yWTRJc2NISnZlSGt0YVc1cVpXTjBiM0l1ZG5CdUxXZGgKZEdWM1lYa3VjM1pqTG1Oc2RYTjBaWEl1Ykc5allXd3dEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBTXdWNldnYgo1TUYxaWt4cjB4aTZhMnhrQ3Z2TWkvZlZhZ0VVWlphSUFQZS9kd1ZEaUcwK3E2MUllTEN6TlZWNktPZXBORE0yCmFLNGJYU0tRbkN6a0lPMk01dkgzTWlFMVR5aFk3ZTRrNWVkRkIrdlFFVmN0Q1MyNWREMnhZcHgvd3hVVkhJamoKTjVza0pxTU8wMFh1VGsrNmQ4cytGTnRzNHpNb3hFejJXTGVUNUZZS0Z2T0VxSGNqYmN3QTVNRXNGTGRaL0J5ZQowQytia25xNUNETE1zRkp6NkRVVE1jeGhSN20xSlI1NGlwNUVJTkVLT3dKK0JwZ2pXVDJWTXhSL1VIMUhxOEp2CmFWM25yRG9sNnVGU3QxdEwyZkZ1aGk4MlVENmd4SFNaTlh4UW9RMUxGY01oQkxEZytqeW1PcEtWQjJBTGVLQ2sKQU9xRll3c1VHNFZFcE5VPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==","tls.crt":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCekNDQWUrZ0F3SUJBZ0lSQUtNY251VFJiYWtyUG41NWt3NUczRVV3RFFZSktvWklodmNOQVFFTEJRQXcKQURBZUZ3MHlOVEEyTVRReE5UQXdNakphRncweU5UQTVNVEl4TlRBd01qSmFNQUF3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURoVFJnSitVWjRLVkUyeStTc1BiN3NrV3c3YkFpa1VoemFDdXVrCjI4V2RtcjlVSXB6Z01QMUdHS2hqKzZVU0czRjlFMlhnd2lyRUN3RWZ1VkVndUdPdjNxYm10WW8xWlNubVAvZWQKQTRwbG1YMDZkZXhHUStXTnRxNGIyOE1yLzNDT3JsWDVMNkpNelpmODJVaTB6Z2Y5MWY4bVljZE0xeGFyamtUNgpFcndqUkhOVkVCbFNXTmlnZjJXTHN4S0c5SEtDZktaZ3YrQUMxbXhyc2NSNm80K2dVaThNWENLR0VYUHlYQnk0Cm00QTB2aW1TUW1PN1ZFOENKeDN5ZzFTOGhlNVNWWXE5SEo4ZWtzdVc4NWhWTE83cEg3bnh2b3BHMEV6ZlBxMDEKUytFMHQzeEpPQXIwWkU0UG5PZ2Viemd1aFlyK3RPbmFvUkYxQld4NlQxb1h1RXluQWdNQkFBR2pmREI2TUE0RwpBMVVkRHdFQi93UUVBd0lGb0RBTUJnTlZIUk1CQWY4RUFqQUFNRm9HQTFVZEVRRUIvd1JRTUU2Q0huQnliM2g1CkxXbHVhbVZqZEc5eUxuWndiaTFuWVhSbGQyRjVMbk4yWTRJc2NISnZlSGt0YVc1cVpXTjBiM0l1ZG5CdUxXZGgKZEdWM1lYa3VjM1pqTG1Oc2RYTjBaWEl1Ykc5allXd3dEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBTXdWNldnYgo1TUYxaWt4cjB4aTZhMnhrQ3Z2TWkvZlZhZ0VVWlphSUFQZS9kd1ZEaUcwK3E2MUllTEN6TlZWNktPZXBORE0yCmFLNGJYU0tRbkN6a0lPMk01dkgzTWlFMVR5aFk3ZTRrNWVkRkIrdlFFVmN0Q1MyNWREMnhZcHgvd3hVVkhJamoKTjVza0pxTU8wMFh1VGsrNmQ4cytGTnRzNHpNb3hFejJXTGVUNUZZS0Z2T0VxSGNqYmN3QTVNRXNGTGRaL0J5ZQowQytia25xNUNETE1zRkp6NkRVVE1jeGhSN20xSlI1NGlwNUVJTkVLT3dKK0JwZ2pXVDJWTXhSL1VIMUhxOEp2CmFWM25yRG9sNnVGU3QxdEwyZkZ1aGk4MlVENmd4SFNaTlh4UW9RMUxGY01oQkxEZytqeW1PcEtWQjJBTGVLQ2sKQU9xRll3c1VHNFZFcE5VPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==","tls.key":"LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBNFUwWUNmbEdlQ2xSTnN2a3JEMis3SkZzTzJ3SXBGSWMyZ3JycE52Rm5acS9WQ0tjCjRERDlSaGlvWS91bEVodHhmUk5sNE1JcXhBc0JIN2xSSUxoanI5Nm01cldLTldVcDVqLzNuUU9LWlpsOU9uWHMKUmtQbGpiYXVHOXZESy85d2pxNVYrUytpVE0yWC9ObEl0TTRIL2RYL0ptSEhUTmNXcTQ1RStoSzhJMFJ6VlJBWgpVbGpZb0g5bGk3TVNodlJ5Z255bVlML2dBdFpzYTdIRWVxT1BvRkl2REZ3aWhoRno4bHdjdUp1QU5MNHBra0pqCnUxUlBBaWNkOG9OVXZJWHVVbFdLdlJ5ZkhwTExsdk9ZVlN6dTZSKzU4YjZLUnRCTTN6NnROVXZoTkxkOFNUZ0sKOUdST0Q1em9IbTg0TG9XSy9yVHAycUVSZFFWc2VrOWFGN2hNcHdJREFRQUJBb0lCQUY5RWVpVzlnazdOS2NwQgo3Uy9uN0JPY2FtZTJCdkYweHo1cjM3aVdOYm11OWJoZDZuZmlQemFrdG8rUW1QeFBIbTRGQmM5RVMxRWFWaDlUCi9Ub1l2ZzVmMTdNMmtIcURqSFFRR0dRTVd6a2E3aGtLUkI1eUYxOFZJQW9ub3grM282Q3hseWtITzFtK2xjWVYKR3VsWk5ZZmdOVVBGbE1DcE1xellPOUtDbVl0UFcxVUhOVkNvVVhGbzd1QW02U2RBaGphNG1GU2JKV1ZSdGFkSAp5KzNJSEF5MUZ5aHMwMDN6RDdRNXJpVFc3aFdpRFNNU1R3OXE2ZCtiYVRrQ2p4UmV1bDVSNTRyaytiWXE3NGE0ClB6V28rczJrMFpBaWdqaEZIaWhLazFCR1IxZG1XYjUxZHR6bDNUV1pZYTR6c0xhL2VEeUUydWdzS3F0WVJRbSsKeHVEVjVBRUNnWUVBODdQanoyK2YyWUx2aUFxcG1tWVVoTmc0VFdzbVBQZzA0WkN6cy9ZVjUwd2hVTHp6NFBubQpCVlNoaWJ0N3drVUR3SjBEMDdLZGxHNHhpemd0VjZIRVgxelpYak1JT2YvVy9LTWFPRmU1MXBjSVFlTFBqY3IwCitmQ29uUTJxTm9sTmh5S0E3V2J4ZnFaZndBOXlhdFNSb3FDVDllNWt1OVU2V0xsU2NNSHFXRGtDZ1lFQTdLdCsKOXVUUVZKcjBFemkwMXBmcXZkdFpmaFdrVlpZOTk3U1dJSk85ZExNNE9SWUZqNk1yS0gwZjhud3d0bTRaM2ZrWApxNEtQeFI5d2QxZkp5enJacVpkZDk2ZUdkV3h2eUpUaXg1OFMzbmVqVFFCRFhKc2ZzdUhMVUZtbUxhV3J1SUdmCmtLdnRQMzF0YS9xd1A2Z2o5RHF1b1ZPaWNUSE1aMlM0eEdNakM5OENnWUE1dzVQbDRVRjBYeExEbmpOaFEzenQKbUFxUVh5dHJIREg4blQzYkZDTlE5YnlYMUpIQjY3blgzWjJFZGduNW5ENHRjNG9xclpXb1R3NHpQNWVQdytvMQo2RjRsYzljcFdEanZIUUhrQlBjcHBCYnk5djNYVUJvTS9Ed2JMZGdBb1Q3ZEh4S01NdkJlNHJTalk0WHRTSUZVCm1OYzVYYzVHcjEzckZkSXlvK1FXRVFLQmdRRE1KcEw2dmgzSEhYTDFNYkVzZXhjT2Rxd1h5dXRhdUtMempWOEMKOHU0MlFISjdLN2ZZVTFQak5TdmRxNnNKY3FmMWhlMFpFU0tiVTZkY0N1b1MyTXp4TVpUcEVDVTRIVFcvdkU1egpDNURuUGlRclE5TFhpeWdvMGdUalpyR21Kb2FlUFpJNjVWTmR0UUF5YUtpb0FJNGpHb3VRdGVnbDVHTUJ2U3gwCm0xK2IyUUtCZ0RxMjFkUE5TWmpxcjQ3TGw5eGE0anAvalFZeVFrSXBRZFRsU0lXTStIdWR4d3BkL0VTdXFCY3kKMGdSck5aRmxNVER0b2EzU29UUVpIenVmV0psQ1ZUSC9iMThDcGFZKzRoK0NvUy95ZTF4cDJoMzV3aDBWUzloVwpyVUFDbkRqUWNTSUdNeHQ4Nyt0OUhzcFljRDJRU2EyY1dJdGZTMitMajJVUjg0VmlTRlFOCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg=="},"kind":"Secret","metadata":{"annotations":{"cert-manager.io/alt-names":"proxy-injector.vpn-gateway.svc,proxy-injector.vpn-gateway.svc.cluster.local","cert-manager.io/certificate-name":"proxy-injector-cert","cert-manager.io/common-name":"","cert-manager.io/ip-sans":"","cert-manager.io/issuer-group":"","cert-manager.io/issuer-kind":"ClusterIssuer","cert-manager.io/issuer-name":"selfsigned-issuer","cert-manager.io/uri-sans":""},"labels":{"controller.cert-manager.io/fao":"true"},"name":"proxy-injector-certs","namespace":"vpn-gateway"},"type":"kubernetes.io/tls"}
+    creationTimestamp: "2025-06-14T15:00:22Z"
+    labels:
+      controller.cert-manager.io/fao: "true"
+    name: proxy-injector-certs
+    namespace: vpn-gateway
+    resourceVersion: "606607"
+    uid: e84cdc52-73b6-4c0f-bbba-ab54a8086a21
+  type: kubernetes.io/tls
+kind: List
+metadata:
+  resourceVersion: ""

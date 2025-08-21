@@ -1,0 +1,122 @@
+{
+  "Swagger setTitle": {
+    "prefix": ["ns_swagger_set_title", "setTitle"],
+    "scope": "typescript",
+    "description": "Swagger document: set title.",
+    "body": ".setTitle('${1:title}')$0"
+  },
+  "Swagger setDescription": {
+    "prefix": ["ns_swagger_set_description", "setDescription"],
+    "scope": "typescript",
+    "description": "Swagger document: set description.",
+    "body": ".setDescription('${1:description}')$0"
+  },
+  "Swagger setVersion": {
+    "prefix": ["ns_swagger_set_version", "setVersion"],
+    "scope": "typescript",
+    "description": "Swagger document: set version.",
+    "body": ".setVersion('${1:version}')$0"
+  },
+  "Swagger setTermsOfService": {
+    "prefix": ["ns_swagger_set_terms_of_service", "setTermsOfService"],
+    "scope": "typescript",
+    "description": "Swagger document: set terms of service URL.",
+    "body": ".setTermsOfService('${1:termsOfService}')$0"
+  },
+  "Swagger setContact": {
+    "prefix": ["ns_swagger_set_contact", "setContact"],
+    "scope": "typescript",
+    "description": "Swagger document: set contact info.",
+    "body": ".setContact('${1:name}', '${2:url}', '${3:email}')$0"
+  },
+  "Swagger setLicense": {
+    "prefix": ["ns_swagger_set_license", "setLicense"],
+    "scope": "typescript",
+    "description": "Swagger document: set license.",
+    "body": ".setLicense('${1:name}', '${2:url}')$0"
+  },
+  "Swagger addServer": {
+    "prefix": ["ns_swagger_add_server", "addServer"],
+    "scope": "typescript",
+    "description": "Swagger document: add server.",
+    "body": ".addServer('${1:url}', '${2:description}', ${3:variables})$0"
+  },
+  "Swagger setExternalDoc": {
+    "prefix": ["ns_swagger_set_external_doc", "setExternalDoc"],
+    "scope": "typescript",
+    "description": "Swagger document: set external docs.",
+    "body": ".setExternalDoc('${1:description}', '${2:url}')$0"
+  },
+  "Swagger setBasePath": {
+    "prefix": ["ns_swagger_set_base_path", "setBasePath"],
+    "scope": "typescript",
+    "description": "Swagger document: set base path.",
+    "body": ".setBasePath('${1:path}')$0"
+  },
+  "Swagger addTag": {
+    "prefix": ["ns_swagger_add_tag", "addTag"],
+    "scope": "typescript",
+    "description": "Swagger document: add tag.",
+    "body": ".addTag('${1:name}', '${2:description}', ${3:externalDocs})$0"
+  },
+  "Swagger addExtension": {
+    "prefix": ["ns_swagger_add_extension", "addExtension"],
+    "scope": "typescript",
+    "description": "Swagger document: add specification extension.",
+    "body": ".addExtension('${1:extensionKey}', ${2:extensionProperties})$0"
+  },
+  "Swagger addSecurity": {
+    "prefix": ["ns_swagger_add_security", "addSecurity"],
+    "scope": "typescript",
+    "description": "Swagger document: add security scheme.",
+    "body": ".addSecurity('${1:name}', ${2:options})$0"
+  },
+  "Swagger addGlobalParameters": {
+    "prefix": ["ns_swagger_add_global_parameters", "addGlobalParameters"],
+    "scope": "typescript",
+    "description": "Swagger document: add global parameters.",
+    "body": ".addGlobalParameters(${1:parameters})$0"
+  },
+  "Swagger addSecurityRequirements": {
+    "prefix": ["ns_swagger_add_security_requirements", "addSecurityRequirements"],
+    "scope": "typescript",
+    "description": "Swagger document: add security requirements.",
+    "body": ".addSecurityRequirements(${1:name}, ${2:requirements})$0"
+  },
+  "Swagger addBearerAuth": {
+    "prefix": ["ns_swagger_add_bearer_auth", "addBearerAuth"],
+    "scope": "typescript",
+    "description": "Swagger document: add bearer auth scheme.",
+    "body": ".addBearerAuth(${1:options}, ${2:name})$0"
+  },
+  "Swagger addOAuth2": {
+    "prefix": ["ns_swagger_add_oauth2", "addOAuth2"],
+    "scope": "typescript",
+    "description": "Swagger document: add OAuth2 scheme.",
+    "body": ".addOAuth2(${1:options}, ${2:name})$0"
+  },
+  "Swagger addApiKey": {
+    "prefix": ["ns_swagger_add_api_key", "addApiKey"],
+    "scope": "typescript",
+    "description": "Swagger document: add API key scheme.",
+    "body": ".addApiKey(${1:options}, ${2:name})$0"
+  },
+  "Swagger addBasicAuth": {
+    "prefix": ["ns_swagger_add_basic_auth", "addBasicAuth"],
+    "scope": "typescript",
+    "description": "Swagger document: add basic auth scheme.",
+    "body": ".addBasicAuth(${1:options}, ${2:name})$0"
+  },
+  "Swagger addCookieAuth": {
+    "prefix": ["ns_swagger_add_cookie_auth", "addCookieAuth"],
+    "scope": "typescript",
+    "description": "Swagger document: add cookie auth scheme.",
+    "body": ".addCookieAuth(${1:cookieName}, ${2:options}, ${3:securityName})$0"
+  },
+  "Swagger build": {
+    "prefix": ["ns_swagger_build", "build"],
+    "scope": "typescript",
+    "description": "Swagger document: build Document object.",
+    "body": ".build()$0"
+  }
+}

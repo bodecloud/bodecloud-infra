@@ -1,0 +1,16 @@
+services:
+  # Simple test VPN - just a container that can reach the internet
+  test-vpn-1:
+    image: alpine:latest
+    command: ["tail", "-f", "/dev/null"]
+    restart: unless-stopped
+
+  test-vpn-2:
+    image: alpine:latest
+    command: ["tail", "-f", "/dev/null"]
+    restart: unless-stopped
+
+  test-vpn-3:
+    image: alpine:latest
+    command: ["tail", "-f", "/dev/null"]
+    restart: unless-stopped 

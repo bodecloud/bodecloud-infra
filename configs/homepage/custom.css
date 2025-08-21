@@ -1,0 +1,32 @@
+/* Custom CSS for bolabaden.org - beatapostapita */
+:root {
+  --bb-bg: #0b0b0c;
+  --bb-card: rgba(255,255,255,0.05);
+  --bb-border: rgba(255,255,255,0.08);
+  --bb-text: rgba(255,255,255,0.92);
+  --bb-muted: rgba(255,255,255,0.6);
+  --bb-primary: #6EE7F9;
+  --bb-accent: #A78BFA;
+}
+
+body {
+  background: radial-gradient(1200px 800px at 10% -10%, rgba(167,139,250,0.15), transparent),
+              radial-gradient(1200px 800px at 110% 10%, rgba(110,231,249,0.12), transparent),
+              var(--bb-bg) !important;
+  color: var(--bb-text) !important;
+}
+
+a { color: var(--bb-primary) !important; }
+a:hover { color: #8EEAFB !important; }
+
+.card, .item, .quicklaunch, .services-group, .service {
+  background: var(--bb-card) !important;
+  border: 1px solid var(--bb-border) !important;
+  backdrop-filter: blur(8px);
+}
+
+.header, .navbar, .searchbar, .footer {
+  background: rgba(12,12,14,0.6) !important;
+  border-bottom: 1px solid var(--bb-border) !important;
+  backdrop-filter: blur(8px);
+}

@@ -84,6 +84,7 @@ caps:
     - {id: Lossless, cat: Audio/Lossless, desc: "Music Lossless"}
     - {id: MusicMP3, cat: Audio/MP3, desc: "Music MP3"}
     - {id: MP3, cat: Audio/MP3, desc: "Music MP3"}
+    - {id: MoviesMusicvideos, cat: Audio/Video, desc: "Movies Music videos"}
     - {id: MusicMusicvideos, cat: Audio/Video, desc: "Music videos"}
     - {id: Musicvideos, cat: Audio/Video, desc: "Music videos"}
     - {id: MusicOthermusic, cat: Audio/Other, desc: "Music Other"}
@@ -92,9 +93,12 @@ caps:
     - {id: Movieclips, cat: Other, desc: "Movie clips"}
     - {id: TV, cat: TV, desc: TV}
     - {id: AdultVideo, cat: XXX/WEB-DL, desc: "Adult Video"}
+    - {id: Adult, cat: XXX/WEB-DL, desc: "Adult Video"}
     - {id: XXXVideo, cat: XXX/WEB-DL, desc: "Adult Video"}
     - {id: Video, cat: XXX/WEB-DL, desc: "Adult Video"}
     - {id: AdultGames, cat: XXX/Other, desc: "Adult Games"}
+    - {id: AdultHentai, cat: XXX/Other, desc: "Adult Hentai"}
+    - {id: AdultMagazines, cat: XXX/Other, desc: "Adult Magazines"}
     - {id: XXXGames, cat: XXX/Other, desc: "Adult Games"}
     - {id: AdultPictures, cat: XXX/ImageSet, desc: "Adult Pictures"}
     - {id: XXXPictures, cat: XXX/ImageSet, desc: "Adult Pictures"}

@@ -1,0 +1,83 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: mediaflow-proxy
+  namespace: '324816055390'
+  selfLink: /apis/serving.knative.dev/v1/namespaces/324816055390/services/mediaflow-proxy
+  uid: 1982e393-d688-4b83-b8ee-080643b96e44
+  resourceVersion: AAY4OnFYE98
+  generation: 5
+  creationTimestamp: '2025-06-15T07:05:31.097194Z'
+  labels:
+    gcb-trigger-id: bb279234-bc92-41e4-9364-8641d8c86fe4
+    managed-by: gcp-cloud-build-deploy-cloud-run
+    gcb-trigger-region: global
+    cloud.googleapis.com/location: us-central1
+  annotations:
+    serving.knative.dev/creator: boden.crouch@gmail.com
+    serving.knative.dev/lastModifier: boden.crouch@gmail.com
+    run.googleapis.com/client-name: cloud-console
+    run.googleapis.com/operation-id: c51a486f-716d-43cd-81ba-44b6accf5fb9
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/minScale: '1'
+    run.googleapis.com/urls: '["https://mediaflow-proxy-324816055390.us-central1.run.app","https://mediaflow-proxy-tv3flavblq-uc.a.run.app"]'
+spec:
+  template:
+    metadata:
+      labels:
+        client.knative.dev/nonce: 0e3a81ab-b66f-4191-8094-dd5e6f6ebf63
+        run.googleapis.com/startupProbeType: Default
+      annotations:
+        autoscaling.knative.dev/maxScale: '10'
+        run.googleapis.com/execution-environment: gen1
+        run.googleapis.com/client-name: cloud-console
+        run.googleapis.com/sessionAffinity: 'true'
+        run.googleapis.com/startup-cpu-boost: 'true'
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: mediaflow-proxy@bolabaden.iam.gserviceaccount.com
+      containers:
+      - name: mediaflow-proxy
+        image: mhdzumair/mediaflow-proxy
+        ports:
+        - name: http1
+          containerPort: 8888
+        env:
+        - name: API_PASSWORD
+          value: d468d92139047f1df5ba0fae9d998957c30834a386cd63d0472a7b044d42a96a
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          timeoutSeconds: 240
+          periodSeconds: 240
+          failureThreshold: 1
+          tcpSocket:
+            port: 8888
+  traffic:
+  - percent: 100
+    latestRevision: true
+status:
+  observedGeneration: 5
+  conditions:
+  - type: Ready
+    status: 'True'
+    lastTransitionTime: '2025-06-23T09:57:19.456310Z'
+  - type: ConfigurationsReady
+    status: 'True'
+    lastTransitionTime: '2025-06-23T09:57:18.477576Z'
+  - type: RoutesReady
+    status: 'True'
+    lastTransitionTime: '2025-06-23T09:57:19.421189Z'
+  latestReadyRevisionName: mediaflow-proxy-00004-lms
+  latestCreatedRevisionName: mediaflow-proxy-00004-lms
+  traffic:
+  - revisionName: mediaflow-proxy-00004-lms
+    percent: 100
+    latestRevision: true
+  url: https://mediaflow-proxy-tv3flavblq-uc.a.run.app
+  address:
+    url: https://mediaflow-proxy-tv3flavblq-uc.a.run.app

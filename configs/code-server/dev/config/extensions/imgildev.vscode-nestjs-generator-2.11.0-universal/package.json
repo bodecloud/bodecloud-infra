@@ -1,0 +1,1066 @@
+{
+	"name": "vscode-nestjs-generator",
+	"displayName": "NestJS File Generator",
+	"description": "Generate NestJS files from the command palette or explorer context menu (right click). It also provides a terminal to start the server in different modes (dev, debug, prod). It is based on the NestJS CLI.",
+	"version": "2.11.0",
+	"icon": "icon.png",
+	"license": "MIT",
+	"publisher": "imgildev",
+	"author": {
+		"name": "Manuel Gil",
+		"url": "https://github.com/ManuelGil"
+	},
+	"sponsor": {
+		"url": "https://github.com/sponsors/manuelgil"
+	},
+	"engines": {
+		"vscode": "^1.88.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"autocomplete-functionality",
+		"autocomplete",
+		"boilerplate",
+		"commands",
+		"express",
+		"extension",
+		"generator",
+		"grammars-utility",
+		"grammars",
+		"javascript",
+		"js",
+		"nest",
+		"nestjs",
+		"node",
+		"nodejs",
+		"ts",
+		"typescript",
+		"vscode-extension",
+		"vscode"
+	],
+	"homepage": "https://github.com/ManuelGil/vscode-nestjs-generator",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ManuelGil/vscode-nestjs-generator"
+	},
+	"bugs": {
+		"url": "https://github.com/ManuelGil/vscode-nestjs-generator/issues"
+	},
+	"extensionPack": [
+		"imgildev.vscode-nestjs-snippets-extension"
+	],
+	"activationEvents": [
+		"workspaceContains:**/nest-cli.json"
+	],
+	"main": "./out/extension.js",
+	"l10n": "./l10n",
+	"contributes": {
+		"configuration": {
+			"title": "NestJS File Generator",
+			"properties": {
+				"nestjs.enable": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "%nestjs.enable%"
+				},
+				"nestjs.files.include": {
+					"type": "array",
+					"default": [
+						"ts"
+					],
+					"scope": "resource",
+					"description": "%nestjs.files.include%"
+				},
+				"nestjs.files.exclude": {
+					"type": "array",
+					"default": [
+						"**/node_modules/**",
+						"**/dist/**",
+						"**/out/**",
+						"**/build/**"
+					],
+					"scope": "resource",
+					"description": "%nestjs.files.exclude%"
+				},
+				"nestjs.files.watch": {
+					"type": "array",
+					"default": [
+						"controllers",
+						"dtos",
+						"services"
+					],
+					"scope": "resource",
+					"description": "%nestjs.files.watch%"
+				},
+				"nestjs.files.showPath": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "%nestjs.files.showPath%"
+				},
+				"nestjs.terminal.cwd": {
+					"type": "string",
+					"scope": "resource",
+					"description": "%nestjs.terminal.cwd%"
+				},
+				"nestjs.submenu.customCommands": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"description": "%nestjs.submenu.customCommands.name%"
+							},
+							"command": {
+								"type": "string",
+								"description": "%nestjs.submenu.customCommands.command%"
+							},
+							"args": {
+								"type": "string",
+								"description": "%nestjs.submenu.customCommands.args%"
+							}
+						}
+					},
+					"default": [
+						{
+							"name": "Template 1",
+							"command": "nest g co",
+							"args": "--flat"
+						},
+						{
+							"name": "Template 2",
+							"command": "nest g co",
+							"args": "--no-flat"
+						}
+					],
+					"scope": "resource",
+					"description": "%nestjs.submenu.customCommands%"
+				},
+				"nestjs.submenu.templates": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"description": "%nestjs.submenu.templates.name%"
+							},
+							"description": {
+								"type": "string",
+								"description": "%nestjs.submenu.templates.description%"
+							},
+							"type": {
+								"type": "string",
+								"enum": [
+									"component",
+									"directive",
+									"pipe",
+									"service",
+									"class",
+									"enum",
+									"guard",
+									"interface",
+									"module",
+									"resolver",
+									"spec",
+									"template"
+								],
+								"description": "%nestjs.submenu.templates.type%"
+							},
+							"template": {
+								"type": "array",
+								"description": "%nestjs.submenu.templates.template%"
+							}
+						}
+					},
+					"default": [
+						{
+							"name": "Custom Service",
+							"description": "Generate a custom service",
+							"type": "service",
+							"template": [
+								"import { Injectable } from '@nestjs/common';",
+								"",
+								"@Injectable()",
+								"export class CustomService {",
+								"}"
+							]
+						}
+					],
+					"scope": "resource",
+					"description": "%nestjs.submenu.templates%"
+				},
+				"nestjs.submenu.activateItem": {
+					"type": "object",
+					"properties": {
+						"file": {
+							"type": "object",
+							"properties": {
+								"class": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.class%"
+								},
+								"controller": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.controller%"
+								},
+								"decorator": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.decorator%"
+								},
+								"dto": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.dto%"
+								},
+								"exception": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.exception%"
+								},
+								"exceptionFilter": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.exceptionFilter%"
+								},
+								"filter": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.filter%"
+								},
+								"gateway": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.gateway%"
+								},
+								"guard": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.guard%"
+								},
+								"interceptor": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.interceptor%"
+								},
+								"interface": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.interface%"
+								},
+								"jwtGuard": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.jwtGuard%"
+								},
+								"jwtStrategy": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.jwtStrategy%"
+								},
+								"middleware": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.middleware%"
+								},
+								"logger": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.logger%"
+								},
+								"module": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.module%"
+								},
+								"pipe": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.pipe%"
+								},
+								"provider": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.provider%"
+								},
+								"resolver": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.resolver%"
+								},
+								"service": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.service%"
+								},
+								"test": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.file.test%"
+								},
+								"template": {
+									"type": "boolean",
+									"default": true,
+									"description": "%nestjs.submenu.activateItem.file.template%"
+								}
+							}
+						},
+						"terminal": {
+							"type": "object",
+							"properties": {
+								"controller": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.controller%"
+								},
+								"gateway": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.gateway%"
+								},
+								"library": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.library%"
+								},
+								"module": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.module%"
+								},
+								"provider": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.provider%"
+								},
+								"resolver": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.resolver%"
+								},
+								"resource": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.resource%"
+								},
+								"service": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.service%"
+								},
+								"custom": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.custom%"
+								},
+								"start": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.start%"
+								},
+								"startDev": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.startDev%"
+								},
+								"startDebug": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.startDebug%"
+								},
+								"startProd": {
+									"type": "boolean",
+									"default": true,
+									"scope": "resource",
+									"description": "%nestjs.submenu.activateItem.terminal.startProd%"
+								}
+							}
+						}
+					},
+					"default": {
+						"file": {
+							"class": true,
+							"controller": true,
+							"decorator": true,
+							"dto": true,
+							"exception": true,
+							"exceptionFilter": true,
+							"filter": true,
+							"gateway": true,
+							"guard": true,
+							"interceptor": true,
+							"interface": true,
+							"jwtGuard": true,
+							"jwtStrategy": true,
+							"middleware": true,
+							"logger": true,
+							"module": true,
+							"pipe": true,
+							"provider": true,
+							"resolver": true,
+							"service": true,
+							"test": true,
+							"template": true
+						},
+						"terminal": {
+							"controller": true,
+							"gateway": true,
+							"library": true,
+							"module": true,
+							"provider": true,
+							"resolver": true,
+							"resource": true,
+							"service": true,
+							"custom": true,
+							"start": true,
+							"startDev": true,
+							"startDebug": true,
+							"startProd": true
+						}
+					},
+					"scope": "resource",
+					"description": "%nestjs.submenu.activateItem%"
+				},
+				"nestjs.files.autoImport": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "%nestjs.files.autoImport%"
+				},
+				"nestjs.files.skipFolderConfirmation": {
+					"type": "boolean",
+					"default": false,
+					"scope": "resource",
+					"description": "%nestjs.files.skipFolderConfirmation%"
+				},
+				"nestjs.files.orm": {
+					"type": "string",
+					"default": "typeorm",
+					"enum": [
+						"mikroorm",
+						"mongoose",
+						"sequelize",
+						"typeorm"
+					],
+					"scope": "resource",
+					"description": "%nestjs.files.orm%"
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "nestjs.file.class",
+				"title": "%nestjs.file.class%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.controller",
+				"title": "%nestjs.file.controller%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.decorator",
+				"title": "%nestjs.file.decorator%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.dto",
+				"title": "%nestjs.file.dto%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.exception",
+				"title": "%nestjs.file.exception%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.exceptionFilter",
+				"title": "%nestjs.file.exceptionFilter%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.filter",
+				"title": "%nestjs.file.filter%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.gateway",
+				"title": "%nestjs.file.gateway%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.guard",
+				"title": "%nestjs.file.guard%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.interceptor",
+				"title": "%nestjs.file.interceptor%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.interface",
+				"title": "%nestjs.file.interface%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.jwtGuard",
+				"title": "%nestjs.file.jwtGuard%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.jwtStrategy",
+				"title": "%nestjs.file.jwtStrategy%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.middleware",
+				"title": "%nestjs.file.middleware%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.logger",
+				"title": "%nestjs.file.logger%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.module",
+				"title": "%nestjs.file.module%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.pipe",
+				"title": "%nestjs.file.pipe%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.provider",
+				"title": "%nestjs.file.provider%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.resolver",
+				"title": "%nestjs.file.resolver%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.service",
+				"title": "%nestjs.file.service%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.test",
+				"title": "%nestjs.file.test%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.file.template",
+				"title": "%nestjs.file.template%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.controller",
+				"title": "%nestjs.terminal.controller%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.gateway",
+				"title": "%nestjs.terminal.gateway%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.library",
+				"title": "%nestjs.terminal.library%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.module",
+				"title": "%nestjs.terminal.module%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.provider",
+				"title": "%nestjs.terminal.provider%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.resolver",
+				"title": "%nestjs.terminal.resolver%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.resource",
+				"title": "%nestjs.terminal.resource%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.service",
+				"title": "%nestjs.terminal.service%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.subApp",
+				"title": "%nestjs.terminal.subApp%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.custom",
+				"title": "%nestjs.terminal.custom%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.start",
+				"title": "%nestjs.terminal.start%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.startDev",
+				"title": "%nestjs.terminal.startDev%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.startDebug",
+				"title": "%nestjs.terminal.startDebug%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.terminal.startProd",
+				"title": "%nestjs.terminal.startProd%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.transform.json.ts",
+				"title": "%nestjs.transform.json.ts%",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.listMethods.refresh",
+				"title": "%nestjs.listMethods.refresh%",
+				"icon": "$(refresh)",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.listEntities.refresh",
+				"title": "%nestjs.listEntities.refresh%",
+				"icon": "$(refresh)",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.listDTOs.refresh",
+				"title": "%nestjs.listDTOs.refresh%",
+				"icon": "$(refresh)",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.listModules.refresh",
+				"title": "%nestjs.listModules.refresh%",
+				"icon": "$(refresh)",
+				"category": "NestJS"
+			},
+			{
+				"command": "nestjs.listFiles.refresh",
+				"title": "%nestjs.listFiles.refresh%",
+				"icon": "$(refresh)",
+				"category": "NestJS"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "workbench.view.extension.nestjs-explorer",
+				"key": "shift+alt+n",
+				"mac": "shift+alt+n",
+				"when": "editorLangId == typescript"
+			}
+		],
+		"viewsWelcome": [
+			{
+				"view": "nestjs.listMethodsView",
+				"contents": "%viewsWelcome.nestjs.listMethodsView%"
+			},
+			{
+				"view": "nestjs.listEntitiesView",
+				"contents": "%viewsWelcome.nestjs.listEntitiesView%"
+			},
+			{
+				"view": "nestjs.listDTOsView",
+				"contents": "%viewsWelcome.nestjs.listDTOsView%"
+			},
+			{
+				"view": "nestjs.listModulesView",
+				"contents": "%viewsWelcome.nestjs.listModulesView%"
+			},
+			{
+				"view": "nestjs.listFilesView",
+				"contents": "%viewsWelcome.nestjs.listFilesView%"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "nestjs-explorer",
+					"title": "NestJS File Generator",
+					"icon": "out/assets/logo.svg"
+				}
+			]
+		},
+		"views": {
+			"nestjs-explorer": [
+				{
+					"id": "nestjs.listMethodsView",
+					"name": "%nestjs.listMethodsView%",
+					"visibility": "visible"
+				},
+				{
+					"id": "nestjs.listEntitiesView",
+					"name": "%nestjs.listEntitiesView%",
+					"visibility": "visible"
+				},
+				{
+					"id": "nestjs.listDTOsView",
+					"name": "%nestjs.listDTOsView%",
+					"visibility": "visible"
+				},
+				{
+					"id": "nestjs.listModulesView",
+					"name": "%nestjs.listModulesView%",
+					"visibility": "visible"
+				},
+				{
+					"id": "nestjs.listFilesView",
+					"name": "%nestjs.listFilesView%",
+					"visibility": "visible"
+				},
+				{
+					"id": "nestjs.feedbackView",
+					"name": "%nestjs.feedbackView%",
+					"visibility": "visible"
+				}
+			]
+		},
+		"submenus": [
+			{
+				"id": "nestjs.folder.submenu",
+				"label": "NestJS File Generator"
+			},
+			{
+				"id": "nestjs.editor.submenu",
+				"label": "NestJS File Generator"
+			},
+			{
+				"id": "nestjs.root.submenu",
+				"label": "NestJS File Generator"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "nestjs.listMethods.refresh",
+					"when": "view == nestjs.listMethodsView",
+					"group": "navigation"
+				},
+				{
+					"command": "nestjs.listEntities.refresh",
+					"when": "view == nestjs.listEntitiesView",
+					"group": "navigation"
+				},
+				{
+					"command": "nestjs.listDTOs.refresh",
+					"when": "view == nestjs.listDTOsView",
+					"group": "navigation"
+				},
+				{
+					"command": "nestjs.listModules.refresh",
+					"when": "view == nestjs.listModulesView",
+					"group": "navigation"
+				},
+				{
+					"command": "nestjs.listFiles.refresh",
+					"when": "view == nestjs.listFilesView",
+					"group": "navigation"
+				}
+			],
+			"explorer/context": [
+				{
+					"submenu": "nestjs.folder.submenu",
+					"group": "2_workspace",
+					"when": "explorerViewletFocus && explorerResourceIsFolder && !explorerResourceIsRoot"
+				},
+				{
+					"submenu": "nestjs.root.submenu",
+					"group": "2_workspace",
+					"when": "explorerViewletFocus && explorerResourceIsRoot && explorerResourceIsFolder"
+				}
+			],
+			"editor/context": [
+				{
+					"submenu": "nestjs.editor.submenu",
+					"group": "1_modification",
+					"when": "editorHasSelection"
+				}
+			],
+			"nestjs.folder.submenu": [
+				{
+					"command": "nestjs.file.class",
+					"group": "1_file@1",
+					"when": "nestjs.activateItem.file.class"
+				},
+				{
+					"command": "nestjs.file.controller",
+					"group": "1_file@2",
+					"when": "nestjs.activateItem.file.controller"
+				},
+				{
+					"command": "nestjs.file.decorator",
+					"group": "1_file@3",
+					"when": "nestjs.activateItem.file.decorator"
+				},
+				{
+					"command": "nestjs.file.dto",
+					"group": "1_file@4",
+					"when": "nestjs.activateItem.file.dto"
+				},
+				{
+					"command": "nestjs.file.exception",
+					"group": "1_file@5",
+					"when": "nestjs.activateItem.file.exception"
+				},
+				{
+					"command": "nestjs.file.exceptionFilter",
+					"group": "1_file@6",
+					"when": "nestjs.activateItem.file.exceptionFilter"
+				},
+				{
+					"command": "nestjs.file.filter",
+					"group": "1_file@7",
+					"when": "nestjs.activateItem.file.filter"
+				},
+				{
+					"command": "nestjs.file.gateway",
+					"group": "1_file@8",
+					"when": "nestjs.activateItem.file.gateway"
+				},
+				{
+					"command": "nestjs.file.guard",
+					"group": "1_file@9",
+					"when": "nestjs.activateItem.file.guard"
+				},
+				{
+					"command": "nestjs.file.interceptor",
+					"group": "1_file@10",
+					"when": "nestjs.activateItem.file.interceptor"
+				},
+				{
+					"command": "nestjs.file.interface",
+					"group": "1_file@11",
+					"when": "nestjs.activateItem.file.interface"
+				},
+				{
+					"command": "nestjs.file.jwtGuard",
+					"group": "1_file@12",
+					"when": "nestjs.activateItem.file.jwtGuard"
+				},
+				{
+					"command": "nestjs.file.jwtStrategy",
+					"group": "1_file@13",
+					"when": "nestjs.activateItem.file.jwtStrategy"
+				},
+				{
+					"command": "nestjs.file.middleware",
+					"group": "1_file@14",
+					"when": "nestjs.activateItem.file.middleware"
+				},
+				{
+					"command": "nestjs.file.logger",
+					"group": "1_file@15",
+					"when": "nestjs.activateItem.file.logger"
+				},
+				{
+					"command": "nestjs.file.module",
+					"group": "1_file@16",
+					"when": "nestjs.activateItem.file.module"
+				},
+				{
+					"command": "nestjs.file.pipe",
+					"group": "1_file@17",
+					"when": "nestjs.activateItem.file.pipe"
+				},
+				{
+					"command": "nestjs.file.provider",
+					"group": "1_file@18",
+					"when": "nestjs.activateItem.file.provider"
+				},
+				{
+					"command": "nestjs.file.resolver",
+					"group": "1_file@19",
+					"when": "nestjs.activateItem.file.resolver"
+				},
+				{
+					"command": "nestjs.file.service",
+					"group": "1_file@20",
+					"when": "nestjs.activateItem.file.service"
+				},
+				{
+					"command": "nestjs.file.test",
+					"group": "1_file@21",
+					"when": "nestjs.activateItem.file.test"
+				},
+				{
+					"command": "nestjs.file.template",
+					"group": "2_file@1",
+					"when": "nestjs.activateItem.file.template"
+				},
+				{
+					"command": "nestjs.terminal.controller",
+					"group": "3_cli@1",
+					"when": "nestjs.activateItem.terminal.controller"
+				},
+				{
+					"command": "nestjs.terminal.gateway",
+					"group": "3_cli@2",
+					"when": "nestjs.activateItem.terminal.gateway"
+				},
+				{
+					"command": "nestjs.terminal.module",
+					"group": "3_cli@3",
+					"when": "nestjs.activateItem.terminal.module"
+				},
+				{
+					"command": "nestjs.terminal.provider",
+					"group": "3_cli@4",
+					"when": "nestjs.activateItem.terminal.provider"
+				},
+				{
+					"command": "nestjs.terminal.resolver",
+					"group": "3_cli@5",
+					"when": "nestjs.activateItem.terminal.resolver"
+				},
+				{
+					"command": "nestjs.terminal.resource",
+					"group": "3_cli@6",
+					"when": "nestjs.activateItem.terminal.resource"
+				},
+				{
+					"command": "nestjs.terminal.service",
+					"group": "3_cli@7",
+					"when": "nestjs.activateItem.terminal.service"
+				},
+				{
+					"command": "nestjs.terminal.custom",
+					"group": "4_cli@1",
+					"when": "nestjs.activateItem.terminal.custom"
+				}
+			],
+			"nestjs.editor.submenu": [
+				{
+					"command": "nestjs.transform.json.ts",
+					"group": "1_file@1"
+				}
+			],
+			"nestjs.root.submenu": [
+				{
+					"command": "nestjs.terminal.start",
+					"group": "1_cli@1",
+					"when": "nestjs.activateItem.terminal.start"
+				},
+				{
+					"command": "nestjs.terminal.startDev",
+					"group": "1_cli@2",
+					"when": "nestjs.activateItem.terminal.startDev"
+				},
+				{
+					"command": "nestjs.terminal.startDebug",
+					"group": "1_cli@3",
+					"when": "nestjs.activateItem.terminal.startDebug"
+				}
+			]
+		},
+		"jsonValidation": [
+			{
+				"fileMatch": ".vscode/settings.json",
+				"url": "./schemas/config.schema.json"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "rimraf out && tsc -p ./ && cpy src/assets/* out/assets",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"format": "biome format --write",
+		"lint": "biome lint --write",
+		"lint:check": "biome check --write",
+		"test": "vscode-test",
+		"compodoc": "npx compodoc -p tsconfig.doc.json -d compodoc --theme readthedocs -s",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@commitlint/cli": "^19.6.1",
+		"@commitlint/config-conventional": "^19.6.0",
+		"@compodoc/compodoc": "^1.1.26",
+		"@types/glob": "^8.1.0",
+		"@types/minimatch": "^3.0.5",
+		"@types/mocha": "^10.0.10",
+		"@types/node": "^22.9.0",
+		"@types/vscode": "^1.88.0",
+		"@vscode/l10n-dev": "^0.0.35",
+		"@vscode/test-cli": "^0.0.10",
+		"@vscode/test-electron": "^2.4.1",
+		"cpy-cli": "^5.0.0",
+		"glob": "^11.0.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.2.11",
+		"rimraf": "^6.0.1",
+		"typescript": "^5.7.2"
+	},
+	"dependencies": {
+		"json-to-ts": "^2.1.0",
+		"json5": "^2.2.3",
+		"vscode-marketplace-client": "^1.0.0"
+	},
+	"__metadata": {
+		"installedTimestamp": 1752874632076,
+		"targetPlatform": "universal",
+		"size": 6555277
+	}
+}

@@ -5,27 +5,33 @@
  "main": {
   "apiKey": "MTc0MDcxNDk2MTY5MDRmMDcxYmM1LTI5ODktNGJiMy05NzExLTdhYjYyMWQxMDAyOQ==",
   "applicationTitle": "Overseerr",
-  "applicationUrl": "",
+  "applicationUrl": "https://overseerr.bolabaden.org",
   "csrfProtection": false,
   "cacheImages": false,
-  "defaultPermissions": 32,
+  "defaultPermissions": 12583072,
   "defaultQuotas": {
-   "movie": {},
-   "tv": {}
+   "movie": {
+    "quotaLimit": 0,
+    "quotaDays": 7
+   },
+   "tv": {
+    "quotaLimit": 0,
+    "quotaDays": 7
+   }
   },
   "hideAvailable": false,
   "localLogin": true,
   "newPlexLogin": true,
   "region": "",
   "originalLanguage": "",
-  "trustProxy": false,
+  "trustProxy": true,
   "partialRequestsEnabled": true,
   "locale": "en"
  },
  "plex": {
-  "name": "bolabaden",
-  "ip": "64-181-216-162.729ffa4dcf2d44458c6ec1a66756a366.plex.direct",
-  "port": 32400,
+  "name": "bolabaden.org",
+  "ip": "plex.bolabaden.org",
+  "port": 443,
   "useSsl": true,
   "libraries": [
    {
@@ -33,32 +39,32 @@
     "name": "Movies",
     "enabled": true,
     "type": "movie",
-    "lastScan": 1742323200719
+    "lastScan": 1755115805163
    },
    {
     "id": "4",
     "name": "Anime",
     "enabled": true,
     "type": "show",
-    "lastScan": 1742323200727
+    "lastScan": 1755115805177
    },
    {
     "id": "2",
     "name": "TV Shows",
     "enabled": true,
     "type": "show",
-    "lastScan": 1742323200815
+    "lastScan": 1751996700092
    },
    {
     "id": "5",
     "name": "Music Videos",
     "enabled": true,
     "type": "movie",
-    "lastScan": 1742323200820
+    "lastScan": 1751996700102
    }
   ],
-  "webAppUrl": "",
-  "machineId": "cc7171151c7e242bd2f1c1c1138181c577adea26"
+  "webAppUrl": "https://plex.bocloud.org",
+  "machineId": "508f1e66f9ebdecae95ab71afb36f051aed8bccc"
  },
  "tautulli": {},
  "radarr": [
@@ -68,6 +74,7 @@
    "port": 7878,
    "apiKey": "fc44a10e3c7c4c0582cf99f1d7ff0f18",
    "useSsl": false,
+   "baseUrl": "",
    "activeProfileId": 6,
    "activeProfileName": "HD - 720p/1080p",
    "activeDirectory": "/movies",
@@ -87,8 +94,9 @@
    "name": "Sonarr",
    "hostname": "sonarr",
    "port": 8989,
-   "apiKey": "6e47cf9c972e4833bcf5f303ca1a7d93",
+   "apiKey": "5fa91e23f1ce4bfda1159fb0d717b70e",
    "useSsl": false,
+   "baseUrl": "",
    "activeProfileId": 6,
    "activeLanguageProfileId": 1,
    "activeProfileName": "HD - 720p/1080p",

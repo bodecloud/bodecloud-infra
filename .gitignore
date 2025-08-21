@@ -1,11 +1,31 @@
+.cursor
+.DS_Store
+.env
 .gitattributes
 .history
+.idea
 .venv
+.vscode
 *.db-shm
 *.db-wal
+*.log
+*.njsproj
+*.ntvs*
+*.sln
 *.sqlite
+*.suo
+*.sw?
+**/node_modules
 *lock_v2*
-configs/recyclarr/repositories/config-templates
+# Dependency directories
+# Editor directories and files
+# Environment variables
+# Logs
+# OS specific
+# Task files
+# tasks.json
+# tasks/ 
+cloudunion
 configs/audiobookshelf/metadata/logs
 configs/bazarr/config/log
 configs/deluge/deluged.pid
@@ -14,9 +34,10 @@ configs/deluge/stats.totals*
 configs/duplicati/Duplicati-server.sqlite
 configs/glauthui/mariadb/*.log
 configs/glauthui/mariadb/aria_log*
+configs/hedgedoc/database
 configs/homepage/logs
+configs/jackett/config/Jackett/log.txt
 configs/janitorr/logs
-configs/jellyfin/config/log
 configs/jellyfin/config/log
 configs/jellyseerr/config/logs
 configs/jellyseerr/config/logs/.machinelogs-2025-03-18.json
@@ -33,6 +54,10 @@ configs/librechat/data-node/journal/WiredTiger*
 configs/librechat/data-node/WiredTiger*
 configs/lidarr/config/logs
 configs/lidarr/config/logs*
+configs/open-webui/cache/
+configs/litellm/pgdata
+configs/open-webui/cache/whisper/models
+configs/open-webui/webui.db
 configs/overseerr/config/db
 configs/overseerr/config/logs
 configs/plex/config/osx-config
@@ -40,9 +65,15 @@ configs/plex/config/osx-config/Cache/PhotoTranscoder
 configs/plex/config/osx-config/Logs
 configs/postgresql/base
 configs/prefetcharr/jellyfin/log
+configs/prowlarr/config/prowlarr.db
+configs/prowlarr/config/prowlarr.pid
 configs/qbittorrent/config/qBittorrent/logs
 configs/radarr/config/logs
+configs/rclone/.cache
 configs/readarr/config/logs
+configs/recyclarr/repositories/config-templates
+configs/redis/appendonlydir/
+configs/redis/dump.rdb
 configs/sonarr/config/logs
 configs/sonarr/config/logs.db
 configs/speedtest-tracker/database.sqlite
@@ -57,14 +88,19 @@ configs/whisparr/config/logs
 configs/wizarr/*.log
 configs/wizarr/logs.log
 configs/wizarr/sessions
+configs/wordpress/mariadb-data
 data
-downloads
-logs.db
-secrets
+dev-debug.log
 docker
-.cursor
+downloads
+logs
+logs.db
 node_modules
-**/node_modules
-cloudunion
+node_modules/
+npm-debug.log*
+secrets
 src
-.roo
+yarn-debug.log*
+yarn-error.log*
+
+.env.full

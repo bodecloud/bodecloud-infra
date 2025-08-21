@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: warp-fetch-proxy
+  name: warp-fetch-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: warp-fetch-proxy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: warp-fetch-proxy
+    spec:
+      containers:
+        - image: th3w1zard1/fetch-proxy:latest
+          livenessProbe:
+            exec:
+              command:
+                - wget -qO- http://127.0.0.1:3128/health > /dev/null 2>&1 || exit 1
+            failureThreshold: 3
+            initialDelaySeconds: 40
+            periodSeconds: 30
+            timeoutSeconds: 10
+          name: warp-fetch-proxy
+          ports:
+            - containerPort: 3128
+              protocol: TCP
+      restartPolicy: Always 

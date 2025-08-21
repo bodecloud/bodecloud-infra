@@ -1,0 +1,23 @@
+# check if there is at least one published port
+
+#! i2p-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: i2p-published
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: i2p
+spec:
+    selector:
+        com.docker.compose.project: boden
+        com.docker.compose.service: i2p
+    ports:
+        - name: i2p-7658
+          port: 7658
+          protocol: TCP
+          targetPort: i2p-7658
+
+# check if there is at least one published port

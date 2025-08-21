@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    homepage.description: A web-based IDE for coding, editing, and debugging code, with support for multiple languages and frameworks.
+    homepage.group: Development
+    homepage.href: https://code.bolabaden.org/
+    homepage.icon: code-server.png
+    homepage.name: Code Server
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.routers.code.rule: Host(`code.bolabaden.org`) || Host(`code.bolabaden.duckdns.org`) || Host(`code.micklethefickle.duckdns.org`) || Host(`code.micklethefickle.bolabaden.org`) || Host(`code.micklethefickle.bolabaden.duckdns.org`)
+    traefik.http.services.code.loadbalancer.server.port: "8443"
+  labels:
+    io.kompose.service: code-demo
+  name: code-demo
+spec:
+  ports:
+    - name: "8443"
+      port: 8443
+      targetPort: 8443
+  selector:
+    io.kompose.service: code-demo

@@ -1,0 +1,86 @@
+{
+	"name": "vsc-essentials",
+	"displayName": "VSC-Essentials",
+	"description": "Language agnostic, The Essential extensions for visual studio code",
+	"icon": "img/essentials.png",
+	"galleryBanner": {
+		"color": "#53595e",
+		"theme": "dark"
+	},
+	"license": "LICENSE.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Gydunhn/VSC-Essentials.git"
+	},
+	"keywords": [
+		"VSC",
+		"VSCode",
+		"Visual Studio",
+		"Visual Studio Code",
+		"VSC Essentials",
+		"Essentials",
+		"Esenciales",
+		"Essenciais",
+		"Essentiel",
+		"Essenziali",
+		"Essentielles",
+		"Esencajoj",
+		"必需品",
+		"골자",
+		"अत्यावश्यकम्",
+		"ملزومات",
+		"Git",
+		"GitLens",
+		"Git History",
+		"TODO",
+		"Todo Tree",
+		"Highlight",
+		"Color Highlight",
+		"XML",
+		"CodeSnap",
+		"Easy CodeSnap",
+		"Git Graph",
+		"CSV",
+		"Rainbow",
+		"Rainbow CSV",
+		"SVG",
+		"Image Preview",
+		"JSON",
+		"Editor",
+		"JSON Editor",
+		"Paste JSON as Code",
+		"Gydunhn"
+	],
+	"version": "2.3.0",
+	"publisher": "Gydunhn",
+	"engines": {
+		"vscode": "^1.35.0"
+	},
+	"categories": [
+		"Extension Packs"
+	],
+	"extensionPack": [
+		"Gydunhn.vsc-essentials-core",
+		"kisstkondoros.vscode-gutter-preview",
+		"vitaliymaz.vscode-svg-previewer",
+		"ArthurLobo.easy-codesnap",
+		"mhutchie.git-graph",
+		"eamodio.gitlens",
+		"donjayamanne.githistory",
+		"codezombiech.gitignore",
+		"DotJoshJohnson.xml",
+		"mechatroner.rainbow-csv",
+		"nickdemayo.vscode-json-editor",
+		"formulahendry.code-runner",
+		"quicktype.quicktype",
+		"naumovs.color-highlight",
+		"johnpapa.vscode-peacock",
+		"Gydunhn.vsc-essentials-themes-core",
+		"Gydunhn.vsc-essentials-material-themes"
+	],
+	"__metadata": {
+		"installedTimestamp": 1752874619219,
+		"targetPlatform": "universal",
+		"size": 66245
+	}
+}

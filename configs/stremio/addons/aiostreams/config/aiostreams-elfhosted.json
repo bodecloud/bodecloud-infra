@@ -1,0 +1,368 @@
+{
+  "services": [
+    {
+      "id": "premiumize",
+      "enabled": true,
+      "credentials": {
+        "apiKey": "6i6zgswm35baj3ur"
+      }
+    },
+    {
+      "id": "alldebrid",
+      "enabled": true,
+      "credentials": {
+        "apiKey": "1eX0m2LsL8bjGXjqtesA"
+      }
+    },
+    {
+      "id": "realdebrid",
+      "enabled": false,
+      "credentials": {
+        "apiKey": "TE6M7M2GGBN6H6XT2OZTUQIX42LEPJ4EIZIHTN73HAW2TJUZAFHA"
+      }
+    },
+    {
+      "id": "debridlink",
+      "enabled": false,
+      "credentials": {
+        "apiKey": "vvppT6-RCIXJVyr1O2j8VYIBAAPy4EmcY_OVgELZWujQOBt5iz_19Rpz6A6xxwwS"
+      }
+    },
+    {
+      "id": "torbox",
+      "enabled": false,
+      "credentials": {
+        "apiKey": "d490b7b1-1f6d-44e8-9cc8-3e735c87874b"
+      }
+    },
+    {
+      "id": "offcloud",
+      "enabled": false,
+      "credentials": {}
+    },
+    {
+      "id": "putio",
+      "enabled": false,
+      "credentials": {}
+    },
+    {
+      "id": "easynews",
+      "enabled": false,
+      "credentials": {}
+    },
+    {
+      "id": "easydebrid",
+      "enabled": false,
+      "credentials": {}
+    },
+    {
+      "id": "pikpak",
+      "enabled": false,
+      "credentials": {}
+    },
+    {
+      "id": "seedr",
+      "enabled": false,
+      "credentials": {}
+    }
+  ],
+  "presets": [
+    {
+      "type": "torrents-db",
+      "instanceId": "388",
+      "enabled": true,
+      "options": {
+        "name": "MangoFalconDB",
+        "timeout": 15000,
+        "resources": [
+          "stream",
+          "meta"
+        ],
+        "includeP2P": false,
+        "useMultipleInstances": false
+      }
+    },
+    {
+      "type": "mediafusion",
+      "instanceId": "def",
+      "enabled": true,
+      "options": {
+        "name": "MediaFusion",
+        "timeout": 15000,
+        "resources": [
+          "stream",
+          "meta",
+          "catalog"
+        ],
+        "useCachedResultsOnly": false,
+        "enableWatchlistCatalogs": false,
+        "downloadViaBrowser": false,
+        "certificationLevelsFilter": [],
+        "nudityFilter": [
+          "Severe"
+        ]
+      }
+    },
+    {
+      "type": "debridio",
+      "instanceId": "7a0",
+      "enabled": true,
+      "options": {
+        "name": "Debridio",
+        "timeout": 15000,
+        "resources": [
+          "stream"
+        ],
+        "debridioApiKey": "a1fd452a7e885e7097416bf56c451c21"
+      }
+    },
+    {
+      "type": "webstreamr",
+      "instanceId": "1ff",
+      "enabled": true,
+      "options": {
+        "name": "WebStreamr",
+        "timeout": 15000,
+        "resources": [
+          "stream"
+        ],
+        "providers": [
+          "en",
+          "multi"
+        ],
+        "includeExternalUrls": false
+      }
+    },
+    {
+      "type": "debridio-tv",
+      "instanceId": "b52",
+      "enabled": true,
+      "options": {
+        "name": "Debridio TV",
+        "timeout": 10000,
+        "resources": [
+          "catalog",
+          "meta",
+          "stream"
+        ],
+        "debridioApiKey": "a1fd452a7e885e7097416bf56c451c21",
+        "channels": [
+          "usa"
+        ],
+        "resultPassthrough": true
+      }
+    },
+    {
+      "type": "debridio-watchtower",
+      "instanceId": "785",
+      "enabled": true,
+      "options": {
+        "name": "Debridio Watchtower",
+        "timeout": 10000,
+        "resources": [
+          "stream"
+        ],
+        "debridioApiKey": "a1fd452a7e885e7097416bf56c451c21"
+      }
+    },
+    {
+      "type": "nuvio-streams",
+      "instanceId": "42a",
+      "enabled": true,
+      "options": {
+        "name": "Nuvio Streams",
+        "timeout": 10000,
+        "resources": [
+          "stream"
+        ],
+        "scraperApiKey": "9cd78e6f8ec0a3f758636145f8a86c3d",
+        "showBoxCookie": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTU0OTAxNzcsIm5iZiI6MTc1NTQ5MDE3NywiZXhwIjoxNzg2NTk0MTk3LCJkYXRhIjp7InVpZCI6ODUzMzE5LCJ0b2tlbiI6ImVlMWM1OTIxY2VhOTkwZjJlNjFlNzNkMGIzMzIyMTg5In19.cdOM3V_4gWyRg-DL5ct_sJ4pAU5nnycpjALCJNpx2sU",
+        "showBoxRegion": "USA5",
+        "providers": [
+          "showbox",
+          "soapertv",
+          "vidzee",
+          "vidsrc",
+          "mp4hydra",
+          "uhdmovies",
+          "moviesmod",
+          "animepahe"
+        ]
+      }
+    }
+  ],
+  "formatter": {
+    "id": "custom",
+    "definition": {
+      "name": "{stream.proxied::istrue[\"🕵️ \"||\"\"]}{stream.type::=p2p[\"[P2P] \"||\"\"]}{service.shortName::exists[\"[{service.shortName}\"||\"\"]}{stream.library::istrue[\"☁️\"||\"\"]}{service.cached::istrue[\"⚡] \"||\"\"]}{service.cached::isfalse[\"⏳] \"||\"\"]}{addon.name}{stream.resolution::exists[\" {stream.resolution}\"||\"\"]}{stream.regexMatched::exists[\" ({stream.regexMatched})\"||\"\"]}\n",
+      "description": "{stream.message::exists[\"ℹ️ {stream.message}\"||\"\"]}\n{stream.title::exists[\"📁 {stream.title::title}\"||\"\"]}{stream.year::exists[\" ({stream.year})\"||\"\"]}{stream.season::>=0[\" S\"||\"\"]}{stream.season::<=9[\"0\"||\"\"]}{stream.season::>0[\"{stream.season}\"||\"\"]}{stream.episode::>=0[\" • E\"||\"\"]}{stream.episode::<=9[\"0\"||\"\"]}{stream.episode::>0[\"{stream.episode}\"||\"\"]}\n{stream.quality::exists[\"🎥 {stream.quality} \"||\"\"]}{stream.encode::exists[\"🎞️ {stream.encode} \"||\"\"]}{stream.releaseGroup::exists[\"🏷️ {stream.releaseGroup}\"||\"\"]}\n{stream.visualTags::exists[\"📺 {stream.visualTags::join(' • ')} \"||\"\"]}{stream.audioTags::exists[\"🎧 {stream.audioTags::join(' • ')} \"||\"\"]}{stream.audioChannels::exists[\"🔊 {stream.audioChannels::join(' • ')}\"||\"\"]}\n{stream.size::>0[\"📦 {stream.size::bytes} \"||\"\"]}{stream.folderSize::>0[\"/ 📦 {stream.folderSize::bytes}\"||\"\"]}{stream.duration::>0[\"⏱️ {stream.duration::time} \"||\"\"]}{stream.age::exists[\"📅 {stream.age} \"||\"\"]}\n{stream.languageEmojis::exists[\"🌐 {stream.languageEmojis::join(' / ')}\"||\"\"]}"
+    }
+  },
+  "preferredQualities": [
+    "BluRay",
+    "WEB-DL",
+    "WEBRip",
+    "HDRip",
+    "HC HD-Rip",
+    "DVDRip",
+    "HDTV",
+    "BluRay REMUX",
+    "CAM",
+    "TS",
+    "TC",
+    "SCR",
+    "Unknown"
+  ],
+  "preferredResolutions": [
+    "1440p",
+    "1080p",
+    "720p",
+    "2160p",
+    "576p",
+    "480p",
+    "360p",
+    "240p",
+    "144p",
+    "Unknown"
+  ],
+  "excludedQualities": [],
+  "excludedVisualTags": [
+    "3D"
+  ],
+  "sortCriteria": {
+    "global": [
+      {
+        "key": "cached",
+        "direction": "desc"
+      },
+      {
+        "key": "library",
+        "direction": "desc"
+      },
+      {
+        "key": "resolution",
+        "direction": "desc"
+      },
+      {
+        "key": "quality",
+        "direction": "desc"
+      },
+      {
+        "key": "size",
+        "direction": "asc"
+      }
+    ]
+  },
+  "deduplicator": {
+    "enabled": true,
+    "keys": [
+      "filename",
+      "infoHash"
+    ],
+    "cached": "single_result",
+    "uncached": "per_service",
+    "p2p": "single_result"
+  },
+  "proxy": {
+    "enabled": true,
+    "id": "stremthru",
+    "url": "https://stremthru.bolabaden.org",
+    "credentials": "bolabaden:duckdns",
+    "publicIp": "170.9.225.137",
+    "proxiedAddons": [],
+    "proxiedServices": [
+      "realdebrid",
+      "none"
+    ]
+  },
+  "hideErrorsForResources": [],
+  "precacheNextEpisode": true,
+  "alwaysPrecache": true,
+  "uuid": "6de0ccf1-34f9-42ce-bc68-97ed959024d9",
+  "trusted": false,
+  "addonPassword": "sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9",
+  "excludedResolutions": [],
+  "includedResolutions": [],
+  "requiredResolutions": [],
+  "includedQualities": [],
+  "requiredQualities": [],
+  "excludedLanguages": [],
+  "includedLanguages": [
+    "Unknown",
+    "Multi",
+    "Dubbed",
+    "Dual Audio",
+    "English"
+  ],
+  "requiredLanguages": [
+    "English"
+  ],
+  "preferredLanguages": [],
+  "includedVisualTags": [],
+  "requiredVisualTags": [],
+  "preferredVisualTags": [],
+  "excludedAudioTags": [],
+  "includedAudioTags": [],
+  "requiredAudioTags": [],
+  "preferredAudioTags": [],
+  "excludedAudioChannels": [],
+  "includedAudioChannels": [],
+  "requiredAudioChannels": [],
+  "preferredAudioChannels": [],
+  "excludedStreamTypes": [
+    "p2p"
+  ],
+  "includedStreamTypes": [],
+  "requiredStreamTypes": [],
+  "preferredStreamTypes": [],
+  "excludedEncodes": [],
+  "includedEncodes": [],
+  "requiredEncodes": [],
+  "preferredEncodes": [
+    "AV1",
+    "HEVC",
+    "AVC"
+  ],
+  "seederRangeTypes": [],
+  "excludeCachedFromAddons": [],
+  "excludeCachedFromServices": [],
+  "excludeCachedFromStreamTypes": [],
+  "excludeUncached": true,
+  "excludeUncachedFromAddons": [],
+  "excludeUncachedFromServices": [
+    "realdebrid"
+  ],
+  "excludeUncachedFromStreamTypes": [],
+  "disableGroups": true,
+  "rpdbApiKey": "t0-free-rpdb",
+  "resultLimits": {
+    "global": 100
+  },
+  "hideErrors": false,
+  "showStatistics": false,
+  "tmdbAccessToken": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZWM4NzZmODUyYjljMTVkMmMxYjQzNmIxMTE3ZGZmNyIsIm5iZiI6MTczNjQzOTU1NC43NzUsInN1YiI6IjY3N2ZmNzAyMjE4ZmQ1N2FjZjRlOGQ2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yK5N4wwBXNKwauenlWmuEv_5jpoTiK8Bs2rit6HO1E",
+  "titleMatching": {
+    "mode": "contains",
+    "enabled": false,
+    "requestTypes": [],
+    "addons": []
+  },
+  "seasonEpisodeMatching": {
+    "requestTypes": [],
+    "addons": []
+  },
+  "catalogModifications": [
+    {
+      "id": "b52e3b0.usa",
+      "type": "tv",
+      "name": "USA TV",
+      "shuffle": false,
+      "enabled": true,
+      "rpdb": true,
+      "hideable": true,
+      "searchable": false,
+      "addonName": "Debridio TV"
+    }
+  ],
+  "externalDownloads": false
+}

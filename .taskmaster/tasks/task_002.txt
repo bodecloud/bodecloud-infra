@@ -1,0 +1,31 @@
+# Task ID: 2
+# Title: Implement Core Layout Components
+# Status: done
+# Dependencies: 1
+# Priority: high
+# Description: Create the foundational layout components including header, footer, navigation, and responsive container components.
+# Details:
+1. Create a responsive layout component using Tailwind CSS grid/flexbox
+2. Implement Header component with:
+   - Professional logo/name
+   - Navigation links to main sections
+   - Mobile-responsive hamburger menu using headlessUI (v1.7.17)
+3. Create Footer component with:
+   - Copyright information
+   - Links to GitHub, contact
+   - Tech stack acknowledgment
+4. Implement main navigation component with smooth scrolling
+5. Create container components for consistent section layouts
+6. Implement dark/light mode toggle using next-themes (v0.2.1)
+7. Ensure all components are fully typed with TypeScript interfaces
+8. Use CSS variables for theme colors in Tailwind config
+9. Implement responsive breakpoints following Tailwind defaults
+10. Create reusable UI components (Button, Card, Section)
+
+# Test Strategy:
+1. Test responsive behavior across multiple viewport sizes (320px, 768px, 1024px, 1440px)
+2. Verify navigation links work correctly
+3. Test mobile menu open/close functionality
+4. Validate accessibility using axe-core: `npm install -D @axe-core/react`
+5. Verify dark/light mode toggle functions correctly
+6. Test keyboard navigation for accessibility

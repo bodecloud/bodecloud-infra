@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: deunhealth
+  name: deunhealth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: deunhealth
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: deunhealth
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: LOG_LEVEL
+              value: debug
+            - name: HEALTH_SERVER_ADDRESS
+              value: 127.0.0.1:9999
+          image: qmcgaw/deunhealth
+          name: deunhealth
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add: []
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /var/run/docker.sock
+              name: docker-sock
+              readOnly: true
+      hostNetwork: false
+      restartPolicy: Always
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+            type: Socket

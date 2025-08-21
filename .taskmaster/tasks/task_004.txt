@@ -1,0 +1,74 @@
+# Task ID: 4
+# Title: Develop Hero Section
+# Status: in-progress
+# Dependencies: 2, 19
+# Priority: high
+# Description: Create an impactful hero section that clearly communicates professional identity and technical focus with immediate access to key areas.
+# Details:
+1. Design a clean, minimalist hero section with:
+   - Professional name and title
+   - Brief technical focus statement (backend, infrastructure, AI)
+   - Call-to-action buttons for key sections
+2. Implement subtle animations using Framer Motion (v10.16.4)
+3. Optimize for both desktop and mobile layouts
+4. Include a professional headshot or abstract technical graphic
+5. Create a TypeWriter effect for technical keywords using a custom hook
+6. Implement scroll indicator for better UX
+7. Ensure text is crisp and readable with appropriate contrast
+8. Add subtle particle or network visualization background using tsParticles (v2.12.0) or react-particles (v2.12.2)
+9. Optimize animations for performance and reduced motion preferences
+10. Implement lazy loading for any hero graphics
+<info added on 2025-07-12T11:05:35.394Z>
+11. Ensure hero section explicitly communicates self-taught software engineer identity
+12. Highlight specific technical focus areas: infrastructure, AI tools, and backend development
+13. Include work preference indicators (remote, async, text-based communication)
+14. Design content specifically for technical hiring managers, CTOs, and contract providers
+15. Balance technical authority with authentic voice (avoid corporate jargon)
+16. Ensure CTA buttons provide immediate access to tools, projects, and contact information
+17. Implement A/B testing to measure engagement with different hero section elements
+18. Create visual hierarchy that emphasizes professional credibility elements
+19. Add subtle visual cues that reinforce technical competency
+20. Ensure all hero section elements directly support hiring facilitation objective
+</info added on 2025-07-12T11:05:35.394Z>
+21. Utilize @21st-dev/magic components from task 19 (Modern UI Components) for professional appearance and animations
+
+# Test Strategy:
+1. Test responsive layout across device sizes
+2. Verify animations perform well on lower-end devices
+3. Test accessibility of all interactive elements
+4. Validate color contrast meets WCAG 2.1 AA standards
+5. Test reduced motion settings respect user preferences
+6. Verify load time is under 1 second for the hero section
+7. Test integration with @21st-dev/magic components for proper functionality
+
+# Subtasks:
+## 1. Core Layout and Responsive Design Implementation [pending]
+### Dependencies: None
+### Description: Develop the foundational structure of the Hero Section with responsive design principles
+### Details:
+Create the HTML/CSS framework for the Hero Section ensuring it works across all device sizes. Implement grid/flexbox layout, establish breakpoints for mobile, tablet, and desktop views. Set up the container structure that will house the animated elements, content blocks, and call-to-action components. Include placeholder elements for content that will be refined later.
+
+## 2. Animation Implementation with Framer Motion [pending]
+### Dependencies: 4.1
+### Description: Integrate advanced animations including TypeWriter effects and particle visualizations
+### Details:
+Implement Framer Motion animations for the Hero Section. Create the TypeWriter effect for dynamic text display. Develop particle visualization system that responds to user interaction. Ensure animations are performant and don't interfere with page load times. Include subtle entrance animations for key content elements and implement animation sequencing for a cohesive experience.
+
+## 3. Content Strategy for Technical Audience [pending]
+### Dependencies: 4.1
+### Description: Refine hero content to specifically appeal to technical hiring managers
+### Details:
+Develop compelling headline copy and supporting text that resonates with technical hiring managers. Highlight technical skills and achievements prominently. Create A/B testing variants of content to determine most effective messaging. Ensure language is precise, technically accurate, and demonstrates depth of expertise while remaining concise and impactful.
+
+## 4. Performance Optimization and Accessibility Compliance [pending]
+### Dependencies: 4.1, 4.2, 4.3
+### Description: Optimize Hero Section for performance metrics and ensure WCAG compliance
+### Details:
+Implement performance optimizations including lazy loading for non-critical elements, code splitting for animations, and asset optimization. Conduct accessibility audit ensuring proper contrast ratios, keyboard navigation, screen reader compatibility, and semantic HTML structure. Test performance using Lighthouse and WebPageTest, aiming for >90 performance score. Document all accessibility features implemented and their compliance with WCAG 2.1 AA standards.
+
+## 5. Integration of @21st-dev/magic Components [pending]
+### Dependencies: 4.1
+### Description: Implement Modern UI Components from task 19 for enhanced visual appeal and functionality
+### Details:
+Integrate the @21st-dev/magic component library into the hero section. Replace or enhance existing UI elements with corresponding magic components. Ensure consistent styling and behavior between custom components and magic components. Leverage the library's built-in animations and interactions to create a more polished user experience. Test integration points thoroughly to ensure seamless operation.
+

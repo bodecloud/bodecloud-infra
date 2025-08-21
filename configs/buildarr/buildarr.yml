@@ -319,7 +319,7 @@ prowlarr:
   port: 9696
   protocol: http
   url_base: null
-  api_key: e6352949607b467e9e48b4bca32f55f1
+  api_key: 29440a82740d475cacb35327c62c87a1
   image: lscr.io/linuxserver/prowlarr
   version: 1.31.2.4975
   settings:

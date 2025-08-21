@@ -6,28 +6,12 @@ language: ko-KR
 type: public
 encoding: UTF-8
 followredirect: true
+certificates:
+  - aa14c810b9cc3bdd3ed5424262a6a01a2c400a5f # invalid CA for qq381
 links:
-  - https://torrentqq372.com/
-  - https://torrentegg64.com/
+  - https://torrentqq381.com/
+  - https://torrentegg72.com/
 legacylinks:
-  - https://torrentqq358.com/
-  - https://torrentegg50.com/
-  - https://torrentqq359.com/
-  - https://torrentegg51.com/
-  - https://torrentqq360.com/
-  - https://torrentegg52.com/
-  - https://torrentqq361.com/
-  - https://torrentegg53.com/
-  - https://torrentqq362.com/
-  - https://torrentegg54.com/
-  - https://torrentqq363.com/
-  - https://torrentegg55.com/
-  - https://torrentqq364.com/
-  - https://torrentegg56.com/
-  - https://torrentqq365.com/
-  - https://torrentegg57.com/
-  - https://torrentqq366.com/
-  - https://torrentegg58.com/
   - https://torrentqq367.com/
   - https://torrentegg59.com/
   - https://torrentqq368.com/
@@ -38,6 +22,23 @@ legacylinks:
   - https://torrentegg62.com/
   - https://torrentqq371.com/
   - https://torrentegg63.com/
+  - https://torrentqq372.com/
+  - https://torrentegg64.com/
+  - https://torrentqq373.com/
+  - https://torrentegg65.com/
+  - https://torrentqq374.com/
+  - https://torrentegg66.com/
+  - https://torrentqq375.com/
+  - https://torrentegg67.com/
+  - https://torrentqq376.com/
+  - https://torrentegg68.com/
+  - https://torrentqq377.com/
+  - https://torrentqq378.com/
+  - https://torrentegg69.com/
+  - https://torrentqq379.com/
+  - https://torrentegg70.com/
+  - https://torrentqq380.com/
+  - https://torrentegg71.com/
 
 caps:
   categorymappings:

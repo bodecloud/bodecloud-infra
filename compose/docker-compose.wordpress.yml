@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+
+services:
+  wordpress:
+    depends_on:
+      - mariadb
+    image: 'docker.io/wordpress:latest'
+    container_name: wordpress
+    hostname: wordpress
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    volumes:
+      - '${CONFIG_PATH:-./configs}/wordpress/wordpress-files:/var/www/html'
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:?}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:?}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-wordpress}
+    labels:
+      traefik.enable: "true"
+      traefik.http.middlewares.gzip.compress: "true"
+      traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: "https"
+      traefik.http.routers.http-0-wordpress.entryPoints: "http"
+      traefik.http.routers.http-0-wordpress.middlewares: "redirect-to-https"
+      traefik.http.routers.http-0-wordpress.rule: "Host(`wordpress.${DOMAIN}`) || Host(`wordpress.${TS_HOSTNAME}.${DOMAIN}`) && PathPrefix(`/`)"
+      traefik.http.routers.http-1-wordpress.entryPoints: "http"
+      traefik.http.routers.http-1-wordpress.middlewares: "redirect-to-https"
+      traefik.http.routers.http-1-wordpress.rule: "Host(`wordpress.${DOMAIN}`) || Host(`wordpress.${TS_HOSTNAME}.${DOMAIN}`) && PathPrefix(`/`)"
+      traefik.http.routers.https-0-wordpress.entryPoints: "https"
+      traefik.http.routers.https-0-wordpress.middlewares: "gzip"
+      traefik.http.routers.https-0-wordpress.rule: "Host(`wordpress.${DOMAIN}`) || Host(`wordpress.${TS_HOSTNAME}.${DOMAIN}`) && PathPrefix(`/`)"
+      traefik.http.routers.https-0-wordpress.tls.certresolver: "letsencrypt"
+      traefik.http.routers.https-0-wordpress.tls: "true"
+      traefik.http.routers.https-1-wordpress.entryPoints: "https"
+      traefik.http.routers.https-1-wordpress.middlewares: "gzip"
+      traefik.http.routers.https-1-wordpress.rule: "Host(`wordpress.${DOMAIN}`) || Host(`wordpress.${TS_HOSTNAME}.${DOMAIN}`) && PathPrefix(`/`)"
+      traefik.http.routers.https-1-wordpress.tls.certresolver: "letsencrypt"
+      traefik.http.routers.https-1-wordpress.tls: "true"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:80 > /dev/null 2>&1 || exit 1"]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    restart: always
+
+  mariadb:
+    image: 'docker.io/mariadb:11'
+    container_name: mariadb
+    hostname: mariadb
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    volumes:
+      - '${CONFIG_PATH:-./configs}/wordpress/mariadb-data:/var/lib/mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_ROOT_PASSWORD:?}
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME:-wordpress}
+      MYSQL_USER: ${WORDPRESS_DB_USER:?}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD:?}
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p $${MYSQL_ROOT_PASSWORD} > /dev/null 2>&1 || exit 1"]
+      interval: 5s
+      timeout: 20s
+      retries: 10
+    restart: always
+
+
+configs: {  }
+secrets: {  }
+volumes: {  }
+
+
+
+
+

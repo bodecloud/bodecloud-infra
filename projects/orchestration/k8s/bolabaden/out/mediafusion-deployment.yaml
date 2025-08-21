@@ -1,0 +1,228 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: mediafusion
+  name: mediafusion
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mediafusion
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: mediafusion
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: ADDON_NAME
+              value: MediaFusion
+            - name: VERSION
+              value: 1.0.0
+            - name: DESCRIPTION
+              value: MediaFusion Stremio Addon
+            - name: BRANDING_DESCRIPTION
+              value: ""
+            - name: CONTACT_EMAIL
+              value: mhdzumair@gmail.com
+            - name: HOST_URL
+              value: https://mediafusion.bolabaden.org
+            - name: POSTER_HOST_URL
+              value: https://mediafusion.bolabaden.org
+            - name: SECRET_KEY
+              value: c75ac92df70c4383c8d1bb37f65454f9
+            - name: API_PASSWORD
+              value: h4L0m4St3R327
+            - name: LOGGING_LEVEL
+              value: DEBUG
+            - name: LOGO_URL
+              value: ""
+            - name: IS_PUBLIC_INSTANCE
+              value: "False"
+            - name: MIN_SCRAPING_VIDEO_SIZE
+              value: "26214400"
+            - name: METADATA_PRIMARY_SOURCE
+              value: imdb
+            - name: DISABLED_PROVIDERS
+              value: '[]'
+            - name: MONGO_URI
+              value: mongodb://mongodb:27017/mediafusion
+            - name: DB_MAX_CONNECTIONS
+              value: "50"
+            - name: REDIS_URL
+              value: redis://redis:6379
+            - name: REDIS_MAX_CONNECTIONS
+              value: "100"
+            - name: PLAYWRIGHT_CDP_URL
+              value: ws://browserless:3000?blockAds=true&stealth=true
+            - name: FLARESOLVERR_URL
+              value: http://flaresolverr:8191/v1
+            - name: TMDB_API_KEY
+              value: cec876f852b9c15d2c1b436b1117dff7
+            - name: IS_SCRAP_FROM_PROWLARR
+              value: "True"
+            - name: PROWLARR_API_KEY
+              value: e6352949607b467e9e48b4bca32f55f1
+            - name: PROWLARR_URL
+              value: http://prowlarr:9696
+            - name: PROWLARR_LIVE_TITLE_SEARCH
+              value: "False"
+            - name: PROWLARR_BACKGROUND_TITLE_SEARCH
+              value: "True"
+            - name: PROWLARR_SEARCH_QUERY_TIMEOUT
+              value: "30"
+            - name: PROWLARR_IMMEDIATE_MAX_PROCESS
+              value: "10"
+            - name: PROWLARR_IMMEDIATE_MAX_PROCESS_TIME
+              value: "15"
+            - name: PROWLARR_SEARCH_INTERVAL_HOUR
+              value: "72"
+            - name: PROWLARR_FEED_SCRAPE_INTERVAL_HOUR
+              value: "3"
+            - name: IS_SCRAP_FROM_JACKETT
+              value: "True"
+            - name: JACKETT_URL
+              value: http://jackett:9117
+            - name: JACKETT_API_KEY
+              value: nnx0n84pcj7umynyd2pbid2nl1zzuemz
+            - name: JACKETT_SEARCH_INTERVAL_HOUR
+              value: "72"
+            - name: JACKETT_SEARCH_QUERY_TIMEOUT
+              value: "30"
+            - name: JACKETT_IMMEDIATE_MAX_PROCESS
+              value: "10"
+            - name: JACKETT_IMMEDIATE_MAX_PROCESS_TIME
+              value: "15"
+            - name: JACKETT_LIVE_TITLE_SEARCH
+              value: "False"
+            - name: JACKETT_BACKGROUND_TITLE_SEARCH
+              value: "True"
+            - name: JACKETT_FEED_SCRAPE_INTERVAL_HOUR
+              value: "3"
+            - name: IS_SCRAP_FROM_ZILEAN
+              value: "True"
+            - name: ZILEAN_SEARCH_INTERVAL_HOUR
+              value: "24"
+            - name: ZILEAN_URL
+              value: https://zilean.elfhosted.com
+            - name: IS_SCRAP_FROM_TORRENTIO
+              value: "True"
+            - name: TORRENTIO_SEARCH_INTERVAL_DAYS
+              value: "3"
+            - name: TORRENTIO_URL
+              value: https://torrentio.strem.fun
+            - name: IS_SCRAP_FROM_MEDIAFUSION
+              value: "True"
+            - name: MEDIAFUSION_SEARCH_INTERVAL_DAYS
+              value: "3"
+            - name: MEDIAFUSION_URL
+              value: https://mediafusion.elfhosted.com
+            - name: SYNC_DEBRID_CACHE_STREAMS
+              value: "True"
+            - name: IS_SCRAP_FROM_BT4G
+              value: "True"
+            - name: BT4G_URL
+              value: https://bt4gprx.com
+            - name: BT4G_SEARCH_INTERVAL_HOUR
+              value: "72"
+            - name: BT4G_SEARCH_TIMEOUT
+              value: "10"
+            - name: BT4G_IMMEDIATE_MAX_PROCESS
+              value: "15"
+            - name: BT4G_IMMEDIATE_MAX_PROCESS_TIME
+              value: "15"
+            - name: TELEGRAM_BOT_TOKEN
+              value: ""
+            - name: TELEGRAM_CHAT_ID
+              value: ""
+            - name: ADULT_CONTENT_REGEX_KEYWORDS
+              value: \b(porn|xxx|sex|nude|naked|erotic|fetish|bdsm|milf|anal|oral|gangbang|threesome|masturbat|orgasm|cumshot|blowjob|handjob|footjob|creampie|facial|bukkake|hentai|yaoi|yuri|ecchi|doujin|camgirl|webcam|stripper|escort|prostitut|brothel|redlight|peepshow|voyeur|exhibitionist|swinger|orgy|hardcore|softcore|playboy|penthouse|hustler|brazzers|bangbros|realitykings|naughtyamerica|digitalplayground|wickedpictures|evilangel|kink|publicagent|fakehub|teamskeet|mofos|twistys|metart|sexart|x-art|joymii|nubiles|18eighteen|lolita|incest|taboo|kinky|slutty|horny|sexy|sensual|seductive|raw|perverted|depraved)\b
+            - name: ADULT_CONTENT_FILTER_IN_TORRENT_TITLE
+              value: "True"
+            - name: IS_SCRAP_FROM_YTS
+              value: "True"
+            - name: ENABLE_RATE_LIMIT
+              value: "False"
+            - name: VALIDATE_M3U8_URLS_LIVENESS
+              value: "True"
+            - name: STORE_STREMTHRU_MAGNET_CACHE
+              value: "False"
+            - name: SCRAPE_WITH_AKA_TITLES
+              value: "True"
+            - name: ENABLE_FETCHING_TORRENT_METADATA_FROM_P2P
+              value: "True"
+            - name: META_CACHE_TTL
+              value: "1800"
+            - name: WORKER_MAX_TASKS_PER_CHILD
+              value: "20"
+            - name: DISABLE_ALL_SCHEDULER
+              value: "False"
+            - name: BACKGROUND_SEARCH_INTERVAL_HOURS
+              value: "72"
+            - name: BACKGROUND_SEARCH_CRONTAB
+              value: '*/5 * * * *'
+            - name: TAMILMV_SCHEDULER_CRONTAB
+              value: 0 */3 * * *
+            - name: TAMIL_BLASTERS_SCHEDULER_CRONTAB
+              value: 0 */6 * * *
+            - name: FORMULA_TGX_SCHEDULER_CRONTAB
+              value: '*/30 * * * *'
+            - name: NOWMETV_SCHEDULER_CRONTAB
+              value: 0 0 * * *
+            - name: NOWSPORTS_SCHEDULER_CRONTAB
+              value: 0 10 * * *
+            - name: TAMILULTRA_SCHEDULER_CRONTAB
+              value: 0 8 * * *
+            - name: VALIDATE_TV_STREAMS_IN_DB_CRONTAB
+              value: 0 */6 * * *
+            - name: SPORT_VIDEO_SCHEDULER_CRONTAB
+              value: '*/20 * * * *'
+            - name: DLHD_SCHEDULER_CRONTAB
+              value: 25 * * * *
+            - name: MOTOGP_TGX_SCHEDULER_CRONTAB
+              value: 0 5 * * *
+            - name: UPDATE_SEEDERS_CRONTAB
+              value: 0 0 * * *
+            - name: ARAB_TORRENTS_SCHEDULER_CRONTAB
+              value: 0 0 * * *
+            - name: WWE_TGX_SCHEDULER_CRONTAB
+              value: 10 */3 * * *
+            - name: UFC_TGX_SCHEDULER_CRONTAB
+              value: 30 */3 * * *
+            - name: MOVIES_TV_TGX_SCHEDULER_CRONTAB
+              value: 0 * * * *
+            - name: PROWLARR_FEED_SCRAPER_CRONTAB
+              value: 0 */3 * * *
+            - name: JACKETT_FEED_SCRAPER_CRONTAB
+              value: 0 */3 * * *
+            - name: CLEANUP_EXPIRED_SCRAPER_TASK_CRONTAB
+              value: 0 * * * *
+            - name: CLEANUP_EXPIRED_CACHE_TASK_CRONTAB
+              value: 0 0 * * *
+          image: mhdzumair/mediafusion:latest
+          livenessProbe:
+            exec:
+              command:
+                - curl -f http://127.0.0.1:8000/health > /dev/null 2>&1 || exit 1
+            failureThreshold: 5
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            timeoutSeconds: 10
+          name: mediafusion
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+      restartPolicy: Always 

@@ -1,0 +1,909 @@
+{
+  "timestamp": "2025-07-16T19:13:34.045617",
+  "events": [
+    {
+      "timestamp": "2025-07-16T19:13:36.476062",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "starting_research",
+        "output": "\ud83d\udd0d Starting the research task for 'What company owns Utube'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:36.476798",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "agent_generated",
+        "output": "",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:36.478171",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83c\udf10 Browsing the web to learn more about the task: What company owns Utube...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:37.778871",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83e\udd14 Planning the research strategy and subtasks...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:39.934465",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subqueries",
+        "output": "\ud83d\uddc2\ufe0f I will conduct my research based on the following queries: ['Who owns YouTube as of July 16, 2025?', 'YouTube ownership structure: Google and Alphabet Inc.', 'Google subsidiaries: List of companies Google owns 2025', 'Alphabet Inc. ownership and control: Sergey Brin and Larry Page stake', 'What company owns Utube']...",
+        "metadata": [
+          "Who owns YouTube as of July 16, 2025?",
+          "YouTube ownership structure: Google and Alphabet Inc.",
+          "Google subsidiaries: List of companies Google owns 2025",
+          "Alphabet Inc. ownership and control: Sergey Brin and Larry Page stake",
+          "What company owns Utube"
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:39.935081",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Who owns YouTube as of July 16, 2025?'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.567421",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://en.wikipedia.org/wiki/YouTube\n",
+        "metadata": "https://en.wikipedia.org/wiki/YouTube"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.568051",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://en.wikipedia.org/wiki/History_of_YouTube\n",
+        "metadata": "https://en.wikipedia.org/wiki/History_of_YouTube"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.569280",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/watch?v=pv4N5sXtyes\n",
+        "metadata": "https://www.youtube.com/watch?v=pv4N5sXtyes"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.570551",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.britannica.com/topic/YouTube\n",
+        "metadata": "https://www.britannica.com/topic/YouTube"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.571333",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/watch?v=aBUaGSkjFYo\n",
+        "metadata": "https://www.youtube.com/watch?v=aBUaGSkjFYo"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.572323",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/watch?v=XODiFpgWteo\n",
+        "metadata": "https://www.youtube.com/watch?v=XODiFpgWteo"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.573312",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/watch?v=da6_8qZWFto\n",
+        "metadata": "https://www.youtube.com/watch?v=da6_8qZWFto"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.574226",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:41.575092",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:43.560398",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 3 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:43.564142",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:43.567429",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:43.569523",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Who owns YouTube as of July 16, 2025? (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:43.936248",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'YouTube ownership structure: Google and Alphabet Inc.'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.465301",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\n",
+        "metadata": "https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.466229",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://replayed.co/blogs/who-owns-the-youtube-company\n",
+        "metadata": "https://replayed.co/blogs/who-owns-the-youtube-company"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.467917",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.fool.com/investing/how-to-invest/stocks/who-owns-youtube/\n",
+        "metadata": "https://www.fool.com/investing/how-to-invest/stocks/who-owns-youtube/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.469002",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/watch?v=A9-q4xwsSXs\n",
+        "metadata": "https://www.youtube.com/watch?v=A9-q4xwsSXs"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.470020",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://surgegraph.io/business/who-owns-youtube-company\n",
+        "metadata": "https://surgegraph.io/business/who-owns-youtube-company"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.471217",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/watch?v=h6tEfLSzjNo\n",
+        "metadata": "https://www.youtube.com/watch?v=h6tEfLSzjNo"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.472034",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://en.wikipedia.org/wiki/Alphabet_Inc.\n",
+        "metadata": "https://en.wikipedia.org/wiki/Alphabet_Inc."
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.473171",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:45.474175",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:48.610628",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 4 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:48.612259",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 4 new images from 11 total images",
+        "metadata": [
+          {
+            "url": "https://businessmodelanalyst.com/wp-content/uploads/2023/04/Gucci-Who-Owns.webp",
+            "score": 2
+          },
+          {
+            "url": "https://businessmodelanalyst.com/wp-content/uploads/2023/01/Who_Owns_Spotify_05.webp",
+            "score": 2
+          },
+          {
+            "url": "https://businessmodelanalyst.com/wp-content/uploads/2023/03/who-owns-Starbucks-01.webp",
+            "score": 2
+          },
+          {
+            "url": "https://businessmodelanalyst.com/wp-content/uploads/2024/12/Modelo-Who-Owns-Image.webp",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:48.613717",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:48.615491",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: YouTube ownership structure: Google and Alphabet Inc. (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:48.722299",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Google subsidiaries: List of companies Google owns 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.119831",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.fool.com/investing/how-to-invest/stocks/list-of-companies-that-alphabet-google-owns/\n",
+        "metadata": "https://www.fool.com/investing/how-to-invest/stocks/list-of-companies-that-alphabet-google-owns/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.120937",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://tracxn.com/d/acquisitions/acquisitions-by-google/__8zKOTB9XR934x_3BSnEVSrmsu3RZtEv3AorQtuBb2Yk\n",
+        "metadata": "https://tracxn.com/d/acquisitions/acquisitions-by-google/__8zKOTB9XR934x_3BSnEVSrmsu3RZtEv3AorQtuBb2Yk"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.122496",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://en.wikipedia.org/wiki/List_of_mergers_and_acquisitions_by_Alphabet\n",
+        "metadata": "https://en.wikipedia.org/wiki/List_of_mergers_and_acquisitions_by_Alphabet"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.123798",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.mirrorreview.com/companies-acquired-by-google/\n",
+        "metadata": "https://www.mirrorreview.com/companies-acquired-by-google/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.125118",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own\n",
+        "metadata": "https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.126504",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://insights.greyb.com/google-subsidiaries-acquisition/\n",
+        "metadata": "https://insights.greyb.com/google-subsidiaries-acquisition/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.127840",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.linkedin.com/pulse/complete-list-200-companies-acquired-google-kalyani-kurve-vlduf\n",
+        "metadata": "https://www.linkedin.com/pulse/complete-list-200-companies-acquired-google-kalyani-kurve-vlduf"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.129205",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:50.130493",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:53.155745",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:53.157777",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 4 new images from 23 total images",
+        "metadata": [
+          {
+            "url": "https://insights.greyb.com/wp-content/uploads/2025/03/GreyB-Patent-and-Innovation-Index-2025-724x1024.png",
+            "score": 2
+          },
+          {
+            "url": "https://insights.greyb.com/wp-content/uploads/2023/08/GreyB-Patent-and-Innovation-Index-2025-768x1086.png",
+            "score": 2
+          },
+          {
+            "url": "https://www.mirrorreview.com/wp-content/uploads/2025/01/Industry-Game-Changers-The-Top-10-SAP-Partners-Transforming-the-Industry-in-2025.jpg",
+            "score": 2
+          },
+          {
+            "url": "https://www.mirrorreview.com/wp-content/uploads/2025/01/Aviz-Networks-Cover-Page.jpg",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:53.159542",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:53.161546",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Google subsidiaries: List of companies Google owns 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:53.421651",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Alphabet Inc. ownership and control: Sergey Brin and Larry Page stake'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:55.243339",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://surgegraph.io/business/who-currently-owns-alphabet\n",
+        "metadata": "https://surgegraph.io/business/who-currently-owns-alphabet"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:55.244653",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://surgegraph.io/business/who-owns-51-of-google\n",
+        "metadata": "https://surgegraph.io/business/who-owns-51-of-google"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:55.246495",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.kamilfranek.com/who-owns-google-alphabet/\n",
+        "metadata": "https://www.kamilfranek.com/who-owns-google-alphabet/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:55.248075",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/stocks/comments/1b8w7ew/alphabet_inc_goog_voting_rights_are_essentially/\n",
+        "metadata": "https://www.reddit.com/r/stocks/comments/1b8w7ew/alphabet_inc_goog_voting_rights_are_essentially/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:55.249369",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.investopedia.com/articles/markets/011516/top-5-google-shareholders-goog.asp\n",
+        "metadata": "https://www.investopedia.com/articles/markets/011516/top-5-google-shareholders-goog.asp"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:55.250659",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.fool.com/investing/how-to-invest/stocks/who-owns-google/\n",
+        "metadata": "https://www.fool.com/investing/how-to-invest/stocks/who-owns-google/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:55.252140",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:55.253571",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 6 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:58.276827",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 5 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:58.278800",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 1 new images from 1 total images",
+        "metadata": [
+          {
+            "url": "https://storage.googleapis.com/sg-blog/2025/01/Larry-Page-and-Sergey-Brin-1024x836.jpg",
+            "score": 2
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:58.280691",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:58.282711",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Alphabet Inc. ownership and control: Sergey Brin and Larry Page stake (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:13:58.320167",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'What company owns Utube'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:00.241127",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\n",
+        "metadata": "https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:00.242690",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.investopedia.com/investing/companies-owned-by-google/\n",
+        "metadata": "https://www.investopedia.com/investing/companies-owned-by-google/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:00.244469",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/watch?v=At3rnAloN_c\n",
+        "metadata": "https://www.youtube.com/watch?v=At3rnAloN_c"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:00.246198",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:00.247881",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 3 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:01.067493",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 2 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:01.070529",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 4 new images from 10 total images",
+        "metadata": [
+          {
+            "url": "https://businessmodelanalyst.com/wp-content/uploads/2023/01/footer.webp",
+            "score": 2
+          },
+          {
+            "url": "https://businessmodelanalyst.com/wp-content/uploads/2024/09/Youtube-Who-Owns-Image-1024x576.webp",
+            "score": 1
+          },
+          {
+            "url": "https://businessmodelanalyst.com/wp-content/uploads/2024/11/Whatsapp-Who-Owns-Image.webp",
+            "score": 1
+          },
+          {
+            "url": "https://businessmodelanalyst.com/wp-content/uploads/2024/12/Nickelodeon-Who-Owns-Image.webp",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:01.072901",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:01.075329",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: What company owns Utube (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:01.104215",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: analytics also played a critical role in improving video discoverability and ensuring that relevant content was surfaced to users. Current Ownership Structure YouTube is owned by Google, which is a subsidiary of Alphabet Inc. Alphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects. Alphabet\u2019s Role In YouTube\u2019s Ownership As a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant component. Alphabet\u2019s Subsidiaries and Structure Alphabet comprises several subsidiaries, each operating as an\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: Current Ownership Structure\nYouTube is owned by Google, which is a subsidiary of Alphabet Inc.\nAlphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects.\nAlphabet\u2019s Role In YouTube\u2019s Ownership\nAs a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant component.\nAlphabet\u2019s Subsidiaries and Structure\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: playlists enhanced engagement and kept users returning to the platform. Google\u2019s expertise in search and data analytics also played a critical role in improving video discoverability and ensuring that relevant content was surfaced to users. Current Ownership Structure YouTube is owned by Google, which is a subsidiary of Alphabet Inc. Alphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects. Alphabet\u2019s Role In YouTube\u2019s Ownership As a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: playlists enhanced engagement and kept users returning to the platform. Google\u2019s expertise in search and data analytics also played a critical role in improving video discoverability and ensuring that relevant content was surfaced to users. Current Ownership Structure YouTube is owned by Google, which is a subsidiary of Alphabet Inc. Alphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects. Alphabet\u2019s Role In YouTube\u2019s Ownership As a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: playlists enhanced engagement and kept users returning to the platform. Google\u2019s expertise in search and data analytics also played a critical role in improving video discoverability and ensuring that relevant content was surfaced to users. Current Ownership Structure YouTube is owned by Google, which is a subsidiary of Alphabet Inc. Alphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects. Alphabet\u2019s Role In YouTube\u2019s Ownership As a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: playlists enhanced engagement and kept users returning to the platform. Google\u2019s expertise in search and data analytics also played a critical role in improving video discoverability and ensuring that relevant content was surfaced to users. Current Ownership Structure YouTube is owned by Google, which is a subsidiary of Alphabet Inc. Alphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects. Alphabet\u2019s Role In YouTube\u2019s Ownership As a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: The acquisition also brought YouTube a level of credibility and legitimacy, attracting more established content creators, media companies, and advertisers. Google\u2019s extensive network of advertiser relationships and its advertising platforms, such as Google AdSense, helped monetize the platform effectively.\nThis enabled YouTube to offer revenue-sharing programs to content creators, allowing them to earn money from their videos and incentivizing high-quality content creation.\nGoogle\u2019s infrastructure and algorithms also helped improve the user experience on YouTube. Introducing features such as recommended videos and personalized playlists enhanced engagement and kept users returning to the platform. Google\u2019s expertise in search and data analytics also played a critical role in improving video discoverability and ensuring that relevant content was surfaced to users.\nCurrent Ownership Structure\nYouTube is owned by Google, which is a subsidiary of Alphabet Inc.\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: Role In YouTube\u2019s Ownership As a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant component. Alphabet\u2019s Subsidiaries and Structure Alphabet comprises several subsidiaries, each operating as an independent entity under Alphabet\u2019s supervision. These subsidiaries, including Google, Nest, Waymo, and others, cover various industries and have their CEO responsible for their respective operations. How YouTube Fits Into Alphabet\u2019s Broader Portfolio YouTube occupies a prominent position within Alphabet\u2019s diverse portfolio of businesses. As a video-sharing platform, it has become an integral part of Google\u2019s digital ecosystem, offering a vast library of user-generated content, music videos, and professional content from various media outlets.\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOoqEAR6TskLrS4DJQd6QmmteBB8l9NScbOTkYzkjEk502_AmMdho\nTitle: Who Owns YouTube?\nContent: them to earn money from their videos and incentivizing high-quality content creation. Google\u2019s infrastructure and algorithms also helped improve the user experience on YouTube. Introducing features such as recommended videos and personalized playlists enhanced engagement and kept users returning to the platform. Google\u2019s expertise in search and data analytics also played a critical role in improving video discoverability and ensuring that relevant content was surfaced to users. Current Ownership Structure YouTube is owned by Google, which is a subsidiary of Alphabet Inc. Alphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects. Alphabet\u2019s Role In YouTube\u2019s Ownership As a wholly owned subsidiary of Google, YouTube is part of Alphabet\n\nSource: https://replayed.co/blogs/who-owns-the-youtube-company\nTitle: Who owns the YouTube company? | Replayed Blog\nContent: Key stakeholders in YouTube's ownership\nThe ownership landscape of YouTube is multifaceted, with several key stakeholders playing significant roles in its operation and governance. At the forefront is Alphabet Inc., the parent company of Google, which oversees YouTube's strategic direction and financial performance. Alphabet's leadership, particularly its executives and board members, influence the broader goals for YouTube, ensuring that it aligns with the company's vision for digital advertising and content delivery. This connection provides YouTube with substantial resources and technological advancements, facilitating its continued growth and adaptability in a competitive market.\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:01.110492",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: On February 14, 2025, YouTube celebrated 20 years since its founding.\nYouTube has been led by a CEO since its founding in 2005, beginning with Chad Hurley, who led the company until 2010. After Google's acquisition of YouTube, the CEO role was retained. Salar Kamangar took over Hurley's position and kept the job until 2014. He was replaced by Susan Wojcicki, who later resigned in 2023.[99] The current CEO is Neal Mohan, who was appointed on February 16, 2023.[99]\nMain article: List of YouTube features\n\nSource: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: owned by Google. YouTube was founded on February 14, 2005, by Chad Hurley, Jawed Karim, and Steve Chen, who were former employees of PayPal. Headquartered in San Bruno, California, it is the second-most-visited website in the world, after Google Search. In January 2024, YouTube had more than 2.7 billion monthly active users, who collectively watched more than one billion hours of videos every day.[7] As of May 2019[update], videos were being uploaded to the platform at a rate of more than 500 hours of content per minute,[8][9] and as of mid-2024[update], there were approximately 14.8 billion videos in total.[10] On November 13, 2006, YouTube was purchased by Google for US$1.65 billion (equivalent to $2.39 billion in 2024).[11] Google expanded YouTube's business model of generating revenue from advertisements alone, to offering paid content such as movies and exclusive content produced by and for YouTube. It also offers YouTube Premium, a paid subscription option for watching content\n\nSource: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: that \"it reduced dislike attacks.\"[96] In 2022, YouTube launched an experiment where the company would show users who watched longer videos on TVs a long chain of short unskippable adverts, intending to consolidate all ads into the beginning of a video. Following public outrage over the unprecedented amount of unskippable ads, YouTube \"ended\" the experiment on September 19 of that year.[97] In October, YouTube announced that they would be rolling out customizable user handles in addition to channel names, which would also become channel URLs.[98] Recent history (2023\u2013present) YouTube logo from August 2017 until February 5th, 2025 On February 16, 2023, Wojcicki announced that she would step down as CEO, with Neal Mohan named as her successor. Wojcicki took on an advisory role for Google and parent company Alphabet.[99] Wojcicki died a year and a half later from non-small-cell lung cancer, on August 9, 2024.[100] In late October 2023, YouTube began cracking down on the use of ad\n\nSource: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: on September 19 of that year.[97] In October, YouTube announced that they would be rolling out customizable user handles in addition to channel names, which would also become channel URLs.[98] Recent history (2023\u2013present) YouTube logo from August 2017 until February 5th, 2025 On February 16, 2023, Wojcicki announced that she would step down as CEO, with Neal Mohan named as her successor. Wojcicki took on an advisory role for Google and parent company Alphabet.[99] Wojcicki died a year and a half later from non-small-cell lung cancer, on August 9, 2024.[100] In late October 2023, YouTube began cracking down on the use of ad blockers on the platform. Users of ad blockers may be given a pop-up warning saying \"Video player will be blocked after 3 videos\". Users of ad blockers are shown a message asking them to allow ads or inviting them to subscribe to the ad-free YouTube Premium subscription plan. YouTube says that the use of ad blockers violates its terms of service.[101][102] In April\n\nSource: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: on September 19 of that year.[97] In October, YouTube announced that they would be rolling out customizable user handles in addition to channel names, which would also become channel URLs.[98] Recent history (2023\u2013present) YouTube logo from August 2017 until February 5th, 2025 On February 16, 2023, Wojcicki announced that she would step down as CEO, with Neal Mohan named as her successor. Wojcicki took on an advisory role for Google and parent company Alphabet.[99] Wojcicki died a year and a half later from non-small-cell lung cancer, on August 9, 2024.[100] In late October 2023, YouTube began cracking down on the use of ad blockers on the platform. Users of ad blockers may be given a pop-up warning saying \"Video player will be blocked after 3 videos\". Users of ad blockers are shown a message asking them to allow ads or inviting them to subscribe to the ad-free YouTube Premium subscription plan. YouTube says that the use of ad blockers violates its terms of service.[101][102] In April\n\nSource: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: on September 19 of that year.[97] In October, YouTube announced that they would be rolling out customizable user handles in addition to channel names, which would also become channel URLs.[98] Recent history (2023\u2013present) YouTube logo from August 2017 until February 5th, 2025 On February 16, 2023, Wojcicki announced that she would step down as CEO, with Neal Mohan named as her successor. Wojcicki took on an advisory role for Google and parent company Alphabet.[99] Wojcicki died a year and a half later from non-small-cell lung cancer, on August 9, 2024.[100] In late October 2023, YouTube began cracking down on the use of ad blockers on the platform. Users of ad blockers may be given a pop-up warning saying \"Video player will be blocked after 3 videos\". Users of ad blockers are shown a message asking them to allow ads or inviting them to subscribe to the ad-free YouTube Premium subscription plan. YouTube says that the use of ad blockers violates its terms of service.[101][102] In April\n\nSource: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: November 30, 2021. ^ Kan, Michael (November 29, 2021). \"Browser Extension Brings Back Dislike Count to YouTube Videos\". PC Magazine. Archived from the original on November 30, 2021. Retrieved January 20, 2022. ^ Wojcicki, Susan (January 25, 2022). \"Letter from Susan: Our 2022 Priorities\". YouTube Official Blog. Archived from the original on October 6, 2023. Retrieved March 8, 2022. ^ Livemint (September 19, 2022). \"YouTube ends experiment that forced users to watch large unskippable ads\". mint. Archived from the original on September 21, 2022. Retrieved September 21, 2022. ^ Krasnoff, Barbara (October 15, 2022). \"How to choose your YouTube handle\". The Verge. Archived from the original on December 14, 2022. Retrieved December 15, 2022. ^ a b c Peters, Jay; Roth, Emma (January 16, 2023). \"YouTube CEO Susan Wojcicki steps down after nine years at the helm\". The Verge. Archived from the original on February 16, 2023. Retrieved February 16, 2023. ^ Afshar, Paradise (August 10, 2024).\n\nSource: https://en.wikipedia.org/wiki/History_of_YouTube\nTitle: History of YouTube - Wikipedia\nContent: From Wikipedia, the free encyclopedia YouTube logo since October 22, 2024 Design history of the video player used by YouTube. Each layout generation might have gone through minor undocumented iterations, and that appearance may vary with embedding parameters. YouTube is an American online video-sharing platform headquartered in San Bruno, California, founded by three former PayPal employees\u2014Chad Hurley, Steve Chen, and Jawed Karim\u2014in February 2005. Google bought the site in November 2006 for US$1.65 billion, since which it operates as one of Google's subsidiaries. YouTube allows users to upload videos, view them, rate them with likes and dislikes, share them, add videos to playlists, report, make comments on videos, and subscribe to other users. The slogan \"Broadcast Yourself\" used for several years and the reference to user profiles as \"Channels\" signifies the premise upon which the platform is based, of allowing anyone to operate a personal broadcasting station in resemblance to\n\nSource: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: In 2022, YouTube launched an experiment where the company would show users who watched longer videos on TVs a long chain of short unskippable adverts, intending to consolidate all ads into the beginning of a video. Following public outrage over the unprecedented amount of unskippable ads, YouTube \"ended\" the experiment on September 19 of that year.[97] In October, YouTube announced that they would be rolling out customizable user handles in addition to channel names, which would also become channel URLs.[98]\nRecent history (2023\u2013present)\nRecent history (2023\u2013present)\nOn February 16, 2023, Wojcicki announced that she would step down as CEO, with Neal Mohan named as her successor. Wojcicki took on an advisory role for Google and parent company Alphabet.[99] Wojcicki died a year and a half later from non-small-cell lung cancer, on August 9, 2024.[100]\n\nSource: https://en.wikipedia.org/wiki/YouTube\nTitle: YouTube - Wikipedia\nContent: HurleyJawed KarimSteve ChenKey peopleNeal Mohan (CEO)Chad Hurley (advisor)IndustryInternetVideo hosting serviceProductsYouTube KidsYouTube MusicYouTube PremiumYouTube ShortsYouTube TVRevenue US$31.5 billion (2023)[1]ParentGoogle LLC (2006\u2013present)URLyoutube.comIPv6 supportYesAdvertisingGoogle AdSenseRegistration Optional Not required to watch most videos; required for certain tasks such as uploading videos, viewing flagged (18+) videos, creating playlists, liking or disliking videos, and posting comments Users 2.7 billion MAU (January 2024)[2]LaunchedApril 23, 2005; 20 years ago (2005-04-23)Current statusActiveContent licenseUploader holds copyright (standard license); Creative Commons can be selected.Written inPython (core/API),[3] C (through CPython), C++, Java (through Guice platform),[4][5] Go,[6] JavaScript (UI) YouTube is an American social media and online video sharing platform owned by Google. YouTube was founded on February 14, 2005, by Chad Hurley, Jawed Karim, and Steve\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:01.119384",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://surgegraph.io/business/who-owns-51-of-google\nTitle: The REAL Power: Who Owns 51% of Google?\nContent: Alphabet Inc.\u2019s ownership structure, characterized by multiple classes of shares, has become an integral part of the discussion on corporate governance. The Class B shares carry super-voting rights. This structure allows insiders like Google founders Larry Page and Sergey Brin to avoid accountability for important company decisions. Grasping these dynamics is key to understanding how and why important strategic decisions are made within the company.\nLarry Page and Sergey Brin have significant power as special individual shareholders. Their joint ownership of Class B shares further increases their power. Their dominance over voting rights gives them the power to dictate the company\u2019s actions, policies, and long-term trajectory. This shows just how much a single shareholder\u2014here, by far the biggest\u2014can shape corporate strategy.\n\nSource: https://surgegraph.io/business/who-currently-owns-alphabet\nTitle: Who Currently Owns Alphabet? A Deep Dive Investigation\nContent: With that, Alphabet Inc. took its place as one of the world\u2019s most powerful companies. Its unusual ownership structure and the dreams of its founders have been integral to its success. Larry Page and Sergey Brin maintain extreme control through their Class B shares. This helps to keep the company focused on delivering against its long-term goal. Alphabet\u2019s growth is primarily driven by institutional investors and individual shareholders. Their trust and interest are a testament to the larger market\u2019s confidence in the company.\nUnderstanding who currently owns Alphabet helps us understand how decisions are made. This realization goes a long way in explaining why their business model is thriving. Alphabet\u2019s influence is expected to increase, determining the future of tech, business, and innovation.\nFrequently Asked Questions\nWho currently owns Alphabet Inc.?\n\nSource: https://www.kamilfranek.com/who-owns-google-alphabet/\nTitle: Who Really Owns Google (Alphabet) and Who Controls It - KAMIL FRANEK Business Analytics\nContent: Brin (5.7%)Sergey Brin owns 5.7% of Alphabet\u2019s shares. However, Sergey Brin controls 24.9% of all votes thanks to owning super-voting shares. As of December 2022, the market value of Sergey Brin\u2019s stake in Alphabet was $65.4 billion.Sergey Brin owned 739 million shares in Alphabet and controlled 3,687 million shareholder votes as of December 2022.Sergey Brin cofounded Google with Larry Page in 1998. Thanks to his stake in Alphabet Inc., he is one of the world\u2019s wealthiest people.Sergey does not currently hold any executive position within Google or Alphabet. However, he is still, together with Larry Page, a controlling shareholder, and member of Alphabet\u2019s Board of Directors.He was born in Moscow, but his family emigrated to the US when he was six years old. He met with Larry Page at Standford when he needed help with math on its PageRank algorithm. Sergey\u2019s extroversion balanced the lack of it in Larry\u2019s case.Sergey held different positions within Google, either as a \u201cPresident\u201d or\n\nSource: https://surgegraph.io/business/who-currently-owns-alphabet\nTitle: Who Currently Owns Alphabet? A Deep Dive Investigation\nContent: most powerful companies. Its unusual ownership structure and the dreams of its founders have been integral to its success. Larry Page and Sergey Brin maintain extreme control through their Class B shares. This helps to keep the company focused on delivering against its long-term goal. Alphabet\u2019s growth is primarily driven by institutional investors and individual shareholders. Their trust and interest are a testament to the larger market\u2019s confidence in the company.Understanding who currently owns Alphabet helps us understand how decisions are made. This realization goes a long way in explaining why their business model is thriving. Alphabet\u2019s influence is expected to increase, determining the future of tech, business, and innovation.Frequently Asked QuestionsWho currently owns Alphabet Inc.?Alphabet Inc. is owned by its shareholders. The two largest individual shareholders are co-founders Larry Page and Sergey Brin. Vanguard Group and BlackRock, both known as \u201cpassive\u201d institutional\n\nSource: https://surgegraph.io/business/who-currently-owns-alphabet\nTitle: Who Currently Owns Alphabet? A Deep Dive Investigation\nContent: most powerful companies. Its unusual ownership structure and the dreams of its founders have been integral to its success. Larry Page and Sergey Brin maintain extreme control through their Class B shares. This helps to keep the company focused on delivering against its long-term goal. Alphabet\u2019s growth is primarily driven by institutional investors and individual shareholders. Their trust and interest are a testament to the larger market\u2019s confidence in the company.Understanding who currently owns Alphabet helps us understand how decisions are made. This realization goes a long way in explaining why their business model is thriving. Alphabet\u2019s influence is expected to increase, determining the future of tech, business, and innovation.Frequently Asked QuestionsWho currently owns Alphabet Inc.?Alphabet Inc. is owned by its shareholders. The two largest individual shareholders are co-founders Larry Page and Sergey Brin. Vanguard Group and BlackRock, both known as \u201cpassive\u201d institutional\n\nSource: https://surgegraph.io/business/who-currently-owns-alphabet\nTitle: Who Currently Owns Alphabet? A Deep Dive Investigation\nContent: have been integral to its success. Larry Page and Sergey Brin maintain extreme control through their Class B shares. This helps to keep the company focused on delivering against its long-term goal. Alphabet\u2019s growth is primarily driven by institutional investors and individual shareholders. Their trust and interest are a testament to the larger market\u2019s confidence in the company.Understanding who currently owns Alphabet helps us understand how decisions are made. This realization goes a long way in explaining why their business model is thriving. Alphabet\u2019s influence is expected to increase, determining the future of tech, business, and innovation.Frequently Asked QuestionsWho currently owns Alphabet Inc.?Alphabet Inc. is owned by its shareholders. The two largest individual shareholders are co-founders Larry Page and Sergey Brin. Vanguard Group and BlackRock, both known as \u201cpassive\u201d institutional investors, are among the largest shareholders.What is Alphabet Inc.?As you may know,\n\nSource: https://www.kamilfranek.com/who-owns-google-alphabet/\nTitle: Who Really Owns Google (Alphabet) and Who Controls It - KAMIL FRANEK Business Analytics\nContent: #4 Sergey Brin (5.7%)\nSergey Brin owns 5.7% of Alphabet\u2019s shares. However, Sergey Brin controls 24.9% of all votes thanks to owning super-voting shares. As of December 2022, the market value of Sergey Brin\u2019s stake in Alphabet was $65.4 billion.\nSergey Brin owned 739 million shares in Alphabet and controlled 3,687 million shareholder votes as of December 2022.\nSergey Brin cofounded Google with Larry Page in 1998. Thanks to his stake in Alphabet Inc., he is one of the world\u2019s wealthiest people.\nSergey does not currently hold any executive position within Google or Alphabet. However, he is still, together with Larry Page, a controlling shareholder, and member of Alphabet\u2019s Board of Directors.\nHe was born in Moscow, but his family emigrated to the US when he was six years old. He met with Larry Page at Standford when he needed help with math on its PageRank algorithm. Sergey\u2019s extroversion balanced the lack of it in Larry\u2019s case.\n\nSource: https://surgegraph.io/business/who-currently-owns-alphabet\nTitle: Who Currently Owns Alphabet? A Deep Dive Investigation\nContent: owns Alphabet helps us understand how decisions are made. This realization goes a long way in explaining why their business model is thriving. Alphabet\u2019s influence is expected to increase, determining the future of tech, business, and innovation.Frequently Asked QuestionsWho currently owns Alphabet Inc.?Alphabet Inc. is owned by its shareholders. The two largest individual shareholders are co-founders Larry Page and Sergey Brin. Vanguard Group and BlackRock, both known as \u201cpassive\u201d institutional investors, are among the largest shareholders.What is Alphabet Inc.?As you may know, Alphabet Inc. Is the parent company of Google and many other companies under their Alphabet Inc. It was created in 2015 as a way to reorganize Google\u2019s rapidly expanding collection of companies and initiatives.How do Larry Page and Sergey Brin maintain control of Alphabet?Larry Page and Sergey Brin currently own Alphabet through special Class B shares. These special shares entitle them to have 10 votes for\n\nSource: https://surgegraph.io/business/who-owns-51-of-google\nTitle: The REAL Power: Who Owns 51% of Google?\nContent: goals with shareholder interests.Key Individual Shareholders\u201cSergey Brin (Left) and Larry Page (Right).\u201d Source: Joi Ito, CC BY 2.0Larry Page and Sergey Brin, Google\u2019s co-founders, met as PhD students at Stanford University, where they conceived the idea for Google. They stand out as the primary individual shareholders. Their substantial holdings of Class B shares afford them extraordinary control over the company\u2019s direction. Collectively, Larry Page and Sergey Brin command 51% of the voting power, enabling them to influence a number of key corporate decisions and policies.Implications of Alphabet\u2019s Unique Power StructureMost public companies operate on the principle of \u201cone share, one vote.\u201d But Alphabet, the parent company of Google, has a unique governance structure that grants a small group of insiders near-absolute control. This control stems from the existence of Class B shares, which hold ten times the voting power of ordinary Class A shares.Larry Page and Sergey Brin,\n\nSource: https://surgegraph.io/business/who-owns-51-of-google\nTitle: The REAL Power: Who Owns 51% of Google?\nContent: Larry Page and Sergey Brin, Alphabet\u2019s co-founders, own the majority of these super-voting shares, giving them an effective 51% control over the company. This unusual arrangement has profound implications for how Alphabet is run, influencing everything from its long-term strategy and investments to its approach to social responsibility.\nThe Benefits of Concentrated Control\nThis concentration of power offers several potential advantages. It allows Alphabet to:\nThink Long-Term: Freed from the pressure of quarterly earnings reports and activist investors, Page and Brin can prioritize long-term projects and investments, even if they don\u2019t offer immediate returns. This has allowed Alphabet to pursue ambitious moonshots like self-driving cars (Waymo) and life extension research (Calico).\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:02.303750",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Strategy App AI Generators BMC Generator SWOT Generator Mission Statement Generator PESTLE Generator Newsletter Books Free Tools Blog About Partner with us Search for: Cart No products in the cart. Return to shop Home > Who Owns > Who Owns YouTube? Who OwnsWho Owns YouTube? Posted on September 9, 2024September 9, 2024 by Daniel Pereira 09 Sep Who owns YouTube? As a subsidiary of Google, YouTube operates under the broader umbrella of Alphabet Inc., a multinational conglomerate. Google\u2019s acquisition of YouTube in 2006 enabled the platform to expand and reach unprecedented heights. Since its inception, YouTube has transformed the digital landscape, changing how we consume and share video content. Its user-friendly interface, a vast library of videos, and engagement opportunities have attracted billions of users worldwide. Under Google\u2019s ownership, YouTube benefits from the resources, technology, and expertise of one of the world\u2019s most influential companies. Under Google\u2019s guidance,\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Who owns YouTube? As a subsidiary of Google, YouTube operates under the broader umbrella of Alphabet Inc., a multinational conglomerate. Google\u2019s acquisition of YouTube in 2006 enabled the platform to expand and reach unprecedented heights.\nSince its inception, YouTube has transformed the digital landscape, changing how we consume and share video content. Its user-friendly interface, a vast library of videos, and engagement opportunities have attracted billions of users worldwide.\nUnder Google\u2019s ownership, YouTube benefits from the resources, technology, and expertise of one of the world\u2019s most influential companies. Under Google\u2019s guidance, YouTube has continued to evolve, offering innovative features, expanding its reach, and fostering a vibrant community of creators and viewers.\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Home > Who Owns > Who Owns YouTube? Who OwnsWho Owns YouTube? Posted on September 9, 2024September 9, 2024 by Daniel Pereira 09 Sep Who owns YouTube? As a subsidiary of Google, YouTube operates under the broader umbrella of Alphabet Inc., a multinational conglomerate. Google\u2019s acquisition of YouTube in 2006 enabled the platform to expand and reach unprecedented heights. Since its inception, YouTube has transformed the digital landscape, changing how we consume and share video content. Its user-friendly interface, a vast library of videos, and engagement opportunities have attracted billions of users worldwide. Under Google\u2019s ownership, YouTube benefits from the resources, technology, and expertise of one of the world\u2019s most influential companies. Under Google\u2019s guidance, YouTube has continued to evolve, offering innovative features, expanding its reach, and fostering a vibrant community of creators and viewers. While Google owns YouTube, it\u2019s essential to recognize that YouTube\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Home > Who Owns > Who Owns YouTube? Who OwnsWho Owns YouTube? Posted on September 9, 2024September 9, 2024 by Daniel Pereira 09 Sep Who owns YouTube? As a subsidiary of Google, YouTube operates under the broader umbrella of Alphabet Inc., a multinational conglomerate. Google\u2019s acquisition of YouTube in 2006 enabled the platform to expand and reach unprecedented heights. Since its inception, YouTube has transformed the digital landscape, changing how we consume and share video content. Its user-friendly interface, a vast library of videos, and engagement opportunities have attracted billions of users worldwide. Under Google\u2019s ownership, YouTube benefits from the resources, technology, and expertise of one of the world\u2019s most influential companies. Under Google\u2019s guidance, YouTube has continued to evolve, offering innovative features, expanding its reach, and fostering a vibrant community of creators and viewers. While Google owns YouTube, it\u2019s essential to recognize that YouTube\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Home > Who Owns > Who Owns YouTube? Who OwnsWho Owns YouTube? Posted on September 9, 2024September 9, 2024 by Daniel Pereira 09 Sep Who owns YouTube? As a subsidiary of Google, YouTube operates under the broader umbrella of Alphabet Inc., a multinational conglomerate. Google\u2019s acquisition of YouTube in 2006 enabled the platform to expand and reach unprecedented heights. Since its inception, YouTube has transformed the digital landscape, changing how we consume and share video content. Its user-friendly interface, a vast library of videos, and engagement opportunities have attracted billions of users worldwide. Under Google\u2019s ownership, YouTube benefits from the resources, technology, and expertise of one of the world\u2019s most influential companies. Under Google\u2019s guidance, YouTube has continued to evolve, offering innovative features, expanding its reach, and fostering a vibrant community of creators and viewers. While Google owns YouTube, it\u2019s essential to recognize that YouTube\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Home > Who Owns > Who Owns YouTube? Who OwnsWho Owns YouTube? Posted on September 9, 2024September 9, 2024 by Daniel Pereira 09 Sep Who owns YouTube? As a subsidiary of Google, YouTube operates under the broader umbrella of Alphabet Inc., a multinational conglomerate. Google\u2019s acquisition of YouTube in 2006 enabled the platform to expand and reach unprecedented heights. Since its inception, YouTube has transformed the digital landscape, changing how we consume and share video content. Its user-friendly interface, a vast library of videos, and engagement opportunities have attracted billions of users worldwide. Under Google\u2019s ownership, YouTube benefits from the resources, technology, and expertise of one of the world\u2019s most influential companies. Under Google\u2019s guidance, YouTube has continued to evolve, offering innovative features, expanding its reach, and fostering a vibrant community of creators and viewers. While Google owns YouTube, it\u2019s essential to recognize that YouTube\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Home > Who Owns > Who Owns YouTube? Who OwnsWho Owns YouTube? Posted on September 9, 2024September 9, 2024 by Daniel Pereira\nHome > Who Owns > Who Owns YouTube?\nWho Owns YouTube?\nWho Owns YouTube?\nPosted on September 9, 2024September 9, 2024 by Daniel Pereira\nPosted on September 9, 2024September 9, 2024\nby Daniel Pereira\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Who owns YouTube? As a subsidiary of Google, YouTube operates under the broader umbrella of Alphabet Inc., a multinational conglomerate. Google\u2019s acquisition of YouTube in 2006 enabled the platform to expand and reach unprecedented heights. Since its inception, YouTube has transformed the digital landscape, changing how we consume and share video content. Its user-friendly interface, a vast library of videos, and engagement opportunities have attracted billions of users worldwide. Under Google\u2019s ownership, YouTube benefits from the resources, technology, and expertise of one of the world\u2019s most influential companies. Under Google\u2019s guidance, YouTube has continued to evolve, offering innovative features, expanding its reach, and fostering a vibrant community of creators and viewers. While Google owns YouTube, it\u2019s essential to recognize that YouTube operates as a distinct platform with its dedicated team and infrastructure. This allows YouTube to retain its unique identity and provide\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: Current Ownership Structure\nYouTube is owned by Google, which is a subsidiary of Alphabet Inc.\nAlphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects.\nAlphabet\u2019s Role In YouTube\u2019s Ownership\nAs a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant component.\nAlphabet\u2019s Subsidiaries and Structure\n\nSource: https://businessmodelanalyst.com/who-owns-youtube/?srsltid=AfmBOopvdYBCSmjGoxBTn9ikGpZaHh_oQ_AYTx7sIUKoHYpjemYYzvpo\nTitle: Who Owns YouTube?\nContent: playlists enhanced engagement and kept users returning to the platform. Google\u2019s expertise in search and data analytics also played a critical role in improving video discoverability and ensuring that relevant content was surfaced to users. Current Ownership Structure YouTube is owned by Google, which is a subsidiary of Alphabet Inc. Alphabet Inc. is a multinational conglomerate created in 2015 as a result of Google\u2019s corporate restructuring. Google co-founders Larry Page and Sergey Brin formed Alphabet to allow for autonomy in their various business ventures and to separate Google\u2019s core internet business from its other innovative projects. Alphabet\u2019s Role In YouTube\u2019s Ownership As a wholly owned subsidiary of Google, YouTube is part of Alphabet Inc. Alphabet has complete ownership and control of YouTube\u2019s operations, finances, and strategic decisions. Alphabet\u2019s overarching objective is to manage and expand its diverse portfolio of businesses, of which YouTube is a significant\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:11.087515",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own\nTitle: What Companies Does Google Own? [Updated for 2024] - Hatchwise\nContent: What Companies Does Google Own? [Updated for 2024]\nWhat Companies Does Google Own? [Updated for 2024]\nWhat Companies Does Google Own? [Updated for 2024]\n\nSource: https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own\nTitle: What Companies Does Google Own? [Updated for 2024] - Hatchwise\nContent: to September. Together, Google and Alphabet own over 200 companies. And it doesn\u2019t stop there; by implementing Google\u2019s aggressive acquisition strategy, the companies continue to grow. A Complete List Of Companies Owned by Google Adsense Android DoubleClick Google Chrome Google Drive Google Maps Google Play YouTube Google Fiber Nest Looker Waze Pointy AppSheet Fitbit Socratic Elastifile Alooma LaunchKit Verily GV Deep Mind Waymo Project Wing Google Pixel Calico Sidewalk Labs CapitalG Intrinsic Glass Enterprise Edition Malta AdMob Dandelion Let\u2019s take a closer look at some of these Google\u2019s owned companies. Adsense Adsense acts as Google\u2019s web vendor for advertising to non-Google websites. Companies seeking to display Google ads on their websites pay a fee and in return, Google provides images, text, videos, and interactive media. Adsense is part of Google Network Members\u2019 properties. In recent years, it has generated almost 25% of Google\u2019s income. \u2022 Revenue in 2016 \u2013 $15.6 billion \u2022\n\nSource: https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own\nTitle: What Companies Does Google Own? [Updated for 2024] - Hatchwise\nContent: to September. Together, Google and Alphabet own over 200 companies. And it doesn\u2019t stop there; by implementing Google\u2019s aggressive acquisition strategy, the companies continue to grow. A Complete List Of Companies Owned by Google Adsense Android DoubleClick Google Chrome Google Drive Google Maps Google Play YouTube Google Fiber Nest Looker Waze Pointy AppSheet Fitbit Socratic Elastifile Alooma LaunchKit Verily GV Deep Mind Waymo Project Wing Google Pixel Calico Sidewalk Labs CapitalG Intrinsic Glass Enterprise Edition Malta AdMob Dandelion Let\u2019s take a closer look at some of these Google\u2019s owned companies. Adsense Adsense acts as Google\u2019s web vendor for advertising to non-Google websites. Companies seeking to display Google ads on their websites pay a fee and in return, Google provides images, text, videos, and interactive media. Adsense is part of Google Network Members\u2019 properties. In recent years, it has generated almost 25% of Google\u2019s income. \u2022 Revenue in 2016 \u2013 $15.6 billion \u2022\n\nSource: https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own\nTitle: What Companies Does Google Own? [Updated for 2024] - Hatchwise\nContent: to September. Together, Google and Alphabet own over 200 companies. And it doesn\u2019t stop there; by implementing Google\u2019s aggressive acquisition strategy, the companies continue to grow. A Complete List Of Companies Owned by Google Adsense Android DoubleClick Google Chrome Google Drive Google Maps Google Play YouTube Google Fiber Nest Looker Waze Pointy AppSheet Fitbit Socratic Elastifile Alooma LaunchKit Verily GV Deep Mind Waymo Project Wing Google Pixel Calico Sidewalk Labs CapitalG Intrinsic Glass Enterprise Edition Malta AdMob Dandelion Let\u2019s take a closer look at some of these Google\u2019s owned companies. Adsense Adsense acts as Google\u2019s web vendor for advertising to non-Google websites. Companies seeking to display Google ads on their websites pay a fee and in return, Google provides images, text, videos, and interactive media. Adsense is part of Google Network Members\u2019 properties. In recent years, it has generated almost 25% of Google\u2019s income. \u2022 Revenue in 2016 \u2013 $15.6 billion \u2022\n\nSource: https://www.mirrorreview.com/companies-acquired-by-google/\nTitle: A Complete List of 200+ Companies Acquired by Google\nContent: Google. One name, multiple features, and more coming our way. But, how can a company founded just two decades ago come up with a bundle of features? As per websitebuilder.org, Google is currently offering 271 products. Like seriously? How? Well, a significant part of this expansion can be attributed to the companies acquired by Google over the years. The number looks huge.\nBut what if I tell you that this can only be achieved with strategic partnerships or acquisitions? And Google has done exactly the same. They have acquired many brands sheltered them and presented them as a product of Google. So which are those companies acquired by Google? And how many companies Google has acquired? In this blog, we\u2019ll give you the entire list of those companies acquired by Google.\nLet\u2019s have a look at the best 10 companies acquired by Google\nHere\u2019s the complete list of the remaining 248 companies acquired by Google\n\nSource: https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own\nTitle: What Companies Does Google Own? [Updated for 2024] - Hatchwise\nContent: Google reported a whopping $97.1 billion in revenue from January to September. Together, Google and Alphabet own over 200 companies. And it doesn\u2019t stop there; by implementing Google\u2019s aggressive acquisition strategy, the companies continue to grow. A Complete List Of Companies Owned by Google Adsense Android DoubleClick Google Chrome Google Drive Google Maps Google Play YouTube Google Fiber Nest Looker Waze Pointy AppSheet Fitbit Socratic Elastifile Alooma LaunchKit Verily GV Deep Mind Waymo Project Wing Google Pixel Calico Sidewalk Labs CapitalG Intrinsic Glass Enterprise Edition Malta AdMob Dandelion Let\u2019s take a closer look at some of these Google\u2019s owned companies. Adsense Adsense acts as Google\u2019s web vendor for advertising to non-Google websites. Companies seeking to display Google ads on their websites pay a fee and in return, Google provides images, text, videos, and interactive media. Adsense is part of Google Network Members\u2019 properties. In recent years, it has generated\n\nSource: https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own\nTitle: What Companies Does Google Own? [Updated for 2024] - Hatchwise\nContent: Google reported a whopping $97.1 billion in revenue from January to September. Together, Google and Alphabet own over 200 companies. And it doesn\u2019t stop there; by implementing Google\u2019s aggressive acquisition strategy, the companies continue to grow. A Complete List Of Companies Owned by Google Adsense Android DoubleClick Google Chrome Google Drive Google Maps Google Play YouTube Google Fiber Nest Looker Waze Pointy AppSheet Fitbit Socratic Elastifile Alooma LaunchKit Verily GV Deep Mind Waymo Project Wing Google Pixel Calico Sidewalk Labs CapitalG Intrinsic Glass Enterprise Edition Malta AdMob Dandelion Let\u2019s take a closer look at some of these Google\u2019s owned companies. Adsense Adsense acts as Google\u2019s web vendor for advertising to non-Google websites. Companies seeking to display Google ads on their websites pay a fee and in return, Google provides images, text, videos, and interactive media. Adsense is part of Google Network Members\u2019 properties. In recent years, it has generated\n\nSource: https://www.mirrorreview.com/companies-acquired-by-google/\nTitle: A Complete List of 200+ Companies Acquired by Google\nContent: A Complete List of 200+ Companies Acquired by Google\nA Complete List of 200+ Companies Acquired by Google\nA Complete List of 200+ Companies Acquired by Google\nLinkedin Facebook Instagram Twitter Youtube Pinterest Tumblr\nLinkedin Facebook Instagram Twitter Youtube Pinterest Tumblr\nLinkedin Facebook Instagram Twitter Youtube Pinterest Tumblr\n\nSource: https://insights.greyb.com/google-subsidiaries-acquisition/\nTitle: Google Subsidiaries and Acquisitions\nContent: Equalum (December 19, 2023) \u2013 Focuses on data integration and analytics.\nPhotomath (February 27, 2023) \u2013 AI-driven math problem-solving app.\nAlter (October 28, 2022) \u2013 Augmented reality, acquired for $100 million.\nSound Life Sciences (October 26, 2022) \u2013 AI health monitoring.\nRaxium (March 17, 2022) \u2013 MicroLED technology, acquired for $1 billion.\nMandiant (March 8, 2022) \u2013 Cybersecurity, acquired for $5.4 billion.\nSiemplify (January 4, 2022) \u2013 Security orchestration, acquired for $500 million.\nList of Google Acquisitions\nList of Google Subsidiaries\nThe table contains the 100 subsidiaries of Google \u2013\nMarch 19, 2025\nMarch 19, 2025\nMarch 19, 2025\nMarch 19, 2025\nTable of Content Insights you may find interesting Google Willow Chip: Unleashing Unprecedented Speed: Can a System Think Faster Than Ever Before? First American Financial Subsidiaries & Acquisitions Kroger Subsidiaries & Acquisitions Xylem Subsidiaries & Acquisitions Nucor Subsidiaries & Acquisitions\n\nSource: https://www.hatchwise.com/blog/2019/12/12/what-companies-does-google-own\nTitle: What Companies Does Google Own? [Updated for 2024] - Hatchwise\nContent: $97.1 billion in revenue from January to September. Together, Google and Alphabet own over 200 companies. And it doesn\u2019t stop there; by implementing Google\u2019s aggressive acquisition strategy, the companies continue to grow. A Complete List Of Companies Owned by Google Adsense Android DoubleClick Google Chrome Google Drive Google Maps Google Play YouTube Google Fiber Nest Looker Waze Pointy AppSheet Fitbit Socratic Elastifile Alooma LaunchKit Verily GV Deep Mind Waymo Project Wing Google Pixel Calico Sidewalk Labs CapitalG Intrinsic Glass Enterprise Edition Malta AdMob Dandelion Let\u2019s take a closer look at some of these Google\u2019s owned companies. Adsense Adsense acts as Google\u2019s web vendor for advertising to non-Google websites. Companies seeking to display Google ads on their websites pay a fee and in return, Google provides images, text, videos, and interactive media. Adsense is part of Google Network Members\u2019 properties. In recent years, it has generated almost 25% of Google\u2019s income.\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:11.095676",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "research_step_finalized",
+        "output": "Finalized research step.\n\ud83d\udcb8 Total Research Costs: $0.03316944000000001",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:11.105794",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "writing_report",
+        "output": "\u270d\ufe0f Writing report for 'What company owns Utube'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:32.163851",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "report_written",
+        "output": "\ud83d\udcdd Report written for 'What company owns Utube' (10062 characters)",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:14:32.166418",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "llm_flow_diagram",
+        "output": "\ud83c\udfa8 LLM Interaction Flow:\ngraph TB\n    classDef startEnd fill:#e1f5fe,stroke:#0277bd,stroke-width:2px\n    classDef success fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px\n    classDef failure fill:#ffebee,stroke:#c62828,stroke-width:2px\n    classDef retry fill:#fff3e0,stroke:#ef6c00,stroke-width:2px\n    classDef decision fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px\n    Start[\"\ud83c\udfac Report Generation<br/>What company owns Utube<br/>\ud83d\udccb research_report\"]\n    Step1[\"\u2705 LLM Interaction<br/>chat_completion<br/>\ud83e\udd16 google/gemini-2.5-pro-exp-03-25<br/>\u23f1\ufe0f 21.1s<br/>\ud83d\udd22 18506 tokens<br/>\ud83d\udccd #1\"]\n    Start --> Step1\n    Step2[\"\u2705 Generate Main Report<br/>Main Report (research_report)<br/>\ud83e\udd16 google/gemini-2.5-pro-exp-03-25<br/>\u23f1\ufe0f 21.1s<br/>\ud83d\udd22 18506 tokens<br/>\ud83d\udccd #2\"]\n    Step1 --> Step2\n    End[\"\ud83c\udfc1 Report Complete<br/>\u2705 2/2 Success<br/>\ud83d\udcc8 100% Rate\"]\n    Step2 --> End\n    class Start,End startEnd\n    class Step1,Step2 success",
+        "metadata": null
+      }
+    }
+  ],
+  "content": {
+    "query": "",
+    "sources": [],
+    "context": [],
+    "report": "",
+    "costs": 0.0,
+    "type": "report",
+    "content": "selected_images",
+    "output": "wikipedia.org/wiki/History_of_YouTube)\n\nWikipedia. (2025, July 16). *YouTube*. [https://en.wikipedia.org/wiki/YouTube](https://en.wikipedia.org/wiki/YouTube)\n",
+    "metadata": [
+      {
+        "url": "https://businessmodelanalyst.com/wp-content/uploads/2023/04/Gucci-Who-Owns.webp",
+        "score": 2
+      },
+      {
+        "url": "https://businessmodelanalyst.com/wp-content/uploads/2023/01/Who_Owns_Spotify_05.webp",
+        "score": 2
+      },
+      {
+        "url": "https://businessmodelanalyst.com/wp-content/uploads/2023/03/who-owns-Starbucks-01.webp",
+        "score": 2
+      },
+      {
+        "url": "https://businessmodelanalyst.com/wp-content/uploads/2024/12/Modelo-Who-Owns-Image.webp",
+        "score": 2
+      },
+      {
+        "url": "https://insights.greyb.com/wp-content/uploads/2025/03/GreyB-Patent-and-Innovation-Index-2025-724x1024.png",
+        "score": 2
+      },
+      {
+        "url": "https://insights.greyb.com/wp-content/uploads/2023/08/GreyB-Patent-and-Innovation-Index-2025-768x1086.png",
+        "score": 2
+      },
+      {
+        "url": "https://www.mirrorreview.com/wp-content/uploads/2025/01/Industry-Game-Changers-The-Top-10-SAP-Partners-Transforming-the-Industry-in-2025.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://www.mirrorreview.com/wp-content/uploads/2025/01/Aviz-Networks-Cover-Page.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://storage.googleapis.com/sg-blog/2025/01/Larry-Page-and-Sergey-Brin-1024x836.jpg",
+        "score": 2
+      },
+      {
+        "url": "https://businessmodelanalyst.com/wp-content/uploads/2023/01/footer.webp",
+        "score": 2
+      }
+    ]
+  }
+}

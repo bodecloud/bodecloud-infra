@@ -1,0 +1,104 @@
+#! warp-gateway-deployment.yaml
+# WARP VPN Gateway with NAT enabled for transparent routing
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warp-gateway
+  namespace: vpn-gateway
+  labels:
+    app: warp-gateway
+    component: vpn-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warp-gateway
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: warp-gateway
+        component: vpn-gateway
+    spec:
+      securityContext:
+        sysctls:
+          - name: net.ipv6.conf.all.disable_ipv6
+            value: "1"
+          - name: net.ipv4.conf.all.src_valid_mark
+            value: "1"
+      containers:
+        - name: warp
+          image: caomingjun/warp:latest
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - MKNOD
+                - AUDIT_WRITE
+            privileged: true
+          env:
+            - name: WARP_SLEEP
+              value: "2"
+          ports:
+            - containerPort: 1080
+              name: socks5-proxy
+            - containerPort: 3128
+              name: http-proxy
+          volumeMounts:
+            - name: warp-data
+              mountPath: /var/lib/cloudflare-warp
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - "curl -s --max-time 5 --proxy socks5://127.0.0.1:1080 http://httpbin.org/ip >/dev/null"
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - "curl -s --max-time 5 --proxy socks5://127.0.0.1:1080 http://httpbin.org/ip >/dev/null"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "50m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
+      volumes:
+        - name: warp-data
+          hostPath:
+            path: /home/ubuntu/my-media-stack/configs/warp/data
+            type: DirectoryOrCreate
+
+---
+# WARP Gateway Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: warp-gateway
+  namespace: vpn-gateway
+  labels:
+    app: warp-gateway
+    component: vpn-gateway
+spec:
+  selector:
+    app: warp-gateway
+  ports:
+    - name: socks5-proxy
+      port: 1080
+      targetPort: 1080
+    - name: http-proxy
+      port: 3128
+      targetPort: 3128
+  type: ClusterIP 

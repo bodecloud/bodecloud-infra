@@ -1,0 +1,2250 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+
+configs:
+  localStorage-stremio.json:
+    file: ./localStorage.json
+  prowlarr-config.xml:
+    content: |
+      <Config>
+        <BindAddress>*</BindAddress>
+        <Port>9696</Port>
+        <SslPort>6969</SslPort>
+        <EnableSsl>False</EnableSsl>
+        <LaunchBrowser>True</LaunchBrowser>
+        <ApiKey>$$PROWLARR_API_KEY</ApiKey>
+        <AuthenticationMethod>External</AuthenticationMethod>
+        <AuthenticationRequired>DisabledForLocalAddresses</AuthenticationRequired>
+        <Branch>master</Branch>
+        <LogLevel>info</LogLevel>
+        <SslCertPath></SslCertPath>
+        <SslCertPassword></SslCertPassword>
+        <UrlBase></UrlBase>
+        <InstanceName>Prowlarr</InstanceName>
+        <UpdateMechanism>Docker</UpdateMechanism>
+        <AnalyticsEnabled>False</AnalyticsEnabled>
+        <PostgresUser>$$PROWLARR__POSTGRES_USER}</PostgresUser>
+        <PostgresPassword>$$PROWLARR__POSTGRES_PASSWORD}</PostgresPassword>
+        <PostgresPort>$$PROWLARR__POSTGRES_PORT}</PostgresPort>
+        <PostgresHost>$$PROWLARR__POSTGRES_HOST}</PostgresHost>
+        <PostgresMainDb>$$PROWLARR__POSTGRES_MAIN_DB}</PostgresMainDb>
+        <PostgresLogDb>$$PROWLARR__POSTGRES_LOG_DB}</PostgresLogDb>
+      </Config>
+
+  scraper_config.json:
+    content: |
+      {
+        "start_urls": {
+        "nowsports": "https://neesports.me/",
+        "nowmetv": "https://neelive.com/",
+        "tamilultra": "https://tamilultra.fr/",
+        "tamilbulb": "https://tamilbulb.tv/",
+        "tgx": [
+          "torrentgalaxy.to",
+          "tgx.rs",
+          "torrentgalaxy.mx"
+        ]
+        },
+        "tamil_blasters": {
+        "homepage": "https://www.1tamilblasters.net",
+        "catalogs": {
+          "tamil": {
+          "hdrip": "7-tamil-new-movies-hdrips-bdrips-dvdrips-hdtv",
+          "tcrip": "8-tamil-new-movies-tcrip-dvdscr-hdcam-predvd",
+          "dubbed": "9-tamil-dubbed-movies-bdrips-hdrips-dvdscr-hdcam-in-multi-audios",
+          "series": "63-tamil-new-web-series-tv-shows",
+          "old": "56-tamil-old-mid-movies-bdrips-hdrips-dvdrips-hdtv"
+          },
+          "malayalam": {
+          "tcrip": "75-malayalam-new-movies-tcrip-dvdscr-hdcam-predvd",
+          "hdrip": "74-malayalam-new-movies-hdrips-bdrips-dvdrips-hdtv",
+          "dubbed": "76-malayalam-dubbed-movies-bdrips-hdrips-dvdscr-hdcam",
+          "series": "98-malayalam-new-web-series-tv-shows",
+          "old": "77-malayalam-old-mid-movies-bdrips-hdrips-dvdrips"
+          },
+          "telugu": {
+          "tcrip": "79-telugu-new-movies-tcrip-dvdscr-hdcam-predvd",
+          "hdrip": "78-telugu-new-movies-hdrips-bdrips-dvdrips-hdtv",
+          "dubbed": "80-telugu-dubbed-movies-bdrips-hdrips-dvdscr-hdcam",
+          "series": "96-telugu-new-web-series-tv-shows",
+          "old": "81-telugu-old-mid-movies-bdrips-hdrips-dvdrips"
+          },
+          "hindi": {
+          "tcrip": "87-hindi-new-movies-tcrip-dvdscr-hdcam-predvd",
+          "hdrip": "86-hindi-new-movies-hdrips-bdrips-dvdrips-hdtv",
+          "dubbed": "88-hindi-dubbed-movies-bdrips-hdrips-dvdscr-hdcam",
+          "series": "89-hindi-new-web-series-tv-shows",
+          "old": "102-hindi-old-mid-movies-bdrips-hdrips-dvdrips"
+          },
+          "kannada": {
+          "tcrip": "83-kannada-new-movies-tcrip-dvdscr-hdcam-predvd",
+          "hdrip": "82-kannada-new-movies-hdrips-bdrips-dvdrips-hdtv",
+          "dubbed": "84-kannada-dubbed-movies-bdrips-hdrips-dvdscr-hdcam",
+          "series": "103-kannada-new-web-series-tv-shows",
+          "old": "85-kannada-old-mid-movies-bdrips-hdrips-dvdrips"
+          },
+          "english": {
+          "tcrip": "52-english-movies-hdcam-dvdscr-predvd",
+          "hdrip": "53-english-movies-hdrips-bdrips-dvdrips",
+          "series": "92-english-web-series-tv-shows"
+          }
+        }
+        },
+        "tamilmv": {
+        "homepage": "https://www.1tamilmv.com",
+        "catalogs": {
+          "tamil": {
+          "hdrip": [
+            "11-web-hd-itunes-hd-bluray",
+            "12-hd-rips-dvd-rips-br-rips",
+            "14-hdtv-sdtv-hdtv-rips"
+          ],
+          "tcrip": "10-predvd-dvdscr-cam-tc",
+          "dubbed": "17-hollywood-movies-in-multi-audios",
+          "series": "19-web-series-tv-shows"
+          },
+          "malayalam": {
+          "hdrip": [
+            "36-web-hd-itunes-hd-bluray",
+            "37-hd-rips-dvd-rips-br-rips",
+            "39-hdtv-sdtv-hdtv-rips"
+          ],
+          "tcrip": "35-predvd-dvdscr-cam-tc",
+          "dubbed": "42-malayalam-dubbed-subtitled-movies",
+          "series": "44-web-series-tv-shows"
+          },
+          "telugu": {
+          "tcrip": "23-predvd-dvdscr-cam-tc",
+          "hdrip": [
+            "24-web-hd-itunes-hd-bluray",
+            "25-hd-rips-dvd-rips-br-rips",
+            "27-hdtv-sdtv-hdtv-rips"
+          ],
+          "dubbed": "31-telugu-dubbed-movies",
+          "series": "33-web-series-tv-shows"
+          },
+          "hindi": {
+          "tcrip": "57-predvd-dvdscr-cam-tc",
+          "hdrip": [
+            "58-web-hd-itunes-hd-bluray",
+            "59-hd-rips-dvd-rips-br-rips",
+            "61-hdtv-sdtv-hdtv-rips"
+          ],
+          "dubbed": "64-hindi-dubbed-movies",
+          "series": "66-web-series-tv-shows"
+          },
+          "kannada": {
+          "tcrip": "68-predvd-dvdscr-cam-tc",
+          "hdrip": [
+            "69-web-hd-itunes-hd-bluray",
+            "70-hd-rips-dvd-rips-br-rips",
+            "72-hdtv-sdtv-hdtv-rips"
+          ],
+          "series": "77-web-series-tv-shows"
+          },
+          "english": {
+          "tcrip": "46-predvd-dvdscr-cam-tc",
+          "hdrip": [
+            "49-web-hd-itunes-hd-bluray",
+            "50-hd-rips-dvd-rips-br-rips"
+          ],
+          "series": "55-web-series-tv-shows"
+          }
+        },
+        "supported_search_forums": {
+          "11-web-hd-itunes-hd-bluray": {
+          "language": "tamil",
+          "media_type": "hdrip"
+          },
+          "12-hd-rips-dvd-rips-br-rips": {
+          "language": "tamil",
+          "media_type": "hdrip"
+          },
+          "14-hdtv-sdtv-hdtv-rips": {
+          "language": "tamil",
+          "media_type": "hdrip"
+          },
+          "10-predvd-dvdscr-cam-tc": {
+          "language": "tamil",
+          "media_type": "tcrip"
+          },
+          "17-hollywood-movies-in-multi-audios": {
+          "language": "tamil",
+          "media_type": "dubbed"
+          },
+          "19-web-series-tv-shows": {
+          "language": "tamil",
+          "media_type": "series"
+          },
+          "36-web-hd-itunes-hd-bluray": {
+          "language": "malayalam",
+          "media_type": "hdrip"
+          },
+          "37-hd-rips-dvd-rips-br-rips": {
+          "language": "malayalam",
+          "media_type": "hdrip"
+          },
+          "39-hdtv-sdtv-hdtv-rips": {
+          "language": "malayalam",
+          "media_type": "hdrip"
+          },
+          "35-predvd-dvdscr-cam-tc": {
+          "language": "malayalam",
+          "media_type": "tcrip"
+          },
+          "42-malayalam-dubbed-subtitled-movies": {
+          "language": "malayalam",
+          "media_type": "dubbed"
+          },
+          "44-web-series-tv-shows": {
+          "language": "malayalam",
+          "media_type": "series"
+          },
+          "23-predvd-dvdscr-cam-tc": {
+          "language": "telugu",
+          "media_type": "tcrip"
+          },
+          "24-web-hd-itunes-hd-bluray": {
+          "language": "telugu",
+          "media_type": "hdrip"
+          },
+          "25-hd-rips-dvd-rips-br-rips": {
+          "language": "telugu",
+          "media_type": "hdrip"
+          },
+          "27-hdtv-sdtv-hdtv-rips": {
+          "language": "telugu",
+          "media_type": "hdrip"
+          },
+          "31-telugu-dubbed-movies": {
+          "language": "telugu",
+          "media_type": "dubbed"
+          },
+          "33-web-series-tv-shows": {
+          "language": "telugu",
+          "media_type": "series"
+          },
+          "57-predvd-dvdscr-cam-tc": {
+          "language": "hindi",
+          "media_type": "tcrip"
+          },
+          "58-web-hd-itunes-hd-bluray": {
+          "language": "hindi",
+          "media_type": "hdrip"
+          },
+          "59-hd-rips-dvd-rips-br-rips": {
+          "language": "hindi",
+          "media_type": "hdrip"
+          },
+          "61-hdtv-sdtv-hdtv-rips": {
+          "language": "hindi",
+          "media_type": "hdrip"
+          },
+          "64-hindi-dubbed-movies": {
+          "language": "hindi",
+          "media_type": "dubbed"
+          },
+          "66-web-series-tv-shows": {
+          "language": "hindi",
+          "media_type": "series"
+          },
+          "68-predvd-dvdscr-cam-tc": {
+          "language": "kannada",
+          "media_type": "tcrip"
+          },
+          "69-web-hd-itunes-hd-bluray": {
+          "language": "kannada",
+          "media_type": "hdrip"
+          },
+          "70-hd-rips-dvd-rips-br-rips": {
+          "language": "kannada",
+          "media_type": "hdrip"
+          },
+          "72-hdtv-sdtv-hdtv-rips": {
+          "language": "kannada",
+          "media_type": "hdrip"
+          },
+          "77-web-series-tv-shows": {
+          "language": "kannada",
+          "media_type": "series"
+          },
+          "46-predvd-dvdscr-cam-tc": {
+          "language": "english",
+          "media_type": "tcrip"
+          },
+          "49-web-hd-itunes-hd-bluray": {
+          "language": "english",
+          "media_type": "hdrip"
+          },
+          "50-hd-rips-dvd-rips-br-rips": {
+          "language": "english",
+          "media_type": "hdrip"
+          },
+          "55-web-series-tv-shows": {
+          "language": "english",
+          "media_type": "series"
+          }
+        }
+        },
+        "arab_torrents": {
+        "homepage": "https://www.arab-torrents.com",
+        "catalogs": {
+          "arabic": {
+          "movies": [
+            "41",
+            "59",
+            "88",
+            "116",
+            "114"
+          ],
+          "series": [
+            "44",
+            "57",
+            "89",
+            "71",
+            "115",
+            "113"
+          ]
+          }
+        }
+        },
+        "dlhd": {
+        "channels_url": "https://daddylive.dad/24-7-channels.php",
+        "channel_url": "https://daddylive.dad/stream/stream-{channel_number}.php",
+        "schedule_url": "https://daddylive.dad/schedule/schedule-generated.php",
+        "server_lookup_url": "https://allupplay.xyz/server_lookup.php?channel_id={server_type}{channel_id}",
+        "m3u8_base_url": "https://{server_key}new.newkso.ru/{server_key}/{server_type}{channel_id}/mono.m3u8",
+        "key_url": "https://key.keylocking.ru",
+        "referer": "https://allupplay.xyz/",
+        "category_mapping": {
+          "Tv Shows": "Other Sports",
+          "Soccer": "Football",
+          "Cricket": "Cricket",
+          "Tennis": "Tennis",
+          "Tennis ATP - AUSTRALIAN OPEN": "Tennis",
+          "Tennis ATP DOUBLES - AUSTRALIAN OPEN": "Tennis",
+          "Tennis WTA - AUSTRALIAN OPEN": "Tennis",
+          "Tennis WTA DOUBLES - AUSTRALIAN OPEN": "Tennis",
+          "Tennis ATP - FRENCH OPEN": "Tennis",
+          "Tennis MIXED DOUBLES - AUSTRALIAN OPEN": "Tennis",
+          "Motorsport": "Motor Sport",
+          "Boxing": "Boxing",
+          "MMA": "MMA",
+          "Golf": "Golf",
+          "Snooker": "Other Sports",
+          "Am. Football": "American Football",
+          "Athletics": "Athletics",
+          "Aussie rules": "Aussie Rules",
+          "Baseball": "Baseball",
+          "Basketball": "Basketball",
+          "Bowling": "Bowling",
+          "Cycling": "Cycling",
+          "Darts": "Dart",
+          "Floorball": "Floorball",
+          "Futsal": "Futsal",
+          "Gymnastics": "Gymnastics",
+          "Handball": "Handball",
+          "Horse Racing": "Horse Racing",
+          "Ice Hockey": "Hockey",
+          "Lacrosse": "Lacrosse",
+          "Netball": "Netball",
+          "Rugby League": "Rugby/AFL",
+          "Rugby Union": "Rugby/AFL",
+          "Squash": "Squash",
+          "Volleyball": "Volleyball",
+          "GAA": "GAA",
+          "Clubber": "Other Sports"
+        }
+        },
+        "sport_video": {
+        "categories": {
+          "american_football": "https://www.sport-video.org.ua/americanfootball.html",
+          "basketball": "https://www.sport-video.org.ua/basketball.html",
+          "baseball": "https://www.sport-video.org.ua/baseball.html",
+          "football": "https://www.sport-video.org.ua/football.html",
+          "hockey": "https://www.sport-video.org.ua/hockey.html",
+          "rugby": "https://www.sport-video.org.ua/rugby.html",
+          "other_sports": "https://www.sport-video.org.ua/other.html"
+        }
+        }
+      }
+
+  sports_artifacts.json:
+    content: |
+      {
+        "AEW": {
+        "background": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4709299.jpg&f=1&nofb=1&ipt=64ca349d447575a4769bed6178a2162e12408e7ba167b249e53347517e2bfac7&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp5152412.jpg&f=1&nofb=1&ipt=cdf583349b9a1975128894796e36b358b4dedc63f82a5b47b9e9780ce97b5ee5&ipo=images"
+        ],
+        "poster": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F1978407.png&f=1&nofb=1&ipt=791ff006f3f024ea448c52cd43f695620585644475ce0daabe7cb2f0c5257354&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F1978406.jpg&f=1&nofb=1&ipt=2d1c52581c81e23da688d2622aae094c1208dcc0777c5c00486ed49b5328e1ae&ipo=images"
+        ],
+        "logo": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F13%2FAEW-Logo-PNG-HD-Image.png&f=1&nofb=1&ipt=66234382a106eaab2923ba28740fa1f66116bd7874131b761958dbab10d8a8a2&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbranditechture.agency%2Fbrand-logos%2Fwp-content%2Fuploads%2F2022%2F06%2FAEW-All-Elite-Wrestling-1024x787.png&f=1&nofb=1&ipt=a351f4e29f9fbb9e49a7b74d4f9c864d18d45b2035cafa0148cd8ff838e07cc8&ipo=images"
+        ]
+        },
+        "Afl": {
+        "background": [
+          "https://wallpapercave.com/wp/wp1998978.jpg",
+          "https://wallpapercave.com/wp/wp1998982.jpg"
+        ],
+        "poster": [
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//rickrifici.com/wp-content/uploads/2011/03/AFL.jpg&f=1&nofb=1",
+          "https://i.pinimg.com/736x/c0/54/73/c0547342c769706d2ed606d2b6f7246b.jpg"
+        ],
+        "logo": [
+          "https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0003/4002/brand.gif?itok=F2rATKp8"
+        ]
+        },
+        "American Football": {
+        "background": [
+          "https://wallpapercave.com/wp/wp2389352.jpg",
+          "https://www.pixelstalk.net/wp-content/uploads/2016/10/Backgrounds-American-Football.jpg"
+        ],
+        "poster": [
+          "https://images.alphacoders.com/592/592115.jpg",
+          "https://media.istockphoto.com/illustrations/american-football-background-illustration-id167593141?k=6&m=167593141&s=170667a&w=0&h=NbFgCG0OyUANqZVL3V052rZBlFL9oBaxBcJvW_tq87s="
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/024/096/022/small_2x/american-football-balloon-equipment-free-png.png"
+        ]
+        },
+        "Athletics": {
+        "background": [
+          "https://i.pinimg.com/564x/8a/54/78/8a5478003bd46abc218daeda47aadb32.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/564x/d5/a8/d1/d5a8d1beb0b6a2079c163512a9ae3406.jpg"
+        ],
+        "logo": [
+          "https://i.pinimg.com/564x/bc/f3/16/bcf3163ed56233e919baafd299823321.jpg"
+        ]
+        },
+        "Aussie Rules": {
+        "background": [
+          "https://s3.amazonaws.com/rical-images/niclas-westerholm-800x480.jpg"
+        ],
+        "poster": [
+          "https://media.wbur.org/wp/2014/09/Geelong-v-North-Mlebourne-1000x693.jpg"
+        ],
+        "logo": [
+          "https://i.pinimg.com/564x/fe/e4/be/fee4be954c22861aaba956a07de49ea0.jpg"
+        ]
+        },
+        "Baseball": {
+        "background": [
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//www.pixelstalk.net/wp-content/uploads/2016/03/Nice-baseball-fields-wallpaper-background.jpg&f=1&nofb=1",
+          "https://www.pixelstalk.net/wp-content/uploads/2016/03/Download-free-baseball-wallpaper-HD.jpg"
+        ],
+        "poster": [
+          "https://www.tinydecozone.com/wp-content/uploads/2021/10/3526cac62db47bfeae4095967a557a42.jpg",
+          "https://wallpaperaccess.com/full/1417896.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/026/750/676/small_2x/baseball-clipart-design-free-png.png"
+        ]
+        },
+        "Basketball": {
+        "background": [
+          "https://images.designtrends.com/wp-content/uploads/2015/12/21135619/Basketball-Background.jpg",
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//wallpapercave.com/wp/acIknTe.jpg&f=1&nofb=1"
+        ],
+        "poster": [
+          "https://images.hdqwalls.com/download/basketball-court-4k-p9-640x960.jpg",
+          "https://images.hdqwalls.com/download/basketball-4k-lu-640x960.jpg",
+          "https://images.hdqwalls.com/download/basketball-artistic-ht-640x960.jpg"
+        ],
+        "logo": [
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//cliparts.co/cliparts/Aib/Kr4/AibKr4gGT.png&f=1&nofb=1"
+        ]
+        },
+        "Billiards": {
+        "background": [
+          "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Fbilliards-15.jpg&f=1&nofb=1&ipt=8b9307b8db760ec15d07a6ed66717495b73db55a0dfcc4bd688a901dcff463ed&ipo=images"
+        ],
+        "poster": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fak.picdn.net%2Fshutterstock%2Fvideos%2F9725927%2Fthumb%2F1.jpg%3Fip%3Dx480&f=1&nofb=1&ipt=36b55f7a9456378df6799f8f9edab09a45cb9c8ad7670353c30c3c10049b01c1&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp3177240.jpg&f=1&nofb=1&ipt=5dc29a21348a01f83b30f5b67ad204fbd1371b3109cf69eaa90e0803ba7c4f6d&ipo=images"
+        ],
+        "logo": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F009%2F730%2F725%2Fsmall%2Fbilliards-championship-sports-badge-design-logo-and-simple-text-billiard-room-or-pool-club-and-team-billiard-ball-icon-symbol-template-vector.jpg&f=1&nofb=1&ipt=e7e888ffd1287f424e7cd3d05bd0bce1a8dbd2f4af4cfd2d82c4a51e8875d519&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.D6r9x55zsgJtybnoheuHZAAAAA%26pid%3DApi&f=1&ipt=9ab2e7fd4ce8760177a69b6d493646f9142b3657b899685fed8d36f8b230b616&ipo=images"
+        ]
+        },
+        "Bowling": {
+        "background": [
+          "https://i.pinimg.com/736x/fa/2d/21/fa2d21f56d7c44e03760a3db74a306e6.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/564x/21/52/3b/21523b4d0fe74144924bbd802eebd9be.jpg"
+        ],
+        "logo": [
+          "https://i.pinimg.com/736x/88/c2/7a/88c27a982617ac8dbe272e3e385370b8.jpg"
+        ]
+        },
+        "Boxing": {
+        "background": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallsdesk.com%2Fwp-content%2Fuploads%2F2016%2F11%2FPictures-of-Boxing-Gloves-.jpg&f=1&nofb=1&ipt=fe744b371e649f9840b329ee59e07b3fa49a981467738452c7ae28f61adf76c8&ipo=images",
+          "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/671/391/2af40c670ee8b823e7c849d2a87a490f_crop_exact.jpg"
+        ],
+        "poster": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fphotos%2Fred-boxing-glove-picture-id1006291908%3Fb%3D1%26k%3D20%26m%3D1006291908%26s%3D170667a%26w%3D0%26h%3DhAOi7KoDXwcqPtFIlnZqN6Prfooug60XGL2wuQ3Nmxo%3D&f=1&nofb=1&ipt=6af23c83f7b547c67026a573a03331b4791401a81efe62bb3fe6f60f5fb30bf5&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ft4.ftcdn.net%2Fjpg%2F04%2F29%2F51%2F81%2F240_F_429518118_k4gpunbwSm2xBDLX71kzWhFPGLvi1Cab.jpg&f=1&nofb=1&ipt=ea7c7cd79a397674bc01ae1469acb8af2b50cfcd3a7cfd2481fdea45007f3a3e&ipo=images",
+          "https://cdn.britannica.com/58/13158-050-B6471F51/Stag-Sharkey-oil-canvas-George-Bellows-Ohio-1909.jpg"
+        ],
+        "logo": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-vector%2F20221116%2Fourmid%2Fpngtree-boxing-logo-vector-icon-illustration-illustration-boxer-sport-vector-png-image_34660450.png&f=1&nofb=1&ipt=0d560ff6ad82ffc371c4be3dc4d7f20c76512f8a182993b28ab5af5d6173802b&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flogopond.com%2Flogos%2F1f8a86c11b5c49c8bb90a218b4a2e3cb.png&f=1&nofb=1&ipt=897047498c6d29a9301df8a78f737650ea5b6fd0f5076dfe3aa25cdde5032079&ipo=images",
+          "https://anthonyjoshua.com/cdn/shop/articles/AJ_Fight_Insta_1.png?v=1662478898&width=1080"
+        ]
+        },
+        "Cricket": {
+        "background": [
+          "https://wallpaperaccess.com/full/1088596.jpg",
+          "https://wallpaperaccess.com/full/3818753.jpg"
+        ],
+        "poster": [
+          "https://wallpapercave.com/wp/wp9536049.jpg",
+          "https://www.setaswall.com/wp-content/uploads/2018/07/Cricket-Wallpaper-23-1182x888.jpg",
+          "https://p4.wallpaperbetter.com/wallpaper/599/783/829/hyderabad-cricketstadium-sport-wallpaper-preview.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/045/552/269/small_2x/cricket-player-transparent-background-icon-png.png"
+        ]
+        },
+        "Cycling": {
+        "background": [
+          "https://i.pinimg.com/736x/b9/ee/68/b9ee683845c3f1d6737c79cf7e5ab192.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/564x/3e/bc/4b/3ebc4b29b63e1f2183b8028344898de1.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/044/619/852/small_2x/cycling-rider-on-a-bike-on-transparent-background-png.png"
+        ]
+        },
+        "Dart": {
+        "background": [
+          "https://wallpapercave.com/wp/wp2483293.jpg",
+          "https://www.baltana.com/files/wallpapers-21/Darts-Arrow-HD-Background-Wallpaper-52811.jpg"
+        ],
+        "poster": [
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//4.bp.blogspot.com/-HbSvu5nU_KQ/URFbg6VXfFI/AAAAAAAASg0/92zXW__vnqA/s1600/Darts%2BWallpapers%2B01.jpg&f=1&nofb=1",
+          "https://wallpapershome.com/images/wallpapers/darts-1920x1080-4k-5k-wallpaper-hd-wheel-target-fire-water-561.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/020/361/186/small_2x/darts-icon-dart-illustration-sign-accuracy-symbol-sharpshooting-logo-vector.jpg"
+        ]
+        },
+        "Fighting": {
+        "background": [
+          "https://www.kolpaper.com/wp-content/uploads/2021/01/WrestleMania-Wallpaper-4.jpg",
+          "https://wallpapercave.com/wp/wp7480043.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/originals/34/bb/f7/34bbf762319412d2c8a0759fa7417adc.png",
+          "https://rajah.com/sites/default/files/styles/page_image/public/2023-09/wwelogo.jpeg?itok=-8FcfTEJ"
+        ],
+        "logo": [
+          "https://png.pngtree.com/png-vector/20210222/ourlarge/pngtree-element-logo-of-vs-fight-png-image_2932642.jpg",
+          "https://img.wethrift.com/wwe.jpg"
+        ]
+        },
+        "Fighting (WWE, UFC)": {
+        "background": [
+          "https://www.kolpaper.com/wp-content/uploads/2021/01/WrestleMania-Wallpaper-4.jpg",
+          "https://wallpapercave.com/wp/wp7480043.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/originals/34/bb/f7/34bbf762319412d2c8a0759fa7417adc.png",
+          "https://rajah.com/sites/default/files/styles/page_image/public/2023-09/wwelogo.jpeg?itok=-8FcfTEJ"
+        ],
+        "logo": [
+          "https://png.pngtree.com/png-vector/20210222/ourlarge/pngtree-element-logo-of-vs-fight-png-image_2932642.jpg",
+          "https://img.wethrift.com/wwe.jpg"
+        ]
+        },
+        "Floorball": {
+        "background": [
+          "https://i.pinimg.com/564x/2e/ec/61/2eec61af4a598497c89b2d25b3fbfeb8.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/564x/42/8f/e8/428fe8e7880e4443c06b73f3eb513fb7.jpg"
+        ],
+        "logo": [
+          "https://i.pinimg.com/736x/21/31/f4/2131f452523cf93c3fccf9c7f425bfa3.jpg"
+        ]
+        },
+        "Football": {
+        "background": [
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//wallpapercave.com/wp/Mx8QOkb.jpg&f=1&nofb=1",
+          "https://wallpapercave.com/wp/wp2694966.jpg",
+          "https://wallpapercave.com/wp/wp8255684.jpg",
+          "https://wallpapercave.com/wp/wp2167295.jpg"
+        ],
+        "poster": [
+          "https://images.hdqwalls.com/download/nike-black-play-football-ev-640x960.jpg",
+          "https://images.hdqwalls.com/download/soccer-4k-abstract-background-ri-640x960.jpg",
+          "https://images.hdqwalls.com/download/fifa-world-cup-russia-2018-4k-5k-8r-640x960.jpg",
+          "https://images.hdqwalls.com/download/football-ground-sun-rays-4k-ev-640x960.jpg",
+          "https://i.pinimg.com/originals/8c/f0/93/8cf093d06bb060ff91770fcec13d2e32.jpg"
+        ],
+        "logo": [
+          "https://cdn0.iconfinder.com/data/icons/sports-59/512/Soccer-512.png"
+        ]
+        },
+        "Formula Racing": {
+        "background": [
+          "https://i.postimg.cc/S4wcrGRZ/f1background.png?dl=1",
+          "https://i.postimg.cc/fTKyhz1N/Gemini-Generated-Image-bohu83bohu83bohu.jpg"
+        ],
+        "poster": [
+          "https://i.postimg.cc/DZP4x8kM/Poster1.jpg",
+          "https://i.postimg.cc/nL1QRKZv/Gemini-Generated-Image-w3if4mw3if4mw3if.jpg"
+        ],
+        "logo": [
+          "https://i.postimg.cc/Sqf4V8tj/f1logo.png?dl=1"
+        ]
+        },
+        "Futsal": {
+        "background": [
+          "https://i.pinimg.com/564x/c2/32/64/c232645e877ccb06bf5e7c19670b63ed.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/736x/9f/b7/02/9fb702368c11d3042a8427d7846da283.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/001/204/243/small_2x/futsal-crest.png"
+        ]
+        },
+        "GAA": {
+        "background": [
+          "https://www.gaa.ie/api/images/image/private/t_ratio16_9-size50/ahldsknycg9xznakzftb"
+        ],
+        "poster": [
+          "https://focus.independent.ie/thumbor/YS9Bl7NZ63xXExyDWp6YovEpRNM=/310x0:3154x1897/1280x853/prod-mh-ireland/01a6eb05-7836-47dc-b260-b506ded42030/a1922a3d-e3f9-489e-a84e-419607dba72a/Sports2567655.jpg"
+        ],
+        "logo": [
+          "https://www.gaa.ie/api/images/image/private/t_ratio16_9-size50/prd/q1o5adhrckxjhtlc47hk"
+        ]
+        },
+        "Golf": {
+        "background": [
+          "https://wallpaperaccess.com/full/1543778.jpg",
+          "https://free4kwallpapers.com/uploads/originals/2018/02/06/stunning-golf-course-wallpaper.jpg",
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//www.pixelstalk.net/wp-content/uploads/2016/04/Free-golf-backgrounds-photos-pics.jpg&f=1&nofb=1"
+        ],
+        "poster": [
+          "https://images.all-free-download.com/images/graphiclarge/golf_picture_9_168173.jpg",
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//cdn.wallpapersafari.com/97/40/W4gJLI.jpg&f=1&nofb=1",
+          "https://www.pixelstalk.net/wp-content/uploads/2016/04/Golf-wallpapers-HD-Photos.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/022/109/661/small_2x/golf-player-silhouette-png.png"
+        ]
+        },
+        "Gymnastics": {
+        "background": [
+          "https://i.pinimg.com/564x/2e/c4/a2/2ec4a2a5652cd8bd49cdb8047eadca31.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/564x/c6/b3/41/c6b3418f1f7b3a3886145f62bdc68e8b.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/001/192/402/small_2x/olympic-gymnastic.png"
+        ]
+        },
+        "Handball": {
+        "background": [
+          "https://i.pinimg.com/564x/be/03/89/be0389613c926d713bd84833e889a05b.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/736x/da/91/56/da91565174a39af08e006b1d7e7ca865.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/027/706/779/small_2x/handball-player-cartoon-png.png"
+        ]
+        },
+        "Hockey": {
+        "background": [
+          "https://wallpapercave.com/wp/oHZo5vc.jpg"
+        ],
+        "poster": [
+          "https://getwallpapers.com/wallpaper/full/2/3/7/1398548-large-cool-hockey-backgrounds-1920x1200.jpg"
+        ],
+        "logo": [
+          "https://seeklogo.com/images/V/vancouver-2010-ice-hockey-logo-37E210CC48-seeklogo.com.png?v=637838255930000000"
+        ]
+        },
+        "Horse Racing": {
+        "background": [
+          "https://i.pinimg.com/564x/3a/07/f3/3a07f3e0550cd2d9870dd43f63855ac6.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/564x/69/82/48/698248f263661a365ab9225e475e5c34.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/013/869/359/small_2x/horse-and-jockey-racing-retro-png.png"
+        ]
+        },
+        "Lacrosse": {
+        "background": [
+          "https://www.kutztown.edu/Images/Photo%20Gallery/KU-Keystone%20Field%2003-090319.JPG"
+        ],
+        "poster": [
+          "https://i.pinimg.com/736x/64/62/46/6462462bb18fd641de70d0a18c3ea7aa.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/042/714/493/small_2x/3d-illustration-sport-icon-lacrosse-png.png"
+        ]
+        },
+        "MLB": {
+        "background": [
+          "https://wallpapercave.com/wp/wp1998982.jpg",
+          "https://wallpapercave.com/wp/wp1998978.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/736x/c0/54/73/c0547342c769706d2ed606d2b6f7246b.jpg",
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//rickrifici.com/wp-content/uploads/2011/03/AFL.jpg&f=1&nofb=1"
+        ],
+        "logo": [
+          "https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0003/4002/brand.gif?itok=F2rATKp8"
+        ]
+        },
+        "MMA": {
+        "background": [
+          "https://cdn.britannica.com/13/190013-050-53F5C201/MMA-fighters-octagon-cage-Key-Arena-Seattle-2012.jpgg"
+        ],
+        "poster": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F262395.jpg&f=1&nofb=1&ipt=a6c43026724a51fa9ec74e9686368ee358d2a869521c8c94e9e600e7764907b8&ipo=images",
+          "https://getwallpapers.com/wallpaper/full/2/3/7/1398548-large-cool-hockey-backgrounds-1920x1200.jpg",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F007%2F395%2F436%2Foriginal%2Fmma-arena-stage-background-free-vector.jpg&f=1&nofb=1&ipt=c5c8ff32c7d48d70e9245af3ea2c8febc37dfdda2731e730c260d298ef886dbe&ipo=images"
+        ],
+        "logo": [
+          "https://i.pinimg.com/564x/46/c6/31/46c631efcea58974ddfb1c4b4550f566.jpg"
+        ]
+        },
+        "MotoGP Racing": {
+        "background": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperbat.com%2Fimg%2F569936-marc-marquez-wallpaper-in-2020-yamaha-motogp-racing-motogp-race.jpg&f=1&nofb=1&ipt=a0e19f2afd8aa9cc2aaeecf47502ed36fa0d2c6565eaf01d437505dcc0e8923f&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fgetwallpapers.com%2Fwallpaper%2Ffull%2F9%2F1%2F1%2F479678.jpg&f=1&nofb=1&ipt=074cb784018cb9d5ebf40c6a97511dcdf9b18e87b2a27e3fe43296ec12437f9c&ipo=images"
+        ],
+        "poster": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F62%2F0e%2F24%2F620e24ceb7964d0168606932e4a976cf.jpg&f=1&nofb=1&ipt=1965087b235796e0dbf101d6329c1f7f14b5dfc5acfb48c075739108c6eddba9&ipo=images",
+          "https://images.wallpapersden.com/image/wxl-motogp-19-game_66061.jpg"
+        ],
+        "logo": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F1.bp.blogspot.com%2F-aLMSit3Q6XY%2FUQJO5Eiac4I%2FAAAAAAAAFcE%2Fueo2j7cdk-c%2Fs320%2FLogo%2BMotogp.jpg&f=1&nofb=1&ipt=8e81f529ea52045afffc5c64a7bbd8cde17f35a4c5f8eca685a0488f9605bfcf&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbesthqwallpapers.com%2FUploads%2F25-12-2017%2F34975%2Fthumb-motogp-4k-logo-grunge-black-background.jpg&f=1&nofb=1&ipt=e934a488b5c925ba56ad11f3b2cb728e85b4e34ac217441c0bf6c4cb4a07db9d&ipo=images"
+        ]
+        },
+        "Motor Sport": {
+        "background": [
+          "https://wallpapercave.com/wp/wp9469126.jpg",
+          "https://wallpapercave.com/wp/wp7657681.jpg"
+        ],
+        "poster": [
+          "https://www.kolpaper.com/wp-content/uploads/2019/12/Car-racing-wallpaper-1-scaled.jpg",
+          "https://i.pinimg.com/originals/d0/9c/4c/d09c4cfd1b93cc66dc13c8b461fd2145.jpg",
+          "https://i.pinimg.com/originals/d0/9c/4c/d09c4cfd1b93cc66dc13c8b461fd2145.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/000/130/098/small/turbocharger-racing-logo-template.jpg"
+        ]
+        },
+        "Netball": {
+        "background": [
+          "https://i.pinimg.com/564x/79/7f/95/797f95498bd6b78afa37f74aa920e467.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/736x/e5/c1/6e/e5c16ed52ad220eadb227eba9b480f33.jpg"
+        ],
+        "logo": [
+          "https://i.pinimg.com/564x/48/ba/b4/48bab44d36f240512760688e83cf8b52.jpg"
+        ]
+        },
+        "Other Sports": {
+        "background": [
+          "https://wallpapercave.com/wp/Cd7iyFl.jpg",
+          "https://i.postimg.cc/wxLw6Z62/Gemini-Generated-Image-4bl8kf4bl8kf4bl8.jpg"
+        ],
+        "poster": [
+          "https://i.postimg.cc/FKzPNKRk/Gemini-Generated-Image-uf48dduf48dduf48.jpg",
+          "https://i.postimg.cc/wxLw6Z62/Gemini-Generated-Image-4bl8kf4bl8kf4bl8.jpg",
+          "https://i.postimg.cc/ZKmV0HnS/Gemini-Generated-Image-lrf40mlrf40mlrf4.jpg",
+          "https://i.postimg.cc/mZmKxKVn/Gemini-Generated-Image-hvsuykhvsuykhvsu.jpg"
+        ],
+        "logo": [
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//images.gofreedownload.net/sport-105683.jpg&f=1&nofb=1"
+        ]
+        },
+        "Rugby/AFL": {
+        "background": [
+          "https://wallpaperaccess.com/full/1104013.jpg",
+          "https://wallpapercave.com/wp/wp5755888.jpg"
+        ],
+        "poster": [
+          "https://s.itl.cat/pngfile/s/308-3080634_rugby-wallpaper-14-rugby-ball-on-ground.jpg",
+          "https://images.hdqwalls.com/download/rugby-world-cup-2019-zh-640x960.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/024/098/231/small_2x/american-football-balloon-equipment-free-png.png"
+        ]
+        },
+        "Squash": {
+        "background": [
+          "https://i.pinimg.com/736x/f6/16/5e/f6165ea091eb8d31e63ad110c98d415e.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/736x/72/73/f1/7273f112fd2fc9cf1c7237d1ca7d3ea7.jpg"
+        ],
+        "logo": [
+          "https://i.pinimg.com/736x/34/95/7a/34957a82d32d7e6d0a9e41b7ba70c520.jpg"
+        ]
+        },
+        "Tennis": {
+        "background": [
+          "https://wallpapercave.com/wp/wp3088699.jpg",
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//yesofcorsa.com/wp-content/uploads/2015/08/3307_tennis.jpg&f=1&nofb=1",
+          "https://external-content.duckduckgo.com/iu/?u=http%3A//3.bp.blogspot.com/-galOVHt3kp0/UZvDZpqBBiI/AAAAAAAALD0/c0zQxrH0LxY/s1600/Tennis%2BWallpapers%2B4.jpg&f=1&nofb=1"
+        ],
+        "poster": [
+          "https://wallpapercave.com/wp/wp3088777.jpg",
+          "https://getwallpapers.com/wallpaper/full/b/1/6/383962.jpg",
+          "https://wallpaperbat.com/img/242328-tennis-picture.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/023/639/633/small_2x/tennis-flat-element-sports-element-png.png"
+        ]
+        },
+        "UFC": {
+        "background": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F3517579.jpg&f=1&nofb=1&ipt=ff4784df1853ed9b8a6efa40d94cbb39f7a465bcd0b3716745d6bc54695f1e76&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F3517579.jpg&f=1&nofb=1&ipt=ff4784df1853ed9b8a6efa40d94cbb39f7a465bcd0b3716745d6bc54695f1e76&ipo=images"
+        ],
+        "poster": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fufc-mcgregor-money-shot-29x7rlse5anvkglu.jpg&f=1&nofb=1&ipt=c299a7163725ee02c1ea412895ce481184b33d7b280d50334924deec270d6a16&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperheart.com%2Fwp-content%2Fuploads%2F2018%2F05%2FUFC-Wallpapers-3.jpg&f=1&nofb=1&ipt=c07f830c802def0bc9f1ba6b98dc128a9b1275dab37f0e0cf461e72c87c9c93a&ipo=images"
+        ],
+        "logo": [
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fapexsportsagency.com%2Fwp-content%2Fuploads%2F2017%2F06%2FUFC-Logo.png&f=1&nofb=1&ipt=3d3a43348ff2ca8ad9a999b48c0f4005448bae11c864e5c9b8e06738abded294&ipo=images",
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F1000logos.net%2Fwp-content%2Fuploads%2F2017%2F06%2FLogo-UFC.png&f=1&nofb=1&ipt=002737bf68f66b035cf48dfd239a203094e982889215e8c45282e6cbc0e7521d&ipo=images"
+        ]
+        },
+        "Volleyball": {
+        "background": [
+          "https://i.pinimg.com/564x/0b/e0/cc/0be0cce4ae979463aba3f99c0032bd5f.jpg"
+        ],
+        "poster": [
+          "https://i.pinimg.com/736x/95/7d/f9/957df9df14a83b09ac3fd6873eb127b6.jpg"
+        ],
+        "logo": [
+          "https://static.vecteezy.com/system/resources/thumbnails/027/436/859/small_2x/volleyball-color-flat-line-icon-png.png"
+        ]
+        },
+        "WWE": {
+        "background": [
+          "https://www.kolpaper.com/wp-content/uploads/2021/01/WrestleMania-Wallpaper-4.jpg",
+          "https://wallpapercave.com/wp/wp7480043.jpg"
+        ],
+        "poster": [
+          "https://rajah.com/sites/default/files/styles/page_image/public/2023-09/wwelogo.jpeg?itok=-8FcfTEJ",
+          "https://i.postimg.cc/R95Yr0MX/fighting-poster.png?dl=1"
+        ],
+        "logo": [
+          "https://img.wethrift.com/wwe.jpg"
+        ]
+        }
+      }
+  mediafusion-nginx-config:
+    content: |
+      user  nginx;
+      worker_processes  1;
+
+      events {
+          worker_connections  1024;
+      }
+
+      http {
+          include       mime.types;
+          default_type  application/octet-stream;
+          sendfile        on;
+          keepalive_timeout  65;
+
+          server {
+              listen 443 ssl;
+              server_name mediafusion.local;
+
+              ssl_certificate     /etc/ssl/certs/mediafusion.local.pem;
+              ssl_certificate_key /etc/ssl/private/mediafusion.local-key.pem;
+
+              ssl_session_cache   shared:SSL:10m;
+              ssl_session_timeout 10m;
+
+              location / {
+                  proxy_pass ${MEDIAFUSION_INTERNAL_URL:-http://mediafusion:8000};
+                  proxy_set_header Host $$host;
+                  proxy_set_header X-Real-IP $$remote_addr;
+                  proxy_set_header X-Forwarded-For $$proxy_add_x_forwarded_for;
+                  proxy_set_header X-Forwarded-Proto $$scheme;
+              }
+          }
+      }
+  nginx-proxy-config.conf:
+    content: |
+      # Custom nginx configuration for nginx-proxy
+      client_max_body_size 100m;
+      proxy_connect_timeout 600s;
+      proxy_send_timeout 600s;
+      proxy_read_timeout 600s;
+      proxy_buffering off;
+      proxy_request_buffering off;
+      # Enable gzip compression
+      gzip on;
+      gzip_vary on;
+      gzip_min_length 1024;
+      gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+      # Security headers
+      add_header X-Frame-Options DENY always;
+      add_header X-Content-Type-Options nosniff always;
+      add_header X-XSS-Protection "1; mode=block" always;
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+  setup-prowlarr-indexers.sh:
+    content: |
+      #!/bin/bash
+
+      # Ensure the script exits on failure
+      set -e
+
+      # Ensure the script is run from the correct directory
+      cd "$$(dirname "$$0")"
+
+      # Set the repo root directory
+      REPO_ROOT="$$(pwd)/../.."
+
+      # Load the environment variables
+      source "$$REPO_ROOT/.env"
+
+      # Ensure the required environment variables are set
+      PROWLARR_API_KEY=${PROWLARR_API_KEY:?}
+      if [[ -z "$$PROWLARR_API_KEY" ]]; then
+        echo "PROWLARR_API_KEY is not set. Please set it in the .env file."
+        exit 1
+      fi
+
+      # Function to handle curl requests
+      handle_curl() {
+        skip_on_failure=$$1
+        shift
+        response=$$(curl -s -o response.txt -w "%{http_code}" "$$@")
+        if [[ $$response -ge 200 && $$response -lt 300 ]]; then
+          rm response.txt
+        else
+          echo "Request failed with status code $$response"
+          cat response.txt
+          rm response.txt
+          if [[ "$$skip_on_failure" != "true" ]]; then
+            exit 1
+          fi
+        fi
+      }
+
+      # Wait for Prowlarr to be ready
+      echo "Waiting for Prowlarr to be ready..."
+      until curl -s -o /dev/null -w "%{http_code}" -H "X-API-KEY: $$PROWLARR_API_KEY" http://127.0.0.1:9696/api/v1/health | grep -q '^2'; do
+        sleep 5
+      done
+
+      # Create tag "flaresolverr"
+      handle_curl true -X POST -H 'Content-Type: application/json' -H "X-API-KEY: $$PROWLARR_API_KEY" --data-raw '{"label":"flaresolverr"}' 'http://127.0.0.1:9696/api/v1/tag'
+
+      # Create FlareSolverr proxy using the JSON file
+      PROXY_DATA=$$(cat "$$REPO_ROOT/resources/json/prowlarr_indexer_proxy.json")
+      PROXY_DATA=$$(echo "$$PROXY_DATA" | sed "s#\\\$$FLARESOLVERR_HOST#$$FLARESOLVERR_HOST#g")
+      handle_curl true -X POST -H 'Content-Type: application/json' -H "X-API-KEY: $$PROWLARR_API_KEY" --data-raw "$$PROXY_DATA" 'http://127.0.0.1:9696/api/v1/indexerProxy?'
+
+      # Configure indexers using the JSON file
+      INDEXERS=$$(jq -c '.[]' "$$REPO_ROOT/resources/json/prowlarr-indexers.json")
+      echo "$$INDEXERS" | while read -r indexer; do
+        indexer_name=$$(echo "$$indexer" | jq -r '.name')
+        echo "Adding indexer named: $$indexer_name"
+
+        # Check for cardigannCaptcha field
+        if echo "$$indexer" | jq -e '.fields[] | select(.name == "cardigannCaptcha")' > /dev/null; then
+          echo "Indexer $$indexer_name requires captcha"
+          handle_curl true -X POST -H "Content-Type: application/json" -H "X-API-KEY: $$PROWLARR_API_KEY" -d "$$indexer" "http://127.0.0.1:9696/api/v1/indexer"
+          handle_curl true -X POST -H "Content-Type: application/json" -H "X-API-KEY: $$PROWLARR_API_KEY" --data-raw "$$indexer" "http://127.0.0.1:9696/api/v1/indexer/action/checkCaptcha"
+        fi
+
+        handle_curl true -X POST -H "Content-Type: application/json" -H "X-API-KEY: $$PROWLARR_API_KEY" -d "$$indexer" "http://127.0.0.1:9696/api/v1/indexer"
+      done
+
+      echo "Indexers setup complete."
+  prowlarr_indexer_proxy.json:
+    content: |
+      {
+        "onHealthIssue": false,
+        "supportsOnHealthIssue": false,
+        "includeHealthWarnings": false,
+        "name": "FlareSolverr",
+        "fields": [
+          {
+            "name": "host",
+            "value": "${FLARESOLVERR_INTERNAL_URL:-http://flaresolverr:8191}"
+          },
+          {
+            "name": "requestTimeout",
+            "value": 60
+          }
+        ],
+        "implementationName": "FlareSolverr",
+        "implementation": "FlareSolverr",
+        "configContract": "FlareSolverrSettings",
+        "infoLink": "https://wiki.servarr.com/prowlarr/supported#flaresolverr",
+        "tags": [
+          1
+        ]
+      }
+
+  setup-prowlarr.sh:
+    content: |
+      #!/bin/bash
+
+      # Ensure the script exits on failure
+      set -e
+
+      # Ensure the script is run from the correct directory
+      cd "$$(dirname "$$0")"
+
+      # Set the repo root directory
+      REPO_ROOT="$$(pwd)/../.."
+
+      # Generate PROWLARR_API_KEY and add to .env file
+      PROWLARR_API_KEY=${PROWLARR_API_KEY:-$$(openssl rand -hex 16)}
+      echo "PROWLARR_API_KEY=" >> .env
+
+      # Stop & delete Prowlarr container if it's running
+      docker compose rm -sf prowlarr
+
+      # delete the volume if it exists
+      docker volume rm -f docker-compose_prowlarr-config
+
+      # Ensure the volume is available
+      docker volume create docker-compose_prowlarr-config
+
+      # Copy the configuration file to the volume
+      docker run --rm -v "$$REPO_ROOT/resources/xml/prowlarr-config.xml:/prowlarr-config/config.xml" -v docker-compose_prowlarr-config:/config alpine /bin/sh -c "
+        cp /prowlarr-config/config.xml /config/config.xml;
+        sed -i 's/\$${PROWLARR_API_KEY}/'"$${PROWLARR_API_KEY}"'/g' /config/config.xml;
+        sed -i 's/\$${PROWLARR__POSTGRES_USER}/'"$$PROWLARR__POSTGRES_USER"'/g' /config/config.xml;
+        sed -i 's/\$${PROWLARR__POSTGRES_PASSWORD}/'"$$PROWLARR__POSTGRES_PASSWORD"'/g' /config/config.xml;
+        sed -i 's/\$${PROWLARR__POSTGRES_PORT}/'"$$PROWLARR__POSTGRES_PORT"'/g' /config/config.xml;
+        sed -i 's/\$${PROWLARR__POSTGRES_HOST}/'"$$PROWLARR__POSTGRES_HOST"'/g' /config/config.xml;
+        sed -i 's/\$${PROWLARR__POSTGRES_MAIN_DB}/'"$$PROWLARR__POSTGRES_MAIN_DB"'/g' /config/config.xml;
+        sed -i 's/\$${PROWLARR__POSTGRES_LOG_DB}/'"$$PROWLARR__POSTGRES_LOG_DB"'/g' /config/config.xml;
+        chmod 664 /config/config.xml;
+        echo 'Prowlarr config setup complete.';
+      "
+
+      # pull the latest images
+      docker compose pull prowlarr flaresolverr
+
+      # Start Prowlarr and FlareSolverr containers
+      docker compose up -d prowlarr flaresolverr
+
+      # Function to handle curl requests
+      handle_curl() {
+        skip_on_failure=$$1
+        shift
+        response=$$(curl -s -o response.txt -w "%{http_code}" "$@")
+        if [[ $$response -ge 200 && $$response -lt 300 ]]; then
+          rm response.txt
+        else
+          echo "Request failed with status code $$response"
+          cat response.txt
+          rm response.txt
+          if [[ "$$skip_on_failure" != "true" ]]; then
+            exit 1
+          fi
+        fi
+      }
+
+      # Wait for Prowlarr to be ready
+      echo "Waiting for Prowlarr to be ready..."
+      until curl -s -o /dev/null -w "%{http_code}" -H "X-API-KEY: $$PROWLARR_API_KEY" http://127.0.0.1:9696/api/v1/health | grep -q '^2'; do
+        sleep 5
+      done
+
+      # Create tag "flaresolverr"
+      handle_curl false -X POST -H 'Content-Type: application/json' -H "X-API-KEY: $$PROWLARR_API_KEY" --data-raw '{"label":"flaresolverr"}' 'http://127.0.0.1:9696/api/v1/tag'
+
+      # Create FlareSolverr proxy using the JSON file
+      PROXY_DATA=$(cat "$$REPO_ROOT/resources/json/prowlarr_indexer_proxy.json")
+      PROXY_DATA=$(echo "$$PROXY_DATA" | sed "s#\\\${FLARESOLVERR_HOST}#${FLARESOLVERR_HOST}#g")
+      handle_curl false -X POST -H 'Content-Type: application/json' -H "X-API-KEY: $$PROWLARR_API_KEY" --data-raw "$PROXY_DATA" 'http://127.0.0.1:9696/api/v1/indexerProxy?'
+
+      # Configure indexers using the JSON file
+      INDEXERS=$$(jq -c '.[]' "$REPO_ROOT/resources/json/prowlarr-indexers.json")
+      echo "$$INDEXERS" | while read -r indexer; do
+        indexer_name=$$(echo "$$indexer" | jq -r '.name')
+        echo "Adding indexer named: $$indexer_name"
+
+        # Check for cardigannCaptcha field
+        if echo "$$indexer" | jq -e '.fields[] | select(.name == "cardigannCaptcha")' > /dev/null; then
+          echo "Indexer $$indexer_name requires captcha"
+          handle_curl true -X POST -H "Content-Type: application/json" -H "X-API-KEY: $$PROWLARR_API_KEY" -d "$$indexer" "http://127.0.0.1:9696/api/v1/indexer"
+          handle_curl true -X POST -H "Content-Type: application/json" -H "X-API-KEY: $$PROWLARR_API_KEY" --data-raw "$$indexer" "http://127.0.0.1:9696/api/v1/indexer/action/checkCaptcha"
+        fi
+
+        handle_curl true -X POST -H "Content-Type: application/json" -H "X-API-KEY: $$PROWLARR_API_KEY" -d "$$indexer" "http://127.0.0.1:9696/api/v1/indexer"
+      done
+
+      echo "Indexers setup complete."
+
+services:
+
+  stremio:
+    # 🔹🔹 Stremio 🔹🔹
+    # Stream Movies/TV over debrid instantly.
+    image: ghcr.io/tsaridas/stremio-docker:main
+    container_name: stremio
+    hostname: stremio
+    networks:
+      publicnet: {}
+      warp-network:
+        gw_priority: 1
+    ports:
+      - 12470:12470/tcp
+    volumes:
+      - ${CONFIG_PATH:-./configs}/stremio/root/.stremio-server:/root/.stremio-server
+    #  - ${SRC_PATH:-./src}/stremio-docker/build:/srv/stremio-server/build
+    environment:
+      IPADDRESS: 127.0.0.1
+      AUTO_SERVER_URL: 1
+      SERVER_URL: https://stremio.${DOMAIN}/
+      #WEBUI_LOCATION: https://stremio-web.${DOMAIN}/shell/
+      WEBUI_LOCATION: https://stremio-web.${DOMAIN}/shell/
+      NO_CORS: 0
+      CASTING_DISABLED: 0
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: publicnet
+      traefik.http.routers.stremio-web.service: stremio-web
+      traefik.http.routers.stremio-web.rule: "Host(`stremio-web.${DOMAIN}`) || Host(`stremio-web.${TS_HOSTNAME}.${DOMAIN}`)"
+      traefik.http.routers.stremio-web.priority: 10
+      traefik.http.services.stremio-web.loadbalancer.server.scheme: https
+      traefik.http.services.stremio-web.loadbalancer.server.port: 8080
+      # Stremio HTTPS Streaming Server (port 12470)
+      traefik.http.routers.stremio-https-server.service: stremio-https-server
+      traefik.http.routers.stremio-https-server.rule: 'Host(`stremio.${DOMAIN}`) || Host(`stremio.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.routers.stremio-https-server.priority: 100
+      traefik.http.services.stremio-https-server.loadbalancer.server.scheme: https
+      traefik.http.services.stremio-https-server.loadbalancer.server.port: 12470
+      homepage.group: Media Streaming Platforms
+      homepage.name: Stremio
+      homepage.icon: stremio.png
+      homepage.href: https://stremio.${DOMAIN}/
+      homepage.description: A one-stop hub for video content aggregation, allowing you to stream movies, series, and more from various sources.
+    healthcheck:
+      test: ["CMD-SHELL", "(curl -fs http://127.0.0.1:11470 > /dev/null 2>&1 || curl -fs https://127.0.0.1:12470 > /dev/null 2>&1) || exit 1"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+      start_period: 1m30s
+    cpu_shares: 10  # potentially should be 1
+    mem_reservation: 256M
+    deploy:
+      resources:
+        reservations:
+          cpus: 0
+          memory: 256M
+        limits:
+          cpus: 2
+          memory: 2G
+    restart: always
+  flaresolverr:
+    # 🔹🔹 Flaresolverr 🔹🔹  # https://github.com/flaresolverr/flaresolverr
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    #image: ghcr.io/thephaseless/byparr:latest
+    container_name: flaresolverr
+    hostname: flaresolverr
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+    expose:
+      - ${FLARESOLVERR_PORT:-8191}
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      PUID: ${PUID:-1001}
+      PGID: ${PGID:-988}
+      UMASK: ${UMASK:-002}
+      # FlareSolverr Environment Variables
+      LOG_LEVEL: debug  # Verbosity of the logging. Use LOG_LEVEL=debug for more information.
+      LOG_HTML: "false"  # Only for debugging. If true all HTML that passes through the proxy will be logged to the console in debug level.
+      CAPTCHA_SOLVER: none  # Captcha solving method. It is used when a captcha is encountered.  Note: none of the captcha solvers work with the current version of Flaresolverr.
+      PORT: ${FLARESOLVERR_PORT:-8191}  # Listening port.
+      HOST: 0.0.0.0  # Listening interface.
+      HEADLESS: ${FLARESOLVERR_HEADLESS:-true}  # Only for debugging. To run the web browser in headless mode or visible.
+      BROWSER_TIMEOUT: ${FLARESOLVERR_BROWSER_TIMEOUT:-120000}  # If you are experiencing errors/timeouts because your system is slow, you can try to increase this value.
+      TEST_URL: ${FLARESOLVERR_TEST_URL:-https://www.google.com}  # FlareSolverr makes a request on start to make sure the web browser is working.
+      PROMETHEUS_ENABLED: ${FLARESOLVERR_PROMETHEUS_ENABLED:-true}  # Enable Prometheus exporter
+      PROMETHEUS_PORT: ${PROMETHEUS_PORT:-9090}  # Listening port for Prometheus exporter
+    labels:
+      traefik.enable: true
+      traefik.http.routers.flaresolverr.middlewares: nginx-auth@docker
+      traefik.http.routers.flaresolverr.rule: 'Host(`flaresolverr.${DOMAIN}`) || Host(`flaresolverr.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.flaresolverr.loadbalancer.server.port: ${FLARESOLVERR_PORT:-8191}
+      homepage.group: Infrastructure
+      homepage.name: Flaresolverr
+      homepage.icon: flaresolverr.png
+      homepage.href: https://flaresolverr.${DOMAIN}/
+      homepage.description: Headless anti-bot proxy to bypass Cloudflare/JS challenges for indexers and scrapers
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:${FLARESOLVERR_PORT:-8191}/health > /dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 60s
+    cpus: 0.6
+    mem_reservation: 64M
+    deploy:
+      resources:
+        reservations:
+          cpus: 0
+          memory: 64M
+        limits:
+          cpus: 0.6
+          memory: 1G
+    restart: always
+  jackett:
+    # 🔹🔹 Jackett 🔹🔹
+    depends_on:
+      flaresolverr:
+        condition: service_healthy
+    image: docker.io/linuxserver/jackett
+    container_name: jackett
+    hostname: jackett
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      publicnet: {}
+      warp-network:
+        gw_priority: 1
+    volumes:
+      - ${CONFIG_PATH:-./configs}/jackett/config:/config
+      - /mnt/remote/blackhole:/blackhole
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      PUID: ${PUID:-1001}
+      PGID: ${PGID:-988}
+      UMASK: ${UMASK:-002}
+      AUTO_UPDATE: ${JACKETT_AUTO_UPDATE:-true}
+      RUN_OPTS: "${JACKETT_RUN_OPTS:-}"
+      JACKETT_API_KEY: ${JACKETT_API_KEY}
+    labels:
+      traefik.enable: true
+      traefik.docker.network: publicnet
+      traefik.http.routers.jackett.rule: 'Host(`jackett.${DOMAIN}`) || Host(`jackett.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.jackett.loadbalancer.server.port: 9117
+      homepage.group: Source Aggregator
+      homepage.name: Jackett Indexer
+      homepage.icon: jackett.png
+      homepage.href: https://jackett.${DOMAIN}/
+      homepage.description: Connects your download applications with various source providers and indexers, making it easier to find and download content through your download clients.
+      homepage.weight: 1
+      homepage.widget.type: jackett
+      homepage.widget.url: ${JACKETT_INTERNAL_URL:-http://jackett:9117}
+      homepage.widget.key: ${JACKETT_API_KEY}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://127.0.0.1:9117/api/v2.0/indexers/all/results/torznab?t=indexers&apikey=${JACKETT_API_KEY} > /dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+    cpu_shares: 10
+    mem_reservation: 128M
+    deploy:
+      resources:
+        reservations:
+          cpus: 0
+          memory: 128M
+        limits:
+          cpus: 1
+          memory: 1024M
+    restart: always
+  prowlarr:
+    # 🔹🔹 Prowlarr 🔹🔹
+    image: docker.io/linuxserver/prowlarr
+    container_name: prowlarr
+    hostname: prowlarr
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      publicnet: {}
+      warp-network:
+        gw_priority: 1
+    volumes:
+      - ${CONFIG_PATH:-./configs}/prowlarr/config:/config:rw
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      PUID: ${PUID:-1001}
+      PGID: ${PGID:-988}
+      UMASK: ${UMASK:-002}
+      PROWLARR_API_KEY: ${PROWLARR_API_KEY}
+    labels:
+      traefik.enable: true
+      traefik.http.routers.prowlarr.rule: 'Host(`prowlarr.${DOMAIN}`) || Host(`prowlarr.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.prowlarr.loadbalancer.server.port: 9696
+      homepage.group: Indexers
+      homepage.name: Prowlarr
+      homepage.icon: prowlarr.png
+      homepage.href: https://prowlarr.${DOMAIN}/
+      homepage.description: Indexer proxy and manager; normalizes indexers and feeds PVR apps like Sonarr/Radarr
+      homepage.weight: 1
+      homepage.widget.type: prowlarr
+      homepage.widget.url: ${PROWLARR_INTERNAL_URL:-http://prowlarr:9696}
+      homepage.widget.key: ${PROWLARR_API_KEY}
+    cpu_shares: 10
+    mem_reservation: 128M
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 6G
+        reservations:
+          cpus: '0.0'
+          memory: 128M
+    healthcheck:  # docker exec prowlarr ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "curl -fs -H \"Authorization: Bearer ${PROWLARR_API_KEY}\" http://127.0.0.1:9696/api/v1/system/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    restart: always
+  aiostreams:
+    # 🔹🔹 AIOStreams 🔹🔹
+    image: ghcr.io/viren070/aiostreams:latest
+    container_name: aiostreams
+    hostname: aiostreams
+    networks:
+      publicnet: {}
+      warp-network:
+        gw_priority: 1
+    volumes:
+      - ${CONFIG_PATH:-./configs}/stremio/addons/aiostreams/data:/app/data
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      PUID: ${PUID:-1001}
+      PGID: ${PGID:-988}
+      UMASK: ${UMASK:-002}
+      # ==============================================================================
+      #                         ESSENTIAL ADDON SETUP
+      # ==============================================================================
+      # These are the most important settings you'll need to configure.
+
+      # --- Addon Identification ---
+      # Descriptive name for your addon instance.
+      ADDON_NAME: ${AIOSTREAMS_ADDON_NAME:-BadenAIO}
+      # Unique identifier for your addon.
+      ADDON_ID: aiostreams.${DOMAIN}
+
+      # --- Network Configuration ---
+      # The port on which the addon will listen.
+      # Default: 3000
+      PORT: ${AIOSTREAMS_PORT:-3005}
+
+      # The base URL of your addon. Highly recommended for proper functioning.
+      # Used for generating installation URLs and identifying self-scraping.
+      # Example: https://aiostreams.yourdomain.com
+      BASE_URL: https://aiostreams.${DOMAIN}
+
+      # --- Security ---
+      # CRITICAL: Secret key for encrypting addon configuration.
+      # MUST be a 64-character hex string.
+      # Generate one using:
+      #   Linux/macOS: openssl rand -hex 32
+      #   Windows (PowerShell): -join ((0..31) | ForEach-Object { '{0:x2}' -f (Get-Random -Minimum 0 -Maximum 255) })
+      #   Or: [System.Guid]::NewGuid().ToString("N") + [System.Guid]::NewGuid().ToString("N") (ensure it's 64 chars)
+      SECRET_KEY: ${AIOSTREAMS_SECRET_KEY:-207d3e5d2dd7edca578b121814f32ed4d73568b5059fd710637a40d310928cde}
+
+      # API key to protect your addon installation and usage.
+      # Leave empty to disable password protection.
+      # Can be any string.
+      ADDON_PASSWORD: ${AIOSTREAMS_ADDON_PASSWORD:-sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9}
+      #
+      # PostgreSQL example:
+      #   DATABASE_URI=postgres://username:password@host:port/database_name
+      #   (e.g., postgresql://postgres:password@localhost:5432/aiostreams)
+      DATABASE_URI: ${AIOSTREAMS_DATABASE_URI:-sqlite://./data/db.sqlite}
+
+
+      # ==============================================================================
+      #                     DEBRID & OTHER SERVICE API KEYS
+      # ==============================================================================
+
+      # Provide a default TMDB access token to be used for the Title Matching filter if a user does not provide any.
+      TMDB_ACCESS_TOKEN: ${TMDB_ACCESS_TOKEN:?}
+
+      # Configure API keys for debrid services and others you plan to use.
+      # 'DEFAULT_' values are pre-filled in the user's config page.
+      # 'FORCED_' values override user settings and hide the option.
+
+      # --- Real-Debrid ---
+      DEFAULT_REALDEBRID_API_KEY: ${REALDEBRID_API_KEY}
+      #- FORCED_REALDEBRID_API_KEY=${REALDEBRID_API_KEY}
+
+      # --- AllDebrid ---
+      DEFAULT_ALLDEBRID_API_KEY: ${ALLDEBRID_API_KEY}
+      #- FORCED_ALLDEBRID_API_KEY=${ALLDEBRID_API_KEY}
+
+      # --- Premiumize ---
+      DEFAULT_PREMIUMIZE_API_KEY: ${PREMIUMIZE_API_KEY}
+      #- FORCED_PREMIUMIZE_API_KEY=${PREMIUMIZE_API_KEY}
+
+      # --- Debrid-Link ---
+      DEFAULT_DEBRIDLINK_API_KEY: ${DEBRIDLINK_API_KEY}
+      #- FORCED_DEBRIDLINK_API_KEY=${DEBRIDLINK_API_KEY}
+
+      # --- Torbox ---
+      DEFAULT_TORBOX_API_KEY: ${TORBOX_API_KEY}
+      #- FORCED_TORBOX_API_KEY=${TORBOX_API_KEY}
+
+      # --- OffCloud ---
+      DEFAULT_OFFCLOUD_API_KEY: ${OFFCLOUD_API_KEY}
+      #- FORCED_OFFCLOUD_API_KEY=${OFFCLOUD_API_KEY}
+      DEFAULT_OFFCLOUD_EMAIL: ${OFFCLOUD_EMAIL}
+      #- FORCED_OFFCLOUD_EMAIL=${OFFCLOUD_EMAIL}
+      DEFAULT_OFFCLOUD_PASSWORD: ${OFFCLOUD_PASSWORD}
+      #- FORCED_OFFCLOUD_PASSWORD=${OFFCLOUD_PASSWORD}
+
+      # --- Put.io ---
+      DEFAULT_PUTIO_CLIENT_ID: ${PUTIO_CLIENT_ID}
+      #- FORCED_PUTIO_CLIENT_ID=${PUTIO_CLIENT_ID}
+      DEFAULT_PUTIO_CLIENT_SECRET: ${PUTIO_CLIENT_SECRET}
+      #- FORCED_PUTIO_CLIENT_SECRET=${PUTIO_CLIENT_SECRET}
+
+      # --- EasyNews ---
+      DEFAULT_EASYNEWS_USERNAME: ${EASYNEWS_USERNAME:-}
+      #- FORCED_EASYNEWS_USERNAME=${EASYNEWS_USERNAME}
+      DEFAULT_EASYNEWS_PASSWORD: ${EASYNEWS_PASSWORD:-}
+      #- FORCED_EASYNEWS_PASSWORD=${EASYNEWS_PASSWORD}
+
+      # --- EasyDebrid ---
+      DEFAULT_EASYDEBRID_API_KEY: ${EASYDEBRID_API_KEY}
+      #- FORCED_EASYDEBRID_API_KEY=${EASYDEBRID_API_KEY}
+
+      # --- PikPak ---
+      DEFAULT_PIKPAK_EMAIL: ${PIKPAK_EMAIL}
+      #- FORCED_PIKPAK_EMAIL=${PIKPAK_EMAIL}
+      DEFAULT_PIKPAK_PASSWORD: ${PIKPAK_PASSWORD}
+      #- FORCED_PIKPAK_PASSWORD=${PIKPAK_PASSWORD}
+
+      # --- Seedr ---
+      DEFAULT_SEEDR_ENCODED_TOKEN: ${SEEDR_ENCODED_TOKEN}
+      #- FORCED_SEEDR_ENCODED_TOKEN=${SEEDR_ENCODED_TOKEN}
+
+
+      # ==============================================================================
+      #                      CUSTOMIZATION & ACCESS CONTROL
+      # ==============================================================================
+
+      # --- Custom HTML ---
+      # Display custom HTML at the top of the addon's configuration page.
+      # Example: CUSTOM_HTML="<div>Welcome to my AIOStreams!</div>"
+      CUSTOM_HTML: ${AIOSTREAMS_CUSTOM_HTML}
+
+      # --- Trusted Users ---
+      # Comma-separated list of trusted UUIDs.
+      # Trusted users can access features like regex filters if REGEX_FILTER_ACCESS is 'trusted'.
+      # Example: TRUSTED_UUIDS=ae32f456-1234-5678-9012-345678901234,another-uuid-here
+      TRUSTED_UUIDS: ${AIOSTREAMS_TRUSTED_UUIDS:-}
+
+      # --- Regex Filter Access ---
+      # Controls who can use regex filters.
+      # 'none': No one can use regex filters.
+      # 'trusted': Only users listed in TRUSTED_UUIDS.
+      # 'all': All users (only recommended if ADDON_PASSWORD is set).
+      # Default: trusted
+      REGEX_FILTER_ACCESS: trusted
+
+      # ==============================================================================
+      #                           CACHE CONFIGURATION
+      # ==============================================================================
+
+      # --- Default maximum cache size ----
+      # The maximum number of items that can be held in a given cache instance, if not overriden by a specific cache instance
+      DEFAULT_MAX_CACHE_SIZE: 100000
+
+      # --- Proxy IP TTL (StremThru/MediaFlow Proxy)
+      # The Time-To-Live (in seconds) of items in the Public IP cache.
+      # Set to -1 to disable caching
+      PROXY_IP_CACHE_TTL: 900  # Default is 900
+
+      # --- Addon Resource Caching ---
+      # Control the Caching of resources fetched from other addons
+      # Set to -1 to disable caching.
+      MANIFEST_CACHE_TTL: 300  # Default is 300
+      SUBTITLE_CACHE_TTL: 300  # Default is 300
+      STREAM_CACHE_TTL: 1  # Default is 1
+      CATALOG_CACHE_TTL: 300  # Default is 300
+      META_CACHE_TTL: 300  # Default is 300
+      ADDON_CATALOG_CACHE_TTL: 300  # Default is 300
+
+      # --- RPDB API Key Validation Caching ---
+      # Control how long a valid API key check is cached for
+      # Default: 7 days
+      RPDB_API_KEY_VALIDITY_CACHE_TTL: 604800
+
+      # --- Self-Scraping ---
+      # Prevent this AIOStreams instance from being added as an addon to itself.
+      # Default: true
+      DISABLE_SELF_SCRAPING: true
+
+      # --- Log Level ---
+      # Set the verbosity of logs. Options: "error", "warn", "info", "http", "verbose", "debug", "silly"
+      # Default: info
+      LOG_LEVEL: debug
+
+      # --- Log Format ---
+      # Output logs in "json" or "text" format.
+      # Default: text
+      LOG_FORMAT: text
+
+      # --- Log Sensitive Information ---
+      # Whether to include potentially sensitive info (like API keys) in logs.
+      # Useful for debugging, but disable for production if concerned.
+      # Default: true
+      LOG_SENSITIVE_INFO: true
+
+      # --- Log Timezone ---
+      # Adjust the timezone used for logging
+      # e.g. Europe/Paris, America/New_York
+      LOG_TIMEZONE: ${TZ:-America/Chicago}
+
+      # --- Stream Proxy Enabled ---
+      # DEFAULT_PROXY_ENABLED: ${AIOSTREAMS_DEFAULT_PROXY_ENABLED:-true}  # Default state for enabling a stream proxy.
+      FORCE_PROXY_ENABLED: true   # Force stream proxy on/off for all users.
+
+      # --- Stream Proxy ID ---
+      # 'mediaflow' or 'stremthru'
+      DEFAULT_PROXY_ID: stremthru
+      # FORCE_PROXY_ID: stremthru
+
+      # --- Stream Proxy URL ---
+      # URL of your MediaFlow or StremThru instance.
+      DEFAULT_PROXY_URL: https://stremthru.${DOMAIN}
+      # FORCE_PROXY_URL: ${STREMTHRU_INTERNAL_URL:-http://stremthru:8080}
+
+      # --- Stream Proxy Credentials ---
+      # Format: username:password
+      DEFAULT_PROXY_CREDENTIALS: bolabaden:duckdns
+      # FORCE_PROXY_CREDENTIALS: ${STREMTHRU_CREDENTIALS:-bolabaden:duckdns}
+
+      # --- Stream Proxy Public IP ---
+      # Public IP for the proxy, if needed.
+      # DEFAULT_PROXY_PUBLIC_IP: {AIOSTREAMS_DEFAULT_PROXY_PUBLIC_IP:-170.9.225.137}
+      # FORCE_PROXY_PUBLIC_IP: {AIOSTREAMS_DEFAULT_PROXY_PUBLIC_IP:-170.9.225.137}
+
+      # --- Proxied Services ---
+      # Comma-separated list of services whose streams should be proxied (e.g., realdebrid,alldebrid).
+      # DEFAULT_PROXY_PROXIED_SERVICES:
+      # FORCE_PROXY_PROXIED_SERVICES:
+
+      # --- Disable Proxied Addons Feature ---
+      # If true, it disables the 'Proxied Addons' option.
+      # FORCE_PROXY_DISABLE_PROXIED_ADDONS: ${AIOSTREAMS_FORCE_PROXY_DISABLE_PROXIED_ADDONS:-false}
+
+      # --- Encrypt Streaming URLs ---
+      # Encrypt MediaFlow/StremThru URLs for better compatibility with external players.
+      ENCRYPT_MEDIAFLOW_URLS: true
+      ENCRYPT_STREMTHRU_URLS: true
+
+
+      # --- Forced Public proxy URL adjustments ----
+      # If you'd like to force some adjustments to be made to the streaming urls generated by either proxy, you can do that here.
+      # This is useful when you want to use a local url for requests but have AIOStreams force the urls to use a specific host, port, and protocol.
+      FORCE_PUBLIC_PROXY_HOST: stremthru.${DOMAIN}  # Default is stremthru.${DOMAIN}
+      FORCE_PUBLIC_PROXY_PORT: 443
+      FORCE_PUBLIC_PROXY_PROTOCOL: https
+
+
+      # ==============================================================================
+      #                       ADVANCED CONFIGURATION & LIMITS
+      # ==============================================================================
+
+      # --- General Default Timeout ---
+      # Default timeout in milliseconds for all requests if not overridden by a specific timeout.
+      # Default: 15000 (15 seconds)
+      DEFAULT_TIMEOUT: 15000
+
+      # --- Configuration Limits ---
+      # Maximum number of addons allowed per AIOStreams configuration.
+      MAX_ADDONS: 100
+      # Maximum number of groups allowed per AIOStreams configuration
+      MAX_GROUPS: 50
+      # Maximum number of keyword filters per AIOStreams configuration.
+      MAX_KEYWORD_FILTERS: 50
+      # Maximum number of condition filters per AIOStreams configuration
+      MAX_CONDITION_FILTERS: 200
+      # Maximum timeout (ms) an addon can be set to via override.
+      MAX_TIMEOUT: 50000
+      # Minimum timeout (ms) an addon can be set to via override.
+      MIN_TIMEOUT: 1000
+
+
+      # ==============================================================================
+      #                           RATE LIMIT CONFIGURATION
+      # ==============================================================================
+      # Configure rate limits to prevent abuse. Typically, defaults are fine.
+
+      # --- Disable Rate Limits ---
+      # Set to true to disable all rate limits (NOT RECOMMENDED).
+      # Default: false
+      DISABLE_RATE_LIMITS: false
+
+      # Window and Max requests refer to the maximum number of requests a user can make within a specific timeframe
+
+      # --- Static File Serving ---
+      STATIC_RATE_LIMIT_WINDOW: 5
+      STATIC_RATE_LIMIT_MAX_REQUESTS: 75
+
+      # --- User API ---
+      USER_API_RATE_LIMIT_WINDOW: 5
+      USER_API_RATE_LIMIT_MAX_REQUESTS: 5
+
+      # --- Stream API ---
+      STREAM_API_RATE_LIMIT_WINDOW: 5
+      STREAM_API_RATE_LIMIT_MAX_REQUESTS: 10
+
+      # --- Format API ---
+      FORMAT_API_RATE_LIMIT_WINDOW: 5
+      FORMAT_API_RATE_LIMIT_MAX_REQUESTS: 30
+
+      # --- Catalog API ---
+      CATALOG_API_RATE_LIMIT_WINDOW: 5
+      CATALOG_API_RATE_LIMIT_MAX_REQUESTS: 5
+
+      # --- Stremio Stream ---
+      STREMIO_STREAM_RATE_LIMIT_WINDOW: 15
+      STREMIO_STREAM_RATE_LIMIT_MAX_REQUESTS: 10
+
+      # --- Stremio Catalog ---
+      STREMIO_CATALOG_RATE_LIMIT_WINDOW: 5
+      STREMIO_CATALOG_RATE_LIMIT_MAX_REQUESTS: 30
+
+      # --- Stremio Manifest ---
+      STREMIO_MANIFEST_RATE_LIMIT_WINDOW: 5
+      STREMIO_MANIFEST_RATE_LIMIT_MAX_REQUESTS: 5
+
+      # --- Stremio Subtitle ---
+      STREMIO_SUBTITLE_RATE_LIMIT_WINDOW: 5
+      STREMIO_SUBTITLE_RATE_LIMIT_MAX_REQUESTS: 10
+
+      # --- Stremio Meta ---
+      STREMIO_META_RATE_LIMIT_WINDOW: 5
+      STREMIO_META_RATE_LIMIT_MAX_REQUESTS: 15
+
+
+      # ==============================================================================
+      #                         INACTIVE USER PRUNING
+      # ==============================================================================
+      # Automatically prune (delete) inactive user configurations.
+
+      # --- Prune Interval ---
+      # How often to check for inactive users, in seconds.
+      # Default: 86400 (1 day)
+      PRUNE_INTERVAL: 8640000
+
+      # --- Prune Max Inactivity Days ---
+      # Maximum days of inactivity before a user's configuration is pruned.
+      # Set to -1 to disable
+      PRUNE_MAX_DAYS: -1
+
+      # ==============================================================================
+      #                      EXTERNAL ADDON SERVICE URLs & TIMEOUTS
+      # ==============================================================================
+      # URLs and default timeouts for various external Stremio addons that AIOStreams can integrate with.
+      # Change these if you use self-hosted versions or if defaults become outdated.
+
+      # ----------- COMET ------------
+      COMET_URL: http://comet:2020
+      MEDIAFUSION_URL: http://${MEDIAFUSION_HOSTNAME}:${MEDIAFUSION_PORT}
+      MEDIAFUSION_CONFIG_TIMEOUT: ${MEDIAFUSION_CONFIG_TIMEOUT:-5000}
+      MEDIAFUSION_API_PASSWORD: ${SUDO_PASSWORD}
+      DEFAULT_JACKETTIO_INDEXERS: '["animetosho", "anirena", "bitsearch", "eztv", "nyaasi", "thepiratebay", "therarbg", "yts"]'
+      DEFAULT_JACKETTIO_STREMTHRU_URL: https://stremthru.${DOMAIN}
+      STREMTHRU_STORE_URL: https://stremthru.elfhosted.com/stremio/store/  # https://stremthru.13377001.xyz/stremio/store/
+      STREMTHRU_TORZ_URL: https://stremthru.elfhosted.com/stremio/torz/  # https://stremthru.13377001.xyz/stremio/torz/
+    labels:
+      traefik.enable: true
+      traefik.docker.network: publicnet
+      traefik.http.routers.aiostreams.rule: 'Host(`aiostreams.${DOMAIN}`) || Host(`aiostreams.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.aiostreams.loadbalancer.server.port: ${AIOSTREAMS_PORT:-3005}
+      homepage.group: Stremio Addons
+      homepage.name: AIOStreams
+      homepage.icon: aiostreams.png
+      homepage.href: https://aiostreams.${DOMAIN}/
+      homepage.description: Stremio add-on that aggregates multiple sources into a single unified stream catalog
+    cpu_shares: 10
+    mem_reservation: 50M
+    deploy:
+      resources:
+        reservations:
+          cpus: 0
+          memory: 50M
+        limits:
+          cpus: 1
+          memory: 1024M
+    restart: always
+  comet:
+    image: docker.io/g0ldyy/comet:latest
+    container_name: comet
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      publicnet: {}
+      warp-network:
+        gw_priority: 1
+    volumes:
+      - ${CONFIG_PATH:-./configs}/stremio/addons/comet/data:/data
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      UMASK: ${UMASK:-002}
+      # ============================== #
+      # Stremio Addon Configuration    #
+      # ============================== #
+      ADDON_ID: stremio.comet.fast
+      ADDON_NAME: Comet
+
+      # ============================== #
+      # FastAPI Server Configuration   #
+      # ============================== #
+      FASTAPI_HOST: 0.0.0.0
+      FASTAPI_PORT: ${COMET_PORT:-2020}
+      FASTAPI_WORKERS: -1 # set to -1 for auto-scaling (min((os.cpu_count() or 1) * 2 + 1, 12))
+      USE_GUNICORN: true # Will use uvicorn if False or if on Windows
+      CORS_ALLOW_ORIGINS: "*"
+      CORS_ALLOW_CREDENTIALS: "true"
+      CORS_ALLOW_METHODS: "GET,POST,PUT,DELETE,OPTIONS"
+      CORS_ALLOW_HEADERS: "*"
+
+      # ============================== #
+      # Dashboard Settings             #
+      # ============================== #
+      DASHBOARD_ADMIN_PASSWORD: ${SUDO_PASSWORD:?} # The password to access the dashboard
+
+      # ============================== #
+      # Database Configuration         #
+      # ============================== #
+      DATABASE_TYPE: sqlite # Options: sqlite, postgresql
+      DATABASE_PATH: data/comet.db # Only relevant for SQLite
+
+      # ============================== #
+      # Cache Settings (Seconds)       #
+      # ============================== #
+      METADATA_CACHE_TTL: 2592000  # 30 days
+      TORRENT_CACHE_TTL: 1296000  # 15 days
+      DEBRID_CACHE_TTL: 86400  # 1 day
+      SCRAPE_LOCK_TTL: 300  # 5 minutes - Duration for distributed scraping locks
+      SCRAPE_WAIT_TIMEOUT: 30  # 30 seconds - Max time to wait for other instance to complete scraping
+
+      # ============================== #
+      # Debrid Proxy Configuration     #
+      # ============================== #
+      #DEBRID_PROXY_URL: http://warp:1080 # Bypass Debrid Services and Torrentio IP blacklist
+
+      # ============================== #
+      # Indexer Manager Settings       #
+      # ============================== #
+      INDEXER_MANAGER_TYPE: prowlarr # Options: jackett, prowlarr, none
+      INDEXER_MANAGER_URL: https://prowlarr.${DOMAIN}
+      INDEXER_MANAGER_API_KEY: ${PROWLARR_API_KEY:?}
+      INDEXER_MANAGER_TIMEOUT: 60  # Max time to get search results (seconds)
+      INDEXER_MANAGER_INDEXERS: ${COMET_INDEXERS:-["animetosho", "anirena", "bitsearch", "eztv", "nyaasi", "thepiratebay", "therarbg", "yts"]} # Jackett/Prowlarr indexers
+
+      # ============================== #
+      # Torrent Settings               #
+      # ============================== #
+      GET_TORRENT_TIMEOUT: 5 # Max time to obtain torrent info hash (seconds)
+      DOWNLOAD_TORRENT_FILES: true # Enable torrent file retrieval (instead of magnet link only)
+
+      # ============================== #
+      # Scraping Configuration         #
+      # ============================== #
+      SCRAPE_COMET: true
+      COMET_URL: https://comet.elfhosted.com
+
+      SCRAPE_ZILEAN: true
+      ZILEAN_URL: https://zilean.elfhosted.com
+
+      SCRAPE_TORRENTIO: true
+      TORRENTIO_URL: https://torrentio.strem.fun
+
+      SCRAPE_MEDIAFUSION: true
+      MEDIAFUSION_URL: https://mediafusion.elfhosted.com
+      #MEDIAFUSION_API_PASSWORD: ""  # API password for MediaFusion instances that require authentication
+      MEDIAFUSION_LIVE_SEARCH: true
+
+      # ============================== #
+      # Debrid Stream Proxy Settings   #
+      # ============================== #
+      PROXY_DEBRID_STREAM: true
+      PROXY_DEBRID_STREAM_PASSWORD: ${STREMTHRU_PROXY_AUTH}
+      PROXY_DEBRID_STREAM_MAX_CONNECTIONS: -1 # -1 to disable connection limits
+      PROXY_DEBRID_STREAM_DEBRID_DEFAULT_SERVICE: realdebrid
+      PROXY_DEBRID_STREAM_DEBRID_DEFAULT_APIKEY: ${REALDEBRID_TOKEN:?}
+
+      # ============================== #
+      # Content Filtering              #
+      # ============================== #
+      REMOVE_ADULT_CONTENT: false
+
+      # ============================== #
+      # UI Customization               #
+      # ============================== #
+      #CUSTOM_HEADER_HTML: None
+
+      # ============================== #
+      # StremThru Integration          #
+      # ============================== #
+      STREMTHRU_URL: https://stremthru.${DOMAIN} # needed to use debrid services
+    labels:
+      traefik.enable: true
+      traefik.http.routers.comet-redirect.service: comet@docker
+      traefik.http.routers.comet-redirect.rule: 'Host(`comet.${DOMAIN}`)'
+      traefik.http.routers.comet-redirect.middlewares: comet-redirect@docker
+      traefik.http.middlewares.comet-redirect.redirectRegex.regex: '^(.*)comet\.(.*)/(.*)$$'
+      traefik.http.middlewares.comet-redirect.redirectRegex.replacement: 'https://comet.${TS_HOSTNAME}.${DOMAIN}/$$3'
+      traefik.http.middlewares.comet-redirect.redirectRegex.permanent: false
+      traefik.http.routers.comet.rule: 'Host(`comet.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.comet.loadbalancer.server.port: ${COMET_PORT:-2020}
+      homepage.group: Stremio Addons
+      homepage.name: Comet
+      homepage.icon: comet.png
+      homepage.href: https://comet.${DOMAIN}/
+      homepage.description: Stremio add-on to discover and index media sources from multiple providers
+    healthcheck:  # docker exec comet ls -la /bin /usr/bin | grep -E 'curl|wget|nc|telnet|http|python|ncat|nmap'
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:${COMET_PORT:-2020}/health > /dev/null 2>&1 || exit 1"]
+      interval: 1m
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: always
+  mediafusion:
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      playwright-service:
+        condition: service_started
+    image: docker.io/mhdzumair/mediafusion:latest
+    container_name: mediafusion
+    hostname: mediafusion
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      backend: {}
+      publicnet: {}
+      warp-network:
+        gw_priority: 1
+    expose:
+      - 8000
+      - 9191
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      PUID: ${PUID:-1001}
+      PGID: ${PGID:-988}
+      UMASK: ${UMASK:-002}
+      # CORE APPLICATION SETTINGS
+      ADDON_NAME: MediaFusion | ${DOMAIN}  # The name of the MediaFusion addon
+      VERSION: 1.0.0  # The version of the MediaFusion addon
+      DESCRIPTION: "MediaFusion | ${DOMAIN}"  # A brief description of the MediaFusion addon to show on Stremio Addon page
+      BRANDING_DESCRIPTION: "MediaFusion is a AIO media stream aggregator addon for Stremio/Kodi."  # Additional branding description text
+      CONTACT_EMAIL: "webmaster@${DOMAIN}"  # The contact email for the MediaFusion addon
+      HOST_URL: "https://mediafusion.${DOMAIN}"  # The URL where MediaFusion is hosted (required)
+      POSTER_HOST_URL: "https://mediafusion.${DOMAIN}"  # The URL where poster images are served from (default: Same as host_url)
+      SECRET_KEY: c75ac92df70c4383c8d1bb37f65454f9  # A 32-character secret key for securely signing the session (required)
+      API_PASSWORD: ${SUDO_PASSWORD:?}  # The password for accessing the API endpoints (required)
+      LOGGING_LEVEL: DEBUG  # The logging level of the application (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+      LOGO_URL: "https://mediafusion.${DOMAIN}/static/logo.png"  # The URL of the MediaFusion logo
+      IS_PUBLIC_INSTANCE: false  # Set to True for community instances that don't require authentication except for /scraper endpoint
+      MIN_SCRAPING_VIDEO_SIZE: 26214400  # Minimum video size in bytes (25 MB) for scraping
+      METADATA_PRIMARY_SOURCE: tmdb  # Primary source for metadata. Options: "imdb" or "tmdb"
+      # STREAMING PROVIDER SETTINGS
+      #DISABLED_PROVIDERS: ""  # List of disabled streaming providers (p2p, realdebrid, seedr, debridlink, alldebrid, offcloud, pikpak, torbox, premiumize, qbittorrent, stremthru, easydebrid)
+      # DATABASE AND CACHE SETTINGS
+      MONGO_URI: ${MONGO_URI:-mongodb://mongodb:27017/mediafusion}  # MongoDB connection URI (required)
+      DB_MAX_CONNECTIONS: 50  # Maximum database connections. Default is 50
+      REDIS_URL: ${REDIS_INTERNAL_URL:-redis://redis:6379}  # Redis service URL for caching and tasks
+      REDIS_MAX_CONNECTIONS: 100  # Maximum Redis connections. Default is 100
+      # EXTERNAL SERVICE SETTINGS
+#      REQUESTS_PROXY_URL: "${MEDIAFUSION_REQUESTS_PROXY_URL:-}"  # Optional proxy URL for requests
+      PLAYWRIGHT_CDP_URL: "${PLAYWRIGHT_CDP_URL:-ws://playwright-service:3000?blockAds=true&stealth=true}"  # Playwright CDP service URL
+      FLARESOLVERR_URL: "${FLARESOLVERR_URL:-https://flaresolverr.${DOMAIN}/v1}"  # FlareSolverr service URL
+      TMDB_API_KEY: "${TMDB_API_KEY:-}"  # TMDB API key for metadata fetching
+      # PROWLARR SETTINGS
+      IS_SCRAP_FROM_PROWLARR: true  # Enable/disable Prowlarr scraping
+      PROWLARR_API_KEY: "${PROWLARR_API_KEY:?}"  # Prowlarr API key
+      PROWLARR_URL: https://prowlarr.${DOMAIN}  # Prowlarr service URL
+      PROWLARR_LIVE_TITLE_SEARCH: false  # Enable live title search in Prowlarr
+      PROWLARR_BACKGROUND_TITLE_SEARCH: true  # Enable background title search
+      PROWLARR_SEARCH_QUERY_TIMEOUT: 30  # Search query timeout in seconds
+      PROWLARR_IMMEDIATE_MAX_PROCESS: 10  # Max immediate processes. Default is 10
+      PROWLARR_IMMEDIATE_MAX_PROCESS_TIME: 15  # Max process time in seconds. Default is 15
+      PROWLARR_SEARCH_INTERVAL_HOUR: 72  # Search interval in hours
+      PROWLARR_FEED_SCRAPE_INTERVAL_HOUR: 3  # Feed scraping interval in hours
+      # JACKETT SETTINGS
+      IS_SCRAP_FROM_JACKETT: true  # Enable/disable Jackett scraping
+      JACKETT_URL: https://jackett.${DOMAIN}  # Jackett service URL
+      JACKETT_API_KEY: "${JACKETT_API_KEY:?}"  # Jackett API key
+      JACKETT_SEARCH_INTERVAL_HOUR: 72  # Search interval in hours
+      JACKETT_SEARCH_QUERY_TIMEOUT: 30  # Search query timeout in seconds
+      JACKETT_IMMEDIATE_MAX_PROCESS: 10  # Max immediate processes. Default is 10
+      JACKETT_IMMEDIATE_MAX_PROCESS_TIME: 15  # Max process time in seconds. Default is 15
+      JACKETT_LIVE_TITLE_SEARCH: false  # Enable live title search
+      JACKETT_BACKGROUND_TITLE_SEARCH: true  # Enable background title search
+      JACKETT_FEED_SCRAPE_INTERVAL_HOUR: "3"  # Feed scraping interval in hours
+      # ZILEAN SETTINGS
+      IS_SCRAP_FROM_ZILEAN: true  # Enable/disable Zilean scraping
+      ZILEAN_SEARCH_INTERVAL_HOUR: 24  # Search interval in hours
+      ZILEAN_URL: "${ZILEAN_URL:-https://zilean.elfhosted.com}"  # Zilean service URL (https://zilean.elfhosted.com has zero rate limits)
+      # TORRENTIO SETTINGS
+      IS_SCRAP_FROM_TORRENTIO: true  # Enable/disable Torrentio scraping
+      TORRENTIO_SEARCH_INTERVAL_DAYS: 3  # Search interval in days
+      TORRENTIO_URL: "${TORRENTIO_URL:-https://torrentio.strem.fun}"  # Torrentio service URL
+      # MEDIAFUSION SETTINGS
+      IS_SCRAP_FROM_MEDIAFUSION: true  # Enable/disable MediaFusion scraping
+      MEDIAFUSION_SEARCH_INTERVAL_DAYS: 3  # Search interval in days
+      MEDIAFUSION_URL: https://mediafusion.elfhosted.com  # MediaFusion service URL
+      SYNC_DEBRID_CACHE_STREAMS: true  # Enable syncing debrid cache streams
+      # BT4G SETTINGS
+      IS_SCRAP_FROM_BT4G: true  # Enable/disable BT4G scraping
+      BT4G_URL: https://bt4gprx.com  # BT4G service URL
+      BT4G_SEARCH_INTERVAL_HOUR: 72  # Search interval in hours
+      BT4G_SEARCH_TIMEOUT: 5  # Search timeout in seconds
+      BT4G_IMMEDIATE_MAX_PROCESS: 15  # Max immediate processes
+      BT4G_IMMEDIATE_MAX_PROCESS_TIME: 15  # Max process time in seconds
+      # PREMIUMIZE SETTINGS
+      PREMIUMIZE_OAUTH_CLIENT_ID: "${PREMIUMIZE_OAUTH_CLIENT_ID}"  # Premiumize OAuth client ID
+      PREMIUMIZE_OAUTH_CLIENT_SECRET: "${PREMIUMIZE_OAUTH_CLIENT_SECRET}"  # Premiumize OAuth client secret
+      # TELEGRAM SETTINGS
+      TELEGRAM_BOT_TOKEN: "${TELEGRAM_BOT_TOKEN}"  # Telegram bot token for notifications about contribution streams
+      TELEGRAM_CHAT_ID: "${TELEGRAM_CHAT_ID}"  # Telegram chat ID for notifications
+      # CONTENT FILTERING SETTINGS
+      ADULT_CONTENT_REGEX_KEYWORDS: "\\b(porn|xxx|sex|nude|naked|erotic|fetish|bdsm|milf|anal|oral|gangbang|threesome|masturbat|orgasm|cumshot|blowjob|handjob|footjob|creampie|facial|bukkake|hentai|yaoi|yuri|ecchi|doujin|camgirl|webcam|stripper|escort|prostitut|brothel|redlight|peepshow|voyeur|exhibitionist|swinger|orgy|hardcore|softcore|playboy|penthouse|hustler|brazzers|bangbros|realitykings|naughtyamerica|digitalplayground|wickedpictures|evilangel|kink|publicagent|fakehub|teamskeet|mofos|twistys|metart|sexart|x-art|joymii|nubiles|18eighteen|lolita|incest|taboo|kinky|slutty|horny|sexy|sensual|seductive|raw|perverted|depraved)\\b"  # Regex pattern for filtering adult content
+      ADULT_CONTENT_FILTER_IN_TORRENT_TITLE: true  # Enable adult content filtering in torrent titles
+      # FEATURE TOGGLES
+      VALIDATE_M3U8_URLS_LIVENESS: false  # Validate M3U8 URLs for liveness
+      ENABLE_RATE_LIMIT: true  # Enable/disable rate limiting
+      STORE_STREMTHRU_MAGNET_CACHE: true  # Store StremThru magnet cache
+      IS_SCRAP_FROM_YTS: true  # Enable/disable YTS scraping
+      SCRAPE_WITH_AKA_TITLES: true  # Include alternative titles in scraping
+      ENABLE_FETCHING_TORRENT_METADATA_FROM_P2P: false  # Enable fetching torrent metadata from P2P (Caution: may raise DMCA issues)
+      # TIME-RELATED SETTINGS
+      META_CACHE_TTL: 1800  # Metadata cache TTL in seconds (Default: 1800 seconds = 30 minutes)
+      WORKER_MAX_TASKS_PER_CHILD: 20  # Max tasks per worker child process. Default is 20
+      # SCHEDULER SETTINGS
+      DISABLE_ALL_SCHEDULER: false  # Disable all schedulers
+      BACKGROUND_SEARCH_INTERVAL_HOURS: 72  # Background search interval in hours
+      BACKGROUND_SEARCH_CRONTAB: "*/5 * * * *"  # Background search schedule
+      TAMILMV_SCHEDULER_CRONTAB: "0 */3 * * *"  # TamilMV scheduler crontab expression
+      TAMIL_BLASTERS_SCHEDULER_CRONTAB: "0 */6 * * *"  # Tamil Blasters scheduler crontab expression
+      FORMULA_TGX_SCHEDULER_CRONTAB: "*/30 * * * *"  # Formula TGX scheduler crontab expression
+      NOWMETV_SCHEDULER_CRONTAB: "0 0 * * *"  # NowMeTV scheduler crontab expression
+      NOWSPORTS_SCHEDULER_CRONTAB: "0 10 * * *"  # NowSports scheduler crontab expression
+      TAMILULTRA_SCHEDULER_CRONTAB: "0 8 * * *"  # TamilUltra scheduler crontab expression
+      VALIDATE_TV_STREAMS_IN_DB_CRONTAB: "0 */6 * * *"  # Validate TV streams in DB crontab expression
+      SPORT_VIDEO_SCHEDULER_CRONTAB: "*/20 * * * *"  # Sport video scheduler crontab expression
+      DLHD_SCHEDULER_CRONTAB: "25 * * * *"  # DLHD scheduler crontab expression
+      MOTOGP_TGX_SCHEDULER_CRONTAB: "0 5 * * *"  # MotoGP TGX scheduler crontab expression
+      UPDATE_SEEDERS_CRONTAB: "0 0 * * *"  # Update seeders crontab expression
+      ARAB_TORRENTS_SCHEDULER_CRONTAB: "0 0 * * *"  # Arab Torrents scheduler crontab expression
+      WWE_TGX_SCHEDULER_CRONTAB: "10 */3 * * *"  # WWE TGX scheduler crontab expression
+      UFC_TGX_SCHEDULER_CRONTAB: "30 */3 * * *"  # UFC TGX scheduler crontab expression
+      MOVIES_TV_TGX_SCHEDULER_CRONTAB: "0 * * * *"  # Movies TV TGX scheduler crontab expression
+      PROWLARR_FEED_SCRAPER_CRONTAB: "0 */3 * * *"  # Prowlarr feed scraper crontab expression
+      JACKETT_FEED_SCRAPER_CRONTAB: "0 */3 * * *"  # Jackett feed scraper crontab expression
+      CLEANUP_EXPIRED_SCRAPER_TASK_CRONTAB: "0 * * * *"  # Cleanup expired scraper task crontab expression
+      CLEANUP_EXPIRED_CACHE_TASK_CRONTAB: "0 0 * * *"  # Cleanup expired cache task crontab expression
+    labels:
+      traefik.enable: true
+      traefik.http.routers.mediafusion.rule: 'Host(`mediafusion.${DOMAIN}`) || Host(`mediafusion.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.mediafusion.loadbalancer.server.port: 8000
+      homepage.group: Stremio Addons
+      homepage.name: MediaFusion
+      homepage.icon: mediafusion.png
+      homepage.href: https://mediafusion.${DOMAIN}/
+      homepage.description: All-in-one Stremio/Kodi stream aggregator combining multiple catalogs and sources
+    mem_limit: 1G
+    mem_reservation: 512M
+    cpus: 0.33
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.01
+          memory: 512M
+        limits:
+          cpus: 0.33
+          memory: 1G
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8000/health > /dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      start_period: 2m
+    restart: always
+  mediaflow-proxy:
+    image: docker.io/mhdzumair/mediaflow-proxy
+    container_name: mediaflow-proxy
+    hostname: mediaflow-proxy
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      publicnet: {}
+      warp-network:
+        gw_priority: 1
+    expose:
+      - ${MEDIAFLOW_PROXY_PORT:-8888}
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      PUID: ${PUID:-1001}
+      PGID: ${PGID:-988}
+      UMASK: ${UMASK:-002}
+      PORT: ${MEDIAFLOW_PROXY_PORT:-8888}
+      API_PASSWORD: ${MEDIAFLOW_PROXY_API_PASSWORD:?}
+      ENABLE_STREAMING_PROGRESS: false
+    labels:
+      traefik.enable: true
+      traefik.docker.network: publicnet
+      traefik.http.routers.mediaflow-proxy.rule: Host(`mediaflow-proxy.${DOMAIN}`) || Host(`mediaflow-proxy.${TS_HOSTNAME}.${DOMAIN}`)
+      traefik.http.services.mediaflow-proxy.loadbalancer.server.port: ${MEDIAFLOW_PROXY_PORT:-8888}
+      homepage.name: MediaFlow Proxy
+      homepage.icon: mediaflow-proxy.png
+      homepage.description: M3U/HLS/HSTS proxy for Stremio/Kodi to normalize and proxy streaming playlists
+      homepage.group: Stremio Addons
+      homepage.href: https://mediaflow-proxy.${DOMAIN}/
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import socket; s=socket.socket(); s.connect(('127.0.0.1', ${MEDIAFLOW_PROXY_PORT:-8888})); print('Healthcheck passed')\""]
+      interval: 1m
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    restart: always
+
+  stremthru:
+    depends_on:
+      redis:
+        condition: service_healthy
+    image: docker.io/muniftanjim/stremthru:latest
+    container_name: stremthru
+    hostname: stremthru
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      publicnet: {}
+      warp-network:
+        gw_priority: 1
+    expose:
+      - 8080
+#    volumes:
+#      - ${CONFIG_PATH:-./configs}/stremio/addons/stremthru/app/data:/app/data
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      PUID: ${PUID:-1001}
+      PGID: ${PGID:-988}
+      UMASK: ${UMASK:-002}
+      # This is the configuration file for StremThru
+      # Review the official documentation at https://github.com/MunifTanjim/stremthru#configuration 
+      # for a full list of available environment variables.
+
+      # The base URL of the StremThru instance.
+      # Required for the StremThru Lists addon to work correctly with Trakt OAuth.
+      STREMTHRU_BASE_URL: https://stremthru.${DOMAIN}
+
+
+      # =============================
+      #     LOGGING CONFIGURATION
+      # ================================
+
+      # The level of information to log. The options are: DEBUG, INFO, WARN, ERROR
+      STREMTHRU_LOG_LEVEL: DEBUG  # DEBUG, INFO, WARN, ERROR
+
+      STREMTHRU_LOG_FORMAT: text  # The format of the log output. The options are: json, text
+
+      # ============================
+      #       PROXY CONFIGURATION
+      # ================================
+
+      # A list of user credentials for the proxy. In a comma separated list of username:password pairs. 
+      STREMTHRU_PROXY_AUTH: "brunner56:${SUDO_PASSWORD},dgorsch2:Rosvamp24,bolabaden:duckdns,bolabaden.duckdns@gmail.com:Hilogirl80"
+
+      # A list of admin users. Should be a comma separated list of usernames that must be defined above in the STREMTHRU_PROXY_AUTH variable.
+      # If you do not set this, all users will be admins.
+      STREMTHRU_AUTH_ADMIN: brunner56,dgorsch2
+
+      # A list of store credentials per user. In a comma separated list of username:store_name:store_token.
+      # You can also use * as the username to apply to all users.
+      # This lets you use different API keys for different users.
+      # e.g. something like *:realdebrid:abc...xyz would mean for all users, this API key would be used for Real Debrid.
+      # (Not needed if using StremThru as a external proxy within other apps/addons like AIOStreams)
+      STREMTHRU_STORE_AUTH: "*:realdebrid:${REALDEBRID_TOKEN},*:premiumize:${PREMIUMIZE_API_KEY},*:alldebrid:${ALLDEBRID_API_KEY},*:debridlink:${DEBRIDLINK_API_KEY},*:torbox:${TORBOX_API_KEY}"
+
+      # A list of proxy configurations per store. This lets you control what is proxied based on what store its from.
+      # The format is a comma separated list of <store>:<true/false>
+      # You can use * to apply to all stores.
+      # e.g. *:true,premiumize:false would mean all stores are proxied, except for premiumize.
+      # (Does not affect proxying of stream links generated by other apps/addons like AIOStreams)
+      #STREMTHRU_STORE_CONTENT_PROXY="*:true,easydebrid:false,premiumize:false"
+      #STREMTHRU_STORE_CONTENT_PROXY="*:true,premiumize:false"
+      STREMTHRU_STORE_CONTENT_PROXY: "*:true,premiumize:false"
+
+      # This is the maximum number of connections to the proxy per user.
+      # In the format of a comma separated list of <username>:<number of connections> pairs.
+      # e.g. user1:10,user2:5 would mean user1 can have 10 connections, and user2 can have 5 connections.
+      # If you want to set a limit for all users, use * as the username.
+      # A connection limit of 0 means no limit.
+      # (This DOES affect the proxying of stream links generated by other apps/addons like AIOStreams)
+      STREMTHRU_CONTENT_PROXY_CONNECTION_LIMIT: "*:10"
+
+
+      # ============================
+      #       TUNNEL CONFIGURATION
+      # ================================
+      # This is the configuration for the tunnel.
+      # The tunnel is separate to the actual proxying of your addons. It lets you configure a
+      # HTTP proxy to use for requests. Configuring a hostname to not be tunneled doesn't affect the proxying of the addon itself, 
+      # only that it won't also be tunneled through the HTTP proxy.
+      # 
+      # If you do not need a tunnel, you can comment out the STREMTHRU_HTTP_PROXY variable.
+      # 
+      # This is the URL of the tunnel.
+      # warp: http://warp:1080 or gluetun: http://gluetun:8080
+      # (Must have the warp or gluetun profile running to use it as a tunnel)
+      #STREMTHRU_HTTP_PROXY="http://warp:1080"
+
+      # This allows you to configure what to use the tunnel for. 
+      # The format is <domain>:<true/false>,<domain>:<true/false>,<domain>:<true/false>. 
+      # * represents all domains.
+      # The following configuration only routes requests to torrentio.strem.fun through the tunnel.
+      # This is necessary when Torrentio blocks your VPS and we want to access the original RD link. 
+      # It wouldn't use the tunnel for the actual playback link, only to get access to the streaming link through Torrentio.
+      #STREMTHRU_TUNNEL="*:false,torrentio.strem.fun:true"       
+      # This setting is the same as above, but has a higher priority, and used specifically to configure specific stores. 
+      # The format is <store>:<true/api>. 
+      # Using api as the value means only the api access will be routed through the tunnel, not the playback links. 
+      # Using true would route everything for that store through the tunnel.
+      #STREMTHRU_STORE_TUNNEL="realdebrid:api"                
+
+      # In most cases, the defaults above are fine. If you want to route everything through the tunnel (e.g. route everything through a VPN), 
+      # then make sure to set the STREMTHRU_TUNNEL variable to *:true.
+
+
+      # ============================================================
+      #                   INTEGRATION CONFIGURATION
+      # ============================================================
+
+      # -------------- Trakt.tv Integration --------------
+      # This lets you use Trakt lists in the StremThru Lists addon.
+      # You need to create a Trakt application at https://trakt.tv/oauth/applications
+      # and set the client ID and secret here.
+      # The redirect URI should be set to https://${STREMTHRU_HOSTNAME}/auth/trakt.tv/callback
+      # replacing ${STREMTHRU_HOSTNAME} with your StremThru hostname e.g. https://stremthru.example.com/auth/trakt.tv/callback
+      STREMTHRU_INTEGRATION_TRAKT_CLIENT_ID: "052d735c61c723ed670991aee9d6322822ed6766702d66910be63a1e1a511fd0"
+      STREMTHRU_INTEGRATION_TRAKT_CLIENT_SECRET: "1d5701574cae67023c25a3743f07669bb84ee74628fd8f0a3fc0c9cca51535c3"
+      # This allows you to configure the time after which the Trakt lists are considered stale and would be refreshed on the next request.
+      # Set to a human readable duration like "1h", "30m", "2d" etc.
+      # The default is 12h
+      STREMTHRU_INTEGRATION_TRAKT_LIST_STALE_TIME: "12h"
+
+      # ------------- TMDB Integration --------------
+      # For StremThru to integrate with TMDB, provide a Read Access Token here from https://www.themoviedb.org/settings/api
+      # This is used for the StremThru Lists addon to fetch metadata from TMDB.
+      STREMTHRU_INTEGRATION_TMDB_ACCESS_TOKEN: "cec876f852b9c15d2c1b436b1117dff7"
+      # Configure the time after which TMDB Lists are considered stale and would be refreshed on the next request.
+      # Set to a human readable duration like "1h", "30m", "2d" etc.
+      # The default is 12h
+      STREMTHRU_INTEGRATION_TMDB_LIST_STALE_TIME: "12h"
+
+      # -------------- AniList Integration --------------
+      # This allows you to configure the time after which the AniList lists are considered stale and would be refreshed on the next request.
+      # Set to a human readable duration like "1h", "30m", "2d" etc.
+      # The default is 12h
+      #STREMTHRU_INTEGRATION_ANILIST_LIST_STALE_TIME=""
+
+      # -------------- MDBList Integration --------------
+      # This allows you to configure the time after which the MDBList lists are considered stale and would be refreshed on the next request.
+      # Set to a human readable duration like "1h", "30m", "2d" etc.
+      # The default is 12h
+      #STREMTHRU_INTEGRATION_MDBLIST_LIST_STALE_TIME=""
+
+      # -------------- GitHub Integration --------------
+      # To avoid rate limits when downloading DMM hashlists and other data from GitHub, provide your GitHub token and username here. 
+      STREMTHRU_INTEGRATION_GITHUB_USER: "th3w1zard1"
+      STREMTHRU_INTEGRATION_GITHUB_TOKEN: "${GITHUB_TOKEN}"
+
+
+      # ================================
+      #             OTHER
+      # ================================
+      # Enable Lazy Pull for the StremThru Torz addon.
+      # Allows the torz addon to pull torrents from upstream databases in the background upon initial requests. 
+      # On the first request, it returns only local torrents, and pulls the rest in the background,  
+      # so that on the second search it has all the results available. 
+      # Makes response times faster, but less results on the first request.
+      STREMTHRU_STREMIO_TORZ_LAZY_PULL: false
+
+
+      # Note: all features are enabled by default, except anime and stremio_p2p. So you should only need to make use of dash (-) prefixed features to disable features
+      # you do not want to use.
+      # =============================
+      #      FEATURE CONFIGURATION
+      # ================================
+
+      # Enables or disables features in StremThru.
+      # The value is a comma-separated list of feature names prefixed with either a plus (+) to enable or a minus (-) to disable.
+      # To disable a feature, prefix its name with a hyphen (-), and to enable it, prefix with a plus (+).
+      # This lets you enable or disable features in StremThru.
+      # The format is a comma separated list of features, optionally prefixed with a - to disable them.
+      #
+      # List of features:
+      #   anime             - Enables AniList support in the StremThru Lists addon.
+      #   dmm_hashlist      - Scrapes DMM hashlists for torrents.
+      #   imdb_title        - Maps movie titles to IMDB IDs for better metadata.
+      #   stremio_list      - Toggles the StremThru Lists addon.
+      #   stremio_p2p       - Toggles P2P support in the StremThru Torz addon.
+      #   stremio_sidekick  - Toggles the StremThru Sidekick utility.
+      #   stremio_store     - Toggles the StremThru Store addon.
+      #   stremio_torz      - Toggles the StremThru Torz addon.
+      #   stremio_wrap      - Toggles the StremThru Wrap addon. 
+      #
+      # Example: "+stremio_sidekick,-dmm_hashlist" enables the Sidekick utility but disables DMM hashlist scraping.
+      # e.g. -dmm_hashlist,-imdb_title would disable the DMM hashlists and IMDB title features.
+      # ================================
+      STREMTHRU_FEATURE: "+anime,-stremio_store,-stremio_torz"
+
+      # =============================
+      #    DATABASE CONFIGURATION
+      # ================================
+      STREMTHRU_DATABASE_URI: "sqlite://./data/stremthru.db"
+      STREMTHRU_REDIS_URI: "${REDIS_INTERNAL_URL:-redis://redis:6379}"  # Optional (caching)
+    labels:
+      traefik.enable: true
+      traefik.docker.network: publicnet
+      traefik.http.routers.stremthru.rule: 'Host(`stremthru.${DOMAIN}`) || Host(`stremthru.${TS_HOSTNAME}.${DOMAIN}`)'
+      traefik.http.services.stremthru.loadbalancer.server.port: 8080
+      homepage.group: Stremio Addons
+      homepage.name: StremThru
+      homepage.icon: stremthru.png
+      homepage.href: https://stremthru.${DOMAIN}/
+      homepage.description: Tunnel/proxy bridge for Debrid services to unify access of streaming links through a single host.
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080 > /dev/null 2>&1 || exit 1"]
+      interval: 1m
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: always

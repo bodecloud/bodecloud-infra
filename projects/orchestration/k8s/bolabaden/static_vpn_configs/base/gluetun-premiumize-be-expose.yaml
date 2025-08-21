@@ -1,0 +1,39 @@
+#! gluetun-premiumize-be-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: gluetun-premiumize-be
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: gluetun-premiumize-be
+spec:
+    selector:
+        com.docker.compose.project: boden
+        com.docker.compose.service: gluetun-premiumize-be
+    ports:
+        - name: gluetun-pr-8001
+          port: 8001
+          targetPort: gluetun-pr-8001
+        - name: gluetun-pr-9999
+          port: 9999
+          targetPort: gluetun-pr-9999
+        - name: gluetun-pr-1060
+          port: 1060
+          targetPort: gluetun-pr-1060
+        - name: gluetun-pr-8892
+          port: 8892
+          targetPort: gluetun-pr-8892
+        - name: gluetun-p-41646
+          port: 41646
+          targetPort: gluetun-p-41646
+        - name: gluetun-pr-8000
+          port: 8000
+          targetPort: gluetun-pr-8000
+        - name: gluetun-pr-8388
+          port: 8388
+          targetPort: gluetun-pr-8388
+        - name: gluetun-pr-8888
+          port: 8888
+          targetPort: gluetun-pr-8888

@@ -1,0 +1,122 @@
+# Task ID: 21
+# Title: Redesign Landing Page with Dark Theme and Technical Focus
+# Status: pending
+# Dependencies: 1, 2, 4, 6, 12, 19, 20
+# Priority: medium
+# Description: Completely redesign the bolabaden.org landing page with a professional, dark-themed design that emphasizes technical depth and authenticity, removing all business/agency language and implementing specified sections.
+# Details:
+1. Design Implementation:
+   - Create a professional, non-corporate dark-themed design system
+   - Define color palette with dark backgrounds and high-contrast text
+   - Update Tailwind configuration with new color variables:
+     ```js
+     // tailwind.config.js
+     module.exports = {
+       theme: {
+         extend: {
+           colors: {
+             'bg-primary': '#121212',
+             'bg-secondary': '#1e1e1e',
+             'accent': '#6366f1',
+             'text-primary': '#f8fafc',
+             'text-secondary': '#cbd5e1',
+           }
+         }
+       }
+     }
+     ```
+
+2. Hero Section:
+   - Implement minimalist hero with name/handle and tagline
+   - Add 1-2 sentence technical summary
+   - Create prominent 'Login' button redirecting to https://homer.bocloud.org
+   - Use @21st-dev/magic components for animations and styling
+
+3. 'What is this site?' Section:
+   - Write honest, technical explanation of public infrastructure
+   - Focus on authenticity and technical depth
+   - Remove all business/service language
+   - Implement clean, readable typography
+
+4. Live Tools/Projects Showcase:
+   - Create responsive grid/list of approved public-facing apps
+   - Include: Speedtest, LobeChat, AI Research Wizard, TinyAuth, Homepage Dashboard
+   - Design consistent project cards with technical details
+   - Implement filtering/sorting capabilities
+
+5. Infrastructure/Architecture Section:
+   - Create high-level architecture diagram using Mermaid.js
+   - Add detailed stack summary with technologies used
+   - Implement interactive elements to explore infrastructure components
+
+6. About Me Section:
+   - Write authentic personal bio highlighting self-taught background, ADHD
+   - Emphasize remote/async work preference
+   - List skills and technical stack
+   - Add 'what I'm looking for' section for potential collaborations
+
+7. Guides/Resources Section:
+   - Implement organized, searchable technical guides
+   - Create documentation browser with categories
+   - Add syntax highlighting for code examples
+   - Ensure mobile-friendly documentation viewing
+
+8. Contact Section:
+   - Add direct contact options (email, GitHub)
+   - Create 'Available for remote work' badge
+   - Implement contact form with validation
+
+9. Footer:
+   - Design minimal footer with copyright information
+   - Add dark/light theme toggle
+   - Implement optional uptime badge
+   - Include minimal navigation links
+
+10. Technical Implementation:
+    - Use @21st-dev/magic for all major UI sections
+    - Ensure responsive design across all device sizes
+    - Implement smooth animations and transitions
+    - Optimize for performance and accessibility
+    - Remove all business/industry/agency/service language
+
+# Test Strategy:
+1. Visual Design Testing:
+   - Verify dark theme implementation across all sections
+   - Validate color contrast meets WCAG 2.1 AA standards
+   - Test responsive layout on multiple device sizes (mobile, tablet, desktop)
+   - Ensure consistent typography and spacing throughout
+
+2. Functional Testing:
+   - Verify 'Login' button correctly redirects to https://homer.bocloud.org
+   - Test navigation between all sections
+   - Validate project showcase filtering and sorting
+   - Test dark/light theme toggle functionality
+   - Ensure all links to external resources work correctly
+
+3. Content Validation:
+   - Review all text content to ensure removal of business/agency language
+   - Verify technical accuracy of infrastructure diagram and stack descriptions
+   - Check for spelling and grammar errors
+   - Ensure consistent tone and voice throughout
+
+4. Performance Testing:
+   - Run Lighthouse performance audits
+   - Test page load times on various connection speeds
+   - Verify image optimization
+   - Test animations for smoothness and performance impact
+
+5. Accessibility Testing:
+   - Validate semantic HTML structure
+   - Test keyboard navigation through all interactive elements
+   - Verify screen reader compatibility
+   - Check focus states for all interactive elements
+
+6. Cross-browser Testing:
+   - Test on Chrome, Firefox, Safari, and Edge
+   - Verify consistent appearance and functionality across browsers
+   - Test on both desktop and mobile browsers
+
+7. User Acceptance Testing:
+   - Gather feedback on the redesign from technical users
+   - Verify the site effectively communicates technical depth and authenticity
+   - Test with users to ensure the site meets expectations for a personal technical portfolio

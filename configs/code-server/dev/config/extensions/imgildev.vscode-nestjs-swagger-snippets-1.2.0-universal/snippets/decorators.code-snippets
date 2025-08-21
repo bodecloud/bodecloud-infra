@@ -1,0 +1,284 @@
+{
+  "Swagger ApiBasicAuth": {
+    "prefix": ["ns_swagger_deco_api_basic_auth", "@ApiBasicAuth"],
+    "scope": "typescript",
+    "description": "Decorator @ApiBasicAuth.",
+    "body": "@ApiBasicAuth(${1:basic})$0"
+  },
+  "Swagger ApiBearerAuth": {
+    "prefix": ["ns_swagger_deco_api_bearer_auth", "@ApiBearerAuth"],
+    "scope": "typescript",
+    "description": "Decorator @ApiBearerAuth.",
+    "body": "@ApiBearerAuth(${1:bearer})$0"
+  },
+  "Swagger ApiBody": {
+    "prefix": ["ns_swagger_deco_api_body", "@ApiBody"],
+    "scope": "typescript",
+    "description": "Decorator @ApiBody con tipo.",
+    "body": ["@ApiBody({", "  type: ${1:type},", "})$0"]
+  },
+  "Swagger ApiConsumes": {
+    "prefix": ["ns_swagger_deco_api_consumes", "@ApiConsumes"],
+    "scope": "typescript",
+    "description": "Decorator @ApiConsumes (MIME).",
+    "body": "@ApiConsumes(${1|'application/json','multipart/form-data','application/xml'|})$0"
+  },
+  "Swagger ApiCookieAuth": {
+    "prefix": ["ns_swagger_deco_api_cookie_auth", "@ApiCookieAuth"],
+    "scope": "typescript",
+    "description": "Decorator @ApiCookieAuth.",
+    "body": "@ApiCookieAuth('${1:session}')$0"
+  },
+  "Swagger ApiExcludeController": {
+    "prefix": ["ns_swagger_deco_api_exclude_controller", "@ApiExcludeController"],
+    "scope": "typescript",
+    "description": "Decorator @ApiExcludeController.",
+    "body": "@ApiExcludeController(${1:true})$0"
+  },
+  "Swagger ApiExcludeEndpoint": {
+    "prefix": ["ns_swagger_deco_api_exclude_endpoint", "@ApiExcludeEndpoint"],
+    "scope": "typescript",
+    "description": "Decorator @ApiExcludeEndpoint.",
+    "body": "@ApiExcludeEndpoint(${1:true})$0"
+  },
+  "Swagger ApiExtension": {
+    "prefix": ["ns_swagger_deco_api_extension", "@ApiExtension"],
+    "scope": "typescript",
+    "description": "Decorator @ApiExtension.",
+    "body": "@ApiExtension(${1:extensionKey}, ${2:extensionProperties})$0"
+  },
+  "Swagger ApiExtraModels": {
+    "prefix": ["ns_swagger_deco_api_extra_models", "@ApiExtraModels"],
+    "scope": "typescript",
+    "description": "Decorator @ApiExtraModels.",
+    "body": "@ApiExtraModels(${1:models})$0"
+  },
+  "Swagger ApiHeader": {
+    "prefix": ["ns_swagger_deco_api_header", "@ApiHeader"],
+    "scope": "typescript",
+    "description": "Decorator @ApiHeader.",
+    "body": ["@ApiHeader({", "  name: '${1:name}',", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiHideProperty": {
+    "prefix": ["ns_swagger_deco_api_hide_property", "@ApiHideProperty"],
+    "scope": "typescript",
+    "description": "Decorator @ApiHideProperty.",
+    "body": "@ApiHideProperty()$0"
+  },
+  "Swagger ApiOAuth2": {
+    "prefix": ["ns_swagger_deco_api_oauth2", "@ApiOAuth2"],
+    "scope": "typescript",
+    "description": "Decorator @ApiOAuth2.",
+    "body": "@ApiOAuth2(${1:['read','write']}, ${2:oauth2})$0"
+  },
+  "Swagger ApiOperation": {
+    "prefix": ["ns_swagger_deco_api_operation", "@ApiOperation"],
+    "scope": "typescript",
+    "description": "Decorator @ApiOperation con summary y description.",
+    "body": ["@ApiOperation({", "  summary: '${1:summary}',", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiParam": {
+    "prefix": ["ns_swagger_deco_api_param", "@ApiParam"],
+    "scope": "typescript",
+    "description": "Decorator @ApiParam para parámetros de ruta.",
+    "body": ["@ApiParam({", "  name: '${1:name}',", "  description: '${2:description}',", "  required: ${3:true},", "  schema: ${4:schema}", "})$0"]
+  },
+  "Swagger ApiProduces": {
+    "prefix": ["ns_swagger_deco_api_produces", "@ApiProduces"],
+    "scope": "typescript",
+    "description": "Decorator @ApiProduces (MIME).",
+    "body": "@ApiProduces(${1|'application/json','application/xml'|})$0"
+  },
+  "Swagger ApiProperty": {
+    "prefix": ["ns_swagger_deco_api_property", "@ApiProperty"],
+    "scope": "typescript",
+    "description": "Decorator @ApiProperty con description y example.",
+    "body": ["@ApiProperty({", "  description: '${1:description}',", "  example: ${2:example}", ")}$0"]
+  },
+  "Swagger ApiPropertyOptional": {
+    "prefix": ["ns_swagger_deco_api_property_optional", "@ApiPropertyOptional"],
+    "scope": "typescript",
+    "description": "Decorator @ApiPropertyOptional con description y example.",
+    "body": ["@ApiPropertyOptional({", "  description: '${1:description}',", "  example: ${2:example}", ")}$0"]
+  },
+  "Swagger ApiResponseProperty": {
+    "prefix": ["ns_swagger_deco_api_response_property", "@ApiResponseProperty"],
+    "scope": "typescript",
+    "description": "Decorator @ApiResponseProperty con type, description y example.",
+    "body": ["@ApiResponseProperty({", "  type: ${1:type},", "  description: '${2:description}',", "  example: ${3:example}", "})$0"]
+  },
+  "Swagger ApiQuery": {
+    "prefix": ["ns_swagger_deco_api_query", "@ApiQuery"],
+    "scope": "typescript",
+    "description": "Decorator @ApiQuery para parámetros de consulta.",
+    "body": ["@ApiQuery({", "  name: '${1:name}',", "  required: ${2:false},", "  schema: ${3:schema}", "})$0"]
+  },
+  "Swagger ApiSecurity": {
+    "prefix": ["ns_swagger_deco_api_security", "@ApiSecurity"],
+    "scope": "typescript",
+    "description": "Decorator @ApiSecurity.",
+    "body": "@ApiSecurity(${1:bearer}, ${2:[]})$0"
+  },
+  "Swagger ApiTags": {
+    "prefix": ["ns_swagger_deco_api_tags", "@ApiTags"],
+    "scope": "typescript",
+    "description": "Decorator @ApiTags.",
+    "body": "@ApiTags(${1:tags})$0"
+  },
+  "Swagger ApiOkResponse": {
+    "prefix": ["ns_swagger_deco_api_ok_response", "@ApiOkResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiOkResponse (200).",
+    "body": ["@ApiOkResponse({", "  status: ${1:200},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiCreatedResponse": {
+    "prefix": ["ns_swagger_deco_api_created_response", "@ApiCreatedResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiCreatedResponse (201).",
+    "body": ["@ApiCreatedResponse({", "  status: ${1:201},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiAcceptedResponse": {
+    "prefix": ["ns_swagger_deco_api_accepted_response", "@ApiAcceptedResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiAcceptedResponse (202).",
+    "body": ["@ApiAcceptedResponse({", "  status: ${1:202},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiNoContentResponse": {
+    "prefix": ["ns_swagger_deco_api_no_content_response", "@ApiNoContentResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiNoContentResponse (204).",
+    "body": ["@ApiNoContentResponse({", "  status: ${1:204},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiMovedPermanentlyResponse": {
+    "prefix": ["ns_swagger_deco_api_moved_permanently_response", "@ApiMovedPermanentlyResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiMovedPermanentlyResponse (301).",
+    "body": ["@ApiMovedPermanentlyResponse({", "  status: ${1:301},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiFoundResponse": {
+    "prefix": ["ns_swagger_deco_api_found_response", "@ApiFoundResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiFoundResponse (302).",
+    "body": ["@ApiFoundResponse({", "  status: ${1:302},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiBadRequestResponse": {
+    "prefix": ["ns_swagger_deco_api_bad_request_response", "@ApiBadRequestResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiBadRequestResponse (400).",
+    "body": ["@ApiBadRequestResponse({", "  status: ${1:400},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiUnauthorizedResponse": {
+    "prefix": ["ns_swagger_deco_api_unauthorized_response", "@ApiUnauthorizedResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiUnauthorizedResponse (401).",
+    "body": ["@ApiUnauthorizedResponse({", "  status: ${1:401},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiTooManyRequestsResponse": {
+    "prefix": ["ns_swagger_deco_api_too_many_requests_response", "@ApiTooManyRequestsResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiTooManyRequestsResponse (429).",
+    "body": ["@ApiTooManyRequestsResponse({", "  status: ${1:429},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiNotFoundResponse": {
+    "prefix": ["ns_swagger_deco_api_not_found_response", "@ApiNotFoundResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiNotFoundResponse (404).",
+    "body": ["@ApiNotFoundResponse({", "  status: ${1:404},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiInternalServerErrorResponse": {
+    "prefix": ["ns_swagger_deco_api_internal_server_error_response", "@ApiInternalServerErrorResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiInternalServerErrorResponse (500).",
+    "body": ["@ApiInternalServerErrorResponse({", "  status: ${1:500},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiBadGatewayResponse": {
+    "prefix": ["ns_swagger_deco_api_bad_gateway_response", "@ApiBadGatewayResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiBadGatewayResponse (502).",
+    "body": ["@ApiBadGatewayResponse({", "  status: ${1:502},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiConflictResponse": {
+    "prefix": ["ns_swagger_deco_api_conflict_response", "@ApiConflictResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiConflictResponse (409).",
+    "body": ["@ApiConflictResponse({", "  status: ${1:409},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiForbiddenResponse": {
+    "prefix": ["ns_swagger_deco_api_forbidden_response", "@ApiForbiddenResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiForbiddenResponse (403).",
+    "body": ["@ApiForbiddenResponse({", "  status: ${1:403},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiGatewayTimeoutResponse": {
+    "prefix": ["ns_swagger_deco_api_gateway_timeout_response", "@ApiGatewayTimeoutResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiGatewayTimeoutResponse (504).",
+    "body": ["@ApiGatewayTimeoutResponse({", "  status: ${1:504},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiGoneResponse": {
+    "prefix": ["ns_swagger_deco_api_gone_response", "@ApiGoneResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiGoneResponse (410).",
+    "body": ["@ApiGoneResponse({", "  status: ${1:410},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiMethodNotAllowedResponse": {
+    "prefix": ["ns_swagger_deco_api_method_not_allowed_response", "@ApiMethodNotAllowedResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiMethodNotAllowedResponse (405).",
+    "body": ["@ApiMethodNotAllowedResponse({", "  status: ${1:405},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiNotAcceptableResponse": {
+    "prefix": ["ns_swagger_deco_api_not_acceptable_response", "@ApiNotAcceptableResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiNotAcceptableResponse (406).",
+    "body": ["@ApiNotAcceptableResponse({", "  status: ${1:406},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiNotImplementedResponse": {
+    "prefix": ["ns_swagger_deco_api_not_implemented_response", "@ApiNotImplementedResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiNotImplementedResponse (501).",
+    "body": ["@ApiNotImplementedResponse({", "  status: ${1:501},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiPreconditionFailedResponse": {
+    "prefix": ["ns_swagger_deco_api_precondition_failed_response", "@ApiPreconditionFailedResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiPreconditionFailedResponse (412).",
+    "body": ["@ApiPreconditionFailedResponse({", "  status: ${1:412},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiPayloadTooLargeResponse": {
+    "prefix": ["ns_swagger_deco_api_payload_too_large_response", "@ApiPayloadTooLargeResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiPayloadTooLargeResponse (413).",
+    "body": ["@ApiPayloadTooLargeResponse({", "  status: ${1:413},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiRequestTimeoutResponse": {
+    "prefix": ["ns_swagger_deco_api_request_timeout_response", "@ApiRequestTimeoutResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiRequestTimeoutResponse (408).",
+    "body": ["@ApiRequestTimeoutResponse({", "  status: ${1:408},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiServiceUnavailableResponse": {
+    "prefix": ["ns_swagger_deco_api_service_unavailable_response", "@ApiServiceUnavailableResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiServiceUnavailableResponse (503).",
+    "body": ["@ApiServiceUnavailableResponse({", "  status: ${1:503},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiUnprocessableEntityResponse": {
+    "prefix": ["ns_swagger_deco_api_unprocessable_entity_response", "@ApiUnprocessableEntityResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiUnprocessableEntityResponse (422).",
+    "body": ["@ApiUnprocessableEntityResponse({", "  status: ${1:422},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiUnsupportedMediaTypeResponse": {
+    "prefix": ["ns_swagger_deco_api_unsupported_media_type_response", "@ApiUnsupportedMediaTypeResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiUnsupportedMediaTypeResponse (415).",
+    "body": ["@ApiUnsupportedMediaTypeResponse({", "  status: ${1:415},", "  description: '${2:description}'", "})$0"]
+  },
+  "Swagger ApiDefaultResponse": {
+    "prefix": ["ns_swagger_deco_api_default_response", "@ApiDefaultResponse"],
+    "scope": "typescript",
+    "description": "Decorator @ApiDefaultResponse.",
+    "body": ["@ApiDefaultResponse({", "  status: ${1:200},", "  description: '${2:description}'", "})$0"]
+  }
+}

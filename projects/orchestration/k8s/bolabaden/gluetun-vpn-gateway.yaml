@@ -1,0 +1,315 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vpn-ca-cert
+  namespace: default
+data:
+  premiumize-ca.pem: |
+    # Replace with your Premiumize CA certificate
+    # You can download this from your Premiumize account
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vpn-auth
+  namespace: default
+type: Opaque
+data:
+  auth.conf: IyBSZXBsYWNlIHdpdGggeW91ciBQcmVtaXVtaXplIGNyZWRlbnRpYWxzCnlvdXJfcHJlbWl1bWl6ZV91c2VybmFtZQp5b3VyX3ByZW1pdW1pemVfcGFzc3dvcmQK
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-vpn-gateway-fi
+  namespace: default
+  labels:
+    app: gluetun-vpn-gateway
+    country: fi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gluetun-vpn-gateway
+      country: fi
+  template:
+    metadata:
+      labels:
+        app: gluetun-vpn-gateway
+        country: fi
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv4.conf.all.src_valid_mark
+          value: "1"
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "1"
+      containers:
+      - name: gluetun
+        image: qmcgaw/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: false
+          runAsUser: 1000
+          runAsGroup: 1000
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: "custom"
+        - name: VPN_TYPE
+          value: "openvpn"
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: "/gluetun/custom.conf"
+        - name: OPENVPN_USER
+          value: "your_premiumize_username"
+        - name: OPENVPN_PASSWORD
+          value: "your_premiumize_password"
+        - name: FIREWALL_OUTBOUND_SUBNETS
+          value: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+        - name: FIREWALL_VPN_INPUT_PORTS
+          value: "8080,8888"
+        - name: TZ
+          value: "UTC"
+        - name: LOG_LEVEL
+          value: "info"
+        - name: HEALTH_VPN_DURATION_INITIAL
+          value: "30s"
+        - name: HEALTH_VPN_DURATION_ADDITION
+          value: "5s"
+        ports:
+        - containerPort: 8080
+          name: http-proxy
+        - containerPort: 8888
+          name: shadowsocks
+        - containerPort: 8000
+          name: control-server
+        volumeMounts:
+        - name: vpn-config
+          mountPath: /gluetun/custom.conf
+          subPath: vpn-fi.premiumize.me.ovpn
+          readOnly: true
+        - name: vpn-ca-cert
+          mountPath: /gluetun/premiumize-ca.pem
+          subPath: premiumize-ca.pem
+          readOnly: true
+        - name: vpn-auth
+          mountPath: /gluetun/auth.conf
+          subPath: auth.conf
+          readOnly: true
+        - name: dev-net-tun
+          mountPath: /dev/net/tun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+      volumes:
+      - name: vpn-config
+        configMap:
+          name: resolved-vpn-configs
+      - name: vpn-ca-cert
+        configMap:
+          name: vpn-ca-cert
+      - name: vpn-auth
+        secret:
+          secretName: vpn-auth
+      - name: dev-net-tun
+        hostPath:
+          path: /dev/net/tun
+          type: CharDevice
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-vpn-gateway-fi
+  namespace: default
+  labels:
+    app: gluetun-vpn-gateway
+    country: fi
+spec:
+  selector:
+    app: gluetun-vpn-gateway
+    country: fi
+  ports:
+  - name: http-proxy
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  - name: shadowsocks
+    port: 8888
+    targetPort: 8888
+    protocol: TCP
+  - name: control-server
+    port: 8000
+    targetPort: 8000
+    protocol: TCP
+  type: ClusterIP
+---
+# Example of additional country deployment (US)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluetun-vpn-gateway-us
+  namespace: default
+  labels:
+    app: gluetun-vpn-gateway
+    country: us
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gluetun-vpn-gateway
+      country: us
+  template:
+    metadata:
+      labels:
+        app: gluetun-vpn-gateway
+        country: us
+    spec:
+      securityContext:
+        sysctls:
+        - name: net.ipv4.conf.all.src_valid_mark
+          value: "1"
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "1"
+      containers:
+      - name: gluetun
+        image: qmcgaw/gluetun:latest
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: false
+          runAsUser: 1000
+          runAsGroup: 1000
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: "custom"
+        - name: VPN_TYPE
+          value: "openvpn"
+        - name: OPENVPN_CUSTOM_CONFIG
+          value: "/gluetun/custom.conf"
+        - name: OPENVPN_USER
+          value: "your_premiumize_username"
+        - name: OPENVPN_PASSWORD
+          value: "your_premiumize_password"
+        - name: FIREWALL_OUTBOUND_SUBNETS
+          value: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+        - name: FIREWALL_VPN_INPUT_PORTS
+          value: "8080,8888"
+        - name: TZ
+          value: "UTC"
+        - name: LOG_LEVEL
+          value: "info"
+        - name: HEALTH_VPN_DURATION_INITIAL
+          value: "30s"
+        - name: HEALTH_VPN_DURATION_ADDITION
+          value: "5s"
+        ports:
+        - containerPort: 8080
+          name: http-proxy
+        - containerPort: 8888
+          name: shadowsocks
+        - containerPort: 8000
+          name: control-server
+        volumeMounts:
+        - name: vpn-config
+          mountPath: /gluetun/custom.conf
+          subPath: vpn-us.premiumize.me.ovpn
+          readOnly: true
+        - name: vpn-ca-cert
+          mountPath: /gluetun/premiumize-ca.pem
+          subPath: premiumize-ca.pem
+          readOnly: true
+        - name: vpn-auth
+          mountPath: /gluetun/auth.conf
+          subPath: auth.conf
+          readOnly: true
+        - name: dev-net-tun
+          mountPath: /dev/net/tun
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+      volumes:
+      - name: vpn-config
+        configMap:
+          name: resolved-vpn-configs
+      - name: vpn-ca-cert
+        configMap:
+          name: vpn-ca-cert
+      - name: vpn-auth
+        secret:
+          secretName: vpn-auth
+      - name: dev-net-tun
+        hostPath:
+          path: /dev/net/tun
+          type: CharDevice
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluetun-vpn-gateway-us
+  namespace: default
+  labels:
+    app: gluetun-vpn-gateway
+    country: us
+spec:
+  selector:
+    app: gluetun-vpn-gateway
+    country: us
+  ports:
+  - name: http-proxy
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  - name: shadowsocks
+    port: 8888
+    targetPort: 8888
+    protocol: TCP
+  - name: control-server
+    port: 8000
+    targetPort: 8000
+    protocol: TCP
+  type: ClusterIP 

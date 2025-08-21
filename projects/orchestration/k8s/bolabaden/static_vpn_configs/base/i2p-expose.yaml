@@ -1,0 +1,39 @@
+#! i2p-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: i2p
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: i2p
+spec:
+    selector:
+        com.docker.compose.project: boden
+        com.docker.compose.service: i2p
+    ports:
+        - name: i2p-7650
+          port: 7650
+          targetPort: i2p-7650
+        - name: i2p-7658
+          port: 7658
+          targetPort: i2p-7658
+        - name: i2p-7654
+          port: 7654
+          targetPort: i2p-7654
+        - name: i2p-7656
+          port: 7656
+          targetPort: i2p-7656
+        - name: i2p-2827
+          port: 2827
+          targetPort: i2p-2827
+        - name: i2p-4444
+          port: 4444
+          targetPort: i2p-4444
+        - name: i2p-4447
+          port: 4447
+          targetPort: i2p-4447
+        - name: i2p-7070
+          port: 7070
+          targetPort: i2p-7070

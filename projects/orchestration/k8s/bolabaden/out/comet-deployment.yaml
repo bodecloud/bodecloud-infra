@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: comet
+  name: comet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: comet
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: comet
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: ADDON_ID
+              value: comet.bolabaden.org
+            - name: ADDON_NAME
+              value: Comet
+            - name: FASTAPI_HOST
+              value: 0.0.0.0
+            - name: FASTAPI_PORT
+              value: "2020"
+            - name: FASTAPI_WORKERS
+              value: "4"
+            - name: USE_GUNICORN
+              value: "True"
+            - name: DASHBOARD_ADMIN_PASSWORD
+              value: h4L0m4St3R327
+            - name: DATABASE_TYPE
+              value: sqlite
+            - name: DATABASE_PATH
+              value: /data/comet.db
+            - name: METADATA_CACHE_TTL
+              value: "2592000"
+            - name: TORRENT_CACHE_TTL
+              value: "1296000"
+            - name: DEBRID_CACHE_TTL
+              value: "86400"
+            - name: INDEXER_MANAGER_TYPE
+              value: prowlarr
+            - name: INDEXER_MANAGER_URL
+              value: http://prowlarr:9696
+            - name: INDEXER_MANAGER_API_KEY
+              value: e6352949607b467e9e48b4bca32f55f1
+            - name: INDEXER_MANAGER_TIMEOUT
+              value: "60"
+            - name: INDEXER_MANAGER_INDEXERS
+              value: '["1337x", "animetosho", "anirena", "limetorrents", "nyaasi", "thepiratebay", "torlock", "yts"]'
+            - name: GET_TORRENT_TIMEOUT
+              value: "2"
+            - name: DOWNLOAD_TORRENT_FILES
+              value: "False"
+            - name: SCRAPE_COMET
+              value: "false"
+            - name: COMET_URL
+              value: https://comet.elfhosted.com
+            - name: SCRAPE_ZILEAN
+              value: "true"
+            - name: ZILEAN_URL
+              value: https://zilean.elfhosted.com
+            - name: SCRAPE_TORRENTIO
+              value: "false"
+            - name: TORRENTIO_URL
+              value: https://torrentio.strem.fun
+            - name: SCRAPE_MEDIAFUSION
+              value: "false"
+            - name: MEDIAFUSION_URL
+              value: https://mediafusion.elfhosted.com
+            - name: STREMTHRU_URL
+              value: https://stremthru.bolabaden.org
+            - name: PROXY_DEBRID_STREAM
+              value: "True"
+            - name: PROXY_DEBRID_STREAM_PASSWORD
+              value: h4L0m4St3R327
+            - name: PROXY_DEBRID_STREAM_MAX_CONNECTIONS
+              value: "-1"
+            - name: PROXY_DEBRID_STREAM_DEBRID_DEFAULT_SERVICE
+              value: premiumize
+            - name: PROXY_DEBRID_STREAM_DEBRID_DEFAULT_APIKEY
+              value: 6i6zgswm35baj3ur
+            - name: REMOVE_ADULT_CONTENT
+              value: "True"
+          image: g0ldyy/comet
+          livenessProbe:
+            exec:
+              command:
+                - wget -qO- http://127.0.0.1:2020/health > /dev/null 2>&1 || exit 1
+            failureThreshold: 3
+            initialDelaySeconds: 15
+            periodSeconds: 60
+            timeoutSeconds: 5
+          name: comet
+          ports:
+            - containerPort: 2020
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: comet-data
+      restartPolicy: Always
+      volumes:
+        - name: comet-data
+          persistentVolumeClaim:
+            claimName: comet-data 

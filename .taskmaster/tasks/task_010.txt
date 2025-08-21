@@ -1,0 +1,61 @@
+# Task ID: 10
+# Title: Implement Tool Demonstrations and Live Service Integration
+# Status: pending
+# Dependencies: 2, 5
+# Priority: medium
+# Description: Create interactive demonstrations of hosted tools and services from bocloud.org with live integration to showcase real technical capabilities.
+# Details:
+1. Design a tools showcase section with:
+   - Tool cards with descriptions for the 5 approved bocloud.org services
+   - Live demo embeds or screenshots
+   - Technical stack information
+2. Implement API integration for tool status checks
+3. Create iframe or embedded demos for each approved service
+4. Add interactive elements to demonstrate functionality of Speedtest Tracker, LobeChat, AI Research Wizard, TinyAuth, and Homepage Dashboard
+5. Implement authentication for protected tool demos, especially for Homepage Dashboard
+6. Create detailed documentation for each approved tool
+7. Add usage statistics where available
+8. Implement lazy loading for tool demos
+9. Create fallback content for when tools are unavailable
+10. Add links to GitHub repositories for open-source tools
+11. Organize tools by categories: Network Monitoring, AI, Security, and Dashboards
+12. Create connections between tools and their corresponding documentation
+13. Ensure TinyAuth demo includes a Login button redirecting to homepage.bocloud.org
+
+# Test Strategy:
+1. Test API integrations with each bocloud.org service
+2. Verify iframe loading and security for all 5 approved services
+3. Test interactive elements in tool demos
+4. Validate authentication flows, especially for TinyAuth and Homepage Dashboard
+5. Test fallback behavior when services are down
+6. Verify responsive layout of tool demonstrations
+7. Test performance impact of embedded tools
+8. Verify proper categorization of tools
+9. Test links between tools and their documentation
+10. Verify TinyAuth login redirect functionality
+
+# Subtasks:
+## 1. Design Tool Showcase Section [pending]
+### Dependencies: None
+### Description: Create the UI layout and components for the tool demonstrations section
+### Details:
+Design and implement the UI components for the tool showcase section including layout, navigation, and visual hierarchy. Create reusable components for tool cards, status indicators, and category filters (Network Monitoring, AI, Security, and Dashboards). Ensure responsive design across device sizes and implement accessibility features. Include placeholders for live status indicators and interactive elements that will be connected later. Design specific card layouts for the 5 approved bocloud.org services: Speedtest Tracker, LobeChat, AI Research Wizard, TinyAuth, and Homepage Dashboard.
+
+## 2. Implement API Integration for Status Checks [pending]
+### Dependencies: 10.1
+### Description: Build backend services to check and display tool availability status
+### Details:
+Develop API integration to fetch real-time status of the 5 approved bocloud.org services (speedtest.bocloud.org, lobechat.bocloud.org, gptr.bocloud.org, auth.bocloud.org, homepage.bocloud.org). Implement polling mechanism for status updates with appropriate caching. Create error handling and fallback mechanisms for when services are unavailable. Design status indicators that clearly communicate availability, maintenance, or offline states to users. Include logging for monitoring API performance and reliability.
+
+## 3. Build Interactive Demo Components with Authentication [pending]
+### Dependencies: 10.1, 10.2
+### Description: Create interactive demo components that handle user authentication
+### Details:
+Implement interactive demo components for each approved service: Speedtest Tracker widget showing download/upload/ping data, LobeChat interface with multiple LLM providers, AI Research Wizard with web scraping capabilities (including legacy version link), TinyAuth with Login button redirecting to homepage.bocloud.org, and Homepage Dashboard preview. Integrate authentication flow for secured tools, especially Homepage Dashboard protected by nginx-auth middleware. Create sandboxed environments for tool testing that don't affect production data. Implement session management and secure credential handling. Design clear user feedback for authentication states and error conditions.
+
+## 4. Integrate Service Documentation and Categorization [pending]
+### Dependencies: 10.2, 10.3
+### Description: Connect tool demos with relevant documentation and organize by categories
+### Details:
+Organize the 5 approved services into their respective categories: Speedtest Tracker (Network Monitoring), LobeChat (AI), AI Research Wizard (AI), TinyAuth (Security), and Homepage Dashboard (Dashboards). Implement contextual documentation links that guide users to relevant resources for each tool. Create a system for handling tool versioning and compatibility information, especially for AI Research Wizard with its legacy version. Design a feedback mechanism for users to report issues with specific tools. Ensure all documentation links are validated and implement redirects for deprecated resources. Focus on showcasing technical capabilities without exposing sensitive infrastructure details.
+

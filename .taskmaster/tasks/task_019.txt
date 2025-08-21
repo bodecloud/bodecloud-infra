@@ -1,0 +1,115 @@
+# Task ID: 19
+# Title: Implement Modern UI Components with @21st-dev/magic
+# Status: pending
+# Dependencies: 1, 2, 3, 4, 6, 12
+# Priority: high
+# Description: Integrate the @21st-dev/magic component library to create modern, professional UI components for the portfolio site while maintaining a minimalist, authentic aesthetic.
+# Details:
+1. Install and configure @21st-dev/magic component library:
+   - Add to project: `npm install @21st-dev/magic`
+   - Configure theme settings to match portfolio design system
+   - Set up provider component in the application root
+
+2. Implement hero section components:
+   - Create animated headline component with TypeWriter effect
+   - Design call-to-action buttons with hover animations
+   - Implement background elements with subtle animations
+
+3. Develop project card components:
+   - Create interactive card components with hover effects
+   - Implement image gallery/carousel for project screenshots
+   - Add technology badge components for tech stack display
+   - Design expandable detail sections
+
+4. Build service showcase components:
+   - Create service feature cards with icons
+   - Implement tabbed interface for service categories
+   - Design progress/status indicators for services
+
+5. Create interactive UI elements:
+   - Implement custom button components with various states
+   - Design modal components for detailed information
+   - Create form components with validation states
+   - Build toast/notification components for feedback
+
+6. Add animation and transition components:
+   - Implement scroll-triggered animations
+   - Create page transition effects
+   - Design loading state animations
+   - Build micro-interactions for interactive elements
+
+7. Ensure responsive design across all components:
+   - Implement responsive variants for all UI components
+   - Create adaptive layouts for different viewport sizes
+   - Test and optimize touch interactions for mobile
+
+8. Apply professional styling aligned with minimalist principles:
+   - Maintain consistent spacing, typography, and color usage
+   - Implement subtle shadows and depth effects
+   - Use animation sparingly for meaningful interactions
+
+9. Implement accessibility features:
+   - Add proper ARIA attributes to all components
+   - Ensure keyboard navigation support
+   - Implement focus states for interactive elements
+   - Test with screen readers and assistive technologies
+
+10. Create a component documentation page:
+    - Document all available components with examples
+    - Show usage patterns and prop options
+    - Include accessibility guidelines for each component
+
+11. Integrate with Content Management System:
+    - Ensure components can render dynamic content from CMS
+    - Create content-aware components that adapt to CMS data structures
+    - Implement loading states for content-dependent components
+    - Test components with various content scenarios from the CMS
+
+# Test Strategy:
+1. Component unit testing:
+   - Write Jest tests for each component
+   - Test component rendering in different states
+   - Verify prop validation and default behaviors
+   - Test component interactions and state changes
+
+2. Visual regression testing:
+   - Set up Storybook for component visualization
+   - Implement visual regression tests with Chromatic
+   - Create stories for each component variant
+   - Document component usage patterns
+
+3. Accessibility testing:
+   - Run automated tests with axe-core
+   - Test keyboard navigation for all interactive components
+   - Verify screen reader compatibility
+   - Check color contrast ratios meet WCAG 2.1 AA standards
+
+4. Responsive design testing:
+   - Test components at various viewport sizes (320px, 768px, 1024px, 1440px)
+   - Verify touch interactions on mobile devices
+   - Test orientation changes on tablet devices
+   - Validate component behavior in responsive layouts
+
+5. Performance testing:
+   - Measure component render performance
+   - Test animation frame rates on low-end devices
+   - Verify bundle size impact of component imports
+   - Implement code splitting for larger components
+
+6. Cross-browser testing:
+   - Test in Chrome, Firefox, Safari, and Edge
+   - Verify consistent appearance and behavior
+   - Check for browser-specific issues
+   - Test with different OS themes (light/dark mode)
+
+7. Integration testing:
+   - Verify components work together in page layouts
+   - Test component interactions within sections
+   - Validate data flow between components
+   - Check for styling conflicts or layout issues
+
+8. CMS integration testing:
+   - Test components with real CMS data
+   - Verify handling of edge cases (missing data, long content)
+   - Test loading states and error handling
+   - Validate component behavior with different content types

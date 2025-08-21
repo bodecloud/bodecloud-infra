@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: prowlarr
+  name: prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: prowlarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: prowlarr
+    spec:
+      containers:
+        - env:
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "988"
+            - name: TZ
+              value: America/Chicago
+            - name: UMASK
+              value: "002"
+            - name: PROWLARR_API_KEY
+              value: e6352949607b467e9e48b4bca32f55f1
+          image: linuxserver/prowlarr
+          livenessProbe:
+            exec:
+              command:
+                - 'curl -fs -H "Authorization: Bearer e6352949607b467e9e48b4bca32f55f1" http://127.0.0.1:9696/api/v1/system/status || exit 1'
+            failureThreshold: 3
+            initialDelaySeconds: 120
+            periodSeconds: 30
+            timeoutSeconds: 10
+          name: prowlarr
+          ports:
+            - containerPort: 9696
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: prowlarr-config
+      restartPolicy: Always
+      volumes:
+        - name: prowlarr-config
+          persistentVolumeClaim:
+            claimName: prowlarr-config

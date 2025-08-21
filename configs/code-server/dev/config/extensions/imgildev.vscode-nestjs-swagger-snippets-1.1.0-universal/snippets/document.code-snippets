@@ -1,0 +1,102 @@
+{
+  "Swagger setTitle": {
+    "prefix": ["ns_swagger_set_title", "setTitle"],
+    "scope": "typescript",
+    "body": ".setTitle('${1:title}')"
+  },
+  "Swagger setDescription": {
+    "prefix": ["ns_swagger_set_description", "setDescription"],
+    "scope": "typescript",
+    "body": ".setDescription('${1:description}')"
+  },
+  "Swagger setVersion": {
+    "prefix": ["ns_swagger_set_version", "setVersion"],
+    "scope": "typescript",
+    "body": ".setVersion('${1:version}')"
+  },
+  "Swagger setTermsOfService": {
+    "prefix": ["ns_swagger_set_terms_of_service", "setTermsOfService"],
+    "scope": "typescript",
+    "body": ".setTermsOfService('${1:termsOfService}')"
+  },
+  "Swagger setContact": {
+    "prefix": ["ns_swagger_set_contact", "setContact"],
+    "scope": "typescript",
+    "body": ".setContact('${1:name}', '${2:url}', '${3:email}')"
+  },
+  "Swagger setLicense": {
+    "prefix": ["ns_swagger_set_license", "setLicense"],
+    "scope": "typescript",
+    "body": ".setLicense('${1:name}', '${2:url}')"
+  },
+  "Swagger addServer": {
+    "prefix": ["ns_swagger_add_server", "addServer"],
+    "scope": "typescript",
+    "body": ".addServer('${1:url}', '${2:description}', ${3:variables})"
+  },
+  "Swagger setExternalDoc": {
+    "prefix": ["ns_swagger_set_external_doc", "setExternalDoc"],
+    "scope": "typescript",
+    "body": ".setExternalDoc('${1:description}', '${2:url}')"
+  },
+  "Swagger setBasePath": {
+    "prefix": ["ns_swagger_set_base_path", "setBasePath"],
+    "scope": "typescript",
+    "body": ".setBasePath('${1:path}')"
+  },
+  "Swagger addTag": {
+    "prefix": ["ns_swagger_add_tag", "addTag"],
+    "scope": "typescript",
+    "body": ".addTag('${1:name}', '${2:description}', ${3:externalDocs})"
+  },
+  "Swagger addExtension": {
+    "prefix": ["ns_swagger_add_extension", "addExtension"],
+    "scope": "typescript",
+    "body": ".addExtension('${1:extensionKey}', ${2:extensionProperties})"
+  },
+  "Swagger addSecurity": {
+    "prefix": ["ns_swagger_add_security", "addSecurity"],
+    "scope": "typescript",
+    "body": ".addSecurity('${1:name}', ${2:options})"
+  },
+  "Swagger addGlobalParameters": {
+    "prefix": ["ns_swagger_add_global_parameters", "addGlobalParameters"],
+    "scope": "typescript",
+    "body": ".addGlobalParameters(${1:parameters})"
+  },
+  "Swagger addSecurityRequirements": {
+    "prefix": ["ns_swagger_add_security_requirements", "addSecurityRequirements"],
+    "scope": "typescript",
+    "body": ".addSecurityRequirements(${1:name}, ${2:requirements})"
+  },
+  "Swagger addBearerAuth": {
+    "prefix": ["ns_swagger_add_bearer_auth", "addBearerAuth"],
+    "scope": "typescript",
+    "body": ".addBearerAuth(${1:options}, ${2:name})"
+  },
+  "Swagger addOAuth2": {
+    "prefix": ["ns_swagger_add_oauth2", "addOAuth2"],
+    "scope": "typescript",
+    "body": ".addOAuth2(${1:options}, ${2:name})"
+  },
+  "Swagger addApiKey": {
+    "prefix": ["ns_swagger_add_api_key", "addApiKey"],
+    "scope": "typescript",
+    "body": ".addApiKey(${1:options}, ${2:name})"
+  },
+  "Swagger addBasicAuth": {
+    "prefix": ["ns_swagger_add_basic_auth", "addBasicAuth"],
+    "scope": "typescript",
+    "body": ".addBasicAuth(${1:options}, ${2:name})"
+  },
+  "Swagger addCookieAuth": {
+    "prefix": ["ns_swagger_add_cookie_auth", "addCookieAuth"],
+    "scope": "typescript",
+    "body": ".addCookieAuth(${1:cookieName}, ${2:options}, ${3:securityName})"
+  },
+  "Swagger build": {
+    "prefix": ["ns_swagger_build", "build"],
+    "scope": "typescript",
+    "body": ".build()"
+  }
+}

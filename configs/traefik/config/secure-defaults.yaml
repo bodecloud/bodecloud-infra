@@ -1,0 +1,648 @@
+# yaml-language-server: $schema=https://www.schemastore.org/traefik-v3-file-provider.json
+
+http:
+  middlewares:
+    ########################################################
+    # COMPREHENSIVE SECURE DEFAULTS
+    # Using EVERY single middleware type Traefik supports
+    # Priority 1: Don't break existing apps
+    # Priority 2: Prevent abuse and attacks
+    ########################################################
+
+    ########################################################
+    # 1. ADD PREFIX - Path modification
+    ########################################################
+    add-prefix-api:
+      addPrefix:
+        prefix: "/api"
+
+    add-prefix-v1:
+      addPrefix:
+        prefix: "/v1"
+
+    ########################################################
+    # 2. BASIC AUTH - HTTP Basic Authentication
+    ########################################################
+    basic-auth-default:
+      basicAuth:
+        # Example users (replace with your own hashed passwords)
+        # Use: htpasswd -nbB username password
+        users:
+          # Default: admin/admin123 (CHANGE THIS!)
+          - "admin:$2y$10$3QK1zYxQrXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        realm: "Secure Area"
+        removeHeader: true
+
+    basic-auth-strict:
+      basicAuth:
+        # For production, use usersFile instead
+        usersFile: "/etc/traefik/users" # Create this file with htpasswd
+        realm: "Restricted Zone"
+        headerField: "X-Auth-User"
+        removeHeader: true
+
+    ########################################################
+    # 3. BUFFERING - Request/Response buffering
+    ########################################################
+    buffering-default:
+      buffering:
+        # Conservative limits to prevent abuse while allowing legitimate use
+        maxRequestBodyBytes: 52428800    # 50MB max request
+        memRequestBodyBytes: 10485760    # 10MB memory threshold
+        maxResponseBodyBytes: 52428800   # 50MB max response
+        memResponseBodyBytes: 10485760   # 10MB response memory threshold
+        retryExpression: "IsNetworkError() && Attempts() < 3"
+
+    buffering-strict:
+      buffering:
+        maxRequestBodyBytes: 10485760    # 10MB max for sensitive endpoints
+        memRequestBodyBytes: 1048576     # 1MB memory threshold
+        maxResponseBodyBytes: 10485760   # 10MB max response
+        memResponseBodyBytes: 1048576    # 1MB response memory threshold
+        retryExpression: "IsNetworkError() && Attempts() < 2"
+
+    buffering-large-files:
+      buffering:
+        maxRequestBodyBytes: 1073741824  # 1GB for file uploads
+        memRequestBodyBytes: 52428800    # 50MB memory threshold
+        maxResponseBodyBytes: 1073741824 # 1GB max response
+        memResponseBodyBytes: 52428800   # 50MB response memory threshold
+        retryExpression: "IsNetworkError() && Attempts() < 2"
+
+    ########################################################
+    # 4. CHAIN - Middleware combinations (defined at bottom)
+    ########################################################
+
+    ########################################################
+    # 5. CIRCUIT BREAKER - Failure protection
+    ########################################################
+    circuit-breaker-default:
+      circuitBreaker:
+        # Conservative threshold - only trigger on severe issues
+        expression: "ResponseCodeRatio(500, 600, 0, 600) > 0.50 || NetworkErrorRatio() > 0.30"
+
+    circuit-breaker-strict:
+      circuitBreaker:
+        # More aggressive for sensitive services
+        expression: "ResponseCodeRatio(500, 600, 0, 600) > 0.25 || NetworkErrorRatio() > 0.15"
+
+    circuit-breaker-latency:
+      circuitBreaker:
+        # Trigger on high latency (>5 seconds at 95th percentile)
+        expression: "LatencyAtQuantileMS(95.0) > 5000"
+
+    ########################################################
+    # 6. COMPRESS - Response compression
+    ########################################################
+    compress-default:
+      compress:
+        # Exclude binary and streaming content
+        excludedContentTypes:
+          - "text/event-stream"
+          - "application/grpc"
+          - "application/grpc-web"
+          - "application/grpc+proto"
+          - "application/octet-stream"
+          - "application/wasm"
+          - "multipart/form-data"
+        minResponseBodyBytes: 1024
+        encodings:
+          - "br"      # Brotli (best compression)
+          - "gzip"    # Gzip (widely supported)
+          - "zstd"    # Zstandard (good balance)
+
+    compress-aggressive:
+      compress:
+        # More aggressive compression
+        excludedContentTypes:
+          - "text/event-stream"
+          - "application/grpc"
+          - "multipart/form-data"
+        minResponseBodyBytes: 512
+        encodings:
+          - "br"
+          - "zstd" 
+          - "gzip"
+
+    ########################################################
+    # 7. CONTENT TYPE - Content-Type header handling
+    ########################################################
+    content-type-default:
+      contentType:
+        # Don't auto-detect - preserve backend behavior
+        autoDetect: false
+
+    content-type-detect:
+      contentType:
+        # Enable auto-detection for legacy backends
+        autoDetect: true
+
+    ########################################################
+    # 8. DIGEST AUTH - HTTP Digest Authentication
+    ########################################################
+    digest-auth-default:
+      digestAuth:
+        # Example users (generate with: htdigest -c file realm username)
+        users:
+          - "admin:secure:a2688e031edb4be6a3797f3882655c05"
+        realm: "secure"
+        removeHeader: true
+
+    digest-auth-file:
+      digestAuth:
+        usersFile: "/etc/traefik/digest-users"
+        realm: "restricted"
+        headerField: "X-Digest-User"
+        removeHeader: true
+
+    ########################################################
+    # 9. ERRORS - Custom error pages
+    ########################################################
+    errors-default:
+      errors:
+        status:
+          - "400-499"  # Client errors
+          - "500-599"  # Server errors
+        service: error-service
+        query: "/error/{status}.html"
+
+    errors-security:
+      errors:
+        status:
+          - "401"      # Unauthorized
+          - "403"      # Forbidden
+          - "404"      # Not Found
+        service: security-error-service
+        query: "/security-error.html"
+
+    ########################################################
+    # 10. FORWARD AUTH - External authentication
+    ########################################################
+    forward-auth-default:
+      forwardAuth:
+        address: "http://auth-service:8080/auth"
+        trustForwardHeader: false
+        authResponseHeaders:
+          - "X-Auth-User"
+          - "X-Auth-Groups"
+          - "X-Auth-Email"
+
+    forward-auth-oauth:
+      forwardAuth:
+        address: "https://oauth-proxy:4180/oauth2/auth"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "X-Auth-Request-User"
+          - "X-Auth-Request-Email"
+          - "X-Auth-Request-Groups"
+
+    ########################################################
+    # 11. GRPC WEB - gRPC Web support
+    ########################################################
+    grpc-web-default:
+      grpcWeb:
+        allowOrigins:
+          - "*"  # Allow all origins (adjust for security)
+
+    grpc-web-restricted:
+      grpcWeb:
+        allowOrigins:
+          - "https://*.yourdomain.com"
+          - "https://app.yourdomain.com"
+
+    ########################################################
+    # 12. HEADERS - Request/Response header management
+    ########################################################
+    headers-security:
+      headers:
+        # Security headers
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        sslRedirect: false  # Set to true if you want to force HTTPS
+        stsSeconds: 31536000  # 1 year HSTS
+        stsIncludeSubdomains: true
+        stsPreload: true
+        forceSTSHeader: false
+        # Custom security headers
+        customResponseHeaders:
+          X-Frame-Options: "DENY"
+          X-Content-Type-Options: "nosniff"
+          X-XSS-Protection: "1; mode=block"
+          Referrer-Policy: "strict-origin-when-cross-origin"
+          Permissions-Policy: "camera=(), microphone=(), geolocation=()"
+        # Remove sensitive headers
+        customRequestHeaders:
+          X-Powered-By: ""
+          Server: ""
+
+    headers-cors-permissive:
+      headers:
+        accessControlAllowCredentials: true
+        accessControlAllowHeaders:
+          - "Content-Type"
+          - "Authorization"
+          - "X-Requested-With"
+        accessControlAllowMethods:
+          - "GET"
+          - "POST"
+          - "PUT"
+          - "DELETE"
+          - "OPTIONS"
+        accessControlAllowOriginList:
+          - "*"
+        accessControlMaxAge: 86400
+        addVaryHeader: true
+
+    headers-cors-strict:
+      headers:
+        accessControlAllowCredentials: true
+        accessControlAllowHeaders:
+          - "Content-Type"
+          - "Authorization"
+        accessControlAllowMethods:
+          - "GET"
+          - "POST"
+        accessControlAllowOriginList:
+          - "https://yourdomain.com"
+          - "https://app.yourdomain.com"
+        accessControlMaxAge: 3600
+        addVaryHeader: true
+
+    ########################################################
+    # 13. IP ALLOW LIST - IP-based access control
+    ########################################################
+    ip-allowlist-local:
+      ipAllowList:
+        sourceRange:
+          - "127.0.0.1/32"
+          - "::1/128"
+          - "10.0.0.0/8"
+          - "172.16.0.0/12"
+          - "192.168.0.0/16"
+        rejectStatusCode: 403
+
+    ip-allowlist-cloudflare:
+      ipAllowList:
+        # Cloudflare IP ranges (update regularly)
+        sourceRange:
+          - "103.21.244.0/22"
+          - "103.22.200.0/22"
+          - "103.31.4.0/22"
+          - "104.16.0.0/13"
+          - "104.24.0.0/14"
+          - "108.162.192.0/18"
+          - "131.0.72.0/22"
+          - "141.101.64.0/18"
+          - "162.158.0.0/15"
+          - "172.64.0.0/13"
+          - "173.245.48.0/20"
+          - "188.114.96.0/20"
+          - "190.93.240.0/20"
+          - "197.234.240.0/22"
+          - "198.41.128.0/17"
+        rejectStatusCode: 403
+        ipStrategy:
+          depth: 1  # Trust X-Forwarded-For from Cloudflare
+
+    ########################################################
+    # 14. IN FLIGHT REQ - Concurrent request limiting
+    ########################################################
+    inflight-default:
+      inFlightReq:
+        amount: 500  # 500 concurrent requests per IP
+        sourceCriterion:
+          ipStrategy:
+            depth: 1
+
+    inflight-strict:
+      inFlightReq:
+        amount: 50   # Strict limit for sensitive endpoints
+        sourceCriterion:
+          ipStrategy:
+            depth: 1
+
+    inflight-api:
+      inFlightReq:
+        amount: 100  # API-specific limits
+        sourceCriterion:
+          requestHeaderName: "X-API-Key"  # Per API key
+
+    ########################################################
+    # 15. PLUGIN - Custom middleware plugins
+    ########################################################
+    plugin-example:
+      plugin:
+        # Example plugin configuration (replace with actual plugin)
+        # This is for custom middleware plugins you install
+        dev:
+          headers:
+            X-Plugin-Applied: "true"
+
+    ########################################################
+    # 16. PASS TLS CLIENT CERT - Client certificate handling
+    ########################################################
+    pass-tls-cert-pem:
+      passTLSClientCert:
+        pem: true  # Pass full certificate in header
+
+    pass-tls-cert-info:
+      passTLSClientCert:
+        info:
+          notAfter: true
+          notBefore: true
+          sans: true
+          subject:
+            country: true
+            province: true
+            locality: true
+            organization: true
+            commonName: true
+            serialNumber: true
+          issuer:
+            country: true
+            organization: true
+            commonName: true
+
+         ########################################################
+     # 17. RATE LIMIT - Request rate limiting
+     ########################################################
+    rate-limit-default:
+      rateLimit:
+        average: 1000    # 1000 requests per second
+        burst: 2000      # Allow bursts up to 2000
+        sourceCriterion:
+          ipStrategy:
+            depth: 1
+
+    rate-limit-strict:
+      rateLimit:
+        average: 100     # 100 requests per second
+        burst: 200       # Allow bursts up to 200
+        sourceCriterion:
+          ipStrategy:
+            depth: 1
+
+    rate-limit-api:
+      rateLimit:
+        average: 1000    # Per API key limiting
+        burst: 1500
+        sourceCriterion:
+          requestHeaderName: "X-API-Key"
+
+    rate-limit-per-minute:
+      rateLimit:
+        average: 60      # 60 requests per minute = 1 per second
+        period: 60       # Over 60 second window
+        burst: 10
+        sourceCriterion:
+          ipStrategy:
+            depth: 1
+
+         ########################################################
+     # 18. REDIRECT REGEX - Regex-based redirects
+     ########################################################
+    redirect-regex-www:
+      redirectRegex:
+        regex: "^https?://([^.]+\\.[^.]+)/(.*)"
+        replacement: "https://www.${1}/${2}"
+        permanent: true
+
+    redirect-regex-canonical:
+      redirectRegex:
+        regex: "^https?://([^/]+)/+(.*)$"
+        replacement: "https://${1}/${2}"
+        permanent: true
+
+    redirect-regex-remove-trailing-slash:
+      redirectRegex:
+        regex: "^(.*)/+$"
+        replacement: "${1}"
+        permanent: true
+
+         ########################################################
+     # 19. REDIRECT SCHEME - Protocol redirects
+     ########################################################
+    redirect-to-https:
+      redirectScheme:
+        scheme: "https"
+        permanent: true
+
+    redirect-to-https-custom-port:
+      redirectScheme:
+        scheme: "https"
+        port: "8443"
+        permanent: true
+
+         ########################################################
+     # 20. REPLACE PATH - Path replacement
+     ########################################################
+    replace-path-root:
+      replacePath:
+        path: "/"
+
+    replace-path-api:
+      replacePath:
+        path: "/api/v1"
+
+    replace-path-health:
+      replacePath:
+        path: "/health"
+
+         ########################################################
+     # 21. REPLACE PATH REGEX - Regex path replacement
+     ########################################################
+    replace-path-regex-versioning:
+      replacePathRegex:
+        regex: "^/v[0-9]+/(.*)"
+        replacement: "/${1}"
+
+    replace-path-regex-normalize:
+      replacePathRegex:
+        regex: "^/api/([^/]+)/v[0-9]+/(.*)"
+        replacement: "/api/${1}/${2}"
+
+         ########################################################
+     # 22. RETRY - Request retry logic
+     ########################################################
+    retry-default:
+      retry:
+        attempts: 3
+        initialInterval: "100ms"
+
+    retry-aggressive:
+      retry:
+        attempts: 5
+        initialInterval: "50ms"
+
+    retry-conservative:
+      retry:
+        attempts: 2
+        initialInterval: "200ms"
+
+         ########################################################
+     # 23. STRIP PREFIX - Remove path prefixes
+     ########################################################
+    strip-prefix-api:
+      stripPrefix:
+        prefixes:
+          - "/api"
+          - "/api/v1"
+        forceSlash: false
+
+    strip-prefix-version:
+      stripPrefix:
+        prefixes:
+          - "/v1"
+          - "/v2"
+          - "/v3"
+        forceSlash: false
+
+         ########################################################
+     # 24. STRIP PREFIX REGEX - Regex prefix removal
+     ########################################################
+    strip-prefix-regex-version:
+      stripPrefixRegex:
+        regex:
+          - "^/v[0-9]+/"
+
+    strip-prefix-regex-user-context:
+      stripPrefixRegex:
+        regex:
+          - "^/users/[0-9]+/"
+          - "^/accounts/[a-zA-Z0-9]+/"
+
+    ########################################################
+    # MIDDLEWARE CHAINS - Combine middlewares for common patterns
+    ########################################################
+
+    # Basic security for all services
+    security-basic:
+      chain:
+        middlewares:
+          - rate-limit-default
+          - inflight-default
+          - circuit-breaker-default
+          - buffering-default
+          - compress-default
+          - headers-security
+          - content-type-default
+          - retry-default
+
+    # Strict security for sensitive services
+    security-strict:
+      chain:
+        middlewares:
+          - rate-limit-strict
+          - inflight-strict
+          - circuit-breaker-strict
+          - buffering-strict
+          - compress-default
+          - headers-security
+          - content-type-default
+          - retry-conservative
+
+    # API-focused security
+    security-api:
+      chain:
+        middlewares:
+          - rate-limit-api
+          - inflight-api
+          - circuit-breaker-default
+          - buffering-default
+          - compress-aggressive
+          - headers-cors-strict
+          - content-type-default
+          - retry-default
+
+    # Public web service with CORS
+    security-web-cors:
+      chain:
+        middlewares:
+          - rate-limit-default
+          - inflight-default
+          - circuit-breaker-default
+          - buffering-default
+          - compress-default
+          - headers-cors-permissive
+          - headers-security
+          - content-type-default
+          - retry-default
+
+    # File upload services
+    security-uploads:
+      chain:
+        middlewares:
+          - rate-limit-strict
+          - inflight-strict
+          - circuit-breaker-default
+          - buffering-large-files
+          - compress-default
+          - headers-security
+          - content-type-default
+          - retry-conservative
+
+    # Admin/internal services with auth and IP restrictions
+    security-admin:
+      chain:
+        middlewares:
+          - ip-allowlist-local
+          - basic-auth-strict
+          - rate-limit-strict
+          - inflight-strict
+          - circuit-breaker-strict
+          - buffering-strict
+          - headers-security
+          - content-type-default
+          - retry-conservative
+
+    # gRPC services
+    security-grpc:
+      chain:
+        middlewares:
+          - rate-limit-default
+          - inflight-default
+          - circuit-breaker-default
+          - grpc-web-restricted
+          - headers-security
+          - retry-default
+
+########################################################
+# USAGE EXAMPLES:
+########################################################
+# 
+# Basic security for most services:
+# middlewares:
+#   - security-basic
+#
+# Strict security for sensitive services:
+# middlewares:
+#   - security-strict
+#
+# API services with CORS:
+# middlewares:
+#   - security-api
+#
+# Public web with CORS:
+# middlewares:
+#   - security-web-cors
+#
+# File upload services:
+# middlewares:
+#   - security-uploads
+#
+# Admin services:
+# middlewares:
+#   - security-admin
+#
+# gRPC services:
+# middlewares:
+#   - security-grpc
+#
+# Custom combinations:
+# middlewares:
+#   - rate-limit-default
+#   - basic-auth-default
+#   - compress-default
+#
+######################################################## 

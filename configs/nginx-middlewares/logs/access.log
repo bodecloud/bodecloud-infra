@@ -1,5 +1,0 @@
-127.0.0.1 - - [04/Jun/2025:23:23:16 -0500] "GET /auth-ip-only HTTP/1.1" 200 2 "-" "curl/8.12.1" "-" auth_method="ip_whitelist" original_uri="-" middleware="auth-ip-only"
-127.0.0.1 - - [04/Jun/2025:23:23:23 -0500] "GET /auth-api-only HTTP/1.1" 401 60 "-" "curl/8.12.1" "-" auth_method="ip_whitelist" original_uri="-" middleware="auth-api-only"
-127.0.0.1 - - [04/Jun/2025:23:23:34 -0500] "GET /auth-api-only HTTP/1.1" 200 2 "-" "curl/8.12.1" "-" auth_method="ip_whitelist" original_uri="-" middleware="auth-api-only"
-127.0.0.1 - - [04/Jun/2025:23:23:42 -0500] "GET /auth-ratelimit HTTP/1.1" 200 2 "-" "curl/8.12.1" "-" auth_method="ip_whitelist" original_uri="-" middleware="auth-ratelimit"
-127.0.0.1 - - [04/Jun/2025:23:39:02 -0500] "GET /ratelimit HTTP/1.1" 200 2 "-" "curl/8.12.1" "-" auth_method="ip_whitelist" original_uri="-" middleware="ratelimit"

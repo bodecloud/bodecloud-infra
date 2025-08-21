@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: error-pages
+  name: error-pages
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: error-pages
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: error-pages
+    spec:
+      containers:
+        - image: httpd:alpine
+          name: error-pages
+          volumeMounts:
+            - mountPath: /usr/local/apache2/htdocs
+              name: error-pages-cm0
+              readOnly: true
+      hostname: error-pages
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: error-pages-cm0
+          name: error-pages-cm0

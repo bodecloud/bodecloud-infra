@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.routers.homepage.middlewares: nginx-auth@file
+    traefik.http.routers.homepage.rule: Host(`homepage.bolabaden.org`) || Host(`homepage.bolabaden.duckdns.org`) || Host(`homepage.micklethefickle.duckdns.org`) || Host(`homepage.micklethefickle.bolabaden.org`) || Host(`homepage.micklethefickle.bolabaden.duckdns.org`)
+    traefik.http.services.homepage.loadbalancer.server.port: "3000"
+  labels:
+    io.kompose.service: homepage
+  name: homepage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: homepage
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+        traefik.enable: "true"
+        traefik.http.routers.homepage.middlewares: nginx-auth@file
+        traefik.http.routers.homepage.rule: Host(`homepage.bolabaden.org`) || Host(`homepage.bolabaden.duckdns.org`) || Host(`homepage.micklethefickle.duckdns.org`) || Host(`homepage.micklethefickle.bolabaden.org`) || Host(`homepage.micklethefickle.bolabaden.duckdns.org`)
+        traefik.http.services.homepage.loadbalancer.server.port: "3000"
+      labels:
+        io.kompose.service: homepage
+    spec:
+      containers:
+        - env:
+            - name: HOMEPAGE_ALLOWED_HOSTS
+              value: '*'
+            - name: HOMEPAGE_VAR_HEADER_STYLE
+            - name: HOMEPAGE_VAR_SEARCH_PROVIDER
+              value: google
+            - name: HOMEPAGE_VAR_TITLE
+              value: Bolabaden
+            - name: HOMEPAGE_VAR_WEATHER_CITY
+              value: Chicago
+            - name: HOMEPAGE_VAR_WEATHER_LAT
+              value: "41.8781"
+            - name: HOMEPAGE_VAR_WEATHER_LONG
+              value: "-87.6298"
+            - name: HOMEPAGE_VAR_WEATHER_UNIT
+              value: fahrenheit
+            - name: TZ
+              value: America/Chicago
+          image: ghcr.io/gethomepage/homepage
+          livenessProbe:
+            exec:
+              command:
+                - wget -qO- http://127.0.0.1:3000 > /dev/null 2>&1 || exit 1
+            failureThreshold: 3
+            periodSeconds: 30
+            timeoutSeconds: 15
+          name: homepage
+          volumeMounts:
+            - mountPath: /app/config
+              name: homepage-cm1
+      hostname: homepage
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: homepage-cm1
+          name: homepage-cm1

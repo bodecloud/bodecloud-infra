@@ -1,0 +1,28 @@
+{"logtail":{"client_time":"2025-04-27T11:48:41.535282462Z","proc_id":981330592,"proc_seq":202},"metrics":"I1201I1402I1602I1a0cI3e0c","v":1,"text":"control: mapRoutine: backoff: 9 msec\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.546496091Z","proc_id":981330592,"proc_seq":203},"v":1,"text":"control: PollNetMap: unexpected EOF\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.546532331Z","proc_id":981330592,"proc_seq":204},"v":1,"text":"control: sendStatus: mapRoutine1: state:authenticated\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.546552331Z","proc_id":981330592,"proc_seq":205},"v":1,"text":"control: mapRoutine: state:authenticated\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.546618331Z","proc_id":981330592,"proc_seq":206},"v":1,"text":"control: PollNetMap: stream=true ep=[185.107.94.249:40560 10.8.0.59:40560 10.76.128.99:40560]\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.547245411Z","proc_id":981330592,"proc_seq":207},"v":2,"text":"control: controlhttp: waiting 1.80 seconds before dialing \"controlplane.tailscale.com\" @ 18.159.140.118\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.54769933Z","proc_id":981330592,"proc_seq":208},"text":"Received error: PollNetMap: unexpected EOF\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.54774381Z","proc_id":981330592,"proc_seq":209},"v":2,"text":"control: controlhttp: trying to dial \"controlplane.tailscale.com\" @ 2a05:d014:386:202:1e36:2966:5bec:a911\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.54788641Z","proc_id":981330592,"proc_seq":210},"v":2,"text":"control: controlhttp: waiting 0.80 seconds before dialing \"controlplane.tailscale.com\" @ 3.125.194.96\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.54790817Z","proc_id":981330592,"proc_seq":211},"v":2,"text":"control: controlhttp: waiting 1.30 seconds before dialing \"controlplane.tailscale.com\" @ 3.70.110.84\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.54791945Z","proc_id":981330592,"proc_seq":212},"v":2,"text":"control: controlhttp: waiting 0.30 seconds before dialing \"controlplane.tailscale.com\" @ 35.156.244.91\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.54793389Z","proc_id":981330592,"proc_seq":213},"v":2,"text":"control: controlhttp: waiting 1.05 seconds before dialing \"controlplane.tailscale.com\" @ 2a05:d014:386:202:c5e9:4c3f:9808:f2b0\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.54793945Z","proc_id":981330592,"proc_seq":214},"v":2,"text":"[RATELIMIT] format(\"control: controlhttp: waiting %.2f seconds before dialing %q @ %v\")\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.848384917Z","proc_id":981330592,"proc_seq":215},"v":2,"text":"control: controlhttp: trying to dial \"controlplane.tailscale.com\" @ 35.156.244.91\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:41.848437277Z","proc_id":981330592,"proc_seq":216},"text":"control: controlhttp: forcing port 443 dial due to recent noise dial\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.098382193Z","proc_id":981330592,"proc_seq":217},"v":2,"text":"control: controlhttp: trying to dial \"controlplane.tailscale.com\" @ 2a05:d014:386:202:eee7:5001:722d:1156\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.176626877Z","proc_id":981330592,"proc_seq":218},"v":1,"text":"control: controlhttp: high-priority success dialing \"controlplane.tailscale.com\" @ 35.156.244.91 from dial plan\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.288231368Z","proc_id":981330592,"proc_seq":219},"v":1,"controltime":"2025-04-27T11:48:42.231547685Z"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.288274608Z","proc_id":981330592,"proc_seq":220},"text":"control: netmap: got new dial plan from control\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.288376008Z","proc_id":981330592,"proc_seq":221},"v":1,"text":"control: new network map (periodic):\nnetmap: self: [gJhsJ] auth=machine-authorized u=th3w1zard1@github [100.123.33.90/32 fd7a:115c:a1e0::a201:215a/128]\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.288384368Z","proc_id":981330592,"proc_seq":222},"v":1,"text":"control: mapRoutine: netmap received: state:synchronized\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.288401368Z","proc_id":981330592,"proc_seq":223},"v":1,"text":"control: sendStatus: mapRoutine-got-netmap: state:synchronized\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.289024687Z","proc_id":981330592,"proc_seq":224},"v":1,"text":"netmap diff: (none)\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.289092727Z","proc_id":981330592,"proc_seq":225},"v":1,"text":"magicsock: got updated network map; 9 peers\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.289345807Z","proc_id":981330592,"proc_seq":226},"v":1,"text":"wgcfg: skipped unselected default routes from: \"wizard-pc-wsl\" ([7xVXJ]), \"micklethefickle\" ([So5A/]), \"tailscale-premiumize-nl-docker\" ([poYcm]), \"beatapostapita\" ([cPKoS]), \"tailscale-airvpn-docker\" ([MbmLx])\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.289422407Z","proc_id":981330592,"proc_seq":227},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.289459567Z","proc_id":981330592,"proc_seq":228},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-04-27T11:48:42.289468367Z","proc_id":981330592,"proc_seq":229},"v":1,"text":"authReconfig: ra=true dns=false 0x02: <nil>\n"}

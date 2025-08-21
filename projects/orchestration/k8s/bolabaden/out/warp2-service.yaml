@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.routers.gptr-legacy.rule: Host(`gptr-legacy.bolabaden.org`) || Host(`gptr-legacy.bolabaden.duckdns.org`) || Host(`gptr-legacy.micklethefickle.duckdns.org`) || Host(`gptr-legacy.micklethefickle.bolabaden.org`) || Host(`gptr-legacy.micklethefickle.bolabaden`)
+    traefik.http.routers.gptr-legacy.service: gptr-legacy
+    traefik.http.routers.gptr.rule: Host(`bolabaden.org`) || Host(`bolabaden.duckdns.org`) || Host(`micklethefickle.duckdns.org`) || Host(`micklethefickle.bolabaden.org`) || Host(`micklethefickle.bolabaden.duckdns.org`) || Host(`gptr.bolabaden.org`) || Host(`gptr.bolabaden.duckdns.org`) || Host(`gptr.micklethefickle.duckdns.org`) || Host(`gptr.micklethefickle.bolabaden.org`) || Host(`gptr.micklethefickle.bolabaden.duckdns.org`)
+    traefik.http.routers.gptr.service: gptr
+    traefik.http.services.gptr-legacy.loadbalancer.server.port: "8000"
+    traefik.http.services.gptr.loadbalancer.server.port: "3000"
+  labels:
+    io.kompose.service: warp2
+  name: warp2
+spec:
+  ports:
+    - name: "8000"
+      port: 8000
+      targetPort: 8000
+    - name: "3000"
+      port: 3000
+      targetPort: 3000
+    - name: "3001"
+      port: 3001
+      targetPort: 3001
+    - name: 8000-tcp
+      port: 8000
+      targetPort: 8000
+  selector:
+    io.kompose.service: warp2

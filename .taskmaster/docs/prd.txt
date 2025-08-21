@@ -1,0 +1,301 @@
+# Product Requirements Document: bocloud.org Professional Developer Portfolio
+
+## Executive Summary
+
+Create a professional, minimalist portfolio website for bocloud.org that showcases technical expertise in self-hosted infrastructure, AI tools, and backend development. The primary goal is to facilitate hiring opportunities by demonstrating real-world technical capabilities without appearing desperate or overly sales-focused.
+
+**NEW SECONDARY OBJECTIVE**: Create a comprehensive technical knowledge sharing section that provides guides, tutorials, and documentation for self-hosted infrastructure deployment, similar to guides.viren070.me but focused on the specific stack and services running in the bocloud.org infrastructure.
+
+## Problem Statement
+
+The current developer is a 30-year-old self-taught software engineer with ADHD who:
+
+- Has extensive technical skills but struggles with traditional job application processes
+- Runs sophisticated self-hosted infrastructure (Kubernetes, Tailscale, Oracle Cloud)
+- Has built and deployed multiple AI tools and services
+- Needs a professional presence that speaks to technical competence without corporate fluff
+- Wants to transition from unstable gig work to stable remote employment
+- Prefers text-based, async communication over phone/video interviews
+- **NEW**: Has built an extensive infrastructure with 100+ services and wants to share knowledge about how others can replicate similar setups
+
+## Target Audience
+
+### Primary Audience
+
+- Technical hiring managers and recruiters
+- CTO/Engineering leads at startups and mid-size companies
+- Freelance/contract opportunity providers
+- Open source project maintainers looking for contributors
+
+### Secondary Audience
+
+- Developers and engineers who might collaborate or refer opportunities
+- Users of the hosted tools and services
+- Potential clients for automation/infrastructure consulting
+
+### **NEW: Technical Knowledge Sharing Audience**
+
+- Self-hosting enthusiasts and homelab operators
+- Developers interested in infrastructure automation
+- People looking to deploy similar stacks (Docker Compose, Kubernetes, Oracle Cloud)
+- Technical community members seeking practical deployment guides
+- Students and professionals learning about modern infrastructure practices
+
+## Core Objectives
+
+1. **Professional Credibility**: Establish technical authority through demonstrated infrastructure and tools
+2. **Hiring Facilitation**: Make it easy for employers to understand capabilities and contact
+3. **Portfolio Showcase**: Display real, working projects and infrastructure
+4. **Authentic Representation**: Avoid corporate speak while maintaining professionalism
+5. **User Utility**: Provide actual value to visitors through hosted tools and services
+6. **NEW: Knowledge Sharing**: Create comprehensive guides and documentation for replicating the infrastructure setup
+7. **NEW: Community Building**: Establish thought leadership in self-hosted infrastructure space
+
+## Technical Requirements
+
+### Infrastructure Showcase
+
+- Live architecture diagram showing K8s, Tailscale, Oracle Cloud setup
+- Real-time service status indicators
+- Links to live tools and dashboards
+- Technical stack documentation
+
+### **NEW: Technical Guides Section**
+
+- Comprehensive documentation for the entire docker-compose.yml stack
+- Step-by-step deployment guides for each service category
+- Infrastructure setup tutorials (Oracle Cloud, Tailscale, Kubernetes)
+- Service-specific configuration guides
+- Troubleshooting and maintenance documentation
+- Interactive service explorer based on the actual running stack
+
+### Core Features
+
+- Responsive design optimized for desktop and mobile
+- Fast loading times (< 3 seconds)
+- SEO optimization for technical keywords
+- Clean, minimal aesthetic that focuses on content
+- Accessibility compliance (WCAG 2.1)
+
+### Content Management
+
+- Easy content updates without full deployments
+- Markdown support for technical documentation
+- Version control integration
+- Automated deployment pipeline
+
+## Content Strategy
+
+### Hero Section
+
+- Clear professional identity
+- Brief technical focus statement
+- Immediate access to key areas (tools, projects, contact, **guides**)
+
+### Technical Showcase
+
+- Live infrastructure diagram
+- Service status dashboard
+- Tool demonstrations with screenshots
+- Architecture explanations in plain language
+
+### **NEW: Infrastructure Guides Section**
+
+- **Service Categories**: Organize guides by service type (Media, Monitoring, Development, AI/ML, etc.)
+- **Deployment Guides**: Step-by-step instructions for deploying the entire stack or individual services
+- **Configuration Examples**: Real configuration files and environment variables
+- **Architecture Deep Dives**: Detailed explanations of how services interact
+- **Troubleshooting**: Common issues and solutions
+- **Prerequisites**: Hardware requirements, domain setup, cloud provider setup
+
+### About Section
+
+- Professional background emphasizing self-taught expertise
+- Technical philosophy and approach
+- Skills and technologies (without buzzword overload)
+- Work preferences (remote, async, text-based)
+
+### Projects Portfolio
+
+- CloudCradle (Oracle Cloud deployment automation)
+- AI Research Wizard (modified GPT-researcher)
+- Cloudflare Load Balancer
+- Constellation (orchestrator project)
+- Other GitHub projects with clear descriptions
+
+### Contact & Availability
+
+- Professional email contact
+- GitHub profile link
+- Clear availability status
+- Preferred communication methods
+
+## Design Principles
+
+1. **Minimalism**: Clean, uncluttered design that highlights content
+2. **Authenticity**: Genuine technical focus without marketing fluff
+3. **Functionality**: Every element serves a purpose
+4. **Accessibility**: Usable by all visitors regardless of abilities
+5. **Performance**: Fast, efficient, and reliable
+6. **NEW: Educational Value**: Provide genuine learning value to the technical community
+
+## Success Metrics
+
+### Primary KPIs
+
+- Job inquiry conversion rate
+- Time spent on technical showcase sections
+- GitHub profile visits from site
+- Contact form submissions or email inquiries
+
+### Secondary KPIs
+
+- Page load speed
+- Mobile usability scores
+- SEO ranking for relevant technical terms
+- Return visitor rate
+
+### **NEW: Knowledge Sharing KPIs**
+
+- Guide page views and engagement time
+- Community feedback and comments
+- Social media shares of technical content
+- Referral traffic from technical communities
+- GitHub stars/forks on related projects
+
+## Technical Stack
+
+### Frontend
+
+- Next.js with TypeScript for performance and maintainability
+- Tailwind CSS for consistent, responsive styling
+- React components for modularity
+- Static site generation where possible
+
+### Backend/Infrastructure
+
+- Hosted on existing Kubernetes infrastructure
+- Integrated with current Tailscale mesh network
+- Automated deployment via CI/CD pipeline
+- SSL/TLS via existing certificate management
+
+### Content Management
+
+- Markdown-based content for easy updates
+- Git-based workflow for version control
+- Automated builds on content changes
+
+### **NEW: Guide Content System**
+
+- Automated service discovery from docker-compose.yml
+- Dynamic guide generation based on running services
+- Integration with service status APIs
+- Searchable documentation system
+
+## Development Phases
+
+### Phase 1: Foundation (Weeks 1-2)
+
+- Set up Next.js project structure
+- Implement basic responsive layout
+- Create core components (Header, Footer, Navigation)
+- Establish content structure and routing
+
+### Phase 2: Content Development (Weeks 3-4)
+
+- Develop hero section with professional messaging
+- Create technical showcase with architecture diagrams
+- Build project portfolio with GitHub integration
+- Implement about section with authentic professional narrative
+
+### Phase 3: Interactive Features (Weeks 5-6)
+
+- Add real-time service status indicators
+- Implement contact form with email integration
+- Create tool demonstration interfaces
+- Add performance monitoring and analytics
+
+### **NEW: Phase 4: Technical Guides Development (Weeks 7-8)**
+
+- Create service discovery system from docker-compose.yml
+- Build guide template system
+- Implement searchable documentation
+- Create interactive service explorer
+- Develop deployment automation guides
+
+### Phase 5: Polish & Optimization (Weeks 9-10)
+
+- SEO optimization and meta tag implementation
+- Performance optimization and caching
+- Accessibility testing and improvements
+- Cross-browser compatibility testing
+
+### Phase 6: Deployment & Launch (Week 11)
+
+- Production deployment to Kubernetes cluster
+- SSL certificate configuration
+- DNS setup and domain configuration
+- Monitoring and alerting setup
+
+## **NEW: Infrastructure Guide Content Areas**
+
+### Service Categories to Document
+
+Based on the docker-compose.yml analysis:
+
+1. **Media Stack**: Plex, Jellyfin, Radarr, Sonarr, Overseerr, Jellyseerr
+2. **Monitoring & Management**: Traefik, Dozzle, Watchtower, Gatus, Tautulli
+3. **AI & ML Services**: GPT-Researcher, Firecrawl, Open-WebUI, LobChat
+4. **Development Tools**: Code-Server, Homepage, Searxng
+5. **Streaming & Content**: AIOStreams, Stremio services, MediaFusion
+6. **Infrastructure**: Tailscale, VPN services, Networking
+7. **Security & Auth**: Authentication services, Crowdsec
+8. **Database & Storage**: MongoDB, Redis, RClone
+
+### Guide Structure Template
+
+- **Overview**: What the service does and why it's useful
+- **Prerequisites**: Required setup and dependencies
+- **Installation**: Step-by-step deployment instructions
+- **Configuration**: Environment variables and settings
+- **Integration**: How it connects with other services
+- **Troubleshooting**: Common issues and solutions
+- **Maintenance**: Updates and ongoing care
+
+## Risk Mitigation
+
+### Technical Risks
+
+- **Infrastructure Dependency**: Ensure graceful degradation if services are unavailable
+- **Performance Issues**: Implement caching and CDN strategies
+- **Security Concerns**: Regular security audits and updates
+- **NEW: Documentation Maintenance**: Automated systems to keep guides current with infrastructure changes
+
+### Content Risks
+
+- **Over-Engineering**: Keep focus on practical demonstration of skills
+- **Impostor Syndrome**: Balance humility with confidence in technical abilities
+- **Scope Creep**: Maintain focus on core hiring objectives
+- **NEW: Information Overload**: Organize technical content clearly and progressively
+
+## Maintenance Plan
+
+### Regular Updates
+
+- Monthly content reviews and updates
+- Quarterly technical stack updates
+- Annual design and UX reviews
+- **NEW: Automated guide updates when infrastructure changes**
+
+### Monitoring
+
+- Uptime monitoring for all linked services
+- Performance monitoring and optimization
+- Security scanning and patch management
+- **NEW: Guide accuracy validation against live infrastructure**
+
+## Conclusion
+
+This website will serve as both a comprehensive technical portfolio that demonstrates real-world capabilities and a valuable resource for the technical community. The combination of professional showcasing and knowledge sharing will differentiate it from typical developer portfolios, establish thought leadership, and appeal to both technical decision-makers looking for competent engineers and community members seeking practical infrastructure guidance.
+
+The dual-purpose approach aligns with the authentic, value-driven philosophy while creating multiple pathways for professional opportunities and community engagement.

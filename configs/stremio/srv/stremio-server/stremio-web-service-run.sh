@@ -47,6 +47,43 @@ get_public_ip() {
     echo "${PUBLIC_IP}"
 }
 
+# Function to resolve a domain/hostname to an IP address
+resolve_domain_to_ip() {
+    DOMAIN="$1"
+    
+    # Check if input is already an IP address (simple check)
+    if echo "${DOMAIN}" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+        echo "${DOMAIN}"
+        return
+    fi
+    
+    echo "[DNS LOOKUP] Attempting to resolve domain: ${DOMAIN}" >&2
+    
+    # Try to resolve using host command
+    if command -v host >/dev/null 2>&1; then
+        RESOLVED_IP=$(host -t A "${DOMAIN}" | grep "has address" | head -n 1 | awk '{print $NF}')
+        if [ -n "${RESOLVED_IP}" ]; then
+            echo "[DNS LOOKUP] Resolved ${DOMAIN} to IP: ${RESOLVED_IP} using 'host' command" >&2
+            echo "${RESOLVED_IP}"
+            return
+        fi
+    fi
+    
+    # Try to resolve using nslookup as fallback
+    if command -v nslookup >/dev/null 2>&1; then
+        RESOLVED_IP=$(nslookup "${DOMAIN}" | grep -A1 "Name:" | grep "Address:" | head -n 1 | awk '{print $NF}')
+        if [ -n "${RESOLVED_IP}" ]; then
+            echo "[DNS LOOKUP] Resolved ${DOMAIN} to IP: ${RESOLVED_IP} using 'nslookup' command" >&2
+            echo "${RESOLVED_IP}"
+            return
+        fi
+    fi
+    
+    # Return original input if resolution failed
+    echo "[DNS LOOKUP] Failed to resolve domain ${DOMAIN} to IP address" >&2
+    echo "${DOMAIN}"
+}
+
 # Function to start HTTP server with specified options
 start_http_server() {
     echo "[SERVER] Starting HTTP server on port 8080 with options: $*"
@@ -251,40 +288,35 @@ if [ -n "${IPADDRESS}" ]; then
     SERVER_PID=$!
     echo "[STARTUP] Server started with PID: ${SERVER_PID}"
 
-    # Check if IPADDRESS is an "any address" value
-    if [ "${IPADDRESS}" = "0.0.0.0" ]; then
-        echo "[STARTUP] IPADDRESS is set to '0.0.0.0' (any address)"
+    # Handle IP address resolution for "any address" values
+    if [ "${IPADDRESS}" = "0.0.0.0" ] || [ "${IPADDRESS}" = "*" ] || [ "${IPADDRESS}" = "any" ]; then
+        echo "[STARTUP] IPADDRESS is set to '${IPADDRESS}' which indicates 'any address'"
         PUBLIC_IP=$(get_public_ip)
+        
+        # If we successfully obtained a public IP, use it instead of the original IPADDRESS
         if [ -n "${PUBLIC_IP}" ]; then
-            echo "[STARTUP] Using discovered public IP: ${PUBLIC_IP}"
+            echo "[STARTUP] Will use discovered public IP address: ${PUBLIC_IP} (replacing ${IPADDRESS})"
             IPADDRESS="${PUBLIC_IP}"
         else
-            echo "[STARTUP] ⚠ Failed to obtain public IP address, using original value: ${IPADDRESS}"
-            echo "[STARTUP] ⚠ This may cause issues with certificate generation"
-        fi
-    elif [ "${IPADDRESS}" = "*" ]; then
-        echo "[STARTUP] IPADDRESS is set to '*' (any address)"
-        PUBLIC_IP=$(get_public_ip)
-        if [ -n "${PUBLIC_IP}" ]; then
-            echo "[STARTUP] Using discovered public IP: ${PUBLIC_IP}"
-            IPADDRESS="${PUBLIC_IP}"
-        else
-            echo "[STARTUP] ⚠ Failed to obtain public IP address, using original value: ${IPADDRESS}"
-            echo "[STARTUP] ⚠ This may cause issues with certificate generation"
-        fi
-    elif [ "${IPADDRESS}" = "any" ]; then
-        echo "[STARTUP] IPADDRESS is set to 'any' (any address)"
-        PUBLIC_IP=$(get_public_ip)
-        if [ -n "${PUBLIC_IP}" ]; then
-            echo "[STARTUP] Using discovered public IP: ${PUBLIC_IP}"
-            IPADDRESS="${PUBLIC_IP}"
-        else
-            echo "[STARTUP] ⚠ Failed to obtain public IP address, using original value: ${IPADDRESS}"
+            echo "[STARTUP] ⚠ Failed to obtain public IP address, falling back to original value: ${IPADDRESS}"
             echo "[STARTUP] ⚠ This may cause issues with certificate generation"
         fi
     else
-        # For specific IP addresses, just use them directly
-        echo "[STARTUP] Using specific IP address: ${IPADDRESS}"
+        # Resolve domain name in IPADDRESS if needed
+        if ! echo "${IPADDRESS}" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "[STARTUP] IPADDRESS '${IPADDRESS}' doesn't look like an IP address, attempting to resolve"
+            RESOLVED_IP=$(resolve_domain_to_ip "${IPADDRESS}")
+            
+            if [ "${RESOLVED_IP}" != "${IPADDRESS}" ]; then
+                echo "[STARTUP] Resolved domain to IP: ${IPADDRESS} -> ${RESOLVED_IP}"
+                IPADDRESS="${RESOLVED_IP}"
+            else
+                echo "[STARTUP] ⚠ Could not resolve domain to IP, using as-is: ${IPADDRESS}"
+                echo "[STARTUP] ⚠ This may cause issues with certificate generation"
+            fi
+        else
+            echo "[STARTUP] Using provided IP address: ${IPADDRESS}"
+        fi
     fi
     
     # Certificate setup for HTTPS

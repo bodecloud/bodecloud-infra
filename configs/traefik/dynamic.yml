@@ -1,0 +1,73 @@
+# Dynamic Traefik Configuration for Load Balancing
+http:
+  routers:
+    # Main load balancer for *.bolabaden.org
+    main-loadbalancer:
+      rule: "HostRegexp(`{subdomain:[a-z0-9-]+}.bolabaden.org`)"
+      service: backend-cluster
+      tls:
+        certResolver: letsencrypt
+      middlewares:
+        - security-headers
+        - rate-limit
+
+    # Health check endpoint
+    health-check:
+      rule: "PathPrefix(`/health`)"
+      service: health-service
+      priority: 100
+
+  services:
+    # Backend cluster with load balancing
+    backend-cluster:
+      loadBalancer:
+        # Round-robin load balancing
+        method: roundrobin
+        healthCheck:
+          path: /health
+          interval: 30s
+          timeout: 5s
+          headers:
+            Host: "{{ .Host }}"
+        servers:
+          # Dynamic server list (will be updated by health checker)
+          - url: "http://172.20.0.2:8443"
+          - url: "http://172.20.0.3:8443"
+          - url: "http://172.20.0.4:8443"
+          - url: "http://172.20.0.5:8443"
+          - url: "http://172.20.0.6:8443"
+          - url: "http://172.20.0.7:8443"
+          - url: "http://172.20.0.8:8443"
+          - url: "http://172.20.0.9:8443"
+          - url: "http://172.20.0.10:8443"
+          - url: "http://172.20.0.11:8443"
+          - url: "http://172.20.0.12:8443"
+          - url: "http://172.20.0.13:8443"
+
+    # Health service
+    health-service:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8080"
+
+  middlewares:
+    # Security headers
+    security-headers:
+      headers:
+        frameDeny: true
+        sslRedirect: true
+        browserXssFilter: true
+        contentTypeNosniff: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 31536000
+        customFrameOptionsValue: "SAMEORIGIN"
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+
+    # Rate limiting
+    rate-limit:
+      rateLimit:
+        burst: 100
+        average: 50 

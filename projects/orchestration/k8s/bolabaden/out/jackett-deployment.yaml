@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: jackett
+  name: jackett
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: jackett
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: jackett
+    spec:
+      containers:
+        - env:
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "988"
+            - name: TZ
+              value: America/Chicago
+            - name: UMASK
+              value: "002"
+            - name: AUTO_UPDATE
+              value: "true"
+            - name: RUN_OPTS
+              value: ""
+          image: linuxserver/jackett
+          livenessProbe:
+            exec:
+              command:
+                - curl -fs http://127.0.0.1:9117/api/v2.0/indexers/all/results/torznab?t=indexers&apikey=nnx0n84pcj7umynyd2pbid2nl1zzuemz || exit 1
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+          name: jackett
+          ports:
+            - containerPort: 9117
+              protocol: TCP
+          securityContext:
+            runAsGroup: 988
+            runAsUser: 1001
+          volumeMounts:
+            - mountPath: /config
+              name: jackett-config
+            - mountPath: /downloads
+              name: jackett-blackhole
+      restartPolicy: Always
+      volumes:
+        - name: jackett-config
+          persistentVolumeClaim:
+            claimName: jackett-config
+        - name: jackett-blackhole
+          persistentVolumeClaim:
+            claimName: jackett-blackhole 

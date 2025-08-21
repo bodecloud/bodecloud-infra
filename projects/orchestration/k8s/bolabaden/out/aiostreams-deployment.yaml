@@ -1,0 +1,135 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: aiostreams
+  name: aiostreams
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: aiostreams
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: aiostreams
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: ADDON_NAME
+              value: BadenAIO
+            - name: ADDON_ID
+              value: aiostreams.bolabaden.org
+            - name: DETERMINISTIC_ADDON_ID
+              value: "false"
+            - name: PORT
+              value: "3005"
+            - name: SECRET_KEY
+              value: 1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82
+            - name: API_KEY
+              value: sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9
+            - name: SHOW_DIE
+              value: "false"
+            - name: LOG_LEVEL
+              value: debug
+            - name: LOG_FORMAT
+              value: text
+            - name: LOG_SENSITIVE_INFO
+              value: "true"
+            - name: MAX_ADDONS
+              value: "50"
+            - name: MAX_KEYWORD_FILTERS
+              value: "30"
+            - name: MAX_REGEX_SORT_PATTERNS
+              value: "30"
+            - name: MAX_MOVIE_SIZE
+              value: "161061273600"
+            - name: MAX_EPISODE_SIZE
+              value: "161061273600"
+            - name: MAX_TIMEOUT
+              value: "50000"
+            - name: MIN_TIMEOUT
+              value: "1000"
+            - name: MEDIAFLOW_IP_TIMEOUT
+              value: "30000"
+            - name: ENCRYPT_MEDIAFLOW_URLS
+              value: "true"
+            - name: STREMTHRU_TIMEOUT
+              value: "30000"
+            - name: DEFAULT_STREMTHRU_URL
+              value: https://stremthru.bolabaden.org/
+            - name: ENCRYPT_STREMTHRU_URLS
+              value: "true"
+            - name: DEFAULT_TIMEOUT
+              value: "15000"
+            - name: COMET_URL
+              value: http://comet:2020/
+            - name: FORCE_COMET_HOSTNAME
+              value: comet.bolabaden.org
+            - name: FORCE_COMET_PORT
+              value: "443"
+            - name: FORCE_COMET_PROTOCOL
+              value: https
+            - name: MEDIAFUSION_URL
+              value: http://mediafusion:8000/
+            - name: MEDIAFUSION_CONFIG_TIMEOUT
+              value: "5000"
+            - name: MEDIAFUSION_API_PASSWORD
+              value: h4L0m4St3R327
+            - name: JACKETTIO_URL
+              value: https://jackettio.elfhosted.com/
+            - name: DEFAULT_JACKETTIO_INDEXERS
+              value: '["1337x", "animetosho", "anirena", "limetorrents", "nyaasi", "solidtorrents", "thepiratebay", "torlock", "yts"]'
+            - name: DEFAULT_JACKETTIO_STREMTHRU_URL
+              value: https://stremthru.13377001.xyz
+            - name: STREMIO_JACKETT_URL
+              value: https://stremio-jackett.elfhosted.com/
+            - name: STREMIO_JACKETT_CACHE_ENABLED
+              value: "true"
+            - name: STREMTHRU_STORE_URL
+              value: https://stremthru.elfhosted.com/stremio/store/
+            - name: EASYNEWS_PLUS_URL
+              value: https://b89262c192b0-stremio-easynews-addon.baby-beamup.club/
+            - name: EASYNEWS_PLUS_PLUS_URL
+              value: https://easynews-cloudflare-worker.jqrw92fchz.workers.dev/
+            - name: TORRENTIO_URL
+              value: https://torrentio.strem.fun/
+            - name: ORION_STREMIO_ADDON_URL
+              value: https://5a0d1888fa64-orion.baby-beamup.club/
+            - name: PEERFLIX_URL
+              value: https://peerflix-addon.onrender.com/
+            - name: TORBOX_STREMIO_URL
+              value: https://stremio.torbox.app/
+            - name: EASYNEWS_URL
+              value: https://ea627ddf0ee7-easynews.baby-beamup.club/
+            - name: DEBRIDIO_URL
+              value: https://debridio.adobotec.com/
+          envFrom:
+            - configMapRef:
+                name: configs-stremio-addons-aiostreams-config--env
+          image: ghcr.io/viren070/aiostreams:latest
+          livenessProbe:
+            exec:
+              command:
+                - wget -qO- http://127.0.0.1:3005/health || exit 1
+            failureThreshold: 5
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            timeoutSeconds: 10
+          name: aiostreams
+          ports:
+            - containerPort: 3005
+              protocol: TCP
+      restartPolicy: Always 

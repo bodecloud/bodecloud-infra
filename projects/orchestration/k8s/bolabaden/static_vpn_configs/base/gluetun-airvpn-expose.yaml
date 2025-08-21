@@ -1,0 +1,36 @@
+#! gluetun-airvpn-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: gluetun-airvpn
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: gluetun-airvpn
+spec:
+    selector:
+        com.docker.compose.project: boden
+        com.docker.compose.service: gluetun-airvpn
+    ports:
+        - name: gluetun-ai-1055
+          port: 1055
+          targetPort: gluetun-ai-1055
+        - name: gluetun-ai-8885
+          port: 8885
+          targetPort: gluetun-ai-8885
+        - name: gluetun-a-41641
+          port: 41641
+          targetPort: gluetun-a-41641
+        - name: gluetun-ai-8888
+          port: 8888
+          targetPort: gluetun-ai-8888
+        - name: gluetun-ai-8388
+          port: 8388
+          targetPort: gluetun-ai-8388
+        - name: gluetun-ai-8000
+          port: 8000
+          targetPort: gluetun-ai-8000
+        - name: gluetun-ai-9999
+          port: 9999
+          targetPort: gluetun-ai-9999

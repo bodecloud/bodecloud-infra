@@ -1,0 +1,77 @@
+#! warp-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: warp
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: warp
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: boden
+            com.docker.compose.service: warp
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: boden
+                com.docker.compose.service: warp
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: warp
+                  image: caomingjun/warp:latest
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: TUNNEL_TOKEN
+                      value: "eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9"
+                    - name: WARP_LICENSE_KEY
+                      value: "eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9"
+                    - name: WARP_SLEEP
+                      value: "2"
+                  securityContext:
+                    sysctls:
+                        name: net.ipv4.conf.all.src_valid_mark
+                        value: 1
+                        name: net.ipv6.conf.all.disable_ipv6
+                        value: 1
+                    capabilities:
+                        add: [MKNOD AUDIT_WRITE NET_ADMIN]
+                  ports:
+                    - name: warp-8080
+                      containerPort: 8080
+                    - name: warp-12470
+                      containerPort: 12470
+                    - name: warp-4000
+                      containerPort: 4000
+                    - name: warp-9117
+                      containerPort: 9117
+                    - name: warp-9696
+                      containerPort: 9696
+                    - name: warp-3000
+                      containerPort: 3000
+                    - name: warp-11470
+                      containerPort: 11470
+                    - name: warp-443
+                      containerPort: 443
+                    - name: warp-1080
+                      containerPort: 1080
+                    - name: warp-3005
+                      containerPort: 3005
+                    - name: warp-8000
+                      containerPort: 8000
+                    - name: warp-2020
+                      containerPort: 2020
+                  volumeMounts:
+                    - name: var-lib-cloudflare-warp
+                      mountPath: /var/lib/cloudflare-warp
+            volumes:
+                - name: var-lib-cloudflare-warp
+                  hostPath:
+                    path: /home/boden/configs/warp/data

@@ -1,0 +1,108 @@
+#! gluetun-airvpn-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: gluetun-airvpn
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: gluetun-airvpn
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: boden
+            com.docker.compose.service: gluetun-airvpn
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: boden
+                com.docker.compose.service: gluetun-airvpn
+                com.docker.compose.network.publicnet: "true"
+        spec:
+            restartPolicy: Always
+            containers:
+                - name: gluetun-airvpn
+                  image: ghcr.io/qdm12/gluetun
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: BLOCK_ADS
+                      value: "on"
+                    - name: BLOCK_MALICIOUS
+                      value: "on"
+                    - name: BLOCK_SURVEILLANCE
+                      value: "on"
+                    - name: FIREWALL_OUTBOUND_SUBNETS
+                      value: "10.76.0.0/16,172.16.0.0/16,100.64.0.0/10"
+                    - name: FIREWALL_VPN_INPUT_PORTS
+                      value: "20027,23936,36175,42162,52065"
+                    - name: HEALTH_SERVER_ADDRESS
+                      value: "127.0.0.1:9999"
+                    - name: HEALTH_SUCCESS_WAIT_DURATION
+                      value: "5s"
+                    - name: HEALTH_TARGET_ADDRESS
+                      value: "cloudflare.com:443"
+                    - name: HEALTH_VPN_DURATION_ADDITION
+                      value: "5s"
+                    - name: HEALTH_VPN_DURATION_INITIAL
+                      value: "6s"
+                    - name: OPENVPN_CIPHERS
+                      value: "aes-256-gcm"
+                    - name: OPENVPN_IPV6
+                      value: "off"
+                    - name: SERVER_COUNTRIES
+                      value: "Austria,Belgium,Brazil,Bulgaria,Canada,Czech Republic,Estonia,Germany,Ireland,Japan,Latvia,Netherlands,New Zealand,Norway,Romania,Serbia,Singapore,Spain,Sweden,Switzerland,United Kingdom,United States,China,Isle of Man"
+                    - name: STORAGE_FILEPATH
+                      value: "/gluetun/servers.json"
+                    - name: VERSION_INFORMATION
+                      value: "on"
+                    - name: VPN_SERVICE_PROVIDER
+                      value: "airvpn"
+                    - name: VPN_TYPE
+                      value: "openvpn"
+                  securityContext:
+                    sysctls:
+                        name: net.ipv6.conf.all.disable_ipv6
+                        value: 1
+                    capabilities:
+                        add: [NET_ADMIN]
+                  livenessProbe:
+                    exec:
+                        command:
+                            - /bin/sh
+                            - -c
+                            - wget -qO- http://127.0.0.1:9999 > /dev/null 2>&1 || exit 1
+                    periodSeconds: 30
+                    initialDelaySeconds: 40
+                    timeoutSeconds: 10
+                    failureThreshold: 3
+                  ports:
+                    - name: gluetun-ai-1055
+                      containerPort: 1055
+                    - name: gluetun-ai-8885
+                      containerPort: 8885
+                    - name: gluetun-a-41641
+                      containerPort: 41641
+                    - name: gluetun-ai-8888
+                      containerPort: 8888
+                    - name: gluetun-ai-8388
+                      containerPort: 8388
+                    - name: gluetun-ai-8000
+                      containerPort: 8000
+                    - name: gluetun-ai-9999
+                      containerPort: 9999
+                  volumeMounts:
+                    - name: gluetun-auth
+                      mountPath: /gluetun/auth
+                    - name: gluetun
+                      mountPath: /gluetun
+            volumes:
+                - name: gluetun-auth
+                  hostPath:
+                    path: /home/boden/configs/gluetun/auth
+                - name: gluetun
+                  hostPath:
+                    path: /home/boden/configs/gluetun/airvpn

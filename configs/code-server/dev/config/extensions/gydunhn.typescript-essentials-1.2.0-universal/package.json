@@ -1,0 +1,89 @@
+{
+	"name": "typescript-essentials",
+	"displayName": "Typescript-Essentials",
+	"description": "Typescript essential extensions for visual studio code",
+	"icon": "img/essentials.png",
+	"galleryBanner": {
+		"color": "#007ACC",
+		"theme": "dark"
+	},
+	"license": "LICENSE.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Gydunhn/Typescript-Essentials.git"
+	},
+	"keywords": [
+		"VSC",
+		"Code",
+		"VSCode",
+		"Visual Studio",
+		"Visual Studio Code",
+		"VSC Essentials",
+		"Essentials",
+		"Esenciales",
+		"Essenciais",
+		"Essentiel",
+		"Essenziali",
+		"Essentielles",
+		"Esencajoj",
+		"必需品",
+		"골자",
+		"अत्यावश्यकम्",
+		"ملزومات",
+		"Frontend",
+		"Web",
+		"Developer",
+		"Web Developer",
+		"TypeScript",
+		"Lint",
+		"linter",
+		"TSLint",
+		"ESLint",
+		"Importer",
+		"TypeScript Importer",
+		"npm",
+		"Intellisense",
+		"Visual Studio IntelliCode",
+		"IntelliCode",
+		"ES6",
+		"Snippets",
+		"JavaScript (ES6) code snippets",
+		"Debugger",
+		"Firefox",
+		"Debugger for Firefox",
+		"unused",
+		"exports",
+		"Total",
+		"Total TypeScript",
+		"Pretty",
+		"Errors",
+		"Pretty Errors",
+		"Pretty TypeScript Errors",
+		"Toolbox",
+		"TypeScript Toolbox",
+		"Gydunhn"
+	],
+	"version": "1.2.0",
+	"publisher": "Gydunhn",
+	"author": {
+		"name": "Javier Camus"
+	},
+	"engines": {
+		"vscode": "^1.35.0"
+	},
+	"categories": [
+		"Extension Packs"
+	],
+	"extensionPack": [
+		"Gydunhn.javascript-essentials",
+		"pmneo.tsimporter",
+		"mattpocock.ts-error-translator",
+		"yoavbls.pretty-ts-errors",
+		"DSKWRK.vscode-generate-getter-setter"
+	],
+	"__metadata": {
+		"installedTimestamp": 1752874619440,
+		"targetPlatform": "universal",
+		"size": 42777
+	}
+}

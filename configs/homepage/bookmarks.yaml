@@ -3,16 +3,24 @@
 # https://gethomepage.dev/configs/bookmarks
 
 - Developer:
-    - Github:
-        - abbr: GH
-          href: https://github.com/
+  - Github:
+    - abbr: GH
+      href: https://github.com/bolabaden
 
-- Social:
-    - Reddit:
-        - abbr: RE
-          href: https://reddit.com/
+- Portfolio:
+  - bolabaden.org:
+    - abbr: BO
+      href: https://bolabaden.org/
+  - LinkedIn:
+    - abbr: LI
+      href: https://www.linkedin.com/in/boden-crouch-555897193/
 
 - Entertainment:
-    - YouTube:
-        - abbr: YT
-          href: https://youtube.com/
+  - Homer:
+    - abbr: HM
+      href: https://homer.bolabaden.org/
+
+- Social:
+  - Reddit:
+    - abbr: RE
+      href: https://reddit.com/

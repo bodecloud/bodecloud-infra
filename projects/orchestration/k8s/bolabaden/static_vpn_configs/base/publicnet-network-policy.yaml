@@ -1,0 +1,24 @@
+#! publicnet-network-policy.yaml
+# Generated code, do not edit
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+    name: publicnet-network-policy
+    namespace: boden
+spec:
+    podSelector:
+        matchLabels:
+            com.docker.compose.network.publicnet: "true"
+    policyTypes:
+        - Ingress
+        - Egress
+    ingress:
+        - from:
+            - podSelector:
+                matchLabels:
+                    com.docker.compose.network.publicnet: "true"
+    egress:
+        - to:
+            - podSelector:
+                matchLabels:
+                    com.docker.compose.network.publicnet: "true"

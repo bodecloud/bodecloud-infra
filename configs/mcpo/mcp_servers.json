@@ -1,0 +1,57 @@
+{
+  "mcpServers": {
+
+    "firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-e0e316bead3d497fb24d42ea21d5daf6",
+        "FIRECRAWL_RETRY_MAX_ATTEMPTS": "3",
+        "FIRECRAWL_RETRY_INITIAL_DELAY": "1000",
+        "FIRECRAWL_RETRY_MAX_DELAY": "10000",
+        "FIRECRAWL_RETRY_BACKOFF_FACTOR": "2",
+        "FIRECRAWL_CREDIT_WARNING_THRESHOLD": "1000",
+        "FIRECRAWL_CREDIT_CRITICAL_THRESHOLD": "100"
+      }
+    },
+    "firecrawl2": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server-firecrawl"
+      ],
+      "env": {
+        "FIRE_CRAWL_API_KEY": "fc-e0e316bead3d497fb24d42ea21d5daf6",
+        "FIRECRAWL_RETRY_MAX_ATTEMPTS": "3",
+        "FIRECRAWL_RETRY_INITIAL_DELAY": "1000",
+        "FIRECRAWL_RETRY_MAX_DELAY": "10000",
+        "FIRECRAWL_RETRY_BACKOFF_FACTOR": "2",
+        "FIRECRAWL_CREDIT_WARNING_THRESHOLD": "1000",
+        "FIRECRAWL_CREDIT_CRITICAL_THRESHOLD": "100"
+      }
+    },
+    "tavily1": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp@0.2.4"
+      ],
+      "env": {
+        "TAVILY_API_KEY": "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"
+      }
+    },
+    "tavily2": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp@0.2.4"
+      ],
+      "env": {
+        "TAVILY_API_KEY": "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"
+      }
+    }
+  }
+}

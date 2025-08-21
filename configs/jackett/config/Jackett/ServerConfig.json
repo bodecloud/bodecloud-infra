@@ -6,7 +6,7 @@
   "APIKey": "nnx0n84pcj7umynyd2pbid2nl1zzuemz",
   "AdminPassword": "2b96a3bab3c0740a1e20ee5755dc8b817b8f384cb7b1058bfd98dbaf521cf10dd5a05f5f66b7d8b011d06dc9f4745a82c6f612e1a7ba8d4b04fb0f8c95268170",
   "InstanceId": "fh8d86aeyr54rza2kweoqfjhfubzn6qg4oz1kbnkgx734ajru5kj6fam0lyx4z8a",
-  "BlackholeDir": "/downloads",
+  "BlackholeDir": "/blackhole",
   "UpdateDisabled": false,
   "UpdatePrerelease": false,
   "BasePathOverride": "",

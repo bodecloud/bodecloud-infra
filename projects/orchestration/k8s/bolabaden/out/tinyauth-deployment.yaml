@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    homepage.description: Authentication service for securing your applications
+    homepage.group: Security
+    homepage.href: https://auth.bolabaden.org/
+    homepage.icon: shield-lock.png
+    homepage.name: TinyAuth
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+    traefik.enable: "true"
+    traefik.http.middlewares.tinyauth.forwardauth.address: http://auth:3000/api/auth/traefik
+    traefik.http.routers.tinyauth.rule: Host(`auth.bolabaden.org`) || Host(`auth.bolabaden.duckdns.org`) || Host(`auth.micklethefickle.duckdns.org`) || Host(`auth.micklethefickle.bolabaden.org`) || Host(`auth.micklethefickle.bolabaden.duckdns.org`)
+  labels:
+    io.kompose.service: tinyauth
+  name: tinyauth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: tinyauth
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        homepage.description: Authentication service for securing your applications
+        homepage.group: Security
+        homepage.href: https://auth.bolabaden.org/
+        homepage.icon: shield-lock.png
+        homepage.name: TinyAuth
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+        traefik.enable: "true"
+        traefik.http.middlewares.tinyauth.forwardauth.address: http://auth:3000/api/auth/traefik
+        traefik.http.routers.tinyauth.rule: Host(`auth.bolabaden.org`) || Host(`auth.bolabaden.duckdns.org`) || Host(`auth.micklethefickle.duckdns.org`) || Host(`auth.micklethefickle.bolabaden.org`) || Host(`auth.micklethefickle.bolabaden.duckdns.org`)
+      labels:
+        io.kompose.service: tinyauth
+    spec:
+      containers:
+        - env:
+            - name: SECRET
+              value: c75ac92df70c4383c8d1bb37f65454f9
+            - name: APP_URL
+              value: https://auth.bolabaden.org
+            - name: USERS
+              value: ""
+            - name: GOOGLE_CLIENT_ID
+              value: ""
+            - name: GOOGLE_CLIENT_SECRET
+              value: ""
+            - name: GITHUB_CLIENT_ID
+              value: ""
+            - name: GITHUB_CLIENT_SECRET
+              value: ""
+            - name: SESSION_EXPIRY
+              value: "604800"
+            - name: COOKIE_SECURE
+              value: "true"
+            - name: APP_TITLE
+              value: Bolabaden
+            - name: LOGIN_MAX_RETRIES
+              value: "15"
+            - name: LOGIN_TIMEOUT
+              value: "300"
+            - name: OAUTH_AUTO_REDIRECT
+              value: none
+            - name: OAUTH_WHITELIST
+              value: boden.crouch@gmail.com,halomastar@gmail.com,athenajaguiar@gmail.com,bolabaden.duckdns@gmail.com
+          image: ghcr.io/steveiliop56/tinyauth:v3
+          name: tinyauth
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: tinyauth-data
+      hostname: auth
+      restartPolicy: Always
+      volumes:
+        - name: tinyauth-data
+          persistentVolumeClaim:
+            claimName: tinyauth-data

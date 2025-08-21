@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f compose/docker-compose.networks-inline.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: warp
+  name: warp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: warp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f compose/docker-compose.networks-inline.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: warp
+    spec:
+      containers:
+        - env:
+            - name: TUNNEL_TOKEN
+              value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+            - name: WARP_LICENSE_KEY
+              value: eyJhIjoiZTRlYjNkYmViMTJiZWFhY2MxNzcwNDEyMzE3OTA0NTQiLCJ0IjoiM2ExODhhOTMtYzQwNC00Zjg5LTg4NzItOThlMDkxNjNiYzAzIiwicyI6Ill6SmpNVFl5WmpNdE9EYzROUzAwWlRrMUxUazFORFl0TWpnd1lXWXhZVEpsT1dNMiJ9
+            - name: WARP_SLEEP
+              value: "2"
+          image: caomingjun/warp:latest
+          name: warp
+          ports:
+            - containerPort: 1080
+              protocol: TCP
+            - containerPort: 443
+              protocol: UDP
+          securityContext:
+            capabilities:
+              add:
+                - MKNOD
+                - AUDIT_WRITE
+                - NET_ADMIN
+          volumeMounts:
+            - mountPath: /var/lib/cloudflare-warp
+              name: warp-cm0
+      hostname: warp
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: warp-cm0
+          name: warp-cm0

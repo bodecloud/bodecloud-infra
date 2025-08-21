@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: tailscale-warp
+  name: tailscale-warp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: tailscale-warp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: tailscale-warp
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "988"
+            - name: UMASK
+              value: "002"
+            - name: TS_ACCEPT_DNS
+              value: "false"
+            - name: TS_AUTH_ONCE
+              value: "true"
+            - name: TS_AUTHKEY
+              value: tskey-auth-kDzjP8CNTRL-WA3g7MNHhKdRhD1M8LmzGDyWd7cxKCT5N
+            - name: TS_ENABLE_HEALTH_CHECK
+              value: "true"
+            - name: TS_ENABLE_METRICS
+              value: "true"
+            - name: TS_HOSTNAME
+              value: tailscale-warp-bolabaden-docker
+            - name: TS_LOCAL_ADDR_PORT
+              value: 0.0.0.0:41641
+            - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
+              value: 0.0.0.0:8885
+            - name: TS_ROUTES
+              value: 10.76.0.0/16,172.17.0.0/16,100.64.0.0/10
+            - name: TS_SOCKET
+              value: /tmp/tailscaled.sock
+            - name: TS_SOCKS5_SERVER
+              value: :1055
+            - name: TS_STATE_DIR
+              value: /var/lib/tailscale
+            - name: TS_EXTRA_ARGS
+              value: --accept-routes --advertise-exit-node
+            - name: TS_USERSPACE
+              value: "true"
+          image: tailscale/tailscale
+          livenessProbe:
+            exec:
+              command:
+                - wget -qO- http://127.0.0.1:41641/healthz > /dev/null 2>&1 || exit 1
+            failureThreshold: 3
+            initialDelaySeconds: 40
+            periodSeconds: 30
+            timeoutSeconds: 10
+          name: tailscale-warp
+          ports:
+            - containerPort: 41641
+              protocol: TCP
+            - containerPort: 8885
+              protocol: TCP
+            - containerPort: 1055
+              protocol: TCP
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          volumeMounts:
+            - mountPath: /var/lib/tailscale
+              name: tailscale-warp-state
+            - mountPath: /tmp
+              name: tailscale-warp-tmp
+            - mountPath: /dev/net/tun
+              name: tun-device
+      restartPolicy: Always
+      volumes:
+        - name: tailscale-warp-state
+          persistentVolumeClaim:
+            claimName: tailscale-warp-state
+        - name: tailscale-warp-tmp
+          persistentVolumeClaim:
+            claimName: tailscale-warp-tmp
+        - name: tun-device
+          hostPath:
+            path: /dev/net/tun
+            type: CharDevice 

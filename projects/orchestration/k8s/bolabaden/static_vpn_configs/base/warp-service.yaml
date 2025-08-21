@@ -1,0 +1,31 @@
+#! warp-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: warp-published
+    namespace: boden
+    labels:
+        com.docker.compose.project: boden
+        com.docker.compose.service: warp
+spec:
+    selector:
+        com.docker.compose.project: boden
+        com.docker.compose.service: warp
+    ports:
+        - name: warp-1080
+          port: 1080
+          protocol: TCP
+          targetPort: warp-1080
+        - name: warp-11470
+          port: 11470
+          protocol: TCP
+          targetPort: warp-11470
+        - name: warp-12470
+          port: 12470
+          protocol: TCP
+          targetPort: warp-12470
+        - name: warp-443
+          port: 443
+          protocol: UDP
+          targetPort: warp-443

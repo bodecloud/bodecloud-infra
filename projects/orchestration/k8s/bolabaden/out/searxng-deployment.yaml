@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    homepage.group: Search
+    homepage.href: https://searxng.bolabaden.org/
+    homepage.icon: searxng.png
+    homepage.name: SearxNG
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: searxng
+  name: searxng
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: searxng
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        homepage.group: Search
+        homepage.href: https://searxng.bolabaden.org/
+        homepage.icon: searxng.png
+        homepage.name: SearxNG
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: searxng
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "988"
+            - name: PUID
+              value: "1001"
+            - name: SEARXNG_BASE_URL
+              value: http://searxng:8080
+            - name: TZ
+              value: America/Chicago
+            - name: UMASK
+              value: "002"
+          image: searxng/searxng:latest
+          livenessProbe:
+            exec:
+              command:
+                - wget --no-verbose --tries=1 --spider http://127.0.0.1:8080/ || exit 1
+            failureThreshold: 3
+            periodSeconds: 30
+            timeoutSeconds: 10
+          name: searxng
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/searxng
+              name: searxng-cm0
+      hostname: searxng
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: searxng-cm0
+          name: searxng-cm0

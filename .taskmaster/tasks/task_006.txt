@@ -1,0 +1,113 @@
+# Task ID: 6
+# Title: Build Projects Portfolio Section
+# Status: pending
+# Dependencies: 2, 3, 19
+# Priority: high
+# Description: Create a comprehensive projects portfolio section showcasing CloudCradle, AI Research Wizard, Cloudflare Load Balancer, Constellation, and other GitHub projects.
+# Details:
+1. Design a project card component with:
+   - Project title and description
+   - Technologies used (badges)
+   - Screenshot or illustration
+   - Links to live demo and GitHub
+2. Implement filtering and sorting options for projects
+3. Create detailed project pages with:
+   - Problem statement
+   - Solution approach
+   - Technical architecture
+   - Key features
+   - Challenges and solutions
+4. Integrate with GitHub API to show real stats:
+   - Star count
+   - Last updated
+   - Language breakdown
+5. Implement GitHub API caching with SWR
+6. Add pagination or infinite scroll for projects
+7. Create image carousel for project screenshots using react-slick (v0.29.0)
+8. Implement lazy loading for project images
+9. Add search functionality for projects
+10. Include tags for technology categories
+11. Add related infrastructure guides links for projects that are part of the infrastructure stack
+12. Create connections between projects and their corresponding service documentation
+<info added on 2025-07-12T11:05:53.512Z>
+13. Project Showcase Requirements (PRD Alignment):
+   - Ensure each project demonstrates specific technical competencies
+   - Include architecture diagrams with plain language explanations
+   - Document technical decisions and trade-offs for each implementation
+   - Provide direct links to live deployments where applicable
+
+14. Project-Specific Documentation:
+   - CloudCradle: Detail Oracle Cloud deployment automation processes
+   - AI Research Wizard: Explain modifications to GPT-researcher
+   - Cloudflare Load Balancer: Document configuration and implementation
+   - Constellation: Showcase orchestration capabilities and use cases
+   - Other GitHub projects: Provide clear technical descriptions
+
+15. Technical Credibility Elements:
+   - Integrate GitHub activity metrics to demonstrate ongoing development
+   - Include code quality indicators where relevant
+   - Document real-world problem statements addressed by each project
+   - Highlight specific infrastructure skills demonstrated in each project
+
+16. Target Audience Considerations:
+   - Technical hiring managers: Emphasize practical implementation skills
+   - CTOs: Showcase problem-solving approaches and solutions
+   - Contract providers: Demonstrate technical depth and expertise
+</info added on 2025-07-12T11:05:53.512Z>
+
+17. Utilize @21st-dev/magic UI components from task 19 (Modern UI Components) for:
+   - Professional project cards with consistent styling
+   - Interactive image carousels and galleries
+   - Filter and search interface elements
+   - Technology tag badges and indicators
+
+# Test Strategy:
+1. Test project card rendering with various content lengths
+2. Verify GitHub API integration and error handling
+3. Test filtering and sorting functionality
+4. Validate responsive behavior of project cards
+5. Test image carousel navigation
+6. Verify search functionality works correctly
+7. Test accessibility of interactive elements
+8. Verify links to related infrastructure guides work correctly
+9. Test integration between projects and service documentation
+10. Verify proper implementation of @21st-dev/magic UI components
+11. Test component behavior across different viewport sizes
+
+# Subtasks:
+## 1. Project Card Component Design and Implementation [pending]
+### Dependencies: None
+### Description: Create reusable project card components that showcase projects with thumbnails, titles, descriptions, and technology tags
+### Details:
+Design and implement responsive project cards that display project information in an attractive format. Include hover effects, technology tag pills, and a consistent layout that works across device sizes. Ensure the component is reusable and accepts standardized data structure from the GitHub API. Utilize @21st-dev/magic UI components for professional styling and interactions.
+
+## 2. GitHub API Integration and Caching [pending]
+### Dependencies: 6.1
+### Description: Implement GitHub API integration to fetch project data and implement caching to improve performance
+### Details:
+Set up GitHub API authentication, create services to fetch repository data, READMEs, and other project metadata. Implement a caching layer to prevent excessive API calls and improve load times. Handle rate limiting gracefully and implement error states for failed API requests.
+
+## 3. Detailed Project Page Templates [pending]
+### Dependencies: 6.1, 6.2
+### Description: Create detailed project page templates with image carousels, technical details, and links to live demos
+### Details:
+Design and implement detailed project page templates that showcase projects in depth. Include image carousels for screenshots, technical details sections, challenge/solution narratives, and prominent links to live demos and source code. Ensure responsive design across all device sizes. Leverage @21st-dev/magic components for carousels and interactive elements.
+
+## 4. Filtering, Sorting, and Search Functionality [pending]
+### Dependencies: 6.1, 6.2
+### Description: Implement filtering by technology, sorting options, and search functionality for the projects portfolio
+### Details:
+Create UI controls for filtering projects by technology stack, sorting by date/complexity/name, and a search bar for finding specific projects. Implement the filtering and search logic with proper state management. Ensure the UI updates dynamically without page reloads. Use @21st-dev/magic UI components for filter controls and search interface.
+
+## 5. Technical Documentation Integration [pending]
+### Dependencies: 6.3
+### Description: Integrate technical documentation including architecture diagrams and code explanations for each project
+### Details:
+Create a system to display technical documentation for each project, including architecture diagrams, code snippets with syntax highlighting, and technical explanations. Parse markdown from GitHub READMEs where possible, and supplement with additional documentation as needed. Use @21st-dev/magic components for documentation display and interactive elements.
+
+## 6. Integration with Modern UI Components [pending]
+### Dependencies: None
+### Description: Integrate @21st-dev/magic UI components throughout the projects portfolio section
+### Details:
+Ensure consistent use of @21st-dev/magic UI components across the entire projects portfolio section. This includes project cards, carousels, filter controls, search interfaces, and documentation displays. Follow the component library's best practices for implementation and styling. Test all components for proper responsiveness and accessibility.
+

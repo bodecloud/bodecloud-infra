@@ -1,0 +1,187 @@
+# Task ID: 16
+# Title: Implement Docker Compose Service Discovery System
+# Status: deferred
+# Dependencies: 1, 5, 14
+# Priority: high
+# Description: Build a system that automatically parses the docker-compose.yml file to discover and categorize all services running in the infrastructure, enabling dynamic service exploration and status monitoring.
+# Details:
+1. Create a service parser module:
+   - Implement YAML parsing using js-yaml: `npm install js-yaml`
+   - Build functions to extract service definitions from docker-compose.yml
+   - Handle large file processing (6000+ lines) with streaming or chunking
+   - Create TypeScript interfaces for service metadata
+
+2. Develop service categorization system:
+   - Define category taxonomy (Media, Monitoring, AI/ML, Development, etc.)
+   - Implement categorization logic based on service names, labels, and configurations
+   - Create a mapping system for automatic categorization
+   - Allow manual category overrides via configuration
+
+3. Implement metadata extraction:
+   - Extract exposed ports and map to services
+   - Parse environment variables with sensitive data masking
+   - Identify service dependencies and relationships
+   - Extract volume mounts and network configurations
+
+4. Create service health monitoring:
+   - Implement health check endpoints for each service type
+   - Set up polling mechanism for status updates
+   - Define service status indicators (healthy, degraded, offline)
+   - Create alerting for critical service failures
+
+5. Build dynamic service explorer interface:
+   - Design a responsive UI component for service browsing
+   - Implement filtering and search functionality
+   - Create detailed service view with metadata display
+   - Add visual indicators for service health status
+
+6. Implement real-time status integration:
+   - Set up WebSocket connection for live updates
+   - Create API endpoints for service status queries
+   - Implement caching layer for performance optimization
+   - Add service metrics collection and display
+
+7. Integrate with documentation system:
+   - Generate service documentation templates
+   - Link services to relevant technical guides
+   - Create API for guide generation based on service metadata
+   - Implement documentation versioning tied to service versions
+
+# Test Strategy:
+1. Unit test the YAML parser:
+   - Test with sample docker-compose files of varying complexity
+   - Verify correct extraction of service definitions
+   - Test error handling with malformed YAML
+   - Benchmark performance with large files
+
+2. Validate service categorization:
+   - Test automatic categorization against known services
+   - Verify category assignment logic
+   - Test manual override functionality
+   - Validate category hierarchy display
+
+3. Test metadata extraction:
+   - Verify port mapping extraction accuracy
+   - Test environment variable parsing and masking
+   - Validate dependency relationship mapping
+   - Test with various service configuration patterns
+
+4. Verify health monitoring:
+   - Test health check endpoints with mock services
+   - Verify status indicator accuracy
+   - Test polling mechanism under load
+   - Validate alerting triggers and notifications
+
+5. Test service explorer UI:
+   - Verify responsive behavior across device sizes
+   - Test filtering and search functionality
+   - Validate detailed view displays all metadata correctly
+   - Test accessibility of the explorer interface
+
+6. Validate real-time updates:
+   - Test WebSocket connection stability
+   - Verify update propagation speed
+   - Test system behavior during service restarts
+   - Validate caching mechanism effectiveness
+
+7. Integration testing:
+   - Test end-to-end workflow from service discovery to documentation
+   - Verify correct integration with existing systems
+   - Test performance under production-like conditions
+   - Validate error handling and recovery scenarios
+
+# Subtasks:
+## 1. Create Docker Compose YAML Parser Module [done]
+### Dependencies: None
+### Description: Develop a module that can parse and extract service definitions from docker-compose.yml files, handling large files efficiently.
+### Details:
+Implement YAML parsing using js-yaml library. Create TypeScript interfaces for service metadata. Build functions to extract service names, ports, environment variables, and other configurations. Implement streaming or chunking for efficient processing of large files (6000+ lines). Add error handling for malformed YAML files.
+<info added on 2025-07-12T10:59:25.983Z>
+✅ COMPLETED: Docker Compose YAML Parser Module
+
+Successfully implemented a comprehensive parser module with the following features:
+
+**Core Implementation:**
+- Created TypeScript interfaces for all Docker Compose service metadata
+- Implemented DockerComposeParser class with full YAML parsing capabilities
+- Added support for large file processing (tested with 6000+ line files)
+- Included comprehensive error handling and validation
+
+**Key Features:**
+- **Service Metadata Extraction**: Ports, environment variables, volumes, networks, dependencies, labels
+- **Sensitive Data Masking**: Automatically masks passwords, secrets, tokens, and API keys
+- **Multiple Format Support**: Handles both array and object formats for all configurations
+- **Performance Optimized**: File size limits and efficient parsing for large compose files
+- **Type Safety**: Full TypeScript interfaces for all data structures
+
+**API Integration:**
+- Created `/api/services/parse` endpoint for testing and integration
+- GET endpoint provides service statistics and sample data
+- POST endpoint allows querying specific services
+- Proper error handling and response formatting
+
+**Testing:**
+- Project builds successfully with TypeScript validation
+- Parser handles the complex docker-compose.yml structure
+- API endpoints are properly configured and accessible
+
+**Next Steps:**
+Ready to move to service categorization system (subtask 16.2)
+</info added on 2025-07-12T10:59:25.983Z>
+<info added on 2025-07-12T11:01:44.548Z>
+✅ COMPLETED: Docker Compose YAML Parser Module
+
+Successfully implemented a comprehensive parser module with the following features:
+
+**Core Implementation:**
+- Created TypeScript interfaces for all Docker Compose service metadata
+- Implemented DockerComposeParser class with full YAML parsing capabilities
+- Added support for large file processing (tested with 6000+ line files)
+- Included comprehensive error handling and validation
+
+**Key Features:**
+- **Service Metadata Extraction**: Ports, environment variables, volumes, networks, dependencies, labels
+- **Sensitive Data Masking**: Automatically masks passwords, secrets, tokens, and API keys
+- **Multiple Format Support**: Handles both array and object formats for all configurations
+- **Performance Optimized**: File size limits and efficient parsing for large compose files
+- **Type Safety**: Full TypeScript interfaces for all data structures
+
+**API Integration:**
+- Created `/api/services/parse` endpoint for testing and integration
+- GET endpoint provides service statistics and sample data
+- POST endpoint allows querying specific services
+- Proper error handling and response formatting
+
+**Testing:**
+- Project builds successfully with TypeScript validation
+- Parser handles the complex docker-compose.yml structure
+- API endpoints are properly configured and accessible
+
+**Next Steps:**
+Ready to move to service categorization system (subtask 16.2)
+</info added on 2025-07-12T11:01:44.548Z>
+
+## 2. Develop Service Categorization System [pending]
+### Dependencies: 16.1
+### Description: Create a system to automatically categorize services based on their configuration and allow for manual overrides.
+### Details:
+Define a comprehensive category taxonomy (Media, Monitoring, AI/ML, Development, etc.). Implement logic to categorize services based on service names, labels, and configurations. Create a mapping system for automatic categorization. Develop configuration options for manual category overrides. Store categorization data in a structured format.
+
+## 3. Implement Service Metadata Extraction [pending]
+### Dependencies: 16.1
+### Description: Extract and organize detailed metadata from services including ports, environment variables, dependencies, and network configurations.
+### Details:
+Extract exposed ports and map them to services. Parse environment variables with sensitive data masking functionality. Identify and map service dependencies and relationships. Extract and organize volume mounts and network configurations. Create a structured data model to represent the complete service metadata.
+
+## 4. Build Service Health Monitoring System [pending]
+### Dependencies: 16.1, 16.3
+### Description: Create a system to monitor the health status of all discovered services with appropriate alerting mechanisms.
+### Details:
+Implement health check endpoints for each service type. Set up a polling mechanism for regular status updates. Define service status indicators (healthy, degraded, offline). Create an alerting system for critical service failures. Implement a caching layer for performance optimization. Add service metrics collection and storage.
+
+## 5. Develop Dynamic Service Explorer Interface [pending]
+### Dependencies: 16.2, 16.3, 16.4
+### Description: Create a responsive UI component that allows users to browse, search, and view detailed information about all services.
+### Details:
+Design a responsive UI component for service browsing with filtering and search functionality. Create detailed service views displaying all relevant metadata. Add visual indicators for service health status. Implement real-time updates via WebSocket connections. Create API endpoints for service queries. Integrate with the documentation system to link services to relevant technical guides.
+

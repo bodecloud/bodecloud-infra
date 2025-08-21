@@ -26,6 +26,7 @@
         "domain": {
           "main": "bolabaden.duckdns.org",
           "sans": [
+            "bolabaden.duckdns.org",
             "*.bolabaden.duckdns.org"
           ]
         },

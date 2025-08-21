@@ -1,3 +1,22 @@
+users:
+  a-user:
+    displayname: "User Tier"
+    password: "password"
+    email: a-user@ci.local
+    groups:
+      - user
+  a-moderator:
+    displayname: "Moderator Tier"
+    password: "password"
+    email: a-moderator@ci.local
+    groups:
+      - moderator
+  a-owner:
+    displayname: "Owner Tier"
+    password: "password"
+    email: a-owner@ci.local
+    groups:
+      - owner
 # yamllint disable rule:line-length
 ---
 ###############################################################

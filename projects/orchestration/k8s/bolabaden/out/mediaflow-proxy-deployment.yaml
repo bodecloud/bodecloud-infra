@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deunhealth.restart.on.unhealthy: "true"
+    kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: mediaflow-proxy
+  name: mediaflow-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mediaflow-proxy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        deunhealth.restart.on.unhealthy: "true"
+        kompose.cmd: kompose -f docker-compose.yml convert -o k8s/out
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: mediaflow-proxy
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "989"
+            - name: UMASK
+              value: "002"
+            - name: PORT
+              value: "8888"
+            - name: API_PASSWORD
+              value: d468d92139047f1df5ba0fae9d998957c30834a386cd63d0472a7b044d42a96a
+            - name: ENABLE_STREAMING_PROGRESS
+              value: "true"
+          image: mhdzumair/mediaflow-proxy
+          livenessProbe:
+            exec:
+              command:
+                - python3
+                - -c
+                - import socket; s=socket.socket(); s.connect(('127.0.0.1', 8888)); print('Healthcheck passed')
+            failureThreshold: 5
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            timeoutSeconds: 10
+          name: mediaflow-proxy
+          ports:
+            - containerPort: 8888
+              protocol: TCP
+      restartPolicy: Always 

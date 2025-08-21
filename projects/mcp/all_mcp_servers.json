@@ -1,0 +1,732 @@
+{
+  "mcpServers": {
+    "excel": {
+      "args": [
+        "-y",
+        "excel-mcp-server"
+      ],
+      "command": "npx"
+    },
+    "firecrawl-mcp": {
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "command": "npx",
+      "disabled": false,
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-e0e316bead3d497fb24d42ea21d5daf6",
+        "FIRECRAWL_CREDIT_CRITICAL_THRESHOLD": "500",
+        "FIRECRAWL_CREDIT_WARNING_THRESHOLD": "2000",
+        "FIRECRAWL_RETRY_BACKOFF_FACTOR": "3",
+        "FIRECRAWL_RETRY_INITIAL_DELAY": "2000",
+        "FIRECRAWL_RETRY_MAX_ATTEMPTS": "5",
+        "FIRECRAWL_RETRY_MAX_DELAY": "30000"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "mindmap": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mindmap-mcp-server"
+      ]
+    },
+    "tavily-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp@0.1.4"
+      ],
+      "autoApprove": [],
+      "disabled": false,
+      "env": {
+        "TAVILY_API_KEY": "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"
+      }
+    },
+    "ai-humanizer": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/ai-humanizer-mcp-server/build/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {},
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "alchemy-mcp": {
+      "args": [
+        "--with",
+        "pymssql",
+        "--with",
+        "cx_oracle",
+        "mcp-alchemy"
+      ],
+      "command": "uvx",
+      "disabled": true,
+      "env": {
+        "DB_URL": "mssql+pymssql://sa:123456@localhost:1433/test"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "apple-shortcuts": {
+      "args": [
+        "-y",
+        "https://github.com/recursechat/mcp-server-apple-shortcuts.git"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "azure-data-explorer-mcp": {
+      "args": [
+        "--directory",
+        "C:/Users/boden/Documents/Cline/MCP/adx-mcp-server",
+        "run",
+        "src/adx_mcp_server/main.py"
+      ],
+      "command": "uv",
+      "disabled": true,
+      "env": {
+        "ADX_CLUSTER_URL": "https://bolabaden.kusto.windows.net",
+        "ADX_DATABASE": "bolabaden"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "branch-thinking": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/branch-thinking/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "browser-automation": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/mcp-browser-automation/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "browserbase": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/mcp-server-browserbase/browserbase/dist/index.js"
+      ],
+      "command": "node",
+      "env": {
+        "BROWSERBASE_API_KEY": "bb_live_V5a1GHAW8JlmM0l9ww0CgLBzvJ8",
+        "BROWSERBASE_PROJECT_ID": "ab754625-4043-428a-9ba6-b30a1fcf1495"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "code-research": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/code-research-mcp-server/build/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {
+        "GITHUB_TOKEN": "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"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "code-search": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/code-search-server/build/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {},
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "cyberchitta": {
+      "args": [
+        "--from",
+        "llm-context",
+        "lc-mcp"
+      ],
+      "command": "uvx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "dataset-viewer": {
+      "args": [
+        "https://github.com/privetin/dataset-viewer.git"
+      ],
+      "command": "uvx",
+      "disabled": true,
+      "env": {
+        "HUGGINGFACE_TOKEN": "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"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "document_operations": {
+      "args": [
+        "run",
+        "C:/Users/boden/Documents/Cline/MCP/document-edit-mcp/claude_document_mcp/server.py"
+      ],
+      "command": "uv",
+      "disabled": true,
+      "env": {
+        "PYTHONPATH": "C:/Users/boden/Documents/Cline/MCP/document-edit-mcp;C:/Users/boden/Documents/Cline/MCP/document-edit-mcp/.venv/Lib/site-packages",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "everart": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everart"
+      ],
+      "command": "npx",
+      "env": {
+        "EVERART_API_KEY": "everart-H0b1-Cg-LIRg6dQf6nNANwtnybsyfOnf-qa9hm0YtEg"
+      },
+      "transportType": "stdio"
+    },
+    "exa": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/exa-mcp-server/build/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {
+        "EXA_API_KEY": "4f304bea-22a0-4473-bc38-21114d0f8aaf"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "fetch": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/fetch-mcp/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "filesystem": {
+      "args": [
+        "-y",
+        "@mcp/filesystem"
+      ],
+      "command": "npx",
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "firecrawl": {
+      "args": [
+        "-y",
+        "mcp-server-firecrawl"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "env": {
+        "FIRECRAWL_API_KEY": "e09yzpAgQ6qNlDlKAqd8uxzkecoLk3weigRRSv7k88",
+        "FIRECRAWL_RETRY_MAX_ATTEMPTS": "5",
+        "FIRECRAWL_RETRY_INITIAL_DELAY": "2000",
+        "FIRECRAWL_RETRY_MAX_DELAY": "30000",
+        "FIRECRAWL_RETRY_BACKOFF_FACTOR": "3",
+        "FIRECRAWL_CREDIT_WARNING_THRESHOLD": "2000",
+        "FIRECRAWL_CREDIT_CRITICAL_THRESHOLD": "500"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "git": {
+      "args": [
+        "--directory",
+        "C:/Users/boden/Documents/Cline/MCP/git-mcp-server/src",
+        "run",
+        "mcp_server_git"
+      ],
+      "command": "uv",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "github": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "goalStory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "goalstory-mcp",
+        "https://prod-goalstory-rqc2.encr.app",
+        "your-api-key"
+      ],
+      "transportType": "stdio"
+    },
+    "google-maps": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-google-maps"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "env": {
+        "GOOGLE_MAPS_API_KEY": "<YOUR_API_KEY>"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "google-sheets-mcp": {
+      "args": [
+        "mcp-google-sheets"
+      ],
+      "command": "uvx",
+      "disabled": true,
+      "env": {
+        "CREDENTIALS_PATH": "C:/Users/boden/AppData/Roaming/gcloud/application_default_credentials.json",
+        "TOKEN_PATH": "C:/Users/boden/AppData/Roaming/gcloud/token.json"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "gsc": {
+      "args": [
+        "-y",
+        "mcp-server-gsc"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "C:/Users/boden/AppData/Roaming/gcloud/application_default_credentials.json"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "gtasks-local": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/gtasks-mcp/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "C:/Users/boden/AppData/Roaming/gcloud/application_default_credentials.json"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "hfspace-mcp": {
+      "args": [
+        "-y",
+        "@th3w1zard1/mcp-hfspace",
+        "--work-dir=C:/Users/boden/Documents/Cline/MCP/mcp-store",
+        "--HF_TOKEN=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",
+        "black-forest-labs/FLUX.1-schnell",
+        "DawnC/PawMatchAI",
+        "DawnC/PawMatchAI/on_find_match_click",
+        "diyism/Datou1111-shou_xin",
+        "fantaxy/Sound-AI-SFX",
+        "haoheliu/audioldm2-text2audio-text2music",
+        "hf-audio/whisper-large-v3-turbo",
+        "Inspyrenet-Rembg",
+        "merve/paligemma-doc",
+        "merve/paligemma2-vqav2",
+        "microsoft/OmniParser",
+        "parler-tts/parler_tts",
+        "prithivMLmods/Mistral-7B-Instruct-v0.3",
+        "Qwen/Qwen2.5-72B-Instruct",
+        "shuttleai/shuttle-3.1-aesthetic",
+        "yanze/PuLID-FLUX"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "installer": {
+      "args": [
+        "-y",
+        "@anaisbetts/mcp-installer"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "knowledge-graph": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/mcp-knowledge-graph/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {},
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "markdownify": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "markdownify-mcp"
+      ]
+    },
+    "mcp-server-weaviate": {
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@weaviate/mcp-server-weaviate",
+        "--config",
+        "\"{\\\"weaviateUrl\\\":\\\"\\\",\\\"cohereApiKey\\\":\\\"UMiApt1sGnODnVZ7lF3Hdx6KPyDM4OvqcD6j9YJF\\\",\\\"openaiApiKey\\\":\\\"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\\\",\\\"weaviateApiKey\\\":\\\"\\\",\\\"storeCollectionName\\\":\\\"my-new-collection\\\",\\\"searchCollectionName\\\":\\\"my-new-search-collection\\\"}\""
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "meilisearch": {
+      "args": [
+        "meilisearch-mcp"
+      ],
+      "command": "uvx",
+      "disabled": true,
+      "env": {
+        "MEILISEARCH_API_KEY": "OSBNwZWDKQXHLmzEZ8eppMNrpORitmOuihGsqAXYMkQ",
+        "MEILISEARCH_HOST": "http://localhost:7700"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "mongodb-mcp": {
+      "args": [
+        "-y",
+        "mongo-mcp",
+        "mongodb://brunner56:h4L0m4St3R327@bolabaden.org:27017/bolabaden?authSource=admin"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "env": {
+        "MONGO_URI": "mongodb://brunner56:h4L0m4St3R327@bolabaden.org:27017/bolabaden?authSource=admin"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "mpc-memgraph": {
+      "args": [
+        "--directory",
+        "/Users/katelatte/projects/mcp-memgraph",
+        "run",
+        "server.py"
+      ],
+      "command": "/Users/katelatte/.local/bin/uv",
+      "transportType": "stdio"
+    },
+    "neon": {
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "neon",
+        "--config",
+        "\"{\\\"neonApiKey\\\":\\\"napi_qdtsm5hm6lm6jv80yquizic0by5jnlfdqduajpxx88ceh3qo23x7ej744et664o0\\\"}\""
+      ],
+      "command": "npx",
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "nile-database": {
+      "args": [
+        "-y",
+        "@niledatabase/nile-mcp-server"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "env": {
+        "NILE_API_KEY": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3RoZW5pbGUuZGV2IiwiYXVkIjpbIm5pbGUiLCJ3b3Jrc3BhY2U6MDE5NWZmMTItZDAyMi03ZGFiLThhZjAtODdkZWI5Mzg2NDYwIl0sImlhdCI6MTc0Mzc0MTI3MywiZXhwIjoyMDU5MTcxMTk5LCJzdWIiOiIwMTk1ZmYxNC00NDFlLTcwNjMtYWE2OS02MWFhYTlhNzFkODMiLCJqdGkiOiIwYjhlMTU1Zi03YWVjLTQzMTktYThhMC1hNTgyZmNiMjg1MDkiLCJzY29wZSI6ImFwaSIsImF1dGhvcml6ZWRfc2NvcGVzIjoiYWxsIn0.hZvxQ7uowOobsXTmdCY3qQ-rEhNDWOJsuiPTMwdlbImazdjZ80AQwCcSCwUmEQabHng34wkQETLEYwcNsnoM0jtxG21KU0AMliy-Lp2yGfGUgNecC5k23rdzRbqskgT30ZVnYolAZxKmd3jfMAigRoTXCQ8VYWS6vaWh4Odx6URNgWO2NJUyWkwzTCZLDzGA0df5kxBwqFsnW0ljdpSdn6s0BQZNVm7Wzc5uprcM3FkNxRclr6FKryIb1BdDFObjPyu3ceVnbDKqwWd32bHND2T_odyRthgcpm21YF-PKlrTzeUdigEBYFlaFukuEoW2mgGyM5jLt2JtWKCapUtaWA",
+        "NILE_WORKSPACE_SLUG": "bolabaden"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "notes": {
+      "args": [
+        "https://github.com/truaxki/mcp-notes.git"
+      ],
+      "command": "uvx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "openrpc": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/openrpc-mcp-server/build/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "panda3d-docs": {
+      "args": [
+        "-y",
+        "git+https://github.com/th3w1zard1/mcp-panda3d.git"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "pandoc": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-pandoc"
+      ]
+    },
+    "postgres": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://localhost/mydb"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "prometheus": {
+      "args": [
+        "--directory",
+        "<full path to prometheus-mcp-server directory>",
+        "run",
+        "src/prometheus_mcp_server/main.py"
+      ],
+      "command": "uv",
+      "disabled": true,
+      "env": {
+        "PROMETHEUS_PASSWORD": "h4L0m4St3R327",
+        "PROMETHEUS_URL": "http://bolabaden.org:9090",
+        "PROMETHEUS_USERNAME": "brunner56"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "env": {
+        "PUPPETEER_LAUNCH_OPTIONS": "{ \"headless\": false, \"executablePath\": \"C:/Program Files/Google/Chrome/Application/chrome.exe\", \"args\": [] }",
+        "ALLOW_DANGEROUS": "true"
+      },
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "qdrant": {
+      "args": [
+        "mcp-server-qdrant"
+      ],
+      "command": "uvx",
+      "disabled": true,
+      "env": {
+        "COLLECTION_NAME": "code-snippets",
+        "EMBEDDING_MODEL": "sentence-transformers/all-MiniLM-L6-v2",
+        "QDRANT_LOCAL_PATH": "C:/Users/boden/Documents/Cline/MCP/mcp-store/qdrant",
+        "QDRANT_URL": "http://localhost:6333",
+        "TOOL_FIND_DESCRIPTION": "Search for relevant code snippets based on natural language descriptions. The 'query' parameter should describe what you're looking for, and the tool will return the most relevant code snippets. Use this when you need to find existing code snippets for reuse or reference.",
+        "TOOL_STORE_DESCRIPTION": "Store reusable code snippets for later retrieval. The 'information' parameter should contain a natural language description of what the code does, while the actual code should be included in the 'metadata' parameter as a 'code' property. The value of 'metadata' is a Python dictionary with strings as keys. Use this whenever you generate some code snippet."
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "rag-web-browser": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/mcp-server-rag-web-browser/build/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {
+        "APIFY-API-TOKEN": "apify_api_caQfKkFnMaLn3649k0ohRimlTKbHUt3jAbbW"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "reasoner": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/mcp-reasoner/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {},
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "redis": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-redis",
+        "redis://localhost:6379"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "sequential-thinking": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "simple-arxiv": {
+      "args": [
+        "https://github.com/andybrandt/mcp-simple-arxiv.git",
+        "--directory",
+        "mcp-simple-arxiv",
+        "run",
+        "mcp_simple_arxiv",
+        "--python",
+        "3.12"
+      ],
+      "command": "uvx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "sqlite": {
+      "args": [
+        "--directory",
+        "C:/Users/boden/Documents/Cline/MCP/mcp-server-sqlite",
+        "run",
+        "mcp-server-sqlite",
+        "--db-path",
+        "C:/Users/boden/Documents/Cline/MCP/mcp-store/test.db"
+      ],
+      "command": "uv",
+      "transportType": "stdio"
+    },
+    "stagehand": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/mcp-server-browserbase/stagehand/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {
+        "BROWSERBASE_API_KEY": "bb_live_V5a1GHAW8JlmM0l9ww0CgLBzvJ8",
+        "BROWSERBASE_PROJECT_ID": "ab754625-4043-428a-9ba6-b30a1fcf1495",
+        "OPENAI_API_KEY": "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"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "time": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-time",
+        "--local-timezone=America/Chicago"
+      ],
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "tmdb": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/mcp-server-tmdb/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {
+        "TMDB_API_KEY": "cec876f852b9c15d2c1b436b1117dff7"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "todoist": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/todoist-mcp-server/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {
+        "TODOIST_API_TOKEN": "d9f0ebcdff604bd11c0944f52360758f7587f907"
+      },
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "video-editor-mcp": {
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "video-editor-mcp",
+        "--config",
+        "\"{\\\"apiKey\\\":\\\"vj_yNEW1rvwwXw_J3Vl2m9R7g\\\"}\""
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "web-search": {
+      "args": [
+        "-y",
+        "https://github.com/pskill9/web-search.git"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "webresearch": {
+      "args": [
+        "-y",
+        "@mzxrai/mcp-webresearch@latest"
+      ],
+      "command": "npx",
+      "disabled": true,
+      "timeout": 60,
+      "transportType": "stdio"
+    },
+    "youtube-transcript": {
+      "args": [
+        "C:/Users/boden/Documents/Cline/MCP/mcp-server-youtube-transcript/dist/index.js"
+      ],
+      "command": "node",
+      "disabled": true,
+      "env": {},
+      "timeout": 60,
+      "transportType": "stdio"
+    }
+  }
+}

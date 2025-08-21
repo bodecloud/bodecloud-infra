@@ -1,0 +1,529 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openvpn-templates
+  namespace: default
+data:
+  # Base OpenVPN configuration for each premiumize endpoint, with hostname placeholders
+  vpn-at.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-at.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-at.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-au.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-au.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-au.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-be.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-be.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-be.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-ca.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-ca.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-ca.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-ch.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-ch.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-ch.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-cz.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-cz.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-cz.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-de.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-de.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-de.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-es.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-es.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-es.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-fi.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-fi.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-fi.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-fr.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-fr.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-fr.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-gb.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-gb.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-gb.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-gr.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-gr.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-gr.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-it.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-it.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-it.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-jp.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-jp.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-jp.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-nl.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-nl.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-nl.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-pl.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-pl.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-pl.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-sg.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-sg.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-sg.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key
+  vpn-us.premiumize.me.ovpn.template: |+
+    verify-x509-name CN=vpn-us.premiumize.me
+    auth-user-pass
+    client
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    mute-replay-warnings
+    reneg-sec 0
+    setenv CLIENT_CERT 0
+    ignore-unknown-option block-outside-dns
+    ca /etc/openvpn/premiumize-ca.pem
+    proto udp
+    remote vpn-us.premiumize.me 1194 # Placeholder for dynamic IP
+    dev tun0
+    mute-replay-warnings
+    auth-nocache
+    pull-filter ignore "auth-token"
+    auth-retry nointeract
+    suppress-timestamps
+    verb 1
+    data-ciphers-fallback aes-256-cbc
+    data-ciphers aes-256-cbc
+    pull-filter ignore "route-ipv6"
+    pull-filter ignore "ifconfig-ipv6"
+    user nonrootuser
+    persist-tun
+    persist-key

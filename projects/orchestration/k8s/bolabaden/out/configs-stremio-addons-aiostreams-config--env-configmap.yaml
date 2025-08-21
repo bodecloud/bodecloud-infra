@@ -1,0 +1,57 @@
+apiVersion: v1
+data:
+  ADDON_ID: aiostreams.bolabaden.org
+  ADDON_NAME: BadenAIO (Oracle)
+  API_KEY: sk_4dc059c0399c43fd94c09baaf0b94da119fc526775914bf2b3a3fb6e073e26d9
+  COMET_URL: http://comet:2020/
+  DEBRIDIO_URL: https://debridio.adobotec.com/
+  DEFAULT_JACKETTIO_INDEXERS: '["1337x", "animetosho", "anirena", "limetorrents", "nyaasi", "solidtorrents", "thepiratebay", "torlock", "yts"]'
+  DEFAULT_JACKETTIO_STREMTHRU_URL: https://stremthru.bolabaden.org
+  DEFAULT_STREMIO_JACKETT_TMDB_API_KEY: cec876f852b9c15d2c1b436b1117dff7
+  DEFAULT_STREMTHRU_CREDENTIAL: bolabaden.duckdns@gmail.com:Hilogirl80!
+  DEFAULT_STREMTHRU_URL: https://stremthru.bolabaden.org/
+  DEFAULT_TIMEOUT: "15000"
+  DETERMINISTIC_ADDON_ID: "false"
+  DISABLE_TORRENTIO_MESSAGE: ""
+  EASYNEWS_PLUS_PLUS_URL: https://easynews-cloudflare-worker.jqrw92fchz.workers.dev/
+  EASYNEWS_PLUS_URL: https://b89262c192b0-stremio-easynews-addon.baby-beamup.club/
+  EASYNEWS_URL: https://ea627ddf0ee7-easynews.baby-beamup.club/
+  ENCRYPT_MEDIAFLOW_URLS: "true"
+  ENCRYPT_STREMTHRU_URLS: "true"
+  FORCE_COMET_HOSTNAME: comet.bolabaden.org
+  FORCE_COMET_PORT: "443"
+  FORCE_COMET_PROTOCOL: https
+  FORCE_JACKETTIO_HOSTNAME: jackettio.bolabaden.org
+  FORCE_JACKETTIO_PORT: "443"
+  FORCE_JACKETTIO_PROTOCOL: https
+  JACKETTIO_URL: http://jackettio:4000/
+  LOG_FORMAT: text
+  LOG_LEVEL: debug
+  LOG_SENSITIVE_INFO: "true"
+  MAX_ADDONS: "50"
+  MAX_EPISODE_SIZE: "161061273600"
+  MAX_KEYWORD_FILTERS: "30"
+  MAX_MOVIE_SIZE: "161061273600"
+  MAX_REGEX_SORT_PATTERNS: "30"
+  MAX_TIMEOUT: "50000"
+  MEDIAFLOW_IP_TIMEOUT: "30000"
+  MEDIAFUSION_API_PASSWORD: h4L0m4St3R327
+  MEDIAFUSION_CONFIG_TIMEOUT: "5000"
+  MEDIAFUSION_URL: http://mediafusion:8000/
+  MIN_TIMEOUT: "1000"
+  ORION_STREMIO_ADDON_URL: https://5a0d1888fa64-orion.baby-beamup.club/
+  PEERFLIX_URL: https://peerflix-addon.onrender.com/
+  PORT: "3005"
+  SECRET_KEY: 1070c705d193441da9fce510d5977e824686d5d0a0ab44bc8d8cb006ff64ee82
+  SHOW_DIE: "false"
+  STREMIO_JACKETT_CACHE_ENABLED: "true"
+  STREMIO_JACKETT_URL: https://stremio-jackett.elfhosted.com/
+  STREMTHRU_STORE_URL: https://stremthru.13377001.xyz/stremio/store/
+  STREMTHRU_TIMEOUT: "30000"
+  TORBOX_STREMIO_URL: https://stremio.torbox.app/
+  TORRENTIO_URL: https://torrentio.strem.fun/
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: aiostreams-configs-stremio-addons-aiostreams-config--env
+  name: configs-stremio-addons-aiostreams-config--env

@@ -1,0 +1,770 @@
+{
+  "timestamp": "2025-07-16T19:03:20.420457",
+  "events": [
+    {
+      "timestamp": "2025-07-16T19:03:25.236377",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "starting_research",
+        "output": "\ud83d\udd0d Starting the research task for 'Best rated QR code reader'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:25.237573",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "agent_generated",
+        "output": "",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:25.238818",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83c\udf10 Browsing the web to learn more about the task: Best rated QR code reader...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:26.725362",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "planning_research",
+        "output": "\ud83e\udd14 Planning the research strategy and subtasks...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:29.089154",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subqueries",
+        "output": "\ud83d\uddc2\ufe0f I will conduct my research based on the following queries: ['best qr code reader app 2025 reviews', 'top rated qr code scanner android ios july 2025', 'qr code scanner app comparison 2025 features privacy', 'best free and open source qr code scanner app 2025', 'Best rated QR code reader']...",
+        "metadata": [
+          "best qr code reader app 2025 reviews",
+          "top rated qr code scanner android ios july 2025",
+          "qr code scanner app comparison 2025 features privacy",
+          "best free and open source qr code scanner app 2025",
+          "Best rated QR code reader"
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:29.089881",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'best qr code reader app 2025 reviews'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.530635",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.qrcodechimp.com/must-have-qr-code-scanner-apps-in-2025/\n",
+        "metadata": "https://www.qrcodechimp.com/must-have-qr-code-scanner-apps-in-2025/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.531279",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.youtube.com/watch?v=mCl0yUXkfg8\n",
+        "metadata": "https://www.youtube.com/watch?v=mCl0yUXkfg8"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.532442",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.uniqode.com/blog/qr-code-basics/best-qr-code-scanner-apps\n",
+        "metadata": "https://www.uniqode.com/blog/qr-code-basics/best-qr-code-scanner-apps"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.533282",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://apps.apple.com/us/app/qr-code-reader/id1200318119\n",
+        "metadata": "https://apps.apple.com/us/app/qr-code-reader/id1200318119"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.534190",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://play.google.com/store/apps/details?id=qrcodereader.barcodescanner.scan.qrscanner&hl=en_US\n",
+        "metadata": "https://play.google.com/store/apps/details?id=qrcodereader.barcodescanner.scan.qrscanner&hl=en_US"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.535115",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/androidapps/comments/178yd9l/best_qr_code_scanner/\n",
+        "metadata": "https://www.reddit.com/r/androidapps/comments/178yd9l/best_qr_code_scanner/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.535827",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.nytimes.com/wirecutter/reviews/best-mobile-scanning-apps/\n",
+        "metadata": "https://www.nytimes.com/wirecutter/reviews/best-mobile-scanning-apps/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.536856",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:30.537849",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 7 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:31.324363",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 6 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:31.325504",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 4 new images from 24 total images",
+        "metadata": [
+          {
+            "url": "https://cdn.thewirecutter.com/wp-content/media/2025/06/BEST-MOBILE-SCANNING-APPS-Adobe-Scan-Banner.jpg?auto=webp&quality=75&width=320",
+            "score": 3
+          },
+          {
+            "url": "https://cdn.thewirecutter.com/wp-content/media/2025/06/BEST-MOBILE-SCANNING-APPS-vFlat-Banner.jpg?auto=webp&quality=75&width=320",
+            "score": 3
+          },
+          {
+            "url": "https://cdn.thewirecutter.com/wp-content/media/2025/06/BEST-MOBILE-SCANNING-APPS-Photomyne-Banner.jpg?auto=webp&quality=75&width=320",
+            "score": 3
+          },
+          {
+            "url": "https://cdn.thewirecutter.com/wp-content/media/2025/06/BEST-MOBILE-SCANNING-APPS-Apple-Notes.png?auto=webp&quality=75&width=320",
+            "score": 3
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:31.326597",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:31.327934",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: best qr code reader app 2025 reviews (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:31.441434",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'top rated qr code scanner android ios july 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:32.733581",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://softwarehouse.au/blog/8-best-barcode-and-qr-code-scanner-apps-for-easy-information-access-in-2025/\n",
+        "metadata": "https://softwarehouse.au/blog/8-best-barcode-and-qr-code-scanner-apps-for-easy-information-access-in-2025/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:32.734502",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.qrcode-tiger.com/ten-best-barcode-scanner-apps-for-android-and-ios\n",
+        "metadata": "https://www.qrcode-tiger.com/ten-best-barcode-scanner-apps-for-android-and-ios"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:32.736017",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://screenapp.io/blog/best-qr-code-scanners\n",
+        "metadata": "https://screenapp.io/blog/best-qr-code-scanners"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:32.737296",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://play.google.com/store/apps/details?id=app.qrcode&hl=en_US\n",
+        "metadata": "https://play.google.com/store/apps/details?id=app.qrcode&hl=en_US"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:32.738521",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:32.739777",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 4 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:35.947184",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 3 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:35.948195",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 2 new images from 2 total images",
+        "metadata": [
+          {
+            "url": "https://screenapp.io/blog/best-qr-code-scanners.webp",
+            "score": 1
+          },
+          {
+            "url": "https://media.qrtiger.com/blog/2025/01/ten-best-barcode-scanner-apps-for-android-and-iosjpg_800.jpeg",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:35.949822",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:35.951058",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: top rated qr code scanner android ios july 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:35.987937",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'qr code scanner app comparison 2025 features privacy'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.407718",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://apps.apple.com/us/app/qr-code-reader-qr-scanner-app/id903799541\n",
+        "metadata": "https://apps.apple.com/us/app/qr-code-reader-qr-scanner-app/id903799541"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.408760",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://discuss.privacyguides.net/t/qr-scanner-pfa/20921\n",
+        "metadata": "https://discuss.privacyguides.net/t/qr-scanner-pfa/20921"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.410143",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.411284",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 2 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.874479",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 2 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.875988",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 2 new images from 4 total images",
+        "metadata": [
+          {
+            "url": "https://apps.apple.com/assets/artwork/1x1-42817eea7ade52607a760cbee00d1495.gif",
+            "score": 2
+          },
+          {
+            "url": "https://forum-uploads.privacyguidesusercontent.com/optimized/2X/d/de1967cb8176652e9750894e6386e9e0c5bd7db8_2_243x500.png",
+            "score": 1
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.877227",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.879324",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: qr code scanner app comparison 2025 features privacy (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:37.889842",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'best free and open source qr code scanner app 2025'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.398823",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://sourceforge.net/directory/qr-code-scanners/\n",
+        "metadata": "https://sourceforge.net/directory/qr-code-scanners/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.400112",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://guides.boisestate.edu/c.php?g=74197&p=473658\n",
+        "metadata": "https://guides.boisestate.edu/c.php?g=74197&p=473658"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.401637",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/opensource/comments/wzgg3x/is_there_an_open_source_qr_code_reader_for_windows/\n",
+        "metadata": "https://www.reddit.com/r/opensource/comments/wzgg3x/is_there_an_open_source_qr_code_reader_for_windows/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.403005",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.404290",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 3 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.794651",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 3 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.795903",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 0 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.797758",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.799609",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: best free and open source qr code scanner app 2025 (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:39.813280",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "running_subquery_research",
+        "output": "\n\ud83d\udd0d Running research for 'Best rated QR code reader'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:41.220360",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\n",
+        "metadata": "https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:41.221682",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://www.reddit.com/r/androidapps/comments/1fychxs/a_simple_fast_and_safe_qr_code_reader_for_android/\n",
+        "metadata": "https://www.reddit.com/r/androidapps/comments/1fychxs/a_simple_fast_and_safe_qr_code_reader_for_android/"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:41.223218",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "added_source_url",
+        "output": "\u2705 Added source url to research: https://apps.apple.com/us/app/qr-reader-for-iphone/id368494609\n",
+        "metadata": "https://apps.apple.com/us/app/qr-reader-for-iphone/id368494609"
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:41.224635",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "researching",
+        "output": "\ud83e\udd14 Researching for relevant information across multiple sources...\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:41.226261",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_urls",
+        "output": "\ud83c\udf10 Scraping content from 3 URLs...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:42.013692",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_content",
+        "output": "\ud83d\udcc4 Scraped 3 pages of content",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:42.015576",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_images",
+        "output": "\ud83d\uddbc\ufe0f Selected 0 new images from 6 total images",
+        "metadata": []
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:42.017266",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "scraping_complete",
+        "output": "\ud83c\udf10 Scraping complete",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:42.019462",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "fetching_query_content",
+        "output": "\ud83d\udcda Getting relevant content based on query: Best rated QR code reader (Original query type: <class 'str'>)...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:42.063426",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://screenapp.io/blog/best-qr-code-scanners\nTitle: 10 Best QR Code Scanners 2025: Top Apps for Mobile and Desktop\nContent: QR codes have become an integral part of our digital lives, from contactless payments to accessing restaurant menus. But with countless scanner apps available, which ones offer the best features, security, and reliability in 2025? This comprehensive guide breaks down the top QR code scanners for both personal and business use. At a Glance: Top QR Code Scanners Compared Scanner App Best For Price Rating Security Level Google Lens Overall Use Free \u2605\u2605\u2605\u2605\u2605 HIGH Kaspersky QR Scanner Security Free \u2605\u2605\u2605\u2605\u2605 HIGH QR Code Reader Pro Business $4.99 \u2605\u2605\u2605\u2605\u2606 MEDIUM Best Overall QR Code Scanners 1. Google Lens \u2605\u2605\u2605\u2605\u2605 Best Overall Free \ud83c\udfaf Key Features: Built into Android devices AI-powered visual search Multiple language support History tracking Offline scanning capability \ud83d\udcaa Strengths: Seamless integration with Google services Fast and accurate scanning Regular security updates Clean, intuitive interface Additional visual search features \u26a0\ufe0f Limitations: Not available as standalone app on iOS Requires\n\nSource: https://screenapp.io/blog/best-qr-code-scanners\nTitle: 10 Best QR Code Scanners 2025: Top Apps for Mobile and Desktop\nContent: QR codes have become an integral part of our digital lives, from contactless payments to accessing restaurant menus. But with countless scanner apps available, which ones offer the best features, security, and reliability in 2025? This comprehensive guide breaks down the top QR code scanners for both personal and business use. At a Glance: Top QR Code Scanners Compared Scanner App Best For Price Rating Security Level Google Lens Overall Use Free \u2605\u2605\u2605\u2605\u2605 HIGH Kaspersky QR Scanner Security Free \u2605\u2605\u2605\u2605\u2605 HIGH QR Code Reader Pro Business $4.99 \u2605\u2605\u2605\u2605\u2606 MEDIUM Best Overall QR Code Scanners 1. Google Lens \u2605\u2605\u2605\u2605\u2605 Best Overall Free \ud83c\udfaf Key Features: Built into Android devices AI-powered visual search Multiple language support History tracking Offline scanning capability \ud83d\udcaa Strengths: Seamless integration with Google services Fast and accurate scanning Regular security updates Clean, intuitive interface Additional visual search features \u26a0\ufe0f Limitations: Not available as standalone app on iOS Requires\n\nSource: https://screenapp.io/blog/best-qr-code-scanners\nTitle: 10 Best QR Code Scanners 2025: Top Apps for Mobile and Desktop\nContent: Table of Contents Turn meetings into insights AI-powered assistant that transforms conversations into structured notes and action items. Start Free \u2192 QR codes have become an integral part of our digital lives, from contactless payments to accessing restaurant menus. But with countless scanner apps available, which ones offer the best features, security, and reliability in 2025? This comprehensive guide breaks down the top QR code scanners for both personal and business use. At a Glance: Top QR Code Scanners Compared Scanner App Best For Price Rating Security Level Google Lens Overall Use Free \u2605\u2605\u2605\u2605\u2605 HIGH Kaspersky QR Scanner Security Free \u2605\u2605\u2605\u2605\u2605 HIGH QR Code Reader Pro Business $4.99 \u2605\u2605\u2605\u2605\u2606 MEDIUM Best Overall QR Code Scanners 1. Google Lens \u2605\u2605\u2605\u2605\u2605 Best Overall Free \ud83c\udfaf Key Features: Built into Android devices AI-powered visual search Multiple language support History tracking Offline scanning capability \ud83d\udcaa Strengths: Seamless integration with Google services Fast and accurate scanning\n\nSource: https://www.qrcode-tiger.com/ten-best-barcode-scanner-apps-for-android-and-ios\nTitle: Top 10 Best Barcode Scanner Apps for Android and iOS for 2025\nContent: BackHelp CenterContact UsCreate QR codeEngkeyboard_arrow_downSelect your languageAfrikaans\u0639\u0631\u0628\u064aBangla/BengaliDanskDeutschEngcheckEspa\u00f1olGreekFinnishFran\u00e7ais\u0939\u093f\u0928\u094d\u0926\u0940IndonesianItaliano\u65e5\u672cJavaneseHungarian\ud55c\uad6d\uc5b4MelayuDutchNorskPunjabiPolishPortugu\u00easRomanianP\u0443\u0441\u0441\u043a\u0438\u0439SvenskaTamil\u0e44\u0e17\u0e22T\u00fcrkUrduTi\u1ebfng Vi\u1ec7t\u7b80\u4f53\u4e2d\u6587\u7e41\u9ad4\u4e2d\u6587closeHomeBlogTop 10 Best Barcode Scanner Apps for Android and iOS for 2025Top 10 Best Barcode Scanner Apps for Android and iOS for 2025By: Christine S.Update: June 04, 2025 If you\u2019ve ever run a business, a barcode is probably no longer unfamiliar to you, and you\u2019re well aware of what a barcode scanner app is and how it\u2019s used.Check out this list of the best barcode scanner apps for Android and iOS you can use every day.Table of ContentsTop barcode scannersQR Code Generator | QR Scanner | Creator | QR TIGERShopSavvy \u2013 Barcode Scanner & QR Code ReaderQR & Barcode ScannerBarcode Generator & ScannerBarcode LookupBarcode Scanner \u2013 Price FinderScandit Barcode Scanner DemoBarcode counter \u2013 Free\n\nSource: https://screenapp.io/blog/best-qr-code-scanners\nTitle: 10 Best QR Code Scanners 2025: Top Apps for Mobile and Desktop\nContent: QR codes have become an integral part of our digital lives, from contactless payments to accessing restaurant menus. But with countless scanner apps available, which ones offer the best features, security, and reliability in 2025? This comprehensive guide breaks down the top QR code scanners for both personal and business use.\nAt a Glance: Top QR Code Scanners Compared\nScanner App Best For Price Rating Security Level Google Lens Overall Use Free \u2605\u2605\u2605\u2605\u2605 HIGH Kaspersky QR Scanner Security Free \u2605\u2605\u2605\u2605\u2605 HIGH QR Code Reader Pro Business $4.99 \u2605\u2605\u2605\u2605\u2606 MEDIUM\nKaspersky QR Scanner\nQR Code Reader Pro\nBest Overall QR Code Scanners\n1. Google Lens\n\nSource: https://www.qrcode-tiger.com/ten-best-barcode-scanner-apps-for-android-and-ios\nTitle: Top 10 Best Barcode Scanner Apps for Android and iOS for 2025\nContent: BackHelp CenterContact UsCreate QR codeEngkeyboard_arrow_downSelect your languageAfrikaans\u0639\u0631\u0628\u064aBangla/BengaliDanskDeutschEngcheckEspa\u00f1olGreekFinnishFran\u00e7ais\u0939\u093f\u0928\u094d\u0926\u0940IndonesianItaliano\u65e5\u672cJavaneseHungarian\ud55c\uad6d\uc5b4MelayuDutchNorskPunjabiPolishPortugu\u00easRomanianP\u0443\u0441\u0441\u043a\u0438\u0439SvenskaTamil\u0e44\u0e17\u0e22T\u00fcrkUrduTi\u1ebfng Vi\u1ec7t\u7b80\u4f53\u4e2d\u6587\u7e41\u9ad4\u4e2d\u6587closeHomeBlogTop 10 Best Barcode Scanner Apps for Android and iOS for 2025Top 10 Best Barcode Scanner Apps for Android and iOS for 2025By: Christine S.Update: June 04, 2025 If you\u2019ve ever run a business, a barcode is probably no longer unfamiliar to you, and you\u2019re well aware of what a barcode scanner app is and how it\u2019s used.Check out this list of the best barcode scanner apps for Android and iOS you can use every day.Table of ContentsTop barcode scannersQR Code Generator | QR Scanner | Creator | QR TIGERShopSavvy \u2013 Barcode Scanner & QR Code ReaderQR & Barcode ScannerBarcode Generator & ScannerBarcode LookupBarcode Scanner \u2013 Price FinderScandit Barcode Scanner DemoBarcode counter \u2013 Free\n\nSource: https://www.qrcode-tiger.com/ten-best-barcode-scanner-apps-for-android-and-ios\nTitle: Top 10 Best Barcode Scanner Apps for Android and iOS for 2025\nContent: BackHelp CenterContact UsCreate QR codeEngkeyboard_arrow_downSelect your languageAfrikaans\u0639\u0631\u0628\u064aBangla/BengaliDanskDeutschEngcheckEspa\u00f1olGreekFinnishFran\u00e7ais\u0939\u093f\u0928\u094d\u0926\u0940IndonesianItaliano\u65e5\u672cJavaneseHungarian\ud55c\uad6d\uc5b4MelayuDutchNorskPunjabiPolishPortugu\u00easRomanianP\u0443\u0441\u0441\u043a\u0438\u0439SvenskaTamil\u0e44\u0e17\u0e22T\u00fcrkUrduTi\u1ebfng Vi\u1ec7t\u7b80\u4f53\u4e2d\u6587\u7e41\u9ad4\u4e2d\u6587closeHomeBlogTop 10 Best Barcode Scanner Apps for Android and iOS for 2025Top 10 Best Barcode Scanner Apps for Android and iOS for 2025By: Christine S.Update: June 04, 2025 If you\u2019ve ever run a business, a barcode is probably no longer unfamiliar to you, and you\u2019re well aware of what a barcode scanner app is and how it\u2019s used.Check out this list of the best barcode scanner apps for Android and iOS you can use every day.Table of ContentsTop barcode scannersQR Code Generator | QR Scanner | Creator | QR TIGERShopSavvy \u2013 Barcode Scanner & QR Code ReaderQR & Barcode ScannerBarcode Generator & ScannerBarcode LookupBarcode Scanner \u2013 Price FinderScandit Barcode Scanner DemoBarcode counter \u2013 Free\n\nSource: https://www.qrcode-tiger.com/ten-best-barcode-scanner-apps-for-android-and-ios\nTitle: Top 10 Best Barcode Scanner Apps for Android and iOS for 2025\nContent: BackHelp CenterContact UsCreate QR codeEngkeyboard_arrow_downSelect your languageAfrikaans\u0639\u0631\u0628\u064aBangla/BengaliDanskDeutschEngcheckEspa\u00f1olGreekFinnishFran\u00e7ais\u0939\u093f\u0928\u094d\u0926\u0940IndonesianItaliano\u65e5\u672cJavaneseHungarian\ud55c\uad6d\uc5b4MelayuDutchNorskPunjabiPolishPortugu\u00easRomanianP\u0443\u0441\u0441\u043a\u0438\u0439SvenskaTamil\u0e44\u0e17\u0e22T\u00fcrkUrduTi\u1ebfng Vi\u1ec7t\u7b80\u4f53\u4e2d\u6587\u7e41\u9ad4\u4e2d\u6587closeHomeBlogTop 10 Best Barcode Scanner Apps for Android and iOS for 2025Top 10 Best Barcode Scanner Apps for Android and iOS for 2025By: Christine S.Update: June 04, 2025 If you\u2019ve ever run a business, a barcode is probably no longer unfamiliar to you, and you\u2019re well aware of what a barcode scanner app is and how it\u2019s used.Check out this list of the best barcode scanner apps for Android and iOS you can use every day.Table of ContentsTop barcode scannersQR Code Generator | QR Scanner | Creator | QR TIGERShopSavvy \u2013 Barcode Scanner & QR Code ReaderQR & Barcode ScannerBarcode Generator & ScannerBarcode LookupBarcode Scanner \u2013 Price FinderScandit Barcode Scanner DemoBarcode counter \u2013 Free\n\nSource: https://www.qrcode-tiger.com/ten-best-barcode-scanner-apps-for-android-and-ios\nTitle: Top 10 Best Barcode Scanner Apps for Android and iOS for 2025\nContent: BackHelp CenterContact UsCreate QR codeEngkeyboard_arrow_downSelect your languageAfrikaans\u0639\u0631\u0628\u064aBangla/BengaliDanskDeutschEngcheckEspa\u00f1olGreekFinnishFran\u00e7ais\u0939\u093f\u0928\u094d\u0926\u0940IndonesianItaliano\u65e5\u672cJavaneseHungarian\ud55c\uad6d\uc5b4MelayuDutchNorskPunjabiPolishPortugu\u00easRomanianP\u0443\u0441\u0441\u043a\u0438\u0439SvenskaTamil\u0e44\u0e17\u0e22T\u00fcrkUrduTi\u1ebfng Vi\u1ec7t\u7b80\u4f53\u4e2d\u6587\u7e41\u9ad4\u4e2d\u6587closeHomeBlogTop 10 Best Barcode Scanner Apps for Android and iOS for 2025Top 10 Best Barcode Scanner Apps for Android and iOS for 2025By: Christine S.Update: June 04, 2025 If you\u2019ve ever run a business, a barcode is probably no longer unfamiliar to you, and you\u2019re well aware of what a barcode scanner app is and how it\u2019s used.Check out this list of the best barcode scanner apps for Android and iOS you can use every day.Table of ContentsTop barcode scannersQR Code Generator | QR Scanner | Creator | QR TIGERShopSavvy \u2013 Barcode Scanner & QR Code ReaderQR & Barcode ScannerBarcode Generator & ScannerBarcode LookupBarcode Scanner \u2013 Price FinderScandit Barcode Scanner DemoBarcode counter \u2013 Free\n\nSource: https://www.qrcode-tiger.com/ten-best-barcode-scanner-apps-for-android-and-ios\nTitle: Top 10 Best Barcode Scanner Apps for Android and iOS for 2025\nContent: HomeBlogTop 10 Best Barcode Scanner Apps for Android and iOS for 2025\nHomeBlogTop 10 Best Barcode Scanner Apps for Android and iOS for 2025\nTop 10 Best Barcode Scanner Apps for Android and iOS for 2025\nTop 10 Best Barcode Scanner Apps for Android and iOS for 2025\nBy: Christine S.Update: June 04, 2025\nBy: Christine S.\nUpdate: June 04, 2025\nJune 04, 2025\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:42.066332",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://play.google.com/store/apps/details?id=qrcodereader.barcodescanner.scan.qrscanner&hl=en_US\nTitle: QR Scanner: Barcode Scanner - Apps on Google Play\nContent: app free.QR readerThe simplest QR reader for free. It can scan QR code automatically and create your own QR codes. Download the QR reader app now.Updated onJun 4, 2025ProductivityEvents & offersEnds on 07/28Scan & Share, Wonderful Summer Starts HereEnds on 07/31Smart Scan Challenge \u2014 Discover Life's WisdomData safetyarrow_forwardSafety starts with understanding how developers collect and share your data. Data privacy and security practices may vary based on your use, region, and age. The developer provided this information and may update it over time.No data shared with third partiesLearn more about how developers declare sharingThis app may collect these data typesApp activity, App info and performance, and Device or other IDsData is encrypted in transitYou can request that data be deletedSee detailsRatings and reviewsRatings and reviews are verifiedinfo_outlinearrow_forwardRatings and reviews are verifiedinfo_outlinephone_androidPhonelaptopChromebooktablet_androidTablet4.6497K\n\nSource: https://play.google.com/store/apps/details?id=qrcodereader.barcodescanner.scan.qrscanner&hl=en_US\nTitle: QR Scanner: Barcode Scanner - Apps on Google Play\nContent: app free.QR readerThe simplest QR reader for free. It can scan QR code automatically and create your own QR codes. Download the QR reader app now.Updated onJun 4, 2025ProductivityEvents & offersEnds on 07/28Scan & Share, Wonderful Summer Starts HereEnds on 07/31Smart Scan Challenge \u2014 Discover Life's WisdomData safetyarrow_forwardSafety starts with understanding how developers collect and share your data. Data privacy and security practices may vary based on your use, region, and age. The developer provided this information and may update it over time.No data shared with third partiesLearn more about how developers declare sharingThis app may collect these data typesApp activity, App info and performance, and Device or other IDsData is encrypted in transitYou can request that data be deletedSee detailsRatings and reviewsRatings and reviews are verifiedinfo_outlinearrow_forwardRatings and reviews are verifiedinfo_outlinephone_androidPhonelaptopChromebooktablet_androidTablet4.6497K\n\nSource: https://play.google.com/store/apps/details?id=qrcodereader.barcodescanner.scan.qrscanner&hl=en_US\nTitle: QR Scanner: Barcode Scanner - Apps on Google Play\nContent: app free.QR readerThe simplest QR reader for free. It can scan QR code automatically and create your own QR codes. Download the QR reader app now.Updated onJun 4, 2025ProductivityEvents & offersEnds on 07/28Scan & Share, Wonderful Summer Starts HereEnds on 07/31Smart Scan Challenge \u2014 Discover Life's WisdomData safetyarrow_forwardSafety starts with understanding how developers collect and share your data. Data privacy and security practices may vary based on your use, region, and age. The developer provided this information and may update it over time.No data shared with third partiesLearn more about how developers declare sharingThis app may collect these data typesApp activity, App info and performance, and Device or other IDsData is encrypted in transitYou can request that data be deletedSee detailsRatings and reviewsRatings and reviews are verifiedinfo_outlinearrow_forwardRatings and reviews are verifiedinfo_outlinephone_androidPhonelaptopChromebooktablet_androidTablet4.6497K\n\nSource: https://play.google.com/store/apps/details?id=qrcodereader.barcodescanner.scan.qrscanner&hl=en_US\nTitle: QR Scanner: Barcode Scanner - Apps on Google Play\nContent: app free.QR readerThe simplest QR reader for free. It can scan QR code automatically and create your own QR codes. Download the QR reader app now.Updated onJun 4, 2025ProductivityEvents & offersEnds on 07/28Scan & Share, Wonderful Summer Starts HereEnds on 07/31Smart Scan Challenge \u2014 Discover Life's WisdomData safetyarrow_forwardSafety starts with understanding how developers collect and share your data. Data privacy and security practices may vary based on your use, region, and age. The developer provided this information and may update it over time.No data shared with third partiesLearn more about how developers declare sharingThis app may collect these data typesApp activity, App info and performance, and Device or other IDsData is encrypted in transitYou can request that data be deletedSee detailsRatings and reviewsRatings and reviews are verifiedinfo_outlinearrow_forwardRatings and reviews are verifiedinfo_outlinephone_androidPhonelaptopChromebooktablet_androidTablet4.6497K\n\nSource: https://play.google.com/store/apps/details?id=qrcodereader.barcodescanner.scan.qrscanner&hl=en_US\nTitle: QR Scanner: Barcode Scanner - Apps on Google Play\nContent: app free.QR readerThe simplest QR reader for free. It can scan QR code automatically and create your own QR codes. Download the QR reader app now.Updated onJun 4, 2025Productivity\n\nSource: https://www.uniqode.com/blog/qr-code-basics/best-qr-code-scanner-apps\nTitle: 7 Best QR Code Scanner Apps in 2024 (For iOS & Android)\nContent: we make app comparisons here. 7 Best QR Code scanner apps in 2024 TrendMicro\u2019s QR Code scanner QR & Barcode Reader by Gamma Play QR Code Reader by TeaCapps QR & Barcode Reader by QR SCAN Team QR Scanner by Simple Design QR Reader for iPhone by TapMedia QR Code Reader by MixerBox At a glance: The best free QR Code Scanner apps We have listed seven QR Code scanner apps that were the best on the parameters we set before the review. These apps are all free, with some offering paid upgrades for additional features. We have also categorized the ones made for both iOS and Android and the ones catering to these platforms specifically. QR Code Scanner App Operating System Price Average rating TrendMicro\u2019s Safe QR Code Reader iOS and Android FREE with limited features 4.6/5 QR & Barcode Reader by Gamma Play iOS and Android FREE (remove ads at $5.99) 4.5/5 QR Code Reader by TeaCapps iOS and Android FREE (Pro version starts at $3.99 on iOS to remove ads) 4.5/5 QR & Barcode Reader by QR SCAN Team\n\nSource: https://www.qrcodechimp.com/must-have-qr-code-scanner-apps-in-2025/\nTitle: Best QR Code Scanner Apps 2025 | Secure & Fast Scanning\nContent: Must have QR Code Scanner Apps in 2025 Discover the best QR code scanner apps for 2025. Get fast, secure, and reliable QR scanning with top-rated apps for iOS and Android. Find the best option for you! Create QR Code Explore Solutions Bhushan More Last Updated: April 2, 2025\nMust have QR Code Scanner Apps in 2025\nDiscover the best QR code scanner apps for 2025. Get fast, secure, and reliable QR scanning with top-rated apps for iOS and Android. Find the best option for you!\nCreate QR Code Explore Solutions\nBhushan More Last Updated: April 2, 2025\nBhushan More Last Updated: April 2, 2025\nLast Updated: April 2, 2025\n\nSource: https://www.uniqode.com/blog/qr-code-basics/best-qr-code-scanner-apps\nTitle: 7 Best QR Code Scanner Apps in 2024 (For iOS & Android)\nContent: 3. QR Code Reader by TeaCapps\nQR Code Reader by TeaCapps is among the highest-rated apps on Apple\u2019s App Store (4.7/13,000 reviews) and Google Play (4.4/2.8 million reviews). The user interface is simple. There\u2019s an adjustable camera frame that you can pinch to decrease or increase the scanner\u2019s area of focus\u2014helpful while scanning a QR in crowded places.\nThe basic features are free, but you can pay with your time to unlock some advanced features, such as manual scan confirmation, by watching ads\u2014sometimes many of them.\nHere are some features that I found appealing during my trial:\nConservative regarding app permissions and requires only a camera and access to follow-up on URLs from QR Codes, which is a good sign\nOffers unlimited scan history and helps you easily manage them\nYou can export your scan history as a CSV file or save it to your cloud storage\nThere\u2019s a zoom feature that helps focus on scanning from afar\n\nSource: https://www.uniqode.com/blog/qr-code-basics/best-qr-code-scanner-apps\nTitle: 7 Best QR Code Scanner Apps in 2024 (For iOS & Android)\nContent: and 2D barcode formats with high scan speed Great voice-over features and suitable for everyday use \ud83d\udc51 Verdict: Uniqode\u2019s recommendation on the best QR Code scanner 2024 We recommend using TrendMicro\u2019s Secure QR Reader for Android and Trend Micro Mobile Security on iPhone as the best QR Scanner apps in 2024 for iOS and Android. Based on our review, this app prioritizes security over value-added features while providing the bare minimum required for a good QR Code scanning experience. The best cross-platform QR Code scanning app with the best value-added feature set is the QR & Barcode Scanner by Gamma Play. Frequently asked questions 1. What\u2019s the best QR Code scanner app for iPhone and Android? The best free QR Code scanner apps for iPhone and Android include: TrendMicro\u2019s Secure QR Reader QR & Barcode Reader by Gamma Play QR Code Reader by TeaCapps QR & Barcode Reader by QR SCAN Team QR Scanner by Simple Design QR Reader for iPhone by TapMedia QR Code Reader by MixerBox 2. Can you\n\nSource: https://play.google.com/store/apps/details?id=qrcodereader.barcodescanner.scan.qrscanner&hl=en_US\nTitle: QR Scanner: Barcode Scanner - Apps on Google Play\nContent: QR reader for free. It can scan QR code automatically and create your own QR codes. Download the QR reader app now.Updated onJun 4, 2025Productivity\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:42.069303",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://discuss.privacyguides.net/t/qr-scanner-pfa/20921\nTitle: QR Scanner (PFA) - Tool Suggestions - Privacy Guides Community\nContent: QR Scanner (PFA) Site Development Tool Suggestions yipii (It's a meee Yipii !) September 16, 2024, 3:21am 1 Hi all, I found a nice tool the other day to generate (and scan) QR codes on android. The tool is named \u201cQR Scanner (PFA)\u201d and is available on fdroid and play store. The tool github is here, and the creator website SECUSO Research Group here. Note that SECUSO Research Group has made a lot of other privacy application available here. This tool has been mentionned in a previous post, but for the scanning functionnality only, and here I mention it for qr code gerenation. I took the time to write this review here because It took me some time to find a private app in the google play store. A lot of application requested location, wifi scanning, all files, contact, telephone, phone identifier, network, \u2026 as usual, it was awful. In comparison, this app require no permission for qr generation, and optionally require the camera for qr scanning. There is quite a few template available, and\n\nSource: https://apps.apple.com/us/app/qr-code-reader-qr-scanner-app/id903799541\nTitle: \n      \u00e2\u0080\u008eQR Code Reader/QR Scanner App on the App\u00c2\u00a0Store\n    \nContent: Features: \u00e2\u0097\u008fAll-in-one scanner: scans all standard 1D and 2D code types\u00e2\u0097\u008fGenerate personalized, creative QR codes with AI\u00e2\u0097\u008fSimple & easy to Use: you can now scan & view product details on Google, amazon.com or amazon.co.jp!\u00e2\u0097\u008fRapid scan\u00e2\u0097\u008fInternet connection is not required for scanning\u00e2\u0097\u008fFlashlight supported: supports scanning even in the dark! \u00e2\u0097\u008fScan history saved\u00e2\u0097\u008fPrivacy Policy: https://s3.amazonaws.com/privacy-html/privacy.html?s=qr\u00e2\u0097\u008fTerms of Use: https://s3.amazonaws.com/privacy-html/QR-Terms+Of+Use.htmlA must-have app in your iPhone & iPad! Download now!!\u00e2\u0080\u0094*This app has been registered and authorized by the company, MixerBoxTerms of use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/\nJun 23, 2025 Version 2.20 - Minor bugs fixed- New feature: AI-powered QR generator\nJun 23, 2025 Version 2.20\nJun 23, 2025 Version 2.20\n- Minor bugs fixed- New feature: AI-powered QR generator\n- Minor bugs fixed- New feature: AI-powered QR generator\n\nSource: https://apps.apple.com/us/app/qr-code-reader-qr-scanner-app/id903799541\nTitle: \n      \u00e2\u0080\u008eQR Code Reader/QR Scanner App on the App\u00c2\u00a0Store\n    \nContent: Features: \u00e2\u0097\u008fAll-in-one scanner: scans all standard 1D and 2D code types\u00e2\u0097\u008fGenerate personalized, creative QR codes with AI\u00e2\u0097\u008fSimple & easy to Use: you can now scan & view product details on Google, amazon.com or amazon.co.jp!\u00e2\u0097\u008fRapid scan\u00e2\u0097\u008fInternet connection is not required for scanning\u00e2\u0097\u008fFlashlight supported: supports scanning even in the dark! \u00e2\u0097\u008fScan history saved\u00e2\u0097\u008fPrivacy Policy: https://s3.amazonaws.com/privacy-html/privacy.html?s=qr\u00e2\u0097\u008fTerms of Use: https://s3.amazonaws.com/privacy-html/QR-Terms+Of+Use.htmlA must-have app in your iPhone & iPad! Download now!!\u00e2\u0080\u0094*This app has been registered and authorized by the company, MixerBoxTerms of use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/\n\nSource: https://apps.apple.com/us/app/qr-code-reader-qr-scanner-app/id903799541\nTitle: \n      \u00e2\u0080\u008eQR Code Reader/QR Scanner App on the App\u00c2\u00a0Store\n    \nContent: Features: \u00e2\u0097\u008fAll-in-one scanner: scans all standard 1D and 2D code types\u00e2\u0097\u008fGenerate personalized, creative QR codes with AI\u00e2\u0097\u008fSimple & easy to Use: you can now scan & view product details on Google, amazon.com or amazon.co.jp!\u00e2\u0097\u008fRapid scan\u00e2\u0097\u008fInternet connection is not required for scanning\u00e2\u0097\u008fFlashlight supported: supports scanning even in the dark! \u00e2\u0097\u008fScan history saved\u00e2\u0097\u008fPrivacy Policy: https://s3.amazonaws.com/privacy-html/privacy.html?s=qr\u00e2\u0097\u008fTerms of Use: https://s3.amazonaws.com/privacy-html/QR-Terms+Of+Use.htmlA must-have app in your iPhone & iPad! Download now!!\u00e2\u0080\u0094*This app has been registered and authorized by the company, MixerBoxTerms of use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/\n\nSource: https://apps.apple.com/us/app/qr-code-reader-qr-scanner-app/id903799541\nTitle: \n      \u00e2\u0080\u008eQR Code Reader/QR Scanner App on the App\u00c2\u00a0Store\n    \nContent: 4.7 \u00e2\u0080\u00a2 138.2K Ratings\nFree Offers In-App Purchases\nOffers In-App Purchases\nScreenshots iPad iPhone\nDescription Features: \u00e2\u0097\u008fAll-in-one scanner: scans all standard 1D and 2D code types\u00e2\u0097\u008fGenerate personalized, creative QR codes with AI\u00e2\u0097\u008fSimple & easy to Use: you can now scan & view product details on Google, amazon.com or amazon.co.jp!\u00e2\u0097\u008fRapid scan\u00e2\u0097\u008fInternet connection is not required for scanning\u00e2\u0097\u008fFlashlight supported: supports scanning even in the dark! \u00e2\u0097\u008fScan history saved\u00e2\u0097\u008fPrivacy Policy: https://s3.amazonaws.com/privacy-html/privacy.html?s=qr\u00e2\u0097\u008fTerms of Use: https://s3.amazonaws.com/privacy-html/QR-Terms+Of+Use.htmlA must-have app in your iPhone & iPad! Download now!!\u00e2\u0080\u0094*This app has been registered and authorized by the company, MixerBoxTerms of use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/\n\nSource: https://discuss.privacyguides.net/t/qr-scanner-pfa/20921\nTitle: QR Scanner (PFA) - Tool Suggestions - Privacy Guides Community\nContent: yipii (It's a meee Yipii !) September 16, 2024, 3:21am 1 Hi all, I found a nice tool the other day to generate (and scan) QR codes on android. The tool is named \u201cQR Scanner (PFA)\u201d and is available on fdroid and play store. The tool github is here, and the creator website SECUSO Research Group here. Note that SECUSO Research Group has made a lot of other privacy application available here. This tool has been mentionned in a previous post, but for the scanning functionnality only, and here I mention it for qr code gerenation. I took the time to write this review here because It took me some time to find a private app in the google play store. A lot of application requested location, wifi scanning, all files, contact, telephone, phone identifier, network, \u2026 as usual, it was awful. In comparison, this app require no permission for qr generation, and optionally require the camera for qr scanning. There is quite a few template available, and I plan to generate a wifi qr for guest that visit\n\nSource: https://discuss.privacyguides.net/t/qr-scanner-pfa/20921\nTitle: QR Scanner (PFA) - Tool Suggestions - Privacy Guides Community\nContent: yipii (It's a meee Yipii !) September 16, 2024, 3:21am 1 Hi all, I found a nice tool the other day to generate (and scan) QR codes on android. The tool is named \u201cQR Scanner (PFA)\u201d and is available on fdroid and play store. The tool github is here, and the creator website SECUSO Research Group here. Note that SECUSO Research Group has made a lot of other privacy application available here. This tool has been mentionned in a previous post, but for the scanning functionnality only, and here I mention it for qr code gerenation. I took the time to write this review here because It took me some time to find a private app in the google play store. A lot of application requested location, wifi scanning, all files, contact, telephone, phone identifier, network, \u2026 as usual, it was awful. In comparison, this app require no permission for qr generation, and optionally require the camera for qr scanning. There is quite a few template available, and I plan to generate a wifi qr for guest that visit\n\nSource: https://apps.apple.com/us/app/qr-code-reader-qr-scanner-app/id903799541\nTitle: \n      \u00e2\u0080\u008eQR Code Reader/QR Scanner App on the App\u00c2\u00a0Store\n    \nContent: QR Code Reader/QR Scanner App 4+ Barcode/QR Code Reader Master MixerBox Inc. Designed for iPad 4.7 \u00e2\u0080\u00a2 138.2K Ratings Free Offers In-App Purchases Screenshots iPad iPhone Description Features: \u00e2\u0097\u008fAll-in-one scanner: scans all standard 1D and 2D code types\u00e2\u0097\u008fGenerate personalized, creative QR codes with AI\u00e2\u0097\u008fSimple & easy to Use: you can now scan & view product details on Google, amazon.com or amazon.co.jp!\u00e2\u0097\u008fRapid scan\u00e2\u0097\u008fInternet connection is not required for scanning\u00e2\u0097\u008fFlashlight supported: supports scanning even in the dark! \u00e2\u0097\u008fScan history saved\u00e2\u0097\u008fPrivacy Policy: https://s3.amazonaws.com/privacy-html/privacy.html?s=qr\u00e2\u0097\u008fTerms of Use: https://s3.amazonaws.com/privacy-html/QR-Terms+Of+Use.htmlA must-have app in your iPhone & iPad! Download now!!\u00e2\u0080\u0094*This app has been registered and authorized by the company, MixerBoxTerms of use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ What\u00e2\u0080\u0099s New Jun 23, 2025 Version 2.20 - Minor bugs fixed- New feature: AI-powered QR\n\nSource: https://discuss.privacyguides.net/t/qr-scanner-pfa/20921\nTitle: QR Scanner (PFA) - Tool Suggestions - Privacy Guides Community\nContent: though! Some have copied their apps and made changes. Ensure you have the SECUSO organization. Some haven\u2019t been updated recently. I have a hunch they are sort of student projects. But I\u2019m ok with that. 1 Like yipii (It's a meee Yipii !) September 16, 2024, 5:16pm 4 This software is doing a simple job and doing it well without bells and whistles. I saw other software that wanted my contact access for contact sharing for example. This app does not request contact and has no screen for that. All you need to do is treat the contact as any other thing you wish to share. You open your main contact application, open a contact, press share, and select the qr generator. I am happy with this solution. Sometimes a software is already feature complete. It is for my current purpose. 2 Likes Related topics Topic Replies Views Activity Privacy Friendly QR Scanner Tool Suggestions 6 868 September 12, 2023 QR code creator + Private chat suggestion Questions 3 266 April 4, 2025 Mention DuckDuckGo's\n\nSource: https://discuss.privacyguides.net/t/qr-scanner-pfa/20921\nTitle: QR Scanner (PFA) - Tool Suggestions - Privacy Guides Community\nContent: and optionally require the camera for qr scanning. There is quite a few template available, and I plan to generate a wifi qr for guest that visit my place. image700\u00d71440 67.9 KB I did write this in the general privacy category, cause it\u2019s not a specifically a recommendation for the website, I also wanted to start a discussion. If someone even search for such tool in the forum, I hope this can save you some time 2 Likes Offline File Sharing Guide jonah (Jonah Aragon) September 16, 2024, 4:06am 2 yipii: here I mention it for qr code gerenation. This is a good idea for a category, there are a ton of shady QR code generators that MITM your links with their own URL shorteners, or replace links/crypto-addresses with malware, etc. 5 Likes donutfreak (DF) September 16, 2024, 6:28am 3 All of the SECUSO apps are good on privacy. The UI and flow may need help in certain areas. It\u2019s all open source though! Some have copied their apps and made changes. Ensure you have the SECUSO organization. Some\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:42.134611",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: QR-Code Studio - via TEC-IT: free software for non-commercial QR code creation AI generated codes: QR Code AI Art Generator - a Hugging Face Space by huggingface-projects Android scanner/reader apps If you have Google Assistant on your phone then you have Google Lens on your phone. Google Lens lets you scan images, text, photos, and even QR codes. To scan, simply open Google Assistant and click on the camera icon on the lower, right side of the assistant. Your phone's camera will activate and you can scan the QR code in question. You can also download Google Lens at https://lens.google.com/ Barcode Scanner Scan barcodes on products then look up prices and reviews. You can also scan Data Matrix and QR Codes containing URLs, contact info, etc. QuickMark Barcode Scanner QuickMark is a mobile barcode scanner app that allows auto-scanning of multiple barcode formats from your phone. Google Lens (Google Goggles) Goggles uses image recognition technology to recognize objects (including\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: QR-Code Studio - via TEC-IT: free software for non-commercial QR code creation AI generated codes: QR Code AI Art Generator - a Hugging Face Space by huggingface-projects Android scanner/reader apps If you have Google Assistant on your phone then you have Google Lens on your phone. Google Lens lets you scan images, text, photos, and even QR codes. To scan, simply open Google Assistant and click on the camera icon on the lower, right side of the assistant. Your phone's camera will activate and you can scan the QR code in question. You can also download Google Lens at https://lens.google.com/ Barcode Scanner Scan barcodes on products then look up prices and reviews. You can also scan Data Matrix and QR Codes containing URLs, contact info, etc. QuickMark Barcode Scanner QuickMark is a mobile barcode scanner app that allows auto-scanning of multiple barcode formats from your phone. Google Lens (Google Goggles) Goggles uses image recognition technology to recognize objects (including\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: Data Matrix and QR Codes containing URLs, contact info, etc. QuickMark Barcode Scanner QuickMark is a mobile barcode scanner app that allows auto-scanning of multiple barcode formats from your phone. Google Lens (Google Goggles) Goggles uses image recognition technology to recognize objects (including barcodes) and return relevant search results. QR Droid Full-featured, ad-supported barcode scanner Apple scanner/reader apps iOS: Qrafter By Kerem Erkan, whose 2D code generator website is listed above. 2017: \" iOS 11 Inbuilt QR Code Scanner: Apple Adds Feature to its Latest Update\" https://scanova.io/blog/blog/2017/09/22/ios-11-inbuilt-qr-code-scanner-apple-adds-feature-latest-version/#.W6VsidW0IzY Read QR Codes without an app QRreader beta (Chrome Browser) Chrome extension: right-click (context) menu on QR code image and select \"Read QR code from image\" BlackBerry: QR Code - https://appworld.blackberry.com/webstore/content/28761887/?CPID=PRD_BBWSH_ << Previous: What is a QR Code?Next:\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: Data Matrix and QR Codes containing URLs, contact info, etc. QuickMark Barcode Scanner QuickMark is a mobile barcode scanner app that allows auto-scanning of multiple barcode formats from your phone. Google Lens (Google Goggles) Goggles uses image recognition technology to recognize objects (including barcodes) and return relevant search results. QR Droid Full-featured, ad-supported barcode scanner Apple scanner/reader apps iOS: Qrafter By Kerem Erkan, whose 2D code generator website is listed above. 2017: \" iOS 11 Inbuilt QR Code Scanner: Apple Adds Feature to its Latest Update\" https://scanova.io/blog/blog/2017/09/22/ios-11-inbuilt-qr-code-scanner-apple-adds-feature-latest-version/#.W6VsidW0IzY Read QR Codes without an app QRreader beta (Chrome Browser) Chrome extension: right-click (context) menu on QR code image and select \"Read QR code from image\" BlackBerry: QR Code - https://appworld.blackberry.com/webstore/content/28761887/?CPID=PRD_BBWSH_ << Previous: What is a QR Code?Next:\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: Data Matrix and QR Codes containing URLs, contact info, etc. QuickMark Barcode Scanner QuickMark is a mobile barcode scanner app that allows auto-scanning of multiple barcode formats from your phone. Google Lens (Google Goggles) Goggles uses image recognition technology to recognize objects (including barcodes) and return relevant search results. QR Droid Full-featured, ad-supported barcode scanner Apple scanner/reader apps iOS: Qrafter By Kerem Erkan, whose 2D code generator website is listed above. 2017: \" iOS 11 Inbuilt QR Code Scanner: Apple Adds Feature to its Latest Update\" https://scanova.io/blog/blog/2017/09/22/ios-11-inbuilt-qr-code-scanner-apple-adds-feature-latest-version/#.W6VsidW0IzY Read QR Codes without an app QRreader beta (Chrome Browser) Chrome extension: right-click (context) menu on QR code image and select \"Read QR code from image\" BlackBerry: QR Code - https://appworld.blackberry.com/webstore/content/28761887/?CPID=PRD_BBWSH_ << Previous: What is a QR Code?Next:\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: Create various codes (datamatrix, Aztec, micro) with an extensive list of actions (SMS, links, free text, maps); URL shortening options (Bit.ly, Goo.gl, Is.gd, etc.); download options (PDF, SVG, etc.); color options; large codes; no analytics. QR code generator - multilingual and QR code variety - https://www.the-qrcode-generator.com/ \u200bVisual QR Codes enable to turn any image into a QR Code: www.visualead.com XZing Project - http://zxing.appspot.com/generator/ Zebra Crossing\" open-source, 1D/2D barcode; simple code generator; uses Google Code. Create codes on your computer (freeware): QR-Code Studio - via TEC-IT: free software for non-commercial QR code creation AI generated codes: QR Code AI Art Generator - a Hugging Face Space by huggingface-projects Android scanner/reader apps If you have Google Assistant on your phone then you have Google Lens on your phone. Google Lens lets you scan images, text, photos, and even QR codes. To scan, simply open Google Assistant and click on the\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: Create various codes (datamatrix, Aztec, micro) with an extensive list of actions (SMS, links, free text, maps); URL shortening options (Bit.ly, Goo.gl, Is.gd, etc.); download options (PDF, SVG, etc.); color options; large codes; no analytics. QR code generator - multilingual and QR code variety - https://www.the-qrcode-generator.com/ \u200bVisual QR Codes enable to turn any image into a QR Code: www.visualead.com XZing Project - http://zxing.appspot.com/generator/ Zebra Crossing\" open-source, 1D/2D barcode; simple code generator; uses Google Code. Create codes on your computer (freeware): QR-Code Studio - via TEC-IT: free software for non-commercial QR code creation AI generated codes: QR Code AI Art Generator - a Hugging Face Space by huggingface-projects Android scanner/reader apps If you have Google Assistant on your phone then you have Google Lens on your phone. Google Lens lets you scan images, text, photos, and even QR codes. To scan, simply open Google Assistant and click on the\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: Create various codes (datamatrix, Aztec, micro) with an extensive list of actions (SMS, links, free text, maps); URL shortening options (Bit.ly, Goo.gl, Is.gd, etc.); download options (PDF, SVG, etc.); color options; large codes; no analytics. QR code generator - multilingual and QR code variety - https://www.the-qrcode-generator.com/ \u200bVisual QR Codes enable to turn any image into a QR Code: www.visualead.com XZing Project - http://zxing.appspot.com/generator/ Zebra Crossing\" open-source, 1D/2D barcode; simple code generator; uses Google Code. Create codes on your computer (freeware): QR-Code Studio - via TEC-IT: free software for non-commercial QR code creation AI generated codes: QR Code AI Art Generator - a Hugging Face Space by huggingface-projects Android scanner/reader apps If you have Google Assistant on your phone then you have Google Lens on your phone. Google Lens lets you scan images, text, photos, and even QR codes. To scan, simply open Google Assistant and click on the\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: Create various codes (datamatrix, Aztec, micro) with an extensive list of actions (SMS, links, free text, maps); URL shortening options (Bit.ly, Goo.gl, Is.gd, etc.); download options (PDF, SVG, etc.); color options; large codes; no analytics. QR code generator - multilingual and QR code variety - https://www.the-qrcode-generator.com/ \u200bVisual QR Codes enable to turn any image into a QR Code: www.visualead.com XZing Project - http://zxing.appspot.com/generator/ Zebra Crossing\" open-source, 1D/2D barcode; simple code generator; uses Google Code. Create codes on your computer (freeware): QR-Code Studio - via TEC-IT: free software for non-commercial QR code creation AI generated codes: QR Code AI Art Generator - a Hugging Face Space by huggingface-projects Android scanner/reader apps If you have Google Assistant on your phone then you have Google Lens on your phone. Google Lens lets you scan images, text, photos, and even QR codes. To scan, simply open Google Assistant and click on the\n\nSource: https://guides.boisestate.edu/c.php?g=74197&p=473658\nTitle: Create QR codes | Code scanner apps - QR Codes - Library Guides at Boise State University\nContent: Create various codes (datamatrix, Aztec, micro) with an extensive list of actions (SMS, links, free text, maps); URL shortening options (Bit.ly, Goo.gl, Is.gd, etc.); download options (PDF, SVG, etc.); color options; large codes; no analytics. QR code generator - multilingual and QR code variety - https://www.the-qrcode-generator.com/ \u200bVisual QR Codes enable to turn any image into a QR Code: www.visualead.com XZing Project - http://zxing.appspot.com/generator/ Zebra Crossing\" open-source, 1D/2D barcode; simple code generator; uses Google Code. Create codes on your computer (freeware): QR-Code Studio - via TEC-IT: free software for non-commercial QR code creation AI generated codes: QR Code AI Art Generator - a Hugging Face Space by huggingface-projects Android scanner/reader apps If you have Google Assistant on your phone then you have Google Lens on your phone. Google Lens lets you scan images, text, photos, and even QR codes. To scan, simply open Google Assistant and click on the\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:43.620667",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "subquery_context_window",
+        "output": "\ud83d\udcc3 Source: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: #1QR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\n#1QR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\n#1QR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\n#1QR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\n#1QR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\nQR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\nQR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\nQR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\nQR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\nQR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99\nQR reader - QR code scanner free App\nQR reader - QR code scanner free App\n3.4 out of 5 stars 520\n3.4 out of 5 stars 520\n3.4 out of 5 stars\n#2Scan QR codeSmart Soft3.7 out of 5 stars 2$5.90\n\nSource: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: QR Reader Free (QR Code Scanner)\n2.5 out of 5 stars 23\n2.5 out of 5 stars 23\n2.5 out of 5 stars\n#20QR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\n#20QR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\n#20QR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\n#20QR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\n#20QR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\nQR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\nQR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\nQR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\nQR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\nQR Barcode Scan Generator ProSmart Soft3.9 out of 5 stars 4$7.90\nQR Barcode Scan Generator Pro\nQR Barcode Scan Generator Pro\n3.9 out of 5 stars 4\n3.9 out of 5 stars 4\n3.9 out of 5 stars\n#22QR Code ProSRBD$1.00\n#22QR Code ProSRBD$1.00\n#22QR Code ProSRBD$1.00\n#22QR Code ProSRBD$1.00\n\nSource: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: 3.6 out of 5 stars\n#8QR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\n#8QR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\n#8QR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\n#8QR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\n#8QR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\nQR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\nQR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\nQR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\nQR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\nQR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99\nQR Code Scanner (Reader)\nQR Code Scanner (Reader)\n1.0 out of 5 stars 1\n1.0 out of 5 stars 1\n1.0 out of 5 stars\n#9Scan code QRMystiQ Ltd3.2 out of 5 stars 3$1.00\n#9Scan code QRMystiQ Ltd3.2 out of 5 stars 3$1.00\n#9Scan code QRMystiQ Ltd3.2 out of 5 stars 3$1.00\n#9Scan code QRMystiQ Ltd3.2 out of 5 stars 3$1.00\n#9Scan code QRMystiQ Ltd3.2 out of 5 stars 3$1.00\n\nSource: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: QR Code Reader (QR Scanner)\n1.0 out of 5 stars 1\n1.0 out of 5 stars 1\n1.0 out of 5 stars\nYour recently viewed items and featured recommendations \u203a View or edit your browsing history After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in. Your recently viewed items and featured recommendations \u203a View or edit your browsing history After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in.\nYour recently viewed items and featured recommendations \u203a View or edit your browsing history After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in. Your recently viewed items and featured recommendations \u203a View or edit your browsing history After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in.\n\nSource: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: QR Code Scanner & Generator - Barcode Reader For Fire Tablets\nMob Bytes Dot\nMob Bytes Dot\nMob Bytes Dot\n#19QR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\n#19QR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\n#19QR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\n#19QR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\n#19QR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\nQR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\nQR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\nQR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\nQR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\nQR Reader Free (QR Code Scanner)Materialights2.5 out of 5 stars 23$0.99\nQR Reader Free (QR Code Scanner)\nQR Reader Free (QR Code Scanner)\n2.5 out of 5 stars 23\n2.5 out of 5 stars 23\n2.5 out of 5 stars\n\nSource: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: #12QR Pro - Powered by AImidwestcoder$2.00\n#12QR Pro - Powered by AImidwestcoder$2.00\n#12QR Pro - Powered by AImidwestcoder$2.00\n#12QR Pro - Powered by AImidwestcoder$2.00\nQR Pro - Powered by AImidwestcoder$2.00\nQR Pro - Powered by AImidwestcoder$2.00\nQR Pro - Powered by AImidwestcoder$2.00\nQR Pro - Powered by AImidwestcoder$2.00\nQR Pro - Powered by AImidwestcoder$2.00\nQR Pro - Powered by AI\nQR Pro - Powered by AI\n#13All Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19\n#13All Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19\n#13All Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19\n#13All Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19\n#13All Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19\nAll Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19\nAll Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19\nAll Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19\n\nSource: https://apps.apple.com/us/app/qr-reader-for-iphone/id368494609\nTitle: \n      \u00e2\u0080\u008eQR Reader for iPhone on the App\u00c2\u00a0Store\n    \nContent: QR Code Reader \u00c2\u00b7\nQR Code Reader \u00c2\u00b7\nQR Code Reader \u00c2\u00b7\nQR, Barcode Scanner for iPhone Utilities\nQR, Barcode Scanner for iPhone Utilities\nQR, Barcode Scanner for iPhone\nQR, Barcode Scanner for iPhone\nQR, Barcode Scanner for iPhone\nQR Code Reader & Code Scanner Utilities\nQR Code Reader & Code Scanner Utilities\nQR Code Reader & Code Scanner\nQR Code Reader & Code Scanner\nQR Code Reader & Code Scanner\nCopyright \u00c2\u00a9 2025 Apple Inc. All rights reserved. Internet Service Terms App Store & Privacy Cookie Warning Support\nCopyright \u00c2\u00a9 2025 Apple Inc. All rights reserved. Internet Service Terms App Store & Privacy Cookie Warning Support\nCopyright \u00c2\u00a9 2025 Apple Inc. All rights reserved. Internet Service Terms App Store & Privacy Cookie Warning Support\nCopyright \u00c2\u00a9 2025 Apple Inc. All rights reserved.\nCopyright \u00c2\u00a9 2025 Apple Inc. All rights reserved.\nCopyright \u00c2\u00a9 2025\nAll rights reserved.\nInternet Service Terms App Store & Privacy Cookie Warning Support\n\nSource: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: Best Sellers in QR & Barcode ScannersTop 100 PaidTop 100 Free#1QR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99#2Scan QR codeSmart Soft3.7 out of 5 stars 2$5.90#3QR Reader and Barcode Scanner for amazon fire tabletMercuryRedSW3.4 out of 5 stars 42$1.99#4QR Code Reader - Barcode Scanner Fire Phones & TabletBIGO.LLC$2.99#5Online ShoppingJust World3.5 out of 5 stars 3$1.00#6BarCode readeredenhall s.r.o.$0.99#7QR Scanner & Barcode Reader for Fire Tablet (no ads)Apolo 8 SW3.6 out of 5 stars 4$2.95#8QR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99#9Scan code QRMystiQ Ltd3.2 out of 5 stars 3$1.00#10wifi qr code password showFree Aryo Games And Apps$1.00#11Create Your Dream AI BoyfriendDigital Marketing$2.00#12QR Pro - Powered by AImidwestcoder$2.00#13All Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19#14Scan code QRSmart Soft$9.50#15Dollar Admiral Rapid Penny Item ShoppingJeremy Roberts4.0 out of 5 stars 3$7.99#16PDF Scanner and Reader\n\nSource: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: Best Sellers in QR & Barcode ScannersTop 100 PaidTop 100 Free#1QR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99#2Scan QR codeSmart Soft3.7 out of 5 stars 2$5.90#3QR Reader and Barcode Scanner for amazon fire tabletMercuryRedSW3.4 out of 5 stars 42$1.99#4QR Code Reader - Barcode Scanner Fire Phones & TabletBIGO.LLC$2.99#5Online ShoppingJust World3.5 out of 5 stars 3$1.00#6BarCode readeredenhall s.r.o.$0.99#7QR Scanner & Barcode Reader for Fire Tablet (no ads)Apolo 8 SW3.6 out of 5 stars 4$2.95#8QR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99#9Scan code QRMystiQ Ltd3.2 out of 5 stars 3$1.00#10wifi qr code password showFree Aryo Games And Apps$1.00#11Create Your Dream AI BoyfriendDigital Marketing$2.00#12QR Pro - Powered by AImidwestcoder$2.00#13All Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19#14Scan code QRSmart Soft$9.50#15Dollar Admiral Rapid Penny Item ShoppingJeremy Roberts4.0 out of 5 stars 3$7.99#16PDF Scanner and Reader\n\nSource: https://www.amazon.com/Best-Sellers-QR-Barcode-Scanners/zgbs/mobile-apps/9408930011\nTitle: Amazon Best Sellers: Best QR & Barcode Scanners\nContent: Best Sellers in QR & Barcode ScannersTop 100 PaidTop 100 Free#1QR reader - QR code scanner free AppColorlights Apps3.4 out of 5 stars 520$1.99#2Scan QR codeSmart Soft3.7 out of 5 stars 2$5.90#3QR Reader and Barcode Scanner for amazon fire tabletMercuryRedSW3.4 out of 5 stars 42$1.99#4QR Code Reader - Barcode Scanner Fire Phones & TabletBIGO.LLC$2.99#5Online ShoppingJust World3.5 out of 5 stars 3$1.00#6BarCode readeredenhall s.r.o.$0.99#7QR Scanner & Barcode Reader for Fire Tablet (no ads)Apolo 8 SW3.6 out of 5 stars 4$2.95#8QR Code Scanner (Reader)CROQUETAPPS1.0 out of 5 stars 1$1.99#9Scan code QRMystiQ Ltd3.2 out of 5 stars 3$1.00#10wifi qr code password showFree Aryo Games And Apps$1.00#11Create Your Dream AI BoyfriendDigital Marketing$2.00#12QR Pro - Powered by AImidwestcoder$2.00#13All Barcode & QR code scannerMerbin Joe5.0 out of 5 stars 1$1.19#14Scan code QRSmart Soft$9.50#15Dollar Admiral Rapid Penny Item ShoppingJeremy Roberts4.0 out of 5 stars 3$7.99#16PDF Scanner and Reader\n",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:43.623700",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "research_step_finalized",
+        "output": "Finalized research step.\n\ud83d\udcb8 Total Research Costs: $0.013579100000000002",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:03:43.628462",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "writing_report",
+        "output": "\u270d\ufe0f Writing report for 'Best rated QR code reader'...",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:04:06.643998",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "report_written",
+        "output": "\ud83d\udcdd Report written for 'Best rated QR code reader' (12915 characters)",
+        "metadata": null
+      }
+    },
+    {
+      "timestamp": "2025-07-16T19:04:06.647136",
+      "type": "event",
+      "data": {
+        "type": "logs",
+        "content": "llm_flow_diagram",
+        "output": "\ud83c\udfa8 LLM Interaction Flow:\ngraph TB\n    classDef startEnd fill:#e1f5fe,stroke:#0277bd,stroke-width:2px\n    classDef success fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px\n    classDef failure fill:#ffebee,stroke:#c62828,stroke-width:2px\n    classDef retry fill:#fff3e0,stroke:#ef6c00,stroke-width:2px\n    classDef decision fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px\n    Start[\"\ud83c\udfac Report Generation<br/>Best rated QR code reader<br/>\ud83d\udccb research_report\"]\n    Step1[\"\u2705 LLM Interaction<br/>chat_completion<br/>\ud83e\udd16 google/gemini-2.5-pro-exp-03-25<br/>\u23f1\ufe0f 23.0s<br/>\ud83d\udd22 19854 tokens<br/>\ud83d\udccd #1\"]\n    Start --> Step1\n    Step2[\"\u2705 Generate Main Report<br/>Main Report (research_report)<br/>\ud83e\udd16 google/gemini-2.5-pro-exp-03-25<br/>\u23f1\ufe0f 23.0s<br/>\ud83d\udd22 19855 tokens<br/>\ud83d\udccd #2\"]\n    Step1 --> Step2\n    End[\"\ud83c\udfc1 Report Complete<br/>\u2705 2/2 Success<br/>\ud83d\udcc8 100% Rate\"]\n    Step2 --> End\n    class Start,End startEnd\n    class Step1,Step2 success",
+        "metadata": null
+      }
+    }
+  ],
+  "content": {
+    "query": "",
+    "sources": [],
+    "context": [],
+    "report": "",
+    "costs": 0.0,
+    "type": "report",
+    "content": "selected_images",
+    "output": " these factors, along with user reviews and expert recommendations, will enable users to select the QR code reader that best meets their needs.\n",
+    "metadata": [
+      {
+        "url": "https://cdn.thewirecutter.com/wp-content/media/2025/06/BEST-MOBILE-SCANNING-APPS-Adobe-Scan-Banner.jpg?auto=webp&quality=75&width=320",
+        "score": 3
+      },
+      {
+        "url": "https://cdn.thewirecutter.com/wp-content/media/2025/06/BEST-MOBILE-SCANNING-APPS-vFlat-Banner.jpg?auto=webp&quality=75&width=320",
+        "score": 3
+      },
+      {
+        "url": "https://cdn.thewirecutter.com/wp-content/media/2025/06/BEST-MOBILE-SCANNING-APPS-Photomyne-Banner.jpg?auto=webp&quality=75&width=320",
+        "score": 3
+      },
+      {
+        "url": "https://cdn.thewirecutter.com/wp-content/media/2025/06/BEST-MOBILE-SCANNING-APPS-Apple-Notes.png?auto=webp&quality=75&width=320",
+        "score": 3
+      },
+      {
+        "url": "https://screenapp.io/blog/best-qr-code-scanners.webp",
+        "score": 1
+      },
+      {
+        "url": "https://media.qrtiger.com/blog/2025/01/ten-best-barcode-scanner-apps-for-android-and-iosjpg_800.jpeg",
+        "score": 1
+      },
+      {
+        "url": "https://apps.apple.com/assets/artwork/1x1-42817eea7ade52607a760cbee00d1495.gif",
+        "score": 2
+      },
+      {
+        "url": "https://forum-uploads.privacyguidesusercontent.com/optimized/2X/d/de1967cb8176652e9750894e6386e9e0c5bd7db8_2_243x500.png",
+        "score": 1
+      }
+    ]
+  }
+}
