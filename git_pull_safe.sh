@@ -4,7 +4,7 @@
 # This script attempts a normal git pull first, and if conflicts arise,
 # offers to resolve them by excluding problematic files from the merge
 
-set -xe  # Exit on any error
+set -e  # Exit on any error
 
 # Colors for output
 RED='\033[0;31m'
@@ -43,23 +43,30 @@ get_current_branch() {
     git rev-parse --abbrev-ref HEAD
 }
 
-# Function to parse git pull error output and extract conflicting files
+# Function to parse git pull/merge error output and extract conflicting files
 parse_conflicting_files() {
-    local pull_output="$1"
+    local output="$1"
     local conflicting_files=()
     
     # Extract file paths from the error output
-    # The pattern is: "        filename" (indented with spaces)
+    # Handle two patterns:
+    # 1. "        filename" (indented with spaces) - from pull conflicts
+    # 2. "CONFLICT (add/add): Merge conflict in filename" - from merge conflicts
     while IFS= read -r line; do
-        # Skip empty lines and non-file lines
+        # Pattern 1: Indented filenames from pull conflicts
         if [[ -n "$line" && "$line" =~ ^[[:space:]]+[^[:space:]] ]]; then
-            # Remove leading whitespace and add to array
             local file_path=$(echo "$line" | sed 's/^[[:space:]]*//')
             if [[ -n "$file_path" ]]; then
                 conflicting_files+=("$file_path")
             fi
+        # Pattern 2: CONFLICT lines from merge conflicts
+        elif [[ -n "$line" && "$line" =~ ^CONFLICT.*Merge[[:space:]]conflict[[:space:]]in[[:space:]](.+)$ ]]; then
+            local file_path=$(echo "$line" | sed 's/^CONFLICT.*Merge conflict in //')
+            if [[ -n "$file_path" ]]; then
+                conflicting_files+=("$file_path")
+            fi
         fi
-    done <<< "$pull_output"
+    done <<< "$output"
     
     echo "${conflicting_files[@]}"
 }
@@ -171,11 +178,43 @@ main() {
         print_success "Git pull completed successfully!"
         exit 0
     else
-        # Capture the pull output for analysis
+        # Check if it's a diverging branches issue
         pull_output=$(git pull 2>&1 || true)
         
-        # Check if the error contains the specific merge conflict pattern
-        if echo "$pull_output" | grep -q "Your local changes to the following files would be overwritten by merge"; then
+        if echo "$pull_output" | grep -q "Not possible to fast-forward"; then
+            print_warning "Diverging branches detected. Attempting pull with --allow-unrelated-histories to identify conflicts..."
+            
+            # Try to pull with allow-unrelated-histories to get the actual conflict output
+            if git pull --allow-unrelated-histories 2>&1; then
+                print_success "Pull with --allow-unrelated-histories completed successfully!"
+                exit 0
+            else
+                # Capture pull conflict output
+                local pull_conflict_output
+                pull_conflict_output=$(git pull --allow-unrelated-histories 2>&1 || true)
+                
+                # Check if we got pull conflicts
+                if echo "$pull_conflict_output" | grep -q "CONFLICT\|Your local changes to the following files would be overwritten by merge"; then
+                    print_warning "Pull conflicts detected during --allow-unrelated-histories attempt"
+                    echo "$pull_conflict_output"
+                    echo ""
+                    
+                    if ask_confirmation "Would you like to resolve this using the exclude-based approach?" "$pull_conflict_output"; then
+                        run_exclude_solution "$pull_conflict_output"
+                    else
+                        print_status "Operation cancelled by user"
+                        print_status "You can manually resolve conflicts or run this script again"
+                        exit 0
+                    fi
+                else
+                    # Different pull error
+                    print_error "Pull with --allow-unrelated-histories failed with an unexpected error:"
+                    echo "$pull_conflict_output"
+                    print_status "Please resolve the issue manually"
+                    exit 1
+                fi
+            fi
+        elif echo "$pull_output" | grep -q "Your local changes to the following files would be overwritten by merge"; then
             print_warning "Merge conflicts detected with local changes"
             echo "$pull_output"
             echo ""
