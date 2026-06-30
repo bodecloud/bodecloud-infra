@@ -14,6 +14,12 @@ This page exists because "HA" becomes meaningless almost immediately in this
 repo unless routing is decomposed into the separate truths the user is actually
 angry about.
 
+That anger should stay specific.
+The user is not mainly furious that routing is hard.
+They are furious that routing stories keep sounding complete one layer before
+the receiving node can actually explain, in shared system terms, why the
+request is still safe on the wrong machine.
+
 The grounding for that is concrete, not hypothetical.
 
 - [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
@@ -50,6 +56,10 @@ They are frustrated with how many respectable infrastructure options solve one
 routing layer loudly while quietly leaving the operator as the hidden
 cross-node interpreter.
 
+That last phrase is the real routing wound in this repo:
+the operator remains the final translator between node entry, placement truth,
+policy continuity, and fallback legitimacy.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -74,6 +84,12 @@ The user is not mainly asking for cleaner routing terminology.
 They are asking why so many HA and failover stories keep sounding plausible
 until the request lands on the wrong healthy node and the operator is still
 the only thing that knows what should happen next.
+
+That means this page has to keep one humiliating question alive all the way
+through:
+
+> after the first hop lands on the wrong node, what exact truth does that node
+> itself own, and what exact truth is still being borrowed from the operator?
 
 ## Strongest honest current answer
 
@@ -113,6 +129,11 @@ If a routing summary sounds sophisticated while still leaving wrong-node entry
 as the moment where the operator privately completes the story, then the page is
 still rewarding the wrong thing.
 
+That is the anti-theater rule for this page:
+if the receiving node still depends on human folklore to know who should serve,
+who is eligible, and whether the handoff preserves the same protected service,
+the routing layer is still being socially completed.
+
 ## What still does not count as HA or failover here
 
 This page should make the common overreads illegal.
@@ -143,6 +164,10 @@ Many ecosystems will happily call the above:
 The repo has to keep asking the harsher follow-up:
 
 - yes, but who still had to know the real answer first?
+
+That is not rhetorical flourish.
+It is the shortest honest checksum for whether "HA routing" has become one more
+label for partial machinery plus private operator settlement.
 
 They also do not satisfy the deeper complaint:
 
@@ -187,6 +212,11 @@ stack-wide resilience.
 The packet requirement is stricter here because the user is already surrounded
 by too many plausible routing stories that fail exactly when they finally
 matter.
+
+What the user is starved for is not another routing recipe.
+It is one believable packet that proves the request remained the same service
+after locality failed, and that the explanation for that survival lived in the
+system rather than in one operator's head.
 
 This is also why route-class separation matters so much.
 
@@ -258,6 +288,11 @@ small for this repo.
 The user is not short on proxies.
 The user is short on options that preserve meaning instead of merely
 redirecting packets.
+
+That sentence is the whole routing benchmark:
+preserve meaning, not just transport.
+Everything else on this page is here to stop the docs from quietly forgetting
+that.
 
 ## The routing layers that must stay separate
 

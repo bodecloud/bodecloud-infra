@@ -29,6 +29,11 @@ This page is therefore not just a test matrix.
 It is the place where the docs admit, in advance, what a passed drill still
 does not let them say.
 
+That is one of the most important anti-theater moves in the whole site.
+Most infrastructure writing waits until after a success to get vague.
+This page is supposed to pre-commit to the vagueness ceiling before the success
+happens.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -48,6 +53,10 @@ This page is not authoritative about:
 
 This is a proof-boundary page, not a success report.
 
+It is also a disappointment-preservation page.
+If a drill passes and the docs immediately become more satisfying than the
+actual evidence deserves, then this page was too weak where it mattered most.
+
 ## Strongest honest current answer
 
 The repo needs proof discipline more than it needs more confident language.
@@ -57,6 +66,11 @@ true and keeps the next unclosed ceiling visible.
 The danger is not missing tests.
 The danger is serious-looking evidence being quietly promoted into broader
 architecture closure than it actually earned.
+
+That promotion drift is the real adversary here.
+It is how the repo can start sounding like it has finally found a respectable
+option even when the operator is still privately carrying almost the same
+decisive burden.
 
 That is why this page cannot read like a standard QA matrix.
 The user is not just asking whether routes can be exercised.
@@ -93,6 +107,10 @@ Another way to say that:
 the drill only counts if it removes one real private completion step from the
 operator and keeps the next still-missing step visible.
 
+That sentence should govern every future addition to this matrix.
+If the drill mainly increases confidence without reducing private completion
+work, it is not moving the dream far enough to matter.
+
 ## The dream fragments being measured
 
 This matrix only makes sense if the dream stays visible.
@@ -111,6 +129,11 @@ The dream is:
 > made fallback necessary, keep policy and auth coherent on the fallback path,
 > and do all of that without the operator's head secretly remaining the real
 > control plane
+
+This matrix exists because that last clause is where most otherwise-impressive
+proof stories quietly go to die.
+The more sophisticated the stack sounds, the easier it becomes to forget that
+the operator may still be the untracked final settlement layer.
 
 Each proof class below should be read against that standard.
 
@@ -138,6 +161,10 @@ Forbidden upgrade:
 
 - the runtime already behaves this way
 
+This class matters because the repo has many strong intent surfaces.
+It is therefore unusually vulnerable to feeling half-achieved just because the
+dream has already been described with precision.
+
 ### `Config present`
 
 Meaning:
@@ -152,6 +179,10 @@ Allowed claim:
 Forbidden upgrade:
 
 - the behavior now exists under live conditions
+
+This class is where authors most often get flattered by their own graph.
+The config can be unusually rich and still leave the same bad-day truth
+outside the system.
 
 ### `Happy-path runtime`
 
@@ -168,6 +199,9 @@ Allowed claim:
 Forbidden upgrade:
 
 - the platform now preserves this path under wrong-node or backend-loss stress
+
+This class is especially dangerous in `bolabaden-infra` because the happy path
+can look mature enough to emotionally impersonate a distributed answer.
 
 ### `Wrong-node proven`
 
@@ -187,6 +221,10 @@ Forbidden upgrade:
 
 - the platform now generically preserves wrong-node traffic
 
+This is the first class that starts feeling like the user's actual benchmark.
+That is exactly why it must stay narrow.
+One protected wrong-node success is not permission to narrate a platform.
+
 ### `Fallback-route proven`
 
 Meaning:
@@ -204,6 +242,10 @@ Forbidden upgrade:
 
 - fallback is broadly solved everywhere
 
+This class exists to stop one of the ecosystem's favorite cheats:
+"we demonstrated recovery once, therefore the missing middle is basically
+present."
+
 ### `Semantic continuity proven`
 
 Meaning:
@@ -218,6 +260,10 @@ Allowed claim:
 Forbidden upgrade:
 
 - all protected routes now have parity guarantees
+
+This class matters because the user is not asking for packet motion alone.
+They are asking whether the protected meaning of the service survives the
+handoff as the same service rather than a more weakly exposed cousin.
 
 ### `Stateful topology proven`
 
@@ -234,6 +280,10 @@ Allowed claim:
 Forbidden upgrade:
 
 - the platform is now generically HA
+
+This class should stay the coldest and hardest to widen.
+Stateful success is where the docs most need to resist gratitude, optimism,
+and cluster-shaped wishful thinking.
 
 ## The anti-widening rule
 

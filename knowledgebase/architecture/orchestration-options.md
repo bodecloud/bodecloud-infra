@@ -47,6 +47,12 @@ The user is not short on platform names.
 The user is short on options that still feel honest after wrong-node entry,
 backend loss, and hidden operator glue become real.
 
+That honesty requirement should remain harsher than ordinary platform
+evaluation.
+The extra layer is not being judged by how feature-complete it sounds.
+It is being judged by whether one more previously private bad-day sentence
+stops needing a human author.
+
 That distinction should keep the whole page meaner than normal architecture
 comparison docs.
 Most comparison docs quietly assume every candidate is already a real option
@@ -90,6 +96,12 @@ That disappointment has to stay present in the prose.
 If the page becomes too balanced, too fair, or too market-literate, it will
 start helping those smaller answers feel complete again.
 
+This is one of the few pages that should remain openly suspicious of good
+manners.
+Normal comparison-doc politeness is exactly how weak options keep getting
+upgraded into "reasonable defaults" long before they have actually displaced
+the hidden operator control plane.
+
 ## Priority decision stack for this page
 
 When this page evaluates whether some extra layer has earned the right to
@@ -125,6 +137,12 @@ There is an emotional reading hidden inside that list too:
 every missing element makes it easier for the page to sound adult while
 quietly avoiding the part the user actually cares about.
 
+That is why this page should keep feeling slightly unfair to large product
+families.
+The ecosystem already knows how to defend them.
+What the repo needs is a page willing to ask what exact humiliation they still
+leave behind after all their architecture dignity is in place.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -149,6 +167,11 @@ It too easily means:
 when the user is actually asking for something much narrower and harsher:
 
 - one more option that remains believable after the bad day starts
+
+That is also why "more mature" has to remain downstream of "owns the right
+truth."
+Otherwise maturity becomes just another way of saying "I can picture this in a
+bigger company" while the same private local burden survives untouched.
 
 ## Automatic disqualifiers for a not-yet-earned option
 
@@ -214,6 +237,11 @@ This matters because the repo is not suffering from lack of reputable product
 families.
 It is suffering from lack of options that survive the user's actual benchmark.
 
+The benchmark should stay rude enough to embarrass vague recommendation habits.
+If the option cannot say what it would make the wrong node know on its own,
+what it would make fallback less private, or what it would make stateful
+authority less social, then it is still only half-present as an option here.
+
 That benchmark should stay insulting on purpose.
 The whole point is that many layers sound impressive until the user asks the
 question they keep getting punished for asking:
@@ -258,6 +286,11 @@ Without that packet, the page is still just warming the reader toward a product
 family.
 
 That is exactly the behavior this page exists to prevent.
+
+The promoted layer has to earn more than attention.
+It has to earn the right to reduce the operator's private explanatory burden in
+front of real failure, and leave behind artifacts that prove that reduction to
+someone else later.
 Warmth is cheap.
 Respectable product gravity is cheap.
 The user has already seen enough of both.

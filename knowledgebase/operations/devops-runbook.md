@@ -17,6 +17,10 @@ real control plane.
 This runbook exists to make that burden visible and to stop green output from
 inflating into resilience theater.
 
+It exists because operator calm is cheap in a repo like this.
+A few healthy commands can make the stack feel governed.
+The runbook's job is to keep asking what the operator still had to know anyway.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -35,6 +39,11 @@ This page is not authoritative about:
 
 This is an operator method page, not a completion certificate.
 
+It is also not a comfort script.
+If following it mainly leaves a human feeling reassured, rather than leaving
+behind inspectable evidence plus a named remaining ceiling, then it is already
+drifting back toward ritual instead of operational truth.
+
 ## Strongest honest current answer
 
 The real job of this runbook is:
@@ -50,6 +59,11 @@ The real job of this runbook is:
 
 If the runbook does not do those things, it becomes a comfort ritual instead
 of an operational tool.
+
+That distinction matters more here than in an ordinary service repo.
+The root wound is not lack of commands.
+It is that commands keep succeeding one layer before the hidden operator role
+actually shrinks.
 
 ## What still does not count as a serious runbook in this repo
 
@@ -71,6 +85,11 @@ The user is asking for less hidden reconstruction burden.
 
 If the runbook leaves the operator feeling informed but still privately
 carrying the same sacred-node truth, then it stayed too shallow.
+
+That is the human test for every runbook section:
+
+> after this step, what exact private sentence did the operator no longer need
+> to finish alone?
 
 ## The dream this runbook has to protect
 
@@ -101,6 +120,11 @@ It is:
 - evidence that stays inspectable after the stressful moment passes
 - a platform where the operator increasingly verifies shared truth instead of
   impersonating it
+
+That last line is the whole operational horizon.
+The runbook is not here to make the operator more heroic.
+It is here to make heroism less necessary and more obviously measurable when it
+is still required.
 
 That is the bar this page has to protect.
 
@@ -177,6 +201,10 @@ into:
 - run enough commands to feel reassured
 - then narrate that reassurance as resilience
 
+That drift is not just a habit problem.
+It is one of the main ways hidden operator knowledge keeps surviving while the
+repo sounds increasingly sophisticated.
+
 That is exactly the failure pattern the user is trying to get away from.
 
 ## The operational sequence
@@ -193,6 +221,10 @@ When investigating or validating anything serious, use this order:
    forbidden
 
 That last step is where most runbooks fail.
+
+It is also the step most likely to keep this repo honest.
+The first successful command is rarely the lie.
+The lie usually begins with the next paragraph.
 
 ## Proof classes
 
@@ -229,6 +261,10 @@ What this does **not** prove:
 - state is safe
 
 This is the minimum proof class, not the final one.
+
+That reminder should be emotionally prominent, not procedural boilerplate.
+In this repo, authoring proof is especially seductive because the authored
+graph is already rich enough to look like half the platform has arrived.
 
 ### 2. Local runtime proof
 
