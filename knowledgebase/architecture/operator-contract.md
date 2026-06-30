@@ -61,6 +61,13 @@ That difference matters because the operator contract is exactly the kind of
 page that can start sounding satisfyingly adult long before the runtime has
 actually changed who carries the missing truth.
 
+It also cannot let a stronger contract description impersonate a stronger
+platform.
+
+This repo can become much better at describing relief before relief arrives.
+That is not fake work, but it becomes dangerous the moment the prose starts
+calming the reader faster than the burden actually moves.
+
 ## Strongest honest current answer
 
 The repo now states the operator contract much more clearly than before, but
@@ -105,6 +112,15 @@ the repo.
 
 It is defining actual transfer of burden, not a generic checklist of desirable
 platform properties.
+
+That means it has to keep another distinction active too:
+
+- a better benchmark for adulthood
+- actual adulthood in the runtime
+
+Those are not the same milestone.
+If this page becomes satisfying enough to make them feel adjacent, it is
+already helping the wrong kind of relief.
 
 ## The dream in one exact sentence
 
@@ -240,6 +256,11 @@ It is not yet relief.
 
 This distinction matters because the ecosystem is full of progress that is real
 and still not the kind the user is asking for.
+
+The same is true for this page.
+A stronger articulation of operator relief is still not operator relief.
+The docs are only earning their keep if they keep the missing transfer visible
+instead of merely defining it more elegantly.
 
 The user is not denying progress.
 They are denying the social move where partial progress gets narrated as if the

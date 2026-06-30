@@ -59,6 +59,18 @@ This page is not allowed to:
 This is a page about how to speak truthfully, not a page that proves the repo
 is done.
 
+It also cannot let stronger evidence hygiene impersonate stronger evidence.
+
+This is one of the easiest traps in a repo at this stage:
+
+- the evidence classes are rigorous
+- the caveats are conservative
+- the source routing is careful
+- the reader starts feeling like the platform must therefore be close to trust
+
+No.
+That is still documentation discipline, not route-specific maturity.
+
 ## Strongest honest current answer
 
 The biggest remaining documentation risk is not false facts.
@@ -122,6 +134,14 @@ instinct to say:
 
 Those are exactly the kinds of sentences that let the docs mature faster than
 the underlying truth moved.
+
+This page has to interrupt one more sentence too:
+
+- "at least the repo now knows how to evaluate itself, so the rest is mostly
+  execution"
+
+That is still a counterfeit upgrade if the same wrong-node, fallback, semantic
+continuity, and stateful truth gaps remain where they were.
 
 This ledger is here to keep that speed mismatch visible:
 
@@ -240,6 +260,11 @@ That is one of the paradoxes this page has to preserve:
 
 the repo's clarity about the dream is a strength, but it is also one of the
 main ways the docs can accidentally overpay confidence.
+
+The same paradox appears at the ledger level.
+The cleaner the evidence taxonomy gets, the easier it becomes for a reader to
+mistake disciplined evaluation for partial completion.
+This page has to keep separating those two feelings on purpose.
 
 That is why intent pages should make the dream sharper, not make runtime
 claims easier.

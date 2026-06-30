@@ -39,6 +39,14 @@ It also exists to stop the repo from promoting a more prestigious answer
 before it can prove one more important truth has genuinely left private
 operator custody.
 
+It also cannot let better promotion grammar impersonate promotion.
+
+This repo can become much better at talking about why a larger layer has not
+yet earned itself and still leave the operator carrying the same private
+bad-day sentence afterward.
+That is useful discipline.
+It is not yet one more real option.
+
 ## The deepest rule of the page
 
 Do not promote because a bigger tool exists.
@@ -60,6 +68,11 @@ prestige-shaped and not burden-shaped enough for this repo.
 This is the simplest serious rule in the whole page.
 A promotion is only real if it deletes one private sentence the operator used
 to have to finish for the platform.
+
+That same harshness has to apply to this page itself.
+If the page mainly improves how well the repo explains promotion without making
+any candidate more earned in evidence terms, then it has improved decision
+quality rather than burden transfer.
 
 ## What still does not count as a serious promotion decision
 
@@ -124,6 +137,11 @@ It is the smallest path that still respects the user's refusal pattern.
 It also reflects a harsher principle:
 the repo should prove one smaller honest burden transfer before paying for a
 larger worldview.
+
+That means this page should leave the reader more constrained, not more warmed
+toward respectable product families.
+If the option space mainly feels more manageable afterward, the page is already
+at risk of sounding more complete than the runtime has earned.
 
 ## What is too weak to justify promotion
 

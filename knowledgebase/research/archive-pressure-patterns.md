@@ -67,6 +67,7 @@ It is also:
 - repeated tool comparisons are not genuine choice
 - better language around HA is not one inch of transferred burden
 - a persuasive synthesis can still be a more elegant form of forgetting
+- richer archive reconstruction is not closer relief
 
 ## Strongest honest current answer
 
@@ -79,6 +80,10 @@ answer is:
 > operator memory, and fake stateful confidence fundamentally intact.
 
 That is problem-shape proof, not runtime proof.
+
+It is also not option proof.
+The archive can make the ecosystem's failures easier to name without making one
+local escape path more earned.
 
 ## Quick claim router
 
@@ -228,6 +233,12 @@ The repeated complaint is:
 > why do so many "serious" answers only become serious by charging a giant
 > worldview tax before they have shown me one believable middle option?
 
+This page should therefore stay hostile to archive synthesis that becomes too
+satisfying.
+If the archive starts feeling like a complete explanation of the repo, the docs
+are in danger of turning recurring pain into one more polished object of study
+instead of a still-active demand on the runtime.
+
 ## What this pressure is doing to the repo
 
 The archive is not just research.
@@ -250,6 +261,12 @@ It keeps recovering the exact kinds of coherence the user no longer trusts:
 - an HA story that is really just ingress plurality
 - a control plane that is really just private human reconstruction with nicer
   nouns
+
+The archive's job is to keep those failures vivid, not resolved.
+A better archive page is not one that merely makes the whole situation feel
+more comprehensible in the abstract.
+It is one that makes it harder to forget what exact kind of fake adulthood the
+user keeps encountering.
 
 ## Pattern 1: "There should already be a standard dynamic middle layer, but there never is"
 
