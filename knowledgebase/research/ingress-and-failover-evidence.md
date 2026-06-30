@@ -245,6 +245,53 @@ So every ingress explanation here should keep asking:
 - how does the receiving node know that?
 - what proves the chosen target is healthy and semantically valid?
 
+### 2.5. The same source also shows the exact overclaim to avoid
+
+The `docker-multi-node-without-swarm` thread is valuable because it does not
+only contain the desired flow.
+It also contains a generated draft that turns the target architecture into
+premature certainty.
+
+That draft treats the combination of:
+
+- multiple Cloudflare A records
+- per-node L4/L7 forwarding
+- redundant proxy processes
+- presumed stateful replication
+
+as if it were enough to say the system has no SPOFs.
+
+That is exactly the documentation failure this page exists to prevent.
+
+The honest extraction is narrower:
+
+- DNS and DDNS can reduce sacred public entrypoint pressure
+- per-node proxying can become the mechanism for wrong-node request
+  preservation
+- a registry or discovery surface can become the missing request-time truth
+  source
+
+The dishonest upgrade is:
+
+- therefore service-level failover is solved
+- therefore TCP forwarding proves stateful continuity
+- therefore "zero SPOF" is already earned
+
+This source has to be read as both architecture pressure and cautionary
+evidence.
+It proves why the user wants the flow.
+It also proves how easy it is for documentation to flatter the flow before the
+runtime owns it.
+
+That means this page should never say "Cloudflare plus L4/L7 forwarding
+ensures no SPOFs."
+It can only say:
+
+> Cloudflare plus per-node forwarding describes the intended shape of the
+> missing middle. The proof still has to show placement truth, peer
+> eligibility, route durability, policy continuity, and stateful authority
+> separately.
+
 ### 3. Familiar reverse-proxy names are not the missing option
 
 `load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`

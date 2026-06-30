@@ -391,6 +391,70 @@ The archive's value is not that it adds more examples.
 Its value is that it keeps forcing every example back to the same hidden-burden
 test.
 
+## The most important source-level correction
+
+The `docker-multi-node-without-swarm` thread is especially important because
+it contains both the user's real architecture and the exact documentation
+failure this knowledgebase must avoid.
+
+The user narrows the problem very clearly:
+
+- scheduling is not the blocker because manual placement is acceptable
+- first-hop node survival is partly addressed by Cloudflare DNS plus per-node
+  DDNS
+- the unresolved hard part is service discovery and routing when the request
+  lands on a node that does not host the requested service
+- the desired behavior is that each node can use the relevant L7 or L4 path to
+  hand the request to another owned node
+
+That is the good source signal.
+
+The same thread then contains a generated architecture draft that slides into
+the bad pattern:
+
+- it treats multiple DNS records plus internal forwarding as though that
+  "ensures" no SPOFs
+- it says stateful services are replicated without proving replication,
+  authority, promotion, or client rediscovery
+- it narrates Redis TCP forwarding as if L4 reachability were equivalent to
+  stateful correctness
+- it sounds polished enough that a reader could mistake the target story for a
+  proven operating state
+
+That is the source-level warning.
+
+The archive therefore proves a stricter lesson than "the user wants
+multi-node Docker." It proves that even a mostly correct explanation can become
+harmful when it crosses from:
+
+- "this is the desired flow"
+
+into:
+
+- "this combination ensures zero SPOFs"
+
+without proof packets.
+
+Any page that uses this source must preserve both halves.
+It must carry forward the user's narrowed problem and reject the generated
+overclaim in the same breath.
+
+The legal sentence is:
+
+> the user is trying to combine manual placement, any-node public entry, and
+> per-node L7/L4 forwarding so service discovery becomes the main missing
+> request-time truth source.
+
+The illegal sentence is:
+
+> DNS plurality plus per-node forwarding means the platform has no SPOFs.
+
+The surviving private burden is:
+
+> I still need the system to prove where placement truth came from, why the
+> chosen peer was eligible, whether the route survived backend loss, and
+> whether any stateful authority claim was more than reachability.
+
 ## How to use one archived thread without overclaiming
 
 A single archived thread can support a page only if the page separates three
