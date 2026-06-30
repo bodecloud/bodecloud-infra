@@ -186,6 +186,23 @@ If a contributor arrives expecting:
 
 this directory should interrupt that expectation immediately.
 
+It should also interrupt a subtler expectation:
+
+- if the docs are now broad, serious, and highly cross-linked, the repo must
+  already be closer to settled than before
+
+That expectation is dangerous here.
+
+This rewrite is not trying to create the feeling of settlement.
+It is trying to create a better reconstruction of:
+
+- what the user is actually demanding
+- where the live worktree still falls short
+- which futures are real, fake, or still too weakly proved
+
+If a contributor leaves this directory with a calmer feeling but a blurrier
+understanding of those distinctions, the docs have regressed.
+
 ## The fastest useful reading route
 
 This knowledgebase is not best read as a taxonomy.
@@ -218,6 +235,14 @@ after reading it, a contributor should be able to say:
 - which "options" are fake because they leave the same hidden burden intact
 
 If a page cannot support that exit condition, it is still too soft.
+
+There is one more exit condition the doorway pages should preserve:
+
+- can the reader name the exact hidden burden each proposed layer is supposed
+  to remove, rather than merely naming the tool or platform family?
+
+Without that, the docs drift back into respectable platform browsing instead of
+answering the repo's real question.
 
 ## The three truth layers you must preserve
 

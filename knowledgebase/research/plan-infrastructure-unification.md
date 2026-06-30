@@ -74,6 +74,26 @@ This page combines:
 It does **not** claim that every unification layer described here is already
 implemented in the root runtime.
 
+## What this page should make impossible to miss
+
+After reading this page, a reader should not still be able to leave with the
+following false summary:
+
+- the repo is exploring several respectable futures
+- therefore the main remaining problem is simply choosing one
+
+That is exactly the kind of calm overreading this page is supposed to prevent.
+
+The useful summary is harsher:
+
+- the repo already understands the missing truth layers unusually well
+- several candidate futures exist
+- many of those futures still differ more in packaging than in burden transfer
+- the real unresolved question is which layer would most honestly remove the
+  most sacred operator reconstruction without importing a larger lie
+
+If that summary is not obvious, this page is still too soft.
+
 ## Why this repo has a unification problem at all
 
 On one node, fragmentation is irritating.
@@ -313,6 +333,47 @@ Different tools unify different fractures.
 
 That is why this repo does not honestly collapse into a single product pitch.
 
+That said, "multiple futures remain visible" is not itself a meaningful
+conclusion.
+
+This page has to prevent three easy downgrades:
+
+- unresolved pressure getting renamed as healthy optionality
+- fake differentiation getting narrated as genuine strategic breadth
+- one future sounding more mature merely because it owns more nouns
+
+The repo preserves multiple futures because different fractures remain open.
+It does **not** preserve them so the reader can relax into generic
+"several good options remain" language.
+
+## Fake openness versus real unresolvedness
+
+There is a difference between:
+
+- several paths that genuinely remove different hidden burdens
+
+and:
+
+- several paths that mostly preserve the same human reconstruction tax while
+  changing syntax, worldview, or marketing story
+
+This page should help the reader tell those apart quickly.
+
+Real unresolvedness means the repo still has not proved which hidden burden is
+large enough to justify promoting which truth-owning layer next.
+
+Fake openness means the docs talk as though breadth itself were maturity while
+the same underlying wounds remain:
+
+- no live tracked root placement authority
+- no generally proven wrong-node request preservation
+- no trustworthy backend-loss route persistence
+- no honest stateful anti-SPOF closure
+
+That distinction matters because "we are keeping options open" can easily
+become one more flattering sentence that leaves the user with the same old
+problem described more elegantly.
+
 ## Compose plus helpers
 
 Can improve:
@@ -374,6 +435,17 @@ added complexity justify itself against named pains instead of prestige.
 The repo is not merely undecided.
 It is refusing to let prestige, ecosystem gravity, or controller aesthetics
 masquerade as proof that the right problem is being solved.
+
+## The real test for every unification future
+
+Every future described on this page should be held against one blunt question:
+
+> if this future were implemented exactly as its advocates imagine, what
+> sacred operator knowledge would still remain outside the system on the bad
+> day?
+
+If the answer is still "quite a lot," then the future is not yet a strong
+answer for this repo, even if it looks coherent, modern, and well-integrated.
 
 ## What the current repo already proves
 
