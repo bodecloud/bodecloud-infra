@@ -23,6 +23,11 @@ fails.
 The answer gets broader, the tech list gets longer, the tone gets calmer, and
 the exact thing the user keeps asking for gets edited into a smaller problem.
 
+That pattern should remain emotionally visible here.
+The user is not complaining about lack of summarization effort.
+The user is complaining about the way effort keeps getting spent on adjacent
+breadth while the decisive burden-transfer question quietly becomes less sharp.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to prove:
@@ -42,6 +47,11 @@ done correctly.
 
 That distinction matters because the site can get much better at sounding
 assimilated before it has truly earned that word.
+
+And "sounding assimilated" is one of the most dangerous fake victories in this
+repo.
+The docs can become broader, denser, calmer, and more cross-linked while still
+failing to reconstruct the actual accusation driving the project.
 
 ## The dream retrieval has to protect
 
@@ -80,6 +90,17 @@ truthful.
 Length, breadth, and surface sophistication are unusually weak proxies for
 truthfulness here.
 
+That weakness should stay explicit because it fights a common instinct:
+
+- more sources
+- more detail
+- more cross-references
+- therefore more fidelity
+
+In `bolabaden-infra`, that inference fails constantly unless the retrieval
+still knows exactly which truth class it is carrying and exactly which part of
+the user's complaint it is trying not to soften.
+
 ## Strongest honest current answer
 
 The repository has four major evidence classes:
@@ -106,6 +127,10 @@ They are asking for evidence custody:
 - which source actually gave us live runtime truth
 - which source only explains pressure, contradiction, or planning
 
+That custody question is more important than generic completeness.
+The repo is already full enough that undifferentiated completeness starts
+becoming another way to launder weak claims through volume.
+
 ## What still does not count as real retrieval here
 
 The following still do not count as "actually RAG this time" in this repo:
@@ -123,6 +148,11 @@ question.
 And "answering the wrong question" is not a soft failure here.
 It usually means the repo has quietly converted a burden-transfer problem into
 an architecture-summary problem.
+
+This page should keep treating that conversion as a real regression.
+If retrieval gets better at architecture summary while getting worse at burden
+reconstruction, the docs have become more impressive and less faithful at the
+same time.
 
 ## Source class 1: architecture-intent and honesty surfaces
 
@@ -159,6 +189,11 @@ has already started flattening the repo.
 
 Once that flattening begins, the docs usually become easier to read and less
 able to survive contact with the user's real complaint.
+
+That is why retrieval here cannot just be "find the relevant files."
+It has to preserve disagreement between truth classes on purpose.
+Smoothness is cheap.
+Truth custody is the scarce part.
 
 ## Source class 2: live root runtime surfaces
 
@@ -205,6 +240,11 @@ This is one of the core retrieval disciplines of the site:
 - trust under failure is a stronger sentence
 - stronger sentences need stronger source classes
 
+That three-line rule should govern more of the site than it currently feels
+like it does.
+Many bad summaries fail precisely because they let presence borrow emotional
+weight from trust language it has not yet earned.
+
 ## Source class 3: planning and promotion surfaces
 
 These are the strongest sources for:
@@ -238,6 +278,12 @@ These sources are allowed to explain what is missing.
 They are not allowed to promote themselves into live proof.
 
 That promotion error is one of the most common ways long-form docs start
+looking more serious than the runtime really is.
+
+The planning layer is especially dangerous because it often contains the most
+adult-sounding language in the repo.
+If retrieval loses discipline there, the future starts impersonating the
+present while still sounding perfectly responsible.
 lying while still sounding careful.
 
 ## Source class 4: archive-pressure surfaces
