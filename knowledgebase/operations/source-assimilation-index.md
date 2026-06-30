@@ -3,7 +3,7 @@
 This page is the retrieval contract for the knowledgebase.
 
 Its job is not just to say "consult sources."
-Its job is to stop the docs from sounding broad, careful, and well-organized
+Its job is to stop the docs from sounding broad, careful, and cross-linked
 while still quietly answering a smaller question than the user actually asked.
 
 In this repository, bad retrieval often looks polished.
@@ -12,20 +12,20 @@ In this repository, bad retrieval often looks polished.
 
 This page is allowed to prove:
 
-- what "actual assimilation" means in this repository
-- how source classes should be separated before stronger claims are written
+- what "actual assimilation" means in `bolabaden-infra`
+- how source classes must stay separate before stronger claims are written
 - why retrieval discipline is part of the repo's honesty contract
-- which source families matter most for the no-Swarm, wrong-node, burden
-  transfer problem
+- which source families matter most for the no-Swarm, wrong-node,
+  burden-transfer problem
 
 This page is not allowed to prove:
 
-- that a page has already assimilated the repo just because it cites many files
-- that source abundance itself produces better answers
+- that a page has already assimilated the repo just because it cites many
+  files
+- that source abundance by itself produces better answers
 - that retrieval discipline can substitute for runtime proof
 
-This is a retrieval contract page, not a claim that the work has already been
-done correctly.
+This is a retrieval contract page, not a completion badge.
 
 ## What "actually RAG this time" means here
 
@@ -35,6 +35,7 @@ In `bolabaden-infra`, "actually RAG this time" does **not** mean:
 - mention more tools
 - summarize more adjacent technologies
 - produce a calmer architecture story
+- flatten plan, runtime, archive, and aspiration into one nice narrative
 
 It means:
 
@@ -45,13 +46,26 @@ It means:
 5. say exactly what it does not prove
 6. preserve contradiction instead of ironing it out
 7. keep worktree truth above elegant prose for runtime claims
-8. use archive pressure to recover the user's complaint without letting the
+8. use archive pressure to recover the user's accusation without letting the
    archive impersonate runtime evidence
 
 If the docs skip that sequence, they may become longer without becoming more
 truthful.
 
-## The source families that matter most
+## The accusation retrieval must preserve
+
+The retrieval pass is not just reconstructing "infra requirements."
+It is reconstructing the user's specific accusation:
+
+> there seem to be endless options for multi-node Docker, failover, clustering,
+> proxies, overlays, discovery, and orchestration, but too many of them solve
+> one visible layer and then quietly leave the operator as the hidden control
+> plane when reality gets sharp.
+
+If the retrieval pass loses that accusation, the page may still become more
+thorough while answering the wrong question.
+
+## The four evidence classes that matter most
 
 This repo has four major evidence classes:
 
@@ -66,7 +80,9 @@ one blended narrative.
 Once that happens, at least one of these becomes false:
 
 - the worktree starts sounding more complete than it is
-- the user's actual complaint gets replaced by a neighboring, weaker question
+- the user's complaint gets replaced by a neighboring, weaker question
+- plans begin lending runtime confidence they did not earn
+- archives begin sounding like implementation proof
 
 ## Priority source map
 
@@ -89,8 +105,9 @@ Use these for:
 
 - the target operating contract
 - honesty boundaries
-- repo-authoring priorities
-- how the repo wants Compose to remain central
+- authoring priorities
+- why Compose is still central
+- why heavier control layers are not allowed to win by tone alone
 
 Do **not** use these alone for:
 
@@ -113,8 +130,8 @@ Use these for:
 
 - service presence
 - network presence
+- fragment inclusion
 - config and secret surfaces
-- active fragment membership
 - proof that a component is in the runtime at all
 
 Do **not** use these alone for:
@@ -133,7 +150,7 @@ Primary anchors:
 
 - [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 - related plan docs under `/docs`
-- roadmap, proof, and promotion pages in the knowledgebase
+- roadmap, proof, and architecture pages under `knowledgebase/`
 
 Use these for:
 
@@ -146,29 +163,32 @@ Do **not** use these alone for:
 
 - claiming the repair is live
 - claiming a candidate already won
-- implying the runtime has already crossed the threshold
+- implying the runtime already crossed the threshold
 
 ### 4. Archive-pressure surfaces
 
-Read first when the page is trying to reconstruct what the user is really
-rebelling against and why ordinary answers keep failing.
+Read first when the page is trying to reconstruct what the user is actually
+rebelling against and why normal answers keep failing.
 
 Primary anchors:
 
 - [`knowledgebase/source-archive/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/)
-- synthesis pages under [`research/`](../research/evidence-ledger.md)
+- synthesis pages under `knowledgebase/research/`
 
-High-value recurring threads include:
+High-value recurring thread families include:
 
-- `docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`
-- `distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
-- `load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
-- `nomad-multi-node-failover__68765e45-1ec4-8006-9179-5ef176d7a90f.md`
+- multi-node Docker without Swarm
+- distributed HA orchestration
+- load-balancer and failover alternatives
+- Nomad, k3s, Kubernetes, and control-plane comparisons
+- reverse-proxy and middleware continuity discussions
+- helper-layer frustration where the helper disappears under the failure it was
+  meant to absorb
 
 Use these for:
 
 - recurring burden-transfer complaints
-- why certain candidate families keep recurring
+- why certain candidate families keep reappearing
 - why generic option lists feel smaller than they sound
 
 Do **not** use these alone for:
@@ -234,6 +254,33 @@ Required outcome:
 - the page preserves the accusation, keeps source classes separate, and defines
   what is still illegal to claim
 
+### Operator pages
+
+Minimum packet:
+
+- one live runtime source
+- one dream source
+- one archive-pressure source
+
+Required outcome:
+
+- the page must say what truth is still operator-owned today and what exact
+  artifact would externalize it
+
+## The retrieval sequence that should happen before writing
+
+The actual sequence should be:
+
+1. name the user-facing wound being reconstructed
+2. name the claim class the page wants to make
+3. pull the strongest dream surface
+4. pull the strongest runtime surface
+5. pull the strongest plan or archive surface needed to explain the gap
+6. write down what truth is still privately owned after reading all three
+7. only then draft the page
+
+If the writing begins before step 6, the page usually becomes too smooth.
+
 ## What still does not count as real retrieval here
 
 The following still do not count as "actually RAG this time" in this repo:
@@ -252,19 +299,19 @@ The docs can become more exhaustive and still answer the wrong question.
 
 ## The small auditable packet every retrieval pass should leave behind
 
-Actual assimilation here should leave behind a small packet, not just a bigger
-stack of citations.
+Actual assimilation here should leave a small packet, not just a larger stack
+of citations.
 
 At minimum the packet should preserve:
 
-- the exact user-facing accusation being reconstructed
+- the exact accusation being reconstructed
 - the strongest runtime artifact consulted
-- the strongest dream or archive artifact consulted
+- the strongest dream, plan, or archive artifact consulted
 - the private burden still left over after both were read
 - the stronger sentence that still stayed illegal
 
 If the retrieval pass cannot produce that packet, then "we really read the repo
-this time" is still too self-congratulatory for this project.
+this time" is still too congratulatory for this project.
 
 ## Bottom line
 
@@ -277,6 +324,6 @@ Actual assimilation here means:
 - we did not let runtime, intent, plan, and archive trade confidence illegally
 - we kept naming what still stayed operator-owned
 
-If a page becomes more cross-linked, more source-aware, and more ecosystem-rich
+If a page becomes more cross-linked, more ecosystem-rich, and more source-aware
 while becoming less able to name the surviving operator-owned truth, the page
 got worse.

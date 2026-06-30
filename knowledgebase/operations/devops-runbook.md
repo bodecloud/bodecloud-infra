@@ -10,9 +10,9 @@ The real operational question in `bolabaden-infra` is not:
 
 It is:
 
-> what exact evidence do I need before I can say the system, rather than my own
-> memory, preserved a request, survived a wrong-node landing, or reduced a real
-> hidden SPOF?
+> what exact evidence do I need before I can honestly say the system, rather
+> than my own memory, preserved a request, survived a wrong-node landing, or
+> reduced a real hidden SPOF?
 
 That is a much harsher standard.
 It is also the only standard that matches what the user is actually trying to
@@ -48,7 +48,7 @@ The recurring hidden burden looks like this:
 - hidden placement truth
 - hidden peer-eligibility truth
 - hidden policy-preservation truth
-- hidden state authority truth
+- hidden state-authority truth
 
 If a command succeeds but the operator still has to privately know:
 
@@ -60,7 +60,7 @@ If a command succeeds but the operator still has to privately know:
 
 then the runbook has not yet reached the user's actual pain.
 
-## Start every pass with a claim sentence
+## Start every pass with one claim sentence
 
 Before touching the runtime, write the claim in this format:
 
@@ -92,8 +92,8 @@ This repo needs a stricter evidence ladder than most homelab writeups.
 | Local runtime health | `docker compose ps`, healthchecks, container logs | a container is up on this node and may be healthy locally | wrong-node success, backend-loss survival, stateful correctness |
 | Route behavior | `curl`, headers, Traefik logs, backend identity markers | one route answered and can sometimes be tied to one backend identity | that the same route survives the failure that makes fallback matter |
 | Wrong-node drill | controlled node targeting plus route identity evidence | one named route preserved meaning after landing on a non-owner node | that the whole platform is now unified |
-| Backend-loss drill | controlled failure plus before/after route evidence | one named route survived one named failure mode with known limits | that unrelated routes or stateful services inherited that property |
-| Stateful correctness | role, write-path, election, rediscovery, reconnect evidence | one named stateful surface preserved authority honestly | that the stateful layer as a whole is now anti-SPOF |
+| Backend-loss drill | controlled failure plus before-and-after route evidence | one named route survived one named failure mode with known limits | that unrelated routes or stateful services inherited that property |
+| Stateful correctness | leader, write-path, election, rediscovery, reconnect evidence | one named stateful surface preserved authority honestly | that the stateful layer as a whole is now anti-SPOF |
 
 The operator should name the evidence class before running the first command.
 
@@ -114,12 +114,12 @@ Concrete runtime facts worth remembering before any drill:
 - active egress fragment: `docker-compose.warp-nat-routing.yml`
 - root-owned networks: `publicnet`, `backend`, `warp-nat-net`
 - root-owned directly declared services include `mongodb`, `searxng`,
-  `code-server`, `chat-analytics`
+  `code-server`, `chat-analytics`, and protected admin surfaces
 - tractable stateless proof candidates already exist: `whoami`, `wishlist`,
   `mkdocs`
 
-Those facts matter because they tell you the runtime is broad enough that
-sloppy testing will over-upgrade very easily.
+Those facts matter because the runtime is broad enough that sloppy testing will
+over-upgrade very easily.
 
 ## Operational sequence
 
@@ -202,7 +202,7 @@ Prefer evidence that lets you answer:
 
 - which hostname was hit?
 - which router handled it?
-- which backend/service did Traefik think it used?
+- which backend or service did Traefik think it used?
 - can the response be tied to node identity or app identity?
 
 Forbidden upgrade after success:
@@ -252,9 +252,10 @@ Goal:
 
 Minimum proof packet:
 
-- before/after route behavior
+- before-and-after route behavior
 - exact failure introduced
-- whether recovery was local restart, peer forwarding, or operator intervention
+- whether recovery was local restart, peer forwarding, or operator
+  intervention
 - whether auth and middleware meaning stayed the same
 - what still remained human knowledge
 
@@ -264,7 +265,8 @@ Forbidden upgrade after success:
 
 The real sentence always has to be narrower:
 
-failover of what, under which exact failure, with which remaining human burden?
+failover of what, under which exact failure, with which remaining human
+burden?
 
 ### 6. Treat stateful drills as a separate discipline
 
@@ -330,12 +332,13 @@ It is still not broad anti-SPOF proof.
 
 Examples:
 
-- a named wrong-node drill with backend identity and policy continuity evidence
-- a named backend-loss drill with explicit before/after semantics
+- a named wrong-node drill with backend identity and policy continuity
+  evidence
+- a named backend-loss drill with explicit before-and-after semantics
 - a stateful drill that proves authority transfer honestly, or proves honest
   singularity instead of pretending otherwise
 
-Strong evidence is not "green output."
+Strong evidence is not green output.
 It is a proof packet with a named ceiling.
 
 ## Example claim packets
@@ -344,17 +347,18 @@ These are the kinds of close-outs this repo actually needs.
 
 ### Example: authored shape
 
-- `Claim tested:` the current root graph still includes the edge, mesh, metrics,
-  and WARP fragments.
+- `Claim tested:` the current root graph still includes the edge, mesh,
+  metrics, docs, and WARP fragments.
 - `Evidence class:` authored shape.
 - `What this proves:` the priority implementation surface still materially
   contains those layers.
-- `What is still forbidden:` saying those layers already cooperate into generic
-  wrong-node success.
+- `What is still forbidden:` saying those layers already cooperate into
+  generic wrong-node success.
 
 ### Example: stateless route
 
-- `Claim tested:` `wishlist.$DOMAIN` answers through the current Traefik stack.
+- `Claim tested:` `wishlist.$DOMAIN` answers through the current Traefik
+  stack.
 - `Evidence class:` route behavior.
 - `What this proves:` one public HTTP route answered and can be inspected at
   the edge.
