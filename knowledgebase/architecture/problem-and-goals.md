@@ -44,6 +44,16 @@ It has to stay that way because the repo is already coherent enough to tempt
 readers into thinking the remaining gap is mostly execution.
 That temptation is part of the problem.
 
+It is not just a reading mistake.
+It is one of the main ways the repo's own sophistication can start betraying
+the user:
+
+- the diagnosis is sharper
+- the components are real
+- the planning is serious
+- the surviving humiliation starts sounding like implementation residue instead
+  of the central unsolved fact
+
 ## Strongest honest current answer
 
 The repo already proves a serious Compose-first platform with a strong edge,
@@ -73,6 +83,17 @@ machinery.
 The harder truth is that the repo already has enough machinery to make false
 closure sound plausible.
 
+That sentence should remain brutal.
+
+The repo is not starving for seriousness theater.
+It is already serious enough that the docs can start accidentally helping the
+same lie the user keeps rejecting:
+
+- the stack feels mature
+- therefore the remaining problem must be mostly polish
+
+This page has to keep saying no to that move.
+
 ## The shortest exact problem statement
 
 The repo is trying to solve this:
@@ -98,6 +119,17 @@ The repo is not searching for:
 - a more modern control plane
 
 unless one of those also changes who owns the truth on the bad day.
+
+That is why this page should stay impatient with adjacent improvements.
+
+Better routing expression, better healthchecks, better sync, or better helper
+generation are all real.
+They are still not the answer if the wrong-node scene still cashes out into:
+
+- remembered placement
+- remembered safe peer choice
+- remembered route meaning
+- remembered stateful caveats
 
 ## The wound behind the problem statement
 
@@ -127,6 +159,12 @@ They are still too polite if they stop naming the lived reveal:
 
 > when reality gets sharp, the operator is still the hidden control plane.
 
+That line is the real center of gravity.
+
+If the page ever gets better organized by weakening that sentence into
+"operational complexity" or "topology awareness," then the docs have become
+cleaner and less faithful at the same time.
+
 ## What the user is actually trying to make impossible
 
 The dream is easier to understand if stated as anti-goals.
@@ -148,6 +186,17 @@ That is why the problem statement must keep both halves visible:
 If a solution narrative removes only the first half, it becomes fantasy.
 If it removes only the second half, it becomes complaint without architecture.
 The real documentation has to preserve both.
+
+That is one reason this repo is hard to document honestly.
+
+Most infra writing wants one of two safe modes:
+
+- emotional distance
+- or technical distance
+
+This project cannot afford either one by itself.
+The whole point is that the technical missing truths and the emotional insult
+of those missing truths are the same wound seen from two angles.
 
 This is one of the places where the knowledgebase most needs to "actually RAG"
 instead of merely summarize.
@@ -211,6 +260,19 @@ That is why the repo keeps sounding unimpressed by things that would normally
 count as obvious progress.
 Progress is not denied.
 It is just being held against a much sharper held-out scene.
+
+And that held-out scene is the part most ecosystems keep trying to negotiate
+away.
+
+They keep offering:
+
+- healthier first hops
+- more respectable helpers
+- larger control surfaces
+
+while hoping the user will stop asking the uglier question:
+
+> yes, but who still privately knows what the wrong node should have done?
 
 That sharper held-out scene is what keeps this page from collapsing into a
 generic roadmap preface.

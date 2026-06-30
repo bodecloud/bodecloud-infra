@@ -47,6 +47,10 @@ This page is not allowed to:
 This page is the benchmark.
 It is not a completion certificate.
 
+That difference matters because the operator contract is exactly the kind of
+page that can start sounding satisfyingly adult long before the runtime has
+actually changed who carries the missing truth.
+
 ## Strongest honest current answer
 
 The repo now states the operator contract much more clearly than before, but
@@ -67,6 +71,19 @@ It is a defensive measure against a specific documentation failure:
 If the docs stop sounding harsh before that burden moves, then the docs are
 helping the lie, not correcting it.
 
+That is not dramatic phrasing.
+It is the literal protection mechanism this page is supposed to provide.
+
+The lie usually sounds reasonable:
+
+- there are multiple nodes now
+- there is a richer edge now
+- there are candidate fallback patterns now
+- therefore the problem is mostly refinement
+
+This page exists to stop that sequence from becoming socially normal inside
+the repo.
+
 ## The dream in one exact sentence
 
 The operator wants several ordinary Docker nodes to behave like one
@@ -83,6 +100,17 @@ It is describing relief.
 
 The operator wants to stop feeling that the system only looks coherent because
 they are silently carrying the missing truth inside their own head.
+
+That sentence should remain the emotional audit for every claimed success.
+
+If a lane is allegedly improving but the operator still has to privately know:
+
+- what really runs where
+- what peer is really safe
+- what failure path still changes route meaning
+- what stateful caveat still invalidates the optimistic story
+
+then relief has not actually arrived yet.
 
 That means the contract is trying to buy a very specific kind of operational
 relief:
@@ -171,6 +199,13 @@ to:
 Anything weaker than that may still be progress.
 It is not yet relief.
 
+This distinction matters because the ecosystem is full of progress that is real
+and still not the kind the user is asking for.
+
+The user is not denying progress.
+They are denying the social move where partial progress gets narrated as if the
+humiliating part of the job had already moved.
+
 ## What still does not count as operator relief
 
 This page should say the quiet failure mode out loud.
@@ -194,6 +229,18 @@ This distinction has to stay severe.
 The repo is not starved for sophisticated-looking machinery.
 It is starved for proof that the sophisticated-looking machinery actually moved
 the humiliating part of the job out of one human head.
+
+That is the repo's actual definition of adulthood.
+
+Not:
+
+- more cluster words
+- more controllers
+- more generated config
+
+But:
+
+- one more important truth no longer needing private custody
 
 ## What a real operator-relief proof bundle would have to contain
 
@@ -229,6 +276,12 @@ being discussed:
 
 If one of those survives, the problem may be narrowed.
 It is not closed.
+
+That is why this page should keep making people slightly uncomfortable.
+
+A comfortable acceptance-bar page in this repo is probably a compromised one.
+The project exists because comfortable answers have been too easy to produce
+while the decisive burden stayed privately human.
 
 ## The actual acceptance criteria
 

@@ -25,6 +25,20 @@ If a candidate layer does not actually move those duties into the system, then
 it is not the middle this repo is searching for, no matter how elegant or
 fashionable it sounds.
 
+That line matters because this repo is surrounded by things that sound like a
+middle while still behaving like translation layers around the same old human
+burden.
+
+The naming problem is part of the wound:
+
+- a helper gets named
+- a control loop gets named
+- a registry gets proposed
+- the reader starts feeling like the category now exists
+
+This page has to keep asking whether the burden actually moved, not whether the
+category now sounds plausible.
+
 ## Why "missing middle" is not just a complexity bracket
 
 One of the easiest mistakes in this repo is to hear "missing middle" and think
@@ -59,6 +73,20 @@ And it is also why some larger systems may still fail:
 - they offer stronger abstractions
 - but they may still charge a worldview tax before proving they are removing
   the right wound
+
+That is why this page cannot define the middle by comfort, popularity, or
+market position.
+
+The middle is not:
+
+- the product tier below Kubernetes
+- the friendlier orchestrator
+- the smarter Compose wrapper
+
+It is the first layer that can survive the accusation:
+
+> did one more private topology truth actually stop living only in the
+> operator?
 
 ## What this page is and is not allowed to prove
 
@@ -125,6 +153,12 @@ The repo is not trying to discover:
 It is trying to discover which added layer, if any, can survive contact with
 the exact humiliation threshold the archive keeps returning to.
 
+That phrase "humiliation threshold" should stay central.
+
+The user is not merely looking for dynamic placement.
+They are looking for the point where the system stops making a healthy wrong
+node feel like a social failure that the operator has to privately repair.
+
 ## What still does not count as finding the middle
 
 This page needs to reject a very specific kind of fake progress.
@@ -145,6 +179,20 @@ They still do not answer the only question that matters:
 
 If that answer is still vague, the repo has found more machinery, not the
 middle.
+
+And machinery abundance is one of the easiest false comforts in this whole
+project.
+
+The stack can become:
+
+- richer
+- cleverer
+- more automated
+- more modern
+
+while still not answering the only question that matters:
+
+> which decisive private reconstruction step disappeared?
 
 This is the page where "option abundance" has to stay under suspicion.
 
@@ -199,6 +247,14 @@ this repo.
 One human head can be the most dangerous single point of failure in the whole
 system.
 
+That line should remain unforgiving.
+
+It is easy to talk about single points of failure only as machines, disks,
+VIPs, or controllers.
+This repo keeps insisting that private human custody of topology truth is also
+an anti-SPOF failure class, and often the one the other categories are still
+hiding behind.
+
 That sentence is not metaphorical decoration.
 It is the deepest anti-SPOF accusation in the repository.
 
@@ -236,6 +292,14 @@ This is why the repo keeps separating:
 Those are different truths.
 The middle layer is needed because the current stack can already express some
 of them without fully owning the rest.
+
+That is why the existing edge sophistication cannot be allowed to flatter the
+rest of the architecture.
+
+The stronger the edge gets, the easier it becomes for the docs to imply that a
+distributed truth layer is almost present.
+This page has to keep resisting that implication until the truth-owning layer
+is real enough to survive a bad-day audit.
 
 ## The repo has already named the gap directly
 
