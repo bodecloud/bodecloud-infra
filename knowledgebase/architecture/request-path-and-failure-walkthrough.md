@@ -29,6 +29,9 @@ It is:
 
 This page therefore forces the accusation through one literal request-time
 scene instead of letting it escape upward into nicer architecture language.
+It should be read as an anti-evasion page.
+Its job is to stop the docs from spending clarity as if clarity were already
+runtime adulthood.
 
 That complaint only becomes visible when the walkthrough is forced through the
 bad-day scene instead of around it:
@@ -42,6 +45,8 @@ bad-day scene instead of around it:
 That is why a more detailed walkthrough is not itself one more runtime gain.
 Better request narration is not preserved request meaning.
 Better path tracing is not wrong-node dignity.
+Better seam naming is not seam ownership.
+Better packet reconstruction is not handoff truth.
 This page should stay suspicious of its own usefulness for exactly that
 reason.
 
@@ -114,6 +119,14 @@ That is why this page cares less about hop count than custody of truth.
 The missing thing is not movement.
 The missing thing is trusted meaning at the wrong node.
 
+The missing thing is the platform being able to say, without private help:
+
+- this request belongs to this service class
+- this node is not the correct local executor
+- this peer is currently eligible
+- this middleware and auth meaning must survive the handoff
+- this route still means the same thing after locality fails
+
 Many systems can move a request.
 Far fewer can explain from shared, inspectable truth why the moved request
 still means the same thing after locality fails.
@@ -125,6 +138,17 @@ It only means the repo has become better at refusing to hide it.
 
 That is a documentation win.
 It is not yet a runtime win.
+
+The distinction matters because the user's frustration is not cured by a better
+operator checklist for the same hidden repair.
+If the bad-day procedure is still:
+
+1. remember where the service really lives
+2. remember which peer is healthy enough to trust
+3. remember which middleware and auth assumptions matter for this route
+4. privately translate that topology back into the stack
+
+then the docs may have improved while the platform contract has not.
 
 ## What still does not count as a request-path answer
 
@@ -182,6 +206,16 @@ It is the hidden-control-plane scene in miniature.
 The request still looks platform-shaped while one human quietly acts as the
 missing placement authority, peer judge, and policy interpreter.
 
+That is why this page keeps distinguishing:
+
+- request transport
+- request interpretation
+- request ownership
+
+Transport alone is not the user's dream.
+The dream is that the system owns the interpretation and ownership of the
+request even when the first healthy node is the wrong one.
+
 ## What a real request-path proof packet would have to contain
 
 If this page ever supports a stronger claim than "the repo understands the
@@ -208,6 +242,12 @@ It is worth keeping one more boundary explicit:
 
 None of those changes by themselves prove that the platform preserved one more
 request honestly when locality failed.
+
+They also do not prove the hardest thing the user is actually asking for:
+
+> when the receiving node is healthy but epistemically incomplete, what
+> replaces private operator knowledge at the exact moment the route must still
+> keep its meaning?
 
 ## Read this page with the correct standard
 
@@ -237,6 +277,11 @@ And it means refusing one common downgrade:
 Many systems preserve reachability.
 Far fewer preserve request meaning once the request lands on the wrong node or
 the local backend disappears.
+
+That difference should stay emotionally legible, not only technically legible.
+The user is tired of systems that can keep the packet moving while still
+requiring them to be the adult in the room who knows what the packet was
+supposed to mean.
 
 This page should therefore be read less like:
 

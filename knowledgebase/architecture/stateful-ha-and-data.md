@@ -34,6 +34,8 @@ That means a better stateful explanation is not stateful relief.
 A cleaner service-class taxonomy is not preserved authority.
 A more comprehensive account of why stateful HA is hard is not one more
 service becoming trustworthy under failure.
+Better authority vocabulary is not authority transfer.
+Better failure prose is not one more write path becoming system-owned.
 
 ## What this page is and is not allowed to prove
 
@@ -161,6 +163,13 @@ That reading is still too soft.
 The docs can become much sharper here while the live authority model remains
 just as socially repaired as before.
 
+That is the trap this page is written to prevent.
+The user is not asking for a more mature-sounding explanation of singular
+authority.
+They are asking for a world where singular authority either becomes explicit
+and honest, or is actually moved into system-owned replication, promotion, and
+rediscovery behavior.
+
 ## Why ingress progress and stateful progress diverge so sharply
 
 This repo can honestly improve ingress before it earns honest stateful HA.
@@ -221,6 +230,9 @@ Keep the corollary explicit:
 
 Those changes stop the repo from lying.
 They still do not move authority, promotion, or rediscovery into the system.
+They also do not reduce the private burden if the real failover procedure still
+depends on one human remembering who is allowed to win, what storage is real,
+and which clients are now attached to a lie.
 
 ## Service-class reality check
 
@@ -287,6 +299,7 @@ That last phrase matters because "could be moved elsewhere later" is one of
 the main ways modern infra asks the operator to subsidize a fake present tense.
 Potential portability is not current authority survivability.
 Future promotion playbooks are not present failover dignity.
+Future clusterability is not current anti-SPOF adulthood.
 
 ## What the user actually wants from the stateful story
 
@@ -308,6 +321,14 @@ That sentence should govern every future promotion discussion for data-bearing
 services.
 False distribution is worse than admitted singularity here because it trains
 the reader to trust continuity that still depends on private folklore.
+
+This repo should keep defending a deliberately unfashionable rule:
+
+- an admitted singleton is honest
+- an unreplicated service behind a pretty hostname is not suddenly resilient
+- a standby that still needs private operator arbitration is not yet a peer
+- a moved write path that still depends on remembered rescue steps is not yet
+  stateful dignity
 
 That is an especially important rule in this repo:
 
@@ -334,6 +355,9 @@ Until then, the repo should keep saying:
 
 That unevenness is not a docs flaw here.
 Pretending it has already been smoothed away would be the flaw.
+The user does not need the docs to smooth that tension.
+The user needs the docs to preserve the tension so nobody can spend elegance as
+if it were resilience.
 
 ## What a real stateful proof packet would need
 
@@ -354,6 +378,14 @@ Without those elements, "stateful progress" is too easy to confuse with:
 - successful restart
 - or operator-guided rescue that still leaves the human as the missing
   algorithm
+
+That final clause is the one that matters most.
+The user's real stateful complaint is not merely "a node can die."
+It is:
+
+> if the node dies and I still have to remember who owns truth, who may be
+> promoted, what clients now need to distrust, and what storage is still real,
+> then the platform has not absorbed the burden I was trying to escape.
 
 ## Strongest honest current answer
 
