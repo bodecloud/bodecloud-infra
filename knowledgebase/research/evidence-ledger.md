@@ -352,6 +352,74 @@ Any serious page in this site should leave behind a small auditable packet:
 If a page cannot produce that packet, it may still be informative, but it has
 not fully earned the word `assimilated` in this repo.
 
+## Source-custody packet format
+
+For this repo, a page has not "actually RAGged" the corpus until it can fill
+out a source-custody packet like this:
+
+| Field | Required answer | Why it matters |
+| --- | --- | --- |
+| User wound | What exact hidden burden or humiliation is being reconstructed? | Prevents the page from becoming generic HA prose. |
+| Runtime anchor | Which live file, merged config, or drill artifact carries the implementation claim? | Prevents intent and archive pressure from impersonating shipped behavior. |
+| Intent anchor | Which instruction, README, or architecture page carries the target contract? | Preserves the dream without pretending it is already true. |
+| Plan anchor | Which roadmap or promotion page names the missing repair? | Keeps known gaps visible instead of turning planning into delivery. |
+| Archive anchor | Which imported thread or synthesis cluster explains why ordinary answers failed? | Keeps the user's standard intact. |
+| Legal sentence | What is the strongest sentence the combined evidence can currently support? | Forces confidence to stay inside the evidence. |
+| Illegal sentence | What more satisfying sentence still cannot be written? | Makes overclaiming explicit instead of implicit. |
+| Next proof | What drill, runtime change, or inspection would upgrade the claim? | Converts frustration into an engineering target. |
+
+The packet does not need to appear verbatim on every page.
+The page does need to have enough structure that a reader could reconstruct it.
+
+If a page cannot name both a legal sentence and an illegal sentence, it is
+probably flattening the evidence.
+
+## Cross-source synthesis rule
+
+Cross-source synthesis is allowed only when source custody stays visible.
+
+The safe form is:
+
+> The archive explains why the burden matters; the instruction files define the
+> desired contract; the runtime currently proves only X; the plan proposes Y;
+> therefore the present claim is Z and no stronger.
+
+The unsafe form is:
+
+> The archive, instructions, runtime, and plan all point in the same direction,
+> therefore the repo has effectively become that direction.
+
+That unsafe form is the main way a documentation page can become emotionally
+satisfying while becoming less true.
+
+## Negative evidence must stay first-class
+
+This knowledgebase should preserve absence as evidence, not merely as a TODO.
+
+Examples:
+
+- no live root `services.yaml` consumer means current-state registry language
+  remains architecture intent or planned repair
+- no generic wrong-node drill means any wrong-node success language is still
+  route-specific or aspirational
+- no backend-loss packet means fallback wording must remain unpromoted
+- no middleware/auth continuity drill means preserved policy is not proven
+- no stateful promotion/authority drill means TCP reachability cannot be
+  narrated as stateful HA
+
+Negative evidence is not pessimism.
+It is the shape of the work still trapped in operator memory.
+
+When a later page says "not yet proven," it should not sound like legal
+disclaimer filler.
+It should point at the exact private sentence still alive, such as:
+
+- `I still personally know which peer is safe.`
+- `I still personally know whether this fallback survives the failure.`
+- `I still personally know whether this stateful answer is authoritative.`
+
+That is the difference between vague caution and actual assimilation.
+
 ## What "actually RAG" should mean in this repo
 
 For this knowledgebase, "actually RAG" should not mean:

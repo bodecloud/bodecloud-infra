@@ -268,6 +268,51 @@ What this cluster should force the docs to preserve:
 - it is trying to prevent unjustified worldview capture
 - "mature orchestrator" is weaker than "owns the missing truth cleanly"
 
+## Archive extraction matrix
+
+When a page pulls from the archive, it should extract pressure in this shape
+instead of merely summarizing the thread:
+
+| Archive cluster | The user is really asking | The ordinary answer usually dodges by | The doc must preserve | Runtime proof eventually required |
+| --- | --- | --- | --- | --- |
+| Compose distribution frustration | Can Compose remain readable while multiple nodes stop acting separate? | Offering remote sockets, sync scripts, or static proxy maps as if they remove hidden topology memory. | Compose readability is operator legibility, not nostalgia. | A receiving node can route from current placement truth without manual per-request reconstruction. |
+| Load-balancer and Traefik failover | Can the wrong public node still preserve the request? | Treating proxy presence, DNS plurality, or a failover stanza as semantic continuity. | Wrong-node dignity is stricter than load balancing. | Route, peer choice, middleware, auth, and application behavior survive a named wrong-node drill. |
+| Distributed HA and Nomad pressure | Is a narrow coordination layer enough, or must a full platform own the truth? | Treating platform maturity as equivalent to removed burden. | Bigger names do not win unless they kill specific private sentences. | A promoted layer demonstrably owns placement, eligibility, and failure-state truth. |
+| Stateful and TCP pressure | Can stateful services fail over honestly? | Treating reachability, proxyability, or replicas as correctness. | Stateful claims require harsher language than stateless HTTP. | Authority, write safety, recovery, and split-brain boundaries are proven by a stateful-specific packet. |
+| Cloudflare and public-entry pressure | Can any public node be more than decorative redundancy? | Treating multiple DNS records as end-to-end failover. | Cloudflare may distribute first hop; it does not preserve request meaning by itself. | A request landing on a surviving non-hosting node is routed correctly after backend loss. |
+
+This matrix is deliberately repetitive.
+The archive's value is not that it adds more examples.
+Its value is that it keeps forcing every example back to the same hidden-burden
+test.
+
+## How to use one archived thread without overclaiming
+
+A single archived thread can support a page only if the page separates three
+things:
+
+- the concrete question the user asked in that thread
+- the burden that question exposes across the broader archive
+- the current repo evidence that does or does not move that burden into the
+  system
+
+For example, a Traefik failover thread can prove that failover syntax and
+runtime semantics are easy to confuse.
+It cannot prove that Traefik is the wrong long-term edge.
+It cannot prove that the current stack's Traefik setup has earned generic
+fallback language.
+It can force the docs to ask whether route meaning, middleware, auth, and
+backend-loss behavior were actually shown.
+
+A Nomad thread can prove that the user is evaluating a more serious scheduler
+because hidden burden keeps surviving lighter answers.
+It cannot prove that Nomad is the chosen future.
+It can force promotion pages to explain which private sentence Nomad would kill
+that a narrower Compose-adjacent layer cannot.
+
+An archive thread is therefore not a verdict.
+It is a pressure artifact.
+
 ## Core recurring patterns the archive keeps recovering
 
 ### Pattern 1: "There should already be a standard dynamic middle layer, but there never is"

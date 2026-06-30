@@ -272,6 +272,27 @@ That is why the user is not merely shopping for "better clustering."
 They are trying to stop the platform from behaving insultingly dumb at the
 worst possible moment.
 
+## The dream-to-proof ladder
+
+The dream has to climb this ladder before the docs can call it real:
+
+| Level | What becomes true | What it kills | What it still cannot claim |
+| --- | --- | --- | --- |
+| Named intent | The repo clearly states the any-node, local-first, peer-forward contract. | `Nobody understands what I am trying to build.` | That the runtime does it. |
+| Runtime shape | The priority Compose stack contains edge, health, routing, and supporting components. | `This is only a thought experiment.` | That components preserve request meaning across nodes. |
+| Current placement truth | The system has an inspectable source of where services actually live now. | `I personally remember which node is real.` | That wrong-node forwarding is correct. |
+| Wrong-node route proof | A request landing on a non-hosting node reaches the intended service with policy intact. | `A healthy wrong node still needs me to explain the route.` | That backend-loss fallback or generic service coverage works. |
+| Backend-loss fallback proof | The preferred local/backend path can disappear and the documented fallback still works. | `Fallback is diagram-deep.` | That stateful authority is safe. |
+| Stateful authority proof | The system can explain writer, promotion, recovery, and split-brain behavior. | `Reachable is being mistaken for authoritative.` | That every stateful service is equally solved. |
+| Operator-relief proof | The docs and tooling let another operator explain what survives without private folklore. | `I am still the hidden control plane.` | That the system is done forever. |
+
+Most infrastructure writing skips from level 1 or 2 straight to relief tone.
+That skip is exactly what the user is rejecting.
+
+This repo should make each rung visible even when the answer is currently
+embarrassing.
+Embarrassment is useful when it points at the next proof artifact.
+
 ## What a real demand-reconstruction packet should leave behind
 
 If this page is doing its job, the reader should leave with a packet that can
