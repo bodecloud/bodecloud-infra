@@ -59,6 +59,35 @@ into hidden human interpretation the moment stress becomes real.
 
 That is why this page has to stay harsher than a normal maturity matrix.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- which failure domains define the repo's real maturity problem
+- how unevenly those domains can mature without justifying broader comfort
+- where hidden operator reconstruction is still part of the live failure model
+
+This page is not authoritative about:
+
+- whether a specific route or workload has already passed its harder drills
+- whether a future control-plane direction has already earned promotion
+- whether maturity language should override narrower runtime or proof pages
+
+This page is a domain-by-domain honesty matrix, not a substitute for route-
+level or topology-level proof.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this domain is still immature in a specific way" | synthesis over runtime, evidence, and operator burden | current runtime pages, proof matrix, research evidence, this page's domain framing | that nothing useful exists in the domain |
+| "one domain matured faster than another" | maturity synthesis | this matrix plus supporting evidence pages | that the stack matures as one clean platform |
+| "hidden operator reconstruction is still part of the failure model" | contradiction plus proof analysis | this matrix, runbook, proof pages, intent surfaces | that the operator burden has no partial reductions anywhere |
+| "the next honest maturity step is X" | roadmap plus proof discipline | domain row, supporting evidence, promotion rules | that the next step is already complete or universally sufficient |
+
+If a maturity sentence starts sounding like a global resilience verdict, this
+page is being overread.
+
 ## What this page is really measuring
 
 This is not a generic infrastructure maturity matrix.

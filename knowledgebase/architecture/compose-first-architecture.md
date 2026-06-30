@@ -24,6 +24,35 @@ The answer is:
 
 That is what "Compose-first" means here.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- why Compose remains the primary human contract
+- why the repo has not yet promoted a heavyweight orchestrator by default
+- which missing truths Compose still does not own cleanly
+
+This page is not authoritative about:
+
+- whether the current helper stack already closes those missing truths
+- whether a future control layer has already earned promotion
+- whether the current runtime already behaves like the dream
+
+This page explains the authoring posture.
+It should not be used to overstate the runtime.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "Compose is still the live human contract" | live runtime + repo-native intent | root `docker-compose.yml`, active `compose/` graph, `AGENTS.md`, `.github/copilot-instructions.md` | that Compose already owns distributed truth |
+| "the repo wants to delay heavyweight promotion" | repo-native intent | `.github/copilot-instructions.md`, `README.md` | that heavyweight promotion is permanently wrong |
+| "helper growth may be justified" | planning + contradiction analysis | architecture and research pages | that helper growth is already coherent enough to be trusted blindly |
+| "Compose-first is still honest" | synthesis judgment | this page plus current runtime and contradiction pages | that the bad-day intelligence is already system-owned |
+
+If a sentence about Compose-first starts sounding like broad runtime success,
+it has crossed out of the page's authority.
+
 Not:
 
 - "Compose solves clustering"
@@ -111,6 +140,11 @@ The hidden companion question is harsher:
 If this page does not keep that second question visible, it becomes too easy
 to romanticize the current architecture simply because it still looks
 Docker-native.
+
+That harsher question is the main anti-overread device for the page.
+Compose-first is only a virtue here if it remains the least dishonest operator
+surface, not if it simply delays admitting that truth ownership has already
+moved somewhere murkier.
 
 ## What Compose-first does and does not mean
 
@@ -314,6 +348,21 @@ Maybe.
 But the user's frustration is specifically with systems that are always "one
 more glue layer away" from no longer requiring private reconstruction.
 This page should not help repeat that pattern.
+
+## Strongest honest current answer
+
+If a reader asks, "Why is this repo still Compose-first?" the shortest
+defensible answer is:
+
+> Because Compose is still the clearest live authoring truth the operator can
+> read directly, while the repo is still trying to identify the smallest honest
+> extra truth-owning layer that could externalize placement, routing, and
+> recovery burden without prematurely surrendering to a heavyweight scheduler
+> worldview. That is a posture, not proof that the bad-day problem is already
+> solved.
+
+Anything more reassuring than that is probably romanticizing the current
+surface.
 
 ## 3. Traffic truth
 

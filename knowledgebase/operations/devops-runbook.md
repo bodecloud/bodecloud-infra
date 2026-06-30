@@ -21,6 +21,35 @@ They are asking for an operating method that can tell the difference between:
 
 This runbook exists to make that difference visible.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- how operators should route questions to the right proof class
+- what kinds of command output are too weak for stronger claims
+- how to stop green output from inflating into resilience theater
+
+This page is not authoritative about:
+
+- whether a given route already survives the wrong node
+- whether a given stateful class is already resilient
+- whether the overall dream is already satisfied
+
+This page governs operational discipline, not completion status.
+
+## Quick claim router
+
+| If the operator is really trying to prove... | Start with... | It still must not imply... |
+| --- | --- | --- |
+| authored runtime coherence | `docker compose config --quiet` and related authoring checks | that services start, routes work, or failover is real |
+| local service presence and health | `docker compose config --services`, `docker compose ps`, `docker inspect` health | that local health implies cross-node truth |
+| route correctness on a normal day | path request plus edge and backend identity evidence | that wrong-node or backend-loss behavior is solved |
+| wrong-node or backend-loss behavior | intentional route drills and failure drills | that one passing drill proves whole-stack resilience |
+| stateful correctness | topology-specific ownership, election, reconnect, and storage evidence | that generic cluster or ingress success means state is safe |
+
+If a command class is weaker than the claim being narrated, the operator should
+downgrade the claim, not upgrade the command.
+
 ## What an honest runbook means in this repo
 
 An honest runbook here is not just a list of commands.
@@ -116,6 +145,11 @@ as the wider ecosystem:
 - run enough commands to feel comforted
 - then narrate that comfort as resilience
 
+That is exactly the operational version of the documentation failure the user
+keeps rejecting.
+The point of this runbook is to make "what did this actually prove?" a normal
+question again.
+
 ## Route the question to the right proof class first
 
 This runbook gets much easier once the operator stops asking one giant
@@ -136,6 +170,19 @@ Use this routing table before running anything.
 The point of this table is not convenience.
 It is to stop the operator from burning time on the wrong command class and
 then trying to inflate its meaning afterward.
+
+## Strongest honest current answer
+
+If an operator asks, "What is the real job of this runbook?" the shortest
+defensible answer is:
+
+> Its job is to stop operational proof from collapsing into comfort theater by
+> forcing each claim to declare its proof class, its ceiling, and what still
+> remains dependent on private operator reconstruction even after the command
+> succeeds.
+
+Anything softer than that will let the same fake-HA story creep back in through
+green output instead of prose.
 
 ## The proof classes this runbook assumes
 

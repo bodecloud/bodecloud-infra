@@ -21,6 +21,36 @@ That is the routing question in `bolabaden-infra`.
 That question is stronger than "is there failover?"
 It asks whether the wrong node stops being semantically wrong.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- which routing truth layers have to coexist before "failover" means anything
+- why first-hop plurality is weaker than request-preserving recovery
+- where the repo's routing story still depends on missing placement,
+  eligibility, persistence, or semantic truth
+
+This page is not authoritative about:
+
+- whether a specific wrong-node route has already been proven end to end
+- whether backend-loss recovery already survives for a given service
+- whether stateful traffic has inherited HTTP honesty for free
+
+This page explains the routing problem shape and its honesty boundaries.
+It should not be used as a substitute for route-specific drills.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "DNS or any-node entry helps only with the first hop" | routing-layer analysis | this page, ingress evidence, request-path pages | that first-hop plurality is unimportant |
+| "routing still lacks shared truth" | live-gap synthesis | this page, current runtime, placement discussions, evidence pages | that no routing progress exists at all |
+| "one helper could still fail the real requirement" | failure analysis | this page plus ingress and failover evidence | that the whole direction is worthless |
+| "request-preserving failover is stricter than route reachability" | proof-discipline synthesis | this page, proof matrix, runbook | that route reachability has no value whatsoever |
+
+If a routing sentence starts sounding like a passed failover drill, it has
+left this page's authority.
+
 ## What the user is actually rebelling against
 
 The repo archive keeps circling the same frustration from different angles:

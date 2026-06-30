@@ -17,6 +17,35 @@ It is here to answer a harsher question:
 > still stop far short of the wrong-node, peer-aware, anti-SPOF behavior the
 > user actually wants?
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- what the priority root Compose surface currently includes
+- what the active include graph visibly expresses
+- which truths are still missing from the tracked root runtime
+
+This page is not authoritative about:
+
+- future control-plane direction as a winner
+- user dream reconstruction by itself
+- wrong-node or failure-path success unless explicitly exercised elsewhere
+
+This page is the strongest inventory of live authored runtime shape, not a
+global resilience verdict.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this is in the current root runtime" | live-root evidence | root `docker-compose.yml`, active include fragments, `docker compose config` when available | that the behavior works under failure |
+| "the runtime shows serious edge and workload breadth" | live-root evidence | root graph, included fragments, network and service declarations | that breadth equals shared truth |
+| "this truth is still missing from the root runtime" | live-root evidence plus negative facts | absence of root `services.yaml`, lack of exercised failure proof, page-local negative sections | that nothing informal exists anywhere |
+| "this missing truth matters to the dream" | synthesis linked to stronger intent pages | this page plus architecture and research pages | that dream fulfillment is already close just because the runtime looks serious |
+
+If a sentence starts celebrating modularity as if it were shared truth, this
+page is being overread.
+
 That distinction matters because large Compose stacks are extremely easy to
 overread.
 
@@ -173,6 +202,15 @@ That inversion is poison for this repo.
 The user's actual complaint is precisely that the remaining gaps are the whole
 problem, even after a great deal of impressive machinery is already present.
 
+That is why this page has to keep saying the same thing from different angles:
+
+- seriousness is already proven
+- breadth is already proven
+- modularity is already proven
+- shared placement truth is not
+- wrong-node truth is not
+- request-preserving bad-day truth is not
+
 That means this page has to keep teaching a disciplined reading habit:
 
 - visible machinery is real
@@ -305,6 +343,19 @@ That belief is exactly how large Compose systems become emotionally
 misleading.
 They accumulate so much intent that readers start crediting them with runtime
 knowledge they have never actually externalized.
+
+## Strongest honest current answer
+
+If a reader asks, "What does the current Compose runtime actually buy us
+today?" the shortest defensible answer is:
+
+> It buys a real, serious, modular live authoring surface with substantial edge
+> and workload machinery already present in the root runtime, but it still does
+> not buy explicit shared placement truth, trustworthy wrong-node behavior, or
+> a self-explaining bad-day recovery contract in the tracked root implementation.
+
+Anything stronger than that needs exercised proof from outside plain file
+inspection.
 
 That missing truth is exactly why `services.yaml` keeps reappearing in the repo
 story.

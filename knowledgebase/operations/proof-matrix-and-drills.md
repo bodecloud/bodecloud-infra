@@ -70,6 +70,35 @@ instruction file carries the same kind of truth.
 If a page starts treating authoring preference as architecture proof, the docs
 are already drifting again.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- what proof classes exist in this repo
+- what each class can honestly support
+- what stronger claim ceilings must remain closed after a drill passes
+
+This page is not authoritative about:
+
+- whether a specific service or route has actually passed a given drill
+- whether one passed drill upgrades the whole stack
+- whether the broader dream is satisfied just because a proof class exists
+
+This page is the proof-language contract.
+It is not the proof result itself.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this behavior is only intent so far" | proof classification | intent surfaces plus this matrix | that the intent is weak or optional |
+| "this route is wrong-node proven" | drill-result classification | route-specific evidence plus this matrix | that the platform now generically preserves wrong-node traffic |
+| "this evidence class is too weak for that claim" | proof-discipline judgment | this matrix, runbook, supporting drills | that the weaker evidence is useless |
+| "the next ceiling is still unclosed" | proof sequencing | this matrix plus the concrete route or topology evidence | that earlier proof was fake simply because it was partial |
+
+If a sentence starts using a proof class as if it were a stack-wide verdict, it
+has already exceeded this page's authority.
+
 ## What a good proof page has to do here
 
 A normal checklist asks whether a feature works.

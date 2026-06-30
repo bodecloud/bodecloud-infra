@@ -49,6 +49,35 @@ The user is not asking for architecture that sounds reasonable.
 They are asking for architecture writing that keeps naming where the option
 space still feels fraudulent.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- which contradictions the repo is consciously carrying
+- why smoothing those contradictions would misdescribe the project
+- where dream, runtime, and control-plane growth are still in conflict
+
+This page is not authoritative about:
+
+- whether one side of the contradiction has already won
+- whether the runtime has already resolved the tensions
+- whether a future layer is already justified just because the tension is clear
+
+This page names the pressure honestly.
+It does not certify that the pressure has been relieved.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this contradiction is central to the repo" | synthesis over intent, runtime, and archive pressure | `.github/copilot-instructions.md`, current runtime pages, archive-pressure pages | that the contradiction is already resolved |
+| "Compose readability and distributed truth are in tension" | current runtime + intent | Compose-first pages, current runtime pages, intent surfaces | that Compose-first has already passed the bad-day test |
+| "helper growth may already be control-plane growth" | contradiction analysis + planning pressure | master-plan, orchestration research, evidence pages | that helper growth is therefore already wrong or already sufficient |
+| "local-first and resilient fallback want different things" | routing and failure analysis | ingress evidence pages, planning docs, this page | that either half has already been fully earned |
+
+If a contradiction is described in a way that sounds settled, the page has
+lost the reason it exists.
+
 ## The contradiction at the center of the whole repo
 
 The dream sounds small when compressed:
@@ -96,6 +125,9 @@ That is the contradiction the repo keeps circling:
 > plane until that control plane has clearly earned the right to exist
 
 Everything else on this page is just a sharper version of that one conflict.
+
+That is why this page should feel less like a balanced tradeoff memo and more
+like a refusal to let the docs buy calmness by deleting the wound.
 
 ## What this page is for
 
@@ -317,6 +349,19 @@ The contradiction here is severe:
 - resilient fallback wants routing truth to outlive the local backend
 
 Any layer that cannot satisfy both is still a partial answer.
+
+## Strongest honest current answer
+
+If a reader asks, "What is the deepest contradiction this repo is living
+inside?" the shortest defensible answer is:
+
+> The repo wants the legibility of Compose and the survivability of a
+> distributed platform, but it does not want to accept heavyweight worldview
+> tax until that tax has proved it owns the exact missing truths better than a
+> thinner layer could. That contradiction is still active; it has not been
+> resolved by current runtime seriousness or by planning clarity alone.
+
+Anything tidier than that is probably deleting the real pressure.
 
 A design that only works while locality holds is not anti-SPOF.
 It is locality with nicer branding.
