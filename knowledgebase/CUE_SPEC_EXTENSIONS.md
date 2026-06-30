@@ -42,6 +42,19 @@ This page also has to resist a subtler overread:
 
 That is exactly the kind of documentation drift the rewrite is trying to stop.
 
+## What still does not count as semantic progress here
+
+The following still do not count as meaningfully solving the schema problem:
+
+- richer metadata keys being invented
+- a field family sounding expressive
+- a schema looking capable of representing failover intent
+- contributors agreeing on vocabulary socially
+- metadata becoming easier to read while runtime ownership stays unresolved
+
+Those all show real pressure and better naming.
+They do not yet prove that the system owns the meanings it can now describe.
+
 ## Quick claim router
 
 Use this page for claims like:
@@ -73,6 +86,20 @@ the missing meaning should actually live:
 - beside Compose as metadata
 - inside active coordination code
 - or across a hybrid contract that still must prove ownership at runtime
+
+## What a real semantic-ownership proof packet would need
+
+Before `x-cue` or any equivalent metadata layer could justify stronger
+language, a packet would need to show:
+
+- which live component consumes the metadata now
+- what concrete behavior changes because of that consumption
+- which operator interpretation burden no longer has to be carried privately
+- how wrong-node, failover, or stateful caution semantics survive runtime use
+- what remains descriptive only and what became enforced truth
+
+Without that packet, `x-cue` stays evidence of semantic pressure, not proof of
+semantic ownership.
 
 ## What `x-cue` is actually trying to rescue
 

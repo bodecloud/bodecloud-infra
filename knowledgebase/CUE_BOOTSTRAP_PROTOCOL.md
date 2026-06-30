@@ -53,6 +53,21 @@ If that upgrade happens, the page stops reconstructing the wound and starts
 describing a neighboring dream where the hard ownership problem is already
 mostly solved.
 
+## What still does not count as bootstrap progress here
+
+The following still do not count as believable bootstrap closure:
+
+- one or two working bootstrap scripts existing
+- Docker installing cleanly on a host
+- env files being present somewhere on disk
+- a node joining socially because an operator finished the missing steps
+- the bootstrap story sounding cleaner in prose than it feels in practice
+- branch-local experiments implying one unified join contract now exists
+
+Those are useful ingredients.
+They are not yet proof that node admission stopped depending on private human
+reconstruction.
+
 ## Quick claim router
 
 Use this page for claims like:
@@ -86,6 +101,21 @@ It also shows that bootstrap still remains fragmented across:
 So the page proves the repo knows what a believable node-join contract should
 feel like, but it does not prove that the priority runtime has already earned
 that contract.
+
+## What a real bootstrap proof packet would need
+
+Before this page could support stronger language, a bootstrap packet would need
+to show:
+
+- how a new node gets identity and trust
+- how secrets and env material arrive and are verified
+- how the node learns placement or eligibility truth
+- when the node becomes safe for ingress or peer participation
+- what operator memory burden disappeared because of that flow
+- what failure or drift the flow can survive without private babysitting
+
+Without that packet, bootstrap remains a serious design wound, not a solved
+join engine.
 
 ## The user's real bootstrap frustration
 

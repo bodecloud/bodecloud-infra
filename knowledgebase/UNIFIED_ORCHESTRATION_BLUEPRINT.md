@@ -83,6 +83,19 @@ This page is not allowed to:
 - use orchestration vocabulary as substitute proof that hidden human SPOFs are
   already removed
 
+## What still does not count as a blueprint here
+
+The following still do not count as a trustworthy blueprint in this repo:
+
+- candidate layers being listed elegantly
+- burden-transfer language sounding persuasive
+- a control-layer story becoming cleaner than the current runtime
+- one proposed architecture looking calmer than the current pain
+- a candidate seeming "balanced" without proving which burden it actually owns
+
+Those make the page easier to read.
+They do not yet make it a serious guide for promotion.
+
 ## Quick claim router
 
 If the question is:
@@ -146,6 +159,20 @@ out of operator memory without destroying the Compose-first surface too early.
 This blueprint is useful only to the degree that it keeps asking which burden
 actually moves and which burden merely gets renamed behind cleaner
 architecture.
+
+## What a real blueprint-promotion packet would need
+
+Before this blueprint could support stronger "this is the answer" language, a
+packet would need to show:
+
+- the exact truth burden that moved out of operator memory
+- which candidate layer now owns that burden concretely
+- what wrong-node, drift, or backend-loss behavior improved because of it
+- what readability or workflow tax was paid in exchange
+- what deeper part of the dream still remains unresolved afterward
+
+Without that packet, this page remains a filter and burden map, not a live
+orchestration verdict.
 
 ## This page is not a chooser, it is a filter
 

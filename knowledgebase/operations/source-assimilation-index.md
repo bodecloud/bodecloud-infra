@@ -71,6 +71,20 @@ Once that happens, at least one of these becomes false:
 
 This page exists to keep both failure modes visible.
 
+## What still does not count as real retrieval here
+
+The following still do not count as "actually RAG this time" in this repo:
+
+- reading many files without distinguishing source class
+- blending archive pressure into runtime proof
+- treating planning language as if it outranks the worktree
+- producing a calm answer that edits the wound down into a smaller question
+- summarizing related technologies without reconstructing the user's benchmark
+- removing contradiction because it makes the docs cleaner
+
+That kind of retrieval can sound thorough while still answering the wrong
+question.
+
 ## Source class 1: architecture-intent and honesty surfaces
 
 These are the strongest sources for:
@@ -214,6 +228,20 @@ Use this table before writing any page or paragraph that sounds confident.
 
 If a sentence cannot be routed through this table, it is probably still too
 vague to trust.
+
+## What a real retrieval proof packet would need
+
+Before a new page or major rewrite can claim it truly assimilated the repo, the
+packet should make recoverable:
+
+- which source classes were used
+- which files supplied dream reconstruction versus runtime proof
+- which contradictions were preserved instead of flattened
+- what the strongest live evidence actually was
+- what the next stronger artifact would need to prove beyond the current pass
+
+If the rewrite cannot leave that packet behind, it may still be polished, but
+it has not actually assimilated the documentation honestly.
 
 ## What retrieval still does not count in this repo
 
