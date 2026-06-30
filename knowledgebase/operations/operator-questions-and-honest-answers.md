@@ -52,6 +52,45 @@ This page is not allowed to:
 - let orchestration nouns or proxy names pretend to answer the benchmark by
   themselves
 
+## What this page must not let happen
+
+An operator FAQ page is one of the easiest places for the docs to get flatter
+while sounding more helpful.
+
+The main failure mode looks like this:
+
+- the question sounds sharper
+- the answer names more real tools
+- the prose gets calmer and more authoritative
+- the actual burden is quietly shrunk into a smaller neighboring problem
+
+This page should keep refusing that move.
+
+It should not let:
+
+- "which tool should I add?" replace "which truth am I still carrying privately?"
+- "which orchestrator is mature?" replace "which burden would it actually own?"
+- "why is Cloudflare not enough?" collapse into a DNS explainer
+- "why is Traefik not enough?" collapse into a reverse-proxy explainer
+- "why are there no real options?" collapse into a product-market lament
+
+If an answer gets easier by making the question smaller, it got less faithful.
+
+## What a genuinely useful answer should leave behind
+
+Each serious answer on this page should leave behind more than advice.
+
+It should leave behind:
+
+- the burden the question is really about
+- the strongest current evidence class behind the answer
+- the contradiction that still remains open
+- the next artifact or drill that would have to exist before a stronger answer
+  becomes honest
+
+That final item matters because otherwise the page still behaves like a better
+shopping guide instead of a burden-faithful operator surface.
+
 ## Question 1: What is the user actually trying to make true?
 
 The user is trying to make several ordinary Docker nodes behave like one

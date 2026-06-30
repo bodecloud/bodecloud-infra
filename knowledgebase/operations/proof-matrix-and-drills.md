@@ -225,6 +225,53 @@ Examples:
 If a page stops naming the next still-closed ceiling, it is already starting to
 overpay the evidence.
 
+## What still does not count as proof in this repo
+
+This page should also make the false-proof patterns explicit.
+
+The following still do not count as meaningful proof of the user's dream:
+
+- a service starting successfully
+- one healthy local `200` response
+- a green healthcheck plus calm logs
+- multiple public nodes existing at the same time
+- a fallback config file existing on disk
+- a route generator that looks dynamic until the preferred backend actually dies
+- a TCP connection succeeding without any service-authority or topology truth
+
+Those may all be useful ingredients.
+They are still weaker than proof that the system owns more of the important
+truth on the bad day.
+
+This matters because the whole repo is vulnerable to one specific lie:
+
+- a path worked once
+- therefore the platform feels distributed
+
+That is exactly the lie this page is meant to prevent.
+
+## What a passing drill should leave behind
+
+Every serious drill in this repo should produce a proof packet, not just a
+result.
+
+That packet should include:
+
+- the exact route or service class exercised
+- the exact topology before the drill
+- the exact failure or stress introduced
+- receiving-node and backend-node identity where relevant
+- the visible user-facing result
+- the stronger sentence that still remains illegal afterward
+- the surviving hidden operator burden, if any
+
+If a drill cannot leave that packet behind, it is too easy for later prose to
+inflate it.
+
+This repo does not just need more tests.
+It needs drills whose outputs are narrow enough to stay honest and rich enough
+to resist flattering reinterpretation.
+
 ## The current matrix for the priority implementation
 
 | Dream fragment | Current proof class | Strongest current anchors | Exact drill needed next | What still remains unproven even after that drill passes |

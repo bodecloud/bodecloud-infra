@@ -97,6 +97,55 @@ Why these are too weak:
 
 The repo should resist all of those upgrade temptations.
 
+## What a real promotion packet would have to contain
+
+Because this repo is so hostile to fake options, a promotion needs more than a
+good abstract case.
+
+A real promotion packet should leave behind:
+
+- the named hidden burden being reduced
+- the source of truth being promoted or externalized
+- the artifact that carries that truth now
+- the drill that proves the promoted layer changed behavior under stress
+- the operator-visible inspection path for that decision
+- the explicit sentence about what still remains outside the promoted layer
+
+Examples:
+
+- if shared current truth is being promoted, show where placement and peer
+  eligibility live and what consumes them
+- if ingress control is being promoted, show the route surviving backend loss
+  without dissolving into private recovery knowledge
+- if a heavier orchestrator is being promoted, show which smaller truth-owning
+  layer failed to carry the burden honestly first
+
+Without a packet like that, "promotion" is still mostly rhetorical.
+
+## What still does not count as a real option
+
+This page should also say more bluntly what fake choice looks like.
+
+An option is still too weak if it mainly changes:
+
+- vocabulary
+- controller prestige
+- dashboard confidence
+- deployment ergonomics
+- the number of nouns the system can now describe
+
+while leaving unchanged:
+
+- where placement truth really lives
+- who determines peer eligibility now
+- whether wrong-node requests stay meaningful
+- whether fallback survives the exact failure that made it necessary
+- whether stateful authority is still secretly singular
+
+That is the whole point of this repo's harsher evaluation standard.
+It is not anti-tool.
+It is anti-renamed burden.
+
 ## The promotion classes that actually matter
 
 This repo does not need one grand promotion.
