@@ -260,6 +260,30 @@ It may not yet say:
 
 - this workload is honestly resilient
 
+For this repo, the packet should be recorded as:
+
+```yaml
+stateful_authority_packet:
+  claim_tested: "stateful authority under failure"
+  service: "<one exact service, not the whole stateful lane>"
+  authority_before: "<writer/leader/source of truth before failure>"
+  failure_introduced: "<exact failure performed deliberately>"
+  authority_after: "<writer/leader/source of truth after failure>"
+  client_observation: "<dependent client behavior, not just service logs>"
+  rediscovery_mechanism: "<how clients found the new writer, or manual/none>"
+  fencing_or_split_brain_guard: "<mechanism, or none>"
+  storage_truth: "<replication, backup, shared storage, or singular disk>"
+  operator_intervention_required: true
+  result: "pass | fail | honest-singularity | inconclusive"
+  what_this_proves: "<narrow earned sentence>"
+  what_is_still_forbidden: "<larger stateful claim still illegal>"
+```
+
+The first useful stateful packet does not have to be a victory lap.
+An `honest-singularity` packet for Headscale or a Postgres-backed app can be
+valuable if it removes private folklore and says exactly which manual authority
+ritual still exists.
+
 ## Stage 5: Only then talk about broader stateful dignity
 
 The repo earns broader stateful confidence only after at least one narrow

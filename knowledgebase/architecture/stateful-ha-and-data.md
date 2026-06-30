@@ -95,6 +95,50 @@ Every serious stateful paragraph in this repo should answer all four:
 If those questions are not answered, then the control plane is still partly
 social.
 
+## The authority ladder
+
+The repo should treat stateful language as a ladder, not a switch.
+
+| Level | What has been shown | What is still forbidden |
+| --- | --- | --- |
+| 1. Reachable | a TCP or HTTP endpoint answers | authority, correctness, or failover |
+| 2. Locally healthy | the process passes a real healthcheck on its current node | cross-node survival |
+| 3. Recoverable by operator | a human can restore or restart the workload with known steps | automatic or system-owned authority transfer |
+| 4. Replicated or backed up | another copy, replica, or backup exists | that the copy is current, writable, or safe to promote |
+| 5. Controlled writer | the system can name the current writer or leader | that clients can find it after failure |
+| 6. Rediscovered by clients | clients reconnect to the correct new authority | that split brain and stale writes are impossible |
+| 7. Drilled and packeted | a failure drill records authority, promotion, rediscovery, fencing, and storage truth | broad stateful anti-SPOF for unrelated workloads |
+
+Most current priority-runtime stateful services are still below level 5.
+That is not an insult to the stack.
+It is the point of the documentation.
+
+## `stateful_authority_packet`
+
+Any future document, runbook, or implementation note that wants stronger
+stateful language should carry a packet shaped like this:
+
+```yaml
+stateful_authority_packet:
+  claim_tested: "stateful authority under failure"
+  service: "redis | mongodb | headscale | postgres | rabbitmq | qdrant"
+  authority_before: "<writer/leader/source of truth before failure>"
+  failure_introduced: "<exact node, process, disk, network, or backend failure>"
+  authority_after: "<writer/leader/source of truth after failure>"
+  client_observation: "<what dependent clients saw before/during/after>"
+  rediscovery_mechanism: "<DNS, seed list, Sentinel, driver, registry, manual, none>"
+  fencing_or_split_brain_guard: "<mechanism, or none>"
+  storage_truth: "<replication, backup, snapshot, shared storage, singular disk>"
+  operator_intervention_required: true
+  result: "pass | fail | honest-singularity | inconclusive"
+  what_this_proves: "<one narrow sentence>"
+  what_is_still_forbidden: "<larger HA sentence still illegal>"
+```
+
+The packet is deliberately more annoying than a status table.
+It forces the repo to say whether it proved authority transfer or merely
+documented a better recovery ritual.
+
 ## Service classes in the current stack
 
 The live stack already includes several distinct state classes:

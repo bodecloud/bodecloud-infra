@@ -37,6 +37,33 @@ The following still do not count as honest stateful progress:
 Stateful HA only becomes real when the write path, failover path, and data
 survival path are all owned strongly enough to survive a bad day.
 
+## Required proof packet before stronger language
+
+Any future Redis, MongoDB, Postgres, RabbitMQ, Headscale, Qdrant, or
+filesystem-backed claim needs a packet like this before the docs should call it
+statefully resilient:
+
+```yaml
+stateful_authority_packet:
+  claim_tested: "stateful authority under failure"
+  service: "<one exact service>"
+  authority_before: "<writer/leader/source of truth before failure>"
+  failure_introduced: "<exact node, process, disk, network, or backend failure>"
+  authority_after: "<writer/leader/source of truth after failure>"
+  client_observation: "<what clients saw before/during/after>"
+  rediscovery_mechanism: "<DNS, seed list, Sentinel, driver, registry, manual, none>"
+  fencing_or_split_brain_guard: "<mechanism, or none>"
+  storage_truth: "<replication, backup, snapshot, shared storage, singular disk>"
+  operator_intervention_required: true
+  result: "pass | fail | honest-singularity | inconclusive"
+  what_this_proves: "<one narrow sentence>"
+  what_is_still_forbidden: "<larger HA sentence still illegal>"
+```
+
+This page is allowed to propose Redis Sentinel, MongoDB Replica Sets, Patroni,
+DRBD, CephFS, or similar options.
+It is not allowed to let those nouns stand in for a recorded authority packet.
+
 ## Strongest honest current answer
 
 The strongest honest current answer is that this page correctly identifies the

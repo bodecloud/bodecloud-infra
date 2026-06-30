@@ -208,17 +208,26 @@ It needs evidence packets that a later contributor cannot easily overread.
 Use this template when a claim touches MongoDB, Redis, Postgres-shaped services,
 RabbitMQ, Headscale, Qdrant, or any other state-bearing service.
 
-| Field | Required evidence |
-| --- | --- |
-| Service class | The exact stateful service and why it is stateful |
-| Write authority | Who owns writes before the failure |
-| Replica or backup model | How another node becomes useful without corrupting truth |
-| Promotion rule | How authority changes, if it changes at all |
-| Client rediscovery | How clients find the new authority |
-| Failure scene | Node loss, disk loss, backend loss, split-brain risk, or restart |
-| Data correctness check | The read/write evidence that proves authority stayed coherent |
-| Remaining SPOF | The disk, node, credential, DNS, or human decision still singular |
-| Still forbidden | The broader HA sentence that remains illegal |
+```yaml
+stateful_authority_packet:
+  claim_tested: "stateful authority under failure"
+  service: "<one exact stateful service>"
+  authority_before: "<writer/leader/source of truth before failure>"
+  failure_introduced: "<exact node, process, disk, network, or backend failure>"
+  authority_after: "<writer/leader/source of truth after failure>"
+  client_observation: "<what dependent clients saw before/during/after>"
+  rediscovery_mechanism: "<DNS, seed list, Sentinel, driver, registry, manual, none>"
+  fencing_or_split_brain_guard: "<mechanism, or none>"
+  storage_truth: "<replication, backup, snapshot, shared storage, singular disk>"
+  operator_intervention_required: true
+  result: "pass | fail | honest-singularity | inconclusive"
+  what_this_proves: "<one narrow sentence>"
+  what_is_still_forbidden: "<larger HA sentence still illegal>"
+```
+
+If the result is `honest-singularity`, the packet still has value.
+It records that the repo removed ambiguity without pretending the workload
+became resilient.
 
 TCP reachability should never be used as a shortcut for this packet.
 

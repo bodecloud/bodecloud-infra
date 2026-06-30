@@ -331,6 +331,51 @@ It is not yet allowed to say:
 - the workload is anti-SPOF
 - the workload survives node loss with preserved authority
 
+### Packet schema for this repo
+
+Use this exact shape when collecting evidence for a stateful claim:
+
+```yaml
+stateful_authority_packet:
+  claim_tested: "stateful authority under failure"
+  service: "redis | mongodb | headscale | postgres | rabbitmq | qdrant"
+  authority_before: "<writer/leader/source of truth before failure>"
+  failure_introduced: "<exact node, process, disk, network, or backend failure>"
+  authority_after: "<writer/leader/source of truth after failure>"
+  client_observation: "<what dependent clients saw before/during/after>"
+  rediscovery_mechanism: "<DNS, seed list, Sentinel, driver, registry, manual, none>"
+  fencing_or_split_brain_guard: "<mechanism, or none>"
+  storage_truth: "<replication, backup, snapshot, shared storage, singular disk>"
+  operator_intervention_required: true
+  result: "pass | fail | honest-singularity | inconclusive"
+  what_this_proves: "<one narrow sentence>"
+  what_is_still_forbidden: "<larger HA sentence still illegal>"
+```
+
+The most useful result value in the current worktree may often be
+`honest-singularity`.
+That result is not a failure of the documentation.
+It is the documentation refusing to promote a singleton writer into a fake
+cluster.
+
+### Current-runtime packet ceilings
+
+These are not completed proof packets.
+They are the highest honest packet ceilings visible from the current runtime.
+
+| Service | Current ceiling | Why it stops there |
+| --- | --- | --- |
+| MongoDB | reachable, persistent, TCP-exposed singleton authority | no tracked proof of Replica Set election, client seed-list/SRV rediscovery, or fencing |
+| Redis | reachable, persistent, TCP-exposed singleton writer | no tracked proof of Sentinel, promoted master discovery, or reconnect correctness |
+| Headscale | useful singleton control-plane authority | SQLite-backed local authority is explicit; leader election and replication remain future work |
+| Firecrawl Postgres/RabbitMQ/Redis graph | real multi-backend stateful dependency graph | no tracked proof that the graph recovers in a correct order under partial backend loss |
+| LiteLLM Postgres/Redis/Qdrant surfaces | real relational, cache, and vector state pressure | no tracked proof of failover-ready Postgres, cache authority transfer, or vector cluster semantics |
+| Qdrant | reachable persistent vector store | no tracked proof of clustered replica semantics or authoritative index recovery |
+
+These ceilings align with the instruction surfaces:
+Compose is the priority implementation, and the project is trying to become
+peer-aware without pretending that exposed state equals stateful HA.
+
 ## Bottom line
 
 The worktree already proves that state matters now.
