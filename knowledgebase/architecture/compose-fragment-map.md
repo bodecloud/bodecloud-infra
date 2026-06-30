@@ -42,6 +42,37 @@ manufactured:
 can all be narrated as if they are one coherent stack unless the docs keep the
 authority boundaries explicit.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove:
+
+- where the tracked runtime is actually authored
+- which domains the root Compose runtime already covers
+- how much operational surface still lives in the Compose-first implementation
+- which fragment files are part of the real assembly path
+
+This page is not allowed to prove:
+
+- that multi-node wrong-node routing already works generically
+- that fragment modularity equals resilient distributed control
+- that edge breadth means failover, fallback, or peer-forward maturity
+- that the repo has already crossed from Compose runtime into system-owned
+  placement truth
+
+## Quick claim router
+
+If the question is:
+
+- "Where does the real runtime live right now?" this page is one of the best
+  authority surfaces.
+- "Which fragments matter to the current implementation?" this page is meant to
+  answer that directly.
+- "Has the repo already solved multi-node failover?" this page is only a
+  supporting source and must defer to the failure-model, HA, and proof-drill
+  pages.
+- "Does this prove a distributed control plane exists?" no. It proves runtime
+  assembly shape more than distributed truth.
+
 ## The live entrypoint
 
 The live entrypoint is the root
@@ -57,6 +88,15 @@ That file is not just a stub that points elsewhere. It:
 That means any architecture reading that starts from a derived mega-file,
 semi-parsed file, or side-path fragment before starting from root Compose is
 already reading the repo in the wrong order.
+
+## Strongest honest current answer
+
+The root Compose runtime already owns a broad and serious operational surface,
+which means the repo is stronger on runtime shape than it is on distributed
+truth. The honest reading is not that Compose is merely legacy scaffolding
+waiting to be replaced. The honest reading is that Compose still is the
+implementation center of gravity, while the anti-SPOF, no-single-sacred-box
+dream remains only partially promoted into system-owned behavior.
 
 ## What the root file tells us structurally
 

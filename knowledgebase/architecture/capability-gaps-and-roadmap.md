@@ -42,6 +42,37 @@ The user is not asking for "the next sensible improvements."
 The user is asking for the exact sequence that makes the system stop collapsing
 back into fake options, remembered placement, and wrong-node ambiguity.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- prioritize missing capability layers in the order that protects honesty
+- explain which gaps still force overclaim if left unresolved
+- connect design intent to promotion work that would make the repo more true
+- distinguish "valuable next work" from "already proven runtime behavior"
+
+This page is not allowed to:
+
+- serve as a completion report
+- imply that a neat roadmap means the architecture is already coherent in
+  runtime
+- flatten distinct gaps across HTTP, TCP, and stateful systems into one generic
+  backlog
+- turn documentation clarity into false maturity claims
+
+## Quick claim router
+
+If the question is:
+
+- "What should happen next if we care about honest anti-SPOF progress?" this
+  page is a primary answer.
+- "Which missing layer still makes the docs overstate reality?" this page
+  should call that out directly.
+- "Does having this roadmap mean the repo is already operationally converged?"
+  no.
+- "Can one backlog item solve the whole dream?" no. The roadmap exists because
+  several independent truth layers still need promotion.
+
 ## The shortest honest roadmap
 
 The current best order remains:
@@ -62,6 +93,15 @@ It is the dependency chain between the dream and reality.
 That is why the order may look narrower than a normal engineering backlog.
 It is optimized around recovering the missing truth layer, not around producing
 the most impressive-looking milestone first.
+
+## Strongest honest current answer
+
+The next work is not "whatever seems generally useful for self-hosting." The
+next work is whichever missing truth layer still forces the docs to rely on
+hope, operator memory, or rhetorical glue. Today that usually means placement
+truth, peer eligibility and convergence, route durability under wrong-node
+conditions, and keeping HTTP, TCP, and stateful promotion in separate honesty
+lanes so one partial win does not counterfeit the rest.
 
 ## Why the order is this strict
 

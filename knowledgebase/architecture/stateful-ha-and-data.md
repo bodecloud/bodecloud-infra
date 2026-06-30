@@ -41,6 +41,36 @@ The repo can absolutely improve ingress before it earns honest stateful HA.
 The danger is letting early routing progress create emotional overconfidence in
 the data plane.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- define the boundary between ingress progress and real stateful correctness
+- explain why stateful HA is a stricter claim than "reachable from more places"
+- identify the missing data-plane capabilities that still block honest
+  promotion
+- keep the repo from overstating resilience just because edge behavior improves
+
+This page is not allowed to:
+
+- imply that proxying to a database equals high availability
+- treat replicated access paths as the same thing as replicated authority
+- upgrade route durability into write-path correctness
+- pretend the repo has already solved storage portability, leader truth, or
+  failover reconciliation unless the implementation proves it
+
+## Quick claim router
+
+If the question is:
+
+- "Why is stateful HA still the hardest part?" this page is a primary answer.
+- "Can ingress improvements be real even if the data plane is immature?" yes,
+  and this page explains that boundary.
+- "Does improved routing mean Redis, Postgres, Mongo, or object storage are now
+  honestly HA?" no.
+- "What has to become system-owned before stateful HA claims are real?" this
+  page exists to answer that precisely.
+
 ## The frustration beneath the stateful question
 
 The user is already exhausted with “just put it behind a proxy,” “just add DNS
@@ -160,6 +190,15 @@ single-writer for a while.
 
 That unevenness is not a documentation defect here.
 Pretending it has already resolved would be the defect.
+
+## Strongest honest current answer
+
+Ingress and peer-forward behavior can improve materially before the stateful
+story becomes honest, but that does not make the stateful problem smaller. The
+real barrier is still replicated authority: durable placement truth, write-path
+rules, leader or primary semantics where needed, storage portability, and
+recovery behavior that survives actual node loss instead of merely surviving a
+proxy hop.
 
 ## What the user actually wants from the stateful story
 

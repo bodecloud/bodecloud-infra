@@ -28,6 +28,36 @@ The user is not asking for a prettier routing explanation.
 They are asking whether the system can stop relying on hidden operator
 reconstruction at the exact moment the wrong-node event becomes real.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- reconstruct the intended end-to-end request contract from repo evidence
+- show where that contract currently has believable support
+- expose exactly where the request story starts depending on missing machinery
+- prevent architecture language from silently pretending a request path is
+  already durable
+
+This page is not allowed to:
+
+- claim stack-wide wrong-node success
+- treat a plausible walkthrough as runtime proof
+- collapse HTTP route plausibility into TCP or stateful failover claims
+- imply that middleware, auth, locality, peer eligibility, and application
+  correctness have all already survived real failure conditions
+
+## Quick claim router
+
+If the question is:
+
+- "What is the user actually trying to make a request do?" this page is one of
+  the best reconstruction surfaces.
+- "Where does the request story become aspirational?" this page is supposed to
+  point at that seam explicitly.
+- "Does the current stack already prove generic wrong-node routing?" no.
+- "Can I use this page alone to claim end-to-end failover?" no. Use it with
+  the proof matrix and failure-model pages.
+
 ## What a solved request path would actually feel like
 
 The user is not trying to win an architecture argument.
@@ -65,6 +95,16 @@ The dream is:
 > stateful systems are one problem.
 
 Everything below is just a stress test of that sentence.
+
+## Strongest honest current answer
+
+The repo can already describe a serious request contract rather than a vague
+"maybe we can proxy to peers someday" hope, but that is still weaker than real
+route-specific proof. The honest current answer is that the architecture dream
+is sharp, the likely direction is visible, and some proxy ingredients exist,
+but the decisive test remains the uncomfortable one: a request lands on the
+wrong node, the system chooses an eligible peer, policy survives the hop, and
+the application still behaves correctly under that exact path.
 
 That means this page is not merely documenting one request path.
 It is helping decide whether the repo is actually building a new class of
