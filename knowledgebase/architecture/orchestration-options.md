@@ -44,6 +44,22 @@ That difference is the whole reason this page exists.
 If it becomes a neat feature table, it will have already degraded into the same
 kind of answer the user keeps rejecting elsewhere.
 
+This page therefore has to be harsher than a normal "architecture options"
+document.
+It has to stop the repo from confusing:
+
+- more categories
+- more tool families
+- more respectable platform names
+
+with:
+
+- a genuinely different answer to the hidden-truth problem
+
+If a candidate layer still leaves the operator privately reconstructing the
+same bad-day answer, then from the user's point of view the option family has
+mostly changed costumes, not outcomes.
+
 ## The shortest honest answer
 
 The current default stance is still:
@@ -92,6 +108,11 @@ forced to collapse into:
 That middle search space is not theoretical.
 It is the main object the repo is trying to defend.
 
+That middle search space is also easy to erase with mature-sounding docs.
+If this page starts reading like the repo is simply choosing between
+respectable platform families, it has already shrunk the dream into a smaller,
+more ordinary decision than the one the user is actually forcing.
+
 That is also why this page must keep separating real options from relabeled
 non-options.
 
@@ -100,6 +121,12 @@ tool name changes.
 It becomes meaningfully different only if it owns a different hidden burden
 than the current path and makes that burden less dependent on private operator
 reconstruction.
+
+That standard needs to stay severe.
+Many platform comparisons fail this repo precisely because they over-credit
+surface differences and under-credit continuity of burden.
+If the same sacred truths survive under a new control plane, then the new
+control plane has not really answered the user's complaint yet.
 
 That last clause should stay brutal.
 
@@ -204,6 +231,14 @@ None of those prove:
 - middleware continuity
 - stateful correctness
 
+So this page has to remain hostile to recommendation styles that sound good
+because they imply closure faster than the evidence earns closure.
+That is another way of saying:
+
+- calmness is not proof
+- maturity vocabulary is not proof
+- controller presence is not proof
+
 That is why this page has to stay organized around pain classes, not product
 features.
 
@@ -225,6 +260,11 @@ That is the standard every later orchestration recommendation should inherit.
 
 This standard is deliberately harsher than normal tooling guidance because the
 user has already seen too many "solutions" that merely rename the burden.
+
+It is also harsher because the docs themselves are part of the failure mode.
+A smoother recommendation can be actively harmful here if it causes the reader
+to feel the choice got simpler while the bad-day request path is still socially
+reconstructed.
 
 ## The problem classes that actually decide the answer
 
@@ -268,6 +308,11 @@ This is where raw Compose starts to require either:
 - stronger helpers
 - a real registry
 - or promotion into a stronger control layer
+
+But this page should keep one warning attached to all three:
+if the resulting truth is still fragmented enough that a knowledgeable operator
+has to mentally fuse several partial signals into "what is actually true right
+now?", then the layer has still not earned full trust.
 
 ### 3. Traffic and request continuity
 
@@ -410,6 +455,12 @@ If done well, it buys:
 - narrower convergence logic
 - a path toward wrong-node recovery without abandoning Compose
 
+The key phrase is "if done well."
+This page should not let that phrase evaporate into optimism.
+The archive and runtime both show how easy it is for helper-heavy systems to
+sound dynamic while still asking the operator to privately arbitrate between
+stale, partial, or socially remembered truths.
+
 That "if done well" qualifier matters a lot.
 The archive is full of examples where helper-heavy approaches sound dynamic but
 still leave the user editing, remembering, or inferring the most important
@@ -451,10 +502,20 @@ knowledgebase:
 if the helper mesh owns enough truth, then pretending the system is still "just
 Compose" becomes as dishonest as pretending Kubernetes would have been free.
 
+That is one of the most important anti-benchmarks in the whole knowledgebase.
+It prevents the repo from treating helper accumulation as automatically safer
+simply because it happened in smaller steps.
+
 ## Option family 2: OpenSVC or other infra-grade HA tooling
 
 This family matters because some of the repo’s hardest pains are
 infra-failover-shaped, not scheduler-shaped.
+
+That distinction deserves more weight than generic orchestration discussions
+usually give it.
+The user is not simply asking for "better clustering."
+They are asking for the exact layer that is still sacred to stop being sacred,
+and sometimes that layer is much narrower than an application platform.
 
 That distinction is one of the least appreciated parts of the user's demand.
 Sometimes the pain is not "schedule everything better."
@@ -504,6 +565,10 @@ This is exactly why OpenSVC-style thinking remains attractive here even though
 generic docs often skip past it.
 It offers a way to spend complexity on one painful truth instead of importing a
 whole political system for the stack.
+
+That is why this family should be judged by discipline, not breadth.
+If it starts being narrated as a near-universal resilience answer, the docs are
+sliding back into the same fake-closure pattern the user is tired of.
 
 ## Option family 3: Nomad
 
@@ -563,6 +628,12 @@ The repo should not promote Nomad because it is fashionable.
 It should promote Nomad if it is already paying scheduler-like tax in a more
 fragile and less self-aware form.
 
+That sentence is the real gate.
+Nomad is not here because it is an elegant middle ground in the abstract.
+It is here because a repo can drift into scheduler-shaped suffering long before
+it admits that scheduler ownership may now be cheaper than pretending the
+helper mesh is still "small."
+
 ## Option family 4: k3s or Kubernetes
 
 This family should only be judged honestly, not reflexively.
@@ -573,6 +644,14 @@ That means resisting both:
 - "Kubernetes is evil, so never let it into the conversation"
 
 Neither reflex is serious enough for this repo.
+
+This page should stay resistant to both comfort reflexes:
+
+- "eventually just admit Kubernetes"
+- "never let Kubernetes near anything readable"
+
+Both are ways of skipping the harder question about which truth the layer would
+own more honestly than the current stack.
 
 ### What this family is genuinely good at
 
@@ -614,6 +693,10 @@ specific than "it is the standard":
 which truth did the repo fail to own any other way, and why is the controller
 tax now cheaper than the helper tax?
 
+That cost comparison is the whole point.
+If the docs cannot state it concretely, then "Kubernetes is mature" is just a
+prestige argument, not an engineering argument.
+
 ## Option family 5: Swarm
 
 Swarm matters mostly because it is the obvious Docker-native temptation.
@@ -633,6 +716,10 @@ It is:
 - truthful failover
 - convergence truth
 - stateful honesty
+
+That is why Swarm keeps failing to become the obvious answer.
+It is near the current worldview, but nearness is not the same as removing the
+specific humiliations that made the current worldview insufficient.
 
 Swarm does not automatically answer those well enough to earn default victory,
 especially when the user is already wary of fake closure.
@@ -669,6 +756,15 @@ This is the repo's version of a proof gate.
 Tooling should not be promoted because it sounds more adult.
 It should be promoted because one previously human-held truth becomes
 materially more visible, current, and trustworthy.
+
+This page should keep those three words together:
+
+- visible
+- current
+- trustworthy
+
+Many options can improve one or two of them while still failing the third.
+The user's complaint lives exactly in that gap.
 
 ## Bottom line
 
