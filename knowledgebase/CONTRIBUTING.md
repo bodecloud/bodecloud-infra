@@ -160,6 +160,20 @@ Before writing or revising a page, stop and fill in this mental checklist:
 4. Which evidence only supports pressure, comparison, or future direction?
 5. What would count as overclaiming on this page?
 
+If the page uses the imported source archive, add a second checklist before
+drafting:
+
+1. Which thread family is being used?
+2. Which stack layer is the thread really about?
+3. What exact user correction or frustration does it preserve?
+4. What ordinary answer did that thread expose as too small?
+5. What stronger runtime sentence is still illegal after reading it?
+
+Do not treat archive files as flavor text.
+They are pressure artifacts.
+They are useful only when the contribution preserves both what they prove and
+what they still cannot prove.
+
 Examples of the wrong substitution:
 
 - "What is the best orchestrator?" instead of "Which layer would own the

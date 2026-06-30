@@ -364,6 +364,7 @@ out a source-custody packet like this:
 | Intent anchor | Which instruction, README, or architecture page carries the target contract? | Preserves the dream without pretending it is already true. |
 | Plan anchor | Which roadmap or promotion page names the missing repair? | Keeps known gaps visible instead of turning planning into delivery. |
 | Archive anchor | Which imported thread or synthesis cluster explains why ordinary answers failed? | Keeps the user's standard intact. |
+| Archive family | Which thread family, stack layer, user pressure, ordinary dodge, and forbidden upgrade were extracted? | Prevents archive citations from becoming decorative. |
 | Legal sentence | What is the strongest sentence the combined evidence can currently support? | Forces confidence to stay inside the evidence. |
 | Illegal sentence | What more satisfying sentence still cannot be written? | Makes overclaiming explicit instead of implicit. |
 | Next proof | What drill, runtime change, or inspection would upgrade the claim? | Converts frustration into an engineering target. |
@@ -373,6 +374,45 @@ The page does need to have enough structure that a reader could reconstruct it.
 
 If a page cannot name both a legal sentence and an illegal sentence, it is
 probably flattening the evidence.
+
+If a page cites an imported conversation but cannot name the stack layer that
+conversation is really about, it is also flattening the evidence.
+The archive repeatedly switches between public entry, service placement, route
+durability, policy continuity, and stateful authority.
+Those layers must not be allowed to collapse into one generic "HA" bucket.
+
+## Source read versus source assimilated
+
+The knowledgebase should treat these as different states.
+
+| State | What happened | What it can support | What it cannot support |
+| --- | --- | --- | --- |
+| Source listed | A file path or thread name appears. | provenance for where to look next | any serious claim by itself |
+| Source summarized | The source's surface content was restated. | a local explanation of that source | that the source was connected to the repo's current proof boundary |
+| Source classified | The source was assigned to a source class and stack layer. | claim routing and confidence ceiling | runtime capability |
+| Source assimilated | The source produced a legal sentence, illegal sentence, surviving private burden, and next proof. | a knowledgebase claim with evidence custody | broad capability beyond that packet |
+
+Most weak documentation regressions happen between `source summarized` and
+`source assimilated`.
+The page sounds informed because it has more context, but it still has not
+identified which private operator duty remained alive after the context was
+read.
+
+For archive threads, assimilation requires at least this:
+
+```yaml
+archive_assimilation:
+  thread_family: "<for example: Compose fork and fallback-list pressure>"
+  stack_layer: "<public entry | service placement | route durability | policy continuity | stateful authority>"
+  user_pressure: "<what the user was actually correcting or demanding>"
+  ordinary_dodge: "<the easier answer the ecosystem or assistant kept giving>"
+  legal_sentence: "<what this source can support>"
+  illegal_sentence: "<what this source still cannot support>"
+  next_proof: "<packet, drill, or runtime artifact needed to upgrade>"
+```
+
+If this cannot be filled out, the source may be useful background, but it has
+not yet earned strong weight in the page.
 
 ## Cross-source synthesis rule
 

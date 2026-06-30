@@ -248,6 +248,9 @@ High-value recurring thread families include:
 - multi-node Docker without Swarm
 - distributed HA orchestration
 - load-balancer and failover alternatives
+- Compose fork, fallback-list, and runtime watcher pressure
+- shared-IP, VPN, Tailscale, WireGuard, and Cloudflare public-entry pressure
+- manual-placement acceptance versus current placement truth
 - Nomad, k3s, Kubernetes, and control-plane comparisons
 - reverse-proxy and middleware continuity discussions
 - helper-layer frustration where the helper disappears under the failure it was
@@ -394,6 +397,44 @@ Before drafting, do this in order:
 
 If the writing begins before step 7, the page usually becomes too smooth.
 
+## Archive retrieval drill
+
+For pages that use the imported archive, "read the archive" is too vague.
+Do this instead:
+
+1. Search the source archive by the failure class, not only by the tool name.
+   Use terms like `wrong-node`, `fallback`, `service discovery`, `Cloudflare`,
+   `shared IP`, `VPN`, `Compose fork`, `Nomad`, `OpenSVC`, `k3s`, `stateful`,
+   `middleware`, and `auth`.
+2. Pick at least one thread that supports the user's accusation and one thread
+   that complicates the easy answer.
+3. Classify each selected thread by stack layer:
+   - public entry
+   - service placement
+   - peer eligibility
+   - route durability
+   - policy continuity
+   - stateful authority
+4. Extract the exact user question or correction that made the ordinary answer
+   inadequate.
+5. Write the forbidden upgrade next to it.
+
+The drill should produce a small table like this before prose starts:
+
+| Thread family | Stack layer | User pressure | Ordinary dodge | Forbidden upgrade |
+| --- | --- | --- | --- | --- |
+| Docker multi-node without Swarm | service placement | manual placement is fine; request-time discovery is not | sell a scheduler because placement is manual | scheduling maturity proves wrong-node routing |
+| Dynamic HA proxy/shared IP | public entry | first-hop SPOF and service-level SPOF are different | claim single-IP or DNS plurality solves failover | IP-level survival proves service-level correctness |
+| Compose fork/fallback lists | route durability | fallback must happen at runtime, not only in YAML | propose preprocessing or prettier schema | generated config proves backend-loss behavior |
+
+If a page cannot fill this table, it may still cite the archive, but it has not
+assimilated it.
+
+This matters because the archive is full of near-misses.
+Near-misses are useful only when they are preserved as near-misses.
+If they are blended into one generic HA complaint, the docs lose the user's
+real standard again.
+
 ## Why "too smooth" is a real warning sign here
 
 Smoothness is suspicious in this repo because the underlying materials are not
@@ -439,6 +480,22 @@ At minimum the packet should preserve:
 If a retrieval pass cannot produce that packet, then "we really read the repo
 this time" is still too congratulatory for this project.
 
+The packet should also include an archive-family field when archive pressure is
+used:
+
+```yaml
+archive_family:
+  thread: "docker-multi-node-without-swarm"
+  stack_layer: "service placement"
+  user_pressure: "manual placement is acceptable; request-time placement truth is not"
+  ordinary_dodge: "recommend a scheduler because placement is manual"
+  forbidden_upgrade: "scheduler vocabulary proves wrong-node service discovery"
+```
+
+This field keeps the archive from becoming decorative citation.
+It forces the writer to preserve why that thread matters and which stronger
+sentence it still cannot support.
+
 For pages about ingress, routing, or failover, the packet should be concrete
 enough to downgrade into the route-level and placement-decision schemas:
 
@@ -448,6 +505,12 @@ assimilation_packet:
   runtime_anchor: "docker-compose.yml + active compose fragments"
   intent_anchor: ".github/copilot-instructions.md"
   archive_anchor: "source-archive threads that preserve the frustration"
+  archive_family:
+    thread: "docker-multi-node-without-swarm"
+    stack_layer: "service placement"
+    user_pressure: "manual placement is accepted; current placement truth is missing"
+    ordinary_dodge: "sell orchestration because placement is manual"
+    forbidden_upgrade: "orchestrator comparison proves runtime placement truth"
   legal_sentence: "the stack has serious ingredients and a precise dream"
   illegal_sentence: "the stack already proves generic wrong-node failover"
   surviving_private_sentence: "I still personally know where this route lives"
