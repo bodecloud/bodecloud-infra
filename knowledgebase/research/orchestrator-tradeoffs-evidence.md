@@ -275,10 +275,20 @@ Important archive facts:
 
 - `docker-multi-node-without-swarm__...` keeps converging on service discovery
   as the hard missing piece
+- the same thread is especially important because the user explicitly accepts
+  manual placement and narrows the real unsolved problem to request-time
+  service discovery
 - the same thread describes Nomad as lighter than Kubernetes but still frames
   the real issue as current placement truth
 - the same pressure repeatedly returns to "service name -> where is it running
   right now"
+- `forking-docker-compose__...` shows that the user was not asking for prettier
+  YAML; they were looking for runtime fallback behavior such as failover lists,
+  startup-failure rescue, and hybrid fallback targets without maintaining a
+  permanent Compose fork
+- `dynamic-ha-proxy-setup__...` shows why IP-level or shared-entry arguments
+  must be separated from service-level correctness; even if first-hop SPOF is
+  reduced, the wrong-node service decision can still be unowned
 - `distributed-ha-orchestration__...` explicitly notes that K3s still uses
   leader election and Swarm still has manager nodes
 - `docker-compose-frustration__...` captures the "Docker feels gaslighting"
@@ -292,6 +302,10 @@ The stronger reading is:
 
 - the repo has not yet seen enough evidence to let one future legally
   impersonate relief
+- the preserved futures are different attempts to buy specific truth ownership,
+  not a pile of interchangeable platform names
+- the smallest faithful answer may be a current-state/fallback decision layer,
+  but only if it actually consumes runtime truth and acts during failure
 
 ## What still does not count as orchestration evidence here
 

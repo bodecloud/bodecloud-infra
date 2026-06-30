@@ -265,6 +265,35 @@ The object is:
 the smallest additional truth-owning layer that stops the system from
 functioning as a distributed illusion.
 
+### Refusal 6: answers that solve the wrong layer of the stack
+
+Several archive threads fail because they switch layers without admitting it.
+
+The user may be asking about:
+
+- IP-level entry plurality
+- DNS or Cloudflare first-hop distribution
+- L4/L7 wrong-node forwarding
+- current service placement
+- runtime fallback after backend loss
+- protected-route policy continuity
+- stateful writer authority
+
+Those are not the same problem.
+
+For example, a shared public IP or multiple Cloudflare A records can reduce
+first-hop fragility, but it does not tell a surviving node where `dozzle` lives
+right now.
+A Compose extension can make fallback intent readable, but it does not become
+fallback behavior unless something watches failures and acts.
+A scheduler can relocate workloads, but it does not automatically prove that
+middleware, auth, and stateful authority survived the handoff.
+
+This is why the docs have to keep asking:
+
+> which layer did this option actually solve, and which private sentence is
+> still alive one layer deeper?
+
 ## The four plus one questions every orchestration answer must survive
 
 Every candidate family must survive these questions:

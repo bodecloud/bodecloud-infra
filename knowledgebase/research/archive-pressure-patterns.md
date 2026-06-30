@@ -268,6 +268,108 @@ What this cluster should force the docs to preserve:
 - it is trying to prevent unjustified worldview capture
 - "mature orchestrator" is weaker than "owns the missing truth cleanly"
 
+### Cluster D: Compose fork pressure is really runtime-fallback pressure
+
+Primary files:
+
+- `source-archive/chatgpt-exports/conversations/forking-docker-compose__68598739-9260-8006-a1d4-2e3275b4ec5a.md`
+- `source-archive/chatgpt-exports/conversations/docker-compose-alternatives__6892ec29-a1f0-8329-9f7f-e0953237480d.md`
+- `source-archive/chatgpt-exports/conversations/docker-compose-vs-kubernetes__6870db2f-9728-8006-ab56-0f32b290135c.md`
+
+What this cluster shows:
+
+- the user is not merely annoyed that Compose lacks a custom YAML key
+- the deeper missing feature is runtime behavior: fallback lists, startup
+  failure handling, health-triggered replacement, and even hybrid cloud escape
+  hatches
+- the user's own course correction moves away from forking Docker toward a
+  smaller script or sidecar that can own the runtime decision without
+  maintaining a Compose fork forever
+- "preprocessor" answers miss the point because the desired behavior has to
+  react after deployment, not only render prettier YAML before deployment
+
+What this cluster should force the docs to preserve:
+
+- do not describe the missing layer as only a schema or formatting problem
+- do not call a generated Compose file a fallback system unless something
+  watches, decides, and acts under failure
+- the useful middle layer may be smaller than an orchestrator, but it still has
+  to be runtime-aware
+
+What this cluster should make painful to forget:
+
+- fallback that exists only before `docker compose up` is not the user's dream
+- a script can be more faithful than a fork if it owns the actual bad-day
+  decision
+- "Compose++" is justified only when it kills a runtime burden, not when it
+  makes YAML feel more expressive
+
+### Cluster E: shared public entry is not the same as service-level truth
+
+Primary files:
+
+- `source-archive/chatgpt-exports/conversations/dynamic-ha-proxy-setup__6892fde1-4da4-8328-b0fb-273db6d8b990.md`
+- `source-archive/chatgpt-exports/conversations/tailscale-load-balancing-setup__6892dcc0-3c9c-8324-9c34-2b20628130ac.md`
+- `source-archive/chatgpt-exports/conversations/ddns-cloudflare-swarm-docker__681a31e2-9a88-8006-8607-0dbd637d756e.md`
+
+What this cluster shows:
+
+- the user keeps pushing against answers that reduce everything to "there must
+  be one ingress SPOF"
+- shared-IP, VPN, Tailscale/WireGuard, and Cloudflare DDNS ideas matter because
+  they attack first-hop failure and public-entry plurality
+- but those layers still do not automatically answer which node owns a service,
+  which peer is eligible, or whether a protected route keeps its meaning
+- the repeated frustration comes from assistants switching between IP-level,
+  node-level, and service-level claims without naming the boundary
+
+What this cluster should force the docs to preserve:
+
+- DNS or shared-IP plurality can be part of the anti-SPOF story without being
+  the whole story
+- public ingress survival must be separated from wrong-node request
+  preservation
+- "no SPOF at the IP level" must never be rewritten as "service failover is
+  solved"
+
+What this cluster should make painful to forget:
+
+- the first hop can be resilient while the service decision is still dumb
+- a reachable node can still be the wrong semantic node
+- edge plurality is a prerequisite, not proof of burden transfer
+
+### Cluster F: manual placement is accepted; current placement truth is not
+
+Primary files:
+
+- `source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`
+- `source-archive/chatgpt-exports/conversations/sharing-docker-networks-across-vps__681d6990-c0e4-8006-a010-985ddb00b3ef.md`
+
+What this cluster shows:
+
+- the user explicitly says scheduling and manual placement are acceptable
+- the remaining hard problem is service discovery and route preservation when a
+  request lands on a node that does not host the service
+- the desired system is not "hide placement from me"; it is "do not make me be
+  the request-time registry"
+- this is why a small current-state registry keeps reappearing as a more
+  faithful first move than wholesale scheduler adoption
+
+What this cluster should force the docs to preserve:
+
+- do not treat manual placement as a failure by itself
+- do not sell an orchestrator merely because it schedules things
+- the missing truth is current request-time placement, not abstract desired
+  placement
+
+What this cluster should make painful to forget:
+
+- the user is fine deciding where services live
+- the user is not fine being the only thing that knows where they live when a
+  wrong-node request arrives
+- service discovery is the live nerve because it converts accepted manual
+  placement into inspectable system truth
+
 ## Archive extraction matrix
 
 When a page pulls from the archive, it should extract pressure in this shape
@@ -278,6 +380,9 @@ instead of merely summarizing the thread:
 | Compose distribution frustration | Can Compose remain readable while multiple nodes stop acting separate? | Offering remote sockets, sync scripts, or static proxy maps as if they remove hidden topology memory. | Compose readability is operator legibility, not nostalgia. | A receiving node can route from current placement truth without manual per-request reconstruction. |
 | Load-balancer and Traefik failover | Can the wrong public node still preserve the request? | Treating proxy presence, DNS plurality, or a failover stanza as semantic continuity. | Wrong-node dignity is stricter than load balancing. | Route, peer choice, middleware, auth, and application behavior survive a named wrong-node drill. |
 | Distributed HA and Nomad pressure | Is a narrow coordination layer enough, or must a full platform own the truth? | Treating platform maturity as equivalent to removed burden. | Bigger names do not win unless they kill specific private sentences. | A promoted layer demonstrably owns placement, eligibility, and failure-state truth. |
+| Compose fork and fallback-list pressure | Can Compose grow runtime fallback behavior without becoming a permanent fork? | Treating a schema extension or preprocessor as enough. | The desired layer has to watch, decide, and act after deployment. | A fallback decision changes runtime behavior during startup or backend failure and leaves an inspection packet. |
+| Shared-IP, VPN, and DNS entry pressure | Can public entry avoid one sacred ingress? | Confusing IP-level resilience with service-level correctness. | First-hop plurality is necessary but not sufficient. | A non-hosting surviving node can still choose the right service peer from shared truth. |
+| Manual-placement acceptance | Can the user keep choosing where services live without being the hidden runtime registry? | Selling a scheduler because placement is manual. | Manual placement is acceptable; private request-time placement memory is not. | A receiving node consumes current placement truth without human reconstruction. |
 | Stateful and TCP pressure | Can stateful services fail over honestly? | Treating reachability, proxyability, or replicas as correctness. | Stateful claims require harsher language than stateless HTTP. | Authority, write safety, recovery, and split-brain boundaries are proven by a stateful-specific packet. |
 | Cloudflare and public-entry pressure | Can any public node be more than decorative redundancy? | Treating multiple DNS records as end-to-end failover. | Cloudflare may distribute first hop; it does not preserve request meaning by itself. | A request landing on a surviving non-hosting node is routed correctly after backend loss. |
 
