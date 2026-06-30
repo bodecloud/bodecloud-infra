@@ -3,10 +3,10 @@
 > **Version**: 1.0.0\
 > **Date**: 2026-03-03\
 > **Status**: Design & Planning\
-> **Goal**: Define a path for turning a multi-VPS Docker Compose stack into a
-> more automated, self-healing, horizontally-scalable personal cloud that can
-> eventually be templated for other domains without pretending that the current
-> runtime already behaves that way.
+> **Goal**: Define one planning path for turning a multi-VPS Docker Compose
+> stack into something more automated, less operator-memory-dependent, and more
+> resilient at request time, without pretending that this planning document is
+> itself proof that the current runtime already behaves that way.
 
 > **Important reading boundary**: this file is a planning artifact, not proof
 > that the runtime already behaves this way. For the current evidence-first
@@ -48,6 +48,22 @@ Bolabaden is a multi-node Docker infrastructure whose **intended direction** is
 to let multiple Compose-managed VPS nodes behave more like one resilient
 personal cloud without defaulting to Kubernetes or Docker Swarm.
 
+This file is useful only if it is read with the right amount of skepticism.
+
+It is not the repo's final answer.
+It is one of the places where the repo argues with itself about what kind of
+extra control surface might actually earn the right to exist.
+
+That matters because the user is not asking for a plan that sounds complete.
+The user is asking for the smallest honest path out of fake HA, wrong-node
+humiliation, and sacred remembered placement.
+
+So this plan should be read as:
+
+- a serious pressure map
+- a serious promotion candidate list
+- not a claim that the repo has already crossed those thresholds
+
 The current live repo already proves:
 
 - a serious root `docker-compose.yml` entrypoint
@@ -66,18 +82,24 @@ The current live repo does **not** yet prove:
 
 This plan exists because those gaps are still real.
 
-**This plan addresses 11 capability gaps** to transform the stack from a manually-synchronized multi-VPS setup into a fully automated, self-healing, horizontally-scalable platform.
+This plan groups the stack's known pressure into 11 capability gaps.
+That does **not** mean every gap is equally mature, equally urgent, or equally
+deserving of a heavyweight solution.
+
+It means the repo already knows many of the places where hidden operator labor
+is still substituting for explicit shared truth.
 
 ### Core Principles
 
 | Principle | Description |
 |-----------|-------------|
-| **No Orchestrator** | No Kubernetes, no Docker Swarm. Automation via lightweight agents. |
-| **Git as Source of Truth** | All config lives in the bolabaden-infra repo. Changes flow through git. |
+| **No Orchestrator by Default** | No Kubernetes or Docker Swarm by default. Stronger control layers must earn themselves by removing a concrete pain. |
+| **Git as Authoring Source** | Repo files are authoritative for authored intent, but git history is not the same thing as current runtime truth. |
 | **Idempotent Everything** | Every script, every sync, every deploy can run N times safely. |
 | **Headscale Mesh** | All nodes communicate via Tailscale/Headscale private network. |
 | **Inline Configs** | Docker Compose configs are inline YAML, not external files. |
-| **Template-Ready** | Anyone can fork, set their domain/secrets, and deploy their own cloud. |
+| **Current-State Truth Matters** | Plans and templates must not outrun the question of what nodes actually know at request time. |
+| **Template-Ready Later** | Forkability matters, but only after the real control and proof boundaries are understood honestly. |
 
 ***
 
@@ -119,6 +141,18 @@ This plan exists because those gaps are still real.
 
 This diagram is an intended target shape, not a statement that the current
 tracked runtime already behaves this way end to end.
+
+It is also not automatically a real option just because the diagram is
+internally coherent.
+
+One of the recurring traps in this repo is that a future can look elegant long
+before it has earned the right to replace the current burden with something
+better.
+
+So every box in this section should be read with a second question attached:
+
+> which hidden human burden would this actually remove, and which one would it
+> still leave socially reconstructed?
 
 ```
                     ┌─────────────────────────────────────┐
