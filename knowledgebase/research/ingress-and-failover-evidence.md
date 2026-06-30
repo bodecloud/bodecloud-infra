@@ -48,11 +48,26 @@ The user keeps pushing back on exactly that drift.
 That pushback is not nitpicking.
 It is the center of the repo's whole existence.
 
-## What this page is trying to prove
+## What this page is and is not allowed to prove
 
-This page is not trying to prove that ingress HA is complete.
+This page is allowed to prove that the repo already has a serious ingress
+surface, that the any-node-entry plus peer-forward dream is explicit, and that
+the current evidence still stops well short of proving preserved request
+meaning under wrong-node entry and backend loss.
 
-It is trying to prove seven much narrower things:
+It is not allowed to prove that ingress HA is complete or that first-hop
+plurality has already become end-to-end request preservation.
+
+It is also not allowed to let:
+
+- Cloudflare plurality
+- Traefik presence
+- healthchecks
+- fallback-looking helpers
+
+do emotional work that belongs to stronger runtime proof.
+
+More concretely, it is allowed to prove seven narrower things:
 
 1. the root runtime already has a substantial real ingress surface
 2. the any-node-entry and peer-forward dream is explicit in repo-native intent

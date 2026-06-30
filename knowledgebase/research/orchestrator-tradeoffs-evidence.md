@@ -69,10 +69,19 @@ burden than the current path.
 If they mostly rename the same burden, then for this repo they are much closer
 to the same option than to distinct ones.
 
-## What this page is trying to prove
+## What this page is and is not allowed to prove
 
-This page is not trying to crown a winner.
-It is trying to prove eight narrower things:
+This page is allowed to prove that the repo is comparing future control layers
+by burden ownership, not by branding, ecosystem prestige, or generic feature
+lists.
+
+It is not allowed to crown a winner or to imply that one platform path has
+already earned whole-stack promotion in the current evidence.
+
+It is also not allowed to confuse "there are several futures" with "all of
+those futures are equally justified."
+
+More concretely, it is allowed to prove eight narrower things:
 
 1. the current runtime is still concretely Compose-first
 2. the repo is already carrying pain that plain Compose does not close

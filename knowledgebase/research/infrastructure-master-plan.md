@@ -90,6 +90,27 @@ The stricter version is:
 - a coherent module is not yet a removed humiliation
 - a named control surface is not yet a shared truth surface
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove that the master plan is one of the strongest
+directional artifacts in the repo and that it already names the missing truth
+layers with unusual clarity.
+
+It is not allowed to prove that those layers are already runtime-owned in the
+tracked priority implementation.
+
+It is also not allowed to let coherence impersonate ownership.
+
+The plan is detailed enough that a reader can easily start treating:
+
+- a named module
+- a described flow
+- a plausible sequence
+
+as if they were already live shared truth.
+
+That is exactly the overread this page is supposed to block.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |

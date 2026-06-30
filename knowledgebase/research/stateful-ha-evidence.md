@@ -22,11 +22,20 @@ demo.
 At the stateful layer, weak answers can preserve the interface while losing the
  place where authority, durability, or correctness actually lived.
 
-## What this page is trying to prove
+## What this page is and is not allowed to prove
 
-This page is not trying to prove that stateful HA is solved.
+This page is allowed to prove that the priority runtime already carries real
+stateful risk, that node-local authority and durability are still visible in
+the live stack, and that the repo is sharper about stateful HA than the runtime
+currently proves.
 
-It is trying to prove seven narrower things:
+It is not allowed to prove that stateful HA is solved or that service
+reachability plus restartability have already become resilient authority.
+
+It is also not allowed to let ingress-looking success leak confidence into the
+stateful layer.
+
+More concretely, it is allowed to prove seven narrower things:
 
 1. the live stack already depends on real stateful services
 2. those services still lean heavily on node-local persistence

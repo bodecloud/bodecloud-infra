@@ -75,6 +75,27 @@ The point of the ranking is not to crown a winner.
 It is to stop the repo from buying a giant worldview to compensate for a
 smaller truth that was never named precisely enough.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove that the orchestration search in this repo is
+really a search for the smallest honest owner of missing distributed truth.
+
+It is not allowed to turn that search into:
+
+- a generic product comparison
+- a prestige ranking
+- an implied verdict that one worldview has already earned whole-stack
+  promotion
+
+It is also not allowed to flatten the user's frustration into ordinary platform
+shopping.
+
+The page only stays honest if every candidate remains tied to:
+
+- the specific hidden burden it would own
+- the worldview cost it would charge
+- the burden it would still leave operator-owned
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
