@@ -42,6 +42,19 @@ It is a reaction to a repeated bait-and-switch:
 - but the larger worldview often arrives before anyone has named which truth
   actually went missing
 
+That history matters because this page is easy to misread in a very specific
+way:
+
+- Compose is still central
+- therefore the current helper strategy must be mostly working
+- therefore promotion questions are mostly aesthetic
+
+That reading is exactly what this page is supposed to prevent.
+Compose-first is not a quiet endorsement of the current state.
+It is a refusal to falsely declare that the missing middle has already been
+solved just because the repo has accumulated enough labels, proxies, helper
+scripts, and surrounding vocabulary to sound serious.
+
 ## The real argument for Compose-first
 
 The real argument is not emotional attachment to YAML.
@@ -89,6 +102,16 @@ The repo keeps demanding a harder question first:
 
 That question is the entire point of Compose-first.
 
+The hidden companion question is harsher:
+
+> are we preserving Compose because it is still the least dishonest operator
+> surface, or because we have not yet admitted that the helper pile has become
+> its own opaque control plane?
+
+If this page does not keep that second question visible, it becomes too easy
+to romanticize the current architecture simply because it still looks
+Docker-native.
+
 ## What Compose-first does and does not mean
 
 In `bolabaden-infra`, Compose-first means all of these are still true:
@@ -108,6 +131,15 @@ The repo is not merely "stuck on Compose."
 It is testing whether the missing truths can be added in a way that still keeps
 Compose as the main human contract instead of downgrading it into a vestigial
 artifact.
+
+That experiment is still open.
+The docs should not let "Compose-first" read like the verdict came back
+positive.
+At this stage it is more honest to read it as:
+
+- Compose is still the least dishonest readable surface
+- the helper and promotion story is still under cross-examination
+- the wrong-node and backend-loss contracts are still the real judge
 
 It does **not** mean:
 
@@ -142,6 +174,13 @@ This page therefore has to keep one harsh question visible:
 
 what exact missing truth is Compose still refusing to own, and what is the
 smallest extra layer that could own it without making Compose a decorative lie?
+
+And one harsher anti-benchmark:
+
+if the answer becomes "Compose is still the authoring surface, but the actual
+bad-day intelligence now lives in three helpers, one sync path, and operator
+intuition about which outputs matter," then Compose-first has failed on its own
+terms.
 
 ## Why Compose is still the least dishonest live surface
 
@@ -264,6 +303,18 @@ If the system still needs an operator to privately complete the answer to
 "where does this service live right now?", then Compose-first has preserved
 readability without yet preserving distributed request truth.
 
+That distinction matters because it blocks a very common self-deception:
+
+- the runtime is still readable
+- the repo has a clear idea for shared placement truth
+- therefore the architecture is only one implementation step away from being
+  honest
+
+Maybe.
+But the user's frustration is specifically with systems that are always "one
+more glue layer away" from no longer requiring private reconstruction.
+This page should not help repeat that pattern.
+
 ## 3. Traffic truth
 
 Questions answered:
@@ -295,6 +346,16 @@ It is also the easiest layer to over-credit emotionally.
 Once a stack has Traefik, auth, middleware, failover helpers, and multiple
 public nodes, readers start granting it missing truth by intuition.
 This page has to keep refusing that gift.
+
+It also has to refuse a subtler lie:
+
+- if enough ingress machinery exists, then the remaining problem must mostly be
+  cleanup
+
+That is not what the evidence says.
+The remaining problem is still semantic ownership of the bad-day request path.
+That is a deeper problem than "proxy cleanup," and the docs should keep saying
+so.
 
 ## 4. Failure truth
 
@@ -367,6 +428,21 @@ can interpret away after the fact.
 
 The repo is not standing still.
 It is already trying to build the missing middle around Compose.
+
+That sentence should not be read as quiet reassurance.
+Building the missing middle around Compose is only a success if the resulting
+truth becomes:
+
+- current enough
+- inspectable enough
+- durable enough
+- system-owned enough
+
+to remove private operator completion from the normal request path.
+
+If it merely spreads the same burden across more moving parts, then the repo is
+not converging on a solution.
+It is converging on a harder-to-audit version of the same problem.
 
 ## 1. Modular includes instead of one impossible file
 
@@ -468,6 +544,16 @@ the repo may accumulate just enough helper intelligence that the docs start
 speaking as if the missing truth has already been externalized when it has only
 been spread across more components.
 
+There is a third danger:
+
+- the helper layer becomes good enough to sound platform-like
+- the docs start grading it on sophistication
+- the user is still asking the same wrong-node question in slightly cleaner
+  language
+
+That is how a Compose-first strategy can fail while still looking productive.
+The page has to stay hostile to that failure mode.
+
 That would be dishonest for exactly the same reason premature Kubernetes
 surrender can be dishonest:
 
@@ -535,6 +621,17 @@ before the precise shape of the problem has been fully named.
 That is why this page should keep feeling slightly unsatisfied.
 Compose-first is only honest if it preserves the discomfort that the system
 still lacks one clean shared answer on the bad day.
+
+The most important phrase there is "one clean shared answer."
+Not:
+
+- one more helper
+- one more generated route
+- one more plausible recovery story
+
+If the system still needs multiple partial answers stitched together by someone
+who already knows how the architecture really works, then the repo is still on
+the wrong side of the user's complaint.
 
 That is why this page should not read like a defense of Compose as a forever
 answer.
