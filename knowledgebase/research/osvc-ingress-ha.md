@@ -47,6 +47,20 @@ This page is not allowed to:
   continuity are solved
 - use script detail as a substitute for passed failure drills
 
+## What still does not count as OpenSVC ingress proof
+
+The following still do not count as route-level closure:
+
+- a fallback YAML file being generated
+- peer hostnames existing in generated output
+- container labels being discoverable locally
+- OpenSVC membership being queryable
+- one successful local-first route on a calm day
+- elegant generator logic that still depends on unproven adjacent truths
+
+Generated config can be useful and still fail to prove the user's real
+wrong-node standard.
+
 ## Quick claim router
 
 If the question is:
@@ -119,6 +133,21 @@ not the same thing as system-owned wrong-node truth, because the generated
 result still depends on adjacent realities like DNS shape, east-west
 reachability, and preserved middleware meaning that the generator does not
 fully own.
+
+## What a real generator proof packet would need
+
+Before this generator could be described as proven failover rather than a
+serious bet, a packet would need to show:
+
+- the exact node that first received the request
+- that the requested service was absent locally
+- the generated route the node actually used
+- that the peer-specific hostname resolved and remained reachable
+- that middleware and auth meaning were preserved across the handoff
+- what failure was introduced and what behavior survived it
+
+Without that packet, this page proves design pressure and useful runtime logic,
+not full wrong-node closure.
 
 ## The dream this generator is trying to encode
 

@@ -96,6 +96,21 @@ The page only stays honest if every candidate remains tied to:
 - the worldview cost it would charge
 - the burden it would still leave operator-owned
 
+## What still does not count as orchestration research here
+
+The following still do not count as useful orchestration conclusions in this
+repo:
+
+- generic feature comparisons
+- benchmark or popularity rankings
+- "lighter than Kubernetes" as a standalone argument
+- assuming any scheduler is progress merely because it centralizes more truth
+- assuming static glue is acceptable because it can be templated cleanly
+- turning the user's frustration into ordinary product indecision
+
+This research only stays honest when each candidate is measured against the
+exact hidden burden it would remove and the worldview tax it would charge.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -176,6 +191,20 @@ The real sentence always has to be:
 - good for which missing truth
 - at what worldview cost
 - with what still left operator-owned
+
+## What a real orchestration promotion packet would need
+
+Before this research could justify promoting a whole candidate family, the
+packet would need to show:
+
+- the specific missing truth that the current runtime still cannot carry
+- the exact candidate layer that now owns that truth better
+- what wrong-node, drift, or failover behavior improved measurably
+- what operator reconstruction burden still remains afterward
+- what new control-plane, storage, or workflow burden was accepted
+
+Without that packet, this page should stay a decision filter, not a disguised
+verdict.
 
 ## What the user is actually rejecting
 

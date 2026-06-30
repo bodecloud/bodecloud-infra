@@ -96,6 +96,20 @@ This page is not allowed to prove:
 - that live node-local persistence is acceptable just because future HA plans
   exist
 
+## What still does not count as stateful evidence here
+
+The following still do not count as trustworthy stateful proof:
+
+- an endpoint answering over TCP
+- a durable-looking bind mount path existing
+- an application reconnecting once after a restart
+- a future HA note sitting beside a singleton live deployment
+- a proxy or ingress path staying up while authority stays singular
+- a service looking distributed from the outside while write truth stays local
+
+This page exists precisely because those weaker signals are easy to narrate as
+progress when the hard authority question is still unresolved.
+
 ## Evidence hierarchy for stateful claims
 
 | Claim type | Highest authority | Why it outranks others | It still does not prove |
@@ -231,6 +245,25 @@ because:
 - or the endpoint answers
 
 None of those things tells you whether authority stopped being singular.
+
+## What a real stateful evidence packet would need
+
+For this repo, a serious stateful packet would need to show:
+
+- who the writer or authoritative leader was before failure
+- what failure was introduced intentionally
+- how promotion, election, or recovery occurred
+- what storage substrate preserved the authoritative dataset
+- what clients observed during and after the event
+- what evidence proves continuity of authority rather than mere reachability
+
+Without that packet, the docs are only allowed to say:
+
+- "stateful dependency exists"
+- "stateful risk is acknowledged"
+- or "stateful hardening is planned"
+
+not "stateful HA is demonstrated."
 
 ## What the planning layer already knows
 

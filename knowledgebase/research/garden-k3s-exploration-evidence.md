@@ -58,6 +58,21 @@ This page also has to resist a very common overread:
 
 The current evidence does not support that jump.
 
+## What still does not count as Garden or k3s closure
+
+The following still do not count as serious completion in this branch:
+
+- strong HA wording inside branch-local status files
+- migration assets existing under `garden.io/`
+- anti-affinity or Longhorn templates existing
+- a cluster bootstrap working once in a partial environment
+- zero-SPOF claims that still sit beside repair or join notes
+- the branch feeling more modern than Compose
+
+Those all show real investment.
+They do not yet prove that this branch earned replacement status over the
+Compose-first runtime.
+
 ## Quick claim router
 
 Use this page for claims like:
@@ -86,6 +101,23 @@ repair, and storage truth become a major burden surface of their own.
 
 So the branch matters because it teaches what a stronger layer costs here, not
 because it has already delivered the user's full dream.
+
+## What a real Garden or k3s promotion packet would need
+
+Before this branch could be described as an earned future rather than high-value
+evidence, a promotion packet would need to show:
+
+- stable multi-node control-plane reality, not bootstrap-in-progress language
+- which hidden placement or failover burden the branch removed in practice
+- whether wrong-node request meaning improved, not just deployment structure
+- what storage and state authority story actually survived node loss
+- what new cluster tax the repo accepted in exchange
+
+Without that packet, the correct reading stays:
+
+- serious exploration
+- serious implementation pressure
+- still not sovereign runtime closure
 
 ## Why this branch matters at all
 
