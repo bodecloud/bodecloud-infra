@@ -11,6 +11,13 @@ has to survive contact with:
 
 Everything else is weaker evidence for live-runtime claims.
 
+That strength is exactly why this page is dangerous.
+Runtime inventories are where infrastructure documentation most often starts
+sounding useful before it has actually answered the operator's real question.
+Once a stack is broad enough, mere presence starts getting misheard as
+relief.
+This page has to keep interrupting that reflex.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -36,6 +43,11 @@ The user's complaint is not that too little exists.
 The complaint is that a lot already exists and still too much of the important
 truth can collapse back into private operator explanation once the bad day
 arrives.
+
+That sentence should govern the whole page.
+If the inventory makes the reader feel calmer without making the hidden
+operator burden materially narrower, the inventory has started performing
+reassurance instead of preserving truth.
 
 ## Strongest honest current answer
 
@@ -72,6 +84,11 @@ conclusion:
 
 This page exists to stop that jump.
 
+More bluntly:
+this page exists because "look how much is already here" is one of the main
+ways the ecosystem keeps dressing up partial answers as if they had finally
+become believable options.
+
 ## What still does not count as runtime evidence
 
 This page is where documentation inflation becomes especially tempting.
@@ -89,6 +106,12 @@ goal:
 Those facts prove the repo is serious and operationally dense.
 They still do not prove that the system, rather than the operator, owns the
 truth needed on the bad day.
+
+That difference is not pedantry.
+It is the whole emotional content of the project.
+The user is not asking for more evidence that the stack is substantial.
+The stack is already substantial enough to feel insulting when the final truth
+still lives in private operator memory.
 
 That is why partial presence is more dangerous here than simple absence.
 Absence tells the truth faster.
@@ -119,6 +142,11 @@ confidence:
 - presence gets mistaken for burden transfer
 - burden transfer gets narrated before it exists
 
+There is a harsher way to say the same thing:
+inventory is where a complicated stack starts trying to cash out dignity it
+has not yet earned.
+This knowledgebase should stay suspicious of that move on purpose.
+
 ## The root file is still a major infrastructure surface
 
 The root file is not just a launcher for fragments.
@@ -145,6 +173,13 @@ of treating the root file as a leftover artifact.
 That matters because the user is explicitly resisting systems that demote the
 last readable surface before proving the new hidden surface has earned the
 trust being demanded.
+
+One of the user's core complaints is that many ecosystems demand surrender of
+the last legible layer before proving the new hidden layer is actually more
+honest.
+The root Compose surface still matters because it lets the operator inspect a
+large part of reality without being forced to take a distributed fairy tale on
+faith.
 
 ## Root-owned networks
 
@@ -187,6 +222,13 @@ It is already surrounded by serious-sounding options.
 What it still lacks is an option that remains believable after wrong-node
 entry, backend loss, and stateful consequences stop being hypothetical.
 
+That is the real threshold.
+Not "does the stack resemble something platform-like?"
+Not "does it contain components respected by serious operators?"
+But "when locality fails or the request lands on the wrong node, does the
+system itself carry enough truth to avoid turning the operator back into the
+private interpreter of reality?"
+
 ## The live edge stack already present
 
 The edge fragment already includes:
@@ -217,6 +259,13 @@ accidentally narrate "serious ingress" as "solved cross-node request
 preservation."
 
 This runtime does not justify that leap.
+
+That inflation pressure is exactly why this page cannot stop at component
+enumeration.
+When readers see Traefik, TinyAuth, CrowdSec, DDNS, docker-gen, probes, and
+middleware, they naturally start filling in missing adulthood on the stack's
+behalf.
+This page has to keep refusing that generosity.
 
 That leap is one of the main things the knowledgebase is trying to outlaw:
 serious ingress is not the same thing as request-preserving truth ownership.

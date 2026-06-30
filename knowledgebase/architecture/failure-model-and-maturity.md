@@ -17,6 +17,11 @@ It is a problem of how often the ecosystem still offers something that sounds
 like maturity while leaving the most important explanation trapped in private
 operator memory.
 
+That is why ordinary maturity language is not enough here.
+Ordinary maturity pages assume the reader mainly wants orientation.
+This reader wants to know which parts of the system have actually stopped
+making them be the private adult in the room.
+
 That is the hidden insult this page has to keep visible:
 
 - the user is not short on technologies
@@ -78,6 +83,11 @@ This page exists to say no to that move.
 The operator's real complaint is that "basically" keeps cashing out into a
 moment where the system still needs private human explanation to stay honest.
 
+That is the part most infrastructure writing keeps sanitizing away.
+The user is not merely annoyed by incompleteness.
+The user is angry at how often incompleteness arrives wearing the costume of a
+nearly finished option.
+
 ## How to read maturity in this repo
 
 A maturity label here does not mean "how many components exist."
@@ -94,6 +104,10 @@ That makes the hidden metric very simple:
 
 If the answer is "a lot," the feature is still immature here even if the stack
 already looks sophisticated.
+
+Another way to say the same thing:
+the lane matures only when one fewer private translation step is required from
+the operator at the exact moment the nice diagram stops being enough.
 
 That is why this page should feel harsher than normal maturity language.
 In many projects, maturity means polish, breadth, or adoption.
@@ -131,6 +145,11 @@ That is not failure of documentation.
 It is the documentation refusing to pretend that naming the missing truths is
 the same thing as system-owning them.
 
+That refusal is part of the architecture discipline here.
+If the docs become too eager to celebrate "directionally close" surfaces, they
+start reproducing the exact thing the repo was created to push back on:
+respectable prose that still leaves the operator holding the last real answer.
+
 ## What still does not count as maturity
 
 This page needs a direct filter against maturity theater.
@@ -145,6 +164,11 @@ The following still do not count as a lane becoming materially more mature:
 
 In this repo, maturity only moves when a hidden reconstruction burden actually
 shrinks.
+
+That phrase should be treated as literal gating logic, not just good rhetoric.
+If the burden did not shrink, the lane did not mature.
+It may have become more instrumented, more legible, or more platform-like.
+Those are different claims and should stay different.
 
 The repo has to keep repeating that because the surrounding ecosystem keeps
 selling a softer story:
@@ -170,6 +194,10 @@ point to a packet that contains:
 - the boundary sentence naming what the lane still does not prove
 
 Without that packet, "more mature now" is still mostly atmosphere.
+
+Atmosphere is not neutral here.
+Atmosphere is how people get sold on options that still betray them under the
+first serious routing or failover question.
 
 That packet requirement is deliberately stricter than ordinary docs practice.
 The user is already surrounded by explanations that sound plausible before the
@@ -222,6 +250,13 @@ There is a deeper reason these three lanes are so easy to lie about:
 - then the hidden burden remains untouched underneath the relief
 
 This page has to be strong enough to interrupt that emotional shortcut.
+
+That shortcut matters because many surfaces in this repo already look mature
+enough to a casual reader.
+The risk is no longer that the system looks too primitive.
+The risk is that it looks adult enough to be overcredited before the
+wrong-node and backend-loss drills have actually transferred ownership of the
+hard truth.
 
 ## What "more mature than before" is allowed to mean
 

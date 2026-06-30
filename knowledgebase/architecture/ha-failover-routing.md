@@ -94,6 +94,12 @@ The dream is not just more reachability.
 The dream is that wrong-node entry stops being the moment where the system
 reveals it was still counting on human folklore.
 
+That sentence should govern the whole page.
+
+If a routing summary sounds sophisticated while still leaving wrong-node entry
+as the moment where the operator privately completes the story, then the page is
+still rewarding the wrong thing.
+
 ## What still does not count as HA or failover here
 
 This page should make the common overreads illegal.
@@ -111,6 +117,19 @@ All of those may be real progress.
 None of them are yet the user's actual benchmark unless they also reduce the
 need for private placement memory, preserve request meaning on the wrong node,
 and survive the failure that made fallback necessary.
+
+This is where normal HA vocabulary becomes actively misleading.
+
+A lot of ecosystems will happily call the above:
+
+- resilience
+- failover
+- high availability
+- distributed ingress
+
+The repo has to keep asking the harsher follow-up:
+
+- yes, but who still had to know the real answer first?
 
 They also do not satisfy the deeper complaint:
 
@@ -156,6 +175,16 @@ The packet requirement is stricter here because the user is already surrounded
 by too many plausible routing stories that fail exactly when they finally
 matter.
 
+This is also why route-class separation matters so much.
+
+The repo cannot afford summaries that do this:
+
+- one HTTP success becomes "failover works"
+- one TCP router becomes "stateful is covered too"
+- one helper artifact becomes "the missing middle is basically here"
+
+Those are exactly the overreads the user is already exhausted by.
+
 ## The current routing surface in the priority implementation
 
 The priority root runtime is the merged surface created by:
@@ -180,6 +209,13 @@ not just imagined in planning docs.
 The repo is not theorizing from an empty lab.
 It is already carrying enough live routing complexity that the missing burden
 feels offensive rather than hypothetical.
+
+That distinction matters because the frustration is not beginner confusion.
+
+The user is not staring at an empty repo asking abstract clustering questions.
+They are staring at a stack that is already serious enough to make the
+remaining hidden burden feel like an insult instead of an understandable early
+limitation.
 
 Within the edge fragment, the current routing surface includes:
 
@@ -259,6 +295,18 @@ The user has already seen enough marketed distribution.
 What is being demanded here is distribution that still tells the truth after
 the landing node is wrong.
 
+That last clause is the anti-theater core of the whole routing story.
+
+The page should keep readers from mistaking:
+
+- more nodes
+- richer ingress
+- more failover nouns
+
+for the much narrower achievement the user is actually looking for:
+
+- a wrong-node machine that can still tell the truth without human rescue
+
 ### 2. Local edge-stack health
 
 Question:
@@ -301,6 +349,11 @@ This distinction is one of the repo's most important anti-fake-option rules.
 Many systems become locally impressive enough that the user gets told the
 remaining gap is small.
 The user's whole point is that the remaining gap is the actual problem.
+
+This page should not let local sophistication become emotional closure.
+
+That is one of the easiest ways routing documentation starts lying while
+remaining technically accurate.
 
 ### 3. Locality truth
 
@@ -370,6 +423,15 @@ this route right now.
 That last sentence is one of the main reasons so many "peer-aware" options
 still feel fake to the user.
 Contact keeps getting sold as if contact had already become judgment.
+
+That is one of the cleanest expressions of the user's complaint in the whole
+routing layer.
+
+The user is tired of surfaces that can contact each other, ping each other,
+discover each other, or list each other while still not being able to answer:
+
+- should this exact request go there now?
+- and if it does, will it still mean the same thing?
 
 ### 5. Fallback-route persistence
 

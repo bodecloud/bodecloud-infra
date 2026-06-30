@@ -70,6 +70,13 @@ What the repo still does **not** prove is the hardest part of the path:
 
 That seam is the entire point of this page.
 
+It is also the place where many infrastructure explanations quietly become
+performances.
+
+They can stay concrete for several paragraphs, name the right components, trace
+the right happy path, and still dodge the only moment the user actually needed
+the system to stop leaning on them.
+
 ## What still does not count as a request-path answer
 
 This repo needs a harsher standard than "the path sounds traceable."
@@ -93,6 +100,17 @@ They also do not yet answer the emotional core of the user's question:
 
 > what do I gain from all this machinery if the bad day still ends with me
 > privately translating the topology for the machine?
+
+That is the sentence shallow walkthroughs almost always fail.
+
+They preserve:
+
+- packet movement
+- proxy order
+- visible components
+
+but not the question of who still had to supply the missing truth when the
+request stopped being local.
 
 ## What a real request-path proof packet would have to contain
 
@@ -136,6 +154,14 @@ That means preserving:
 Many systems preserve reachability.
 Far fewer preserve request meaning once the request lands on the wrong node or
 the local backend disappears.
+
+This page should therefore be read less like:
+
+- what hops exist?
+
+and more like:
+
+- at which hop does the system stop knowing enough on its own?
 
 ## Primary evidence for this page
 
@@ -188,6 +214,11 @@ More specifically:
 - step `2` is where the receiving node has to stop bluffing about what it knows
 - step `3` is where the system either becomes self-describing or exposes that
   the operator is still the real router
+
+That is the core retrieval lesson for this page.
+
+If a summary leaves the reader mainly thinking about ingress plurality, it has
+already lost the user's real benchmark.
 
 ## The request class we should trace first
 
@@ -324,6 +355,13 @@ The user is not fighting the local happy path.
 The user is fighting the moment a healthy-looking platform suddenly demands
 private operator translation as soon as locality stops being true.
 
+That is why local success has to be narrated almost defensively here.
+
+Local success is real.
+Local success is valuable.
+Local success is also the exact place where many platforms start sounding more
+complete than they really are.
+
 A locally served route does **not** prove:
 
 - another node could preserve the same request
@@ -357,6 +395,13 @@ That is already much stricter than:
 - "Traefik is present"
 
 The repo currently has meaningful pieces of this scene, but not closure.
+
+That has to remain the honest compression even if the walkthrough gets much
+more detailed.
+
+More detail is not the same as more owned truth.
+It only becomes more truth when the receiving node can answer the decisive
+questions from shared evidence instead of operator memory.
 
 This is also the step where the ecosystem's fake abundance becomes obvious.
 There are many tools that can improve one fragment of this list.

@@ -86,6 +86,11 @@ That is why this page cannot just be a balanced tradeoff page.
 Balanced tradeoff pages tend to normalize the very wound this repo is trying
 to preserve.
 
+That wound should remain explicit:
+the problem is not just contradiction.
+The problem is contradiction continually being sold back to the user as if it
+were already a meaningful menu of options.
+
 ## What still does not count as facing the contradictions honestly
 
 This page should reject a softer kind of self-congratulation too.
@@ -101,6 +106,11 @@ The following still do not count as confronting the contradictions well:
 Those things may be useful orientation.
 They still do not move the contradiction unless one hidden burden, one proof
 gap, or one false equivalence actually shrinks.
+
+This is where a lot of documentation dies in place.
+It becomes perceptive enough to describe the trap while still leaving the
+reader inside the trap.
+This repo should keep treating that as failure, not sophistication.
 
 This matters because the ecosystem is full of documents that are beautifully
 aware of the tradeoffs and still fundamentally useless once the user asks the
@@ -163,6 +173,13 @@ The contradiction is the user's actual lived experience of modern infra:
 - and still too few options that feel believable after wrong-node entry or
   backend loss becomes real
 
+That last line is the real center of gravity for this page.
+The user is not lacking words, patterns, stacks, platforms, or migration
+targets.
+The user is lacking options that survive contact with the exact point where
+"surely the system knows what to do" usually collapses into "you still know,
+personally."
+
 ## What this page is trying to prevent
 
 This page is not balancing tradeoffs for sport.
@@ -184,6 +201,12 @@ There is a fourth drift hiding inside the other three too:
   actual question
 
 This page has to keep fighting that too.
+
+That means the page cannot be content with being nuanced.
+It has to stay adversarial toward fake closure.
+The docs are not merely organizing ideas here; they are trying to stop the
+knowledgebase from becoming one more polished layer that helps partial answers
+look emotionally complete.
 
 ## Tension 1: Compose readability vs scheduler-grade expectations
 
@@ -234,9 +257,22 @@ That does not make Compose-first wrong.
 It makes Compose-first honest only if the repo admits the missing work instead
 of describing Compose as if it natively solved distribution.
 
+And the inverse trap matters too:
+it does not make the heavyweight answer automatically honest just because it
+admits more machinery.
+One of the user's real pressures is that "accept a bigger platform" too often
+functions as social intimidation rather than proof that the burden has really
+moved to the system.
+
 The user is not asking for prettier YAML.
 They are asking why "simple Docker" stops offering real options once
 distribution matters.
+
+That indictment of the space should stay legible in the docs.
+If the docs make the situation sound like a calm, mature progression from
+Compose to more serious tools, they erase the user's actual claim that the
+space keeps pretending to offer adulthood while repeatedly withholding
+something more basic: a truthful narrow option.
 
 And they are also asking why the usual answer to that question so often jumps
 straight from:
