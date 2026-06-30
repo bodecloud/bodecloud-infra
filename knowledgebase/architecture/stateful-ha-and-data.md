@@ -30,6 +30,11 @@ this repo.
 The edge can keep looking adult while the authority model underneath remains
 social, singular, and privately repaired.
 
+That means a better stateful explanation is not stateful relief.
+A cleaner service-class taxonomy is not preserved authority.
+A more comprehensive account of why stateful HA is hard is not one more
+service becoming trustworthy under failure.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -144,6 +149,18 @@ That is visible in concrete ways:
 
 That is why this page has to refuse flattering summaries.
 
+It also has to refuse a more intellectualized trap:
+
+- ingress progress and authority progress are now separated cleanly
+- the stateful caveats are now explicit
+- the docs can now name singular authority honestly
+- therefore the remaining gap starts sounding like implementation labor rather
+  than a still-unmet platform contract
+
+That reading is still too soft.
+The docs can become much sharper here while the live authority model remains
+just as socially repaired as before.
+
 ## Why ingress progress and stateful progress diverge so sharply
 
 This repo can honestly improve ingress before it earns honest stateful HA.
@@ -195,6 +212,15 @@ That is the phrase to keep in mind:
 social control plane.
 
 It explains why many "HA-looking" answers still fail the user's standard.
+
+Keep the corollary explicit:
+
+- better stateful humility is not stateful HA
+- better stateful warnings are not stateful HA
+- better stateful evidence routing is not stateful HA
+
+Those changes stop the repo from lying.
+They still do not move authority, promotion, or rediscovery into the system.
 
 ## Service-class reality check
 
@@ -256,6 +282,11 @@ What is not enough:
 - healthchecks
 - a restart policy
 - "could be moved elsewhere later"
+
+That last phrase matters because "could be moved elsewhere later" is one of
+the main ways modern infra asks the operator to subsidize a fake present tense.
+Potential portability is not current authority survivability.
+Future promotion playbooks are not present failover dignity.
 
 ## What the user actually wants from the stateful story
 

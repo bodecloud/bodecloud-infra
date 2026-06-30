@@ -18,6 +18,14 @@ Once a stack is broad enough, mere presence starts getting misheard as
 relief.
 This page has to keep interrupting that reflex.
 
+That warning needs to be taken one step further here.
+Better inventory fidelity is not runtime relief.
+Better recollection of what already exists is not the same thing as the
+runtime owning one more decisive truth under pressure.
+The page can become more comprehensive and still leave the user with the same
+bad-day humiliation if the decisive sentence still ends in private operator
+memory.
+
 The user already has the broad stack.
 What they still do not have is confidence that the stack itself, rather than
 the operator, owns the decisive truth when a request lands on the wrong node
@@ -102,6 +110,15 @@ conclusion:
 
 This page exists to stop that jump.
 
+It also has to stop the more intellectualized version of the same jump:
+
+- the inventory is now comprehensive
+- the files are now cross-linked correctly
+- the runtime can now be narrated coherently
+- therefore the remaining gap must be mostly implementation follow-through
+
+That conclusion is still too soothing.
+
 It exists because this repo is already past the stage where absence is the
 main problem.
 The danger now is partial presence being socially overread as one more burden
@@ -148,6 +165,16 @@ That is why partial presence is more dangerous here than simple absence.
 Absence tells the truth faster.
 Partial presence is how a stack starts sounding complete before it has actually
 removed the humiliation threshold the user keeps pointing at.
+
+This page therefore should not merely answer "what exists?"
+It also has to keep answering:
+
+> what exists here that the runtime itself can cash out on the bad day without
+> borrowing the last explanation from the operator?
+
+If that answer is still narrow, then the inventory is still mostly describing
+machinery adjacent to the dream rather than machinery that has already earned
+it.
 
 ## What the operator still has to know privately today
 

@@ -39,6 +39,12 @@ bad-day scene instead of around it:
 - the operator still had to remember what the system itself was supposed to
   know
 
+That is why a more detailed walkthrough is not itself one more runtime gain.
+Better request narration is not preserved request meaning.
+Better path tracing is not wrong-node dignity.
+This page should stay suspicious of its own usefulness for exactly that
+reason.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -95,6 +101,15 @@ They can stay concrete for several paragraphs, name the right components, trace
 the right happy path, and still dodge the only moment the user actually needed
 the system to stop leaning on them.
 
+There is now a subtler trap too:
+
+- the walkthrough names the seam precisely
+- the handoff problem is easy to describe
+- packet movement and service meaning are carefully separated
+- therefore the remaining problem starts sounding operationally narrow
+
+That move is still too generous.
+
 That is why this page cares less about hop count than custody of truth.
 The missing thing is not movement.
 The missing thing is trusted meaning at the wrong node.
@@ -107,6 +122,9 @@ That is also why a better walkthrough is not itself one more proof class.
 The docs can now reconstruct this seam with much more fidelity than before.
 That does not mean the live system has already moved the seam.
 It only means the repo has become better at refusing to hide it.
+
+That is a documentation win.
+It is not yet a runtime win.
 
 ## What still does not count as a request-path answer
 
@@ -181,6 +199,15 @@ For a stateless protected HTTP route, that packet would need artifacts like:
 
 Without a packet like that, a clean walkthrough is still analysis, not route
 ownership proof.
+
+It is worth keeping one more boundary explicit:
+
+- a better walkthrough may improve operator comprehension
+- a better walkthrough may improve future drill design
+- a better walkthrough may reduce ambiguity in the site
+
+None of those changes by themselves prove that the platform preserved one more
+request honestly when locality failed.
 
 ## Read this page with the correct standard
 

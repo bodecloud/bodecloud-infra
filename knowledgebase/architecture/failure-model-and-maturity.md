@@ -22,6 +22,12 @@ Ordinary maturity pages assume the reader mainly wants orientation.
 This reader wants to know which parts of the system have actually stopped
 making them be the private adult in the room.
 
+That means a better maturity model is not itself maturity.
+A clearer lane map is not one more solved lane.
+A sharper failure taxonomy is not one more trustworthy option.
+This page has to keep resisting the comforting thought that the hard part is
+now mostly sequencing because the repo can finally explain the pain well.
+
 That is the hidden insult this page has to keep visible:
 
 - the user is not short on technologies
@@ -96,6 +102,13 @@ runtime may still be leaving the same decisive completion step in the
 operator's head.
 
 This page has to keep interrupting that feeling.
+
+That interruption has to apply to the documentation surface too.
+If a reader walks away thinking "at least the repo now really understands the
+maturity problem, so the rest is mostly execution," then this page has become
+too calming.
+Understanding the maturity problem matters.
+It is still not a maturity promotion.
 
 That is the part most infrastructure writing keeps sanitizing away.
 The user is not merely annoyed by incompleteness.
@@ -199,6 +212,14 @@ That difference is one of the hardest honesty rules in the whole site:
 - more platform-like is not the same as more system-owned
 - more system-owned is not the same as more trustworthy
 - more trustworthy in one lane is not the same as global maturity
+
+Add one more boundary explicitly:
+
+- better maturity honesty is not lane maturity
+
+That distinction matters because this repo is now capable of producing better
+honesty faster than it can produce better runtime ownership.
+The first gain should not be allowed to impersonate the second.
 
 The repo has to keep repeating that because the surrounding ecosystem keeps
 selling a softer story:
