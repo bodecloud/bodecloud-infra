@@ -57,6 +57,13 @@ This page answers the recurring question:
 > no-Swarm-by-default, local-first-then-peer-forward, wrong-node-survival
 > dream, and which files only support that dream indirectly?
 
+The shortest non-evasive answer is:
+
+- yes, those files point at the same wound
+- no, they do not carry equal authority about it
+- and pretending they are interchangeable is one of the easiest ways to make
+  the repo sound more solved than it is
+
 That question matters because a contributor can read the right files and still
 misread the repo if they do not know what each file is allowed to prove.
 
@@ -152,6 +159,14 @@ The shortest honest answer is:
 - [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules)
   is mostly Compose-authoring discipline and should not be overpromoted into
   distributed-systems authority
+
+The compression of that answer should stay brutally simple:
+
+- `copilot-instructions.md` explains the dream directly
+- `README.md` keeps the repo from overclaiming that dream
+- `AGENTS.md` keeps the discussion attached to the priority runtime
+- `.cursorrules` mainly stops bad Compose habits from making the dream even
+  harder to assess honestly
 
 Those files are aligned.
 They are not equal.
@@ -296,6 +311,13 @@ If someone says ".cursorrules explains the distributed architecture" or
 "AGENTS.md is where the anti-SPOF dream really lives," the repo has already
 started flattening authority across the wrong surfaces.
 
+The same is true in the softer version:
+
+- if someone says "they all basically explain the failover idea"
+- and does not immediately qualify that statement by truth class
+- the repo has already started to blur dream authority, runtime anchoring, and
+  authoring discipline into one counterfeit voice
+
 And if someone says "they all basically say the same thing," that is usually a
 sign the custody lines have already been blurred.
 
@@ -394,6 +416,13 @@ the correct short answer is:
 - `AGENTS.md`: only partially, mostly by anchoring the real runtime surface
 - `.cursorrules`: mostly no, except where stricter Compose hygiene prevents
   fake resilience stories from getting even easier to write
+
+If the answer gets compressed even further, it should become:
+
+- yes, but not equally
+- the architecture dream lives in `copilot-instructions.md`
+- the runtime anchor lives in `AGENTS.md`
+- the hygiene pressure lives in `.cursorrules`
 
 That answer should be treated as the default compression of the authority map.
 
