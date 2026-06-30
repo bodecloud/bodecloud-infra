@@ -30,6 +30,17 @@ It becomes dishonest when:
 
 This page is the repo's claim firewall against those upgrades.
 
+This page therefore has to behave like a proof router, not just a proof list.
+
+For each claim it should force four questions:
+
+1. what exact dream fragment is being claimed
+2. what exact proof class is required before that fragment may be narrated more
+   strongly
+3. what weaker evidence classes must be explicitly refused
+4. what part of the dream would still remain unproven even after the drill
+   passes
+
 It is also where the repo tries to stop doing the documentation equivalent of
 answering the wrong question well.
 
@@ -161,6 +172,12 @@ The repo needs harsh proof language because soft proof language is how fake HA
  gets normalized.
 
 Use these proof classes consistently.
+
+There is also an ordering rule:
+
+- never narrate a claim using a stronger proof class than the strongest drill
+  actually earned
+- always state the next unclosed ceiling
 
 ### `Intent only`
 
@@ -305,6 +322,9 @@ Another way to read the table below is:
 - which claims actually reduce the operator's reconstruction tax
 - which claims only decorate the same tax with better tooling
 
+That means the table should not be read as feature progress first.
+It should be read as burden-relocation progress first.
+
 | Claim | What the claim really means | Current proof class | Strongest current evidence | Exact next drill | What that drill still would not prove |
 | --- | --- | --- | --- | --- | --- |
 | Any healthy public node can be the first hop | More than one node can intentionally receive ingress without one sacred public reverse-proxy box | Config present | Cloudflare plurality and anti-sacred-node intent are explicit in [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md), [README.md](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md), and the root runtime surface | Force one representative HTTP route through at least two distinct public node-entry targets and correlate edge logs on both nodes | That the receiving node can preserve the request correctly when the service is not local |
@@ -326,6 +346,13 @@ Another way to read the table below is:
 The repo should not speak about drills as if "tested" were one thing.
 There are levels, and the whole point is to stop later levels from being
 implied by earlier ones.
+
+The public language rule should be mechanical:
+
+- if the strongest drill was level 2, do not speak with level 3 nouns
+- if the strongest drill was level 3, do not imply level 4 survivability
+- if the strongest drill was level 4, do not imply level 5 semantic parity
+- if the strongest drill was level 5, do not imply level 6 stateful honesty
 
 ### Drill level 0: architecture paper
 
@@ -442,6 +469,14 @@ That is what turns proof from a badge into an explanatory surface.
 The repo does not only need to know that something passed.
 It needs to know what private burden the passing proof actually removed.
 
+The winning question after any drill is not only:
+
+- did it pass?
+
+It is:
+
+- which reason for operator reconstruction just became less true?
+
 That last sentence is a stricter requirement than it sounds.
 A drill is stronger here when it removes one more reason the operator has to
 silently complete the architecture from memory after the command finishes.
@@ -457,6 +492,9 @@ roadmap.
 
 It is optimized for recovering the missing truth layer, not for maximizing how
 many green checks can appear early.
+
+That optimization should stay visible because it explains why the proof order
+is intentionally narrower and less flattering than a normal demo roadmap.
 
 ### 1. Prove one representative stateless HTTP route
 
@@ -504,6 +542,11 @@ that surface must actually explain during wrong-node or backend-loss pressure.
 This ordering is useful precisely because it resists a common simplification:
 that a registry surface should be discussed abstractly before the repo has
 proved what that surface must be able to explain under stress.
+
+The page should keep reminding the reader:
+
+- a registry file is not yet a trusted truth layer just because it exists
+- it becomes one only when a stressed route can be explained from it
 
 ### 5. Move into one stateful class at a time
 

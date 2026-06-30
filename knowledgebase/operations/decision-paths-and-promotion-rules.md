@@ -42,6 +42,16 @@ It has to stop the repo from repeating the broader ecosystem pattern:
 
 If a path still ends there, then for this repo it is not a real option yet.
 
+This page therefore needs to behave less like an opinionated roadmap and more
+like a promotion gate.
+
+Every path below should answer:
+
+1. what hidden burden it is trying to relocate
+2. what proof class would justify choosing it
+3. what proof class is still too weak
+4. what unchanged burden would reveal that the path is mostly theater
+
 ## What a useful decision page has to prevent
 
 The user’s real frustration is not lack of information.
@@ -116,6 +126,20 @@ This repo does not need more semi-answers that sound structurally different
 while preserving the same semantic gamble around wrong-node traffic, backend
 loss, or stateful authority.
 
+## The promotion grammar this repo should use
+
+Before any path gets recommended as the next serious move, the docs should be
+able to state four things plainly:
+
+- current dominant pain:
+  which specific truth burden is still too socially held
+- current layer ceiling:
+  what the present layer cannot honestly own without becoming fake
+- smallest honest promotion:
+  which narrower next layer directly owns that burden
+- non-solution warning:
+  what that promoted layer still does not solve and must not be credited for
+
 That question should be read together with the repo's strongest architecture
 intent surface:
 [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md).
@@ -160,6 +184,23 @@ That is why this page should feel biased against promotion theater.
 The user is not asking for the next step that sounds mature.
 The user is asking for the next step that makes the wrong-node and hidden-truth
 problem less true.
+
+## What is too weak to justify promotion
+
+Do not promote a path just because:
+
+- the current helper layer is embarrassing to summarize cleanly
+- the surrounding ecosystem treats a larger platform as the default grown-up
+  answer
+- the stack already contains enough nouns to make a scheduler feel inevitable
+- a route worked once in a happy-path demo
+- a stateful service is reachable across the network
+- a generated config looks more dynamic than the old one
+
+Those can all coincide with the same deeper failure:
+
+the operator still privately owns the truth the promoted layer claims to have
+relocated.
 
 ## The deepest decision rule
 
@@ -222,6 +263,9 @@ This is the path most aligned with the user's deepest request:
 not "never build a control plane,"
 but "build the smallest truth-owning layer that actually stops the fake-option
 cycle."
+
+This page should therefore treat Path 1 as the baseline burden-relocation test
+for the whole repo.
 
 That last clause has to stay sharp.
 If this path produces a placement file, a sync helper, a route generator, and a
@@ -375,6 +419,8 @@ This path earns itself when the narrow pain is actually narrow.
 It becomes fake when its first-hop improvements get narrated as if the whole
 service surface became request-preserving.
 
+That fake-upgrade warning is what keeps this path honest.
+
 ### What this path solves well
 
 - strong first-hop or critical infra failover semantics
@@ -419,6 +465,13 @@ embarrassing to explain.
 Embarrassment is not evidence.
 The scheduler should be promoted because it owns a named pain more honestly,
 not because the existing story became hard to narrate cleanly.
+
+This is also where the repo should ask a harsher follow-up:
+
+- did the helper layer become complicated because it was genuinely paying down
+  the right truth burdens?
+- or did it become complicated because the repo kept refusing to name a real
+  scheduler pain until too late?
 
 ### What this path solves well
 
@@ -481,6 +534,9 @@ This repo should never promote here just because multi-node Docker feels
 annoying.
 That is not a sufficient reason.
 
+This is the highest-risk path for documentation fraud because it can absorb
+many unresolved burdens into broader platform rhetoric.
+
 The earned reason would have to sound much more specific:
 
 - explicit truth layers are understood
@@ -521,6 +577,10 @@ It is acceptable for:
 
 Uniformity is not the goal.
 Honest service-class-specific correctness is.
+
+That unevenness is not weak architecture discipline here.
+It is the repo refusing fake generalization before the proof and ownership
+semantics for each stateful class have actually diverged in public.
 
 This page should stay willing to look uneven if unevenness is the more honest
 state.

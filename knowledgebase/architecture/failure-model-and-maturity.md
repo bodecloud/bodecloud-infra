@@ -20,6 +20,13 @@ infrastructure habits at the same time:
 
 This page exists to stop those upgrades from happening for free.
 
+It also has to do something more procedural than older maturity pages:
+
+- define which domain is being judged
+- say which truth layer is actually live there
+- name the hidden operator tax still present there
+- name the next honest maturity step without narrating two steps at once
+
 It also exists to stop a subtler failure:
 
 the stack can become more mature in vocabulary faster than it becomes mature in
@@ -78,6 +85,12 @@ The labels are just compression.
 The real content is whether the human operator is still silently performing the
 missing control-plane work.
 
+That means each row should be interpreted as:
+
+- what the system itself owns
+- what the operator still owns
+- what the docs must not quietly credit to the system yet
+
 That last rule matters because this repo is especially vulnerable to maturity
 theater.
 
@@ -131,6 +144,9 @@ That sentence should color every row in the matrix.
 The opposite of maturity in this repo is not emptiness.
 It is sophistication that still depends on folklore.
 
+This page should therefore be treated as a matrix for folklore-removal as much
+as for feature presence.
+
 That is the central reading rule for this matrix.
 
 It should also be used against the rest of the docs:
@@ -158,6 +174,10 @@ They are either:
 The point of the matrix is not merely to rank components.
 It is to identify exactly where the repo is still trapped between those two bad
 choices.
+
+Some futures really do offer new truth ownership.
+Others mostly offer a better story about the same hidden burden.
+This matrix exists to keep those two futures from looking equally mature.
 
 That means the matrix has to stay tied to bad-day behavior.
 
@@ -258,6 +278,15 @@ This repo does not need prettier maturity language.
 It needs language that preserves where the system is still split across live
 runtime truth, planned truth, and operator-held truth.
 
+There is also a practical reading rule:
+
+- `Present` means materially live in a recognizable form, not emotionally
+  solved
+- `Partial` means some burden relocated, important burden still socially held
+- `Planned` means the repo knows the missing truth, but the runtime does not
+  own it yet
+- `Absent` means important to the dream, not materially system-owned today
+
 This is another place where the docs should act more like held-out test cases
 than like architecture marketing.
 
@@ -266,6 +295,21 @@ The operator-held truth part is the most important one.
 Most infrastructure matrices ignore it.
 This one cannot, because operator reconstruction tax is one of the main things
 the repo is trying to eliminate.
+
+## What should move a row upward
+
+A row should move upward only when:
+
+- a stronger proof class was earned for the relevant domain
+- the system now owns more of the explanation for success under stress
+- the operator has to privately reconstruct less of the governing truth
+
+A row should not move upward merely because:
+
+- another helper exists
+- another future was documented
+- another path sounds more serious
+- another layer can now be named
 
 ### Confidence levels
 
@@ -356,6 +400,11 @@ The repo is not confused about what it wants.
 It is still trying to earn the right to say that the runtime itself understands
 that desire instead of only the humans around it.
 
+That is close to the core maturity test for the whole knowledgebase:
+
+is the runtime itself becoming a better explainer of the dream, or are the
+humans merely becoming better explainers around the runtime?
+
 ### 2. Edge sophistication is ahead of shared truth
 
 Ingress, auth, middleware, and observability are already serious.
@@ -370,6 +419,9 @@ pieces but not enough trustworthy options.
 The user's frustration is not "there are too few tools."
 It is "there are too many tools that still fail to remove the same hidden human
 burden."
+
+That is why real components alone do not normalize these rows.
+Real components can still participate in fake-option maturity theater.
 
 ### 3. HTTP maturity is ahead of stateful maturity
 
@@ -409,6 +461,8 @@ This point matters enough to repeat plainly:
 if the system still needs the operator to remember the truth before the system
 can act correctly, then the operator is still a SPOF even if several machines
 are technically online.
+
+That line should be treated as the matrix's harshest invariant.
 
 ## What to trust today
 
