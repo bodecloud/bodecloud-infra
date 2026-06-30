@@ -14,11 +14,23 @@ That has to be answered like an operator tracing a real path through a real
 stack.
 If it turns into generic architecture prose, it stops being useful.
 
+## Strongest honest current answer
+
+The repo already has enough edge machinery to describe a serious request path.
+
+It does **not** yet prove the hardest part of the request path:
+
+- that a healthy receiving node which lacks the service locally can preserve
+  the request from shared current truth instead of forcing the operator to stay
+  the hidden control plane
+
+That is the seam this page exists to expose.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
 
-- reconstruct the intended request contract from live repo evidence
+- reconstruct the intended request contract from repo-native sources
 - show which components already participate in that contract
 - identify the exact seams where the request story becomes aspirational
 - explain why wrong-node success is stricter than "a proxy answered"
@@ -28,8 +40,8 @@ This page is not allowed to:
 - claim generic wrong-node success today
 - treat a plausible walkthrough as runtime proof
 - merge HTTP, TCP, and stateful failover into one maturity story
-- imply that middleware, auth, locality, peer eligibility, and app correctness
-  have all already survived a real failure drill
+- imply that middleware, auth, locality, peer eligibility, and application
+  behavior have already survived a real failure drill
 
 ## Read this page with the right standard
 
@@ -50,25 +62,26 @@ the local backend disappears.
 
 ## Primary evidence for this page
 
-Use these files together:
+Use these together:
 
 1. [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
 2. [`compose/docker-compose.coolify-proxy.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.coolify-proxy.yml)
-3. [`../research/ingress-and-failover-evidence.md`](../research/ingress-and-failover-evidence.md)
+3. [Ingress and Failover Evidence](../research/ingress-and-failover-evidence.md)
 4. [`ha-failover-routing.md`](ha-failover-routing.md)
 5. [`failure-model-and-maturity.md`](failure-model-and-maturity.md)
 6. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+7. [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 
-Those six together let this page answer:
+Those together let this page answer:
 
-- what the dream is
-- what the live edge surface is
-- where the live edge surface still stops
+- what the target contract is
+- what the live edge surface really is
+- where the live edge story still stops
 
-## The request contract this repo is trying to earn
+## The target request contract
 
-The clearest repo-native contract is the one already stated in
-[`copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md):
+The clearest repo-native contract is already stated in
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md):
 
 ```text
 User -> Cloudflare DNS -> any surviving node
@@ -100,7 +113,7 @@ The concrete hostname is not the point.
 The class is:
 
 - public HTTP
-- auth-protected or middleware-bearing
+- auth-bearing or middleware-bearing
 - possibly local on one node and remote on another
 
 That is the most revealing request class for the user's actual dream.
@@ -129,7 +142,7 @@ The real question is not whether the parts exist.
 It is which parts already carry shared truth and which parts still depend on
 assumptions that disappear on the bad day.
 
-## Walkthrough 1: the easy path the repo is most likely to support
+## Walkthrough 1: the flattering path the repo is most likely to support
 
 Scenario:
 
@@ -146,7 +159,7 @@ What this path likely means in today's repo:
 - middleware can plausibly execute on the local path
 - the target container can plausibly answer locally
 
-What this path still does not prove:
+What this path still does **not** prove:
 
 - that another healthy node could have answered the same request with the same
   behavior
@@ -173,7 +186,7 @@ For this scene to be honestly solved, node A must know all of the following:
 1. that the target service is not local
 2. which peer currently owns a valid instance
 3. whether that peer is healthy enough for this route class
-4. whether the auth and middleware meaning survive the handoff
+4. whether auth and middleware meaning survive the handoff
 5. whether the fallback path still exists after the failure that made fallback
    necessary
 
@@ -195,8 +208,8 @@ The current worktree gives meaningful pieces, but not the full contract.
 
 - no tracked root `services.yaml` or equivalent live placement registry is
   proven active
-- `docker-gen-failover` is specifically called out elsewhere as buggy because
-  it deletes routes on container stop
+- `docker-gen-failover` is specifically called out as buggy because it deletes
+  routes on container stop
 - peer eligibility rules are not yet proved as tracked shared truth
 - wrong-node success is not yet proved route-by-route
 - middleware and auth continuity across peer fallback are not yet proved
@@ -248,7 +261,7 @@ That is why this page has to keep classes separate:
 
 If those classes are merged, the docs become smoother and less honest.
 
-## What a real proof for this page would look like
+## What would count as real proof
 
 This page is not the proof.
 It should still define what proof would count.
@@ -265,12 +278,15 @@ For one stateless HTTP route, real proof would mean:
 Anything weaker than that may still be useful progress.
 It is not yet the user's real benchmark.
 
-## Strongest honest current answer
+## Bottom line
 
 The repo already has a serious request model and a serious edge surface.
 It also has enough explicit architecture intent to make the dream concrete:
-any-node entry, local-first service when honest, peer-forward when necessary,
-and no fake merging of HTTP, TCP, and stateful claims.
+
+- any-node entry
+- local-first service when honest
+- peer-forward when necessary
+- no fake merging of HTTP, TCP, and stateful claims
 
 What the repo still does not prove is the part the user actually keeps asking
 about:

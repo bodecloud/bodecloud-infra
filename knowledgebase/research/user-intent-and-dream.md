@@ -9,50 +9,37 @@ trying to answer too politely:
 For `bolabaden-infra`, this is not flavor text.
 It is the center of the project.
 
-If this page gets watered down, the rest of the docs become technically
-organized while still missing the real point:
+If this page gets watered down, the rest of the docs become organized while
+still missing the real point:
 
 - the user is not lacking tools
-- the user is not lacking product categories
-- the user is not lacking diagrams
-- the user is lacking an option that still feels honest after the request lands
-  on the wrong node
+- the user is not lacking architecture nouns
+- the user is not lacking platform categories
+- the user is lacking an option that still feels honest after the request
+  lands on the wrong node
 
 That last line is the whole reason this repository exists.
 
-## The shortest honest reading
+## Strongest honest current answer
 
-The user is not mainly trying to:
+The user is trying to build a personal cloud that keeps the causal legibility
+of Compose while behaving more like one request-preserving system at runtime.
 
-- spread some containers across multiple machines
-- make the stack sound more distributed
-- collect one more reverse proxy, scheduler, or cluster product
-- upgrade from "small homelab" to "serious homelab" language
+The user is not merely looking for:
 
-The real ask is much sharper:
+- "something between Compose and Kubernetes"
+- "lighter orchestration"
+- "better load balancing"
+- "more Docker tooling"
 
-> build a personal cloud that stays Compose-readable and operator-owned, but
-> behaves like one resilient system at request time, without paying a giant
-> scheduler tax before that scheduler has clearly earned itself.
+Those are adjacent descriptions.
+They are too weak.
 
-That sentence still needs one more cut.
+The sharper version is:
 
-The user is not only asking for "something between Compose and Kubernetes."
-That summary is too soft.
-There are many things "between" those nouns that still preserve the same
-private burden:
-
-- the operator still remembers where the service really lives
-- the operator still remembers which node is sacred
-- the operator still remembers which fallback is currently safe
-- the operator still remembers which stateful system is only pretending to be
-  resilient
-
-The dream is not "middleweight orchestration."
-The dream is:
-
-> remove sacred-node memory and wrong-node humiliation while preserving causal
-> legibility.
+> remove sacred-node memory and wrong-node humiliation without surrendering the
+> whole system to a heavyweight scheduler before that scheduler has clearly
+> earned itself.
 
 That is the real benchmark.
 
@@ -70,43 +57,51 @@ This page is not authoritative about:
 - whether any proposed control layer has already earned promotion
 - whether the tracked implementation already satisfies the dream
 
-This page is a demand reconstruction surface.
+This is a demand-reconstruction surface.
 It is not a runtime proof page.
 
-## Primary anchors for this page
+## Primary anchors for reconstructing the dream
 
-Use these files in this order when reconstructing the dream:
+Use these sources in this order:
 
 1. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
 2. [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
 3. [`archive-pressure-patterns.md`](archive-pressure-patterns.md)
-4. [`../architecture/instruction-surfaces-and-authority.md`](../architecture/instruction-surfaces-and-authority.md)
+4. the source archive threads that state the burden directly
 
 Why this order matters:
 
-- `copilot-instructions.md` is the clearest statement of the dream
-- `README.md` keeps the repo-level honesty boundary around that dream
-- `archive-pressure-patterns.md` preserves what kinds of "answers" the user
-  already considers fake
-- the authority page explains why not every instruction surface should be read
-  as architecture proof
+- `copilot-instructions.md` gives the clearest architecture-intent statement
+- `README.md` keeps the honesty wall around that dream
+- archive-pressure material preserves what kinds of "answers" the user already
+  considers fake
+
+The core contract from `copilot-instructions.md` is already explicit:
+
+- no central orchestrator by default
+- current-state truth preferred over scheduler-declared desired state
+- local-first serving
+- peer-forward fallback when the request lands on a healthy node that does not
+  host the service locally
+
+That contract is the dream this page is cross-examining.
 
 ## The dream in one concrete scene
 
-The best way to reconstruct the user's intent is not with tooling names.
-It is with a literal bad-day request:
+The cleanest way to reconstruct the user's intent is not through product names.
+It is through one bad-day request:
 
-1. Cloudflare sends a request to a healthy public node.
+1. Cloudflare sends traffic to a healthy public node.
 2. That node does not host the target service locally.
 3. The receiving node still knows what service the request means.
-4. The receiving node still knows which healthy peer is eligible now.
+4. The receiving node still knows which peer is eligible now.
 5. The request still preserves auth, middleware, and visible service meaning.
-6. The operator does not have to reconstruct the answer privately first.
+6. The operator does not have to privately reconstruct the answer first.
 
-That is the dream.
+That scene is the dream.
 
-If a proposed architecture still fails that scene, the user will correctly
-experience it as the same old system wearing better clothes.
+If a proposed architecture still fails that scene, the user is right to
+experience it as the same old system with nicer language.
 
 ## What the user wants the platform to feel like
 
@@ -121,7 +116,7 @@ The user wants the platform to feel like this:
 - fallback still feels like the same service, not a semantically degraded
   workaround
 - middleware and auth do not silently disappear during fallback
-- operator surfaces stay inspectable instead of becoming invisible cluster
+- operator surfaces stay inspectable instead of collapsing into cluster
   folklore
 - stateful systems are described much more harshly than stateless ones
 
@@ -130,9 +125,10 @@ It is the held-out evaluation surface for the whole repo.
 
 ## What the user keeps rejecting
 
-The user keeps rejecting two answer families.
+The archive and repo both make it clear that the user is rejecting two answer
+families at once.
 
-### Rejected family 1: static glue that still leaves truth in the operator's head
+### Rejected family 1: static glue that keeps truth in the operator's head
 
 Examples:
 
@@ -142,8 +138,8 @@ Examples:
 - failover stories that only work while a specific person still remembers the
   topology
 
-These answers fail because they preserve the hidden burden while improving the
-story around it.
+These fail because they preserve the hidden burden while improving the story
+around it.
 
 ### Rejected family 2: heavyweight worldview capture before it has earned trust
 
@@ -156,15 +152,15 @@ Examples:
 - platforms that solve one real pain while importing a much larger opaque
   control plane
 
-These answers fail because they often relocate the burden rather than making it
-more legible and more honestly owned.
+These fail because they often relocate the burden rather than making it more
+legible and more honestly owned.
 
 The dream refuses both extremes.
 
 ## The real complaint under the architecture language
 
 The user's recurring complaint is not just "self-hosting is hard."
-It is more specific:
+It is more precise:
 
 1. Docker and Compose feel empowering while the system is small.
 2. The moment multi-node routing and failover matter, truth starts leaking into
@@ -237,9 +233,10 @@ Every serious page in the knowledgebase should preserve all of the following:
 
 If a page becomes smoother by shrinking one of those things, it got worse.
 
-## Strongest honest current answer
+## Bottom line
 
 The dream is not ambiguous.
+
 The user wants a multi-node Docker system that behaves like one resilient
 platform at request time without defaulting to heavy orchestration, and they
 specifically want to stop acting as the hidden control plane when requests land

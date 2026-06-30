@@ -8,7 +8,37 @@ This page answers a very specific question:
 
 That is the "missing middle" in `bolabaden-infra`.
 
-It is not a brand name. It is a capability shape.
+It is not a brand name.
+It is a capability shape.
+
+## Strongest honest current answer
+
+The repo is searching for the smallest added layer that owns enough shared
+truth to make:
+
+- wrong-node recovery
+- peer selection
+- fallback-route persistence
+- and bad-day explanation
+
+system-owned instead of remembered.
+
+That layer is still incomplete.
+
+The repo already has:
+
+- a real Compose runtime
+- a strong edge layer
+- planning around failover helpers, secret sync, compose sync, and Headscale
+- research into OpenSVC, Nomad, k3s, and related alternatives
+
+What it does **not** yet have is a promoted shared-truth layer that cleanly
+answers:
+
+- where the service lives now
+- whether the peer is eligible now
+- whether the route survives now
+- whether the handoff preserves meaning now
 
 ## What this page is and is not allowed to prove
 
@@ -26,33 +56,10 @@ This page is not authoritative about:
 
 This page defines the wanted shape, not the final chosen implementation.
 
-## Strongest honest current answer
-
-The repo is searching for a layer that owns enough shared truth to make
-wrong-node recovery, peer selection, and bad-day explanation explicit, while
-still keeping `docker-compose.yml` legible and manually assignable.
-
-That layer is still incomplete.
-
-The repo already has:
-
-- real Compose runtime breadth
-- a strong edge layer
-- planning around failover helpers, secret sync, compose sync, and Headscale
-- research into OpenSVC, Nomad, k3s, and related alternatives
-
-What it does not yet have is a promoted shared-truth layer that cleanly
-answers:
-
-- where the service lives now
-- whether the peer is eligible now
-- whether the route survives now
-- whether the handoff preserves meaning now
-
 ## The wanted layer, in plain terms
 
 The missing middle is the smallest added surface that would make these things
-system-owned instead of remembered:
+system-owned instead of privately remembered:
 
 - service placement truth
 - peer eligibility truth
@@ -64,10 +71,26 @@ That layer does **not** need to be a full scheduler by default.
 It **does** need to stop private topology memory from being the real control
 plane.
 
+## Why the repo knows it needs this layer
+
+This is not an abstract architecture taste.
+The repo has already named the gap explicitly.
+
+The strongest current planning signals are in
+[`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md),
+which calls out all of these as still missing:
+
+- universal wrong-node success
+- a live tracked root `services.yaml` current-state registry
+- trustworthy route persistence under local backend failure
+- automated service failover between nodes
+
+Those are exactly the kinds of truths the missing middle would need to own.
+
 ## What disqualifies a fake middle answer
 
-A candidate is not the missing middle for this repo if it mainly does one or
-more of these:
+A candidate is **not** the missing middle for this repo if it mainly does one
+or more of these:
 
 - improves ingress reachability without solving wrong-node semantics
 - hides placement truth behind magic without making it inspectable
@@ -96,7 +119,7 @@ the missing layer likely needs these concrete capabilities.
 The repo repeatedly converges on `services.yaml` as the simplest mental model:
 
 - what service lives on which node
-- which ports or classes it exposes
+- which ports or route classes it exposes
 - whether there are multiple backends
 
 The important part is not the filename.
@@ -165,7 +188,7 @@ These are the main candidate families already present in planning or research.
 | --- | --- | --- |
 | lightweight registry plus helper agents | placement truth, sync, redeploy, failover logic | still must prove durability, eligibility, and semantic preservation |
 | OpenSVC-shaped ingress or service supervision | stronger service ownership and failover semantics | still needs proof that it removes burden instead of renaming it |
-| Nomad-style promotion | scheduling and health-aware placement | must earn its tax and not just widen the worldview |
+| Nomad-style promotion | scheduling and health-aware placement | must earn its worldview tax and not just widen the control plane |
 | k3s / Kubernetes promotion | broad cluster truth and scheduling machinery | may solve many layers, but the repo treats the cost and loss of legibility as real |
 | improved proxy automation alone | route generation and local edge behavior | not enough unless it owns placement, durability, and explanation too |
 
@@ -173,7 +196,7 @@ These are the main candidate families already present in planning or research.
 
 The missing middle has only been found when this scene stops feeling fragile:
 
-1. request lands on a healthy public node
+1. a request lands on a healthy public node
 2. that node does not host the service locally
 3. the node knows where the service lives now
 4. the node knows which peer is eligible now
@@ -183,3 +206,30 @@ The missing middle has only been found when this scene stops feeling fragile:
 
 Anything weaker may still be useful engineering.
 It is not yet the missing middle this repo is looking for.
+
+## The hidden risk this page should keep visible
+
+One of the most important risks in this repo is that the "small missing middle"
+quietly grows into a scheduler in disguise.
+
+That does not automatically make it wrong.
+It does mean the repo should stay explicit about when it starts paying:
+
+- worldview cost
+- control-plane opacity
+- operator legibility loss
+- central coordination assumptions
+
+The missing middle is only "middle" in an honest sense if the extra layer
+stays narrow relative to the exact missing truths it is supposed to own.
+
+## Bottom line
+
+The missing middle is not a product name waiting to be discovered.
+It is the smallest truth-owning layer that would stop the operator from being
+the hidden registry, hidden failover brain, and hidden explainer for wrong-node
+behavior.
+
+The repo already knows many of the capabilities that layer must own.
+It does not yet prove that one implementation has earned promotion as the
+answer.

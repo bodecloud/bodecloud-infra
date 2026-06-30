@@ -1,55 +1,68 @@
 # Operator Contract and Success Criteria
 
-This page defines the success contract for `bolabaden-infra`.
+This page defines the acceptance bar for `bolabaden-infra`.
 
-It exists because the rest of the knowledgebase can become smarter, more
-concrete, and more honest while still missing the one standard the user is
-actually forcing on the repo.
+It exists because the repo now has enough architecture language, enough
+research, and enough partially-real machinery that it would be very easy to
+sound thoughtful while still answering a smaller question than the user is
+actually forcing on the project.
 
-That standard is not:
+That smaller question is usually one of these:
 
-> is there an interesting Compose-first multi-node architecture here?
+- how do we make Docker feel more clustered?
+- how do we get better failover?
+- how do we keep Compose while scaling a little?
+- how do we document the moving parts more clearly?
 
-It is:
+Those are all adjacent.
+They are still smaller than the real benchmark.
 
-> does this stack start behaving like one request-preserving personal cloud
-> instead of several ordinary Docker nodes whose correctness still depends on
-> operator memory, lucky request placement, and fake closure?
+The real benchmark is:
 
-If this page gets soft, the whole site gets soft again.
+> can several ordinary Docker nodes start behaving like one request-preserving
+> personal cloud, without correctness depending on sacred-node memory, lucky
+> first-hop placement, or fake closure dressed up as HA?
+
+If this page gets soft, the whole knowledgebase gets soft with it.
 
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
 
-- define the acceptance bar the rest of the docs answer to
-- keep the user's real benchmark sharper than generic HA language
-- distinguish burden removal from architecture theater
-- state what "solved enough to feel different" has to mean
+- define the real acceptance bar the rest of the docs answer to
+- preserve the user's actual complaint instead of a calmer neighboring one
+- state what success has to feel like at request time and failure time
+- distinguish burden removal from better-narrated burden
+- keep stateless HTTP, protected HTTP, TCP, and stateful lanes under separate
+  honesty rules
 
 This page is not allowed to:
 
 - claim that the current runtime already satisfies the contract
-- use good acceptance language as substitute proof
-- flatten stateless, protected, TCP, and stateful classes into one bar
-- quietly shrink the dream into an easier neighboring goal
+- use sharper wording as substitute proof
+- flatten all service classes into one maturity bar
+- smuggle "mostly solved" language in through architecture tone
+- let first-hop plurality impersonate request preservation
+
+This page is the benchmark.
+It is not a completion certificate.
 
 ## Strongest honest current answer
 
-The repo now has a much sharper operator contract than ordinary self-hosting
-stacks usually write down, but the implementation still only partially meets
-it. The most important success criteria remain intentionally uncomfortable:
-wrong-node requests must stop feeling like a gamble, fallback must survive the
-failure that made fallback necessary, protected routes must preserve policy
-meaning, and stateful services must stop being described by marketing-level
-availability vocabulary.
+The repo now states the operator contract much more clearly than before, but
+the current runtime still meets it only unevenly. The acceptance bar remains
+deliberately uncomfortable: wrong-node requests must stop feeling like a
+gamble, fallback must survive the failure that made fallback necessary,
+protected routes must preserve the same policy meaning after handoff, and
+stateful systems must stop being described with availability language they
+have not earned.
 
-## The dream in one sentence
+## The dream in one exact sentence
 
 The operator wants several ordinary Docker nodes to behave like one
 request-preserving personal cloud while keeping Compose as the readable
-authoring surface and refusing fake HA, hidden sacred nodes, and heavyweight
-orchestrator tax unless that tax clearly removes real pain.
+authoring contract and refusing fake HA, sacred remembered entrypoints, and
+heavyweight orchestrator tax unless that tax clearly removes a real burden.
 
 That sentence is the center of gravity for the whole repo.
 
@@ -59,42 +72,70 @@ The user is not fundamentally asking for:
 
 - more YAML
 - more healthchecks
-- more load balancers
+- more reverse proxies
 - more dashboards
-- more platform brands
+- more "cloud-native" product names
 
 The recurring frustration is deeper:
 
-- Compose is readable until wrong-node routing matters
-- static glue keeps pushing burden back into operator memory
-- many "HA" answers stop at the first hop
-- many tools solve deployment without solving request preservation
-- many heavier orchestrators demand worldview surrender before proving they are
-  paying down the right pain
+- Compose feels straightforward until wrong-node behavior matters
+- many HA answers stop at the first hop and call it closure
+- many helper tools solve configuration churn without solving request
+  preservation
+- many orchestrator answers demand worldview surrender before they prove they
+  are paying down the right pain
+- many docs present several respectable options even when the real burden
+  stayed in the operator's head
 
-That is why the contract here is about lived operational relief, not just
-component inventory.
+That is why this contract is about lived operational relief, not component
+inventory.
 
-## What "solved" has to feel like
+## What success has to feel like
 
-This repo is not solved because:
+The project is not solved because:
 
-- a proxy runs
-- multiple A records exist
-- several nodes are online
-- a route template can be generated
+- a proxy is running
+- multiple public nodes exist
+- Traefik labels are present
+- a mesh is reachable
+- routes can be generated on the happy path
 
-It is solved only when the platform feels materially different at request time
-and failure time.
+It is solved only when the platform feels materially different during the two
+moments that expose the truth:
 
-The key phrase is "materially different."
-The user is not asking for a better narrated version of the same hidden burden.
+1. when the request lands on the wrong healthy node
+2. when the preferred backend disappears
+
+"Materially different" means the operator should stop feeling like the system
+quietly needs them to remember the topology in order to be coherent.
+
+That last clause matters.
+The user is not asking for a cleaner story about the same hidden burden.
 They are asking for the burden itself to move.
+
+## The negative benchmark
+
+Before listing acceptance criteria, keep the anti-benchmark visible.
+
+The platform has failed this contract if any of these remain true in the lane
+being discussed:
+
+- the safest answer to "what runs where right now?" is still private operator
+  memory
+- a healthy wrong node cannot tell whether the requested service is local
+- peer selection is mostly reachability plus hope
+- the fallback route disappears during the failure it was meant to absorb
+- a protected forwarded route no longer behaves like the same protected route
+- a stateful service is being called resilient because it is reachable, not
+  because authority and promotion are defined
+
+If one of those survives, the problem may be narrowed.
+It is not closed.
 
 ## The actual acceptance criteria
 
-Each criterion below is a real bar. The runtime can meet some and miss others.
-Nothing about one class of success upgrades the rest.
+Each criterion below is real.
+Success in one lane does not silently upgrade the rest.
 
 ### 1. Any-node entry stops feeling like a coin flip
 
@@ -104,52 +145,58 @@ The operator should be able to think:
 
 without secretly meaning:
 
-> I hope the right host happened to be chosen.
+> I hope the right machine happened to be chosen.
 
 Acceptance means:
 
 - more than one public node can receive the first hop
 - the docs do not confuse first-hop plurality with full request preservation
-- the next decision after first hop is system-owned more than memory-owned
+- the next decision after first hop is increasingly system-owned rather than
+  memory-owned
 
-### 2. Local service remains genuinely local
+What does **not** count:
 
-If the requested service already runs on the receiving node, the platform
-should serve it there.
+- multiple A records by themselves
+- a single successful route from a preferred node
+- vague language like "ingress is redundant now"
+
+### 2. Local service remains honestly local
+
+If the target service already runs on the receiving node, the platform should
+serve it there.
 
 Why this matters:
 
 - locality stays fast
 - locality stays inspectable
-- the stack does not invent fake cluster ritual just to look distributed
+- the platform does not invent unnecessary global indirection for aesthetics
 
 Acceptance means:
 
 - the receiving node can determine locality honestly
-- local serving is visible rather than accidental
-- the docs do not narrate global forwarding as if local-first no longer matters
+- local-first behavior is visible rather than accidental
+- the docs do not narrate peer forwarding as if locality stopped mattering
 
 ### 3. Wrong-node entry becomes survivable
 
-If the request lands on a node that does not host the target service locally,
+If the request lands on a healthy node that does not host the service locally,
 the user does not want to hear:
 
 - the proxy is healthy
 - the mesh exists
 - a peer hostname is reachable
-- the DNS was plural
+- the DNS is plural
 
 They want the request to still complete correctly because the receiving node
 can determine:
 
 - the service is not local
-- which peer currently hosts it
-- whether that peer is eligible now
-- whether the route needed for fallback survives the relevant failure
-- whether the user-visible service contract still means the same thing after
-  handoff
+- where it actually lives now
+- which peer is eligible now
+- whether the recovery path survives the relevant failure
+- whether the user-visible service meaning survives the handoff
 
-This is one of the central acceptance criteria of the whole repo.
+This is the central acceptance criterion of the whole repo.
 
 ### 4. Protected routes keep the same policy meaning after handoff
 
@@ -161,29 +208,30 @@ For protected surfaces, the following must survive peer handoff:
 - forward-auth behavior
 - middleware ordering
 - security filtering
-- headers and rewrites that matter to the route's meaning
+- headers, rewrites, and path behavior that define what the route actually is
 
 If a forwarded route still returns "something" but no longer behaves like the
-same protected route, that is not success.
+same protected service, that is not success.
 
 ### 5. Fallback survives the failure that made fallback necessary
 
 This criterion exists because the repo already knows about a specific trap:
 
-- `docker-gen-failover` is meaningful
+- `docker-gen-failover` is meaningful and directionally relevant
 - the master plan also records that it can currently delete routes when a
   container stops
 
-That means the system is not allowed to claim success unless the route required
+That means the system is not allowed to claim success unless the route needed
 for recovery remains present during actual backend loss.
 
-Fallback that evaporates under real failure is theater.
+Fallback that evaporates under the bad day is theater.
 
 ### 6. The control surface stays legible
 
-The operator is not refusing orchestration because they enjoy manual pain.
-They are refusing unreadable control planes that hide causal truth behind
-controller magic or stale metadata.
+The operator is not refusing heavier orchestration because they enjoy manual
+pain.
+They are refusing unreadable control planes that hide causal truth before they
+have clearly earned that hiding.
 
 Acceptance means an operator can still answer:
 
@@ -194,8 +242,8 @@ Acceptance means an operator can still answer:
 - which extra component is actually paying for itself?
 
 If the answer becomes "the controller knows" without inspectable proof, the
-repo has moved away from its purpose unless the extra complexity was clearly
-earned.
+repo has drifted away from its purpose unless the added complexity clearly
+removed a real burden.
 
 ### 7. Stateful services stop being lied about
 
@@ -211,16 +259,16 @@ The operator wants blunt answers:
 - what reconnect behavior should clients expect?
 - is the real failure domain still one local disk path?
 
-A stateful service is not "HA enough" merely because:
+A stateful surface is not "HA enough" merely because:
 
 - a global hostname exists
 - a TCP router exists
 - another node could theoretically be pointed at it
 - the container could be restarted elsewhere
 
-### 8. The operator can disappear briefly without the platform losing its mind
+### 8. The operator can disappear briefly without the platform forgetting itself
 
-One of the repo's deepest questions is:
+One of the deepest repo questions is:
 
 > if I disappear for a week, does the system still know enough about itself to
 > preserve a request, or did I only hide my own memory behind cleaner YAML?
@@ -237,13 +285,31 @@ It means the important truth should increasingly live in:
 and less in:
 
 - remembered sacred nodes
+- remembered route exceptions
 - remembered restart caveats
-- remembered hidden route exceptions
 - remembered stateful folklore
+
+## What absolutely does not count as success
+
+This repo needs an explicit "does not count" section because too many
+neighboring infrastructures keep getting congratulated for smaller wins.
+
+The following are useful, but they do not satisfy this contract by themselves:
+
+- "the dashboard is green"
+- "Cloudflare points at multiple boxes"
+- "Traefik is healthy"
+- "Headscale peers can see each other"
+- "a generated route exists while the backend is healthy"
+- "the service worked from the node that already hosted it"
+- "the orchestrator has a clean story about desired state"
+
+Those may be prerequisites.
+They are not closure.
 
 ## Service-class-specific success criteria
 
-The acceptance contract is not one size fits all.
+The operator contract is not one size fits all.
 
 ### Stateless HTTP
 
@@ -258,63 +324,69 @@ This is the lane most likely to earn the first serious proof.
 
 ### Protected HTTP
 
-Success means everything above plus:
+Success means everything stateless HTTP needs, plus:
 
-- auth parity
+- forward-auth continuity
 - middleware parity
-- visible policy parity
+- preserved security and rewrite semantics
+- user-visible behavior that still feels like the same service
 
-Protected-route success is stricter than plain reachability.
+This lane is harder than plain HTTP and should be narrated more harshly.
 
-### Raw TCP
+### TCP
+
+Success means transport claims are separated from stronger service claims.
+
+The docs must distinguish:
+
+- socket reachability
+- router correctness
+- client reconnect semantics
+- ownership semantics behind the routed endpoint
+
+TCP success is not automatically application success.
+
+### Stateful services
 
 Success means:
 
-- transport reaches the right backend
-- the receiving node does not lie about what class of recovery is happening
-- the docs keep transport proof separate from stateful correctness proof
+- authority is explicit
+- replication semantics are explicit
+- promotion behavior is explicit
+- failure and recovery sequence is explicit
+- data-loss and split-brain risks are named, not implied away
 
-### Stateful systems
+This is the harshest lane and should remain the slowest to earn stronger
+language.
 
-Success means:
+## What "good enough to feel different" really means
 
-- ownership is explicit
-- replication is explicit
-- promotion rules are explicit
-- storage truth is explicit
-- client reconnect expectations are explicit
-- failure drills are specific to that topology
+The operator does not need every lane solved before the platform feels more
+real.
+But the platform does need enough truth movement that the experience changes.
 
-This is the harshest lane and should stay the slowest to overclaim.
+The smallest meaningful psychological shift would be:
 
-## What definitely does not count as success
+1. current placement truth becomes inspectable
+2. one stateless HTTP wrong-node path is genuinely proven
+3. the same route is exercised through backend loss
+4. one protected route is compared across local and forwarded behavior
+5. the docs remain harsh about TCP and stateful surfaces
 
-The following are useful but insufficient:
+At that point the user could reasonably say:
 
-- `docker compose config --quiet`
-- clean merged Compose output
-- healthy local containers
-- happy-path public routing
-- peer reachability
-- "a route answered"
-- "the dashboard looked good"
+> this is still incomplete, but it is no longer just a better narrated pile of
+> ordinary Docker boxes
 
-Those may support narrower claims.
-They do not satisfy the operator contract by themselves.
+That is a real threshold.
 
-## The smallest honest path toward meeting the contract
+## The brutal final question
 
-The repo does not need a giant worldview import before it learns anything.
-The smallest honest path is narrower:
+Every future helper, registry, sync layer, agent, or orchestrator promotion
+should survive this exact question:
 
-1. expose live placement truth strong enough to answer "what runs where now?"
-2. prove one local stateless HTTP route on the correct node
-3. prove the same route through intentional wrong-node entry
-4. prove whether fallback survives actual backend loss
-5. compare protected-route policy continuity across that same path
-6. only then narrate stronger maturity for the HTTP lane
-7. keep TCP and stateful classes on their own harsher tracks
+> after this change, what hidden burden moved out of the operator's head and
+> into the system itself?
 
-That sequence is not the whole dream.
-It is the smallest sequence that would make the dream more true rather than
-just more articulate.
+If the answer is vague, the work may still be interesting.
+It has not satisfied the operator contract.
