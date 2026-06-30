@@ -8,16 +8,15 @@ Not:
 
 and not:
 
-> what components exist at the edge?
+> what containers exist at the edge?
 
 The real question is:
 
-> when a hostname is requested, what literally happens next, which runtime
-> surfaces own each step, what truth does the receiving node have on its own,
-> and where does the story stop being system-owned and turn back into private
-> operator memory?
+> when a hostname is requested, what literally happens next, what truth does
+> the receiving node own at each hop, and at what point does the explanation
+> turn back into private operator memory?
 
-That is the only honest way to talk about "multi-node without Swarm" in this
+That is the only honest way to document "multi-node without Swarm" in this
 repo.
 
 ## What this page is and is not allowed to prove
@@ -26,39 +25,37 @@ This page is allowed to prove:
 
 - the target request contract the repo keeps trying to earn
 - which live runtime components already participate in that contract
-- which parts of the request path are materially present in the current Compose
-  runtime
+- which route classes are materially present in the current Compose runtime
 - where proof stops today for wrong-node, peer-forward, and backend-loss
   behavior
-- why route class matters: plain HTTP, protected HTTP, TCP, and stateful lanes
-  are not one maturity surface
+- which private sentence still survives after each hop
 
 This page is not allowed to prove:
 
 - generic wrong-node success today
 - generic peer-forward correctness today
 - generic backend-loss survival today
-- that a plausible walkthrough is the same thing as a validated drill
+- that a plausible walkthrough equals a validated drill
 - that HTTP optimism transfers into TCP or stateful authority
 
 This is a decomposition page.
 It is not a green-check page.
 
-## The fake walkthrough this page is supposed to stop
+## The fake walkthrough this page has to stop
 
-The bad version of this page would do something like this:
+The bad version of this page would say:
 
 1. DNS resolves
 2. Traefik matches
 3. auth middleware exists
 4. helper containers exist
-5. therefore the distributed request story is mostly in place
+5. therefore the distributed request path is mostly in place
 
-That is exactly the walkthrough shape this page is meant to reject.
+That shape is exactly what this page exists to prevent.
 
-A detailed walkthrough can still be useless if it quietly skips the moment
-where the receiving node stops knowing and the operator starts privately
-completing the story.
+A walkthrough can be detailed and still be useless if it quietly skips the
+moment where the receiving node stops knowing and the operator starts finishing
+the sentence privately.
 
 ## The target contract
 
@@ -71,28 +68,23 @@ User -> Cloudflare DNS -> any surviving node
   service is remote -> forward to healthy peer that currently hosts it
 ```
 
-That contract is much stricter than:
+That is stricter than:
 
 - more than one public node exists
-- Traefik is running
-- some helper can generate fallback-looking config
-- a route can probably be proxied somewhere
+- the hostname matches
+- a helper can generate fallback-looking config
+- the route can probably be proxied somewhere
 
 The contract is about preserved request meaning after locality fails.
 
-That word "meaning" matters.
-The user is not merely asking for packets to arrive.
-They are asking for the wrong healthy node to stop acting stupid when it is not
-the owner node.
+## The one event the whole repo keeps circling
 
-## The one event this page is really about
-
-This entire repo can be reduced to one embarrassing event:
+The entire architecture pressure can be reduced to one embarrassing event:
 
 1. a public request lands on a healthy node
-2. the requested service is not actually local there
-3. the node must decide what to do
-4. the decision must be right for this route class
+2. the requested service is not local there
+3. that node must decide what to do
+4. the decision must be correct for the route class
 5. the explanation must exist outside one operator's head
 
 If a page, helper, or architecture proposal does not improve that event, it is
@@ -100,8 +92,8 @@ probably orbiting the problem instead of solving it.
 
 ## The live request actors already present now
 
-From the root runtime and active fragments, the present request path already
-contains these real actors:
+From the root runtime and active fragments, the request path already contains
+real actors.
 
 ### Public-entry and naming actors
 
@@ -111,19 +103,19 @@ contains these real actors:
 ### Main L7 execution actors
 
 - `traefik`
-- Traefik router/service labels across root and fragments
+- Traefik router and service labels across root and fragment files
 
 ### Policy and auth actors
 
 - `nginx-traefik-extensions`
 - `tinyauth`
-- protected routes using `nginx-auth@file`
 - `crowdsec`
+- protected routes using `nginx-auth@file`
 
-### Fallback-intent and helper actors
+### Fallback and helper actors
 
 - `docker-gen-failover`
-- generated dynamic output to
+- generated output to
   `${CONFIG_PATH:-./volumes}/traefik/dynamic/failover-fallbacks.yaml`
 
 ### Private reachability actors
@@ -131,13 +123,13 @@ contains these real actors:
 - `headscale-server`
 - `headscale`
 
-### Proof-candidate actors
+### Proof-candidate services
 
 - `whoami`
 - `wishlist`
 - `mkdocs`
 
-The runtime also already includes real routed service classes:
+The runtime also already contains real route classes:
 
 - simple stateless HTTP:
   - `whoami`
@@ -149,12 +141,13 @@ The runtime also already includes real routed service classes:
   - `code-server`
   - `dozzle`
   - `portainer`
-  - metrics/admin routes such as `prometheus`, `cadvisor`, `alertmanager`
+  - `prometheus`
+  - `alertmanager`
   - `mcpo`
-- TCP/stateful transport:
+- TCP transport:
   - `mongodb`
   - `redis`
-  - multiple `biodecompwarehouse*` routes
+  - `biodecompwarehouse*`
 - state-bearing app subgraphs:
   - `nuq-postgres`
   - `rabbitmq`
@@ -162,129 +155,123 @@ The runtime also already includes real routed service classes:
   - `qdrant`
   - Headscale SQLite authority
 
-So the request-path problem is not hypothetical.
-The missing layer matters because the runtime is already broad enough to make
-the missing truth socially expensive.
+So the request-path problem is not theoretical.
+The stack is already large enough that missing truth has become socially
+expensive.
 
-## The private sentence test for this page
+## The private-sentence test for this page
 
-At the end of any walkthrough section, the reader should be able to answer:
+At the end of each walkthrough section, the reader should be able to answer:
 
 > what exact sentence would still need private operator completion if this
 > request landed on the wrong healthy node right now?
 
-If the section leaves behind only components and flow language, but not that
-surviving private sentence, the walkthrough is still too soft.
+If a section leaves behind only components and flow language, but not that
+surviving sentence, the walkthrough is still too soft.
 
 ## The one question to keep asking at every hop
 
-At every stage of the path, keep asking:
+At every stage, keep asking:
 
-> what does the receiving node know from shared, inspectable, system-owned
-> truth, and what would still have to be privately supplied by the operator if
-> the local backend were absent?
+> what does the receiving node know from shared inspectable system-owned truth,
+> and what would still have to be privately supplied by the operator if the
+> local backend were absent?
 
 If that question disappears, the walkthrough can stay technical while still
-quietly turning back into theater.
+quietly collapsing back into theater.
 
 ## Walkthrough 1: normal-day stateless HTTP
 
 Use `whoami.$DOMAIN`, `wishlist.$DOMAIN`, or `mkdocs.$DOMAIN` as the cleanest
 mental model.
 
-These are the most useful first-pass routes because they are:
+These are useful first-pass routes because they are:
 
 - HTTP
-- narrow
 - low-state
+- narrow
 - good proof candidates
-- less likely to hide authority ambiguity
+- less likely to hide state-authority ambiguity
 
 They are also the fairest early test of the repo's promise.
 If the stack cannot make one low-state HTTP route survive wrong-node entry with
-an inspectable explanation, then louder HA language elsewhere is almost
-certainly premature.
+an inspectable explanation, louder HA language elsewhere is premature.
 
 ### Hop 1: DNS and public entry
 
 What is live now:
 
-- Cloudflare DDNS is part of the active edge fragment
+- Cloudflare DDNS is in the active edge fragment
 - the repo explicitly rejects one sacred public box as the only front door
 
 What this honestly proves:
 
 - first-hop plurality is part of the live design
-- more than one node is intended to be a plausible public entry candidate
+- more than one node is intended to be a valid public entry candidate
 
 What it still does not prove:
 
-- the receiving node knows where the service actually lives now
+- the receiving node knows where the service lives now
 - the receiving node knows whether the target is local or remote
-- the receiving node knows which peer is valid if the service is remote
-
-This is the first place many ecosystems overclaim.
-Plural DNS is necessary.
-Plural DNS is not preserved request meaning.
+- the receiving node knows which peer is valid if the target is remote
 
 Private sentence still surviving after Hop 1:
 
 > traffic can hit more than one node, but I still personally know that this
-> says nothing about what the chosen node should do next
+> says nothing about what the chosen node should do next.
 
 ### Hop 2: Traefik accepts the hostname
 
 What is live now:
 
 - Traefik is materially present
-- root and fragment services carry real routers and service labels
+- root and fragment services carry real routers and services
 
 What this honestly proves:
 
 - the receiving node can parse the hostname
-- the receiving node can match a local router definition
+- the receiving node can match a route definition
 - the route exists in authored runtime truth
 
 What it still does not prove:
 
-- that the router owns cross-node placement truth
-- that the receiving node can choose a remote backend from shared current
-  truth
+- that the route owns cross-node placement truth
+- that the receiving node can choose a remote backend from shared current truth
 
 This hop is route execution.
-It is not yet route truth.
+It is not route truth.
 
 Private sentence still surviving after Hop 2:
 
 > the route matched, but I still personally know that route execution is
-> weaker than distributed backend truth
+> weaker than distributed backend truth.
 
 ### Hop 2.5: the missing decision point
 
-This is the hop many infra writeups skip because it is socially awkward.
+This is the hop infra prose loves to skip because it is socially awkward.
 
 The missing question is:
 
-> once the route is known, what tells this node whether it is the owner node or
-> merely the first-hop node?
+> once the route is known, what tells this node whether it is the owner node
+> or merely the first-hop node?
 
 That is where placement truth and peer-eligibility truth would have to appear
 if the contract were becoming real.
 
-Without that layer, the walkthrough silently mutates into:
+Without that layer, the walkthrough quietly mutates into:
 
-1. hostname matched
+1. the hostname matched
 2. a human knows what should happen
 3. therefore the route story feels understandable
 
-That is the exact move this repo is trying to escape.
+That mutation is exactly what this repo is trying to escape.
 
 ### Hop 3: middleware and auth policy are applied
 
 What is live now:
 
 - `nginx-traefik-extensions` participates in forward-auth behavior
-- `tinyauth` provides real auth participation
+- `tinyauth` participates in real auth handling
 - `crowdsec` is in the edge stack
 - protected routes already use `nginx-auth@file`
 
@@ -300,22 +287,19 @@ What it still does not prove:
 - that the remote peer has converged enough config, secrets, and policy
   expectations to preserve the same route meaning
 
-This is why protected HTTP has to stay stricter than a plain stateless route.
-
 Private sentence still surviving after Hop 3:
 
 > the same middleware names exist, but I still personally know that this does
-> not prove the remote handoff preserves the same route meaning
+> not prove the remote handoff preserves the same route meaning.
 
 ### Hop 4: local service execution
 
-If the target service is local to the receiving node, the story gets much
-stronger.
+If the target service is local to the receiving node, the story gets stronger.
 
 What this honestly proves:
 
 - the local happy path works for that route class
-- the edge and app are at least locally connected
+- the edge and the app are at least locally connected
 - the service is not merely theoretical
 
 What it still does not prove:
@@ -325,12 +309,12 @@ What it still does not prove:
 - backend-loss rescue
 
 The local happy path is real progress.
-It is not the user's actual benchmark.
+It is still smaller than the user's benchmark.
 
 Private sentence still surviving after Hop 4:
 
 > the owner node can serve the route, but I still personally know that this
-> says very little about wrong-node dignity
+> says very little about wrong-node dignity.
 
 ## Walkthrough 2: protected HTTP
 
@@ -342,8 +326,8 @@ Now use a route such as:
 - `prometheus.$DOMAIN`
 - `mcpo.$DOMAIN`
 
-These are the revealing routes because the system has to preserve not just
-transport, but meaning:
+These are more revealing because the system must preserve not just transport,
+but meaning:
 
 - auth behavior
 - middleware order
@@ -352,7 +336,7 @@ transport, but meaning:
 - header assumptions
 - visible route semantics
 
-### What the live runtime already gives this class
+### What the runtime already gives this class
 
 The current runtime already gives protected routes:
 
@@ -362,7 +346,7 @@ The current runtime already gives protected routes:
 - middleware-bearing edge surfaces
 - observability around edge and helper components
 
-### What still remains unproven
+### What remains unproven
 
 The current worktree still does not prove:
 
@@ -376,16 +360,16 @@ That is why "the page still loads" is too weak.
 A route that answers but no longer behaves like the same protected service is
 not a successful handoff.
 
-## Walkthrough 2.5: the false comfort transition
+## Walkthrough 2.5: the false-comfort transition
 
-This repo repeatedly risks one exact transition:
+This repo repeatedly risks one exact illegitimate transition:
 
 - a route exists locally
 - the route is protected
 - the edge stack is serious
 - therefore a peer-forward version of the route must be close enough
 
-That transition is illegitimate until the docs can show:
+That transition stays illegal until the docs can show:
 
 - the source of placement truth
 - the source of peer-eligibility truth
@@ -400,9 +384,9 @@ This is the scene the user actually cares about.
 
 Assume all of the following:
 
-1. Cloudflare sends traffic to a healthy public node.
-2. Traefik, CrowdSec, and auth all look healthy.
-3. The requested service is not actually local to that node.
+1. Cloudflare sends traffic to a healthy public node
+2. Traefik, auth, and edge helpers all look healthy
+3. the requested service is not local to that node
 
 At that moment, the repo becomes very good at describing the problem and still
 not strong enough to prove the general solution.
@@ -416,14 +400,14 @@ From the live edge stack, the receiving node can likely know:
 - the middleware chain it would normally apply
 - whether the edge stack itself looks healthy
 
-### What the current worktree does not yet prove the node knows on its own
+### What the worktree does not yet prove the node knows on its own
 
 The current worktree does not yet prove the receiving node has shared truth
 for:
 
 - exact live placement of the target service
 - whether the relevant peer is healthy enough to receive the request
-- whether that peer has converged secrets, environment, and auth semantics
+- whether that peer has converged secrets, environment, and policy semantics
 - whether the forwarded request would still mean the same thing after handoff
 
 That is the missing middle layer in one scene.
@@ -431,23 +415,19 @@ That is the missing middle layer in one scene.
 Private sentence still surviving in the wrong-node scene:
 
 > the wrong node can see the request shape, but I still personally know facts
-> the runtime has not yet proven it owns
+> the runtime has not yet proven it owns.
 
 ## Walkthrough 4: backend-loss scene
 
-There is a second trap that must stay separate from wrong-node entry:
+This is a separate trap and it must stay separate.
 
-> even if a wrong-node handoff looks plausible while everything is healthy, the
-> rescue path may still disappear once the preferred backend actually fails
+Even if wrong-node forwarding looks plausible while everything is healthy, the
+rescue path may still disappear once the preferred backend actually fails.
 
-This matters because a helper can look excellent right up until the exact event
-it is meant to absorb.
+That is why `docker-gen-failover` matters and why it still does not get to
+claim victory.
 
-The repo already records this pressure around `docker-gen-failover`.
-
-So backend-loss has to stay distinct from wrong-node success.
-
-Another way to say the same thing:
+Another way to say the distinction:
 
 - wrong-node success asks whether the first-hop mistake can be corrected
 - backend-loss success asks whether the correction path survives the damage
@@ -455,17 +435,17 @@ Another way to say the same thing:
 The user is frustrated because many options solve one of those socially and not
 the other operationally.
 
-Wrong-node success means:
+Wrong-node success would mean:
 
 - the request landed on a non-owner node
 - the system still chose a valid backend
 
-Backend-loss success means:
+Backend-loss success would mean:
 
 - the preferred backend disappeared
 - the rescue path still existed
 - the route still meant the same thing
-- the operator did not have to privately complete the story
+- the operator did not have to privately finish the story
 
 Those proofs overlap.
 They are not the same proof.
@@ -473,188 +453,64 @@ They are not the same proof.
 Private sentence still surviving in the backend-loss scene:
 
 > the route looked recoverable while healthy, but I still personally know the
-> rescue path may evaporate during the exact failure event
+> rescue path may evaporate during the exact failure event.
 
-## Why helper presence still is not enough
+## Walkthrough 5: TCP and stateful lanes
 
-The repo already contains several things that make the story sound closer to
-solved:
+This is where many infrastructure discussions become dishonest fastest.
 
-- `docker-gen-failover`
-- substantial Traefik dynamic and middleware logic
-- Headscale-backed private networking assumptions
-- route-rich Compose fragments
+The runtime already contains:
 
-But helper presence alone still does not count as wrong-node proof.
+- Traefik TCP routers for `mongodb`, `redis`, and other raw transport surfaces
+- state-bearing systems such as `nuq-postgres`, `rabbitmq`,
+  `litellm-postgres`, `qdrant`, and Headscale
+
+That proves there is real transport machinery.
+It does not prove:
+
+- safe peer-aware failover
+- write-authority transfer
+- correct client behavior after rerouting
+- promotion rules
+- operational dignity under node loss
+
+Headscale is the cleanest example.
+The current fragment still points its authority to SQLite at
+`/var/lib/headscale/db.sqlite`.
+
+So even if the route is clean and the hostname is plural, the authority can
+still be singular.
+
+Private sentence still surviving in the stateful lane:
+
+> the service is reachable, but I still personally know who the real writer is
+> and what happens if that node disappears.
 
 ## The actual deliverable this page is pushing toward
 
-The real deliverable is not a smoother explanation of a hypothetical path.
+The real deliverable is not a smoother explanation of a hypothetical flow.
 It is one preserved route packet that can answer all of these:
 
 - which node received the request first?
 - why was it the wrong node?
 - what shared truth named the real owner?
-- why was the chosen peer valid now?
+- why was the chosen peer eligible now?
 - what visible route semantics stayed the same?
-- what artifact lets a second operator inspect that answer later?
+- what artifact lets a second operator inspect the answer later?
+- if failover is claimed, what survived after the preferred backend died?
 
-Until one packet like that exists, this page is still primarily a warning page.
+Until one packet like that exists, this page is primarily a warning page.
 
-The user is specifically tired of:
+## The honest bottom line
 
-- there is a failover helper
-- there is a private mesh
-- there is a route generator
-- there is a dynamic proxy
+The stack already contains real public-entry pressure, real edge machinery,
+real auth layers, real helper layers, and real stateful surfaces.
 
-being narrated as if the hard part had therefore moved out of the operator's
-head.
+What it does not yet prove is that the decisive handoff truth has moved out of
+private human custody.
 
-It has not, unless the receiving node can show where it got the truth for the
-handoff decision.
+So the honest sentence today is:
 
-That is the burden-transfer test in its most practical form:
-
-- not `is there a helper?`
-- not `is there a generated file?`
-- not `is there private connectivity?`
-
-But:
-
-> can the receiving node show the truth source behind the decision without a
-> human privately narrating the rest?
-
-## Why route class must stay separate
-
-This repo becomes misleading the moment these route classes are narrated as one
-shared maturity story.
-
-### 1. Stateless HTTP
-
-This is the lane most likely to earn real relief first.
-
-Why:
-
-- route meaning is visible at L7
-- middleware and auth can be inspected
-- one good drill can prove a narrow but real win
-
-Best early proof candidates:
-
-- `whoami`
-- `wishlist`
-- `mkdocs`
-
-### 2. Protected HTTP
-
-This lane is stricter because the route has policy meaning, not just transport
-meaning.
-
-Better future candidates:
-
-- `code-server`
-- `dozzle`
-- `portainer`
-- `prometheus`
-- `mcpo`
-
-### 3. Raw TCP
-
-This lane already exists through live TCP routers for:
-
-- `mongodb`
-- `redis`
-- `biodecompwarehouse*`
-
-It proves real transport exposure.
-It does not prove:
-
-- peer-aware failover
-- semantic continuity
-- safe substitution
-- stateful correctness
-
-### 4. Stateful surfaces
-
-This is the strictest lane of all.
-
-A stateful service does not become honestly HA because:
-
-- it is reachable through Traefik
-- more than one node exists
-- a proxy can point to more than one backend
-
-Stateful routing becomes meaningful only when authority, durability,
-promotion, reconnect, and rediscovery are explicit.
-
-## The exact point where the story turns back into operator memory
-
-The request story turns back into private operator memory the moment the
-runtime cannot answer all of these on its own:
-
-- where does this service really live right now?
-- is the candidate peer merely alive, or actually valid for this route?
-- if forwarded, will the route still mean the same thing?
-- if the preferred backend disappears, what path still exists?
-- if the route is stateful, who is the actual authority?
-
-That is the real SPOF reading in this repo.
-
-The user is not only worried about a dead server.
-The user is worried about the operator still being the hidden explainer when
-the system was supposed to behave like one cloud.
-
-## What a real walkthrough-backed proof packet would need
-
-Before this page can support stronger language, it needs a proof packet with:
-
-- the exact hostname
-- the receiving node identity
-- the actual backend identity
-- the source of placement truth used for the decision
-- the source of peer-eligibility truth used for the decision
-- evidence that policy and auth meaning stayed the same
-- whether the route also survived backend loss
-- the sentence that is still forbidden even after the drill
-
-Without that packet, a walkthrough is still disciplined imagination rather than
-validated relief.
-
-## The exact stronger sentences still forbidden
-
-Even after this walkthrough, the following are still forbidden today:
-
-- `wrong-node HTTP is basically solved`
-- `fallback is mostly handled now`
-- `protected route handoff is mostly a middleware problem`
-- `TCP routing is close enough to stateful failover`
-- `the request path already behaves like one cloud`
-
-## Bottom line
-
-The current runtime already contains a serious request stack:
-
-- Cloudflare-oriented public entry
-- Traefik routing
-- TinyAuth and forward-auth participation
-- CrowdSec enforcement
-- Headscale mesh assumptions
-- helper-driven fallback intent
-- a mix of simple HTTP, protected HTTP, TCP, and stateful services
-
-That is enough to make request preservation a real platform problem.
-
-What the current worktree still does not prove is the part the user actually
-cares about:
-
-- that the wrong healthy node already knows what the request should mean
-- that it already knows which peer is valid
-- that the route still means the same thing after handoff
-- that the rescue path survives backend loss
-- that TCP and stateful routes have escaped operator folklore
-
-That is the honest boundary today.
-The runtime can already execute a lot.
-The missing win is still the point where the receiving node can explain itself
-without a human finishing the sentence first.
+> the repo can already explain the distributed request problem in concrete
+> runtime terms, but the most important decisions in the wrong-node and
+> backend-loss path are still only partially system-owned.
