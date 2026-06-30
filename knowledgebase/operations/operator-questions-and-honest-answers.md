@@ -105,6 +105,14 @@ the same hidden operator burden intact.
 That means this page is not just an FAQ.
 It is also a filter against false progress.
 
+It also explains why the repo can feel starved for options even while the wider
+ecosystem keeps offering more products, more tutorials, and more architecture
+diagrams.
+
+The user is not literally lacking tools to try.
+The user is lacking options that move the burden to the system instead of
+relabeling the same burden in a fancier register.
+
 If a reader leaves this page thinking:
 
 - "there are lots of options, we just need to choose one"
@@ -121,6 +129,53 @@ The user is starved for answers that relocate where the truth lives.
 If the answer still depends on the operator privately remembering which box is
 special, which fallback is ceremonial, or which peer currently owns the real
 service, the answer is still in the rejected class.
+
+## Why the ecosystem still feels option-poor even when it is full of tools
+
+This repo is not suffering from literal tool scarcity.
+It is suffering from scarcity of **honest closure**.
+
+There are many things the ecosystem can sell here:
+
+- another reverse proxy
+- another control plane
+- another cluster bootstrap recipe
+- another service-discovery story
+- another "HA" diagram
+
+But most of those offers do one of four unsatisfying things:
+
+1. improve the first hop while leaving wrong-node meaning preservation weak
+2. improve local automation while leaving global placement truth social
+3. improve recovery ceremony while leaving route persistence unproven
+4. import a much heavier worldview before proving that the extra worldview
+   actually closes the pain the user keeps hitting
+
+That is why the problem feels like "there are no real options" even though
+there are endless nouns available.
+
+The missing thing is not a product category.
+It is a narrower class of answer:
+
+> an option that makes any-node entry, wrong-node forwarding, policy
+> continuity, and service-class honesty more system-owned and less
+> operator-reconstructed
+
+Without that shift, a new option is often just:
+
+- new syntax for the same guesswork
+- new automation around the same private topology memory
+- new orchestration prestige around the same unresolved question
+
+This page has to preserve that distinction because ordinary self-hosting
+conversation almost always collapses it.
+
+The user frustration makes sense once phrased more precisely:
+
+- not "why are there no tools?"
+- but "why do so many tools stop one layer before the burden actually moves?"
+
+That is the real option drought this repo is reacting to.
 
 ## Question 0: Why did earlier docs keep feeling useless even when they contained real information?
 
@@ -686,3 +741,41 @@ if a proposed answer sounds cleaner, more mature, or more standard, but still
 leaves sacred-node memory, route fragility, or stateful dishonesty basically
 where they already were, then it is not a real option here.
 It is just a better-dressed version of the same wound.
+
+## Question 18: What would count as a real option here instead of fake-option theater?
+
+A real option does not have to solve the entire repo.
+It does have to relocate at least one painful truth clearly enough that the
+operator can feel the burden actually move.
+
+In this repo, that means a candidate option should be evaluated with a harsher
+checklist than "is this a popular pattern?" or "does this sound production
+grade?"
+
+At minimum, a real option should answer:
+
+- what truth does this layer own directly now?
+- what previously private reconstruction no longer has to happen in the
+  operator's head?
+- what kind of wrong-node case becomes more honest because of it?
+- what proof would show the burden actually moved instead of just being
+  re-described?
+- what new tax or worldview did this option introduce in exchange?
+
+If a proposal cannot answer those questions concretely, it is still mostly
+theater.
+
+This is also why partial wins still matter.
+
+Examples of things that could count as real progress:
+
+- a trustworthy placement-truth surface that wrong-node routing can actually
+  consume
+- a peer-forward layer that preserves auth and middleware under backend loss
+- a narrow infra-grade HA layer for ingress continuity that removes one sacred
+  first-hop assumption
+- a scheduler promotion that demonstrably removes manual placement burden
+  instead of just making the stack sound more serious
+
+The key is that the option must remove a specific humiliation, not just add a
+more respectable diagram.
