@@ -40,6 +40,33 @@ It is not narrow.
 
 If the authority map is wrong, every other page drifts.
 
+## Priority source stack for the exact question the user keeps asking
+
+For the narrow but crucial question:
+
+> where does the repo most clearly explain the multiple ordinary Docker nodes,
+> no-Swarm-by-default, failover/fallback, wrong-node-survival direction?
+
+the source stack should be read in this order:
+
+1. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+2. [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+3. [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
+4. [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules)
+
+That order is not cosmetic.
+
+It means:
+
+- the dream is named first
+- the repo-level honesty wall comes next
+- the runtime anchor comes after that
+- the authoring discipline comes last
+
+If a contributor flips that order, they will usually start smuggling runtime
+authority into files that were only meant to protect writing discipline or repo
+framing.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -239,6 +266,13 @@ The simplest summary is:
 > the dream and its honesty walls at repo level; `AGENTS.md` ties claims back to
 > the actual runtime surface; `.cursorrules` is mostly service-authoring
 > discipline, not architecture explanation
+
+That summary should be treated as the default answer when the user asks some
+version of:
+
+- "which file actually explains what we are trying to do?"
+- "which file is just supporting discipline?"
+- "which file proves less than it sounds like it does?"
 
 That ranking should drive every future documentation judgment.
 It should also be read as a defense against a specific temptation:

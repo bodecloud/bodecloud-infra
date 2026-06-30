@@ -69,6 +69,8 @@ This site is not allowed to:
 
 Start here if you want:
 
+- the question-first map for the whole site:
+  [Reading Paths and Retrieval Routes](reading-paths.md)
 - the real benchmark and acceptance bar:
   [Operator Contract and Success Criteria](architecture/operator-contract.md)
 - the literal wrong-node and degraded-backend request story:
@@ -95,6 +97,9 @@ Start by asking which hard question you are actually trying to answer.
 
 Use this map:
 
+- "I do not want folder names. I want the shortest route to the real
+  question."
+  Start with [Reading Paths and Retrieval Routes](reading-paths.md).
 - "What is the user really trying to build, underneath all the tool talk?"
   Start with [User Intent and Dream](research/user-intent-and-dream.md) and
   [Operator Contract and Success Criteria](architecture/operator-contract.md).

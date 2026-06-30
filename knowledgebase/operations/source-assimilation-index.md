@@ -99,6 +99,31 @@ It is not itself proof that the contract has been perfectly satisfied.
 If a sentence starts using "well sourced" as a substitute for "correctly
 routed and bounded," this page is being violated.
 
+## Priority retrieval stack for the repo's real architecture question
+
+For the main question this knowledgebase is built around:
+
+> can several ordinary Docker nodes become one request-preserving personal
+> cloud without either static-glue humiliation or immediate heavyweight
+> orchestrator surrender?
+
+retrieval should start in this order:
+
+1. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+2. [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+3. root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+4. active fragments under [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
+5. archive-derived research and refusal surfaces
+
+The sequence matters.
+
+If retrieval starts at step 3, the dream gets under-reconstructed.
+If retrieval starts at step 5, frustration gets over-promoted into proof.
+If retrieval stops at steps 1 and 2, the runtime stays romanticized.
+
+Actual assimilation means holding all five in tension without letting any one
+of them define the whole question.
+
 ## What "actually RAG this time" means in this repo
 
 In this repo, real retrieval does **not** mean:

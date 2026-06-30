@@ -80,6 +80,7 @@ If you are reading in the repo, start with:
 
 Then follow this order:
 
+- [`reading-paths.md`](reading-paths.md)
 - [`research/user-intent-and-dream.md`](research/user-intent-and-dream.md)
 - [`architecture/instruction-surfaces-and-authority.md`](architecture/instruction-surfaces-and-authority.md)
 - [`operations/operator-questions-and-honest-answers.md`](operations/operator-questions-and-honest-answers.md)
@@ -98,10 +99,11 @@ Then follow this order:
 - [`operations/devops-runbook.md`](operations/devops-runbook.md)
 
 That order is intentional.
-It starts with the dream, then clarifies which repo files actually own the
-dream versus the runtime anchor, then forces the operator’s pain and request
-path back into view, then explains the live runtime, then names the missing
-middle layer, then rebuilds the proof boundaries.
+It starts with the question-first reading map, then the dream, then clarifies
+which repo files actually own the dream versus the runtime anchor, then forces
+the operator’s pain and request path back into view, then explains the live
+runtime, then names the missing middle layer, then rebuilds the proof
+boundaries.
 
 That sequence matters because this repo is easiest to misunderstand when read
 in the opposite order.
@@ -119,6 +121,14 @@ Those readings are too weak.
 
 If you are not trying to read the whole site, do not browse by folder.
 Browse by the actual question you need answered.
+
+### "What is the shortest serious way to read this repo without being fooled?"
+
+Read:
+
+- [`reading-paths.md`](reading-paths.md)
+- [`research/user-intent-and-dream.md`](research/user-intent-and-dream.md)
+- [`architecture/instruction-surfaces-and-authority.md`](architecture/instruction-surfaces-and-authority.md)
 
 ### "What is the dream, really?"
 
