@@ -171,6 +171,29 @@ They treat "worth considering" and "has earned default gravity" as nearly the
 same thing.
 This repo has to keep those very far apart.
 
+## The private completion test for every candidate family
+
+This page also needs a direct test that is harsher than normal platform
+comparison language.
+
+After adopting a candidate family, what exact sentence should the operator no
+longer need to finish privately?
+
+Examples of the sentence this repo wants to kill:
+
+- "yes, but I still know which node really has the service"
+- "yes, but I still know which peer is actually safe right now"
+- "yes, but I still know the fallback route will disappear if that backend dies"
+- "yes, but I still know this only sounds HA because the state owner is still
+  singular"
+
+If a candidate family cannot name which one of those sentences it makes less
+true, then it has not yet earned default gravity here.
+
+That is the difference between a real option and a more respectable
+recommendation.
+The user has already seen plenty of the second category.
+
 ## What still does not count as an orchestration decision here
 
 This page should also say more directly what fake decisiveness looks like.
@@ -284,6 +307,32 @@ middle ground between:
 If no middle ground can survive honest proof, then the repo should say that.
 But it should only say it after the honest proof, not before.
 
+## Why the current worktree still keeps the answer narrow
+
+The current worktree already explains why this page cannot yet crown a winner.
+
+Right now the repo still shows:
+
+- a serious Compose-first root runtime with public ingress, observability,
+  Headscale mesh, TCP services, and state-bearing services
+- helper pressure such as `docker-gen-failover` that points in the right
+  direction while still being openly distrusted under backend-loss conditions
+- repeated pressure toward a shared placement-truth surface like
+  `services.yaml`, without current tracked runtime proof that such a surface is
+  live and consumed by routing
+- stateful classes such as MongoDB, Redis, Headscale, and Firecrawl support
+  services that make "just pick the most mature orchestrator" emotionally easy
+  and evidentially lazy at the same time
+
+That combination matters because it explains the repo's real stuckness:
+there is already too much machinery to pretend the problem is toy-sized, and
+still too little shared truth to pretend one family has clearly earned the
+right to own the whole story.
+
+This is why the docs keep refusing to sound satisfied.
+The repo is already expensive enough to make fake maturity tempting.
+It is not yet truthful enough to reward that temptation.
+
 ## The candidate families the repo is actually circling
 
 The repo is not comparing infinite possibilities.
@@ -336,6 +385,22 @@ Current verdict:
 - still the default search space
 - not yet a proven winner
 
+The harsher current reading is:
+
+- this family is still closest to the user's dream
+- this family is still closest to the risk of renamed burden
+
+That is the contradiction the docs should preserve.
+Compose-adjacent helpers are attractive because they promise the smallest
+surrender.
+They are dangerous because they can quietly become a shadow control plane while
+still leaving the operator to privately bless the exact same wrong-node and
+fallback decisions as before.
+
+In other words:
+this family is where the repo is most likely to find a meaningful middle
+ground, and also where it is most likely to counterfeit one.
+
 That is probably the most honest present-tense answer in the whole page.
 The repo keeps circling this family because it most directly respects the
 user's dream.
@@ -382,6 +447,24 @@ Current verdict:
 - meaningful candidates for named domains
 - not yet justified as the repo-wide default answer
 
+The important present-tense limit is that this family can move burden and darken
+burden at the same time.
+
+It can improve:
+
+- service supervision
+- placement answers
+- recovery coordination
+
+while worsening:
+
+- operator legibility
+- direct causality between authored config and live behavior
+- the user's confidence that the new hidden layer really earned its trust
+
+That means this family should only be promoted against a named domain failure,
+not against generalized embarrassment with the current stack.
+
 That is a narrower and more respectful answer than "probably Nomad/OpenSVC
 eventually."
 The repo is not trying to predict the winner for sport.
@@ -426,6 +509,23 @@ Current verdict:
 - absolutely relevant as a future promotion path
 - still not the default answer the repo has earned today
 
+The page should also be blunter about what would have to happen before this
+family stops sounding premature.
+
+For this family to earn default gravity, the repo would need evidence that:
+
+- narrower truth-owning helper layers were pressed honestly and still failed
+- the failure was about decisive burden, not just aesthetics or maintenance
+  fatigue
+- the stronger control plane made one of the private completion sentences
+  materially less true
+- operators could still inspect what the new layer believed without replacing
+  one sacred-node folklore story with a more prestigious but darker cluster
+  folklore story
+
+Without that evidence, this family is still too easy to over-credit simply
+because it sounds like adulthood.
+
 This family may eventually win.
 If it does, it should win because narrower layers were honestly pressed until
 they failed a named burden threshold, not because Kubernetes or k3s merely
@@ -462,6 +562,19 @@ or more of these burdens materially and inspectably:
 
 If a candidate mostly helps one of those while worsening several others, it has
 not earned default promotion yet.
+
+This checklist should also be read as a betrayal test against the current
+worktree.
+
+If a candidate helps on paper while the operator would still be forced to
+privately supply:
+
+- current placement
+- real peer safety
+- route survival assumptions
+- stateful singularity caveats
+
+then the candidate did not beat the burden that matters here.
 
 This checklist is intentionally closer to a betrayal test than a feature test.
 The repo already has enough feature language.
