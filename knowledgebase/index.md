@@ -73,6 +73,27 @@ The dream is clear.
 The stack is real.
 The missing truth-owning middle layer is still incomplete.
 
+## What still does not count as a good front door for this repo
+
+This page should also say more bluntly what fake orientation still looks like.
+
+These still do not count:
+
+- a broad overview that never names the hidden burden explicitly
+- a technically correct summary that makes the problem sound like generic HA
+- a polished entry page that leaves "wrong-node" as a detail instead of the
+  humiliation threshold
+- an options-rich tone that quietly implies the operator burden must already be
+  falling
+- a reading route that never says which stronger sentence is still forbidden
+
+The user is not mainly asking for a better welcome page.
+The user is asking for a front door that does not immediately downgrade the
+real wound into a calmer neighboring question.
+
+If this page sounds helpful while still making the repo feel more solved than
+the evidence allows, then it is still part of the problem.
+
 ## What kind of site this is
 
 This is not a normal architecture site.
@@ -162,6 +183,9 @@ Primary anchors:
 These registers overlap.
 They are not interchangeable.
 
+If a sentence cannot say which register it belongs to, that sentence is still
+too weak to trust.
+
 ## The shortest serious reading route
 
 If you only have time for one pass and do not want to be fooled by calm
@@ -188,6 +212,12 @@ That route keeps all of these visible at once:
 - what still lacks proof
 - why stateful surfaces stay under harsher rules
 
+This route still must not be overread into:
+
+- evidence that the route already survives the relevant failures
+- proof that the missing middle is already selected
+- permission to narrate the runtime as mostly converged
+
 ## Fast routes by real question
 
 Use these when you already know what you need and want to avoid folder
@@ -205,6 +235,23 @@ browsing.
 | what still has to become system-owned before stronger claims are legal | [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md) |
 | why Redis, MongoDB, Headscale, and similar services need harsher language | [Stateful HA and Data](architecture/stateful-ha-and-data.md) |
 | what proof is still missing before the docs can speak more strongly | [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md) |
+
+## What a real first-pass packet should leave behind
+
+This front page should not merely orient.
+It should help a reader leave behind an auditable first-pass packet.
+
+A serious first pass should preserve:
+
+- the real question the reader came with
+- the truth register or registers they actually needed
+- the strongest runtime-facing artifact they consulted
+- the strongest dream- or archive-facing artifact they consulted
+- the contradiction that still remained open after the first pass
+- the next proof packet required before a stronger claim becomes honest
+
+If the first pass only leaves behind "I understand the architecture better
+now," it is still too weak for this repo.
 
 ## The easiest bad read
 
@@ -239,3 +286,6 @@ Before trusting any confident sentence in this knowledgebase, ask:
 > complaint as if they were already one thing?
 
 If the answer is unclear, the sentence is still too weak.
+
+That weakness is not harmless here.
+It is how polished documentation turns back into fake closure.

@@ -49,6 +49,28 @@ The user is not asking for a mellow orientation guide.
 They are asking for docs that can withstand frustration, contradiction, and
 the feeling that every apparent option secretly preserves the same hidden tax.
 
+## What still does not count as a useful repo-facing doorway
+
+This README should also say more explicitly what fake helpfulness still looks
+like.
+
+These still do not count:
+
+- a contributor-facing intro that mainly catalogs folders
+- a calm summary that never names the sacred-node or wrong-node pressure
+- a reading order that sounds complete but does not say what stronger claim is
+  still forbidden
+- a doorway that makes the docs feel mature without warning that maturity is
+  not the same as runtime ownership
+- a repo intro that makes the problem sound like "choosing an orchestrator"
+
+The user is not asking for a nicer README tone.
+They are asking for a doorway that does not betray the core question before the
+reader even reaches the deeper pages.
+
+If this file helps someone browse but still leaves them with a smaller, calmer,
+or more product-shaped question, then it is still too weak.
+
 That means the doorway pages have to do more than orient.
 They have to keep a reader from leaving with the wrong calm conclusion.
 
@@ -202,6 +224,23 @@ The practical test is simple:
 - or does it mostly explain the available tools more elegantly?
 
 If the second answer is stronger, the page is still too weak for this repo.
+
+## What a serious repo-entry packet should leave behind
+
+This README should not merely say where to click next.
+It should help a reader preserve the minimum packet needed to not misread the
+repo.
+
+That packet should include:
+
+- the main burden the user is trying to escape
+- the first truth register the reader needs
+- the first runtime-facing page they should inspect
+- the first dream- or archive-facing page they should inspect
+- the stronger sentence that remains forbidden after the first read
+
+If a reader can finish this file and still say only "this is a multi-node
+Docker project with some HA ambitions," then the doorway failed.
 
 ## What this rewrite is trying to fix
 
