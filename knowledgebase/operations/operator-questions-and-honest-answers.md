@@ -21,6 +21,10 @@ The central question is:
 
 Everything below should be read through that lens.
 
+That lens is stricter than "what modern tool fits this stack?"
+It is asking which truth is still privately owned at the exact moment the
+platform is supposed to act coherent.
+
 The reason this page has to stay sharp is that operator Q&A is one of the
 easiest places for a repo to start sounding compassionate while still quietly
 answering a smaller problem.
@@ -70,6 +74,9 @@ The repo is not asking for a handoff of responsibility in the abstract.
 It is asking for a believable handoff of the exact truths that currently live
 as remembered placement, remembered peer safety, remembered fallback logic, and
 remembered service-class caveats.
+
+A good answer therefore has to leave behind a surviving burden, not merely a
+recommendation.
 
 What feels absent is not ingenuity.
 It is the moment where the system becomes adult enough to stop turning back
@@ -135,6 +142,10 @@ The main failure mode looks like this:
 
 This page should keep refusing that move.
 
+Sympathy can substitute for specificity here if the page is not careful.
+The prose can sound more understanding while naming less of the surviving
+private truth.
+
 It should not let:
 
 - "which tool should I add?" replace "which truth am I still carrying privately?"
@@ -185,6 +196,12 @@ real through-line of the archive.
 If an answer does not name that pattern, it is probably still participating in
 it.
 
+It is the archive in miniature:
+
+- the market sounds full of options
+- the answer sounds intelligent
+- one more private operator completion step quietly survives
+
 And if it only names the pattern without naming the surviving burden, it is
 still too easy on itself.
 
@@ -219,6 +236,9 @@ becoming less faithful:
 - more product names
 - more comparison nuance
 - less pressure on the exact burden that still stayed operator-owned
+
+If an answer looks more useful but is less able to identify the surviving
+private truth, it got worse.
 
 ## What a genuinely useful answer should leave behind
 

@@ -40,6 +40,22 @@ The risk is polite reduction:
 - the reader feels more oriented
 - the actual wound gets domesticated into ordinary platform shopping
 
+The archive already gives the scene that keeps producing that reduction.
+Manual placement is already acceptable.
+Cloudflare plurality is already acceptable.
+Multiple boxes already exist.
+
+The missing thing is narrower and meaner:
+
+- a healthy wrong node still does not inherently know enough
+- request meaning still risks collapsing into remembered topology
+- fallback still risks depending on the same human burden it was supposed to
+  relieve
+
+That is why many technically respectable answers still feel fake here.
+They improve the surrounding surface while preserving the same hidden operator
+role at the exact moment the user wanted the machine to grow up.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -92,6 +108,19 @@ Many options are not useless because they do nothing.
 They are useless to this user because they improve surrounding layers while
 leaving the decisive hidden human role intact.
 
+That is the sorting rule the docs have to keep applying.
+Options are not mainly being ranked by trendiness, popularity, or even feature
+depth.
+They are being ranked by whether they relocate:
+
+- topology truth
+- peer eligibility truth
+- fallback truth
+- policy-preservation truth
+
+If those truths still cash out into one person's memory, then the option may
+still be real engineering progress while remaining fake relief for this repo.
+
 ## The shortest honest statement of the dream
 
 The user wants:
@@ -126,6 +155,10 @@ They usually weaken it into something like:
 
 Those are all easier to discuss.
 They are also all smaller than the user's actual demand.
+
+They are smaller because they let the answer sound complete before the docs
+have named who still silently completes the request story when the request
+lands on the wrong healthy node.
 
 This is where many otherwise decent summaries fail.
 
@@ -243,6 +276,11 @@ It is by one bad-day scene:
 7. The operator can explain why it worked from shared truth instead of memory.
 
 That scene is the dream.
+
+This scene should be treated as the held-out benchmark every later page must
+answer.
+If a page becomes more polished but less able to keep this scene sharp, then
+the page got worse even if it sounds more mature.
 
 If a proposed system still fails there, then from the user's point of view it
 is still the old problem with better branding.

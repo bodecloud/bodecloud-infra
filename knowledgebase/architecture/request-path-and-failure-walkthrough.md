@@ -27,6 +27,9 @@ It is:
 > every supposedly modern answer starts sounding confident right before the
 > moment I would need it to stop depending on me.
 
+This page therefore forces the accusation through one literal request-time
+scene instead of letting it escape upward into nicer architecture language.
+
 That complaint only becomes visible when the walkthrough is forced through the
 bad-day scene instead of around it:
 
@@ -96,6 +99,10 @@ That is why this page cares less about hop count than custody of truth.
 The missing thing is not movement.
 The missing thing is trusted meaning at the wrong node.
 
+Many systems can move a request.
+Far fewer can explain from shared, inspectable truth why the moved request
+still means the same thing after locality fails.
+
 ## What still does not count as a request-path answer
 
 This repo needs a harsher standard than "the path sounds traceable."
@@ -143,6 +150,10 @@ The dangerous hidden handoff usually looks like this:
 6. the operator becomes the missing registry, peer judge, and route explainer
 
 That is the actual seam under investigation.
+
+It is the hidden-control-plane scene in miniature.
+The request still looks platform-shaped while one human quietly acts as the
+missing placement authority, peer judge, and policy interpreter.
 
 ## What a real request-path proof packet would have to contain
 
@@ -194,6 +205,11 @@ This page should therefore be read less like:
 and more like:
 
 - at which hop does the system stop knowing enough on its own?
+
+At each hop, keep forcing one discipline question:
+
+> did the platform carry the truth itself, or did it only carry the request
+> until a human would have to finish the logic?
 
 The user does not mainly want a nicer answer to "how does the packet move?"
 The user wants a harsher answer to:

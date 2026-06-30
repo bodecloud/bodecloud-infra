@@ -82,6 +82,18 @@ More bluntly:
 - it still does not have enough system-owned truth to make that seriousness
   fully trustworthy
 
+That is why adjacent summaries keep drifting toward:
+
+- better HA
+- better orchestration
+- better service discovery
+- better failover language
+
+while still missing the repo's harder sentence:
+
+> when the request lands on the wrong healthy node, who still has to finish
+> the story?
+
 That distinction is one of the main reasons ordinary summaries keep failing the
 user.
 
@@ -89,6 +101,11 @@ They keep summarizing the repo as if its main problem were insufficient
 machinery.
 The harder truth is that the repo already has enough machinery to make false
 closure sound plausible.
+
+The repo is therefore past the stage where "needs more components" is an
+honest diagnosis by itself.
+The danger now is that real sophistication can start borrowing credibility for
+a burden transfer that never actually happened.
 
 That sentence should remain brutal.
 
@@ -138,6 +155,14 @@ They are still not the answer if the wrong-node scene still cashes out into:
 - remembered route meaning
 - remembered stateful caveats
 
+If a candidate layer still leaves behind one more sentence that starts with:
+
+- "well, privately we know..."
+- "in practice the operator knows..."
+- "normally that hostname really belongs..."
+
+then the repo-level problem is still alive.
+
 The whole point is to make fewer important sentences start with:
 
 - "well, privately we know..."
@@ -176,7 +201,8 @@ They are still too polite if they stop naming the lived reveal:
 That line is the real center of gravity.
 
 If the page ever gets better organized by weakening that sentence into
-"operational complexity" or "topology awareness," then the docs have become
+"operational complexity," "topology awareness," or "coordination overhead,"
+then the docs have become
 cleaner and less faithful at the same time.
 
 ## What the user is actually trying to make impossible

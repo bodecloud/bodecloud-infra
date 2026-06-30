@@ -28,6 +28,11 @@ Another way to say it:
 the contract is only being met when the operator no longer has to privately
 finish the sentence the platform should have been able to finish itself.
 
+That private-sentence test outranks generic redundancy, automation, polish, or
+platform aesthetics.
+If those improve while the operator still has to privately complete the
+meaning of the request, then the contract is still unmet.
+
 If this page gets soft, the whole knowledgebase gets soft with it.
 
 ## What this page is and is not allowed to prove
@@ -59,12 +64,17 @@ actually changed who carries the missing truth.
 ## Strongest honest current answer
 
 The repo now states the operator contract much more clearly than before, but
-the current runtime still meets it only unevenly. The acceptance bar remains
-deliberately uncomfortable: wrong-node requests must stop feeling like a
-gamble, fallback must survive the failure that made fallback necessary,
-protected routes must preserve the same policy meaning after handoff, and
-stateful systems must stop being described with availability language they
-have not earned.
+the current runtime still meets it only unevenly.
+The acceptance bar remains deliberately uncomfortable:
+
+- wrong-node requests must stop feeling like a gamble
+- fallback must survive the failure that made fallback necessary
+- protected routes must preserve the same policy meaning after handoff
+- stateful systems must stop being described with availability language they
+  have not earned
+
+The contract only becomes real when one more caveat stops living as private
+operator completion.
 
 That discomfort is not a tone choice.
 It is a defensive measure against a specific documentation failure:
@@ -92,6 +102,9 @@ actually moved the decisive burden.
 
 This page exists to stop that sequence from becoming socially normal inside
 the repo.
+
+It is defining actual transfer of burden, not a generic checklist of desirable
+platform properties.
 
 ## The dream in one exact sentence
 
@@ -147,6 +160,8 @@ This repo also has to ask:
 
 If the answer is still "the operator," then some part of the contract is still
 unmet no matter how respectable the stack sounds.
+
+That is a real gate, not just a tone choice.
 
 ## The private completion the system is supposed to eliminate
 
@@ -229,6 +244,9 @@ and still not the kind the user is asking for.
 The user is not denying progress.
 They are denying the social move where partial progress gets narrated as if the
 humiliating part of the job had already moved.
+
+That is why this page stays anti-premature-closure around the exact part of
+the system that still cashes out into them.
 
 ## What a passing route should let the operator stop doing
 
