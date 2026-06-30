@@ -57,6 +57,11 @@ The user is trying to stop being trapped between:
 - and giant worldview packages that demand surrender before they have proved
   they heal the right wound
 
+That means this page cannot read like a buyer's guide with better prose.
+It has to read like an argument about burden ownership.
+If a platform path is described without naming which hidden burden it removes,
+the description is too vague for this repo.
+
 That is why this page has to stay hostile to fake differentiation.
 
 Many future paths only become real options if they reduce a different hidden
@@ -86,6 +91,18 @@ whole knowledgebase.
 The repo is not merely comparing products.
 It is watching for the moment when its own "smaller" solution stops being small
 in any honest sense.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "Compose is still the live baseline" | Class 1 | `docker-compose.yml`, active Compose fragments | that Compose is sufficient for every failure class |
+| "the repo wants multi-node Docker without immediate heavyweight capture" | Class 2 | `.github/copilot-instructions.md`, `README.md` | that scheduler promotion is off the table forever |
+| "the repo already knows which missing capabilities hurt" | Class 3 | `docs/INFRASTRUCTURE_MASTER_PLAN.md`, `docs/osvc_ingress_ha.md`, `docs/stateful_ha_plan.md` | that one future has already earned promotion |
+| "the user keeps rejecting fake closure" | Class 4 | linked archive threads | that hesitation is random or that all options deserve equal weight forever |
+
+This page should never allow "there are several futures" to become "all
+futures are equally justified."
 
 ## What this page should let a reader answer immediately
 
@@ -177,6 +194,14 @@ The differentiator that matters is:
 - who now owns peer eligibility?
 - who now owns route persistence?
 - who now owns stateful authority?
+
+One more differentiator belongs here:
+
+- which new worldview costs are now being imposed in exchange?
+
+That matters because the user is not refusing platform tax in the abstract.
+They are refusing to pay worldview-scale cost before the specific missing truth
+is named tightly enough to justify the bill.
 
 If two futures answer those with roughly the same "still mostly the operator,"
 then they are much closer to one fake choice than to two real ones.
@@ -301,6 +326,13 @@ The current worktree is best read as:
 - control-plane pressure is real
 - platform closure is still unresolved
 
+It should also be read as a warning that helper growth is already carrying a
+governance burden.
+If helper growth starts owning placement truth, convergence truth, peer
+eligibility, and repair semantics, then the repo is no longer merely keeping
+Compose simple.
+It is building a control plane and must be judged like one.
+
 ## What each broad family is actually buying in burden terms
 
 This page needs this map because otherwise tradeoff language drifts back into
@@ -318,6 +350,21 @@ pretending all "stronger" futures are buying the same kind of relief.
 
 That unresolved closure is not an embarrassment.
 It is one of the most faithful facts the docs can preserve.
+
+## Promotion questions this page should force
+
+Before any future gets promoted in prose, the page should be able to answer:
+
+1. Which hidden human reconstruction burden does this path reduce first?
+2. Which burdens remain operator-owned afterward?
+3. Which service classes actually benefit from this promotion?
+4. Does this path reduce wrong-node ambiguity, or just relocate it?
+5. Does this path reduce stateful authority ambiguity, or only supervision
+   ambiguity?
+6. Is the repo paying for a worldview larger than the wound it is healing?
+
+If those questions cannot be answered, the future is not mature enough to be
+spoken about as if it had earned itself.
 
 It is also why
 [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
@@ -386,6 +433,11 @@ That second line is the real translation key.
 The repo is not fundamentally trying to pick a deployment framework.
 It is trying to decide who or what owns enough truth to make wrong-node,
 failover, and convergence behavior stop depending on operator folklore.
+
+That is why this page has to stay strict about fake differentiation.
+Some options differ mostly in syntax and ecosystem.
+Others differ in where truth ownership moves.
+Only the second kind of difference really matters here.
 
 What it does not prove:
 
@@ -518,6 +570,19 @@ Where no scheduler alone is enough:
 - storage durability and portability
 
 Different platform choices solve different subsets of those classes.
+
+## Strongest honest current answer
+
+The shortest defensible platform answer today is:
+
+> The live repo is still concretely Compose-first, the helper and coordination
+> burden is already real enough that plain Compose is no longer the full story,
+> several future control-plane families remain genuinely relevant because they
+> address different missing truth classes, and no current evidence proves that
+> one whole-stack future has already earned promotion over the others.
+
+That answer is less emotionally satisfying than a winner.
+It is also much closer to the truth the repo has currently earned.
 That is why the decision surface remains open.
 
 It is also why the repo should be suspicious of any page that makes the choice

@@ -23,6 +23,18 @@ The repeated pattern is:
 - still no runtime truth that makes the receiving node stop being
   semantically wrong on the bad day
 
+This page therefore has to do more than list ingress ingredients.
+It has to filter against false emotional closure.
+The wrong reader reaction would be:
+
+- there is Cloudflare
+- there is Traefik
+- there are healthchecks
+- there is a fallback-looking helper
+- therefore the ingress problem is mostly handled
+
+That reaction is exactly what this page has to prevent.
+
 It also exists because the archive shows how quickly answers regress into edge
 theater:
 
@@ -106,6 +118,19 @@ The archive evidence for that pressure is unusually direct:
 ## Evidence classes this page relies on
 
 This page uses all four evidence classes, but not equally.
+
+## Quick claim router
+
+Use this map before letting any ingress sentence become confident:
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "the edge stack is real and serious" | Class 1 | `docker-compose.yml`, `compose/docker-compose.coolify-proxy.yml`, `compose/docker-compose.docs.yml`, `compose/docker-compose.core.yml` | that wrong-node survival is end-to-end solved |
+| "the repo wants any-node entry plus peer forwarding" | Class 2 | `.github/copilot-instructions.md`, `README.md` | that the tracked runtime already performs that contract |
+| "the repo already knows where current ingress breaks" | Class 3 | `docs/osvc_ingress_ha.md`, `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that the repair path is live |
+| "the user rejects ordinary load-balancer answers" | Class 4 | archive conversations linked below | that ecosystem dissatisfaction itself proves a local technical result |
+
+If a paragraph crosses rows, it should say which row is doing which work.
 
 ## Class 1: live implementation evidence
 
@@ -224,6 +249,18 @@ serious.
 The question is whether they currently make the Compose-first any-node-entry
 dream more true without silently reinstalling a sacred public node in practice.
 
+That means this page should always keep four subquestions separate:
+
+1. Can traffic hit more than one node?
+2. Can the receiving node know whether it is the right node?
+3. Can the receiving node find a healthy eligible peer if it is the wrong one?
+4. Can the request preserve auth, middleware, and service meaning while doing
+   that?
+
+Most ecosystem answers stop after question 1.
+Many stronger-looking answers stop after question 2.
+This repo is still trying to earn honest yeses to questions 3 and 4.
+
 ## 3. The docs site is routed through the same ingress story
 
 [`compose/docker-compose.docs.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.docs.yml)
@@ -280,6 +317,12 @@ The current root runtime does not, by itself, prove:
 - that peer eligibility is based on trusted current-state convergence
 - that auth and middleware remain semantically identical during fallback
 - that the ingress story is equally mature for HTTP and raw TCP
+
+That missing proof should be read as a routing-fidelity gap, not a cosmetic
+gap.
+The danger is not merely that the docs would be slightly optimistic.
+The danger is that they would declare relief before the system has actually
+stopped cheating with hidden human interpretation.
 
 This is also where the docs have to resist turning "the ingress stack is
 substantial" into "the ingress problem is mostly solved."
@@ -396,6 +439,22 @@ The user is not asking for a thing called "ingress HA."
 The user is asking for the smallest truthful machinery that stops the first
 healthy wrong node from becoming an interpretive error.
 
+That should also control future wording.
+
+Good wording:
+
+- "multi-node first-hop entry is supported as intent"
+- "the live edge is substantial"
+- "shared placement truth is still absent from the tracked root runtime"
+- "route-preserving peer fallback is still below proof threshold"
+
+Bad wording:
+
+- "ingress HA is basically there"
+- "the stack already supports distributed failover"
+- "Traefik plus Cloudflare solves the problem"
+- "dynamic generation closes wrong-node routing"
+
 ## 3. The planning layer sharpens the subproblem split
 
 [`docs/osvc_ingress_ha.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/osvc_ingress_ha.md)
@@ -510,6 +569,20 @@ generic proxy-failover standard.
 
 The generic standard asks whether packets and responses survived.
 The user's standard asks whether the architecture stopped cheating.
+
+## Strongest honest current answer
+
+If a reader asks, "What do we actually know right now?" the shortest
+defensible answer is:
+
+> The tracked Compose-first runtime already has a serious ingress stack and the
+> repo explicitly wants any-node entry with local-first or peer-forward
+> handling, but the priority runtime still lacks shared tracked placement truth
+> and still does not prove end-to-end wrong-node request preservation with
+> stable auth, middleware, and service semantics.
+
+Anything stronger than that needs stronger evidence than this page currently
+has.
 
 ## The strongest honest current claim
 

@@ -62,6 +62,10 @@ still lives on one disk path, one elected node that is not actually
 replaceable yet, or one reconnect story that only works in the flattering
 sequence.
 
+This page therefore cannot let "multiple nodes exist" do emotional work it has
+not technically earned.
+For state, that mistake is costlier than almost anywhere else in the repo.
+
 ## Evidence classes this page relies on
 
 ### Class 1: live implementation evidence
@@ -93,6 +97,18 @@ Used for:
 
 - why fake HA language is unacceptable
 - why node survival is not enough if state authority is still singular
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "the priority runtime already depends on stateful systems" | Class 1 | `compose/docker-compose.core.yml`, `compose/docker-compose.firecrawl.yml`, other active Compose fragments | that those systems already run in resilient topologies |
+| "the repo explicitly separates ingress continuity from data correctness" | Class 2 + Class 3 | `README.md`, `docs/stateful_ha_plan.md`, `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that the runtime already enforces that separation cleanly in practice |
+| "the intended stateful futures are sharper than the live runtime" | Class 3 | `docs/stateful_ha_plan.md` | that Redis Sentinel, Replica Set, or cautious Postgres paths are already live |
+| "the user rejects fake stateful HA language" | Class 4 | archive-pressure pages and source archive | that archive frustration itself proves a working topology |
+
+If a stateful sentence is not routable through this table, it is probably
+borrowing confidence from a nearby non-stateful success surface.
 
 ## Strongest live stateful anchors
 
@@ -190,6 +206,11 @@ The live runtime does not, by itself, prove:
 - Postgres promotion, fencing, or reconnect behavior
 - storage portability beyond node-local bind mounts
 - service-class-specific failover maturity
+
+That means the live runtime is currently stronger at proving stateful exposure
+than stateful anti-SPOF.
+Those are not adjacent achievements.
+They are different proof classes and should stay separated.
 
 That missing proof is the main reason stateful HA has to stay separate from
 ingress rhetoric.
@@ -412,6 +433,20 @@ Without that chain, the only honest label remains partial or planned.
 And that is not a disappointing label.
 It is the label that prevents the repo from copying the same false closure it
 rejects elsewhere.
+
+## Strongest honest current answer
+
+If a reader asks, "So what do we actually know about state right now?" the
+shortest defensible answer is:
+
+> The priority runtime already depends on several real stateful systems and the
+> repo is unusually explicit that ingress or scheduler cleverness cannot fake
+> their correctness, but the tracked runtime still mainly proves node-local
+> durable dependency rather than replicated, election-safe, client-correct,
+> storage-portable stateful HA.
+
+Anything stronger than that needs service-class-specific topology evidence that
+the root runtime does not yet provide.
 
 ## Operational reading
 

@@ -90,6 +90,18 @@ The stricter version is:
 - a coherent module is not yet a removed humiliation
 - a named control surface is not yet a shared truth surface
 
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "the repo understands the wound clearly" | Class 3 | `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that the live runtime already owns the planned truth surfaces |
+| "the repo wants a thinner middle layer before heavyweight promotion" | Class 2 + Class 3 | `.github/copilot-instructions.md`, `README.md`, `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that heavyweight promotion is permanently ruled out |
+| "the hidden burden is distributed truth, not lack of tools" | Class 3 + Class 4 | master plan plus archive-pressure pages | that naming the burden already removes it |
+| "specific modules are promising" | Class 3 | `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that those modules are active, validated, or ownership-complete |
+
+If a paragraph cannot be mapped cleanly here, it is probably flattening the
+plan into a stronger present tense than the repo has earned.
+
 ## The fastest correct reading of the master plan
 
 This page should let the reader recover the useful summary immediately:
@@ -328,6 +340,20 @@ They should instead be judged by what hidden burden they are trying to remove.
 
 That table matters because the user is not mainly asking for more architecture.
 They are asking for less private burden at request time and failure time.
+
+## Strongest honest current answer
+
+If a reader asks, "What does the master plan actually buy us today?" the
+shortest defensible answer is:
+
+> The master plan proves the repo understands that the real missing layer is
+> distributed truth ownership rather than lack of components, and it sketches a
+> thinner control layer intended to externalize placement, convergence,
+> failover, and portability burdens without immediately surrendering to a full
+> heavyweight orchestrator. It does not prove that those truth surfaces are
+> already live, trusted, or ownership-complete in the tracked runtime.
+
+Anything calmer or stronger than that is probably overreading the plan.
 
 ## What the master plan does not prove
 

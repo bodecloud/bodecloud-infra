@@ -15,6 +15,15 @@ It is closer to an anti-inflation device for the entire knowledgebase.
 Its job is to keep the rest of the site from gaining confidence faster than the
 repo gains shared truth.
 
+It also needs to function as a retrieval discipline, not a style note.
+The point is not merely "be careful what you claim."
+The point is:
+
+- route each sentence to the right authority surface
+- refuse evidence-class upgrades
+- preserve the user's actual negative benchmark
+- stop pages from sounding satisfying for the wrong reason
+
 There is a more specific version of that complaint underneath the wording:
 
 the docs kept reconstructing a smaller dream than the user actually has.
@@ -88,6 +97,29 @@ equivalence.
 Two claims can be adjacent in ordinary infrastructure language while being very
 far apart in terms of whether they actually cross one of the user's real
 negative benchmarks.
+
+## What a retrieval-like page must do
+
+If a page in this site is actually doing retrieval rather than polished
+compression, it should let a reader recover all of the following quickly:
+
+- which question is being answered
+- which source class is allowed to answer that question
+- which stronger-sounding claims are being refused
+- which hidden operator burden is still not externalized
+- which next proof class would be required to move the claim upward
+
+If any of those are missing, the page is still vulnerable to flattening.
+
+The most common flattening pattern is:
+
+- archive pressure names the wound clearly
+- repo intent names the dream clearly
+- live runtime shows some serious components
+- planning text proposes a repair
+- the docs quietly fuse those into one present-tense feeling of progress
+
+That fusion is what this ledger is here to stop.
 
 This ledger exists so those gaps stay named instead of being smoothed into
 confidence.
@@ -216,6 +248,42 @@ The benchmark remains harsher:
 - can the system externalize current truth?
 - can recovery survive without private operator recollection becoming the real
   control plane?
+
+## Claim router
+
+Before a page makes a strong sentence, it should be possible to route that
+sentence through this table.
+
+| If the sentence is really about... | Primary evidence class | Strongest local anchors | The sentence must still refuse to imply... |
+| --- | --- | --- | --- |
+| what is live in the priority runtime | Class 1 | `docker-compose.yml`, `compose/docker-compose.*.yml`, `docker compose config` | wrong-node correctness, failover survival, stateful HA, or distributed truth ownership |
+| what the repo is explicitly trying to become | Class 2 | `.github/copilot-instructions.md`, `README.md`, `AGENTS.md`, `.cursorrules` | that intent has already crossed into shipped behavior |
+| what gap structure the repo already recognizes | Class 3 | `docs/INFRASTRUCTURE_MASTER_PLAN.md`, `docs/stateful_ha_plan.md`, `docs/osvc_ingress_ha.md`, brainstorm docs | that a named repair path is already active or validated |
+| what the user keeps rejecting or refusing | Class 4 | `knowledgebase/source-archive/`, `archive-pressure-patterns.md`, archive-linked evidence pages | that recurring frustration itself proves implementation or promotion maturity |
+
+If a sentence draws on more than one class, the page should say so explicitly
+instead of allowing the reader to hear one blended "architecture" voice.
+
+## Anti-adjacency checks
+
+These checks belong on every serious page in the site.
+
+Before accepting a sentence, ask:
+
+1. Is this sentence answering the user's real question, or a nearby easier
+   question?
+2. Did the sentence just borrow emotional force from a stronger adjacent claim?
+3. Did a plan, archive thread, or component list just get upgraded into
+   runtime confidence?
+4. Did "serious infrastructure" get substituted for "removed operator burden"?
+5. Did the sentence make first-hop redundancy sound like route-preserving
+   correctness?
+6. Did the sentence make reachability sound like authority continuity?
+7. Did the sentence make a helper sound smaller than the truth it is quietly
+   accumulating?
+
+If the answer to any of those is yes, the sentence is too flattering for this
+repo.
 
 ## The evidence classes
 
@@ -443,6 +511,24 @@ The practical meaning of the evidence classes is:
 - elegant design language never outranks a weaker current implementation
 - operator frustration recovered from the archive can sharpen the question, but
   still cannot impersonate shipped proof
+
+Another practical rule belongs here:
+
+a page should name the next required proof class whenever it approaches a
+ceiling.
+
+Examples:
+
+- if the page is living on Class 2 intent, it should say what Class 1 runtime
+  artifact would be needed to upgrade the claim
+- if the page is living on Class 3 planning evidence, it should say what live
+  exercised behavior would be needed to stop calling it planning
+- if the page is living on Class 1 component evidence, it should say what
+  failure-path proof would be needed to convert component presence into
+  preserved behavior
+
+Without that upward-proof rule, the docs can stay honest in theory while still
+leaving readers with the wrong felt level of closure.
 
 The archive can tell us what the user is really rebelling against.
 It cannot tell us that the current runtime has defeated it.
