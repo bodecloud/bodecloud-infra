@@ -85,6 +85,19 @@ The user is not merely asking for packets to arrive.
 They are asking for the wrong healthy node to stop acting stupid when it is not
 the owner node.
 
+## The one event this page is really about
+
+This entire repo can be reduced to one embarrassing event:
+
+1. a public request lands on a healthy node
+2. the requested service is not actually local there
+3. the node must decide what to do
+4. the decision must be right for this route class
+5. the explanation must exist outside one operator's head
+
+If a page, helper, or architecture proposal does not improve that event, it is
+probably orbiting the problem instead of solving it.
+
 ## The live request actors already present now
 
 From the root runtime and active fragments, the present request path already
@@ -187,6 +200,11 @@ These are the most useful first-pass routes because they are:
 - good proof candidates
 - less likely to hide authority ambiguity
 
+They are also the fairest early test of the repo's promise.
+If the stack cannot make one low-state HTTP route survive wrong-node entry with
+an inspectable explanation, then louder HA language elsewhere is almost
+certainly premature.
+
 ### Hop 1: DNS and public entry
 
 What is live now:
@@ -240,6 +258,26 @@ Private sentence still surviving after Hop 2:
 
 > the route matched, but I still personally know that route execution is
 > weaker than distributed backend truth
+
+### Hop 2.5: the missing decision point
+
+This is the hop many infra writeups skip because it is socially awkward.
+
+The missing question is:
+
+> once the route is known, what tells this node whether it is the owner node or
+> merely the first-hop node?
+
+That is where placement truth and peer-eligibility truth would have to appear
+if the contract were becoming real.
+
+Without that layer, the walkthrough silently mutates into:
+
+1. hostname matched
+2. a human knows what should happen
+3. therefore the route story feels understandable
+
+That is the exact move this repo is trying to escape.
 
 ### Hop 3: middleware and auth policy are applied
 
@@ -409,6 +447,14 @@ The repo already records this pressure around `docker-gen-failover`.
 
 So backend-loss has to stay distinct from wrong-node success.
 
+Another way to say the same thing:
+
+- wrong-node success asks whether the first-hop mistake can be corrected
+- backend-loss success asks whether the correction path survives the damage
+
+The user is frustrated because many options solve one of those socially and not
+the other operationally.
+
 Wrong-node success means:
 
 - the request landed on a non-owner node
@@ -440,6 +486,20 @@ solved:
 - route-rich Compose fragments
 
 But helper presence alone still does not count as wrong-node proof.
+
+## The actual deliverable this page is pushing toward
+
+The real deliverable is not a smoother explanation of a hypothetical path.
+It is one preserved route packet that can answer all of these:
+
+- which node received the request first?
+- why was it the wrong node?
+- what shared truth named the real owner?
+- why was the chosen peer valid now?
+- what visible route semantics stayed the same?
+- what artifact lets a second operator inspect that answer later?
+
+Until one packet like that exists, this page is still primarily a warning page.
 
 The user is specifically tired of:
 

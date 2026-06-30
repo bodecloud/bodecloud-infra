@@ -176,6 +176,27 @@ Concrete runtime facts worth remembering before any drill:
 Those facts matter because the runtime is broad enough that sloppy testing will
 over-upgrade very easily.
 
+## The runbook is downstream of one exact contract
+
+Before running anything, keep the repo's target contract in mind:
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+That contract changes what "testing" means.
+
+For example:
+
+- if you only proved a local route answers, you did not test the contract
+- if you only proved a peer is reachable, you did not test the contract
+- if you only proved Traefik rendered a route, you did not test the contract
+
+You only start testing the contract once the receiving node is forced to reveal
+how much distributed truth it really owns.
+
 ## The route classes must stay separate during testing
 
 Do not run one pass and narrate it as if all route classes benefited equally.

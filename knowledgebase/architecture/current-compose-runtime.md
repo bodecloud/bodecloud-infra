@@ -69,6 +69,24 @@ It still does not prove the decisive thing the user is actually asking for:
 That gap is the whole reason the repo can feel both serious and still
 insufficient at the same time.
 
+## What the runtime already does prove about the user's dream
+
+The current Compose runtime is strong enough to prove that the user is not
+chasing a fantasy architecture from scratch.
+
+It proves the repo already has:
+
+- enough edge machinery to make wrong-node behavior a real concern
+- enough protected surfaces that middleware continuity is no longer optional
+- enough TCP and stateful surfaces that sloppy HA language becomes dangerous
+- enough helpers and observability that "we have no options" is no longer the
+  problem
+
+That last point matters.
+The user's frustration is not lack of components.
+It is lack of smaller honest control surfaces that turn all of those
+components into inspectable distributed decisions.
+
 ## Root runtime facts that are definitely live
 
 ### Active include set
@@ -213,6 +231,11 @@ That proves the repo is already growing helper behavior around Compose.
 It does not prove that the helper owns trustworthy route survival under the
 exact backend-loss event that makes the user angry.
 
+This is one of the clearest examples of why the docs must stay strict.
+The runtime already contains enough moving parts to impersonate a solution.
+That is precisely why inventory pages have to keep saying "present" instead of
+"earned."
+
 ### Headscale-backed private reachability is already real
 
 The active Headscale fragment still points to SQLite:
@@ -258,6 +281,8 @@ without the operator privately finishing the story.
 ## Fragment-by-fragment runtime ledger
 
 The best way to read the current runtime is not as one flat service dump.
+It is as a list of real subsystems that now make stronger architectural claims
+possible, but not yet automatically legal.
 It is as a ledger of which burden each fragment is already trying to absorb.
 
 ### `compose/docker-compose.coolify-proxy.yml`
