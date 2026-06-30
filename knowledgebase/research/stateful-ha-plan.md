@@ -1,613 +1,320 @@
-# Stateful HA Plan: Where the Repo Refuses to Lie
+# Stateful HA Plan: Which Truths Get Earned First
 
-This page is about sequencing, not product shopping.
+This page is about sequencing.
+It is not a product catalogue and not a permission slip to call the stack
+statefully resilient early.
 
-It asks a much stricter question:
+The question here is:
 
-> Which parts of stateful resilience is `bolabaden-infra` actually prepared to
-> solve honestly first, and which parts must stay explicitly deferred until the
-> surrounding ingress, placement, and failover layers stop being fragile?
+> which parts of stateful resilience can `bolabaden-infra` harden honestly
+> first, and which parts must remain explicitly deferred until the surrounding
+> routing, placement, and authority surfaces stop depending on private human
+> truth?
 
-That question matters because stateful HA is where infrastructure docs most
-often become fraudulent without meaning to.
-It is also where the repo would be easiest to "finish" on paper while leaving
-the real pain intact.
-For stateful systems especially, the docs need to preserve the stricter rule
-behind this rewrite:
+That wording matters because stateful HA is where infrastructure writing most
+easily becomes fraudulent without intending to.
 
-- do not compress the hard problem into a cleaner adjacent problem
-- do not discard contradiction because it complicates the story
-- do not turn partial likeness into authoritative sameness
+The docs can get sharper.
+The diagrams can get cleaner.
+The repo can still be one bad failure away from the same old answer:
 
-Those rules matter here more than almost anywhere else in the repo because
-stateful HA is where people are most tempted to mistake disciplined language
-for solved burden.
-
-The prose can become sharper, the topology can become cleaner, the plan can
-become more mature, and the repo can still be one bad failure away from the
-same old answer:
-
-- one box mattered
-- one writer mattered
-- one recovery ritual mattered
-- one human still knew the truth better than the system
+- one box still mattered
+- one writer still mattered
+- one recovery ritual still mattered
+- one human still knew the topology better than the system
 
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
 
-- define the order in which stateful hardening can become honest
-- explain which stateful subproblems must stay separate
-- connect live runtime statefulness to possible next promotion paths
-- preserve the repo's refusal to counterfeit stateful HA from ingress progress
+- define the order in which stateful hardening becomes honest
+- separate stateful subproblems that the ecosystem keeps collapsing together
+- explain which service classes deserve earlier hardening and which do not
+- preserve the repo's refusal to counterfeit stateful dignity from ingress
+  progress
 
 This page is not allowed to:
 
-- imply that the root stack already has broad stateful HA
-- treat the existence of an L4 path as proof of replicated authority
-- collapse sequencing discipline into an implementation completion claim
-- suggest every state-bearing workload is on the same hardening path
-
-## What still does not count as stateful HA in this repo
-
-The following still do not count as stateful resilience here:
-
-- a port answering after a restart
-- a container getting recreated on another node
-- an HAProxy or Traefik route continuing to exist
-- a replica process existing without proven authority semantics
-- storage being mounted from a path that merely looks shared
-- dashboards staying green while write ownership is still unclear
-
-This repo needs stricter language because state is where fake adulthood is
-easiest to stage.
-
-That phrase should stay central.
-
-Stateful adulthood theater usually looks like:
-
-- more replicas
-- more cluster nouns
-- more diagrams
-- more process around a failure
-
-while the underlying question remains privately unresolved:
-
-> who could actually write, who decided that, and how would a newcomer prove
-> it without asking the operator?
-
-## Quick claim router
-
-If the question is:
-
-- "What is the repo actually prepared to harden first for stateful systems?"
-  this page is a primary answer.
-- "Does the current runtime already prove stateful anti-SPOF?" no.
-- "Is this a product recommendation page?" no. It is a sequencing and honesty
-  page first.
-- "Can this page stand in for workload-specific proof?" no. Use the evidence
-  and architecture pages for that.
-
-## Why this page exists
-
-The user is clearly frustrated with fake availability stories.
-
-Stateful systems are where the fake version of HA is easiest to accidentally
-sell:
-
-- the container restarts
-- the port answers
-- the dashboard turns green
-- the proxy route exists
-
-but:
-
-- write authority is unclear
-- client topology assumptions are wrong
-- storage is still node-local truth
-- promotion behavior is untested
-- failover correctness is wishful
-
-This page exists to keep the repo from telling that lie.
-It also exists because this is one of the few places where the user is
-explicitly demanding that the docs not help the system gaslight itself.
-
-That is not rhetorical excess.
-
-The gaslighting risk is real whenever the docs start letting adjacent success
-stand in for authority success:
-
-- route success
-- restart success
-- dashboard success
-- "clustered" branding success
-
-That sentence matters because stateful infrastructure is where the whole
-project could most easily retreat into fake adulthood:
-
-- more replicas
-- more ports
-- more diagrams
-- more cluster words
-
-while the operator still privately knows that one machine, one disk path, or
-one manual recovery ritual remains the real authority.
-
-This page should keep refusing that retreat.
-
-If it ever becomes more comfortable than accusatory, it probably got worse.
-The point is not to keep the docs agitated for style.
-The point is to stop stateful planning from becoming another socially polished
-way of hiding singular truth.
-
-## Evidence classes used here
-
-This page blends:
-
-- live-root evidence from the active Compose-first runtime
-- repo-direction evidence from planning and architecture docs
-- stateful-side-path evidence from L4 ingress and OpenSVC-related work
-
-It does **not** claim that the entire root stack already has broad stateful HA.
-
-## The strongest principle the repo already understands
-
-The single most important principle in the current docs is:
-
-> moving a container or preserving a port is not the same as making state
-> survive node loss.
-
-That instinct is consistent across:
-
-- [`docs/stateful_ha_plan.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/stateful_ha_plan.md)
-- [`knowledgebase/architecture/stateful-ha-and-data.md`](../architecture/stateful-ha-and-data.md)
-- [`knowledgebase/research/stateful-ha-evidence.md`](stateful-ha-evidence.md)
-
-It is one of the healthiest instincts in the entire repo, because it directly
-resists shallow HA theater.
-That instinct is more than a caveat.
-It is one of the repo's clearest philosophical boundaries:
-
-the system is allowed to become more reachable before it becomes more honest
-about state only if the docs never confuse those two kinds of progress.
-
-That sentence is one of the most important burden-faithful lines in the whole
-knowledgebase.
-
-If later pages flatten it into:
-
-- "network first"
-- "transport first"
-- "availability first"
-
-then the hard part has already been softened.
-The actual warning is harsher:
-
-reachability progress becomes dangerous the moment it starts borrowing
-authority language it has not earned.
+- imply the current root runtime already has broad stateful HA
+- treat an L4 path as proof of preserved writer authority
+- suggest every stateful workload should graduate to the same cluster pattern
+- let planning coherence masquerade as live capability
 
 ## Strongest honest current answer
 
-The strongest honest current answer is that the repo already knows the right
-stateful lesson, but it has not yet earned broad stateful resilience. The real
-progress here is intellectual and architectural discipline: ingress and
-wrong-node behavior can improve first, while only a narrow set of stateful
-services should be hardened next, and only under much stricter authority,
-storage, and client-behavior rules than the rest of the stack.
+The strongest honest current answer is:
 
-## What a real stateful proof packet would need
+- the repo already understands the right stateful lesson
+- it has not yet earned broad stateful resilience
+- the right near-term move is not "cluster everything"
+- the right near-term move is to harden a small number of truths in the right
+  order while refusing to lie about everything else
 
-Before any workload here gets described as honestly resilient, a proof packet
-should identify at least:
+That is not hesitation.
+That is sequencing discipline.
 
-- the authoritative writer or leader model
-- how promotion or election actually occurs
-- what storage substrate preserves the authoritative dataset
-- what failure was introduced on purpose
-- what the client observed before, during, and after failover
-- what evidence shows continuity rather than mere reachability
+## The stateful trap this plan is trying to avoid
 
-Without that packet, the repo is only allowed to say:
+Stateful fake adulthood usually looks like:
 
-- "candidate topology exists"
-- "routing path exists"
-- or "hardening plan exists"
+- more replicas
+- more cluster nouns
+- more dashboards
+- more failover diagrams
 
-not "stateful HA exists."
+while the private truth stays basically unchanged:
 
-## The repo's actual near-term stateful priority
+> I still know which node really matters, which copy is authoritative, and how
+> recovery is supposed to work.
 
-The repo does **not** read like it wants to solve every distributed-storage
-problem immediately.
+This plan exists to stop the repo from becoming more elaborate while preserving
+the same private operator burden.
 
+## What still does not count as stateful progress here
+
+The following still do not count as honest stateful resilience:
+
+- a port answering after restart
+- a container moving to another node
+- a proxy route continuing to exist
+- storage living on a path that merely sounds durable
+- a replica process existing without proven authority semantics
+- a cluster story that never forces client rediscovery and fencing questions
+
+If a page becomes emotionally relieving by leaning on those signals, it is
+probably softening the real problem instead of solving it.
+
+## The repo's actual near-term stateful priorities
+
+The repo does not read like it wants to solve every distributed storage problem
+immediately.
 It reads like it wants to do something much more disciplined:
 
-1. make ingress and wrong-node behavior less fragile
-2. make placement and failover truth less dependent on human memory
-3. choose a small number of critical stateful systems to harden properly
-4. refuse to pretend that every bind-mounted service is now anti-SPOF
+1. make wrong-node and ingress behavior less humiliating
+2. make placement truth less dependent on human memory
+3. choose a very small number of stateful systems to harden properly
+4. refuse to pretend every bind-mounted service is now anti-SPOF
 
-That is not hesitation. It is sequencing discipline.
-It is the repo refusing the usual trap where the desire for a complete story
-causes people to overstate what the first stateful hardening step will buy.
+That sequence matters because stateful correctness built on top of routing
+ambiguity and placement folklore is just a fancier lie.
 
-It is also a refusal to buy dignity theater.
+## Stage 0: Keep the accusation alive
 
-The repo is not trying to feel grown up faster.
-It is trying to avoid the more humiliating failure where a bigger stateful
-story gets written down before any concrete workload has actually stopped
-depending on private human truth.
+Before any technical sequence, the repo has to preserve the accusation that
+created it:
 
-## Why sequencing matters so much here
+- the ecosystem keeps pretending the only serious options are manual folklore
+  or a heavyweight orchestrator worldview
+- "multi-node" often means little more than multiple places a request can die
+- many self-hosting stacks sound flexible until the request hits the wrong node
+  or the authority disk disappears
 
-If the repo tries to solve all of these at once:
+If the docs lose that accusation, the plan becomes calmer and less useful.
 
-- any-node ingress
-- peer forwarding
-- failover route generation
-- service relocation
-- replicated storage
-- app-specific state semantics
+## Stage 1: Fix request-path truth before claiming state-path truth
 
-then every category becomes harder to reason about, and the system starts lying
-through sheer complexity overload.
+The first hard prerequisite to honest stateful hardening is that the repo get
+better at request-path truth:
 
-The current plan is strongest when it refuses that trap.
+- any healthy public node can receive the request
+- that node can distinguish local service versus remote service
+- remote service forwarding preserves policy, auth, and operator visibility
+- wrong-node success is not just lucky local placement
 
-It also lines up with the user's deeper frustration about lack of genuine
-options.
-Stateful infrastructure is one of the clearest places where the ecosystem
-pretends there are only two choices:
+Why this stage comes first:
 
-- stay naive and node-local
-- or immediately adopt the heaviest distributed answer in sight
+- if requests already fail when they land on the wrong healthy node, then
+  replicated state underneath does not restore dignity
+- otherwise the repo risks building better writer topology under a request
+  plane that still humiliates the user first
 
-This repo is trying to make a narrower, more service-specific path visible
-instead.
+This stage still does not prove stateful HA.
+It only removes one adjacent source of confusion.
 
-That is one of the clearest ways this documentation differs from generic
-infrastructure advice.
+## Stage 2: Make placement truth explicit instead of social
 
-Generic advice often wants one stateful answer category.
-This repo keeps insisting that the meaningful question is smaller and meaner:
+Before the repo can claim serious stateful promotion paths, it needs better
+current-state truth about where things actually live now.
 
-- which workload
-- which authority model
-- which storage truth
-- which client behavior
-- which failure
+That means some equivalent of:
 
-That path only stays honest if every workload keeps its own proof burden.
-The repo should resist any temptation to say:
+- explicit placement truth
+- explicit backend truth
+- explicit peer eligibility truth
+- fewer cases where the operator knows more than the system can say
 
-- Redis progress means database progress
-- L4 routing progress means authority progress
-- one successful failover demo generalizes across all stateful surfaces
+This is where lightweight current-state registry ideas matter.
 
-## Current implementation evidence that shapes the plan
+Without this stage, stateful promotion still depends too much on private human
+memory:
 
-The live runtime already includes meaningful state-bearing services directly in
-the priority implementation and active fragments, including:
+- where the workload was running
+- which peer should receive the handoff
+- which clients need to be pointed elsewhere
 
-- `redis`
-- `mongodb`
-- `rabbitmq`
-- `litellm-postgres`
-- `nuq-postgres`
-- many bind-mounted app and config paths under `${CONFIG_PATH}`-style storage
+This stage still does not prove stateful HA either.
+It only removes a large amount of invisible operator glue.
 
-The repo also contains a separate L4 ingress path:
+## Stage 3: Separate workload classes instead of solving "stateful" as one thing
 
-- [`compose/docker-compose.l4-ingress.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.l4-ingress.yml)
-- [`scripts/osvc_l4_sync.py`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/scripts/osvc_l4_sync.py)
+Once request truth and placement truth improve, the next honest move is not
+"turn on stateful HA for the repo."
 
-That matters because it proves the repo is already distinguishing between:
+The next move is to split workloads into service classes:
 
-- "can a client reach a TCP endpoint?"
-- and "is the data model behind that endpoint resilient?"
+- intentionally singular for now
+- candidate replicated single-writer
+- quorum and election worthy
+- not yet worth hardening because surrounding layers are still too fragile
 
-Those are not the same question.
-That distinction should keep reappearing because the user has already seen too
-many toolchains erase it.
+That classification itself is progress because it prevents fake equivalence.
 
-And once that distinction disappears, the docs start performing the same old
-trick:
+### Likely honest classification from the current repo
 
-- the endpoint exists
-- therefore the capability sounds real
-- therefore the burden sounds handled
-
-This page should keep breaking that chain on purpose.
-
-## The subproblems this plan has to keep separate
-
-If future docs collapse these into one checkbox labeled "HA," the repo will
-regress.
-
-## 1. Ingress reachability
-
-Can the client reach a live endpoint at all?
-
-This is the most superficial layer.
-
-It matters, but it proves the least.
-
-## 2. Role discovery
-
-Can the client or frontend path discover the correct:
-
-- primary
-- master
-- replica set seed list
-- valid backend role
-
-Without role discovery, a reachable port can still point at the wrong truth.
-
-## 3. Data continuity
-
-Does the authoritative dataset survive node loss and continue from the right
-source?
-
-This is the real stateful HA question.
-
-## 4. Storage substrate truth
-
-Is the storage implementation consistent with the failover story being told?
+#### A. Intentionally singular for now, but said brutally
 
 Examples:
 
-- bind mounts on one node do not become resilient because proxy logic got
-  smarter
-- shared filesystems impose their own failure and correctness semantics
-- database-native replication and quorum are different from filesystem
-  replication
+- Headscale control-plane authority
+- some app-specific Postgres or SQLite workloads whose client behavior and
+  promotion semantics are not yet owned
 
-## 5. Client failover behavior
+Honest sentence:
 
-Even if the backend topology is correct, do the actual clients reconnect,
-rediscover, and continue correctly?
+> This workload is important, persistent, and still singular enough that the
+> docs must not call it anti-SPOF.
 
-This is one of the easiest layers to forget and one of the easiest ways to
-declare success too early.
+That is not failure.
+That is the repo refusing to counterfeit dignity.
 
-## Redis: why it reads like an early serious candidate
+#### B. Candidate replicated single-writer workloads
 
-The repo points toward a Redis path involving:
+Examples:
 
-- Sentinel-style master election
-- HAProxy or L4 routing toward the active master
+- Redis
+- MongoDB
 
-That is a pragmatic fit for the repo's actual desire:
+Why these rise earlier:
 
-- one logical Redis entrypoint
-- automatic primary promotion
-- understandable L4 routing semantics
+- the repo already names plausible topologies for them
+- their role in the stack is central enough to matter
+- they are easier to reason about than "all volumes for all apps"
 
-It is attractive because it moves the repo beyond single-node Redis without
-forcing immediate adoption of a more complex distributed data model.
+But even here, the page must stay harsh:
 
-### What that path could prove if actually implemented and tested
+- Redis Sentinel or Mongo Replica Set vocabulary does not equal proof
+- client rediscovery matters as much as server promotion
+- fencing matters as much as election
 
-- a single node loss does not inherently destroy Redis availability
-- write traffic can converge toward a promoted master
-- clients do not require manual rewiring after every failover event
+#### C. Stateful graph workloads that need end-to-end recovery thinking
 
-### What it would still not prove by itself
+Examples:
 
-- that every Redis-using application in the repo tolerates failover correctly
-- that every client reconnect strategy is safe
-- that persistence and replica lag tradeoffs have been accepted consciously
+- Firecrawl with Redis + Postgres + RabbitMQ
 
-Redis is therefore a good early candidate, but not a universal proof of stateful
-HA maturity.
+Why this comes later:
 
-## MongoDB: why the repo treats it differently
+- the workload is not one datastore problem
+- it is a dependency graph problem
+- "the app came back" is too weak when the subsystems recover out of order or
+  preserve contradictory truths
 
-The repo's Mongo direction implies replica-set semantics, not just frontend
-port failover.
+These workloads should not be the first place the repo tries to feel mature.
 
-That is the correct instinct.
+#### D. Volume and shared-storage claims that should stay deferred
 
-MongoDB resilience is not honestly solved by:
+Examples:
 
-- a VIP
-- a shared port
-- or a simple TCP switch
+- broad bind-mount interchangeability
+- "just make the storage shared" narratives
 
-MongoDB needs topology-aware thinking:
+Why this comes later:
 
-- multiple members
-- client seed-list or SRV awareness
-- election behavior
-- replica lag and write concern decisions
+- shared storage can multiply complexity faster than it removes pain
+- the repo already knows node-local volumes are a real limitation
+- pretending they are easy to generalize early is one of the fastest ways to
+  produce infrastructure theater
 
-This is healthier than pretending that a dumb front door makes Mongo resilient.
+## Stage 4: Pick one or two stateful workloads and earn the proof packet
 
-## Postgres: why the repo stays cautious
+Only after the earlier stages should the repo harden a narrow stateful set in a
+way that earns stronger language.
 
-The repo's tone around Postgres is more restrained, and that restraint is one
-of the better signs in the whole knowledgebase.
+The proof packet for any chosen workload needs at least:
 
-Postgres HA usually imports heavier machinery:
+1. the authority model before failure
+2. the failure deliberately introduced
+3. the promotion or election mechanism
+4. the evidence that the old authority stopped being authoritative
+5. what the clients saw before, during, and after failover
+6. what storage truth preserved the authoritative dataset
+7. what contradiction still remains
 
-- Patroni-style coordination
-- repmgr-style promotion logic
-- consensus layers such as etcd or similar
-- sharper correctness risks around promotion, lag, and split-brain handling
+Without that packet, the repo may say:
 
-The repo appears to understand that Postgres is not the best place to perform a
-premature victory lap.
+- candidate topology exists
+- routing path exists
+- hardening plan exists
 
-That caution encodes a valuable priority judgment:
+It may not yet say:
 
-> do not enter the most complex stateful HA domain first while ingress,
-> placement, and convergence truth are still under active repair.
+- this workload is honestly resilient
 
-## RabbitMQ and message systems: the implied caution
+## Stage 5: Only then talk about broader stateful dignity
 
-Even where a broker can be reached through L4 or forwarded through another node,
-that still leaves major questions open:
+The repo earns broader stateful confidence only after at least one narrow
+workload demonstrates:
 
-- queue durability
-- mirrored or quorum queue behavior
-- reconnect semantics
-- consumer topology assumptions
+- preserved authority
+- correct promotion
+- correct client rediscovery
+- fencing
+- storage survival
 
-These systems are not solved merely because they fit behind a stable port.
+That matters because the user does not need another document that sounds like
+it has many options.
+The user needs proof that at least one option stopped being fake.
 
-## Files and bind-mounted application state: the plan's hardest honesty test
-
-This may be the hardest truth in the repo.
-
-Many services can look portable at the container layer while their real identity
-still lives in:
-
-- bind-mounted config
-- local media or app state
-- node-local databases
-- mutable files under `${CONFIG_PATH}` and similar trees
-
-That means much apparent multi-node flexibility still collapses back into local
-disk truth.
-
-The repo is right to resist pretending otherwise.
-This is probably one of the deepest frustrations under the whole project:
-the stack can look wide, modern, and peer-capable while its most important
-state still collapses back into one host path and one remembered rescue path.
-
-That is also why "more options" has felt fake to the user.
-Many supposed options only diversify the front-door story while leaving the
-real state authority exactly where it already was.
-
-### Why the repo is right to defer universal distributed-filesystem ambition
-
-Trying to solve all of this simultaneously would mean solving:
-
-- ingress
-- placement
-- failover routing
-- replicated storage
-- app-specific state semantics
-
-in one jump.
-
-That is exactly how fake completeness happens.
-
-## The L4 ingress path: what it changes and what it does not
-
-The presence of:
-
-- [`scripts/osvc_l4_sync.py`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/scripts/osvc_l4_sync.py)
-- [`compose/docker-compose.l4-ingress.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.l4-ingress.yml)
-
-shows that the repo is trying to expose TCP services behind generated HAProxy
-frontends and Tailscale-addressed backends.
-
-That is useful.
-
-But this path only changes:
-
-- how a client reaches a backend port
-- how multiple backends can be presented behind one logical TCP surface
-
-It does **not** by itself solve:
-
-- primary election
-- replica consistency
-- write continuity
-- storage durability
-- application-aware recovery logic
-
-That distinction should remain brutally explicit in every future stateful page.
-
-## The sequencing judgment the current plan encodes
-
-The repo appears to be making a deliberate priority call.
-
-### Solve earlier
-
-- honest ingress behavior
-- wrong-node routing that does not collapse into theater
-- placement awareness
-- opt-in TCP frontend generation
-- targeted hardening of Redis and MongoDB first
-
-### Treat cautiously or defer
-
-- universal shared storage stories
-- broad Postgres HA complexity
-- stack-wide claims that all bind-mounted services are now resilient
-- pretending every TCP-reachable service has become state-safe
-
-This is exactly the kind of sequencing the repo should be making.
-It is also a reminder that progress has to stay service-specific here.
-One hardened route or one replicated datastore should not bleed into a
-stack-wide stateful maturity claim.
-
-And one promoted tool should not be allowed to claim ownership of every
-stateful burden just because it participates in the path.
-
-The repo should keep asking, per service:
-
-- who owns authority
-- who owns discovery
-- who owns promotion
-- who owns storage truth
-- who owns client reconnection assumptions
-
-If those answers are still fragmented or private, the docs should say so even
-when the surrounding stack looks much more impressive.
-
-## What stronger proof would be required before broad stateful HA claims
-
-Before the repo can claim broad stateful HA, it would need stronger evidence of:
-
-- live replicated deployments for selected datastores
-- tested promotion and rejoin behavior
-- client configurations that actually tolerate failover
-- storage semantics that survive node loss
-- operational runbooks for split-brain, stale replica, rejoin, and resync cases
-- proof that ingress continuity and state continuity are aligned rather than
-  accidentally decoupled
-
-Without that, "stateful HA" should remain:
-
-- a plan category
-- a service-specific claim
-- or a tightly scoped experiment
-
-not a broad description of the stack.
-The repo needs language that can tolerate uneven maturity without treating that
-unevenness as failure.
-Otherwise every partial success gets narratively inflated just to avoid
-admitting the remaining wound.
-
-## What this page is trying to prevent
-
-This page exists to prevent four specific lies.
-
-### Lie 1: reachable port equals resilient service
-
-It does not.
-
-### Lie 2: failover proxy equals stateful continuity
-
-It does not.
-
-### Lie 3: database replicas equal application-level correctness
-
-They do not by themselves.
-
-### Lie 4: one hardened datastore path means the repo has solved stateful HA in general
-
-It has not.
+## Why "cluster everything" is the wrong first move
+
+If the repo tries to solve all of this at once:
+
+- any-node ingress
+- peer forwarding
+- current-state registry
+- Redis failover
+- Mongo failover
+- Postgres failover
+- queue semantics
+- shared storage
+
+then every category becomes harder to reason about, and the docs become easier
+to fake simply because the system is now too complicated to inspect honestly.
+
+The correct response to that complexity is not to write calmer prose.
+It is to reduce the number of truths being promoted at once.
+
+## The smallest honest roadmap for stateful dignity
+
+If this repo stays faithful to the user's actual dream, the smallest honest
+stateful roadmap looks something like:
+
+1. preserve the accusation and proof boundaries
+2. improve wrong-node request preservation first
+3. make placement truth explicit
+4. classify stateful workloads by honesty level
+5. choose one or two candidate replicated single-writer workloads
+6. earn proof packets for those workloads
+7. keep every other stateful workload brutally honest until it earns more
+
+That roadmap is less dramatic than "build a cluster."
+It is much closer to the kind of option set the user is actually demanding.
 
 ## Bottom line
 
-The stateful HA plan is strongest when read as a boundary-setting prioritization
-document, not a shopping list. It shows that the repo already understands the
-difference between reachable endpoints and durable state, and that it is trying
-to harden the most important service classes first instead of pretending all
-local data can become cluster-safe overnight. That is one of the most valuable
-forms of honesty in `bolabaden-infra`, and the docs should preserve it rather
-than smoothing it away.
+The user's dream is not a repo that sounds more distributed.
+It is a repo where a request, a writer, and a failure no longer force one human
+to secretly know the answer first.
+
+This plan should only promote steps that make that sentence less true.
+Everything else is choreography.
