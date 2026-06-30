@@ -2,82 +2,82 @@
 
 This page defines the actual architecture problem in `bolabaden-infra`.
 
-The problem is not:
+It is not:
 
-- "more clustering"
-- "better deployment hygiene"
-- "more mature infrastructure"
-- "better docs about self-hosting"
-- "choosing the right orchestrator"
+- better deployment hygiene
+- more modern infrastructure
+- more cluster-shaped diagrams
+- picking the "right" orchestrator
+- writing nicer docs about self-hosting
 
-The problem is:
+It is:
 
-> how do several ordinary Docker nodes become one request-preserving personal
-> cloud while
+> how do several ordinary Docker nodes become one believable request-preserving
+> personal cloud while
 > [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-> stays readable and the system stops leaning on one operator to remember where
-> the real topology truth lives?
+> remains readable and one operator stops being the hidden registry, hidden
+> peer selector, hidden route explainer, and hidden memory of where the real
+> topology truth lives?
 
-That question is stricter than generic HA language and smaller than "migrate to
-Kubernetes."
-It is also much closer to the user's actual frustration than most infrastructure
-summaries are willing to be.
-
-The repo is not just looking for more resilience.
-It is looking for a system that stops humiliating the operator by revealing,
-too late, that the operator was still the real keeper of placement, failover,
-and route-meaning truth.
+That sentence is harsher than ordinary HA prose on purpose.
+The user is not merely frustrated with outages.
+The user is frustrated with fake options that still collapse into private human
+glue once reality gets sharp.
 
 ## What this page is and is not allowed to prove
 
-This page is authoritative about:
+This page is allowed to prove:
 
 - the real problem the repo is trying to solve
-- the concrete requirement stack implied by that problem
-- which neighboring answers are still too small
-- why the no-Swarm dream is not reducible to generic HA language
+- the hidden burdens implied by that problem
+- why many neighboring answers are too small
+- why "no Swarm by default" is really a burden-accounting rule
 
-This page is not authoritative about:
+This page is not allowed to prove:
 
-- whether the current runtime already satisfies those requirements
-- whether one proposed helper layer has already won
-- whether a sharper problem statement makes the remaining gap small
+- that the current runtime already satisfies the problem
+- that one future helper layer has already won
+- that a sharper benchmark makes the remaining gap small
 
-This page is the benchmark, not the completion report.
+This page is the benchmark.
+It is not the completion report.
 
 ## The user's real demand
 
-The repo's strongest intent surfaces,
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md),
-[README.md](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md),
-and
-[knowledgebase/AGENTS.md](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/AGENTS.md),
-make the pressure explicit:
+The strongest intent surfaces in the repo make the pressure explicit:
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+- [knowledgebase/AGENTS.md](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/AGENTS.md)
+
+Together they imply:
 
 - do not default immediately to Swarm, Kubernetes, k3s, or another heavyweight
-  control plane
+  scheduler worldview
 - keep Compose as the real authoring and operator surface
-- make any healthy public node a plausible first hop
+- let any healthy public node be a plausible first hop
 - serve locally when locality exists
 - forward to a healthy peer when locality does not exist
-- do not fake HA by confusing reachability, DNS plurality, or proxy presence
-  with genuine burden transfer
+- do not counterfeit HA by confusing reachability, DNS plurality, or proxy
+  presence with transferred burden
 
-That is why the real question is not "what orchestrator should I use?"
+That is why the real question is not:
+
+> what orchestrator should I use?
 
 It is closer to:
 
 > can multiple ordinary Docker nodes become one believable platform without the
 > final truth still living in one human head?
 
-That is the dream this knowledgebase has to keep visible.
+That is the dream these docs have to keep visible.
 
-## The exact operating contract the dream is pointing at
+## The exact operating contract the dream points at
 
-The most useful sentence in the repo is not "multi-node" and it is not
-"anti-SPOF."
+The most useful sentence in the repo is not "multi-node."
+It is not even "anti-SPOF."
 
-It is the request contract preserved in
+It is the contract preserved in
 [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md):
 
 ```text
@@ -86,30 +86,30 @@ User -> Cloudflare DNS -> any surviving node
   service is remote -> forward to healthy peer that currently hosts it
 ```
 
-That is what the repo keeps trying to achieve without immediately surrendering
-to:
+That is the thing the repo keeps trying to achieve without immediately
+surrendering to:
 
 - Docker Swarm
 - Kubernetes or k3s
 - a giant scheduler that owns more truth than it can explain
 
-This matters because a lot of otherwise intelligent infrastructure writing
-quietly swaps that contract for smaller substitutes such as:
+Many otherwise intelligent summaries quietly replace that contract with smaller
+substitutes such as:
 
-- "multiple public nodes exist"
-- "Traefik is present on the edge"
-- "the route can probably be recreated elsewhere"
-- "there is some kind of failover helper"
+- multiple public nodes exist
+- Traefik is present on the edge
+- the route can probably be recreated elsewhere
+- some kind of failover helper exists
 
-Those are pieces of the environment.
+Those are environment facts.
 They are not the contract.
 
-## What "no Swarm by default" really means here
+## What "no Swarm by default" really means
 
-The no-Swarm or no-Kubernetes pressure should not be read as ideology.
-It is a burden-accounting rule.
+The no-Swarm or no-Kubernetes pressure is not ideology.
+It is burden accounting.
 
-The repo is effectively asking:
+The repo is really asking:
 
 > how much shared truth can we add before we have to promote ourselves into a
 > heavier control plane?
@@ -119,7 +119,7 @@ That is a different question from:
 > which orchestrator has the most features?
 
 The user is not angry because orchestrators exist.
-The user is angry because so many proposed answers only feel impressive while
+The user is angry because too many proposed answers only feel impressive while
 one operator still privately knows:
 
 - what runs where
@@ -127,9 +127,9 @@ one operator still privately knows:
 - which route still means the same thing after handoff
 - which fallback disappears under the exact failure that made it matter
 
-That is why "stay Compose-first" is not nostalgia.
-It is a demand to justify every promoted control layer by the hidden burden it
-actually removes.
+So "stay Compose-first" is not nostalgia.
+It is a demand to justify every promoted control layer by the hidden sentence
+it actually kills.
 
 ## The shortest exact problem statement
 
@@ -139,36 +139,37 @@ The repo is trying to do this:
 > shared truth that a request landing on the wrong healthy node does not turn
 > into guesswork, folklore, redirects, or fake failover.
 
-The key phrase is "shared truth."
-The repo is not starved for components.
-It is starved for smaller honest control surfaces that actually move truth out
-of private operator memory and into the system.
+The key phrase is `shared truth`.
+
+The repo is not short on components.
+It is short on smaller honest control surfaces that move decisive bad-day truth
+out of private operator memory and into the system.
 
 ## What the system must eventually know for itself
 
 If the dream becomes real, the system has to own more than "containers are up."
-It has to own decisive bad-day truths such as:
+It has to own bad-day truths such as:
 
 - where the requested service actually lives now
 - whether the receiving node should serve locally or forward
 - which peer is healthy and eligible for that specific route
-- whether auth, middleware, and headers survive the handoff unchanged
+- whether auth, middleware, and headers survive handoff unchanged
 - whether fallback still exists under the failure that made it necessary
 - whether the route class is stateless HTTP, protected HTTP, raw TCP, or a
-  stateful surface that needs stricter semantics
+  stateful surface requiring stricter semantics
 
-The user is not merely asking for these truths to be writable somewhere.
+The user is not merely asking for those truths to be writable somewhere.
 They are asking for them to become inspectable enough that the wrong receiving
 node does not need a human narrator to finish the story.
 
 If those truths still cash out into:
 
-- "well, privately we know where it runs"
+- "privately we know where it runs"
 - "in practice the operator knows which peer is safe"
 - "normally that hostname really belongs to node X"
 
-then the central problem is still alive, even if the surrounding stack looks
-much more serious.
+then the central problem is still alive, no matter how serious the surrounding
+stack looks.
 
 ## Why common answers still feel too small
 
@@ -177,17 +178,17 @@ intact.
 
 Examples:
 
-- DNS plurality helps more than one public node receive traffic, but it does
-  not prove the wrong node can preserve the request meaningfully
+- DNS plurality lets more than one public node receive traffic, but it does not
+  prove the wrong node can preserve the request meaningfully
 - Traefik helps with HTTP routing, but its presence alone does not prove
   peer-forward continuity or stateful correctness
 - healthchecks improve local truth, but they do not by themselves define
   peer eligibility
-- file sync, secret sync, and helper generation can reduce drift, but they do
-  not automatically create trustworthy current placement truth
+- sync loops can reduce drift, but they do not automatically create trustworthy
+  current placement truth
 - Swarm, Nomad, OpenSVC, k3s, or Kubernetes may eventually earn a place, but
-  only if they remove a concrete hidden burden rather than merely replacing one
-  kind of opacity with another
+  only if they remove a concrete hidden burden rather than replacing one kind
+  of opacity with another
 
 That is why the user's frustration is not just "there are too many options."
 It is:
@@ -197,7 +198,7 @@ It is:
 
 ## The wound behind the problem
 
-This page should preserve the lived failure scene, not smooth it away.
+This page should preserve the lived failure scene instead of smoothing it away.
 
 The user keeps hitting the same reveal:
 
@@ -220,7 +221,7 @@ are too polite if they replace the sharper truth:
 That sentence is not melodrama.
 It is the most faithful summary of the repo's actual pain.
 
-## What this repo is actually trying to make impossible
+## What the repo is trying to make impossible
 
 The repo is trying to make this scene stop being normal:
 
@@ -234,7 +235,7 @@ The repo is trying to make this scene stop being normal:
 That is the hidden work the platform is supposed to absorb.
 
 If one more proposed layer does not make that scene less dependent on private
-memory, then it is not yet attacking the central pain.
+memory, it is not attacking the central pain yet.
 
 ## Acceptance tests implied by the problem
 
@@ -252,37 +253,43 @@ A believable step forward should narrow at least one of these:
 In other words, a candidate layer matters only if it changes who owns the truth
 on the bad day.
 
-The acceptance tests for future architecture work therefore sound like:
+That means future architecture work should be judged by questions like:
 
 - can the receiving node determine locality or remote ownership from shared
   truth rather than memory?
 - can it choose a peer from eligibility truth rather than reachability alone?
-- can it preserve the same protected route semantics after forwarding?
-- can the fallback still work after the preferred backend disappears?
-- can stronger claims stay honest under direct inspection of the runtime?
+- can it preserve the same protected-route semantics after forwarding?
+- can the fallback survive the exact failure that made it relevant?
+- can the docs still say what remains forbidden after the improvement lands?
 
-Another way to say the same thing:
+## Goals, stated brutally
 
-- can the node explain its distributed decision from shared artifacts?
-- can the operator inspect the explanation after the fact?
-- can the explanation survive without socially reconstructing the topology?
+The goals are not:
 
-If the answer to those is still "not yet," then the remaining gap is not
-cosmetic.
-It is still the central unsolved fact.
+- sound clustered
+- look modern
+- get closer to industry standard
+- use bigger platform nouns sooner
+
+The goals are:
+
+1. make the healthy wrong node less dependent on one human's head
+2. move placement, eligibility, and fallback truth into inspectable system
+   state
+3. preserve the meaning of the request, not just packet delivery
+4. keep proof rules strict enough that stateful, TCP, and protected-route
+   claims do not borrow confidence from simpler lanes
+5. justify any promoted control layer by the exact private sentence it removes
 
 ## Bottom line
 
-The repo is not just building infrastructure.
-It is searching for the smallest honest middle layer between:
+The user's dream is not "multi-node infrastructure" in the abstract.
 
-- static multi-node Docker glue that still depends on private folklore
-- and a heavyweight orchestrator worldview that has not yet earned the right to
-  hide that much truth
+It is:
 
-That is the benchmark every later page should inherit.
+> a believable request-preserving personal cloud made out of ordinary Docker
+> nodes, where Compose remains inspectable and one human stops being the place
+> where the final answer still secretly lives.
 
-Better understanding of the problem is necessary.
-It is still not architecture progress by itself.
-Architecture progress only happens when one more decisive bad-day sentence stops
-living in private operator memory.
+If a page, tool, or architecture move loses that sentence, it is already
+drifting away from the point of the repo.
