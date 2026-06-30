@@ -18,6 +18,12 @@ It is dangerous in a very specific way:
 That is exactly the kind of documentation drift the rest of this knowledgebase
 is trying to stop.
 
+This page should therefore be read less like a summary and more like a
+corrective retrieval layer.
+Its job is not to make the master plan feel shorter.
+Its job is to stop the reader from remembering the wrong thing about the master
+plan after skimming it.
+
 It is also one of the easiest places to accidentally downgrade the user's real
 frustration into ordinary roadmap language.
 If this page turns into:
@@ -47,6 +53,10 @@ They also have to do something slightly harsher than ordinary roadmap hygiene:
 they have to keep saying whether the plan merely describes missing truth well,
 or whether the runtime already owns any of that truth directly.
 
+That distinction is not clerical.
+It is one of the main ways this site avoids becoming another polished retelling
+of the same hidden operator burden.
+
 ## The shortest honest reading
 
 The master plan proves that the repo has already stopped treating its problem
@@ -74,6 +84,12 @@ paper.
 
 That sentence is the main rule for reading the whole master plan.
 
+The stricter version is:
+
+- a better-described future is not yet a better-owned runtime
+- a coherent module is not yet a removed humiliation
+- a named control surface is not yet a shared truth surface
+
 ## The fastest correct reading of the master plan
 
 This page should let the reader recover the useful summary immediately:
@@ -86,6 +102,12 @@ This page should let the reader recover the useful summary immediately:
   reconstruction burden rather than merely diagramming it better
 
 If that summary is not obvious, the master plan is still too easy to overread.
+
+If the summary becomes calmer by deleting the user's actual complaint, this
+page has failed too.
+The complaint is not optional background color.
+It is the calibration mechanism that stops planning language from outranking
+runtime truth.
 
 ## Why this page needs to exist at all
 
@@ -120,6 +142,11 @@ cares about most:
 the system still only works honestly because a human privately knows which node,
 which route, or which authority is real.
 
+That is the negative benchmark this page should keep reasserting.
+If a module description still cashes out as "an experienced operator would know
+what to do here," the plan may be smart, but the user's dream is still only
+partially served.
+
 ## What the master plan clearly proves
 
 ## 1. The repo is deliberately searching for a thinner control layer before promoting a heavyweight orchestrator
@@ -135,6 +162,10 @@ That is not procrastination.
 It is architecture intent under pressure.
 It is the repo trying not to lose the last readable authoring surface before it
 has correctly identified which missing truths actually justify replacing it.
+
+This matters because the repo is not trying to preserve Compose out of nostalgia.
+It is trying to preserve the last directly inspectable layer until something
+else proves it can own the painful truths more honestly.
 
 This matters because the user is not just skeptical of Kubernetes or Nomad as
 brands.
@@ -186,6 +217,12 @@ together:
 - which peer is current
 - whether the route that exists now will still exist after failure
 
+That is also why the page should stay resistant to neat "module completion"
+interpretations.
+The hard part is not that the modules can be enumerated.
+The hard part is whether, taken together, they would move topology truth out of
+private memory and into inspectable shared surfaces.
+
 ### What this proves
 
 - the user's dominant pain is hidden coordination truth
@@ -221,6 +258,10 @@ It is closer to:
 
 > preserve the meaning of the request without requiring the operator to become
 > the hidden routing oracle
+
+That phrase should stay central.
+The repo is not just trying to make more paths answer.
+It is trying to make the first healthy node less semantically embarrassing.
 
 ### What this proves
 

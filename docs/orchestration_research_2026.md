@@ -39,6 +39,12 @@ That difference matters.
 So this page is not a product ranking.
 It is a pressure map.
 
+It should also be read as a record of unresolved insistence.
+The repo keeps returning here because the normal market categories keep failing
+to describe the exact thing the user is still asking for.
+If this file is reduced to a calmer survey of options, it starts preserving the
+same nouns while losing the actual question.
+
 ## The Pressure That Keeps Producing Orchestration Research
 
 The repo keeps returning to orchestration questions because plain Compose,
@@ -57,6 +63,16 @@ Those problems are harsher than generic "scaling":
 That is why the repo keeps exploring extra layers instead of just adding more
 Compose fragments forever.
 
+This is also why the research has to stay hostile to respectable-sounding
+closure.
+A platform family does not become a real answer here because:
+
+- it sounds mature
+- it is commonly adopted
+- it makes the architecture diagram look more adult
+
+Those are all ways to improve narration faster than burden ownership.
+
 ## What the User Is Actually Rejecting
 
 The orchestration search only makes sense if the refusals stay explicit.
@@ -73,6 +89,10 @@ Examples:
 
 That does not solve the underlying wrong-node and drift problem.
 
+This page should keep one harsher version of that sentence visible:
+static glue becomes especially dangerous when the docs start narrating it as if
+the system had already crossed into shared-truth territory.
+
 ### 2. Fake HA that stops at DNS or a proxy
 
 Examples:
@@ -83,6 +103,10 @@ Examples:
 
 Those may improve reachability.
 They do not automatically improve correctness.
+
+They also do not automatically improve dignity.
+That matters in this repo because "it still answered something" is often much
+less than the user is actually asking the system to preserve.
 
 ### 3. Heavyweight platform sermons that ignore the actual pain
 
@@ -98,6 +122,14 @@ If the actual pain is still:
 
 then jumping straight to a giant scheduler can still be the wrong move.
 
+This page should therefore resist two equal and opposite simplifications:
+
+- "eventually everyone serious lands on Kubernetes anyway"
+- "anything bigger than Compose is philosophical betrayal"
+
+Both moves shrink the user's real search into a more ordinary culture war than
+the repo is actually conducting.
+
 ### 4. A false choice between raw Compose pain and total platform capture
 
 This is probably the deepest pattern in the repo.
@@ -109,6 +141,11 @@ two unsatisfying extremes:
 - accept a full new worldview all at once
 
 The repo is trying to find the missing middle.
+
+But even "missing middle" is not enough if it becomes just another category
+label.
+The real test is whether a candidate layer changes who owns the bad-day truth,
+not merely where the layer sits on a complexity spectrum.
 
 ## The Real Things the Repo Is Trying to Buy
 
@@ -124,6 +161,10 @@ The system needs a trustworthy answer to:
 
 Without that, the operator remains the hidden scheduler.
 
+That phrase should be taken literally.
+One of the deepest anti-SPOF themes in this repo is that a human head can be
+the most dangerous unreplicated control plane in the whole system.
+
 ### Convergence truth
 
 The system needs a trustworthy answer to:
@@ -134,6 +175,10 @@ The system needs a trustworthy answer to:
 - who repairs obvious mismatch
 
 Without that, "distributed" often just means "the same mess copied around."
+
+This repo is full of pressure against exactly that outcome:
+multi-node duplication without multi-node truth still feels distributed in the
+most misleading way possible.
 
 ### Ingress truth
 
@@ -165,6 +210,11 @@ The user does not want to keep reconstructing:
 - which layer is responsible when something fails
 
 If a new layer does not reduce that burden, it has not earned itself.
+
+That is the hidden metric behind almost every option discussion in this repo.
+The question is not only "what can this platform do?"
+It is also "what private explanatory labor does this platform stop asking the
+operator to perform?"
 
 ## Option Families, in Repo Terms
 
@@ -203,6 +253,10 @@ Because it preserves what the repo still values:
 - becoming a shadow control plane without admitting it
 - scattering truth across helpers, templates, agents, and conventions
 - preserving file readability while losing runtime clarity
+
+This page should not underrate that risk.
+Shadow control planes are one of the easiest ways to keep the same pain while
+telling a much nicer story about it.
 
 ### When this family is still the right answer
 
@@ -247,6 +301,11 @@ It does **not** automatically prove:
 
 This matters because the repo must not promote infra-grade primitives into
 fake universal proof.
+
+That warning matters beyond OpenSVC specifically.
+One of the repo's recurring failure modes is taking something that genuinely
+helps one narrow truth and then narrating it as if it had healed the whole
+stack's honesty problem.
 
 ## 3. Nomad and similar scheduler families
 
