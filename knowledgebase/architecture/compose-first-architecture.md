@@ -41,6 +41,26 @@ This page is not authoritative about:
 This page explains the authoring posture.
 It should not be used to overstate the runtime.
 
+## Priority evidence stack for Compose-first claims
+
+When a sentence about Compose-first is being evaluated, it should be routed
+through this stack in order:
+
+1. root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+   and active fragments under
+   [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
+2. [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
+3. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+4. contradiction and promotion pages elsewhere in the knowledgebase
+
+That sequence keeps this page from drifting into two opposite lies:
+
+- "Compose-first is just sentimental attachment"
+- "Compose-first already proves the runtime is close to the dream"
+
+The runtime has to anchor the claim first.
+Intent and future logic then explain why that anchor is still being defended.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -52,6 +72,26 @@ It should not be used to overstate the runtime.
 
 If a sentence about Compose-first starts sounding like broad runtime success,
 it has crossed out of the page's authority.
+
+## What Compose-first is being forced to justify
+
+Compose-first is not just being defended against heavyweight orchestrators.
+It is also being interrogated against a different threat:
+
+> the possibility that the helper pile becomes a shadow control plane while
+> Compose remains only the decorative language humans still feel attached to
+
+That threat has to stay visible.
+
+Otherwise this page becomes a polite defense of the status quo instead of a
+continuing test:
+
+- is Compose still the least dishonest human contract?
+- or is it being preserved after the actual bad-day intelligence moved
+  somewhere murkier?
+
+That second question is one of the most important anti-romantic checks in the
+entire knowledgebase.
 
 Not:
 

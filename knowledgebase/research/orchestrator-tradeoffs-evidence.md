@@ -113,6 +113,27 @@ in any honest sense.
 This page should never allow "there are several futures" to become "all
 futures are equally justified."
 
+## Priority comparison stack for future-path claims
+
+If a future-path sentence is being evaluated, the source order should be:
+
+1. root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+   and active Compose fragments
+2. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+3. [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+4. plan and exploration artifacts such as
+   [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md),
+   [`docs/osvc_ingress_ha.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/osvc_ingress_ha.md),
+   and
+   [`docs/stateful_ha_plan.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/stateful_ha_plan.md)
+5. archive-pressure surfaces
+
+That ordering prevents three different doc failures:
+
+- pretending a future is real because it is well described
+- pretending the runtime is neutral just because several futures are discussed
+- pretending archive frustration can pick the winning control plane by itself
+
 ## What this page should let a reader answer immediately
 
 After reading this page, a reader should not still be wondering:
@@ -142,6 +163,22 @@ starts becoming a way to avoid naming which specific burden should be promoted
 next.
 
 This page should keep both thresholds visible.
+
+## What this page should make harder to say lazily
+
+After reading this page, it should be harder for a contributor to say:
+
+- "Kubernetes is probably the mature answer"
+- "Nomad is probably the light answer"
+- "OpenSVC is probably the HA answer"
+- "the repo is just keeping options open for now"
+
+Those sentences are too under-specified for this repo unless they are followed
+by:
+
+- which hidden burden is being removed
+- which new worldview cost is being imposed
+- which proof ceiling would still remain open afterward
 
 ## What this page is protecting against
 

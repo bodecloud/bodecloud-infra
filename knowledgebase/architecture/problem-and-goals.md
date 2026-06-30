@@ -82,6 +82,27 @@ This page is not authoritative about:
 This page is the benchmark and requirement frame.
 It is not a claim that the benchmark has been met.
 
+## Priority reconstruction stack for this page
+
+If someone asks what evidence should shape this page first, the order should
+be:
+
+1. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+2. [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+3. root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+   and active fragments under
+   [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
+4. archive-pressure reconstruction pages
+
+That order matters.
+
+If the page starts from the runtime alone, it under-reconstructs the dream.
+If it starts from archive frustration alone, it over-promotes pressure into
+present truth.
+If it stops at repo-native intent, it romanticizes the implementation gap.
+
+This page only stays honest if all four layers remain visible at once.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -93,6 +114,20 @@ It is not a claim that the benchmark has been met.
 
 If a sentence starts using a clear requirement frame as if it were proof of
 delivery, it has outrun this page's authority.
+
+## What this page should make harder to say carelessly
+
+After reading this page, a contributor should be less able to say any of the
+following without feeling immediate friction:
+
+- "the repo just wants better HA"
+- "the repo basically needs an orchestrator"
+- "the only missing thing is cleaner service discovery"
+- "the rest is mostly implementation detail now that the goal is named"
+
+Those are all smaller neighboring readings.
+They may overlap parts of the problem, but they are not the full problem this
+repo is trying to solve.
 
 ## The actual problem statement
 

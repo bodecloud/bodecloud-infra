@@ -70,6 +70,24 @@ This page is not authoritative about:
 This page defines the shape of the wanted answer.
 It is not proof that the answer has already been found.
 
+## Priority reconstruction stack for "missing middle" claims
+
+For this page, the strongest reconstruction order is:
+
+1. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+2. [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+3. [`problem-and-goals.md`](problem-and-goals.md)
+4. [`../research/orchestrator-tradeoffs-evidence.md`](../research/orchestrator-tradeoffs-evidence.md)
+5. archive-pressure and refusal pages
+
+That order matters because "missing middle" is easy to degrade in two
+different directions:
+
+- into a generic market category
+- into a flattering name for whatever helper stack already exists
+
+This page is only useful if it resists both.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -81,6 +99,22 @@ It is not proof that the answer has already been found.
 
 If a sentence starts using the phrase "missing middle" as if the repo has
 already implemented one, this page has been overread.
+
+## What automatically disqualifies a fake middle answer here
+
+A candidate answer should be treated as disqualified as the repo's real middle
+layer if it mainly does one or more of these:
+
+- relocates hidden truth into helpers without making that truth inspectable
+- improves first-hop plurality without preserving wrong-node semantics
+- improves scheduling posture without clarifying stateful authority
+- sounds smaller than Kubernetes while still demanding worldview-scale trust
+- leaves the operator privately joining together the facts that explain why the
+  system worked
+
+That does not mean the candidate has zero value.
+It means the candidate has not yet solved the specific wound this page is
+tracking.
 
 ## The real problem statement
 
