@@ -317,6 +317,91 @@ So these tracks must stay under harsher proof rules.
 | TCP separation | can transport continuity be described without pretending it solved state? | the port answered | explicit transport-only proof and explicit forbidden stronger claims |
 | Stateful authority proof | who writes, who promotes, who fences, who is rediscovered? | the datastore is persistent and reachable | workload-specific proof packets with authority, failure, promotion, fencing, and client behavior |
 
+## Roadmap promotion packet
+
+A roadmap item should not be promoted from "interesting option" to "next
+implementation step" until it can fill out this packet.
+
+This is the roadmap version of source assimilation.
+It exists because the repo has enough plausible paths that a candidate can win
+by vocabulary instead of by burden transfer.
+
+```yaml
+roadmap_promotion_packet:
+  candidate: "services.yaml | generated Traefik fallback | OpenSVC | Nomad | k3s | custom agent | other"
+  candidate_family: "current-state-registry | fallback-runtime | peer-eligibility | orchestrator-promotion | stateful-authority"
+  source_pressure:
+    primary_archive_source: "knowledgebase/source-archive/<provider>/conversations/<file>.md"
+    source_family: "<from operations/source-assimilation-index.md>"
+    pressured_packet_fields:
+      - "placement_source"
+      - "selected_peer"
+      - "peer_eligibility"
+      - "backend_loss"
+      - "policy_chain"
+      - "stateful_authority"
+  private_sentence_to_kill: "<the exact thing the operator should no longer privately know>"
+  smaller_neighboring_question_refused: "<the easier problem this candidate must not pretend to solve>"
+  runtime_anchor: "<current file, fragment, generated artifact, command, or drill this candidate would touch>"
+  minimum_v1_scope: "<one narrow stateless route, one protected route, one TCP transport, etc.>"
+  required_proof_packet: "placement_decision_packet | route_packet | backend_loss_packet | policy_parity_packet | stateful_authority_packet"
+  legal_sentence_after_v1: "<the strongest claim allowed if the v1 passes>"
+  still_forbidden_after_v1: "<the broader claim that still remains illegal>"
+  rejection_reason_if_missing: "<why this stays research or prose, not roadmap promotion>"
+```
+
+If this packet cannot name a `primary_archive_source`, the candidate may still
+be technically useful, but it has not yet been tied back to the user's actual
+wound.
+
+If it cannot name `private_sentence_to_kill`, it is not a burden-removal
+roadmap item.
+It is only an implementation idea.
+
+If it cannot name `required_proof_packet`, it will make the docs sound more
+confident without making the system more trustworthy.
+
+### Packet examples
+
+For `services.yaml` or an equivalent generated current-state registry, the
+promotion packet should be anchored to the multi-node Docker without Swarm
+source family.
+The private sentence is:
+
+> I still personally know where the requested service really lives.
+
+The first legal v1 sentence would be:
+
+> one stateless HTTP route used shared placement truth from a receiving node
+> that did not host the service.
+
+The still-forbidden sentence would be:
+
+> generic wrong-node routing is solved.
+
+For generated Traefik fallback or route-generation work, the promotion packet
+should be anchored to fallback and backend-loss source pressure.
+The private sentence is:
+
+> I still personally know whether the rescue path survives the backend loss
+> that made it necessary.
+
+The first legal v1 sentence would be:
+
+> one named route preserved its fallback path after the preferred backend was
+> intentionally removed.
+
+The still-forbidden sentence would be:
+
+> HTTP failover is solved for the platform.
+
+For Nomad, OpenSVC, k3s, Kubernetes, or any heavier controller, the promotion
+packet must be harsher.
+It must name the exact private sentence the heavier layer kills that a smaller
+Compose-adjacent layer failed to kill.
+If it only says "more mature orchestration," "real clustering," or "industry
+standard," it has failed the packet.
+
 ## Promotion gates by burden, not by tool
 
 The roadmap should not ask whether `services.yaml`, OpenSVC, Nomad, k3s,
