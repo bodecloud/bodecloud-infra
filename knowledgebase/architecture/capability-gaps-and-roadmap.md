@@ -2,15 +2,15 @@
 
 For the evidence shaping this roadmap, start with:
 
-- [`../research/evidence-ledger.md`](../research/evidence-ledger.md)
-- [`../research/ingress-and-failover-evidence.md`](../research/ingress-and-failover-evidence.md)
-- [`../research/stateful-ha-evidence.md`](../research/stateful-ha-evidence.md)
-- [`../research/orchestrator-tradeoffs-evidence.md`](../research/orchestrator-tradeoffs-evidence.md)
-- [`/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
+- [Evidence Ledger](../research/evidence-ledger.md)
+- [Ingress and Failover Evidence](../research/ingress-and-failover-evidence.md)
+- [Stateful HA Evidence](../research/stateful-ha-evidence.md)
+- [Orchestrator Tradeoffs Evidence](../research/orchestrator-tradeoffs-evidence.md)
+- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 
 This page is not a feature wishlist.
 
-It is the map of which missing truths still force the rest of the system to
+It is the map of which missing truths still force the rest of the platform to
 overclaim relative to the user's real benchmark.
 
 The user is not asking for a tidy next-steps board.
@@ -30,32 +30,47 @@ That is what "roadmap" means in this repo.
 
 ## What this page is and is not allowed to prove
 
-This page is allowed to:
+This page is authoritative about:
 
-- prioritize missing truth layers in the order that protects honesty
-- explain which unresolved gaps still force overclaim if left untouched
-- connect current runtime evidence to the next proof-bearing promotion step
-- distinguish valuable next work from already-proven capability
-- keep HTTP, protected HTTP, TCP, and stateful promotion on different tracks
+- prioritizing missing truth layers in the order that protects honesty
+- explaining which unresolved gaps still force overclaim if left untouched
+- connecting current runtime evidence to the next proof-bearing promotion step
+- distinguishing valuable next work from already-proven capability
+- keeping stateless HTTP, protected HTTP, TCP, and stateful promotion on
+  different tracks
 
-This page is not allowed to:
+This page is not authoritative about:
 
-- act like a completion report
-- imply that a well-ordered roadmap means the runtime is already coherent
-- flatten all recovery classes into one generic queue
-- upgrade planning clarity into present-tense runtime maturity
+- acting like a completion report
+- implying that a well-ordered roadmap means the runtime is already coherent
+- flattening all recovery classes into one generic queue
+- upgrading planning clarity into present-tense runtime maturity
 
 This page is a sequencing contract.
 It is not an implementation victory lap.
 
 ## Strongest honest current answer
 
-The next work is not "whatever seems generally useful for self-hosting." The
-next work is whichever missing truth layer still forces the docs to rely on
-hope, operator memory, stale topology assumptions, or rhetorical glue. In the
-priority implementation today, that means placement truth, convergence truth,
-peer eligibility, route durability under real failure, and keeping stateless,
-protected, TCP, and stateful promotion under separate honesty gates.
+The next work is not "whatever seems generally useful for self-hosting."
+
+The next work is whichever missing truth layer still forces the docs and the
+runtime story to rely on:
+
+- hope
+- operator memory
+- stale topology assumptions
+- rhetorical glue
+- or helper-language that sounds stronger than the proof it owns
+
+In the priority implementation today, that means:
+
+- placement truth
+- convergence truth
+- route durability under real failure
+- peer eligibility
+- stateless wrong-node proof
+- protected-route continuity
+- keeping TCP and stateful promotion under separate honesty gates
 
 ## The shortest honest roadmap
 
@@ -69,10 +84,32 @@ The current best order remains:
 6. prove one full wrong-node stateless HTTP path end to end
 7. prove protected-route continuity on that same path
 8. keep HTTP, TCP, and stateful classes under separate proof rules
-9. only then decide what has earned promotion into a stronger control layer
+9. only then decide what has actually earned promotion into a stronger control
+   layer
 
 This is not motivational sequencing.
 It is the dependency chain between the dream and reality.
+
+## What still does not count as progress
+
+This repo has a specific problem, so it also needs a specific false-progress
+filter.
+
+The following may all be useful work and still not count as roadmap closure by
+themselves:
+
+- adding more public nodes without proving wrong-node meaning survives
+- adding richer proxy logic without proving route persistence under failure
+- adding more healthchecks without proving peer eligibility semantics
+- adding secret-sync or file-sync helpers without showing how they gate
+  substitution trust
+- standing up Nomad, OpenSVC, k3s, or other controller experiments without
+  proving which hidden burden they actually removed
+- making docs calmer, cleaner, or more enterprise-sounding while the same weak
+  runtime truths remain
+
+That list exists because the user is explicitly frustrated by ecosystems that
+keep narrating partial machinery as if the burden has already moved.
 
 ## Why the order has to stay this strict
 
@@ -127,7 +164,7 @@ moves:
 
 Each priority below is written as:
 
-- what missing burden it addresses
+- what hidden burden it addresses
 - what the current worktree proves
 - what failure signature still survives
 - what proof threshold would actually close that gap
@@ -206,8 +243,7 @@ Failure signature:
 
 - traffic lands on a healthy node
 - the node cannot answer service placement deterministically
-- peer-forward behavior depends on stale assumptions or private operator
-  memory
+- peer-forward behavior depends on stale assumptions or private operator memory
 
 Proof threshold:
 
@@ -277,6 +313,25 @@ Unlocks:
 Without convergence truth, wrong-node recovery is still partly luck wearing a
 better badge.
 
+## Why the roadmap keeps stateless HTTP as the first real proof lane
+
+The repo absolutely cares about TCP and stateful workloads.
+It still has to start with stateless HTTP because that is the narrowest class
+where the core wound can be tested without borrowing credibility from a larger
+claim than the system has earned.
+
+Stateless HTTP is the first place where the repo can prove all of these at
+once:
+
+- wrong-node entry happened
+- placement truth existed
+- a peer was chosen for a reason
+- the route survived local backend loss
+- the request still meant the same thing to the user
+
+That is not the final dream.
+It is the first point where the dream stops being theoretical.
+
 ## Priority 3: route persistence under backend loss
 
 Class:
@@ -314,8 +369,8 @@ What counts as evidence:
 
 Unlocks:
 
-- the first real claim that "fallback" means more than "there was another
-  idea on paper"
+- the first real claim that "fallback" means more than "there was another idea
+  on paper"
 
 This priority is narrower than "fix failover."
 It is stronger than "dynamic config exists."
@@ -396,13 +451,16 @@ What counts as evidence:
 
 - controlled entry target
 - visible local-versus-remote decision
-- peer choice explanation
+- peer-choice explanation
 - user-visible route success
 
 Unlocks:
 
 - the first legitimate "this platform feels different now" claim
 - a harder baseline for later helper or orchestrator promotion
+
+This is the first place where "multi-node" can stop sounding emotional and
+start sounding operational.
 
 ## Priority 6: protected-route continuity on the same path
 
@@ -418,7 +476,7 @@ HTTP wrong-node success first.
 
 Current truth:
 
-- TinyAuth, Nginx auth extensions, CrowdSec, and Traefik middleware are all
+- TinyAuth, nginx auth extensions, CrowdSec, and Traefik middleware are all
   materially present
 - the worktree still does not prove local and forwarded policy meaning are the
   same
@@ -534,10 +592,30 @@ The roadmap should explicitly reject these out-of-sequence moves:
 Those moves are not always useless.
 They are misordered relative to the user's real problem.
 
+## What a passing proof packet looks like for this roadmap
+
+Every later promotion argument should be able to point to a proof packet rather
+than only to a narrative.
+
+For this repo, a strong proof packet usually means:
+
+- the exact route or service class being discussed is named
+- the node that received the request is named
+- the local-versus-remote decision is visible
+- the placement or eligibility truth surface that informed that decision is
+  visible
+- the failure event being tested is explicit
+- the route persistence result is visible after the failure
+- the user-visible result is captured
+- the page stays explicit about what broader class was **not** proven
+
+Without that structure, "progress" in this repo too easily collapses back into
+coherent description of a future someone hopes will exist.
+
 ## The practical interpretation
 
-If the repo has limited attention, the next highest-value work is not "the
-most technically impressive change."
+If the repo has limited attention, the next highest-value work is not the most
+technically impressive change.
 
 It is the change that most reduces one of these humiliations:
 
@@ -558,3 +636,15 @@ Before any roadmap item is promoted, force it through this exact question:
 
 If the answer is vague, the work may still be interesting.
 It is not yet roadmap-critical for this repo.
+
+## Bottom line
+
+This roadmap is not trying to make the project look well managed.
+
+It is trying to stop three things:
+
+- helper sprawl being mistaken for solved truth
+- bigger platforms being chosen before the smaller honest layers were exhausted
+- polished sequencing being mistaken for runtime maturity
+
+The roadmap only has value if it keeps the burden-transfer question brutal.
