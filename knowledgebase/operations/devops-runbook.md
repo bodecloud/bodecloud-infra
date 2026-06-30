@@ -51,6 +51,27 @@ The real job of this runbook is:
 If the runbook does not do those things, it becomes a comfort ritual instead
 of an operational tool.
 
+## What still does not count as a serious runbook in this repo
+
+This page should also say more bluntly what fake operational maturity still
+looks like.
+
+These still do not count:
+
+- a long sequence of healthy commands with no named proof class
+- a green validation pass followed by a broader resilience sentence
+- a route test with no backend identity evidence
+- a failover claim with no before/after semantics comparison
+- a stateful reassurance story that never names write authority
+- a calm operator summary that hides how much private topology memory was still
+  required
+
+The user is not mainly asking for more commands.
+The user is asking for less hidden reconstruction burden.
+
+If the runbook leaves the operator feeling informed but still privately
+carrying the same sacred-node truth, then it stayed too shallow.
+
 ## The dream this runbook has to protect
 
 The repo is trying to keep the directness of Compose while pushing toward:
@@ -70,6 +91,18 @@ Operationally, that means the runbook cannot be satisfied by:
 
 Those may be necessary signals.
 They are not the same as the dream the user is asking for.
+
+Operationally, the dream is not "a nicer incident notebook."
+
+It is:
+
+- wrong-node entry that does not collapse into private recollection
+- fallback that preserves service meaning instead of just transport
+- evidence that stays inspectable after the stressful moment passes
+- a platform where the operator increasingly verifies shared truth instead of
+  impersonating it
+
+That is the bar this page has to protect.
 
 ## What the runbook is trying to kill
 
@@ -346,6 +379,33 @@ After any meaningful command or drill, record four things:
 If those notes are missing, the command output will almost always get
 overread later.
 
+## What a real runbook proof packet would have to contain
+
+The repo should not leave behind isolated command output.
+It should leave behind proof packets that another operator can inspect without
+reconstructing the whole event socially.
+
+A serious packet should contain:
+
+- the exact question being tested
+- the exact proof class reached
+- the exact node or nodes involved
+- the route or service identity that was supposed to survive
+- the strongest sentence that became more honest
+- the stronger sentence that is still forbidden
+- the place where hidden operator memory still had to fill a gap
+
+For stronger drills, the packet should also contain:
+
+- before/after backend identity evidence
+- logs from both the receiving node and the selected peer when peer handoff is
+  involved
+- the specific failure introduced on purpose
+- the semantic difference, if any, before and after the failure
+
+If the packet cannot be inspected later without a narrator, the narrator is
+still part of the control plane.
+
 ## What not to do
 
 Do not let the runbook become:
@@ -357,3 +417,5 @@ Do not let the runbook become:
 
 The whole point is to keep the operator from feeling calmer than the evidence
 allows.
+
+The runbook succeeds only when it makes overstatement harder than honesty.
