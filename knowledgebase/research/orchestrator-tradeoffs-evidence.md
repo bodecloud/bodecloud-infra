@@ -17,6 +17,11 @@ The user is explicitly pushing against an ecosystem where adulthood is too
 often faked by enlarging the worldview rather than actually relocating the
 hidden burden.
 
+That sentence should govern the whole page.
+The danger is not merely picking the wrong orchestrator.
+It is letting "more adult architecture" become another synonym for "the user
+will privately bridge the same gap, but with better branding."
+
 The real question is not:
 
 > Which orchestrator is best in the abstract?
@@ -51,6 +56,10 @@ The current worktree does **not** prove:
 The real threshold is not which product sounds right.
 It is whether a candidate removes the specific hidden burden that currently
 keeps the operator acting as the control plane.
+
+That is why this page has to stay rude about prestige.
+Prestige is one of the easiest ways to make a future feel inevitable before it
+has actually earned one more truth-owning responsibility in this repo.
 
 That sentence should dominate the whole page.
 If a comparison sounds sophisticated but stops naming the surviving operator
@@ -88,6 +97,10 @@ This page is not allowed to:
 
 This page should never allow "there are several futures" to become "all
 futures are equally justified."
+
+Nor should it allow "some futures are serious" to become "the repo is already
+basically waiting to bless one."
+The whole point is that seriousness is cheap compared with burden transfer.
 
 That is one of the softer lies advanced documentation likes to tell.
 Equal narratability is not equal justification.
@@ -158,6 +171,11 @@ It is:
 - which control-plane growth is narrow and honest
 - versus which growth silently becomes a scheduler in disguise
 
+That distinction is more important than "lightweight versus heavyweight."
+A heavyweight layer can still be more honest if it truly owns the right truth.
+A lightweight layer can still be fake if it mostly preserves the operator's
+private settlement role under a gentler vocabulary.
+
 That is the real differentiator this repo cares about.
 Not only "lighter versus heavier,"
 but "does the new layer stay narrow enough to feel like an earned answer
@@ -186,6 +204,11 @@ That is the right lens for comparing future layers.
 The question becomes:
 
 - which candidate most honestly owns one or more of those missing truths?
+
+That wording has to stay this narrow.
+Otherwise the page slips back into capability envy and forgets that the user is
+not trying to buy more nouns.
+They are trying to stop being the last untracked dependency in the system.
 
 not:
 
@@ -218,6 +241,11 @@ Important archive facts:
 These sources do not pick the winner.
 They do explain why the repo keeps several futures alive without that being
 mere indecision.
+
+That distinction is crucial because "indecision" flatters the surrounding
+market.
+The stronger reading is that the repo has not yet seen enough evidence to let
+one future legally impersonate relief.
 
 That matters because indecision is the lazy reading.
 The stronger reading is that the repo is refusing to award adulthood to a
@@ -277,6 +305,11 @@ as:
 That packet does not need to prove whole-stack closure.
 It does need to prove that at least one hidden burden became materially less
 private.
+
+That is the minimum seriousness threshold for this whole page:
+not which future feels most plausible,
+but which future can prove that one more bad-day explanation no longer depends
+on operator folklore.
 
 That is the whole bar.
 Not a better roadmap.

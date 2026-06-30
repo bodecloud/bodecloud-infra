@@ -37,6 +37,11 @@ There is a second thing being reconstructed too:
 If that distinction disappears, "unification" becomes one more flattering word
 for a system that still needs the same sacred human memory.
 
+That is why this page has to stay harsher than a normal architecture memo.
+The repo is already good enough at naming the fracture that the naming itself
+can start feeling like progress.
+This page has to keep blocking that emotional shortcut.
+
 ## What the user is actually trying to escape
 
 The user is not chasing unification because neatness feels nice.
@@ -63,6 +68,9 @@ not the right layer.
 That sentence is stronger than "make the cluster easier."
 It is the sentence every promising tool should have to survive.
 
+The real test is not whether the layer makes the stack look more singular.
+It is whether the layer makes the operator less singular.
+
 ## Evidence classes used here
 
 This page combines:
@@ -83,6 +91,10 @@ following false summary:
 - therefore the main remaining problem is simply choosing one
 
 That is exactly the kind of calm overreading this page is supposed to prevent.
+
+This repo cannot afford calm overreading anymore.
+It already contains enough machinery, enough planning, and enough serious nouns
+that calmness itself can become a form of inaccuracy.
 
 The useful summary is harsher:
 
@@ -108,6 +120,10 @@ It also should not let analytical clarity impersonate closure.
 A page like this is especially dangerous because once the fractures are named
 cleanly, readers can start feeling as though the hardest part is merely picking
 which implementation to bless.
+
+That is one of the main risks of doing the documentation well.
+Better articulation can accidentally make the gap feel smaller than it is.
+This page has to keep making the gap legible without making it feel prepaid.
 
 That is not what the current evidence proves.
 
@@ -144,6 +160,10 @@ private reconstruction burden across all of these at once:
 
 So this page is best read as a burden map and decision pressure document, not
 as proof that the burden has already been paid down.
+
+That difference should stay emotionally obvious.
+Understanding the wound is one of the repo's strengths.
+It is not yet one of the repo's repairs.
 
 ## Why this repo has a unification problem at all
 
@@ -203,6 +223,12 @@ The real unification dream is therefore:
 
 > make the system rely less on hidden operator reconstruction and more on
 > explicit, inspectable, portable truth.
+
+The word "portable" matters here because private operator memory is always
+portable in the worst possible sense: the system works as long as the same
+human keeps carrying it.
+The repo is trying to replace that kind of portability with shared,
+inspectable portability.
 
 That sentence also implies the most important warning for this page:
 

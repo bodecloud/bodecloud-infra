@@ -37,6 +37,11 @@ The user is not starved for ingress ingredients.
 The user is starved for a system that stops turning those ingredients back
 into private human completion steps the moment locality disappears.
 
+That is why this page cannot merely be technically careful.
+It has to stay socially careful too.
+Ingress is exactly where respectable partial answers most easily start
+impersonating relief.
+
 This page is also where retrieval discipline matters most.
 It has to keep four source classes separate on purpose:
 
@@ -85,6 +90,11 @@ This page has to keep being ruder than the surrounding vocabulary of
 "resilience," "high availability," and "distributed ingress" unless the proof
 really supports it.
 
+The rudeness is not stylistic.
+It is defensive.
+Without it, the edge stack starts cashing out legitimacy one layer before the
+receiving node can actually justify its own fallback decision.
+
 ## Strongest honest current answer
 
 The repo already has a serious ingress surface.
@@ -118,6 +128,11 @@ It is also the part generic infrastructure writing keeps trying to make sound
 small.
 This repo should keep refusing that minimization.
 
+The operator's real complaint lives exactly in that gap.
+Everything before it can look modern.
+Everything after it still too often sounds like "trust me, I know which peer
+is really okay."
+
 ## What still does not count as ingress evidence here
 
 The following still do not count as meaningful ingress proof in this repo:
@@ -132,6 +147,11 @@ The following still do not count as meaningful ingress proof in this repo:
 Those are all ingredients or local signals.
 They are not yet proof that the wrong healthy node can preserve request meaning
 under pressure.
+
+This page should stay hostile to ingredient inflation.
+The repo has already accumulated enough ingredients to sound almost finished to
+the wrong reader.
+The job here is to make that reader uncomfortable again.
 
 That is why this page cannot reward a bigger ingredient list.
 The repo already has enough ingredients to look serious.
@@ -169,6 +189,12 @@ It is a proof filter for one very specific dream:
 > wrong box, the preferred backend dies, or the stack is under anti-SPOF
 > pressure.
 
+That phrase "behave less stupidly" should keep more authority here than many
+formal infrastructure terms.
+It names the exact experiential failure the user is rebelling against:
+multiple nodes exist, yet the system still collapses into local assumptions and
+private rescue knowledge at the worst possible time.
+
 That phrasing matters.
 The user is not chasing prestige architecture.
 They are chasing a stack that stops acting insultingly dumb at the exact
@@ -194,6 +220,11 @@ Many ecosystems would stop earlier.
 They would take partial packet quality, partial fallback behavior, or partial
 visibility and start upgrading the whole ingress story emotionally.
 This page exists to stop that drift.
+
+That is also why operator-readable artifacts are part of the proof packet.
+The user is not only asking for successful routing.
+They are asking for a system that can later explain why the route was valid
+without requiring the same operator to retell the story from memory.
 
 ## Evidence hierarchy for ingress claims
 
@@ -233,6 +264,11 @@ No.
 The user already has multi-node Docker.
 The missing thing is shared current-state truth that lets the receiving node
 behave correctly when locality is absent.
+
+That is the real ingress missing middle in plain language.
+Not another edge brand.
+Not another routing DSL.
+Shared current truth that the wrong node can actually use.
 
 ### 2. The user states the desired wrong-node behavior directly
 
