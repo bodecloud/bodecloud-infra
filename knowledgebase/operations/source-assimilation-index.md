@@ -18,6 +18,23 @@ It usually sounds like:
 
 This page exists to stop that downgrade.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove:
+
+- what "actual assimilation" means in this repository
+- how source classes should be separated before stronger claims are written
+- why retrieval discipline is part of the repo's honesty contract
+
+This page is not allowed to prove:
+
+- that a page has already assimilated the repo just because it cites many files
+- that source abundance itself produces better answers
+- that retrieval discipline can substitute for runtime proof
+
+This is a retrieval contract page, not a claim that the work has already been
+done correctly.
+
 ## The dream retrieval has to protect
 
 The user is not asking for:

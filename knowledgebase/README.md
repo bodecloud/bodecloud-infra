@@ -49,6 +49,23 @@ The user is not asking for a mellow orientation guide.
 They are asking for docs that can withstand frustration, contradiction, and
 the feeling that every apparent option secretly preserves the same hidden tax.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove:
+
+- how the knowledgebase should be entered without immediately downgrading the
+  question
+- which reading routes are safest for reconstructing the user's real demand
+- that the site exists to resist fake convergence and fake option language
+
+This page is not allowed to prove:
+
+- that the runtime already crossed the thresholds the route describes
+- that reading order itself is evidence of implementation maturity
+- that the repo is already settled just because the site has become broader
+
+This is a doorway contract, not a runtime proof page.
+
 ## What still does not count as a useful repo-facing doorway
 
 This README should also say more explicitly what fake helpfulness still looks

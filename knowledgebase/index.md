@@ -44,6 +44,11 @@ This site is not authoritative about:
 The site should help a reader leave with the right map of reality, not the
 most optimistic story.
 
+That means this front page is not allowed to become a high-gloss compression of
+the whole repo.
+It has to stay a routing surface that keeps the dream, the burden, and the
+still-missing proof all visible at once.
+
 ## Strongest honest current answer
 
 `bolabaden-infra` already contains a serious Compose-first platform:
