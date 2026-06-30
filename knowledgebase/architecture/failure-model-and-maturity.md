@@ -89,6 +89,14 @@ That is why maturity language has to stay lane-specific here.
 The repo is coherent enough that one strong-looking lane can start donating
 borrowed confidence to its weaker neighbors if the docs get lazy.
 
+That risk grows as the docs improve.
+The site can now explain the uneven lanes well enough that a reader may start
+feeling like the hard part is mostly classification and sequencing, when the
+runtime may still be leaving the same decisive completion step in the
+operator's head.
+
+This page has to keep interrupting that feeling.
+
 That is the part most infrastructure writing keeps sanitizing away.
 The user is not merely annoyed by incompleteness.
 They are angry at how often incompleteness arrives wearing the costume of a
@@ -114,6 +122,11 @@ already looks sophisticated.
 Another way to say the same thing:
 the lane matures only when one fewer private translation step is required from
 the operator at the exact moment the nice diagram stops being enough.
+
+That means "better understanding the lane" and "the lane matured" have to stay
+separate achievements.
+If the explanation got clearer while the private translation step stayed
+intact, then the docs improved and the lane did not.
 
 That is why this page should feel harsher than normal maturity language.
 In many projects, maturity means polish, breadth, or adoption.
@@ -170,6 +183,8 @@ The following still do not count as a lane becoming materially more mature:
 - a route works on the preferred node
 - a failure story sounds more plausible
 - one lane got sharper while another lane was silently upgraded with it
+- the reader now feels more oriented about why the lane is hard
+- the docs can now narrate the failure boundary more elegantly
 
 In this repo, maturity only moves when a hidden reconstruction burden actually
 shrinks.
@@ -210,6 +225,8 @@ Examples:
 - "yes, but I still know which peer is actually safe for this handoff"
 - "yes, but I still know the fallback route disappears if that backend dies"
 - "yes, but I still know this stateful surface still has one sacred owner"
+- "yes, but I still know which policy-bearing route is only cosmetically
+  transferable and which one is actually semantically safe"
 
 If the lane still leaves one of those sentences mostly intact, then the lane
 may be better instrumented, better documented, or more impressive-looking, but

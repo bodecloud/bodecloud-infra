@@ -85,6 +85,11 @@ They are asking why so many HA and failover stories keep sounding plausible
 until the request lands on the wrong healthy node and the operator is still
 the only thing that knows what should happen next.
 
+That means this page cannot let routing decomposition become its own fake
+victory.
+Explaining the routing lanes more clearly is useful.
+It is not itself one more lane of burden transfer.
+
 That means this page has to keep one humiliating question alive all the way
 through:
 
@@ -134,6 +139,12 @@ if the receiving node still depends on human folklore to know who should serve,
 who is eligible, and whether the handoff preserves the same protected service,
 the routing layer is still being socially completed.
 
+That sentence matters because this repo is now serious enough that routing
+prose can become emotionally convincing long before the wrong-node scene
+becomes system-owned.
+This page has to keep the reader from mistaking a better routing explanation
+for a more trustworthy routing platform.
+
 ## What still does not count as HA or failover here
 
 This page should make the common overreads illegal.
@@ -146,6 +157,8 @@ The following still do not count as meaningful HA or failover in this repo:
 - a TCP router exists for a stateful service
 - a local protected route returns `200`
 - a mesh exists between nodes
+- the docs can now explain the route classes, helpers, and failure seams in a
+  much more disciplined way
 
 All of those may be real progress.
 None of them are yet the user's actual benchmark unless they also reduce the

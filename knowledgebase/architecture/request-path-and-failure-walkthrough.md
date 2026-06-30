@@ -103,6 +103,11 @@ Many systems can move a request.
 Far fewer can explain from shared, inspectable truth why the moved request
 still means the same thing after locality fails.
 
+That is also why a better walkthrough is not itself one more proof class.
+The docs can now reconstruct this seam with much more fidelity than before.
+That does not mean the live system has already moved the seam.
+It only means the repo has become better at refusing to hide it.
+
 ## What still does not count as a request-path answer
 
 This repo needs a harsher standard than "the path sounds traceable."
@@ -149,6 +154,10 @@ The dangerous hidden handoff usually looks like this:
 5. the remaining decision quietly stops being system-owned
 6. the operator becomes the missing registry, peer judge, and route explainer
 
+If a walkthrough sounds concrete while step 5 still survives unchanged, then
+the walkthrough may be excellent and the platform may still be socially manual
+at the decisive moment.
+
 That is the actual seam under investigation.
 
 It is the hidden-control-plane scene in miniature.
@@ -193,6 +202,10 @@ That means preserving:
 - middleware and auth meaning
 - backend identity
 - recovery behavior under local failure
+
+And it means refusing one common downgrade:
+
+- "the packet arrived somewhere useful, so the request was preserved"
 
 Many systems preserve reachability.
 Far fewer preserve request meaning once the request lands on the wrong node or

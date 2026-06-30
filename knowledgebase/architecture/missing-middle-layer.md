@@ -43,6 +43,15 @@ The naming problem is part of the wound:
 This page has to keep asking whether the burden actually moved, not whether the
 category now sounds plausible.
 
+That warning matters even more now that the knowledgebase is broader.
+The repo can now describe the missing-middle shape with enough precision that a
+reader may start feeling like the hard part is mostly choosing among candidate
+families.
+This page has to keep saying no.
+The hard part is not naming the category.
+The hard part is proving one more humiliating private completion step actually
+left the operator.
+
 ## Why "missing middle" is not just a complexity bracket
 
 One of the easiest mistakes in this repo is to hear "missing middle" and think
@@ -135,6 +144,12 @@ Compose can expose a lot, but it does not natively own them.
 Heavier control planes may be able to own them, but the repo does not yet
 trust them by default to own the right ones in the right way.
 
+That is why the missing middle is not just a software gap.
+It is a trust gap.
+The repo does not merely need somewhere those truths could live.
+It needs somewhere those truths can live without demanding a larger worldview
+before the user can verify that the burden really moved.
+
 ## Strongest honest current answer
 
 The repo is looking for the smallest added layer that makes these truths
@@ -201,6 +216,9 @@ repo:
 - finding something more dynamic than static Compose
 - giving helpers nicer names for placement, sync, or failover
 - building enough glue that the repo feels "cluster-ish"
+- getting much better at describing what the middle should do
+- having several candidate families that each seem to own one attractive slice
+  of the burden while none clearly own the decisive one
 
 Those things may all be relevant.
 They still do not answer the only question that matters:
