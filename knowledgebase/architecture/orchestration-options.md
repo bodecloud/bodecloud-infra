@@ -21,6 +21,12 @@ The real question is:
 
 That is the decision surface that matters.
 
+It also means this page cannot behave like a respectable shopping guide.
+The user is not asking for a more polished comparison table.
+The user is asking which extra layer, if any, actually stops the system from
+repeatedly cashing out into private operator knowledge while still pretending
+to have offered a grown-up option.
+
 If this page ever turns into a normal "platform comparison" page, it has
 already failed.
 
@@ -40,6 +46,14 @@ the truths the operator is still privately carrying:
 The user is not short on platform names.
 The user is short on options that still feel honest after wrong-node entry,
 backend loss, and hidden operator glue become real.
+
+That distinction should keep the whole page meaner than normal architecture
+comparison docs.
+Most comparison docs quietly assume every candidate is already a real option
+and the task is just to pick the best fit.
+This repo is still asking a harder prior question:
+which candidates are even telling the truth about the burden they leave
+behind?
 
 That is a stronger complaint than "there are too many choices."
 The complaint is that many choices stop feeling like choices once the user
@@ -72,6 +86,10 @@ The user has already seen too many ecosystem answers that become smaller the
 moment they are forced to speak in terms of actual burden transfer instead of
 general platform capability.
 
+That disappointment has to stay present in the prose.
+If the page becomes too balanced, too fair, or too market-literate, it will
+start helping those smaller answers feel complete again.
+
 ## Priority decision stack for this page
 
 When this page evaluates whether some extra layer has earned the right to
@@ -102,6 +120,10 @@ way:
 - lose the evidence and it becomes recommendation theater
 - lose the proof ceiling and it starts promoting prestige as if prestige were
   closure
+
+There is an emotional reading hidden inside that list too:
+every missing element makes it easier for the page to sound adult while
+quietly avoiding the part the user actually cares about.
 
 ## Quick claim router
 
@@ -169,6 +191,13 @@ This matters because the repo is not suffering from lack of reputable product
 families.
 It is suffering from lack of options that survive the user's actual benchmark.
 
+That benchmark should stay insulting on purpose.
+The whole point is that many layers sound impressive until the user asks the
+question they keep getting punished for asking:
+
+- yes, but after all this, why am I still the one who really knows what is
+  true right now?
+
 The benchmark is not "which one scales better?"
 It is not "which one has the biggest community?"
 It is not even "which one is most likely to be broadly correct in general?"
@@ -205,6 +234,13 @@ Examples:
 Without that packet, the page is still just warming the reader toward a product
 family.
 
+That is exactly the behavior this page exists to prevent.
+Warmth is cheap.
+Respectable product gravity is cheap.
+The user has already seen enough of both.
+What is rare is a page that can say, with evidence, that one more layer has
+actually earned the right to make life less humiliating.
+
 This packet requirement protects against one of the oldest infrastructure
 failures in the world: confusing recommendation with evidence.
 The user does not need another persuasive walk through the product landscape.
@@ -232,6 +268,10 @@ Too much infrastructure advice effectively says:
 
 This repo exists because the user does not accept that as the only adult
 decision surface.
+
+That refusal should not be narrated as indecision.
+It is a direct challenge to an ecosystem that keeps confusing larger
+worldviews with more honest options.
 
 That refusal is not stubbornness.
 It is the central philosophical pressure of the project.

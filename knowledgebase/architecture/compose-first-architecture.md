@@ -47,6 +47,10 @@ It is staying Compose-first only as long as Compose remains the least
 dishonest place where cause, effect, and configuration meaning are still
 visible.
 
+That sentence is more important than "Compose-first" as a slogan.
+If Compose stops being the least dishonest visible surface, this page should
+become one of the first places willing to say so.
+
 ## Strongest honest current answer
 
 Compose-first is still the least dishonest live authoring surface in the repo,
@@ -66,6 +70,15 @@ binary:
 
 This repo exists because that binary itself feels like evidence of missing
 options.
+
+That should remain a live accusation, not just scene-setting.
+The user is not merely weighing two valid philosophies.
+The user is pushing back on the way the ecosystem keeps shrinking the menu
+until it becomes:
+
+- keep the legible but inadequate thing
+- or accept the larger hidden thing and stop asking whether there should have
+  been anything more truthful in between
 
 ## What still does not count as justifying Compose-first
 
@@ -88,6 +101,11 @@ They still do not answer the only defensible question:
 
 If the answer becomes no, sentimentality is not a valid defense.
 
+That warning matters because Compose can become its own fake adulthood too.
+It can sound grounded, artisan, pragmatic, and clear while still leaving the
+same bad-day burden untouched.
+This page should stay hostile to that possibility.
+
 That sentence protects against a subtle failure mode:
 Compose-first can sound pragmatic and grounded while still becoming just
 another ideology if it stops asking whether the bad-day intelligence has
@@ -109,6 +127,12 @@ That packet should contain:
 
 Without that packet, Compose-first can quietly turn from honest restraint into
 unexamined attachment.
+
+That shift would be fatal for this knowledgebase.
+The whole point is not to defend Compose culturally.
+The point is to defend the last surface that is still more honest than the
+larger answers surrounding it, and to stop defending it the moment that is no
+longer true.
 
 This page has to be strict about that because "Compose-first" is exactly the
 kind of phrase that can start sounding adult, disciplined, and reasonable even
@@ -140,6 +164,11 @@ They are saying "why do so many complexity increases still leave me holding
 the same explanatory burden, and why do so many simpler answers stop being
 honest as soon as distribution matters?"
 
+That is why this page cannot sound calm in the wrong way.
+If it frames Compose-first as a tasteful preference instead of a temporary
+defensive posture against fake adulthood, it will erase the user's actual
+reason for still caring about this layer at all.
+
 ## What Compose-first means in the priority implementation
 
 In `bolabaden-infra`, Compose-first means all of these are still true:
@@ -170,6 +199,11 @@ It is a substantive architecture position:
 > a farther-away control surface should not become the default answer until it
 > owns a named truth better than the readable surface it is replacing
 
+That sentence is the real retention standard.
+Compose-first does not survive because it is simpler.
+It survives only until another surface can prove it owns one of the missing
+truths more honestly without immediately disappearing into prestige fog.
+
 ## What Compose-first definitely does not mean
 
 It does not mean:
@@ -193,6 +227,11 @@ system actually is.
 
 That is exactly the documentation habit the user is pushing back on across the
 whole repo.
+
+The same warning applies to Compose-first itself.
+If this page starts sounding like "Compose remains central, therefore the repo
+is still coherent," then the page has started spending trust it has not
+earned.
 
 ## Why Compose is still the least dishonest live surface
 
@@ -224,6 +263,12 @@ It does keep current authoring truth close to the human eye.
 That is why Compose-first still carries moral weight here.
 Not because YAML is sacred, but because hidden state and hidden decisions have
 to earn themselves instead of arriving pre-forgiven.
+
+That moral weight is conditional, not romantic.
+Compose is not holy.
+It is just still one of the few places where the repo can look directly at its
+own incompleteness without immediately hiding it inside a more respectable
+story.
 
 ### 2. It handles heterogeneous workloads without inventing one giant worldview
 
