@@ -72,6 +72,52 @@ It is also a useful test for the rest of the knowledgebase:
 if another page cannot preserve that unevenness, it is probably smoothing the
 repo into a more coherent story than the evidence supports.
 
+That answer also needs an operational form.
+Readers should not only remember which file is strongest.
+They should know which file to reach for when a specific class of question
+appears.
+
+## Question-to-source map
+
+When the question is:
+
+- what is the platform trying to become at request time?
+- is wrong-node preservation part of the design target?
+- is the repo intentionally resisting immediate Swarm or Kubernetes capture?
+
+start with
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md).
+
+When the question is:
+
+- how boldly can the dream be described without cheating?
+- what honesty wall does the repo itself keep trying to preserve?
+- which future-facing claims are acknowledged as intent rather than proof?
+
+start with
+[`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md).
+
+When the question is:
+
+- where should live implementation truth be checked first?
+- what files and commands define the runtime anchor?
+- what real env and secret burden constrains validation claims?
+
+start with
+[`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md).
+
+When the question is:
+
+- what authoring patterns are mandatory for Compose services?
+- what counts as sabotage in healthcheck or config handling?
+- how does the repo try to avoid making fake resilience even easier to write?
+
+start with
+[`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules).
+
+This matters because a lot of bad documentation does not lie in one sentence.
+It lies by answering a good question from the wrong authority surface.
+
 ## The false-convergence problem this page has to stop
 
 This repo now has several instruction surfaces that are much better aligned
@@ -98,6 +144,17 @@ The right conclusion is narrower:
 
 If that last line disappears, this page starts helping the docs become calm,
 ordered, and wrong again.
+
+That is the exact failure mode to watch for:
+
+- intent gets used to close proof gaps
+- workflow guidance gets used to imply architecture maturity
+- authoring discipline gets used to imply distributed correctness
+- aligned language gets used to imply that the missing middle is already
+  mostly chosen
+
+The repo is more coherent than before.
+That does not mean it is more finished than before.
 
 It is important because people naturally want to say:
 
@@ -490,6 +547,15 @@ Any page that cites these instruction surfaces should follow these rules:
 - use `AGENTS.md` to support runtime-surface prioritization
 - use `.cursorrules` to support authoring discipline
 - do not let any one of them silently claim runtime proof it does not own
+
+It should then apply one more pass:
+
+- ask whether the chosen file is being used for the claim class it actually
+  owns
+- ask whether a stronger source exists for that sentence
+- ask whether the paragraph quietly upgrades intent into behavior
+- ask whether the result makes the repo sound more converged than the current
+  worktree proves
 
 That last rule is the whole point.
 
