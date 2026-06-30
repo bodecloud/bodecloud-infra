@@ -309,6 +309,42 @@ survive contact with implementation work:
 If a later page cannot preserve that packet, it is answering a smaller
 question than the user actually asked.
 
+## Why "more options" can still feel like no options
+
+The user is not literally saying no tools exist.
+The source archive shows the opposite: there are many possible adjacent
+answers, including Compose helpers, Traefik/Caddy/HAProxy patterns, DNS
+failover, VPN/shared-IP tricks, Swarm, Nomad, OpenSVC, k3s, Kubernetes, Helm,
+and custom controllers.
+
+The frustration is that many of those options answer:
+
+- how can traffic reach more than one place?
+- how can config be generated?
+- how can workloads be scheduled?
+- how can a dashboard show cluster-shaped state?
+
+while leaving the real bad-day question unanswered:
+
+> when the request lands on a healthy node that is not the owner, what system
+> truth tells it what to do without the operator finishing the thought?
+
+That is why "lack of options" means lack of burden-removing options, not lack
+of projects.
+
+For this repo, an option is not truly an option until it can produce at least
+one of these:
+
+- a placement decision the receiving node can explain
+- a peer-eligibility decision stricter than reachability
+- a fallback path that survives the backend failure that made fallback matter
+- a protected-route handoff that preserves auth and middleware meaning
+- a stateful authority packet that names writer, promotion, fencing, storage,
+  and client rediscovery
+
+Anything less may still be useful research.
+It is not yet relief.
+
 ## What this page should force every later page to inherit
 
 Every serious later page should inherit at least these four facts:

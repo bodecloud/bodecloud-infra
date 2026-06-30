@@ -146,6 +146,14 @@ Answers like these are not good enough:
 Those are aesthetic or ecosystem answers.
 This repo needs burden answers.
 
+The stricter version is:
+
+> what proof packet would let the docs legally say that burden moved?
+
+If the candidate cannot name the packet, it cannot be promoted yet.
+It may still be a good experiment, but the roadmap should keep it in research,
+helper, or local-progress language.
+
 ## The shortest honest sequence
 
 If the repo wants the shortest burden-faithful route, it still looks like
@@ -308,6 +316,35 @@ So these tracks must stay under harsher proof rules.
 | Protected-route continuity | does auth and middleware meaning survive handoff? | the route returns a response | compare local and wrong-node protected-route behavior |
 | TCP separation | can transport continuity be described without pretending it solved state? | the port answered | explicit transport-only proof and explicit forbidden stronger claims |
 | Stateful authority proof | who writes, who promotes, who fences, who is rediscovered? | the datastore is persistent and reachable | workload-specific proof packets with authority, failure, promotion, fencing, and client behavior |
+
+## Promotion gates by burden, not by tool
+
+The roadmap should not ask whether `services.yaml`, OpenSVC, Nomad, k3s,
+Kubernetes, a custom Go agent, or a generated Traefik file sounds like a
+better option.
+
+It should ask which hidden burden each candidate can actually absorb.
+
+| Candidate pressure | Earliest honest promotion gate | Required packet | Still forbidden after first pass |
+| --- | --- | --- | --- |
+| `services.yaml` or current-state registry | one receiving node consumes shared placement truth for one stateless route | `placement_decision_packet` plus route packet | generic wrong-node routing |
+| generated Traefik or fallback config | one named route survives preferred-backend loss without deleting its rescue path | backend-loss packet | broad HTTP failover |
+| stronger ingress or service mesh behavior | one protected route preserves auth, middleware, and visible service meaning after handoff | route packet plus policy-parity evidence | protected-route continuity across the stack |
+| Nomad/OpenSVC/k3s/Kubernetes promotion | a heavier layer owns a burden a smaller layer failed to externalize and exposes why | `promotion_packet` plus the lane-specific drill packet | that the new worldview is generally superior for this repo |
+| stateful service HA | writer, promotion, fencing, storage, and client rediscovery are exercised for one service class | `stateful_authority_packet` | broad stateful resilience |
+
+This table is intentionally hostile to tool prestige.
+The repo can respect a tool without letting the tool inherit claims it has not
+earned inside this specific Compose-first contract.
+
+The first promotion gate should usually be the current-state registry path,
+not because a registry is glamorous, but because it attacks the most basic
+private burden:
+
+> I still personally know where the real service lives.
+
+If that burden is not moved first, heavier options can still become elaborate
+ways to hide the same missing truth.
 
 ## What is adjacent but not next
 

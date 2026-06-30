@@ -99,6 +99,33 @@ If a candidate promotion cannot name the private authority it is replacing, it
 is not yet a promotion.
 It is only a new component.
 
+Use a structured packet when a tool, helper, registry, generated file, or
+orchestrator starts being described as an answer rather than research:
+
+```yaml
+promotion_packet:
+  candidate_layer: "<tool, helper, registry, generated artifact, or controller>"
+  promoted_from: "research | helper | docs-only | local-runtime | manual-ops"
+  hidden_burden_removed: "<one private sentence the operator no longer owns>"
+  replaced_private_authority: "<operator memory, judgment, caveat, or manual reconstruction>"
+  new_truth_authority:
+    artifact: "<file, API, runtime state, controller, log, or generated config>"
+    freshness_or_convergence: "<how stale or drifted truth is detected>"
+  runtime_consumer: "<route path, proxy, sync loop, agent, controller, or CLI>"
+  drill_required: "<wrong-node, backend-loss, policy-parity, stateful-authority, or other>"
+  drill_packet: "<route_packet, placement_decision_packet, backend_loss_packet, stateful_authority_packet>"
+  operator_inspection_path: "<command, log, page, file, or dashboard proving why>"
+  legal_new_claim: "<one narrow claim now allowed>"
+  still_forbidden:
+    - "<stronger claim still illegal>"
+```
+
+If the packet cannot name `runtime_consumer`, it is still only documentation or
+inventory.
+If it cannot name `drill_packet`, it is still not stress-proven.
+If it cannot name `hidden_burden_removed`, it is probably solving a neighboring
+problem instead of the user's actual wound.
+
 ## Minimum v1 promotion boundary
 
 The first promotion does not need to solve the whole repo.
@@ -118,6 +145,11 @@ responsibility.
 
 A smaller packet can still be good implementation progress, but it should not
 be allowed to upgrade the docs into saying the middle layer has arrived.
+
+The minimum v1 packet is intentionally stateless and HTTP-shaped.
+That is not because TCP or stateful workloads are unimportant.
+It is because the first promotion has to prove the system can absorb one
+operator burden without immediately borrowing confidence from harder lanes.
 
 ## Rejection rule for fake options
 
@@ -162,6 +194,15 @@ exists.
 Promote it when some runtime path consumes that truth and changes behavior
 because of it.
 
+Minimum promotion packet for this path:
+
+- `hidden_burden_removed`: `I still have to remember where it really lives`
+- `new_truth_authority`: current-state registry or generated runtime state
+- `runtime_consumer`: route-generation path, edge proxy, or routing decision
+  layer
+- `drill_packet`: `placement_decision_packet` plus a route packet for one
+  stateless HTTP route
+
 ### Path 2: Harden helpers without promoting a full controller
 
 Use when:
@@ -182,6 +223,15 @@ Promote this path if it can delete the sentence:
 Do not promote this path merely because a helper renders a file.
 Promote it when the generated decision remains correct during the failure scene
 it exists to handle.
+
+Minimum promotion packet for this path:
+
+- `hidden_burden_removed`: `I still have to remember whether fallback survives
+  the real failure`
+- `new_truth_authority`: generated config plus an inspectable survival record
+- `runtime_consumer`: the proxy or route path that keeps using the fallback
+  after preferred-backend loss
+- `drill_packet`: backend-loss packet for one named route
 
 ### Path 3: Promote a stronger ingress or service-coordination layer
 
@@ -205,6 +255,15 @@ Do not promote this path merely because a stronger ingress layer can route to
 more places.
 Promote it when it preserves service meaning, policy, and eligibility under a
 wrong-node handoff.
+
+Minimum promotion packet for this path:
+
+- `hidden_burden_removed`: `I still have to remember whether the same protected
+  route meaning survives handoff`
+- `new_truth_authority`: ingress/service-coordination state visible outside
+  one operator's memory
+- `runtime_consumer`: the actual protected route path
+- `drill_packet`: route packet plus policy-parity evidence
 
 ### Path 4: Promote a heavier orchestrator or cluster worldview
 
@@ -231,6 +290,17 @@ Do not promote this path merely because Compose has become uncomfortable.
 Promote it only when the discomfort is proven to come from a burden a heavier
 system would actually own better.
 
+Minimum promotion packet for this path:
+
+- `hidden_burden_removed`: the exact private sentence the smaller layer failed
+  to kill
+- `new_truth_authority`: scheduler, service registry, controller state, or
+  cluster API that owns the missing truth
+- `runtime_consumer`: request path, scheduling path, state authority path, or
+  operator workflow that actually consumes that truth
+- `drill_packet`: the narrow packet matching the burden, not a general
+  "cluster works" result
+
 ## Demotion and quarantine rules
 
 Not every serious experiment deserves to stay in the active story.
@@ -256,11 +326,15 @@ Use this short ledger for any future promotion decision:
 | Field | Required answer |
 | --- | --- |
 | Candidate layer | The concrete tool, helper, file, service, or controller being promoted |
+| Promoted from | Research, helper, docs-only, local runtime, or manual ops |
 | Private sentence removed | The exact operator-owned sentence that should die |
+| Replaced private authority | The human memory, judgment, caveat, or reconstruction being replaced |
 | New truth authority | The artifact or component that now owns that truth |
 | Runtime consumer | The code, service, proxy, or route path that consumes it |
 | Drill passed | The stress scene that proved behavior changed |
+| Drill packet | The proof packet that records the stress result and ceiling |
 | Inspection path | How an operator can see why the decision happened |
+| Legal new claim | The one narrow stronger sentence now allowed |
 | Still forbidden | The stronger claim that remains illegal afterward |
 
 If any row is empty, the promotion is not yet real.
