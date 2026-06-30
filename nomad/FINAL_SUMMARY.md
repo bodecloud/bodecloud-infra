@@ -1,5 +1,25 @@
 # Final Summary - Nomad HA Configuration Progress
 
+This file is one of the clearest reasons the Nomad branch must not be narrated
+as "complete."
+
+It contains real progress, but it also directly documents the branch's most
+important blocker:
+
+- no cluster leader
+- insufficient server quorum
+- Consul still short of trustworthy HA
+
+So this file should now be read as:
+
+- a serious progress summary
+- evidence that the repo pushed hard on a Nomad middle-layer future
+- evidence that the branch still had unresolved control-plane blockers
+
+For the knowledgebase synthesis, see:
+
+- [`../knowledgebase/research/nomad-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/nomad-exploration-evidence.md)
+
 ## ✅ Completed Work
 
 ### 1. HA Infrastructure Configuration
@@ -154,5 +174,6 @@ nomad server members
 - ✅ Created recovery scripts
 - ✅ Maintained code quality with proper commits
 
-All code changes have been committed and are ready for deployment once the Nomad cluster is fixed.
-
+The branch work described here is valuable, but it should not be mistaken for
+demonstrated end-to-end HA until the cluster-leader and quorum issues are
+actually resolved and re-verified.

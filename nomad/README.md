@@ -1,6 +1,47 @@
 # Nomad Job Specifications for Docker Compose Stack
 
-This directory contains Nomad job specifications that are 1:1 equivalents of the Docker Compose configuration found in `docker-compose.yml` and its included files.
+This directory preserves one of the repo's strongest attempts at a middle layer
+between raw Compose and full Kubernetes-style platform capture.
+
+It should **not** be read as the current primary runtime.
+The priority implementation for `bolabaden-infra` remains the root
+[`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+and its included fragments.
+
+It should also **not** be read as finished HA proof.
+The branch itself records cluster-leader, quorum, and Consul SPOF blockers that
+prevent that conclusion.
+
+The most honest summary is:
+
+- substantial Nomad conversion work exists
+- the branch tries to preserve Compose semantics in a stronger scheduler
+- the branch contains useful parity, variable, and deployment work
+- the branch still documents control-plane blockers that prevent broad HA
+  closure
+
+For the rendered knowledgebase assimilation, see:
+
+- [`../knowledgebase/research/nomad-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/nomad-exploration-evidence.md)
+
+## How to read "1:1 equivalents"
+
+Earlier wording in this file described the jobs as "1:1 equivalents" of the
+Compose stack.
+That is directionally useful but too absolute if read as runtime proof.
+
+The safer reading is:
+
+- the branch attempts close semantic parity
+- many service mappings, ports, variables, and structures were carried over
+- full equivalence still depends on runtime verification, cluster health, and
+  service-by-service validation
+
+## Historical branch overview
+
+The remainder of this file is preserved as the branch's operational overview.
+Use it as a guide to the branch's intent and assets, not as proof that Nomad is
+already the settled answer.
 
 ## ⚠️ IMPORTANT: Secrets Management
 

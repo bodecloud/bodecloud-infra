@@ -1,6 +1,12 @@
 ### OpenSVC HA Ingress (Dynamic, Zero Hardcoded Nodes/Services)
 
-This repo already runs **Traefik** for HTTP(S). The missing piece for multi-node HA is **dynamic failover/load-balancing across nodes** without hardcoding node/service names.
+This page describes an **approach** for OpenSVC-assisted ingress failover.
+It should not be read as proof that the current tracked root runtime already
+delivers universal any-node success.
+
+This repo already runs **Traefik** for HTTP(S). The missing piece for multi-node
+HA is **dynamic failover/load-balancing across nodes** without hardcoding
+node/service names.
 
 This document describes the approach implemented in:
 - `scripts/osvc_ingress_sync.py` (generates Traefik file-provider config)
@@ -10,13 +16,19 @@ This document describes the approach implemented in:
 
 ### What this enables
 
+What follows is best read as intended behavior of this OpenSVC-based direction,
+not as a blanket statement about today’s live Compose-first runtime.
+
 - **Node-scoped hostnames (always hit that node first)**:
   - `https://<service>.<node>.bolabaden.org`
-  - DNS resolves to `<node>`; Traefik on that node routes to local container **or** implicitly falls back to another node that has the service.
+  - DNS resolves to `<node>`; the intended behavior is that Traefik on that
+    node can route to a local container **or** fall back to another node that
+    has the service.
 
 - **Global hostnames (load-balance/failover across any node running the service)**:
   - `https://<service>.bolabaden.org`
-  - DNS/LB must land you on *any* healthy node ingress; that node will route locally or fall back to other nodes automatically.
+  - DNS/LB must land you on *any* healthy node ingress; the intended behavior
+    is that the receiving node can route locally or fall back to other nodes.
 
 ---
 
@@ -67,6 +79,14 @@ Traefik is already configured with:
 
 So updating the file updates routing dynamically.
 
+That is still weaker than proving correct failure behavior.
+
+Dynamic generation alone does not prove:
+
+- that the fallback route survives when the local backend disappears
+- that auth and middleware continuity survive the peer hop
+- that this path is the current authoritative runtime for the whole repo
+
 ---
 
 ### TCP (Redis/Mongo/etc.)
@@ -79,4 +99,7 @@ To get:
 
 …you need an L4 load balancer per port (example: HAProxy in `network_mode: host`) and **true datastore HA** (Redis Sentinel/Cluster, Mongo replica set, etc.). This is planned next.
 
+That last point is the real honesty wall:
+
+HTTP failover experimentation is not proof of stateful HA.
 

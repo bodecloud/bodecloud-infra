@@ -1,136 +1,115 @@
-# bolabaden Infrastructure Knowledgebase
+# Legacy Docs Index
 
-Welcome to the operational knowledgebase for **bolabaden.org** — a multi-node, Docker-based homelab infrastructure built for high availability **without** Kubernetes or Docker Swarm.
+This `docs/` directory is no longer the primary documentation surface for understanding `bolabaden-infra`.
 
----
+The current authoritative documentation lives under:
 
-## Architecture at a Glance
+- [`knowledgebase/`](../knowledgebase/)
+- especially [`knowledgebase/index.md`](../knowledgebase/index.md)
 
-```
-User → Cloudflare DNS → Any Node
-  ├─ Service exists locally? → Serve directly  (fast path)
-  └─ Service on another node? → Traefik L7 proxy → Peer node
-```
+This matters because earlier docs in this repo flattened too many things together:
 
-Key properties:
+- live Compose behavior
+- planned failover architecture
+- research pressure from the source archive
+- optimistic platform language that sounded more complete than the implementation really was
 
-- **No central orchestrator** — services are manually assigned to nodes; the system reflects current state, not desired state
-- **Distributed failover** — each node can independently serve requests or forward to peers
-- **L7 reverse proxy** — Traefik v3 with file provider handles HTTPS routing, health checks, and primary + fallback configurations
-- **DNS failover** — Cloudflare with multiple A records provides node-level failover
-- **L4 proxy** — raw TCP services (Redis, MongoDB) handled separately
+The newer knowledgebase separates those layers explicitly.
 
----
+## Start in the knowledgebase
 
-## Quick Navigation
+If you need to understand what the repo is actually trying to build, read these first:
 
-| I want to… | Go to |
-|---|---|
-| Understand the overall roadmap | [Infrastructure Master Plan](INFRASTRUCTURE_MASTER_PLAN.md) |
-| Deploy a new node or service | [Constellation Agent → Deployment Guide](../infra/docs/DEPLOYMENT_GUIDE.md) |
-| Configure secrets | [Docker Secrets Setup](../DOCKER_SECRETS_README.md) |
-| Troubleshoot a service | [Constellation Agent → Troubleshooting](../infra/docs/TROUBLESHOOTING.md) |
-| Understand HA patterns | [Stateful HA Plan](stateful_ha_plan.md) |
-| Run maintenance / clean up disk | [Maintenance Guide](MAINTENANCE.md) |
-| Set up telemetry / metrics | [OTLP Quickstart](OTLP_QUICKSTART.md) |
-| Contribute code or docs | [Contributing Guidelines](../CONTRIBUTING.md) |
+1. [`../knowledgebase/index.md`](../knowledgebase/index.md)
+2. [`../knowledgebase/architecture/problem-and-goals.md`](../knowledgebase/architecture/problem-and-goals.md)
+3. [`../knowledgebase/architecture/current-compose-runtime.md`](../knowledgebase/architecture/current-compose-runtime.md)
+4. [`../knowledgebase/architecture/compose-first-architecture.md`](../knowledgebase/architecture/compose-first-architecture.md)
+5. [`../knowledgebase/architecture/ha-failover-routing.md`](../knowledgebase/architecture/ha-failover-routing.md)
+6. [`../knowledgebase/architecture/stateful-ha-and-data.md`](../knowledgebase/architecture/stateful-ha-and-data.md)
+7. [`../knowledgebase/architecture/capability-gaps-and-roadmap.md`](../knowledgebase/architecture/capability-gaps-and-roadmap.md)
+8. [`../knowledgebase/operations/devops-runbook.md`](../knowledgebase/operations/devops-runbook.md)
 
----
+Those pages are now the best explanation of the actual repo question:
 
-## Infrastructure Components
+> how do you make multiple ordinary Docker nodes feel resilient, peer-aware, and low-bullshit without immediately falling into Swarm, Kubernetes, or another heavyweight control plane?
 
-### Core Services
-- **Traefik v3** — L7 reverse proxy, TLS termination, health-check-based routing
-- **CrowdSec** — community-driven intrusion prevention
-- **MongoDB** — primary document store
-- **Redis** — cache and message queue
-- **Dozzle** — real-time container log viewer
-- **Homepage** — service discovery dashboard
+## What this `docs/` directory is still good for
 
-### Monitoring Stack
-- **Grafana** — dashboards and alerting
-- **VictoriaMetrics** — Prometheus-compatible time-series DB (better performance)
-- **Loki** — log aggregation
-- **Alertmanager** — alert routing and notification
+This directory still contains important repo artifacts. They just should not be mistaken for the whole story.
 
-### Automation Tooling
-- **Constellation Agent** (`infra/`) — Go-based infrastructure agent; gossip cluster, Raft consensus, Traefik API provider, automated service failover
+### Planning anchors
 
----
+- [Infrastructure Master Plan](INFRASTRUCTURE_MASTER_PLAN.md)
+- [Stateful HA Plan](stateful_ha_plan.md)
+- [OpenSVC Ingress HA](osvc_ingress_ha.md)
+- [Orchestration Research 2026](orchestration_research_2026.md)
 
-## Repo Layout
+These are valuable because they reveal where the repo wants to go. They are not the same thing as proof of current live behavior.
 
-```
-my-media-stack/
-├── docker-compose.yml          # Core services (MongoDB, Redis, Dozzle, Homepage…)
-├── compose/                    # Modular service groups (metrics, LLM, Coolify, L4…)
-├── infra/                      # Constellation Agent — Go source + docs
-│   └── docs/                   # 27 docs covering architecture, API, ops runbooks
-├── docs/                       # Infrastructure architecture and operational docs (you are here)
-├── scripts/                    # Maintenance and utility scripts
-├── secrets/                    # Runtime secrets (excluded from git)
-└── volumes/                    # Persistent data volumes
-```
+### Product- or subsystem-specific docs
 
----
+- [Maintenance Guide](MAINTENANCE.md)
+- [OTLP Quickstart](OTLP_QUICKSTART.md)
+- [KotorModSync Telemetry Setup](KOTORMODSYNC_TELEMETRY_SETUP.md)
+- [KotorModSync Client Integration](KOTORMODSYNC_CLIENT_INTEGRATION.md)
+- [KotorModSync Security Summary](KOTORMODSYNC_SECURITY_SUMMARY.md)
 
-## Philosophy
+These are still useful, but they sit beside the larger infrastructure question rather than replacing it.
 
-This stack deliberately avoids orchestrators. The reasoning — and the costs of that choice — are explored in [The Hidden Attrition of Infrastructure](../plan-infrastructure-unification.md).
+### Planning history
 
-The short version: orchestrators like Kubernetes introduce a *control plane paradox* — the system that manages your services is itself a distributed system that can fail. For a homelab, the operational overhead outweighs the benefits. Instead, this infrastructure uses:
+- [`plans/`](plans/)
+- [`brainstorms/`](brainstorms/)
+- [`residual-review-findings/`](residual-review-findings/)
 
-- Simple DNS-based failover (Cloudflare multi-A-record)
-- Traefik as a lightweight mesh boundary
-- A custom Go agent (Constellation) for gossip-based health tracking and automated routing updates
-- Runbooks + automation scripts for operational tasks that would otherwise need an orchestrator
+These files help explain decisions, but they should not be treated as current runtime truth unless a live implementation page or verification artifact proves the same claim.
 
----
+## Reading guide by question
 
-## Document Status
+If your question is "what is actually running now?":
 
-| Document | Status | Last Updated |
-|---|---|---|
-| [Infrastructure Master Plan](INFRASTRUCTURE_MASTER_PLAN.md) | Active | 2026-03-03 |
-| [Constellation Agent Docs](../infra/docs/README.md) | Active | Ongoing |
-| [Orchestration Research 2026](orchestration_research_2026.md) | Research/Reference | 2026 |
-| [Stateful HA Plan](stateful_ha_plan.md) | Planning | Active |
-| [Maintenance Guide](MAINTENANCE.md) | Active | Ongoing |
-| [KotorModSync Telemetry](KOTORMODSYNC_TELEMETRY_SETUP.md) | Active | Ongoing |
+- [`../knowledgebase/architecture/current-compose-runtime.md`](../knowledgebase/architecture/current-compose-runtime.md)
+- [`../knowledgebase/architecture/compose-fragment-map.md`](../knowledgebase/architecture/compose-fragment-map.md)
 
----
+If your question is "what does failover really mean here?":
 
-## Run The Knowledgebase
+- [`../knowledgebase/architecture/ha-failover-routing.md`](../knowledgebase/architecture/ha-failover-routing.md)
+- [`../knowledgebase/research/ingress-and-failover-evidence.md`](../knowledgebase/research/ingress-and-failover-evidence.md)
 
-Use these commands from the repository root.
+If your question is "how honest is the stateful HA story?":
 
-Start docs service with core stack:
+- [`../knowledgebase/architecture/stateful-ha-and-data.md`](../knowledgebase/architecture/stateful-ha-and-data.md)
+- [`../knowledgebase/research/stateful-ha-evidence.md`](../knowledgebase/research/stateful-ha-evidence.md)
+- [Stateful HA Plan](stateful_ha_plan.md)
 
-```bash
-docker compose up -d mkdocs
-```
+If your question is "why not just pick Kubernetes, Swarm, Nomad, or OpenSVC?":
 
-Validate merged compose config:
+- [`../knowledgebase/architecture/orchestration-options.md`](../knowledgebase/architecture/orchestration-options.md)
+- [`../knowledgebase/research/orchestrator-tradeoffs-evidence.md`](../knowledgebase/research/orchestrator-tradeoffs-evidence.md)
+- [Orchestration Research 2026](orchestration_research_2026.md)
 
-```bash
-docker compose config --quiet
-```
+## Important boundary
 
-Watch logs:
+Do not use this directory as evidence that the repo already has:
 
-```bash
-docker logs -f mkdocs
-```
+- fully proven multi-node failover
+- a live tracked root `services.yaml` current-state registry
+- universal peer-aware request success
+- zero-SPOF stateful behavior
+- one settled future control plane
 
-Open the site:
+Those are exactly the kinds of overclaims the knowledgebase was rewritten to avoid.
 
-- Routed host: `https://docs.$DOMAIN`
-- Local host port: `http://localhost:8001`
+## Bottom line
 
-Quick troubleshooting:
+Use this folder as:
 
-```bash
-docker ps --filter "name=mkdocs" --format "table {{.Names}}\t{{.Status}}"
-docker inspect mkdocs --format '{{json .State.Health}}'
-docker compose up -d --force-recreate mkdocs
-```
+- a planning archive
+- a set of subsystem docs
+- a source layer
+
+Use the knowledgebase as:
+
+- the current authoritative explanation
+- the honesty boundary
+- the place where live truth, planned truth, and research pressure are kept separate on purpose

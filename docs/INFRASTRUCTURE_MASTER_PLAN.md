@@ -3,7 +3,16 @@
 > **Version**: 1.0.0\
 > **Date**: 2026-03-03\
 > **Status**: Design & Planning\
-> **Goal**: Turn a multi-VPS Docker Compose stack into a fully automated, self-healing, horizontally-scalable personal cloud that anyone can template for their own domain.
+> **Goal**: Define a path for turning a multi-VPS Docker Compose stack into a
+> more automated, self-healing, horizontally-scalable personal cloud that can
+> eventually be templated for other domains without pretending that the current
+> runtime already behaves that way.
+
+> **Important reading boundary**: this file is a planning artifact, not proof
+> that the runtime already behaves this way. For the current evidence-first
+> reading, start with [`../knowledgebase/index.md`](../knowledgebase/index.md)
+> and especially the architecture pages under
+> [`../knowledgebase/architecture/`](../knowledgebase/architecture/).
 
 ***
 
@@ -35,7 +44,27 @@ TOC convention: top-level entries use numbered list items, nested entries use bu
 
 ## 1. Executive Summary
 
-Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compose.yml` and `cloud-init-bootstrap.sh` across multiple VPSes. Each node can independently serve requests or proxy to peers via Traefik. Cloudflare DNS with multiple A records provides node-level failover.
+Bolabaden is a multi-node Docker infrastructure whose **intended direction** is
+to let multiple Compose-managed VPS nodes behave more like one resilient
+personal cloud without defaulting to Kubernetes or Docker Swarm.
+
+The current live repo already proves:
+
+- a serious root `docker-compose.yml` entrypoint
+- modular `compose/` includes
+- a substantial Traefik/CrowdSec/auth edge layer
+- Cloudflare DNS participation
+- strong planning pressure toward any-node entry and peer-aware routing
+
+The current live repo does **not** yet prove:
+
+- universal wrong-node success
+- a live tracked root `services.yaml` current-state registry
+- trustworthy route persistence under local backend failure
+- automated service failover between nodes
+- stateful zero-SPOF correctness merely because a service is present
+
+This plan exists because those gaps are still real.
 
 **This plan addresses 11 capability gaps** to transform the stack from a manually-synchronized multi-VPS setup into a fully automated, self-healing, horizontally-scalable platform.
 
@@ -63,7 +92,7 @@ Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compo
 | Modular compose includes | ✅ 7 includes | `compose/docker-compose.*.yml` |
 | Traefik v3 reverse proxy | ✅ With CrowdSec, ACME | `compose/docker-compose.coolify-proxy.yml` |
 | Headscale | ✅ Single-node | `compose/docker-compose.headscale.yml` |
-| Cloudflare DDNS | ✅ Single-record | `compose/docker-compose.coolify-proxy.yml` (favonia/cloudflare-ddns) |
+| Cloudflare DDNS | ✅ Present, but not yet the same thing as full multi-node request failover | `compose/docker-compose.coolify-proxy.yml` (favonia/cloudflare-ddns) |
 | CrowdSec WAF | ✅ Working | Bouncer plugin + LAPI |
 | TinyAuth | ✅ OAuth (Google/GitHub) | Forward auth middleware |
 | nginx-traefik-extensions | ✅ API key + IP whitelist + TinyAuth fallback | Nginx forward auth |
@@ -73,7 +102,7 @@ Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compo
 | Nomad/Consul | ⚠️ Installed by bootstrap, not integrated | Bootstrap installs binaries |
 | Secret sync | ❌ Manual | `.secrets` file, `generate-secrets.sh` |
 | Compose sync | ❌ Manual git pull | Bootstrap does `git pull --ff-only` |
-| Service failover | ❌ Not automated | Only Cloudflare DNS failover |
+| Service failover | ❌ Not automated | Cloudflare DNS can shift entry, but service-level peer failover is not proven |
 
 ### Identified Bugs
 
@@ -87,6 +116,9 @@ Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compo
 ## 3. Architecture Overview
 
 ### Target Architecture
+
+This diagram is an intended target shape, not a statement that the current
+tracked runtime already behaves this way end to end.
 
 ```
                     ┌─────────────────────────────────────┐
@@ -118,6 +150,10 @@ Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compo
 
 ### DNS Routing Pattern
 
+This section describes the naming and routing pattern the repo wants.
+It should not be read as proof that every global hostname already preserves
+wrong-node success today.
+
 ```
 bolabaden.org                  → All VPS IPs (round-robin)
 *.bolabaden.org                → All VPS IPs (round-robin)
@@ -128,6 +164,10 @@ grafana.vractormania.bolabaden.org   → VPS1 only (grafana on vractormania)
 ```
 
 ### Internal DNS (Tailscale/Headscale MagicDNS)
+
+This is also target-shape material.
+It describes how private naming could support the no-cluster, any-node dream
+more coherently once the missing placement and failover truth layers exist.
 
 ```
 vractormania.myscale.bolabaden.org                → Tailscale IP of VPS1
@@ -148,7 +188,8 @@ docker run --rm -v "$PWD:/docs" -w /docs squidfunk/mkdocs-material:latest build 
 
 Expected behavior:
 
-* `docker compose config --quiet` may print environment-variable warnings but should not fail.
+* `docker compose config --quiet` may print environment-variable warnings and
+  may still require a prepared env/secrets surface depending on the machine.
 * Strict MkDocs builds should complete with `Documentation built`.
 * The Material image may print an upstream warning banner that is informational when strict build still succeeds.
 

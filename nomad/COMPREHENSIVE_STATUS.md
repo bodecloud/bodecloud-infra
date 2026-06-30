@@ -1,6 +1,19 @@
 # Comprehensive Nomad Cluster Status Report
 Generated: $(date)
 
+## Reality check
+
+This file is valuable because it preserves concrete Nomad and Consul cluster
+observations.
+It should not be read as proof that the Nomad branch has already earned full
+promotion as the repo's settled answer.
+
+The same document still records critical SPOFs and partial-node availability.
+
+For the assimilated reading of the Nomad branch, see:
+
+- [`../knowledgebase/research/nomad-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/nomad-exploration-evidence.md)
+
 ## Executive Summary
 
 ### ✅ Operational Status
@@ -197,4 +210,3 @@ Generated: $(date)
 ## Overall Status: 🟡 PARTIALLY HEALTHY
 
 **Cluster is functional with most services operational, but critical infrastructure gaps (Consul HA, node recovery) need addressing for production readiness and zero single points of failure.**
-

@@ -1,5 +1,11 @@
 ### Stateful HA (Zero-SPOF) Plan
 
+This page is a planning document.
+It describes the minimum kinds of topology truth the repo would need before it
+could honestly claim low-SPOF behavior for stateful systems.
+
+It is not proof that the current runtime already provides this.
+
 You can’t get “zero SPOF including stateful services” by *only* moving containers between nodes.
 
 Stateful HA requires **replication + quorum** (or replicated block storage) so that losing one node does not lose the data and does not stop writes.
@@ -10,16 +16,23 @@ This document is the pragmatic plan for this repo.
 
 ### 0) Ingress reality check (TCP vs hostname)
 
-- **HTTP(S)** can be routed by hostname (Host header/SNI) and we already generate dynamic failover config for Traefik.
+- **HTTP(S)** can be routed by hostname (Host header/SNI), and the repo already
+  experiments with dynamic Traefik failover config generation.
 - **Plain TCP** (like `redis://…`) cannot be routed by hostname unless you terminate TLS and use SNI.
   - So for TCP we load-balance by **port** (ex: 6379) and rely on DNS/LB to land you on any node.
   - See `scripts/osvc_l4_sync.py` + `compose/docker-compose.l4-ingress.yml`.
+
+That does **not** mean the repo already has full TCP failover correctness.
+It means the repo already knows that plain TCP and stateful HA cannot be faked
+with the same story used for HTTP.
 
 ---
 
 ### 1) Redis (recommendation: Redis Sentinel + HAProxy master routing)
 
-**Goal**: `redis://redis.<node>.bolabaden.org:6379` and `redis://redis.bolabaden.org:6379` always connect to the *current master*.
+**Goal**: `redis://redis.<node>.bolabaden.org:6379` and
+`redis://redis.bolabaden.org:6379` connect to the *current master* once this
+topology exists and is actually verified.
 
 Minimum topology (3 nodes):
 - 1 Redis master
@@ -44,6 +57,10 @@ Minimum topology (3 nodes):
 
 Client behavior:
 - Drivers handle failover if they can see multiple members.
+
+That conditional matters.
+Mongo resilience is not created by putting Traefik or DNS in front of a single
+Mongo container.
 
 Two ways to make it “one hostname”:
 - **Best**: Mongo SRV records (`mongodb+srv://…`) with records generated from cluster membership.
@@ -78,6 +95,11 @@ For this stack, the minimal workable path is:
 - Make only the truly critical datastores replicated (Redis/Mongo).
 - Promote shared volumes later once ingress + scheduling are stable.
 
+This is one of the most important anti-fantasy sections in the repo.
+
+If volumes stay node-local, then some forms of node interchangeability are
+still impossible no matter how polished the ingress story sounds.
+
 ---
 
 ### 5) What we will do next in this repo
@@ -87,5 +109,4 @@ For this stack, the minimal workable path is:
   - per-node wildcard records (`*.node.domain`)
   - optional global wildcard (`*.domain`) via LB/VIP
   - optional Mongo SRV records for replica set discovery
-
 

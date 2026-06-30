@@ -1,3 +1,14 @@
+> Status note:
+> This document records the intended and partially implemented Constellation
+> integration path.
+> It does not by itself prove that the integration is fully validated,
+> production-ready, or authoritative for the root Compose-first runtime.
+>
+> Many later headings in this file preserve historical "complete" or
+> "production-ready" wording from the subtree's own status narrative.
+> Those headings should be read as branch-local claims under review, not as the
+> current repo-wide verdict.
+>
 # Constellation Integration Plan
 
 ## Overview
@@ -118,7 +129,7 @@ The original Constellation Python project provided several features that should 
    - ✅ Node-based migration triggers (cordoned nodes)
    - ✅ Manual migration triggers via REST API
    - ⚠️ Migration execution: Currently simulates migration (logs + status tracking)
-     - Migration framework is fully implemented
+     - Migration framework appears substantially implemented
      - Actual container transfer/state migration is simulated
      - Container discovery and validation is implemented
      - Full migration would require remote Docker API access, volume transfer, etc.
@@ -175,7 +186,8 @@ The original Constellation Python project provided several features that should 
 **Phase 1: 100% Complete** ✅
 - All core missing features implemented
 - All TODOs resolved
-- Core functionality fully implemented (migration execution uses simulation/logging for container transfer)
+- Core functionality substantially implemented (migration execution still uses
+  simulation/logging for container transfer)
 
 **Phase 2: 100% Complete** ✅
 - REST API: ✅ Complete
@@ -317,7 +329,9 @@ The actual container migration execution is currently **simulated** (logs migrat
 
 The framework is designed to support full migration implementation when needed, with all the infrastructure and APIs in place.
 
-The infrastructure is fully tested and ready for production use. The migration system can be used for monitoring and planning migrations, with full execution implementation as a future enhancement.
+The documented surfaces indicate heavy testing and integration effort. They do
+not by themselves prove end-to-end production readiness, especially while full
+migration execution remains a future enhancement.
 
 ## Known Limitations and Future Enhancements
 
@@ -334,7 +348,7 @@ The infrastructure is fully tested and ready for production use. The migration s
 - **Resource Threshold Parsing**: Implemented and logged
 - **Metrics Collection**: Requires integration with metrics infrastructure (Prometheus/node-exporter)
 - **Threshold Evaluation**: Logic ready, needs metrics data source
-  - Threshold parsing logic is fully implemented in `infra/failover/migration.go`
+  - Threshold parsing logic is implemented in `infra/failover/migration.go`
   - Integration with metrics collection system needed for full functionality
 
 ### Testing
@@ -473,7 +487,10 @@ The infrastructure is fully tested and ready for production use. The migration s
 
 **Final Status**: ✅ **100% COMPLETE, FULLY TESTED, AND PRODUCTION-READY**
 
-All phases of the Constellation integration are complete, fully tested, and integrated into the agent. The system is ready for production use with the documented limitations (simulated migration execution, resource metrics pending infrastructure integration).
+Most planned Constellation integration phases appear represented in the tree and
+documented here, but the presence of simulated migration execution and pending
+resource-metrics integration means this file should not be read as full
+production proof.
 
 ## Implementation Completion Summary
 
@@ -594,14 +611,17 @@ grep -r "NewServer\|apiServer.Start" infra/cmd/agent
 
 ### Conclusion
 
-**The Constellation integration is 100% complete, fully tested, and production-ready.**
+**The Constellation integration appears extensive and heavily documented, but it
+still requires stronger runtime proof before being called complete or
+production-ready.**
 
-All features from the original Python Constellation project have been successfully integrated into the Go implementation:
-- ✅ REST API with 15+ endpoints
-- ✅ WebSocket service for real-time updates
-- ✅ Enhanced failover with migration framework
-- ✅ Config file support (YAML/JSON)
-- ✅ Image building via Docker API
+The current tree strongly suggests that most of the originally targeted
+integration domains are represented in the Go implementation:
+- REST API with multiple endpoints
+- WebSocket service for real-time updates
+- enhanced failover and migration framework work
+- config file support (YAML/JSON)
+- image building via Docker API
 
-**The system is ready for production deployment.**
-
+**Treat the system as an advanced integration candidate, not as automatically
+approved for production deployment.**

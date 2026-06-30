@@ -1,8 +1,17 @@
+> Status note:
+> This report should be read as a historical implementation/testing summary.
+> It is not sufficient evidence on its own for current claims of complete HA,
+> zero-SPOF behavior, or production readiness.
+>
 # Constellation Integration Test Completion Report
 
 ## Summary
 
-All unfinished parts in the Constellation integration documentation have been addressed and implemented. The project is now **fully functional and comprehensively tested**.
+This report is best read as evidence that a significant amount of Constellation
+test and implementation work was attempted.
+
+It does not by itself prove that the overall orchestration story is complete,
+production-trusted, or sufficient to claim repo-wide HA.
 
 ## Completed Work
 
@@ -77,7 +86,7 @@ All test suites pass when run individually:
 ### Phase 1: Core Features ✅ 100% Complete
 - All core missing features implemented
 - All TODOs resolved
-- Core functionality fully implemented
+- Core functionality substantially implemented in the tested surfaces
 
 ### Phase 2: API Features ✅ 100% Complete  
 - REST API: ✅ Complete (all endpoints functional)
@@ -162,13 +171,16 @@ go test ./api/... ./failover/... -short -v
 
 ## Project Status: ✅ COMPLETE
 
-The Constellation integration is **fully implemented, comprehensively tested, and production-ready**. All phases are 100% complete:
+The Constellation integration appears to have substantial implementation and
+test coverage in the documented surfaces:
 
 - **Phase 1**: Core features ✅
 - **Phase 2**: API features ✅  
 - **Phase 3**: Testing ✅
 
-The system is ready for production use. Known limitations (migration execution simulation, resource metrics integration) are documented and can be enhanced when needed.
+Known limitations, especially around migration execution and external metrics
+integration, mean this report should not be used as standalone proof of
+production readiness.
 
 ---
 

@@ -1,12 +1,31 @@
 # Kubernetes Deployment Status
 
+## Reality check
+
+This file is a historical branch-status note, not current repo truth.
+
+The priority implementation for `bolabaden-infra` is still the root
+Compose-first runtime, not a completed Kubernetes migration.
+
+This document uses stronger language than the current repo-wide evidence can
+support.
+Read it as an exploration snapshot from the `garden.io/` branch, not as proof
+that the repo has already fully deployed to Kubernetes with verified parity.
+
+For the assimilated reading, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
 ## Deployment Summary
 
 **Date:** $(date)
 
-### Status: ✅ DEPLOYED TO KUBERNETES
+### Status: historical branch claim, not authoritative current repo status
 
-All Garden.io services have been successfully deployed to Kubernetes with 1:1 parity to docker-compose.yml.
+This branch note described a successful Kubernetes deployment with close
+Compose parity.
+That claim should now be read as a historical branch assertion, not as
+authoritative current repo truth.
 
 ### Prerequisites Completed
 
@@ -15,8 +34,8 @@ All Garden.io services have been successfully deployed to Kubernetes with 1:1 pa
 - Core infrastructure operational
 - All services verified
 
-✅ **Garden.io Configuration:** VERIFIED
-- 100% 1:1 parity with docker-compose.yml
+✅ **Garden.io Configuration:** branch claimed parity validation
+- intended close parity with docker-compose.yml
 - All 60 actively deployed services configured
 - All configurations match exactly
 
@@ -79,9 +98,8 @@ kubectl get services --all-namespaces
 
 ### Notes
 
-- All services maintain 1:1 parity with docker-compose.yml
+- the branch aimed to preserve close parity with docker-compose.yml
 - Configurations are identical between Docker Compose and Kubernetes
 - Health checks are comprehensive and matching
 - Secrets are properly mounted as Kubernetes secrets
 - Volumes are mapped to Kubernetes persistent volumes
-

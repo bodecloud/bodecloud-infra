@@ -1,0 +1,463 @@
+# Instruction Surfaces and Authority
+
+This page exists because one of the easiest ways to ruin this repo is to let
+different instruction files borrow authority they do not actually have.
+
+That mistake shows up fast:
+
+- workflow guidance gets narrated as architecture law
+- architecture intent gets narrated as runtime proof
+- authoring discipline gets narrated as distributed correctness
+
+The result is always the same:
+
+the repo starts sounding more solved than it is.
+
+That is exactly what the user does not want.
+It is also one of the easiest ways for the docs to recreate the same
+option-space fraud the user keeps reacting against:
+
+- several files sound aligned
+- alignment gets mistaken for one coherent implemented truth
+- one coherent truth gets mistaken for runtime behavior
+- the actual authority boundary disappears
+
+They are already frustrated by infrastructure ecosystems that pretend the
+option space is richer than it really is.
+This docs set cannot repeat that behavior by flattening its own instruction
+surfaces into one fake voice.
+
+## The question this page answers
+
+The concrete recurring question is:
+
+> which repo instruction files actually define the multi-node Docker, no-Swarm,
+> wrong-node-survival, failover/fallback idea, and what does each file have the
+> authority to claim?
+
+That sounds narrow.
+It is not narrow.
+
+If the authority map is wrong, every other page drifts.
+
+## The shortest honest answer
+
+If someone asks:
+
+> do `AGENTS.md`, `.github/copilot-instructions.md`, and `.cursorrules`
+> explain the multiple-Docker-node, no-Swarm, failover/fallback model?
+
+The correct answer is:
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md):
+  yes, directly, and more clearly than any other repo file
+- [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md):
+  only partially, mostly by anchoring attention to the actual root runtime
+  surface
+- [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules):
+  mostly no, except where Compose hygiene helps prevent fake resilience claims
+
+The blunt version is:
+
+- if you want the dream, read `copilot-instructions.md`
+- if you want the runtime anchor, read `AGENTS.md`
+- if you want authoring discipline, read `.cursorrules`
+
+If a contributor leaves this page still thinking all three files "basically say
+the same thing," then this page has failed.
+
+That is the shortest honest answer to the exact question the user keeps
+pressing.
+It is also a useful test for the rest of the knowledgebase:
+if another page cannot preserve that unevenness, it is probably smoothing the
+repo into a more coherent story than the evidence supports.
+
+It is important because people naturally want to say:
+
+- "all three files point in the same direction"
+
+That statement is true only in a weak sense.
+It is false if used to imply that all three files *explain* the no-Swarm,
+wrong-node, peer-forward architecture equally well.
+
+They do not matter equally.
+Treating them as equal is one of the easiest ways to misunderstand the repo.
+
+## What is really at stake
+
+The user's real complaint is not:
+
+- "please rank repo docs"
+
+It is:
+
+> please stop giving me systems and explanations that sound rich and flexible
+> until I try to pin down where the actual truth lives
+
+That complaint applies inside this repo too.
+
+Every important page in the knowledgebase eventually depends on answering:
+
+- which file names the dream most clearly?
+- which file keeps us tied to the real runtime?
+- which file enforces discipline without overclaiming architecture?
+- which file mostly governs Compose hygiene rather than distributed truth?
+
+That is the real purpose of this page.
+The point is not to be tidy about documentation hierarchy.
+The point is to stop the repo from remembering itself wrong.
+
+## The authority ranking the docs should use
+
+For the multi-node Docker without immediate orchestrator surrender story, the
+highest-signal files are:
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+- [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
+- [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules)
+
+They should be read in that order unless the question is specifically about
+runtime validation or authoring rules.
+
+The simplest summary is:
+
+> `copilot-instructions.md` says the dream most clearly; `README.md` explains
+> the dream and its honesty walls at repo level; `AGENTS.md` ties claims back to
+> the actual runtime surface; `.cursorrules` is mostly service-authoring
+> discipline, not architecture explanation
+
+That ranking should drive every future documentation judgment.
+It should also be read as a defense against a specific temptation:
+
+- treat repeated repo language as proof
+- treat repo-wide agreement as implementation
+- treat service-authoring rules as distributed-systems semantics
+
+The user keeps asking this because they are not really ranking docs.
+They are checking whether the repo itself knows where its truth lives.
+
+That is why the order has to stay explicit:
+
+- dream first
+- honesty wall second
+- runtime anchor third
+- authoring discipline fourth
+
+## Trust matrix
+
+| File | Best used for | Strongest claims it can support | Claims it cannot support alone |
+| --- | --- | --- | --- |
+| `.github/copilot-instructions.md` | Architecture intent | No central orchestrator by default, multi-node Docker worldview, local-first then peer-forward, shared placement-truth concept, separate L7/L4 thinking | Live end-to-end failover proof |
+| `README.md` | Repo-facing synthesis and honesty boundary | The dream is real, the root runtime is substantial, and the proof gaps still matter | Runtime correctness by itself |
+| `AGENTS.md` | Runtime anchor | Root `docker-compose.yml` plus `compose/` are the priority implementation surface and validation must stay tied to real env/secret requirements | The full HA model by itself |
+| `.cursorrules` | Compose hygiene and authoring discipline | Real healthchecks, inline configs, portable reviewable service definitions, self-healing posture | Cross-node request preservation, peer-forwarding logic, or failover correctness |
+
+This is not just a neat table.
+It is the boundary between honest docs and docs that start sounding like sales
+material.
+
+It is also a defense against a specific flattening error:
+
+- architecture intent
+- runtime anchor
+- authoring discipline
+
+are not interchangeable categories.
+
+## File-by-file authority
+
+## `.github/copilot-instructions.md`
+
+This is the repo's clearest architecture manifesto.
+
+If someone asks the user's question in the most direct form:
+
+> which file actually explains the multiple Docker nodes, no-Swarm,
+> local-first-then-peer-forward idea?
+
+this is the answer.
+
+It says, directly:
+
+- this is a multi-node Docker infrastructure repo
+- the project wants to become anti-SPOF without defaulting to Swarm or
+  Kubernetes
+- there is no central orchestrator by default
+- services are manually assigned to nodes
+- current-state truth matters more than scheduler-declared desire
+- local-first service is preferred
+- peer-forward fallback is part of the desired baseline
+- L7 HTTP and L4/TCP are different problem classes
+- Cloudflare multi-record DNS is part of node-entry resilience, not the whole
+  story
+
+It also contains the cleanest request-contract sketch in the repo:
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+That sketch matters because it proves the dream is not vague.
+It is behavior-shaped.
+
+This file does not merely say:
+
+- there are several nodes
+- Traefik exists
+- Cloudflare exists
+
+It says the repo wants a very particular kind of system:
+
+- first hop can be any healthy node
+- locality should stay visible instead of being hidden behind cluster ritual
+- wrong-node entry should not be fatal
+- peer-forwarding is normal desired behavior, not an exotic future luxury
+This matters because it proves the repo's dream is behavior-shaped enough to be
+judged, not just broad enough to be admired.
+
+### What it can legitimately prove
+
+- the dream is explicit, not inferred
+- the project is intentionally resisting premature heavy-orchestrator capture
+- wrong-node survival is part of the design target
+- a shared placement-truth surface such as `services.yaml` is central to the
+  concept
+
+### What it cannot legitimately prove
+
+- that the root runtime currently consumes a live tracked `services.yaml`
+- that peer-forwarding works end to end today
+- that fallback survives backend-loss events
+- that middleware and auth continuity are already proven
+- that L4/TCP failover is solved
+- that stateful systems are honestly HA
+
+This file is high-authority intent.
+It is not runtime proof.
+
+## `README.md`
+
+The root README is the strongest public synthesis surface.
+
+Its authority is different from `copilot-instructions.md`.
+It is less raw as architecture law, but stronger as the repo's main honesty
+boundary for:
+
+- what the project is trying to make true
+- what the root runtime already contains
+- what is still planning, aspiration, or partial proof
+- why the documentation must keep those states separate
+
+### What it can legitimately prove
+
+- the dream matters enough to sit at repo root
+- the repo knows it is navigating a missing-middle-layer problem
+- overclaiming is already recognized as dangerous
+
+### What it cannot legitimately prove
+
+- runtime behavior by itself
+- that every caveat it mentions has been operationally closed
+- that the future control surface is settled
+
+The README is the strongest repo-facing "do not lie to yourself" file.
+The repo already has enough parts to sound ambitious.
+The harder job is preserving a truthful compression of what those parts do not
+yet buy.
+
+## `AGENTS.md`
+
+`AGENTS.md` matters because it drags the conversation back to the real worktree.
+
+It is also important to say what it does not do:
+
+it does not explain the dream as clearly as `copilot-instructions.md`.
+
+Its job is not to give the whole philosophy of the project.
+Its job is to stop abstraction drift.
+
+It makes clear:
+
+- this is a Compose infrastructure repo, not a normal app repo
+- the priority implementation is the root
+  [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+  plus the fragments under
+  [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
+- validation is constrained by real env and secret requirements
+- claims about the system should tie back to real commands and real runtime
+  surfaces
+
+What it does **not** do is explain the multi-node failover/fallback dream with
+the same specificity as `copilot-instructions.md`.
+
+It says enough to confirm that this is a multi-node Compose repo and that the
+root runtime matters.
+It does not carry the full philosophical burden of the no-Swarm, any-node,
+wrong-node-survival model.
+
+That matters because one of the user's biggest complaints is fake option-space.
+`AGENTS.md` is one of the files that helps resist that by keeping the repo
+grounded in actual inspectable surfaces.
+
+### What it can legitimately prove
+
+- where implementation truth should be checked first
+- that the repo is still Compose-first in operator reality
+- that environment and secret requirements are part of the real runtime burden
+
+### What it cannot legitimately prove
+
+- the whole no-cluster peer-forward model by itself
+- that the dream is already implemented
+- that any HA path works end to end
+
+`AGENTS.md` is an implementation anchor.
+It is not the architecture thesis.
+That distinction has to stay sharp because implementation anchors are
+structurally attractive to overread.
+
+## `.cursorrules`
+
+`.cursorrules` is narrower still.
+
+This is the file most likely to be accidentally overpromoted by people who see
+strong wording and assume they are looking at architecture.
+They are mostly not.
+
+Its job is to enforce service-authoring behavior that prevents the
+infrastructure story from becoming even more brittle than it already is.
+
+It mostly says:
+
+- prefer inline configs over external file sprawl
+- require real healthchecks
+- do not "fix" services by deleting healthchecks
+- keep a self-healing posture where appropriate
+
+That is useful.
+It is also much narrower than people sometimes assume when they lump it together
+with the architecture instruction files.
+
+In fact, one of the strongest reasons not to overread `.cursorrules` is that it
+also contains generic material that is not really about this repo's distributed
+architecture question at all.
+Its presence is a reminder that not every instruction surface is pure signal.
+
+That is not trivial.
+In a repo trying to escape fake HA, healthcheck discipline and portable config
+surfaces matter a lot.
+
+But this file still does not define the overall routing and failover model.
+
+### What it can legitimately prove
+
+- the repo wants health-aware, reviewable, portable service definitions
+- self-healing posture is intentional
+- resilient authoring discipline matters to the project
+
+### What it cannot legitimately prove
+
+- cross-node failover correctness
+- placement truth
+- peer-forward decision logic
+- distributed request preservation
+
+Treat it as authoring discipline, not control-plane proof.
+That sentence should remain blunt because `.cursorrules` is exactly the kind of
+file people naturally overpromote once they see strong wording about health and
+Compose rigor.
+
+## How these files combine into one coherent reading
+
+If you read them in the right order, the repo becomes much less ambiguous.
+
+## 1. `copilot-instructions.md` names the dream
+
+It defines the desired operating contract:
+
+- no central orchestrator by default
+- multi-node Docker
+- current-state truth
+- local-first service
+- peer-forward fallback
+- separate L7 and L4 handling
+
+This file says what the project wants the platform to feel like at request
+time.
+
+## 2. `README.md` says the dream is real but not fully proven
+
+It lifts the architecture intent into repo-level language while preserving the
+honesty wall between:
+
+- what is live
+- what is planned
+- what is still missing
+
+This file says how boldly the dream may be described without cheating.
+
+## 3. `AGENTS.md` says where to look before claiming anything
+
+It forces the reader back to:
+
+- root Compose
+- included fragments
+- real validation constraints
+
+This file says where current truth must be checked.
+
+## 4. `.cursorrules` says how not to sabotage the story
+
+It keeps service definitions from degenerating into:
+
+- fake health
+- config sprawl
+- review-hostile setups
+- brittle local workarounds
+
+This file says how service authoring should behave while the project is still
+Compose-first.
+
+## What this means for the rest of the knowledgebase
+
+Any page that cites these instruction surfaces should follow these rules:
+
+- use `copilot-instructions.md` to support architecture intent
+- use `README.md` to support repo-level framing and honesty boundaries
+- use `AGENTS.md` to support runtime-surface prioritization
+- use `.cursorrules` to support authoring discipline
+- do not let any one of them silently claim runtime proof it does not own
+
+That last rule is the whole point.
+
+The user is trying to build a system where the truth is readable.
+The docs have to model that same discipline.
+
+## The real takeaway
+
+The instruction surfaces are not just repo trivia.
+They are the repo's internal map of where truth lives.
+If the docs flatten that map, they stop being a guide and start becoming
+another partial-truth surface the operator has to mentally correct.
+
+The decisive takeaway is:
+
+> if you want to know what this project is trying to become, read
+> `copilot-instructions.md`; if you want to know how honestly that dream may be
+> narrated at repo level, read `README.md`; if you want to know where current
+> implementation truth must be checked, read `AGENTS.md`; if you want to know
+> how service authoring is supposed to avoid making the whole thing more brittle,
+> read `.cursorrules`
+
+That is the authority model the knowledgebase should keep enforcing.
+
+It is also the shortest honest answer to the recurring complaint underneath the
+question:
+
+the repo is allowed to have several aligned instruction files, but it is not
+allowed to pretend that alignment erases the difference between the file that
+names the dream, the file that forces proof back to the worktree, and the file
+that mostly keeps YAML hygiene from making the situation worse.

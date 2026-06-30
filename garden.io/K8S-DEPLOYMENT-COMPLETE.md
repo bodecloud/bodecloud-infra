@@ -1,5 +1,18 @@
 # Kubernetes Deployment - Configuration Complete
 
+## Reality check
+
+This document records branch-level configuration validation work.
+It is useful, but it is not proof that the repo's Kubernetes path is fully
+deployed, healthy, or equal to the root Compose-first runtime under real
+failure.
+
+Read it as a configuration-progress artifact, not as closure.
+
+For the assimilated branch reading, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
 ## Status: ✅ CONFIGURATION COMPLETE
 
 All Garden.io configurations have been successfully validated and are ready for Kubernetes deployment.
@@ -97,11 +110,10 @@ kubectl get pods --all-namespaces
 
 ### Notes
 
-- All services maintain 1:1 parity with docker-compose.yml
+- The branch aimed to preserve close parity with docker-compose.yml
 - Health checks are comprehensive and matching
 - Secrets are properly configured
 - Volumes are mapped correctly
 - All dependencies are defined
 
 The deployment is ready to proceed once the ingress controller issue is resolved.
-

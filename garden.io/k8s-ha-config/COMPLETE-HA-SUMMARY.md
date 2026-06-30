@@ -1,6 +1,35 @@
 # Complete High Availability Implementation Summary
 
-## ✅ Status: All HA Infrastructure Configured and Ready
+## Reality check
+
+This file is historically valuable, but its old headline was too strong.
+
+The branch's own contents show a split reality:
+
+- many HA-oriented configs and scripts were created
+- some cluster bootstrap work happened
+- additional nodes were still joining
+- multiple "next steps" were still required
+- other files in the same branch still describe single-node or not-yet-HA
+  conditions
+
+So the correct reading is not:
+
+> all HA infrastructure is configured and ready
+
+It is:
+
+> substantial HA-oriented configuration work exists, but the branch itself does
+> not prove completed zero-SPOF operation
+
+For the broader knowledgebase assimilation, see:
+
+- [`../../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
+## Historical branch status snapshot
+
+The remainder of this file is preserved as a historical status snapshot of what
+the branch believed was configured or close at the time.
 
 ### What Has Been Created
 
@@ -107,4 +136,6 @@ kubectl get pv
 kubectl get storageclass
 ```
 
-All configurations are complete and ready for final deployment!
+These notes describe intended or partially prepared architecture.
+They do not, by themselves, prove final deployment or demonstrated zero-SPOF
+behavior.
