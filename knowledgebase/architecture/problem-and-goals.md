@@ -60,6 +60,23 @@ The repo is trying to solve this:
 The repo is therefore not only a hosting system.
 It is a search for a smaller honest control surface.
 
+## What does not count as solving this problem
+
+The problem is specific enough that it needs an explicit false-solution filter.
+
+The repo has **not** solved the problem merely because:
+
+- more public nodes exist
+- DNS can hit several addresses
+- a reverse proxy can see more containers
+- a mesh network connects the nodes
+- a helper can generate routes on the happy path
+- a larger orchestrator can be demoed in isolation
+
+Those may all be helpful ingredients.
+None of them, by themselves, prove that request meaning survives wrong-node
+entry without private operator reconstruction.
+
 ## The hidden enemy
 
 The hidden enemy is not lack of products.
@@ -142,6 +159,11 @@ If it satisfies `1` through `6` but cheats on `7`, it is still not enough.
 If it satisfies all of those but still fails `8`, the system is still leaning
 on folklore.
 
+That is why the problem statement must stay stricter than generic anti-SPOF
+language.
+Without the full stack above, "resilience" becomes too easy to say and too hard
+to trust.
+
 ## Why generic options lists still fail
 
 Many neighboring answers are technically respectable and still too small here.
@@ -177,6 +199,13 @@ The repo's standard is harsher:
 - do they solve the exact wrong-node and anti-folklore problem, or mostly
   relocate it?
 
+That harsher standard is what keeps this repo from collapsing back into the
+same two humiliations the user keeps rejecting:
+
+- static glue that still needs private human topology memory
+- heavyweight control planes adopted before smaller honest answers were
+  exhausted
+
 ## The practical goal
 
 The practical goal is not "be more like cloud-native infrastructure."
@@ -188,3 +217,6 @@ It is:
 
 That is the real acceptance bar for every future control-plane, agent, helper,
 registry, or orchestrator decision in this repo.
+
+For the exact acceptance bar that follows from this page, continue to
+[Operator Contract and Success Criteria](./operator-contract.md).

@@ -105,6 +105,30 @@ That scene is the dream.
 If a proposed system still fails there, then from the user's point of view it
 is still the old problem with better branding.
 
+## Why "more options" still feels like a lie to the user
+
+The repo is surrounded by products, guides, and half-solutions.
+The user is not blind to that.
+
+The reason those options still feel fake is that many of them only improve one
+layer while leaving the real request-time burden untouched.
+
+They may improve:
+
+- first-hop reachability
+- local container exposure
+- health signaling
+- prettier config generation
+- scheduler respectability
+
+while still failing the more humiliating question:
+
+> after the request lands on the wrong healthy node, what exact shared truth
+> now exists that did not exist before?
+
+If an option cannot answer that, it is not surprising that the user hears
+"there are many choices" as basically dishonest.
+
 ## Why the user is frustrated even though many tools exist
 
 The source archive makes one thing painfully clear:
@@ -260,6 +284,25 @@ If an option does not materially reduce one of those burdens, it may still be
 technically respectable.
 It is not yet a serious answer to this repository's actual demand.
 
+## What a real option would eventually have to leave behind
+
+The user is not only asking for a satisfying argument.
+They are asking for a system that leaves behind inspectable traces of burden
+transfer.
+
+So a real option should eventually cause the repo or runtime to gain things
+like:
+
+- a shared placement-truth surface
+- an explicit peer-eligibility surface
+- durable routing state that survives the failure it is meant to absorb
+- drills or logs that explain the local-versus-remote decision
+- visible proof that protected-route meaning survived handoff when relevant
+
+That matters because the dream here is not abstract anti-SPOF language.
+It is a demand for the system to stop quietly delegating the hard part back to
+the operator.
+
 ## Why Compose remains sacred even though it is painful
 
 The repo's insistence on keeping the root
@@ -314,6 +357,11 @@ Every serious page in the knowledgebase should preserve all of the following:
   hidden human control plane
 
 If a page gets smoother by shrinking one of those, it got worse.
+
+This is also why the next page after this one should usually be
+[Problem, Pressure, and Goals](../architecture/problem-and-goals.md) or
+[Operator Contract and Success Criteria](../architecture/operator-contract.md):
+the dream has to hand off into concrete requirements instead of staying a mood.
 
 ## Bottom line
 
