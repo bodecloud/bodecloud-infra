@@ -97,6 +97,19 @@ The user is not asking to feel heard while keeping the same dependency.
 They are asking which dependency is still private and which option would make
 it less private.
 
+That means a genuinely useful answer in this repo often sounds less like
+"here is the best tool" and more like:
+
+- here is the burden you are still carrying
+- here is why the nearby answer stops one layer too early
+- here is the narrow kind of artifact that would make the answer less fake
+- here is the exact sentence you still are not allowed to say afterward
+
+If that feels harsher than normal operator guidance, that is because the user
+is not asking for normal operator guidance.
+They are asking which option would stop one more private reconstruction step
+from being socially hidden behind serious-looking tooling.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -181,6 +194,10 @@ These still do not count as honest answers:
 - answering "why does this still feel fake?" with a generic HA explainer
 - treating first-hop plurality as if it were preserved service meaning
 - treating clearer prose as if it were stronger evidence
+- treating a route table or proxy label set as if it already answered the
+  question of who still blesses peer validity
+- answering "what should I do?" without also answering "what am I still being
+  forced to privately know afterward?"
 
 The user's frustration is not a lack of terminology.
 It is the recurring experience of being offered adjacent answers that stop one
@@ -251,6 +268,7 @@ It should leave behind:
 - the contradiction that still remains open
 - the next artifact or drill that would have to exist before a stronger answer
   becomes honest
+- the exact private sentence the operator is still expected to finish today
 
 That final item matters because otherwise the page still behaves like a better
 shopping guide instead of a burden-faithful operator surface.

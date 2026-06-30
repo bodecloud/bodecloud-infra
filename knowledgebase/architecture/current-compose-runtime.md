@@ -23,6 +23,19 @@ What they still do not have is confidence that the stack itself, rather than
 the operator, owns the decisive truth when a request lands on the wrong node
 or a preferred backend disappears.
 
+That distinction needs to stay almost repetitive on this page because runtime
+inventories are one of the easiest places for "present" to get confused with
+"owned."
+The runtime can visibly contain more and more machinery while the most
+important sentence still begins with:
+
+- "in practice the operator knows..."
+- "privately we know that node X is the real one..."
+- "normally that fallback only works because we remember..."
+
+If this page stops making those unfinished sentences visible, then the
+inventory is laundering presence into adulthood.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -111,6 +124,10 @@ goal:
 - TCP labels on stateful services
 - observability breadth
 - helper presence with failover-shaped names
+- an any-node-looking ingress story that still depends on remembered backend
+  ownership
+- a route that can be rendered today but has not been stressed under the
+  failure that would make the route matter
 
 Those facts prove the repo is serious and operationally dense.
 They still do not prove that the system, rather than the operator, owns the
@@ -149,6 +166,9 @@ Today the operator may still need to know things like:
   or actually safe to describe with failover language
 - whether a state-bearing surface such as MongoDB, Redis, or Headscale still
   hides a sacred authority node behind a more distributed-looking ingress story
+- whether a request that reaches the "right" backend after forwarding is still
+  the same protected service in terms of middleware, headers, policy, and
+  user-visible semantics
 
 That list is a more faithful summary of the user's complaint than "the stack is
 still maturing."

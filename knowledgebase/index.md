@@ -11,6 +11,13 @@ This site exists for one hard question:
 
 That is the real question.
 
+It also means this front page has to resist a very specific temptation:
+using coherence, breadth, and serious vocabulary to make the problem feel more
+civilized than it actually is.
+The user is not suffering from lack of civilized language.
+They are suffering from a stack that can sound adult while still cashing out
+into private operator knowledge when wrong-node truth matters.
+
 If you are here because ordinary self-hosting or homelab answers keep sounding
 technically respectable and still somehow useless, that reaction is part of
 the point.
@@ -76,6 +83,12 @@ But:
 - the remaining burden is still brutally specific
 - the missing burden transfer is still the center of the problem
 
+That brutal specificity is what makes this repo different from generic HA or
+orchestrator documentation.
+The missing thing is not "maturity" in the abstract.
+It is the transfer of exact bad-day sentences out of one operator's head and
+into shared system truth.
+
 That means this front page is not allowed to become a high-gloss compression of
 the whole repo.
 It has to stay a routing surface that keeps the dream, the burden, and the
@@ -89,6 +102,11 @@ That is the front-page danger in this repo.
 The stack is already serious enough that a polished overview can start
 borrowing closure from sophistication alone.
 This page has to keep breaking that reflex.
+
+It should almost feel a little impolite for a landing page.
+That is appropriate here.
+Politeness is one of the ways infrastructure summaries quietly stop naming the
+last hidden dependency.
 
 ## Strongest honest current answer
 
@@ -119,6 +137,11 @@ The dream is clear.
 The stack is real.
 The missing truth-owning middle layer is still incomplete.
 
+That three-part sentence should be treated almost like a checksum for the whole
+site.
+If a summary preserves only two of the three, it will usually become misleading
+in exactly the way the user is already exhausted by.
+
 That three-part sentence has to stay intact.
 
 If one clause disappears, the page becomes misleading in a different way:
@@ -144,6 +167,11 @@ That is the hidden work the platform is supposed to absorb.
 The shortest honest description of the current wound is:
 
 the operator is still acting like the missing control plane.
+
+That sentence should not be read metaphorically.
+It is the most concrete explanation for why so many adjacent tools and papers
+can still feel useless here.
+They often move machinery around without clearly shrinking that hidden role.
 
 That hidden job includes things like:
 
@@ -171,6 +199,11 @@ This front page should keep all three clauses visible at once.
 That is also why this page cannot behave like a normal polished landing page.
 Normal landing pages compress tension.
 This one has to preserve it.
+
+That is because the user's actual dream is itself tension-shaped.
+They want Compose to remain legible and local while wrong-node behavior stops
+being humiliating, without being forced too early into a larger worldview that
+has not yet earned the right to hide so much truth.
 
 ## What still does not count as a good front door for this repo
 

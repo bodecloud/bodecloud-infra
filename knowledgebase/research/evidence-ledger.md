@@ -129,6 +129,11 @@ This ledger is here to keep that speed mismatch visible:
 - the runtime may move much slower
 - the docs are only honest if they keep those clocks separate
 
+That separation should be treated as a hard documentation invariant, not a
+stylistic preference.
+If a page becomes more satisfying by letting those clocks drift together, the
+page got more persuasive and less trustworthy.
+
 ## The four evidence classes
 
 Every serious claim in this knowledgebase should route through one of four
@@ -168,6 +173,8 @@ What Class 1 cannot prove by itself:
 - future failover semantics from present components alone
 - backend-loss recovery
 - stateful authority correctness
+- that a helper surface with failover-shaped naming has actually inherited the
+  same service meaning the operator thinks it has
 
 Presence is real.
 Presence is not closure.
@@ -236,6 +243,14 @@ main ways the docs can accidentally overpay confidence.
 
 That is why intent pages should make the dream sharper, not make runtime
 claims easier.
+
+They should also make one sentence easier to resist:
+
+- "because the repo finally says exactly what it wants, the implementation
+  must be most of the way there"
+
+That sentence is one of the main counterfeit upgrades this ledger exists to
+keep illegal.
 
 ### Class 3: planning and promotion evidence
 

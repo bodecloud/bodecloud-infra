@@ -146,6 +146,19 @@ If a page becomes more cross-linked, more source-aware, and more
 ecosystem-rich while becoming less able to name the surviving operator-owned
 truth, the page got worse.
 
+That means "actual assimilation" should leave behind a small auditable packet,
+not just a bigger stack of citations.
+At minimum the packet should preserve:
+
+- the exact user-facing accusation being reconstructed
+- the strongest runtime artifact consulted
+- the strongest dream or archive artifact consulted
+- the private burden still left over after both were read
+- the stronger sentence that still stayed illegal
+
+If the retrieval pass cannot produce that packet, then "we really read the
+repo this time" is still too self-congratulatory for this project.
+
 ## Strongest honest current answer
 
 The repository has four major evidence classes:
@@ -228,6 +241,11 @@ The complaint is not just "please read more."
 It is "please stop spending the extra reading budget on everything except the
 exact burden I keep pointing at."
 
+That also means retrieval here has to be allowed to sound repetitive.
+If the same hidden burden has to be named on five pages in a row to keep it
+from being laundered away by surrounding sophistication, then repetition is
+more faithful than elegant variation.
+
 ## The private burden question retrieval must preserve
 
 Every serious retrieval pass in this repo should leave one question intact all
@@ -242,6 +260,10 @@ Examples include:
 - which peer is actually valid now
 - whether the fallback route still survives the bad day
 - whether the stateful owner is still singular
+- whether the request still means the same thing after it leaves the receiving
+  node
+- whether a helper-generated route is only visible now or is still trustworthy
+  under the exact failure that made it relevant
 
 That list is not just a debugging checklist.
 It is the repository's anti-slop checksum.

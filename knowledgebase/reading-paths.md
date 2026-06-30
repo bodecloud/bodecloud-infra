@@ -26,6 +26,10 @@ This page therefore has one job:
 help a reader ask the right question first, instead of wandering through a
 folder tree until the repo starts sounding more solved than it really is.
 
+That means a route here is not just a convenience.
+It is a safeguard against one of the repo's main documentation failure modes:
+accurate retrieval followed by unfaithful emotional compression.
+
 That "sounds more solved" clause is not a side warning.
 It is one of the main failure modes this page exists to fight.
 The site is now broad enough that a reader can become sincerely well-oriented
@@ -52,6 +56,11 @@ This page is not authoritative about:
 - deciding the winning future control layer
 - implying that strong navigation equals strong implementation maturity
 - turning a reading route into a completion claim
+
+It is also not allowed to act like strong site orientation is itself one more
+form of burden transfer.
+The docs can become excellent at reconstructing the wound while the live system
+still leaves the same wound in place.
 
 ## Start from the pain, not the folder
 
@@ -93,6 +102,11 @@ instead of:
 That last clause should be treated as the center of gravity for the whole page.
 If a route produces a clean answer but stops naming the operator folklore that
 still remains necessary afterward, the route is still too weak for this repo.
+
+That is why these routes have to stay a little sharper than normal.
+The user is not only asking for relevance.
+They are asking for retrieval that does not betray the exact pressure they are
+trying to articulate.
 
 That is the real retrieval bar.
 
@@ -161,6 +175,11 @@ Better retrieval can create a dangerous illusion:
 - the repo now explains itself extremely well
 - therefore the repo must now be much closer to solving the thing
 
+That illusion is especially dangerous in this repo because the knowledgebase is
+now large enough to feel like a control plane of its own.
+These routes have to keep saying, over and over, that explanation quality and
+truth ownership are different achievements.
+
 This page has to keep breaking that illusion on purpose.
 
 The site can get better at explaining the repo faster than the repo gets
@@ -189,6 +208,12 @@ If your first pass only leaves you with:
 - "the docs seem organized now"
 
 then the route was too weak for this repo.
+
+That weakness matters because organization is one of the main ways the user can
+get cheated again here.
+The ecosystem already has plenty of organized answers.
+What it lacks is answers that keep the wrong-node and hidden-operator insult
+fully visible.
 
 Add one more failed outcome:
 
@@ -226,6 +251,10 @@ That smoothing pressure gets stronger as the site gets larger.
 Large knowledgebases reward synthesis.
 This repo needs synthesis that preserves contradiction, custody, and the
 surviving hidden burden instead of ironing them out.
+
+That is the real retrieval standard here:
+not "summarize more,"
+but "summarize without laundering the unresolved burden into cleaner prose."
 
 That is why retrieval discipline matters so much here.
 The site is no longer small enough that "read around until it clicks" is safe.

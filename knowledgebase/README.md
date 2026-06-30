@@ -100,6 +100,20 @@ The repo no longer mainly risks underselling itself.
 It risks explaining itself so well that the remaining wound starts sounding
 like cleanup instead of the still-central unsolved fact.
 
+That risk gets worse as the site improves.
+The knowledgebase can now reconstruct the accusation with enough coherence
+that a reader may leave feeling like the repo has finally "done the hard
+thinking," when the live stack may still be leaving the same decisive
+wrong-node sentence in human memory.
+
+This README has to keep forbidding that extra sentence:
+
+> because the docs are now this sharp, the runtime must already be much closer
+> to owning the truth.
+
+The docs are allowed to become more faithful.
+They are not allowed to become one more counterfeit source of relief.
+
 ## The real standard a reader needs to carry
 
 The practical test for almost every page in this site is:
@@ -123,6 +137,13 @@ A documentation pass is not strong here because it:
 
 It is strong only if it makes the repo harder to overread and easier to map to
 the exact burden the user is trying to eliminate.
+
+It should also survive one harsher follow-up:
+
+> after reading this page, can I still say exactly what the operator has to
+> privately know on the bad day?
+
+If the answer is no, the page got smoother and weaker at the same time.
 
 That burden should keep being named in repo-facing prose, not treated as a
 detail already handled elsewhere:
@@ -176,6 +197,11 @@ These still do not count:
 - a doorway that makes the docs feel mature without warning that maturity is
   not the same as runtime ownership
 - a repo intro that makes the problem sound like "choosing an orchestrator"
+- a repo intro that successfully preserves frustration but still cannot name
+  the surviving private burden precisely
+- a contributor-facing doorway that says "there is a missing middle layer"
+  without saying what exact humiliating private reconstruction that layer would
+  have to remove before the phrase becomes useful
 
 The user is not asking for a nicer README tone.
 They are asking for a doorway that does not betray the core question before the
@@ -189,6 +215,8 @@ That includes leaving them with:
 - "this is mainly a Compose versus orchestrator repo"
 - "this is mainly a multi-node homelab design repo"
 - "this is mainly a serious edge-stack repo with some HA gaps"
+- "the docs have now done the hard part of thinking, so the runtime is mostly
+  waiting on implementation effort"
 
 All three are adjacent.
 None is the full question.
