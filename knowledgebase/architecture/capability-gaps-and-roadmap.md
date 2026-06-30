@@ -5,62 +5,72 @@ For the evidence shaping this roadmap, start with:
 - [Evidence Ledger](../research/evidence-ledger.md)
 - [Ingress and Failover Evidence](../research/ingress-and-failover-evidence.md)
 - [Stateful HA Evidence](../research/stateful-ha-evidence.md)
-- [Orchestrator Tradeoffs Evidence](../research/orchestrator-tradeoffs-evidence.md)
+- [Orchestrator and Control-Plane Tradeoffs Evidence](../research/orchestrator-tradeoffs-evidence.md)
 - [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 
-This page is not a feature wishlist.
+This page is not a feature list.
+It is not a self-hosting "next steps" board.
+It is not a comfort document.
 
-It is the map of which missing truth layers still force the platform to
-overclaim relative to the user's actual benchmark.
+It is the sequence of missing truth layers that still force the platform to
+lean on:
 
-The user is not asking for a tidy next-steps board.
-They are asking why so many infrastructures still collapse into one of two
-dissatisfying outcomes:
-
-- stay in ordinary Docker and keep wrong-node fragility plus private topology
-  memory
-- jump into a heavyweight orchestrator before smaller honest layers were even
-  exhausted
-
-So the only roadmap worth keeping here is the roadmap that answers:
-
-> which missing truth layer still forces the platform to lean on hope, memory,
-> stale assumptions, or theatrical confidence?
+- private memory
+- stale assumptions
+- helper language that sounds stronger than it is
+- visible machinery that still cannot cash out into bad-day dignity
 
 That is what "roadmap" means in this repo.
+
+## The exact roadmap question
+
+The only roadmap question that matters here is:
+
+> which missing truth layer still forces the operator to personally remember,
+> infer, narrate, or reconstruct the answer during wrong-node entry,
+> backend loss, or stateful recovery?
+
+If a candidate next step cannot answer that question concretely, it is not a
+real next step yet.
+
+It may still be a good idea.
+It is just not the next burden-removal step.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
 - prioritizing missing truth layers in the order that protects honesty
-- explaining which unresolved gaps still force stronger claims to remain
-  illegal
+- identifying which unresolved gaps still make stronger sentences illegal
 - connecting current runtime evidence to the next proof-bearing promotion step
-- separating stateless HTTP, protected HTTP, TCP, and stateful promotion tracks
-- explaining what kind of control surface might actually earn the right to
-  exist next
+- keeping stateless HTTP, protected HTTP, TCP, and stateful tracks separate
+- naming what sort of control surface might actually earn promotion next
 
 This page is not authoritative about:
 
 - acting like a completion report
-- implying that a well-ordered roadmap means the runtime is already coherent
+- implying that a good sequence means the runtime is already coherent
 - flattening all recovery classes into one generic queue
-- upgrading planning quality into present-tense platform maturity
+- turning roadmap quality into present-tense platform maturity
 
-This page is a sequencing contract, not a morale document.
+This is a sequencing contract, not a morale artifact.
 
 ## Strongest honest current answer
 
-The next work is not "whatever seems generally useful for self-hosting."
+The next work is not:
 
-The next work is whichever missing truth layer still forces the docs and the
-runtime story to rely on:
+- whatever is fashionable in self-hosting
+- whatever sounds clustered
+- whatever makes the diagram more adult
+- whatever adds one more helper daemon
 
-- operator memory
-- stale topology assumptions
-- helper language that sounds stronger than the proof it owns
-- visible machinery that cannot yet cash out into real bad-day decisions
+The next work is whichever missing truth layer still forces the repo to rely on:
+
+- remembered service location
+- remembered peer safety
+- remembered route persistence
+- remembered state authority
+- vague helper confidence instead of inspectable proof
 
 In the priority implementation today, that means the next serious gaps are:
 
@@ -68,157 +78,176 @@ In the priority implementation today, that means the next serious gaps are:
 - convergence truth
 - route durability under real failure
 - peer eligibility truth
-- wrong-node proof for one stateless HTTP path
-- protected-route continuity on that same path
-- keeping TCP and stateful promotion under separate honesty gates
+- one narrow wrong-node stateless HTTP proof
+- protected-route continuity on that same route
+- keeping TCP and stateful promotion under harsher separate gates
 
-That list is best read as a list of places where the user's frustration is
-still objectively correct.
+That list is not merely technical.
+It is a list of places where the user's frustration is still objectively
+correct.
 
-## The roadmap question every candidate layer must survive
+## The filter every candidate layer must survive
 
-Every helper, middle layer, or orchestrator experiment should have to answer:
+Every helper, registry, orchestrator, sync loop, mesh trick, or middle layer
+should have to answer this sentence:
 
 > after this lands, what exact humiliating thing will the operator no longer
-> have to personally remember, infer, narrate, or reconstruct during wrong-node
-> entry, backend loss, or stateful recovery?
+> have to know privately?
 
 If the answer is vague, the option is still vague.
-If the answer is "it gives us more flexibility" or "it makes things more
-dynamic," the burden probably did not move.
-If the answer only sounds good on a diagram, it is still mostly theater.
 
-This repo needs that filter because the ecosystem is full of nearby answers
-that improve elegance, terminology, or automation while leaving the same human
-burden intact.
+If the answer is:
 
-## The gaps in the order that actually protects honesty
+- "it gives us more flexibility"
+- "it makes things more dynamic"
+- "it is more scalable"
+- "it is closer to industry standard"
 
-The shortest honest order still looks like this:
+then the hidden burden probably did not move.
+
+That filter is necessary because the ecosystem is full of answers that improve
+terminology, automation, or elegance while still leaving the same human SPOF in
+place.
+
+## The shortest honest sequence
+
+If the repo wants the shortest burden-faithful order, it still looks like
+this:
 
 1. keep the docs hostile to fake certainty
 2. establish placement truth
 3. establish convergence truth
-4. make routes survive local backend loss
+4. make routes survive the actual backend-loss event
 5. define peer eligibility as something stricter than reachability
-6. prove one full wrong-node stateless HTTP path end to end
+6. prove one full wrong-node stateless HTTP path
 7. prove protected-route continuity on that same path
-8. keep HTTP, TCP, and stateful classes under separate proof rules
-9. only then decide what has actually earned promotion into a stronger control
+8. keep HTTP, TCP, and stateful tracks under separate proof rules
+9. only then decide what has truly earned promotion into a stronger control
    layer
 
 That order is not motivational sequencing.
+
 It is the dependency chain between the dream and reality.
 
-## Gap 1: Documentation honesty and proof custody
+## Gap 1: documentation honesty and proof custody
 
-This gap sounds softer than the others, but it is first because the repo is now
-serious enough that documentation can overpay confidence long before the runtime
-earns it.
+This sounds softer than the others, but it is first because the repo is now
+serious enough that docs can overpay confidence long before the runtime earns
+it.
 
-This gap exists to stop pages from quietly doing any of these:
+This gap exists to stop pages from doing any of these:
 
 - treating DNS plurality as end-to-end failover
 - treating route presence as route durability
-- treating a planning artifact as current runtime truth
-- treating a better explanation as a smaller gap
+- treating a plan as current runtime truth
+- treating explanation quality as smaller implementation burden
 
 What closure would actually mean:
 
-- the main pages keep dream, runtime, and missing-middle truth separate
+- the major pages keep dream, runtime, planning, and archive pressure separate
 - stronger claims stay illegal until backed by route-level or class-level proof
 
-What it still does **not** mean:
+What closure still does **not** mean:
 
 - documentation quality equals runtime progress
 
-## Gap 2: Placement truth
+## Gap 2: placement truth
 
-This is the first major runtime gap.
+This is still the first major runtime gap.
 
 The receiving node needs a shared answer to:
 
 - what service lives where right now?
-- which node is currently authoritative for this route?
+- which node is authoritative for this route right now?
 
-The repo's intent surfaces repeatedly converge on a lightweight current-state
-registry such as `services.yaml`.
+The repo keeps converging on a lightweight current-state registry such as
+`services.yaml`.
 The important part is not the filename.
-The important part is that current placement truth becomes shared, inspectable,
-and usable by the receiving node.
+The important part is that placement truth becomes:
+
+- shared
+- inspectable
+- current enough to matter
+- consumable by the receiving node
 
 What closure would mean:
 
-- a real runtime-consumed placement truth surface exists
+- a live runtime-consumed placement truth surface exists
 - wrong-node routing no longer depends on remembered service location
 
-What still remains illegal even after partial progress:
+What still remains illegal after partial progress:
 
 - generic wrong-node success
 - peer-forward continuity
-- stateful HA claims
+- stateful HA language
 
-## Gap 3: Convergence truth
+## Gap 3: convergence truth
 
 Placement truth alone is not enough.
-The platform also needs confidence that the shared truth is current enough and
-converges fast enough to matter during change and failure.
+
+The platform also needs a believable story for how that truth stays current
+enough during:
+
+- deployment drift
+- secret drift
+- node churn
+- partial failure
+- split visibility
 
 This gap exists because stale truth can be as misleading as missing truth.
 
-Questions behind this gap:
+The questions behind it are:
 
-- how is placement updated?
-- who publishes or reconciles it?
+- who updates the shared truth?
+- how is the update propagated?
 - how stale can it get before forwarding becomes dishonest?
-- what happens during node churn, partial failure, or split visibility?
+- how does the runtime expose disagreement?
 
 What closure would mean:
 
-- the operator is no longer privately carrying the freshest topology truth
-- the runtime has a believable story for currentness rather than static hope
+- the operator is no longer privately carrying the freshest topology answer
+- the platform has a believable story for currentness rather than static hope
 
 What still remains illegal after closure:
 
 - route durability claims without failure drills
-- auth or middleware continuity claims
+- protected-route continuity claims
 
-## Gap 4: Route durability under failure
+## Gap 4: route durability under failure
 
-This is where many respectable stacks collapse.
+This is where many respectable-looking stacks collapse.
 
 The route cannot merely exist while everything is healthy.
-It has to survive the actual failure that made fallback necessary.
+It has to survive the failure that made fallback necessary.
 
-This gap is especially live in this repo because helper logic such as
-`docker-gen-failover` has already been documented as weak or defective rather
-than solved HA.
+This gap is especially alive here because `docker-gen-failover` is already part
+of the runtime and already part of the repo's skepticism.
 
-Questions behind this gap:
+The current repo already preserves the harder warning:
 
-- does the wrong-node rescue path still exist after the preferred backend dies?
-- does route material persist or vanish under container stop or backend loss?
-- does the receiving node still know what to do after the local favorite path
-  disappears?
+- helper existence is weaker than route persistence
+- a fallback surface can still disappear during the exact failure it is meant
+  to rescue
 
 What closure would mean:
 
-- one route class survives a real fallback-triggering failure without private
+- one named route survives a real fallback-triggering failure without private
   human reconstruction
 
 What still remains illegal after partial closure:
 
-- class-wide failover claims across all HTTP routes
-- any TCP or stateful promotion
+- class-wide HTTP failover claims
+- TCP equivalence claims
+- stateful promotion
 
-## Gap 5: Peer eligibility truth
+## Gap 5: peer eligibility truth
 
 Peer reachability is too weak.
 
 The platform needs a stricter answer to:
 
 - which peer is healthy?
-- which peer is actually hosting the right service revision?
+- which peer actually hosts the right service revision?
 - which peer is acceptable for that route's auth, middleware, and policy
   expectations?
 
@@ -226,29 +255,32 @@ This matters because a reachable peer can still be the wrong peer.
 
 What closure would mean:
 
-- the receiving node can choose from eligibility truth rather than mesh
-  reachability alone
+- the receiving node chooses from eligibility truth rather than reachability
+  plus hope
 
 What still remains illegal after closure:
 
 - protected-route continuity claims without semantic comparison
 - stateful substitution claims
 
-## Gap 6: Wrong-node proof for one stateless HTTP path
+## Gap 6: one wrong-node stateless HTTP proof
 
 The roadmap needs one brutally narrow success packet before broader language
 becomes believable.
 
 That packet should prove one full stateless HTTP wrong-node path end to end:
 
-- request lands on a healthy node that does not host the service locally
+- the request lands on a healthy node that does not host the service locally
 - the receiving node discovers the real backend from shared truth
-- forwarding works
-- the route survives the relevant failure condition if fallback is being claimed
+- forwarding succeeds
+- the route survives the relevant failure condition if fallback is being
+  claimed
 - the operator does not have to privately complete the answer
 
 This is intentionally narrow.
-One narrow honest proof is more valuable here than ten diagram-shaped options.
+
+One honest narrow proof is more valuable here than ten architecture-shaped
+options.
 
 What still remains illegal after closure:
 
@@ -256,116 +288,99 @@ What still remains illegal after closure:
 - TCP equivalence claims
 - stateful promotion
 
-## Gap 7: Protected-route continuity
+## Gap 7: protected-route continuity
 
-After one stateless HTTP proof, the next harder problem is protected HTTP.
+After one stateless HTTP route is proven, the next pressure is not "declare the
+HTTP story solved."
 
-This gap exists because a route returning a response is weaker than a route
-preserving the same protected service semantics.
+It is:
 
-Protected-route proof has to compare:
+> does the same thing remain true when the route has policy meaning?
 
-- auth behavior
-- middleware order and effect
-- headers and trust boundaries
-- user-visible service meaning before and after handoff
+The runtime already has real protected-route surfaces:
 
-What closure would mean:
+- `code-server` with `nginx-auth@file`
+- `dozzle` with `nginx-auth@file`
+- `portainer` with `nginx-auth@file`
+- various metrics/admin routes with auth middleware
+- TinyAuth as a live auth surface in the edge fragment
 
-- one protected route survives wrong-node forwarding without semantic drift
-
-What still remains illegal after closure:
-
-- class-wide protected-route confidence
-- TCP and stateful carryover
-
-## Gap 8: Separate honesty tracks for TCP and stateful surfaces
-
-This gap exists to stop HTTP optimism from leaking into classes where it does
-not belong.
-
-The repo already contains TCP-exposed stateful services such as MongoDB and
-Redis.
-That makes the separation rule live, not theoretical.
-
-Questions behind this gap:
-
-- is the proof only about transport?
-- is write authority preserved?
-- is substitution safe?
-- is the service merely reachable or honestly resilient?
+This means the protected-route gap is not hypothetical.
 
 What closure would mean:
 
-- TCP proof packets and stateful proof packets have their own gates
-- HTTP success no longer socially upgrades those classes
+- one named protected route behaves like the same protected route after
+  wrong-node handoff
+- auth, middleware ordering, and trust assumptions survive the handoff
 
 What still remains illegal after closure:
 
-- generic "the platform is HA now" language
+- TCP parity claims
+- stateful equivalence claims
+- whole-platform "one cloud" language
 
-## What kind of stronger control layer could actually earn promotion
+## Gap 8: keeping TCP and stateful services on harsher tracks
 
-Only after the earlier gaps move does it become honest to ask whether a
-stronger middle layer or orchestrator has earned the right to exist.
+This repo becomes dishonest very quickly if HTTP success bleeds into TCP or
+stateful dignity.
 
-That could eventually include things like:
+The current runtime already exposes TCP surfaces like:
 
-- a lightweight runtime-consumed placement layer
-- a more explicit convergence mechanism
-- stricter service discovery or peer registry logic
-- or, later, experiments with Nomad, OpenSVC, k3s, Kubernetes, or another
-  controller
+- `mongodb`
+- `redis`
 
-But the promotion rule stays the same:
+It also already depends on stateful components like:
 
-- the new layer must remove a concrete hidden burden
-- not merely make the architecture story cleaner
+- `headscale-server`
+- `nuq-postgres`
+- `litellm-postgres`
+- `rabbitmq`
 
-The repo is not anti-controller on principle.
-It is anti-unearned opacity.
+Headscale remains the clearest current warning because the active config still
+uses SQLite at `/var/lib/headscale/db.sqlite`.
 
-## What still does not count as progress
+That means:
 
-The following may all be useful and still not count as roadmap closure by
-themselves:
+- an externally reachable control-plane route is real
+- distributed state authority is still a separate problem
 
-- adding more public nodes without proving wrong-node meaning survives
-- adding richer proxy logic without proving route durability under failure
-- adding more healthchecks without proving peer eligibility semantics
-- adding sync helpers without showing how they reduce hidden substitution trust
-- standing up Nomad, OpenSVC, k3s, or Kubernetes experiments without proving
-  which hidden burden they actually removed
-- making the docs calmer, cleaner, or more enterprise-sounding while the same
-  runtime truth gaps remain
-- making the roadmap more comprehensive while the operator still has to
-  privately finish the decisive sentence on the bad day
+What closure would mean:
 
-That last point matters more than it should in a normal repo.
-This project is already sophisticated enough that better planning language can
-start performing as if it were one more solved capability.
-This page has to keep blocking that move.
+- per-stateful-class authority, promotion, persistence, and rediscovery
+  semantics are explicit
 
-## What a real roadmap-promotion packet would have to contain
+What still remains illegal before that:
 
-Before this page supports stronger language like "this next step has clearly
-earned priority," it should point to a packet containing:
+- "HA" language for stateful surfaces based only on ingress or TCP exposure
 
-- the exact hidden burden the priority is meant to remove
-- the current worktree evidence that the burden still survives
-- the narrower artifact, drill, or truth surface that would close it
-- the stronger class of claim that closure would unlock next
-- the explicit statement of what still remains illegal after that priority lands
+## Gap 9: promotion only after burden transfer
 
-Without that packet, even a good sequence can still collapse back into
-aspiration.
+Only after the earlier gaps are narrower should the repo decide whether a
+stronger control surface has truly earned promotion.
 
-## Bottom line
+Candidate layers might include:
 
-This roadmap is not here to make the repo sound strategic.
-It is here to keep the docs from illegally spending confidence before the
-corresponding truth layer has moved.
+- a narrow runtime-consumed registry layer
+- stronger route-generation or sync logic
+- OpenSVC-shaped ingress control
+- Nomad-like scheduling and service discovery
+- k3s or Kubernetes for broader desired-state control
 
-The repo already has many sophisticated options nearby.
-What it is still starved for is proof that one of those options actually moved
-a truth boundary instead of merely enriching the story around it.
+But no candidate earns promotion because it sounds serious.
+
+It only earns promotion if it can prove:
+
+- one named hidden operator burden actually moved
+- the new layer stays inspectable
+- the bad-day story is more honest, not just more automatic-looking
+
+## The current bottom line
+
+The strongest current roadmap sentence is:
+
+> the next work is not broader orchestration in the abstract; it is whichever
+> missing truth layer most directly stops the operator from being the last
+> untracked dependency during wrong-node entry, backend loss, or stateful
+> recovery
+
+That is the roadmap this repo is allowed to keep.
