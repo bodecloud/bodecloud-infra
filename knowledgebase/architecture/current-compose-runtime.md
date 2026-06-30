@@ -1,116 +1,122 @@
 # Current Compose Runtime
 
-This page is the strongest live implementation surface in the repo:
+This page is the strongest live implementation inventory in the repository.
+
+If a sentence claims something is part of the priority implementation now, it
+has to survive contact with:
 
 - root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-- the fragments it includes directly under
+- the fragments directly included from
   [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
 
-If a claim cannot survive contact with those files, it is not a live-runtime
-claim yet.
+Everything else is weaker evidence for live-runtime claims.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
-- what the priority runtime includes today
-- which major service domains are really active in the root stack
-- which helper components and failure signatures are already visible
+- what the root stack includes today
+- which networks and service domains are actually active
+- which helper layers are already present in the priority implementation
+- which visible implementation facts shape the real documentation burden
 
 This page is not authoritative about:
 
 - generic wrong-node success
-- end-to-end failover proof
-- stateful correctness under peer substitution
-- promoting future helper layers into current truth
+- durable peer-forward routing during backend loss
+- cross-node policy preservation
+- stateful correctness under failover
+- promoting planning material into live truth
 
-This page is the strongest current inventory, not the final resilience verdict.
+This is the strongest current inventory.
+It is not a distributed-systems completion certificate.
 
 ## Strongest honest current answer
 
-The root runtime is already broad, serious, and operationally rich.
+The current runtime is already serious enough that shallow language becomes
+dangerous.
 
 It clearly proves:
 
 - Compose is still the real implementation center
-- the stack already has a substantial public edge layer
-- observability, auth, mesh, worker, and app domains are real
-- the repo is far beyond "just some containers"
+- the root file is not symbolic or legacy residue
+- the stack already spans public ingress, private mesh, observability,
+  operator tools, app hosting, TCP services, documentation, AI tooling, and
+  route experimentation
+- the repo has enough machinery that words like "failover" or "anti-SPOF"
+  must be used carefully
 
 It still does **not** prove the hardest missing truths:
 
-- shared placement truth
+- shared current placement truth
 - durable wrong-node rescue routes
-- peer eligibility truth
-- policy-preserving peer handoff
-- honest stateful failover
+- semantically valid peer selection
+- preserved auth and middleware after peer handoff
+- honest stateful failover semantics
 
-That is why the stack can look mature while the user's real complaint remains
-valid.
+That difference is the whole reason this page exists.
+
+## The root file is still a major infrastructure surface
+
+The root file is not just a launcher for fragments.
+It still owns:
+
+- networks
+- configs
+- secrets
+- direct services
+- operator-facing utility surfaces
+- some of the most sensitive mixed-protocol workloads in the repo
+
+That matters because one of the easiest bad reads in this repository is:
+
+> the real system must already live somewhere else because the stack has been
+> split into fragments.
+
+That read is false.
+
+The root `docker-compose.yml` is still a major truth surface.
+Any future middle layer or orchestrator promotion has to respect that instead
+of treating the root file as a leftover artifact.
 
 ## Root-owned networks
 
-The root file defines three central networks:
+The root runtime defines three central networks:
 
-| Network | Visible role | What it suggests | What it does not prove |
+| Network | Immediate visible role | Why it matters | What it still does not prove |
 | --- | --- | --- | --- |
-| `publicnet` | ingress-adjacent and externally exposed traffic | the repo is already partitioning public-facing traffic explicitly | that the same topology truth is shared across nodes |
-| `backend` | east-west application and support traffic | the stack already distinguishes internal service traffic from public edge traffic | that cross-node service placement is coordinated |
-| `warp-nat-net` | specialized egress / routing surface | the repo has real network-policy and alternate-routing pressure, not just app hosting | that route correctness survives node loss or helper drift |
+| `warp-nat-net` | controlled alternate egress and routing behavior | the repo is already experimenting with network truth and non-default egress | that cross-node route decisions are cluster-owned |
+| `publicnet` | ingress-adjacent traffic and externally exposed surfaces | public-facing behavior is already explicitly partitioned | that all public nodes share the same request-time service truth |
+| `backend` | internal app and support traffic | the stack clearly distinguishes internal from public traffic | that cross-node placement and peer eligibility are system-owned |
 
 These networks prove segmentation pressure.
-They do not prove shared cluster truth.
+They do not prove a shared multi-node control plane.
 
 ## Active include graph
 
-The live root stack includes these fragments directly:
+The root file directly includes the following fragments:
 
-| Fragment | Primary domain | Main components or concerns |
+| Fragment | Primary domain | Why it matters |
 | --- | --- | --- |
-| `compose/docker-compose.coolify-proxy.yml` | public edge and ingress | Traefik, CrowdSec, TinyAuth, `nginx-traefik-extensions`, `cloudflare-ddns`, `docker-gen-failover` |
-| `compose/docker-compose.docs.yml` | docs serving | keeps the documentation inside the same routed surface it is describing |
-| `compose/docker-compose.firecrawl.yml` | crawl / browser / queue workloads | worker-style services with their own support-state concerns |
-| `compose/docker-compose.headscale.yml` | private mesh and coordination assumptions | `headscale-server`, `headscale`, mesh identity, ACL, internal routing assumptions |
-| `compose/docker-compose.llm.yml` | model gateway and AI tooling | LLM surfaces, helper databases, MCP-style tooling pressure |
-| `compose/docker-compose.metrics.yml` | observability | Grafana, Prometheus, VictoriaMetrics, Loki, Promtail, cAdvisor, Blackbox, Alertmanager |
-| `compose/docker-compose.stremio-group.yml` | media and adjacent workloads | large heterogeneous app cluster with external dependency churn |
-| `compose/docker-compose.warp-nat-routing.yml` | route experiments and controlled egress | alternate network behavior and privilege-sensitive routing |
-| `compose/docker-compose.wishlist.yml` | smaller standalone services | simple app absorption without inventing a new domain model |
+| `compose/docker-compose.coolify-proxy.yml` | public ingress and edge policy | this is the strongest live edge surface: Traefik, CrowdSec, TinyAuth, `nginx-traefik-extensions`, `cloudflare-ddns`, `docker-gen-failover`, Autokuma, log rotation |
+| `compose/docker-compose.docs.yml` | documentation serving | the docs themselves live inside the same routed stack they are describing |
+| `compose/docker-compose.firecrawl.yml` | browser and crawl workloads | proves the repo is already carrying worker-like and queue-like complexity |
+| `compose/docker-compose.headscale.yml` | private mesh and coordination assumptions | Headscale is not theoretical; the runtime depends on it as part of the private-network story |
+| `compose/docker-compose.llm.yml` | AI and model-gateway workloads | the runtime includes higher-complexity app surfaces beyond ordinary self-hosting |
+| `compose/docker-compose.metrics.yml` | observability | Grafana, Prometheus, VictoriaMetrics, Loki, Promtail, Blackbox, cAdvisor, exporters, dashboards, alerts |
+| `compose/docker-compose.stremio-group.yml` | media and streaming-adjacent workloads | large heterogeneous service pressure remains part of the real stack |
+| `compose/docker-compose.warp-nat-routing.yml` | alternate-routing and egress experiments | networking behavior is part of the repo's live design surface, not an afterthought |
+| `compose/docker-compose.wishlist.yml` | smaller absorbable app surfaces | the stack keeps growing by absorbing services into the same core runtime |
 
-This include set is important because it shows the repo's real operating
-domains:
-
-- public ingress
-- private mesh
-- observability
-- workload clusters
-- network experimentation
-
-That is already a platform-shaped stack, even though the missing shared-truth
-layer is still incomplete.
-
-## Root-owned service classes
-
-The root file is not just glue. It still owns many direct services.
-
-Representative root-owned services include:
-
-- data and state: `mongodb`, `redis`
-- operator tools: `dozzle`, `portainer`, `homepage`, `watchtower`
-- app and utility surfaces: `searxng`, `code-server`, `dns-server`,
-  `telemetry-auth`, `chat-analytics`
-- site-facing workloads: `bolabaden-nextjs`
-- project-specific TCP and mixed-protocol services:
-  `biodecompwarehouse*`
-
-This matters because any future promotion cannot honestly treat the root file as
-legacy residue. It is still a major infrastructure surface.
+This include graph matters because it proves the repo is already operating as a
+platform-shaped Compose system.
+The missing problem is not "how do we stop being toy-scale?"
+The missing problem is "how do we stop being toy-scale without lying about
+distributed truth?"
 
 ## The live edge stack already present
 
-The active proxy fragment makes the current edge story concrete.
-
-Visible live edge components include:
+The edge fragment already includes:
 
 - `traefik`
 - `crowdsec`
@@ -119,82 +125,188 @@ Visible live edge components include:
 - `nginx-traefik-extensions`
 - `cloudflare-ddns`
 - `docker-gen-failover`
+- `whoami`
+- `logrotate-traefik`
+- `autokuma`
 
-That proves the repo is already serious about:
+That list is important because it proves the repo already has:
 
-- ingress
-- auth continuity
-- middleware and security policy
-- public DNS participation
-- dynamic route generation attempts
+- L7 ingress
+- security and bouncer logic
+- forward-auth pressure
+- DNS automation pressure
+- dynamic routing pressure
+- service probing and uptime pressure
 
-It does **not** prove that those components already compose into durable
-wrong-node recovery.
+It also proves why lazy documentation is dangerous.
+Once a stack contains this much edge machinery, it becomes very easy to
+accidentally narrate "serious ingress" as "solved cross-node request
+preservation."
 
-## The live mesh and observability surfaces
+This runtime does not justify that leap.
 
-The runtime also clearly includes:
+## The live mesh surface already present
 
-- `headscale-server` and `headscale` in the Headscale fragment
-- `grafana`, `prometheus`, `victoriametrics`, `loki`, `promtail`,
-  `cadvisor`, `blackbox-exporter`, and `alertmanager` in the metrics fragment
+The Headscale fragment already contains:
 
-This matters for two reasons.
+- `headscale-server`
+- `headscale`
+- inline Headscale configuration
+- Traefik-facing route and middleware material around the Headscale surfaces
 
-First, the repo is not missing seriousness or instrumentation.
+The planning docs explicitly record that Headscale is single-node today and
+still a singleton control-plane concern.
 
-Second, even with those surfaces present, the repo still does not automatically
-own:
+So the correct reading is:
 
-- current placement truth
-- semantically valid peer substitution
-- request-preserving failover
+- Headscale is real and central to the repo's private-mesh assumptions
+- Headscale is not yet a proven HA control-plane surface
 
-Observability helps measure the platform. It does not replace the missing
-middle layer.
+This is exactly the kind of distinction the docs must keep visible.
 
-## Concrete gaps already named by repo planning
+## The live observability surface already present
 
-The runtime should be read alongside the master-plan gaps the repo has already
-named explicitly.
+The metrics fragment is huge, and that matters.
 
-Current planning material calls out:
+It already includes:
+
+- `victoriametrics`
+- `prometheus`
+- `grafana`
+- `loki`
+- `promtail`
+- `blackbox-exporter`
+- `cadvisor`
+- `alertmanager`
+- `process-exporter`
+- `mongodb-exporter`
+- `redis-exporter`
+- many dashboards, alert rules, and recording rules
+
+That proves the repo is not missing seriousness.
+It is also a warning:
+
+> strong observability does not automatically mean strong distributed truth.
+
+The system can be richly monitored and still fail the user's real benchmark if
+wrong-node forwarding, placement truth, or stateful authority remain socially
+reconstructed.
+
+## Root-owned direct services
+
+The root file still declares many direct services rather than delegating
+everything to fragments.
+
+Representative examples include:
+
+- data and state:
+  - `mongodb`
+  - `redis`
+- app and utility surfaces:
+  - `dcef`
+  - `chat-analytics`
+  - `searxng`
+  - `code-server`
+  - `session-manager`
+  - `bolabaden-nextjs`
+  - `telemetry-auth`
+  - `dns-server`
+- operator and maintenance surfaces:
+  - `dozzle`
+  - `homepage`
+  - `portainer`
+  - `watchtower`
+  - `dockerproxy-ro`
+  - `dockerproxy-rw`
+- mixed-protocol and project-specific surfaces:
+  - `biodecompwarehouse`
+  - `biodecompwarehouse-mcp`
+  - `biodecompwarehouse-bsim-server`
+  - `biodecompwarehouse-aio`
+
+That service list matters for three reasons.
+
+First, the root file is still an active authoring surface.
+
+Second, the stack already spans:
+
+- stateless HTTP
+- TCP and database endpoints
+- operator dashboards
+- mixed app surfaces
+- documentation surfaces
+- niche project services
+
+Third, every claim about "one unified platform" has to survive all of those
+service classes, not just the easiest HTTP examples.
+
+## Why the runtime already creates documentation pressure
+
+This runtime is complicated enough that simple summaries become misleading.
+
+A useful docs pass now has to answer at least these questions:
+
+- which services are local-only concerns and which participate in a broader
+  any-node story?
+- which services are routed through Traefik and which expose TCP directly?
+- which services are state-bearing enough that failover language must stay
+  harsh?
+- which helpers are active but untrusted?
+- which routes are generated, which are static, and which are only planned?
+
+Without those distinctions, the docs can sound coherent while quietly
+flattening away the user's whole complaint.
+
+## The most important negative evidence already named by the repo
+
+The live runtime has to be read next to the planning material, because the
+planning layer records several crucial gaps that affect how the runtime should
+be described.
+
+The strongest named gaps include:
 
 - `docker-gen-failover` can delete routes when containers stop
-- `watchtower` is configured but not functioning correctly
-- Cloudflare DDNS multi-record behavior is still problematic
+- `watchtower` is configured but has not been functioning correctly
+- Cloudflare DDNS presence is not the same thing as full multi-node request
+  failover
+- multi-record DDNS behavior is still a known problem
 - secret sync is still manual
 - compose sync is still manual
-- service failover is not automated
+- automated service failover between nodes is still missing
+- a live root `services.yaml` registry is still unproven
 
-Those named gaps are a useful reminder:
+Those gaps matter because they keep the runtime honest.
 
-the runtime already has many ingredients, but the repo itself still records the
-core control-plane truths as incomplete.
+The stack is already rich.
+The repo itself still says the middle control-plane truths are incomplete.
 
-## What the current runtime really proves
+## What the runtime clearly proves
 
-The current root runtime proves all of these:
+The current root runtime clearly proves:
 
-1. the stack is Compose-first in reality, not just in rhetoric
-2. the stack already spans edge, mesh, observability, worker, and app domains
-3. the platform already has enough machinery that loose language becomes
-   dangerous
-4. the repo is already trying to solve the multi-node problem from inside a
-   serious implementation, not from a toy baseline
+1. the repo is Compose-first in reality, not just in rhetoric
+2. the root file and include graph together form a large active platform
+3. the system already carries serious ingress, mesh, observability, and
+   operator complexity
+4. the docs have to distinguish service classes, not just list containers
+5. the repo is solving a hard problem from inside a real stack, not from a toy
+   lab
 
-## What it still does not prove
+## What the runtime still does not prove
 
 The current root runtime does **not** yet prove:
 
-1. that any healthy public node can preserve a request for a remote service
-2. that a live root placement registry such as `services.yaml` exists and is
+1. any healthy public node can generically preserve a request for a remote
+   service
+2. a live placement registry such as `services.yaml` exists and is actively
    consumed
-3. that the wrong-node rescue route survives the exact backend failure that
-   made rescue necessary
-4. that auth and middleware remain semantically identical after peer handoff
-5. that stateful services have cluster-grade authority and failover semantics
+3. the rescue route survives the failure that makes rescue necessary
+4. auth and middleware remain semantically identical after peer handoff
+5. TCP and stateful services have cluster-grade authority and failover truth
+6. the operator can explain cross-node behavior from shared tracked truth
+   instead of private reconstruction
 
-That difference is the key reading rule for this whole site:
+That distinction is the key reading rule for the entire site:
 
-the runtime is already real, but the shared-truth layer is still incomplete.
+the current runtime is already real, but the shared-truth layer is still
+incomplete.

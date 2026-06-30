@@ -1,59 +1,60 @@
 # Source Assimilation Index
 
-This page is the retrieval contract behind the knowledgebase.
+This page is the retrieval contract for the knowledgebase.
 
-Its job is not merely to say "cite sources."
-Its job is to stop the docs from sounding comprehensive while still quietly
-answering a smaller, safer, easier question than the user actually asked.
+Its job is not just to say "consult sources."
+Its job is to stop the docs from sounding broad, careful, and well-organized
+while still quietly answering a smaller question than the user actually asked.
 
-In this repo, bad retrieval usually looks polished.
+In this repository, bad retrieval often looks polished.
 
-It sounds like:
+It usually sounds like:
 
-- many files were consulted
-- many tools were mentioned
-- many options were listed
-- many architecture words were used
-
-and the user's real problem still got downgraded.
+- a lot of files were read
+- a lot of technologies were named
+- a lot of options were summarized
+- the user received a calm architecture story
+- and the real burden was still edited down into something easier
 
 This page exists to stop that downgrade.
 
-## The dream this page has to protect
+## The dream retrieval has to protect
 
-The user's frustration is not mainly about missing documentation.
+The user is not asking for:
 
-It is about a broader pattern:
+- a larger option catalog
+- a more generic architecture guide
+- a smoother self-hosting narrative
+- a blended summary of "things related to HA"
 
-- the ecosystem offers many partial tools
-- each tool solves only a slice
-- the operator is left privately reconstructing the real system
-- docs then pretend the existence of options is the same thing as a real path
+The user is asking for a knowledgebase that actually reconstructs:
 
-So "actually RAG this time" in `bolabaden-infra` does **not** mean:
+- what they are trying to make true
+- why normal answers keep failing
+- which truths are already live in the worktree
+- which truths are only intent or planning pressure
+- which future layers are genuinely trying to remove hidden burden
+- where the docs must stay harsh because state, routing, and failover are still
+  incomplete
 
-- gather more files
-- blend them into a calm voice
-- smooth over contradictions
-- produce a plausible average summary
+So "actually RAG this time" in `bolabaden-infra` means:
 
-It means:
-
-1. reconstruct the real dream
+1. recover the real dream before writing
 2. identify what class of claim is being made
-3. route that claim to the strongest authority for that class
+3. route that claim to the strongest source class
 4. say exactly what that source proves
 5. say exactly what it does not prove
 6. preserve contradiction instead of ironing it out
-7. keep current worktree truth above elegant prose for runtime claims
-8. use archive pressure to recover the user's actual complaint without letting
-   the archive impersonate runtime evidence
+7. keep worktree truth above elegant prose for runtime claims
+8. use archive pressure to recover the user's complaint without letting the
+   archive impersonate runtime evidence
 
-If the docs skip that sequence, they may become longer but not more useful.
+If the docs skip that sequence, they may become longer without becoming more
+truthful.
 
 ## Strongest honest current answer
 
-The repo has four major evidence classes, and they do not carry equal weight:
+The repository has four major evidence classes:
 
 1. architecture-intent and honesty surfaces
 2. live root runtime surfaces
@@ -63,22 +64,20 @@ The repo has four major evidence classes, and they do not carry equal weight:
 The biggest recurring retrieval mistake is flattening those four classes into
 one blended narrative.
 
-Once that happens, at least one of two things becomes false:
+Once that happens, at least one of these becomes false:
 
 - the worktree starts sounding more complete than it is
 - the user's actual complaint gets replaced by a neighboring, weaker question
 
-This page exists to keep both failures visible.
+This page exists to keep both failure modes visible.
 
-## Source classes and what they are for
-
-### 1. Architecture-intent and honesty surfaces
+## Source class 1: architecture-intent and honesty surfaces
 
 These are the strongest sources for:
 
 - what the repo wants the runtime to do
 - what the dream actually is
-- where the project explicitly refuses fake HA language
+- what kinds of fake-HA language the repo already refuses
 
 Read in this order:
 
@@ -92,26 +91,26 @@ These files do **not** have equal weight.
 Their real hierarchy is:
 
 - `copilot-instructions.md`
-  - strongest statement of the no-Swarm/no-Kubernetes, local-first,
-    peer-forward, anti-SPOF dream
+  - strongest statement of the multi-node, no-Swarm/no-Kubernetes-by-default,
+    local-first, peer-forward dream
 - `README.md`
-  - strongest repo-level honesty wall about what the stack still does not
+  - strongest repo-level honesty wall about what the live stack still does not
     prove
 - `AGENTS.md`
-  - operator/setup/runtime constraints, not the deepest architecture dream
+  - strongest operator/setup/runtime constraints surface
 - `.cursorrules`
-  - authoring discipline and Compose hygiene, not core architecture proof
+  - strongest authoring-discipline and Compose-hygiene surface
 
-If a page treats those four files as if they all define the same thing, the
-page has already started flattening the repo.
+If a page treats those four as if they are all saying the same thing, that page
+has already started flattening the repo.
 
-### 2. Live root runtime surfaces
+## Source class 2: live root runtime surfaces
 
 These are the strongest sources for:
 
 - what the priority implementation actually is
-- what the root stack really owns today
-- what helper layers are live now
+- what is active in the root stack now
+- which helpers and services are already part of the live runtime
 
 Start with:
 
@@ -119,7 +118,7 @@ Start with:
 2. active fragments under
    [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
 
-Important current fragments include:
+High-value current fragments include:
 
 - `compose/docker-compose.coolify-proxy.yml`
 - `compose/docker-compose.docs.yml`
@@ -131,53 +130,58 @@ Important current fragments include:
 - `compose/docker-compose.warp-nat-routing.yml`
 - `compose/docker-compose.wishlist.yml`
 
-These files outrank planning docs whenever the claim is:
+These surfaces outrank planning docs whenever the claim is:
 
-- this exists now
-- this is active in the root stack
-- this network, service, or helper is part of the priority runtime
+- this service is live now
+- this network is part of the priority runtime now
+- this helper already exists now
+- this domain is really part of the root implementation now
 
-They do **not** outrank planning docs for:
+They do **not** outrank planning docs for claims like:
 
-- what the repo wishes those services did under failure
-- whether a helper layer is already trustworthy
+- this helper is already trustworthy under failure
+- this route survives backend disappearance
+- this service is now honestly anti-SPOF
 
-### 3. Planning and promotion surfaces
+## Source class 3: planning and promotion surfaces
 
 These are the strongest sources for:
 
-- what gaps the repo has already named explicitly
-- what future promotion candidates exist
-- what bug or capability boundary the project already understands
+- what capability gaps the repo has already named
+- what failure signatures are already known
+- what future layers are being considered for promotion
 
 Start with:
 
 1. [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-2. [`docs/stateful_ha_plan.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/stateful_ha_plan.md)
-3. [`docs/osvc_ingress_ha.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/osvc_ingress_ha.md)
-4. research pages under
-   [`knowledgebase/research/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research)
+2. [Infrastructure Master Plan Evidence](../research/infrastructure-master-plan.md)
+3. [Ingress and Failover Evidence](../research/ingress-and-failover-evidence.md)
+4. [Stateful HA Evidence](../research/stateful-ha-evidence.md)
+5. [Orchestrator Tradeoffs Evidence](../research/orchestrator-tradeoffs-evidence.md)
+6. [OpenSVC Ingress HA](../research/osvc-ingress-ha.md)
+7. [Nomad Exploration Evidence](../research/nomad-exploration-evidence.md)
+8. [Garden k3s Exploration Evidence](../research/garden-k3s-exploration-evidence.md)
 
-These files are where the repo already says things like:
+These are the surfaces where the repo already says things like:
 
-- route persistence under backend loss is still missing
-- automated service failover between nodes is still missing
-- `docker-gen-failover` currently deletes routes when containers stop
-- Cloudflare DDNS presence is not the same thing as full multi-node failover
+- universal wrong-node success is still missing
+- a live `services.yaml` registry is still unproven
+- `docker-gen-failover` can delete routes when containers stop
+- Cloudflare DDNS presence is not the same thing as full failover
 - Headscale is single-node today
-- stateful HA needs replication and topology-specific correctness, not just
-  container movement
+- automated service failover between nodes is still missing
+- stateful HA requires topology-specific authority and replication truth
 
-These planning sources are allowed to explain what is missing.
-They are not allowed to silently promote themselves into live proof.
+These sources are allowed to explain what is missing.
+They are not allowed to promote themselves into live proof.
 
-### 4. Archive-pressure surfaces
+## Source class 4: archive-pressure surfaces
 
 These are the strongest sources for:
 
 - what the user is actually rebelling against
-- why ordinary "just use X" answers keep failing
-- where the missing middle layer keeps reappearing
+- why normal answer families keep sounding fake
+- where the missing middle keeps reappearing
 
 Start with:
 
@@ -185,71 +189,70 @@ Start with:
 - [Archive Pressure Patterns](../research/archive-pressure-patterns.md)
 - [Evidence Ledger](../research/evidence-ledger.md)
 - the source archive conversations under
-  [`knowledgebase/source-archive/chatgpt-exports/conversations/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations)
+  [`knowledgebase/source-archive/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive)
 
 This class is essential because the repo is not only technical.
-It is also a response to a recurring ecosystem failure:
+It is also a reaction against an ecosystem pattern:
 
-> the tooling landscape keeps offering fragments and naming them as if the
-> operator's real burden has been removed.
+> many partial tools exist, and docs often narrate their existence as if the
+> operator's real burden has already been removed.
 
 Archive pressure restores that complaint.
 It does **not** prove runtime correctness.
 
 ## Claim router
 
-Use this table before writing any summary page.
+Use this table before writing any page or paragraph that sounds confident.
 
 | If the sentence is really claiming... | Start with | Why | It still must not imply... |
 | --- | --- | --- | --- |
-| "this is the dream of the repo" | `copilot-instructions.md`, `README.md` | strongest architecture-intent and honesty sources | that the runtime already earned it |
+| "this is the dream of the repo" | `copilot-instructions.md`, `README.md` | strongest architecture-intent and honesty surfaces | that the runtime already earned it |
 | "this exists in the live stack today" | root Compose runtime | strongest implementation truth | that it survives the relevant failure |
-| "the repo already knows this is missing or broken" | planning docs | strongest named-gap sources | that the repair is already live |
-| "the user is rejecting this whole category of answer" | archive-pressure sources | strongest statement of the actual complaint | that complaint itself proves the implementation |
+| "the repo already knows this is missing or broken" | planning surfaces | strongest named-gap evidence | that the repair is already live |
+| "the user rejects this whole family of answers" | archive-pressure surfaces | strongest statement of the actual complaint | that the complaint itself proves implementation |
+| "this service class needs harsher language" | runtime plus stateful evidence pages | strongest combined truth about protocol and state class | that all stateful closure is already solved |
 
-If a sentence cannot be routed through this table, it is probably too vague to
-be useful.
+If a sentence cannot be routed through this table, it is probably still too
+vague to trust.
 
 ## Retrieval packs for the most common real questions
 
-These are the highest-signal local bundles for the questions this repo keeps
-returning to. They exist because broad archive scans produce volume faster than
-understanding.
+Broad archive scans produce volume faster than understanding.
+These packs exist to keep retrieval deliberate.
 
 ### Pack A: "Why does Compose stop feeling honest the moment multi-node matters?"
 
 Use when the real question is:
 
+- why is the user still clinging to Compose?
 - why is the user so hostile to static glue?
-- why is `docker-compose.yml` still sacred even though it is now painful?
-- why does the repo keep insisting the missing problem is not "better YAML"?
+- why is the problem not just "better YAML"?
 
 Start with:
 
 1. [User Intent and Dream](../research/user-intent-and-dream.md)
 2. [Problem and Goals](../architecture/problem-and-goals.md)
 3. `source-archive/chatgpt-exports/conversations/docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`
-4. `source-archive/chatgpt-exports/conversations/docker-compose-multi-server-setup__67f73c50-150c-8006-8408-c03db2d8d287.md`
+4. `source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`
 
 What this pack proves well:
 
 - the user does not merely dislike Compose syntax
 - the real break happens when runtime truth escapes local node boundaries
-- advice that says "just run Traefik and DDNS" keeps stopping one layer too
-  early
+- service discovery and wrong-node routing are the real pressure points
 
 What it must not be widened into:
 
 - Compose itself is useless
-- remote Docker sockets or overlay mesh automatically solve the hidden burden
+- any remote-proxy or overlay trick automatically solves the burden
 
 ### Pack B: "What counts as a fake failover answer in this repo?"
 
 Use when the real question is:
 
-- why are Cloudflare, Traefik, and more healthchecks still not enough?
-- why does the repo keep saying wrong-node dignity is the real threshold?
-- why is a helper like `docker-gen-failover` both important and distrusted?
+- why are Cloudflare and Traefik still not enough?
+- why does the repo keep saying wrong-node dignity is the threshold?
+- why is `docker-gen-failover` both central and distrusted?
 
 Start with:
 
@@ -261,190 +264,126 @@ Start with:
 
 What this pack proves well:
 
-- the user is not looking for a generic reverse proxy
-- Traefik configuration alone does not grant failover semantics
-- the repo already knows route persistence under backend loss is one of the
-  hardest seams
+- first-hop redundancy is not the same thing as preserved request meaning
+- dynamic route generation can still fail at the critical moment
+- proxy category fit does not equal solved failover semantics
 
 What it must not be widened into:
 
-- the current runtime has no meaningful ingress machinery
-- all proxy-based fallback ideas are permanently invalid
+- all proxy-driven failover is worthless
+- the edge stack has no value
 
-### Pack C: "Does some orchestrator already earn default promotion?"
+### Pack C: "What is the missing middle actually trying to own?"
 
 Use when the real question is:
 
-- should the repo just move to Nomad, k3s, OpenSVC, or something else?
-- is the user only resisting mature tools out of taste?
-- what exact burden would a bigger control plane have to own better?
+- why is the repo still searching for a helper layer?
+- why is `services.yaml` such a recurring idea?
+- what truth would a promoted middle layer need to own?
 
 Start with:
 
-1. [Orchestration Options](../architecture/orchestration-options.md)
-2. [The Missing Middle Layer](../architecture/missing-middle-layer.md)
+1. [The Missing Middle Layer](../architecture/missing-middle-layer.md)
+2. [Infrastructure Master Plan Evidence](../research/infrastructure-master-plan.md)
 3. [Orchestrator Tradeoffs Evidence](../research/orchestrator-tradeoffs-evidence.md)
 4. `source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
-5. `source-archive/chatgpt-exports/conversations/nomad-multi-node-failover__68765e45-1ec4-8006-9179-5ef176d7a90f.md`
-6. [Garden and k3s Exploration Evidence](../research/garden-k3s-exploration-evidence.md)
-7. [Nomad Exploration Evidence](../research/nomad-exploration-evidence.md)
+5. `source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`
 
 What this pack proves well:
 
-- the repo is not anti-orchestrator in principle
-- "respectable platform family" is weaker than "owns a named hidden burden"
-- the user is explicitly searching for a middle layer, not merely for a brand
+- the missing middle is a capability shape, not a product label
+- service discovery and eligibility truth are the real pressure points
+- the repo is trying to avoid both static glue and premature platform capture
 
 What it must not be widened into:
 
-- every stronger control plane is equally bad
-- peer-equal or leaderless rhetoric is automatically the right answer
+- the repo has already chosen the winning implementation
 
-### Pack D: "What does the current worktree actually own today?"
+### Pack D: "Why do stateful services stay under harsher rules?"
 
 Use when the real question is:
 
-- what is active in the priority implementation?
-- which pieces are live versus planned versus archived?
-- where should route or topology claims be checked first?
+- why are Redis, MongoDB, and Headscale treated differently from Dozzle or
+  static frontends?
+- why does the repo keep refusing broad HA language?
 
 Start with:
 
-1. [Instruction Surfaces and Authority](../architecture/instruction-surfaces-and-authority.md)
-2. [Current Compose Runtime](../architecture/current-compose-runtime.md)
-3. [Compose Fragment Map](../architecture/compose-fragment-map.md)
-4. [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-5. active `compose/docker-compose.*.yml` fragments
+1. [Stateful HA and Data](../architecture/stateful-ha-and-data.md)
+2. [Stateful HA Evidence](../research/stateful-ha-evidence.md)
+3. [Stateful HA Plan](../research/stateful-ha-plan.md)
+4. [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 
 What this pack proves well:
 
-- the root runtime is serious and broad
-- specific services, networks, and helper components are really present
-- the current stack already encodes real routing, mesh, and observability
-  pressure
+- stateful correctness is about authority, replication, and write truth
+- route reachability is not the same thing as honest failover
+- Headscale is still a singleton control-plane concern today
 
 What it must not be widened into:
 
-- broad wrong-node resilience is already live
-- stateful HA can be inferred from component presence
+- no stateful service can ever be improved before total cluster closure
 
-## What "full assimilation" means in this repo
+### Pack E: "What does the current root runtime actually contain?"
 
-Full assimilation is not achieved when the docs can repeat the repository.
+Use when the real question is:
 
-It is achieved when the docs can explain, with source discipline:
+- what is real in the priority implementation now?
+- which fragments and services are central to the live stack?
+- why is the root runtime already serious enough that docs must stay precise?
 
-- what the user actually wants
-- what the current worktree really does
-- where the worktree still falls short
-- which missing layers the repo keeps circling
-- which nearby explanations would sound reasonable but still miss the point
+Start with:
 
-That last item is critical.
+1. [Current Compose Runtime](../architecture/current-compose-runtime.md)
+2. root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+3. the included `compose/docker-compose.*.yml` fragments
 
-Many weak summaries in this repo have been wrong not because they invented
-facts, but because they answered a neighboring question instead of the real
-one.
+What this pack proves well:
 
-Examples of neighboring but weaker questions:
+- the stack is already broad and platform-shaped
+- the root file is still a major authoring surface
+- ingress, mesh, observability, and mixed protocol domains are all live now
 
-- "How do I host many services?"
-- "What reverse proxies exist?"
-- "What orchestrators are popular?"
-- "Can Docker Compose run on more than one host?"
+What it must not be widened into:
 
-Those are all easier than the real question:
+- the distributed truth problem is therefore already solved
 
-> how do we keep the directness of Compose while making multiple ordinary
-> Docker nodes behave less stupidly under wrong-node entry, backend loss, and
-> anti-SPOF pressure?
+## Minimum retrieval workflow before rewriting a page
 
-If the docs drift back to the easier questions, assimilation has failed.
+Before replacing or heavily revising an infra page, use this sequence:
 
-## Retrieval rules for documentation work
+1. identify the page's primary claim type
+2. route it through the claim router above
+3. read at least one source from the strongest class
+4. read at least one source that states what remains unproven
+5. if the page reconstructs user frustration, read an archive-pressure source
+6. only then write the page
 
-When rewriting or summarizing, follow this sequence.
+If steps `3` through `5` are skipped, the page is very likely to flatten the
+repo into a smoother but weaker story.
 
-### Rule 1: start with the user question, not the folder name
+## Anti-cheat rules for assimilation
 
-Do not open files merely because they are nearby.
-Open files because they can answer a specific claim the page needs to make.
+Never let:
 
-### Rule 2: identify claim type before gathering evidence
+- an archive complaint become runtime proof
+- a planning document become implementation proof
+- a proxy feature become full failover proof
+- a DNS plurality story become request-preservation proof
+- an option catalog become evidence that the operator's burden is lower
 
-Decide whether the page is trying to say:
+Never summarize a source class without also naming its boundary.
 
-- dream
-- runtime
-- planning gap
-- archive complaint
-- proof boundary
+Never use "the repo wants X" and "the runtime proves X" interchangeably.
 
-If you do not identify the claim type first, you will almost certainly start
-letting unlike evidence classes borrow authority from each other.
-
-### Rule 3: prefer the smallest strong bundle over the broadest sweep
-
-In this repo, six sharply chosen files usually beat sixty vaguely adjacent
-ones.
-
-Breadth matters only after the strongest sources for the exact claim have
-already been read.
-
-### Rule 4: preserve contradiction on purpose
-
-If runtime, planning, and archive pressure disagree in tone, keep that visible.
-The disagreement is often more informative than a blended summary.
-
-### Rule 5: always name the ceiling
-
-Every serious page should make it obvious:
-
-- what the sources let it say confidently
-- what stronger sentence would still be a lie
-
-If that ceiling is missing, the page is probably overclaiming.
-
-## The easiest ways to fail at RAG in this repo
-
-These failure modes are now common enough to name explicitly.
-
-### Failure mode 1: option laundering
-
-The docs list enough products and frameworks that the reader feels the option
-space has become healthy, even though no option has yet removed the real hidden
-burden.
-
-### Failure mode 2: intent inflation
-
-The docs read a strong dream file and start narrating current behavior as if
-the runtime had already earned it.
-
-### Failure mode 3: archive inflation
-
-The docs read a large number of pain threads and start narrating the repo as if
-the repeated pain itself were evidence of implementation progress.
-
-### Failure mode 4: runtime flattery
-
-The docs see a serious stack and start narrating its presence as if presence
-alone made wrong-node, fallback, or stateful semantics trustworthy.
-
-### Failure mode 5: plan sedation
-
-The docs find detailed plans and mistake the clarity of the repair path for
-partial completion of the repair itself.
+If contradiction disappears entirely, you probably retrieved too shallowly.
 
 ## Bottom line
 
-The retrieval standard in `bolabaden-infra` is not "did we read a lot?"
+Good retrieval in `bolabaden-infra` does not mean "more files."
+It means routing each claim to the right authority, preserving the repo's own
+honesty boundaries, and keeping the user's real complaint alive instead of
+replacing it with a calmer adjacent problem.
 
-It is:
-
-> did we reconstruct the user's real demand, route each claim to the right
-> authority class, preserve the repo's own contradictions, and refuse to let
-> serious-looking adjacent evidence merge into broader confidence than the
-> current worktree has actually earned?
-
-If the answer is no, then the docs may be longer than before and still not
-actually more honest.
+If the docs do that, they become useful.
+If they do not, they become infrastructure theater with citations.

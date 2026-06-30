@@ -1,159 +1,186 @@
 # The Missing Middle Layer
 
-This page answers a very specific question:
+This page answers the repository's most important architectural question:
 
-> if raw Compose is too dependent on private operator memory, and immediate
-> Kubernetes or Swarm promotion is too expensive or too ideological, what is
-> the smaller truth-owning layer the repo is actually searching for?
+> if plain Compose becomes too dependent on private operator memory, and
+> immediate promotion to Kubernetes, Swarm, Nomad, or another larger control
+> plane feels too expensive or too premature, what is the smaller truth-owning
+> layer the repo is actually searching for?
 
-That is the "missing middle" in `bolabaden-infra`.
+That is the "missing middle."
 
 It is not a brand name.
-It is a capability shape.
-
-## Strongest honest current answer
-
-The repo is searching for the smallest added layer that owns enough shared
-truth to make:
-
-- wrong-node recovery
-- peer selection
-- fallback-route persistence
-- and bad-day explanation
-
-system-owned instead of remembered.
-
-That layer is still incomplete.
-
-The repo already has:
-
-- a real Compose runtime
-- a strong edge layer
-- planning around failover helpers, secret sync, compose sync, and Headscale
-- research into OpenSVC, Nomad, k3s, and related alternatives
-
-What it does **not** yet have is a promoted shared-truth layer that cleanly
-answers:
-
-- where the service lives now
-- whether the peer is eligible now
-- whether the route survives now
-- whether the handoff preserves meaning now
+It is a burden-removal shape.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
-- what category of helper layer the repo actually wants
-- which burdens that layer must remove to count as real progress
-- why many adjacent solutions still feel fake to this user
+- the capability shape the repo is repeatedly converging on
+- which burdens the middle layer must actually remove
+- which candidate families are visible in the repo
+- why many plausible solutions still fail this repo's benchmark
 
 This page is not authoritative about:
 
-- claiming that the repo has already found the winner
-- promoting one research path into the live runtime
-- pretending that "lighter than Kubernetes" is a sufficient definition
+- claiming the winner has already been found
+- claiming the live runtime already owns this layer
+- equating "lighter than Kubernetes" with "good enough"
 
-This page defines the wanted shape, not the final chosen implementation.
+This page describes the wanted layer, not the final chosen implementation.
 
-## The wanted layer, in plain terms
+## Strongest honest current answer
 
-The missing middle is the smallest added surface that would make these things
-system-owned instead of privately remembered:
+The repo is looking for the smallest added layer that makes these truths
+system-owned instead of remembered:
 
-- service placement truth
-- peer eligibility truth
-- fallback-route truth
-- convergence truth for secrets, env, and deployment shape
-- operator-readable explanation of what happened
+- where a service lives now
+- whether a peer is eligible now
+- whether a rescue route still exists now
+- whether peers are converged enough to substitute safely
+- why the system made the routing or failover decision it made
 
-That layer does **not** need to be a full scheduler by default.
-It **does** need to stop private topology memory from being the real control
-plane.
+The repo already has:
 
-## Why the repo knows it needs this layer
+- a large real Compose runtime
+- a serious Traefik/CrowdSec/auth edge surface
+- Headscale as a real private-mesh assumption
+- planning pressure toward `services.yaml`, peer sync, and failover helpers
+- research into OpenSVC, Nomad, k3s, and related paths
 
-This is not an abstract architecture taste.
-The repo has already named the gap explicitly.
+What it still does **not** have is a promoted layer that cleanly owns those
+truths across the whole priority implementation.
 
-The strongest current planning signals are in
+## Why this layer is needed at all
+
+The repo does not need a missing middle because clustering is fashionable.
+It needs one because several facts are still too easy to answer only from
+private human reconstruction.
+
+Those facts include:
+
+- what runs where right now
+- which node is the right peer for this specific service
+- whether that peer is merely reachable or actually safe to receive traffic
+- whether the route needed for fallback survives backend disappearance
+- whether auth and middleware keep the same meaning during handoff
+- whether a stateful service is actually movable or only reachable
+
+As long as those answers remain mostly social, the operator is still the hidden
+control plane.
+
+That is the real thing this page is trying to kill.
+
+## Why DNS and proxies are not enough by themselves
+
+The repo already has Cloudflare participation and a strong live edge stack.
+That still does not satisfy the missing middle because:
+
+- Cloudflare can choose a healthy first-hop node, but not the correct backend
+  service placement inside the user's topology
+- Traefik can express rich routing and middleware locally, but not magically
+  infer trustworthy cross-node placement truth
+- health checks can detect some failures, but not automatically answer whether
+  a remote peer is semantically equivalent for this traffic
+
+This is why the repo keeps separating:
+
+- first-hop plurality
+- request preservation
+- stateful authority
+
+The middle layer is needed because those are different truths.
+
+## The repo has already named the gap directly
+
+The clearest planning pressure is in
 [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md),
-which calls out all of these as still missing:
+which explicitly records these as still missing:
 
 - universal wrong-node success
 - a live tracked root `services.yaml` current-state registry
 - trustworthy route persistence under local backend failure
 - automated service failover between nodes
 
-Those are exactly the kinds of truths the missing middle would need to own.
+Those are not side quests.
+They are exactly the truths the missing middle would need to own.
 
-## What disqualifies a fake middle answer
+The master plan also records:
 
-A candidate is **not** the missing middle for this repo if it mainly does one
-or more of these:
+- `docker-gen-failover` is broken because it can delete routes when containers
+  stop
+- Cloudflare DDNS presence is not the same thing as full failover
+- Headscale is single-node today
+- secret sync and compose sync are still manual
 
-- improves ingress reachability without solving wrong-node semantics
-- hides placement truth behind magic without making it inspectable
-- uses bigger-cluster vocabulary while the operator still has to privately join
-  the facts together
-- forwards traffic but drops auth, middleware, or visible service meaning
-- treats stateful services as HA because some route still answers
-- sounds smaller than Kubernetes while still demanding worldview-scale trust
+That list is basically a map of why the middle layer has not been earned yet.
 
-The repo can still learn from such candidates.
-They just have not solved the wound this page is tracking.
+## The wanted layer, stated as responsibilities instead of brands
 
-## What the current repo evidence says the missing layer probably includes
+The middle layer has to own responsibility, not just naming.
 
-Based on:
+At minimum, it has to own five families of truth.
 
-- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
-- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-- current root Compose and include surfaces
-
-the missing layer likely needs these concrete capabilities.
-
-### 1. Placement registry or equivalent current-state truth
+### 1. Placement truth
 
 The repo repeatedly converges on `services.yaml` as the simplest mental model:
 
-- what service lives on which node
-- which ports or route classes it exposes
-- whether there are multiple backends
+- which service exists on which node
+- which protocol class it belongs to
+- which ports or hostnames matter
+- whether it has multiple backends
 
-The important part is not the filename.
-The important part is that the truth be:
+The filename is not sacred.
+The property set is.
+
+The truth has to be:
 
 - explicit
 - current
-- readable
 - shared
+- inspectable
+- consumed by routing logic instead of merely documented for humans
 
-### 2. Peer health and eligibility model
+If the registry exists but routing still depends on remembered host placement,
+the middle layer has failed.
 
-Reachability is not enough.
-The layer has to distinguish:
+### 2. Eligibility truth
 
-- peer exists
-- peer is reachable
-- peer is healthy for this service
-- peer is semantically safe to receive this traffic
+A peer being reachable is not the same thing as a peer being safe.
 
-Without that distinction, wrong-node forwarding becomes a more decorated guess.
+The middle layer has to distinguish:
 
-### 3. Route materialization that survives failure
+- node exists
+- node is reachable
+- service is present
+- service is healthy
+- service is semantically eligible for this kind of traffic right now
 
-Planning material explicitly calls out `docker-gen-failover` as broken because
-it can delete routes when containers stop.
+That last line matters because the repo keeps refusing fake equivalence between:
 
-That means the missing layer cannot merely generate dynamic config.
-It has to generate or preserve rescue routes in a way that survives the failure
-that made rescue necessary.
+- a port that answers
+- and a service that can honestly preserve the same behavior
 
-### 4. Convergence for secrets, env, and deployment shape
+Without eligibility truth, wrong-node forwarding is only decorated guessing.
 
-The master plan also names manual secret sync and manual compose sync as real
+### 3. Route durability truth
+
+The repo's own planning material records that `docker-gen-failover` can remove
+Traefik routes when containers stop.
+
+That is devastating for any serious failover story.
+
+It means the middle layer cannot merely generate dynamic config.
+It has to generate or preserve rescue routes in a way that survives the exact
+failure that makes rescue necessary.
+
+If the fallback path disappears at the moment of local failure, the helper is
+not a failover layer.
+It is part of the outage.
+
+### 4. Convergence truth
+
+The repo also records manual secret sync and manual Compose sync as still-open
 gaps.
 
 That matters because peer substitution is dishonest if:
@@ -161,74 +188,188 @@ That matters because peer substitution is dishonest if:
 - the peer lacks the same secrets
 - the peer lacks the same env assumptions
 - the peer runs a materially different service definition
+- the peer has drifted in image version, sidecar assumptions, or route labels
 
-So the missing middle needs some convergence story, even if it is lighter than
-a full scheduler.
+So even a "small" middle layer needs some convergence story.
+It does not need to be a full scheduler by definition.
+It does need to stop cross-node substitution from being a silent drift gamble.
 
-### 5. Operator-readable explanation
+### 5. Explanation truth
 
-This repo does not only want automation.
-It wants a system that can still explain itself.
+The user does not only want automation.
+They want the system to stay inspectable.
 
-That means the added layer should make it easier to answer:
+That means the middle layer has to make it easier to answer:
 
-- why this node forwarded
-- why this peer was selected
-- why the route still existed
-- why the request kept the same meaning
+- why did this node serve locally?
+- why did it forward?
+- why was that peer chosen?
+- why did the rescue route still exist?
+- why did the request keep the same meaning?
 
-If the helper gets smarter while the explanation gets darker, the repo has
-gained machinery and lost trust.
+If the helper gets smarter while explanations get darker, the repo has gained
+machinery and lost trust.
+
+## What disqualifies a fake middle answer
+
+A candidate is **not** the missing middle for this repo if it mainly does one
+or more of these:
+
+- improves ingress reachability without solving wrong-node meaning
+- hides placement truth behind magic without making it inspectable
+- uses bigger cluster vocabulary while the operator still has to privately join
+  the facts together
+- forwards traffic but leaves middleware, auth, or service meaning ambiguous
+- treats stateful services as resilient because a route still answers
+- sounds smaller than Kubernetes while quietly importing a scheduler's worldview
+  tax anyway
+
+The repo can still learn from such candidates.
+They just have not solved the wound this page is tracking.
 
 ## Candidate families already visible in the repo
 
-These are the main candidate families already present in planning or research.
+The repo is not searching blindly.
+Several candidate families are already visible in planning and research.
 
-| Candidate family | What it might solve | Why it is still incomplete |
-| --- | --- | --- |
-| lightweight registry plus helper agents | placement truth, sync, redeploy, failover logic | still must prove durability, eligibility, and semantic preservation |
-| OpenSVC-shaped ingress or service supervision | stronger service ownership and failover semantics | still needs proof that it removes burden instead of renaming it |
-| Nomad-style promotion | scheduling and health-aware placement | must earn its worldview tax and not just widen the control plane |
-| k3s / Kubernetes promotion | broad cluster truth and scheduling machinery | may solve many layers, but the repo treats the cost and loss of legibility as real |
-| improved proxy automation alone | route generation and local edge behavior | not enough unless it owns placement, durability, and explanation too |
+### Candidate family 1: lightweight registry plus helper agents
+
+This is the most obvious middle-shaped path already visible in the repo.
+
+It usually implies:
+
+- a shared current-state file or registry such as `services.yaml`
+- peer broadcast or sync
+- helper logic for failure detection and redeploy
+- route generation or route updates from tracked truth
+
+Why it is attractive:
+
+- it preserves Compose as the primary authoring surface
+- it externalizes placement truth without immediately promoting a full
+  scheduler
+- it stays closer to the repo's demand for inspectable ownership
+
+Why it is still incomplete:
+
+- it still has to prove route durability
+- it still has to prove safe peer eligibility
+- it still has to prove policy preservation
+- it still risks quietly becoming a scheduler in disguise
+
+### Candidate family 2: OpenSVC-shaped service ownership
+
+The OpenSVC research pages are interesting because they feel closer to a
+truth-owning supervision layer than a pure proxy trick.
+
+Why this family is attractive:
+
+- stronger service ownership and supervision semantics
+- better fit for explicit resource and service responsibility than pure
+  sidecar-style glue
+- possible way to answer wrong-node rescue without inventing every primitive
+  from scratch
+
+Why it is still incomplete:
+
+- not yet proven in the live runtime
+- still must show that it removes burden instead of renaming it
+- must prove that it keeps the operator surface legible enough to count as a
+  real middle rather than just a different control plane
+
+### Candidate family 3: Nomad-style promotion
+
+Nomad appears repeatedly because it offers more scheduler truth than plain
+Compose without looking as worldview-heavy as Kubernetes.
+
+Why this family is attractive:
+
+- clearer placement and health semantics than ad hoc helper glue
+- real scheduling primitives
+- lighter reputation than Kubernetes
+
+Why it is still incomplete:
+
+- it still imports a scheduler worldview and therefore owes a burden-removal
+  justification
+- it does not automatically prove preserved wrong-node semantics for this repo's
+  actual stack
+- it may solve more placement than the user needs while still demanding trust
+  across more opaque machinery
+
+### Candidate family 4: k3s / Kubernetes promotion
+
+This family is not irrational.
+It is just expensive in the repo's value system.
+
+Why this family is attractive:
+
+- broad cluster truth ownership
+- mature ingress, service-discovery, and scheduling machinery
+- fewer DIY coordination primitives
+
+Why it is still incomplete:
+
+- it carries the largest worldview cost
+- it risks reducing Compose legibility too early
+- it has not yet been proven to be the smallest honest answer to this repo's
+  actual wound
+
+### Candidate family 5: improved proxy automation alone
+
+This family tries to keep the solution close to the edge stack.
+
+Why it is attractive:
+
+- minimal platform change
+- direct effect on ingress behavior
+- seems intuitive when the pain is phrased as routing
+
+Why it is still incomplete:
+
+- proxy automation alone does not own placement truth
+- it does not solve convergence truth
+- it often collapses stateful correctness into reachability
+- the `docker-gen-failover` bug is already evidence that proxy-only automation
+  can fail precisely at the wrong time
 
 ## The real success test
 
 The missing middle has only been found when this scene stops feeling fragile:
 
 1. a request lands on a healthy public node
-2. that node does not host the service locally
+2. the node does not host the service locally
 3. the node knows where the service lives now
 4. the node knows which peer is eligible now
-5. the route survives the local failure
-6. auth and middleware still mean the same thing
+5. the rescue route survives the local failure
+6. auth and middleware still preserve the same meaning
 7. the operator can explain all of that from shared tracked truth
 
 Anything weaker may still be useful engineering.
-It is not yet the missing middle this repo is looking for.
+It is not yet the middle layer this repo is searching for.
 
-## The hidden risk this page should keep visible
+## The hidden risk this page must keep visible
 
-One of the most important risks in this repo is that the "small missing middle"
+One of the biggest risks in this repo is that the "small missing middle"
 quietly grows into a scheduler in disguise.
 
 That does not automatically make it wrong.
-It does mean the repo should stay explicit about when it starts paying:
+It does mean the docs should stay explicit about when the repo starts paying:
 
 - worldview cost
 - control-plane opacity
 - operator legibility loss
 - central coordination assumptions
 
-The missing middle is only "middle" in an honest sense if the extra layer
-stays narrow relative to the exact missing truths it is supposed to own.
+The middle is only honestly "middle" if the added layer stays narrow relative
+to the exact truths it is supposed to own.
 
 ## Bottom line
 
-The missing middle is not a product name waiting to be discovered.
+The missing middle is not a product waiting to be discovered.
 It is the smallest truth-owning layer that would stop the operator from being
-the hidden registry, hidden failover brain, and hidden explainer for wrong-node
-behavior.
+the hidden registry, hidden failover brain, hidden drift detector, and hidden
+explainer for wrong-node behavior.
 
 The repo already knows many of the capabilities that layer must own.
 It does not yet prove that one implementation has earned promotion as the
