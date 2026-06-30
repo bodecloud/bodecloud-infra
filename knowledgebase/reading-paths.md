@@ -12,6 +12,12 @@ The core retrieval mistake in this repo is simple:
 
 This page exists to stop that.
 
+Treat it less like navigation chrome and more like a retrieval discipline page.
+
+The repo's problem is now large enough that a reader can gather many true
+fragments and still produce the wrong overall answer if they retrieve the wrong
+mix of surfaces.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -25,6 +31,8 @@ This page is not authoritative about:
 - whether the runtime already behaves correctly
 - whether one architecture path already won
 - whether better retrieval means the implementation is more mature
+
+This page is allowed to tell you how not to accidentally lie.
 
 ## Start from the wound, not the folder
 
@@ -40,9 +48,16 @@ For each reading pass, identify:
 
 If you cannot name those four things, the route is too loose.
 
+Also ask one fifth question when the topic sounds broad:
+
+5. what exact private sentence might still survive after this reading pass?
+
+That fifth question is what keeps a coherent answer from being a smaller,
+useless answer.
+
 ## The main truth registers
 
-Use these deliberately:
+Use these deliberately and do not let them impersonate one another:
 
 - Runtime truth:
   root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml),
@@ -55,6 +70,9 @@ Use these deliberately:
   [research/evidence-ledger.md](research/evidence-ledger.md) and related evidence pages
 - Archive pressure:
   [operations/source-assimilation-index.md](operations/source-assimilation-index.md)
+
+If you mix them, say which one is carrying which part of the answer.
+If you do not, you will almost always over-credit the runtime.
 
 ## Route 1: "What is the user actually trying to build?"
 
@@ -73,6 +91,9 @@ Primary truth register:
 Do not upgrade into:
 
 - `the runtime already does this`
+- `because the dream is coherent, the missing middle must be close`
+- `because several files repeat the same desire, the implementation must be
+  converging automatically`
 
 ## Route 2: "What does the current Compose runtime materially contain?"
 
@@ -92,6 +113,9 @@ Primary truth register:
 Do not upgrade into:
 
 - `because the runtime is broad, the missing truth must already be system-owned`
+- `because several fragments look serious, wrong-node dignity must be nearly
+  solved`
+- `because helpers exist, the runtime already owns the bad-day story`
 
 ## Route 3: "Why is wrong-node behavior the real benchmark?"
 
@@ -111,6 +135,8 @@ Primary truth registers:
 Do not upgrade into:
 
 - `one local happy-path success means the platform is basically anti-SPOF`
+- `a rendered route is close enough to a preserved request`
+- `a reachable peer is almost the same thing as an eligible peer`
 
 ## Route 4: "What still has to be proven before stronger claims become honest?"
 
@@ -132,6 +158,8 @@ Primary truth registers:
 Do not upgrade into:
 
 - `the existence of a disciplined proof language means the implementation must be close`
+- `named drills imply those drills have already passed`
+- `the roadmap being coherent means the proof burden got smaller`
 
 ## Route 5: "Why do nearby options keep feeling fake?"
 
@@ -152,6 +180,8 @@ Primary truth registers:
 Do not upgrade into:
 
 - `a more famous controller is automatically a more honest answer`
+- `a lighter orchestrator automatically counts as the missing middle`
+- `more dynamic config automatically means less private operator burden`
 
 ## Route 6: "What is the repo's harsh answer on stateful services?"
 
@@ -172,6 +202,8 @@ Primary truth registers:
 Do not upgrade into:
 
 - `reachable through Traefik` or `restartable elsewhere` equals HA
+- `TCP exposure is close enough to state authority`
+- `public control-plane reachability means the stateful surface escaped singular authority`
 
 ## Route 7: "What should I edit first if a page still feels vague?"
 
@@ -182,6 +214,7 @@ Start with:
 3. [architecture/current-compose-runtime.md](architecture/current-compose-runtime.md)
 4. [research/evidence-ledger.md](research/evidence-ledger.md)
 5. [operations/source-assimilation-index.md](operations/source-assimilation-index.md)
+6. [architecture/instruction-surfaces-and-authority.md](architecture/instruction-surfaces-and-authority.md)
 
 Edit pages that still fail to leave behind:
 
@@ -189,6 +222,27 @@ Edit pages that still fail to leave behind:
 - the truth register carrying the answer
 - the stronger sentence still forbidden
 - the next artifact or drill needed for a stronger claim
+
+The page is also weak if it sounds good while leaving behind no answer to:
+
+- which exact smaller question it accidentally answered instead
+
+## Route 8: "How do I actually use this site like a RAG pass?"
+
+Use when you need a compact but honest synthesis instead of a casual browse.
+
+Sequence:
+
+1. identify the exact request or failure class
+2. choose one primary route above
+3. choose one contrast route that could falsify an overly broad conclusion
+4. extract the strongest runtime artifact you can name
+5. extract the strongest intent, plan, or research artifact you can name
+6. write down the private burden still surviving afterward
+7. write down the stronger sentence still forbidden
+
+If you skip the contrast route, the synthesis tends to become too smooth.
+That is one of the main reasons the earlier docs felt useless.
 
 ## What a good reading pass should leave behind
 
@@ -200,6 +254,7 @@ A good reading route should leave you with a small packet:
 - the private burden still surviving afterward
 - the sentence still forbidden
 - the next proof packet required
+- the smaller neighboring question you successfully avoided
 
 If you finish with only:
 

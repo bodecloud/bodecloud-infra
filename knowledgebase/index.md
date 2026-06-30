@@ -11,6 +11,11 @@ This site exists to answer one unusually stubborn infrastructure question:
 
 That is the real subject of `bolabaden-infra`.
 
+It is also the question every page in this site should be forced to serve.
+
+If a page is informative but answers a smaller question than that one, the page
+is still failing the user.
+
 This site is not primarily:
 
 - a generic self-hosting handbook
@@ -19,6 +24,37 @@ This site is not primarily:
 - a generic `modern homelab` notebook
 
 Those topics only matter when they help answer the real question above.
+
+## The user's dream, stated as directly as possible
+
+The dream is not just:
+
+- "run Docker on more than one machine"
+- "have multiple ingress points"
+- "add enough glue that the stack feels clustered"
+- "avoid Kubernetes because it is annoying"
+
+The dream is:
+
+- keep `docker-compose.yml` close to the center of human authorship
+- keep the nodes ordinary enough that the system is still understandable
+- avoid inventing one new sacred node to replace the old one
+- avoid inventing one new sacred human to replace the old one
+- make any healthy public node a believable first hop
+- preserve the meaning of the request even when it lands on the wrong node
+- keep failover and fallback from degenerating into private folklore
+- only pay heavier orchestration cost if it actually kills one of those hidden
+  burdens
+
+This matters because many infrastructure summaries quietly rewrite the dream
+into something easier:
+
+- generic high availability
+- generic clustering
+- generic orchestration selection
+- generic self-hosting maturity
+
+Those are not the same thing.
 
 ## The accusation this site has to preserve
 
@@ -30,6 +66,15 @@ The site only stays useful if it keeps the user's real accusation visible:
 > plane when reality gets sharp.
 
 If a page becomes more polished while losing that accusation, it got worse.
+
+The accusation should stay active while reading every page:
+
+> does this explanation still depend on a human privately knowing which node is
+> special, which peer is safe, which backend is current, or which fallback is
+> fake?
+
+If the answer is yes, then the docs are not yet describing a system-owned
+truth.
 
 ## The shortest correct reading
 
@@ -58,6 +103,9 @@ User -> Cloudflare DNS -> any surviving public node
 That is the dream.
 It is not the same thing as current proof.
 
+That gap between dream and proof is not a documentation nuisance.
+It is the whole architecture problem.
+
 ## The three-part checksum for the whole site
 
 Everything in this knowledgebase should keep this sentence intact:
@@ -68,6 +116,16 @@ Everything in this knowledgebase should keep this sentence intact:
 
 If a page loses one of those three, it starts lying in one direction or
 another.
+
+The most common failure modes are:
+
+- the dream disappears and the page answers only a calmer neighboring question
+- the runtime disappears and the page becomes architecture theater
+- the missing middle disappears and the page sounds like the problem is mostly
+  solved because the stack looks serious
+
+Those failures are why this site has to be read almost like a RAG retrieval
+system with strict source boundaries, not like an ordinary documentation site.
 
 ## What the repo already proves
 
@@ -99,6 +157,17 @@ What it still does **not** prove is the thing the user actually cares about:
 The runtime is serious.
 The missing burden transfer is still brutally concrete.
 
+## How to read this site without making it useless
+
+Before trusting any section, ask four questions:
+
+1. what exact question is this page answering?
+2. what smaller neighboring question would be easier to answer but less useful?
+3. which truth layer is actually carrying the answer?
+4. what stronger sentence is still forbidden when the page ends?
+
+If the page does not leave those answers behind, it is still too soft.
+
 ## The hidden operator job the site has to keep naming
 
 The shortest honest summary of the current wound is:
@@ -116,6 +185,12 @@ That hidden job currently includes things like:
 - remembering which stateful surfaces still hide a sacred authority node
 
 If a page forgets that hidden job, it will almost always overstate the system.
+
+That is why the knowledgebase has to keep circling back to the same harsh
+point:
+
+> the current wound is not lack of components, but lack of system-owned truth
+> during the bad day
 
 ## The four truth layers
 
@@ -171,7 +246,8 @@ They feel like they lack honest options.
 
 ## How to use this site
 
-If you want the shortest route through the knowledgebase:
+If you want the shortest route through the knowledgebase, use this as the main
+reader path:
 
 1. [Problem, Pressure, and Goals](architecture/problem-and-goals.md)
 2. [Current Compose Runtime](architecture/current-compose-runtime.md)
@@ -182,7 +258,12 @@ If you want the shortest route through the knowledgebase:
 7. [Orchestration Options](architecture/orchestration-options.md)
 8. [DevOps Runbook](operations/devops-runbook.md)
 
-If you want the proof pressure underneath those pages:
+Use that path when the real question is:
+
+> what is the actual dream, what is already real, what still remains privately
+> held, and what would have to change before stronger language becomes honest?
+
+If you want the proof pressure underneath those pages, read:
 
 - [Evidence Ledger](research/evidence-ledger.md)
 - [Ingress and Failover Evidence](research/ingress-and-failover-evidence.md)
@@ -190,9 +271,15 @@ If you want the proof pressure underneath those pages:
 - [Orchestrator Tradeoffs Evidence](research/orchestrator-tradeoffs-evidence.md)
 - [Source Assimilation Index](operations/source-assimilation-index.md)
 
-If you want the navigation logic spelled out first:
+Use those when the real question is:
+
+> which claims are actually supported by runtime evidence and which are still
+> being socially completed by the operator?
+
+If you want the navigation logic and retrieval discipline first, read:
 
 - [Reading Paths](reading-paths.md)
+- [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
 
 ## What a good page in this site should leave behind
 
