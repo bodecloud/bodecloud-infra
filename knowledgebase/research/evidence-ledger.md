@@ -33,6 +33,10 @@ The danger is:
 - the confidence levels sound disciplined
 - the reader still walks away feeling more closure than the runtime earned
 
+That is why evidence grammar has to stay subordinate to burden truth.
+Better claim classification is good.
+It is not itself one more shared system-owned fact.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -119,6 +123,12 @@ instinct to say:
 Those are exactly the kinds of sentences that let the docs mature faster than
 the underlying truth moved.
 
+This ledger is here to keep that speed mismatch visible:
+
+- the site can get better at explanation quickly
+- the runtime may move much slower
+- the docs are only honest if they keep those clocks separate
+
 ## The four evidence classes
 
 Every serious claim in this knowledgebase should route through one of four
@@ -176,6 +186,11 @@ its oldest wounds:
 
 This ledger exists to break that chain.
 
+That anti-chain rule should be treated as a site-wide checksum.
+If a page points at live components but becomes less able to say which private
+completion step still survives, the page is probably laundering presence into
+premature maturity.
+
 ### Class 2: architecture-intent and honesty evidence
 
 Use for claims about what the repo explicitly wants to become and what honesty
@@ -219,6 +234,9 @@ That is one of the paradoxes this page has to preserve:
 the repo's clarity about the dream is a strength, but it is also one of the
 main ways the docs can accidentally overpay confidence.
 
+That is why intent pages should make the dream sharper, not make runtime
+claims easier.
+
 ### Class 3: planning and promotion evidence
 
 Use for claims about known gaps, proposed repairs, explicit capability holes,
@@ -257,6 +275,10 @@ That sentence matters because the planning layer often contains the most adult
 voice in the repo.
 Without a page like this, the future starts impersonating the present while
 still sounding perfectly responsible.
+
+That is one of the main social risks in this knowledgebase:
+the better the future is described, the easier it becomes to feel like the
+present is already partly vindicated.
 
 And "perfectly responsible" is not a defense here.
 

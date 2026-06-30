@@ -51,6 +51,10 @@ That sentence is more important than "Compose-first" as a slogan.
 If Compose stops being the least dishonest visible surface, this page should
 become one of the first places willing to say so.
 
+That exit-mindedness matters.
+Otherwise "Compose-first" becomes just another identity surface instead of a
+temporary truth-custody discipline.
+
 ## Strongest honest current answer
 
 Compose-first is still the least dishonest live authoring surface in the repo,
@@ -70,6 +74,12 @@ binary:
 
 This repo exists because that binary itself feels like evidence of missing
 options.
+
+That accusation should stay central:
+the user is not merely comparing tools.
+They are reacting to an ecosystem that keeps forcing a jump from legible but
+inadequate surfaces to larger hidden surfaces without proving there was no
+more honest middle step available.
 
 That should remain a live accusation, not just scene-setting.
 The user is not merely weighing two valid philosophies.
@@ -106,6 +116,10 @@ It can sound grounded, artisan, pragmatic, and clear while still leaving the
 same bad-day burden untouched.
 This page should stay hostile to that possibility.
 
+That is the anti-romantic rule for this whole page:
+Compose-first only survives while it remains the least dishonest place to see
+what the runtime really knows and does not know.
+
 That sentence protects against a subtle failure mode:
 Compose-first can sound pragmatic and grounded while still becoming just
 another ideology if it stops asking whether the bad-day intelligence has
@@ -133,6 +147,8 @@ The whole point is not to defend Compose culturally.
 The point is to defend the last surface that is still more honest than the
 larger answers surrounding it, and to stop defending it the moment that is no
 longer true.
+
+That is why this page should sound conditional, not loyal.
 
 This page has to be strict about that because "Compose-first" is exactly the
 kind of phrase that can start sounding adult, disciplined, and reasonable even

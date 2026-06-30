@@ -89,6 +89,11 @@ conclusion:
 
 This page exists to stop that jump.
 
+It exists because this repo is already past the stage where absence is the
+main problem.
+The danger now is partial presence being socially overread as one more burden
+having moved when it really has not.
+
 More bluntly:
 "look how much is already here" is one of the main ways the ecosystem keeps
 dressing up partial answers as if they had finally become believable options.
@@ -117,6 +122,11 @@ The user is not asking for more evidence that the stack is substantial.
 The stack is already substantial enough to feel insulting when the final truth
 still lives in private operator memory.
 
+That is why a runtime inventory in this repo has to do more than enumerate.
+It has to keep saying which part of the runtime is real, which part is merely
+adjacent to the dream, and which part still leaves the operator acting as the
+missing control plane.
+
 That is why partial presence is more dangerous here than simple absence.
 Absence tells the truth faster.
 Partial presence is how a stack starts sounding complete before it has actually
@@ -142,6 +152,9 @@ Today the operator may still need to know things like:
 
 That list is a more faithful summary of the user's complaint than "the stack is
 still maturing."
+
+It is also the shortest honest answer to what the runtime still expects one
+human to quietly finish for it.
 
 The user is not saying the runtime lacks machinery.
 They are saying too many decisive truths still need to be remembered,
@@ -181,6 +194,11 @@ There is a harsher way to say the same thing:
 inventory is where a complicated stack starts trying to cash out dignity it
 has not yet earned.
 This knowledgebase should stay suspicious of that move on purpose.
+
+The anti-slop question for every subsection on this page is therefore:
+
+> what exact truth did the runtime gain here, and what exact bad-day sentence
+> would the operator still have to privately complete anyway?
 
 ## The root file is still a major infrastructure surface
 
@@ -256,6 +274,11 @@ The repo is not begging to become serious.
 It is already surrounded by serious-sounding options.
 What it still lacks is an option that remains believable after wrong-node
 entry, backend loss, and stateful consequences stop being hypothetical.
+
+That distinction should stay central:
+the repo is already sophisticated enough to deserve serious language.
+It is still not allowed to spend that seriousness as if sophistication itself
+were a substitute for shared current truth.
 
 That is the real threshold.
 Not "does the stack resemble something platform-like?"

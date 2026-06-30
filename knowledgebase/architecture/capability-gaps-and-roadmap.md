@@ -90,6 +90,10 @@ cheating if it skipped ahead.
 The roadmap in this repo does not mainly exist to prioritize effort.
 It exists to prevent narrative overpayment.
 
+That is why a "good roadmap" here is not mainly one that feels strategic.
+It is one that keeps the docs from illegally spending confidence before the
+corresponding truth layer has moved.
+
 ## What still does not count as sequencing well
 
 This page needs to reject roadmap theater, not only feature theater.
@@ -212,6 +216,11 @@ themselves:
 - making docs calmer, cleaner, or more enterprise-sounding while the same weak
   runtime truths remain
 
+That last bullet matters more than it should in a normal repo.
+This project is now sophisticated enough that better planning language can
+start performing as if it were one more solved capability.
+This page has to keep blocking that move.
+
 That list exists because the user is explicitly frustrated by ecosystems that
 keep narrating partial machinery as if the burden has already moved.
 
@@ -253,6 +262,12 @@ The real dependency chain is:
 6. keep stateful classes under harsher rules than stateless HTTP
 
 If that chain breaks at step 1 or 2, later success claims are already suspect.
+
+That is why the order has to remain this strict even if later steps look more
+impressive, more modern, or more obviously demo-friendly.
+The repo is not optimizing for the flashiest next milestone.
+It is optimizing for the first milestone that actually removes one more hidden
+private completion step.
 
 ## What this roadmap is really protecting
 

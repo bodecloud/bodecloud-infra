@@ -130,6 +130,11 @@ It is missing a believable home for truths like:
 - current route-class meaning
 - current explanation for why the system chose local versus remote
 
+The layer is missing because those truths still have nowhere honest to live.
+Compose can expose a lot, but it does not natively own them.
+Heavier control planes may be able to own them, but the repo does not yet
+trust them by default to own the right ones in the right way.
+
 ## Strongest honest current answer
 
 The repo is looking for the smallest added layer that makes these truths
@@ -151,6 +156,11 @@ The repo already has:
 
 What it still does **not** have is one promoted layer that cleanly owns those
 truths across the priority implementation.
+
+That sentence should be read as the negative definition of the middle.
+The middle is not missing because the repo has not found enough tools.
+It is missing because the decisive truths still do not have a socially and
+technically believable home.
 
 That is why so many surrounding ideas still feel partial:
 
@@ -200,8 +210,9 @@ They still do not answer the only question that matters:
 If that answer is still vague, the repo has found more machinery, not the
 middle.
 
-And machinery abundance is one of the easiest false comforts in this whole
-project.
+And machinery abundance is exactly what this repo has learned to distrust.
+A larger pile of helpers can still leave the operator doing the same decisive
+translation step under a fancier vocabulary.
 
 The stack can become:
 
@@ -254,6 +265,10 @@ plain language:
 
 If a candidate layer does not materially change that daily feeling, then the
 repo should stay suspicious of it.
+
+That is the human-level proof standard the page should keep defending:
+if the operator's daily bad-day experience still feels privately completed,
+then the middle has not actually arrived yet.
 
 ## Why this layer is needed at all
 

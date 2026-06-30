@@ -85,6 +85,10 @@ This page exists to say no to that move.
 The operator's real complaint is that "basically" keeps cashing out into a
 moment where the system still needs private human explanation to stay honest.
 
+That is why maturity language has to stay lane-specific here.
+The repo is coherent enough that one strong-looking lane can start donating
+borrowed confidence to its weaker neighbors if the docs get lazy.
+
 That is the part most infrastructure writing keeps sanitizing away.
 The user is not merely annoyed by incompleteness.
 They are angry at how often incompleteness arrives wearing the costume of a
@@ -152,6 +156,9 @@ If the docs become too eager to celebrate "directionally close" surfaces, they
 start reproducing the exact thing the repo was created to push back on:
 respectable prose that still leaves the operator holding the last real answer.
 
+This page should therefore feel less like a platform scorecard and more like a
+map of where the hidden operator control plane is still alive.
+
 ## What still does not count as maturity
 
 This page needs a direct filter against maturity theater.
@@ -171,6 +178,12 @@ That phrase should be treated as literal gating logic, not just good rhetoric.
 If the burden did not shrink, the lane did not mature.
 It may have become more instrumented, more legible, or more platform-like.
 Those are different claims and should stay different.
+
+That difference is one of the hardest honesty rules in the whole site:
+
+- more platform-like is not the same as more system-owned
+- more system-owned is not the same as more trustworthy
+- more trustworthy in one lane is not the same as global maturity
 
 The repo has to keep repeating that because the surrounding ecosystem keeps
 selling a softer story:

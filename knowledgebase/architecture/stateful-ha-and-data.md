@@ -25,6 +25,11 @@ while skipping the only question that matters:
 
 That distinction is why this page has to stay blunt.
 
+Stateful pages are where otherwise good docs most easily become deceptive in
+this repo.
+The edge can keep looking adult while the authority model underneath remains
+social, singular, and privately repaired.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -122,6 +127,11 @@ The strongest honest reading of the current runtime is:
 - replication is not yet the default reality
 - client topology correctness is not yet a generally proved surface
 
+That is the shortest honest answer to why stateful language has to stay
+harsher here than ingress language.
+The repo can improve user-visible continuity earlier than it can improve data
+authority.
+
 That is visible in concrete ways:
 
 - MongoDB still binds data locally
@@ -174,6 +184,11 @@ Every serious stateful claim in this repo should answer all three:
 
 If any of those questions is still mainly answered by operator memory, then the
 system is still socially carrying part of the control plane.
+
+That is why stateful claims should be treated as the hardest anti-theater
+surface in the whole site.
+They are the place where "something still answers" and "the system still owns
+truth" diverge most violently.
 
 That is the phrase to keep in mind:
 
@@ -257,6 +272,11 @@ fake resilience language.
 
 A clearly described single-node authority model is more honest than a routed
 multi-node illusion that still depends on remembered rescue steps.
+
+That sentence should govern every future promotion discussion for data-bearing
+services.
+False distribution is worse than admitted singularity here because it trains
+the reader to trust continuity that still depends on private folklore.
 
 That is an especially important rule in this repo:
 
