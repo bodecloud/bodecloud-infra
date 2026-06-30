@@ -32,6 +32,16 @@ The user is not mainly frustrated by lack of names.
 The user is frustrated by being offered many names for paths that still do not
 answer the real wound.
 
+This page therefore has to do more than rank next steps.
+It has to stop the repo from repeating the broader ecosystem pattern:
+
+- rename the pain
+- package the pain differently
+- call the new package a serious option
+- leave the operator privately completing the architecture on the bad day
+
+If a path still ends there, then for this repo it is not a real option yet.
+
 ## What a useful decision page has to prevent
 
 The user’s real frustration is not lack of information.
@@ -67,6 +77,11 @@ still collapse back into:
 - one sacred ingress truth
 - one operator-only failure narrative
 
+That collapse is the main anti-benchmark for this whole page.
+If a recommendation changes tooling, controller shape, or platform vocabulary
+without changing the hidden truth the operator still has to carry, then the
+recommendation is mostly theater from the user's point of view.
+
 ## Read this page correctly
 
 This is not a product ranking.
@@ -95,6 +110,11 @@ It is:
 
 > what exact hidden burden is still not owned honestly enough by the current
 > layer, and what is the smallest promotion that would really own it?
+
+The key word is "really."
+This repo does not need more semi-answers that sound structurally different
+while preserving the same semantic gamble around wrong-node traffic, backend
+loss, or stateful authority.
 
 That question should be read together with the repo's strongest architecture
 intent surface:
@@ -136,6 +156,11 @@ The user is not refusing orchestration because orchestration is hard.
 The user is refusing premature worldview capture that renames the same old gap
 instead of closing it.
 
+That is why this page should feel biased against promotion theater.
+The user is not asking for the next step that sounds mature.
+The user is asking for the next step that makes the wrong-node and hidden-truth
+problem less true.
+
 ## The deepest decision rule
 
 The repo should not promote because a bigger tool exists.
@@ -156,6 +181,14 @@ That is the harshest and most useful decision rule in the repo:
 
 promote when the current layer is lying by omission, not when a shinier layer
 exists.
+
+There is a companion rule:
+
+do not preserve the current layer out of sentimentality either.
+
+If Compose-plus-helpers stops being the least dishonest surface and becomes a
+socially maintained pseudo-control-plane that only still sounds simpler, then
+"staying Compose-first" can become just as fake as premature platform capture.
 
 This can be phrased even more bluntly:
 
@@ -189,6 +222,13 @@ This is the path most aligned with the user's deepest request:
 not "never build a control plane,"
 but "build the smallest truth-owning layer that actually stops the fake-option
 cycle."
+
+That last clause has to stay sharp.
+If this path produces a placement file, a sync helper, a route generator, and a
+convergence checker, but the operator still has to mentally decide which one is
+the real truth on the bad day, then the path has not escaped the fake-option
+cycle.
+It has only organized it better.
 
 ### What this path must contain if it is going to stop being hand-wavy
 
@@ -242,6 +282,10 @@ This requirement is deliberately narrow because the user is tired of vague
 One route proven honestly is worth more in this repo than twenty abstract
 features that still leave the real path unexercised.
 
+That asymmetry matters here.
+A stack with more features is not ahead of the user's dream if the bad-day
+request path is still narratively stronger than operationally owned.
+
 ### What this path solves well
 
 - keeps Compose central
@@ -286,6 +330,12 @@ That is why this path is not merely "the conservative option."
 It is the path most likely to preserve explanatory fidelity while the repo
 still learns what the actual missing truth layer has to do.
 
+But staying here is only justified while the path is still getting more
+truthful.
+If the helper layer keeps growing while the same core questions still resolve
+to operator reconstruction, then this path stops being disciplined and starts
+being evasive.
+
 ## Path 2: infra-grade HA promotion for ingress or identity-critical pieces
 
 Use this path when:
@@ -317,6 +367,13 @@ domains when the real pain may still be much narrower:
 - keep first-hop truth alive
 - keep identity surfaces boring
 - stop one small critical layer from staying sacred
+
+The limit is important:
+removing a sacred first hop is not the same as removing sacred application
+truth.
+This path earns itself when the narrow pain is actually narrow.
+It becomes fake when its first-hop improvements get narrated as if the whole
+service surface became request-preserving.
 
 ### What this path solves well
 
@@ -357,6 +414,12 @@ The key phrase is “for some or all stateless services.”
 If this path starts being narrated as a universal answer to stateful truth,
 shared storage, and protocol-specific failover, the docs are drifting again.
 
+This path also fails if it gets promoted mainly because the helper mesh became
+embarrassing to explain.
+Embarrassment is not evidence.
+The scheduler should be promoted because it owns a named pain more honestly,
+not because the existing story became hard to narrate cleanly.
+
 ### What this path solves well
 
 - workload placement automation
@@ -391,6 +454,15 @@ Use this path only when:
 This path is not forbidden.
 It is just the highest-tax option in the repo’s universe.
 
+That tax is not only operational.
+It is also paid in:
+
+- lost directness
+- farther-away truth surfaces
+- more controller-shaped explanations
+- higher risk that the docs trust the platform story more than the bad-day
+  evidence
+
 ### What this path solves well
 
 - desired-state scheduling and reconciliation
@@ -421,6 +493,10 @@ This page should keep treating "clarity back" as the key requirement.
 If promotion makes the stack more fashionable but not more self-explaining,
 then the user has not actually gained an option.
 
+That sentence should be treated as a hard gate, not a nice side effect.
+The user's complaint is fundamentally about hidden truth and fake options, not
+about lack of ecosystem prestige.
+
 ## Path 5: service-class-specific stateful promotion
 
 Use this path when the real pain is not generic routing at all.
@@ -445,6 +521,11 @@ It is acceptable for:
 
 Uniformity is not the goal.
 Honest service-class-specific correctness is.
+
+This page should stay willing to look uneven if unevenness is the more honest
+state.
+The user wants a truthful map of what is real, weak, or still fictionalized,
+not a symmetrical platform story.
 
 This is one of the biggest places where generic platform language harms the
 repo.
@@ -547,6 +628,12 @@ too much manual compensation.
 If the helper layer becomes opaque, coordination-heavy, and difficult to audit,
 then the honest move may be to promote it into a named scheduler instead of
 pretending it is still somehow simpler because it has fewer logos.
+
+The inverse is also true.
+If a promoted platform still leaves the operator carrying the same private
+wrong-node, route-survival, or stateful-authority knowledge, then the platform
+has not actually earned its promotion in this repo even if it is powerful in
+general.
 
 That is another way of saying:
 
