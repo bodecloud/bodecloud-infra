@@ -77,6 +77,21 @@ It is also not a generic product-discovery page.
 It has to preserve why so many respectable answers still feel fake in this
 specific repo.
 
+It also cannot let "better dream reconstruction" impersonate relief.
+
+This repo now has enough language around the user's wound that a page can become
+excellent at explaining the insult while still leaving the insult fully alive.
+That kind of page is more useful than generic summary, but it is still not yet
+doing the whole job.
+
+The reader cannot be allowed to leave thinking:
+
+- now I finally understand the dream
+- therefore the repo must now have a believable path
+
+Those are different achievements.
+This page can only own the first one.
+
 ## What still does not count as understanding the dream
 
 The following still do not count as a serious reading of the user's demand:
@@ -121,6 +136,10 @@ They are being ranked by whether they relocate:
 If those truths still cash out into one person's memory, then the option may
 still be real engineering progress while remaining fake relief for this repo.
 
+That is also why this page has to stay suspicious of "comprehensive" summaries.
+Coverage is not the same thing as fidelity if the summary still calms the
+reader faster than it preserves the bad-day accusation.
+
 ## The shortest honest statement of the dream
 
 The user wants:
@@ -145,6 +164,12 @@ The dream is:
 That is the central demand.
 
 It is also the sentence most summaries are tempted to weaken.
+
+This page should treat that temptation as a live failure mode, not a style
+issue.
+The most common way to make this repo sound more mature than it is is to
+understand the dream well enough to paraphrase it into something more polite,
+more platform-shaped, and less humiliating.
 
 They usually weaken it into something like:
 
@@ -184,6 +209,11 @@ Relief in this repo would feel like:
 That is what shared truth buys here.
 It is not just cleaner architecture.
 It is less private embarrassment on the bad day.
+
+The sharper version is:
+the user is not asking mainly for nicer diagrams or even better defaults.
+The user is asking to stop being the final undocumented witness who makes the
+system's adult-sounding story come true by private recollection.
 
 ## What a real demand-reconstruction packet should leave behind
 

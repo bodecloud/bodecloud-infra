@@ -48,6 +48,19 @@ It has to stay that way because the repo is already coherent enough to tempt
 readers into thinking the remaining gap is mostly execution.
 That temptation is part of the problem.
 
+It also cannot become a page where diagnosis quality starts impersonating
+solution quality.
+
+This repo already has enough serious language that the problem statement itself
+can start behaving like one more fake comfort surface:
+
+- the benchmark is sharp
+- the gaps are named
+- the goals are legible
+- therefore the missing part must be mostly implementation effort
+
+That is exactly the downgrade this page has to block.
+
 It is not just a reading mistake.
 It is one of the main ways the repo's own sophistication can start betraying
 the user:
@@ -205,6 +218,12 @@ If the page ever gets better organized by weakening that sentence into
 then the docs have become
 cleaner and less faithful at the same time.
 
+The same thing happens if the page becomes more comprehensive while quietly
+making the wound feel more procedural than humiliating.
+The user is not merely reporting friction.
+The user is reporting that many grown-up-looking answers still collapse back
+into private operator completion the moment the request path becomes real.
+
 ## What the user is actually trying to make impossible
 
 The dream is easier to understand if stated as anti-goals.
@@ -267,6 +286,10 @@ A faithful reconstruction has to preserve:
 - the technical missing truths
 - the emotional reason those missing truths still feel insulting
 - the fact that many nearby answers fail by sounding complete one layer too soon
+
+It also has to preserve the asymmetry between understanding and escape.
+This page can understand the problem very well and the repo can still be far
+from one option that has earned the right to feel believable.
 
 That balance is one of the central duties of the whole knowledgebase.
 

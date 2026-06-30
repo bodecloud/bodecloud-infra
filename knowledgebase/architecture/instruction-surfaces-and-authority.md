@@ -112,6 +112,21 @@ Coherence is useful here.
 Coherence is also one of the easiest ways to smuggle in confidence the live
 system has not paid for yet.
 
+It is also not allowed to become a page where better source routing feels like
+one more removed burden.
+
+This repo needs authority mapping because truth custody matters.
+But better truth custody in the docs is still not the same as the runtime owning
+more truth under wrong-node entry or backend loss.
+
+If the reader leaves thinking:
+
+- now I know which files say what
+- therefore the repo is finally much closer to being solved
+
+then this page has accidentally converted documentation hygiene into fake
+platform maturity.
+
 ## Strongest honest current answer
 
 The shortest honest answer is:
@@ -153,6 +168,11 @@ knowledgebase.
 The repo now has enough aligned language that coherence itself can start
 performing as counterfeit proof.
 This page has to keep breaking that spell.
+
+The sharper version is that the docs can now sound assimilated before the
+runtime is trustworthy.
+That is progress in one dimension and danger in another.
+This page has to keep those dimensions from being mistaken for each other.
 
 If a contributor comes away thinking "they all basically say the same thing,"
 then this page has failed.
@@ -275,6 +295,10 @@ voice.
 And a merged voice is exactly what becomes dangerous here.
 The more unified the repo sounds, the easier it becomes to spend emotional
 confidence that only a live runtime should be allowed to spend.
+
+This page should therefore remain a little annoying.
+If authority boundaries start feeling obvious enough to skip, the reader is
+already close to borrowing confidence from alignment instead of from proof.
 
 The packet is especially important because this repo now has enough strong
 language that a reader can accidentally become more convinced by cross-file

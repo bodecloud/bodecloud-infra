@@ -92,6 +92,20 @@ The user has already seen too many ecosystem answers that become smaller the
 moment they are forced to speak in terms of actual burden transfer instead of
 general platform capability.
 
+It also cannot let better option analysis impersonate a real option.
+
+This repo is now sophisticated enough that an orchestration page can become
+excellent at judging platforms while still leaving the user with the same
+practical answer they were already furious about:
+
+- several families are respectable
+- several promotion packets are imaginable
+- several candidates are narratable
+- but the bad-day burden still cashes out into private human truth
+
+That is not useless progress.
+It is also not yet relief.
+
 That disappointment has to stay present in the prose.
 If the page becomes too balanced, too fair, or too market-literate, it will
 start helping those smaller answers feel complete again.
@@ -142,6 +156,11 @@ families.
 The ecosystem already knows how to defend them.
 What the repo needs is a page willing to ask what exact humiliation they still
 leave behind after all their architecture dignity is in place.
+
+It also needs a page willing to say that excellent comparison work is still not
+the same thing as the repo finally having more believable choices.
+The user is not short on product literacy.
+The user is short on options that stop collapsing into private explanation.
 
 ## Quick claim router
 
@@ -242,6 +261,11 @@ If the option cannot say what it would make the wrong node know on its own,
 what it would make fallback less private, or what it would make stateful
 authority less social, then it is still only half-present as an option here.
 
+The same standard has to apply to this page's own prose.
+If the page mainly makes the candidates feel more intelligible, more balanced,
+or more mature without making at least one candidate more earned in repo terms,
+then it has improved comparison quality rather than option quality.
+
 That benchmark should stay insulting on purpose.
 The whole point is that many layers sound impressive until the user asks the
 question they keep getting punished for asking:
@@ -302,6 +326,11 @@ failures in the world: confusing recommendation with evidence.
 The user does not need another persuasive walk through the product landscape.
 The user needs one reason to believe a new layer earned the right to exist in
 their life specifically.
+
+That is why this page cannot be satisfied by good analysis alone.
+It has to keep producing disappointment until one candidate can point to a
+transferred bad-day sentence, a visible truth-owning artifact, and a drill that
+proves the operator truly got out of that exact loop.
 
 ## The shortest honest answer
 
