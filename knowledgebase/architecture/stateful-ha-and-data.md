@@ -61,6 +61,23 @@ Those things may improve:
 
 They do not, by themselves, produce stateful HA.
 
+## What still does not count as stateful progress
+
+Because stateful language gets abused so easily, this page needs an explicit
+false-progress filter.
+
+The repo has **not** made meaningful stateful HA progress merely because:
+
+- the same hostname still resolves
+- a TCP proxy path still answers
+- a standby container can start
+- a bind mount exists on another machine
+- a service can be redeployed elsewhere eventually
+- a liveness check still passes after the original node dies
+
+Those may all improve operator confidence or demo smoothness.
+They are still weaker than proving preserved authority.
+
 Real stateful HA requires some combination of:
 
 - replicated data across failure domains
@@ -241,6 +258,14 @@ fake resilience language.
 A clearly described single-node authority model is more honest than a routed
 multi-node illusion that still depends on remembered rescue steps.
 
+That is an especially important rule in this repo:
+
+- explicit single-writer truth is a valid honest state
+- fake "multi-node enough" wording is not
+
+If the platform has not yet earned replicated authority, the docs should say so
+plainly.
+
 ## What would count as real progress here
 
 Real progress in this layer would look like:
@@ -258,6 +283,26 @@ Until then, the repo should keep saying:
 
 That unevenness is not a docs flaw here.
 Pretending it has already been smoothed away would be the flaw.
+
+## What a real stateful proof packet would need
+
+For this repo, a serious stateful claim should eventually be backed by a proof
+packet that includes:
+
+- the named service class and concrete service
+- the current authority model before failure
+- the failure being tested
+- the promotion, election, or single-writer outcome after failure
+- the client rediscovery or reconnect behavior
+- the storage truth that makes the post-failure authority trustworthy
+- the explicit limits on what was **not** proven
+
+Without those elements, "stateful progress" is too easy to confuse with:
+
+- routed reachability
+- successful restart
+- or operator-guided rescue that still leaves the human as the missing
+  algorithm
 
 ## Strongest honest current answer
 

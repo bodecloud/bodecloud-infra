@@ -131,6 +131,27 @@ Too much infrastructure advice effectively says:
 This repo exists because the user does not accept that as the only adult
 decision surface.
 
+## What still does not count as an orchestration decision here
+
+This repo has seen enough platform gravity that it needs a harder false-choice
+filter.
+
+The following still do **not** count as having made the orchestration decision:
+
+- proving that a candidate can boot
+- proving that a candidate can schedule something
+- proving that a candidate has richer health semantics on paper
+- proving that a candidate has an ecosystem around ingress, storage, or rollout
+- proving that a candidate feels more "serious" than helper glue
+
+Those facts may all be relevant.
+They still do not answer the only question that matters here:
+
+> which hidden burden would stop living in the operator after this layer was
+> promoted?
+
+If the answer is still mushy, the candidate is still mostly prestige pressure.
+
 ## The candidate families the repo is actually circling
 
 The repo is not comparing infinite possibilities.
@@ -276,6 +297,33 @@ or more of these burdens materially and inspectably:
 If a candidate mostly helps one of those while worsening several others, it has
 not earned default promotion yet.
 
+## What promotion evidence would actually look like
+
+For this repo, a candidate layer earns promotion only when the docs can point
+to a proof packet instead of a persuasive comparison.
+
+That proof packet should eventually include things like:
+
+- the named burden the candidate was supposed to remove
+- the exact route, service class, or coordination domain where that burden was
+  tested
+- the shared truth surface the candidate now owns
+- the failure or wrong-node condition that was exercised
+- the post-failure or post-handoff result
+- the explicit limits on what broader classes were **not** proven yet
+
+Examples:
+
+- if the candidate claims better placement truth, show the placement surface it
+  owns and how runtime decisions consume it
+- if it claims better peer eligibility, show why the chosen peer was valid and
+  why another was not
+- if it claims stateful progress, show authority, promotion, and client
+  rediscovery truth rather than only route continuity
+
+Without that structure, this page is too easy to overread as "the repo is
+getting warmer toward product X."
+
 ## Why the archive makes this page harsher
 
 This page has to stay harsher than a normal architecture-options page because
@@ -293,6 +341,14 @@ They are trying to avoid bad complexity:
 - complexity that steals legibility
 - complexity that relocates rather than removes burden
 - complexity that sounds safer than it really is
+
+That is also why this page must keep a visible distinction between:
+
+- a candidate that owns more truth
+- and a candidate that merely owns more machinery
+
+The first might deserve promotion.
+The second only deserves caution.
 
 ## Bottom line
 
