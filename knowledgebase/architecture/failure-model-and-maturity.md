@@ -1,457 +1,192 @@
 # Failure Model and Maturity Matrix
 
-This page is the anti-theater page for the priority implementation rooted at
+This page is the lane-by-lane maturity map for the priority implementation
+rooted at
 [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml).
 
-It exists to answer the harder question behind almost every architecture
-discussion in this repo:
+It is not asking "how impressive is the stack?"
+It is asking:
 
-> what actually breaks today, what truth is materially live, what is still
-> carried by the operator, and what exact proof would be required before
-> stronger maturity language stops being a lie?
+> when the good path breaks, which truths are already system-owned, which still
+> fall back into private operator custody, and what exact proof would move one
+> more lane out of that private space?
 
-That is the real maturity problem in `bolabaden-infra`.
-
-It is not mainly a problem of "how far along is the stack?"
-It is a problem of how often the ecosystem still offers something that sounds
-like maturity while leaving the most important explanation trapped in private
-operator memory.
-
-That is why ordinary maturity language is not enough here.
-Ordinary maturity pages assume the reader mainly wants orientation.
-This reader wants to know which parts of the system have actually stopped
-making them be the private adult in the room.
-
-That means a better maturity model is not itself maturity.
-A clearer lane map is not one more solved lane.
-A sharper failure taxonomy is not one more trustworthy option.
-This page has to keep resisting the comforting thought that the hard part is
-now mostly sequencing because the repo can finally explain the pain well.
-
-That is the hidden insult this page has to keep visible:
-
-- the user is not short on technologies
-- the user is not short on respectable diagrams
-- the user is not short on architecture language
-- the user is short on options that stop collapsing into "you still have to
-  know what is really true when the bad day arrives"
-
-The repo does not mature as one calm platform.
-It matures as several uneven truth lanes:
-
-- public entry
-- local edge execution
-- locality and placement truth
-- peer eligibility
-- route persistence
-- protected-route continuity
-- service-class-specific recovery
-- stateful ownership and promotion
-
-If those are compressed into one comfort level, the docs become flatter than
-the worktree.
-They also become kinder than the evidence.
+That is the maturity question that matters in this repo.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
-- which failure domains define the real maturity problem
-- how unevenly those domains are currently maturing
-- which hidden operator burdens are still part of the live failure model
-- what the next honest maturity step is for each domain
+- the real failure lanes the repo is trying to mature
+- what the current worktree materially proves in each lane
+- which hidden operator burden still survives in each lane
+- what next proof would justify stronger language
 
 This page is not authoritative about:
 
-- whether one named route has already passed its harder drills
-- whether a future control-plane direction has already earned promotion
-- whether one partial gain upgrades the whole stack
+- a global maturity score
+- future controller choices being already justified
+- one lane silently upgrading another
+- "directionally close" being good enough
 
 ## Strongest honest current answer
 
-The strongest honest current answer is that the repo has outgrown "toy stack"
-status but has not yet crossed into "request-preserving platform" status.
-The current implementation proves a serious Compose-first infrastructure
-surface, real ingress machinery, real auth and observability layers, and clear
-architectural intent.
-It does not yet prove that wrong-node traffic, backend loss,
-protected-route parity, or stateful ownership have become system-owned truths
-rather than better-documented operator burdens.
+The repo has a serious Compose-first runtime and a serious anti-SPOF dream.
+It does not yet have one platform-wide proof that the system owns wrong-node
+truth, backend-loss truth, protected-route continuity, and stateful authority.
 
-That distinction matters because many ecosystems would already start speaking
-as if this were the final stretch:
+So the only honest maturity model is lane-specific.
 
-- ingress exists
-- Cloudflare is involved
-- more than one node matters
-- helpers are appearing
-- therefore the platform is "basically" maturing into HA
+The current worktree is:
 
-This page exists to say no to that move.
-The operator's real complaint is that "basically" keeps cashing out into a
-moment where the system still needs private human explanation to stay honest.
+- beyond toy-stack status
+- beyond single-proxy simplification
+- still below "request-preserving personal cloud" status
 
-That is why maturity language has to stay lane-specific here.
-The repo is coherent enough that one strong-looking lane can start donating
-borrowed confidence to its weaker neighbors if the docs get lazy.
+That is why this page separates lanes instead of flattening them.
 
-That risk grows as the docs improve.
-The site can now explain the uneven lanes well enough that a reader may start
-feeling like the hard part is mostly classification and sequencing, when the
-runtime may still be leaving the same decisive completion step in the
-operator's head.
+## How maturity is measured here
 
-This page has to keep interrupting that feeling.
+A lane matures only when one fewer private reconstruction step is required from
+the operator on the bad day.
 
-That interruption has to apply to the documentation surface too.
-If a reader walks away thinking "at least the repo now really understands the
-maturity problem, so the rest is mostly execution," then this page has become
-too calming.
-Understanding the maturity problem matters.
-It is still not a maturity promotion.
+That means:
 
-That is one of the main remaining traps on this page:
+- more services does not equal more maturity
+- more labels does not equal more maturity
+- a better explanation does not equal more maturity
+- a stronger local route does not equal more maturity elsewhere
 
-- the lanes are separated more clearly
-- the maturity words are used more honestly
-- the hidden operator burden is described more faithfully
-- the next proofs are easier to name
+The hidden test is simple:
 
-and therefore the stack can start feeling broadly more mature already.
+> after calling this lane more mature, what exact sentence does the operator no
+> longer need to finish privately?
 
-No.
-The docs may only have become better at refusing counterfeit maturity.
-That is important.
-It still is not the same thing as one more lane becoming system-owned under
-pressure.
+If the answer is "none," then the lane may be better documented or more
+instrumented, but it is not more mature in the sense this repo cares about.
 
-That is the part most infrastructure writing keeps sanitizing away.
-The user is not merely annoyed by incompleteness.
-They are angry at how often incompleteness arrives wearing the costume of a
-nearly finished option.
-
-## How to read maturity in this repo
-
-A maturity label here does not mean "how many components exist."
-It means:
-
-- what the system itself currently owns
-- what the operator still has to reconstruct
-- what the docs must not quietly credit to the system yet
-
-That makes the hidden metric very simple:
-
-> how much human reconstruction is still required before the feature behaves
-> honestly on the bad day?
-
-If the answer is "a lot," the feature is still immature here even if the stack
-already looks sophisticated.
-
-Another way to say the same thing:
-the lane matures only when one fewer private translation step is required from
-the operator at the exact moment the nice diagram stops being enough.
-
-That means "better understanding the lane" and "the lane matured" have to stay
-separate achievements.
-If the explanation got clearer while the private translation step stayed
-intact, then the docs improved and the lane did not.
-
-That is why this page should feel harsher than normal maturity language.
-In many projects, maturity means polish, breadth, or adoption.
-Here, maturity means the system has stopped humiliating the operator by
-revealing too late that the operator was still the real keeper of placement,
-eligibility, fallback, or stateful truth.
-
-## Maturity levels used on this page
-
-Use these labels narrowly.
+## Maturity labels
 
 ### `Intent-shaped`
 
-The repo has named the target clearly, but current runtime proof is weak or
-absent.
+The lane is clearly named in the docs and architecture dream, but the current
+runtime does not yet prove the behavior.
 
 ### `Runtime-shaped`
 
-Real components are live and the current stack visibly leans in that direction,
-but the system still depends on hidden interpretation or unproved joins.
+Real components are live and relevant, but the lane still depends on hidden
+operator interpretation or missing joins.
 
 ### `Partial proof`
 
-Some narrower evidence exists or the failure shape is clearly isolated, but the
-important next ceiling remains open.
+Some meaningful evidence or known failure isolation exists, but the decisive
+burden transfer is still incomplete.
 
 ### `Trustworthy for this lane`
 
-Not a global victory. It means this exact lane has enough specific proof that
-the docs can speak more strongly about it.
+This exact lane has enough narrow proof that the docs can speak more strongly
+without borrowing confidence from neighboring lanes.
 
-At the moment, most important lanes are still below that last level.
+Most important lanes are still below that last level.
 
-That is not failure of documentation.
-It is the documentation refusing to pretend that naming the missing truths is
-the same thing as system-owning them.
+## Lane proof packet standard
 
-That refusal is part of the architecture discipline here.
-If the docs become too eager to celebrate "directionally close" surfaces, they
-start reproducing the exact thing the repo was created to push back on:
-respectable prose that still leaves the operator holding the last real answer.
+Before any lane gets upgraded, the docs should be able to point to a packet
+containing:
 
-This page should therefore feel less like a platform scorecard and more like a
-map of where the hidden operator control plane is still alive.
-
-## What still does not count as maturity
-
-This page needs a direct filter against maturity theater.
-
-The following still do not count as a lane becoming materially more mature:
-
-- more labels, helper names, or route objects exist
-- more nodes can be named in the docs
-- a route works on the preferred node
-- a failure story sounds more plausible
-- one lane got sharper while another lane was silently upgraded with it
-- the reader now feels more oriented about why the lane is hard
-- the docs can now narrate the failure boundary more elegantly
-
-In this repo, maturity only moves when a hidden reconstruction burden actually
-shrinks.
-
-That phrase should be treated as literal gating logic, not just good rhetoric.
-If the burden did not shrink, the lane did not mature.
-It may have become more instrumented, more legible, or more platform-like.
-Those are different claims and should stay different.
-
-That difference is one of the hardest honesty rules in the whole site:
-
-- more platform-like is not the same as more system-owned
-- more system-owned is not the same as more trustworthy
-- more trustworthy in one lane is not the same as global maturity
-
-Add one more boundary explicitly:
-
-- better maturity honesty is not lane maturity
-
-That distinction matters because this repo is now capable of producing better
-honesty faster than it can produce better runtime ownership.
-The first gain should not be allowed to impersonate the second.
-
-The repo has to keep repeating that because the surrounding ecosystem keeps
-selling a softer story:
-
-- a bigger stack feels more mature
-- more nodes feel more mature
-- a cleverer edge layer feels more mature
-- a more famous platform feels more mature
-
-All of that may be directionally useful.
-None of it answers the user's actual benchmark unless one more explanation
-stops needing to live in the operator's head.
-
-That also means this page has to police its own success.
-It can become:
-
-- easier to audit
-- easier to compare across lanes
-- easier to summarize
-- easier to RAG against
-
-without any lane becoming materially more trustworthy.
-If that happens, the maturity model improved while the maturity state did not.
-This page has to keep those two gains separated on purpose.
-
-## The private completion test for each maturity lane
-
-Every lane on this page should also survive one direct test:
-
-after calling the lane more mature, what exact sentence does the operator no
-longer need to finish privately?
-
-Examples:
-
-- "yes, but I still know which node really has this route"
-- "yes, but I still know which peer is actually safe for this handoff"
-- "yes, but I still know the fallback route disappears if that backend dies"
-- "yes, but I still know this stateful surface still has one sacred owner"
-- "yes, but I still know which policy-bearing route is only cosmetically
-  transferable and which one is actually semantically safe"
-
-If the lane still leaves one of those sentences mostly intact, then the lane
-may be better instrumented, better documented, or more impressive-looking, but
-it is not yet mature in the sense this repo actually cares about.
-
-That matters because ordinary maturity talk keeps rewarding exactly the wrong
-signals here:
-
-- more machinery
-- more polish
-- more vocabulary
-- less honest pressure on the final private completion step
-
-This page exists to keep that substitution illegal.
-
-## What a lane-specific maturity proof packet would have to contain
-
-Before any lane graduates to stronger wording, the docs should be able to
-point to a packet that contains:
-
-- the exact lane being upgraded
+- the lane being upgraded
 - the previous hidden operator burden
 - the new system-owned truth or artifact
-- the failure condition or comparison that was exercised
-- the boundary sentence naming what the lane still does not prove
+- the exercised failure condition or comparison
+- the stronger sentence now allowed
+- the sentence that remains forbidden
 
-Without that packet, "more mature now" is still mostly atmosphere.
-
-Atmosphere is not neutral here.
-Atmosphere is how people get sold on options that still betray them under the
-first serious routing or failover question.
-
-That packet requirement is deliberately stricter than ordinary docs practice.
-The user is already surrounded by explanations that sound plausible before the
-failure drill and feel evasive after it.
-This repo cannot afford to become another source of the same tone.
+Without that packet, maturity is still mostly atmosphere.
 
 ## The matrix
 
-| Domain | What the current worktree materially proves | Current maturity | Hidden operator burden still present | Next honest maturity step |
+| Lane | What the current worktree materially proves | Current maturity | Hidden operator burden still present | Next honest maturity step |
 | --- | --- | --- | --- | --- |
-| Public node-entry reachability | The repo explicitly targets any-node entry; `cloudflare-ddns` is live in the edge stack; multi-node entry is a first-class idea in `.github/copilot-instructions.md` and `README.md` | Runtime-shaped | Public plurality is not the same thing as preserved request meaning; current DDNS behavior is still recorded as a real limitation in the master plan | Prove multiple public nodes can receive traffic without narrating that as end-to-end failover |
-| Local edge execution | Traefik, TinyAuth, Nginx auth extensions, CrowdSec, file-provider config, and healthchecks are materially live | Runtime-shaped | Local edge health can still be mistaken for cross-node truth; auth and middleware continuity across peer handoff remain unproved | Prove one protected route locally with the exact policy surface visible |
-| Placement and locality truth | The docs repeatedly converge on `services.yaml` as the needed current-state registry, but the priority runtime does not yet prove a live consumed root registry | Intent-shaped | The operator still remains the safest source of "what runs where right now?" | Introduce or expose one live placement-truth surface consumed by routing or eligibility logic |
-| Peer eligibility truth | Headscale is materially live; peer communication is not purely hypothetical; the master plan names sync-agent and peer broadcast directions | Intent-shaped | Reachability can still be confused with correctness; the system does not yet visibly own "which peer is valid now?" | Prove one peer-selection decision is based on current tracked truth rather than folklore |
-| Fallback-route persistence | `docker-gen-failover` exists, but the master plan explicitly records that the current model can delete routes when a container stops | Partial proof | The fallback surface is still vulnerable to disappearing at the exact moment it is needed | Replace or harden route generation, then exercise backend-loss drills |
-| Protected-route semantic continuity | The edge stack already includes TinyAuth, Nginx auth middleware, CrowdSec, and Traefik middleware surfaces | Runtime-shaped | A forwarded request may not yet behave like the same service from the user's perspective | Compare local versus peer-forwarded behavior for one protected route and prove auth plus middleware parity |
-| Stateless HTTP wrong-node success | The dream is explicit and the runtime is mature enough to make this a real near-term target, but no generic wrong-node proof is claimed | Intent-shaped | Wrong-node success still feels like a hope rather than a property | Prove one named stateless HTTP route through intentional wrong-node entry |
-| Backend-loss fallback for HTTP | The docs already isolate this as distinct from wrong-node reachability and record the known route-persistence bug | Intent-shaped | A route that answers happily today may still disappear or semantically degrade during real loss | Stop the local backend and prove whether the peer-forward path survives with the same user-visible contract |
-| TCP forwarding | The root graph already routes at least some TCP traffic such as MongoDB through Traefik TCP labels | Runtime-shaped | Transport reachability may be overread as service resilience | Define proof separately for transport success, client behavior, and ownership semantics |
-| Headscale control plane | Headscale is materially live, public, and exposed through Traefik; the master plan is blunt that it remains effectively singleton today | Runtime-shaped | The mesh still depends on one active control-plane owner and SQLite-backed state | Prove leader election and data continuity only after a real HA path exists |
-| Stateful databases and queues | Stateful surfaces exist in the root graph or surrounding plans, but the docs already reject branding them as HA by adjacency | Intent-shaped | Storage ownership, replication, promotion, reconnect semantics, and disk truth are still the real failure domain | Per service class, define write authority, replica semantics, failover sequence, and recovery proof |
-| Convergence and drift control | The master plan clearly names secret sync, compose sync, and node-alignment pressure | Intent-shaped | A forwarded request may still land in semantically different runtime because node revisions or secrets differ | Expose a drift-detection surface and prove nodes agree on the inputs that matter for peer fallback |
+| Public node-entry reachability | The architecture dream explicitly targets any-node first hop; `cloudflare-ddns` is live; first-hop plurality is a first-class design pressure in `.github/copilot-instructions.md` | Runtime-shaped | The operator still cannot treat first-hop plurality as preserved service meaning | Show traffic arriving at more than one public node without upgrading that to wrong-node success |
+| Local edge execution | The edge stack is real: `traefik`, `tinyauth`, `nginx-traefik-extensions`, `crowdsec`, routers, middlewares, healthchecks, local app routes | Runtime-shaped | Local success can still be mistaken for cross-node truth ownership | Prove one named local route with its real policy stack visible end to end |
+| Placement and locality truth | The docs repeatedly converge on a `services.yaml`-like registry, but the priority runtime does not yet prove a live consumed root registry | Intent-shaped | "What runs where right now?" is still most safely answered from private memory | Introduce one tracked placement-truth surface visibly consumed by routing or eligibility logic |
+| Peer eligibility truth | Headscale is live, private reachability is not hypothetical, and research surfaces name sync and peer-broadcast pressure | Intent-shaped | Reachable is not the same as semantically safe; the receiving node still lacks a proven shared answer to "which peer is valid now?" | Demonstrate one peer-selection decision from shared current truth rather than folklore |
+| Fallback-route persistence | `docker-gen-failover` exists and the repo already records that it can delete routes when a backend dies | Partial proof | The rescue path can still disappear during the exact failure it is meant to absorb | Harden or replace route generation, then re-run a backend-loss drill |
+| Protected-route continuity | TinyAuth, Nginx forward-auth extensions, CrowdSec, and Traefik middleware surfaces are all live | Runtime-shaped | A forwarded route may still not mean the same protected service after handoff | Compare one protected route locally and through peer-forward path, preserving auth and middleware behavior |
+| Stateless HTTP wrong-node success | The target contract is explicit and there are suitable live HTTP surfaces such as `whoami`, `wishlist`, and `code-server` | Intent-shaped | Wrong-node success is still a hope, not a proven property | Force one request onto the wrong healthy node and show correct completion |
+| Backend-loss HTTP survival | The repo already distinguishes this from wrong-node rescue and already documents the route-deletion trap | Intent-shaped | Even a good wrong-node story may still collapse when the preferred backend disappears | Stop the preferred backend and prove whether the rescue path survives with the same visible contract |
+| TCP forwarding | The root runtime already exposes TCP routes such as `mongodb` and `redis` through Traefik TCP | Runtime-shaped | Transport reachability is easy to overread as stateful resilience | Split proof into transport success, client behavior, and authority semantics |
+| Headscale control-plane resilience | Headscale is live and important, but active config still uses SQLite at `/var/lib/headscale/db.sqlite` | Runtime-shaped | The mesh still depends on a singular state authority | Only speak of HA after a real authority transition path exists |
+| Stateful databases and queues | Root `mongodb`, root `redis`, Firecrawl `nuq-postgres` and `rabbitmq`, and `litellm-postgres` are all real current dependencies | Intent-shaped | Write authority, replication, promotion, reconnect, and disk truth remain singular or undefined | Per service class, define authority, promotion, failover, and rediscovery semantics |
+| Convergence and drift control | Research and plans clearly name secret sync, compose sync, and node-alignment pressure | Intent-shaped | A forwarded request may still land on a semantically different node revision or secret surface | Expose drift detection and prove nodes agree on the truth peer-forward decisions depend on |
 
 ## The lanes most likely to be overclaimed
 
-Three lanes are especially vulnerable to documentation inflation.
+### Public entry
 
-### 1. Public entry
+Plural DNS and multiple public nodes are real gains.
+They are still only first-hop gains until the receiving node can preserve
+service meaning.
 
-This is the easiest place to overclaim because multi-A records and multiple
-reachable nodes feel emotionally satisfying. They are still only the first hop.
+### Traefik-centered ingress
 
-### 2. Traefik-centered ingress
+Traefik is a strong execution surface.
+That makes it easy to overcredit.
+It executes routing well; it does not by itself create distributed truth.
 
-Traefik is one of the strongest real components in the whole stack. That is
-exactly why it is dangerous to overread it. A strong local routing surface can
-make cross-node gaps feel smaller than they are.
+### Stateful services
 
-### 3. Stateful services
-
-These are where the ecosystem most often cheats. Reachability, TCP forwarding,
-or even container restart behavior do not settle ownership, replication,
-promotion, or reconnect truth.
-
-There is a deeper reason these three lanes are so easy to lie about:
-
-- they each produce a visible success signal early
-- that visible signal feels like relief
-- readers want relief
-- then the hidden burden remains untouched underneath the relief
-
-This page has to be strong enough to interrupt that emotional shortcut.
-
-That shortcut matters because many surfaces in this repo already look mature
-enough to a casual reader.
-The risk is no longer that the system looks too primitive.
-The risk is that it looks adult enough to be overcredited before the
-wrong-node and backend-loss drills have actually transferred ownership of the
-hard truth.
+This is where most infra stacks cheat hardest.
+Reachability, clean TCP exposure, and container restart behavior do not answer
+ownership or promotion.
 
 ## What "more mature than before" is allowed to mean
 
-The docs may say a lane has become more mature only if the relevant hidden
-operator burden has actually shrunk.
+The docs may use stronger maturity language only when one of these becomes
+true:
 
-Examples of honest maturity improvements:
+- current placement truth is externalized from private memory
+- the receiving node can justify peer choice from shared current truth
+- the fallback route survives the exact failure that used to delete it
+- a protected forwarded route demonstrably preserves the same policy meaning
+- a stateful surface gains explicit authority and promotion semantics
 
-- the system exposes current placement truth instead of requiring remembered
-  placement
-- the receiving node can choose a peer from shared current truth rather than
-  from static folklore
-- fallback routes survive the exact failure that used to delete them
-- local and peer-forwarded protected behavior have been compared and shown to
-  preserve the same visible contract
+The docs must not upgrade maturity language because:
 
-Examples of dishonest maturity upgrades:
-
-- more components exist
-- more labels exist
-- more plans exist
-- a route works locally
+- the stack looks larger
+- the prose sounds clearer
 - a happy-path `200` happened
+- a controller idea sounds more serious
 
 ## The current failure model in plain English
 
-Today the stack can still fail in ways that feel especially offensive to the
-user:
+Today the platform can still fail in ways that directly offend the user's
+benchmark:
 
-- traffic may reach a healthy node without that node having trustworthy shared
-  truth about where the service should really go
-- a fallback-looking helper may still lose the route during the failure it was
-  meant to absorb
-- a protected route may still answer differently after handoff even if the
+- traffic can land on a healthy node that still lacks trustworthy shared
+  placement truth
+- a rescue mechanism can be present and still disappear during the relevant
+  failure
+- a protected route can still answer differently after handoff even when the
   response code stays green
-- stateful surfaces may still be described more confidently than their storage
-  and promotion model deserves
-- the operator may still be the safest place where the important topology truth
-  lives
+- TCP reachability can still be mistaken for stateful dignity
+- the operator can still remain the safest keeper of topology truth
 
-That last point is the anti-SPOF reading that matters most here.
+That last item is the real anti-SPOF reading.
 
 ## What would materially change the maturity story
 
-The smallest meaningful maturity jump is not "pick Kubernetes" or "add another
-proxy." It is:
+The smallest meaningful maturity sequence is:
 
-1. move current placement truth out of private memory
-2. prove one real stateless wrong-node HTTP path
+1. move present-tense placement truth out of private memory
+2. prove one stateless wrong-node HTTP route
 3. prove whether the same route survives backend loss
 4. compare protected-route continuity across that handoff
-5. only then promote stronger language for the HTTP lane
-6. keep TCP and stateful lanes on their own harsher timelines
+5. only then promote stronger HTTP-lane language
+6. keep TCP and stateful lanes on their own harsher proof tracks
 
-Until those things happen, the mature thing to say is not "the stack is mostly
-resilient now."
+Until then, the honest sentence is:
 
-The mature thing to say is:
-
-> the stack is getting better at naming the right problems and has real
-> machinery around them, but the most important truths are still maturing as
-> separate lanes rather than one platform-wide victory.
-
-That sentence is intentionally unsatisfying.
-It should be unsatisfying.
-The whole point of the repo is that the available options keep sounding more
-satisfying than they deserve.
-
-## The most dangerous false upgrade
-
-The easiest false upgrade in this repo is:
-
-> one HTTP lane got clearer, therefore the platform is now broadly HA-shaped
-
-That sentence is still wrong here.
-
-Even if one protected or stateless HTTP path becomes trustworthy, the docs must
-still keep separate pressure on:
-
-- TCP transport versus service authority
-- backend-loss fallback versus wrong-node happy-path rescue
-- stateful ownership and promotion
-- singleton control-plane realities
-
-If those boundaries blur, this page stops serving its only job.
-
-The larger dream is not "eventually say HA with better caveats."
-The larger dream is that the user eventually gets at least one path through
-this system that feels like a real option rather than another intelligent
-story about why the operator still has to carry the truth alone.
+> the repo has real runtime machinery and sharper truth custody than before,
+> but its most important failure lanes are still maturing separately rather
+> than composing into one platform-wide victory
