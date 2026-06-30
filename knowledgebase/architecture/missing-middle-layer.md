@@ -52,6 +52,19 @@ The hard part is not naming the category.
 The hard part is proving one more humiliating private completion step actually
 left the operator.
 
+That distinction is one of the most dangerous remaining documentation traps in
+the whole site:
+
+- the repo can now explain the missing middle more sharply
+- the repo can now compare candidates more honestly
+- the repo can now say exactly what burden the layer should remove
+- therefore it can start feeling like the layer is almost here
+
+No.
+Describing the missing category faithfully is still not the same thing as the
+runtime possessing a socially and technically believable home for the truths
+that category is supposed to own.
+
 ## Why "missing middle" is not just a complexity bracket
 
 One of the easiest mistakes in this repo is to hear "missing middle" and think
@@ -186,6 +199,12 @@ That is why so many surrounding ideas still feel partial:
 
 but they do not necessarily remove the exact hidden burden the user is
 complaining about.
+
+That is also why this page cannot become too pleased with category clarity.
+It is valuable that the repo can now say "truth-owning middle layer" more
+precisely than before.
+It becomes dangerous the moment that precision starts sounding like partial
+runtime possession.
 
 That is why the missing middle cannot be treated as a branding exercise.
 
@@ -457,6 +476,16 @@ The user is not mainly asking for a curated shortlist.
 The user is asking for a system that stops quietly requiring remembered rescue
 knowledge on the bad day.
 
+So the page has to keep one ugly distinction alive:
+
+- better shortlist quality
+- better category language
+- better candidate comparison
+
+are all still different from:
+
+- one more bad-day explanation no longer needing to live in one person's head
+
 If the shortlist still leaves that burden mostly intact, this page has
 organized the wound without treating it.
 
@@ -495,6 +524,16 @@ The evidence classes are.
 If a proposal cannot name what new inspectable artifacts it would cause the
 repo to have, then it is still too abstract to count as a serious middle-layer
 answer here.
+
+And even that standard must stay two-stage:
+
+- can the proposal name the inspectable artifact?
+- can the artifact credibly become the thing the operator trusts instead of
+  their own remembered topology story?
+
+If the answer stops at artifact naming, the page is still only describing a
+promising shape.
+It has not yet shown that the social custody of truth actually moved.
 
 ## What still does not count as inspectable artifacts
 

@@ -119,6 +119,17 @@ This repo needs authority mapping because truth custody matters.
 But better truth custody in the docs is still not the same as the runtime owning
 more truth under wrong-node entry or backend loss.
 
+That distinction matters even more because this repo now has enough strong
+instruction surfaces to create a dangerous kind of documentary adulthood:
+
+- the repo can state the dream directly
+- the repo can rank its authority surfaces clearly
+- the repo can answer "which file says what?" with much less ambiguity
+- the repo can keep contributors from borrowing confidence from the wrong file
+
+and still leave the same live burden in place when a healthy wrong node has to
+preserve request meaning without private human completion.
+
 If the reader leaves thinking:
 
 - now I know which files say what
@@ -173,6 +184,14 @@ The sharper version is that the docs can now sound assimilated before the
 runtime is trustworthy.
 That is progress in one dimension and danger in another.
 This page has to keep those dimensions from being mistaken for each other.
+
+That warning should remain almost irritatingly explicit:
+
+- better source custody is not better failover custody
+- better file ranking is not better topology custody
+- better guidance discipline is not better peer-selection truth
+- better repo self-knowledge is not the same thing as the platform no longer
+  needing one operator to finish the story
 
 If a contributor comes away thinking "they all basically say the same thing,"
 then this page has failed.
@@ -237,6 +256,11 @@ Another way to say it:
 the instruction surfaces can all be doing their jobs correctly and the repo
 can still be far away from the moment where the operator no longer has to
 privately complete the story under real failure conditions.
+
+That is one reason the user's repeated stress test is healthy rather than
+annoying.
+Once the docs become coherent enough, the remaining danger is no longer chaos.
+It is the temptation to let coherence impersonate runtime adulthood.
 
 They are also the moves that make the repo sound more mature than the current
 runtime has actually earned.
@@ -623,6 +647,14 @@ start with
 
 That map matters because bad documentation rarely lies in one sentence.
 It usually lies by answering a good question from the wrong authority surface.
+
+It also lies by answering from the right authority surface, but then letting
+that answer cast social confidence farther than the file was ever allowed to
+prove.
+This page has to block both failures:
+
+- wrong file for the question
+- right file, but overpromoted into a stronger truth class
 
 That is the exact failure mode this page is trying to make harder:
 
