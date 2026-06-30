@@ -57,6 +57,16 @@ protected routes must preserve the same policy meaning after handoff, and
 stateful systems must stop being described with availability language they
 have not earned.
 
+That discomfort is not a tone choice.
+It is a defensive measure against a specific documentation failure:
+
+- the stack becomes easier to explain
+- the architecture becomes easier to admire
+- the operator is still the one privately completing the request story
+
+If the docs stop sounding harsh before that burden moves, then the docs are
+helping the lie, not correcting it.
+
 ## The dream in one exact sentence
 
 The operator wants several ordinary Docker nodes to behave like one
@@ -95,6 +105,8 @@ Ordinary success criteria often ask:
 This repo also has to ask:
 
 - who still had to secretly know the answer first?
+- what still only looks solved because the operator can mentally repair the
+  topology story on demand?
 
 If the answer is still "the operator," then some part of the contract is still
 unmet no matter how respectable the stack sounds.
@@ -176,6 +188,12 @@ favor:
 Those things may improve orientation.
 They do not yet change the lived moment where the operator still has to answer
 the real question from private memory.
+
+This distinction has to stay severe.
+
+The repo is not starved for sophisticated-looking machinery.
+It is starved for proof that the sophisticated-looking machinery actually moved
+the humiliating part of the job out of one human head.
 
 ## What a real operator-relief proof bundle would have to contain
 
@@ -335,6 +353,14 @@ Acceptance means an operator can still answer:
 If the answer becomes "the controller knows" without inspectable proof, the
 repo has drifted away from its purpose unless the added complexity clearly
 removed a real burden.
+
+This clause exists because unreadable seriousness is one of the user's main
+anti-goals.
+
+The user is not refusing heavier orchestration out of nostalgia.
+They are refusing to prepay abstraction tax for a control plane that still
+cannot prove it removed the specific bad-day dependence on remembered sacred
+nodes, remembered route exceptions, and remembered recovery folklore.
 
 ### 7. Stateful services stop being lied about
 

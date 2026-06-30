@@ -49,6 +49,10 @@ the whole repo.
 It has to stay a routing surface that keeps the dream, the burden, and the
 still-missing proof all visible at once.
 
+If this page ever becomes the place where the repo starts sounding more solved
+than it really is, then the nicest-looking page in the site will also be the
+most misleading one.
+
 ## Strongest honest current answer
 
 `bolabaden-infra` already contains a serious Compose-first platform:
@@ -78,6 +82,17 @@ The dream is clear.
 The stack is real.
 The missing truth-owning middle layer is still incomplete.
 
+That three-part sentence has to stay intact.
+
+Most weak summaries in this repo fail by dropping one clause:
+
+- they keep the dream and the stack, then quietly forget the missing layer
+- they keep the stack and the gaps, then quietly forget why the dream hurts
+- they keep the dream and the gaps, then quietly flatten the current runtime
+  into something thinner and less real than it is
+
+This front page should keep all three clauses visible at once.
+
 ## What still does not count as a good front door for this repo
 
 This page should also say more bluntly what fake orientation still looks like.
@@ -98,6 +113,20 @@ real wound into a calmer neighboring question.
 
 If this page sounds helpful while still making the repo feel more solved than
 the evidence allows, then it is still part of the problem.
+
+That danger is not hypothetical.
+Polished ambiguity is one of the easiest ways infrastructure docs become
+misleading without ever containing a single obviously false sentence.
+
+A front page can stay technically accurate while still producing the wrong
+emotional conclusion:
+
+- there is a lot here
+- the architecture is serious
+- the gaps are clearly named
+- therefore the hard part must already be mostly under control
+
+This page is not allowed to produce that conclusion.
 
 ## What kind of site this is
 
@@ -149,6 +178,12 @@ more system-owned and less operator-owned.
 
 If a page does not help a reader reason about that scene, it may still be
 technically useful, but it is not yet close enough to the actual wound.
+
+This scene is also the empathy test for the site.
+
+If a page remains correct while making that scene feel secondary, already
+manageable, or mostly handled by implication, then the page is still answering
+the wrong human problem.
 
 ## What the user is actually rebelling against
 
@@ -206,6 +241,17 @@ The docs should therefore help a reader feel the difference between:
 - and a genuine transfer of burden out of one human head
 
 Only the third one counts.
+
+That is also the rule for site polish and retrieval quality.
+
+The knowledgebase should not be optimized toward:
+
+- sounding broader
+- sounding calmer
+- sounding more authoritative in the abstract
+
+unless those improvements also preserve the still-unmoved burden with equal
+clarity.
 
 ## The four truth registers you have to keep separate
 
@@ -302,6 +348,17 @@ This route still must not be overread into:
 - evidence that the route already survives the relevant failures
 - proof that the missing middle is already selected
 - permission to narrate the runtime as mostly converged
+
+This is the shortest serious route, not the shortest flattering route.
+
+If a reader follows it and still leaves thinking:
+
+- the repo mainly needs polish
+- the repo mainly needs a tool choice
+- the repo mainly needs a few more integrations
+
+then the route was either followed too casually or the front door still failed
+to hold the real wound in place.
 
 ## Fast routes by real question
 

@@ -60,6 +60,19 @@ That last clause should be treated as the center of gravity for the whole page.
 If a route produces a clean answer but stops naming the operator folklore that
 still remains necessary afterward, the route is still too weak for this repo.
 
+That is the real retrieval bar.
+
+Not:
+
+- did the route find relevant pages?
+- did the route produce a coherent summary?
+- did the route cover multiple perspectives?
+
+But:
+
+- did the route preserve the exact remaining insult the user is still reacting
+  to?
+
 ## The reading mistake this page is trying to stop
 
 Most bad retrieval in this repo follows the same pattern:
@@ -86,6 +99,15 @@ more self-owning.
 This page exists partly to keep readers from mistaking that coherence for
 burden transfer.
 
+That warning matters even more now that the site is broader.
+
+Better retrieval can create a dangerous illusion:
+
+- the repo now explains itself extremely well
+- therefore the repo must now be much closer to solving the thing
+
+This page has to keep breaking that illusion on purpose.
+
 ## What disciplined retrieval has to preserve
 
 A good reading route in this repo should not merely get you to relevant pages.
@@ -101,6 +123,12 @@ is probably answering a calmer neighboring question instead.
 
 And calmer neighboring questions are exactly what the user keeps rejecting.
 They are often technically respectable and psychologically false.
+
+This is why "actually RAG this time" matters so much in this repo.
+
+The failure mode is not only missing documents.
+It is retrieving the right documents, then compressing them into a summary that
+is smoother, safer, and less faithful than the source pressure really was.
 
 That is why retrieval discipline matters so much here.
 The site is no longer small enough that "read around until it clicks" is safe.
@@ -151,6 +179,14 @@ then it is still incomplete.
 
 The enemy here is not only irrelevance.
 It is relevance that still shrinks the problem.
+
+Retrieval can therefore fail in two opposite ways:
+
+- by missing the right material
+- by finding it, then normalizing it into a smaller wound
+
+The second failure is more dangerous here because it can sound thorough while
+still betraying the user's actual demand.
 
 ## Read by claim type first
 
@@ -244,6 +280,12 @@ hallucination:
 
 This path is for live truth, not wishful extrapolation.
 
+It is also the path most likely to be overread by people who equate stack size
+with maturity.
+
+That is why it deliberately ends in proof surfaces and the root Compose file
+instead of letting implementation inventory narrate itself into resilience.
+
 ### 3. "Why is wrong-node traffic still the real humiliation threshold?"
 
 Read in this order:
@@ -272,6 +314,11 @@ It is the point where fake option language gets caught by reality.
 If this route does its job, the reader should leave less impressed by generic
 traffic vocabulary and more sensitive to the exact moment where the operator is
 still privately completing the request story.
+
+That last phrase is the route's real output.
+
+If a reader instead leaves mainly thinking about proxies, meshes, or ingress
+product names, then the route did not keep the wound specific enough.
 
 ### 4. "What helper layer is the repo actually looking for?"
 
@@ -302,6 +349,11 @@ The deeper correction is harsher:
 - the repo is not only choosing tools
 - it is trying to discover which extra layer, if any, actually deserves to
   exist because it removed a real humiliation threshold
+
+That "if any" matters.
+
+Retrieval in this repo is not supposed to manufacture certainty where the repo
+is still testing whether an added layer deserves to exist at all.
 
 ### 5. "Why are stateful services a much harsher problem?"
 
