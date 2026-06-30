@@ -11,6 +11,7 @@ Read these alongside it:
 
 - [Current Compose Runtime](current-compose-runtime.md)
 - [Request Path and Failure Walkthrough](request-path-and-failure-walkthrough.md)
+- [Current-State Registry and Peer Eligibility](current-state-registry-and-peer-eligibility.md)
 - [Failure Model and Maturity Matrix](failure-model-and-maturity.md)
 - [Operator Questions and Honest Answers](../operations/operator-questions-and-honest-answers.md)
 - [Ingress and Failover Evidence](../research/ingress-and-failover-evidence.md)

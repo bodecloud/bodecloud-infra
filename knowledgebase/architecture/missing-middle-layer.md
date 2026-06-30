@@ -57,6 +57,9 @@ still missing.
 The middle layer exists only because plain Compose does not satisfy that dream
 once the platform wants real multi-node dignity.
 
+For the concrete lightweight-registry version of this idea, read
+[Current-State Registry and Peer Eligibility](current-state-registry-and-peer-eligibility.md).
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:

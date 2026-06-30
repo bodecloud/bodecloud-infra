@@ -192,8 +192,9 @@ Start with:
 
 1. [architecture/request-path-and-failure-walkthrough.md](architecture/request-path-and-failure-walkthrough.md)
 2. [architecture/ha-failover-routing.md](architecture/ha-failover-routing.md)
-3. [architecture/failure-model-and-maturity.md](architecture/failure-model-and-maturity.md)
-4. [research/ingress-and-failover-evidence.md](research/ingress-and-failover-evidence.md)
+3. [architecture/current-state-registry-and-peer-eligibility.md](architecture/current-state-registry-and-peer-eligibility.md)
+4. [architecture/failure-model-and-maturity.md](architecture/failure-model-and-maturity.md)
+5. [research/ingress-and-failover-evidence.md](research/ingress-and-failover-evidence.md)
 
 Primary truth registers:
 
@@ -256,9 +257,10 @@ Use this when the repo starts sounding like a product comparison problem.
 Start with:
 
 1. [architecture/missing-middle-layer.md](architecture/missing-middle-layer.md)
-2. [architecture/orchestration-options.md](architecture/orchestration-options.md)
-3. [architecture/capability-gaps-and-roadmap.md](architecture/capability-gaps-and-roadmap.md)
-4. [research/orchestrator-tradeoffs-evidence.md](research/orchestrator-tradeoffs-evidence.md)
+2. [architecture/current-state-registry-and-peer-eligibility.md](architecture/current-state-registry-and-peer-eligibility.md)
+3. [architecture/orchestration-options.md](architecture/orchestration-options.md)
+4. [architecture/capability-gaps-and-roadmap.md](architecture/capability-gaps-and-roadmap.md)
+5. [research/orchestrator-tradeoffs-evidence.md](research/orchestrator-tradeoffs-evidence.md)
 
 Primary truth registers:
 

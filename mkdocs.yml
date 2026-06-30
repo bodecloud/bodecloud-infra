@@ -85,6 +85,7 @@ nav:
   - Request-Time Truth:
     - Request Path and Failure Walkthrough: architecture/request-path-and-failure-walkthrough.md
     - HA, Failover, and Routing: architecture/ha-failover-routing.md
+    - Current-State Registry and Peer Eligibility: architecture/current-state-registry-and-peer-eligibility.md
     - Ingress and Failover Evidence: research/ingress-and-failover-evidence.md
     - Stateful HA and Data: architecture/stateful-ha-and-data.md
     - Stateful HA Evidence: research/stateful-ha-evidence.md
