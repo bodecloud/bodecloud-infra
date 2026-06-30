@@ -130,6 +130,85 @@ That boundary matters because many available options may be capable in
 principle while still not answering the user's humiliation test in the current
 worktree.
 
+## Question 0: Do the instruction files already explain the no-Swarm failover idea?
+
+### Hidden burden
+
+The operator is asking whether the repo's own instruction surfaces already
+contain the real dream, or whether the docs have been inventing a new story
+after the fact.
+
+### Strongest current evidence
+
+Yes, the instruction files do explain the direction, but not as equal sources.
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+  is the clearest architecture-dream surface. It explicitly names ordinary
+  multi-node Docker, no central orchestrator by default, local-first serving,
+  peer-forward fallback, L7/L4 separation, Cloudflare any-node entry, and
+  anti-SPOF pressure without fake HA language.
+- [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
+  is the runtime-anchor surface. It says the priority implementation is still
+  root `docker-compose.yml` plus `compose/`, and it names the validation
+  constraints and repo gotchas.
+- [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules)
+  is the authoring-discipline surface. It requires committed changes, inline
+  Compose config preference, and meaningful healthchecks.
+
+The direct answer is:
+
+> yes, those files explain what the repo is trying to do with multiple Docker
+> nodes, no Swarm by default, fallback, failover, wrong-node routing, and
+> health-aware service discipline.
+
+The required caveat is just as important:
+
+> no, their agreement does not prove the behavior is broadly implemented.
+
+### Why the nearby common answer is still too small
+
+The nearby common answer is:
+
+> the instructions say we want HA/failover, so the docs should just describe
+> that architecture.
+
+That answer is too small because it loses the burden split.
+
+The real interpretation is:
+
+- Copilot instructions answer "what are we trying to make true?"
+- AGENTS answers "where must runtime truth be inspected?"
+- `.cursorrules` answers "how do we avoid making the Compose surface worse?"
+
+None of those files answers:
+
+- which shared placement source did the wrong node consult?
+- which peer was selected and why was it eligible?
+- did middleware and auth survive handoff?
+- did the fallback route survive the failure that triggered it?
+- did a stateful backend preserve authority, not just reachability?
+
+### What would allow a stronger answer
+
+A stronger answer requires at least one route-specific packet showing:
+
+- first-hop node
+- local versus remote service decision
+- placement truth source
+- selected peer and peer eligibility
+- policy chain preservation
+- backend-loss behavior
+- the remaining forbidden stronger sentence
+
+That is the point where instruction intent starts becoming runtime-owned
+behavior.
+
+### Private sentence still surviving today
+
+> The instruction files know the dream, but I still have to inspect the runtime
+> to know whether any particular part of that dream has actually moved out of
+> my head.
+
 ## Question 1: What exact operating contract is the repo trying to earn?
 
 ### Hidden burden

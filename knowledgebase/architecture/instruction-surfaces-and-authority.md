@@ -27,6 +27,23 @@ This page answers:
 > no-Swarm-by-default, local-first then peer-forward dream, and which files
 > only constrain how we talk about, author, or plan around that dream?
 
+It also answers the more practical question that tends to come up during real
+work:
+
+> when someone says "AGENTS, Copilot instructions, and `.cursorrules` are
+> basically telling us what we want to do with multiple Docker nodes, no Swarm,
+> failover, fallback, and wrong-node routing, right?", what is the exact honest
+> answer?
+
+The exact honest answer is:
+
+> yes, but each file proves a different part of that sentence, and none of them
+> proves the runtime already owns the whole behavior.
+
+That distinction is not pedantry.
+It is the difference between assimilating the repo and merely recognizing its
+keywords.
+
 The weaker neighboring question is:
 
 > which files mention HA, failover, clusters, or Compose the most?
@@ -113,6 +130,68 @@ Ask instead:
 > are these files even allowed to speak the same class of truth?
 
 Very often they are not.
+
+## Answering the instruction-file question directly
+
+The instruction surfaces should be read as a joined contract with separated
+burdens.
+
+If the question is:
+
+> do AGENTS, Copilot instructions, and `.cursorrules` explain the multi-node
+> Docker, no-Swarm, failover/fallback direction?
+
+The answer is:
+
+> yes, but `copilot-instructions.md` explains the dream, `AGENTS.md` explains
+> where current implementation truth has to be checked, and `.cursorrules`
+> explains how changes must be authored without weakening the stack. They are
+> not three equal witnesses for runtime capability.
+
+Read them this way:
+
+| File | What it contributes to the answer | What it cannot contribute |
+| --- | --- | --- |
+| `.github/copilot-instructions.md` | The target behavior: ordinary Docker nodes, no central orchestrator by default, local-first serving, peer-forward fallback, L7/L4 separation, anti-SPOF pressure without fake HA language. | Proof that any generic wrong-node request currently succeeds. |
+| `AGENTS.md` | The implementation anchor: root `docker-compose.yml`, `compose/`, Go infra tooling, telemetry auth, validation commands, and environment gotchas. | The full architecture manifesto or evidence that the target behavior is live. |
+| `.cursorrules` | The authoring discipline: commit changes, prefer inline Compose configs, preserve meaningful healthchecks, and avoid papering over service failure. | Distributed correctness, route durability, middleware continuity, or stateful failover. |
+
+So the instruction files do explain the desired direction.
+They do not, by themselves, answer the harder operational question:
+
+> when traffic lands on a healthy node that does not host the service, what
+> exact shared truth does that node consult, which peer does it choose, and what
+> proof shows the route still means the same thing after handoff?
+
+That second question must come from runtime evidence, proof packets, and
+route-specific drills.
+If a page answers it only by pointing back at instructions, it is borrowing
+confidence from intent.
+
+## The instruction surfaces as a burden split
+
+The three recurring instruction files divide the user's frustration into
+different burdens:
+
+- `copilot-instructions.md` names the missing behavior.
+- `AGENTS.md` names the surfaces that must be inspected before claiming that
+  behavior is live.
+- `.cursorrules` names the minimum authoring hygiene required not to make the
+  behavior less trustworthy while changing Compose.
+
+That burden split matters because the user is not asking for a slogan like
+"multi-node Docker failover."
+The user is asking for a system that stops forcing one human to be:
+
+- the placement registry
+- the peer selector
+- the fallback explainer
+- the middleware-continuity auditor
+- the stateful-authority caveat keeper
+
+The instruction surfaces can help preserve that demand.
+They cannot retire those human jobs until live mechanisms and proof packets
+show that the work moved into the system.
 
 ## The strongest honest reading orders
 
