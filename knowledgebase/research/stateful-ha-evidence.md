@@ -21,6 +21,16 @@ place where correctness actually lived.
 
 This page therefore exists to stop the docs from calling reachability "HA."
 
+It also exists to stop a subtler failure:
+
+- the route still answers
+- the diagrams still look serious
+- the stateful story sounds cautious and mature
+- the docs still never force the reader to say where authority actually lives
+
+That is one of the easiest places for infrastructure writing to become
+performatively honest while still not being honest enough.
+
 ## The dream this page has to protect
 
 The user is not asking whether stateful services can be restarted.
@@ -42,6 +52,16 @@ That is why stateful HA in this repo has to stay separate from:
 
 The dream is not distributed-looking state.
 The dream is state that has stopped secretly living in one brittle place.
+
+That difference has to stay brutal.
+
+Many systems can be made to look distributed from the outside.
+Far fewer systems make it impossible for the real answer to still be:
+
+- one node really mattered
+- one disk really mattered
+- one writer really mattered
+- one operator still knew the truth better than the system did
 
 ## Strongest honest current answer
 
@@ -109,6 +129,19 @@ The following still do not count as trustworthy stateful proof:
 
 This page exists precisely because those weaker signals are easy to narrate as
 progress when the hard authority question is still unresolved.
+
+That means this page should be hostile to calming language.
+
+If a paragraph sounds more respectable because it says:
+
+- persistent
+- durable
+- redundant
+- highly available
+
+without forcing the reader to name writer authority, promotion rules, storage
+truth, and client behavior, then the paragraph is softer than this repo can
+afford.
 
 ## Evidence hierarchy for stateful claims
 
@@ -245,6 +278,20 @@ because:
 - or the endpoint answers
 
 None of those things tells you whether authority stopped being singular.
+
+That last sentence is the core warning.
+
+Stateful overclaim does not usually begin with a dramatic lie.
+It begins with a chain of smaller truths that are each real:
+
+- the route survived
+- the process restarted
+- the service answered
+- the replica existed
+
+and then ends by smuggling in the part that was never proven:
+
+- therefore authority became resilient
 
 ## What a real stateful evidence packet would need
 

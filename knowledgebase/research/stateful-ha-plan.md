@@ -19,6 +19,19 @@ behind this rewrite:
 - do not discard contradiction because it complicates the story
 - do not turn partial likeness into authoritative sameness
 
+Those rules matter here more than almost anywhere else in the repo because
+stateful HA is where people are most tempted to mistake disciplined language
+for solved burden.
+
+The prose can become sharper, the topology can become cleaner, the plan can
+become more mature, and the repo can still be one bad failure away from the
+same old answer:
+
+- one box mattered
+- one writer mattered
+- one recovery ritual mattered
+- one human still knew the truth better than the system
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -48,6 +61,20 @@ The following still do not count as stateful resilience here:
 
 This repo needs stricter language because state is where fake adulthood is
 easiest to stage.
+
+That phrase should stay central.
+
+Stateful adulthood theater usually looks like:
+
+- more replicas
+- more cluster nouns
+- more diagrams
+- more process around a failure
+
+while the underlying question remains privately unresolved:
+
+> who could actually write, who decided that, and how would a newcomer prove
+> it without asking the operator?
 
 ## Quick claim router
 
@@ -85,6 +112,16 @@ This page exists to keep the repo from telling that lie.
 It also exists because this is one of the few places where the user is
 explicitly demanding that the docs not help the system gaslight itself.
 
+That is not rhetorical excess.
+
+The gaslighting risk is real whenever the docs start letting adjacent success
+stand in for authority success:
+
+- route success
+- restart success
+- dashboard success
+- "clustered" branding success
+
 That sentence matters because stateful infrastructure is where the whole
 project could most easily retreat into fake adulthood:
 
@@ -97,6 +134,11 @@ while the operator still privately knows that one machine, one disk path, or
 one manual recovery ritual remains the real authority.
 
 This page should keep refusing that retreat.
+
+If it ever becomes more comfortable than accusatory, it probably got worse.
+The point is not to keep the docs agitated for style.
+The point is to stop stateful planning from becoming another socially polished
+way of hiding singular truth.
 
 ## Evidence classes used here
 
@@ -128,6 +170,21 @@ It is one of the repo's clearest philosophical boundaries:
 
 the system is allowed to become more reachable before it becomes more honest
 about state only if the docs never confuse those two kinds of progress.
+
+That sentence is one of the most important burden-faithful lines in the whole
+knowledgebase.
+
+If later pages flatten it into:
+
+- "network first"
+- "transport first"
+- "availability first"
+
+then the hard part has already been softened.
+The actual warning is harsher:
+
+reachability progress becomes dangerous the moment it starts borrowing
+authority language it has not earned.
 
 ## Strongest honest current answer
 
@@ -174,6 +231,13 @@ That is not hesitation. It is sequencing discipline.
 It is the repo refusing the usual trap where the desire for a complete story
 causes people to overstate what the first stateful hardening step will buy.
 
+It is also a refusal to buy dignity theater.
+
+The repo is not trying to feel grown up faster.
+It is trying to avoid the more humiliating failure where a bigger stateful
+story gets written down before any concrete workload has actually stopped
+depending on private human truth.
+
 ## Why sequencing matters so much here
 
 If the repo tries to solve all of these at once:
@@ -200,6 +264,18 @@ pretends there are only two choices:
 
 This repo is trying to make a narrower, more service-specific path visible
 instead.
+
+That is one of the clearest ways this documentation differs from generic
+infrastructure advice.
+
+Generic advice often wants one stateful answer category.
+This repo keeps insisting that the meaningful question is smaller and meaner:
+
+- which workload
+- which authority model
+- which storage truth
+- which client behavior
+- which failure
 
 That path only stays honest if every workload keeps its own proof burden.
 The repo should resist any temptation to say:
@@ -233,6 +309,15 @@ That matters because it proves the repo is already distinguishing between:
 Those are not the same question.
 That distinction should keep reappearing because the user has already seen too
 many toolchains erase it.
+
+And once that distinction disappears, the docs start performing the same old
+trick:
+
+- the endpoint exists
+- therefore the capability sounds real
+- therefore the burden sounds handled
+
+This page should keep breaking that chain on purpose.
 
 ## The subproblems this plan has to keep separate
 

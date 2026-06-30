@@ -18,6 +18,16 @@ It is dangerous in a very specific way:
 That is exactly the kind of documentation drift the rest of this knowledgebase
 is trying to stop.
 
+This is also one of the easiest files in the repo to sound deeply useful while
+quietly reintroducing the user's main frustration.
+
+The risk is:
+
+- the module names are good
+- the flows are coherent
+- the architecture sounds like adulthood
+- the hidden operator burden is still mostly waiting in the wings
+
 This page should therefore be read less like a summary and more like a
 corrective retrieval layer.
 Its job is not to make the master plan feel shorter.
@@ -57,6 +67,12 @@ That distinction is not clerical.
 It is one of the main ways this site avoids becoming another polished retelling
 of the same hidden operator burden.
 
+That is why this page cannot act like a friendly roadmap summary.
+
+If it helps the reader feel calmer without making them more precise about what
+the runtime still does not own, then it is functioning as sedation, not
+retrieval.
+
 ## The shortest honest reading
 
 The master plan proves that the repo has already stopped treating its problem
@@ -90,6 +106,12 @@ The stricter version is:
 - a coherent module is not yet a removed humiliation
 - a named control surface is not yet a shared truth surface
 
+The word "humiliation" matters here.
+
+The repo is not merely tracking implementation debt.
+It is tracking the recurring moment where the system still needs a private
+human interpreter right when it is supposed to be behaving like one platform.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to prove that the master plan is one of the strongest
@@ -111,6 +133,20 @@ as if they were already live shared truth.
 
 That is exactly the overread this page is supposed to block.
 
+The overread usually sounds intelligent.
+That is what makes it dangerous.
+
+It says things like:
+
+- "the architecture clearly intends X"
+- "the control loop will do Y"
+- "the helper layer provides Z"
+
+while skipping the real audit question:
+
+> what exact piece of shared truth does the current runtime own now that it did
+> not own before?
+
 ## What still does not count as master-plan progress
 
 The following still do not count as meaningful completion signals:
@@ -123,6 +159,12 @@ The following still do not count as meaningful completion signals:
 
 Those are signs that the repo is thinking harder.
 They are not signs that the hidden operator burden has actually moved.
+
+This page should keep that asymmetry visible.
+
+Better planning is a real achievement.
+It is just not the same category of achievement as one more important runtime
+truth leaving the operator's memory.
 
 ## Quick claim router
 
@@ -154,6 +196,9 @@ page has failed too.
 The complaint is not optional background color.
 It is the calibration mechanism that stops planning language from outranking
 runtime truth.
+
+Without that calibration, the master plan becomes one more sophisticated way to
+sound like the repo has more options than it really does today.
 
 ## What a real promotion packet for the master plan would need
 
@@ -199,6 +244,20 @@ That means the docs have to keep asking a harsher question:
 
 That second half matters just as much as the first.
 
+Otherwise the master plan starts acting like a dignity substitute.
+
+It lets the repo say:
+
+- we see the missing layer
+- we named the modules
+- we know the flows
+
+while the user is still left asking:
+
+- yes, but what new truth stopped being private?
+- yes, but what wrong-node behavior became system-owned?
+- yes, but what exact burden stopped living in the operator?
+
 A plan can be excellent and still leave behind the one burden the user actually
 cares about most:
 
@@ -229,6 +288,13 @@ has correctly identified which missing truths actually justify replacing it.
 This matters because the repo is not trying to preserve Compose out of nostalgia.
 It is trying to preserve the last directly inspectable layer until something
 else proves it can own the painful truths more honestly.
+
+That sentence is the adult version of the user's frustration.
+
+The repo is not anti-abstraction in the abstract.
+It is anti-unearned surrender.
+It wants the heavier layer to prove that it actually removes a named pain
+instead of merely sounding like the kind of thing serious platforms use.
 
 This matters because the user is not just skeptical of Kubernetes or Nomad as
 brands.
