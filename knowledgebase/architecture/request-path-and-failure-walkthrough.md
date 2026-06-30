@@ -266,6 +266,29 @@ Without that layer, the walkthrough quietly mutates into:
 
 That mutation is exactly what this repo is trying to escape.
 
+### Hop 2.5 decision ledger
+
+This hop should eventually be able to leave behind a machine-readable or
+operator-readable decision record.
+
+For a stateless HTTP route, that record would need to answer:
+
+| Decision field | Required answer | Current evidence level | Still illegal to claim |
+| --- | --- | --- | --- |
+| `entry_node` | Which public node received the request first? | Cloudflare/public-entry intent exists. | That any surviving node can already complete the handoff. |
+| `route_class` | Is this stateless HTTP, protected HTTP, TCP, or stateful? | The runtime contains all four classes. | That proof from one class transfers to another. |
+| `locality` | Is the requested service local to this node right now? | Service labels and Compose placement exist per authored file. | That the receiving node has shared current placement truth. |
+| `placement_source` | What inspectable source told the node where the service lives? | Intent repeatedly points toward `services.yaml` or equivalent. | That a live root placement authority is consumed today. |
+| `peer_choice` | Which peer was chosen, and why that peer? | Private mesh components exist through Headscale. | That reachable equals eligible. |
+| `policy_context` | Which auth, middleware, headers, and trust assumptions must survive? | `nginx-auth@file`, TinyAuth, and edge middleware exist. | That cross-node policy continuity is proven. |
+| `backend_state` | Was the preferred backend healthy, absent, or failed during the test? | Healthchecks and helper containers exist. | That backend-loss fallback survived. |
+| `explanation_artifact` | Where can a second operator inspect the decision later? | Documentation now defines the required packet. | That the runtime emits it. |
+
+This is the difference between a request path and a real control surface.
+
+Without this record, the node may still route successfully in a narrow case,
+but the explanation remains socially owned.
+
 ### Hop 3: middleware and auth policy are applied
 
 What is live now:
@@ -500,6 +523,32 @@ It is one preserved route packet that can answer all of these:
 - if failover is claimed, what survived after the preferred backend died?
 
 Until one packet like that exists, this page is primarily a warning page.
+
+The packet should be boring enough to paste into an incident note:
+
+```yaml
+route_packet:
+  route: whoami.example.test
+  route_class: stateless-http
+  entry_node: node2
+  expected_owner: node1
+  locality_result: remote
+  placement_source: unproven
+  selected_peer: unproven
+  peer_eligibility_reason: unproven
+  policy_chain:
+    expected: []
+    observed: []
+    preserved: unproven
+  backend_condition: healthy | preferred-backend-lost
+  result: unproven
+  operator_private_sentence_still_alive:
+    - "I still personally know where this route really lives."
+```
+
+Today, many fields in that packet would honestly remain `unproven`.
+That is not a documentation failure.
+That is the exact shape of the implementation work still missing.
 
 ## The honest bottom line
 

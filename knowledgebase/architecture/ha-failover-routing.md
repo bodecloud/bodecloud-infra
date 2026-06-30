@@ -222,6 +222,52 @@ It is several truths that are often illegally blended together.
 Until more of those become system-owned, the operator remains the safest
 distributed control plane in the stack.
 
+## The missing routing decision object
+
+The routing dream needs a small decision object, not just more proxy syntax.
+
+In implementation terms, the receiving node needs to be able to answer this
+shape before a route can be called peer-aware:
+
+```yaml
+routing_decision:
+  hostname: whoami.example.test
+  route_class: stateless-http
+  entry_node: node2
+  service_locality: remote
+  placement_truth:
+    source: services.yaml | osvc | nomad | generated-runtime-state | unknown
+    service_owner: node1
+    freshness: unproven
+  peer_eligibility:
+    peer: node1
+    transport: headscale | public | lan | unknown
+    health: unproven
+    policy_converged: unproven
+  handoff:
+    preserves_auth: unproven
+    preserves_middleware: unproven
+    preserves_headers: unproven
+    preserves_service_identity: unproven
+  backend_loss:
+    tested: false
+    surviving_backend: unproven
+  explanation_artifact: unproven
+```
+
+That object does not have to be literal YAML in v1.
+But some equivalent record has to exist if the stack is going to stop making
+the operator the hidden routing algorithm.
+
+Right now, the current runtime supplies many ingredients for that object.
+It does not yet supply the object itself.
+
+The absence is not theoretical.
+A repository search currently finds no tracked root `services.yaml` placement
+authority in the priority Compose runtime; the only `services`-named YAML file
+found is under the Garden/k8s exploration area, which is not the root Compose
+contract.
+
 ## The route classes must stay separate
 
 The repo becomes dishonest as soon as these lanes are narrated like one shared
@@ -423,6 +469,25 @@ The minimal packet looks like this:
 
 That packet is intentionally small because the repo does not need another large
 architecture story nearly as much as it needs one honest route-level success.
+
+The first acceptable packet should probably use a boring stateless HTTP route,
+not a heroic stateful service.
+
+Good early candidates:
+
+| Candidate | Why it is useful | Why it is still not enough |
+| --- | --- | --- |
+| `whoami` | Minimal route semantics; good wrong-node smoke target. | Does not prove auth continuity or stateful behavior. |
+| `mkdocs` | Real docs service; still low-state. | Does not prove protected admin behavior. |
+| `wishlist` | More app-like than `whoami`, still HTTP. | May introduce app assumptions before the routing layer is isolated. |
+
+Bad first candidates:
+
+| Candidate | Why not first |
+| --- | --- |
+| `code-server` / `portainer` / `dozzle` | Protected-route semantics make the proof stricter; use after a simple route packet exists. |
+| `redis` / `mongodb` | TCP and stateful authority questions will pollute the first routing proof. |
+| `headscale` | Control-plane/state authority makes it a poor first proof even though it matters strategically. |
 
 ## What the docs are allowed to say today
 

@@ -459,6 +459,29 @@ The user is not only asking for successful routing.
 They are asking for a system that can later explain why the route was valid
 without requiring the operator to retell the topology from memory.
 
+## Evidence packet applied to the current root stack
+
+Applying the evidence-ledger source-custody format to ingress gives this
+current packet:
+
+| Packet field | Current answer |
+| --- | --- |
+| User wound | A healthy wrong node should not need the operator to remember where the service really lives. |
+| Runtime anchor | `docker-compose.yml` and active `compose/` fragments contain Traefik, auth/middleware surfaces, Cloudflare DDNS, Headscale, TCP routers, and `docker-gen-failover`. |
+| Intent anchor | `.github/copilot-instructions.md` states the any-node, local-first, peer-forward target contract. |
+| Plan/gap anchor | Master-plan and architecture pages keep naming current placement truth and route durability as missing. |
+| Archive anchor | Imported multi-node-without-swarm, load-balancer-failover, distributed-HA, and Compose-frustration threads explain why ordinary answers feel fake. |
+| Legal sentence | The repo has serious ingress machinery and a precise peer-forward dream, but generic wrong-node request preservation remains unproved. |
+| Illegal sentence | Cloudflare plus Traefik plus `docker-gen-failover` already gives trustworthy multi-node failover. |
+| Next proof | A route-specific packet for one stateless HTTP route where a non-hosting entry node uses inspectable placement truth to choose an eligible peer and preserve route meaning. |
+
+This packet is intentionally unsatisfying.
+It is unsatisfying in the same place the runtime is still incomplete.
+
+That is the correct outcome.
+The documentation should not soothe the exact gap the implementation has not
+closed.
+
 ## Exact claim boundaries this evidence supports
 
 This evidence stack supports these sentences:
