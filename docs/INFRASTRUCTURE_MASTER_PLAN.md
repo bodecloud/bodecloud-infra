@@ -78,6 +78,31 @@ Each module only matters if it changes where the truth actually lives.
 If a module merely improves the story around the same private operator burden,
 it is not a real step toward the user's dream.
 
+### What this plan is actually trying to make feel normal
+
+This plan should keep one concrete user-facing scene in view:
+
+1. a request reaches a healthy public node
+2. that node does not happen to host the target service locally
+3. the node still knows what the request means
+4. it can still preserve the request by handing it to the right healthy peer
+5. the operator does not have to mentally reconstruct the answer first
+
+If a module does not make that scene more believable, it is probably not
+attacking the central pain yet.
+
+That is also why this plan should not quietly substitute neighboring goals such
+as:
+
+- more automation
+- more clustering
+- better deployment hygiene
+- cleaner diagrams
+
+Those may still matter.
+They are not the same thing as removing the humiliation of wrong-node entry,
+private placement knowledge, and fake failover confidence.
+
 The current live repo already proves:
 
 - a serious root `docker-compose.yml` entrypoint
@@ -139,6 +164,17 @@ For every module below, keep four questions attached:
 If those questions disappear, the plan can start sounding complete simply
 because it is detailed.
 That is exactly the failure mode this repo keeps trying to escape.
+
+It is also why the plan has to preserve the user's frustration instead of
+editing it out for tone.
+The frustration is not rhetorical excess.
+It is accurate feedback about a category of infra advice that keeps sounding
+helpful while reducing real options back to:
+
+- private human glue
+- or a large orchestrator worldview
+
+If the plan forgets that accusation, it becomes more readable and less honest.
 
 ***
 
@@ -566,6 +602,20 @@ See the [Failover Agent Brainstorm](brainstorms/20260604-failover-agent-explorat
 
 When a service/container fails on one node, there's no automatic failover to another node. The `docker-gen-failover` approach has a critical bug: it deletes Traefik routes when containers stop.
 
+That bug matters because it is not just one implementation defect.
+It is the exact shape of the user's complaint:
+
+- the system sounds peer-aware
+- the route looks present while the happy path is intact
+- the fallback semantics evaporate at the moment they are actually needed
+
+If this module is narrated as ordinary service-healing work, it becomes much
+smaller than the pressure it is really carrying.
+It is one of the main places where the repo is trying to answer:
+
+> can the first healthy node preserve the meaning of the request without the
+> operator quietly preserving the architecture first?
+
 ### Current Implementation (Broken)
 
 ```yaml
@@ -615,6 +665,21 @@ docker-gen-failover:
 ```
 
 #### Service Registry (`services.yaml`)
+
+This registry idea only matters if it stops the operator from being the hidden
+registry.
+
+If `services.yaml` becomes:
+
+- stale enough to require human override
+- partial enough to require human fusion with other signals
+- trusted only because an expert operator already knows the answer
+
+then the repo has reintroduced the same sacred human control plane in a more
+documented format.
+
+So this section should be read as a truth-ownership requirement, not merely as
+"yet another config file we should probably have."
 
 ```yaml
 # Distributed to all nodes via sync-agent
@@ -685,6 +750,17 @@ Traefik's built-in health checking will automatically route around failed backen
 
 The weighting above keeps local service preference while still distributing failover traffic across healthy peers.
 
+But this is still not the full answer by itself.
+Even a very good Traefik dynamic configuration can still leave unanswered:
+
+- who decides which peer is semantically eligible
+- which runtime assumptions still have to match before peer pickup is honest
+- whether the route remains trustworthy after the registry drifts
+
+This module should therefore avoid narrating Traefik as the whole solution.
+Traefik is part of the preservation surface.
+It is not automatically the owner of every truth required for preservation.
+
 #### Failover Sequence
 
 ```
@@ -709,6 +785,21 @@ Container fails on Node A:
          └── Traefik health check detects healthy
          └── Traffic gradually returns to Node A
 ```
+
+This sequence should be read as a target discipline, not as proof that the
+repo already owns this story.
+
+What would make it real is not that the steps are plausible.
+What would make it real is that the operator no longer has to privately answer
+questions like:
+
+- which peer is safe to pick up this service right now
+- whether that peer has matching auth, env, and middleware assumptions
+- whether the fallback route survived long enough to matter
+- whether success now means semantic continuity or merely reachability
+
+If those questions still live outside the system, then this sequence is still a
+design story about future relief, not current relief itself.
 
 ***
 
