@@ -75,6 +75,13 @@ The operator is asking:
 
 That is why ordinary option lists keep feeling smaller than they sound.
 
+The shortest version of the same question is:
+
+> how does the healthy wrong node stop needing me?
+
+That is cruder than most architecture prose.
+It is also the most useful compression of the user's real frustration.
+
 ## The answer discipline used on this page
 
 Every serious answer here should leave behind five things:
@@ -116,6 +123,14 @@ larger worldview that has not yet proved it deserves to hide that much truth.
 
 That is why the ecosystem can feel full while still failing to feel useful.
 
+The repo is not starving for options.
+It is starving for options that can survive the humiliation test:
+
+- a request lands on the wrong healthy node
+- the system still produces the right outcome
+- the explanation is inspectable later
+- the operator does not have to socially complete the topology
+
 ## The strongest broad answer the repo can support today
 
 The repo can already support this broad answer:
@@ -132,6 +147,41 @@ The repo cannot yet support this broader answer:
 That boundary matters because many of the available options may be capable in
 principle while still not answering the user's humiliation test in the current
 worktree.
+
+## Question 0: What exact operating contract is the repo trying to earn?
+
+### Hidden burden
+
+The operator still privately completes the sentence after the first hop.
+
+### Strongest current evidence class
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+  states the target contract directly:
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+### Why the nearby common answer is still too small
+
+Saying "multi-node Compose" is weaker than saying what should happen on the
+wrong node.
+
+Saying "anti-SPOF" is weaker than saying how the request meaning survives.
+
+### What would allow a stronger answer
+
+- one route packet proving locality detection
+- one route packet proving peer selection
+- one route packet proving the same user-visible semantics after handoff
+
+### Private sentence still surviving today
+
+> yes, but I still personally know what should happen after the first hop more
+> clearly than the system does
 
 ## Question 1: What is the user actually trying to make true?
 
@@ -176,6 +226,10 @@ The real target is harsher:
 - one shared placement-truth surface actually consumed by routing or forwarding
 - one narrow wrong-node HTTP proof
 - one backend-loss proof that shows the rescue path still means the same thing
+
+Those artifacts matter because they are the first ones that would stop the docs
+from merely describing the dream and start letting the runtime answer for
+itself.
 
 ### Private sentence still surviving today
 

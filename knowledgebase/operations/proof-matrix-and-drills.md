@@ -39,6 +39,11 @@ Most fake closure here follows the same pattern:
 
 This page exists to break that sequence.
 
+The deeper reason it exists is that the repo no longer lacks moving parts.
+It lacks proof packets that survive the user's actual accusation:
+
+> after all these tools, am I still the hidden control plane?
+
 ## Proof classes
 
 ### `Intent only`
@@ -105,6 +110,9 @@ Forbidden upgrade:
 
 - wrong-node traffic is generically solved
 
+This class matters more than the others because it is the first class that
+begins testing the repo's actual promise instead of merely its runtime shape.
+
 ### `Fallback-route proven`
 
 Meaning:
@@ -165,6 +173,13 @@ Every serious drill should leave behind a packet containing:
 
 Without that packet, the result is still too easy to overread.
 
+The packet should also answer one socially important question:
+
+- which humiliating private sentence stopped being true because of this drill?
+
+If the packet cannot answer that, it is probably still a technical anecdote
+instead of real burden transfer.
+
 ## Drill matrix
 
 | Claim under test | Minimum drill | Current ceiling if it passes | Stronger sentence still forbidden afterward |
@@ -176,6 +191,18 @@ Without that packet, the result is still too easy to overread.
 | One protected route keeps the same policy meaning after handoff | Compare local and peer-forwarded auth, middleware, headers, and visible behavior | This exact protected route preserved semantics | Protected-route continuity is solved across the stack |
 | TCP route is reachable | Connect to a TCP-exposed service such as `mongodb` or `redis` through the intended entrypoint | Transport path is real | Stateful resilience or authority transfer is solved |
 | One stateful service owns authority correctly under failure | Define and exercise writer, replica, promotion, and rediscovery behavior | This exact authority model is real | The general stateful lane is now anti-SPOF |
+
+## The matrix is really an anti-bluff device
+
+This matrix exists because this repo is especially easy to overread in three
+ways:
+
+1. config gets mistaken for behavior
+2. behavior gets mistaken for distributed truth
+3. one distributed truth gets mistaken for broad platform closure
+
+The matrix should make those jumps feel socially illegal before they feel
+technically tempting.
 
 ## The highest-leverage next drills
 
@@ -190,6 +217,13 @@ the next best drills are:
 That order matters.
 It keeps the repo from borrowing confidence from narrower wins.
 
+It also tracks the user's actual pain gradient:
+
+- first prove the wrong node stops acting stupid for one low-state route
+- then prove the rescue path survives the failure that made it matter
+- then prove policy meaning survives the same style of handoff
+- only then spend serious honesty on stateful authority
+
 ## What a passed drill still does not mean
 
 This page should keep a few false promotions illegal:
@@ -201,3 +235,25 @@ This page should keep a few false promotions illegal:
 - a well-designed proof matrix does not mean the runtime has already matured
 
 The matrix is only useful if it keeps those ceilings visible in advance.
+
+## The exact contract every serious drill is testing
+
+Every real drill in this repo should be reducible back to this:
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+The drill is only interesting if it tests one uncertain part of that contract:
+
+- first-hop plurality
+- locality determination
+- peer selection
+- fallback durability
+- policy continuity
+- state authority
+
+Otherwise the drill may still be useful, but it is not yet testing the dream
+the user is actually asking the repo to earn.

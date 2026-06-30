@@ -50,6 +50,21 @@ finish the story.
 
 That answer is still different by lane.
 
+It is also different by event.
+
+The repo's real contract is not "several nodes exist."
+It is:
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+Every maturity label in this page is downstream of that event model.
+If a label cannot say how much of that contract is now system-owned for one
+lane, the label is too flattering.
+
 ## The hidden maturity test
 
 A lane is only more mature if one fewer private sentence has to be completed by
@@ -75,6 +90,14 @@ documented, but it has not matured in the way this repo actually cares about.
 
 That is why `better architecture` and `more mature failure lane` have to stay
 separate ideas here.
+
+Another way to phrase the same rule:
+
+> a lane only matures when the wrong healthy node gets less socially
+> embarrassing.
+
+That sentence is harsher than most maturity matrices use.
+It is also closer to what the user is actually trying to get rid of.
 
 ## Maturity levels
 
@@ -146,6 +169,25 @@ proving burden transfer.
 | Drift and convergence control | Research and plans already preserve sync pressure for secrets, Compose state, and node agreement | Intent-shaped | A wrong-node request can still land on a semantically different node revision | Expose drift-detection truth that peer-forward decisions can actually trust |
 | Operator inspectability | The docs and metrics are better than before; dashboards exist for key services including TinyAuth, Headscale, `docker-gen-failover`, RabbitMQ, and database surfaces | Partial proof | The operator can still be required to privately explain why the distributed decision was valid | Surface inspectable evidence for locality, peer choice, and fallback-route origin |
 
+## What the matrix is really scoring
+
+This matrix is not scoring:
+
+- elegance
+- ecosystem status
+- amount of machinery
+- similarity to a cluster product
+
+It is scoring how much of the following sentences still survive:
+
+- `I still personally know where this service really lives.`
+- `I still personally know which peer is actually safe right now.`
+- `I still personally know whether the fallback is real or theatrical.`
+- `I still personally know whether this protected route is still the same route after handoff.`
+- `I still personally know whether the writer is still singular.`
+
+If those sentences do not shrink, the maturity label should stay harsh.
+
 ## The current maturity story in plain English
 
 The repo is already beyond `one reverse proxy and some containers`.
@@ -161,6 +203,11 @@ The current state is best described like this:
 - the burden transfer is still incomplete in the most important failure modes
 
 That is why this page refuses a single global badge.
+
+The repo is already serious enough that the user is not wrong to expect more.
+The problem is not that nothing exists.
+The problem is that the decisive distributed truth is still too often implied,
+remembered, or reconstructed rather than owned.
 
 ## The lanes that are easiest to flatter by accident
 
@@ -276,6 +323,10 @@ This page still forbids these global upgrades:
 - `protected operator routes are effectively preserved across nodes`
 - `stateful services are close enough to HA for normal language`
 - `the stack is one trustworthy cloud already`
+
+One more forbidden sentence should stay visible:
+
+- `the healthy wrong node can already explain itself`
 
 ## The smallest honest maturation sequence
 
