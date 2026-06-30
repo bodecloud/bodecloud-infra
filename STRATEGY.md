@@ -31,6 +31,35 @@ The manual synchronization bottleneck is the heart of the issue. The repo keeps 
 - partial failover behavior
 - too much hidden operator knowledge
 
+This page also has to defend against a common failure mode in infrastructure
+strategy writing:
+
+the strategy sounds stronger simply because it names the right nouns.
+
+That is not enough for this repo.
+
+The user is not short on nouns.
+They are short on options that still feel real after the first request lands on
+the wrong node, the local backend disappears, or the operator has to answer
+"what actually runs where right now?" without resorting to private memory.
+
+So this strategy is not trying to produce a respectable posture.
+It is trying to keep the repo aligned with a harsher benchmark:
+
+> does the next coordination layer actually remove hidden burden, or does it
+> mostly improve the story around the same hidden burden?
+
+There is a second benchmark implied by that one:
+
+> when the ecosystem appears to offer many products, does this repo actually
+> gain another real option, or just another better-dressed version of the same
+> wound?
+
+That question matters because the user frustration is not just "too few
+features."
+It is that too many supposed options stop one layer before truth actually moves
+out of the operator's head.
+
 ## Guiding policy
 
 The repo's strategy is to stay Compose-first for as long as that remains the least painful honest choice, while deliberately adding only the extra coordination layers that solve a real failure mode.
@@ -47,6 +76,31 @@ This is not anti-automation.
 It is anti-premature-platform-ideology.
 
 The goal is not to avoid a control plane forever. The goal is to avoid adopting a heavier one before the repo can justify exactly what pain it removes.
+
+That last clause matters more than it usually does in strategy documents.
+
+For this repo, "heavier" is not just about CPU, RAM, or setup complexity.
+It is about worldview cost:
+
+- what becomes harder to inspect directly
+- what becomes harder to reason about causally
+- what gets hidden behind a more authoritative control surface
+- and whether that hiddenness is actually paying for itself by removing a real
+  sacred-node, wrong-node, or convergence pain
+
+If a future control plane mostly changes legitimacy, fashion, or naming, but
+not the real burden location, it has still not earned itself here.
+
+That is why this strategy should also be read as an anti-fake-option document.
+
+It is not enough for a candidate layer to be:
+
+- popular
+- cluster-shaped
+- highly automated
+- widely described as HA
+
+It has to change who owns the truth on the bad day.
 
 ## What this strategy believes
 
@@ -73,6 +127,34 @@ The strategy keeps several futures open because the repo is still working out wh
 - OpenSVC or similar infra-grade HA
 - Nomad or a comparable lighter scheduler
 - k3s or Kubernetes only when the capability threshold is clearly crossed
+
+This also means the repo should resist category-based comfort.
+
+It is not enough to say:
+
+- "this is the lightweight option"
+- "this is the serious option"
+- "this is the scalable option"
+
+Those labels are too easy to map onto the same fake-option market the user is
+already reacting against.
+
+The only labels that matter are closer to:
+
+- which hidden truth would this own directly
+- which hidden truth would still be socially reconstructed
+- which humiliation on the bad day would still survive even after promotion
+
+That third bullet is a better option filter than most ordinary strategy docs
+ever use.
+
+The repo should keep asking:
+
+- after adopting this layer, what still breaks unless one human knows the
+  missing context privately?
+
+If the answer is "most of the important parts," the layer is still mostly
+cosmetic no matter how mature it sounds.
 
 ### 4. State is the honesty boundary
 
@@ -110,6 +192,12 @@ Why this matters:
 
 Without placement truth, "multi-node" remains partly folklore.
 
+There is a stronger way to say the same thing:
+
+without placement truth, the operator is still partially functioning as the
+control plane even if the repo already contains a large amount of real
+automation and edge machinery.
+
 ### Track 2: Ingress continuity without fake guarantees
 
 Harden the any-node request model so the stack gets better at:
@@ -131,6 +219,27 @@ Why this matters:
 
 This is the nearest honest resilience layer for the repo.
 
+It is also the layer most likely to produce false confidence if it improves
+first.
+
+That is why this track has to stay tied to:
+
+- wrong-node behavior
+- route persistence under the exact failure that triggered fallback
+- semantic continuity after peer handoff
+
+rather than settling for "more nodes answer now" language.
+
+It is also the place where the surrounding ecosystem most often tries to sell
+the user an illusion of choice.
+
+There are endless ways to make more nodes accept traffic.
+There are far fewer ways to make those nodes preserve request meaning once they
+accept it.
+
+This track should therefore be judged by meaning preservation, not traffic
+plurality.
+
 ### Track 3: Bootstrap and environment convergence
 
 Reduce the amount of hidden memory required to bring up a node or keep one aligned.
@@ -145,6 +254,13 @@ This includes work around:
 Why this matters:
 
 If joining or recovering a node still depends on private memory, the system keeps carrying human SPOFs even when containers look distributed.
+
+This is one of the least glamorous parts of the strategy and one of the most
+important.
+
+A system can look advanced at the edge while still be spiritually single-node
+because only one operator memory can really reconstruct it after a messy
+recovery.
 
 ### Track 4: Honest stateful resilience
 
@@ -162,6 +278,11 @@ Why this matters:
 
 This is where the repo either becomes genuinely trustworthy or quietly starts lying.
 
+It is also where fake-option language becomes most dangerous.
+
+For stateful systems, a new proxy, cluster, or replicated storage layer may
+create new machinery without yet creating a trustworthy answer.
+
 ### Track 5: Control-plane justification and escalation
 
 Keep stronger orchestration options alive, but judge them by explicit pain removed rather than industry fashion.
@@ -175,6 +296,18 @@ This includes work around:
 Why this matters:
 
 The repo is not choosing products. It is choosing where complexity should live.
+
+It is also choosing which kinds of hiddenness are acceptable.
+
+Some hiddenness is worth buying if it removes a concrete burden and leaves a
+clear inspectable contract behind.
+Some hiddenness is merely repackaged surrender.
+
+The strategy needs to keep those two things separate or the whole repo drifts
+back into ordinary infrastructure consumerism.
+
+That drift would look like progress from far away.
+It would also recreate the same user frustration under more respectable names.
 
 ## Success metrics
 
@@ -233,3 +366,19 @@ Keep the stack Compose-first and operator-readable while deliberately adding the
 ## Short message
 
 `bolabaden-infra` is trying to build a personal-cloud middle ground: stronger than raw multi-node Compose sprawl, lighter than full orchestrator religion, and honest about where routing success ends and real HA begins.
+
+The phrase "middle ground" is still slightly too gentle on its own.
+
+This repo is really searching for an honesty frontier:
+
+- more explicit shared truth than raw Compose sprawl
+- less worldview capture than heavyweight orchestrator doctrine
+- less fake comfort than the surrounding ecosystem keeps trying to sell
+
+If the repo keeps that sentence intact, it stays aligned with the real dream.
+If it loses that sentence, it will likely regress into one of two failure
+modes:
+
+- documentation that sounds mature while leaving the same burden in place
+- promotion pressure toward a larger platform before the real thresholds have
+  actually been crossed

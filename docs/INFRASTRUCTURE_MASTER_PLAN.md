@@ -64,6 +64,20 @@ So this plan should be read as:
 - a serious promotion candidate list
 - not a claim that the repo has already crossed those thresholds
 
+It should also be read as a defense against fake-option drift.
+
+This repo is not short on products, tutorials, or cluster stories.
+It is short on options that still feel real after the request lands on the
+wrong node, the local backend disappears, or the operator has to answer
+"what actually runs where right now?" without reconstructing it from memory.
+
+That means the plan is not just a to-do list.
+It is also an anti-self-deception device.
+
+Each module only matters if it changes where the truth actually lives.
+If a module merely improves the story around the same private operator burden,
+it is not a real step toward the user's dream.
+
 The current live repo already proves:
 
 - a serious root `docker-compose.yml` entrypoint
@@ -89,6 +103,17 @@ deserving of a heavyweight solution.
 It means the repo already knows many of the places where hidden operator labor
 is still substituting for explicit shared truth.
 
+That is the more useful reading of "master plan" here.
+
+It does not mean:
+
+- the repo already picked its final platform
+- the modules all deserve implementation as written
+- each named gap implies a separate product or subsystem should exist
+
+It means the repo can at least name where the hidden labor is still leaking
+through.
+
 ### Core Principles
 
 | Principle | Description |
@@ -100,6 +125,20 @@ is still substituting for explicit shared truth.
 | **Inline Configs** | Docker Compose configs are inline YAML, not external files. |
 | **Current-State Truth Matters** | Plans and templates must not outrun the question of what nodes actually know at request time. |
 | **Template-Ready Later** | Forkability matters, but only after the real control and proof boundaries are understood honestly. |
+
+### How to read the rest of this file without lying to yourself
+
+For every module below, keep four questions attached:
+
+1. what burden is this module actually trying to remove?
+2. what truth would the system own directly if it worked?
+3. what truth would still remain socially reconstructed by the operator?
+4. what proof would be required before the module counts as more than a nice
+   plan?
+
+If those questions disappear, the plan can start sounding complete simply
+because it is detailed.
+That is exactly the failure mode this repo keeps trying to escape.
 
 ***
 
@@ -153,6 +192,10 @@ So every box in this section should be read with a second question attached:
 
 > which hidden human burden would this actually remove, and which one would it
 > still leave socially reconstructed?
+
+If the answer is "most of the hard parts would still be socially
+reconstructed," then the box is still mostly architecture theater no matter
+how coherent the drawing looks.
 
 ```
                     ┌─────────────────────────────────────┐
