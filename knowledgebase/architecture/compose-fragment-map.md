@@ -1,207 +1,128 @@
 # Compose Fragment Map
 
-This page explains how the priority implementation is partitioned **right now**.
+This page reconstructs how the priority implementation is actually assembled
+from the root
+[`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+and the active files under
+[`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/).
 
-It is not a directory tour.
-It is a control-surface map for the real runtime the user keeps pointing back
-to:
+It is not here to admire modularity.
+It is here to answer the harder operator question:
 
-- the root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-- the included `compose/` fragments
-- the surrounding side paths that are visible in the repo but not equal in
-  authority
+> when someone says "the stack," which files are really carrying the present
+> burden, and which files are merely nearby futures, parked experiments, or
+> misleading aggregates?
 
-This matters because the tree contains several different kinds of truth at the
-same time:
+That distinction matters because this repo contains several classes of truth at
+once:
 
-- the live Compose-first stack
-- alternate or future directions
-- generated snapshot files
-- parked or optional service surfaces
+- the live Compose-first runtime
+- side-path Compose futures
+- generated aggregate views
+- optional or parked stacks
+- planning and research pressure that points beyond the live runtime
 
-If the docs flatten those into one cheerful blob called "the stack," the reader
-cannot tell what actually governs the runtime today.
-This page is therefore doing more than mapping files.
-It is reconstructing a tree that already contains several competing futures at
-once, without pretending those futures have already reconciled into one runtime
-truth.
-
-That matters because one of the user's deepest frustrations is not just
-complexity.
-It is the feeling that the ecosystem keeps pretending the option space is
-clearer than it is.
-
-This tree is one of the places where that false clarity can easily be
-manufactured:
-
-- live runtime files
-- alternate futures
-- generated aggregates
-- parked domains
-
-can all be narrated as if they are one coherent stack unless the docs keep the
-authority boundaries explicit.
+If those classes are blended together, the tree starts sounding like it offers
+more genuine options than it really does.
+That is one of the exact wounds this knowledgebase is supposed to stop hiding.
 
 ## What this page is and is not allowed to prove
 
 This page is allowed to prove:
 
-- where the tracked runtime is actually authored
-- which domains the root Compose runtime already covers
-- how much operational surface still lives in the Compose-first implementation
-- which fragment files are part of the real assembly path
+- where the priority runtime is authored today
+- which Compose fragments are part of the live root include path
+- which major burdens still live directly in the root file
+- which nearby Compose files are real but not part of the active runtime path
+- where readers are most likely to confuse breadth with actual anti-SPOF
+  maturity
 
 This page is not allowed to prove:
 
-- that multi-node wrong-node routing already works generically
-- that fragment modularity equals resilient distributed control
-- that edge breadth means failover, fallback, or peer-forward maturity
-- that the repo has already crossed from Compose runtime into system-owned
-  placement truth
-
-## Quick claim router
-
-If the question is:
-
-- "Where does the real runtime live right now?" this page is one of the best
-  authority surfaces.
-- "Which fragments matter to the current implementation?" this page is meant to
-  answer that directly.
-- "Has the repo already solved multi-node failover?" this page is only a
-  supporting source and must defer to the failure-model, HA, and proof-drill
-  pages.
-- "Does this prove a distributed control plane exists?" no. It proves runtime
-  assembly shape more than distributed truth.
-
-## The live entrypoint
-
-The live entrypoint is the root
-[`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml).
-
-That file is not just a stub that points elsewhere. It:
-
-- defines the base networks
-- declares shared configs and secrets references
-- owns several core services directly
-- includes the active fragments that extend the runtime by domain
-
-That means any architecture reading that starts from a derived mega-file,
-semi-parsed file, or side-path fragment before starting from root Compose is
-already reading the repo in the wrong order.
+- that wrong-node routing already works generically
+- that fragment partitioning equals shared placement truth
+- that edge sophistication equals peer-forward correctness
+- that "many Compose files" means the repo already has a healthy option space
+- that a side-path fragment has earned promotion just because it is thoughtful
 
 ## Strongest honest current answer
 
-The root Compose runtime already owns a broad and serious operational surface,
-which means the repo is stronger on runtime shape than it is on distributed
-truth. The honest reading is not that Compose is merely legacy scaffolding
-waiting to be replaced. The honest reading is that Compose still is the
-implementation center of gravity, while the anti-SPOF, no-single-sacred-box
-dream remains only partially promoted into system-owned behavior.
+The live runtime is still decisively Compose-first.
+The root file is still the canonical assembly surface.
+The fragment set is broad enough that the repo already feels post-Compose in
+its burdens, but not post-Compose in its truth ownership.
 
-## What still does not count as fragment-map insight
+That is the real reading.
 
-This page should also reject a very common false upgrade.
+Not:
 
-The following still do not count as a meaningful understanding of the runtime
-shape:
+- "this is just a simple Compose repo"
 
-- knowing which fragment owns which domain
-- seeing that the include graph is broad
-- noticing that the root file is still important
-- describing the domains more cleanly than before
-- treating modularity as if it were already a resilience layer
+and not:
 
-Those things improve orientation.
-They still do not answer whether the assembled runtime has stopped depending on
-private placement memory or fragile rescue semantics.
+- "this is already a distributed control plane with a few rough edges"
 
-## What a real fragment-authority proof packet would have to contain
+The root runtime is substantial.
+The missing middle truth layer is still substantial too.
 
-Before this page is used to support stronger language like "the runtime shape
-is now clearly reconstructed," it should point to a packet containing:
+## Authority ladder
 
-- the exact fragment or root-owned surface being credited
-- the narrower operational burden that surface really owns
-- the adjacent burden it still does not own
-- the reason that domain cannot yet be widened into wrong-node or HA proof
+If a contributor is trying to understand how the live runtime is put together,
+read in this order:
 
-Without that packet, tree literacy can still impersonate architecture closure.
+1. root
+   [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+2. the active include targets named by the root file
+3. runtime-boundary pages such as
+   [current-compose-runtime.md](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/architecture/current-compose-runtime.md)
+   and
+   [failure-model-and-maturity.md](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/architecture/failure-model-and-maturity.md)
+4. only then side-path Compose files and planning material
 
-## What the root file tells us structurally
+If someone starts with `compose/docker-compose.everything.yml`,
+`compose/docker-compose.parsed.yml`, or a future-facing fragment before reading
+the root file, they are already skipping the repo's main truth surface.
 
-The root file already encodes one of the repo's strongest truths:
+## What the root file still owns directly
 
-- this is still a Compose-first system
-- but it is no longer a small, one-surface Compose system
+The root file is not just a loader.
+It still directly owns important runtime language and several important
+services.
 
-The root owns shared network language such as:
+### Shared network language
+
+The root file defines these shared networks:
 
 - `publicnet`
 - `backend`
 - `warp-nat-net`
 
-and then pulls in the active fragment set that creates most of the repo's real
-architecture pressure.
+That proves the runtime is already modeling different traffic classes
+explicitly.
+It does not prove that any receiving node already knows the right service
+meaning of an incoming request.
 
-That is the important nuance.
-The root file is still the contract, but the contract is now broad enough that
-it behaves like several domains glued together under one authoring surface.
+### Shared config and secret language
 
-That is also why the repo feels like it is already post-Compose in its
-problems even while Compose remains central in authorship.
-The user is not confused about where the YAML lives.
-They are frustrated that the surrounding truth still does not compose into one
-reliable request-preserving platform.
+The root file also carries shared config and secret surfaces such as:
 
-## Active fragments included by the root stack
+- secret `signing_secret`
+- config `watchtower-config.json`
+- session-manager assets
+- inline Homepage configuration blobs
 
-These fragments are part of the current live merged stack:
+That proves Compose is being used as a real configuration surface.
+It does not prove topology truth, current placement truth, or peer eligibility
+truth.
 
-| Fragment | Primary responsibility | Why it exists | Main risk surface |
-|---|---|---|---|
-| `compose/docker-compose.coolify-proxy.yml` | Public ingress, auth, middleware, edge security | Concentrates external exposure, identity edges, and route-generation pressure. | Routing bugs, auth ordering, failover generation, public exposure, false confidence about dynamic HA |
-| `compose/docker-compose.docs.yml` | Documentation serving | Keeps docs inside the same routed infrastructure they are describing. | The docs inherit the same ingress truth gaps they are documenting |
-| `compose/docker-compose.firecrawl.yml` | Crawling, browser automation, and queue-backed work | Concentrates worker coordination plus state-bearing support services. | Worker orchestration, Postgres/Rabbit state, restart semantics |
-| `compose/docker-compose.headscale.yml` | Private mesh and identity backbone | Provides private node-to-node path assumptions the wider multi-node dream depends on. | Hidden SPOF risk if treated as coordination truth without redundancy |
-| `compose/docker-compose.llm.yml` | LLM gateway, model surfaces, MCP-style tooling | Concentrates model-facing tooling, auxiliary datastores, and API aggregation. | Secret sprawl, drift, auxiliary state, API dependency layering |
-| `compose/docker-compose.metrics.yml` | Metrics, logs, alerting, dashboards | Gives the repo visibility into itself. | Operational complexity and the risk of using observability breadth as a substitute for recovery truth |
-| `compose/docker-compose.stremio-group.yml` | Media, debrid, search, and related apps | Represents one of the largest heterogeneous workload clusters in the repo. | External dependency churn, storage sprawl, network quirks, app drift |
-| `compose/docker-compose.warp-nat-routing.yml` | Alternate routing and controlled egress experiments | Encodes network-level ambitions that exceed normal app hosting. | Route correctness, privilege sensitivity, hidden network complexity |
-| `compose/docker-compose.wishlist.yml` | Small standalone app include | Shows the root can still absorb simple app surfaces without forcing a new domain model. | Low direct risk, but still part of naming and routing complexity |
+### Root-owned services
 
-## What this fragment set means
-
-The root include set is already telling the story of the repo's real operating
-domains:
-
-- edge control
-- private coordination
-- observability
-- app/workload clusters
-- network experiments
-
-That is not mere organization.
-It is where the user’s real frustrations are already materialized:
-
-- too many important things happening at the edge
-- too many services depending on one Compose worldview
-- too many futures visible at once
-- too much pressure to invent a control plane without admitting it yet
-
-That last line should stay sharp.
-One of the most important things this page can help a contributor see is that
-the repo is not simply growing "more Compose."
-It is accumulating exactly the kinds of burdens that make a missing middle
-truth layer unavoidable to even talk about honestly.
-
-## Services defined directly in the root file
-
-The root file also owns a substantial set of services directly rather than pushing everything into fragments.
-
-Representative root-owned services include:
+The root file still directly defines a serious workload set, including:
 
 - `mongodb`
 - `redis`
+- `dcef`
+- `chat-analytics`
 - `searxng`
 - `code-server`
 - `homepage`
@@ -213,186 +134,201 @@ Representative root-owned services include:
 - `dns-server`
 - `telemetry-auth`
 - `bolabaden-nextjs`
-- several `biodecompwarehouse*` services
+- `biodecompwarehouse`
+- `biodecompwarehouse-mcp`
+- `biodecompwarehouse-bsim-server`
+- `biodecompwarehouse-aio`
+- profile-gated `session-manager`
 
-## Why this matters
+This matters because the root file is still one of the main places where real
+infrastructure decisions are made.
+Any future promotion to a narrower controller, helper layer, or orchestrator
+must account for the fact that the root file is not residue.
+It is still the live platform surface.
 
-The root file is not just glue.
-It is still a major authoring surface for:
+## The active include path
 
-- important datastores
-- dashboards
-- socket mediation
-- update automation
-- custom project services
-- operator-facing utilities
+The root file currently includes these fragments:
 
-That means any future promotion to a stronger control layer cannot honestly
-treat the root file as residue.
-It contains real infrastructure decisions today.
+1. `compose/docker-compose.coolify-proxy.yml`
+2. `compose/docker-compose.docs.yml`
+3. `compose/docker-compose.firecrawl.yml`
+4. `compose/docker-compose.headscale.yml`
+5. `compose/docker-compose.llm.yml`
+6. `compose/docker-compose.metrics.yml`
+7. `compose/docker-compose.stremio-group.yml`
+8. `compose/docker-compose.warp-nat-routing.yml`
+9. `compose/docker-compose.wishlist.yml`
 
-## The architectural reading hidden in the fragment map
+That list is not trivia.
+It is the present-tense answer to "which fragments are actually part of the
+priority implementation?"
 
-The fragment layout reveals at least five meaningful domains.
-Those domains are the reason the repo no longer feels like "just Docker
-Compose," even though Docker Compose is still the live baseline.
-The interesting part is not merely that the domains exist.
-It is that they create pressure for a stronger control layer while still
-refusing to agree on which stronger layer has actually earned promotion.
+Everything else in `compose/` must be read with more caution.
 
-## 1. Edge control plane
+## Fragment burden ledger
 
-Dominant surfaces:
+The cleanest way to read the fragment set is not as a directory tour.
+It is as a burden ledger: what does each fragment visibly own, and what nearby
+claim must still be refused?
 
-- Traefik
-- CrowdSec
-- TinyAuth
-- nginx-based extensions
-- DDNS
-- route generation
+| Active fragment | It visibly owns | Evidence examples in the file tree | What the docs must still refuse |
+| --- | --- | --- | --- |
+| `compose/docker-compose.coolify-proxy.yml` | public ingress, auth, middleware, DDNS, edge security, helper-driven failover generation | `traefik`, `tinyauth`, `crowdsec`, `cloudflare-ddns`, `docker-gen-failover`, `autokuma`, `whoami`, file-provider output to `traefik/dynamic/failover-fallbacks.yaml` | that sophisticated ingress already equals generic wrong-node dignity or protected-route continuity |
+| `compose/docker-compose.docs.yml` | docs serving inside the same routed platform | `mkdocs` is part of the active include path | that the documentation surface escapes the same ingress truth limits it is describing |
+| `compose/docker-compose.firecrawl.yml` | browser automation, queue-backed workers, support state | `playwright-service`, `firecrawl`, `nuq-postgres`, `rabbitmq` | that worker and queue presence somehow upgrades stateful failover truth |
+| `compose/docker-compose.headscale.yml` | private mesh identity and connectivity assumptions | `headscale-server`, `headscale`, active SQLite config at `/var/lib/headscale/db.sqlite` | that reachability or node identity equals valid forwarding truth |
+| `compose/docker-compose.llm.yml` | AI gateway, tool exposure, caches, auxiliary state | `open-webui`, `litellm`, `litellm-postgres`, `qdrant`, `mcp-proxy`, `mcpo`, `gptr` | that app-level gateway failover solves node-level request preservation |
+| `compose/docker-compose.metrics.yml` | metrics, logs, dashboards, probes, alerts | `prometheus`, `victoriametrics`, `grafana`, `loki`, `alertmanager`, exporters, blackbox probes, dashboards for `docker-gen-failover`, `tinyauth`, `whoami`, `headscale`, `watchtower`, `mongodb`, `redis` | that observability breadth equals automated recovery or shared runtime truth |
+| `compose/docker-compose.stremio-group.yml` | media/search/debrid/helper workload cluster | heterogeneous app bundle with proxying, storage, and external-provider dependence | that workload breadth creates unified placement truth or resilience semantics |
+| `compose/docker-compose.warp-nat-routing.yml` | alternate egress shaping and network behavior control | `warp-net-init`, `warp-nat-gateway`, `warp_router`, `ip-checker-warp`, inline scripts | that packet-path cleverness equals preserved application meaning |
+| `compose/docker-compose.wishlist.yml` | a small narrow app surface | active lightweight app include | that a simple stateless app surface proves the hard routes are solved |
 
-Why this domain matters:
+## What the active fragment set actually says about the repo
 
-- it controls what the outside world actually experiences
-- it is where wrong-node success either becomes real or collapses into theater
-- it is also where the repo carries one of its clearest known integrity failures: route generation that is not yet trustworthy under backend stop conditions
+The fragment set already tells a more specific story than "large Compose
+repo."
 
-## 2. Private coordination plane
+It says the priority runtime is simultaneously carrying:
 
-Dominant surfaces:
+- edge and identity pressure
+- private mesh pressure
+- observability pressure
+- state and worker pressure
+- media/app sprawl pressure
+- network behavior pressure
 
-- Headscale
-- DNS and mesh-related services
-- WARP routing helpers
+That is why the repo no longer feels like simple container hosting.
+The operator is already being asked to reconcile the kinds of burdens that
+normally force a system to either:
 
-Why this domain matters:
+- expose shared truth clearly
 
-- the multi-node dream depends on trustworthy node-to-node private paths
-- but these services do not automatically equal placement truth, convergence truth, or failover correctness
+or:
 
-This is a good example of why "there is a mesh" is not enough evidence by
-itself.
+- quietly make one human keep stitching the truth together by hand
 
-## 3. Observability plane
+The current tree proves the burden set.
+It does not yet prove that the burden transfer has happened.
 
-Dominant surfaces:
+## Root versus fragment: where the pressure really lives
 
-- Prometheus
-- VictoriaMetrics
-- Grafana
-- Loki
-- exporters
-- Alertmanager
+One easy mistake is to imagine the root file as a bootstrap layer and the
+fragments as the "real stack."
+That is not how this repo reads honestly.
 
-Why this domain matters:
+The root file still owns:
 
-- the repo has already invested significantly in seeing itself
-- but observability breadth does not equal automated recovery truth
+- shared networks
+- shared config and secret naming
+- direct TCP-exposed stateful services such as `mongodb` and `redis`
+- operator-facing utilities such as `code-server`, `dozzle`, and `portainer`
+- the docs and site-adjacent world around `bolabaden-nextjs`, `homepage`, and
+  `telemetry-auth`
 
-This is another place where the docs must refuse false inflation.
-A visible failure is still a failure until recovery semantics are real.
+The fragments then extend that root with additional domains.
 
-## 4. Workload clusters
+So the better reading is:
 
-Dominant surfaces:
+- the root file is still a major workload and policy surface
+- the fragments widen the domain footprint
+- the repo's missing truth layer has to reconcile both, not replace one neat
+  bucket
 
-- media cluster
-- llm cluster
-- firecrawl/browser-automation cluster
-- custom project apps
+## Important side-path Compose files that are not in the active include path
 
-Why this domain matters:
+The repo also contains meaningful Compose files that are not currently part of
+the live root include graph.
+They matter, but they do not carry the same authority.
 
-- this is where heterogeneity becomes scheduling, storage, and drift pressure
-- these clusters are also where control-plane promotion decisions are most likely to be earned later
+| Side-path file | Why it matters | Why it is dangerous if overread |
+| --- | --- | --- |
+| `compose/docker-compose.authentik.yml` | preserves a real alternate identity direction | it can be mistaken for present auth authority when TinyAuth is the visible live edge path |
+| `compose/docker-compose.l4-ingress.yml` | preserves separate thinking for L4 and raw TCP ingress | it can be confused with active runtime proof for TCP failover |
+| `compose/docker-compose.nomad.yml` | proves scheduler exploration is real, not imaginary | it can be mistaken for an already-earned control-plane decision |
+| `compose/docker-compose.core.yml` | captures alternate service grouping instincts | it can be mistaken for the present canonical assembly path |
+| `compose/docker-compose.warp.yml` and `compose/docker-compose.vpn-docker.yml` | preserve alternate network and egress approaches | they can be confused with the active WARP routing path |
+| `compose/docker-compose.parsed.yml`, `compose/docker-compose.semiparsed.yml`, `compose/docker-compose.semifullparsed.yml`, `compose/docker-compose.everything.yml` | show aggregate or transformed views of the stack | they can look more "complete" than the root file and tempt readers into treating generated output as canonical truth |
+| `compose/docker-compose.unused.yml`, `compose/docker-compose.unsend.yml`, `compose/docker-compose.wordpress.yml`, `compose/docker-compose.plex.yml` | show template appetite, parked domains, and alternate futures | they can inflate the perceived option space without earning present authority |
 
-## 5. Network and egress experimentation
+## The most dangerous mistakes this page is trying to stop
 
-Dominant surfaces:
+### Mistake 1: file count as option-space proof
 
-- WARP routing
-- alternate route-control helpers
-- traffic-path experiments
+"There are many Compose files" does not mean "the user now has many mature
+choices."
 
-Why this domain matters:
+Some files are:
 
-- the repo's dream is not only "host apps," but also "shape how requests and egress behave across nodes"
-- that means network experimentation is not peripheral; it is part of the main anti-SPOF and anti-sacred-node pressure
+- live runtime surfaces
+- exploratory futures
+- generated views
+- historical parking lots
 
-## Important non-live and side-path Compose files
+Those are not interchangeable forms of maturity.
 
-The tree also contains Compose files that are not part of the active root
-include path, but still matter for interpretation.
+### Mistake 2: modularity as resilience
 
-| File | Why it matters |
-|---|---|
-| `compose/docker-compose.authentik.yml` | Signals a real alternate identity direction that should not be confused with the current primary auth path. |
-| `compose/docker-compose.l4-ingress.yml` | Proves the repo treats plain TCP and L4 handling as a separate domain from HTTP ingress. |
-| `compose/docker-compose.nomad.yml` | Shows scheduler/control-plane exploration is not theoretical. |
-| `compose/docker-compose.core.yml` | Preserves a simpler or alternate foundational service grouping that still reflects important design thinking. |
-| `compose/docker-compose.warp.yml`, `compose/docker-compose.vpn-docker.yml` | Preserve alternate network and egress strategies. |
-| `compose/docker-compose.parsed.yml`, `compose/docker-compose.semiparsed.yml`, `compose/docker-compose.semifullparsed.yml`, `compose/docker-compose.everything.yml` | Derived or aggregated views that can look authoritative if read carelessly. Some even carry hardcoded-looking IP-era assumptions. They are not the canonical live entrypoint. |
-| `compose/docker-compose.unused.yml`, `compose/docker-compose.unsend.yml`, `compose/docker-compose.wordpress.yml`, `compose/docker-compose.plex.yml` | Parked or optional surfaces that still reveal how broad the repo's template appetite and alternate futures have been. |
+A runtime partitioned into neat fragments can still leave the operator owning
+the most important answer:
 
-## The most dangerous reading mistake
+> what should happen to this request on this node right now?
 
-The most dangerous reading mistake is to assume:
+Fragment cleanliness helps orientation.
+It does not by itself transfer that burden into the system.
 
-- if a Compose file exists, it is part of the live stack
-- if a generated aggregate exists, it is the canonical truth
-- if a fragment describes a control-plane future, the runtime already behaves that way
+### Mistake 3: aggregate output as authority
 
-This page exists to keep those categories separate.
+Derived files can feel more total and therefore more truthful.
+In this repo, that is a trap.
+The root file plus its active include path is the authority surface.
+Generated aggregates are downstream views, not upstream truth.
 
-It also exists to stop a subtler mistake:
+### Mistake 4: side-path exploration as current behavior
 
-- assuming that because several futures are visible, the repo must already
-  have a rich and healthy option space
+The repo is full of real thought.
+Real thought is not the same thing as promoted runtime behavior.
 
-Not necessarily.
-Some of those futures are genuinely different.
-Some are variations on the same hidden-burden story.
-One of the documentation job here is to stop that distinction from being
-blurred by file count alone.
+That distinction matters especially in a repo whose whole theme is:
 
-## What this page actually proves
+- no fake closure
+- no fake HA
+- no fake answer just because it sounds more adult
 
-The live stack is not confusing merely because there are "too many files."
+## What this page can honestly support elsewhere
 
-It is confusing because several futures are visible in the tree at once:
+This page can support sentences like:
 
-- Compose-first live operation
-- exploratory control-plane work
-- alternate auth and ingress directions
-- generated aggregate snapshots
-- optional exhaustive app surfaces
+- "the active runtime still centers on root Compose"
+- "the root file directly owns both shared infrastructure language and major
+  services"
+- "the current runtime is widened by nine active fragments"
+- "the tree contains active, side-path, generated, and parked Compose files
+  that must not be flattened into one authority class"
 
-That is why the knowledgebase has to keep separating:
+This page cannot support sentences like:
 
-- current live truth
-- side-path or research truth
-- generated or archival views
-
-Otherwise the repo becomes impossible to reason about under pressure.
-Under calm conditions, a messy tree can still feel navigable.
-Under failure or migration pressure, confusing current truth with side-path
-truth is exactly how the operator gets forced back into hidden reconstruction.
-
-That is especially important here because the user is not asking for generic
-tidiness.
-The user is asking which surfaces are actually carrying the no-Swarm,
-multi-node, anti-SPOF pressure today.
+- "the repo already has a coherent distributed control plane"
+- "the fragment graph already proves anti-SPOF behavior"
+- "the generated aggregate files are a better truth source than the root file"
+- "the side-path fragments mean the platform already has many mature fallback
+  architectures"
 
 ## Bottom line
 
-The fragment map shows that the repo is already partitioned into several real
-domains, while still insisting that root Compose remains the canonical runtime
-contract.
+The fragment map proves that the priority implementation is still one
+Compose-first runtime assembled from a root file plus a live include set.
+It also proves that the tree contains several neighboring futures, helper
+directions, and misleading aggregates that can easily be mistaken for present
+authority.
 
-That is exactly the tension the rest of the documentation has to preserve:
+That is the real documentary burden here.
+The problem is not merely "too many files."
+The problem is that the tree can be narrated as richer, more converged, and
+more option-complete than it really is unless the docs keep saying:
 
-- this is still one Compose-first system
-- but it is already carrying enough domain pressure that future control layers,
-  promotions, and narrower platforms are visible in the tree
-
-If the docs flatten that into either "just Compose" or "already a distributed platform," they stop telling the truth.
+- this is live
+- this is nearby
+- this is generated
+- this is parked
+- and none of those categories should be promoted by mood alone
