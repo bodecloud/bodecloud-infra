@@ -2,18 +2,18 @@
 
 This page defines the acceptance bar for `bolabaden-infra`.
 
-It is not here to celebrate sophistication.
-It is here to stop the repo from quietly answering a smaller question than the
-user actually cares about.
+It exists to stop the repo from quietly answering a smaller, calmer question
+than the one the user is actually trying to solve.
 
-The smaller neighboring questions are:
+The user is not really asking:
 
-- how do we make Docker feel more clustered?
-- how do we add better failover helpers?
-- how do we keep Compose while scaling a little?
-- how do we document the moving parts more clearly?
+- how do we make Docker feel a little more clustered?
+- how do we add nicer failover helpers?
+- how do we keep Compose while scaling modestly?
+- how do we write prettier architecture docs?
 
-Those are all adjacent.
+Those are neighboring questions.
+
 They are not the contract.
 
 ## The contract in one sentence
@@ -21,70 +21,81 @@ They are not the contract.
 Several ordinary Docker nodes should start behaving like one
 request-preserving personal cloud while keeping Compose as the readable
 authoring contract and refusing sacred-node folklore, fake HA language, and
-heavy controller tax unless that tax clearly removes a real burden.
+heavy controller tax unless that extra complexity clearly removes a real hidden
+operator burden.
 
-That is the benchmark every architecture page answers to.
+That sentence is what every architecture page in this repo is supposed to
+answer to.
 
-## What this page is and is not allowed to prove
+## The dream underneath the contract
+
+The user's deeper dream is not merely uptime.
+
+It is dignity under wrong-node entry.
+
+That means:
+
+- the first hop should stop feeling lucky
+- the wrong node should stop feeling humiliating
+- route rescue should stop depending on private memory
+- auth and middleware should stop turning to mush during peer-forward handoff
+- stateful services should stop being narrated more optimistically than their
+  real authority model deserves
+
+If those things do not improve, the repo may still become more elaborate
+without getting meaningfully closer to the real target.
+
+## What this page is allowed to do
 
 This page is allowed to:
 
-- define what success actually means
-- preserve the user's real complaint instead of a calmer neighboring one
-- state what success has to feel like during wrong-node entry and backend loss
-- separate stateless HTTP, protected HTTP, TCP, and stateful lanes
-- forbid stronger sentences until the runtime earns them
+- define success in the user's actual terms
+- preserve the user's impatience with fake relief
+- separate HTTP, protected HTTP, TCP, and stateful lanes
+- state what a good path and a bad path must feel like
+- forbid stronger language until the runtime actually earns it
 
 This page is not allowed to:
 
-- claim the current runtime already satisfies the contract
-- treat better prose as proof of relief
+- pretend the current runtime already satisfies the contract
+- treat clearer prose as proof of operator relief
 - flatten all service classes into one maturity bar
-- let first-hop plurality impersonate request preservation
+- let plural DNS impersonate end-to-end failover
 
 ## Strongest honest current answer
 
-The docs are now much clearer about the contract than the runtime is.
-That is useful, but it is not relief.
+The docs now understand the contract more clearly than the runtime currently
+proves it.
 
-The runtime still meets the contract only unevenly.
-The main unmet clauses are still the decisive ones:
+That is progress.
+It is not completion.
 
-- wrong-node requests are not yet generically proven
-- backend-loss fallback is not yet proven to survive the failure that triggers
-  it
+The current runtime still leaves the hardest clauses unmet:
+
+- generic wrong-node success is not yet proven
+- backend-loss fallback is not yet proven to survive the triggering failure
 - protected-route parity after handoff is not yet proven
-- stateful authority is still much harsher than edge reachability
+- stateful authority is still far harsher than edge reachability
+- current placement truth is still more architectural pressure than proven
+  runtime authority
 
 So the contract remains intentionally uncomfortable.
 
-## What the contract is trying to buy
+## The operator relief this contract is trying to buy
 
-The contract is not only technical.
-It is trying to buy a specific kind of operator relief:
+This repo is supposed to remove very specific private burdens from the
+operator's head.
 
-- the first hop no longer feels lucky
-- the wrong node no longer feels humiliating
-- the rescue path no longer feels like private folklore
-- a protected route remains the same protected route after handoff
-- stateful services stop being described more optimistically than their writer
-  authority deserves
+The contract is moving in the right direction only when fewer moments still
+sound like this:
 
-If those do not move, the contract is not met no matter how adult the stack
-sounds.
+- "I know which node really hosts that service"
+- "I know which peer is actually safe right now"
+- "I know that helper route will disappear if the backend dies"
+- "I know that the forwarded route is not semantically the same one"
+- "I know this stateful hostname only looks portable from the outside"
 
-## The private completion test
-
-The contract only becomes real when fewer important moments still sound like
-this:
-
-- "I know which node really has that service"
-- "I know which peer is actually safe for that handoff"
-- "I know that helper loses the route if the wrong thing dies"
-- "I know the forwarded route is not semantically the same one"
-- "I know that stateful hostname only looks portable from the outside"
-
-Those are the exact private completions the system is supposed to eliminate.
+Those private completions are the real human SPOF the repo is trying to kill.
 
 ## The anti-benchmark
 
@@ -93,21 +104,21 @@ true:
 
 - the safest answer to "what runs where right now?" is still private operator
   memory
-- a healthy wrong node cannot determine local versus remote service ownership
-- peer choice is mostly reachability plus hope
-- the rescue route disappears during the failure it is meant to absorb
-- a protected forwarded route is not the same protected route from the user's
-  perspective
+- a healthy receiving node cannot determine local versus remote service
+  ownership from shared truth
+- peer choice is still mostly reachability plus hope
+- the rescue route disappears during the failure it exists to cover
+- a forwarded protected route does not remain the same protected service
 - a stateful service is described as resilient because it is reachable, not
-  because authority and promotion are defined
+  because write authority and promotion are defined
 
 If one of those survives, the lane may be better understood.
 It is not contract-satisfying.
 
-## Proof bundle standard
+## The proof-bundle standard
 
-Before the docs claim the contract is being met in any lane, they should point
-to a bundle containing:
+Before the docs claim the contract is being met in any lane, they should be
+able to point to a proof bundle containing:
 
 - the exact route or service class exercised
 - the node that received the first hop
@@ -115,38 +126,41 @@ to a bundle containing:
 - evidence that the next decision was system-owned rather than privately
   reconstructed
 - evidence that the user-visible contract stayed the same after handoff
-- the explicit sentence naming what stronger clauses are still unmet
+- the explicit sentence naming which stronger clauses remain unmet
 
-Without that bundle, the docs may still be describing orientation rather than
-relief.
+Without that bundle, the docs may be giving orientation rather than relief.
 
 ## Acceptance criteria by lane
 
-### 1. Any-node entry stops feeling like a coin flip
+### 1. Any-node entry stops being a coin flip
 
 Acceptance means:
 
 - more than one public node can receive the first hop
-- the docs do not confuse that with end-to-end failover
-- the next decision after the first hop is moving from private memory toward
-  shared system-owned truth
+- the docs do not confuse that with full failover
+- the next decision after the first hop is increasingly based on shared
+  current truth rather than private recollection
 
-What does not count:
+This is why Cloudflare DDNS and plural A records matter, but only as the first
+step.
 
-- multiple DNS records by themselves
-- one successful route from the preferred node
-- "ingress is redundant now"
+They help with sacred-ingress reduction.
+They do not finish the contract.
 
-### 2. Honest locality remains possible
+### 2. Locality remains first-class
 
-If the target service is local to the receiving node, the platform should keep
-that path local.
+If the requested service is already local to the receiving node, that path
+should stay local.
 
 Acceptance means:
 
 - the node can determine locality honestly
-- local-first behavior is visible, not accidental
-- the docs do not narrate peer-forwarding as if locality stopped mattering
+- local-first behavior is deliberate, not accidental
+- peer-forwarding does not get narrated as though locality has become
+  irrelevant
+
+The user is not trying to erase locality.
+The user is trying to make locality non-fragile.
 
 ### 3. Wrong-node entry becomes survivable
 
@@ -161,38 +175,48 @@ the receiving node should be able to determine:
 - whether the route survives the relevant failure
 - whether the user-visible meaning survives the handoff
 
-If those still require private completion by the operator, the central
+If any of that still depends on private completion by the operator, the core
 contract is still unmet.
 
-### 4. Protected routes preserve policy meaning after handoff
+### 4. Protected routes remain the same protected routes
 
-For protected HTTP surfaces, success is stricter than "something answered."
+This lane is stricter than plain stateless HTTP.
 
-The following should survive peer handoff:
+For protected routes, acceptance means peer-forward handoff preserves:
 
 - auth challenge behavior
 - forward-auth behavior
-- middleware ordering
-- security filtering
-- path and header behavior that define what the route actually is
+- middleware order
+- filtering and trust-boundary assumptions
+- path/header semantics that define what the route actually is
 
-If a forwarded route returns content but no longer behaves like the same
-protected service, that is failure.
+The live runtime already gives this lane teeth because real surfaces already
+use `nginx-auth@file`, and TinyAuth already exists as a live forward-auth
+component.
+
+That means the repo has no excuse to flatten protected-route proof into "it
+returned content."
 
 ### 5. Fallback survives the failure that made fallback necessary
 
-This clause exists because the repo already knows the `docker-gen-failover`
-trap:
+This clause exists because the repo already knows one of its real traps:
 
-- it is directionally relevant
-- it can still delete routes when the backend disappears
+- `docker-gen-failover` is directionally relevant
+- it is a real part of the runtime
+- helper existence is still weaker than route durability
 
 Fallback that evaporates on the bad day is theater.
 
-### 6. The control surface stays legible
+The user does not want theatrical HA.
+The user wants the burden moved.
 
-The user is not refusing heavier orchestration out of nostalgia.
-They are refusing to prepay abstraction tax for a control plane that still
+### 6. The control surface stays inspectable
+
+The repo is Compose-first for a reason.
+
+The user is not refusing Swarm, k3s, Nomad, or Kubernetes out of stubborn
+purism.
+The user is refusing to prepay controller tax for a control plane that still
 cannot prove it removed the right burden.
 
 Acceptance means an operator can still answer:
@@ -204,25 +228,33 @@ Acceptance means an operator can still answer:
 - which extra component is actually paying for itself?
 
 If the answer becomes "the controller knows" without inspectable proof, the
-repo has drifted away from its purpose unless the extra complexity clearly
-removed a real burden.
+repo has drifted away from its purpose unless that controller clearly bought
+back a real hidden-human SPOF.
 
 ### 7. Stateful services stop being lied about
 
-For `redis`, `mongodb`, `nuq-postgres`, `litellm-postgres`, `rabbitmq`,
-`headscale`, and similar surfaces, the questions are harsher:
+This is the harshest lane.
+
+For `mongodb`, `redis`, `nuq-postgres`, `litellm-postgres`, `rabbitmq`,
+`headscale-server`, and similar surfaces, acceptance requires answers to
+questions like:
 
 - who owns writes?
 - who replicates from whom?
 - how does promotion work?
-- what breaks on node loss?
+- what actually breaks on node loss?
 - how do clients rediscover the real authority?
-- is the real failure domain still one local disk path?
+- is the real failure domain still one disk path?
 
-Stable hostnames, TCP forwarding, and "it still answers" do not satisfy this
+Headscale is the clearest current warning because its config still points to
+SQLite at `/var/lib/headscale/db.sqlite`.
+
+That means a healthy HTTP route to Headscale is not a proof of Headscale HA.
+
+Stable hostnames, TCP routing, and "it still answers" do not satisfy this
 lane.
 
-## What stronger sentences are still forbidden
+## What stronger sentences remain forbidden
 
 Until matching proof bundles exist, the docs should keep forbidding sentences
 such as:
@@ -230,13 +262,13 @@ such as:
 - "wrong-node behavior is basically handled now"
 - "fallback is mostly solved for HTTP"
 - "the platform now behaves like one cloud"
-- "the only remaining issue is broader automation"
+- "the remaining work is mostly automation"
 - "the stateful lane is resilient enough"
 
-Those sentences are exactly how a repo starts flattering itself before relief
-actually arrives.
+Those are exactly the sentences that turn progress into self-flattery before
+relief actually arrives.
 
-## What would count as real progress
+## What real progress looks like
 
 The smallest contract-faithful progress sequence is:
 
@@ -246,10 +278,40 @@ The smallest contract-faithful progress sequence is:
 4. prove protected-route continuity for one named service
 5. keep TCP and stateful lanes on separate harsher tracks
 
-That is the difference between:
+That sequence matters because it moves the repo from:
 
-- a better architecture story
+- a stronger explanation of the dream
 
-and:
+to:
 
-- one more burden actually leaving the operator's head
+- one more hidden human burden actually leaving the operator's head
+
+## What this contract says about future orchestration choices
+
+This contract does not ban Nomad, k3s, Kubernetes, Swarm-like behavior, or any
+other control layer in principle.
+
+It does ban adopting them for the wrong reason.
+
+A future controller only earns its keep here if it can prove it materially
+improves one or more of these:
+
+- current placement truth
+- peer eligibility truth
+- wrong-node request preservation
+- backend-loss route durability
+- protected-route semantic continuity
+- inspectable stateful authority
+
+If it only makes the stack look more adult while leaving those burdens in the
+operator's head, then it violated the contract even if it introduced more
+industry-standard nouns.
+
+## The strongest honest contract sentence today
+
+Today the strongest honest sentence is:
+
+> the repo now describes the user's real benchmark more faithfully, but the
+> runtime still meets that benchmark unevenly because the most important
+> wrong-node, backend-loss, protected-route, and stateful authority clauses are
+> not yet broadly proven
