@@ -43,6 +43,11 @@ The naming problem is part of the wound:
 This page has to keep asking whether the burden actually moved, not whether the
 category now sounds plausible.
 
+That is also why “we now have more middle-layer candidates” is not obviously
+good news here.
+Candidate abundance can still be the same old problem in a better taxonomy if
+none of the candidates actually remove the decisive private completion step.
+
 That warning matters even more now that the knowledgebase is broader.
 The repo can now describe the missing-middle shape with enough precision that a
 reader may start feeling like the hard part is mostly choosing among candidate
@@ -157,6 +162,12 @@ Compose can expose a lot, but it does not natively own them.
 Heavier control planes may be able to own them, but the repo does not yet
 trust them by default to own the right ones in the right way.
 
+That means the missing middle is not just technically absent.
+It is morally unearned.
+The repo is still waiting for a believable place where those truths can live
+without the user having to pre-pay with worldview surrender before the burden
+transfer is proven.
+
 That is why the missing middle is not just a software gap.
 It is a trust gap.
 The repo does not merely need somewhere those truths could live.
@@ -223,6 +234,14 @@ The user is not merely looking for dynamic placement.
 They are looking for the point where the system stops making a healthy wrong
 node feel like a social failure that the operator has to privately repair.
 
+That is why this page has to stay skeptical of “strong shortlist” rhetoric.
+A shortlist of partial answers can still be another way of saying:
+
+- we can now name the gap better
+- we can now sort the helpers better
+- we still cannot point to the layer that actually makes the humiliation less
+  private
+
 ## What still does not count as finding the middle
 
 This page needs to reject a very specific kind of fake progress.
@@ -251,6 +270,11 @@ And machinery abundance is exactly what this repo has learned to distrust.
 A larger pile of helpers can still leave the operator doing the same decisive
 translation step under a fancier vocabulary.
 
+That is one of the harshest lessons this page should preserve:
+more middle-shaped machinery is not necessarily movement toward the middle.
+Sometimes it is just a richer set of ways to orbit the same untransferred
+truth.
+
 The stack can become:
 
 - richer
@@ -271,6 +295,12 @@ This is the page where "option abundance" has to stay under suspicion.
 A shortlist of plausible helpers can still be psychologically false if all of
 them leave the operator doing the same decisive reconstruction work under a new
 interface.
+
+That is why this page should prefer one transferred sentence over ten plausible
+candidate classes.
+The user is not asking whether the repo can imagine a middle.
+The user is asking which sentence they no longer have to finish privately once
+the middle is real.
 
 ## What a real missing-middle proof packet would have to contain
 
@@ -306,6 +336,12 @@ repo should stay suspicious of it.
 That is the human-level proof standard the page should keep defending:
 if the operator's daily bad-day experience still feels privately completed,
 then the middle has not actually arrived yet.
+
+This is the part that makes the repo’s “lack of options” complaint sharper than
+it sounds.
+The complaint is not that there are no helpers to try.
+The complaint is that there are still too few helpers that clearly change the
+operator’s daily bad-day experience in the one way that matters.
 
 ## Why this layer is needed at all
 

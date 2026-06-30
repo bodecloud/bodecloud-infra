@@ -70,6 +70,13 @@ asks the humiliating question:
 
 That difference is the whole reason this page exists.
 
+It is also why the user’s frustration with “lack of options” should not be
+translated into ordinary market language.
+The user is not blind to product families.
+The user is rejecting the idea that adjacent, respectable tooling automatically
+counts as a meaningful choice when the bad-day burden still lands in the same
+private human place.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -128,6 +135,12 @@ That disappointment has to stay present in the prose.
 If the page becomes too balanced, too fair, or too market-literate, it will
 start helping those smaller answers feel complete again.
 
+This is one of the few pages where polite product neutrality is actively
+dangerous.
+The ecosystem already knows how to defend itself in general terms.
+What this repo needs is a page willing to say that several famous categories
+may still amount to different wrappers around the same unresolved humiliation.
+
 This is one of the few pages that should remain openly suspicious of good
 manners.
 Normal comparison-doc politeness is exactly how weak options keep getting
@@ -154,6 +167,11 @@ If it starts from plans alone, it over-promotes futures into present gravity.
 
 This page only stays honest if the dream, the live baseline, the hidden wound,
 the candidate evidence, and the proof ceiling are all present at once.
+
+That also means this page should not reward “promising candidate family”
+language too easily.
+A candidate family is only morally interesting here if it makes at least one
+previously private truth materially less private in the held-out scene.
 
 If any one of those drops out, the page immediately gets worse in a predictable
 way:
@@ -254,6 +272,16 @@ That is the difference between a real option and a more respectable
 recommendation.
 The user has already seen plenty of the second category.
 
+This repo should keep those categories far apart:
+
+- respectable software
+- plausible architecture
+- interesting research path
+- actually earned option
+
+Collapsing them together is exactly how “there are many options” keeps turning
+into one more answer that sounds generous while leaving the same burden intact.
+
 ## What still does not count as an orchestration decision here
 
 This page should also say more directly what fake decisiveness looks like.
@@ -274,10 +302,19 @@ This matters because the repo is not suffering from lack of reputable product
 families.
 It is suffering from lack of options that survive the user's actual benchmark.
 
+That line should remain uncomfortable.
+The market can be full while the option surface is still poor.
+Those are not contradictory observations in this repo.
+
 The benchmark should stay rude enough to embarrass vague recommendation habits.
 If the option cannot say what it would make the wrong node know on its own,
 what it would make fallback less private, or what it would make stateful
 authority less social, then it is still only half-present as an option here.
+
+And “half-present” should not be over-rewarded.
+Half-present options are exactly how infrastructure people accidentally gaslight
+the user into feeling surrounded by choice while still privately carrying the
+same decisive truth.
 
 The same standard has to apply to this page's own prose.
 If the page mainly makes the candidates feel more intelligible, more balanced,
@@ -296,6 +333,12 @@ while still not improving the repo's real option surface at all.
 If that happens, the page got truer without the runtime getting freer.
 That is acceptable, but only if it is named honestly instead of being mistaken
 for partial relief.
+
+That is one of the main honesty constraints for the whole knowledgebase now:
+
+- better option analysis is not better option reality
+- better candidate ranking is not one more earned candidate
+- better orchestration literacy is not less hidden operator custody
 
 That benchmark should stay insulting on purpose.
 The whole point is that many layers sound impressive until the user asks the
