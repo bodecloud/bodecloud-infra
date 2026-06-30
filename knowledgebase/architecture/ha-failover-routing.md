@@ -10,75 +10,50 @@ If you want the deeper evidence stack first, read:
 - [Current Compose Runtime](current-compose-runtime.md)
 - [Operator Contract and Success Criteria](operator-contract.md)
 
-This page exists because "HA" becomes meaningless almost immediately in this
-repo unless routing is decomposed into the separate truths the user is actually
-angry about.
+This page exists because "HA" becomes almost useless in this repo unless
+routing is broken into the separate truths the user is actually asking about.
 
-That anger should stay specific.
-The user is not mainly furious that routing is hard.
-They are furious that routing stories keep sounding complete one layer before
-the receiving node can actually explain, in shared system terms, why the
-request is still safe on the wrong machine.
-
-The grounding for that is concrete, not hypothetical.
-
-- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-  states the target contract directly:
-  any surviving public node should be able to receive the request, serve it
-  locally if the service is local, or forward it to a healthy peer if it is
-  not.
-- [`docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md)
-  captures the same pressure in plainer words:
-  manual placement is acceptable, DNS plurality already exists, and the real
-  problem is service discovery and request preservation when traffic lands on
-  the wrong node.
-- [`load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md)
-  shows the user explicitly rejecting answers that stop at familiar proxy
-  nouns.
-
-The user is not asking:
+The user is not mainly asking:
 
 - can more than one node receive traffic?
 - is Traefik present?
-- are there healthchecks?
+- do healthchecks exist?
 - is there a helper that sounds failover-shaped?
 
-The user is asking:
+The harder question is:
 
 > if traffic lands on the wrong healthy machine, can that machine still
 > preserve the service contract without requiring private operator memory?
 
-That is the routing question here.
+That is the routing problem here.
 
-It is also the reason "there are lots of HA options" is not a satisfying
-answer in this repo.
-Many options can improve one routing layer.
-Far fewer deserve to be called relief once the wrong-node scene is forced all
-the way through.
+## The routing dream, in the repo's own words
 
-That also means a better routing map is not routing relief.
-A sharper HA taxonomy is not failover.
-A more disciplined separation between HTTP, TCP, and stateful stories is not
-one more route class becoming trustworthy.
+The strongest intent surface is
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md).
+It describes the target operating contract as:
 
-The reason the wording has to stay that severe is that the user is not merely
-frustrated with downtime.
-They are frustrated with how many respectable infrastructure options solve one
-routing layer loudly while quietly leaving the operator as the hidden
-cross-node interpreter.
+- any healthy public node can receive the first request
+- if the service is local, that node serves it locally
+- if the service is remote, that node forwards to a healthy peer that currently
+  hosts it
+- the edge should preserve auth, middleware, and policy meaning rather than
+  merely expose containers
 
-That last phrase is the real routing wound in this repo:
-the operator remains the final translator between node entry, placement truth,
-policy continuity, and fallback legitimacy.
+That target is anti-SPOF and peer-aware without immediately collapsing into
+Swarm, Kubernetes, k3s, or another heavyweight orchestrator.
+
+It is also only intent unless the runtime proves it.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
 - how routing has to be decomposed before "failover" means anything useful
-- which routing layers are materially live in the current Compose runtime
-- which routing truths are still missing, social, or only planned
-- why first-hop plurality is much weaker than request-preserving recovery
+- which routing classes exist in the current Compose runtime
+- which truths are materially live, which are planned, and which are still
+  operator-owned
+- why first-hop plurality is weaker than request-preserving recovery
 - why HTTP, TCP, and stateful failover must not be flattened together
 
 This page is not authoritative about:
@@ -88,104 +63,106 @@ This page is not authoritative about:
 - whether stateful traffic inherited optimism from the HTTP story
 - whether one working helper path upgrades the whole platform
 
-This is a routing decomposition page, not a route-success report.
-It also cannot become a reassurance page.
+This is a routing decomposition page, not a victory lap.
 
-The user is not mainly asking for cleaner routing terminology.
-They are asking why so many HA and failover stories keep sounding plausible
-until the request lands on the wrong healthy node and the operator is still
-the only thing that knows what should happen next.
+## The routing classes that must stay separate
 
-That means this page cannot let routing decomposition become its own fake
-victory.
-Explaining the routing lanes more clearly is useful.
-It is not itself one more lane of burden transfer.
+Routing in this repo splits into at least four different classes:
 
-It also cannot let the reader confuse option abundance with burden transfer.
-The user is not starved for nouns.
-The user is starved for routing surfaces that stop collapsing back into hidden
-operator settlement at the exact moment locality fails.
+### 1. Stateless HTTP
 
-That warning matters because this repo is now capable of much better routing
-honesty than before.
-If that honesty starts sounding like partial resolution, then the page becomes
-another way the docs cash sophistication out as if the runtime had already
-earned it.
+This is the easiest class to talk about and the most dangerous one to
+overclaim from.
 
-That means this page has to keep one humiliating question alive all the way
-through:
+What it would mean:
 
-> after the first hop lands on the wrong node, what exact truth does that node
-> itself own, and what exact truth is still being borrowed from the operator?
+- wrong-node entry is acceptable
+- the receiving node can discover the real backend
+- forwarding keeps the route semantics intact
+- backend loss can trigger a valid fallback rather than a dead route
+
+What does **not** prove it:
+
+- Cloudflare can reach more than one node
+- Traefik is healthy
+- a local route returns `200`
+- a helper renders fallback-shaped config
+
+### 2. Protected HTTP
+
+This is stricter than ordinary stateless HTTP because the platform has to
+preserve:
+
+- auth behavior
+- middleware order
+- headers and trust boundaries
+- the exact meaning of the protected route
+
+Wrong-node success here means more than "the response still comes back."
+It means the forwarded route is still the same protected service in user-visible
+and policy-visible terms.
+
+### 3. Raw TCP
+
+This class is different enough that HTTP optimism cannot spill into it.
+
+A TCP router for Redis or MongoDB does **not** prove:
+
+- peer-aware service failover
+- semantic continuity
+- state correctness
+- safe substitution between backends
+
+It only proves transport is possible through a proxy surface.
+
+### 4. Stateful surfaces
+
+This is the strictest class.
+State-bearing services do not become honestly HA because:
+
+- they are reachable through Traefik
+- multiple nodes exist
+- a proxy can point at more than one host
+
+Stateful routing only becomes meaningful when authority, data durability,
+substitution safety, and recovery semantics are all explicit.
 
 ## Strongest honest current answer
 
-The root runtime already has a serious edge stack and enough moving parts to
-make the routing problem real rather than hypothetical:
+The root runtime already contains enough edge and routing machinery to make the
+problem real rather than hypothetical:
 
 - Cloudflare-oriented public-entry assumptions
 - Traefik
 - TinyAuth
 - `nginx-traefik-extensions`
 - CrowdSec
-- Docker-socket proxies
+- Docker socket proxies
 - `docker-gen-failover`
 - Headscale mesh assumptions
 - TCP routers for services such as MongoDB and Redis
 
-What is still missing is the thing the user actually wants that machinery to
-buy:
+That is a real routing stack.
+
+What it still does **not** clearly own is the thing the user actually wants
+that machinery to buy:
 
 - shared placement truth
 - trustworthy peer eligibility truth
-- durable fallback-route persistence
-- proof that the request keeps meaning the same thing after wrong-node handoff
+- durable fallback-route persistence under failure
+- proof that a request keeps the same meaning after wrong-node handoff
 - proof that stateful authority survives any routing story being told
 
-That list is why the repo should stay suspicious of "available options"
-language.
-An option only counts in the user's moral accounting if it actually helps move
-one of those truths into the system.
-Otherwise it is still mostly another way to decorate the same burden.
+That is the missing middle layer.
 
-That is the whole difference between:
-
-- a stack that can route many things locally
-- and a stack that stops gambling on node locality
-
-That second line is closer to the user's dream than ordinary HA vocabulary.
-The dream is not just more reachability.
-The dream is that wrong-node entry stops being the moment where the system
-reveals it was still counting on human folklore.
-
-If a routing summary sounds sophisticated while still leaving wrong-node entry
-as the moment where the operator privately completes the story, then the page is
-still rewarding the wrong thing.
-
-That is the anti-theater rule for this page:
-if the receiving node still depends on human folklore to know who should serve,
-who is eligible, and whether the handoff preserves the same protected service,
-the routing layer is still being socially completed.
-
-That sentence matters because this repo is now serious enough that routing
-prose can become emotionally convincing long before the wrong-node scene
-becomes system-owned.
-This page has to keep the reader from mistaking a better routing explanation
-for a more trustworthy routing platform.
-
-It should keep one more boundary explicit:
-
-- better routing analysis is not routing progress
-
-The first is a documentation gain.
-The second only happens when one more wrong-node decision becomes system-owned
-rather than privately blessed by the operator.
+The repo already knows how to speak about routes.
+It still does not universally know how to let the receiving node explain, in
+shared system terms, why the route is safe when locality fails.
 
 ## What still does not count as HA or failover here
 
-This page should make the common overreads illegal.
-
-The following still do not count as meaningful HA or failover in this repo:
+The following may be real progress.
+They still do not count as meaningful HA or failover on their own in this repo:
 
 - more than one public node can receive the first hop
 - Traefik is present and healthy
@@ -193,554 +170,125 @@ The following still do not count as meaningful HA or failover in this repo:
 - a TCP router exists for a stateful service
 - a local protected route returns `200`
 - a mesh exists between nodes
-- the docs can now explain the route classes, helpers, and failure seams in a
-  much more disciplined way
+- the docs can now explain the route classes more clearly
 
-All of those may be real progress.
-None of them are yet the user's actual benchmark unless they also reduce the
-need for private placement memory, preserve request meaning on the wrong node,
-and survive the failure that made fallback necessary.
+All of those can improve posture.
+None of them satisfy the user's benchmark unless they also reduce the need for
+private placement memory, preserve request meaning on the wrong node, and
+survive the failure that made fallback necessary.
 
-This is where normal HA vocabulary becomes actively misleading.
+The harsher checksum question is:
 
-Many ecosystems will happily call the above:
+> yes, but who still had to know the real answer first?
 
-- resilience
-- failover
-- high availability
-- distributed ingress
+If the answer is still "the operator," then the route may be real software and
+still fake relief.
 
-The repo has to keep asking the harsher follow-up:
+## The exact hidden routing jobs the operator may still be doing
 
-- yes, but who still had to know the real answer first?
+Today the operator may still have to know things like:
 
-That follow-up is also the quickest filter for routing option theater.
-If a proposal still depends on one human privately knowing who should serve,
-who is eligible, or whether the handoff preserved the same service meaning,
-then the option may be real software and still fake relief.
+- which node currently hosts the real copy of a named HTTP service
+- whether a helper-generated rescue path would still exist after the preferred
+  backend disappears
+- whether a reachable peer is merely alive on the mesh or actually acceptable
+  for the route's auth, middleware, secrets, and revision surface
+- whether a TCP endpoint is merely transport-reachable or safe to describe with
+  failover language
+- whether a state-bearing surface still hides a sacred authority node behind a
+  more distributed-looking ingress story
 
-That follow-up also applies to the docs.
-If a revision makes the routing story feel more serious but makes it harder to
-say who still had to know the real answer first, then the revision moved in
-the wrong direction.
+That list is why "there are a lot of routing options" is not the same thing as
+relief in this repo.
 
-That is not rhetorical flourish.
-It is the shortest honest checksum for whether "HA routing" has become one more
-label for partial machinery plus private operator settlement.
+## The missing truths that matter most
 
-They also do not satisfy the deeper complaint:
+The routing story only becomes believable when the platform owns more of these:
 
-> I am tired of options that solve one routing layer and leave the next layer
-> as my private job.
+### Placement truth
 
-That is why this page has to keep decomposing routing into narrower truths
-instead of letting "HA routing" sound like one solved category.
+The receiving node needs shared, current knowledge of where the service
+actually lives now.
 
-The ecosystem habit this page is resisting is simple:
+The repo keeps converging on a lightweight current-state registry such as
+`services.yaml`, but the docs must still treat that as intent unless the root
+runtime really ships and consumes it.
 
-- solve one visible routing layer
-- let the label "HA" drift upward
-- leave the next layer as the user's private job
+### Peer eligibility truth
+
+Reachability is not enough.
+The platform needs a stricter answer to:
+
+- which peer is healthy?
+- which peer is serving the right revision?
+- which peer is acceptable for this route's auth and middleware expectations?
+
+### Route durability truth
+
+A fallback route only matters if it survives the failure that made fallback
+necessary.
+A route rendered while everything is still healthy is not enough.
+
+### Semantic continuity truth
+
+The request has to keep meaning the same thing after forwarding.
+That includes:
+
+- auth continuity
+- middleware continuity
+- trust-boundary continuity
+- user-visible route continuity
+
+Without that, the route may be alive but not preserved.
+
+## Why Cloudflare and Traefik are necessary but insufficient
+
+Cloudflare is part of the anti-SPOF story as the first hop.
+Traefik is central to the HTTP routing story.
+Both are important.
+Neither solves the whole problem alone.
+
+Cloudflare can help more than one node become a first hop.
+That is weaker than proving the wrong node can preserve the request correctly.
+
+Traefik can express routers, middlewares, services, and TCP paths.
+That is weaker than proving:
+
+- the wrong node knows the right backend
+- the peer is actually eligible
+- the fallback survives the backend loss
+- the route preserves meaning after handoff
+
+This is exactly where normal HA language becomes misleading:
+layer one gets solved loudly, and the remaining hidden operator work gets
+quietly edited out.
 
 ## What a real routing proof packet would have to contain
 
-If this page ever supports stronger routing claims, it should be because an
-actual route-level proof packet exists.
+If a future page supports stronger routing claims, it should point to a real
+route-level proof packet containing:
 
-That packet should include:
-
-- the exact route class, such as stateless HTTP, protected HTTP, raw TCP, or a
-  named stateful surface
+- the exact route class:
+  stateless HTTP, protected HTTP, raw TCP, or a named stateful surface
 - the entry node and backend node identities
 - the source of placement and peer truth used for the handoff
 - the failure condition introduced, if fallback is being claimed
 - the policy or middleware comparison, if semantic continuity is being claimed
 - the explicit statement of which stronger routing class is still unproven
 
-Examples:
-
-- a protected HTTP route can prove wrong-node dignity for that route class
-  without proving TCP or stateful correctness
-- a TCP route can prove transport continuity without proving write authority
-- a stateful drill can prove one exact topology without upgrading the whole
-  platform into generic HA
-
-Without packets like those, routing prose is still too easy to overread as
-stack-wide resilience.
-
-The packet requirement is stricter here because the user is already surrounded
-by too many plausible routing stories that fail exactly when they finally
-matter.
-
-What the user is starved for is not another routing recipe.
-It is one believable packet that proves the request remained the same service
-after locality failed, and that the explanation for that survival lived in the
-system rather than in one operator's head.
-
-That is why this page should prefer one severe, narrow, honest proof over ten
-respectable routing categories.
-The user is not asking to be told the ecosystem is rich.
-The user is asking whether any part of that ecosystem has actually crossed the
-burden-transfer line for the specific held-out scene.
-
-This is also why route-class separation matters so much.
-
-The repo cannot afford summaries that do this:
-
-- one HTTP success becomes "failover works"
-- one TCP router becomes "stateful is covered too"
-- one helper artifact becomes "the missing middle is basically here"
-
-Those are exactly the overreads the user is already exhausted by.
-
-## The current routing surface in the priority implementation
-
-The priority root runtime is the merged surface created by:
-
-- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-- [`compose/docker-compose.coolify-proxy.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.coolify-proxy.yml)
-- [`compose/docker-compose.docs.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.docs.yml)
-- [`compose/docker-compose.headscale.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.headscale.yml)
-- [`compose/docker-compose.metrics.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.metrics.yml)
-
-At the root level, the merged graph already defines three important network
-surfaces:
-
-- `publicnet`
-- `backend`
-- `warp-nat-net`
-
-That alone does not prove resilience.
-It does prove the routing problem is already materially encoded in the runtime,
-not just imagined in planning docs.
-
-The repo is not theorizing from an empty lab.
-It is already carrying enough live routing complexity that the missing burden
-feels offensive rather than hypothetical.
-
-That distinction matters because the frustration is not beginner confusion.
-The user is not staring at an empty repo asking abstract clustering questions.
-They are staring at a stack that is already serious enough to make the
-remaining hidden burden feel insulting instead of understandable.
-
-Within the edge fragment, the current routing surface includes:
-
-- `cloudflare-ddns`
-- `traefik`
-- `tinyauth`
-- `nginx-traefik-extensions`
-- `crowdsec`
-- `crowdsec-init`
-- `docker-gen-failover`
-- `dockerproxy-ro`
-- `dockerproxy-rw`
-
-Within the root runtime there are already concrete route classes that stress
-routing differently:
-
-- stateless or near-stateless HTTP surfaces such as docs and utility frontends
-- protected HTTP surfaces such as Dozzle that depend on auth and middleware
-  continuity
-- raw TCP surfaces such as MongoDB and Redis already exposed through Traefik
-  TCP routers in the root graph
-- stateful control-plane surfaces such as Headscale, whose single-node reality
-  is already openly acknowledged in the planning layer
-
-That matters because "routing" here is not one problem.
-
-It is also why ordinary "best HA proxy" or "best failover tool" advice is too
-small for this repo.
-The user is not short on proxies.
-The user is short on options that preserve meaning instead of merely
-redirecting packets.
-
-That sentence is the whole routing benchmark:
-preserve meaning, not just transport.
-Everything else on this page is here to stop the docs from quietly forgetting
-that.
-
-## The routing layers that must stay separate
-
-If these layers get collapsed into one sentence called "HA," the docs become
-decorative again.
-
-They also become emotionally false.
-They start describing reassurance instead of burden movement.
-
-### 1. Public node-entry reachability
-
-Question:
-
-- can a client reach some healthy public node at all?
-
-What the repo already has:
-
-- Cloudflare-oriented public-entry assumptions
-- `cloudflare-ddns`
-- a long-standing goal of multi-node public entry instead of one sacred public
-  box
-- repo-native intent that explicitly says "User -> Cloudflare DNS -> any
-  surviving node"
-
-What this layer can honestly buy:
-
-- more than one node can plausibly receive the first hop
-- ingress does not have to be psychologically concentrated on one sacred host
-- some node loss at the public edge may be survivable
-
-What this layer does not buy:
-
-- service locality truth
-- peer eligibility truth
-- fallback-route persistence
-- policy continuity
-- stateful correctness
-
-This is why "multiple A records" is not even close to the final answer.
-
-It is often the first place people feel tempted to stop thinking because it
-looks distributed enough to market.
-
-That temptation is one of the exact pressures this knowledgebase is fighting.
-The user has already seen enough marketed distribution.
-What is being demanded here is distribution that still tells the truth after
-the landing node is wrong.
-
-That last clause is the anti-theater core of the whole routing story.
-
-The page should keep readers from mistaking:
-
-- more nodes
-- richer ingress
-- more failover nouns
-
-for the much narrower achievement the user is actually looking for:
-
-- a wrong-node machine that can still tell the truth without human rescue
-
-### 2. Local edge-stack health
-
-Question:
-
-- once traffic reaches a node, is the local edge stack coherent enough to make
-  the next decision honestly?
-
-What the repo already has:
-
-- Traefik as the real L7 execution surface
-- TinyAuth for forward-auth behavior
-- `nginx-traefik-extensions` as auth and middleware glue
-- CrowdSec as active security and filtering logic
-- Docker and file provider surfaces
-- health-bearing edge components
-
-What this layer can honestly buy:
-
-- local route execution
-- local auth and middleware handling
-- local TLS and certificate handling
-- serious edge behavior instead of one symbolic proxy
-
-What it does not buy:
-
-- cross-node knowledge
-- trustworthy peer choice
-- proof that local and forwarded behavior remain semantically identical
-
-If this layer is broken, distributed entry above it is useless.
-If this layer is healthy, the distributed problem is still not solved.
-
-This is a recurring pattern across the repo:
-
-- a healthy local edge is necessary
-- a healthy local edge is impressive
-- a healthy local edge is still not the same thing as wrong-node rescue
-
-This distinction is one of the repo's most important anti-fake-option rules.
-Many systems become locally impressive enough that the user gets told the
-remaining gap is small.
-The user's whole point is that the remaining gap is the actual problem.
-
-This page should not let local sophistication become emotional closure.
-
-That is one of the easiest ways routing documentation starts lying while
-remaining technically accurate.
-
-### 3. Locality truth
-
-Question:
-
-- does the receiving node actually know whether the requested service is local?
-
-What the repo already has:
-
-- local Docker labels
-- local Docker provider visibility
-- route material in the root and edge runtime
-- repeated architectural pressure toward a tracked current-state registry such
-  as `services.yaml`
-
-What the repo does not yet prove:
-
-- a live tracked root `services.yaml` consumed by routing decisions
-- a shared placement-truth surface that outranks operator memory
-
-Why this matters:
-
-The recurring `services.yaml` pressure is not about loving files.
-It is about stopping "the operator remembers where the service really lives"
-from being the real control plane.
-
-Without locality truth, a wrong-node request cannot become an honest decision.
-
-That is why `services.yaml` keeps haunting the repo.
-Not because YAML is fashionable, but because some externalized present truth
-has to exist somewhere before the system can stop pretending the operator's
-memory is not the real control plane.
-
-### 4. Peer-selection truth
-
-Question:
-
-- if the service is not local, does the receiving node know which peer is
-  actually valid right now?
-
-This is stricter than:
-
-- can nodes talk over Headscale?
-- does a peer hostname exist?
-- did the same service run on that peer recently?
-
-What the repo already has:
-
-- Headscale as a materially live mesh component
-- explicit planning around peer broadcast, leader election, and node-aware
-  coordination in the master plan
-
-What the repo does not yet prove:
-
-- a live peer-eligibility decision surface consumed by the edge layer
-- a trustworthy answer to "which peer should I use now?" that is stronger than
-  static config or social memory
-
-Mesh reachability is helpful.
-Mesh reachability is not current truth ownership.
-
-That difference is where many "peer-aware" stacks keep cheating.
-Peer contact is not peer judgment.
-A reachable peer is not yet a peer the receiving node can honestly trust for
-this route right now.
-
-That last sentence is one of the main reasons so many "peer-aware" options
-still feel fake to the user.
-Contact keeps getting sold as if contact had already become judgment.
-
-That is one of the cleanest expressions of the user's complaint in the whole
-routing layer.
-
-The user is tired of surfaces that can contact each other, ping each other,
-discover each other, or list each other while still not being able to answer:
-
-- should this exact request go there now?
-- and if it does, will it still mean the same thing?
-
-### 5. Fallback-route persistence
-
-Question:
-
-- when the preferred backend disappears, does the route needed for recovery
-  still exist?
-
-This is one of the hardest and most important seams in the current runtime.
-
-The repo already knows about a specific live weakness:
-
-- `docker-gen-failover` is present in the edge stack
-- the master plan explicitly records that the current approach deletes routes
-  when containers stop
-
-This is not a minor caveat.
-It is exactly the kind of failure the user is trying to stop:
-
-> the system looked dynamic until the bad event arrived, then the dynamic route
-> vanished with the thing it was supposed to route around
-
-That is why the docs keep treating `docker-gen-failover` as both meaningful and
-dangerous:
-
-- meaningful because it shows the repo is trying to generate fallback-aware
-  Traefik config
-- dangerous because the current generation model is recorded as losing routes
-  at the wrong moment
-
-That "wrong moment" language should be read literally.
-The repo is criticizing solutions that advertise adaptability until the bad
-event arrives and then discard the very route that was supposed to preserve
-dignity.
-
-This is not just a technical annoyance.
-It is one of the betrayal patterns the user keeps reacting to:
-
-- the option sounds dynamic
-- the option sounds modern
-- the option sounds like failover
-- the exact failure reveals the option never fully owned the promise
-
-### 6. Policy continuity
-
-Question:
-
-- if traffic is forwarded, is it still the same protected service?
-
-This layer is easy to under-document and central to the repo's actual demand.
-
-For protected HTTP surfaces, continuity has to include:
-
-- TinyAuth behavior
-- `nginx-traefik-extensions` forward-auth behavior
-- middleware ordering
-- security filtering implications
-- headers, rewrites, redirects, and path behavior that define route identity
-
-That means a forwarded route is not proven merely because:
-
-- the upstream answered
-- a login page still appears
-- some `200` exists
-
-The route has to stay meaningfully the same route.
-
-Otherwise the stack has not preserved the service contract.
-It has only preserved enough surface behavior to sound successful in a shallow
-status update.
-
-That is why protected-route routing has to stay this severe.
-The user is not asking for a success report that can survive on status codes.
-They are asking whether the system still deserves to say "this request worked"
-without smuggling in a human who already knows what silently changed.
-
-### 7. Stateful truth
-
-Question:
-
-- even if routing works, does the route still point to a service with honest
-  authority semantics?
-
-This is where HTTP optimism often becomes a lie.
-
-The root runtime already includes state-bearing services such as:
-
-- MongoDB
-- Redis
-- Headscale
-
-Those services can already be discussed in routing terms because they have live
-route material.
-They cannot be broadly discussed in HA terms unless the repo also answers:
-
-- who owns writes?
-- what replicates from what?
-- how does promotion work?
-- what reconnect behavior do clients need?
-- what remains tied to one local disk path?
-
-That is why this page refuses to let TCP and stateful surfaces inherit success
-from one HTTP drill.
-
-This repo is not anti-HTTP proof.
-It just refuses to let one HTTP proof become a laundering mechanism for much
-harsher service classes.
-
-## What the repo can already say without lying
-
-The repo can already say all of these honestly:
-
-- the priority implementation has a real and non-trivial routing surface
-- the stack already distinguishes public entry, internal traffic, and special
-  routing domains
-- the edge is already policy-bearing rather than a dumb proxy
-- the repo explicitly wants local-first then peer-forward behavior
-- the repo explicitly knows that Cloudflare plurality is weaker than preserved
-  request meaning
-- the repo explicitly knows its current failover helper is not yet trustworthy
-
-That is already meaningful.
-It is still far from generic closure.
-
-That gap between meaningful progress and believable option is one of the
-hardest things the docs need to preserve.
-Too many infrastructure discussions erase that gap the moment enough machinery
-appears.
-
-## What the repo still cannot say honestly
-
-The repo still cannot say all of these without stronger route-specific proof:
-
-- "wrong-node routing is basically solved"
-- "the stack is anti-SPOF now"
-- "multi-record DNS plus Traefik gives us failover"
-- "protected routes keep their meaning after peer handoff"
-- "TCP and stateful failover are covered by the same routing story"
-- "`docker-gen-failover` already gives durable rescue paths"
-
-Those sentences are exactly the kind of overpayment this knowledgebase is
-trying to stop.
-
-The user has already paid that overpayment too many times in the surrounding
-space:
-
-- a component exists
-- a helper exists
-- a route exists
-- therefore the burden must have moved
-
-This page is here to keep saying that last step is exactly what remains
-unproven.
-
-## The real pressure this page must preserve
-
-The user is not frustrated because there are no tools.
-They are frustrated because too many respectable tools answer only one routing
-layer at a time and then let documentation speak as if the whole burden moved.
-
-That last clause matters.
-The real enemy here is not only missing functionality.
-It is partial functionality plus overconfident narration.
-
-The real routing pressure in this repo is:
-
-- first hop should not be sacred
-- locality should stay real
-- wrong-node entry should not collapse into folklore
-- rescue routes should not evaporate under the bad day
-- protected routes should stay semantically coherent
-- stateful services should stay under harsher truth rules
-
-That list is not only a technical decomposition.
-It is a record of the ways the available options keep becoming smaller than
-they first sound.
-
-If any of those get blurred together under "HA," the docs regress.
+That is the minimum needed to stop "route exists" from impersonating "route is
+trustworthy under pressure."
 
 ## Bottom line
 
-This repo already has a serious routing stack.
-It does not yet have a proven request-preserving routing truth stack.
+The routing dream in this repo is not merely "more ingress flexibility."
+It is:
 
-The difference is exactly this:
+- any healthy node can receive traffic
+- the node can decide local versus remote honestly
+- it can preserve the request meaning when forwarding
+- and the operator no longer has to privately finish the story
 
-- reachability is partially real now
-- request preservation is still only partially system-owned
-
-Everything in `bolabaden-infra` keeps circling that gap because it is the real
-one.
-
-Another way to say the same thing:
-
-- the repo is not starved for components
-- it is starved for options that remain honest after wrong-node entry, backend
-  loss, and stateful consequences are all allowed into the same sentence
-
-That sentence is close to the center of the whole documentation effort.
-If the site fully internalizes it, the rest of the pages can stay honest.
-If the site forgets it, the docs keep regressing into polished ambiguity.
+The current stack is serious enough to make that dream plausible.
+It is not yet proven enough to let the docs speak as if the dream already owns
+the bad day.
