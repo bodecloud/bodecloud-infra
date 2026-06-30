@@ -106,6 +106,24 @@ practical answer they were already furious about:
 That is not useless progress.
 It is also not yet relief.
 
+That distinction has to stay loud because this page is now vulnerable to a
+newer kind of counterfeit maturity:
+
+- the candidate families are mapped more clearly
+- the tradeoffs are narrated more honestly
+- the default stance is better defended
+- the page sounds less naive and less market-driven
+
+and therefore the repo can start feeling like it now has genuinely better
+options in hand.
+
+Not necessarily.
+The repo may only have better analysis of why the current options are still
+not good enough.
+That is meaningful progress in documentation fidelity.
+It is still not the same thing as one more option having actually earned the
+right to remove a hidden burden from the operator's life.
+
 That disappointment has to stay present in the prose.
 If the page becomes too balanced, too fair, or too market-literate, it will
 start helping those smaller answers feel complete again.
@@ -266,6 +284,19 @@ If the page mainly makes the candidates feel more intelligible, more balanced,
 or more mature without making at least one candidate more earned in repo terms,
 then it has improved comparison quality rather than option quality.
 
+That line should remain one of the page's main self-tests.
+This page can become:
+
+- better researched
+- better organized
+- better at preserving the user's complaint
+- better at explaining why prestige is weak evidence
+
+while still not improving the repo's real option surface at all.
+If that happens, the page got truer without the runtime getting freer.
+That is acceptable, but only if it is named honestly instead of being mistaken
+for partial relief.
+
 That benchmark should stay insulting on purpose.
 The whole point is that many layers sound impressive until the user asks the
 question they keep getting punished for asking:
@@ -296,6 +327,16 @@ That packet should include:
 - the drill or failure condition that shows the burden moved
 - the operator-visible inspection path that keeps the new layer legible
 - the explicit statement of what still remains outside the candidate's reach
+
+It should also answer a harsher follow-up:
+
+- did this packet merely make the candidate easier to believe in
+- or did it make one more private bad-day sentence materially unnecessary
+
+If the packet stops at persuasiveness, the candidate is still mostly a better
+story.
+This repo is specifically trying to stop better stories from impersonating
+better options.
 
 Examples:
 

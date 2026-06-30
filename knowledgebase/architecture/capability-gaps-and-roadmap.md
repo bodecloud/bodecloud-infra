@@ -75,6 +75,23 @@ This page has to keep refusing that emotional trade.
 A clearer sequence is still only a clearer description of the burden until the
 burden itself moves.
 
+That distinction is one of the main remaining traps in the whole site:
+
+- the phases are sharper
+- the dependencies are named better
+- the proof classes are easier to keep separate
+- the next work sounds more concrete and less hand-wavy
+
+and therefore the reader can start feeling like the platform has acquired
+better options already.
+
+Maybe not.
+It may only have acquired a better description of why the current options are
+still insufficient.
+That is real documentation progress.
+It is not yet runtime relief, and this page has to keep those two truths from
+blending together.
+
 ## Strongest honest current answer
 
 The next work is not "whatever seems generally useful for self-hosting."
@@ -113,6 +130,21 @@ It exists to prevent narrative overpayment.
 That is why a "good roadmap" here is not mainly one that feels strategic.
 It is one that keeps the docs from illegally spending confidence before the
 corresponding truth layer has moved.
+
+That also means this page has to distrust one of planning's most flattering
+failure modes:
+
+- better sequence
+- better naming
+- better integrity gates
+- better experiments
+
+therefore the platform must finally be closer to adulthood in practice
+
+No.
+The platform is closer to describing its wound faithfully in practice.
+That only becomes architectural adulthood when one more hidden completion step
+actually leaves the operator.
 
 ## What still does not count as sequencing well
 
@@ -220,6 +252,18 @@ If these nine steps become easier to explain while the same wrong-node,
 backend-loss, semantic continuity, and stateful truth gaps remain, then this
 page has only improved retrieval, not options.
 
+That line should keep being read literally.
+This roadmap can improve in three different ways that still do not count as
+relief by themselves:
+
+- it can become easier to read
+- it can become easier to audit
+- it can become easier to RAG against
+
+Those are all valuable.
+They still do not mean one more route, peer, or control-layer choice has
+become believable under pressure.
+
 It is also the difference between:
 
 - "the repo is exploring sophisticated things"
@@ -257,6 +301,12 @@ That last bullet matters more than it should in a normal repo.
 This project is now sophisticated enough that better planning language can
 start performing as if it were one more solved capability.
 This page has to keep blocking that move.
+
+The same goes for roadmap completeness itself.
+A more comprehensive roadmap can still be a more comprehensive map of the same
+trapped condition.
+If the operator still has to privately finish the decisive sentence on the bad
+day, the roadmap got broader before the platform got freer.
 
 That list exists because the user is explicitly frustrated by ecosystems that
 keep narrating partial machinery as if the burden has already moved.
