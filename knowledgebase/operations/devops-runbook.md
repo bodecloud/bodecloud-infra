@@ -121,6 +121,81 @@ Bad examples:
 Those are not claims.
 They are invitations to narrate comfort as progress.
 
+## Run a source-custody preflight before commands
+
+Do not start an operational pass from a command.
+Start it from a source-custody packet.
+
+The point is to prevent this failure:
+
+1. an archive thread explains a real wound
+2. a command produces a green result
+3. the operator emotionally joins those two facts
+4. the docs accidentally claim more than either fact proved
+
+Before the first command, write this short preflight:
+
+```yaml
+runbook_preflight:
+  claim_sentence: "<specific claim being tested>"
+  source_pressure:
+    source: "<archive, plan, instruction, or runtime page that made this claim matter>"
+    source_family: "wrong-node-routing | fallback | protected-http | raw-tcp | stateful-authority | orchestrator-promotion"
+    packet_field_pressured: "entry_node | locality_result | placement_source | selected_peer | peer_eligibility | policy_chain | backend_loss | stateful_authority"
+  runtime_anchor: "<docker-compose.yml, compose fragment, merged config, live command, or none yet>"
+  evidence_class_needed: "authored-shape | route-behavior | wrong-node-drill | backend-loss-drill | policy-parity | stateful-correctness"
+  legal_sentence_if_passes: "<narrow sentence this pass could honestly earn>"
+  still_forbidden_even_if_passes: "<stronger sentence still illegal>"
+  surviving_private_sentence_to_watch: "<operator-owned truth that may remain alive>"
+```
+
+This preflight is deliberately small.
+It forces the pass to say which source pressure is being converted into which
+proof attempt.
+
+If `source_pressure` is blank, the pass may still be useful maintenance.
+It is not yet an "actually RAGged" burden-transfer pass.
+
+If `runtime_anchor` is blank, the pass is still at intent, plan, or archive
+pressure level.
+Do not let it produce runtime claims.
+
+### Example preflight: wrong-node HTTP
+
+```yaml
+runbook_preflight:
+  claim_sentence: "one stateless HTTP route can land on a non-owner node and still reach the intended owner"
+  source_pressure:
+    source: "knowledgebase/source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md"
+    source_family: "wrong-node-routing"
+    packet_field_pressured: "placement_source"
+  runtime_anchor: "docker-compose.yml plus compose/docker-compose.coolify-proxy.yml"
+  evidence_class_needed: "wrong-node-drill"
+  legal_sentence_if_passes: "this exact stateless route preserved meaning under one wrong-node entry scene"
+  still_forbidden_even_if_passes: "wrong-node routing is solved generally"
+  surviving_private_sentence_to_watch: "I still personally know which peer is safe for other routes"
+```
+
+### Example preflight: Redis TCP
+
+```yaml
+runbook_preflight:
+  claim_sentence: "Redis TCP routing can be described without implying stateful HA"
+  source_pressure:
+    source: "knowledgebase/source-archive/chatgpt-exports/conversations/redis-url-and-load-balancing__68a914f8-d47c-8324-8734-bc1f17507bac.md"
+    source_family: "raw-tcp"
+    packet_field_pressured: "stateful_authority"
+  runtime_anchor: "root and fragment Traefik TCP labels for redis"
+  evidence_class_needed: "route-behavior"
+  legal_sentence_if_passes: "Redis transport exposure exists for this path"
+  still_forbidden_even_if_passes: "Redis is HA because a TCP route answered"
+  surviving_private_sentence_to_watch: "I still personally know who the writer is"
+```
+
+The preflight is not bureaucracy.
+It is the step that keeps archive pressure, runtime checks, and proof classes
+from illegally blending into a satisfying but false confidence story.
+
 ## The evidence ladder
 
 This repo needs a stricter evidence ladder than most homelab writeups.
