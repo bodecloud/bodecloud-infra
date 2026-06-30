@@ -122,12 +122,11 @@ Start with:
 Important current fragments include:
 
 - `compose/docker-compose.coolify-proxy.yml`
-- `compose/docker-compose.core.yml`
 - `compose/docker-compose.docs.yml`
 - `compose/docker-compose.firecrawl.yml`
 - `compose/docker-compose.headscale.yml`
-- `compose/docker-compose.metrics.yml`
 - `compose/docker-compose.llm.yml`
+- `compose/docker-compose.metrics.yml`
 - `compose/docker-compose.stremio-group.yml`
 - `compose/docker-compose.warp-nat-routing.yml`
 - `compose/docker-compose.wishlist.yml`
@@ -156,7 +155,7 @@ Start with:
 1. [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 2. [`docs/stateful_ha_plan.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/stateful_ha_plan.md)
 3. [`docs/osvc_ingress_ha.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/osvc_ingress_ha.md)
-4. relevant research pages under
+4. research pages under
    [`knowledgebase/research/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research)
 
 These files are where the repo already says things like:
@@ -211,6 +210,124 @@ Use this table before writing any summary page.
 If a sentence cannot be routed through this table, it is probably too vague to
 be useful.
 
+## Retrieval packs for the most common real questions
+
+These are the highest-signal local bundles for the questions this repo keeps
+returning to. They exist because broad archive scans produce volume faster than
+understanding.
+
+### Pack A: "Why does Compose stop feeling honest the moment multi-node matters?"
+
+Use when the real question is:
+
+- why is the user so hostile to static glue?
+- why is `docker-compose.yml` still sacred even though it is now painful?
+- why does the repo keep insisting the missing problem is not "better YAML"?
+
+Start with:
+
+1. [User Intent and Dream](../research/user-intent-and-dream.md)
+2. [Problem and Goals](../architecture/problem-and-goals.md)
+3. `source-archive/chatgpt-exports/conversations/docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`
+4. `source-archive/chatgpt-exports/conversations/docker-compose-multi-server-setup__67f73c50-150c-8006-8408-c03db2d8d287.md`
+
+What this pack proves well:
+
+- the user does not merely dislike Compose syntax
+- the real break happens when runtime truth escapes local node boundaries
+- advice that says "just run Traefik and DDNS" keeps stopping one layer too
+  early
+
+What it must not be widened into:
+
+- Compose itself is useless
+- remote Docker sockets or overlay mesh automatically solve the hidden burden
+
+### Pack B: "What counts as a fake failover answer in this repo?"
+
+Use when the real question is:
+
+- why are Cloudflare, Traefik, and more healthchecks still not enough?
+- why does the repo keep saying wrong-node dignity is the real threshold?
+- why is a helper like `docker-gen-failover` both important and distrusted?
+
+Start with:
+
+1. [HA, Failover, and Routing](../architecture/ha-failover-routing.md)
+2. [Request Path and Failure Walkthrough](../architecture/request-path-and-failure-walkthrough.md)
+3. [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
+4. `source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
+5. `source-archive/chatgpt-exports/conversations/traefik-service-failover-setup__689d5598-9720-832e-a891-ff57340bcd9c.md`
+
+What this pack proves well:
+
+- the user is not looking for a generic reverse proxy
+- Traefik configuration alone does not grant failover semantics
+- the repo already knows route persistence under backend loss is one of the
+  hardest seams
+
+What it must not be widened into:
+
+- the current runtime has no meaningful ingress machinery
+- all proxy-based fallback ideas are permanently invalid
+
+### Pack C: "Does some orchestrator already earn default promotion?"
+
+Use when the real question is:
+
+- should the repo just move to Nomad, k3s, OpenSVC, or something else?
+- is the user only resisting mature tools out of taste?
+- what exact burden would a bigger control plane have to own better?
+
+Start with:
+
+1. [Orchestration Options](../architecture/orchestration-options.md)
+2. [The Missing Middle Layer](../architecture/missing-middle-layer.md)
+3. [Orchestrator Tradeoffs Evidence](../research/orchestrator-tradeoffs-evidence.md)
+4. `source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
+5. `source-archive/chatgpt-exports/conversations/nomad-multi-node-failover__68765e45-1ec4-8006-9179-5ef176d7a90f.md`
+6. [Garden and k3s Exploration Evidence](../research/garden-k3s-exploration-evidence.md)
+7. [Nomad Exploration Evidence](../research/nomad-exploration-evidence.md)
+
+What this pack proves well:
+
+- the repo is not anti-orchestrator in principle
+- "respectable platform family" is weaker than "owns a named hidden burden"
+- the user is explicitly searching for a middle layer, not merely for a brand
+
+What it must not be widened into:
+
+- every stronger control plane is equally bad
+- peer-equal or leaderless rhetoric is automatically the right answer
+
+### Pack D: "What does the current worktree actually own today?"
+
+Use when the real question is:
+
+- what is active in the priority implementation?
+- which pieces are live versus planned versus archived?
+- where should route or topology claims be checked first?
+
+Start with:
+
+1. [Instruction Surfaces and Authority](../architecture/instruction-surfaces-and-authority.md)
+2. [Current Compose Runtime](../architecture/current-compose-runtime.md)
+3. [Compose Fragment Map](../architecture/compose-fragment-map.md)
+4. [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+5. active `compose/docker-compose.*.yml` fragments
+
+What this pack proves well:
+
+- the root runtime is serious and broad
+- specific services, networks, and helper components are really present
+- the current stack already encodes real routing, mesh, and observability
+  pressure
+
+What it must not be widened into:
+
+- broad wrong-node resilience is already live
+- stateful HA can be inferred from component presence
+
 ## What "full assimilation" means in this repo
 
 Full assimilation is not achieved when the docs can repeat the repository.
@@ -258,110 +375,76 @@ Open files because they can answer a specific claim the page needs to make.
 Decide whether the page is trying to say:
 
 - dream
-- live runtime
-- missing gap
-- archive pressure
+- runtime
+- planning gap
+- archive complaint
+- proof boundary
 
-Only then choose sources.
+If you do not identify the claim type first, you will almost certainly start
+letting unlike evidence classes borrow authority from each other.
 
-### Rule 3: let the worktree outrank elegant synthesis for runtime claims
+### Rule 3: prefer the smallest strong bundle over the broadest sweep
 
-If a planning page or archive conversation sounds better than the live compose
-surface, the live compose surface still wins for "what exists now."
+In this repo, six sharply chosen files usually beat sixty vaguely adjacent
+ones.
 
-### Rule 4: never let planning docs impersonate implementation
+Breadth matters only after the strongest sources for the exact claim have
+already been read.
 
-Planning material is often clearer than the worktree.
-That does not make it runtime proof.
+### Rule 4: preserve contradiction on purpose
 
-### Rule 5: never let archive pressure impersonate architecture proof
+If runtime, planning, and archive pressure disagree in tone, keep that visible.
+The disagreement is often more informative than a blended summary.
 
-The archive helps recover the real complaint.
-It does not tell you which implementation path is complete.
+### Rule 5: always name the ceiling
 
-### Rule 6: preserve contradiction
+Every serious page should make it obvious:
 
-If the repo simultaneously says:
+- what the sources let it say confidently
+- what stronger sentence would still be a lie
 
-- "this is the dream"
-- and "this is still missing"
+If that ceiling is missing, the page is probably overclaiming.
 
-do not smooth that into one moderate sentence.
-Expose both and state the boundary.
+## The easiest ways to fail at RAG in this repo
 
-### Rule 7: always ask where operator memory is still doing system work
+These failure modes are now common enough to name explicitly.
 
-This is one of the highest-value retrieval questions in the whole repo.
+### Failure mode 1: option laundering
 
-Whenever a page describes a topology, also ask:
+The docs list enough products and frameworks that the reader feels the option
+space has become healthy, even though no option has yet removed the real hidden
+burden.
 
-- what truth still lives in private operator reconstruction?
-- what should eventually be externalized into shared current-state knowledge?
+### Failure mode 2: intent inflation
 
-If the docs cannot answer that, they have not really assimilated the system.
+The docs read a strong dream file and start narrating current behavior as if
+the runtime had already earned it.
 
-## What the source archive is best used for
+### Failure mode 3: archive inflation
 
-The source archive is most useful when a page needs to recover one of these:
+The docs read a large number of pain threads and start narrating the repo as if
+the repeated pain itself were evidence of implementation progress.
 
-- the user's exact complaint
-- the direct statement of the desired wrong-node behavior
-- the reason familiar orchestration answers were not accepted
-- the emotional pressure behind "fake options" and "fake HA" language
+### Failure mode 4: runtime flattery
 
-Some of the most important archive threads for this repo's identity are:
+The docs see a serious stack and start narrating its presence as if presence
+alone made wrong-node, fallback, or stateful semantics trustworthy.
 
-- `docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`
-- `load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
-- `distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
-- `traefik-service-failover-setup__689d5598-9720-832e-a891-ff57340bcd9c.md`
-- `docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`
+### Failure mode 5: plan sedation
 
-These files help explain why the repo exists in its current shape.
-They do not remove the duty to inspect the current worktree.
-
-## Failure modes this page is explicitly trying to prevent
-
-### Failure mode 1: flattening everything into one "balanced" voice
-
-This makes the docs sound mature while erasing source authority.
-
-### Failure mode 2: answering the easier neighboring question
-
-This is the most common way to be technically adjacent and still useless.
-
-### Failure mode 3: letting availability-sounding words do proof work
-
-Examples:
-
-- "multi-node"
-- "distributed"
-- "fallback"
-- "load balanced"
-- "HA"
-
-These words mean almost nothing unless routed to the right evidence class.
-
-### Failure mode 4: confusing "many options exist" with "the user has a real path"
-
-This is the emotional center of the repo.
-The docs should be actively hostile to this confusion.
+The docs find detailed plans and mistake the clarity of the repair path for
+partial completion of the repair itself.
 
 ## Bottom line
 
-This knowledgebase only becomes useful if it behaves like a retrieval system
-with source discipline, not like a summarizer with a calm tone.
+The retrieval standard in `bolabaden-infra` is not "did we read a lot?"
 
-The correct assimilation standard is:
+It is:
 
-> reconstruct the user's real dream, route each claim to the strongest source
-> class for that claim, preserve contradiction, and never let a nicer source
-> silently overrule current worktree truth.
+> did we reconstruct the user's real demand, route each claim to the right
+> authority class, preserve the repo's own contradictions, and refuse to let
+> serious-looking adjacent evidence merge into broader confidence than the
+> current worktree has actually earned?
 
-Anything weaker will keep producing the same kind of documentation the user is
-already frustrated with:
-
-- tidy
-- plausible
-- sourced
-- and still not answering the real question
+If the answer is no, then the docs may be longer than before and still not
+actually more honest.

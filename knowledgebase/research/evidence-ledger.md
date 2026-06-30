@@ -8,39 +8,26 @@ It is information being narrated at the wrong confidence level.
 
 The repo has enough:
 
-- real pressure
 - real ingress machinery
-- real planning
-- real archive context
+- real multi-node pressure
+- real planning depth
+- real archive frustration
 - real implementation complexity
 
-to sound finished long before it actually is.
+to sound mature long before it is trustworthy.
 
-This ledger exists to stop that narrative overpayment.
-
-## Strongest honest current answer
-
-The biggest remaining documentation risk is not false facts.
-It is adjacency masquerading as proof.
-
-That usually happens in this order:
-
-1. archive pressure names the wound clearly
-2. instruction files name the dream clearly
-3. live compose files show serious components
-4. planning docs propose sharp repairs
-5. the docs quietly fuse those into one present-tense feeling of maturity
-
-That fusion is the thing this page is here to block.
+This ledger exists to stop that overpayment.
 
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
 
-- define evidence classes for the rest of the knowledgebase
+- define the evidence classes the rest of the knowledgebase should use
 - route claim types to the right authority surfaces
 - explain confidence ceilings
 - keep contradiction visible instead of smoothing it away
+- force pages to say what remains unproven even when something important is
+  true
 
 This page is not allowed to:
 
@@ -53,9 +40,40 @@ This page is not allowed to:
 This is a page about how to speak truthfully, not a page that proves the repo
 is done.
 
+## Strongest honest current answer
+
+The biggest remaining documentation risk is not false facts.
+It is adjacency masquerading as proof.
+
+That usually happens in this order:
+
+1. archive pressure names the wound clearly
+2. instruction files name the dream clearly
+3. live Compose files show serious components
+4. planning docs propose sharp repairs
+5. the docs quietly fuse those into one present-tense feeling of maturity
+
+That fusion is exactly what this ledger exists to block.
+
+## The hidden mistake this ledger is trying to stop
+
+Most weak summaries in this repo are not wrong because they invented facts.
+They are wrong because they let several weaker truths emotionally combine into
+a stronger claim than any one source actually proves.
+
+That is how documentation starts sounding like this:
+
+- "the stack is basically anti-SPOF now"
+- "the system already has a distributed control story"
+- "failover is mostly there, it just needs polish"
+- "the remaining work is mostly automation"
+
+Those are the kinds of sentences this ledger is supposed to make illegal
+unless there is route-specific proof strong enough to survive them.
+
 ## The four evidence classes
 
-Every serious claim in this knowledgebase should be routed through one of four
+Every serious claim in this knowledgebase should route through one of four
 classes.
 
 ### Class 1: live runtime evidence
@@ -73,7 +91,8 @@ Typical questions:
 Strong anchors:
 
 - [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-- active files under [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/)
+- active files under
+  [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/)
 - `docker compose config`
 - route-specific drill output, if a drill really exists
 
@@ -82,12 +101,18 @@ What Class 1 can honestly prove:
 - authored or inspected runtime shape
 - presence of a component
 - local implementation facts
+- the starting condition for a stronger drill
 
 What Class 1 cannot prove by itself:
 
 - the user's full dream
 - distributed behavior the runtime only gestures toward
 - future failover semantics from present components alone
+- backend-loss recovery
+- stateful authority correctness
+
+Presence is real.
+Presence is not closure.
 
 ### Class 2: architecture-intent and honesty evidence
 
@@ -110,11 +135,13 @@ What Class 2 can honestly prove:
 - the dream
 - the anti-goals
 - the repo's intended operating contract
+- the repo's own honesty wall
 
 What Class 2 cannot prove by itself:
 
 - that the root runtime already behaves that way
 - that the docs are allowed to use present-tense capability language
+- that the helper layer already exists just because the dream names it clearly
 
 Intent is real.
 Intent is not runtime proof.
@@ -143,11 +170,13 @@ What Class 3 can honestly prove:
 - the repo already sees the gap
 - the gap is not being ignored
 - a future path is being considered seriously
+- a current helper is already distrusted for a named reason
 
 What Class 3 cannot prove by itself:
 
 - that the repair is live
 - that the current runtime already inherited the planned behavior
+- that a proposed helper has earned trust just because the plan is detailed
 
 Detailed plans are still plans.
 
@@ -174,11 +203,13 @@ What Class 4 can honestly prove:
 
 - the standard the user is holding the system to
 - the kinds of answers that should not satisfy the docs
+- the recurring shape of the user's disappointment
 
 What Class 4 cannot prove by itself:
 
 - that the local repo already solved the pain
 - that one future technical choice has already been earned
+- that the runtime is close just because the archive pressure is clear
 
 Archive pressure tells us what counts.
 It does not certify completion.
@@ -193,13 +224,15 @@ Use this before writing any substantial paragraph.
 | "this is the dream or operating contract" | Class 2 | `copilot-instructions.md`, `README.md` | that the worktree already earned it |
 | "the repo already knows this is missing or broken" | Class 3 | planning docs and gap pages | that the repair is active |
 | "the user rejects this whole answer family" | Class 4 | archive-pressure and source archive | that rejection alone proves the better design |
+| "this lane is getting closer but still unsafe" | Class 1 + 3 | runtime plus named gap | that "closer" is the same as proven |
+| "this helper matters but is not yet trustworthy" | Class 1 + 3 | live helper presence plus explicit distrust in plans | that helper presence equals route durability |
 
 If a sentence cannot be routed cleanly, it is usually too vague or doing too
 much work at once.
 
 ## The anti-merger rule
 
-This is the most important rule in the whole page:
+This is the most important rule on the page:
 
 do not let several weaker evidence classes emotionally combine into a stronger
 claim than any one of them actually proves.
@@ -210,6 +243,7 @@ That means:
 - Class 2 plus Class 3 does not equal near-complete behavior
 - Class 1 plus Class 3 does not equal working failover
 - Class 1 plus Class 4 does not equal the user's dream being met
+- Class 2 plus Class 4 does not equal justified orchestrator promotion
 
 This repo is especially vulnerable to this because it has:
 
@@ -223,8 +257,8 @@ This ledger exists to stop "sounds like completion" from replacing proof.
 
 ## The five fields every serious page should make recoverable
 
-If a page is actually behaving like a retrieval surface rather than a polished
-summary, a reader should be able to recover all five of these quickly:
+If a page is behaving like a retrieval surface rather than a polished essay, a
+reader should be able to recover all five of these quickly:
 
 1. the claim
 2. the evidence class
@@ -249,9 +283,11 @@ The ledger should stop all of these:
 - architecture-closure claims made from exploration artifacts
 - smooth wording upgrades where "dynamic," "multi-node," or "resilient" begin
   to mean more than the evidence supports
+- emotional satisfaction with the dream being mistaken for progress in the
+  worktree
 
 Those are not minor wording bugs.
-They are exactly how the docs become satisfying for the wrong reason.
+They are how the docs become satisfying for the wrong reason.
 
 ## Practical examples
 
@@ -260,7 +296,10 @@ They are exactly how the docs become satisfying for the wrong reason.
 - "the repo wants any-node entry plus peer forwarding"
 - "the root runtime already has a substantial Traefik/auth/CrowdSec edge"
 - "the master plan explicitly records service failover as still missing"
-- "the archive shows the user rejects answers that preserve sacred-node memory"
+- "the archive shows the user rejects answers that preserve sacred-node
+  memory"
+- "the current stack has fallback-shaped glue, but the plans explicitly record
+  that it can lose routes under container stop"
 
 ### Incorrect
 
@@ -268,6 +307,7 @@ They are exactly how the docs become satisfying for the wrong reason.
 - "the system already behaves like one distributed platform"
 - "stateful HA is mostly in place because the services are routed"
 - "the missing middle layer is effectively solved"
+- "because several sources all point the same way, the runtime is close"
 
 The difference is not tone.
 It is evidence-class discipline.
@@ -280,6 +320,8 @@ Every serious page should be forced to answer:
 2. which source class is doing the heavy lifting?
 3. what nearby stronger sentence would still be a lie?
 4. where does the current answer still depend on operator reconstruction?
+5. what would have to be observed next before the stronger sentence becomes
+   legal?
 
 That fourth question matters because the user's complaint is not only about
 missing features.
@@ -288,7 +330,7 @@ It is about private operator memory still doing system work.
 If the docs cannot say where that hidden burden still lives, they have not
 really assimilated the repo.
 
-## Bottom line
+## The bottom-line test
 
 The knowledgebase now has enough material to sound convincing almost
 everywhere.

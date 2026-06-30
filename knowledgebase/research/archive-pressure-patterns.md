@@ -9,7 +9,8 @@ answers fail.
 That matters because this repo can only be documented honestly if it preserves
 the pressure that created it:
 
-- the user asks for multi-node behavior that feels like it should already exist
+- the user asks for multi-node behavior that feels like it should already
+  exist
 - the ecosystem keeps offering either static glue or heavyweight platform
   migration
 - the user rejects those answers because the actual problem survives
@@ -21,19 +22,7 @@ place.
 
 That forgetting is one of the main failure modes of the whole site.
 
-The runtime, plans, and instruction surfaces can all be documented accurately
-and still miss the point if the archive pressure disappears.
-The archive is where the repo most clearly remembers that the real complaint is
-not "I need more infrastructure nouns."
-It is:
-
-> I keep getting offered answers that sound like options while leaving the same
-> hidden sacred-node burden intact
-
-This page exists to keep that complaint from being domesticated into something
-more ordinary.
-
-## Evidence boundary for this page
+## What this page is and is not allowed to prove
 
 This is an archive-pressure map.
 
@@ -43,6 +32,7 @@ It is authoritative about:
 - recurring refusal
 - recurring disappointment
 - recurring capability thresholds
+- the emotional and architectural shape of the user's real complaint
 
 It is not authoritative about:
 
@@ -59,10 +49,17 @@ near-implementation.
 
 That would be the wrong lesson.
 
-The archive tells us what the user keeps refusing, what kinds of answers keep
-failing, and what kind of system they are really trying to call into
-existence.
-It does not tell us that the current runtime has already become that system.
+## Strongest honest current answer
+
+If a reader asks what the archive is really proving, the shortest defensible
+answer is:
+
+> the archive proves that the user keeps rediscovering the same hidden wound
+> under different tool names: self-hosting ecosystems keep offering answers
+> that sound dynamic or serious while leaving wrong-node humiliation, sacred
+> operator memory, and fake stateful confidence fundamentally intact.
+
+That is problem-shape proof, not runtime proof.
 
 ## Quick claim router
 
@@ -83,8 +80,8 @@ Across the imported material, the user is not mainly asking for more services.
 They are repeatedly asking some version of:
 
 > why is there no straightforward middle layer that makes multiple ordinary
-> Docker nodes behave dynamically and resiliently without forcing me into static
-> glue or a heavyweight cluster platform?
+> Docker nodes behave dynamically and resiliently without forcing me into
+> static glue or a heavyweight cluster platform?
 
 That question is more specific than "I want HA."
 It is really a stacked demand:
@@ -104,11 +101,86 @@ the ecosystem keeps answering adjacent questions instead of this one.
 That repetition is not noise.
 It is one of the strongest signals in the whole repo.
 
-When a user keeps restating the same dissatisfaction through different tool
-names, the right reading is not "they are indecisive."
-The right reading is:
+## High-signal archive clusters
 
-the ecosystem keeps forcing them back into the same false choice space.
+These are the archive bundles that most clearly reconstruct the user's actual
+standards.
+
+### Cluster A: Compose becomes humiliating at the exact moment distribution matters
+
+Primary files:
+
+- `source-archive/chatgpt-exports/conversations/docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`
+- `source-archive/chatgpt-exports/conversations/docker-compose-multi-server-setup__67f73c50-150c-8006-8408-c03db2d8d287.md`
+
+What this cluster shows:
+
+- the user's problem is not merely "Compose syntax is ugly"
+- Compose feels empowering while the topology is still local and obvious
+- the moment multiple hosts and hidden container state enter the picture,
+  Docker's surface stops feeling causally legible
+- many "simple multi-server Compose" answers quietly translate to:
+  - one reverse proxy
+  - one or more remote Docker sockets
+  - one overlay mesh
+  - one operator still stitching the truth together
+
+What this forces the docs to preserve:
+
+- Compose readability is not nostalgia
+- the user is protecting operator legibility, not merely preferring YAML
+- a solution can sound lightweight while still leaving the same hidden burden
+  intact
+
+### Cluster B: Wrong-node survival is the real threshold, not generic load balancing
+
+Primary files:
+
+- `source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
+- `source-archive/chatgpt-exports/conversations/traefik-service-failover-setup__689d5598-9720-832e-a891-ff57340bcd9c.md`
+
+What this cluster shows:
+
+- the user is not shopping for "a reverse proxy"
+- mainstream answers like Traefik, NGINX, or HAProxy are often rejected not
+  because they are bad tools, but because they stop short of the user-facing
+  requirement
+- "field not found, node: failover" is not merely a syntax footgun; it exposes
+  how easily failover language outruns what the live router model really owns
+- advanced origin selection, route durability, stickiness, circuit breaking,
+  and fallback semantics are being treated as one missing capability family
+  rather than as optional proxy extras
+
+What this forces the docs to preserve:
+
+- do not narrate "proxy present" as "failover solved"
+- do not narrate one generated file-provider trick as a real middle layer
+- the user cares about preserved service meaning after wrong-node entry, not
+  just packet redirection
+
+### Cluster C: The user keeps searching for peer-equal or narrow coordination, not just bigger names
+
+Primary files:
+
+- `source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
+- `source-archive/chatgpt-exports/conversations/nomad-multi-node-failover__68765e45-1ec4-8006-9179-5ef176d7a90f.md`
+
+What this cluster shows:
+
+- the user is explicitly asking whether they must invent their own framework
+- they are attracted to systems where nodes are less sacred and less
+  role-captured
+- they still do not want "build your own orchestrator" if an honest narrower
+  layer already exists
+- even when Nomad appears as a candidate, the real question stays:
+  - does it remove the hidden burden
+  - or does it just provide a more respectable surface for similar burden
+
+What this forces the docs to preserve:
+
+- the repo is not anti-platform out of stubbornness
+- it is trying to prevent unjustified worldview capture
+- "mature orchestrator" is weaker than "owns the missing truth cleanly"
 
 ## What this pressure is doing to the repo
 
@@ -124,7 +196,7 @@ It keeps forcing the docs and the architecture to answer:
 
 That is why the archive matters so much.
 
-The archive is effectively acting like a negative benchmark engine.
+It is effectively acting like a negative benchmark engine.
 It keeps recovering the exact kinds of coherence the user no longer trusts:
 
 - a route that exists but dies when it matters
@@ -133,7 +205,7 @@ It keeps recovering the exact kinds of coherence the user no longer trusts:
 - a control plane that is really just private human reconstruction with nicer
   nouns
 
-## Pattern 1: "There should already be a standard dynamic model, but there never is"
+## Pattern 1: "There should already be a standard dynamic middle layer, but there never is"
 
 This is one of the loudest repeating frustrations in the archive.
 
@@ -160,13 +232,12 @@ That pressure is what keeps the repo searching for a middle layer between:
 - raw Compose sprawl
 - and full orchestrator worldview capture
 
-This is where the docs must resist a common flattening move.
+What this pattern forces the docs to say:
 
-It is too easy to rewrite this pattern as:
-
-- wants cleaner automation
-- wants better service discovery
-- wants less manual config
+- do not describe the repo as if it is merely looking for better Compose
+  hygiene
+- do not reduce this to "wants better service discovery"
+- do not reduce this to "wants less manual config"
 
 Those are all true and all too small.
 
@@ -174,13 +245,6 @@ The deeper pattern is:
 
 the user wants the system to stop requiring private reconstruction of topology
 and recovery truth just to behave like one platform under stress.
-
-### What this pattern forces the docs to say
-
-Do not describe the repo as if it is merely looking for better Compose hygiene.
-
-It is looking for a more standardized dynamic behavior model than raw
-Compose alone gives.
 
 ## Pattern 2: "Wrong-node requests should still work"
 
@@ -211,29 +275,13 @@ It quietly requires all of these things:
 Most ordinary answers in the archive solve one slice of that and then talk as
 if they solved the whole thing.
 
-### What this pattern forces the docs to say
+What this pattern forces the docs to say:
 
-Never collapse:
-
-- node-entry survival
-- peer forwarding
-- route persistence
-- request continuity
-- full request correctness
-
-into one vague phrase like "HA routing."
-
-That warning should govern more than this page.
-
-The entire site fails if it starts describing:
-
-- entry-node plurality
-- peer reachability
-- route generation
-- request preservation
-- semantic continuity
-
-as if they were one maturity tier.
+- never collapse entry-node plurality, peer forwarding, route persistence,
+  request preservation, and semantic continuity into one vague phrase like "HA
+  routing"
+- keep wrong-node dignity as the real threshold instead of treating it like an
+  optional advanced feature
 
 ## Pattern 3: "Do not hardcode everything, but also do not immediately jump to Consul, Swarm, or Kubernetes"
 
@@ -261,8 +309,8 @@ The archive keeps forcing a narrower target:
 - lighter coordination
 - more direct ownership of what the system thinks is true
 
-This is one of the clearest places where the user's dream stops sounding like a
-normal product comparison.
+This is one of the clearest places where the user's dream stops sounding like
+a normal product comparison.
 
 They are not only asking for lighter machinery.
 They are asking for machinery whose truth can still be inspected and whose
@@ -276,173 +324,99 @@ That is why repo-native ideas keep reappearing:
 - file-generated Traefik config
 - Compose-first plus stronger truth layers
 
-### What this pattern forces the docs to say
+What this pattern forces the docs to say:
 
-Optionality is not indecision here.
-
-It is the result of the user refusing both:
-
-- static pain
-- and ideological platform capture
+- optionality is not indecision here
+- the repo is refusing both static pain and ideological platform capture
+- "keep exploring" is sometimes the honest answer when neither extreme has
+  earned trust
 
 ## Pattern 4: "DNS failover is not the whole story"
 
 The archive repeatedly rejects the shallow version of resilience:
 
 - multiple A records
+- DNS health flipping
+- "clients will eventually hit another node"
 
-## What this page should force every other page to remember
+Why that keeps feeling insufficient:
 
-Every serious page in the site should be able to say which one of these
-archive pressures it is actually answering:
+- DNS can change the first hop
+- DNS does not tell the wrong node what the service means
+- DNS does not prove fallback-route durability
+- DNS does not preserve auth or middleware semantics
+- DNS does not make a stateful service honest
 
-- "there should be a standard dynamic middle layer, but there never is"
-- "wrong-node requests should still work"
-- "do not hardcode everything, but do not jump straight to worldview capture"
-- "DNS failover is not the whole story"
-- "stateful honesty should remain harsher than stateless routing optimism"
+This is exactly why the repo keeps saying:
 
-If a page cannot say which recurring wound it is helping answer, it is
-probably drifting back toward generic infrastructure prose.
+first-hop plurality is real progress and still much weaker than preserved
+request meaning.
 
-## Strongest honest current answer
+What this pattern forces the docs to say:
 
-If a reader asks, "What is the archive really proving?" the shortest
-defensible answer is:
+- Cloudflare belongs in the anti-SPOF story
+- Cloudflare is not the final story
+- a multi-record ingress surface should not be narrated as distributed closure
 
-> The archive proves that the user keeps rediscovering the same hidden wound
-> under different tool names: self-hosting ecosystems keep offering answers
-> that sound dynamic or serious while leaving wrong-node humiliation, sacred
-> operator memory, and fake stateful confidence fundamentally intact.
+## Pattern 5: "Stateful honesty must stay harsher than stateless optimism"
 
-That is a problem-shape proof, not a local-runtime proof.
-- some client-side redistribution
-- and then calling the problem solved
+The archive repeatedly pushes toward resilience language.
+The repo keeps having to answer with a harsher distinction:
 
-The user keeps pushing past that because DNS only helps with:
+- stateless HTTP may eventually earn real wrong-node and fallback drills
+- TCP is harder
+- stateful write authority is harder still
 
-- landing on a surviving node
+This matters because many ecosystems quietly smuggle stateful optimism through
+network-level success:
 
-It does not prove:
+- the route answered
+- the socket connected
+- the replica promoted
 
-- the surviving node knows where the service is
-- the request path survives
-- auth and middleware survive
-- stateful correctness survives
+and then start implying the service is now "HA."
 
-This distinction keeps resurfacing whenever an answer stops too early and
-declares victory at the ingress edge.
+The archive pressure in this repo refuses that move.
+It keeps restoring the question:
 
-### What this pattern forces the docs to say
+> who owns truth, who can write, how is promotion decided, and what exactly
+> survives after the failure?
 
-Cloudflare multi-A DNS, Cloudflare LB, keepalived VIPs, and similar entry-layer
-mechanisms should be documented as:
+What this pattern forces the docs to say:
 
-- ingress-layer tools
-- not proof of end-to-end service continuity
+- reachable is weaker than correct
+- correct is weaker than authoritative
+- authoritative is weaker than well-explained
 
-This is exactly the kind of distinction generic self-hosting discourse keeps
-blurring.
-The archive matters because it keeps restoring the user's impatience with that
-blur.
+## What these patterns mean for documentation
 
-## Pattern 5: "I want equality between nodes if possible"
+The archive is useful only if it makes the rest of the docs harder to flatter.
 
-The archive shows repeated resistance to sacred infrastructure roles:
+Every serious page should preserve all of these:
 
-- sacred ingress box
-- sacred manager
-- sacred leader that quietly becomes the real control point
+- the user is not lacking products
+- the user is lacking honest closure
+- the real threshold is wrong-node dignity
+- route persistence under the relevant failure is more important than calm
+  architecture prose
+- stateful services stay under a much harsher standard
+- larger control planes must earn their opacity
 
-This does not mean every service must be symmetric.
-It means the repo keeps trying to avoid a system where anti-SPOF language is
-built on top of one quietly indispensable machine.
-
-That is why "equality between nodes" is not a cosmetic preference.
-It is a resistance to the pattern where the architecture diagram says
-distributed while one host or one remembered role still carries the real
-intelligence of the platform.
-
-### What this pattern forces the docs to say
-
-Whenever a role becomes operationally sacred, the docs should name it plainly
-instead of smuggling it through "cluster" vocabulary.
-
-## Pattern 6: "Stateful honesty matters more than architectural aesthetics"
-
-The archive repeatedly resists the move where stateless routing progress gets
-widened into a general resilience story.
-
-The user keeps pushing on questions like:
-
-- who owns writes?
-- what replica or quorum model exists?
-- what survives node loss?
-- how do clients rediscover the surviving topology?
-
-That is why the repo has to keep separating:
-
-- ingress continuity
-- request continuity
-- stateful correctness
-
-### What this pattern forces the docs to say
-
-Never use successful HTTP routing language to imply Redis, MongoDB, RabbitMQ,
-or Postgres now have honest failover semantics.
-
-## Pattern 7: "The docs themselves are part of the problem if they get too congratulatory"
-
-The archive pressure is not only about the runtime.
-It is also about narration.
-
-The user keeps rejecting answers that:
-
-- smooth over contradictions
-- upgrade intent into proof
-- treat modularity as if it were already orchestration
-- act as though the lack of options has already been solved
-
-That means the docs are part of the control surface.
-If they speak too broadly, they recreate the same problem at the documentation
-layer.
-
-### What this pattern forces the docs to say
-
-The knowledgebase should read like a map of exact pain, exact evidence, and
-exact missing layers, not a congratulatory essay about modern infrastructure.
-
-## What the archive keeps forcing the architecture to admit
-
-Across these patterns, the archive keeps forcing the repo to admit three things
-at once:
-
-1. raw Compose is too static once wrong-node routing and failover become real
-2. the ecosystem's standard answer often jumps too quickly to heavyweight
-   control planes
-3. the missing middle layer is not imaginary; it is the real subject of the
-   project
-
-That is why the repo keeps circling:
-
-- current-state registry ideas
-- sync-agent and failover-agent ideas
-- OpenSVC exploration
-- Nomad exploration
-- Garden, k3s, and Kubernetes exploration
-
-This is not indecision for its own sake.
-It is the shape of a repo trying to find the smallest honest layer that removes
-the right burdens.
+If a page becomes easier to read by shrinking one of those things, it probably
+got less honest.
 
 ## Bottom line
 
-The archive keeps saying the same thing in different ways:
+The core archive complaint is not ambiguous.
 
-> the user does not want prettier YAML, and they do not want premature platform
-> surrender. They want a real middle layer that makes multiple Docker nodes
-> behave like one request-preserving, operator-readable system without lying
-> about state or failover.
+It is:
 
-If the rest of the knowledgebase stops reflecting that pressure, it stops
-reflecting `bolabaden-infra`.
+> I keep getting offered answers that sound like options while leaving the same
+> hidden sacred-node burden intact.
+
+That line is the reason `bolabaden-infra` keeps circling Compose-first truth
+layers, peer-aware routing, `services.yaml`, helper agents, OpenSVC, Nomad,
+k3s, and stateful caution all at once.
+
+The repo is not being indecisive.
+It is trying to stop accepting fake closure.

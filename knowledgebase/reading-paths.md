@@ -101,6 +101,7 @@ Read in this order:
 1. [User Intent and Dream](research/user-intent-and-dream.md)
 2. [Problem and Goals](architecture/problem-and-goals.md)
 3. [Operator Contract and Success Criteria](architecture/operator-contract.md)
+4. [Archive Pressure Patterns](research/archive-pressure-patterns.md)
 
 Use this path when you need:
 
@@ -108,6 +109,7 @@ Use this path when you need:
 - the anti-goals
 - the negative benchmark
 - the real acceptance bar
+- the reason ordinary option lists keep feeling insulting
 
 Do **not** use it as runtime proof.
 
@@ -120,6 +122,7 @@ Read in this order:
 3. [Compose Fragment Map](architecture/compose-fragment-map.md)
 4. [Failure Model and Maturity](architecture/failure-model-and-maturity.md)
 5. [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
+6. [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
 
 Use this path when you need:
 
@@ -137,6 +140,8 @@ Read in this order:
 2. [HA, Failover, and Routing](architecture/ha-failover-routing.md)
 3. [Operator Questions and Honest Answers](operations/operator-questions-and-honest-answers.md)
 4. [Ingress and Failover Evidence](research/ingress-and-failover-evidence.md)
+5. `source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
+6. `source-archive/chatgpt-exports/conversations/traefik-service-failover-setup__689d5598-9720-832e-a891-ff57340bcd9c.md`
 
 Use this path when you need:
 
@@ -153,6 +158,7 @@ Read in this order:
 2. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
 3. [Decision Paths and Promotion Rules](operations/decision-paths-and-promotion-rules.md)
 4. [Source Assimilation Index](operations/source-assimilation-index.md)
+5. [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 
 Use this path when you need:
 
@@ -187,6 +193,8 @@ Read in this order:
 5. [Nomad Exploration Evidence](research/nomad-exploration-evidence.md)
 6. [OpenSVC Cluster Bootstrap](research/opensvc-cluster-bootstrap.md)
 7. [OpenSVC Ingress HA](research/osvc-ingress-ha.md)
+8. `source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
+9. `source-archive/chatgpt-exports/conversations/nomad-multi-node-failover__68765e45-1ec4-8006-9179-5ef176d7a90f.md`
 
 Use this path when you need:
 
@@ -209,6 +217,30 @@ Use this path when you need:
 - source hierarchy
 - archive pressure without runtime inflation
 - a check against blending unlike truth classes into one neat narrative
+
+### 8. "Which archive threads should I actually read instead of vaguely searching everything?"
+
+Read in this order:
+
+1. [Archive Pressure Patterns](research/archive-pressure-patterns.md)
+2. [Source Assimilation Index](operations/source-assimilation-index.md)
+3. then one of these focused bundles:
+
+- Compose pain bundle:
+  - `source-archive/chatgpt-exports/conversations/docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`
+  - `source-archive/chatgpt-exports/conversations/docker-compose-multi-server-setup__67f73c50-150c-8006-8408-c03db2d8d287.md`
+- failover realism bundle:
+  - `source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
+  - `source-archive/chatgpt-exports/conversations/traefik-service-failover-setup__689d5598-9720-832e-a891-ff57340bcd9c.md`
+- orchestrator pressure bundle:
+  - `source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
+  - `source-archive/chatgpt-exports/conversations/nomad-multi-node-failover__68765e45-1ec4-8006-9179-5ef176d7a90f.md`
+
+Use this path when you need:
+
+- actual archive reconstruction instead of generic RAG theater
+- the user complaint in its sharper native form
+- smaller high-signal bundles instead of one giant undirected archive pass
 
 ## Read by truth register
 
@@ -261,55 +293,25 @@ Start with:
 
 - [Archive Pressure Patterns](research/archive-pressure-patterns.md)
 - [Source Assimilation Index](operations/source-assimilation-index.md)
-- [Evidence Ledger](research/evidence-ledger.md)
+- [Operator Questions and Honest Answers](operations/operator-questions-and-honest-answers.md)
 
 Use this register for:
 
-- what kind of answers the user keeps rejecting
-- why certain product families keep failing emotionally and technically
-- keeping the dream large enough while the runtime remains incomplete
+- why normal answers keep failing
+- which bundles are worth reading closely
+- how to stop replacing the real complaint with a tidier one
 
-## Fastest route for an impatient serious reader
+## Bottom line
 
-If someone only wants the shortest route to the real situation without being
-calmed down by the wrong pages, use:
+The right reading path in this repo is never just "start in the most relevant
+folder."
 
-1. [User Intent and Dream](research/user-intent-and-dream.md)
-2. [Problem and Goals](architecture/problem-and-goals.md)
-3. [Operator Contract and Success Criteria](architecture/operator-contract.md)
-4. [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
-5. [Current Compose Runtime](architecture/current-compose-runtime.md)
-6. [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md)
-7. [The Missing Middle Layer](architecture/missing-middle-layer.md)
-8. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
-9. [Stateful HA and Data](architecture/stateful-ha-and-data.md)
-10. [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
+It is:
 
-That is the minimum path that keeps:
+> identify the class of claim, pick the smallest strong bundle that can answer
+> it honestly, and keep runtime truth, intent truth, planning truth, and
+> archive-pressure truth from quietly merging into one stronger story than the
+> current worktree has actually earned.
 
-- the dream
-- the root implementation
-- the wrong-node problem
-- the missing middle
-- the roadmap dependency chain
-- the stateful split
-- the proof boundary
-
-visible at the same time.
-
-## The anti-cheat route
-
-If a page starts making the repo feel much calmer than the user sounds, pause
-and cross-check it against these four pages:
-
-1. [User Intent and Dream](research/user-intent-and-dream.md)
-2. [Current Compose Runtime](architecture/current-compose-runtime.md)
-3. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
-4. [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
-
-That quick check usually reveals whether the page is:
-
-- over-crediting planning
-- over-crediting presence in YAML
-- over-crediting public-node plurality
-- under-crediting the still-hidden operator burden
+If that discipline disappears, the site can still feel organized while losing
+the real question again.

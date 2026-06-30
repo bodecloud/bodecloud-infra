@@ -12,12 +12,13 @@ That is the real proof problem here.
 
 The user is not asking for a generic checklist.
 They are asking whether several ordinary Docker nodes can stop behaving like a
-set of separate local stacks with nice branding and start behaving like one
-request-preserving, operator-legible personal cloud without immediately forcing
-surrender to Swarm, Kubernetes, or some other worldview-heavy control plane.
+set of separate local stacks with nicer branding and start behaving like one
+request-preserving, operator-legible personal cloud without immediately
+forcing surrender to Swarm, Kubernetes, or some other worldview-heavy control
+plane.
 
-This page exists so green-looking evidence does not silently upgrade itself into
-broader closure than it actually earned.
+This page exists so green-looking evidence does not silently upgrade itself
+into broader closure than it actually earned.
 
 ## What this page is and is not allowed to prove
 
@@ -27,12 +28,16 @@ This page is authoritative about:
 - what each class can honestly support
 - which stronger ceilings must remain closed after a drill passes
 - which exact drills would materially move the dream forward
+- which kinds of passing results are still too narrow to widen into stack-wide
+  confidence
 
 This page is not authoritative about:
 
 - whether a specific service has already passed a given drill
 - whether one passing drill upgrades the whole stack
 - whether the overall dream is satisfied just because a proof class exists
+
+This is a proof-boundary page, not a success report.
 
 ## Strongest honest current answer
 
@@ -41,6 +46,27 @@ passed drill only matters if it makes one specific fragment of the dream more
 true and keeps the next unclosed ceiling visible. The danger is not missing
 tests. The danger is serious-looking evidence being quietly promoted into
 broader architecture closure than it actually earned.
+
+## The thing this page is trying to stop
+
+Most fake closure in this repo follows a repeating pattern:
+
+1. config exists
+2. the service starts
+3. a happy-path request returns `200`
+4. the surrounding prose starts sounding distributed
+5. the operator's hidden burden remains almost unchanged
+
+This page exists to break that sequence.
+
+It forces every claimed success to answer:
+
+- what exact path or topology was exercised?
+- what exact failure class was exercised?
+- what stronger sentence is still forbidden?
+- which hidden operator burden still survives even after the drill passes?
+
+If those questions disappear, the site becomes another fake HA story.
 
 ## The proof classes
 
@@ -146,8 +172,8 @@ Forbidden upgrade:
 
 Meaning:
 
-- ownership, replication, promotion, reconnect behavior, and storage truth were
-  defined for one stateful class
+- ownership, replication, promotion, reconnect behavior, and storage truth
+  were defined for one stateful class
 - a real failure drill exercised that exact topology
 
 Allowed claim:
@@ -184,20 +210,20 @@ Each row below should be read against that standard.
 | Dream fragment | Current proof class | Strongest current anchors | Exact drill needed next | What still remains unproven even after that drill passes |
 | --- | --- | --- | --- | --- |
 | Any-node public entry is a real target | `Config present` | `.github/copilot-instructions.md`, `README.md`, `cloudflare-ddns`, master plan | Prove more than one public node can receive the first hop | That the right service is preserved after wrong-node entry |
-| Local-first service is real | `Intent only` | Intent surfaces plus current Traefik-centered local routing model | Pick one stateless HTTP route and prove local serve from the honest hosting node with logs or backend identity | That wrong-node forwarding works when locality is absent |
-| Wrong-node stateless HTTP requests succeed | `Intent only` | Routing philosophy plus serious edge runtime | Intentionally land a request for one stateless HTTP route on the wrong node and prove receiving-node identity, backend-node identity, and success | That the route also survives when fallback is required because the preferred local backend disappeared |
-| Fallback route survives backend loss | `Intent only` | Master plan explicitly records route-persistence risk around `docker-gen-failover` | Start from a known-good route, remove the preferred local backend, and observe whether the fallback route remains present | That auth and middleware semantics stayed identical after handoff |
+| Local-first service is real | `Intent only` | intent surfaces plus current Traefik-centered local routing model | Pick one stateless HTTP route and prove local serve from the honest hosting node with logs or backend identity | That wrong-node forwarding works when locality is absent |
+| Wrong-node stateless HTTP requests succeed | `Intent only` | routing philosophy plus serious edge runtime | Intentionally land a request for one stateless HTTP route on the wrong node and prove receiving-node identity, backend-node identity, and success | That the route also survives when fallback is required because the preferred local backend disappeared |
+| Fallback route survives backend loss | `Intent only` | master plan explicitly records route-persistence risk around `docker-gen-failover` | Start from a known-good route, remove the preferred local backend, and observe whether the fallback route remains present | That auth and middleware semantics stayed identical after handoff |
 | Middleware and auth continuity survive peer handoff | `Config present` | TinyAuth, Nginx auth extensions, CrowdSec, Traefik middleware surfaces | Compare one protected route locally versus through intentional peer handoff and verify parity | That all protected routes now share the same continuity guarantees |
-| Placement truth is live and shared | `Intent only` | Repeated `services.yaml` intent in architecture and operations pages | Introduce or expose one real placement-truth surface and prove routing or eligibility logic consumes it | That convergence, drift detection, and restart semantics are also trustworthy |
+| Placement truth is live and shared | `Intent only` | repeated `services.yaml` intent in architecture and operations pages | Introduce or expose one real placement-truth surface and prove routing or eligibility logic consumes it | That convergence, drift detection, and restart semantics are also trustworthy |
 | Peer eligibility truth is live | `Intent only` | Headscale runtime plus peer-broadcast and sync direction in the master plan | Prove a receiving node chooses a peer from current tracked truth rather than folklore | That the same truth remains valid under revision drift and secret drift |
-| TCP forwarding works for one named service | `Config present` | Current TCP routing such as MongoDB in root Compose | Exercise a specific TCP path end to end and prove transport plus backend identity | That the corresponding stateful semantics are safe |
-| Headscale control-plane failover is real | `Intent only` | Live Headscale runtime plus leader-election and replication plan | Define exact topology, then run an owner-loss drill with continuity checks | That broader mesh or application failover is solved |
-| One stateful service is honestly resilient | `Intent only` | Service-specific plan or runtime plus explicit topology | Define ownership, replicas, promotion, reconnect, and storage truth; then exercise failure | That other stateful classes are similarly mature |
+| TCP forwarding works for one named service | `Config present` | current TCP routing such as MongoDB in root Compose | Exercise a specific TCP path end to end and prove transport plus backend identity | That the corresponding stateful semantics are safe |
+| Headscale control-plane failover is real | `Intent only` | live Headscale runtime plus leader-election and replication plan | Define exact topology, then run an owner-loss drill with continuity checks | That broader mesh or application failover is solved |
+| One stateful service is honestly resilient | `Intent only` | service-specific plan or runtime plus explicit topology | Define ownership, replicas, promotion, reconnect, and storage truth; then exercise failure | That other stateful classes are similarly mature |
 
 ## The exact drill levels
 
-These levels are intentionally strict. They are meant to stop partial evidence
-from sounding final.
+These levels are intentionally strict.
+They are meant to stop partial evidence from sounding final.
 
 ### Drill level 1: authoring coherence
 
@@ -322,7 +348,7 @@ Still forbidden:
 
 ## Candidate drills that would actually move the repo forward
 
-The following drills matter more than generic test count because they attack the
+These drills matter more than generic test count because they attack the
 user's real frustration directly.
 
 ### Candidate drill A: one stateless HTTP local-first proof
@@ -338,6 +364,13 @@ Why it matters:
 
 - establishes the honest local baseline before wrong-node claims begin
 
+Minimum evidence:
+
+- named route
+- receiving node identity
+- backend identity
+- proof that the node genuinely hosted the service locally
+
 ### Candidate drill B: one stateless HTTP wrong-node proof
 
 Goal:
@@ -350,6 +383,13 @@ Why it matters:
 - this is the first place where "multi-node" stops being emotional theater and
   starts becoming a real property
 
+Minimum evidence:
+
+- forced wrong-node entry
+- proof that the entry node did not host the service
+- proof of peer backend identity
+- successful user-visible response
+
 ### Candidate drill C: backend-loss proof for the same route
 
 Goal:
@@ -361,6 +401,14 @@ Why it matters:
 - directly tests whether the route-generation and fallback story collapses at
   the exact moment it is needed
 
+Minimum evidence:
+
+- same route as the earlier drill
+- known-good pre-failure state
+- intentional backend stop
+- route persistence observation
+- successful fallback response
+
 ### Candidate drill D: protected-route parity proof
 
 Goal:
@@ -370,6 +418,12 @@ Goal:
 Why it matters:
 
 - proves whether request meaning survives, not just transport
+
+Minimum evidence:
+
+- auth behavior comparison
+- middleware or header comparison
+- equivalent visible route behavior
 
 ### Candidate drill E: one stateful topology honesty proof
 
@@ -384,7 +438,14 @@ Why it matters:
 - prevents the repo from accidentally proving only HTTP optimism and narrating
   that as general resilience
 
-## What not to do with passing results
+Minimum evidence:
+
+- explicit authority model
+- explicit storage truth
+- explicit promotion or recovery story
+- one real failure drill against that topology
+
+## What a passing drill is still not allowed to mean
 
 Do not let a passing drill become:
 
@@ -392,10 +453,11 @@ Do not let a passing drill become:
 - generic HA
 - proof that an orchestrator decision has been settled
 - proof that stateful services inherited HTTP success
+- proof that the user's hidden burden is broadly gone
 
 The discipline rule is simple:
 
 > always state the next unclosed ceiling
 
-That is how the repo avoids becoming another system that sounds comprehensive a
-week before it is trustworthy.
+That is how the repo avoids becoming another system that sounds comprehensive
+a week before it is trustworthy.
