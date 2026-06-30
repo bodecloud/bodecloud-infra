@@ -161,6 +161,30 @@ operator burden into system-owned truth.
 Anything weaker can still be useful progress, but it should not be called the
 missing middle layer.
 
+## V1 completion audit table
+
+This table is the contract-level audit.
+It exists so the repo cannot quietly call the knowledgebase, a plan, or a
+plausible helper the first real completion boundary.
+
+| V1 clause | Evidence that would prove it | Current honest status | Why completion is still illegal |
+| --- | --- | --- | --- |
+| Compose remains the visible authoring surface | Root `docker-compose.yml`, active `compose/` fragments, and validation output still define the priority runtime. | Materially true as the current architecture baseline. | This proves authorship shape, not multi-node burden transfer. |
+| One explicit placement or peer-eligibility truth source exists | A tracked or generated source such as `services.yaml`, runtime registry output, OpenSVC/Nomad inventory, or equivalent is consumed by routing or eligibility logic. | Defined as a requirement, not proven as a consumed root-runtime authority. | A design for placement truth is weaker than a receiving node using it. |
+| One active request path consumes that truth | A request packet shows the receiving node read the placement source and used it to choose local serve or peer handoff. | Not yet proven. | Without consumption evidence, the source can still be decorative topology memory. |
+| One non-owner public node preserves one stateless HTTP request | A `route_packet` and `placement_decision_packet` show first-hop node, owner node, selected peer, peer eligibility, service identity, and preserved meaning. | Not yet proven. | A local `200`, DNS plurality, or route existence does not prove wrong-node dignity. |
+| The same route has backend-loss proof | A backend-loss packet shows the preferred backend was removed or broken and the rescue path remained usable. | Not yet proven. | A fallback file, helper container, or healthcheck does not prove survival under the failure that matters. |
+| One protected route has policy-parity proof | Local and wrong-node/peer-forwarded protected-route behavior are compared for auth challenge, middleware, headers, and trust boundary. | Not yet proven. | "The page loaded" is not proof that the protected route stayed the same protected route. |
+| Stateful services remain under a harsher lane | Stateful docs and proof packets keep reachability separate from write authority, promotion, fencing, storage, and rediscovery. | Partly true as documentation discipline. | Documentation discipline does not prove any stateful service became HA. |
+
+The table should be read harshly.
+Only the first and last clauses have meaningful documentation support today,
+and even those are support for boundaries, not proof of the v1 dream.
+
+The first time this table should become more optimistic is after a narrow route
+drill leaves behind packets that a second operator can inspect without
+reconstructing the topology from memory.
+
 ## The v1 non-goals
 
 These are not required for the first honest completion boundary:
