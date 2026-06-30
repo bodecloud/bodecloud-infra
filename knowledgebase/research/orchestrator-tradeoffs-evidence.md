@@ -11,6 +11,12 @@ enough to admit it."
 That smoother story is exactly what this repo has to resist unless the evidence
 really earns it.
 
+And the repo has to resist it even when the smoother story starts sounding
+more adult than the rough one.
+The user is explicitly pushing against an ecosystem where adulthood is too
+often faked by enlarging the worldview rather than actually relocating the
+hidden burden.
+
 The real question is not:
 
 > Which orchestrator is best in the abstract?
@@ -46,6 +52,10 @@ The real threshold is not which product sounds right.
 It is whether a candidate removes the specific hidden burden that currently
 keeps the operator acting as the control plane.
 
+That sentence should dominate the whole page.
+If a comparison sounds sophisticated but stops naming the surviving operator
+burden, it has already drifted back into product-literacy theater.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to prove:
@@ -78,6 +88,11 @@ This page is not allowed to:
 
 This page should never allow "there are several futures" to become "all
 futures are equally justified."
+
+That is one of the softer lies advanced documentation likes to tell.
+Equal narratability is not equal justification.
+Some futures are still mostly atmosphere unless they can show one more truth
+becoming inspectably system-owned.
 
 ## What the live worktree concretely proves
 
@@ -143,6 +158,11 @@ It is:
 - which control-plane growth is narrow and honest
 - versus which growth silently becomes a scheduler in disguise
 
+That is the real differentiator this repo cares about.
+Not only "lighter versus heavier,"
+but "does the new layer stay narrow enough to feel like an earned answer
+instead of another worldview tax pretending to be inevitable?"
+
 ## What the planning layer says the real wounds are
 
 The planning docs are already unusually explicit about the actual burden set.
@@ -171,6 +191,11 @@ not:
 
 - which candidate is most famous?
 
+This repo should keep saying that because fame is one of the most dangerous
+forms of false reassurance in the whole control-plane conversation.
+Famous platforms can still leave the user's actual accusation unanswered if
+the docs stop too early at capability language.
+
 ## What the archive contributes
 
 The archive shows that the user is not randomly "not ready" for an
@@ -194,6 +219,11 @@ These sources do not pick the winner.
 They do explain why the repo keeps several futures alive without that being
 mere indecision.
 
+That matters because indecision is the lazy reading.
+The stronger reading is that the repo is refusing to award adulthood to a
+candidate before it can prove one more humiliating failure class has actually
+become less privately human.
+
 ## What still does not count as orchestration evidence here
 
 This repo needs a harsher evidence filter than ordinary platform-comparison
@@ -212,6 +242,11 @@ their own:
 
 Those things may matter later.
 They do not yet answer the user's real question.
+
+That question should keep sounding a little abrasive here.
+The user is not waiting for a prettier matrix.
+The user is waiting for some candidate to stop making "just accept a larger
+system" sound like a social threat instead of an earned technical answer.
 
 The real question is still:
 
@@ -242,6 +277,12 @@ as:
 That packet does not need to prove whole-stack closure.
 It does need to prove that at least one hidden burden became materially less
 private.
+
+That is the whole bar.
+Not a better roadmap.
+Not a better ecosystem fit.
+Not a calmer explanation.
+One more important truth has to stop living as private operator folklore.
 
 If a candidate cannot leave that kind of artifact bundle behind, then it has
 not yet earned stronger language than "still being considered."

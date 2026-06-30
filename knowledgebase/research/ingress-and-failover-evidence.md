@@ -32,6 +32,11 @@ Those are ingredients.
 The user is asking for preserved service meaning under wrong-node entry and
 backend loss.
 
+That distinction has to stay emotionally explicit.
+The user is not starved for ingress ingredients.
+The user is starved for a system that stops turning those ingredients back
+into private human completion steps the moment locality disappears.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -57,6 +62,12 @@ This page is not authoritative about:
 - that an HTTP narrative automatically applies to raw TCP services
 
 This is an evidence boundary page, not a proxy feature catalog.
+
+That boundary matters because ingress is where the ecosystem is best at
+selling confidence early.
+This page has to keep being ruder than the surrounding vocabulary of
+"resilience," "high availability," and "distributed ingress" unless the proof
+really supports it.
 
 ## Strongest honest current answer
 
@@ -88,6 +99,10 @@ What is still not honestly proved:
 
 That gap is the center of the ingress story, not a minor implementation note.
 
+It is also the part that generic infrastructure writing keeps trying to make
+sound small.
+This repo should keep refusing that minimization.
+
 ## What still does not count as ingress evidence here
 
 The following still do not count as meaningful ingress proof in this repo:
@@ -102,6 +117,11 @@ The following still do not count as meaningful ingress proof in this repo:
 Those are all ingredients or local signals.
 They are not yet proof that the wrong healthy node can preserve request meaning
 under pressure.
+
+That is why this page cannot reward a bigger ingredient list.
+The repo already has enough ingredients to look serious.
+The problem is that seriousness keeps arriving one layer before trustworthy
+request preservation does.
 
 ## The dream this page has to protect
 
@@ -134,6 +154,11 @@ It is a proof filter for one very specific dream:
 > wrong box, the preferred backend dies, or the stack is under anti-SPOF
 > pressure.
 
+That phrasing matters.
+The user is not chasing prestige architecture.
+The user is chasing a stack that stops acting insultingly dumb at the exact
+moment multiple nodes are supposed to mean something.
+
 ## What a real ingress proof packet would have to contain
 
 For this repo, a serious ingress proof packet would need to show all of the
@@ -149,6 +174,11 @@ following together:
 
 If any of those are missing, the packet may still be useful debugging evidence,
 but it does not close the user's real ingress question.
+
+This is where many ecosystems would stop earlier.
+They would take partial packet quality, partial fallback behavior, or partial
+visibility and start upgrading the whole ingress story emotionally.
+This page exists to stop that drift.
 
 ## Evidence hierarchy for ingress claims
 
@@ -222,6 +252,11 @@ NGINX, or HAProxy appear in the stack.
 The presence of serious tools is not the same thing as the removal of the
 hidden burden.
 
+That sentence should outrank a lot of ordinary proxy advice.
+The user has already seen enough serious tools.
+The missing thing is not another respectable noun.
+It is one more truth the receiving node can own without private operator help.
+
 ### 4. The user is resisting heavyweight orchestrators for a reason
 
 `distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
@@ -248,6 +283,10 @@ therefore you have options" pattern the user is explicitly rejecting.
 
 The emotional pressure is evidence about the acceptance bar, not evidence that
 the runtime already crossed it.
+
+That distinction is easy to blur and expensive to lose.
+Once archive pressure starts feeling like runtime progress, the site starts
+rewarding empathy theater instead of proof.
 
 ## What the live root runtime concretely proves
 

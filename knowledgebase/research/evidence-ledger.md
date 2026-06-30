@@ -18,6 +18,11 @@ to sound mature long before it is trustworthy.
 
 This ledger exists to stop that overpayment.
 
+It also exists because the repo is now sophisticated enough that disciplined
+classification alone can start sounding like maturity.
+This page has to keep reminding the reader that better evidence grammar is not
+the same thing as one more important truth actually leaving operator memory.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -55,6 +60,10 @@ That usually happens in this order:
 
 That fusion is exactly what this ledger exists to block.
 
+And that fusion is not just an intellectual error.
+It is the mechanism by which the docs start becoming emotionally more
+satisfying than the runtime has actually earned.
+
 ## The hidden mistake this ledger is trying to stop
 
 Most weak summaries in this repo are not wrong because they invented facts.
@@ -70,6 +79,11 @@ That is how documentation starts sounding like this:
 
 Those are the kinds of sentences this ledger is supposed to make illegal
 unless there is route-specific proof strong enough to survive them.
+
+That illegality should stay a little aggressive.
+The repo is no longer mainly threatened by ignorance.
+It is threatened by respectable-seeming adjacency becoming socially accepted as
+if it were proof.
 
 ## The four evidence classes
 
@@ -114,6 +128,10 @@ What Class 1 cannot prove by itself:
 Presence is real.
 Presence is not closure.
 
+That two-line rule should feel harsher than it looks.
+Presence is exactly where a serious-looking stack starts trying to borrow
+trust from components that have not yet passed the bad-day test.
+
 ### Class 2: architecture-intent and honesty evidence
 
 Use for claims about what the repo explicitly wants to become and what honesty
@@ -145,6 +163,12 @@ What Class 2 cannot prove by itself:
 
 Intent is real.
 Intent is not runtime proof.
+
+And in this repo, intent can become dangerously persuasive because it is
+already unusually clear.
+The clearer the dream gets, the easier it becomes for weak summaries to sound
+like the runtime is "basically on its way there" when the hard proof still has
+not moved.
 
 ### Class 3: planning and promotion evidence
 
@@ -180,6 +204,11 @@ What Class 3 cannot prove by itself:
 
 Detailed plans are still plans.
 
+That sentence matters because the planning layer often contains the most adult
+voice in the repo.
+Without a page like this, the future starts impersonating the present while
+still sounding perfectly responsible.
+
 ### Class 4: archive-pressure evidence
 
 Use for claims about what the user keeps rejecting, what pain keeps recurring,
@@ -213,6 +242,11 @@ What Class 4 cannot prove by itself:
 
 Archive pressure tells us what counts.
 It does not certify completion.
+
+This is one of the most important retrieval protections in the site.
+The archive can tell us exactly why the user feels insulted by adjacent
+answers.
+It cannot tell us that the current stack has finally stopped being one.
 
 ## Claim routing matrix
 
@@ -254,6 +288,12 @@ This repo is especially vulnerable to this because it has:
 
 Put together, those can sound like completion.
 This ledger exists to stop "sounds like completion" from replacing proof.
+
+That phrase should almost be read as the entire mission statement for the
+knowledgebase.
+The docs are not just trying to be accurate.
+They are trying to stop aesthetic maturity from outrunning real burden
+transfer.
 
 ## What still does not count as evidence discipline
 
