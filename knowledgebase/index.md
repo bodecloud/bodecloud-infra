@@ -127,6 +127,86 @@ still teaching the same lie the user is tired of hearing:
 
 > there are lots of options now, so the hidden burden must already be lower
 
+## The dream in one brutally concrete scene
+
+The dream is not abstract HA.
+It is not "better clustering."
+It is not "more infra options."
+
+It is one concrete scene becoming normal:
+
+1. a request lands on a healthy public node
+2. that node does **not** host the target service locally
+3. the node still knows what the request means
+4. the node still knows which peer is eligible
+5. the request still preserves auth, middleware, and service meaning
+6. the operator does **not** have to privately remember the topology first
+
+That is the scene.
+
+The repo only gets to call itself closer to the dream when that scene becomes
+more system-owned and less operator-owned.
+
+If a page does not help a reader reason about that scene, it may still be
+technically useful, but it is not yet close enough to the actual wound.
+
+## What the user is actually rebelling against
+
+The user is not mainly rebelling against Docker Compose itself.
+They are rebelling against a repeating pattern in the self-hosting and infra
+ecosystem:
+
+- one option is "stay simple" but secretly means static glue plus private
+  human reconstruction
+- one option is "get serious" but secretly means accept a full orchestrator
+  worldview before the missing truth was even named clearly
+- everything in between sounds half-real until a bad day reveals the same
+  sacred-node folklore underneath
+
+That is why this site keeps returning to the phrase "missing middle."
+
+The missing middle does **not** mean:
+
+- a medium-complexity product
+- a softer Kubernetes
+- a nicer sync script
+- a route generator with better branding
+
+It means:
+
+- a thinner truth-owning layer
+- that removes the specific hidden burden the operator currently carries
+- without charging more worldview tax than the burden is worth
+
+That distinction is the center of the whole site.
+
+## What a satisfying option would actually feel like
+
+A satisfying option in this repo would not merely add features.
+It would change where the truth lives.
+
+It would make at least some of these statements become true:
+
+- "what runs where right now?" can be answered by the system directly
+- "can this node accept the request safely?" is not guessed from surface
+  reachability alone
+- "who should receive the request if local service is absent?" is no longer
+  private operator folklore
+- "does this fallback still preserve the request meaning?" becomes drillable
+  instead of assumed
+- "is this service actually resilient or only reachable?" becomes harder to
+  lie about
+
+That is why the repo keeps rejecting respectable but unsatisfying closure.
+
+The docs should therefore help a reader feel the difference between:
+
+- more moving parts
+- more present-tense confidence
+- and a genuine transfer of burden out of one human head
+
+Only the third one counts.
+
 ## The four truth registers you have to keep separate
 
 Most documentation drift in this repo happens when these get flattened into
@@ -257,6 +337,13 @@ A serious first pass should preserve:
 
 If the first pass only leaves behind "I understand the architecture better
 now," it is still too weak for this repo.
+
+It should leave behind something harsher and more useful:
+
+- the exact humiliation threshold the system still fails at
+- the exact hidden burden still living in operator memory
+- the exact stronger sentence the docs are still not allowed to say
+- the exact next proof packet that would be required before saying it
 
 ## The easiest bad read
 

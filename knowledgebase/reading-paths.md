@@ -73,6 +73,42 @@ That is false.
 The site is getting better at reconstructing the pressure.
 That does not mean the runtime has already solved the pressure.
 
+## What disciplined retrieval has to preserve
+
+A good reading route in this repo should not merely get you to relevant pages.
+It should preserve four things by the time you stop:
+
+- the exact question you were really trying to answer
+- the truth register you were borrowing from
+- the stronger sentence that remained forbidden
+- the hidden burden that still stayed operator-owned afterward
+
+If a route gives you a clean answer without preserving those four things, it
+is probably answering a calmer neighboring question instead.
+
+That is why retrieval discipline matters so much here.
+The site is no longer small enough that "read around until it clicks" is safe.
+
+## The negative benchmark behind every route
+
+Every route on this page is trying to stop the same downgrade:
+
+- the user asks how to remove sacred-node behavior and fake options
+- the reader answers with cleaner HA language, platform comparisons, or
+  implementation inventory
+- the real burden transfer question disappears
+
+So each route should be read as a protection against a specific kind of
+misanswer.
+
+Not just:
+
+- "where should I click?"
+
+but:
+
+- "which weaker answer am I in danger of giving if I skip this route?"
+
 ## What still does not count as a good reading route here
 
 This page needs to say more explicitly what fake retrieval success still looks
@@ -143,6 +179,13 @@ Use this path when you need:
 - the real acceptance bar
 - the reason ordinary option lists keep feeling insulting
 
+This path protects against the weak misreading:
+
+- "the user mainly wants better HA options"
+
+That is too small.
+The user wants options that stop cashing out into the same private burden.
+
 Do **not** use it as runtime proof.
 
 ### 2. "What does the current root runtime actually contain?"
@@ -161,6 +204,13 @@ Use this path when you need:
 - the priority implementation
 - the real root include graph
 - the difference between "present in YAML" and "system-owned under failure"
+
+This path protects against the weak misreading:
+
+- "if the services and edge stack are present, the platform must already be
+  most of the way there"
+
+Presence is not preserved meaning under failure.
 
 This path is for live truth, not wishful extrapolation.
 
@@ -182,6 +232,13 @@ Use this path when you need:
 - where peer-forward routing still lacks proof
 - why the user's frustration is sharper than "needs better load balancing"
 
+This path protects against the weak misreading:
+
+- "wrong-node entry is mostly a routing detail"
+
+It is not a detail.
+It is the point where fake option language gets caught by reality.
+
 ### 4. "What helper layer is the repo actually looking for?"
 
 Read in this order:
@@ -199,6 +256,13 @@ Use this path when you need:
   surrender
 - the burden-ownership test future candidates must pass
 
+This path protects against the weak misreading:
+
+- "the repo just needs to pick the right orchestrator or helper"
+
+The repo first needs the missing truth named precisely enough that a promoted
+layer actually earns itself.
+
 ### 5. "Why are stateful services a much harsher problem?"
 
 Read in this order:
@@ -213,6 +277,12 @@ Use this path when you need:
 - the difference between liveness and authority
 - why Redis, MongoDB, Headscale, and databases cannot inherit HTTP optimism
 - why stateful promotion must remain much slower and harsher
+
+This path protects against the weak misreading:
+
+- "if the ingress story gets better, the hard part is basically solved"
+
+Stateful authority is where a lot of fake HA language finally breaks.
 
 ### 6. "Which future paths are real options and which are still theater?"
 
@@ -234,6 +304,13 @@ Use this path when you need:
 - honest tradeoffs
 - future directions without mistaking them for current truth
 
+This path protects against the weak misreading:
+
+- "because there are several plausible future layers, the repo must already
+  have real options"
+
+Candidate richness is not the same thing as burden relief.
+
 ### 7. "How do I keep my own summary from lying?"
 
 Read in this order:
@@ -249,6 +326,13 @@ Use this path when you need:
 - source hierarchy
 - archive pressure without runtime inflation
 - a check against blending unlike truth classes into one neat narrative
+
+This path protects against the weak misreading:
+
+- "if the docs and archive are now well-assimilated, the repo must be much
+  closer to closure"
+
+Better retrieval can still coexist with the same unresolved runtime burden.
 
 ### 8. "Which archive threads should I actually read instead of vaguely searching everything?"
 

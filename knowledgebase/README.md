@@ -49,6 +49,56 @@ The user is not asking for a mellow orientation guide.
 They are asking for docs that can withstand frustration, contradiction, and
 the feeling that every apparent option secretly preserves the same hidden tax.
 
+## The shortest honest reconstruction of the wound
+
+The wound is not merely "multi-node Docker is hard."
+
+The wound is that the stack keeps sounding flexible until a real request lands
+on the wrong node and the truth suddenly collapses back into:
+
+- private placement memory
+- sacred-node folklore
+- unclear peer eligibility
+- a fallback story that may exist only as architecture narration
+
+That is why these docs cannot behave like ordinary repo docs.
+
+Ordinary repo docs can get away with:
+
+- broad overviews
+- tool catalogs
+- architecture summaries
+- future-roadmap confidence
+
+This repo cannot.
+
+Here, a page fails if it makes the system sound more coherent than the burden
+transfer really is.
+
+## The real standard a reader needs to carry
+
+The practical test for almost every page in this site is:
+
+> did this page explain which truth became system-owned, or did it mostly
+> explain the available tools and plans more elegantly?
+
+If the second answer is stronger, the page is still too weak.
+
+That is the standard contributors should carry while reading or editing this
+knowledgebase.
+
+It is also the easiest way to detect fake progress in docs form.
+
+A documentation pass is not strong here because it:
+
+- sounds more mature
+- covers more concepts
+- names more candidate platforms
+- has more complete reading routes
+
+It is strong only if it makes the repo harder to overread and easier to map to
+the exact burden the user is trying to eliminate.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to prove:
@@ -258,6 +308,16 @@ That packet should include:
 
 If a reader can finish this file and still say only "this is a multi-node
 Docker project with some HA ambitions," then the doorway failed.
+
+If they can instead say:
+
+- "this repo is trying to stop wrong-node recovery from depending on one human
+  head"
+- "it is resisting both static-glue denial and premature orchestrator
+  surrender"
+- "the docs now tell me exactly which stronger claims are still illegal"
+
+then the doorway is finally doing its job.
 
 ## What this rewrite is trying to fix
 
