@@ -186,6 +186,29 @@ If retrieval gets better at architecture summary while getting worse at burden
 reconstruction, the docs have become more impressive and less faithful at the
 same time.
 
+## The private burden question retrieval must preserve
+
+Every serious retrieval pass in this repo should leave one question intact all
+the way to the end:
+
+> after reading the sources, what exact thing is the operator still privately
+> expected to know, infer, narrate, or bless for the system?
+
+Examples include:
+
+- which node really hosts the service now
+- which peer is actually valid now
+- whether the fallback route still survives the bad day
+- whether the stateful owner is still singular
+
+If retrieval broadens the answer while making that question harder to see, then
+retrieval got worse, not better.
+
+That is one of the most important anti-slop rules in this knowledgebase.
+This repo is already full of adjacent context.
+The hard part is keeping that context from laundering the decisive burden into a
+smaller neighboring question.
+
 ## Source class 1: architecture-intent and honesty surfaces
 
 These are the strongest sources for:
@@ -221,6 +244,17 @@ has already started flattening the repo.
 
 Once that flattening begins, the docs usually become easier to read and less
 able to survive contact with the user's real complaint.
+
+This is also why retrieval here cannot be reduced to "cite the main files."
+It has to preserve which file gave us:
+
+- the dream
+- the honesty wall
+- the runtime anchor
+- the authoring discipline
+
+If those origins blur together, later pages start speaking with confidence
+borrowed from the wrong source class.
 
 That is why retrieval here cannot just be "find the relevant files."
 It has to preserve disagreement between truth classes on purpose.
@@ -258,6 +292,20 @@ High-value current fragments include:
 - `compose/docker-compose.headscale.yml`
 - `compose/docker-compose.llm.yml`
 - `compose/docker-compose.metrics.yml`
+
+The reason these runtime surfaces matter so much is not only that they are
+live.
+It is that they tell us where the current implementation is already expensive
+enough to tempt the docs into fake adulthood:
+
+- serious ingress
+- real mesh
+- broad observability
+- state-bearing services
+- helper pressure that already looks platform-shaped
+
+Retrieval has to bring those facts forward without letting them impersonate the
+missing shared truths they still do not prove.
 - `compose/docker-compose.stremio-group.yml`
 - `compose/docker-compose.warp-nat-routing.yml`
 - `compose/docker-compose.wishlist.yml`

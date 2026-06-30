@@ -182,6 +182,34 @@ All of that may be directionally useful.
 None of it answers the user's actual benchmark unless one more explanation
 stops needing to live in the operator's head.
 
+## The private completion test for each maturity lane
+
+Every lane on this page should also survive one direct test:
+
+after calling the lane more mature, what exact sentence does the operator no
+longer need to finish privately?
+
+Examples:
+
+- "yes, but I still know which node really has this route"
+- "yes, but I still know which peer is actually safe for this handoff"
+- "yes, but I still know the fallback route disappears if that backend dies"
+- "yes, but I still know this stateful surface still has one sacred owner"
+
+If the lane still leaves one of those sentences mostly intact, then the lane
+may be better instrumented, better documented, or more impressive-looking, but
+it is not yet mature in the sense this repo actually cares about.
+
+That matters because ordinary maturity talk keeps rewarding exactly the wrong
+signals here:
+
+- more machinery
+- more polish
+- more vocabulary
+- less honest pressure on the final private completion step
+
+This page exists to keep that substitution illegal.
+
 ## What a lane-specific maturity proof packet would have to contain
 
 Before any lane graduates to stronger wording, the docs should be able to

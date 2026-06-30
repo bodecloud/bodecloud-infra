@@ -167,6 +167,32 @@ privately complete the story under real failure conditions.
 They are also the moves that make the repo sound more mature than the current
 runtime has actually earned.
 
+## The exact overclaim each file is supposed to stop
+
+This page should also say more concretely what each major surface is protecting
+against.
+
+- `.github/copilot-instructions.md`
+  - stops the dream from being shrunk into "just a bunch of Compose files" or
+    upgraded into "already a finished distributed control plane"
+- `README.md`
+  - stops repo-level prose from spending runtime confidence the worktree has not
+    earned
+- `AGENTS.md`
+  - stops contributors from drifting away from the priority root implementation
+    and pretending side paths are the main runtime
+- `.cursorrules`
+  - stops Compose authoring habits from making fake resilience even easier to
+    write, especially through weak healthchecks or sprawling external config
+    indirection
+
+That list matters because authority is not just about who says the dream most
+clearly.
+It is also about who is tasked with blocking which specific kind of lie.
+
+If a contributor cannot say what overclaim a file is there to stop, they have
+not fully assimilated that file's role yet.
+
 ## What a real authority-mapping packet would have to contain
 
 Before this page supports a stronger claim like "the repo's guidance surfaces
@@ -213,6 +239,32 @@ It is a truth-custody order:
 
 If the order flips, the repo usually starts smuggling runtime maturity into
 files that were only supposed to protect framing or authoring discipline.
+
+## What the current worktree makes this page say more sharply
+
+The current worktree already gives this page a practical reason to stay strict.
+
+The repo now has:
+
+- a strong architecture-dream file
+- a stronger README honesty wall
+- a real root Compose runtime with active fragments and direct services
+- a stricter set of authoring rules around configs and healthchecks
+
+That means the repo can sound deeply coherent even when the missing middle
+truths are still unresolved.
+
+So the danger is no longer only "people do not know the dream."
+The danger is:
+
+- people know the dream
+- people know the runtime is serious
+- people know the helper stack is real
+- and they accidentally treat that coherence as if the wrong-node and
+  backend-loss story were already materially closer to solved than the proof
+  actually allows
+
+This page should keep blocking that upgrade on purpose.
 
 ## The simplest default answer
 
