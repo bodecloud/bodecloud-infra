@@ -60,6 +60,56 @@ The repo is trying to solve this:
 The repo is therefore not only a hosting system.
 It is a search for a smaller honest control surface.
 
+## The wound behind the problem statement
+
+The problem is not only architectural.
+It is experiential.
+
+The user keeps running into the same humiliating reveal:
+
+- the stack sounds flexible
+- the stack sounds distributed
+- the stack sounds full of options
+- then a real request or failure exposes that the decisive truth still lives
+  in one human head
+
+That is the wound this page has to preserve.
+
+If that experiential layer disappears, the problem can start sounding like an
+ordinary engineering optimization:
+
+- improve routing
+- improve clustering
+- improve topology awareness
+- improve failover
+
+Those are all real subproblems.
+They are still too polite if they stop naming the lived reveal:
+
+> when reality gets sharp, the operator is still the hidden control plane.
+
+## What the user is actually trying to make impossible
+
+The dream is easier to understand if stated as anti-goals.
+
+The user is trying to make these moments impossible:
+
+- "the wrong node got the request, so now I have to remember the real answer"
+- "the fallback exists only as architecture narration"
+- "the route still technically works, but no longer means the same thing"
+- "the platform sounds distributed, but its decisive truths are still private"
+- "the only serious alternative is to surrender to a giant control plane
+  worldview"
+
+That is why the problem statement must keep both halves visible:
+
+- hidden operator burden is too high
+- the ecosystem's offered escapes still often feel fake
+
+If a solution narrative removes only the first half, it becomes fantasy.
+If it removes only the second half, it becomes complaint without architecture.
+The real documentation has to preserve both.
+
 ## What still does not count as understanding the problem
 
 This page needs its own anti-flattening filter.
@@ -116,6 +166,12 @@ That reconstruction currently shows up in questions like:
 
 As long as those questions are answered mainly from memory, the platform is
 still only partially system-owned.
+
+This is the most important compression of the whole page:
+
+- the repo does not mainly lack components
+- it mainly lacks system-owned answers to the questions that become decisive on
+  the bad day
 
 ## What the current stack already gives
 

@@ -66,6 +66,39 @@ heavyweight orchestrator tax unless that tax clearly removes a real burden.
 
 That sentence is the center of gravity for the whole repo.
 
+## What the contract is emotionally trying to buy
+
+This contract is not only describing technical success.
+It is describing relief.
+
+The operator wants to stop feeling that the system only looks coherent because
+they are silently carrying the missing truth inside their own head.
+
+That means the contract is trying to buy a very specific kind of operational
+relief:
+
+- the first hop no longer feels lucky
+- the wrong node no longer feels humiliating
+- the rescue path no longer feels like private folklore
+- the stateful lane no longer gets described with optimism it did not earn
+
+That is why this page has to stay harsher than an ordinary success-criteria
+document.
+
+Ordinary success criteria often ask:
+
+- does it work?
+- is it redundant?
+- is it automated?
+- is it observable?
+
+This repo also has to ask:
+
+- who still had to secretly know the answer first?
+
+If the answer is still "the operator," then some part of the contract is still
+unmet no matter how respectable the stack sounds.
+
 ## What the user is actually tired of
 
 The user is not fundamentally asking for:
@@ -112,6 +145,19 @@ quietly needs them to remember the topology in order to be coherent.
 That last clause matters.
 The user is not asking for a cleaner story about the same hidden burden.
 They are asking for the burden itself to move.
+
+This is the page where "move" must stay literal.
+
+The docs should only become stronger when some truth actually moves from:
+
+- private operator reconstruction
+
+to:
+
+- system-owned, inspectable, shared decision surfaces
+
+Anything weaker than that may still be progress.
+It is not yet relief.
 
 ## What still does not count as operator relief
 
@@ -232,6 +278,17 @@ can determine:
 
 This is the central acceptance criterion of the whole repo.
 
+It is central because it is where most fake closure finally breaks.
+
+Many infra stories can sound nearly complete right up until this moment.
+Then the real test appears:
+
+- can the receiving node decide correctly without a human secretly supplying
+  the topology?
+
+If not, the platform may be rich, but it is still not the thing the user
+actually came here trying to build.
+
 ### 4. Protected routes keep the same policy meaning after handoff
 
 In this repo, routing correctness is not only transport correctness.
@@ -299,6 +356,17 @@ A stateful surface is not "HA enough" merely because:
 - a TCP router exists
 - another node could theoretically be pointed at it
 - the container could be restarted elsewhere
+
+This criterion also protects the whole site from a common collapse:
+
+- "the stateless story improved, so we can speak more confidently about the
+  whole platform"
+
+No.
+
+The stateful lane is where the docs have to become less forgiving, not more.
+If this lane stays unresolved, the site is still obligated to keep saying so
+bluntly.
 
 ### 8. The operator can disappear briefly without the platform forgetting itself
 

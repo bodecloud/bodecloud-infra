@@ -25,6 +25,41 @@ If a candidate layer does not actually move those duties into the system, then
 it is not the middle this repo is searching for, no matter how elegant or
 fashionable it sounds.
 
+## Why "missing middle" is not just a complexity bracket
+
+One of the easiest mistakes in this repo is to hear "missing middle" and think
+it means:
+
+- medium complexity
+- medium size
+- medium opinionation
+- halfway between Compose and Kubernetes
+
+That is not the real meaning here.
+
+The real meaning is harsher:
+
+- a layer small enough not to demand worldview surrender too early
+- but strong enough to own truths that currently live only in human memory
+
+So the middle is not defined by its size.
+It is defined by the exact burden it successfully takes away.
+
+That is why some apparently "small" helpers still fail the benchmark:
+
+- they reduce repetition
+- they improve generation
+- they improve expression
+- but they do not remove the decisive private explanation step
+
+And it is also why some larger systems may still fail:
+
+- they centralize more
+- they sound more adult
+- they offer stronger abstractions
+- but they may still charge a worldview tax before proving they are removing
+  the right wound
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -136,6 +171,17 @@ effective control plane.
 
 That is the thing this page is trying to kill.
 
+This page should keep that sentence in its strongest form:
+
+- the operator is not merely burdened
+- the operator is still functioning as the unreplicated registry, explainer,
+  and rescue interpreter
+
+That is the anti-SPOF accusation hiding underneath almost every question in
+this repo.
+One human head can be the most dangerous single point of failure in the whole
+system.
+
 ## Why DNS and proxy sophistication are still not enough
 
 The repo already has Cloudflare participation and a strong live edge stack.
@@ -196,6 +242,14 @@ before calling anything the missing middle, ask:
 
 If the answer is weak, then the thing may still be useful.
 It is not the missing middle for this repo.
+
+The most revealing follow-up is:
+
+> what exact sentence will the operator no longer need to say from memory once
+> this layer exists?
+
+If the page cannot answer that sentence concretely, then the candidate is
+still too abstract, too polite, or too tool-shaped to count as the middle.
 
 That means candidate layers should be judged less by:
 
