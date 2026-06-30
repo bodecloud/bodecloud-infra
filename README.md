@@ -34,6 +34,31 @@ The user frustration is not "there are no tools."
 It is "too many supposed solutions stop one layer before truth actually moves
 out of my head."
 
+## Read this repo with the right negative benchmark
+
+The user is not mainly asking:
+
+- how do I make the docs cleaner?
+- which orchestrator is best?
+- what is the modern HA stack?
+
+The user is asking a harsher question:
+
+> which options are real once traffic lands on the wrong node, and which
+> options still secretly depend on me remembering the real topology?
+
+That negative benchmark should shape every architectural reading of this repo.
+
+If a solution still requires the operator to privately remember:
+
+- which node really hosts the service
+- which peer is safe now
+- which route survives backend loss
+- which database path still owns truth
+
+then for this repo it is still much closer to a fake option than a solved
+platform capability.
+
 ## The shortest honest description
 
 Today this repo is a serious, modular, multi-service Docker Compose stack with:
@@ -66,6 +91,29 @@ If you read nothing else, read that distinction correctly:
 - the dream is clear
 - the direction is serious
 - the proof is still partial
+
+## The fastest way to misread this repo
+
+The fastest bad reading is:
+
+1. see Cloudflare multi-node entry
+2. see Traefik, auth, middleware, and observability
+3. see orchestration side paths like OpenSVC, Nomad, or k3s
+4. assume the remaining problem is mainly polish, automation, or platform
+   choice
+
+That reading is wrong.
+
+The remaining problem is still missing truth ownership:
+
+- current placement truth
+- peer eligibility truth
+- convergence truth
+- route persistence under the relevant failure
+- stateful correctness truth
+
+That is why the repo can look sophisticated and still feel unsolved in exactly
+the way the user keeps complaining about.
 
 ## Which repo files actually explain that dream
 
@@ -132,6 +180,29 @@ operator to reconstruct:
 - whether a stateful backend is honestly resilient or merely still reachable
 
 That is the real option drought this repo is reacting to.
+
+## The repo's real question is smaller than Kubernetes and bigger than Compose
+
+This is one of the most important framing rules in the tree.
+
+The repo is not asking:
+
+- should we stay on raw Compose forever?
+- should we just bite the bullet and move to Kubernetes?
+
+It is asking:
+
+> what is the smallest added truth-owning layer that makes wrong-node requests,
+> backend-loss recovery, and hidden human topology memory stop being the
+> dominant failure mode?
+
+That is why this repo keeps circling helper agents, `services.yaml`,
+OpenSVC-shaped ingress work, schema-first ideas, Nomad comparisons, and k3s
+exploration at the same time.
+
+Those are not random side quests.
+They are different attempts to locate the missing middle layer without paying
+ full scheduler tax before it is clearly earned.
 
 ## What is live vs what is planned
 
@@ -255,6 +326,21 @@ The deeper problem is not lack of components.
 It is lack of a shared truth surface that can make the first healthy receiving
 node stop being a semantic gamble.
 
+## Real options vs fake options
+
+This repo needs a blunter filter than normal infrastructure READMEs use.
+
+| Option class | Real only if... | Still fake if... |
+| --- | --- | --- |
+| Multi-node DNS entry | the receiving node can still preserve the request meaningfully | the request only works when it lands on the right node by luck |
+| Proxy-centered failover | fallback survives the failure that made fallback necessary | the route vanishes when the preferred backend disappears |
+| Placement registry | routing or eligibility logic actually consumes live placement truth | the registry is only architecture intent or planning rhetoric |
+| Heavier orchestrator promotion | it removes a named truth gap the current layer cannot own honestly | it mostly renames the same burden while adding worldview tax |
+| Stateful HA story | authority, replication, promotion, and client behavior are defined and proven | a service is merely reachable through a stable hostname or TCP path |
+
+The user is frustrated precisely because the ecosystem offers many answers that
+look like the left column while behaving like the right column.
+
 ## Recommended reading
 
 If you want the real operator-grade explanation instead of the old flattened story, start in the knowledgebase:
@@ -267,6 +353,19 @@ If you want the real operator-grade explanation instead of the old flattened sto
 - [`knowledgebase/architecture/stateful-ha-and-data.md`](knowledgebase/architecture/stateful-ha-and-data.md)
 - [`knowledgebase/architecture/capability-gaps-and-roadmap.md`](knowledgebase/architecture/capability-gaps-and-roadmap.md)
 - [`knowledgebase/operations/devops-runbook.md`](knowledgebase/operations/devops-runbook.md)
+
+If you want the shortest route through the real problem, use this order:
+
+1. [`knowledgebase/research/user-intent-and-dream.md`](knowledgebase/research/user-intent-and-dream.md)
+2. [`knowledgebase/operations/operator-questions-and-honest-answers.md`](knowledgebase/operations/operator-questions-and-honest-answers.md)
+3. [`knowledgebase/architecture/request-path-and-failure-walkthrough.md`](knowledgebase/architecture/request-path-and-failure-walkthrough.md)
+4. [`knowledgebase/architecture/current-compose-runtime.md`](knowledgebase/architecture/current-compose-runtime.md)
+5. [`knowledgebase/architecture/missing-middle-layer.md`](knowledgebase/architecture/missing-middle-layer.md)
+6. [`knowledgebase/operations/decision-paths-and-promotion-rules.md`](knowledgebase/operations/decision-paths-and-promotion-rules.md)
+7. [`knowledgebase/research/evidence-ledger.md`](knowledgebase/research/evidence-ledger.md)
+
+That order forces the dream, the wound, the live runtime, the missing layer,
+and the proof ceiling to stay in view at the same time.
 
 Those pages are the current authoritative explanation because they explicitly separate:
 

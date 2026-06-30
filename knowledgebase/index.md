@@ -277,6 +277,46 @@ It is:
 > reduce the amount of hidden human truth required for several Docker nodes to
 > behave like one request-preserving platform.
 
+## If you only remember four things, remember these
+
+This page should not require a second pass before the reader can answer the
+main operator questions.
+
+The shortest high-fidelity reading is:
+
+1. the dream is not "better HA"; it is "stop making the operator's private
+   topology memory the real control plane"
+2. the live root Compose runtime is real, large, and serious, but it still
+   does not broadly prove wrong-node request preservation or stateful
+   correctness
+3. the real missing layer is not "more tooling" in the abstract; it is shared
+   placement, peer-eligibility, convergence, and route-persistence truth
+4. many apparent options are still fake options because they only rename the
+   same hidden burden under a different platform story
+
+If a future rewrite makes those four points harder to recover, it is drifting
+again no matter how polished it sounds.
+
+## The fake-option filter
+
+This repo has too many adjacent answers that sound different while preserving
+the same wound.
+
+Use this filter before treating anything as a real path forward.
+
+| Apparent option | Why it sounds promising | Why it is still fake for this repo unless more is true |
+| --- | --- | --- |
+| More public DNS records | first-hop plurality sounds like resilience | the receiving node may still not know where the service lives or whether fallback preserves meaning |
+| A stronger reverse proxy setup | proxy language sounds like routing truth | the proxy may still only understand local backends, stale peers, or happy-path routing |
+| A service-registry idea on paper | it names the missing placement layer | the tracked root runtime may still not ship or consume it |
+| A failover generator | it implies recovery behavior exists | the recovery route may still disappear when the backend disappears |
+| A bigger orchestrator | it sounds like the grown-up answer | it may charge worldview tax before proving which exact truth layer it is actually removing |
+| A reachable TCP frontend | it makes stateful services look globally present | it may still hide one real writer, one real disk path, or one real authority with weak failure semantics |
+
+That table matters because the user is not just short on working code.
+They are short on options that stay real after the first wrong-node request or
+the first serious backend-loss event.
+
 That is also why smoother docs can still be a regression here.
 If a page lowers the felt ambiguity by hiding the remaining reconstruction tax,
 it is making the site more pleasant while making the repo harder to reason
@@ -365,6 +405,30 @@ They are asking for docs that can keep telling the truth even when the truth is
 that the dream is sharper than the runtime, the edge is stronger than the
 middle, and the missing truth layer is still the main obstacle.
 
+## The authority order that should shape every high-level claim
+
+The site becomes useless again the moment these source classes start getting
+flattened.
+
+For high-level pages, keep this order explicit:
+
+1. current worktree and merged root Compose evidence for runtime claims
+2. `.github/copilot-instructions.md` for the sharpest statement of the dream
+3. planning docs for what the repo is seriously trying next
+4. research and archive synthesis for why the usual ecosystem answers kept
+   failing the user
+
+That means:
+
+- do not let a plan answer whether something is live
+- do not let a runtime inventory answer what the user is really frustrated by
+- do not let archive pressure answer what currently works
+- do not let one smooth synthesis page outrank the stubborn negative artifact
+  that still says the truth layer is missing
+
+This entry page should keep that ranking visible because summary pages are
+exactly where evidence classes quietly get merged into one reassuring voice.
+
 ## What victory would actually feel like
 
 This site should keep repeating the end-state in operator language, because
@@ -381,6 +445,26 @@ Real progress would feel like this:
 - extra control-plane machinery, if adopted, feels earned instead of imposed
 
 That is a much stricter target than "the cluster works."
+
+## What the next real proof would have to look like
+
+The next meaningful leap is not another philosophy page.
+It is one route proving more of the dream than the current stack proves today.
+
+The most valuable next proof would look like this:
+
+- one stateless HTTP route
+- request intentionally lands on a healthy node that does not host the service
+  locally
+- that node proves it knows the service is remote
+- that node proves why the chosen peer is eligible now
+- the request succeeds through the peer path
+- auth, middleware, and visible request meaning are compared, not assumed
+- the same route is later re-tested under backend-loss conditions so the route
+  needed for recovery is not only a happy-path artifact
+
+Anything weaker may still be useful engineering.
+It is just not yet the proof that most directly answers the user's real demand.
 
 ## The live obstacle is still a missing truth layer
 

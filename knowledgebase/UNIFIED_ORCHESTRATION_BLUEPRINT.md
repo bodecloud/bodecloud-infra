@@ -132,6 +132,30 @@ It is the one that takes ownership of the exact truth the operator is currently
 carrying privately, while damaging the operator-readable surface as little as
 possible.
 
+## The blueprint should be read as a burden-transfer map
+
+This page becomes much easier to use when each candidate layer is judged by
+one blunt question:
+
+> what hidden burden moves out of the operator's head if this layer becomes
+> real?
+
+If the honest answer is "not much," the layer is still mostly theater for this
+repo.
+
+The main burdens to track are:
+
+- remembered placement truth
+- remembered peer safety
+- remembered fallback-route behavior
+- remembered convergence assumptions
+- remembered stateful authority
+
+That is the real comparison surface.
+Not elegance.
+Not ecosystem size.
+Not how mature the diagrams look afterward.
+
 The hidden corollary is important:
 
 if the truth still has to be privately carried, then the layer did not win just
@@ -301,6 +325,23 @@ It is:
 
 If a future control layer leaves those conditions mostly intact, then however
 modern it sounds, it has not crossed the user's real bar.
+
+## The candidate-layer scorecard
+
+This repo needs a sharper filter than "lighter versus heavier orchestrator."
+
+| Candidate layer | What it can honestly buy | What it still does not buy by itself | Failure mode if oversold |
+| --- | --- | --- | --- |
+| Compose-first plus thin helpers | preserves direct authoring readability; can host placement, eligibility, and route-generation truth narrowly | stateful topology ownership, generic scheduling, broad reconciliation | helper mesh becomes a shadow control plane while the docs still pretend it is "just Compose" |
+| Schema-first extension such as CUE-style semantics | stronger declared intent, cleaner generation surfaces, better explicit meaning than scattered labels | live convergence, live peer judgment, failure-time route persistence | the repo starts sounding more explicit while runtime truth is still not owned |
+| Agent-first or active-control layer | active observation, sync, route generation, and convergence reactions become possible | honest simplicity, stateful semantics, and bounded control-plane scope | the agents quietly become an orchestrator in disguise without paying down enough pain |
+| Narrow infra-grade HA promotion such as OpenSVC-shaped ingress work | can remove sacred ingress or identity surfaces without promoting the whole app layer | app-level wrong-node preservation for all services, stateful correctness | first-hop continuity gets narrated as if the whole service surface is now resilient |
+| Lighter scheduler promotion such as Nomad-shaped workloads | real placement and rescheduling ownership for selected stateless classes | stateful truth, ingress semantics, and protocol-specific failover by default | the repo calls scheduling maturity "platform maturity" too early |
+| Full desired-state platform such as k3s or Kubernetes | broad reconciliation, ecosystem depth, controller patterns, stronger platform conventions | automatic honesty about state, request meaning, or cross-domain SPOF language | worldview capture arrives before the exact pain it removes is named plainly |
+
+This table is intentionally unfair to broad answers.
+The repo has already seen too many broad answers that improve a category while
+still leaving the same hidden burden intact at request time.
 
 ## What the user is explicitly refusing
 
@@ -570,6 +611,45 @@ What it risks:
 - growing a private control plane that is no longer obviously simpler than
   selected scheduler promotion
 
+## What each path would still leave unresolved
+
+The blueprint needs this section because this repo is especially vulnerable to
+"good enough in one domain" quietly becoming "settled overall."
+
+### If the repo stays Compose-first with thin helpers
+
+Still unresolved unless separately solved:
+
+- stateful election, promotion, and reconnect truth
+- whether helper-layer convergence logic is now controller-sized
+- whether wrong-node proof survives backend loss rather than only happy-path
+  remote forwarding
+
+### If the repo promotes a narrow infra HA layer
+
+Still unresolved unless separately solved:
+
+- whether application services can be preserved from the wrong node
+- whether edge continuity hides stateful fragility
+- whether the app layer still depends on remembered placement
+
+### If the repo promotes a scheduler
+
+Still unresolved unless separately solved:
+
+- whether ingress semantics stay legible
+- whether stateful classes are genuinely improved or only rescheduled
+- whether the user actually gained clarity rather than just a new worldview
+
+### If the repo promotes a full desired-state platform
+
+Still unresolved unless separately solved:
+
+- honest cross-domain SPOF language
+- service-class-specific data truth
+- the risk that the runtime is now harder to read while still needing private
+  expert reconstruction on a bad day
+
 ## What this blueprint already proves
 
 ### Proof 1: plain Compose is not enough on its own
@@ -681,6 +761,21 @@ need their own proof and promotion path.
 
 If this step is skipped, the repo recreates fake HA at the exact layer that
 hurts users most.
+
+## The immediate architectural question after this page
+
+After reading this blueprint, the next question should not be:
+
+- "so which orchestrator wins?"
+
+It should be:
+
+- "which specific truth layer can we make live next in the smallest possible
+  way, and what stronger claims would still remain forbidden afterward?"
+
+That question keeps the repo aligned with the user's real demand.
+It is also the fastest way to stop the docs from quietly turning blueprint
+coherence into fake settlement.
 
 ## The promotion rule hiding underneath the whole blueprint
 

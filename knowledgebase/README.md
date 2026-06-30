@@ -186,6 +186,27 @@ If a contributor arrives expecting:
 
 this directory should interrupt that expectation immediately.
 
+## The fastest useful reading route
+
+This knowledgebase is not best read as a taxonomy.
+It is best read as a pressure chain.
+
+If someone only has limited time, this is the shortest route that still
+preserves the real dream:
+
+1. [`research/user-intent-and-dream.md`](research/user-intent-and-dream.md)
+2. [`operations/operator-questions-and-honest-answers.md`](operations/operator-questions-and-honest-answers.md)
+3. [`architecture/request-path-and-failure-walkthrough.md`](architecture/request-path-and-failure-walkthrough.md)
+4. [`architecture/current-compose-runtime.md`](architecture/current-compose-runtime.md)
+5. [`architecture/missing-middle-layer.md`](architecture/missing-middle-layer.md)
+6. [`operations/decision-paths-and-promotion-rules.md`](operations/decision-paths-and-promotion-rules.md)
+7. [`research/evidence-ledger.md`](research/evidence-ledger.md)
+
+That route exists because many other reading orders make the repo feel calmer
+than it really is.
+This one keeps the wound, the runtime, the gap, and the proof ceiling visible
+at the same time.
+
 The site is also trying to preserve a sharper exit condition for every major
 page:
 
@@ -256,6 +277,25 @@ The current docs are now built around a harder but more useful summary:
   preservation
 - the tracked worktree still does not generically prove stateful HA correctness
 
+## The fake clarity traps this directory has to keep preventing
+
+The knowledgebase regresses whenever one of these starts sounding like enough:
+
+- "there are multiple public nodes now"
+- "the proxy stack is sophisticated"
+- "there is a registry-shaped idea"
+- "there is a failover generator"
+- "there are several orchestration futures in the tree"
+
+Those can all be true and still leave the same hidden burden intact.
+
+The real question remains:
+
+- did the system itself take ownership of one more missing truth layer
+- or did the docs only get better at narrating the absence of that layer?
+
+That distinction is the whole maintenance game for this directory.
+
 It also needs one extra sentence that stays active in the reader's head:
 
 the site is not trying to sound more complete than the ecosystem's answers.
@@ -317,6 +357,19 @@ They also need to keep a fifth thing visible:
 
 - whether the apparent intelligence of the system is actually present in the
   runtime, or merely present in the operator reading the page
+
+## The minimum exit condition for any rewritten summary page
+
+After reading a top-level or summary page, a contributor should be able to say:
+
+- what the user is actually trying to make true
+- what the current worktree really proves
+- which source class the page leaned on for each major claim
+- which options are still fake because they relocate almost no hidden burden
+- what the next real proof would need to show
+
+If a page cannot support those five answers, it is still too soft for this
+repo even if the prose is cleaner.
 
 That is the wrong trade for this repo.
 Niceness is cheap.
