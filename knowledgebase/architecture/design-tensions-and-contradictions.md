@@ -64,6 +64,35 @@ keep legible and what the system itself would need to own before wrong-node,
 backend-loss, protected-route, and stateful claims stop collapsing back into
 operator interpretation.
 
+## What still does not count as facing the contradictions honestly
+
+This page should reject a softer kind of self-congratulation too.
+
+The following still do not count as confronting the contradictions well:
+
+- naming the tensions elegantly
+- presenting both sides fairly
+- showing several candidate directions
+- documenting why each direction is hard
+- describing the repo as "in transition"
+
+Those things may be useful orientation.
+They still do not move the contradiction unless one hidden burden, one proof
+gap, or one false equivalence actually shrinks.
+
+## What a real contradiction-reduction packet would have to contain
+
+Before the docs claim a design tension is materially relaxing, they should be
+able to point to a packet containing:
+
+- the exact contradiction being reduced
+- the previous hidden burden or false equivalence
+- the new artifact, drill, or runtime fact that narrowed it
+- the aspect of the contradiction that still remains open
+
+Without that packet, "the tension is getting better" is still mostly narrative
+comfort.
+
 ## The contradiction at the center of the whole repo
 
 The dream sounds small when compressed:

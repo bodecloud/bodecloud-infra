@@ -50,6 +50,44 @@ the repo still leads with `docker-compose.yml`; it does not prove the current
 runtime already owns wrong-node truth, peer eligibility, backend-loss
 durability, or stateful correctness.
 
+## What still does not count as justifying Compose-first
+
+This page needs to keep one bad defense illegal.
+
+The following still do not count as a serious justification for remaining
+Compose-first:
+
+- Compose is familiar
+- Compose is readable on the happy path
+- the repo already has a lot of Compose invested
+- larger orchestrators feel annoying or ideological
+- helpers exist, so the gap must already be closing
+
+Some of those may be emotionally or operationally true.
+They still do not answer the only defensible question:
+
+> is Compose still the least dishonest primary contract for the truths the
+> runtime actually owns today?
+
+If the answer becomes no, sentimentality is not a valid defense.
+
+## What a real Compose-first retention packet would have to contain
+
+Before the docs use stronger "Compose-first is still right here" language, they
+should be able to point to a concrete packet.
+
+That packet should contain:
+
+- the exact truth Compose still exposes better than the stronger alternative
+- the exact hidden burden Compose still does not own
+- the narrower helper or artifact carrying the missing burden today, if any
+- the reason a heavier control plane still has not earned the worldview tax
+- the explicit sentence describing what evidence would end Compose-first as the
+  default
+
+Without that packet, Compose-first can quietly turn from honest restraint into
+unexamined attachment.
+
 ## What Compose-first is being forced to justify
 
 Compose-first is not only being defended against heavyweight orchestrators.
