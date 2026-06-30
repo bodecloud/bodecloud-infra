@@ -180,6 +180,48 @@ The packet should also answer one socially important question:
 If the packet cannot answer that, it is probably still a technical anecdote
 instead of real burden transfer.
 
+## Route proof packet template
+
+Use this template when a drill touches HTTP routing, peer forwarding, or
+fallback.
+
+| Field | Required evidence |
+| --- | --- |
+| Route under test | Exact hostname, path, service name, and whether it is public, protected, or internal |
+| Intended owner | The node or backend expected to own the service before failure |
+| First-hop node | The public node that actually received the request |
+| Locality result | Whether the first-hop node served locally or chose a peer |
+| Truth source used | The file, registry, generated config, label set, or runtime API consulted |
+| Peer chosen | The backend peer selected and why it was eligible |
+| Policy surface | Auth, middleware, headers, and trust-boundary behavior observed |
+| Failure scene | Wrong-node entry, backend loss, peer loss, route drift, or policy comparison |
+| User-visible result | Status, content identity, headers, and whether the request still meant the same thing |
+| Private sentence removed | The exact operator sentence the system no longer needs |
+| Still forbidden | The larger claim this drill still does not prove |
+
+This template is intentionally verbose.
+The repo does not need more impressive success anecdotes.
+It needs evidence packets that a later contributor cannot easily overread.
+
+## Stateful proof packet template
+
+Use this template when a claim touches MongoDB, Redis, Postgres-shaped services,
+RabbitMQ, Headscale, Qdrant, or any other state-bearing service.
+
+| Field | Required evidence |
+| --- | --- |
+| Service class | The exact stateful service and why it is stateful |
+| Write authority | Who owns writes before the failure |
+| Replica or backup model | How another node becomes useful without corrupting truth |
+| Promotion rule | How authority changes, if it changes at all |
+| Client rediscovery | How clients find the new authority |
+| Failure scene | Node loss, disk loss, backend loss, split-brain risk, or restart |
+| Data correctness check | The read/write evidence that proves authority stayed coherent |
+| Remaining SPOF | The disk, node, credential, DNS, or human decision still singular |
+| Still forbidden | The broader HA sentence that remains illegal |
+
+TCP reachability should never be used as a shortcut for this packet.
+
 ## Drill matrix
 
 | Claim under test | Minimum drill | Current ceiling if it passes | Stronger sentence still forbidden afterward |
@@ -257,3 +299,25 @@ The drill is only interesting if it tests one uncertain part of that contract:
 
 Otherwise the drill may still be useful, but it is not yet testing the dream
 the user is actually asking the repo to earn.
+
+## Evidence naming convention
+
+When a proof packet is recorded, name it by the behavior it actually proves,
+not the ambition it gestures toward.
+
+Good names:
+
+- `whoami-wrong-node-http-proof`
+- `wishlist-backend-loss-http-proof`
+- `dozzle-protected-route-policy-parity-proof`
+- `redis-tcp-reachability-only`
+- `headscale-state-authority-not-proven`
+
+Weak names:
+
+- `ha-test`
+- `failover-working`
+- `cluster-proof`
+- `zero-spof-validation`
+
+The name should make the ceiling visible before anyone opens the packet.

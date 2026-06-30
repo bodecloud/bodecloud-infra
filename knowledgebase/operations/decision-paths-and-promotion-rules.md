@@ -84,6 +84,59 @@ A real promotion packet should contain:
 
 Without that packet, "promotion" is still mostly rhetoric.
 
+The packet also has to identify the authority it is replacing.
+
+For this repo, that usually means naming one of these current private
+authorities:
+
+- operator memory of current placement
+- operator judgment of peer safety
+- operator interpretation of generated fallback files
+- operator knowledge of middleware and auth continuity
+- operator caveats around stateful authority
+
+If a candidate promotion cannot name the private authority it is replacing, it
+is not yet a promotion.
+It is only a new component.
+
+## Minimum v1 promotion boundary
+
+The first promotion does not need to solve the whole repo.
+It does need to make one complete burden transfer visible.
+
+A contract-faithful v1 promotion should include:
+
+1. one explicit placement or peer-eligibility truth source
+2. one consumer of that truth in the request path or route-generation path
+3. one stateless HTTP route that exercises local versus remote behavior
+4. one backend-loss drill for that same route
+5. one operator inspection path that explains why the receiving node made the
+   decision it made
+
+That is the smallest useful unit because it proves a real transfer of
+responsibility.
+
+A smaller packet can still be good implementation progress, but it should not
+be allowed to upgrade the docs into saying the middle layer has arrived.
+
+## Rejection rule for fake options
+
+An option should be rejected or kept as research-only when it mostly answers one
+of these easier questions:
+
+- can we make the diagram cleaner?
+- can we make deployment feel more modern?
+- can we reduce the number of manual commands?
+- can we make the proxy config more dynamic?
+- can we get a dashboard that looks more cluster-like?
+
+Those are useful only if they serve the harder question:
+
+> which private bad-day sentence stops being true?
+
+If the answer is still "none yet," the option may remain useful research, but
+it has not earned promotion.
+
 ## The main candidate paths
 
 ### Path 1: Stay Compose-first and add a lightweight shared-truth layer
@@ -104,6 +157,11 @@ Promote this path if it can delete the sentence:
 
 > I still have to remember where it really lives
 
+Do not promote this path merely because a `services.yaml`-shaped artifact
+exists.
+Promote it when some runtime path consumes that truth and changes behavior
+because of it.
+
 ### Path 2: Harden helpers without promoting a full controller
 
 Use when:
@@ -120,6 +178,10 @@ This path must eventually answer:
 Promote this path if it can delete the sentence:
 
 > I still have to remember whether fallback survives the real failure
+
+Do not promote this path merely because a helper renders a file.
+Promote it when the generated decision remains correct during the failure scene
+it exists to handle.
 
 ### Path 3: Promote a stronger ingress or service-coordination layer
 
@@ -138,6 +200,11 @@ Promote this path if it can delete the sentence:
 
 > I still have to remember whether the same protected-route meaning survives
 > handoff
+
+Do not promote this path merely because a stronger ingress layer can route to
+more places.
+Promote it when it preserves service meaning, policy, and eligibility under a
+wrong-node handoff.
 
 ### Path 4: Promote a heavier orchestrator or cluster worldview
 
@@ -159,6 +226,44 @@ Promote this path if it can delete a sentence like:
 
 > I still have to remember which peer is actually safe and why the platform
 > chose it
+
+Do not promote this path merely because Compose has become uncomfortable.
+Promote it only when the discomfort is proven to come from a burden a heavier
+system would actually own better.
+
+## Demotion and quarantine rules
+
+Not every serious experiment deserves to stay in the active story.
+
+Demote or quarantine a path when:
+
+- it adds a new dashboard but leaves truth ownership private
+- it adds a new controller but still requires the operator to explain the bad
+  day afterward
+- it makes one easy route cleaner while making protected routes or stateful
+  lanes easier to overclaim
+- it creates a second source of truth without proving which one wins under
+  drift
+- it requires more worldview tax than the burden it removes
+
+Demotion does not mean the experiment was worthless.
+It means the docs should stop letting it sound like an earned option.
+
+## Promotion ledger format
+
+Use this short ledger for any future promotion decision:
+
+| Field | Required answer |
+| --- | --- |
+| Candidate layer | The concrete tool, helper, file, service, or controller being promoted |
+| Private sentence removed | The exact operator-owned sentence that should die |
+| New truth authority | The artifact or component that now owns that truth |
+| Runtime consumer | The code, service, proxy, or route path that consumes it |
+| Drill passed | The stress scene that proved behavior changed |
+| Inspection path | How an operator can see why the decision happened |
+| Still forbidden | The stronger claim that remains illegal afterward |
+
+If any row is empty, the promotion is not yet real.
 
 ## What still does not count as a real option
 

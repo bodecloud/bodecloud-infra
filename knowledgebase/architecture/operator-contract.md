@@ -130,6 +130,56 @@ able to point to a proof bundle containing:
 
 Without that bundle, the docs may be giving orientation rather than relief.
 
+The bundle should also name the old human job it replaced.
+
+That matters because a route can work while still leaving the operator as the
+person who knows why it worked.
+The contract is not satisfied until the system can expose enough of the reason
+for the operator to inspect it without privately reconstructing the whole
+scene.
+
+## The v1 completion boundary
+
+The first honest completion boundary is intentionally narrow.
+
+For this repo, a believable v1 would mean:
+
+1. the root Compose-first runtime remains the visible authoring surface
+2. one explicit current-placement or peer-eligibility truth source exists
+3. one active request path consumes that truth
+4. one public node that does not host the service can still preserve a named
+   stateless HTTP request
+5. the same route has a backend-loss proof packet
+6. one protected route has a policy-parity proof packet
+7. stateful services are still documented under a separate harsher lane rather
+   than borrowed into the HTTP win
+
+That v1 would not mean the whole platform is solved.
+It would mean the repo finally proved one complete transfer of a private
+operator burden into system-owned truth.
+
+Anything weaker can still be useful progress, but it should not be called the
+missing middle layer.
+
+## The v1 non-goals
+
+These are not required for the first honest completion boundary:
+
+- full Kubernetes-grade scheduling
+- generic service mobility for every workload
+- stateful HA for every database-shaped service
+- automatic migration of all Compose services
+- one dashboard that explains every failure mode
+- a single universal controller for every traffic class
+
+Those may become future work.
+They are not the first honest proof target.
+
+The first target is smaller and stricter:
+
+> prove that one healthy wrong node can stop needing the operator for one real
+> route, then keep the claim narrow.
+
 ## Acceptance criteria by lane
 
 ### 1. Any-node entry stops being a coin flip
@@ -277,6 +327,23 @@ The smallest contract-faithful progress sequence is:
 3. prove whether the same route survives backend loss
 4. prove protected-route continuity for one named service
 5. keep TCP and stateful lanes on separate harsher tracks
+
+## Contract ledger
+
+Use this ledger to keep future edits honest.
+
+| Lane | Minimum proof | Operator sentence that should die | Stronger sentence still forbidden |
+| --- | --- | --- | --- |
+| Any-node entry | More than one public node receives traffic and first-hop identity is observed | `I know which public node is the real one.` | `Any-node entry preserves the request end to end.` |
+| Locality | A receiving node can explain local versus remote service ownership from an explicit truth source | `I know whether this service is local here.` | `All placement truth is system-owned.` |
+| Wrong-node HTTP | One named stateless route succeeds through a non-owner first hop with peer identity observed | `I know which peer should answer this wrong-node request.` | `Wrong-node routing is generically solved.` |
+| Backend loss | The same route survives loss of the preferred backend through the intended rescue path | `I know whether fallback survives the failure.` | `HTTP failover is broadly solved.` |
+| Protected HTTP | One protected route preserves auth, middleware, headers, and visible behavior across handoff | `I know whether this forwarded route is still the same protected service.` | `Protected-route continuity is solved across the stack.` |
+| TCP | A raw TCP route is reachable and explicitly labeled as transport-only proof | `I know whether this port is reachable.` | `Stateful authority is resilient.` |
+| Stateful authority | One service defines and exercises writer, replica, promotion, and rediscovery behavior | `I know who owns writes after failure.` | `The general stateful lane is anti-SPOF.` |
+
+This ledger is deliberately unforgiving.
+It prevents one lane's success from borrowing dignity for another lane.
 
 That sequence matters because it moves the repo from:
 
