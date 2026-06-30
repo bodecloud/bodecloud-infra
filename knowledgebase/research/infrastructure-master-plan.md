@@ -111,6 +111,19 @@ as if they were already live shared truth.
 
 That is exactly the overread this page is supposed to block.
 
+## What still does not count as master-plan progress
+
+The following still do not count as meaningful completion signals:
+
+- a planned module being named convincingly
+- a sequence sounding operationally plausible
+- a sync or failover flow being easy to picture
+- a future control surface being cleaner than the current one
+- a roadmap making the architecture feel emotionally calmer
+
+Those are signs that the repo is thinking harder.
+They are not signs that the hidden operator burden has actually moved.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -141,6 +154,23 @@ page has failed too.
 The complaint is not optional background color.
 It is the calibration mechanism that stops planning language from outranking
 runtime truth.
+
+## What a real promotion packet for the master plan would need
+
+Before the master plan can be read as more than strong directional evidence, a
+promotion packet would need to show:
+
+- which planned truth surface is now live
+- which exact operator reconstruction burden it removed
+- which current root runtime artifact consumes that truth
+- which failure case is now handled without private human memory
+- what new burden the added layer introduced in exchange
+
+If that packet cannot be assembled, the correct reading stays:
+
+- the plan names the wound well
+- the plan may point toward the repair
+- the runtime still has to earn ownership
 
 ## Why this page needs to exist at all
 

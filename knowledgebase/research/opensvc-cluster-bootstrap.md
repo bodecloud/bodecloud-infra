@@ -39,6 +39,21 @@ Because OpenSVC sits so close to the user's hoped-for middle layer, this page
 must be more suspicious than usual about upgrading serious experimentation into
 earned runtime trust.
 
+## What still does not count as OpenSVC closure
+
+The following still do not count as OpenSVC having earned the repo's trust:
+
+- install scripts existing
+- bootstrap scripts touching Docker networks successfully
+- generated ingress files appearing on disk
+- OpenSVC node membership being queryable
+- one side-path using OpenSVC while another still uses a different truth source
+- the cluster story sounding emotionally closer to what the user wants
+
+Those are serious signals.
+They are not yet the same thing as sovereign ownership of placement and
+failover truth.
+
 ## Quick claim router
 
 Use this page for claims like:
@@ -67,6 +82,23 @@ membership.
 But it still remains a side-path whose scripts reveal ambition and useful
 implementation pressure more strongly than they prove sovereign runtime
 ownership.
+
+## What a real OpenSVC promotion packet would need
+
+Before OpenSVC could be described as more than a serious candidate, a packet
+would need to show:
+
+- which root runtime paths now depend on OpenSVC truth directly
+- whether HTTP and L4 generation consume the same node-authority source
+- which operator memory burden was actually removed
+- what failure was survived because OpenSVC owned the decision
+- what new cluster tax or ambiguity OpenSVC introduced in exchange
+
+If that packet is missing, the correct reading stays:
+
+- OpenSVC is one of the clearest middle-layer candidates
+- OpenSVC is materially tied to failover experiments
+- OpenSVC still has not earned sovereign status in the root runtime
 
 ## What problem OpenSVC is being asked to solve
 

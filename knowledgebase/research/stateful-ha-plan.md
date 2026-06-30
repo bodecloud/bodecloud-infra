@@ -35,6 +35,20 @@ This page is not allowed to:
 - collapse sequencing discipline into an implementation completion claim
 - suggest every state-bearing workload is on the same hardening path
 
+## What still does not count as stateful HA in this repo
+
+The following still do not count as stateful resilience here:
+
+- a port answering after a restart
+- a container getting recreated on another node
+- an HAProxy or Traefik route continuing to exist
+- a replica process existing without proven authority semantics
+- storage being mounted from a path that merely looks shared
+- dashboards staying green while write ownership is still unclear
+
+This repo needs stricter language because state is where fake adulthood is
+easiest to stage.
+
 ## Quick claim router
 
 If the question is:
@@ -124,6 +138,26 @@ wrong-node behavior can improve first, while only a narrow set of stateful
 services should be hardened next, and only under much stricter authority,
 storage, and client-behavior rules than the rest of the stack.
 
+## What a real stateful proof packet would need
+
+Before any workload here gets described as honestly resilient, a proof packet
+should identify at least:
+
+- the authoritative writer or leader model
+- how promotion or election actually occurs
+- what storage substrate preserves the authoritative dataset
+- what failure was introduced on purpose
+- what the client observed before, during, and after failover
+- what evidence shows continuity rather than mere reachability
+
+Without that packet, the repo is only allowed to say:
+
+- "candidate topology exists"
+- "routing path exists"
+- or "hardening plan exists"
+
+not "stateful HA exists."
+
 ## The repo's actual near-term stateful priority
 
 The repo does **not** read like it wants to solve every distributed-storage
@@ -166,6 +200,13 @@ pretends there are only two choices:
 
 This repo is trying to make a narrower, more service-specific path visible
 instead.
+
+That path only stays honest if every workload keeps its own proof burden.
+The repo should resist any temptation to say:
+
+- Redis progress means database progress
+- L4 routing progress means authority progress
+- one successful failover demo generalizes across all stateful surfaces
 
 ## Current implementation evidence that shapes the plan
 

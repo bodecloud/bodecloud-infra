@@ -38,6 +38,21 @@ This page is not authoritative about:
 This is a demand-reconstruction page.
 It is not a runtime-proof page.
 
+## What still does not count as understanding the dream
+
+The following still do not count as a serious reading of the user's demand:
+
+- reducing the dream to "anti-SPOF"
+- reducing the wound to "needs better load balancing"
+- treating tool abundance as the same thing as genuine choice
+- assuming scheduler adoption is automatically relief
+- assuming Compose frustration is just resistance to learning newer tools
+- assuming the user wants abstraction more than preserved request meaning
+
+The dream is more specific than any of those summaries.
+It is about removing the humiliating moment where a healthy node still needs a
+human to explain what the request should have meant.
+
 ## The shortest honest statement of the dream
 
 The user wants:
@@ -60,6 +75,27 @@ The dream is:
 > hidden routing explainer, and hidden memory of what lives where.
 
 That is the central demand.
+
+## What a real demand-reconstruction packet should leave behind
+
+If this page is doing its job, the reader should leave with a packet that can
+survive contact with implementation work:
+
+- the operator is currently acting as hidden registry, hidden placement memory,
+  and hidden fallback explainer
+- the desired system behavior is request-preserving, not merely multi-entry
+- wrong-node entry is the real held-out test, not whether several IPs exist
+- any promoted middle layer must remove hidden human reconstruction burden in
+  practice
+- stateful services stay under stricter truth rules than stateless HTTP paths
+
+If the reader instead leaves with:
+
+- "they want clustering"
+- "they need a better proxy"
+- "they should pick Nomad or k3s"
+
+then the packet has already collapsed back into generic infra language.
 
 ## The best intent surfaces for reconstructing that demand
 
@@ -151,6 +187,22 @@ That is why the repo keeps talking about "wrong-node humiliation."
 It is not rhetorical excess.
 It is a precise name for the moment where direct system legibility collapses
 back into private human memory.
+
+## What still does not count as a satisfying option in this repo
+
+Even after reading the archive, the following still do not count as satisfying
+options:
+
+- an option that improves first-hop reachability but not request-time truth
+- an option that adds fallback nouns without proving peer eligibility
+- an option that centralizes power while leaving the same ambiguity unmeasured
+- an option that makes the diagrams cleaner while the operator remains the
+  hidden cluster brain
+- an option that sounds calmer only because it stopped naming the wound
+
+The user's frustration is not lack of exposure to tooling.
+It is repeated exposure to answers that improve adjacent layers while leaving
+the degrading moment intact.
 
 ## The archive surfaces that sharpen the dream instead of blurring it
 
@@ -255,6 +307,20 @@ That hidden reconstruction looks like:
 The dream is not merely "better automation."
 It is the removal of those remembered truths as the effective runtime control
 plane.
+
+## What this page would need before anyone could overread it as progress
+
+This page should not be used to imply runtime progress unless another packet
+exists beside it that proves:
+
+- where current placement truth lives now
+- how wrong-node forwarding chooses eligible peers now
+- how auth and middleware survive handoff now
+- which failures are actually survived and which are still archive-only dreams
+
+Without that neighboring packet, this page remains what it is supposed to be:
+a reconstruction of the user's real benchmark, not evidence that the benchmark
+has already been crossed.
 
 That is why many respectable answers still feel insulting here.
 They improve:

@@ -88,6 +88,21 @@ What is still not honestly proved:
 
 That gap is the center of the ingress story, not a minor implementation note.
 
+## What still does not count as ingress evidence here
+
+The following still do not count as meaningful ingress proof in this repo:
+
+- several A or AAAA records existing at Cloudflare
+- a healthy Traefik dashboard
+- multiple reverse-proxy containers running
+- a generated fallback file existing on disk
+- a peer being pingable or reachable over Tailscale
+- one service answering after manual operator nudging
+
+Those are all ingredients or local signals.
+They are not yet proof that the wrong healthy node can preserve request meaning
+under pressure.
+
 ## The dream this page has to protect
 
 The architecture dream is explicit in
@@ -118,6 +133,22 @@ It is a proof filter for one very specific dream:
 > ordinary Docker nodes should behave less stupidly when requests land on the
 > wrong box, the preferred backend dies, or the stack is under anti-SPOF
 > pressure.
+
+## What a real ingress proof packet would have to contain
+
+For this repo, a serious ingress proof packet would need to show all of the
+following together:
+
+- the exact entry node that first received the request
+- whether the requested service was local or remote at that moment
+- the current placement truth source the receiving node consulted
+- the peer-selection logic that chose the fallback target
+- preserved middleware and auth behavior across the handoff
+- backend health or loss conditions during the test
+- operator-readable artifacts explaining why the route was valid
+
+If any of those are missing, the packet may still be useful debugging evidence,
+but it does not close the user's real ingress question.
 
 ## Evidence hierarchy for ingress claims
 
@@ -242,6 +273,12 @@ traffic, and specialized routing domains.
 It does **not** prove that the receiving node knows which peer currently hosts
 which service.
 
+That missing sentence matters more than most healthy-compose outputs.
+It is the boundary between:
+
+- "the edge exists"
+- and "the edge can preserve meaning under wrong-node entry"
+
 ### 2. Traefik is already one of the stack's real control planes
 
 The edge fragment contains live components such as:
@@ -258,6 +295,10 @@ This proves:
 - request correctness already depends on policy and middleware surfaces
 - ingress is not just port exposure
 - the edge already has multiple cooperating control layers
+
+It still does not prove that those layers survive handoff together in the way
+the user actually wants.
+That stronger claim needs a proof packet, not a component list.
 
 It does **not** prove:
 

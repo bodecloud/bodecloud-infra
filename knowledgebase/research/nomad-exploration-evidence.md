@@ -52,6 +52,20 @@ This page is not allowed to:
 - imply Consul or quorum problems are secondary details
 - collapse scheduler progress into full wrong-node or stateful success
 
+## What still does not count as Nomad success here
+
+The following still do not count as serious closure:
+
+- many jobs existing under `nomad/`
+- templates rendering cleanly
+- jobs looking 1:1 on paper
+- a partial cluster coming up once
+- parity notes being numerous and detailed
+- the branch sounding more disciplined than raw Compose
+
+Those all show substantial effort.
+They do not yet prove a healthy trusted control plane.
+
 ## Quick claim router
 
 If the question is:
@@ -108,6 +122,20 @@ This is one of the easiest places for the docs to become flattering again.
 Conversion language can sound like solved equivalence even when the runtime
 still has not earned the cluster-health and failover claims that would make the
 conversion actually matter.
+
+## What a real Nomad promotion packet would have to prove
+
+Before Nomad could be described as an earned next control plane here, a packet
+would need to show:
+
+- healthy server quorum and leadership
+- the absence or honest containment of Consul SPOF
+- verified service relocation or restart behavior under failure
+- which hidden placement burden Nomad removed in practice
+- whether wrong-node request meaning improved at all, or only scheduling truth
+
+Without those pieces, Nomad remains high-value evidence and high-effort
+exploration, not an already-trusted resolution.
 
 ## What the same branch also admits directly
 
