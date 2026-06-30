@@ -25,6 +25,10 @@ The repo is no longer at risk of only looking too primitive.
 It is now equally at risk of looking mature enough that narrow evidence starts
 getting socially promoted into a larger feeling of completion.
 
+This page is therefore not just a test matrix.
+It is the place where the docs admit, in advance, what a passed drill still
+does not let them say.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -84,6 +88,10 @@ It forces every claimed success to answer:
 - which hidden operator burden still survives even after the drill passes?
 
 If those questions disappear, the site becomes another fake HA story.
+
+Another way to say that:
+the drill only counts if it removes one real private completion step from the
+operator and keeps the next still-missing step visible.
 
 ## The dream fragments being measured
 

@@ -18,6 +18,11 @@ Once a stack is broad enough, mere presence starts getting misheard as
 relief.
 This page has to keep interrupting that reflex.
 
+The user already has the broad stack.
+What they still do not have is confidence that the stack itself, rather than
+the operator, owns the decisive truth when a request lands on the wrong node
+or a preferred backend disappears.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -40,8 +45,8 @@ It is not a distributed-systems completion certificate.
 
 It also cannot be allowed to become a comfort certificate.
 The user's complaint is not that too little exists.
-The complaint is that a lot already exists and still too much of the important
-truth can collapse back into private operator explanation once the bad day
+The complaint is that a lot already exists and too much of the important truth
+can still collapse back into private operator explanation once the bad day
 arrives.
 
 That sentence should govern the whole page.
@@ -85,9 +90,8 @@ conclusion:
 This page exists to stop that jump.
 
 More bluntly:
-this page exists because "look how much is already here" is one of the main
-ways the ecosystem keeps dressing up partial answers as if they had finally
-become believable options.
+"look how much is already here" is one of the main ways the ecosystem keeps
+dressing up partial answers as if they had finally become believable options.
 
 ## What still does not count as runtime evidence
 
@@ -140,7 +144,7 @@ That list is a more faithful summary of the user's complaint than "the stack is
 still maturing."
 
 The user is not saying the runtime lacks machinery.
-The user is saying too many decisive truths still need to be remembered,
+They are saying too many decisive truths still need to be remembered,
 inferred, or reconstructed by a human at the exact moment a believable
 platform should already be exposing them.
 
@@ -244,8 +248,8 @@ The root file directly includes the following fragments:
 This include graph matters because it proves the repo is already operating as a
 platform-shaped Compose system.
 The missing problem is not "how do we stop being toy-scale?"
-The missing problem is "how do we stop being toy-scale without lying about
-distributed truth?"
+The missing problem is "how do we stop being platform-shaped without lying
+about distributed truth?"
 
 That second sentence is the more important one.
 The repo is not begging to become serious.

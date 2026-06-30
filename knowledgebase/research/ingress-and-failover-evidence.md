@@ -37,6 +37,22 @@ The user is not starved for ingress ingredients.
 The user is starved for a system that stops turning those ingredients back
 into private human completion steps the moment locality disappears.
 
+This page is also where retrieval discipline matters most.
+It has to keep four source classes separate on purpose:
+
+- the dream:
+  [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- the live root runtime:
+  [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+  plus active `compose/` fragments
+- the known gaps:
+  master-plan and architecture evidence pages
+- the archive pressure restoring what the user is actually rebelling against:
+  especially
+  [`docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md)
+  and
+  [`load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md).
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -98,9 +114,8 @@ What is still not honestly proved:
 - raw TCP failover correctness just because L7 ideas exist
 
 That gap is the center of the ingress story, not a minor implementation note.
-
-It is also the part that generic infrastructure writing keeps trying to make
-sound small.
+It is also the part generic infrastructure writing keeps trying to make sound
+small.
 This repo should keep refusing that minimization.
 
 ## What still does not count as ingress evidence here
@@ -156,7 +171,7 @@ It is a proof filter for one very specific dream:
 
 That phrasing matters.
 The user is not chasing prestige architecture.
-The user is chasing a stack that stops acting insultingly dumb at the exact
+They are chasing a stack that stops acting insultingly dumb at the exact
 moment multiple nodes are supposed to mean something.
 
 ## What a real ingress proof packet would have to contain
@@ -175,7 +190,7 @@ following together:
 If any of those are missing, the packet may still be useful debugging evidence,
 but it does not close the user's real ingress question.
 
-This is where many ecosystems would stop earlier.
+Many ecosystems would stop earlier.
 They would take partial packet quality, partial fallback behavior, or partial
 visibility and start upgrading the whole ingress story emotionally.
 This page exists to stop that drift.

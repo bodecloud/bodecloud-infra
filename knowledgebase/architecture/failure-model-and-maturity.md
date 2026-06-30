@@ -44,6 +44,7 @@ It matures as several uneven truth lanes:
 
 If those are compressed into one comfort level, the docs become flatter than
 the worktree.
+They also become kinder than the evidence.
 
 ## What this page is and is not allowed to prove
 
@@ -63,12 +64,13 @@ This page is not authoritative about:
 ## Strongest honest current answer
 
 The strongest honest current answer is that the repo has outgrown "toy stack"
-status but has not yet crossed into "request-preserving platform" status. The
-current implementation proves a serious Compose-first infrastructure surface,
-real ingress machinery, real auth and observability layers, and clear
-architectural intent. It does not yet prove that wrong-node traffic, backend
-loss, protected-route parity, or stateful ownership have become system-owned
-truths rather than better-documented operator burdens.
+status but has not yet crossed into "request-preserving platform" status.
+The current implementation proves a serious Compose-first infrastructure
+surface, real ingress machinery, real auth and observability layers, and clear
+architectural intent.
+It does not yet prove that wrong-node traffic, backend loss,
+protected-route parity, or stateful ownership have become system-owned truths
+rather than better-documented operator burdens.
 
 That distinction matters because many ecosystems would already start speaking
 as if this were the final stretch:
@@ -85,7 +87,7 @@ moment where the system still needs private human explanation to stay honest.
 
 That is the part most infrastructure writing keeps sanitizing away.
 The user is not merely annoyed by incompleteness.
-The user is angry at how often incompleteness arrives wearing the costume of a
+They are angry at how often incompleteness arrives wearing the costume of a
 nearly finished option.
 
 ## How to read maturity in this repo

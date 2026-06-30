@@ -14,6 +14,22 @@ This page exists because "HA" becomes meaningless almost immediately in this
 repo unless routing is decomposed into the separate truths the user is actually
 angry about.
 
+The grounding for that is concrete, not hypothetical.
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+  states the target contract directly:
+  any surviving public node should be able to receive the request, serve it
+  locally if the service is local, or forward it to a healthy peer if it is
+  not.
+- [`docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md)
+  captures the same pressure in plainer words:
+  manual placement is acceptable, DNS plurality already exists, and the real
+  problem is service discovery and request preservation when traffic lands on
+  the wrong node.
+- [`load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md)
+  shows the user explicitly rejecting answers that stop at familiar proxy
+  nouns.
+
 The user is not asking:
 
 - can more than one node receive traffic?
@@ -51,19 +67,18 @@ This page is not authoritative about:
 - whether stateful traffic inherited optimism from the HTTP story
 - whether one working helper path upgrades the whole platform
 
-This is a routing decomposition page.
-It is not a route-success report.
-
+This is a routing decomposition page, not a route-success report.
 It also cannot become a reassurance page.
+
 The user is not mainly asking for cleaner routing terminology.
-The user is asking why so many HA and failover stories keep sounding credible
+They are asking why so many HA and failover stories keep sounding plausible
 until the request lands on the wrong healthy node and the operator is still
-the only thing bridging the missing truth.
+the only thing that knows what should happen next.
 
 ## Strongest honest current answer
 
 The root runtime already has a serious edge stack and enough moving parts to
-justify real routing work:
+make the routing problem real rather than hypothetical:
 
 - Cloudflare-oriented public-entry assumptions
 - Traefik
@@ -89,12 +104,10 @@ That is the whole difference between:
 - a stack that can route many things locally
 - and a stack that stops gambling on node locality
 
-That second line is closer to the user's dream than ordinary HA vocabulary is.
+That second line is closer to the user's dream than ordinary HA vocabulary.
 The dream is not just more reachability.
 The dream is that wrong-node entry stops being the moment where the system
 reveals it was still counting on human folklore.
-
-That sentence should govern the whole page.
 
 If a routing summary sounds sophisticated while still leaving wrong-node entry
 as the moment where the operator privately completes the story, then the page is
@@ -120,7 +133,7 @@ and survive the failure that made fallback necessary.
 
 This is where normal HA vocabulary becomes actively misleading.
 
-A lot of ecosystems will happily call the above:
+Many ecosystems will happily call the above:
 
 - resilience
 - failover
@@ -211,11 +224,9 @@ It is already carrying enough live routing complexity that the missing burden
 feels offensive rather than hypothetical.
 
 That distinction matters because the frustration is not beginner confusion.
-
 The user is not staring at an empty repo asking abstract clustering questions.
 They are staring at a stack that is already serious enough to make the
-remaining hidden burden feel like an insult instead of an understandable early
-limitation.
+remaining hidden burden feel insulting instead of understandable.
 
 Within the edge fragment, the current routing surface includes:
 
