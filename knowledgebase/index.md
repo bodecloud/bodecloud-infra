@@ -16,6 +16,23 @@ It is also the question every page in this site should be forced to serve.
 If a page is informative but answers a smaller question than that one, the page
 is still failing the user.
 
+## The failure mode this site has to prevent
+
+The failure mode is not:
+
+- the docs are too short
+- the docs are too scattered
+- the docs are too technical
+
+The failure mode is:
+
+1. the site sounds organized
+2. the site sounds mature
+3. the user accusation gets softened into a calmer neighboring question
+4. the hidden operator burden becomes easier to forget
+
+That is how a documentation set becomes polished and useless at the same time.
+
 This site is not primarily:
 
 - a generic self-hosting handbook
@@ -56,6 +73,24 @@ into something easier:
 
 Those are not the same thing.
 
+## The private-sentence benchmark for the whole site
+
+The whole site should be read under a simple benchmark:
+
+> after reading this page, what exact private sentence is still being finished
+> by the operator?
+
+Examples:
+
+- `I still personally know which node is the real one.`
+- `I still personally know which peer is safe.`
+- `I still personally know whether the fallback is real.`
+- `I still personally know whether the route that answered still means the same thing.`
+- `I still personally know whether the stateful answer is authoritative.`
+
+If a page cannot make that clearer, it may still be informative while still
+being weaker than the user needs.
+
 ## The accusation this site has to preserve
 
 The site only stays useful if it keeps the user's real accusation visible:
@@ -75,6 +110,21 @@ The accusation should stay active while reading every page:
 
 If the answer is yes, then the docs are not yet describing a system-owned
 truth.
+
+## Why the accusation matters more than tone
+
+Many infra docs get rewarded for sounding:
+
+- even-handed
+- balanced
+- practical
+- calm
+
+Those traits are fine until they erase the accusation.
+
+In this repo, the accusation is the integrity check.
+If the page sounds nicer by making the wound easier to forget, the page got
+worse.
 
 ## The shortest correct reading
 
@@ -105,6 +155,21 @@ It is not the same thing as current proof.
 
 That gap between dream and proof is not a documentation nuisance.
 It is the whole architecture problem.
+
+## What this site must keep forcing the reader to remember
+
+Three things must stay simultaneously visible:
+
+- the dream is specific
+- the runtime is real
+- the hidden truth-owning layer is still incomplete
+
+If one of those disappears, the reader usually falls into one of three wrong
+stories:
+
+- only aspiration, no implementation
+- only implementation, no accusation
+- only seriousness-of-stack, no missing burden transfer
 
 ## The three-part checksum for the whole site
 
@@ -157,6 +222,19 @@ What it still does **not** prove is the thing the user actually cares about:
 The runtime is serious.
 The missing burden transfer is still brutally concrete.
 
+## What a fake good summary sounds like
+
+These still sound good while being too small:
+
+- `the repo is exploring several HA strategies`
+- `the repo is evolving toward a middle layer`
+- `the repo has a solid multi-node foundation`
+- `the repo is deciding between lightweight and heavyweight orchestration`
+
+Each one becomes more truthful only if it also preserves:
+
+> the operator is still the missing control plane on the bad day
+
 ## How to read this site without making it useless
 
 Before trusting any section, ask four questions:
@@ -206,6 +284,18 @@ This site only stays honest if it keeps these truth layers separate:
 The site gets misleading the moment those four layers blend into one calm
 voice.
 
+## Why the site has to act like evidence custody, not normal docs
+
+This knowledgebase is closer to a retrieval-and-proof surface than to a normal
+reference site because the main risk is not forgetting facts.
+
+The main risk is illegal confidence transfer:
+
+- from dream to runtime
+- from plan to implementation
+- from archive pressure to present-tense proof
+- from component presence to burden transfer
+
 ## The core architecture problem
 
 The repo is not just asking for `better HA`.
@@ -226,6 +316,22 @@ system-owned:
 
 If a candidate does not move those truths into the system, it has not solved
 the user's real complaint, no matter how mature it sounds.
+
+## What this site should leave a serious reader with
+
+After a good pass through the site, the reader should not merely think:
+
+- `there are many options`
+- `the architecture is clearer`
+- `the docs are more comprehensive`
+
+They should be able to say:
+
+- which truth is still privately carried
+- which source class proved the present runtime
+- which source class only proved intent or planning
+- which stronger sentence is still forbidden
+- what exact artifact or drill would kill the next private sentence
 
 ## The pressure already visible in the archive
 
@@ -316,3 +422,6 @@ Those are exactly the overreads this site exists to interrupt.
 The useful conclusion is not that the repo is simple.
 It is that the repo is serious, the dream is specific, and the missing burden
 transfer is still brutally concrete.
+
+If the site ever becomes easier to admire than to audit, it has drifted away
+from what the user actually asked for.

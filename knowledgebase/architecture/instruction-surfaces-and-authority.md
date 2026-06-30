@@ -164,6 +164,28 @@ It is not the strongest answer to:
 That boundary has to stay explicit or the repo will start using clarity of
 desire as a substitute for proof of delivery.
 
+## Why the intent surface matters so much
+
+This repo has a lot of files that mention failover, HA, anti-SPOF work, or
+cluster-shaped ideas.
+Only a few of them state the request contract plainly enough to preserve the
+user's actual frustration.
+
+That is why
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+matters so much.
+It does not just say "be resilient."
+It says:
+
+- keep Compose as the human-facing control surface
+- let any healthy public node receive the first hop
+- serve locally when possible
+- peer-forward when locality is absent
+- avoid faking success by collapsing L7, L4, and stateful semantics together
+
+That is a much sharper dream than generic "multi-node Docker."
+It is also why a lot of otherwise relevant files are only secondary authority.
+
 ## The repo-level honesty wall
 
 [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md) is the strongest

@@ -27,6 +27,21 @@ This page is not allowed to prove:
 
 This is a retrieval contract page, not a completion badge.
 
+## The failure mode this page is trying to stop
+
+The common failure in this repo is not lack of reading.
+It is reading many true things and still answering the wrong question.
+
+That usually happens like this:
+
+1. the archive reconstructs the wound
+2. the instruction files reconstruct the dream
+3. the runtime shows serious machinery
+4. the plans show credible next steps
+5. the answer becomes broader while the hidden burden stays vague
+
+This page exists to stop step 5.
+
 ## What "actually RAG this time" means here
 
 In `bolabaden-infra`, "actually RAG this time" does **not** mean:
@@ -52,6 +67,17 @@ It means:
 If the docs skip that sequence, they may become longer without becoming more
 truthful.
 
+## The accusation retrieval must keep alive
+
+Retrieval is only aligned here if it preserves the user's accusation in a form
+the next page can still feel:
+
+> all these options exist, but too many of them solve one visible layer and
+> still leave me as the hidden control plane when the bad day begins
+
+If retrieval produces a calmer answer that no longer feels accused by that
+sentence, it probably answered a neighboring question instead.
+
 ## The accusation retrieval must preserve
 
 The retrieval pass is not just reconstructing "infra requirements."
@@ -64,6 +90,21 @@ It is reconstructing the user's specific accusation:
 
 If the retrieval pass loses that accusation, the page may still become more
 thorough while answering the wrong question.
+
+## The retrieval pass is trying to recover a surviving private sentence
+
+The most useful retrieval question is often:
+
+> after reading these sources, what exact sentence is still privately finished
+> by the operator?
+
+Examples:
+
+- `I still personally know what runs where.`
+- `I still personally know which peer is truly eligible.`
+- `I still personally know whether the fallback survives backend loss.`
+- `I still personally know whether the protected route still means the same thing after handoff.`
+- `I still personally know whether state authority is singular.`
 
 ## The four evidence classes that matter most
 
@@ -83,6 +124,24 @@ Once that happens, at least one of these becomes false:
 - the user's complaint gets replaced by a neighboring, weaker question
 - plans begin lending runtime confidence they did not earn
 - archives begin sounding like implementation proof
+
+## Why source abundance is not the same thing as assimilation
+
+This repo is already large enough that an answer can cite:
+
+- instruction files
+- runtime files
+- plan files
+- archive syntheses
+- research pages
+
+and still be weak.
+
+Assimilation only starts when the answer also states:
+
+- which source class is carrying which part of the claim
+- what the strongest consulted artifact still does not prove
+- what hidden burden remained after the reading pass
 
 ## Priority source map
 
@@ -115,6 +174,10 @@ Do **not** use these alone for:
 - route-specific failover claims
 - proof that a missing middle layer already exists
 
+Likely surviving private sentence after dream-only reading:
+
+> yes, but I still personally do not know what the runtime really owns today
+
 ### 2. Live runtime surfaces
 
 Read first when the page is claiming what the priority implementation actually
@@ -141,6 +204,11 @@ Do **not** use these alone for:
 - shared placement truth
 - stateful correctness
 
+Likely surviving private sentence after runtime-only reading:
+
+> yes, but I still personally do not know whether these components cash out
+> into the burden transfer the user actually wants
+
 ### 3. Planning and promotion surfaces
 
 Read first when the page is asking what the repo has already named as missing
@@ -164,6 +232,11 @@ Do **not** use these alone for:
 - claiming the repair is live
 - claiming a candidate already won
 - implying the runtime already crossed the threshold
+
+Likely surviving private sentence after plan-only reading:
+
+> yes, but I still personally do not know whether the repair exists outside
+> the plan
 
 ### 4. Archive-pressure surfaces
 
@@ -197,6 +270,11 @@ Do **not** use these alone for:
 - declaring one explored option live
 - route-specific success claims
 
+Likely surviving private sentence after archive-only reading:
+
+> yes, but I still personally do not know what the current worktree truly
+> proves
+
 ## Retrieval packets by page type
 
 Different page types need different minimum source packets.
@@ -215,6 +293,10 @@ Required outcome:
 - the reader can tell what the repo wants, what it ships, what it still lacks,
   and why the user is still dissatisfied
 
+Required surviving warning:
+
+- `do not let the doorway page sound more mature than the runtime`
+
 ### Runtime pages
 
 Minimum packet:
@@ -227,6 +309,10 @@ Required outcome:
 
 - the page says what is present now and explicitly refuses to over-upgrade that
   presence into distributed capability proof
+
+Required surviving warning:
+
+- `do not confuse present components with present burden transfer`
 
 ### Architecture or roadmap pages
 
@@ -241,6 +327,10 @@ Required outcome:
 - the page can state the gap between current runtime and target behavior
   without narrating the gap as if it were mostly closed
 
+Required surviving warning:
+
+- `do not let sequencing sound like implementation`
+
 ### Research or evidence pages
 
 Minimum packet:
@@ -253,6 +343,10 @@ Required outcome:
 
 - the page preserves the accusation, keeps source classes separate, and defines
   what is still illegal to claim
+
+Required surviving warning:
+
+- `do not let archive frustration impersonate runtime proof`
 
 ### Operator pages
 
@@ -267,6 +361,10 @@ Required outcome:
 - the page must say what truth is still operator-owned today and what exact
   artifact would externalize it
 
+Required surviving warning:
+
+- `do not let operational clarity impersonate reduced burden`
+
 ## The retrieval sequence that should happen before writing
 
 The actual sequence should be:
@@ -280,6 +378,19 @@ The actual sequence should be:
 7. only then draft the page
 
 If the writing begins before step 6, the page usually becomes too smooth.
+
+## Why "too smooth" is a real warning sign here
+
+Smoothness is suspicious in this repo because the underlying materials are not
+smooth:
+
+- the dream is sharper than the runtime
+- the runtime is richer than the proof
+- the options are broader than the honest choices
+- the archive is angrier than normal infra prose expects
+
+If the draft becomes tidy by flattening those tensions, retrieval probably
+failed even if it was thorough.
 
 ## What still does not count as real retrieval here
 
@@ -317,6 +428,15 @@ this time" is still too congratulatory for this project.
 
 This repo is not mainly asking for broader summaries.
 It is asking for evidence custody.
+
+The real retrieval standard is not:
+
+> did we read enough?
+
+It is:
+
+> after reading, what accusation stayed alive, what source class carried the
+> answer, and what burden still remained privately held?
 
 Actual assimilation here means:
 

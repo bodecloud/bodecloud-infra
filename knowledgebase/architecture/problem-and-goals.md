@@ -48,7 +48,8 @@ This page is the benchmark, not the completion report.
 ## The user's real demand
 
 The repo's strongest intent surfaces,
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md),
+[README.md](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md),
 and
 [knowledgebase/AGENTS.md](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/AGENTS.md),
 make the pressure explicit:
@@ -70,6 +71,65 @@ It is closer to:
 > final truth still living in one human head?
 
 That is the dream this knowledgebase has to keep visible.
+
+## The exact operating contract the dream is pointing at
+
+The most useful sentence in the repo is not "multi-node" and it is not
+"anti-SPOF."
+
+It is the request contract preserved in
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md):
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+That is what the repo keeps trying to achieve without immediately surrendering
+to:
+
+- Docker Swarm
+- Kubernetes or k3s
+- a giant scheduler that owns more truth than it can explain
+
+This matters because a lot of otherwise intelligent infrastructure writing
+quietly swaps that contract for smaller substitutes such as:
+
+- "multiple public nodes exist"
+- "Traefik is present on the edge"
+- "the route can probably be recreated elsewhere"
+- "there is some kind of failover helper"
+
+Those are pieces of the environment.
+They are not the contract.
+
+## What "no Swarm by default" really means here
+
+The no-Swarm or no-Kubernetes pressure should not be read as ideology.
+It is a burden-accounting rule.
+
+The repo is effectively asking:
+
+> how much shared truth can we add before we have to promote ourselves into a
+> heavier control plane?
+
+That is a different question from:
+
+> which orchestrator has the most features?
+
+The user is not angry because orchestrators exist.
+The user is angry because so many proposed answers only feel impressive while
+one operator still privately knows:
+
+- what runs where
+- which peer is valid
+- which route still means the same thing after handoff
+- which fallback disappears under the exact failure that made it matter
+
+That is why "stay Compose-first" is not nostalgia.
+It is a demand to justify every promoted control layer by the hidden burden it
+actually removes.
 
 ## The shortest exact problem statement
 
@@ -96,6 +156,10 @@ It has to own decisive bad-day truths such as:
 - whether fallback still exists under the failure that made it necessary
 - whether the route class is stateless HTTP, protected HTTP, raw TCP, or a
   stateful surface that needs stricter semantics
+
+The user is not merely asking for these truths to be writable somewhere.
+They are asking for them to become inspectable enough that the wrong receiving
+node does not need a human narrator to finish the story.
 
 If those truths still cash out into:
 
@@ -196,6 +260,12 @@ The acceptance tests for future architecture work therefore sound like:
 - can it preserve the same protected route semantics after forwarding?
 - can the fallback still work after the preferred backend disappears?
 - can stronger claims stay honest under direct inspection of the runtime?
+
+Another way to say the same thing:
+
+- can the node explain its distributed decision from shared artifacts?
+- can the operator inspect the explanation after the fact?
+- can the explanation survive without socially reconstructing the topology?
 
 If the answer to those is still "not yet," then the remaining gap is not
 cosmetic.

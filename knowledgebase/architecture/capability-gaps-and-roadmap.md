@@ -43,6 +43,30 @@ real next step yet.
 It may still be a good idea.
 It is just not the next burden-removal step.
 
+## The roadmap is downstream of one exact contract
+
+The roadmap gets less vague once it is tied back to the repo's most explicit
+contract in
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md):
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+Most roadmap confusion comes from replacing that with smaller statements such
+as:
+
+- "improve failover"
+- "make ingress more resilient"
+- "add clustering"
+- "remove SPOFs"
+
+Those are all downstream.
+The roadmap only stays honest if each step is read against the exact contract
+above.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -186,6 +210,17 @@ this:
 That order is not motivational sequencing.
 It is the dependency chain between the dream and reality.
 
+It is also the shortest route away from the ecosystem pattern the user keeps
+running into:
+
+1. a tool promises flexibility
+2. a helper promises failover
+3. the UI promises clustering
+4. the wrong node still needs a private explainer
+
+If a roadmap step does not interrupt that sequence, it is probably still too
+abstract.
+
 ## Why the roadmap starts by being mean to the docs
 
 Starting with documentation honesty can sound like procrastination unless the
@@ -295,6 +330,13 @@ What closure would mean:
 - a live runtime-consumed placement truth surface exists
 - wrong-node routing no longer depends on remembered service location
 - the receiving node can state why it chose the backend it chose
+
+What "good enough" does not mean:
+
+- a spreadsheet or note somewhere exists
+- the operator can answer the question quickly
+- a plan names `services.yaml`
+- a helper can be configured manually after the fact
 
 What still remains illegal after partial progress:
 

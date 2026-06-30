@@ -36,6 +36,17 @@ This page is not authoritative about:
 This is a demand-reconstruction page.
 It is not a runtime-proof page.
 
+## The failure mode this page is trying to stop
+
+The most common way to fail the user here is:
+
+1. summarize the ecosystem well
+2. describe the architecture dream calmly
+3. turn the user's accusation into a milder neighboring question
+4. quietly lose the humiliation that made the repo exist
+
+This page exists to stop that softening.
+
 ## The shortest honest statement of the dream
 
 The user wants:
@@ -60,6 +71,20 @@ The dream is:
 
 That is the central demand.
 
+## The private sentence benchmark for the dream
+
+The dream only becomes concrete when it is translated into private sentences
+the user wants to kill:
+
+- `I still personally know which node is the real one.`
+- `I still personally know which peer is truly safe.`
+- `I still personally know whether the fallback is real or decorative.`
+- `I still personally know whether the forwarded route still means the same thing.`
+- `I still personally know whether the stateful answer is authoritative or merely reachable.`
+
+If a later page sounds sophisticated while leaving the same sentences alive,
+then that page answered a smaller question than the user asked.
+
 ## The exact humiliation the user is trying to kill
 
 The user keeps hitting the same scene:
@@ -83,6 +108,22 @@ are too polite if they replace the sharper truth:
 That sentence is not melodrama.
 It is the most faithful summary of the repo's actual pain.
 
+## Why the word "humiliation" is actually accurate here
+
+`humiliation` matters because the failure is not just technical.
+
+The system is implicitly promising:
+
+- several nodes
+- several paths
+- several options
+- some kind of resilience story
+
+Then, at the sharp moment, it quietly asks one human to finish the real answer.
+
+That is not merely incomplete engineering.
+That is the exact social wound the user is trying to get away from.
+
 ## What ordinary answers keep getting wrong
 
 Many nearby answers improve one layer while quietly leaving the decisive burden
@@ -105,6 +146,21 @@ Examples:
 That is why many technically respectable answers still feel fake here.
 They improve the surrounding surface while preserving the same hidden operator
 role at the exact moment the user wanted the machine to grow up.
+
+## What a fake understanding sounds like
+
+The following still sound like understanding while actually reducing the
+question:
+
+- `the repo wants anti-SPOF`
+- `the repo needs better multi-node routing`
+- `the repo wants something between Compose and Kubernetes`
+- `the repo wants a cleaner control plane`
+
+Each of those is adjacent.
+None of them is the whole demand unless it also preserves:
+
+> stop making the operator be the missing algorithm when reality gets sharp
 
 ## What still does not count as understanding the dream
 
@@ -157,6 +213,26 @@ Relief in this repo would feel like:
 That is what shared truth buys here.
 It is not just cleaner architecture.
 It is less private embarrassment on the bad day.
+
+## Why this page has to sound harsher than normal architecture prose
+
+Normal architecture pages are often rewarded for:
+
+- calm tone
+- balanced options
+- mild wording
+- emotionally neutral summaries
+
+That style is not always wrong.
+It is wrong for this page if it edits out the accusation.
+
+This page has to preserve the user's sharpened stance because later pages will
+otherwise drift toward:
+
+- tool shopping
+- generic clustering
+- tasteful ambiguity
+- confidence by tone
 
 ## Why the user sounds angrier than normal architecture docs expect
 
@@ -212,6 +288,17 @@ survive contact with implementation work:
 If a later page cannot preserve that packet, it is answering a smaller
 question than the user actually asked.
 
+## What this page should force every later page to inherit
+
+Every serious later page should inherit at least these four facts:
+
+- the dream is request-preserving, not merely multi-node
+- the wound is social as much as technical because the operator still closes
+  the loop privately
+- the benchmark is wrong-node and bad-day truth, not pretty steady-state shape
+- larger control layers only earn themselves if one of those humiliating
+  private sentences actually dies
+
 ## Bottom line
 
 The user is not asking for prettier infrastructure language.
@@ -219,3 +306,6 @@ They are asking for the platform to stop cashing out into private operator
 memory at the exact moment multiple nodes are supposed to mean something.
 
 That is the dream every other page has to inherit.
+
+If a later page becomes broader while making that sentence easier to forget,
+the later page is worse even if it is more detailed.

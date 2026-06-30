@@ -57,8 +57,38 @@ It says the desired operating model is:
 
 That is the dream.
 
+The file even gives the target routing contract in plain text:
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+That directness matters because this page is not really about "routing" in the
+generic reverse-proxy sense.
+It is about whether that contract survives reality.
+
 The rest of this page is about how much of that dream the tracked runtime
 actually earns.
+
+## What "multiple Docker nodes" has to mean to be worth anything
+
+For this repo, "multiple nodes" is worthless if it only means:
+
+- more than one box exists
+- more than one box can be reached
+- more than one box can terminate TLS
+- more than one box can be named in DNS
+
+The phrase only becomes meaningful when the wrong first hop can still produce
+the right service outcome without private operator completion.
+
+That is why the routing question is socially harsher than a normal proxy
+question.
+The issue is not only whether packets can move.
+It is whether humiliation disappears when the first receiving node is not the
+owner node.
 
 ## The fake wins this page is supposed to reject
 
@@ -110,6 +140,27 @@ So the problem is not "there is no routing stack."
 
 The problem is that the stack still does not clearly own all the truth needed
 to make wrong-node requests dignified.
+
+## Why `docker-gen-failover` does not get to claim more than it earned
+
+`docker-gen-failover` is exactly the kind of component that can flatter a repo
+into sounding closer to solved than it is.
+
+Its presence proves:
+
+- the repo is actively trying to generate fallback-aware routing material
+- failover is a tracked concern in the live authoring surface
+- the edge is not being treated as purely static
+
+Its presence does not prove:
+
+- that the generated rescue route survives the preferred-backend failure
+- that the wrong node knows when to trust the generated route
+- that a protected route preserves the same meaning after the handoff
+- that the helper has escaped the hidden-control-plane trap
+
+That distinction matters because the user is specifically tired of options that
+look dynamic while still requiring a human to know when they are lying.
 
 ## What the routing stack still does not prove
 
@@ -172,6 +223,18 @@ What does **not** prove this lane:
 - Traefik is healthy
 - a local request returns `200`
 - `docker-gen-failover` generated something that looks fallback-shaped
+
+This is the lane where the repo has the best chance of earning a real early
+victory.
+But that is only true if the victory is narrow and embarrassing enough to be
+believable:
+
+- one named route
+- one wrong first hop
+- one inspectable peer decision
+- one preserved outcome
+
+Anything broader than that is probably bluff again.
 
 ### 2. Protected HTTP
 
@@ -240,6 +303,16 @@ multi-node authority.
 
 The route can be real while the authority is still singular.
 
+This is where a lot of self-hosting conversations become actively misleading.
+They talk as if a reachable control plane, a public hostname, or a replica-ish
+story means the state escaped the node.
+
+For this repo, the stricter reading is:
+
+> if the write authority, promotion rule, recovery order, and data truth still
+> need a human narrator, the service is still singular in the exact way that
+> matters.
+
 ## The wrong-node event decomposed honestly
 
 When the user says several Docker nodes should behave like one cloud, the
@@ -278,6 +351,19 @@ That packet is intentionally narrow.
 
 This repo does not need another hundred broad routing promises nearly as much
 as it needs one route-level packet that survives embarrassment honestly.
+
+## The human question hiding inside the routing question
+
+The routing contract is not only technical.
+It is also social:
+
+> if someone wakes up later and asks why the wrong healthy node still produced
+> the right answer, does the system have the explanation or does one operator?
+
+That is why this page keeps sounding harsher than normal proxy documentation.
+The user's real complaint is not that Traefik lacks features.
+It is that the surrounding stack keeps offering "options" without truly
+removing the hidden human SPOF.
 
 ## Why Cloudflare is necessary but insufficient
 
