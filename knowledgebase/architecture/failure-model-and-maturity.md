@@ -110,6 +110,21 @@ too calming.
 Understanding the maturity problem matters.
 It is still not a maturity promotion.
 
+That is one of the main remaining traps on this page:
+
+- the lanes are separated more clearly
+- the maturity words are used more honestly
+- the hidden operator burden is described more faithfully
+- the next proofs are easier to name
+
+and therefore the stack can start feeling broadly more mature already.
+
+No.
+The docs may only have become better at refusing counterfeit maturity.
+That is important.
+It still is not the same thing as one more lane becoming system-owned under
+pressure.
+
 That is the part most infrastructure writing keeps sanitizing away.
 The user is not merely annoyed by incompleteness.
 They are angry at how often incompleteness arrives wearing the costume of a
@@ -232,6 +247,18 @@ selling a softer story:
 All of that may be directionally useful.
 None of it answers the user's actual benchmark unless one more explanation
 stops needing to live in the operator's head.
+
+That also means this page has to police its own success.
+It can become:
+
+- easier to audit
+- easier to compare across lanes
+- easier to summarize
+- easier to RAG against
+
+without any lane becoming materially more trustworthy.
+If that happens, the maturity model improved while the maturity state did not.
+This page has to keep those two gains separated on purpose.
 
 ## The private completion test for each maturity lane
 

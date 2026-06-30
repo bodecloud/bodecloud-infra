@@ -110,6 +110,21 @@ conclusion:
 
 This page exists to stop that jump.
 
+It also has to stop a still more flattering version of the same jump:
+
+- the inventory is stricter now
+- the runtime map is easier to retrieve now
+- the root and fragments are described more faithfully now
+- therefore the platform must now be substantially closer to owning the bad
+  day
+
+Not necessarily.
+The docs may only be getting better at reconstructing the same trapped
+condition.
+That is real fidelity progress.
+It is still not proof that one more decisive truth stopped living in private
+operator memory.
+
 It also has to stop the more intellectualized version of the same jump:
 
 - the inventory is now comprehensive
@@ -228,6 +243,19 @@ That packet should include:
 - the next drill or comparison required before stronger language is allowed
 
 Without that packet, inventory tends to impersonate relief.
+
+That problem gets worse as the site gets better.
+A high-quality inventory can now become:
+
+- easier to audit
+- easier to synthesize
+- easier to cite
+- easier to RAG against
+
+while still leaving the runtime no more capable of preserving request meaning
+without private human completion.
+This page has to keep that split explicit so documentation quality does not
+start impersonating runtime adulthood.
 
 That line should be read literally.
 Inventory is one of the oldest ways infra docs accidentally overpay
