@@ -1,788 +1,209 @@
 # Reading Paths and Retrieval Routes
 
-This page is the practical entry map for the knowledgebase.
+This page is the practical map for reading the knowledgebase without
+accidentally answering a smaller question than the user is actually asking.
 
-The site is now large enough that browsing by folder can still waste time.
-The useful question is not:
+The core retrieval mistake in this repo is simple:
 
-> which page sounds nearby?
+- find relevant pages
+- blend runtime, intent, plans, and archive pressure into one voice
+- produce a coherent answer
+- silently lose the exact private burden still left to the operator
 
-It is:
-
-> which truth register answers the claim I actually need to make without
-> flattening the repo into a calmer, smaller problem than the user is really
-> forcing?
-
-That difference matters.
-This repo is especially vulnerable to documentation that feels organized while
-quietly downgrading the actual question.
-
-That downgrade is not just a navigation mistake.
-It is one of the main ways the user's dream gets quietly reduced into something
-more discussable and less faithful to the real wound.
-
-This page therefore has one job:
-
-help a reader ask the right question first, instead of wandering through a
-folder tree until the repo starts sounding more solved than it really is.
-
-That means a route here is not just a convenience.
-It is a safeguard against one of the repo's main documentation failure modes:
-accurate retrieval followed by unfaithful emotional compression.
-
-That "sounds more solved" clause is not a side warning.
-It is one of the main failure modes this page exists to fight.
-The site is now broad enough that a reader can become sincerely well-oriented
-and still answer a smaller question than the one the user is actually asking.
-
-That matters even more now that the knowledgebase is bigger.
-Large sites create a new failure mode:
-the reader can hit enough adjacent correct pages to feel oriented while still
-never quite reconstructing the exact accusation driving the repo.
+This page exists to stop that.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
-- where a reader should start for a given question
-- which pages answer runtime, dream, planning, archive-pressure, or proof
-  questions best
-- how to avoid answering a weaker neighboring question by accident
-- how to keep retrieval disciplined instead of merely broad
+- where to start for a given question
+- which truth register each route should lean on
+- how to avoid weaker neighboring questions
 
 This page is not authoritative about:
 
-- proving failover behavior itself
-- deciding the winning future control layer
-- implying that strong navigation equals strong implementation maturity
-- turning a reading route into a completion claim
+- whether the runtime already behaves correctly
+- whether one architecture path has already won
+- whether better retrieval means the implementation is more mature
 
-It is also not allowed to act like strong site orientation is itself one more
-form of burden transfer.
-The docs can become excellent at reconstructing the wound while the live system
-still leaves the same wound in place.
+## Retrieval discipline
 
-That warning has to get even sharper as retrieval improves.
-Better routes can create a false feeling of runtime adulthood:
+Do not start from folder names.
+Start from the actual question.
 
-- the site finds the right packet faster
-- the packet preserves the contradiction more cleanly
-- the summary sounds more precise and less generic
-- therefore the platform must now be meaningfully less dependent on operator
-  folklore
+For each reading pass, identify:
 
-That does not follow.
-Better retrieval can reduce interpretive loss while leaving the exact same
-wrong-node, peer-eligibility, and fallback burden untouched in the runtime.
+1. the real question you are trying to answer
+2. the smaller neighboring question you must avoid
+3. which truth layer is allowed to carry the answer
+4. what stronger sentence must remain forbidden at the end
 
-## Start from the pain, not the folder
+If you cannot name those four things, the route is too loose.
 
-Do not start with:
+## The main truth registers
 
-- "architecture sounds close"
-- "operations sounds close"
-- "research sounds close"
+Use these deliberately:
 
-Start with one of these actual human questions:
+- Runtime truth:
+  root [`/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml),
+  active `compose/` fragments, and validation commands
+- Intent truth:
+  [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- Plan truth:
+  [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
+- Research pressure:
+  [research/evidence-ledger.md](research/evidence-ledger.md) and related evidence pages
+- Archive pressure:
+  [operations/source-assimilation-index.md](operations/source-assimilation-index.md)
 
-- what is the user really trying to make stop happening?
-- what does the root Compose runtime really own today?
-- why is wrong-node traffic still the deciding humiliation threshold?
-- what exact missing layer is the repo still searching for?
-- what still has to be proven before stronger language becomes honest?
+## Route 1: "What is the user actually trying to build?"
 
-Folder browsing tends to reward adjacency.
-This repo needs routes that preserve the exact burden still left behind.
+Use when you need the dream, not present-tense proof.
 
-## Strongest honest current answer
+Start with:
 
-The knowledgebase is now broad enough that the main risk is no longer missing
-pages.
-The main risk is reading the right pages in the wrong order and accidentally
-answering:
+1. [architecture/problem-and-goals.md](architecture/problem-and-goals.md)
+2. [architecture/operator-contract.md](architecture/operator-contract.md)
+3. [architecture/design-tensions-and-contradictions.md](architecture/design-tensions-and-contradictions.md)
 
-- "better HA"
-- "better orchestration"
-- "better docs"
-- "what are the available options?"
+Primary truth register:
 
-instead of:
+- intent truth
 
-> how do several ordinary Docker nodes stop behaving like separate islands,
-> while `docker-compose.yml` stays legible and wrong-node entry stops
-> depending on operator folklore?
+Do not upgrade into:
 
-That last clause should be treated as the center of gravity for the whole page.
-If a route produces a clean answer but stops naming the operator folklore that
-still remains necessary afterward, the route is still too weak for this repo.
+- "the runtime already does this"
 
-That is why these routes have to stay a little sharper than normal.
-The user is not only asking for relevance.
-They are asking for retrieval that does not betray the exact pressure they are
-trying to articulate.
+## Route 2: "What does the current Compose runtime materially contain?"
 
-That is the real retrieval bar.
+Use when you need current implementation shape.
 
-Not:
+Start with:
 
-- did the route find relevant pages?
-- did the route produce a coherent summary?
-- did the route cover multiple perspectives?
+1. [architecture/current-compose-runtime.md](architecture/current-compose-runtime.md)
+2. [architecture/compose-fragment-map.md](architecture/compose-fragment-map.md)
+3. [architecture/request-path-and-failure-walkthrough.md](architecture/request-path-and-failure-walkthrough.md)
+4. [architecture/stateful-ha-and-data.md](architecture/stateful-ha-and-data.md)
 
-But:
+Primary truth register:
 
-- did the route preserve the exact remaining insult the user is still reacting
-  to?
+- runtime truth
 
-That insult should keep being stated plainly:
+Do not upgrade into:
 
-- a healthy wrong node still risks not knowing enough
-- a fallback story still risks collapsing back into the operator
-- a serious stack still risks requiring private topology completion
+- "because the runtime is broad, the missing truth must already be system-owned"
 
-That word "insult" is not decorative.
-It names the social failure the user keeps reacting to:
-serious technology is present, but the real control plane still has to be a
-human when topology truth matters.
+## Route 3: "Why is wrong-node behavior the real benchmark?"
 
-That insult is usually some version of:
+Use when a route or failover claim sounds too broad.
 
-the system still becomes socially manual again right when the topology
-question matters.
+Start with:
 
-## The reading mistake this page is trying to stop
+1. [architecture/request-path-and-failure-walkthrough.md](architecture/request-path-and-failure-walkthrough.md)
+2. [architecture/failure-model-and-maturity.md](architecture/failure-model-and-maturity.md)
+3. [operations/proof-matrix-and-drills.md](operations/proof-matrix-and-drills.md)
 
-Most bad retrieval in this repo follows the same pattern:
+Primary truth registers:
 
-1. start with the folder name
-2. gather a reasonable-looking set of nearby pages
-3. blend dream, runtime, planning, and archive pressure into one clean voice
-4. produce a conclusion that sounds mature
-5. quietly lose the user's actual complaint
+- runtime truth
+- intent truth
 
-This page exists to stop that sequence.
+Do not upgrade into:
 
-It also exists to stop a more subtle error:
+- "one local happy-path success means the platform is basically anti-SPOF"
 
-- the stronger the site gets, the easier it is to believe the repo itself is
-  already closer to closure than the evidence supports
+## Route 4: "What still has to be proven before stronger claims become honest?"
 
-That is false.
-The site is getting better at reconstructing the pressure.
-That does not mean the runtime has already solved the pressure.
+Use when you need claim boundaries and drill classes.
 
-The knowledgebase can become more coherent faster than the platform becomes
-more self-owning.
-This page exists partly to keep readers from mistaking that coherence for
-burden transfer.
+Start with:
 
-That distinction should remain active in every route summary:
+1. [operations/proof-matrix-and-drills.md](operations/proof-matrix-and-drills.md)
+2. [operations/devops-runbook.md](operations/devops-runbook.md)
+3. [research/evidence-ledger.md](research/evidence-ledger.md)
+4. [research/ingress-and-failover-evidence.md](research/ingress-and-failover-evidence.md)
+5. [research/stateful-ha-evidence.md](research/stateful-ha-evidence.md)
 
-- "better explanation" is one score
-- "less operator-owned truth" is a different score
+Primary truth registers:
 
-That warning matters even more now that the site is broader.
+- proof discipline
+- runtime evidence
 
-Better retrieval can create a dangerous illusion:
+Do not upgrade into:
 
-- the repo now explains itself extremely well
-- therefore the repo must now be much closer to solving the thing
+- "the existence of a proof matrix means the implementation must be close"
 
-That illusion is especially dangerous in this repo because the knowledgebase is
-now large enough to feel like a control plane of its own.
-These routes have to keep saying, over and over, that explanation quality and
-truth ownership are different achievements.
+## Route 5: "Why do nearby options keep feeling fake?"
 
-This page has to keep breaking that illusion on purpose.
+Use when the repo sounds like a product comparison problem.
 
-The site can get better at explaining the repo faster than the repo gets
-better at owning the truth itself.
-Every reading route should therefore keep two separate scores alive:
+Start with:
 
-- how well does the repo explain the pressure?
-- how much of that pressure has the live system actually paid down?
+1. [architecture/missing-middle-layer.md](architecture/missing-middle-layer.md)
+2. [architecture/orchestration-options.md](architecture/orchestration-options.md)
+3. [operations/decision-paths-and-promotion-rules.md](operations/decision-paths-and-promotion-rules.md)
+4. [research/orchestrator-tradeoffs-evidence.md](research/orchestrator-tradeoffs-evidence.md)
 
-Those two scores must not be allowed to merge.
-This page fails if it makes the second score feel improved simply because the
-first one is now much stronger.
+Primary truth registers:
 
-## What a good first pass should leave in your hands
+- intent truth
+- research pressure
 
-If the route is working, you should be able to leave the first pass with a
-small packet like this:
+Do not upgrade into:
 
-- the request class or failure scene you are reasoning about
+- "a more famous controller is automatically a more honest answer"
+
+## Route 6: "What is the repo's harsh answer on stateful services?"
+
+Use when availability language starts sounding too generous.
+
+Start with:
+
+1. [architecture/stateful-ha-and-data.md](architecture/stateful-ha-and-data.md)
+2. [research/stateful-ha-evidence.md](research/stateful-ha-evidence.md)
+3. [research/stateful-ha-plan.md](research/stateful-ha-plan.md)
+
+Primary truth registers:
+
+- runtime truth
+- evidence pages
+
+Do not upgrade into:
+
+- "reachable through Traefik" or "restartable elsewhere" equals HA
+
+## Route 7: "What should I edit first if a page still feels vague?"
+
+Start with:
+
+1. [index.md](index.md)
+2. [architecture/problem-and-goals.md](architecture/problem-and-goals.md)
+3. [architecture/current-compose-runtime.md](architecture/current-compose-runtime.md)
+4. [architecture/operator-contract.md](architecture/operator-contract.md)
+5. [operations/proof-matrix-and-drills.md](operations/proof-matrix-and-drills.md)
+
+Edit pages that still fail to leave behind:
+
+- the hidden burden still private
+- the truth register carrying the answer
+- the stronger sentence still forbidden
+- the next artifact or drill needed for a stronger claim
+
+## What a good first pass should leave behind
+
+A good reading route should leave you with a small packet:
+
+- the request or failure class you are reasoning about
 - the strongest runtime artifact you relied on
-- the strongest dream or archive artifact you relied on
-- the hidden operator step that still remained afterward
-- the stronger sentence that still stayed illegal
-- the next proof packet you would need before saying it
+- the strongest intent or research artifact you relied on
+- the private burden still surviving afterward
+- the sentence still forbidden
+- the next proof packet required
 
-If your first pass only leaves you with:
+If you finish with only:
 
-- "I understand the architecture better"
+- "the site is organized"
+- "the architecture is clearer"
 - "there are several plausible directions"
-- "the docs seem organized now"
 
 then the route was too weak for this repo.
-
-That weakness matters because organization is one of the main ways the user can
-get cheated again here.
-The ecosystem already has plenty of organized answers.
-What it lacks is answers that keep the wrong-node and hidden-operator insult
-fully visible.
-
-Add one more failed outcome:
-
-- "I understand the option space better, but I can no longer say what exact
-  private burden still survives"
-
-And one more:
-
-- "I understand the site better, but the user's actual accusation feels less
-  sharp than when I started"
-
-## What disciplined retrieval has to preserve
-
-A good reading route in this repo should not merely get you to relevant pages.
-It should preserve four things by the time you stop:
-
-- the exact question you were really trying to answer
-- the truth register you were borrowing from
-- the stronger sentence that remained forbidden
-- the hidden burden that still stayed operator-owned afterward
-
-If a route gives you a clean answer without preserving those four things, it
-is probably answering a calmer neighboring question instead.
-
-And calmer neighboring questions are exactly what the user keeps rejecting.
-They are often technically respectable and psychologically false.
-
-This is why "actually RAG this time" matters so much in this repo.
-
-The failure mode is not only missing documents.
-It is retrieving the right documents, then compressing them into a summary that
-is smoother, safer, and less faithful than the source pressure really was.
-
-That smoothing pressure gets stronger as the site gets larger.
-Large knowledgebases reward synthesis.
-This repo needs synthesis that preserves contradiction, custody, and the
-surviving hidden burden instead of ironing them out.
-
-That is the real retrieval standard here:
-not "summarize more,"
-but "summarize without laundering the unresolved burden into cleaner prose."
-
-That is also why "actually RAG this time" has teeth here.
-The failure mode is not merely weak retrieval coverage.
-It is retrieval that finds the right materials, produces a sharper packet, and
-still accidentally convinces the reader that sharper reconstruction equals
-smaller remaining runtime burden.
-
-That is why retrieval discipline matters so much here.
-The site is no longer small enough that "read around until it clicks" is safe.
-
-## The negative benchmark behind every route
-
-Every route on this page is trying to stop the same downgrade:
-
-- the user asks how to remove sacred-node behavior and fake options
-- the reader answers with cleaner HA language, platform comparisons, or
-  implementation inventory
-- the real burden transfer question disappears
-
-So each route should be read as a protection against a specific kind of
-misanswer.
-
-Not just:
-
-- "where should I click?"
-
-but:
-
-- "which weaker answer am I in danger of giving if I skip this route?"
-
-## What still does not count as a good reading route here
-
-This page needs to say more explicitly what fake retrieval success still looks
-like.
-
-These still do not count:
-
-- finding the right page family but blending its conclusion with a stronger
-  truth class nearby
-- reading runtime inventory and quietly importing planning optimism into it
-- reading archive pressure and quietly upgrading it into implementation
-  momentum
-- following a question path that never states what stronger sentence remains
-  forbidden
-- producing a comprehensive summary that still cannot name which private burden
-  the system continues to rely on
-
-The user is not asking for elegant site navigation by itself.
-The user is asking for retrieval that stays faithful to the exact wound instead
-of drifting into a cleaner neighboring problem.
-
-If a route makes the site easier to browse but still easier to overclaim from,
-then it is still incomplete.
-
-The enemy here is not only irrelevance.
-It is relevance that still shrinks the problem.
-
-That includes routes that become too satisfying.
-If a route feels beautifully complete while still making it difficult to say
-which exact private step the operator must perform after the reading is over,
-then the route has become a polished evasion.
-
-That is why question-first retrieval is not just a navigation preference here.
-It is the only reliable way to stop the stack from hijacking the question.
-
-That is why the routes in this page are intentionally question-first rather
-than stack-first.
-The repo already has enough stack to distract the reader.
-The routes are here to stop the distraction from becoming the answer.
-
-Retrieval can therefore fail in two opposite ways:
-
-- by missing the right material
-- by finding it, then normalizing it into a smaller wound
-
-The second failure is more dangerous here because it can sound thorough while
-still betraying the user's actual demand.
-
-## The three easiest bad summaries
-
-These are the most common failures a route should help you avoid:
-
-### 1. "The repo mainly needs better HA"
-
-Too small.
-The repo needs shared runtime truth that removes private reconstruction.
-
-### 2. "The repo mainly needs the right orchestrator"
-
-Too early.
-The repo first needs to prove what extra truth must exist and who should own
-it.
-
-### 3. "The repo mainly needs better docs"
-
-Too flattering.
-Better docs only matter here if they reconstruct the real burden more
-faithfully and stop weaker neighboring answers from taking over.
-
-## Read by claim type first
-
-Before following a reading path, identify the class of sentence you are trying
-to support.
-
-### If the sentence is really claiming...
-
-| Claim class | Start with | Why | It still must not imply... |
-| --- | --- | --- | --- |
-| what the user actually wants | [User Intent and Dream](research/user-intent-and-dream.md) | strongest reconstruction of the dream and anti-goals | that the runtime already earned that dream |
-| what the current implementation actually contains | [Current Compose Runtime](architecture/current-compose-runtime.md) | strongest live-runtime inventory | that presence equals resilience under failure |
-| what the stack is still missing | [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md) | strongest sequencing of unresolved burdens | that the gaps are already partially closed just because they are clearly named |
-| why normal answers still feel fake | [Operator Questions and Honest Answers](operations/operator-questions-and-honest-answers.md) | strongest user-facing explanation of the hidden burden | that the critique itself proves the replacement |
-| what proof is still required | [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md) | strongest proof boundary page | that a missing drill can be replaced by elegant theory |
-| what future layer is being tested | [Orchestrator Tradeoffs Evidence](research/orchestrator-tradeoffs-evidence.md) | strongest candidate-layer pressure page | that a candidate therefore earned default promotion |
-
-If you cannot route a claim this way, the claim is probably too vague to be
-useful.
-
-That vagueness matters because it is exactly where:
-
-- architecture intent turns into runtime implication
-- runtime presence turns into resilience implication
-- archive pressure turns into false closure
-
-This page is supposed to interrupt that slide before it happens.
-
-The same warning applies to route quality itself.
-A route can become:
-
-- more intuitive
-- more complete
-- more navigable
-- more AI-retrievable
-
-without the platform becoming any less dependent on human topology
-reconstruction.
-This page has to keep naming that distinction so the site's own quality does
-not impersonate system maturity.
-
-If you want the shortest practical rule, use this:
-
-> pick the sentence you want to support first, then pick the smallest bundle
-> that can support it honestly.
-
-## Question-first reading paths
-
-### 1. "What is the user actually trying to build?"
-
-Read in this order:
-
-1. [User Intent and Dream](research/user-intent-and-dream.md)
-2. [Problem and Goals](architecture/problem-and-goals.md)
-3. [Operator Contract and Success Criteria](architecture/operator-contract.md)
-4. [Archive Pressure Patterns](research/archive-pressure-patterns.md)
-
-Use this path when you need:
-
-- the dream
-- the anti-goals
-- the negative benchmark
-- the real acceptance bar
-- the reason ordinary option lists keep feeling insulting
-
-This path protects against the weak misreading:
-
-- "the user mainly wants better HA options"
-
-That is too small.
-The user wants options that stop cashing out into the same private burden.
-
-That sentence is the real checkpoint for the whole route.
-If a later summary drops it, the route failed even if every page was relevant.
-
-Do **not** use it as runtime proof.
-
-### 2. "What does the current root runtime actually contain?"
-
-Read in this order:
-
-1. [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
-2. [Current Compose Runtime](architecture/current-compose-runtime.md)
-3. [Compose Fragment Map](architecture/compose-fragment-map.md)
-4. [Failure Model and Maturity](architecture/failure-model-and-maturity.md)
-5. [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
-6. [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-
-Use this path when you need:
-
-- the priority implementation
-- the real root include graph
-- the difference between "present in YAML" and "system-owned under failure"
-
-This path protects against the weak misreading:
-
-- "if the services and edge stack are present, the platform must already be
-  most of the way there"
-
-Presence is not preserved meaning under failure.
-
-This route should be read as protection against a common self-hosting
-hallucination:
-
-- the stack is large
-- the YAML is rich
-- the edge is serious
-- therefore the hard part must mostly be solved
-
-The real question this route should leave behind is:
-
-> what part of the request story is still being privately completed by the
-> operator even after all of this YAML exists?
-
-This path is for live truth, not wishful extrapolation.
-
-It is also the path most likely to be overread by people who equate stack size
-with maturity.
-
-That is why it deliberately ends in proof surfaces and the root Compose file
-instead of letting implementation inventory narrate itself into resilience.
-
-### 3. "Why is wrong-node traffic still the real humiliation threshold?"
-
-Read in this order:
-
-1. [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md)
-2. [HA, Failover, and Routing](architecture/ha-failover-routing.md)
-3. [Operator Questions and Honest Answers](operations/operator-questions-and-honest-answers.md)
-4. [Ingress and Failover Evidence](research/ingress-and-failover-evidence.md)
-5. `source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
-6. `source-archive/chatgpt-exports/conversations/traefik-service-failover-setup__689d5598-9720-832e-a891-ff57340bcd9c.md`
-
-Use this path when you need:
-
-- literal request-path reasoning
-- why first-hop plurality is weaker than preserved request meaning
-- where peer-forward routing still lacks proof
-- why the user's frustration is sharper than "needs better load balancing"
-
-This path protects against the weak misreading:
-
-- "wrong-node entry is mostly a routing detail"
-
-It is not a detail.
-It is the point where fake option language gets caught by reality.
-
-If this route does its job, the reader should leave less impressed by generic
-traffic vocabulary and more sensitive to the exact moment where the operator is
-still privately completing the request story.
-
-That last phrase is the route's real output.
-
-If a reader instead leaves mainly thinking about proxies, meshes, or ingress
-product names, then the route did not keep the wound specific enough.
-
-### 4. "What helper layer is the repo actually looking for?"
-
-Read in this order:
-
-1. [The Missing Middle Layer](architecture/missing-middle-layer.md)
-2. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
-3. [Decision Paths and Promotion Rules](operations/decision-paths-and-promotion-rules.md)
-4. [Source Assimilation Index](operations/source-assimilation-index.md)
-5. [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-
-Use this path when you need:
-
-- the actual missing control surface
-- why the repo is not satisfied with raw Compose or immediate orchestrator
-  surrender
-- the burden-ownership test future candidates must pass
-
-This path protects against the weak misreading:
-
-- "the repo just needs to pick the right orchestrator or helper"
-
-The repo first needs the missing truth named precisely enough that a promoted
-layer actually earns itself.
-
-The deeper correction is harsher:
-
-- the repo is not only choosing tools
-- it is trying to discover which extra layer, if any, actually deserves to
-  exist because it removed a real humiliation threshold
-
-That "if any" matters.
-
-Retrieval in this repo is not supposed to manufacture certainty where the repo
-is still testing whether an added layer deserves to exist at all.
-
-### 5. "Why are stateful services a much harsher problem?"
-
-Read in this order:
-
-1. [Stateful HA and Data](architecture/stateful-ha-and-data.md)
-2. [Stateful HA Evidence](research/stateful-ha-evidence.md)
-3. [Stateful HA Plan](research/stateful-ha-plan.md)
-4. [Failure Model and Maturity](architecture/failure-model-and-maturity.md)
-
-Use this path when you need:
-
-- the difference between liveness and authority
-- why Redis, MongoDB, Headscale, and databases cannot inherit HTTP optimism
-- why stateful promotion must remain much slower and harsher
-
-This path protects against the weak misreading:
-
-- "if the ingress story gets better, the hard part is basically solved"
-
-Stateful authority is where a lot of fake HA language finally breaks.
-
-### 6. "Which future paths are real options and which are still theater?"
-
-Read in this order:
-
-1. [Orchestration Options](architecture/orchestration-options.md)
-2. [Orchestrator Tradeoffs Evidence](research/orchestrator-tradeoffs-evidence.md)
-3. [Infrastructure Master Plan](research/infrastructure-master-plan.md)
-4. [Garden and k3s Exploration Evidence](research/garden-k3s-exploration-evidence.md)
-5. [Nomad Exploration Evidence](research/nomad-exploration-evidence.md)
-6. [OpenSVC Cluster Bootstrap](research/opensvc-cluster-bootstrap.md)
-7. [OpenSVC Ingress HA](research/osvc-ingress-ha.md)
-8. `source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
-9. `source-archive/chatgpt-exports/conversations/nomad-multi-node-failover__68765e45-1ec4-8006-9179-5ef176d7a90f.md`
-
-Use this path when you need:
-
-- candidate middle layers
-- honest tradeoffs
-- future directions without mistaking them for current truth
-
-This path protects against the weak misreading:
-
-- "because there are several plausible future layers, the repo must already
-  have real options"
-
-Candidate richness is not the same thing as burden relief.
-
-It is especially not the same thing as dignity restoration under wrong-node
-entry.
-
-### 7. "How do I keep my own summary from lying?"
-
-Read in this order:
-
-1. [Source Assimilation Index](operations/source-assimilation-index.md)
-2. [Evidence Ledger](research/evidence-ledger.md)
-3. [Archive Pressure Patterns](research/archive-pressure-patterns.md)
-4. [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
-
-Use this path when you need:
-
-- retrieval discipline
-- source hierarchy
-- archive pressure without runtime inflation
-- a check against blending unlike truth classes into one neat narrative
-
-This path protects against the weak misreading:
-
-- "if the docs and archive are now well-assimilated, the repo must be much
-  closer to closure"
-
-Better retrieval can still coexist with the same unresolved runtime burden.
-
-### 8. "Which archive threads should I actually read instead of vaguely searching everything?"
-
-Read in this order:
-
-1. [Archive Pressure Patterns](research/archive-pressure-patterns.md)
-2. [Source Assimilation Index](operations/source-assimilation-index.md)
-3. then one of these focused bundles:
-
-- Compose pain bundle:
-  - `source-archive/chatgpt-exports/conversations/docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`
-  - `source-archive/chatgpt-exports/conversations/docker-compose-multi-server-setup__67f73c50-150c-8006-8408-c03db2d8d287.md`
-- failover realism bundle:
-  - `source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
-  - `source-archive/chatgpt-exports/conversations/traefik-service-failover-setup__689d5598-9720-832e-a891-ff57340bcd9c.md`
-- orchestrator pressure bundle:
-  - `source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
-  - `source-archive/chatgpt-exports/conversations/nomad-multi-node-failover__68765e45-1ec4-8006-9179-5ef176d7a90f.md`
-
-Use this path when you need:
-
-- actual archive reconstruction instead of generic RAG theater
-- the user complaint in its sharper native form
-- smaller high-signal bundles instead of one giant undirected archive pass
-
-## Read by truth register
-
-### Live runtime truth
-
-Start with:
-
-- [Current Compose Runtime](architecture/current-compose-runtime.md)
-- [Compose Fragment Map](architecture/compose-fragment-map.md)
-- [Failure Model and Maturity](architecture/failure-model-and-maturity.md)
-- [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
-
-Use this register for:
-
-- what exists now
-- which helpers are materially live
-- which lanes are still only runtime-shaped rather than trustworthy
-
-This register still must not be overread into:
-
-- generic wrong-node success
-- backend-loss survival
-- honest stateful authority
-
-### Intent and dream truth
-
-Start with:
-
-- [User Intent and Dream](research/user-intent-and-dream.md)
-- [Problem and Goals](architecture/problem-and-goals.md)
-- [Operator Contract and Success Criteria](architecture/operator-contract.md)
-
-Use this register for:
-
-- what the user actually wants
-- what would count as genuine relief
-- which nearby goals are still too small
-
-This register still must not be overread into:
-
-- evidence that the runtime is close
-- proof that a candidate layer already deserves promotion
-
-### Planning and promotion truth
-
-Start with:
-
-- [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
-- [Infrastructure Master Plan](research/infrastructure-master-plan.md)
-- [Decision Paths and Promotion Rules](operations/decision-paths-and-promotion-rules.md)
-
-Use this register for:
-
-- named missing layers
-- sequencing pressure
-- when a stronger control surface might earn itself
-
-This register still must not be overread into:
-
-- proof that a named gap is partially solved
-- permission to narrate roadmap coherence as implementation maturity
-
-### Archive and reconstruction truth
-
-Start with:
-
-- [Archive Pressure Patterns](research/archive-pressure-patterns.md)
-- [Source Assimilation Index](operations/source-assimilation-index.md)
-- [Operator Questions and Honest Answers](operations/operator-questions-and-honest-answers.md)
-
-Use this register for:
-
-- why normal answers keep failing
-- which bundles are worth reading closely
-- how to stop replacing the real complaint with a tidier one
-
-This register still must not be overread into:
-
-- live behavior evidence
-- proof that the same pain has already been relieved technically
-
-## What a real reading packet should leave behind
-
-This page should not merely route readers.
-It should help them leave behind packets that the next reader can audit.
-
-A serious reading packet should preserve:
-
-- the question that triggered the route
-- the truth registers that were consulted
-- the strongest runtime-facing artifact used
-- the strongest dream- or archive-facing artifact used
-- the contradiction that was intentionally preserved
-- the next proof packet that would be required before a stronger claim becomes
-  honest
-
-If a reading packet only says "I read the right pages," it is still too weak
-for this repo.
-
-The packet should be good enough that another reader can ask:
-
-- which page let you say that?
-- which truth class was that page allowed to speak for?
-- what stronger sentence did you still refuse to say?
-- what burden was still left in operator memory afterward?
-
-Add one more audit question:
-
-- did this route only improve reconstruction, or did it also prove any real
-  burden transfer?
-
-If that answer is "reconstruction only," that is still valuable.
-It just is not allowed to dress itself up as runtime progress.
-
-## Bottom line
-
-The right reading path in this repo is never just "start in the most relevant
-folder."
-
-It is:
-
-> identify the class of claim, pick the smallest strong bundle that can answer
-> it honestly, and keep runtime truth, intent truth, planning truth, and
-> archive-pressure truth from quietly merging into one stronger story than the
-> current worktree has actually earned.
-
-If that discipline disappears, the site can still feel organized while losing
-the real question again.

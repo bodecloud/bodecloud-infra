@@ -11,34 +11,16 @@ This site exists to answer one unusually stubborn infrastructure question:
 
 That is the real subject of `bolabaden-infra`.
 
-This is not primarily:
+This site is not primarily:
 
-- a generic self-hosting site
-- a broad HA survey
-- an orchestrator comparison hub
-- a "how to modernize your homelab" handbook
+- a generic self-hosting handbook
+- a reverse-proxy cookbook
+- an orchestrator comparison catalog
+- a generic "modern homelab" set of notes
 
-Those are neighboring topics.
-They are not the main wound the repo is trying to close.
+Those topics matter only when they help answer the real question above.
 
-The repo's recurring complaint is sharper than that:
-
-- ordinary Docker answers often stop at static glue, DNS plurality, or local
-  proxying
-- heavyweight answers often jump straight to Swarm, Kubernetes, k3s, Nomad, or
-  another larger control plane
-- both categories can sound respectable while still leaving the operator as the
-  final keeper of placement, failover, and route-meaning truth
-
-The user's dream is to find out whether there is an honest middle layer:
-
-- still Compose-first
-- still human-legible
-- still based on ordinary Docker nodes
-- but no longer dependent on one person silently remembering what should happen
-  when traffic lands on the wrong healthy machine
-
-## The architecture dream
+## The shortest correct reading
 
 The strongest intent surface in the repo is
 [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md).
@@ -54,7 +36,7 @@ It says the intended direction is:
 - explicit separation between HTTP routing and raw TCP or stateful behavior
 - anti-SPOF pressure without fake HA language
 
-The target request contract is therefore:
+That target request contract is:
 
 ```text
 User -> Cloudflare DNS -> any surviving public node
@@ -62,74 +44,33 @@ User -> Cloudflare DNS -> any surviving public node
   service is remote -> forward to healthy peer that really hosts it
 ```
 
-That contract is the dream.
+That is the dream.
 It is not the same thing as current proof.
 
-## What the site is for
+## What the repo already proves
 
-This site is supposed to help a reader answer three different questions without
-collapsing them together:
+The priority implementation is still rooted in:
 
-1. what does the root Compose runtime actually contain today?
-2. what architecture is the repo clearly trying to grow into?
-3. which missing truth layers still force the operator to privately complete
-   the story during wrong-node entry, backend loss, or stateful recovery?
-
-Most infrastructure docs fail here by making the stack sound progressively more
-adult as the terminology gets better.
-This site is trying to do the opposite:
-improve clarity without laundering partial machinery into fake closure.
-
-## What this site is and is not allowed to prove
-
-This site is authoritative about:
-
-- the repo's actual dream
-- the current root Compose implementation surface
-- the difference between live runtime truth, repo-native intent, planning
-  pressure, and archive pressure
-- the exact gaps between today's stack and genuine wrong-node recovery
-- which stronger claims still need proof before they become legal
-
-This site is not allowed to:
-
-- claim the current runtime already behaves like the dream
-- turn a good explanation into failover proof
-- promote plans or research into shipped behavior
-- imply that better organization means the platform now owns more truth
-
-The user does not mainly need one more smooth infrastructure story.
-They need the docs to stop helping the same lie that keeps happening elsewhere:
-
-- the stack looks serious
-- the options sound rich
-- the route names sound mature
-- therefore the system must finally be close to handling the bad day on its own
-
-That conclusion is exactly what this site has to keep blocking when the
-evidence does not support it.
-
-## Strongest honest current answer
-
-`bolabaden-infra` already contains a serious Compose-first platform:
-
-- a real root
-  [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-- active includes under
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- active fragments under
   [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
-- a substantial Traefik, CrowdSec, TinyAuth, and nginx-auth edge layer
-- operator, observability, and maintenance surfaces
-- private-mesh pressure through Headscale
-- repeated repo pressure toward any-node entry, peer-aware routing, and
-  anti-SPOF behavior
+
+That runtime already proves a serious Compose-first platform with:
+
+- a real Traefik and auth-bearing edge layer
+- public and private network segmentation
+- stateful services such as MongoDB and Redis
+- observability and operator surfaces
+- Headscale and mesh pressure
+- alternate routing and egress experiments
 
 What it still does **not** prove is the thing the user actually cares about:
 
 - that any healthy public node can accept a request and preserve it correctly
   when the service is remote
 - that placement truth is shared explicitly instead of remembered
-- that peer eligibility is system-owned rather than guessed from reachability
-- that fallback routes survive the failure they are meant to absorb
+- that peer eligibility is system-owned rather than guessed
+- that fallback paths survive the failure that makes fallback matter
 - that auth, middleware, and request semantics survive peer handoff
 - that stateful services are genuinely resilient rather than merely reachable
 
@@ -138,81 +79,134 @@ The stack is real.
 The missing truth-owning middle layer is still incomplete.
 
 That three-part sentence is the checksum for the whole site.
-If a page preserves only two of the three, it usually becomes misleading in the
-same way the user is already exhausted by.
 
-## The hidden job the operator still performs
+## The hidden operator job the site has to keep naming
 
 The shortest honest summary of the current wound is:
 
 the operator is still acting like the missing control plane.
 
-That hidden job includes things like:
+That hidden job currently includes things like:
 
 - remembering what runs on which node right now
-- remembering which peer is actually safe to forward to
-- remembering whether the fallback path still exists under failure
+- remembering which peer is actually valid right now
+- remembering whether a generated fallback route would still exist under real
+  failure
 - remembering whether a reachable answer is only transport-reachable or
   semantically valid
 - remembering which stateful surfaces still hide a sacred authority node
 
-Most nearby tools improve machinery, naming, or automation without clearly
-shrinking that role.
-That is why so many respectable answers still feel useless in this repo.
+If a page forgets that hidden job, it will almost always overstate the system.
 
-## How to read the site correctly
+## The four truth layers
 
-Keep four authority layers separate:
+This site only stays honest if it keeps these truth layers separate:
 
-- live runtime truth:
-  the root
-  [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml),
-  included files under
-  [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose),
-  and checks such as `docker compose config`
-- repo-native intent:
-  especially
-  [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-- planning truth:
-  especially
-  [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-- archive and research pressure:
-  the pages under [research](research/evidence-ledger.md) and the archive map in
-  [Source Assimilation Index](operations/source-assimilation-index.md)
+| Truth layer | Main examples | What it is allowed to answer | What it is not allowed to answer |
+| --- | --- | --- | --- |
+| Live runtime truth | `docker-compose.yml`, active `compose/` fragments, `docker compose config` | what the priority implementation actually ships now | what the system would do if missing layers already existed |
+| Repo-native intent | `.github/copilot-instructions.md`, `knowledgebase/AGENTS.md` | what the repo is clearly trying to become | whether the runtime already behaves that way |
+| Planning truth | `docs/INFRASTRUCTURE_MASTER_PLAN.md`, stateful and ingress plan docs | what gaps are already named and what promotion paths exist | that a planned repair is already active |
+| Archive and research pressure | `knowledgebase/research/`, `knowledgebase/source-archive/` | why the user keeps rejecting partial answers and which patterns recur | present-tense runtime proof |
 
 The site gets misleading the moment those four layers blend into one calm
 voice.
 
-## Start here
+## The core architecture problem
 
-If you want the shortest route through the site:
+The repo is not just asking for "better HA."
+It is asking for a smaller, honest middle layer between:
+
+- static multi-node Docker glue that still depends on private folklore
+- and a heavyweight orchestrator worldview that has not yet earned the right to
+  hide that much truth
+
+That middle layer would need to make at least some of these truths
+system-owned:
+
+- current placement
+- current peer eligibility
+- current rescue-route validity
+- current route-class meaning
+- current explanation for why the system chose local versus remote
+
+If a candidate does not move those truths into the system, it has not solved
+the user's real complaint, no matter how mature it sounds.
+
+## The decision pressure already visible in the archive
+
+The archive is consistent about where the real pain lives:
+
+- `docker-multi-node-without-swarm__...` keeps converging on service discovery
+  as the hard missing piece
+- `distributed-ha-orchestration__...` keeps showing that fully leaderless,
+  peer-equal orchestration is rare and usually requires custom glue
+- `load-balancer-failover-alternatives__...` shows that even rich failover
+  products often solve only one slice of the problem
+- `nomad-multi-node-failover__...` shows that stronger orchestrators can help,
+  but they bring a larger control-plane worldview and still need proof against
+  this repo's exact wound
+
+That is why the user does not feel like they lack product names.
+They feel like they lack honest options.
+
+## How to use this site
+
+If you want the shortest route through the knowledgebase:
 
 1. [Problem, Pressure, and Goals](architecture/problem-and-goals.md)
 2. [Current Compose Runtime](architecture/current-compose-runtime.md)
 3. [HA, Failover, and Routing](architecture/ha-failover-routing.md)
-4. [Stateful HA and Data](architecture/stateful-ha-and-data.md)
-5. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
-6. [DevOps Runbook](operations/devops-runbook.md)
+4. [The Missing Middle Layer](architecture/missing-middle-layer.md)
+5. [Stateful HA and Data](architecture/stateful-ha-and-data.md)
+6. [Orchestration Options](architecture/orchestration-options.md)
+7. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
+8. [DevOps Runbook](operations/devops-runbook.md)
 
-If you want the proof pressure behind those pages:
+If you want the proof pressure underneath those pages:
 
 - [Evidence Ledger](research/evidence-ledger.md)
 - [Ingress and Failover Evidence](research/ingress-and-failover-evidence.md)
 - [Stateful HA Evidence](research/stateful-ha-evidence.md)
 - [Orchestrator Tradeoffs Evidence](research/orchestrator-tradeoffs-evidence.md)
+- [Source Assimilation Index](operations/source-assimilation-index.md)
 
-## What still does not count
+If you want the navigation logic spelled out first:
 
-This site should keep a few false conclusions illegal:
+- [Reading Paths](reading-paths.md)
+
+## What a good page in this site should leave behind
+
+After reading a useful page here, a contributor should be able to answer:
+
+- what concrete question the page was solving
+- which truth layer carried the answer
+- which burden still remains operator-owned
+- which stronger sentence is still forbidden
+- what artifact, drill, or runtime change would make that stronger sentence
+  legal
+
+If a page leaves behind only:
+
+- "the architecture is clearer"
+- "the options are broader"
+- "the platform sounds more mature"
+
+then it is still too weak for this repo.
+
+## What this site must keep refusing
+
+This knowledgebase should keep several false conclusions illegal:
 
 - "there are multiple public nodes, so failover is basically solved"
 - "Traefik exists, so wrong-node forwarding must be close"
 - "a helper has failover in the name, so the platform owns fallback now"
-- "a route can be rendered, so it must survive the failure that made it matter"
+- "a route can be rendered, so it must survive the failure that made it
+  matter"
 - "the docs are clearer now, so the platform must be closer to adulthood"
 
-Those are exactly the overreads this site is supposed to interrupt.
+Those are exactly the overreads this site exists to interrupt.
 
-The useful emotional conclusion is not that the repo is simple.
+The useful conclusion is not that the repo is simple.
 It is that the repo is serious, the dream is specific, and the missing burden
 transfer is still brutally concrete.

@@ -11,113 +11,9 @@ That is the missing middle.
 
 It is not a product name.
 It is not a prestige category.
-It is not "lighter than Kubernetes" by itself.
+It is not just "something lighter than Kubernetes."
 
 It is a burden-transfer shape.
-
-This page only makes sense if the burden is stated brutally:
-
-the user is trying to stop being the hidden registry, hidden failover brain,
-hidden drift detector, hidden routing explainer, and hidden memory of what
-lives where.
-
-That is not just a colorful complaint.
-It is a direct accusation that one human head is still functioning as the most
-dangerous unreplicated control surface in the platform.
-
-If a candidate layer does not actually move those duties into the system, then
-it is not the middle this repo is searching for, no matter how elegant or
-fashionable it sounds.
-
-That line matters because this repo is surrounded by things that sound like a
-middle while still behaving like translation layers around the same old human
-burden.
-
-The naming problem is part of the wound:
-
-- a helper gets named
-- a control loop gets named
-- a registry gets proposed
-- the reader starts feeling like the category now exists
-
-This page has to keep asking whether the burden actually moved, not whether the
-category now sounds plausible.
-
-That is also why “we now have more middle-layer candidates” is not obviously
-good news here.
-Candidate abundance can still be the same old problem in a better taxonomy if
-none of the candidates actually remove the decisive private completion step.
-
-That warning matters even more now that the knowledgebase is broader.
-The repo can now describe the missing-middle shape with enough precision that a
-reader may start feeling like the hard part is mostly choosing among candidate
-families.
-This page has to keep saying no.
-The hard part is not naming the category.
-The hard part is proving one more humiliating private completion step actually
-left the operator.
-
-That distinction is one of the most dangerous remaining documentation traps in
-the whole site:
-
-- the repo can now explain the missing middle more sharply
-- the repo can now compare candidates more honestly
-- the repo can now say exactly what burden the layer should remove
-- therefore it can start feeling like the layer is almost here
-
-No.
-Describing the missing category faithfully is still not the same thing as the
-runtime possessing a socially and technically believable home for the truths
-that category is supposed to own.
-
-## Why "missing middle" is not just a complexity bracket
-
-One of the easiest mistakes in this repo is to hear "missing middle" and think
-it means:
-
-- medium complexity
-- medium size
-- medium opinionation
-- halfway between Compose and Kubernetes
-
-That is not the real meaning here.
-
-The real meaning is harsher:
-
-- a layer small enough not to demand worldview surrender too early
-- but strong enough to own truths that currently live only in human memory
-
-So the middle is not defined by its size.
-It is defined by the exact burden it successfully takes away.
-
-That is why some apparently "small" helpers still fail the benchmark:
-
-- they reduce repetition
-- they improve generation
-- they improve expression
-- but they do not remove the decisive private explanation step
-
-And it is also why some larger systems may still fail:
-
-- they centralize more
-- they sound more adult
-- they offer stronger abstractions
-- but they may still charge a worldview tax before proving they are removing
-  the right wound
-
-That is why this page cannot define the middle by comfort, popularity, or
-market position.
-
-The middle is not:
-
-- the product tier below Kubernetes
-- the friendlier orchestrator
-- the smarter Compose wrapper
-
-It is the first layer that can survive the accusation:
-
-> did one more private topology truth actually stop living only in the
-> operator?
 
 ## What this page is and is not allowed to prove
 
@@ -141,806 +37,253 @@ This page is not authoritative about:
 This page describes the wanted layer.
 It does not certify a final chosen implementation.
 
-## The layer is missing because one more truth still has nowhere honest to live
+## The shortest honest definition
 
-The cleanest summary of the missing middle is:
+The missing middle is:
 
-there are decisions the platform wants to make that plain Compose does not own,
-but the repo still does not trust a larger scheduler to own them by default.
+the smallest added layer that makes decisive bad-day truths system-owned
+instead of privately remembered.
 
-That means the repo is not simply missing automation.
-It is missing a believable home for truths like:
+That means the middle is **not** defined by:
 
-- current placement
-- current eligibility
-- current rescue-route validity
-- current route-class meaning
-- current explanation for why the system chose local versus remote
+- size
+- popularity
+- how friendly the UI feels
+- whether it is marketed as lightweight
+- whether it sits "between Compose and Kubernetes" on a diagram
 
-The layer is missing because those truths still have nowhere honest to live.
-Compose can expose a lot, but it does not natively own them.
-Heavier control planes may be able to own them, but the repo does not yet
-trust them by default to own the right ones in the right way.
+It is defined by whether one more humiliating private completion step actually
+leaves the operator.
 
-That means the missing middle is not just technically absent.
-It is morally unearned.
-The repo is still waiting for a believable place where those truths can live
-without the user having to pre-pay with worldview surrender before the burden
-transfer is proven.
+## The hidden duties that layer must remove
 
-That is why the missing middle is not just a software gap.
-It is a trust gap.
-The repo does not merely need somewhere those truths could live.
-It needs somewhere those truths can live without demanding a larger worldview
-before the user can verify that the burden really moved.
+The user is trying to stop being all of the following at once:
 
-## Strongest honest current answer
+- the hidden service registry
+- the hidden failover brain
+- the hidden drift detector
+- the hidden routing explainer
+- the hidden memory of what lives where
 
-The repo is looking for the smallest added layer that makes these truths
-system-owned instead of remembered:
+If a candidate layer does not actually move those duties into the system, then
+it is not the middle this repo is searching for, no matter how elegant or
+fashionable it sounds.
 
-- where a service lives now
-- whether a peer is eligible now
-- whether the rescue route still exists now
-- whether candidate peers are converged enough to substitute safely
-- why the system made the routing or failover decision it made
+## Why "missing middle" is not just a complexity bracket
+
+One of the easiest mistakes in this repo is to hear "missing middle" and think
+it means:
+
+- medium complexity
+- medium size
+- medium opinionation
+- halfway between Compose and Kubernetes
+
+That is not the real meaning here.
+
+The real meaning is harsher:
+
+- a layer small enough not to demand worldview surrender too early
+- but strong enough to own truths that currently live only in human memory
+
+That is why some apparently small helpers still fail the benchmark:
+
+- they reduce repetition
+- they improve generation
+- they improve expression
+- but they do not remove the decisive private explanation step
+
+And it is why some larger systems may eventually pass:
+
+- they centralize more
+- they impose more worldview
+- but they may truly own the right truths if they can prove the burden moved
+
+## The truths that currently have nowhere honest to live
+
+The missing middle exists because the repo keeps needing truths like these:
+
+| Truth | Why the system needs it | Why plain Compose does not own it cleanly |
+| --- | --- | --- |
+| Current placement | the wrong node must know where the service actually lives now | Compose defines desired containers per host, not a shared live placement map |
+| Current peer eligibility | not every reachable peer is safe for every route | local health checks do not define cross-node suitability |
+| Current rescue-route validity | fallback only matters if it survives failure | rendered config is weaker than post-failure route truth |
+| Current route-class meaning | HTTP, protected HTTP, TCP, and stateful paths need different semantics | Compose can expose all of them, but not classify their substitution rules |
+| Current explanation for local vs remote choice | operators need inspectable reasoning after the fact | folklore often substitutes for operator-readable routing truth |
+
+The middle layer is missing because those truths still have nowhere honest to
+live.
+
+## What the repo already has without that layer
 
 The repo already has:
 
 - a large real Compose runtime
-- a serious Traefik, CrowdSec, and auth-bearing edge surface
+- a serious Traefik, CrowdSec, TinyAuth, and nginx-auth-bearing edge layer
 - Headscale as a real private-mesh assumption
 - planning pressure toward `services.yaml`, peer sync, and failover helpers
 - research into OpenSVC, Nomad, k3s, and related paths
 
-What it still does **not** have is one promoted layer that cleanly owns those
-truths across the priority implementation.
+Those are meaningful ingredients.
+They are not yet the same thing as one promoted layer that cleanly owns the
+decisive truths across the priority implementation.
 
-That sentence should be read as the negative definition of the middle.
-The middle is not missing because the repo has not found enough tools.
-It is missing because the decisive truths still do not have a socially and
-technically believable home.
+## Candidate families the repo keeps circling
 
-That is why so many surrounding ideas still feel partial:
+The repo is not short on candidate families.
+It is short on one that has clearly earned itself.
 
-- they improve first-hop reachability
-- or they improve routing expression
-- or they improve service ownership
-- or they improve scheduling semantics
+### 1. Static glue plus better local proxies
 
-but they do not necessarily remove the exact hidden burden the user is
-complaining about.
+Examples:
 
-That is also why this page cannot become too pleased with category clarity.
-It is valuable that the repo can now say "truth-owning middle layer" more
-precisely than before.
-It becomes dangerous the moment that precision starts sounding like partial
-runtime possession.
+- richer Traefik or nginx expression
+- helper-generated fallback config
+- more labels, more includes, more templating
 
-That is why the missing middle cannot be treated as a branding exercise.
+What this family can help with:
 
-The repo is not trying to discover:
+- cleaner route expression
+- better local proxy behavior
+- improved operator legibility
 
-- the most elegant cluster helper
-- the most modern halfway platform
-- the most ergonomic route generator
+What it usually fails to solve:
 
-It is trying to discover which added layer, if any, can survive contact with
-the exact humiliation threshold the archive keeps returning to.
+- shared live placement truth
+- cross-node peer eligibility truth
+- inspectable wrong-node decision logic
 
-That phrase "humiliation threshold" should stay central.
+### 2. Lightweight registry plus local proxying
 
-The user is not merely looking for dynamic placement.
-They are looking for the point where the system stops making a healthy wrong
-node feel like a social failure that the operator has to privately repair.
+Examples:
 
-That is why this page has to stay skeptical of “strong shortlist” rhetoric.
-A shortlist of partial answers can still be another way of saying:
+- a tracked `services.yaml`
+- file-backed service maps
+- small sync agents
+- peer-broadcast updates over mesh links
 
-- we can now name the gap better
-- we can now sort the helpers better
-- we still cannot point to the layer that actually makes the humiliation less
-  private
+What this family is trying to solve:
+
+- "service name -> where is it running right now"
+- giving every node a shared placement view
+- keeping Compose as the main authoring layer
+
+Why it is attractive here:
+
+- it attacks the exact wound visible in the archive
+- it may stay narrower than a scheduler
+- it keeps the control surface close to Docker and Compose
+
+What it still must prove:
+
+- registry freshness and correctness under failure
+- peer eligibility beyond simple reachability
+- route durability after backend loss
+- stateful truth beyond HTTP routing
+
+### 3. Gossip and event-driven Compose glue
+
+Examples from the archive:
+
+- Serf-like membership and failure events
+- node agents reacting to gossip events
+- peer-equal failure detection without immediately adopting a full scheduler
+
+What this family can help with:
+
+- membership awareness
+- node-failure signals
+- peer-to-peer event distribution
+
+What it still does not give for free:
+
+- strong shared truth
+- conflict-free decisions
+- state authority
+- safe failover semantics for complex protected or stateful routes
+
+This family is attractive when the user wants "all nodes equal" and does not
+want Swarm.
+It is dangerous if eventual gossip gets mistaken for authoritative decision
+truth.
+
+### 4. Stronger orchestrator or cluster-control families
+
+Examples:
+
+- Nomad
+- OpenSVC
+- k3s or Kubernetes-derived paths
+
+What they can potentially own better:
+
+- scheduling and rescheduling
+- service discovery
+- stronger cluster state
+- automatic failover mechanics
+
+What they cost:
+
+- larger control-plane worldview
+- more hidden machinery
+- more abstraction distance from the readable Compose surface
+
+That cost is acceptable only if they remove a real hidden burden that the
+smaller families cannot remove honestly.
+
+## What the archive keeps confirming
+
+The archive keeps converging on the same points:
+
+- `docker-multi-node-without-swarm__...` frames service discovery as the hard
+  missing piece once manual placement and DNS plurality are accepted
+- `distributed-ha-orchestration__...` makes clear that fully peer-equal,
+  leaderless orchestration usually requires custom glue rather than an
+  off-the-shelf miracle
+- `nomad-multi-node-failover__...` shows that stronger orchestrators can help,
+  but they bring a larger worldview and still need proof against this repo's
+  exact burden
+
+That means the missing middle is not a naming failure.
+It is a truth-ownership failure.
+
+## Tests a candidate must pass to count as the middle
+
+A candidate layer starts earning the name only if it can answer:
+
+1. Can the receiving node determine locality or remote ownership from shared
+   truth rather than memory?
+2. Can it choose a peer from eligibility truth rather than reachability alone?
+3. Can it explain why the route remained valid after handoff?
+4. Can it preserve protected-route semantics rather than just transport?
+5. Can it keep a fallback alive after the preferred backend disappears?
+6. Can it do all of that without forcing premature surrender to a larger
+   control-plane worldview?
+
+If the answer is still "not yet," then the layer may be useful but it has not
+yet become the missing middle this repo needs.
 
 ## What still does not count as finding the middle
 
-This page needs to reject a very specific kind of fake progress.
-
-The following still do not count as having found the missing middle for this
-repo:
+The following still do not count as having found the missing middle:
 
 - identifying several promising candidate families
 - finding something smaller than Kubernetes
 - finding something more dynamic than static Compose
 - giving helpers nicer names for placement, sync, or failover
-- building enough glue that the repo feels "cluster-ish"
-- getting much better at describing what the middle should do
-- having several candidate families that each seem to own one attractive slice
-  of the burden while none clearly own the decisive one
-
-Those things may all be relevant.
-They still do not answer the only question that matters:
-
-> which hidden burden stops living in the operator after this layer exists?
-
-If that answer is still vague, the repo has found more machinery, not the
-middle.
-
-And machinery abundance is exactly what this repo has learned to distrust.
-A larger pile of helpers can still leave the operator doing the same decisive
-translation step under a fancier vocabulary.
-
-That is one of the harshest lessons this page should preserve:
-more middle-shaped machinery is not necessarily movement toward the middle.
-Sometimes it is just a richer set of ways to orbit the same untransferred
-truth.
-
-The stack can become:
-
-- richer
-- cleverer
-- more automated
-- more modern
-
-while still not answering the only question that matters:
-
-> which decisive private reconstruction step disappeared?
-
-That is the anti-theater question for the whole page.
-If a candidate cannot answer it concretely, it is still probably decorative
-seriousness rather than the missing middle.
-
-This is the page where "option abundance" has to stay under suspicion.
-
-A shortlist of plausible helpers can still be psychologically false if all of
-them leave the operator doing the same decisive reconstruction work under a new
-interface.
-
-That is why this page should prefer one transferred sentence over ten plausible
-candidate classes.
-The user is not asking whether the repo can imagine a middle.
-The user is asking which sentence they no longer have to finish privately once
-the middle is real.
-
-## What a real missing-middle proof packet would have to contain
-
-Before this page supports a stronger claim like "the middle is becoming real,"
-it should point to a concrete packet.
-
-That packet should contain:
-
-- the exact hidden burden being transferred
-- the artifact or runtime surface that now owns that burden
-- the route or service class where the transfer becomes visible
-- the failure condition or decision point that proves the burden moved
-- the explicit sentence naming which adjacent burdens still remain private
-
-Without that packet, the docs are still mostly describing an attractive shape
-instead of a transferred responsibility.
-
-## What a believable middle would change in daily life
-
-If the missing middle were real, the operator's experience should change in
-plain language:
-
-- fewer moments of "I know what the machine should have done"
-- fewer moments of "this route only sounds okay because I know the real owner"
-- fewer moments of "this peer is probably fine, but only because I know the
-  topology"
-- fewer moments of "this service looks distributed from the outside, but I
-  know the authority is still singular"
-
-If a candidate layer does not materially change that daily feeling, then the
-repo should stay suspicious of it.
-
-That is the human-level proof standard the page should keep defending:
-if the operator's daily bad-day experience still feels privately completed,
-then the middle has not actually arrived yet.
-
-This is the part that makes the repo’s “lack of options” complaint sharper than
-it sounds.
-The complaint is not that there are no helpers to try.
-The complaint is that there are still too few helpers that clearly change the
-operator’s daily bad-day experience in the one way that matters.
-
-## Why this layer is needed at all
-
-The repo does not need a missing middle because clustering is fashionable.
-It needs one because several critical facts are still too easy to answer only
-from private human reconstruction.
-
-Those facts include:
-
-- what runs where right now
-- which peer is the right candidate for this service right now
-- whether that peer is merely reachable or actually safe to receive traffic
-- whether the route needed for rescue survives backend disappearance
-- whether auth and middleware keep the same meaning during handoff
-- whether a stateful service is genuinely movable or merely reachable
-
-As long as those answers remain mostly social, the operator is still the
-effective control plane.
-
-That is the thing this page is trying to kill.
-
-This page should keep that sentence in its strongest form:
-
-- the operator is not merely burdened
-- the operator is still functioning as the unreplicated registry, explainer,
-  and rescue interpreter
-
-That is the anti-SPOF accusation hiding underneath almost every question in
-this repo.
-One human head can be the most dangerous single point of failure in the whole
-system.
-
-That line should remain unforgiving.
-
-It is easy to talk about single points of failure only as machines, disks,
-VIPs, or controllers.
-This repo keeps insisting that private human custody of topology truth is also
-an anti-SPOF failure class, and often the one the other categories are still
-hiding behind.
-
-That claim is one of the deepest things the docs need to preserve.
-The missing middle is not just a convenience layer.
-It is an attempt to reduce a human SPOF that most neighboring architectures
-leave unnamed.
-
-That sentence is not metaphorical decoration.
-It is the deepest anti-SPOF accusation in the repository.
-
-If a candidate layer still needs one human to explain:
-
-- what really runs where
-- which peer is actually safe
-- whether the rescue route is still trustworthy
-- whether the forwarded request still means the same thing
-
-then the layer may have improved the experience, but it has not yet removed the
-repo's most dangerous single point of failure.
-
-## Why DNS and proxy sophistication are still not enough
-
-The repo already has Cloudflare participation and a strong live edge stack.
-That still does not satisfy the missing middle because:
-
-- Cloudflare can choose a healthy first-hop node, but not the correct backend
-  placement inside the user's topology
-- Traefik can express rich routing and middleware locally, but not magically
-  infer trustworthy cross-node placement truth
-- healthchecks can detect some failures, but not automatically answer whether a
-  remote peer is semantically equivalent for this traffic
-- richer edge behavior can make the platform sound more complete than its
-  distributed truth actually is
-
-This is why the repo keeps separating:
-
-- first-hop plurality
-- request preservation
-- policy continuity
-- stateful authority
-
-Those are different truths.
-The middle layer is needed because the current stack can already express some
-of them without fully owning the rest.
-
-That is why the existing edge sophistication cannot be allowed to flatter the
-rest of the architecture.
-
-The stronger the edge gets, the easier it becomes for the docs to imply that a
-distributed truth layer is almost present.
-This page has to keep resisting that implication until the truth-owning layer
-is real enough to survive a bad-day audit.
-
-## The repo has already named the gap directly
-
-The clearest planning pressure is in
-[`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md),
-which explicitly records these as still missing:
-
-- universal wrong-node success
-- a live tracked root `services.yaml` current-state registry
-- trustworthy route persistence under local backend failure
-- automated service failover between nodes
-
-Those are not side quests.
-They are the exact truths the missing middle would need to own.
-
-The master plan also records:
-
-- `docker-gen-failover` is broken because it can delete routes when containers
-  stop
-- Cloudflare DDNS presence is not the same thing as full failover
-- Headscale is single-node today
-- secret sync and Compose sync are still manual
-
-That list is basically a proof that the middle layer has not been earned yet.
-
-It is also a warning against overreading conceptual convergence as practical
-convergence.
-
-The repo already knows the shape of the gap unusually well.
-Knowing the shape of the gap is not the same thing as possessing a layer that
-actually closes it.
-
-## The burden-transfer test
-
-This is the most important test on the page:
-
-before calling anything the missing middle, ask:
-
-> which specific hidden explanation will the system own after this exists that
-> the operator currently has to supply from memory?
-
-If the answer is weak, then the thing may still be useful.
-It is not the missing middle for this repo.
-
-The most revealing follow-up is:
-
-> what exact sentence will the operator no longer need to say from memory once
-> this layer exists?
-
-If the page cannot answer that sentence concretely, then the candidate is
-still too abstract, too polite, or too tool-shaped to count as the middle.
-
-That means candidate layers should be judged less by:
-
-- popularity
-- modernity
-- how small or large they sound
-- how impressive the diagrams are
-
-and more by:
-
-- which hidden burden they concretely remove
-- which truths become inspectable and shared
-- which truths remain private, stale, or guess-driven
-- whether operator legibility improves or decays
-
-## The easiest way this page can still fail
-
-The most common failure mode here is subtle:
-
-the page starts sounding like it has already narrowed the solution to a small
-respectable cluster of tool families, and that feeling of narrowed possibility
-gets mistaken for relief.
-
-That is still too soft for this repo.
-
-The user is not mainly asking for a curated shortlist.
-The user is asking for a system that stops quietly requiring remembered rescue
-knowledge on the bad day.
-
-So the page has to keep one ugly distinction alive:
-
-- better shortlist quality
-- better category language
-- better candidate comparison
-
-are all still different from:
-
-- one more bad-day explanation no longer needing to live in one person's head
-
-If the shortlist still leaves that burden mostly intact, this page has
-organized the wound without treating it.
-
-That is one of the clearest failure modes remaining in the site.
-
-A page can become more impressive by:
-
-- naming candidate families precisely
-- comparing them more thoughtfully
-- compressing the search space more cleanly
-
-and still fail if it does not keep asking which exact remembered explanation
-the operator is now finally allowed to stop supplying.
-
-## What a real middle answer would have to leave behind in the repo
-
-The user is not only asking for a better idea.
-They are asking for a system that leaves behind clearer runtime evidence.
-
-So a real middle answer should eventually leave behind artifacts like:
-
-- a tracked placement-truth surface such as `services.yaml` or an equally
-  inspectable generated state surface
-- an explicit peer-eligibility surface showing why a node is eligible, not just
-  that it answered a ping
-- visible convergence markers that show whether peers are close enough in
-  config, secrets, and revision to substitute honestly
-- durable routing artifacts or generated config that survive the local failure
-  they are meant to absorb
-- drill output, status surfaces, or logs that explain why a request was served
-  locally, forwarded, or denied
-
-The filename choices are not sacred.
-The evidence classes are.
-
-If a proposal cannot name what new inspectable artifacts it would cause the
-repo to have, then it is still too abstract to count as a serious middle-layer
-answer here.
-
-And even that standard must stay two-stage:
-
-- can the proposal name the inspectable artifact?
-- can the artifact credibly become the thing the operator trusts instead of
-  their own remembered topology story?
-
-If the answer stops at artifact naming, the page is still only describing a
-promising shape.
-It has not yet shown that the social custody of truth actually moved.
-
-## What still does not count as inspectable artifacts
-
-Even this page's artifact language needs a harsher filter.
-
-The following still do not count as the kind of inspectable evidence this repo
-needs:
-
-- a generated file with no documented consumer
-- a status page that repeats what the operator already had to infer
-- a peer list that shows reachability but not semantic eligibility
-- dynamic config that disappears under the failure it is meant to absorb
-- logs that explain only that forwarding happened, not why it was trustworthy
-
-The artifact has to make the system more authoritative, not merely more
-verbose.
-
-That distinction matters because verbose helper layers are common.
-
-What this repo needs is not more surfaces that narrate state.
-It needs surfaces that actually become the reason state can be trusted during
-wrong-node and fallback decisions.
-
-## The wanted layer, stated as responsibilities instead of brands
-
-The middle layer has to own responsibility, not only configuration syntax.
-
-At minimum, it has to own six families of truth.
-
-### 1. Placement truth
-
-The repo repeatedly converges on `services.yaml` as the simplest mental model:
-
-- which service exists on which node
-- which protocol class it belongs to
-- which ports or hostnames matter
-- whether it has multiple backends
-- whether the route is local-first only, peer-forwardable, or harsher
-
-The filename is not sacred.
-The property set is.
-
-The truth has to be:
-
-- explicit
-- current
-- shared
-- inspectable
-- consumed by routing logic instead of merely documented for humans
-
-If the registry exists but routing still depends on remembered host placement,
-the middle layer has failed.
-
-### 2. Eligibility truth
-
-A peer being reachable is not the same thing as a peer being safe.
-
-The middle layer has to distinguish:
-
-- node exists
-- node is reachable
-- service is present
-- service is healthy
-- service is converged enough
-- service is semantically eligible for this traffic right now
-
-That last line matters because the repo keeps refusing fake equivalence
-between:
-
-- a port that answers
-- and a service that can honestly preserve the same behavior
-
-Without eligibility truth, wrong-node forwarding is still decorated guessing.
-
-### 3. Route durability truth
-
-The repo's own planning material records that `docker-gen-failover` can remove
-Traefik routes when containers stop.
-
-That is devastating for any serious failover story.
-
-It means the middle layer cannot merely generate dynamic config.
-It has to generate or preserve rescue routes in a way that survives the exact
-failure that makes rescue necessary.
-
-If the fallback path disappears at the moment of local failure, the helper is
-not a failover layer.
-It is part of the outage.
-
-### 4. Convergence truth
-
-The repo also records manual secret sync and manual Compose sync as still-open
-gaps.
-
-That matters because peer substitution is dishonest if:
-
-- the peer lacks the same secrets
-- the peer lacks the same env assumptions
-- the peer runs a materially different service definition
-- the peer has drifted in image version, middleware, or route labels
-- the peer looks healthy but is semantically on another world
-
-So even a "small" middle layer needs some convergence story.
-It does not need to be a full scheduler by definition.
-It does need to stop cross-node substitution from being a silent drift gamble.
-
-### 5. Policy-continuity truth
-
-The user does not only want packets to arrive somewhere.
-They want the request to keep meaning the same thing.
-
-For protected HTTP, that means the middle layer needs enough truth to preserve:
-
-- auth expectations
-- middleware behavior
-- headers and rewrites that define route identity
-- security posture relevant to the route
-
-If the forwarding story survives only at the transport layer, it still has not
-solved the user’s real complaint.
-
-### 6. Explanation truth
-
-The user does not only want automation.
-They want the system to stay inspectable.
-
-That means the middle layer has to make it easier to answer:
-
-- why did this node serve locally?
-- why did it forward?
-- why was that peer chosen?
-- why did the rescue route still exist?
-- why did the request keep the same meaning?
-
-If the helper gets smarter while explanations get darker, the repo has gained
-machinery and lost trust.
-
-## What disqualifies a fake middle answer
-
-A candidate is **not** the missing middle for this repo if it mainly does one
-or more of these:
-
-- improves ingress reachability without solving wrong-node meaning
-- hides placement truth behind magic without making it inspectable
-- uses larger cluster vocabulary while the operator still has to privately join
-  the important facts together
-- forwards traffic but leaves middleware, auth, or service meaning ambiguous
-- treats stateful services as resilient because a route still answers
-- sounds smaller than Kubernetes while quietly importing a scheduler's
-  worldview tax anyway
-- gives the repo more moving parts while leaving the same hidden burden intact
-
-The repo can still learn from such candidates.
-They just have not solved the wound this page is tracking.
-
-## What the user is actually asking these candidates to stop doing
-
-The repo keeps revisiting candidate families because ordinary self-hosting
-answers keep doing one insulting thing:
-
-- they offer more nouns
-- they offer more diagrams
-- they offer more cluster vocabulary
-- they offer more traffic paths
-
-while still leaving the operator with the same emergency burden:
-
-- remember which node is real for this service
-- remember whether the peer is actually aligned
-- remember whether the rescue route will still exist after failure
-- remember whether the protected route still means the same thing after handoff
-
-That is why this page keeps sounding harsher than a normal comparison page.
-The user is not shopping for technologies.
-They are trying to stop being the unpaid control plane.
-
-## Candidate families already visible in the repo
-
-The repo is not searching blindly.
-Several candidate families are already visible in planning and research.
-
-## Candidate family 1: lightweight registry plus helper agents
-
-This is the most obvious middle-shaped path already visible in the repo.
-
-It usually implies:
-
-- a shared current-state file or registry such as `services.yaml`
-- peer broadcast or sync
-- helper logic for failure detection and redeploy
-- route generation or route updates from tracked truth
-
-Why it is attractive:
-
-- it preserves Compose as the primary authoring surface
-- it externalizes placement truth without immediately promoting a full
-  scheduler
-- it stays closer to the repo's demand for inspectable ownership
-
-Why it is still incomplete:
-
-- it still has to prove route durability
-- it still has to prove safe peer eligibility
-- it still has to prove policy preservation
-- it still has to prove convergence semantics that are stronger than “git pull
-  happened”
-- it still risks quietly becoming a scheduler in disguise
-
-The risk here is not only failure.
-It is invisible growth into an unacknowledged control plane.
-
-## Candidate family 2: OpenSVC-shaped service ownership
-
-The OpenSVC research pages are interesting because they feel closer to a
-truth-owning supervision layer than a pure proxy trick.
-
-Why this family is attractive:
-
-- stronger service ownership and supervision semantics
-- better fit for explicit resource and service responsibility than pure
-  sidecar-style glue
-- possible way to answer wrong-node rescue without inventing every primitive
-  from scratch
-
-Why it is still incomplete:
-
-- not yet proven in the live runtime
-- still must show that it removes burden instead of renaming it
-- must prove that it keeps the operator surface legible enough to count as a
-  real middle rather than just a different control plane
-- still owes explicit answers for policy continuity and stateful harshness
-
-This family is promising only if it can stay narrow relative to the truths it
-claims to own.
-
-## Candidate family 3: Nomad-style promotion
-
-Nomad appears repeatedly because it offers more scheduler truth than plain
-Compose without looking as worldview-heavy as Kubernetes.
-
-Why this family is attractive:
-
-- clearer placement and health semantics than ad hoc helper glue
-- real scheduling primitives
-- lighter reputation than Kubernetes
-
-Why it is still incomplete:
-
-- it still imports a scheduler worldview and therefore owes a burden-removal
-  justification
-- it does not automatically prove preserved wrong-node semantics for this repo's
-  actual stack
-- it may solve more placement than the user needs while still demanding trust
-  across more opaque machinery
-
-Nomad only counts as middle if it is genuinely the smallest honest answer left,
-not merely the smaller famous orchestrator.
-
-## Candidate family 4: k3s / Kubernetes promotion
-
-This family is not irrational.
-It is just expensive in the repo's value system.
-
-Why this family is attractive:
-
-- broad cluster truth ownership
-- mature ingress, service-discovery, and scheduling machinery
-- fewer DIY coordination primitives
-
-Why it is still incomplete:
-
-- it carries the largest worldview cost
-- it risks reducing Compose legibility too early
-- it has not yet been proven to be the smallest honest answer to this repo's
-  actual wound
-- it can easily become the default answer before the narrower burden-transfer
-  question was answered properly
-
-This family may still win later.
-This page simply refuses to let it win by prestige alone.
-
-## Candidate family 5: improved proxy automation alone
-
-This family tries to keep the solution close to the edge stack.
-
-Why it is attractive:
-
-- minimal platform change
-- direct effect on ingress behavior
-- intuitive when the pain is phrased narrowly as routing
-
-Why it is still incomplete:
-
-- proxy automation alone does not own placement truth
-- it does not solve convergence truth
-- it often collapses stateful correctness into reachability
-- the `docker-gen-failover` bug already proves proxy-only automation can fail
-  at the worst possible time
-
-This family is useful only if it becomes part of a larger truth-owning story.
-On its own, it is too close to the exact category of partial answer the user
-already distrusts.
-
-## The real success test
-
-The missing middle has only been found when this scene stops feeling fragile:
-
-1. a request lands on a healthy public node
-2. the node does not host the service locally
-3. the node knows where the service lives now
-4. the node knows which peer is eligible now
-5. the rescue route survives the local failure
-6. auth and middleware still preserve the same meaning
-7. the operator can explain all of that from shared tracked truth
-
-Anything weaker may still be useful engineering.
-It is not yet the middle layer this repo is searching for.
-
-## What would actually count as promotion evidence
-
-No candidate family should be called "the missing middle" until the repo can
-show a proof packet that includes all of the following for at least one real
-service path:
-
-- the current placement truth the system consumed
-- the reason a remote peer was or was not eligible
-- evidence that the rescue route survived the local backend loss
-- evidence that the forwarded route preserved auth or middleware meaning when
-  relevant
-- evidence that an operator can reconstruct the decision from shared surfaces
-  instead of private memory
-
-This matters because a lot of infra work looks persuasive right up until the
-moment you ask:
-
-> what exact evidence would prove the hidden burden moved out of the operator
-> and into the system?
-
-If the answer is still vague, the candidate has not earned promotion.
-
-## The hidden risk this page must keep visible
-
-One of the biggest risks in the repo is that the "small missing middle"
-quietly grows into a scheduler in disguise.
-
-That does not automatically make it wrong.
-It does mean the docs should stay explicit about when the repo starts paying:
-
-- worldview cost
-- control-plane opacity
-- operator legibility loss
-- central coordination assumptions
-
-The middle is only honestly "middle" if the added layer stays narrow relative
-to the exact truths it is supposed to own.
+- building enough glue that the repo feels cluster-ish
+- becoming much better at describing what the middle should do
+
+All of that may be real progress.
+None of it proves the operator stopped being the final keeper of truth.
 
 ## Bottom line
 
-The missing middle is not a product waiting to be discovered.
+The middle layer is not "the nicer orchestrator."
+It is the first added layer that can survive this accusation:
 
-It is the smallest truth-owning layer that would stop the operator from being
-the:
+> did one more private topology truth actually stop living only in the
+> operator?
 
-- hidden registry
-- hidden failover brain
-- hidden drift detector
-- hidden peer-eligibility judge
-- hidden routing explainer
-
-for wrong-node behavior.
-
-The repo already knows many of the responsibilities that layer must own.
-It does not yet prove that one implementation has earned promotion as the
-answer.
+Until the answer becomes yes, the missing middle is still missing, no matter
+how complete the surrounding explanation sounds.
