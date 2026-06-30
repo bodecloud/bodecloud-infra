@@ -41,6 +41,13 @@ The user is not short on platform names.
 The user is short on options that still feel honest after wrong-node entry,
 backend loss, and hidden operator glue become real.
 
+That is a stronger complaint than "there are too many choices."
+The complaint is that many choices stop feeling like choices once the user
+asks the humiliating question:
+
+> after all the adult-sounding layers are in place, why am I still the thing
+> that knows what is really true right now?
+
 That difference is the whole reason this page exists.
 
 ## What this page is and is not allowed to prove
@@ -59,6 +66,11 @@ This page is not authoritative about:
 - whether broader ecosystem prestige should override repo-specific evidence
 
 This page is a promotion filter, not a final platform verdict.
+
+It also needs to behave like a disappointment filter.
+The user has already seen too many ecosystem answers that become smaller the
+moment they are forced to speak in terms of actual burden transfer instead of
+general platform capability.
 
 ## Priority decision stack for this page
 
@@ -81,6 +93,16 @@ If it starts from plans alone, it over-promotes futures into present gravity.
 This page only stays honest if the dream, the live baseline, the hidden wound,
 the candidate evidence, and the proof ceiling are all present at once.
 
+If any one of those drops out, the page immediately gets worse in a predictable
+way:
+
+- lose the dream and the page turns into market prose
+- lose the runtime and it becomes fantasy
+- lose the wound and it becomes generic architecture advice
+- lose the evidence and it becomes recommendation theater
+- lose the proof ceiling and it starts promoting prestige as if prestige were
+  closure
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -92,6 +114,19 @@ the candidate evidence, and the proof ceiling are all present at once.
 
 If a sentence starts sounding like "pick the most mature orchestrator," it has
 already left this page's decision surface.
+
+That is because "mature" is one of the most dangerous words in this problem
+space.
+It too easily means:
+
+- more ecosystem
+- more automation
+- more abstraction
+- more seriousness of tone
+
+when the user is actually asking for something much narrower and harsher:
+
+- one more option that remains believable after the bad day starts
 
 ## Automatic disqualifiers for a not-yet-earned option
 
@@ -108,6 +143,11 @@ one or more of these:
 That does not make the candidate worthless.
 It means the candidate has not yet answered the repo's real benchmark strongly
 enough to deserve default status.
+
+This is where many recommendation documents fail the user.
+They treat "worth considering" and "has earned default gravity" as nearly the
+same thing.
+This repo has to keep those very far apart.
 
 ## What still does not count as an orchestration decision here
 
@@ -128,6 +168,16 @@ The following still do not count as a serious architecture decision:
 This matters because the repo is not suffering from lack of reputable product
 families.
 It is suffering from lack of options that survive the user's actual benchmark.
+
+The benchmark is not "which one scales better?"
+It is not "which one has the biggest community?"
+It is not even "which one is most likely to be broadly correct in general?"
+
+It is much more personal and much more brutal:
+
+> which one actually stops this whole topic from repeatedly collapsing back
+> into my own private burden when a request lands on the wrong node or a local
+> dependency dies?
 
 ## What a default-promotion packet would have to contain
 
@@ -155,6 +205,12 @@ Examples:
 Without that packet, the page is still just warming the reader toward a product
 family.
 
+This packet requirement protects against one of the oldest infrastructure
+failures in the world: confusing recommendation with evidence.
+The user does not need another persuasive walk through the product landscape.
+The user needs one reason to believe a new layer earned the right to exist in
+their life specifically.
+
 ## The shortest honest answer
 
 The current default stance is still:
@@ -176,6 +232,17 @@ Too much infrastructure advice effectively says:
 
 This repo exists because the user does not accept that as the only adult
 decision surface.
+
+That refusal is not stubbornness.
+It is the central philosophical pressure of the project.
+The repo is trying to defend the idea that there should be a meaningful
+middle ground between:
+
+- brittle private glue
+- and total worldview surrender
+
+If no middle ground can survive honest proof, then the repo should say that.
+But it should only say it after the honest proof, not before.
 
 ## The candidate families the repo is actually circling
 
@@ -207,6 +274,14 @@ Why this family still fails easily:
 - convergence of secrets, env, and revision state can still be weak
 - helper sprawl can quietly become an orchestrator in disguise
 
+There is a subtler risk too:
+
+- this family can feel emotionally correct because it preserves the user's
+  desired ergonomics
+- while still failing technically to move enough truth out of private memory
+
+That is why this family remains attractive and suspicious at the same time.
+
 Current repo evidence:
 
 - the master plan explicitly names `services.yaml`, sync, secret convergence,
@@ -220,6 +295,12 @@ Current verdict:
 
 - still the default search space
 - not yet a proven winner
+
+That is probably the most honest present-tense answer in the whole page.
+The repo keeps circling this family because it most directly respects the
+user's dream.
+The repo keeps refusing to crown it because respecting the dream is not yet
+the same thing as proving the dream can carry the burden honestly.
 
 ### Family 2: stronger service-supervision and placement systems
 
@@ -243,6 +324,10 @@ Why this family still has to earn itself:
 - it can add legitimate machinery before the repo has proven which domain
   actually needs that much machinery
 
+This family is where the user starts getting offered something that might
+actually move a real burden, but also risks becoming one more layer that the
+operator has to trust before it has emotionally earned that trust.
+
 Archive pressure this family must answer:
 
 - `distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
@@ -256,6 +341,13 @@ Current verdict:
 
 - meaningful candidates for named domains
 - not yet justified as the repo-wide default answer
+
+That is a narrower and more respectful answer than "probably Nomad/OpenSVC
+eventually."
+The repo is not trying to predict the winner for sport.
+It is trying to avoid forcing a bigger worldview onto the operator before the
+smaller world has been given an honest chance to prove where it actually
+breaks.
 
 ### Family 3: full scheduler / cluster worldview
 
@@ -278,6 +370,10 @@ Why this family is dangerous in this repo:
 - it can tempt the docs into declaring closure because the platform name now
   sounds adult enough
 
+That last risk matters more here than in most projects.
+The user is explicitly reacting to an ecosystem where adulthood of tone too
+often substitutes for adulthood of burden ownership.
+
 Current repo evidence:
 
 - the repo has real k3s and Garden exploration
@@ -289,6 +385,11 @@ Current verdict:
 
 - absolutely relevant as a future promotion path
 - still not the default answer the repo has earned today
+
+This family may eventually win.
+If it does, it should win because narrower layers were honestly pressed until
+they failed a named burden threshold, not because Kubernetes or k3s merely
+made the whole story sound complete enough to stop asking harder questions.
 
 ## The actual burden checklist a candidate must beat
 
@@ -321,6 +422,11 @@ or more of these burdens materially and inspectably:
 
 If a candidate mostly helps one of those while worsening several others, it has
 not earned default promotion yet.
+
+This checklist is intentionally closer to a betrayal test than a feature test.
+The repo already has enough feature language.
+What it needs is a way to detect when a supposedly better option still leaves
+the user stranded in the same explanatory role.
 
 ## What promotion evidence would actually look like
 
@@ -375,6 +481,11 @@ That is also why this page must keep a visible distinction between:
 The first might deserve promotion.
 The second only deserves caution.
 
+That distinction is the emotional center of the page.
+The user is not allergic to power.
+The user is allergic to paying more worldview tax for machinery that still
+fails to answer the real burden question honestly.
+
 ## Bottom line
 
 No broader orchestration family has yet earned default promotion for the repo
@@ -385,3 +496,12 @@ stronger layer to justify itself by owning a named hidden burden better than
 the current stack, not by sounding more adult, more modern, or more complete.
 
 That is the real orchestration answer in `bolabaden-infra` today.
+
+It is also the repo's way of refusing a false consolation:
+
+- that the problem is basically solved once a bigger platform is mentioned
+- that the missing options were imaginary
+- or that the user's frustration mainly came from not having heard enough
+  mature product names yet
+
+This page should keep making that consolation unavailable.

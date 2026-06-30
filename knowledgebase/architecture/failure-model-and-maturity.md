@@ -12,6 +12,19 @@ discussion in this repo:
 
 That is the real maturity problem in `bolabaden-infra`.
 
+It is not mainly a problem of "how far along is the stack?"
+It is a problem of how often the ecosystem still offers something that sounds
+like maturity while leaving the most important explanation trapped in private
+operator memory.
+
+That is the hidden insult this page has to keep visible:
+
+- the user is not short on technologies
+- the user is not short on respectable diagrams
+- the user is not short on architecture language
+- the user is short on options that stop collapsing into "you still have to
+  know what is really true when the bad day arrives"
+
 The repo does not mature as one calm platform.
 It matures as several uneven truth lanes:
 
@@ -52,6 +65,19 @@ architectural intent. It does not yet prove that wrong-node traffic, backend
 loss, protected-route parity, or stateful ownership have become system-owned
 truths rather than better-documented operator burdens.
 
+That distinction matters because many ecosystems would already start speaking
+as if this were the final stretch:
+
+- ingress exists
+- Cloudflare is involved
+- more than one node matters
+- helpers are appearing
+- therefore the platform is "basically" maturing into HA
+
+This page exists to say no to that move.
+The operator's real complaint is that "basically" keeps cashing out into a
+moment where the system still needs private human explanation to stay honest.
+
 ## How to read maturity in this repo
 
 A maturity label here does not mean "how many components exist."
@@ -68,6 +94,12 @@ That makes the hidden metric very simple:
 
 If the answer is "a lot," the feature is still immature here even if the stack
 already looks sophisticated.
+
+That is why this page should feel harsher than normal maturity language.
+In many projects, maturity means polish, breadth, or adoption.
+Here, maturity means the system has stopped humiliating the operator by
+revealing too late that the operator was still the real keeper of placement,
+eligibility, fallback, or stateful truth.
 
 ## Maturity levels used on this page
 
@@ -95,6 +127,10 @@ the docs can speak more strongly about it.
 
 At the moment, most important lanes are still below that last level.
 
+That is not failure of documentation.
+It is the documentation refusing to pretend that naming the missing truths is
+the same thing as system-owning them.
+
 ## What still does not count as maturity
 
 This page needs a direct filter against maturity theater.
@@ -110,6 +146,18 @@ The following still do not count as a lane becoming materially more mature:
 In this repo, maturity only moves when a hidden reconstruction burden actually
 shrinks.
 
+The repo has to keep repeating that because the surrounding ecosystem keeps
+selling a softer story:
+
+- a bigger stack feels more mature
+- more nodes feel more mature
+- a cleverer edge layer feels more mature
+- a more famous platform feels more mature
+
+All of that may be directionally useful.
+None of it answers the user's actual benchmark unless one more explanation
+stops needing to live in the operator's head.
+
 ## What a lane-specific maturity proof packet would have to contain
 
 Before any lane graduates to stronger wording, the docs should be able to
@@ -122,6 +170,11 @@ point to a packet that contains:
 - the boundary sentence naming what the lane still does not prove
 
 Without that packet, "more mature now" is still mostly atmosphere.
+
+That packet requirement is deliberately stricter than ordinary docs practice.
+The user is already surrounded by explanations that sound plausible before the
+failure drill and feel evasive after it.
+This repo cannot afford to become another source of the same tone.
 
 ## The matrix
 
@@ -160,6 +213,15 @@ make cross-node gaps feel smaller than they are.
 These are where the ecosystem most often cheats. Reachability, TCP forwarding,
 or even container restart behavior do not settle ownership, replication,
 promotion, or reconnect truth.
+
+There is a deeper reason these three lanes are so easy to lie about:
+
+- they each produce a visible success signal early
+- that visible signal feels like relief
+- readers want relief
+- then the hidden burden remains untouched underneath the relief
+
+This page has to be strong enough to interrupt that emotional shortcut.
 
 ## What "more mature than before" is allowed to mean
 
@@ -223,6 +285,11 @@ The mature thing to say is:
 > machinery around them, but the most important truths are still maturing as
 > separate lanes rather than one platform-wide victory.
 
+That sentence is intentionally unsatisfying.
+It should be unsatisfying.
+The whole point of the repo is that the available options keep sounding more
+satisfying than they deserve.
+
 ## The most dangerous false upgrade
 
 The easiest false upgrade in this repo is:
@@ -240,3 +307,8 @@ still keep separate pressure on:
 - singleton control-plane realities
 
 If those boundaries blur, this page stops serving its only job.
+
+The larger dream is not "eventually say HA with better caveats."
+The larger dream is that the user eventually gets at least one path through
+this system that feels like a real option rather than another intelligent
+story about why the operator still has to carry the truth alone.
