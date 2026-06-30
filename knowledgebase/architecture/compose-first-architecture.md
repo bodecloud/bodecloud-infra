@@ -138,6 +138,60 @@ This page has to be strict about that because "Compose-first" is exactly the
 kind of phrase that can start sounding adult, disciplined, and reasonable even
 after it has stopped answering the user's real question.
 
+## What would actually end Compose-first
+
+This page also needs an explicit exit condition.
+
+Compose-first should stop being the default the moment another surface can
+prove, with current worktree evidence plus drills, that it owns at least one
+decisive missing truth more honestly than root Compose does.
+
+In this repo, the decisive truths are things like:
+
+- current placement truth
+- peer eligibility truth
+- backend-loss route durability
+- protected-route semantic continuity under handoff
+- stateful authority and promotion truth
+
+That means Compose-first should end only after a challenger can show:
+
+- the new control surface is not merely richer, farther away, or more famous
+- operators can still inspect what it believes with less social translation
+- one hidden human SPOF actually moved into a shared system-owned artifact
+- the new surface stays honest on the bad day rather than only on the happy
+  path
+
+This matters because the user is not asking to keep Compose forever.
+The user is asking for the next layer to earn the surrender it requests.
+
+That is the real exit criterion:
+not "a bigger platform exists,"
+not "the ecosystem respects it,"
+but "one of the humiliating private burdens really left the operator's head."
+
+## What does not end Compose-first
+
+The docs should also keep a blacklist here.
+
+These do **not** end Compose-first by themselves:
+
+- standing up Nomad, k3s, Kubernetes, OpenSVC, or another controller in a lab
+- generating richer route files
+- accumulating more helper daemons around the edge
+- making `services.yaml` sound central without proving the runtime consumes it
+- making the architecture diagram look more like a cluster product
+
+Those may all be valid experiments.
+They still do not answer the only serious replacement question:
+
+> what exact burden does the new surface own better than readable Compose, and
+> where is the evidence that this remains true under wrong-node or backend-loss
+> stress?
+
+If this page forgets that question, "Compose-first" will collapse into branding
+and its replacements will collapse into prestige.
+
 ## What Compose-first is being forced to justify
 
 Compose-first is not only being defended against heavyweight orchestrators.

@@ -139,6 +139,32 @@ earned priority," it should point to a packet containing:
 Without that packet, even a good sequence can still collapse back into
 aspiration.
 
+## The test every "new option" has to survive
+
+This roadmap also needs one direct question that should be applied to every
+candidate helper, middle layer, or orchestrator experiment before the docs
+start sounding impressed by it.
+
+The question is:
+
+> after this lands, what exact humiliating thing will the operator no longer
+> have to personally remember, infer, narrate, or reconstruct during wrong-node
+> entry, backend loss, or stateful recovery?
+
+If the answer is vague, then the option is still vague.
+If the answer is "it gives us more flexibility" or "it makes things more
+dynamic," then the burden probably did not move.
+If the answer only sounds good on a diagram, then the option is still mostly
+theater.
+
+This repo needs that filter because the ecosystem is full of nearby answers
+that improve elegance, terminology, or automation while leaving the same human
+burden intact.
+
+That is the user's real accusation.
+The roadmap should keep surfacing it instead of rounding it off into generic
+"future enhancements."
+
 ## The shortest honest roadmap
 
 The current best order remains:
@@ -323,6 +349,12 @@ It is the first operational gate.
 
 If the docs cannot keep the burden model honest, then every later priority can
 be "completed" in language long before it is completed in the worktree.
+
+Priority 0 is also the gate that keeps the rest of the roadmap from becoming
+emotionally counterfeit.
+If the docs start treating partial runtime sophistication like a meaningful menu
+of options, then later priorities can look well-sequenced while still being
+built on the exact false closure the user is trying to escape.
 
 ## Priority 1: placement truth
 
