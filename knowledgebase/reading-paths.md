@@ -1,64 +1,60 @@
 # Reading Paths and Retrieval Routes
 
-This page exists because the knowledgebase is no longer mainly failing at
-lacking content.
+This page is the practical entry map for the knowledgebase.
 
-Its remaining failure mode is structural:
-
-- the right pages exist
-- the evidence boundaries are sharper
-- the navigation can still tempt readers into browsing by topic instead of by
-  the real question
-
-That is dangerous in this repo because topic-first reading often recreates the
-same old downgrade:
-
-- "better HA"
-- "better clustering"
-- "better orchestrator choices"
-
-instead of the harder repo-shaped question:
-
-> how do several ordinary Docker nodes stop behaving like separate islands
-> whose real correctness still depends on private operator reconstruction when
-> the request lands on the wrong machine?
-
-This page is the answer to that structural problem.
+The site is large enough now that topic browsing can still waste time. The
+useful question is not "which folder sounds close?" It is "which truth register
+answers the question I actually have?"
 
 ## What this page is and is not allowed to prove
 
-This page is allowed to:
+This page is authoritative about:
 
-- route readers to the right evidence class for the question they actually have
-- stop the site from being read like a generic topic taxonomy
-- reduce the chance that the user’s real dream gets replaced by a smaller
-  neighboring question
+- where a reader should start for a given question
+- which pages answer runtime, intent, planning, or proof questions best
+- how to avoid collapsing the repo into a calmer, smaller problem
 
-This page is not allowed to:
+This page is not authoritative about:
 
-- substitute for the proof pages
-- imply that navigation clarity means implementation maturity
-- make a route look sufficient if it only answers the easier subproblem
+- proving failover behavior itself
+- deciding the winning future control layer
+- implying that good navigation means strong implementation maturity
 
-## Read by the question you are really asking
+## Strongest honest current answer
 
-### 1. "What is the user actually trying to make true?"
+The knowledgebase is now broad enough that the main risk is no longer missing
+pages. The main risk is reading the right pages in the wrong order and
+accidentally answering:
+
+- "better HA"
+- "better orchestration"
+- "better docs"
+
+instead of:
+
+> how do several ordinary Docker nodes stop behaving like separate islands,
+> while `docker-compose.yml` stays legible and wrong-node entry stops depending
+> on operator folklore?
+
+## Question-first reading paths
+
+### 1. "What is the user actually trying to build?"
 
 Read in this order:
 
 1. [User Intent and Dream](research/user-intent-and-dream.md)
-2. [Operator Contract and Success Criteria](architecture/operator-contract.md)
-3. [Operator Questions and Honest Answers](operations/operator-questions-and-honest-answers.md)
+2. [Problem and Goals](architecture/problem-and-goals.md)
+3. [Operator Contract and Success Criteria](architecture/operator-contract.md)
 
 Use this path when you need:
 
-- the real dream
-- the negative benchmark
-- the anti-fake-options framing
+- the dream
+- the anti-goals
+- the success criteria
 
-Do not use this path as runtime proof.
+Do not use it as runtime proof.
 
-### 2. "What does the priority runtime actually prove today?"
+### 2. "What does the current root runtime actually contain?"
 
 Read in this order:
 
@@ -69,11 +65,11 @@ Read in this order:
 
 Use this path when you need:
 
-- live runtime truth
-- authoritative source ordering
-- the line between config shape and stronger proof
+- the priority implementation
+- the real root include graph
+- the gap between "present in YAML" and "proven under failure"
 
-### 3. "Why is wrong-node traffic still the humiliating threshold?"
+### 3. "Why is wrong-node traffic still the real threshold?"
 
 Read in this order:
 
@@ -83,26 +79,26 @@ Read in this order:
 
 Use this path when you need:
 
-- request-path realism
-- wrong-node meaning preservation
-- where first-hop plurality stops being enough
+- literal request-path reasoning
+- why multi-A DNS is weaker than request preservation
+- where peer-forward routing still lacks proof
 
-### 4. "What still remains hidden in operator memory?"
+### 4. "What helper layer is the repo actually looking for?"
 
 Read in this order:
 
 1. [The Missing Middle Layer](architecture/missing-middle-layer.md)
-2. [Failure Model and Maturity](architecture/failure-model-and-maturity.md)
+2. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
 3. [Decision Paths and Promotion Rules](operations/decision-paths-and-promotion-rules.md)
 4. [Source Assimilation Index](operations/source-assimilation-index.md)
 
 Use this path when you need:
 
-- hidden SPOFs
-- burden ownership analysis
-- evidence discipline
+- the actual missing control surface
+- why the repo is not satisfied with raw Compose or immediate Kubernetes
+- the burden-ownership test future candidates must pass
 
-### 5. "Why are stateful services a separate honesty problem?"
+### 5. "Why are stateful services a stricter problem?"
 
 Read in this order:
 
@@ -112,44 +108,43 @@ Read in this order:
 
 Use this path when you need:
 
-- the difference between reachability and authority
-- the live stateful risk surface
-- planned stateful futures without overclaiming them
+- the difference between liveness and authority
+- why Redis, MongoDB, Headscale, and databases cannot inherit HTTP optimism
 
-### 6. "Which future paths are real options versus renamed burden?"
+### 6. "Which future paths are real options and which are still theater?"
 
 Read in this order:
 
 1. [Orchestrator Tradeoffs Evidence](research/orchestrator-tradeoffs-evidence.md)
-2. [Orchestration Research 2026](research/orchestration-research-2026.md)
-3. [Infrastructure Master Plan](research/infrastructure-master-plan.md)
-4. [OpenSVC Cluster Bootstrap](research/opensvc-cluster-bootstrap.md)
-5. [Garden and k3s Exploration](research/garden-k3s-exploration-evidence.md)
-6. [Nomad Exploration](research/nomad-exploration-evidence.md)
+2. [Infrastructure Master Plan](research/infrastructure-master-plan.md)
+3. [Garden and k3s Exploration Evidence](research/garden-k3s-exploration-evidence.md)
+4. [Nomad Exploration Evidence](research/nomad-exploration-evidence.md)
+5. [OpenSVC Cluster Bootstrap](research/opensvc-cluster-bootstrap.md)
+6. [OpenSVC Ingress HA](research/osvc-ingress-ha.md)
 
 Use this path when you need:
 
-- candidate-future comparison by burden ownership
-- not just product taxonomy
-- side-path evidence without premature promotion
+- candidate middle layers
+- honest tradeoffs
+- future directions without mistaking them for live truth
 
-## Read by truth register when the claim type is already known
+## Read by truth register
 
 ### Live runtime truth
 
 Start with:
 
-- [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
 - [Current Compose Runtime](architecture/current-compose-runtime.md)
+- [Compose Fragment Map](architecture/compose-fragment-map.md)
 - [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
 
-### Dream and intent truth
+### Intent and dream truth
 
 Start with:
 
 - [User Intent and Dream](research/user-intent-and-dream.md)
-- [Operator Contract and Success Criteria](architecture/operator-contract.md)
 - [Problem and Goals](architecture/problem-and-goals.md)
+- [Operator Contract and Success Criteria](architecture/operator-contract.md)
 
 ### Planning and promotion truth
 
@@ -159,7 +154,7 @@ Start with:
 - [Infrastructure Master Plan](research/infrastructure-master-plan.md)
 - [Decision Paths and Promotion Rules](operations/decision-paths-and-promotion-rules.md)
 
-### Archive pressure and reconstruction truth
+### Archive and reconstruction truth
 
 Start with:
 
@@ -167,12 +162,12 @@ Start with:
 - [Source Assimilation Index](operations/source-assimilation-index.md)
 - [Evidence Ledger](research/evidence-ledger.md)
 
-## Fastest route for an impatient but serious reader
+## Fastest route for an impatient serious reader
 
-If someone only has time for one high-fidelity route, use:
+If someone only wants the shortest route to the real situation, use:
 
 1. [User Intent and Dream](research/user-intent-and-dream.md)
-2. [Operator Contract and Success Criteria](architecture/operator-contract.md)
+2. [Problem and Goals](architecture/problem-and-goals.md)
 3. [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
 4. [Current Compose Runtime](architecture/current-compose-runtime.md)
 5. [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md)
@@ -180,26 +175,13 @@ If someone only has time for one high-fidelity route, use:
 7. [Stateful HA and Data](architecture/stateful-ha-and-data.md)
 8. [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
 
-That route does the minimum necessary to preserve:
+That is the minimum path that keeps:
 
 - the dream
-- the acceptance bar
-- the live proof boundary
-- the wrong-node humiliation threshold
-- the hidden burden analysis
-- the stateful honesty split
+- the root implementation
+- the wrong-node problem
+- the missing middle
+- the stateful split
+- the proof boundary
 
-## Strongest honest current answer
-
-The strongest honest current answer is that this site should not be navigated
-like a normal infrastructure docs tree.
-
-It should be navigated like a retrieval system that is trying to stop the same
-old substitution error:
-
-- answering the smaller neighboring question
-- with the wrong evidence class
-- and then mistaking cleaner navigation for stronger truth
-
-If this page helps a reader reach the right pages but still answer the calmer
-question, it has still failed.
+visible at the same time.
