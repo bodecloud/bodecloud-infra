@@ -21,6 +21,32 @@ next.
 This page is the higher-level acceptance contract that says what has to become
 true before the deeper frustration is honestly being solved.
 
+## What this page should make impossible to miss
+
+This page exists to stop a specific failure mode in the documentation itself.
+
+That failure mode looks like this:
+
+- the repo accumulates better names for the same pain
+- the diagrams become cleaner
+- the options become more legible
+- the docs sound more decisive
+- the operator burden stays fundamentally where it was
+
+If the documentation lets that happen, then the docs are participating in the
+same problem the user is rebelling against.
+
+The user is not asking for a more articulate explanation of why multi-node
+Compose is hard.
+The user is asking for the architecture to stop behaving like "several
+ordinary Docker hosts plus operator folklore" at the exact moment where
+request preservation matters.
+
+So this page has one job:
+
+> keep the difference between architectural fluency and actual burden removal
+> brutally visible
+
 ## The dream in one sentence
 
 The operator wants several ordinary Docker nodes to behave like one
@@ -82,6 +108,18 @@ request time and failure time.
 The key phrase there is "feel materially different."
 The user is not asking for a nicer explanation of the same hidden burden.
 They are asking for the burden itself to stop living in operator memory.
+
+The failure mode to watch for here is subtle:
+
+- docs improve
+- helper components grow
+- routing stories become more sophisticated
+- the operator still has to silently know which node is "really" the one that
+  matters
+
+That is not progress toward the dream.
+That is a better narrated version of the same dependence on private
+reconstruction.
 
 ### Feeling 1: any-node entry is normal, not a gamble
 
@@ -197,6 +235,17 @@ The hidden benchmark is not "could a strong operator recover this eventually?"
 It is "does the system already know enough to stop needing hidden operator
 completion as part of normal request handling?"
 
+This is the anti-benchmark the repo has to keep in view.
+If the architecture still degrades into:
+
+- "the right person knows which box to hit"
+- "the operator can explain the intended fallback"
+- "the proxy could be rewired quickly if needed"
+- "the labels more or less imply the answer"
+
+then the central problem is still present.
+Those are all variants of hidden human completion.
+
 ## What does not count as success
 
 The repo has to keep refusing several fake versions of success.
@@ -306,6 +355,24 @@ It is:
 
 > explain it in a way that keeps the unresolved burden visible until the
 > burden is actually removed
+
+### Fake success 8: the burden moved from YAML confusion to agent or helper confusion
+
+What it proves:
+
+- the repo has introduced a smarter middle layer
+- there is now a dedicated component with a strong name
+- the architecture may be closer to current-state awareness
+
+What it does not prove:
+
+- the operator no longer has to trust invisible internal reasoning
+- the helper's truth inputs are current, inspectable, and durable
+- request preservation is owned by the system rather than merely rephrased
+
+This matters because a "thin" helper can still become a new sacred box, a new
+private memory store, or a new unverifiable controller if the repo stops
+insisting on inspectable truth.
 
 ## The contracts the repo actually has to satisfy
 
@@ -444,6 +511,12 @@ What still does not satisfy it:
 - the stack is survivable only after manual recollection
 - the truth exists only as a social convention plus labels
 
+These contracts are intentionally narrower than a grand "solved distributed
+systems" claim.
+But they are also stricter than a normal homelab success story.
+The repo does not get credit for being thoughtfully modular if the wrong-node
+path is still a semantic gamble.
+
 ## The repo’s real success sentence
 
 If this repo ever honestly reaches the user’s dream, the defensible sentence
@@ -457,6 +530,28 @@ will be something like:
 That sentence is narrower than "zero SPOF everywhere."
 
 It is also far more real.
+
+## The single most important success test
+
+If the user asks the rude but correct question:
+
+> if a healthy request lands on the wrong healthy node, is that still a normal
+> request or did we just enter a recovery ritual?
+
+the finished system should answer:
+
+> that is still a normal request
+
+and the docs should be able to defend that answer without appealing to:
+
+- maintainer intuition
+- hoped-for peer reachability
+- stale placement assumptions
+- "it usually works"
+- a hidden sacred front door
+
+Until that answer is true, the documentation should keep sounding unfinished
+where the system is unfinished.
 
 ## Bottom line
 
