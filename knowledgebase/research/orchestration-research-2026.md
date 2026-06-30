@@ -57,6 +57,19 @@ two serious adult lives available:
 This page should keep treating that absence of believable middle options as one
 of the primary wounds, not as a side remark.
 
+That sentence matters more than most orchestrator comparison pages usually let
+themselves admit.
+
+The user is not merely frustrated that the ecosystem is complicated.
+They are frustrated that the ecosystem keeps performing the same social trick:
+
+- hand-built glue is treated as the price of staying small
+- scheduler adoption is treated as the price of becoming adult
+- the missing middle category never gets to appear as a serious possibility
+
+This page gets weaker the moment it starts sounding impressed by that false
+binary.
+
 ## This page is not choosing products, it is ranking missing truths
 
 The repo does not really need "the best orchestrator."
@@ -75,6 +88,16 @@ The point of the ranking is not to crown a winner.
 It is to stop the repo from buying a giant worldview to compensate for a
 smaller truth that was never named precisely enough.
 
+That is one of the deepest traps in this repo.
+
+If the missing truth stays vague, then the bigger platform always gets to look
+more mature by default.
+The docs then become accomplices in the same move:
+
+- smaller answers are dismissed as naive
+- larger answers are treated as adulthood
+- the actual burden transfer never gets audited precisely enough
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to prove that the orchestration search in this repo is
@@ -89,6 +112,21 @@ It is not allowed to turn that search into:
 
 It is also not allowed to flatten the user's frustration into ordinary platform
 shopping.
+
+That prohibition has to stay explicit because "platform shopping" is exactly
+how the complaint gets neutralized.
+
+Once the problem is narrated as:
+
+- Compose vs Nomad
+- Nomad vs k3s
+- k3s vs Kubernetes
+
+the reader can feel informed without ever being forced to answer the harder
+question:
+
+> what missing truth is still trapped in the operator, and which layer would
+> actually remove it rather than merely rename it?
 
 The page only stays honest if every candidate remains tied to:
 
@@ -110,6 +148,15 @@ repo:
 
 This research only stays honest when each candidate is measured against the
 exact hidden burden it would remove and the worldview tax it would charge.
+
+It also has to be measured against what humiliation would still survive after
+adoption.
+
+That may sound emotionally charged for an infra page, but it is the correct
+fidelity level for this repo.
+The user is not trying to win a tooling debate.
+They are trying to stop the system from becoming socially manual again exactly
+where it claims to be distributed.
 
 ## Quick claim router
 
@@ -192,6 +239,14 @@ The real sentence always has to be:
 - at what worldview cost
 - with what still left operator-owned
 
+Add one more mandatory question:
+
+- and what fake closure would still survive after adoption?
+
+Without that question, promotion packets drift too easily toward stronger
+nouns, cleaner diagrams, better demos, and the same hidden burden with less
+criticizable language.
+
 ## What a real orchestration promotion packet would need
 
 Before this research could justify promoting a whole candidate family, the
@@ -215,6 +270,8 @@ The user is not merely saying:
 - "I want HA"
 - "I want clustering"
 - "I want orchestration"
+
+They are also not simply asking for a recommendation with stronger defaults.
 
 The user is rejecting a repeating pattern of fake choice.
 
@@ -245,6 +302,13 @@ This is why so many apparently "reasonable" answers fail this repo.
 They improve surface flexibility without relocating where the real intelligence
 of the system lives.
 
+That is why this page cannot afford to sound satisfied by templating,
+generation, or GitOps language by itself.
+
+Those may all be useful.
+They are still near-misses if they do not create a new shared runtime truth
+that the wrong node can actually rely on under stress.
+
 ### Refusal 2: wrong-node traffic that still depends on sacred human memory
 
 The desired system is not just "load balanced."
@@ -257,6 +321,18 @@ It is supposed to behave like this:
   work
 
 That is a much stricter demand than ordinary reverse-proxy redundancy.
+
+It is also why many "distributed enough" answers still fail here.
+
+If the receiving node still depends on:
+
+- implied topology
+- stale registry truth
+- operator-maintained rescue conventions
+- semantically uncertain middleware inheritance
+
+then the ecosystem is still asking the user to do the same hidden labor, only
+now beneath a larger stack that makes the burden harder to name.
 
 It is also why the user keeps sounding harsher than normal infra consumers.
 The bar is not "route traffic somewhere healthy."
@@ -717,6 +793,20 @@ Different domains may earn stronger ownership at different times:
 If one page starts talking as if a single tool promotion obviously closes all
 four domains at once, that page is overselling the architecture.
 
+This is where a lot of infrastructure writing becomes accidentally dishonest.
+
+It narrates promotion as if "serious platform adopted" means:
+
+- routing got smarter
+- placement got truthful
+- failover got durable
+- state got authoritative
+
+when in practice those domains rarely move together that cleanly.
+
+The user is sensitive to exactly that kind of bundled overclaim because it is
+one of the main ways fake options keep getting sold as closure.
+
 ## The real evaluation question
 
 Every platform family should be judged by the same hard question:
@@ -741,6 +831,20 @@ It is:
 > which missing truth does it own, how inspectable is that truth, what tax
 > does it import, and does that tax finally pay down the wrong-node and
 > backend-loss lies that Compose alone cannot fix?
+
+The phrase "pay down" matters.
+
+This repo is not looking for one more elegant architecture.
+It is looking for a purchase that retires specific debt:
+
+- placement debt
+- peer-eligibility debt
+- route-persistence debt
+- state-authority debt
+
+If a candidate does not retire one of those debts in a way the docs can point
+to concretely, it has not yet earned promotion no matter how adult the stack
+sounds.
 
 ## The purchase map the repo should keep using
 
@@ -776,6 +880,10 @@ That is not indecision.
 It is a refusal to let cleaner architecture rhetoric erase real differences in
 what each burden actually is.
 
+It is also a refusal to accept the infrastructure market's favorite shortcut:
+once the nouns sound serious enough, the burden no longer needs to be tracked
+with the same cruelty.
+
 ## The orchestration search is really protecting something
 
 This research is not protecting a brand preference.
@@ -797,3 +905,7 @@ a category where distributed Docker does not immediately collapse into either:
 - or total orchestrator capture
 
 This page should keep that pressure explicit.
+
+If it stops doing that, it becomes one more polished comparison page that
+helps the reader feel updated while leaving the user inside the same fake
+option space that caused this repo to exist.

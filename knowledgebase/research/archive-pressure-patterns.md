@@ -22,6 +22,17 @@ place.
 
 That forgetting is one of the main failure modes of the whole site.
 
+The danger is not just that the repo forgets facts.
+The bigger danger is that it remembers facts while forgetting the accusation.
+
+Once that happens, the docs start sounding informed, balanced, and mature
+while quietly reinstating the exact betrayal the user keeps reacting to:
+
+- plenty of nouns
+- plenty of options
+- plenty of architecture literacy
+- still no believable layer that removes the hidden human burden
+
 ## What this page is and is not allowed to prove
 
 This is an archive-pressure map.
@@ -48,6 +59,14 @@ It is tempting to let repeated pressure masquerade as proof of direction or
 near-implementation.
 
 That would be the wrong lesson.
+
+The wrong lesson is not merely "archive pressure is not implementation."
+It is also:
+
+- archive richness is not understanding
+- repeated tool comparisons are not genuine choice
+- better language around HA is not one inch of transferred burden
+- a persuasive synthesis can still be a more elegant form of forgetting
 
 ## Strongest honest current answer
 
@@ -100,6 +119,17 @@ the ecosystem keeps answering adjacent questions instead of this one.
 
 That repetition is not noise.
 It is one of the strongest signals in the whole repo.
+
+It is also not indecision.
+
+The user is not wandering because they cannot settle on vocabulary.
+They keep circling the same wound because most answer spaces keep performing
+the same dodge with different branding:
+
+- static truth, but dressed up as dynamic
+- sacred nodes, but wrapped in more respectable machinery
+- failover language, but without preserved request meaning
+- HA tone, but with operator memory still doing the real work
 
 ## High-signal archive clusters
 
@@ -158,6 +188,14 @@ What this forces the docs to preserve:
 - the user cares about preserved service meaning after wrong-node entry, not
   just packet redirection
 
+What this cluster should also make harder to forget:
+
+- a wrong-node answer that still needs a human explainer is still failure
+- a route that can be rescued only because the operator already knows the map
+  is not real dignity
+- "almost there" language is one of the main ways the ecosystem keeps trying
+  to close this complaint without actually answering it
+
 ### Cluster C: The user keeps searching for peer-equal or narrow coordination, not just bigger names
 
 Primary files:
@@ -181,6 +219,14 @@ What this forces the docs to preserve:
 - the repo is not anti-platform out of stubbornness
 - it is trying to prevent unjustified worldview capture
 - "mature orchestrator" is weaker than "owns the missing truth cleanly"
+
+This matters because the user's frustration is not solved by being offered
+larger and larger adulthood theater.
+
+The repeated complaint is:
+
+> why do so many "serious" answers only become serious by charging a giant
+> worldview tax before they have shown me one believable middle option?
 
 ## What this pressure is doing to the repo
 
@@ -245,6 +291,17 @@ The deeper pattern is:
 
 the user wants the system to stop requiring private reconstruction of topology
 and recovery truth just to behave like one platform under stress.
+
+That sentence should be treated as the archive's most dangerous preservation
+target.
+
+If later documentation paraphrases it into:
+
+- "better service discovery"
+- "better failover ergonomics"
+- "less manual config"
+
+then the docs have already rounded off the edges that matter most.
 
 ## Pattern 2: "Wrong-node requests should still work"
 
@@ -465,6 +522,13 @@ The clearest archive-aligned progress artifacts would look like:
 Until artifacts like those exist, the archive should keep functioning as a
 negative benchmark, not as a consolation prize.
 
+It should also keep functioning as a hostility filter against polished
+ambiguity.
+
+If a future page is beautifully organized, richly cross-linked, and still
+cannot say exactly what new shared truth replaced private operator memory,
+archive pressure should count that page as another elegant near-miss.
+
 ## Bottom line
 
 The core archive complaint is not ambiguous.
@@ -480,3 +544,9 @@ k3s, and stateful caution all at once.
 
 The repo is not being indecisive.
 It is trying to stop accepting fake closure.
+
+That is the real value of the archive.
+
+It keeps the docs from pretending that better wording, broader option sets, or
+calmer architecture diagrams are the same thing as one more important truth
+finally leaving the operator's head.
