@@ -47,6 +47,47 @@ The site should also keep one harsher follow-up visible:
 That is the question that stops a polished knowledgebase from becoming one more
 beautifully organized version of the same old ambiguity.
 
+## How to read this site without being fooled
+
+This site is only useful if the reader keeps several truth registers separate
+instead of letting them blend into one impressive-sounding story.
+
+The main registers are:
+
+- live runtime truth from the root
+  [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+  and the included fragments under
+  [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
+- repo-native architecture intent from files such as
+  [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+  and [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+- planning and promotion work from docs that describe what the repo is trying
+  to earn next
+- archive pressure from conversations and notes that reveal which kinds of
+  answers the user keeps rejecting
+
+Those registers are related, but they are not interchangeable.
+
+If a page sounds persuasive because it quietly lets:
+
+- intent impersonate runtime
+- promotion work impersonate present capability
+- archive frustration impersonate implementation proof
+- runtime fragments impersonate solved architecture
+
+then that page has failed, even if every sentence sounds reasonable.
+
+This is the closest thing the knowledgebase has to a site-wide reading
+contract:
+
+- use the runtime to prove runtime claims
+- use intent files to reconstruct the dream
+- use planning files to explain what is being promoted
+- use archive pressure to recover what simpler summaries would otherwise erase
+
+If a page cannot say which register a claim belongs to, it is still too vague
+for this repo.
+
 There is a stricter rule underneath that sentence:
 
 the site is not allowed to become clearer by making the user's dream smaller.
@@ -94,6 +135,78 @@ That is the most important reading rule for the whole site:
 - do not answer a smaller neighboring question just because it is easier
 - do not swap the real wound for a tidy summary of related subproblems
 - do not let rhetorical coherence outrank faithful reconstruction
+
+## What a real answer would actually have to own
+
+The site should not merely describe the dream.
+It should keep the implied requirement stack visible.
+
+A real answer would have to own at least these truths:
+
+1. first-hop truth:
+   multiple healthy public nodes can receive the first request without one
+   silently remaining the sacred entrypoint
+2. placement truth:
+   the receiving node can determine where the requested service actually lives
+   now, not where someone hoped it would live
+3. eligibility truth:
+   the system can distinguish a merely reachable peer from a peer that is
+   semantically safe to forward to
+4. route-survival truth:
+   the fallback path needed during wrong-node or degraded-node behavior does
+   not disappear with the local backend it was supposed to rescue
+5. policy continuity truth:
+   auth, middleware, headers, and request meaning survive the handoff instead
+   of degrading into a looser emergency path
+6. stateful honesty:
+   stateful services are not narrated as solved just because a proxy can still
+   reach something over the network
+7. operator-legibility truth:
+   the explanation for success or failure lives in inspectable shared surfaces
+   rather than private memory and remembered repair rituals
+
+If a proposed future only improves one or two of those truths, it may still be
+useful, but it is not yet the full answer this repo keeps trying to recover.
+
+This is why so much infrastructure writing feels irrelevant here.
+It often stops after:
+
+- ingress plurality
+- service exposure
+- controller presence
+- health status
+- or a respectable-looking HA diagram
+
+Those can all exist while the operator still privately carries the most
+important truths.
+
+That is the difference between "more infrastructure" and "less hidden burden."
+
+## What still does not count as solving the problem
+
+The site also needs an explicit anti-cheat section, because this repo is full
+of answers that can look mature while quietly preserving the same wound.
+
+The dream is not satisfied by:
+
+- Cloudflare being able to hit more than one node while the next hop is still
+  a semantic gamble
+- Traefik being present while wrong-node request preservation remains partial
+  or unproven
+- a placement registry existing on paper while the live runtime does not
+  actually own and consume it
+- helper automation existing while the real topology still has to be mentally
+  reconstructed by the operator
+- a stateful backend being reachable from more than one node while write
+  ownership, storage truth, and failure semantics remain singular
+- a respectable orchestrator being introduced before it has proven which
+  smaller missing truths it actually relocates out of private memory
+
+This is the negative benchmark the whole site should preserve:
+
+if a reader leaves with more named options but still cannot tell whether the
+wrong healthy node has stopped being architecturally humiliating, the docs are
+still too smooth.
 
 The archive pressure behind that question is not hypothetical.
 It shows up directly in conversations where the user says, in effect:

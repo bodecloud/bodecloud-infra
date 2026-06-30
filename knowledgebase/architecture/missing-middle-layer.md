@@ -47,6 +47,12 @@ repo is actually asking.
 This page has to behave more like reconstruction from pressure than summary
 from categories.
 
+It also has to do something stricter than merely defend "lighter than
+Kubernetes."
+It has to identify the smallest additional layer that would genuinely reduce
+the user's reconstruction burden instead of just relocating it behind nicer
+language.
+
 ## The real problem statement
 
 The project is not primarily asking:
@@ -98,6 +104,25 @@ That phrase matters.
 
 The wanted layer does not merely have to coordinate.
 It has to be explainable.
+
+That explainability requirement is what keeps this page from collapsing into a
+tool-family comparison.
+
+The user is not only asking:
+
+- which system can route
+- which system can fail over
+- which system can schedule
+
+They are also asking:
+
+- where does the new truth live
+- who can inspect it
+- what still depends on remembered operator lore
+- what disappears when the local backend disappears
+
+If a middle layer does not answer those questions cleanly, it may still be an
+interesting product, but it is not the category this repo is trying to find.
 
 That means the page should be read with a harsher standard than ordinary
 architecture prose:
@@ -157,6 +182,21 @@ The user's standard is closer to:
 > when reality goes sideways, can the system still explain itself without
 > forcing me to reconstruct hidden topology lore from memory?
 
+This page should therefore be read with one hard rule:
+
+bad-day inspectability outranks respectable architecture vocabulary.
+
+If a candidate solution sounds mature but becomes harder to explain under:
+
+- wrong-node entry
+- peer loss
+- stale placement truth
+- secret drift
+- route disappearance
+- stateful ownership conflict
+
+then it is not a real middle answer for this repo.
+
 ## What middle layer means here
 
 This phrase becomes useless if it just means some automation.
@@ -182,6 +222,66 @@ That is the cleanest one-line definition on this page.
 If a future control layer routes better, schedules better, or self-heals better
 but still leaves the same sacred facts socially held, then it may be useful,
 but it is not yet the missing middle this repo is looking for.
+
+## Minimum properties of a real middle layer
+
+To stop this phrase from drifting, the page needs a stricter checklist.
+
+A real middle layer for this repo would need to provide:
+
+1. explicit placement truth:
+   where the service currently lives is recorded in a shared inspectable form
+2. explicit peer eligibility truth:
+   the system can distinguish between a reachable peer and a semantically valid
+   peer for the class of service being forwarded
+3. fallback-path durability:
+   the route needed for rescue does not vanish with the local failure it is
+   supposed to compensate for
+4. request-meaning preservation:
+   forwarded traffic keeps the same auth, middleware, and service identity
+   semantics
+5. class-sensitive honesty:
+   stateless and stateful services are not given the same emotional grade just
+   because both can be proxied
+6. operator readability:
+   when something fails, the explanation can be recovered from tracked system
+   surfaces rather than ritual memory
+
+That is the minimum bar.
+
+If a proposed layer only gives:
+
+- service discovery without fallback durability
+- forwarding without policy continuity
+- stateful reachability without stateful honesty
+- automation without readability
+
+then it is still a partial answer, not the missing middle.
+
+This is what keeps the category from dissolving into "some automation plus a
+registry."
+
+## What would still be fake middle-layer theater
+
+The repo also needs a negative checklist, because fake middle layers are often
+exactly what look attractive at first glance.
+
+A candidate is still theater if:
+
+- it introduces shared config but not shared live truth
+- it forwards requests but loses middleware, auth, or request identity under
+  that handoff
+- it centralizes the real answer into one helper node or one helper process
+  while preserving multi-node rhetoric
+- it can recover only while the operator already knows which peer is special
+- it narrates stateful backends as "covered" because a proxy target exists
+- it reduces YAML pain while leaving bad-day causal explanation harder than
+  before
+
+That last failure matters a lot.
+
+This repo is not trying to trade one form of toil for another prettier one.
+It is trying to reduce the number of truths that only exist socially.
 
 That means a good middle layer must be understandable in failure language, not
 just architecture language.
@@ -233,6 +333,16 @@ That is not a flaw in Compose.
 It is the point where a local runtime description stops being a sufficient
 distributed truth source.
 
+That distinction is important because this page is not anti-Compose.
+It is anti-fantasy.
+
+Compose remains the right authoring anchor until a stronger layer proves that
+it relocates enough of the missing truth burden to justify itself.
+
+The real challenge is not to "graduate from Compose."
+It is to stop asking Compose to pretend it already owns distributed truths that
+it does not naturally own.
+
 This is also why the user keeps sounding more frustrated than a normal
 "should I use Nomad or k3s?" conversation would imply.
 
@@ -250,6 +360,25 @@ That last failure mode is the one the docs must keep visible.
 The user is not seeking a magical tool that solves everything.
 They are seeking a control layer that does not cheat by paying down one burden
 while re-hiding the rest under smoother language.
+
+## How future candidates should be judged
+
+This page should make later comparison pages harsher, not softer.
+
+Before any proposed control layer earns emotional legitimacy here, it should be
+interrogated with questions like:
+
+- what new truth surface does it create that the operator can actually inspect?
+- which current hidden burden does it relocate out of memory?
+- what happens when traffic lands on the wrong healthy node?
+- what happens when the preferred local backend is gone?
+- what remains true for stateless HTTP services that is still false for TCP or
+  stateful systems?
+- which part of the claimed resilience is behavior and which part is still
+  narration?
+
+If the answer set is still fuzzy, then the solution may still be worth
+researching, but it has not yet earned the status of "the missing middle."
 
 This is another place where the docs need to act more like a held-out test
 than like a summary:

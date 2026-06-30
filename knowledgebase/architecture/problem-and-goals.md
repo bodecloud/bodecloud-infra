@@ -38,6 +38,17 @@ That unevenness is part of the architecture, not an editorial annoyance.
 
 If a page does not answer that version, it is still too shallow.
 
+The page also has to do something stronger than sounding intense.
+It has to reconstruct the problem in a way that lets later pages be judged.
+
+That means this page should answer four separate questions at once:
+
+1. what exact pain is being treated as central
+2. which truths the current stack still fails to own cleanly
+3. what a real improvement would need to relocate out of private memory
+4. which adjacent infrastructure answers are still too small even if they are
+   technically respectable
+
 The docs can also fail by answering a more normal adjacent question extremely
 well.
 
@@ -84,6 +95,15 @@ It includes:
 - policy continuity truth
 - stateful honesty
 
+Those are not seven equal bullets.
+They are seven different truth burdens that tend to break at different times.
+
+That asymmetry is the whole reason the repo is so easy to misunderstand.
+
+Some layers can look strong while the more humiliating ones remain weak.
+That is why this page has to behave more like a requirement breakdown than a
+generic architecture intro.
+
 What makes this problem hard is that each of those truths becomes visible at a
 different moment of pain.
 
@@ -102,6 +122,50 @@ Some truths are still weak:
 - fallback-route survival under the relevant failure
 
 If those are narrated as if they mature together, the docs lie.
+
+## Requirement stack implied by the dream
+
+Once the dream is stated honestly, the required stack becomes more concrete.
+
+The repo is implicitly asking for a platform that can satisfy all of these:
+
+1. any-node first hop:
+   any surviving public node can accept the request
+2. local-first preservation:
+   if the requested service is local, the node should serve locally without
+   pretending that locality does not matter
+3. wrong-node preservation:
+   if the service is remote, the request still has a legitimate path to the
+   correct healthy peer
+4. policy preservation:
+   the forwarded request keeps the same auth, middleware, and routing meaning
+   instead of becoming a degraded bypass path
+5. survivable fallback:
+   the rescue path remains available under the failure it was meant to absorb
+6. truthful state language:
+   stateful systems are described according to their real write, storage, and
+   failover semantics rather than by the mere existence of a network route
+7. inspectable ownership:
+   an operator can explain why the system behaved as it did from tracked shared
+   truth instead of remembered topology folklore
+
+This requirement stack is the page's most important output.
+
+If a future mechanism satisfies:
+
+- `1` and `2`, but not `3`
+- or `3` and `4`, but not `5`
+- or `1` through `5`, but not `6`
+- or all of those while still failing `7`
+
+then it may represent progress, but it has not yet reached the repo's actual
+goal state.
+
+That is why "does failover work?" is still too weak a question.
+The better question is:
+
+which parts of this stack are genuinely system-owned now, and which parts are
+still being socially reconstructed by the operator?
 
 That is why so many options feel promising for ten minutes and then collapse:
 
@@ -204,6 +268,38 @@ Most option lists quietly assume one of the following is fine:
 Those are not neutral compromises in this repo.
 They are the exact pattern the repo is trying to escape.
 
+## The goal is not just a mechanism, but a transfer of burden
+
+Most infrastructure goal statements name a feature set.
+This one needs a different formulation.
+
+The real goal is a transfer:
+
+- from private memory to inspectable shared truth
+- from wrong-node surprise to wrong-node preservation
+- from diagram-level HA language to behavior-level honesty
+- from "I know which machine is special" to "the system tells me which machine
+  matters and why"
+
+That transfer is why the user keeps rejecting otherwise respectable answers.
+
+A platform can add:
+
+- more routing logic
+- more healthchecks
+- more registries
+- more automation
+- or more controller machinery
+
+and still fail the goal if the important explanations remain tacit.
+
+This is also why "more options" keeps feeling like a non-answer.
+The missing thing is not choice volume.
+It is burden relocation.
+
+If the operator remains the secret place where the system becomes coherent,
+the goal has not been met.
+
 ## Why this feels bigger than just make failover work
 
 The user is not only frustrated that failover is hard.
@@ -225,6 +321,12 @@ That is why the repo keeps rediscovering the same missing middle layer.
 
 The project does not feel hard because it lacks components.
 It feels hard because too many crucial truths are still implicit.
+
+This is the place where a lot of lighter-weight documentation quietly fails.
+It explains the chain, but it does not force the reader to ask which links are
+currently system-owned and which are still folklore.
+
+That distinction has to remain active on every later page.
 
 That is why the benchmark here is harsher than “can we fail over?”
 
@@ -257,6 +359,18 @@ For this architecture question:
 are stronger intent surfaces than
 [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md),
 which is mostly about repo execution, validation, and environment handling.
+
+That distinction matters here because one of the easiest ways to write useless
+docs is to let broad agreement across repo files sound like runtime maturity.
+
+This page should therefore be read alongside:
+
+- [`instruction-surfaces-and-authority.md`](instruction-surfaces-and-authority.md)
+- [`../operations/source-assimilation-index.md`](../operations/source-assimilation-index.md)
+
+The first stops authority flattening.
+The second stops retrieval flattening.
+This page depends on both.
 
 That distinction matters because weaker docs keep blurring:
 
