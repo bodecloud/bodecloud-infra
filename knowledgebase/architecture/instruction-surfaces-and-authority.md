@@ -93,6 +93,13 @@ The shortest honest answer is:
 Those files are aligned.
 They are not equal.
 
+They are also not additive proof.
+
+Several files saying adjacent true things does not upgrade the runtime into a
+stronger state.
+It only means the repo has become more explicit about what it wants and what it
+refuses to fake.
+
 If a contributor comes away thinking "they all basically say the same thing,"
 then this page has failed.
 
@@ -120,6 +127,19 @@ surfaces correctly:
 
 Those are exactly the moves that let the docs become smoother and less honest
 at the same time.
+
+This matters because "agreement" is one of the easiest things to overread in a
+documentation-heavy repo.
+
+The repo can be in strong agreement about:
+
+- the dream
+- the wound
+- the proof boundaries
+- the likely missing layer shape
+
+while still being far from runtime closure on the held-out scene that actually
+matters.
 
 They are also the moves that make the repo sound more mature than the current
 runtime has actually earned.
@@ -186,6 +206,17 @@ That answer should be treated as the default compression of the authority map.
 It should also be treated as a warning against overpromotion.
 The repo now has enough repeated language that a casual reader can mistake
 coherence for completion.
+
+This is why the user keeps asking this question again in slightly different
+forms.
+
+It is not repetition for its own sake.
+It is a stress test against a real repo failure mode:
+
+- the docs get sharper
+- the files sound more aligned
+- contributors start acting as if alignment itself proved the hard part was
+  nearly settled
 
 ## File-by-file authority
 
@@ -318,6 +349,12 @@ That distinction matters because implementation-anchor files often acquire
 accidental charisma.
 They mention real commands, real paths, and real runtime surfaces, which can
 make them sound like they implicitly prove more architecture than they do.
+
+That is exactly why `AGENTS.md` must stay third in the authority order.
+
+It is valuable because it drags people back to the live surface.
+It becomes dangerous when that live-surface gravity gets mistaken for proof that
+the live surface already behaves like the dream surface.
 
 ## `.cursorrules`
 

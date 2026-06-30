@@ -84,6 +84,18 @@ The dream is:
 
 That is the central demand.
 
+It is also the sentence most summaries are tempted to weaken.
+
+They usually weaken it into something like:
+
+- better HA
+- better failover
+- better clustering
+- better self-hosting ergonomics
+
+Those are all easier to discuss.
+They are also all smaller than the user's actual demand.
+
 ## What a real demand-reconstruction packet should leave behind
 
 If this page is doing its job, the reader should leave with a packet that can
@@ -159,6 +171,12 @@ That is why so many respectable options still feel insulting in context.
 They are often improvements.
 They just stop one layer before the user's actual held-out scene.
 
+That "one layer before" pattern is one of the most important retrieval clues in
+the whole repository.
+
+If a summary does not preserve the fact that many answers fail just one layer
+before dignity returns, then the summary has already normalized the wound.
+
 ## Why "more options" still feels like a lie to the user
 
 The repo is surrounded by products, guides, and half-solutions.
@@ -213,6 +231,12 @@ back into private human memory.
 It is also why ordinary self-hosting optimism does not work well here.
 The repo is not impressed by components that behave until the first topology
 question becomes socially manual again.
+
+That last phrase matters because it names the exact betrayal point.
+
+The user is not asking for impressive happy-path machinery.
+The user is asking for the topology question to stop becoming socially manual
+again the moment the request lands on the wrong healthy machine.
 
 ## What still does not count as a satisfying option in this repo
 
@@ -337,6 +361,15 @@ That hidden reconstruction looks like:
 The dream is not merely "better automation."
 It is the removal of those remembered truths as the effective runtime control
 plane.
+
+That is why this page has to stay unusually fused.
+
+If you separate the technical and emotional layers too aggressively, you lose
+the most important fact:
+
+- the reason ordinary answers feel fake is not just that they are incomplete
+- it is that they leave the degrading human role intact while sounding like
+  they solved something larger
 
 ## What this page would need before anyone could overread it as progress
 

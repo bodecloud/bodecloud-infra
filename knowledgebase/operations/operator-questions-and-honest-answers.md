@@ -50,6 +50,13 @@ answers.
 What feels absent is not "tools."
 What feels absent is a believable handoff of burden.
 
+That phrase should stay literal.
+
+The repo is not asking for a handoff of responsibility in the abstract.
+It is asking for a believable handoff of the exact truths that currently live
+as remembered placement, remembered peer safety, remembered fallback logic, and
+remembered service-class caveats.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -125,6 +132,16 @@ real through-line of the archive.
 If an answer does not name that pattern, it is probably still participating in
 it.
 
+That is also why operator Q and A is such a dangerous genre here.
+
+It is very easy for an answer to become more useful-looking while secretly
+becoming less faithful:
+
+- more recommendations
+- more product names
+- more comparison nuance
+- less pressure on the exact burden that still stayed operator-owned
+
 ## What a genuinely useful answer should leave behind
 
 Each serious answer on this page should leave behind more than advice.
@@ -184,6 +201,12 @@ It is not the full ask.
 That distinction matters because the ecosystem is full of useful engineering
 that still does not produce a satisfying option in this repo's sense.
 
+This page should not let "useful engineering" turn into a euphemism for
+"close enough."
+
+The user is frustrated precisely because the world is already full of things
+that are useful, respectable, half-true, and still not burden-faithful enough.
+
 ## Question 2: Why do ordinary HA answers keep feeling fake here?
 
 Because they usually solve one slice while leaving the hidden burden where it
@@ -212,6 +235,16 @@ this repo.
 
 That is true even when the answer is technically respectable.
 Technical respectability and burden relocation are not the same achievement.
+
+That sentence is one of the main honesty rails for the whole knowledgebase.
+
+The site should keep forcing readers to distinguish:
+
+- a better component
+- a better architecture story
+- a better present-tense burden owner
+
+Only the third one changes the user's actual answer space.
 
 ## Question 3: Why does the repo sometimes act like there are "no real options" even though there are many tools?
 
@@ -316,6 +349,12 @@ layer between raw Compose and heavyweight scheduler worldview.
 The current runtime does not yet prove a live consumed root
 [`services.yaml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/services.yaml).
 The concept remains architecture intent rather than finished runtime proof.
+
+That is why `services.yaml` has to be read as pressure, not closure.
+
+It is the repo naming the shape of the missing truth surface.
+It is not yet the repo proving that the truth surface now exists and owns the
+bad-day decision path.
 
 ## Question 7: Why is wrong-node behavior the real benchmark instead of "the dashboard is green"?
 
