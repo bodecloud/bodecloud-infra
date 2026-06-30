@@ -86,6 +86,39 @@ They are not equal.
 If a contributor comes away thinking "they all basically say the same thing,"
 then this page has failed.
 
+## What still does not count as understanding authority here
+
+This page also needs to block a softer misread.
+
+The following still do not count as having understood the repo's instruction
+surfaces correctly:
+
+- noticing that the main files use similar language
+- concluding they all carry the same truth class
+- using repeated wording as if it were runtime corroboration
+- treating stricter style rules as distributed-systems maturity evidence
+- treating implementation-anchor files as if they were the architecture thesis
+
+Those are exactly the moves that let the docs become smoother and less honest
+at the same time.
+
+## What a real authority-mapping packet would have to contain
+
+Before this page supports a stronger claim like "the repo's guidance surfaces
+are now genuinely assimilated," it should be because the documentation leaves
+behind a concrete packet.
+
+That packet should contain:
+
+- the exact file being cited
+- the truth class that file carries
+- the stronger claim that file is allowed to support
+- the adjacent stronger claim it is not allowed to support
+- the file that must be consulted next if the question shifts truth class
+
+Without that packet, the reader can still mistake aligned files for one merged
+voice.
+
 ## The ranking that should govern the whole knowledgebase
 
 For the specific question:

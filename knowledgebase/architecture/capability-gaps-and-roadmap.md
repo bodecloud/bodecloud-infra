@@ -72,6 +72,38 @@ In the priority implementation today, that means:
 - protected-route continuity
 - keeping TCP and stateful promotion under separate honesty gates
 
+## What still does not count as sequencing well
+
+This page needs to reject roadmap theater, not only feature theater.
+
+The following still do not count as strong sequencing:
+
+- putting the missing items in a tidy order
+- naming the lower-level dependencies correctly
+- showing that several experiments are happening in parallel
+- calling the next work "foundational" without naming the exact hidden burden
+- having a roadmap that sounds sober while it still leaves the same weak truth
+  surfaces untouched
+
+Those things may improve planning posture.
+They still do not prove the sequence is actually protecting the user from fake
+closure.
+
+## What a real roadmap-promotion packet would have to contain
+
+Before this page supports stronger language like "this next step has clearly
+earned priority," it should point to a packet containing:
+
+- the exact hidden burden the priority is meant to remove
+- the current worktree evidence that the burden still survives
+- the narrower artifact, drill, or truth surface that would close it
+- the stronger class of claim that closure would unlock next
+- the explicit statement of what still remains illegal to claim after that
+  priority lands
+
+Without that packet, even a good sequence can still collapse back into
+aspiration.
+
 ## The shortest honest roadmap
 
 The current best order remains:

@@ -98,6 +98,35 @@ waiting to be replaced. The honest reading is that Compose still is the
 implementation center of gravity, while the anti-SPOF, no-single-sacred-box
 dream remains only partially promoted into system-owned behavior.
 
+## What still does not count as fragment-map insight
+
+This page should also reject a very common false upgrade.
+
+The following still do not count as a meaningful understanding of the runtime
+shape:
+
+- knowing which fragment owns which domain
+- seeing that the include graph is broad
+- noticing that the root file is still important
+- describing the domains more cleanly than before
+- treating modularity as if it were already a resilience layer
+
+Those things improve orientation.
+They still do not answer whether the assembled runtime has stopped depending on
+private placement memory or fragile rescue semantics.
+
+## What a real fragment-authority proof packet would have to contain
+
+Before this page is used to support stronger language like "the runtime shape
+is now clearly reconstructed," it should point to a packet containing:
+
+- the exact fragment or root-owned surface being credited
+- the narrower operational burden that surface really owns
+- the adjacent burden it still does not own
+- the reason that domain cannot yet be widened into wrong-node or HA proof
+
+Without that packet, tree literacy can still impersonate architecture closure.
+
 ## What the root file tells us structurally
 
 The root file already encodes one of the repo's strongest truths:
