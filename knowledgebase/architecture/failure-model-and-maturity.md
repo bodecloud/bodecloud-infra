@@ -13,6 +13,21 @@ It is trying to answer the question that actually matters here:
 
 That is the maturity standard for this repo.
 
+## The fake maturity move this page is supposed to prevent
+
+The bad version of maturity language in this repo sounds like:
+
+- there are more services
+- there are more helpers
+- there are more dashboards
+- there are more edge components
+- therefore the platform is becoming mature
+
+That move is exactly what this page should interrupt.
+
+This repo does not care about maturity as visual seriousness.
+It cares about maturity as transferred bad-day truth.
+
 ## Why maturity has to stay lane-specific
 
 This stack is already too real to be called a toy.
@@ -58,6 +73,9 @@ The test is:
 If the answer is `none`, then the lane may be better instrumented or better
 documented, but it has not matured in the way this repo actually cares about.
 
+That is why `better architecture` and `more mature failure lane` have to stay
+separate ideas here.
+
 ## Maturity levels
 
 ### `Intent-shaped`
@@ -83,6 +101,16 @@ language without borrowing confidence from adjacent lanes.
 
 Most important lanes are still below that last line.
 
+## The private sentence companion to each lane
+
+Each lane should be read with an implicit companion question:
+
+> what sentence would the operator still have to finish privately if this lane
+> were exercised right now?
+
+If the page cannot answer that sentence, the maturity label is too vague to be
+useful.
+
 ## The proof-packet rule
 
 No lane should be upgraded unless the docs can point to a narrow proof packet
@@ -96,6 +124,10 @@ that includes:
 - the sentence still forbidden
 
 Without that packet, `maturity` is still mostly atmosphere.
+
+That rule matters even more now that the docs are strong enough to generate
+false confidence if a lane gets upgraded for sounding coherent instead of
+proving burden transfer.
 
 ## The matrix
 
@@ -129,6 +161,17 @@ The current state is best described like this:
 - the burden transfer is still incomplete in the most important failure modes
 
 That is why this page refuses a single global badge.
+
+## The lanes that are easiest to flatter by accident
+
+The following lanes are especially vulnerable to inflated language:
+
+- public entry, because plural DNS sounds more finished than it is
+- Traefik-centered ingress, because route execution sounds like route truth
+- protected routes, because successful response codes hide policy discontinuity
+- helper-driven fallback, because generated config sounds closer to survival
+- stateful services, because reachability sounds much closer to resilience than
+  it really is
 
 ## The lanes most likely to be overclaimed
 
@@ -166,6 +209,29 @@ authority, promotion, or write dignity.
 Headscale is the clearest warning because its current config still resolves to
 SQLite on one state path.
 
+## What a lane upgrade should actually feel like
+
+A lane upgrade should feel less like:
+
+- `the docs are finally comfortable saying this`
+
+and more like:
+
+- `one humiliating private sentence is no longer true`
+
+Examples:
+
+- placement truth matures when `I still privately know what runs where` becomes
+  less true
+- wrong-node HTTP matures when `the non-owner node still needs me to explain
+  the backend` becomes less true
+- backend-loss maturity improves when `the rescue path disappears during the
+  exact failure` becomes less true
+- protected-route maturity improves when `the forwarded route is not really the
+  same protected route` becomes less true
+- stateful maturity improves when `the real writer is still singular and only I
+  know it` becomes less true
+
 ## What this repo has already learned correctly
 
 The repo has already learned several important negative truths:
@@ -200,6 +266,16 @@ The docs must not claim maturity because:
 - the diagrams got cleaner
 - the happy path works
 - a future orchestrator sounds credible
+
+## The exact stronger sentences still forbidden today
+
+This page still forbids these global upgrades:
+
+- `the platform is broadly anti-SPOF now`
+- `multi-node ingress is mature`
+- `protected operator routes are effectively preserved across nodes`
+- `stateful services are close enough to HA for normal language`
+- `the stack is one trustworthy cloud already`
 
 ## The smallest honest maturation sequence
 

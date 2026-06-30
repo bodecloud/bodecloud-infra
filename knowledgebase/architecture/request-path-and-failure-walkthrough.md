@@ -44,6 +44,22 @@ This page is not allowed to prove:
 This is a decomposition page.
 It is not a green-check page.
 
+## The fake walkthrough this page is supposed to stop
+
+The bad version of this page would do something like this:
+
+1. DNS resolves
+2. Traefik matches
+3. auth middleware exists
+4. helper containers exist
+5. therefore the distributed request story is mostly in place
+
+That is exactly the walkthrough shape this page is meant to reject.
+
+A detailed walkthrough can still be useless if it quietly skips the moment
+where the receiving node stops knowing and the operator starts privately
+completing the story.
+
 ## The target contract
 
 The clearest contract still lives in
@@ -137,6 +153,16 @@ So the request-path problem is not hypothetical.
 The missing layer matters because the runtime is already broad enough to make
 the missing truth socially expensive.
 
+## The private sentence test for this page
+
+At the end of any walkthrough section, the reader should be able to answer:
+
+> what exact sentence would still need private operator completion if this
+> request landed on the wrong healthy node right now?
+
+If the section leaves behind only components and flow language, but not that
+surviving private sentence, the walkthrough is still too soft.
+
 ## The one question to keep asking at every hop
 
 At every stage of the path, keep asking:
@@ -183,6 +209,11 @@ This is the first place many ecosystems overclaim.
 Plural DNS is necessary.
 Plural DNS is not preserved request meaning.
 
+Private sentence still surviving after Hop 1:
+
+> traffic can hit more than one node, but I still personally know that this
+> says nothing about what the chosen node should do next
+
 ### Hop 2: Traefik accepts the hostname
 
 What is live now:
@@ -204,6 +235,11 @@ What it still does not prove:
 
 This hop is route execution.
 It is not yet route truth.
+
+Private sentence still surviving after Hop 2:
+
+> the route matched, but I still personally know that route execution is
+> weaker than distributed backend truth
 
 ### Hop 3: middleware and auth policy are applied
 
@@ -228,6 +264,11 @@ What it still does not prove:
 
 This is why protected HTTP has to stay stricter than a plain stateless route.
 
+Private sentence still surviving after Hop 3:
+
+> the same middleware names exist, but I still personally know that this does
+> not prove the remote handoff preserves the same route meaning
+
 ### Hop 4: local service execution
 
 If the target service is local to the receiving node, the story gets much
@@ -247,6 +288,11 @@ What it still does not prove:
 
 The local happy path is real progress.
 It is not the user's actual benchmark.
+
+Private sentence still surviving after Hop 4:
+
+> the owner node can serve the route, but I still personally know that this
+> says very little about wrong-node dignity
 
 ## Walkthrough 2: protected HTTP
 
@@ -292,6 +338,24 @@ That is why "the page still loads" is too weak.
 A route that answers but no longer behaves like the same protected service is
 not a successful handoff.
 
+## Walkthrough 2.5: the false comfort transition
+
+This repo repeatedly risks one exact transition:
+
+- a route exists locally
+- the route is protected
+- the edge stack is serious
+- therefore a peer-forward version of the route must be close enough
+
+That transition is illegitimate until the docs can show:
+
+- the source of placement truth
+- the source of peer-eligibility truth
+- the continuity of middleware and auth semantics
+- the continuity of the route under backend loss if failover is being claimed
+
+Without those, the walkthrough is still leaning on emotional plausibility.
+
 ## Walkthrough 3: wrong-node entry
 
 This is the scene the user actually cares about.
@@ -326,6 +390,11 @@ for:
 
 That is the missing middle layer in one scene.
 
+Private sentence still surviving in the wrong-node scene:
+
+> the wrong node can see the request shape, but I still personally know facts
+> the runtime has not yet proven it owns
+
 ## Walkthrough 4: backend-loss scene
 
 There is a second trap that must stay separate from wrong-node entry:
@@ -355,6 +424,11 @@ Backend-loss success means:
 Those proofs overlap.
 They are not the same proof.
 
+Private sentence still surviving in the backend-loss scene:
+
+> the route looked recoverable while healthy, but I still personally know the
+> rescue path may evaporate during the exact failure event
+
 ## Why helper presence still is not enough
 
 The repo already contains several things that make the story sound closer to
@@ -379,6 +453,17 @@ head.
 
 It has not, unless the receiving node can show where it got the truth for the
 handoff decision.
+
+That is the burden-transfer test in its most practical form:
+
+- not `is there a helper?`
+- not `is there a generated file?`
+- not `is there private connectivity?`
+
+But:
+
+> can the receiving node show the truth source behind the decision without a
+> human privately narrating the rest?
 
 ## Why route class must stay separate
 
@@ -475,6 +560,16 @@ Before this page can support stronger language, it needs a proof packet with:
 
 Without that packet, a walkthrough is still disciplined imagination rather than
 validated relief.
+
+## The exact stronger sentences still forbidden
+
+Even after this walkthrough, the following are still forbidden today:
+
+- `wrong-node HTTP is basically solved`
+- `fallback is mostly handled now`
+- `protected route handoff is mostly a middleware problem`
+- `TCP routing is close enough to stateful failover`
+- `the request path already behaves like one cloud`
 
 ## Bottom line
 
