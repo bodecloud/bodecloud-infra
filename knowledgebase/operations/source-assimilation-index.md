@@ -18,6 +18,11 @@ It usually sounds like:
 
 This page exists to stop that downgrade.
 
+In this repo, that downgrade is one of the main ways "thorough" work still
+fails.
+The answer gets broader, the tech list gets longer, the tone gets calmer, and
+the exact thing the user keeps asking for gets edited into a smaller problem.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to prove:
@@ -34,6 +39,9 @@ This page is not allowed to prove:
 
 This is a retrieval contract page, not a claim that the work has already been
 done correctly.
+
+That distinction matters because the site can get much better at sounding
+assimilated before it has truly earned that word.
 
 ## The dream retrieval has to protect
 
@@ -69,6 +77,9 @@ So "actually RAG this time" in `bolabaden-infra` means:
 If the docs skip that sequence, they may become longer without becoming more
 truthful.
 
+Length, breadth, and surface sophistication are unusually weak proxies for
+truthfulness here.
+
 ## Strongest honest current answer
 
 The repository has four major evidence classes:
@@ -88,6 +99,13 @@ Once that happens, at least one of these becomes false:
 
 This page exists to keep both failure modes visible.
 
+It also exists because the user is not only asking for more evidence.
+They are asking for evidence custody:
+
+- which source actually gave us the dream
+- which source actually gave us live runtime truth
+- which source only explains pressure, contradiction, or planning
+
 ## What still does not count as real retrieval here
 
 The following still do not count as "actually RAG this time" in this repo:
@@ -101,6 +119,10 @@ The following still do not count as "actually RAG this time" in this repo:
 
 That kind of retrieval can sound thorough while still answering the wrong
 question.
+
+And "answering the wrong question" is not a soft failure here.
+It usually means the repo has quietly converted a burden-transfer problem into
+an architecture-summary problem.
 
 ## Source class 1: architecture-intent and honesty surfaces
 
@@ -134,6 +156,9 @@ Their real hierarchy is:
 
 If a page treats those four as if they are all saying the same thing, that page
 has already started flattening the repo.
+
+Once that flattening begins, the docs usually become easier to read and less
+able to survive contact with the user's real complaint.
 
 ## Source class 2: live root runtime surfaces
 
@@ -174,6 +199,12 @@ They do **not** outrank planning docs for claims like:
 - this route survives backend disappearance
 - this service is now honestly anti-SPOF
 
+This is one of the core retrieval disciplines of the site:
+
+- presence in the worktree is real
+- trust under failure is a stronger sentence
+- stronger sentences need stronger source classes
+
 ## Source class 3: planning and promotion surfaces
 
 These are the strongest sources for:
@@ -206,6 +237,9 @@ These are the surfaces where the repo already says things like:
 These sources are allowed to explain what is missing.
 They are not allowed to promote themselves into live proof.
 
+That promotion error is one of the most common ways long-form docs start
+lying while still sounding careful.
+
 ## Source class 4: archive-pressure surfaces
 
 These are the strongest sources for:
@@ -231,6 +265,11 @@ It is also a reaction against an ecosystem pattern:
 Archive pressure restores that complaint.
 It does **not** prove runtime correctness.
 
+But without archive pressure, the docs often stop sounding like the same user
+problem entirely.
+They start sounding like a normal self-hosting research project instead of a
+reaction against fake option space.
+
 ## Claim router
 
 Use this table before writing any page or paragraph that sounds confident.
@@ -245,6 +284,13 @@ Use this table before writing any page or paragraph that sounds confident.
 
 If a sentence cannot be routed through this table, it is probably still too
 vague to trust.
+
+And if it is too vague to trust, it is probably still vulnerable to one of the
+repo's favorite failure modes:
+
+- dream truth smuggled into runtime truth
+- runtime presence smuggled into resilience truth
+- research pressure smuggled into implementation maturity
 
 ## What a real retrieval proof packet would need
 

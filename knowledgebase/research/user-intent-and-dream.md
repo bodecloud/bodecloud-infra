@@ -21,6 +21,10 @@ That is the wound this repository keeps circling.
 If this page gets reduced to "the user wants anti-SPOF," the docs become
 technically cleaner and materially less honest.
 
+That reduction is one of the main recurring failures in the surrounding option
+space.
+The answer becomes respectable and still too small.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -52,6 +56,10 @@ The following still do not count as a serious reading of the user's demand:
 The dream is more specific than any of those summaries.
 It is about removing the humiliating moment where a healthy node still needs a
 human to explain what the request should have meant.
+
+That sentence should be treated as the demand all later summaries must survive.
+If a future page sounds calmer but can no longer say that sentence clearly, the
+page got worse.
 
 ## The shortest honest statement of the dream
 
@@ -123,6 +131,12 @@ The repo is therefore not confused about the dream.
 It is confused only about which added layer, if any, has earned the right to
 make the dream live.
 
+That is an important distinction.
+The repo is not wandering because it lacks desire or vocabulary.
+It is wandering because the market keeps offering answers that either preserve
+the same hidden burden under nicer terminology or demand a much larger
+worldview before the user trusts that the burden really moved.
+
 ## The dream in one request-time scene
 
 The most useful way to understand this repository is not by product category.
@@ -140,6 +154,10 @@ That scene is the dream.
 
 If a proposed system still fails there, then from the user's point of view it
 is still the old problem with better branding.
+
+That is why so many respectable options still feel insulting in context.
+They are often improvements.
+They just stop one layer before the user's actual held-out scene.
 
 ## Why "more options" still feels like a lie to the user
 
@@ -165,6 +183,10 @@ while still failing the more humiliating question:
 If an option cannot answer that, it is not surprising that the user hears
 "there are many choices" as basically dishonest.
 
+In this repository, "choice" only starts becoming a serious word once the
+system can point to a new source of shared truth that really replaced private
+operator reconstruction.
+
 ## Why the user is frustrated even though many tools exist
 
 The source archive makes one thing painfully clear:
@@ -188,6 +210,10 @@ It is not rhetorical excess.
 It is a precise name for the moment where direct system legibility collapses
 back into private human memory.
 
+It is also why ordinary self-hosting optimism does not work well here.
+The repo is not impressed by components that behave until the first topology
+question becomes socially manual again.
+
 ## What still does not count as a satisfying option in this repo
 
 Even after reading the archive, the following still do not count as satisfying
@@ -203,6 +229,10 @@ options:
 The user's frustration is not lack of exposure to tooling.
 It is repeated exposure to answers that improve adjacent layers while leaving
 the degrading moment intact.
+
+That is why this page has to keep the emotional and technical sides fused.
+If you separate them too much, you stop seeing why the same technically
+reasonable answer can still feel like a false option.
 
 ## The archive surfaces that sharpen the dream instead of blurring it
 

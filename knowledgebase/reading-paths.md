@@ -17,6 +17,10 @@ That difference matters.
 This repo is especially vulnerable to documentation that feels organized while
 quietly downgrading the actual question.
 
+That downgrade is not just a navigation mistake.
+It is one of the main ways the user's dream gets quietly reduced into something
+more discussable and less faithful to the real wound.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -52,6 +56,10 @@ instead of:
 > while `docker-compose.yml` stays legible and wrong-node entry stops
 > depending on operator folklore?
 
+That last clause should be treated as the center of gravity for the whole page.
+If a route produces a clean answer but stops naming the operator folklore that
+still remains necessary afterward, the route is still too weak for this repo.
+
 ## The reading mistake this page is trying to stop
 
 Most bad retrieval in this repo follows the same pattern:
@@ -73,6 +81,11 @@ That is false.
 The site is getting better at reconstructing the pressure.
 That does not mean the runtime has already solved the pressure.
 
+The knowledgebase can become more coherent faster than the platform becomes
+more self-owning.
+This page exists partly to keep readers from mistaking that coherence for
+burden transfer.
+
 ## What disciplined retrieval has to preserve
 
 A good reading route in this repo should not merely get you to relevant pages.
@@ -85,6 +98,9 @@ It should preserve four things by the time you stop:
 
 If a route gives you a clean answer without preserving those four things, it
 is probably answering a calmer neighboring question instead.
+
+And calmer neighboring questions are exactly what the user keeps rejecting.
+They are often technically respectable and psychologically false.
 
 That is why retrieval discipline matters so much here.
 The site is no longer small enough that "read around until it clicks" is safe.
@@ -132,6 +148,9 @@ of drifting into a cleaner neighboring problem.
 
 If a route makes the site easier to browse but still easier to overclaim from,
 then it is still incomplete.
+
+The enemy here is not only irrelevance.
+It is relevance that still shrinks the problem.
 
 ## Read by claim type first
 
@@ -186,6 +205,9 @@ This path protects against the weak misreading:
 That is too small.
 The user wants options that stop cashing out into the same private burden.
 
+That sentence is the real checkpoint for the whole route.
+If a later summary drops it, the route failed even if every page was relevant.
+
 Do **not** use it as runtime proof.
 
 ### 2. "What does the current root runtime actually contain?"
@@ -211,6 +233,14 @@ This path protects against the weak misreading:
   most of the way there"
 
 Presence is not preserved meaning under failure.
+
+This route should be read as protection against a common self-hosting
+hallucination:
+
+- the stack is large
+- the YAML is rich
+- the edge is serious
+- therefore the hard part must mostly be solved
 
 This path is for live truth, not wishful extrapolation.
 
@@ -239,6 +269,10 @@ This path protects against the weak misreading:
 It is not a detail.
 It is the point where fake option language gets caught by reality.
 
+If this route does its job, the reader should leave less impressed by generic
+traffic vocabulary and more sensitive to the exact moment where the operator is
+still privately completing the request story.
+
 ### 4. "What helper layer is the repo actually looking for?"
 
 Read in this order:
@@ -262,6 +296,12 @@ This path protects against the weak misreading:
 
 The repo first needs the missing truth named precisely enough that a promoted
 layer actually earns itself.
+
+The deeper correction is harsher:
+
+- the repo is not only choosing tools
+- it is trying to discover which extra layer, if any, actually deserves to
+  exist because it removed a real humiliation threshold
 
 ### 5. "Why are stateful services a much harsher problem?"
 
