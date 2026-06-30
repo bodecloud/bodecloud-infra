@@ -76,6 +76,25 @@ This page is not authoritative about:
 This page is a domain-by-domain honesty matrix, not a substitute for route-
 level or topology-level proof.
 
+## Priority evidence stack for maturity claims
+
+When this page classifies maturity, the evidence order should be:
+
+1. [`current-compose-runtime.md`](current-compose-runtime.md)
+2. [`../operations/proof-matrix-and-drills.md`](../operations/proof-matrix-and-drills.md)
+3. domain-specific research evidence pages
+4. [`../operations/devops-runbook.md`](../operations/devops-runbook.md)
+5. repo-native intent pages that explain why the maturity gap matters
+
+That order prevents a common failure:
+
+- intent makes the future sound coherent
+- coherence makes the present sound farther along
+- a lane with partial evidence gets narrated as a platform-wide maturity gain
+
+This page is only useful if narrower runtime and drill evidence keep outranking
+bigger architecture language.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -87,6 +106,19 @@ level or topology-level proof.
 
 If a maturity sentence starts sounding like a global resilience verdict, this
 page is being overread.
+
+## What this matrix should make harder to say lazily
+
+After reading this page, it should be harder to say:
+
+- "the stack is getting resilient now"
+- "multi-node is mostly handled"
+- "the remaining gaps are mostly polish"
+- "stateful and stateless maturity are close enough to narrate together"
+
+Those are all over-compressions.
+This page exists precisely because the repo matures as uneven truth lanes, not
+as one calm maturity curve.
 
 ## Strongest honest current answer
 

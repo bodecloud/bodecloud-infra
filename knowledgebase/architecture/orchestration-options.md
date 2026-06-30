@@ -76,6 +76,26 @@ This page is not authoritative about:
 
 This page is a promotion filter, not a final platform verdict.
 
+## Priority decision stack for this page
+
+When this page evaluates whether some extra layer has earned the right to
+exist, it should route the question through this order:
+
+1. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+2. [`../architecture/current-compose-runtime.md`](current-compose-runtime.md)
+3. [`../architecture/problem-and-goals.md`](problem-and-goals.md)
+4. [`../research/orchestrator-tradeoffs-evidence.md`](../research/orchestrator-tradeoffs-evidence.md)
+5. [`../operations/proof-matrix-and-drills.md`](../operations/proof-matrix-and-drills.md)
+
+That order matters.
+
+If this page starts from product families, it collapses into market prose.
+If it starts from runtime alone, it under-reconstructs the dream.
+If it starts from plans alone, it over-promotes futures into present gravity.
+
+This page only stays honest if the dream, the live baseline, the hidden wound,
+the candidate evidence, and the proof ceiling are all present at once.
+
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
@@ -87,6 +107,22 @@ This page is a promotion filter, not a final platform verdict.
 
 If a sentence starts sounding like "pick the most mature orchestrator," it has
 already left this page's decision surface.
+
+## Automatic disqualifiers for a not-yet-earned option
+
+A candidate option has not yet earned default promotion here if it mainly does
+one or more of these:
+
+- changes the control surface without naming which hidden burden moved
+- improves deployment prestige while leaving wrong-node meaning weak
+- improves controller power while leaving stateful authority socially held
+- reduces local toil while preserving private topology reconstruction on the
+  bad day
+- sounds more adult mainly because the worldview got larger
+
+That does not make the candidate worthless.
+It means the candidate has not yet answered the repo's real benchmark strongly
+enough to deserve default status.
 
 ## The shortest honest answer
 

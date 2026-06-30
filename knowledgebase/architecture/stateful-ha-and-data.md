@@ -59,6 +59,24 @@ This page is not allowed to:
 - pretend the repo has already solved storage portability, leader truth, or
   failover reconciliation unless the implementation proves it
 
+## Priority evidence stack for stateful claims
+
+Stateful claims on this site should be routed through this order:
+
+1. [`../research/stateful-ha-evidence.md`](../research/stateful-ha-evidence.md)
+2. root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+   and relevant active fragments
+3. [`../operations/proof-matrix-and-drills.md`](../operations/proof-matrix-and-drills.md)
+4. [`/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/stateful_ha_plan.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/stateful_ha_plan.md)
+
+That order matters because stateful pages are easy to falsify in two opposite
+ways:
+
+- over-credit routing and proxy progress as data-plane truth
+- over-credit future plans as if they already relocate authority
+
+This page stays honest only if current evidence outranks planned elegance.
+
 ## Quick claim router
 
 If the question is:
@@ -181,6 +199,21 @@ hidden behind a still-responding edge.
 
 That is why this page keeps hitting the brakes.
 
+## Automatic disqualifiers for fake stateful closure
+
+For this repo, a stateful answer has not earned honest HA language if it
+mainly depends on:
+
+- a stable hostname without replicated authority
+- TCP reachability without explicit write ownership
+- standby presence without client rediscovery semantics
+- container mobility without durable storage portability
+- operator memory to decide which survivor is actually valid
+
+Any one of those can still be useful operationally.
+None of them are enough to justify flattering stateful resilience language by
+themselves.
+
 It also explains why this page has to preserve uneven maturity instead of
 tidying it away.
 
@@ -221,8 +254,6 @@ The most frustrating fake option in this space is the one that says:
 
 That fake option is exactly what this page is trying to outlaw in the
 knowledgebase.
-
-That is exactly the shortcut this page exists to reject.
 
 ## Stateful HA is four different problems, not one
 

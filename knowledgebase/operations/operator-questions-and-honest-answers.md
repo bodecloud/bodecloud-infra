@@ -36,6 +36,25 @@ This page is not allowed to:
 - let product names, cluster labels, or proxy categories pretend they answer
   the user's real benchmark by themselves
 
+## Priority reconstruction stack for the repeated user questions
+
+When this page reconstructs the user's repeated infra questions, it should do
+so in this order:
+
+1. [`../research/user-intent-and-dream.md`](../research/user-intent-and-dream.md)
+2. [`../research/archive-pressure-patterns.md`](../research/archive-pressure-patterns.md)
+3. [`../architecture/instruction-surfaces-and-authority.md`](../architecture/instruction-surfaces-and-authority.md)
+4. runtime and proof pages for whatever narrower claim is being discussed
+
+That order matters because this page is especially vulnerable to sounding
+right while answering the wrong question.
+
+If it starts from runtime alone, it under-reconstructs the real frustration.
+If it starts from archive pressure alone, it can start mistaking critique for
+implementation.
+If it skips authority order, it blurs dream, runtime, and future intent
+together again.
+
 ## Quick claim router
 
 If the question is:
@@ -89,6 +108,19 @@ If an answer is technically correct but only answers:
 then it still may not be answering the user's real question.
 
 This is one of the most important habits the whole knowledgebase has to learn.
+
+## What this page should make harder to say lazily
+
+After reading this page, it should be harder for a contributor to say:
+
+- "the user mostly wants better load balancing"
+- "the user mostly needs service discovery"
+- "the user mostly needs a cluster manager"
+- "the user just wants a more modern stack"
+
+Those may describe neighboring subproblems.
+They are not strong enough summaries of the real repeated question this repo is
+trying to answer.
 
 It also needs a stronger standard than ordinary FAQ writing.
 
