@@ -24,6 +24,11 @@ It is looking for a system that stops humiliating the operator by revealing,
 too late, that the operator is still the real keeper of placement and recovery
 truth.
 
+That means a better problem statement is not problem reduction.
+A sharper benchmark is not one more serious option.
+The page can become more exact and still leave the same unsolved burden
+perfectly intact.
+
 That sentence is not rhetorical decoration.
 It is the practical acceptance test behind almost every future architecture
 choice in this repo.
@@ -50,6 +55,11 @@ That temptation is part of the problem.
 
 It also cannot become a page where diagnosis quality starts impersonating
 solution quality.
+
+That warning needs to stay explicit because this repo is now good enough at
+self-diagnosis to create counterfeit comfort.
+If the benchmark becomes precise enough that the remaining gap starts sounding
+small, then the page has started paying out reassurance it has not earned.
 
 This repo already has enough serious language that the problem statement itself
 can start behaving like one more fake comfort surface:
@@ -130,6 +140,24 @@ same lie the user keeps rejecting:
 - therefore the remaining problem must be mostly polish
 
 This page has to keep saying no to that move.
+
+One more boundary belongs here plainly:
+
+- better problem understanding is not architecture progress
+
+The first is necessary.
+The second only happens when one more decisive truth stops living in private
+operator folklore.
+
+It also has to keep refusing a subtler move:
+
+- the dream is now reconstructed faithfully
+- the benchmark is now severe and concrete
+- the missing burdens are now named well
+- therefore the rest starts sounding like implementation labor rather than a
+  still-unmet platform contract
+
+That conclusion is still too soothing.
 
 ## The shortest exact problem statement
 
@@ -223,6 +251,11 @@ making the wound feel more procedural than humiliating.
 The user is not merely reporting friction.
 The user is reporting that many grown-up-looking answers still collapse back
 into private operator completion the moment the request path becomes real.
+
+That is why this page cannot be allowed to become a polished executive summary
+of the repo's pain.
+If it starts sounding like the main hard work is now communication quality,
+then it is already betraying the thing it is supposed to guard.
 
 ## What the user is actually trying to make impossible
 

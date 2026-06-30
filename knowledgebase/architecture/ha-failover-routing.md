@@ -50,6 +50,11 @@ The user is asking:
 
 That is the routing question here.
 
+That also means a better routing map is not routing relief.
+A sharper HA taxonomy is not failover.
+A more disciplined separation between HTTP, TCP, and stateful stories is not
+one more route class becoming trustworthy.
+
 The reason the wording has to stay that severe is that the user is not merely
 frustrated with downtime.
 They are frustrated with how many respectable infrastructure options solve one
@@ -89,6 +94,12 @@ That means this page cannot let routing decomposition become its own fake
 victory.
 Explaining the routing lanes more clearly is useful.
 It is not itself one more lane of burden transfer.
+
+That warning matters because this repo is now capable of much better routing
+honesty than before.
+If that honesty starts sounding like partial resolution, then the page becomes
+another way the docs cash sophistication out as if the runtime had already
+earned it.
 
 That means this page has to keep one humiliating question alive all the way
 through:
@@ -145,6 +156,14 @@ becomes system-owned.
 This page has to keep the reader from mistaking a better routing explanation
 for a more trustworthy routing platform.
 
+It should keep one more boundary explicit:
+
+- better routing analysis is not routing progress
+
+The first is a documentation gain.
+The second only happens when one more wrong-node decision becomes system-owned
+rather than privately blessed by the operator.
+
 ## What still does not count as HA or failover here
 
 This page should make the common overreads illegal.
@@ -177,6 +196,11 @@ Many ecosystems will happily call the above:
 The repo has to keep asking the harsher follow-up:
 
 - yes, but who still had to know the real answer first?
+
+That follow-up also applies to the docs.
+If a revision makes the routing story feel more serious but makes it harder to
+say who still had to know the real answer first, then the revision moved in
+the wrong direction.
 
 That is not rhetorical flourish.
 It is the shortest honest checksum for whether "HA routing" has become one more
