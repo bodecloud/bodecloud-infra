@@ -23,6 +23,11 @@ The real benchmark is:
 > personal cloud, without correctness depending on sacred-node memory, lucky
 > first-hop placement, or fake closure dressed up as HA?
 
+Another way to say it:
+
+the contract is only being met when the operator no longer has to privately
+finish the sentence the platform should have been able to finish itself.
+
 If this page gets soft, the whole knowledgebase gets soft with it.
 
 ## What this page is and is not allowed to prove
@@ -81,6 +86,10 @@ The lie usually sounds reasonable:
 - there are candidate fallback patterns now
 - therefore the problem is mostly refinement
 
+This page has to keep treating that conclusion as dangerous.
+It is the easiest way a serious stack starts flattering itself before it has
+actually moved the decisive burden.
+
 This page exists to stop that sequence from becoming socially normal inside
 the repo.
 
@@ -138,6 +147,21 @@ This repo also has to ask:
 
 If the answer is still "the operator," then some part of the contract is still
 unmet no matter how respectable the stack sounds.
+
+## The private completion the system is supposed to eliminate
+
+The operator contract becomes real only when fewer important moments still
+sound like this:
+
+- "I know that hostname really belongs on node B"
+- "I know this fallback peer is only technically healthy, not semantically
+  safe"
+- "I know the rescue route disappears if the local helper dies"
+- "I know the auth story is no longer the same after handoff"
+- "I know this stateful service only looks movable from the outside"
+
+Those sentences are not side effects.
+They are the thing the contract is trying to kill.
 
 ## What the user is actually tired of
 
@@ -206,6 +230,20 @@ The user is not denying progress.
 They are denying the social move where partial progress gets narrated as if the
 humiliating part of the job had already moved.
 
+## What a passing route should let the operator stop doing
+
+For a stateless protected HTTP route to count as genuinely passing the
+contract, the operator should no longer need to privately provide all of these:
+
+- which node currently owns the service
+- which peer is acceptable for rescue
+- which route should survive local failure
+- which policy meaning must remain intact after handoff
+- why the system made the decision it just made
+
+The point is not only that the route answered.
+The point is that the answer stopped depending on private custody.
+
 ## What still does not count as operator relief
 
 This page should say the quiet failure mode out loud.
@@ -257,6 +295,19 @@ to a bundle that contains:
 
 Without that bundle, the docs may still be describing aspiration or
 orientation rather than relief.
+
+## What the contract still refuses to let the docs say
+
+Until stronger proof exists, this page should keep forbidding sentences like:
+
+- "wrong-node behavior is basically handled now"
+- "fallback is mostly solved for HTTP"
+- "the platform now behaves like one cloud"
+- "the only remaining problem is broader automation"
+
+Those are exactly the kinds of sentences that feel emotionally plausible once
+the docs get good.
+This page exists partly to keep them illegal until the runtime earns them.
 
 ## The negative benchmark
 

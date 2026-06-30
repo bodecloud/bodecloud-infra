@@ -15,6 +15,11 @@ That has to be answered like an operator tracing a real path through a real
 stack.
 If it turns into generic architecture prose, it stops being useful.
 
+This page should feel almost annoyingly literal.
+That is a feature, not a style accident.
+The user is specifically rebelling against infrastructure explanations that
+stay concrete right up until the machine would have to stop depending on them.
+
 The deeper reason this page has to stay literal is that the user's complaint is
 not just "the docs are abstract."
 It is:
@@ -51,6 +56,16 @@ This page is not authoritative about:
 This is a request-trace and boundary page.
 It is not a success report.
 
+## The exact question this page has to keep asking
+
+At every step in the path, the real question is:
+
+> what does the receiving node actually know on its own right now, and what
+> would still have to be privately supplied by the operator if locality fails?
+
+If a walkthrough skips that question, it can still look highly technical while
+quietly turning back into performance.
+
 ## Strongest honest current answer
 
 The repo already has enough live machinery to describe a serious request path:
@@ -76,6 +91,10 @@ performances.
 They can stay concrete for several paragraphs, name the right components, trace
 the right happy path, and still dodge the only moment the user actually needed
 the system to stop leaning on them.
+
+That is why this page cares less about hop count than custody of truth.
+The missing thing is not movement.
+The missing thing is trusted meaning at the wrong node.
 
 ## What still does not count as a request-path answer
 
@@ -111,6 +130,19 @@ They preserve:
 
 but not the question of who still had to supply the missing truth when the
 request stopped being local.
+
+## The private handoff this page is trying to make visible
+
+The dangerous hidden handoff usually looks like this:
+
+1. the request lands successfully
+2. the edge stack looks healthy
+3. the hostname is recognizable
+4. locality fails
+5. the remaining decision quietly stops being system-owned
+6. the operator becomes the missing registry, peer judge, and route explainer
+
+That is the actual seam under investigation.
 
 ## What a real request-path proof packet would have to contain
 
@@ -163,6 +195,12 @@ and more like:
 
 - at which hop does the system stop knowing enough on its own?
 
+The user does not mainly want a nicer answer to "how does the packet move?"
+The user wants a harsher answer to:
+
+> at which moment does packet movement stop being the same thing as preserved
+> service meaning?
+
 ## Primary evidence for this page
 
 Use these together:
@@ -208,6 +246,18 @@ moments:
 Most weak docs only narrate step `1`.
 The user is angry about steps `2` and `3`.
 
+More specifically, the repo is testing whether step `2` and step `3` can stop
+being social.
+
+If the node still needs a person to implicitly answer:
+
+- where is it really?
+- who is safe?
+- what path survives?
+- does the same protection still apply?
+
+then the request path is still only partially owned by the platform.
+
 More specifically:
 
 - step `1` is where infrastructure people usually start sounding triumphant
@@ -240,6 +290,12 @@ That route is useful because it is:
 The goal is not "prove Dozzle specifically right now."
 The goal is to pick a route class where the whole user complaint becomes
 visible.
+
+That complaint becomes visible precisely because Dozzle is not the hardest
+service in the repo.
+If the platform cannot make a believable wrong-node story true for a protected
+stateless route class first, then stronger claims about broader platform
+coherence should remain embarrassing.
 
 ## Step 1: first-hop plurality
 

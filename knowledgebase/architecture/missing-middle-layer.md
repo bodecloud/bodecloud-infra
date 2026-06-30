@@ -21,6 +21,10 @@ the user is trying to stop being the hidden registry, hidden failover brain,
 hidden drift detector, hidden routing explainer, and hidden memory of what
 lives where.
 
+That is not just a colorful complaint.
+It is a direct accusation that one human head is still functioning as the most
+dangerous unreplicated control surface in the platform.
+
 If a candidate layer does not actually move those duties into the system, then
 it is not the middle this repo is searching for, no matter how elegant or
 fashionable it sounds.
@@ -110,6 +114,22 @@ This page is not authoritative about:
 This page describes the wanted layer.
 It does not certify a final chosen implementation.
 
+## The layer is missing because one more truth still has nowhere honest to live
+
+The cleanest summary of the missing middle is:
+
+there are decisions the platform wants to make that plain Compose does not own,
+but the repo still does not trust a larger scheduler to own them by default.
+
+That means the repo is not simply missing automation.
+It is missing a believable home for truths like:
+
+- current placement
+- current eligibility
+- current rescue-route validity
+- current route-class meaning
+- current explanation for why the system chose local versus remote
+
 ## Strongest honest current answer
 
 The repo is looking for the smallest added layer that makes these truths
@@ -194,6 +214,10 @@ while still not answering the only question that matters:
 
 > which decisive private reconstruction step disappeared?
 
+That is the anti-theater question for the whole page.
+If a candidate cannot answer it concretely, it is still probably decorative
+seriousness rather than the missing middle.
+
 This is the page where "option abundance" has to stay under suspicion.
 
 A shortlist of plausible helpers can still be psychologically false if all of
@@ -215,6 +239,21 @@ That packet should contain:
 
 Without that packet, the docs are still mostly describing an attractive shape
 instead of a transferred responsibility.
+
+## What a believable middle would change in daily life
+
+If the missing middle were real, the operator's experience should change in
+plain language:
+
+- fewer moments of "I know what the machine should have done"
+- fewer moments of "this route only sounds okay because I know the real owner"
+- fewer moments of "this peer is probably fine, but only because I know the
+  topology"
+- fewer moments of "this service looks distributed from the outside, but I
+  know the authority is still singular"
+
+If a candidate layer does not materially change that daily feeling, then the
+repo should stay suspicious of it.
 
 ## Why this layer is needed at all
 
@@ -254,6 +293,11 @@ VIPs, or controllers.
 This repo keeps insisting that private human custody of topology truth is also
 an anti-SPOF failure class, and often the one the other categories are still
 hiding behind.
+
+That claim is one of the deepest things the docs need to preserve.
+The missing middle is not just a convenience layer.
+It is an attempt to reduce a human SPOF that most neighboring architectures
+leave unnamed.
 
 That sentence is not metaphorical decoration.
 It is the deepest anti-SPOF accusation in the repository.

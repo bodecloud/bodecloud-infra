@@ -35,6 +35,10 @@ This page is not authoritative about:
 This page defines promotion grammar.
 It does not declare promotion complete.
 
+It also exists to stop the repo from promoting a more prestigious answer
+before it can prove one more important truth has genuinely left private
+operator custody.
+
 ## The deepest rule of the page
 
 Do not promote because a bigger tool exists.
@@ -52,6 +56,10 @@ That means every promotion decision should be expressible in one harsh sentence:
 
 If that sentence cannot be written concretely, then the promotion is still too
 prestige-shaped and not burden-shaped enough for this repo.
+
+This is the simplest serious rule in the whole page.
+A promotion is only real if it deletes one private sentence the operator used
+to have to finish for the platform.
 
 ## What still does not count as a serious promotion decision
 
@@ -75,6 +83,8 @@ real.
 If the page sounds decisive without naming what private truth stopped being
 private, then it is still performing certainty instead of earning it.
 
+That is the main false-confidence pattern this page is trying to block.
+
 ## The real burden this page is trying to relocate
 
 The user is not mainly trying to relocate YAML.
@@ -88,6 +98,9 @@ The current burdens that matter most are:
   contract survived"
 - stateful resilience still being narrated harder than it is proved
 - operator confidence still depending on folklore about which node is sacred
+
+Promotion should therefore be judged less by platform beauty and more by
+whether folklore actually shrank.
 
 If a proposed layer does not materially reduce one of those burdens, it should
 not be treated as a meaningful promotion in this repo.
@@ -108,6 +121,10 @@ Right now the strongest evidence-aligned default is still:
 This is not caution for its own sake.
 It is the smallest path that still respects the user's refusal pattern.
 
+It also reflects a harsher principle:
+the repo should prove one smaller honest burden transfer before paying for a
+larger worldview.
+
 ## What is too weak to justify promotion
 
 These are not enough:
@@ -126,6 +143,9 @@ Why these are too weak:
 - they can all be true while stateful resilience remains mostly branding
 
 The repo should resist all of those upgrade temptations.
+
+Especially because larger systems are very good at producing emotional closure
+before they produce burden-faithful closure.
 
 ## What a real promotion packet would have to contain
 
@@ -151,6 +171,20 @@ Examples:
   layer failed to carry the burden honestly first
 
 Without a packet like that, "promotion" is still mostly rhetorical.
+
+## What a promotion should make impossible to say with a straight face
+
+After a real promotion, at least one of these sentences should become harder to
+say honestly:
+
+- "I still have to remember where it really lives"
+- "I still have to remember which peer is actually safe"
+- "I still have to remember whether fallback survives the real failure"
+- "I still have to remember that the protected-service meaning changed"
+- "I still have to remember that the write owner is still singular"
+
+If those sentences survive mostly intact, the promotion likely changed posture
+more than burden.
 
 ## What a real promotion packet should leave impossible to overread
 
@@ -188,6 +222,8 @@ That is the whole point of this repo's harsher evaluation standard.
 It is not anti-tool.
 It is anti-renamed burden.
 
+That distinction should remain one of the repo's clearest decision rules.
+
 ## The humiliation threshold a promotion has to cross
 
 This repo should also preserve a stronger phrase for what "earned promotion"
@@ -207,6 +243,9 @@ up until the operator still has to privately know one of the following:
 If a new layer changes the diagram, the ergonomics, or the vocabulary while
 leaving those private completions mostly intact, then the promotion did not
 cross the threshold.
+
+This threshold is what keeps the repo from mistaking adult-sounding platform
+language for adulthood.
 
 ## The promotion classes that actually matter
 
@@ -260,6 +299,9 @@ Why this class matters:
 
 until one real wrong-node HTTP path works, the repo is still missing its most
 important proof of concept.
+
+That is why broader promotion should stay uncomfortable until this narrower
+promotion class is real.
 
 ## Promotion Class 3: ingress control that survives backend loss
 

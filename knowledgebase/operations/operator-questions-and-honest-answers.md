@@ -85,6 +85,11 @@ They are asking for one more humiliating dependency to stop being private:
 - remembered fallback meaning
 - remembered stateful caveats
 
+That is why this page should remain hostile to soothing language.
+The user is not asking to feel heard while keeping the same dependency.
+They are asking which dependency is still private and which option would make
+it less private.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -103,6 +108,18 @@ This page is not allowed to:
 - blur first-hop plurality into request preservation
 - let orchestration nouns or proxy names pretend to answer the benchmark by
   themselves
+
+## The answer standard for this page
+
+Every serious answer here should be able to say four things plainly:
+
+1. what hidden burden the operator is actually talking about
+2. why the nearby common answer is still too small
+3. what evidence class supports the harsher answer
+4. what next artifact or drill would be needed before saying more
+
+If an answer cannot do those four things, it is still too close to tooling
+advice instead of burden-faithful reconstruction.
 
 ## What this page must not let happen
 
@@ -171,6 +188,18 @@ it.
 And if it only names the pattern without naming the surviving burden, it is
 still too easy on itself.
 
+## The easiest way this page could still fail
+
+This page would still fail if it became a very smart explanation of why tools
+are insufficient without forcing itself to say:
+
+- which truth is still missing
+- who still privately carries it
+- what concrete artifact would externalize it
+- what stronger sentence would become legal afterward
+
+That is the difference between empathy theater and operator relief work.
+
 That is the line this page has to keep defending.
 
 A smart answer that says "yes, many tools stop one layer early" is still not
@@ -211,6 +240,8 @@ The repo is not trying to shop for dignity by brand name.
 It is trying to identify which specific truths still fail to move out of the
 operator's head.
 
+That sentence should govern the whole page more than any recommendation list.
+
 That is why this page should stay harsher than a normal FAQ.
 The user is not asking to be guided more gently through the product space.
 The user is asking which pieces of the product space are still fake comfort
@@ -232,6 +263,10 @@ something like:
 
 If the answer leaves that sentence mostly intact, then the answer may still be
 useful, but it has not yet described a real option.
+
+The private sentence test is brutal on purpose.
+It is the simplest way to stop decent-sounding answers from quietly overstating
+their value in this repo.
 
 That test matters because the archive is full of answers that become
 substantially better at explanation without becoming substantially better at
