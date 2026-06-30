@@ -19,9 +19,9 @@ The real question is:
 > topology lie, or a real state-authority ambiguity that the current
 > Compose-first stack cannot solve honestly?
 
-That is the orchestration question that matters in this repo.
+That is the orchestration question that matters in `bolabaden-infra`.
 
-## Strongest honest current answer
+## The strongest honest current answer
 
 The current default stance in this repo is:
 
@@ -37,16 +37,16 @@ It is anti-unearned-orchestrator.
 
 ## What this page is and is not allowed to prove
 
-This page is authoritative about:
+This page is allowed to prove:
 
 - how orchestration options should be judged in this repo
 - which burden a promoted layer would need to own to justify itself
 - why product prestige is weaker than repo-specific burden transfer
-- what kinds of candidate families are relevant to the real problem
+- what candidate families are relevant to the real problem
 - what proof packets are required before stronger platform language becomes
   legal
 
-This page is not authoritative about:
+This page is not allowed to prove:
 
 - which orchestrator has won globally
 - whether the live runtime already demonstrates the promoted behavior
@@ -55,15 +55,15 @@ This page is not authoritative about:
 
 This is a promotion filter, not a winner declaration.
 
-## The user's real decision, stated plainly
+## The user's real decision is not logo selection
 
-The user is not choosing between software logos.
+The user is not choosing between software brands.
 
 They are trying to decide whether the dream can be preserved:
 
 - ordinary Docker nodes
 - Compose-first authorship
-- visible, inspectable behavior
+- visible inspectable behavior
 - fewer secret sacred nodes
 - fewer secret sacred humans
 - real fallback and failover behavior
@@ -72,7 +72,7 @@ They are trying to decide whether the dream can be preserved:
 The orchestration decision only becomes interesting when one of those dreams
 starts colliding with truths the current stack cannot own by itself.
 
-## The accusation every option must survive
+## The accusation every option has to survive
 
 Every candidate here should be read under the same accusation:
 
@@ -95,14 +95,14 @@ This page exists to stop prestige from masquerading as burden transfer.
 
 ## What "worldview tax" means here
 
-`Worldview tax` is not just a dramatic phrase.
+`Worldview tax` is not a decorative phrase.
 It means the option demands some combination of:
 
 - more abstraction distance
 - more invisible cluster state
 - more controller trust
 - more operational doctrine
-- less direct reasoning from `docker-compose.yml` plus the runtime
+- less direct reasoning from `docker-compose.yml` plus current runtime
 
 That tax may be worth paying.
 It is only worth paying when a real hidden burden moved in return.
@@ -111,35 +111,35 @@ It is only worth paying when a real hidden burden moved in return.
 
 Before any option gets described as the right next layer, it has to answer:
 
-1. Which exact hidden operator burden does it remove?
-2. Which truth does it own that the current runtime does not own cleanly?
-3. How does the wrong node determine the right backend now?
-4. How does the system distinguish a merely reachable peer from an eligible
+1. which exact hidden operator burden does it remove?
+2. which truth does it own that the current runtime does not own cleanly?
+3. how does the wrong node determine the right backend now?
+4. how does the system distinguish a merely reachable peer from an eligible
    peer?
-5. What evidence proves the route still exists after backend loss?
-6. What evidence proves the route still means the same thing after handoff?
-7. How does the option state its limits for TCP and stateful classes?
-8. What worldview tax does the option impose in return?
+5. what evidence proves the route still exists after backend loss?
+6. what evidence proves the route still means the same thing after handoff?
+7. how does the option state its limits for TCP and stateful classes?
+8. what worldview tax does the option impose in return?
 
 If a candidate cannot answer those concretely, it may still be interesting.
 It has not earned default gravity here.
 
 ## The private completion test
 
-Every orchestration option should be judged by a direct question:
+Every orchestration option should be judged by one direct question:
 
 > after adopting this layer, what exact sentence should the operator no longer
 > need to finish privately?
 
 Examples of sentences this repo wants to kill:
 
-- "That route only works because I know node3 is the real backend today."
-- "The proxy can reach node2, but I privately know node2 is the only safe one."
-- "The fallback config exists, but I know it disappears when the preferred
-  backend dies."
-- "Redis is reachable through the edge, but I know that does not mean there is
-  safe failover."
-- "The protected route still returns, but I know the auth semantics changed."
+- `That route only works because I know node3 is the real backend today.`
+- `The proxy can reach node2, but I privately know node2 is the only safe one.`
+- `The fallback config exists, but I know it disappears when the preferred
+  backend dies.`
+- `Redis is reachable through the edge, but I know that does not mean there is
+  safe failover.`
+- `The protected route still returns, but I know the auth semantics changed.`
 
 If the layer cannot kill at least one such sentence cleanly, it has not yet
 justified its existence.
@@ -160,27 +160,28 @@ What this family is trying to preserve:
 - `docker-compose.yml` stays central
 - service intent remains human-legible
 - nodes still feel like ordinary Docker machines
-- the added layer only grows enough cluster truth to solve the wrong-node wound
+- the added layer only grows enough cluster truth to solve the wrong-node
+  wound
 
 What it can plausibly solve:
 
 - current placement lookup
 - inspectable local-vs-remote routing decisions
-- a narrower, more honest burden transfer than a full scheduler
+- a narrower burden transfer than a full scheduler
 
-What it still must prove:
+What it still has to prove:
 
 - registry freshness
-- explicit disagreement handling
-- peer eligibility truth
+- disagreement handling
+- peer-eligibility truth
 - fallback durability under actual backend loss
 - protected-route continuity
-- strict boundaries for TCP and stateful claims
+- strict limits for TCP and stateful claims
 
 Private sentence still likely to survive unless proved otherwise:
 
 > yes, but I still personally know whether the shared registry is current
-> enough to trust
+> enough to trust.
 
 ### 2. Compose plus gossip or event-driven coordination
 
@@ -190,32 +191,32 @@ Examples from the archive:
 - peer-equal node agents reacting to cluster events
 - distributed signals without immediately adopting a manager hierarchy
 
-Why it remains attractive:
+Why it stays attractive:
 
 - it respects the user's instinct against early hierarchy
 - it preserves the emotional dream of equal nodes
 - it can reduce private failure detection
-- it can distribute signals faster than manual memory can
+- it can distribute liveness signals faster than manual memory can
 
-Why it remains risky:
+Why it stays risky:
 
 - membership is not placement truth
 - event distribution is not authority
 - liveness is not eligibility
-- gossip is much better at "who seems alive" than at "who is definitely the
-  correct backend for this protected or stateful route"
+- gossip is much better at `who seems alive` than at
+  `who is definitely the correct backend for this protected or stateful route`
 
 Private sentence still likely to survive unless proved otherwise:
 
 > yes, but I still personally know hearing the event is not the same thing as
-> knowing the right backend
+> knowing the right backend.
 
 ### 3. Compose plus registry and dynamic proxy/control-plane helpers
 
 Examples:
 
 - Consul-like registries
-- HAProxy or Envoy driven from service-discovery state
+- HAProxy or Envoy driven from discovery state
 - helper APIs publishing backend identity and policy inputs
 
 What this family can improve:
@@ -231,13 +232,13 @@ What it may still leave behind:
 - registry sacredness
 - ambiguity about stateful authority
 
-This family becomes a real candidate only if the receiving node can explain its
-choice from shared truth rather than cultural memory.
+This family only becomes real if the receiving node can explain its choice from
+shared truth rather than cultural memory.
 
 Private sentence still likely to survive unless proved otherwise:
 
 > yes, but I still personally know whether the registry or helper became the
-> new sacred component
+> new sacred component.
 
 ### 4. Stronger orchestrators or cluster managers
 
@@ -270,7 +271,7 @@ that smaller layers failed to remove honestly.
 Private sentence still likely to survive unless proved otherwise:
 
 > yes, but I still personally do not know whether the larger controller solved
-> my wound or just made it harder to inspect
+> my wound or just made it harder to inspect.
 
 ## Promotion criteria by family
 
@@ -279,7 +280,7 @@ Private sentence still likely to survive unless proved otherwise:
 | Compose plus shared registry | the wrong node can consult shared current placement truth and explain its choice | the registry is stale, operator-fed folklore, or not truly runtime-consumed |
 | Gossip or event-driven coordination | events lead to inspectable and correct route decisions | the system knows who is alive but not who is truly eligible |
 | Registry plus dynamic proxy | the proxy preserves route meaning and fallback survives backend loss | updates exist, but protected semantics or stateful caveats still rely on human memory |
-| Stronger orchestrator | it removes a named hidden burden smaller layers failed to remove honestly | it mostly sounds more adult while leaving the same decisive truth privately held |
+| Stronger orchestrator | it removes a named hidden burden smaller layers failed to remove honestly | it mainly sounds more adult while leaving the same decisive truth privately held |
 
 ## Automatic disqualifiers for a not-yet-earned option
 
@@ -330,12 +331,12 @@ A winner would make at least one previously true statement false:
   solve
 - protected-route meaning no longer becomes ambiguous after handoff
 
-That is what "winning" has to mean here.
+That is what winning has to mean here.
 
-## Bottom line
+## The honest bottom line
 
 The user is not starving for orchestrator names.
-The user is starving for one option that can survive the accusation:
+The user is starving for one option that can survive this accusation:
 
 > if I stop privately finishing the topology sentence, does the platform still
 > know what to do?

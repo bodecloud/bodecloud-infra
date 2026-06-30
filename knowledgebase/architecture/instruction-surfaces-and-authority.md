@@ -11,42 +11,42 @@ new kind of failure:
 
 That conclusion is false.
 
-This repo has become good at naming the wound.
-It is still uneven at proving which parts of the wound have actually moved out
+The repo has become good at naming the wound.
+It is still uneven at proving which parts of that wound have actually moved out
 of the operator's head.
 
 So this page is not a taxonomy exercise.
-It is an authority map for deciding which files are allowed to say what.
+It is an authority map for deciding which files are allowed to say what without
+illegally borrowing confidence from their neighbors.
 
-## The exact question this page answers
+## The actual question this page answers
 
 This page answers:
 
-> which files actually explain the multi-node ordinary-Docker, no-Swarm by
-> default, local-first then peer-forward dream, and which files only constrain
-> how we talk about, author, or plan around that dream?
+> which files are really allowed to explain the multi-node ordinary-Docker,
+> no-Swarm-by-default, local-first then peer-forward dream, and which files
+> only constrain how we talk about, author, or plan around that dream?
 
 The weaker neighboring question is:
 
 > which files mention HA, failover, clusters, or Compose the most?
 
-That weaker question is one reason earlier docs became useless.
-
-This repo has many files that mention adjacent concepts.
+That weaker question is one reason earlier documentation became useless.
+This repo has many files that speak near the problem.
 Far fewer files are allowed to own the same class of truth.
 
 ## Why the authority map matters here
 
-The user is frustrated partly because the ecosystem keeps collapsing different
-truth classes together:
+The user is frustrated partly because the broader ecosystem keeps collapsing
+different truth classes together:
 
 - architecture desire becomes runtime implication
 - current runtime presence becomes distributed-behavior confidence
 - planning coherence becomes "we basically know what to do"
 - authoring rigor becomes proof of resilience
 
-This repo can accidentally repeat the same move internally if it does not keep
-its own authority boundaries harsh.
+This repo can repeat exactly the same mistake internally if it does not keep
+its authority boundaries harsh.
 
 That is what this page is for.
 
@@ -55,17 +55,36 @@ That is what this page is for.
 This page is allowed to prove:
 
 - which files own which truth class
-- which surfaces are primary for the user's real dream
-- which surfaces are primary for the current runtime
-- which files are only honesty or authoring constraints
-- which kinds of sentences are illegal from each surface
+- which surfaces are primary for the user's actual dream
+- which surfaces are primary for current runtime truth
+- which files are only honesty, authoring, or planning constraints
+- which kinds of sentences become illegal when they are spoken from the wrong
+  surface
 
 This page is not allowed to prove:
 
 - that repeated language across files counts as implementation corroboration
-- that a planning artifact is halfway to being runtime proof
+- that a planning artifact is halfway to runtime proof
 - that stricter docs imply more system-owned truth
 - that the priority implementation already satisfies the dream
+
+This is an authority wall, not a maturity badge.
+
+## The dangerous sentence shape this page has to block
+
+This repo has one especially dangerous sentence shape:
+
+1. the archive names the wound correctly
+2. the instruction files describe the dream clearly
+3. the live Compose files show serious machinery
+4. the planning docs name plausible repairs
+5. the docs quietly blend all of that into a present-tense feeling of maturity
+
+That fifth step is the failure.
+
+If a paragraph depends on more than one authority class, it should say which
+class is carrying which part of the sentence.
+Otherwise the docs start sounding wiser than the runtime actually is.
 
 ## The authority map
 
@@ -73,30 +92,31 @@ The most important repo surfaces are not equal.
 
 | Surface | Truth class | What it is authoritative about | What it must not be upgraded into |
 | --- | --- | --- | --- |
-| [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md) | Architecture-dream truth | The clearest direct statement of the desired operating contract | Runtime proof that wrong-node, fallback, or stateful dignity already work |
-| [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md) | Repo-level honesty wall | The repo's blunt benchmark, anti-fake-HA posture, and explanation of the user's real complaint | A present-tense implementation report |
+| [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md) | Architecture-dream truth | The clearest direct statement of the desired operating contract | Runtime proof that wrong-node routing, failover, or stateful dignity already work |
+| [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md) | Repo-level honesty wall | The repo's blunt benchmark, anti-fake-HA posture, and the user's actual complaint | A present-tense implementation report |
 | [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md) | Runtime-anchor and operator-surface truth | What the priority implementation surface is, how it is validated, and what constraints exist while working in the repo | The main architecture manifesto |
 | [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules) | Authoring-discipline truth | Commit rules, inline config preference, and healthcheck discipline | Distributed-systems correctness, route durability, or failover proof |
-| [`knowledgebase/AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/AGENTS.md) | Documentation-honesty truth | How the docs must separate runtime truth, planned truth, and archive pressure | Proof that the runtime now owns one more missing burden |
+| [`knowledgebase/AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/AGENTS.md) | Documentation-honesty truth | How docs must separate runtime truth, planned truth, and archive pressure | Proof that the runtime now owns one more missing burden |
 | [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml) | Live root runtime truth | What the priority implementation actually declares at the root right now | Generic multi-node correctness |
-| Active files under [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/) | Live fragment truth | What each live subsystem currently contributes to ingress, auth, observability, state, routing, and sidecars | That all fragments are equally live, equally trusted, or equally mature |
+| Active files under [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/) | Live fragment truth | What each live subsystem contributes to ingress, auth, observability, state, routing, and helpers | That all fragments are equally live, equally trusted, or equally mature |
 | [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md) | Planning and promotion truth | Which missing truth-owning layers the repo already knows it needs to consider | That the current runtime already owns those layers |
 | [`knowledgebase/research/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/) and the source archive | Research-pressure truth | Why the repo keeps returning to `services.yaml`, peer-aware routing, stateful honesty, OpenSVC, Nomad, k3s, Swarm, and other options | Shipped behavior |
 
-That table should be read as a conflict resolver.
+That table is a conflict resolver.
 
-If two files seem to disagree, the first thing to ask is not "which one sounds
-more complete?"
+If two files seem to agree, do not ask first:
 
-It is:
+> doesn't that mean the claim is probably true?
 
-> are they even trying to answer the same truth class?
+Ask instead:
+
+> are these files even allowed to speak the same class of truth?
 
 Very often they are not.
 
 ## The strongest honest reading orders
 
-There are two serious reading orders in this repo, depending on the question.
+There are two serious reading orders in this repo.
 
 ### If the question is: what is the user actually trying to build?
 
@@ -110,7 +130,7 @@ Read in this order:
 
 That order answers:
 
-> what dream is the repo trying to earn, and what accusations is it making
+> what dream is the repo trying to earn, and what accusation is it making
 > against the usual ecosystem answers?
 
 ### If the question is: what has the priority implementation actually earned?
@@ -127,14 +147,18 @@ That order answers:
 
 > what is actually present, inspectable, and currently claimable?
 
-Those two orders are both necessary because the repo's dream is much broader
-than its currently proven runtime behavior.
+The repo needs both orders because the dream is much broader than the currently
+proven runtime behavior.
 
-## The clearest dream surface
+## The clearest dream surfaces
 
-The clearest architecture-dream file remains
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md).
+The clearest architecture-dream surfaces are still:
 
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+
+`copilot-instructions.md` is the sharpest direct statement of the operating
+contract.
 It explicitly says the repo wants:
 
 - no central orchestrator by default
@@ -161,105 +185,79 @@ It is not the strongest answer to:
 
 > what already works today?
 
-That boundary has to stay explicit or the repo will start using clarity of
+That boundary must stay explicit or the repo will start using clarity of
 desire as a substitute for proof of delivery.
-
-## Why the intent surface matters so much
-
-This repo has a lot of files that mention failover, HA, anti-SPOF work, or
-cluster-shaped ideas.
-Only a few of them state the request contract plainly enough to preserve the
-user's actual frustration.
-
-That is why
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-matters so much.
-It does not just say "be resilient."
-It says:
-
-- keep Compose as the human-facing control surface
-- let any healthy public node receive the first hop
-- serve locally when possible
-- peer-forward when locality is absent
-- avoid faking success by collapsing L7, L4, and stateful semantics together
-
-That is a much sharper dream than generic "multi-node Docker."
-It is also why a lot of otherwise relevant files are only secondary authority.
 
 ## The repo-level honesty wall
 
-[`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md) is the strongest
-repo-level honesty wall around the dream.
-
-Its real job is not onboarding.
-Its real job is to keep the repo from calming the problem down into easier
-questions like:
+The README matters because it keeps the repo from calming the problem down into
+easier questions like:
 
 - which orchestrator is best?
 - how do we improve HA?
 - how do we modernize the stack?
 
-The README preserves the harsher benchmark:
+Its real benchmark is harsher:
 
 > which options are still real once traffic lands on the wrong node and the
 > operator is no longer allowed to privately complete the topology story?
 
-That is why README authority is higher than AGENTS authority for the user
-complaint, even though AGENTS is closer to the implementation.
+That is why README authority is higher than AGENTS authority for the user's
+complaint even though AGENTS is closer to implementation work.
 
 ## The runtime-anchor surfaces
 
-[`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md),
-[`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml),
-and the active fragment files under [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/)
-own the runtime-anchor layer.
+The runtime-anchor layer is owned by:
 
-They answer questions like:
+- [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- active files under [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/)
+
+These surfaces answer questions like:
 
 - what is the priority implementation surface?
 - what services, configs, networks, and secrets actually exist now?
 - what commands validate the authored graph?
 - what operator constraints exist while working here?
 
-Examples that belong to this layer now:
+Examples that belong here now:
 
-- the root include graph
-- root networks like `publicnet`, `backend`, and `warp-nat-net`
-- root services like `mongodb`, `redis`, `code-server`, `searxng`, `homepage`,
-  `dozzle`, and others
-- edge services in `compose/docker-compose.coolify-proxy.yml` like `traefik`,
-  `tinyauth`, `nginx-traefik-extensions`, `crowdsec`, `cloudflare-ddns`,
+- root services such as `mongodb`, `redis`, `code-server`, `searxng`,
+  `homepage`, and `dozzle`
+- edge services such as `traefik`, `tinyauth`,
+  `nginx-traefik-extensions`, `crowdsec`, `cloudflare-ddns`,
   `docker-gen-failover`, and `whoami`
 - Headscale surfaces in `compose/docker-compose.headscale.yml`
 - monitoring surfaces in `compose/docker-compose.metrics.yml`
 
-Those files prove the stack is real.
+These files prove the stack is real.
+They do not prove:
 
-They do **not** prove:
+- generic wrong-node routing correctness
+- backend-loss persistence
+- protected-route parity after peer-forward handoff
+- stateful HA dignity
 
-- that wrong-node routing works generically
-- that backend-loss fallback survives
-- that protected routes preserve policy meaning across peer-forward handoff
-- that stateful services have earned HA language
-
-That is why runtime presence must stay separate from distributed capability.
+That is why runtime presence must stay separate from distributed-capability
+claims.
 
 ## The authoring-discipline surfaces
 
-[`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules) and parts of
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-govern how services should be authored.
+The authoring-discipline layer is owned mainly by:
 
-They are authoritative about things like:
+- [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules)
+- the authoring sections inside
+  [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+
+These surfaces are authoritative about:
 
 - commit every change
 - prefer inline Compose configs
 - require actual healthchecks
 - do not weaken healthchecks just to make the stack look healthy
 
-Those rules matter.
-Bad authoring discipline makes the anti-SPOF question harder to answer
-honestly.
+Those rules matter because bad authoring discipline makes the anti-SPOF problem
+harder to answer honestly.
 
 But these surfaces are not allowed to cash themselves out into:
 
@@ -268,22 +266,24 @@ But these surfaces are not allowed to cash themselves out into:
 - route durability under backend loss
 - stateful failover semantics
 
-This is one of the most important boundaries in the whole repo:
+This is one of the most important boundaries in the repo:
 
-good Compose hygiene is necessary, but it is not distributed-systems truth.
+> good Compose hygiene is necessary, but it is not distributed-systems truth.
 
 ## The planning surfaces
 
-[`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-and related planning artifacts are authoritative about pressure and candidate
-promotion paths, not completion.
+The planning layer is owned by:
 
-They are allowed to say:
+- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
+- related planning artifacts under `docs/`
+- roadmap and gap pages in the knowledgebase
+
+These surfaces are allowed to say:
 
 - which missing truths the repo already knows it lacks
 - which future layers might earn promotion
 - which hidden operator burdens are still alive
-- where the repo suspects the missing middle layer might live
+- where the repo suspects the missing middle may live
 
 They are not allowed to say:
 
@@ -293,7 +293,7 @@ They are not allowed to say:
 - that peer-forward or failover is already broadly proven
 
 This matters because this repo's planning layer is unusually good.
-That makes it especially dangerous.
+That makes it unusually dangerous.
 
 Detailed planning can sound like partial implementation when the reader is
 already hungry for relief.
@@ -310,33 +310,38 @@ They are authoritative about:
 - recurring ecosystem dead ends
 - why helper piles often still feel fake
 - why wrong-node dignity keeps outranking generic "more clustered" language
-- why stateful honesty remains harsher than ingress optimism
+- why stateful honesty stays harsher than ingress optimism
 
 They are not authoritative about current shipped behavior.
 
 That sounds obvious.
-It is still one of the easiest mistakes to make in this repo, because the
-archive often describes the real problem more vividly than the runtime proves
-its current answer.
+It is still one of the easiest mistakes to make here, because the archive often
+describes the real problem more vividly than the runtime proves its current
+answer.
 
-## The dangerous blended sentence
+## The private sentence test for authority
 
-This repo has one especially dangerous sentence shape:
+Whenever a strong sentence appears in the docs, ask:
 
-1. the archive names the wound correctly
-2. the instruction files describe the dream clearly
-3. the live Compose files show serious machinery
-4. the planning docs name plausible repairs
-5. the docs quietly blend all of that into a present-tense feeling of maturity
+> which surface was actually allowed to say this part, and what private
+> sentence would still survive if I forced the claim back through the runtime?
 
-That fifth step is the failure this page exists to block.
+Examples:
 
-If a paragraph depends on more than one authority class, it should say which
-class is carrying which part of the claim.
+- if the sentence came from dream surfaces, the surviving private sentence is
+  often:
+  `yes, but I still do not know what the runtime owns today`
+- if the sentence came from runtime surfaces, the survivor is often:
+  `yes, but I still do not know whether the system can explain itself on the
+  bad day`
+- if the sentence came from plans:
+  `yes, but I still do not know whether the repair exists outside the plan`
+- if the sentence came from archive pressure:
+  `yes, but I still do not know what the current worktree truly proves`
 
-Otherwise the docs start sounding better than the system actually is.
+If that reflex disappears, the authority map has failed.
 
-## The current bottom line
+## The honest bottom line
 
 The strongest current authority reading is:
 
@@ -346,9 +351,9 @@ The strongest current authority reading is:
 - planning authority lives in `INFRASTRUCTURE_MASTER_PLAN.md` and related docs
 - archive pressure lives in research and source-archive surfaces
 
-The repo becomes more useful, not less, when those layers stay separate.
+The docs get better, not worse, when those layers stay separate.
 
-The reader should leave this page with one strict reflex:
+The reflex this page should leave behind is:
 
 > before trusting a strong sentence, ask which surface was actually allowed to
-> say that part
+> say that part.
