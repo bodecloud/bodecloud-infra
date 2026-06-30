@@ -61,6 +61,16 @@ This page is not authoritative about:
 This is a tension-preservation page.
 It is not a victory page.
 
+It is also not allowed to become a "finally someone explained the tradeoffs
+well" page.
+
+That kind of page can feel intellectually honest while still failing the user's
+real standard.
+The user is not starving for more articulate contradiction analysis.
+The user is starving for an option that stops cashing out into private operator
+settlement at the exact moment the wrong node, the missing backend, or the
+stateful truth matters.
+
 ## Strongest honest current answer
 
 The repo is in motion between:
@@ -91,6 +101,12 @@ the problem is not just contradiction.
 The problem is contradiction continually being sold back to the user as if it
 were already a meaningful menu of options.
 
+That means even a very perceptive document can still fail here.
+If it mainly makes the contradiction feel sophisticated, legible, and
+respectably managed, but does not sharpen where the hidden burden still lands,
+then it is still helping the same ecosystem habit this repo is reacting
+against.
+
 ## What still does not count as facing the contradictions honestly
 
 This page should reject a softer kind of self-congratulation too.
@@ -106,6 +122,15 @@ The following still do not count as confronting the contradictions well:
 Those things may be useful orientation.
 They still do not move the contradiction unless one hidden burden, one proof
 gap, or one false equivalence actually shrinks.
+
+They also do not prove the docs have become more truthful in the strongest
+sense that matters here.
+A better contradiction analysis can still leave the reader with the same false
+aftertaste:
+
+- maybe the repo is not solved, but at least it finally has real options
+
+This page has to keep asking whether that feeling was earned or merely narrated.
 
 This is where a lot of documentation dies in place.
 It becomes perceptive enough to describe the trap while still leaving the
@@ -207,6 +232,17 @@ It has to stay adversarial toward fake closure.
 The docs are not merely organizing ideas here; they are trying to stop the
 knowledgebase from becoming one more polished layer that helps partial answers
 look emotionally complete.
+
+The sharper version of that warning is:
+
+- nuanced contradiction awareness is not contradiction reduction
+- stronger prose is not stronger optionhood
+- better retrieval of the wound is not the wound being carried by the platform
+- architectural literacy is not control-plane ownership
+
+If this page forgets those distinctions, then it becomes one more elegant place
+where the user's actual complaint gets translated into respectable but
+emotionally unbinding theory.
 
 ## Tension 1: Compose readability vs scheduler-grade expectations
 

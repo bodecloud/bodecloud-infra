@@ -57,6 +57,21 @@ It is also a disappointment-preservation page.
 If a drill passes and the docs immediately become more satisfying than the
 actual evidence deserves, then this page was too weak where it mattered most.
 
+It is also not allowed to become a place where proof vocabulary itself feels
+like progress.
+
+This repo now has enough evidence language, proof classes, and anti-theater
+discipline that even the matrix can accidentally start performing closure:
+
+- the proof classes are crisp
+- the drill catalog is thoughtful
+- the ceilings are named in advance
+- therefore the project must finally be operating like a serious distributed
+  system
+
+No.
+That is still literacy, not proof.
+
 ## Strongest honest current answer
 
 The repo needs proof discipline more than it needs more confident language.
@@ -71,6 +86,10 @@ That promotion drift is the real adversary here.
 It is how the repo can start sounding like it has finally found a respectable
 option even when the operator is still privately carrying almost the same
 decisive burden.
+
+This page therefore has to be hostile not only to overclaim after success, but
+also to the false maturity that comes from having a beautifully designed proof
+system before the underlying request-preserving reality has moved.
 
 That is why this page cannot read like a standard QA matrix.
 The user is not just asking whether routes can be exercised.
@@ -110,6 +129,12 @@ operator and keeps the next still-missing step visible.
 That sentence should govern every future addition to this matrix.
 If the drill mainly increases confidence without reducing private completion
 work, it is not moving the dream far enough to matter.
+
+The same rule applies to the matrix itself.
+If the page mainly increases the reader's confidence that the repo is "thinking
+about proof the right way," but the operator still has to do the same private
+settlement work in a real incident, then the matrix has become one more
+reassuring artifact instead of a truth gate.
 
 ## The dream fragments being measured
 
@@ -165,6 +190,9 @@ This class matters because the repo has many strong intent surfaces.
 It is therefore unusually vulnerable to feeling half-achieved just because the
 dream has already been described with precision.
 
+That vulnerability is exactly why this page cannot reward conceptual clarity as
+if it were partial runtime completion.
+
 ### `Config present`
 
 Meaning:
@@ -202,6 +230,10 @@ Forbidden upgrade:
 
 This class is especially dangerous in `bolabaden-infra` because the happy path
 can look mature enough to emotionally impersonate a distributed answer.
+
+That same danger applies to the documentation around it.
+A strong drill description of the happy path is still just a stronger
+description of the narrowest kind of success.
 
 ### `Wrong-node proven`
 

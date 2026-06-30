@@ -58,6 +58,23 @@ It is also not a morale document.
 If it starts sounding like one, it has probably stopped naming the exact hidden
 burden that still makes the stronger architecture story illegal.
 
+It also cannot let "better roadmap clarity" impersonate progress.
+
+This repo is now mature enough, rhetorically, that the roadmap itself can start
+performing as if it were one more control surface:
+
+- the missing pieces are named
+- the order is cleaner
+- the phases look sharper
+- the language sounds less lost
+
+and therefore the reader is invited to feel that the platform has become more
+real than it actually has.
+
+This page has to keep refusing that emotional trade.
+A clearer sequence is still only a clearer description of the burden until the
+burden itself moves.
+
 ## Strongest honest current answer
 
 The next work is not "whatever seems generally useful for self-hosting."
@@ -87,6 +104,9 @@ still objectively correct.
 It is also the list of places where a cleaner architecture story would still be
 cheating if it skipped ahead.
 
+That means this page should never let "the next work is now easier to
+understand" stand in for "the next work has become less necessary."
+
 The roadmap in this repo does not mainly exist to prioritize effort.
 It exists to prevent narrative overpayment.
 
@@ -110,6 +130,14 @@ The following still do not count as strong sequencing:
 Those things may improve planning posture.
 They still do not prove the sequence is actually protecting the user from fake
 closure.
+
+They also do not prove that the repo has become less dependent on the operator
+being the undocumented final interpreter of:
+
+- where the service really lives
+- which peer is actually safe to trust
+- whether fallback is transport-only or meaning-preserving
+- which stronger sentence still has to stay unsaid
 
 This page has to stay unusually hostile to tidy planning aesthetics.
 
@@ -187,6 +215,11 @@ The current best order remains:
 This is not motivational sequencing.
 It is the dependency chain between the dream and reality.
 
+It is also not a substitute for runtime progress.
+If these nine steps become easier to explain while the same wrong-node,
+backend-loss, semantic continuity, and stateful truth gaps remain, then this
+page has only improved retrieval, not options.
+
 It is also the difference between:
 
 - "the repo is exploring sophisticated things"
@@ -215,6 +248,10 @@ themselves:
   proving which hidden burden they actually removed
 - making docs calmer, cleaner, or more enterprise-sounding while the same weak
   runtime truths remain
+- making the roadmap more comprehensive while the operator still has to
+  privately finish the decisive sentence during a bad day
+- making the dependency logic easier to retrieve while the same recovery burden
+  still cashes out into remembered topology and hope
 
 That last bullet matters more than it should in a normal repo.
 This project is now sophisticated enough that better planning language can

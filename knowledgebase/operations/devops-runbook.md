@@ -44,6 +44,22 @@ If following it mainly leaves a human feeling reassured, rather than leaving
 behind inspectable evidence plus a named remaining ceiling, then it is already
 drifting back toward ritual instead of operational truth.
 
+It is also not allowed to become a page that professionalizes the hidden
+operator role.
+
+That is a subtle failure mode in a repo like this:
+
+- the runbook gets sharper
+- the questions get better
+- the sequence gets more disciplined
+- the operator becomes more fluent at explaining what is and is not proven
+
+and yet the same person is still privately acting as the final bridge between
+what the system exposes and what the stack actually means under stress.
+
+That is better operational literacy.
+It is not yet less hidden operator burden.
+
 ## Strongest honest current answer
 
 The real job of this runbook is:
@@ -65,6 +81,14 @@ The root wound is not lack of commands.
 It is that commands keep succeeding one layer before the hidden operator role
 actually shrinks.
 
+So this page has to keep separating two things that are easy to confuse:
+
+- a more competent operator
+- a system that requires less operator heroism
+
+The first can improve dramatically while the second barely moves.
+This runbook has to keep making that uncomfortable on purpose.
+
 ## What still does not count as a serious runbook in this repo
 
 This page should also say more bluntly what fake operational maturity still
@@ -85,6 +109,9 @@ The user is asking for less hidden reconstruction burden.
 
 If the runbook leaves the operator feeling informed but still privately
 carrying the same sacred-node truth, then it stayed too shallow.
+
+If it leaves the operator sounding more authoritative while still carrying the
+same sacred-node truth, then it may actually be making the wound easier to hide.
 
 That is the human test for every runbook section:
 
@@ -125,6 +152,11 @@ That last line is the whole operational horizon.
 The runbook is not here to make the operator more heroic.
 It is here to make heroism less necessary and more obviously measurable when it
 is still required.
+
+That means "good runbook quality" is not enough.
+The page cannot merely teach someone to narrate the system honestly.
+It also has to keep pointing at the exact place where the system still refuses
+to own what the operator just learned how to explain more clearly.
 
 That is the bar this page has to protect.
 
@@ -206,6 +238,10 @@ It is one of the main ways hidden operator knowledge keeps surviving while the
 repo sounds increasingly sophisticated.
 
 That is exactly the failure pattern the user is trying to get away from.
+
+This sequence is therefore not a performance rubric for impressive operators.
+It is a measuring stick for how much private closure work still survives after
+the operator has done everything correctly.
 
 ## The operational sequence
 
