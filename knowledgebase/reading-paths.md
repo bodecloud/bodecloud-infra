@@ -73,6 +73,30 @@ That is false.
 The site is getting better at reconstructing the pressure.
 That does not mean the runtime has already solved the pressure.
 
+## What still does not count as a good reading route here
+
+This page needs to say more explicitly what fake retrieval success still looks
+like.
+
+These still do not count:
+
+- finding the right page family but blending its conclusion with a stronger
+  truth class nearby
+- reading runtime inventory and quietly importing planning optimism into it
+- reading archive pressure and quietly upgrading it into implementation
+  momentum
+- following a question path that never states what stronger sentence remains
+  forbidden
+- producing a comprehensive summary that still cannot name which private burden
+  the system continues to rely on
+
+The user is not asking for elegant site navigation by itself.
+The user is asking for retrieval that stays faithful to the exact wound instead
+of drifting into a cleaner neighboring problem.
+
+If a route makes the site easier to browse but still easier to overclaim from,
+then it is still incomplete.
+
 ## Read by claim type first
 
 Before following a reading path, identify the class of sentence you are trying
@@ -91,6 +115,14 @@ to support.
 
 If you cannot route a claim this way, the claim is probably too vague to be
 useful.
+
+That vagueness matters because it is exactly where:
+
+- architecture intent turns into runtime implication
+- runtime presence turns into resilience implication
+- archive pressure turns into false closure
+
+This page is supposed to interrupt that slide before it happens.
 
 ## Question-first reading paths
 
@@ -259,6 +291,12 @@ Use this register for:
 - which helpers are materially live
 - which lanes are still only runtime-shaped rather than trustworthy
 
+This register still must not be overread into:
+
+- generic wrong-node success
+- backend-loss survival
+- honest stateful authority
+
 ### Intent and dream truth
 
 Start with:
@@ -272,6 +310,11 @@ Use this register for:
 - what the user actually wants
 - what would count as genuine relief
 - which nearby goals are still too small
+
+This register still must not be overread into:
+
+- evidence that the runtime is close
+- proof that a candidate layer already deserves promotion
 
 ### Planning and promotion truth
 
@@ -287,6 +330,11 @@ Use this register for:
 - sequencing pressure
 - when a stronger control surface might earn itself
 
+This register still must not be overread into:
+
+- proof that a named gap is partially solved
+- permission to narrate roadmap coherence as implementation maturity
+
 ### Archive and reconstruction truth
 
 Start with:
@@ -300,6 +348,29 @@ Use this register for:
 - why normal answers keep failing
 - which bundles are worth reading closely
 - how to stop replacing the real complaint with a tidier one
+
+This register still must not be overread into:
+
+- live behavior evidence
+- proof that the same pain has already been relieved technically
+
+## What a real reading packet should leave behind
+
+This page should not merely route readers.
+It should help them leave behind packets that the next reader can audit.
+
+A serious reading packet should preserve:
+
+- the question that triggered the route
+- the truth registers that were consulted
+- the strongest runtime-facing artifact used
+- the strongest dream- or archive-facing artifact used
+- the contradiction that was intentionally preserved
+- the next proof packet that would be required before a stronger claim becomes
+  honest
+
+If a reading packet only says "I read the right pages," it is still too weak
+for this repo.
 
 ## Bottom line
 

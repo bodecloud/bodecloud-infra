@@ -45,6 +45,28 @@ That is the rule.
 If the current layer still hurts but the next layer does not clearly relocate
 the hidden truth burden, then promotion is premature theater.
 
+## What still does not count as a serious promotion decision
+
+This page should also say more bluntly what fake decisiveness still looks like.
+
+These still do not count:
+
+- a cleaner architecture story with no named burden being externalized
+- a more modern orchestrator noun with no proof that wrong-node truth becomes
+  more system-owned
+- a recommendation driven mainly by ecosystem prestige
+- a promotion path that improves deployment ergonomics while leaving placement
+  truth socially carried
+- a control-layer jump justified by embarrassment with the current helper stack
+  instead of proof that the helper stack cannot honestly own the burden
+
+The user is not asking for a bolder recommendation voice.
+The user is asking for an option that makes the same humiliation threshold less
+real.
+
+If the page sounds decisive without naming what private truth stopped being
+private, then it is still performing certainty instead of earning it.
+
 ## The real burden this page is trying to relocate
 
 The user is not mainly trying to relocate YAML.
@@ -121,6 +143,18 @@ Examples:
   layer failed to carry the burden honestly first
 
 Without a packet like that, "promotion" is still mostly rhetorical.
+
+## What a real promotion packet should leave impossible to overread
+
+A serious packet should make at least three dishonest upgrades harder:
+
+- "we picked a bigger platform, therefore the burden must be lower now"
+- "the helper layer was awkward, therefore the replacement must be more real"
+- "the new layer has stronger abstractions, therefore wrong-node behavior must
+  be closer to solved"
+
+If a packet still leaves those upgrades easy to say, then the packet is still
+too flattering.
 
 ## What still does not count as a real option
 
@@ -324,3 +358,7 @@ They are:
 
 Anything broader than that may still become right later.
 It has not yet clearly earned itself from current evidence.
+
+The point of this page is not to make the repo sound harder to satisfy.
+It is to keep the repo from accepting a prestigious rename of the same burden
+as if that were the long-missing option.
