@@ -103,9 +103,9 @@ map to one inspectable packet field.
 | --- | --- | --- |
 | What node received the request? | `entry_node` | The first hop is known, not inferred from memory. |
 | Was the service local there? | `locality_result` / `service_locality` | The receiving node can distinguish owner from first-hop node. |
-| Where did placement truth come from? | `placement_source` / `placement_truth.source` | The node consulted shared current truth, not operator folklore. |
-| Which peer was chosen? | `selected_peer` / `peer_eligibility.peer` | Peer choice was made by system-owned evidence. |
-| Why was that peer valid? | `peer_eligibility_reason` | Reachability was not mistaken for eligibility. |
+| Where did placement truth come from? | `placement_source` / `placement_decision_packet.placement_source` | The node consulted shared current truth, not operator folklore. |
+| Which peer was chosen? | `selected_peer` / `placement_decision_packet.selected_peer` | Peer choice was made by system-owned evidence. |
+| Why was that peer valid? | `peer_eligibility_reason` / `placement_decision_packet.peer_eligibility.reason` | Reachability was not mistaken for eligibility. |
 | Did policy survive? | `policy_chain` / `handoff.preserves_auth` | Auth, middleware, headers, and route meaning remained coherent. |
 | Did the rescue path survive damage? | `backend_condition` / `backend_loss` | Fallback was tested after the preferred path failed. |
 | Can another operator inspect it later? | `explanation_artifact` | The explanation moved out of one human head. |
@@ -156,7 +156,8 @@ Saying "anti-SPOF" is weaker than saying how the request meaning survives.
 ### What would allow a stronger answer
 
 - one route packet proving locality detection
-- one route packet proving peer selection
+- one `placement_decision_packet` proving shared placement truth and peer
+  eligibility
 - one route packet proving the same user-visible semantics after handoff
 
 ### Private sentence still surviving today
@@ -204,6 +205,8 @@ The harsher target is:
 
 - one shared placement-truth surface actually consumed by routing or forwarding
 - one narrow wrong-node HTTP proof
+- one placement decision packet showing the wrong node used shared truth instead
+  of operator memory
 - one backend-loss proof showing the rescue path still means the same thing
 
 ### Private sentence still surviving today

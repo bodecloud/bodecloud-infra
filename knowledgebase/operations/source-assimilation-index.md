@@ -149,11 +149,11 @@ true.
 
 Primary anchors:
 
-- [`.github/copilot-instructions.md`](/run/media/brunner56/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-- [`README.md`](/run/media/brunner56/Workspaces/bolabaden-infra/README.md)
-- [`AGENTS.md`](/run/media/brunner56/Workspaces/bolabaden-infra/AGENTS.md)
-- [`knowledgebase/AGENTS.md`](/run/media/brunner56/Workspaces/bolabaden-infra/knowledgebase/AGENTS.md)
-- [`.cursorrules`](/run/media/brunner56/Workspaces/bolabaden-infra/.cursorrules)
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+- [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
+- [`knowledgebase/AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/AGENTS.md)
+- [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules)
 
 Use these for:
 
@@ -180,8 +180,8 @@ actually ships today.
 
 Primary anchors:
 
-- [`docker-compose.yml`](/run/media/brunner56/Workspaces/bolabaden-infra/docker-compose.yml)
-- [`compose/`](/run/media/brunner56/Workspaces/bolabaden-infra/compose)
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
 - merged output from `docker compose config`
 
 Use these for:
@@ -211,7 +211,7 @@ missing or what a stronger layer would need to earn.
 
 Primary anchors:
 
-- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
+- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 - related plan docs under `/docs`
 - roadmap, proof, and architecture pages under `knowledgebase/`
 
@@ -240,7 +240,7 @@ actually rebelling against and why normal answers keep failing.
 
 Primary anchors:
 
-- [`knowledgebase/source-archive/`](/run/media/brunner56/Workspaces/bolabaden-infra/knowledgebase/source-archive/)
+- [`knowledgebase/source-archive/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/)
 - synthesis pages under `knowledgebase/research/`
 
 High-value recurring thread families include:
@@ -370,8 +370,8 @@ Examples:
 
 | If the operator page asks... | It should point at... | Stronger claim still forbidden until... |
 | --- | --- | --- |
-| "Can the wrong node handle this?" | `entry_node`, `locality_result`, `placement_source` | a drill shows the wrong node used shared truth. |
-| "Can it forward to the right peer?" | `selected_peer`, `peer_eligibility_reason` | eligibility is demonstrated, not assumed from reachability. |
+| "Can the wrong node handle this?" | `entry_node`, `locality_result`, `placement_source`, `placement_decision_packet` | a drill shows the wrong node used shared truth. |
+| "Can it forward to the right peer?" | `selected_peer`, `peer_eligibility_reason`, `placement_decision_packet.peer_eligibility` | eligibility is demonstrated, not assumed from reachability. |
 | "Did auth survive?" | `policy_chain`, `handoff.preserves_auth` | local and wrong-node behavior are compared. |
 | "Did failover work?" | `backend_condition`, `backend_loss` | the preferred backend is actually removed or broken during the test. |
 | "Is this stateful service HA?" | authority, writer, recovery, fencing fields in a stateful packet | authority transfer or honest singularity is proven. |
@@ -440,7 +440,7 @@ If a retrieval pass cannot produce that packet, then "we really read the repo
 this time" is still too congratulatory for this project.
 
 For pages about ingress, routing, or failover, the packet should be concrete
-enough to downgrade into the route-level schema:
+enough to downgrade into the route-level and placement-decision schemas:
 
 ```yaml
 assimilation_packet:
@@ -453,12 +453,18 @@ assimilation_packet:
   surviving_private_sentence: "I still personally know where this route lives"
   next_runtime_packet:
     route_packet_field: placement_source
+    placement_decision_packet_field: placement_source
     required_upgrade: "receiving node consults shared current placement truth"
 ```
 
 The exact values will change by page.
 The point is that retrieval should end with a next proof field, not a vague
 recommendation to "test more."
+
+If the next proof field is `placement_source`, the writer should usually link
+to [Current-State Registry and Peer Eligibility](../architecture/current-state-registry-and-peer-eligibility.md)
+and name which part of `placement_decision_packet` is still missing.
+That prevents "we need service discovery" from staying too abstract.
 
 ## The honest bottom line
 
