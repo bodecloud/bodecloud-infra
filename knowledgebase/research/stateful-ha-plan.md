@@ -19,6 +19,34 @@ behind this rewrite:
 - do not discard contradiction because it complicates the story
 - do not turn partial likeness into authoritative sameness
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- define the order in which stateful hardening can become honest
+- explain which stateful subproblems must stay separate
+- connect live runtime statefulness to possible next promotion paths
+- preserve the repo's refusal to counterfeit stateful HA from ingress progress
+
+This page is not allowed to:
+
+- imply that the root stack already has broad stateful HA
+- treat the existence of an L4 path as proof of replicated authority
+- collapse sequencing discipline into an implementation completion claim
+- suggest every state-bearing workload is on the same hardening path
+
+## Quick claim router
+
+If the question is:
+
+- "What is the repo actually prepared to harden first for stateful systems?"
+  this page is a primary answer.
+- "Does the current runtime already prove stateful anti-SPOF?" no.
+- "Is this a product recommendation page?" no. It is a sequencing and honesty
+  page first.
+- "Can this page stand in for workload-specific proof?" no. Use the evidence
+  and architecture pages for that.
+
 ## Why this page exists
 
 The user is clearly frustrated with fake availability stories.
@@ -86,6 +114,15 @@ It is one of the repo's clearest philosophical boundaries:
 
 the system is allowed to become more reachable before it becomes more honest
 about state only if the docs never confuse those two kinds of progress.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that the repo already knows the right
+stateful lesson, but it has not yet earned broad stateful resilience. The real
+progress here is intellectual and architectural discipline: ingress and
+wrong-node behavior can improve first, while only a narrow set of stateful
+services should be hardened next, and only under much stricter authority,
+storage, and client-behavior rules than the rest of the stack.
 
 ## The repo's actual near-term stateful priority
 

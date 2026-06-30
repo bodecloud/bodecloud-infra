@@ -29,6 +29,34 @@ That boundary matters because generated ingress is one of the easiest places
 for a repo like this to sound nearly solved while still leaving the deepest
 truths unowned.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- explain exactly what the current OpenSVC ingress generator is trying to own
+- show where generated routes really come from and what they still assume
+- clarify the difference between generated config and owned distributed truth
+- recover the precise bet this branch is making about local-first and peer
+  fallback ingress
+
+This page is not allowed to:
+
+- claim universal wrong-node success
+- imply OpenSVC already governs the live root runtime
+- treat runtime generation as proof that DNS, peer eligibility, or semantic
+  continuity are solved
+- use script detail as a substitute for passed failure drills
+
+## Quick claim router
+
+If the question is:
+
+- "What exactly is this generator doing?" this page is a primary answer.
+- "Does generated ingress already equal proven failover?" no.
+- "Why is this branch strategically interesting?" this page is meant to answer
+  that precisely.
+- "Can I cite this as route-level proof?" not by itself.
+
 ## What the current script literally does
 
 Primary artifact:
@@ -81,6 +109,16 @@ through naming, DNS, reachability, or shared policy?
 That is also why generated config is dangerous in this repo.
 It can look like inspectable runtime intelligence while still smuggling
 critical truths in through adjacent systems the generator does not itself own.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that this generator is one of the
+clearest live attempts in the repo to move fallback routing out of handwritten
+folklore and into runtime-derived config. That is real progress. It is still
+not the same thing as system-owned wrong-node truth, because the generated
+result still depends on adjacent realities like DNS shape, east-west
+reachability, and preserved middleware meaning that the generator does not
+fully own.
 
 ## The dream this generator is trying to encode
 

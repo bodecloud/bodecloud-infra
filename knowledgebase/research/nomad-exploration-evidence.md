@@ -34,6 +34,35 @@ It is:
 This branch matters because Nomad is one of the clearest attempts to test a
 candidate answer to that exact complaint.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- explain what the Nomad branch genuinely proves about the repo's middle-layer
+  search
+- preserve the branch's strongest positive and negative evidence together
+- show how Nomad changed where some truth burdens would live
+- prevent conversion effort from being mistaken for production-ready control
+  plane truth
+
+This page is not allowed to:
+
+- claim Nomad is already the chosen future
+- treat job-conversion effort as proof of healthy cluster reality
+- imply Consul or quorum problems are secondary details
+- collapse scheduler progress into full wrong-node or stateful success
+
+## Quick claim router
+
+If the question is:
+
+- "What did the Nomad exploration actually teach?" this page is a primary
+  answer.
+- "Did the branch prove Nomad is ready?" no.
+- "Is this branch still worth keeping as evidence?" yes, and this page explains
+  why.
+- "Does Nomad automatically solve the user's whole dream?" no.
+
 ## Why the Nomad branch matters
 
 Nomad is attractive in this repo for reasons that are much more specific than
@@ -211,6 +240,15 @@ without yet earning a broad claim about:
 - public any-node request preservation
 - policy continuity under peer handoff
 - stateful authority and election truth
+
+## Strongest honest current answer
+
+The strongest honest current answer is that the Nomad branch proves the repo
+made a serious attempt to buy a thinner honest control plane and discovered a
+new class of truth burdens immediately: quorum, leadership, and control-plane
+health. That does not make the branch a failure. It makes it valuable evidence
+that stronger coordination layers can help while still needing to earn trust on
+their own terms rather than being treated as automatic closure.
 
 ## Why this branch must stay in the knowledgebase
 

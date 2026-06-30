@@ -62,6 +62,39 @@ It also has to refuse a subtler failure mode:
 - settlement starts sounding like a live operating model
 - the unresolved ownership question quietly disappears
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- define the burden-transfer lens the repo should use when judging control
+  layers
+- explain what any future orchestration layer would actually need to own
+- preserve the user's real orchestration question instead of the softer product
+  comparison question
+- connect the Compose-first contract to possible promotion paths without
+  collapsing them into one answer
+
+This page is not allowed to:
+
+- choose a winner by rhetoric alone
+- imply a live operating model already exists just because the blueprint is
+  coherent
+- treat candidate layers as equivalent just because they sound modern
+- use orchestration vocabulary as substitute proof that hidden human SPOFs are
+  already removed
+
+## Quick claim router
+
+If the question is:
+
+- "What should a future control layer actually have to earn here?" this page is
+  a primary answer.
+- "Has the repo already chosen one orchestrator?" no.
+- "Is this page about current runtime proof?" no. It is a filter and burden-map
+  first.
+- "Can a candidate layer be useful without solving the whole dream?" yes, and
+  this page should make that explicit.
+
 ## What a real blueprint has to do in this repo
 
 In a normal infrastructure repo, a blueprint can get away with listing
@@ -104,6 +137,15 @@ That sentence is one of the most important filters in the whole knowledgebase.
 It means this page cannot merely compare power, elegance, or ecosystem depth.
 It has to keep reconstructing the exact wound each candidate does and does not
 close.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that the repo is not missing orchestrator
+names. It is missing a control layer that clearly relocates the right truths
+out of operator memory without destroying the Compose-first surface too early.
+This blueprint is useful only to the degree that it keeps asking which burden
+actually moves and which burden merely gets renamed behind cleaner
+architecture.
 
 ## This page is not a chooser, it is a filter
 
