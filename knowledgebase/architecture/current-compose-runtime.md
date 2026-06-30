@@ -1,633 +1,361 @@
 # Current Compose Runtime
 
-This page is the strongest live implementation inventory in the repository.
+This page is the strongest live-runtime inventory in the repository.
 
-If a sentence claims something is part of the priority implementation now, it
-has to survive contact with:
+If a sentence says something is part of the priority implementation now, it
+needs to survive contact with:
 
 - root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-- the fragments directly included from
+- the fragments it actively includes from
   [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
 
-Everything else is weaker evidence for live-runtime claims.
+Everything else is weaker evidence for current runtime claims.
 
-That strength is exactly why this page is dangerous.
-Runtime inventories are where infrastructure documentation most often starts
-sounding useful before it has actually answered the operator's real question.
-Once a stack is broad enough, mere presence starts getting misheard as
-relief.
-This page has to keep interrupting that reflex.
+That strength is also why this page is dangerous.
+Runtime inventories are where complicated infra stacks most easily start
+sounding more relieving than they really are.
+Once a repo has enough services, networks, helpers, and middlewares, simple
+presence starts getting mistaken for shared truth.
 
-That warning needs to be taken one step further here.
-Better inventory fidelity is not runtime relief.
-Better recollection of what already exists is not the same thing as the
-runtime owning one more decisive truth under pressure.
-The page can become more comprehensive and still leave the user with the same
-bad-day humiliation if the decisive sentence still ends in private operator
-memory.
-
-The user already has the broad stack.
-What they still do not have is confidence that the stack itself, rather than
-the operator, owns the decisive truth when a request lands on the wrong node
-or a preferred backend disappears.
-
-That distinction needs to stay almost repetitive on this page because runtime
-inventories are one of the easiest places for "present" to get confused with
-"owned."
-The runtime can visibly contain more and more machinery while the most
-important sentence still begins with:
-
-- "in practice the operator knows..."
-- "privately we know that node X is the real one..."
-- "normally that fallback only works because we remember..."
-
-If this page stops making those unfinished sentences visible, then the
-inventory is laundering presence into adulthood.
+This page has to keep interrupting that move.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
-- what the root stack includes today
-- which networks and service domains are actually active
-- which helper layers are already present in the priority implementation
-- which visible implementation facts shape the real documentation burden
+- what the root runtime actually includes today
+- which networks, configs, secrets, and service families are materially present
+- which files still define the priority implementation
+- which visible runtime facts shape the real burden-transfer problem
 
 This page is not authoritative about:
 
 - generic wrong-node success
-- durable peer-forward routing during backend loss
-- cross-node policy preservation
-- stateful correctness under failover
-- promoting planning material into live truth
+- durable peer-forward behavior under backend loss
+- shared placement truth
+- auth or middleware continuity after peer handoff
+- honest stateful failover semantics
 
-This is the strongest current inventory.
+This page is a live inventory.
 It is not a distributed-systems completion certificate.
-
-It also cannot be allowed to become a comfort certificate.
-The user's complaint is not that too little exists.
-The complaint is that a lot already exists and too much of the important truth
-can still collapse back into private operator explanation once the bad day
-arrives.
-
-That sentence should govern the whole page.
-If the inventory makes the reader feel calmer without making the hidden
-operator burden materially narrower, the inventory has started performing
-reassurance instead of preserving truth.
 
 ## Strongest honest current answer
 
-The current runtime is already serious enough that shallow language becomes
-dangerous.
+The root runtime already proves a serious Compose-first platform.
 
 It clearly proves:
 
-- Compose is still the real implementation center
-- the root file is not symbolic or legacy residue
-- the stack already spans public ingress, private mesh, observability,
-  operator tools, app hosting, TCP services, documentation, AI tooling, and
-  route experimentation
-- the repo has enough machinery that words like "failover" or "anti-SPOF"
-  must be used carefully
+- the root `docker-compose.yml` is still a major implementation surface, not a
+  symbolic wrapper
+- the repo is actively split across included fragments rather than pretending to
+  be a single-file toy stack
+- the stack already spans public ingress, auth, security, observability,
+  private mesh, media, search, AI tooling, TCP services, and alternate egress
+  experiments
+- the runtime is complex enough that words like "failover," "anti-SPOF," and
+  "peer-aware" need strict custody
 
-It still does **not** prove the hardest missing truths:
+It still does **not** prove the thing the user actually wants:
 
 - shared current placement truth
-- durable wrong-node rescue routes
-- semantically valid peer selection
-- preserved auth and middleware after peer handoff
-- honest stateful failover semantics
+- trustworthy peer eligibility truth
+- durable wrong-node rescue paths
+- preserved auth and middleware semantics after cross-node forwarding
+- stateful failover semantics that are honest rather than merely reachable
 
 That difference is the whole reason this page exists.
 
-The runtime is already rich enough to tempt the reader into the wrong
-conclusion:
+The stack is broad.
+The stack is real.
+The stack is still not the same thing as a truth-owning multi-node platform.
 
-- the stack is broad
-- the edge is serious
-- the helpers are real
-- therefore the options must be becoming real too
+## The priority runtime really does center on the root file
 
-This page exists to stop that jump.
+The root file defines the visible control surface the user is trying not to
+lose too early.
 
-It also has to stop a still more flattering version of the same jump:
+The root `docker-compose.yml` currently owns or directly declares:
 
-- the inventory is stricter now
-- the runtime map is easier to retrieve now
-- the root and fragments are described more faithfully now
-- therefore the platform must now be substantially closer to owning the bad
-  day
-
-Not necessarily.
-The docs may only be getting better at reconstructing the same trapped
-condition.
-That is real fidelity progress.
-It is still not proof that one more decisive truth stopped living in private
-operator memory.
-
-It also has to stop the more intellectualized version of the same jump:
-
-- the inventory is now comprehensive
-- the files are now cross-linked correctly
-- the runtime can now be narrated coherently
-- therefore the remaining gap must be mostly implementation follow-through
-
-That conclusion is still too soothing.
-
-It exists because this repo is already past the stage where absence is the
-main problem.
-The danger now is partial presence being socially overread as one more burden
-having moved when it really has not.
-
-More bluntly:
-"look how much is already here" is one of the main ways the ecosystem keeps
-dressing up partial answers as if they had finally become believable options.
-
-## What still does not count as runtime evidence
-
-This page is where documentation inflation becomes especially tempting.
-
-The following still do not count as strong runtime evidence for the user's real
-goal:
-
-- a large number of active services
-- a sophisticated-looking edge stack
-- multiple fragments and networks
-- TCP labels on stateful services
-- observability breadth
-- helper presence with failover-shaped names
-- an any-node-looking ingress story that still depends on remembered backend
-  ownership
-- a route that can be rendered today but has not been stressed under the
-  failure that would make the route matter
-
-Those facts prove the repo is serious and operationally dense.
-They still do not prove that the system, rather than the operator, owns the
-truth needed on the bad day.
-
-That difference is not pedantry.
-It is the whole emotional content of the project.
-The user is not asking for more evidence that the stack is substantial.
-The stack is already substantial enough to feel insulting when the final truth
-still lives in private operator memory.
-
-That is why a runtime inventory in this repo has to do more than enumerate.
-It has to keep saying which part of the runtime is real, which part is merely
-adjacent to the dream, and which part still leaves the operator acting as the
-missing control plane.
-
-That is why partial presence is more dangerous here than simple absence.
-Absence tells the truth faster.
-Partial presence is how a stack starts sounding complete before it has actually
-removed the humiliation threshold the user keeps pointing at.
-
-This page therefore should not merely answer "what exists?"
-It also has to keep answering:
-
-> what exists here that the runtime itself can cash out on the bad day without
-> borrowing the last explanation from the operator?
-
-If that answer is still narrow, then the inventory is still mostly describing
-machinery adjacent to the dream rather than machinery that has already earned
-it.
-
-## What the operator still has to know privately today
-
-This page also has to say, without softening it, what the current runtime
-still forces a human to know personally.
-
-Today the operator may still need to know things like:
-
-- which node currently hosts the real copy of one named HTTP service when the
-  request lands somewhere else
-- whether a route generated by helper logic is merely present right now or
-  would still survive after the preferred backend disappears
-- whether a reachable peer is only alive on the mesh or actually acceptable
-  for the requested route's auth, middleware, secrets, and revision surface
-- whether a TCP endpoint exposed through Traefik is merely transport-reachable
-  or actually safe to describe with failover language
-- whether a state-bearing surface such as MongoDB, Redis, or Headscale still
-  hides a sacred authority node behind a more distributed-looking ingress story
-- whether a request that reaches the "right" backend after forwarding is still
-  the same protected service in terms of middleware, headers, policy, and
-  user-visible semantics
-
-That list is a more faithful summary of the user's complaint than "the stack is
-still maturing."
-
-It is also the shortest honest answer to what the runtime still expects one
-human to quietly finish for it.
-
-The user is not saying the runtime lacks machinery.
-They are saying too many decisive truths still need to be remembered,
-inferred, or reconstructed by a human at the exact moment a believable
-platform should already be exposing them.
-
-That is why runtime breadth cannot be narrated as relief on its own.
-If the operator still has to privately complete the sentence
-"yes, but what this node should really do right now is...",
-then the runtime is still borrowing adulthood from human memory.
-
-## What a runtime-backed progress packet would have to contain
-
-Before this page is used to support stronger "the runtime is moving toward the
-dream" language, it should point to a concrete packet.
-
-That packet should include:
-
-- the exact live component or path being credited
-- the narrower burden it really reduces
-- the artifact in the root runtime that proves the component is materially
-  present now
-- the adjacent burden it still does not reduce
-- the next drill or comparison required before stronger language is allowed
-
-Without that packet, inventory tends to impersonate relief.
-
-That problem gets worse as the site gets better.
-A high-quality inventory can now become:
-
-- easier to audit
-- easier to synthesize
-- easier to cite
-- easier to RAG against
-
-while still leaving the runtime no more capable of preserving request meaning
-without private human completion.
-This page has to keep that split explicit so documentation quality does not
-start impersonating runtime adulthood.
-
-That line should be read literally.
-Inventory is one of the oldest ways infra docs accidentally overpay
-confidence:
-
-- they show how much is present
-- presence gets mistaken for burden transfer
-- burden transfer gets narrated before it exists
-
-There is a harsher way to say the same thing:
-inventory is where a complicated stack starts trying to cash out dignity it
-has not yet earned.
-This knowledgebase should stay suspicious of that move on purpose.
-
-The anti-slop question for every subsection on this page is therefore:
-
-> what exact truth did the runtime gain here, and what exact bad-day sentence
-> would the operator still have to privately complete anyway?
-
-## The root file is still a major infrastructure surface
-
-The root file is not just a launcher for fragments.
-It still owns:
-
-- networks
-- configs
-- secrets
+- shared networks
+- shared configs
+- shared secrets
 - direct services
-- operator-facing utility surfaces
-- some of the most sensitive mixed-protocol workloads in the repo
+- the include list for the active fragment stack
 
-That matters because one of the easiest bad reads in this repository is:
+That matters because the repo's dream is explicitly not:
 
-> the real system must already live somewhere else because the stack has been
-> split into fragments.
+- demote the last readable layer immediately
+- then ask the user to trust a more hidden control plane on faith
 
-That read is false.
+The root file remains a major truth surface because it still lets the operator
+inspect a large part of reality directly.
 
-The root `docker-compose.yml` is still a major truth surface.
-Any future middle layer or orchestrator promotion has to respect that instead
-of treating the root file as a leftover artifact.
+## Active include set
 
-That matters because the user is explicitly resisting systems that demote the
-last readable surface before proving the new hidden surface has earned the
-trust being demanded.
+The root file actively includes these fragments today:
 
-One of the user's core complaints is that many ecosystems demand surrender of
-the last legible layer before proving the new hidden layer is actually more
-honest.
-The root Compose surface still matters because it lets the operator inspect a
-large part of reality without being forced to take a distributed fairy tale on
-faith.
+- `compose/docker-compose.coolify-proxy.yml`
+- `compose/docker-compose.docs.yml`
+- `compose/docker-compose.firecrawl.yml`
+- `compose/docker-compose.headscale.yml`
+- `compose/docker-compose.llm.yml`
+- `compose/docker-compose.metrics.yml`
+- `compose/docker-compose.stremio-group.yml`
+- `compose/docker-compose.warp-nat-routing.yml`
+- `compose/docker-compose.wishlist.yml`
+
+That include list already says something important about the runtime:
+
+- the edge stack is not imaginary
+- the docs surface is live
+- the private mesh assumptions are live
+- observability is live
+- LLM and research tooling are live
+- alternate egress experiments are live
+- media and application workloads are live
+
+What it does **not** say is where cross-node placement truth lives.
+The include graph proves breadth.
+It does not by itself prove distributed dignity.
 
 ## Root-owned networks
 
-The root runtime defines three central networks:
+The root runtime defines three central shared networks:
 
-| Network | Immediate visible role | Why it matters | What it still does not prove |
+| Network | Immediate visible role | What it honestly proves | What it still does not prove |
 | --- | --- | --- | --- |
-| `warp-nat-net` | controlled alternate egress and routing behavior | the repo is already experimenting with network truth and non-default egress | that cross-node route decisions are cluster-owned |
-| `publicnet` | ingress-adjacent traffic and externally exposed surfaces | public-facing behavior is already explicitly partitioned | that all public nodes share the same request-time service truth |
-| `backend` | internal app and support traffic | the stack clearly distinguishes internal from public traffic | that cross-node placement and peer eligibility are system-owned |
+| `publicnet` | ingress-adjacent and public-facing traffic | public exposure is explicitly modeled in the runtime | that all public nodes share request-time service truth |
+| `backend` | internal app and support traffic | the stack distinguishes internal traffic from public entry | that cross-node service ownership is system-owned |
+| `warp-nat-net` | alternate egress and NAT-routed traffic | the repo is experimenting with non-default egress and routing behavior | that cross-node failover decisions are cluster-owned |
 
-These networks prove segmentation pressure.
-They do not prove a shared multi-node control plane.
+Those networks matter because they show the repo is already modeling different
+traffic realities.
+They do not prove the runtime can explain wrong-node decisions for itself.
 
-## Active include graph
+## Shared runtime surfaces declared at the root
 
-The root file directly includes the following fragments:
+The root file also defines shared configs and secrets that matter operationally.
 
-| Fragment | Primary domain | Why it matters |
-| --- | --- | --- |
-| `compose/docker-compose.coolify-proxy.yml` | public ingress and edge policy | this is the strongest live edge surface: Traefik, CrowdSec, TinyAuth, `nginx-traefik-extensions`, `cloudflare-ddns`, `docker-gen-failover`, Autokuma, log rotation |
-| `compose/docker-compose.docs.yml` | documentation serving | the docs themselves live inside the same routed stack they are describing |
-| `compose/docker-compose.firecrawl.yml` | browser and crawl workloads | proves the repo is already carrying worker-like and queue-like complexity |
-| `compose/docker-compose.headscale.yml` | private mesh and coordination assumptions | Headscale is not theoretical; the runtime depends on it as part of the private-network story |
-| `compose/docker-compose.llm.yml` | AI and model-gateway workloads | the runtime includes higher-complexity app surfaces beyond ordinary self-hosting |
-| `compose/docker-compose.metrics.yml` | observability | Grafana, Prometheus, VictoriaMetrics, Loki, Promtail, Blackbox, cAdvisor, exporters, dashboards, alerts |
-| `compose/docker-compose.stremio-group.yml` | media and streaming-adjacent workloads | large heterogeneous service pressure remains part of the real stack |
-| `compose/docker-compose.warp-nat-routing.yml` | alternate-routing and egress experiments | networking behavior is part of the repo's live design surface, not an afterthought |
-| `compose/docker-compose.wishlist.yml` | smaller absorbable app surfaces | the stack keeps growing by absorbing services into the same core runtime |
+Examples visible directly in the root:
 
-This include graph matters because it proves the repo is already operating as a
-platform-shaped Compose system.
-The missing problem is not "how do we stop being toy-scale?"
-The missing problem is "how do we stop being platform-shaped without lying
-about distributed truth?"
+- shared secret `signing_secret`
+- `watchtower-config.json` mounted from `~/.docker/config.json`
+- session-manager assets
+- Homepage inline config content
 
-That second sentence is the more important one.
-The repo is not begging to become serious.
-It is already surrounded by serious-sounding options.
-What it still lacks is an option that remains believable after wrong-node
-entry, backend loss, and stateful consequences stop being hypothetical.
+This proves the repo is already using Compose as a real control surface for:
 
-That distinction should stay central:
-the repo is already sophisticated enough to deserve serious language.
-It is still not allowed to spend that seriousness as if sophistication itself
-were a substitute for shared current truth.
+- shared configuration
+- inline-config preference
+- secret-backed service behavior
+- operator-facing tooling
 
-That is the real threshold.
-Not "does the stack resemble something platform-like?"
-Not "does it contain components respected by serious operators?"
-But "when locality fails or the request lands on the wrong node, does the
-system itself carry enough truth to avoid turning the operator back into the
-private interpreter of reality?"
+It still does not prove that config centralization equals shared topology truth.
+The repo can be highly declarative and still leave the operator privately
+finishing cross-node decisions.
 
-## The live edge stack already present
+## Direct root services that matter to the architecture story
 
-The edge fragment already includes:
+The root file itself visibly carries several important workloads, including:
 
-- `traefik`
-- `crowdsec`
-- `crowdsec-init`
-- `tinyauth`
+- `mongodb`
+- `dcef`
+- `chat-analytics`
+- `searxng`
+- `code-server`
+- additional direct services further down the root file
+
+The architecture importance is not just that these exist.
+It is that the root file still hosts:
+
+- HTTP-facing services
+- protected tooling surfaces
+- TCP-exposed stateful services
+- developer and operator surfaces
+
+This means the priority runtime is not merely "the fragments."
+The root file remains part of the real platform contract.
+
+## Service families the runtime visibly contains today
+
+The current runtime can be read more honestly by grouping it into service
+families instead of a raw service dump.
+
+### 1. Edge, ingress, and auth family
+
+Most visibly anchored by `compose/docker-compose.coolify-proxy.yml`.
+
+This family includes live pressure from tools such as:
+
+- Traefik
+- TinyAuth
 - `nginx-traefik-extensions`
+- CrowdSec
+- Docker socket proxies
 - `cloudflare-ddns`
 - `docker-gen-failover`
-- `whoami`
-- `logrotate-traefik`
-- `autokuma`
 
-That list is important because it proves the repo already has:
+What this family honestly proves:
 
-- L7 ingress
-- security and bouncer logic
-- forward-auth pressure
-- DNS automation pressure
-- dynamic routing pressure
-- service probing and uptime pressure
+- the repo has a serious HTTP edge stack
+- policy, auth, and middleware are not afterthoughts
+- DNS plurality and proxy experimentation are live concerns
 
-It also proves why lazy documentation is dangerous.
-Once a stack contains this much edge machinery, it becomes very easy to
-accidentally narrate "serious ingress" as "solved cross-node request
-preservation."
-
-This runtime does not justify that leap.
-
-That inflation pressure is exactly why this page cannot stop at component
-enumeration.
-When readers see Traefik, TinyAuth, CrowdSec, DDNS, docker-gen, probes, and
-middleware, they naturally start filling in missing adulthood on the stack's
-behalf.
-This page has to keep refusing that generosity.
-
-That leap is one of the main things the knowledgebase is trying to outlaw:
-serious ingress is not the same thing as request-preserving truth ownership.
-
-## The live mesh surface already present
-
-The Headscale fragment already contains:
-
-- `headscale-server`
-- `headscale`
-- inline Headscale configuration
-- Traefik-facing route and middleware material around the Headscale surfaces
-
-The planning docs explicitly record that Headscale is single-node today and
-still a singleton control-plane concern.
-
-So the correct reading is:
-
-- Headscale is real and central to the repo's private-mesh assumptions
-- Headscale is not yet a proven HA control-plane surface
-
-This is exactly the kind of distinction the docs must keep visible.
-
-## The live observability surface already present
-
-The metrics fragment is huge, and that matters.
-
-It already includes:
-
-- `victoriametrics`
-- `prometheus`
-- `grafana`
-- `loki`
-- `promtail`
-- `blackbox-exporter`
-- `cadvisor`
-- `alertmanager`
-- `process-exporter`
-- `mongodb-exporter`
-- `redis-exporter`
-- many dashboards, alert rules, and recording rules
-
-That proves the repo is not missing seriousness.
-It is also a warning:
-
-> strong observability does not automatically mean strong distributed truth.
-
-The system can be richly monitored and still fail the user's real benchmark if
-wrong-node forwarding, placement truth, or stateful authority remain socially
-reconstructed.
-
-Observability can explain the pain after the fact while still doing nothing to
-move who had to privately know the truth before the fact.
-That is exactly the kind of impressive-but-insufficient option the user keeps
-rejecting.
-
-## Root-owned direct services
-
-The root file still declares many direct services rather than delegating
-everything to fragments.
-
-Representative examples include:
-
-- data and state:
-  - `mongodb`
-  - `redis`
-- app and utility surfaces:
-  - `dcef`
-  - `chat-analytics`
-  - `searxng`
-  - `code-server`
-  - `session-manager`
-  - `bolabaden-nextjs`
-  - `telemetry-auth`
-  - `dns-server`
-- operator and maintenance surfaces:
-  - `dozzle`
-  - `homepage`
-  - `portainer`
-  - `watchtower`
-  - `dockerproxy-ro`
-  - `dockerproxy-rw`
-- mixed-protocol and project-specific surfaces:
-  - `biodecompwarehouse`
-  - `biodecompwarehouse-mcp`
-  - `biodecompwarehouse-bsim-server`
-  - `biodecompwarehouse-aio`
-
-That service list matters for three reasons.
-
-First, the root file is still an active authoring surface.
-
-Second, the stack already spans:
-
-- stateless HTTP
-- TCP and database endpoints
-- operator dashboards
-- mixed app surfaces
-- documentation surfaces
-- niche project services
-
-Third, every claim about "one unified platform" has to survive all of those
-service classes, not just the easiest HTTP examples.
-
-That is why this page cannot be satisfied by sounding comprehensive.
-The user has already seen too many comprehensive stories that quietly borrow
-their confidence from the easiest route class and then spread that tone over
-everything else.
-
-## Why the runtime already creates documentation pressure
-
-This runtime is complicated enough that simple summaries become misleading.
-
-A useful docs pass now has to answer at least these questions:
-
-- which services are local-only concerns and which participate in a broader
-  any-node story?
-- which services are routed through Traefik and which expose TCP directly?
-- which services are state-bearing enough that failover language must stay
-  harsh?
-- which helpers are active but untrusted?
-- which routes are generated, which are static, and which are only planned?
-
-Without those distinctions, the docs can sound coherent while quietly
-flattening away the user's whole complaint.
-
-That complaint is not abstract.
-It is the repeated experience that "we have a stack for that" keeps turning
-into "you still have to be the actual cross-node interpreter for that."
-
-## What this runtime already rules out
-
-The current runtime is already strong enough to rule out a few lazy readings.
-
-It rules out:
-
-- "the repo is still basically a simple homelab stack"
-- "the real problem must just be adding more services"
-- "the docs can stay high-level because the implementation is still small"
-- "the root Compose surface is only scaffolding for some future real platform"
-
-It does **not** rule in:
+What it still does not prove:
 
 - generic wrong-node success
-- durable backend-loss recovery
-- policy-preserving peer handoff
-- stateful HA that survives contact with write authority
+- trustworthy peer selection
+- middleware continuity after cross-node forwarding
+- route durability under the exact failure that makes fallback matter
 
-That split is worth stating plainly because it is where many infrastructure
-writeups become emotionally useless.
-They are willing to admit the stack is complicated, but they still phrase the
-conclusion as if complication itself were already a respectable substitute for
-the missing options.
+### 2. Stateful core services family
 
-This page should keep refusing that substitution.
+Visible in the root file and fragments such as `compose/docker-compose.core.yml`
+and the active root graph.
 
-## The most important negative evidence already named by the repo
+Examples include:
 
-The current runtime already contains negative evidence that the docs must keep
-visible instead of smoothing over:
+- MongoDB
+- Redis
+- Headscale-related state
+- Firecrawl-supporting stateful surfaces
 
-- `docker-gen-failover` is present but already documented elsewhere as losing
-  routes under the exact failure condition where rescue should matter
-- Headscale is materially live but openly treated as effectively singleton
-  today
-- stateful surfaces are present in the root graph, but presence does not
-  settle write authority, promotion, or replica semantics
-- no live shared placement-truth artifact in the root runtime has yet earned
-  stronger routing language
+What this family honestly proves:
 
-This matters because the current stack is not only defined by what is present.
-It is also defined by which present helpers and surfaces still fail the user's
-benchmark under stress.
+- the repo is not only about static frontends or disposable apps
+- state-bearing services are already part of the priority runtime
+- TCP routing pressure is already real
 
-The live runtime has to be read next to the planning material, because the
-planning layer records several crucial gaps that affect how the runtime should
-be described.
+What it still does not prove:
 
-The strongest named gaps include:
+- that these services are honestly HA
+- that TCP reachability means safe substitution
+- that state authority is no longer concentrated on a sacred node
 
-- `docker-gen-failover` can delete routes when containers stop
-- `watchtower` is configured but has not been functioning correctly
-- Cloudflare DDNS presence is not the same thing as full multi-node request
-  failover
-- multi-record DDNS behavior is still a known problem
-- secret sync is still manual
-- compose sync is still manual
-- automated service failover between nodes is still missing
-- a live root `services.yaml` registry is still unproven
+### 3. Observability and operator family
 
-Those gaps matter because they keep the runtime honest.
+Most visibly anchored by `compose/docker-compose.metrics.yml`, Homepage config,
+and operator-facing dashboards.
 
-The stack is already rich.
-The repo itself still says the middle control-plane truths are incomplete.
+What this family honestly proves:
 
-That incompleteness is not a minor implementation detail.
-It is the reason the runtime can already look more option-rich than it really
-is under stress.
+- the stack is already instrumented and watched
+- the operator has substantial runtime visibility surfaces
+- the repo is serious about knowing what is alive
 
-## What the runtime clearly proves
+What it still does not prove:
 
-The current root runtime clearly proves:
+- that observability equals convergence truth
+- that alerts can tell the wrong node what to do
+- that being able to see the failure is the same thing as the system owning the
+  recovery truth
 
-1. the repo is Compose-first in reality, not just in rhetoric
-2. the root file and include graph together form a large active platform
-3. the system already carries serious ingress, mesh, observability, and
-   operator complexity
-4. the docs have to distinguish service classes, not just list containers
-5. the repo is solving a hard problem from inside a real stack, not from a toy
-   lab
+### 4. Mesh and routing-experiment family
 
-## What the runtime still does not prove
+Most visibly anchored by `compose/docker-compose.headscale.yml` and
+`compose/docker-compose.warp-nat-routing.yml`.
 
-The current root runtime does **not** yet prove:
+What this family honestly proves:
 
-1. any healthy public node can generically preserve a request for a remote
-   service
-2. a live placement registry such as `services.yaml` exists and is actively
-   consumed
-3. the rescue route survives the failure that makes rescue necessary
-4. auth and middleware remain semantically identical after peer handoff
-5. TCP and stateful services have cluster-grade authority and failover truth
-6. the operator can explain cross-node behavior from shared tracked truth
-   instead of private reconstruction
+- the repo is already experimenting with private-mesh communication
+- non-default routing and egress are not theoretical
+- the runtime is trying to shape traffic, not merely host containers
 
-That distinction is the key reading rule for the entire site:
+What it still does not prove:
 
-the current runtime is already real, but the shared-truth layer is still
-incomplete.
+- that mesh reachability equals eligible forwarding
+- that alternate routing equals shared placement truth
+- that any healthy node can preserve any route meaningfully
 
-If that sentence ever gets softened, the whole site starts telling a smaller
-and safer story than the one the user is actually forcing the repo to face.
+### 5. Workload and application family
+
+Examples from active fragments include docs, wishlist, media, search, AI, and
+developer tooling.
+
+What this family honestly proves:
+
+- the platform is already broad enough to create real routing and recovery
+  pressure
+- the bad-day problem is not hypothetical because many kinds of workloads are
+  already in play
+
+What it still does not prove:
+
+- that breadth creates believable options
+- that one route class's optimism transfers to another
+
+## What the runtime still forces the operator to know privately
+
+The current runtime may still force a human to know things like:
+
+- which node actually hosts a named service right now when the request lands
+  somewhere else
+- whether a helper-generated rescue path would still exist after backend loss
+- whether a reachable peer is merely alive or actually safe for that route's
+  auth, middleware, secrets, and revision expectations
+- whether a TCP-exposed stateful service is only transport-reachable or safe to
+  describe with failover language
+- whether a state-bearing workload still hides one sacred authority node behind
+  a more distributed-looking ingress story
+
+That list is a more faithful runtime summary than "the stack is still maturing."
+
+The user is not saying the runtime lacks machinery.
+They are saying too many decisive truths still have to be remembered,
+inferred, or narrated by a human at exactly the moment a believable platform
+should already be exposing them.
+
+## What still does not count as runtime evidence
+
+The following are all real facts and still not enough for the user's benchmark:
+
+- many active services
+- a sophisticated-looking edge stack
+- multiple active fragments
+- TCP routers on stateful services
+- broad observability
+- helpers with failover-shaped names
+- more than one public-entry-looking component
+- a route that can be rendered now but has not been stressed under the failure
+  that would make it matter
+
+Those facts prove the repo is operationally dense.
+They do not prove the system, rather than the operator, owns the truth needed
+on the bad day.
+
+## What a runtime-backed progress packet would have to contain
+
+Before this page supports stronger "the runtime has moved closer to the dream"
+language, it should point to a packet containing:
+
+- the exact live component or route being credited
+- the narrower hidden burden it really reduces
+- the runtime artifact proving that component is materially present now
+- the adjacent burden it still does not reduce
+- the next drill required before stronger language becomes legal
+
+Without that packet, inventory tends to impersonate relief.
+
+## Bottom line
+
+The current Compose runtime is already serious enough to deserve careful,
+evidence-first reading.
+
+It proves:
+
+- the root Compose surface matters
+- the edge stack is real
+- stateful and TCP pressure are real
+- the repo is already broad enough that wrong-node truth is a live problem
+
+It still does not prove:
+
+- shared placement truth
+- trustworthy peer eligibility
+- durable route persistence under failure
+- preserved request meaning after peer handoff
+- honest stateful failover semantics
+
+That is the honest runtime boundary today.
+The stack is substantial.
+The missing middle layer is still missing.
