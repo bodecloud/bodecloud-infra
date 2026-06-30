@@ -4,15 +4,15 @@ Read this page as the routing burden ledger for the priority implementation
 rooted at
 [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml).
 
-If a route claim cannot survive contact with the current Compose runtime, this
-page is supposed to reject it.
+If a routing claim cannot survive contact with the current Compose runtime,
+this page is supposed to reject it.
 
 Read these alongside it:
 
 - [Current Compose Runtime](current-compose-runtime.md)
 - [Request Path and Failure Walkthrough](request-path-and-failure-walkthrough.md)
 - [Failure Model and Maturity Matrix](failure-model-and-maturity.md)
-- [Operator Contract and Success Criteria](operator-contract.md)
+- [Operator Questions and Honest Answers](../operations/operator-questions-and-honest-answers.md)
 - [Ingress and Failover Evidence](../research/ingress-and-failover-evidence.md)
 
 ## Why this page exists
@@ -22,7 +22,7 @@ This repo is not trying to answer the easy question:
 > can several machines exist, all run Docker, all publish services, and all
 > have Traefik somewhere in the picture?
 
-That question was already answered the moment the repo grew past a single host.
+That question was answered the moment the repo grew past a single host.
 
 The real question is harsher:
 
@@ -32,18 +32,23 @@ The real question is harsher:
 
 That is the routing benchmark.
 
-It is the reason the repo keeps circling around `services.yaml`, peer-aware
-fallback, route durability, and the difference between "reachable" and
-"actually preserved."
+It is why the repo keeps circling around:
 
-## Strongest architecture intent
+- `services.yaml`
+- peer-aware forwarding
+- route durability
+- middleware continuity
+- the difference between "reachable" and "actually preserved"
+
+## The strongest routing dream
 
 The strongest intent surface is still
 [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md).
+
 It says the desired operating model is:
 
 - no heavyweight orchestrator by default
-- manual service placement is acceptable
+- manual service placement remains acceptable
 - any healthy public node can receive the first request
 - local-first serving should happen when the target is already on that node
 - peer-forward fallback should happen when the target is remote
@@ -57,18 +62,19 @@ actually earns.
 
 ## What the current runtime materially contains
 
-The routing story is not hypothetical. The priority Compose stack already ships
-real ingress, policy, and transport surfaces:
+The routing story is not hypothetical.
+The priority Compose stack already ships real ingress, policy, and transport
+surfaces:
 
 - the root stack includes directly routed HTTP services such as
   `chat-analytics`, `searxng`, `code-server`, `dozzle`, `homepage`,
-  `portainer`, and others through Traefik labels
-- the root stack includes TCP-exposed stateful surfaces such as `mongodb` and
-  `redis` through Traefik TCP routers
+  `portainer`, `wishlist`, and other label-driven routes
+- the root stack includes TCP-exposed surfaces such as `mongodb`, `redis`, and
+  `biodecompwarehouse*` through Traefik TCP routers
 - the `compose/docker-compose.coolify-proxy.yml` fragment includes the central
   edge surfaces: `traefik`, `tinyauth`, `nginx-traefik-extensions`,
-  `crowdsec`, `cloudflare-ddns`, `docker-gen-failover`, `whoami`, and
-  `autokuma`
+  `crowdsec`, `cloudflare-ddns`, `docker-gen-failover`, `whoami`,
+  `logrotate-traefik`, and `autokuma`
 - protected routes already exist in the live authoring surface through labels
   like `traefik.http.routers.code-server.middlewares: nginx-auth@file`,
   `traefik.http.routers.dozzle.middlewares: nginx-auth@file`, and
@@ -76,9 +82,9 @@ real ingress, policy, and transport surfaces:
 - TinyAuth is not merely an idea; the proxy fragment defines
   `traefik.http.middlewares.tinyauth.forwardAuth.address:
   http://auth:3000/api/auth/traefik`
-- Headscale is real and internet-facing in
-  `compose/docker-compose.headscale.yml`, including both `headscale-server`
-  and the `headscale` UI with Traefik routers and redirects
+- Headscale is live and internet-facing in
+  [`compose/docker-compose.headscale.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.headscale.yml),
+  including both `headscale-server` and the `headscale` UI
 - `docker-gen-failover` is real and explicitly writes generated route material
   to `${CONFIG_PATH:-./volumes}/traefik/dynamic/failover-fallbacks.yaml`
 
@@ -95,18 +101,31 @@ The current worktree does **not** yet prove:
   `services.yaml` or equivalent placement-truth source
 - that any named HTTP route already succeeds generically after wrong-node
   entry
-- that a preferred-backend loss leaves behind a durable rescue route
+- that preferred-backend loss leaves behind a durable rescue route
 - that auth and middleware continuity are preserved after peer-forward handoff
 - that TCP routing implies safe stateful substitution
-- that Headscale, MongoDB, Redis, PostgreSQL, or RabbitMQ have inherited real
-  HA dignity from the existence of routing components
+- that Headscale, MongoDB, Redis, PostgreSQL, RabbitMQ, or Qdrant inherited
+  real HA dignity from the existence of routing components
 
 Those absences are what keep "HA" from being an honest one-word summary.
 
-## The routing classes that must not be flattened
+## The routing burden in one table
 
-This repo becomes misleading the moment these route classes are narrated as one
- success story.
+| Truth the platform needs | Why it matters | Strongest current evidence | Current gap |
+| --- | --- | --- | --- |
+| Placement truth | the receiving node must know where the service lives now | recurring `services.yaml` pressure in repo intent surfaces | no clear live tracked root placement authority consumed by routing |
+| Peer-eligibility truth | not every reachable peer is safe for every route | Headscale and private-mesh assumptions are real | reachability is not yet proven equivalent to safe route eligibility |
+| Route-durability truth | fallback only matters if it survives the failure | `docker-gen-failover` is live and generates dynamic Traefik material | helper presence is weaker than backend-loss persistence proof |
+| Semantic-continuity truth | wrong-node handoff must preserve route meaning | protected-route middleware surfaces are real | continuity across peer-forward handoff remains unproven |
+| Stateful-authority truth | TCP exposure is not the same as HA | TCP routers for Redis and MongoDB exist | authority, promotion, and write dignity remain separate unresolved problems |
+
+Until those truths become more system-owned, the operator remains the safest
+distributed control plane in the stack.
+
+## The route classes that must never be flattened
+
+This repo becomes misleading the moment these lanes are narrated as one shared
+success story.
 
 ### 1. Stateless HTTP
 
@@ -131,7 +150,7 @@ For stateless HTTP, wrong-node success would mean:
 
 What does **not** prove this lane:
 
-- Cloudflare can point more than one A record at the domain
+- Cloudflare can point more than one record at the domain
 - Traefik is healthy
 - a local request returns `200`
 - `docker-gen-failover` generated something that looks fallback-shaped
@@ -147,7 +166,7 @@ surfaces:
 - `code-server` uses `nginx-auth@file`
 - `dozzle` uses `nginx-auth@file`
 - `portainer` uses `nginx-auth@file`
-- many metrics/admin surfaces also use `nginx-auth@file`
+- multiple metrics and admin surfaces also use `nginx-auth@file`
 - TinyAuth exists as a live forward-auth building block
 
 Protected wrong-node success would mean the forwarded request still preserves:
@@ -156,9 +175,9 @@ Protected wrong-node success would mean the forwarded request still preserves:
 - forward-auth behavior
 - middleware ordering
 - header and trust-boundary assumptions
-- the same visible route semantics from the user perspective
+- the same visible route semantics from the user's point of view
 
-This is why "the page still loads" is too weak.
+This is why `the page still loads` is too weak.
 
 A forwarded protected route that answers but no longer behaves like the same
 protected service is not a successful handoff.
@@ -166,14 +185,14 @@ protected service is not a successful handoff.
 ### 3. Raw TCP
 
 This lane already exists in the live runtime through Traefik TCP routers for
-`mongodb` and `redis`, plus other TCP-oriented surfaces.
+`mongodb`, `redis`, and other TCP-oriented surfaces.
 
 That proves real transport exposure.
 
 It does **not** prove:
 
 - safe peer-aware failover
-- state authority transfer
+- state-authority transfer
 - correct client semantics after rerouting
 - operational dignity under node loss
 
@@ -192,38 +211,18 @@ The current stack includes real stateful dependencies:
 - `nuq-postgres`
 - `litellm-postgres`
 - `rabbitmq`
+- `qdrant`
 - `headscale-server`
 
 Headscale is the clearest example of why the lane must stay strict.
 Its current config still uses SQLite at `/var/lib/headscale/db.sqlite`.
 
 That means a clean public route to Headscale is not the same thing as
-multi-node state authority.
+multi-node authority.
 
 The route can be real while the authority is still singular.
 
-## The actual routing burden
-
-The repo keeps rediscovering the same missing middle layer:
-
-- the node that receives a request needs current placement truth
-- it also needs peer eligibility truth
-- it also needs a durable route artifact that survives the failure that
-  triggered fallback
-- it also needs to preserve route semantics after handoff
-
-Without those truths, the node can be reachable and still "behave stupidly"
-under wrong-node entry.
-
-This is why `services.yaml` keeps reappearing.
-The repo is trying to externalize the sentence:
-
-> where does this service actually live right now, and who says that is true?
-
-Until the platform owns that answer, the operator is still the safest control
-plane.
-
-## The wrong-node event, decomposed honestly
+## The wrong-node event decomposed honestly
 
 When the user says several Docker nodes should behave like one cloud, the
 critical event is not "two nodes exist."
@@ -242,38 +241,6 @@ It is this event:
    not folklore.
 
 Every architecture choice in this repo is downstream of that event.
-
-## Where the current runtime is strongest
-
-The live stack is strongest in these areas:
-
-- it already has serious edge machinery rather than a toy reverse proxy
-- it already separates HTTP and TCP in actual runtime labels
-- it already has protected-route surfaces, not merely public happy-path demos
-- it already has observability around edge components through the metrics stack
-- it already exposes helper/control components such as `docker-gen-failover`,
-  `cloudflare-ddns`, and Headscale rather than hiding them
-
-That means the docs do not need to pretend the repo is earlier than it is.
-
-## Where the current runtime is still unfinished
-
-The live stack is still unfinished in exactly the places that matter most to
-the user:
-
-- placement truth still appears architecturally central without being clearly
-  rooted in a live tracked runtime source
-- peer selection still looks more like a missing join than a proven platform
-  behavior
-- `docker-gen-failover` is directionally relevant but currently configured as a
-  generated dynamic-route helper, not a proven backend-loss survivor
-- protected-route continuity is inferable from labels but not yet proven across
-  wrong-node handoff
-- stateful services still have transport exposure long before they have
-  multi-node authority dignity
-
-That is why the repo still feels constrained by hidden human SPOFs even though
-it already has many moving parts.
 
 ## Why Cloudflare is necessary but insufficient
 
@@ -315,7 +282,7 @@ The unresolved question is still:
 
 > who gave it the current truth needed to make the right distributed decision?
 
-If the answer remains "the operator" or "a half-manual helper path," then the
+If the answer remains `the operator` or `a half-manual helper path`, then the
 system still has a real human SPOF even though the proxy layer looks serious.
 
 ## Why `docker-gen-failover` does not get automatic credit
@@ -329,11 +296,12 @@ But the current Compose evidence shows it as:
 - a generated-file helper
 - fed from Docker events
 - writing failover material to a dynamic Traefik file
-- not continuously claimed as a proven backend-loss survivor
+- not continuously proven as a backend-loss survivor
 
 Research pages in this repo already preserve the harder warning:
 
-> `docker-gen-failover` currently deletes routes on container stop
+> `docker-gen-failover` can still delete routes on container stop and therefore
+> fail the exact backend-loss scenario that made fallback matter.
 
 That makes it an excellent example of the user's complaint.
 
@@ -347,18 +315,38 @@ So the docs should keep speaking of it as:
 - worth measuring
 - not yet victory
 
-## The route truths the platform still needs to own
+## Where the current routing story is strongest
 
-For the routing dream to become believable, the platform needs to own at least
-these truths explicitly:
+The live stack is strongest in these areas:
 
-| Truth | Why it matters | Current strongest evidence | Current gap |
-| --- | --- | --- | --- |
-| Placement truth | the receiving node must know where the service lives now | repeated `services.yaml` pressure in repo intent surfaces | no clear live tracked root placement authority consumed by routing |
-| Peer eligibility truth | not every reachable peer is safe for every route | Headscale and private-network assumptions are real | reachability is not yet proven equivalent to safe route eligibility |
-| Route durability truth | fallback matters only if it survives the failure | `docker-gen-failover` is live | helper existence is weaker than backend-loss persistence proof |
-| Semantic continuity truth | wrong-node handoff must preserve route meaning | protected-route middleware surfaces exist | continuity across peer-forward handoff remains unproven |
-| Stateful authority truth | TCP exposure is not the same as HA | TCP routers for Redis and MongoDB exist | authority, promotion, and write-dignity remain separate problems |
+- it already has serious edge machinery rather than a toy reverse proxy
+- it already separates HTTP and TCP in actual runtime labels
+- it already has protected-route surfaces, not merely public happy-path demos
+- it already has observability around edge components through the metrics stack
+- it already exposes helper and control components such as
+  `docker-gen-failover`, `cloudflare-ddns`, and Headscale rather than hiding
+  them
+
+That means the docs do not need to pretend the repo is earlier than it is.
+
+## Where the current routing story is still unfinished
+
+The live stack is still unfinished in exactly the places that matter most to
+the user:
+
+- placement truth still appears architecturally central without being clearly
+  rooted in a live tracked runtime source
+- peer selection still looks more like a missing join than a proven platform
+  behavior
+- `docker-gen-failover` is directionally relevant but still a helper, not a
+  proven backend-loss survivor
+- protected-route continuity is inferable from labels but not yet proven
+  across wrong-node handoff
+- stateful services still have transport exposure long before they have
+  multi-node authority dignity
+
+That is why the repo still feels constrained by hidden human SPOFs even though
+it already has many moving parts.
 
 ## What this page allows the docs to say today
 
@@ -375,9 +363,9 @@ The docs are **not** allowed to say:
 
 - wrong-node behavior is basically solved
 - fallback is mostly handled now
-- Cloudflare plus Traefik has removed the hidden operator SPOF
+- Cloudflare plus Traefik removed the hidden operator SPOF
 - TCP routing implies stateful resilience
-- the platform now behaves like one cloud in the user's intended sense
+- the platform already behaves like one cloud in the user's intended sense
 
 ## What would materially change the routing story
 
