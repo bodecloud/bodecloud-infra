@@ -3,60 +3,75 @@
 This page is the hard boundary around the repo's ingress story.
 
 It exists because ingress is where infrastructure documentation most easily
-becomes emotionally misleading.
+turns disrespectful without sounding careless.
 
-The stack can have:
+The ecosystem is very good at producing a stack that looks reassuring:
 
 - Cloudflare DNS
 - several public nodes
 - Traefik
 - healthchecks
 - wildcard routes
-- fallback-sounding helpers
+- helper containers with words like `failover`
 
-and still fail the real question the user keeps asking:
+and still leaves the user with the same humiliating private question:
 
-> if traffic lands on the wrong surviving node, can that node still preserve
-> the meaning of the request instead of merely answering somehow?
+> if traffic lands on the wrong healthy node, can that node still preserve the
+> meaning of the request without me privately completing the topology?
 
-That is the actual ingress question in `bolabaden-infra`.
+That is the ingress question in `bolabaden-infra`.
 
-This page is not allowed to downgrade that question into:
+This page is not allowed to downgrade that question into softer adjacent ones:
 
 - do multiple nodes exist?
-- can traffic arrive at more than one IP?
+- can traffic hit more than one IP?
 - is Traefik running?
-- is there some kind of fallback helper?
+- is there some helper that sounds dynamic?
 
 Those are ingredients.
-The user is asking for preserved service meaning under wrong-node entry and
-backend loss.
-
-That distinction has to stay emotionally explicit.
 The user is not starved for ingress ingredients.
-The user is starved for a system that stops turning those ingredients back
-into private human completion steps the moment locality disappears.
+The user is starved for a system that stops cashing those ingredients back out
+as human memory the moment locality disappears.
 
-That is why this page cannot merely be technically careful.
-It has to stay socially careful too.
-Ingress is exactly where respectable partial answers most easily start
-impersonating relief.
+That is why this page has to stay rude.
+If it becomes smoother than the failure it is describing, it has already
+started lying.
 
-This page is also where retrieval discipline matters most.
-It has to keep four source classes separate on purpose:
+## Strongest honest current answer
 
-- the dream:
-  [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-- the live root runtime:
-  [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-  plus active `compose/` fragments
-- the known gaps:
-  master-plan and architecture evidence pages
-- the archive pressure restoring what the user is actually rebelling against:
-  especially
-  [`docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md)
-  and
-  [`load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md).
+The repo already has a serious ingress surface.
+
+It does **not** yet prove a general, trustworthy wrong-node
+request-preservation surface.
+
+What is true right now:
+
+- the architecture dream is explicit
+- the priority runtime really does ship an edge stack
+- protected HTTP routes are already a real concern
+- raw TCP routes are already a real concern
+- first-hop plurality is already part of the design
+- the repo already knows service discovery and current placement truth are the
+  real missing middle
+- the current fallback helper is directionally relevant but not trustworthy
+
+What is still not honestly proved:
+
+- generic peer-forward success for arbitrary services
+- durable route persistence after local backend loss
+- middleware and auth continuity during peer fallback
+- a live tracked root placement-truth surface such as actual
+  `services.yaml` consumption
+- safe equivalence between "reachable peer" and "eligible peer"
+- raw TCP failover correctness just because L7 ideas exist
+
+That gap is not a footnote.
+That gap is the ingress story.
+
+The user's complaint lives exactly there:
+everything before it can look adult,
+everything after it still too often sounds like "trust me, I know where it
+really runs."
 
 ## What this page is and is not allowed to prove
 
@@ -64,15 +79,15 @@ This page is authoritative about:
 
 1. the repo's any-node-entry and peer-forward dream is explicit
 2. the current root runtime already carries a serious ingress surface
-3. HTTP and TCP both already exist at the edge, but they are different proof
-   classes
+3. HTTP and TCP are both real present-tense edge concerns, but they are
+   different proof classes
 4. service discovery and current placement truth are still the real sticking
    points
-5. the repo already knows that first-hop plurality is not the same thing as
-   preserved requests
+5. the repo already knows first-hop plurality is weaker than preserved request
+   meaning
 6. the current fallback path has named trust gaps
-7. ingress documentation here must include auth, middleware, locality, and
-   backend identity, not just path routing
+7. ingress claims here must include locality, backend identity, auth, and
+   middleware, not merely path routing
 
 This page is not authoritative about:
 
@@ -84,95 +99,90 @@ This page is not authoritative about:
 
 This is an evidence boundary page, not a proxy feature catalog.
 
-That boundary matters because ingress is where the ecosystem is best at
-selling confidence early.
-This page has to keep being ruder than the surrounding vocabulary of
-"resilience," "high availability," and "distributed ingress" unless the proof
-really supports it.
+## Retrieval contract for this page
 
-The rudeness is not stylistic.
-It is defensive.
-Without it, the edge stack starts cashing out legitimacy one layer before the
-receiving node can actually justify its own fallback decision.
+This page has to keep four source classes separate on purpose.
 
-## Strongest honest current answer
+### Class 1: the dream
 
-The repo already has a serious ingress surface.
+Primary anchors:
 
-It does **not** yet prove a general, trustworthy wrong-node
-request-preservation surface.
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
 
-What is true today:
+This class is allowed to prove:
 
-- the root runtime has real public and private network segmentation
-- Traefik is a live control surface
-- auth and middleware are already part of edge correctness, not optional
-  decoration
-- Cloudflare plurality is part of the intended first-hop anti-SPOF story
-- the docs and archive are explicit that service discovery is still the
-  missing middle layer
-- planned failover glue has known trust problems
+- the repo wants any healthy node to receive the first request
+- the repo wants local-first then peer-forward behavior
+- the repo wants Compose-first multi-node anti-SPOF pressure without immediate
+  Swarm/Kubernetes capture
 
-What is still not honestly proved:
+This class is **not** allowed to prove:
 
-- generic peer-forward success for arbitrary services
-- durable route persistence after local backend loss
-- middleware and auth continuity during peer-forward fallback
-- a tracked root runtime source of current placement truth such as live
-  `services.yaml` consumption
-- safe equivalence between "reachable peer" and "eligible fallback target"
-- raw TCP failover correctness just because L7 ideas exist
+- that the root runtime already does that
 
-That gap is the center of the ingress story, not a minor implementation note.
-It is also the part generic infrastructure writing keeps trying to make sound
-small.
-This repo should keep refusing that minimization.
+### Class 2: the live root runtime
 
-The operator's real complaint lives exactly in that gap.
-Everything before it can look modern.
-Everything after it still too often sounds like "trust me, I know which peer
-is really okay."
+Primary anchors:
 
-## What still does not count as ingress evidence here
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- active files under [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/)
 
-The following still do not count as meaningful ingress proof in this repo:
+This class is allowed to prove:
 
-- several A or AAAA records existing at Cloudflare
-- a healthy Traefik dashboard
-- multiple reverse-proxy containers running
-- a generated fallback file existing on disk
-- a peer being pingable or reachable over Tailscale
-- one service answering after manual operator nudging
+- what the priority implementation currently ships
+- which ingress components are real
+- which networks, routes, middleware surfaces, and TCP/HTTP exposures exist
 
-Those are all ingredients or local signals.
-They are not yet proof that the wrong healthy node can preserve request meaning
-under pressure.
+This class is **not** allowed to prove:
 
-This page should stay hostile to ingredient inflation.
-The repo has already accumulated enough ingredients to sound almost finished to
-the wrong reader.
-The job here is to make that reader uncomfortable again.
+- distributed correctness under failure just because the edge stack is rich
 
-That is why this page cannot reward a bigger ingredient list.
-The repo already has enough ingredients to look serious.
-The problem is that seriousness keeps arriving one layer before trustworthy
-request preservation does.
+### Class 3: repo-native gap naming
+
+Primary anchors:
+
+- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
+- architecture evidence pages in this knowledgebase
+
+This class is allowed to prove:
+
+- what the repo itself already admits is still missing
+- where current helper layers are not trustworthy enough yet
+
+This class is **not** allowed to prove:
+
+- that the repair path is already live
+
+### Class 4: archive pressure
+
+Primary anchors:
+
+- [`docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md)
+- [`load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md)
+- [`distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md)
+- [`docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md)
+
+This class is allowed to prove:
+
+- what the user is actually rebelling against
+- why ordinary ingress language keeps failing the user
+- which private sentence the docs must keep alive until the runtime kills it
+
+This class is **not** allowed to prove:
+
+- current runtime behavior
+
+If a paragraph blends these classes, it should say which class is doing which
+work.
+Otherwise the page will slowly start using archive force or dream force to
+fake runtime force.
 
 ## The dream this page has to protect
 
-The architecture dream is explicit in
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md):
-
-- Compose-first
-- multi-node
-- anti-SPOF pressure
-- no immediate collapse into Swarm, Kubernetes, or another heavyweight control
-  plane
-- local-first serving
-- peer-forward fallback when the receiving node does not host the target
-  service locally
-
-The target request contract is stated there directly:
+The strongest intent wording lives in
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md),
+which states the target operating contract directly:
 
 ```text
 User -> Cloudflare DNS -> any surviving node
@@ -182,23 +192,255 @@ User -> Cloudflare DNS -> any surviving node
 
 That contract is the standard this page uses.
 
-This page is therefore not a reverse-proxy feature checklist.
+So this page is not a reverse-proxy checklist.
 It is a proof filter for one very specific dream:
 
-> ordinary Docker nodes should behave less stupidly when requests land on the
-> wrong box, the preferred backend dies, or the stack is under anti-SPOF
-> pressure.
+> ordinary Docker nodes should stop behaving insultingly dumb when requests
+> land on the wrong box, the preferred backend dies, or anti-SPOF pressure is
+> finally supposed to mean something.
 
-That phrase "behave less stupidly" should keep more authority here than many
-formal infrastructure terms.
-It names the exact experiential failure the user is rebelling against:
-multiple nodes exist, yet the system still collapses into local assumptions and
-private rescue knowledge at the worst possible time.
-
-That phrasing matters.
+That wording matters.
 The user is not chasing prestige architecture.
-They are chasing a stack that stops acting insultingly dumb at the exact
-moment multiple nodes are supposed to mean something.
+The user is chasing a stack that stops making multiple nodes feel decorative on
+the bad day.
+
+## What the archive proves about the real missing layer
+
+The archive is unusually explicit here.
+
+### 1. The user is not asking for "more Docker"
+
+`docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`
+opens with the exact shape of the wound:
+
+- "Can I just unify a bunch of Docker hosts with some clever networking +
+  load balancers, without introducing a cluster manager?"
+- requests need "some dynamic mechanism to update routing when containers
+  move/come/go"
+- if placement is manual and Cloudflare already handles entry, then "your real
+  challenge is service discovery/routing"
+
+So the bad summary is:
+
+> the user wants multi-node Docker
+
+No.
+The user already has multi-node Docker.
+The missing thing is shared current-state truth that lets the receiving node
+behave correctly when locality is absent.
+
+That is the ingress missing middle in plain language.
+
+### 2. The user states the desired wrong-node behavior directly
+
+The same archive file contains one of the most revealing sentences in the
+project:
+
+- "the nodes are setup in a way where if any service was requested on node1
+  but it doesn't exist on node1 ... it'll l7/l4 ... to the other nodes i own.
+  So all I really need is service discovery to be loadbalanced/unified."
+
+That sentence is more useful than a dozen generic HA labels.
+It says exactly what the receiving node has to know.
+
+So every ingress explanation in this repo should keep asking:
+
+- what runs where right now?
+- how does the receiving node know that?
+- what proves it is choosing a healthy, semantically valid target?
+
+### 3. Familiar reverse-proxy names are not the missing option
+
+`load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
+shows the user explicitly asking for existing projects that really approximate
+the behavior they want, and rejecting answers that stop at familiar reverse
+proxy categories.
+
+That means this repo should never sound impressed merely because Traefik,
+NGINX, or HAProxy appear.
+
+The presence of serious tools is not the same thing as the removal of the
+hidden burden.
+
+### 4. The user is resisting heavyweight capture for a reason
+
+`distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
+captures the other side of the pressure:
+
+- there is no clean drop-in peer-equal Compose scaler
+- glue is likely unavoidable
+- the user still does not want to build a whole orchestration framework
+
+That does not prove the current stack works.
+It proves why the repo keeps circling a missing middle instead of simply
+accepting Swarm or Kubernetes as the emotional end of the conversation.
+
+### 5. Emotional pressure is part of the retrieval surface
+
+`docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`
+contains the line:
+
+- "Docker feels gaslighting"
+
+That is not decorative color.
+It explains why the docs must not reward the same pattern of:
+
+- many partial tools exist
+- therefore the user already has options
+
+The emotional pressure is evidence about the acceptance bar.
+It is not evidence that the runtime has crossed it.
+
+## What the live root runtime concretely proves
+
+The priority implementation is still the merged root graph centered on:
+
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- [`compose/docker-compose.coolify-proxy.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.coolify-proxy.yml)
+- [`compose/docker-compose.docs.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.docs.yml)
+- [`compose/docker-compose.headscale.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.headscale.yml)
+- [`compose/docker-compose.metrics.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.metrics.yml)
+
+### 1. The ingress surface is real
+
+The root runtime defines and uses:
+
+- `publicnet`
+- `backend`
+- `warp-nat-net`
+
+That proves the stack already distinguishes public entry, internal service
+traffic, and specialized routing domains.
+
+It does **not** prove that the receiving node knows which peer currently hosts
+which service.
+
+That sentence matters more than most healthy Compose output.
+It is the line between:
+
+- the edge exists
+- the edge can preserve meaning under wrong-node entry
+
+### 2. Traefik is already one of the stack's real control planes
+
+The edge fragment contains live components such as:
+
+- `traefik`
+- `tinyauth`
+- `nginx-traefik-extensions`
+- `crowdsec`
+- `cloudflare-ddns`
+- `docker-gen-failover`
+
+That proves:
+
+- request correctness already depends on policy and middleware surfaces
+- ingress is not just port exposure
+- the edge already has multiple cooperating control layers
+
+It does **not** prove:
+
+- those layers preserve behavior together under peer-forward fallback
+- route state survives local backend disappearance
+- auth continuity remains intact when locality changes
+
+### 3. Protected HTTP routes are already a real stress class
+
+The root Compose surface includes protected routes such as Dozzle, where
+correctness already depends on policy continuity rather than mere reachability.
+
+That matters because the user is not asking whether an unprotected dummy
+upstream can be forwarded.
+They are asking whether the same protected service still exists after handoff.
+
+### 4. Raw TCP routes are already part of the same runtime
+
+The root runtime also contains TCP exposure for services such as:
+
+- MongoDB
+- Redis
+
+That proves the ingress story cannot stay purely HTTP-centric.
+
+It also forces a stricter language wall:
+
+- TCP route existence is real
+- TCP failover truth is still unproven
+- stateful correctness is stricter than TCP reachability
+
+### 5. Headscale makes the mesh assumption real
+
+The current runtime includes:
+
+- `headscale-server`
+- `headscale`
+
+So private-mesh assumptions are not hypothetical.
+But the planning layer also records that Headscale is still single-node today.
+
+The correct summary is therefore:
+
+- mesh assumptions are real
+- mesh-control-plane HA is not yet proved
+
+### 6. Cloudflare plurality is present, but the repo itself says it is not enough
+
+The stack includes Cloudflare DDNS, but
+[`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
+explicitly says that current Cloudflare DDNS presence is not the same thing as
+full multi-node request failover.
+
+Without the plan, someone could say:
+
+- Cloudflare DDNS exists
+- therefore any-node ingress is basically handled
+
+The repo itself rejects that inflation.
+
+### 7. The current fallback helper is not trustworthy enough to narrate as solved
+
+The same plan calls out a specific gap:
+
+- `docker-gen-failover` removes Traefik routes when containers stop
+- route persistence under local backend failure is still missing
+- automated service failover between nodes is still missing
+
+So the honest summary is:
+
+- fallback glue exists
+- fallback trust does not
+
+### 8. The root runtime still lacks tracked shared placement truth
+
+The intent surfaces repeatedly converge on lightweight current-state truth like
+`services.yaml` or equivalent shared discovery state.
+
+The repo is explicit that the tracked root implementation does not currently
+ship a live root `services.yaml`.
+
+That matters because the missing thing is not a better load balancer.
+It is shared current-state knowledge.
+
+## What still does not count as ingress evidence here
+
+The following are still too weak to count as meaningful ingress proof in this
+repo:
+
+- several A or AAAA records existing at Cloudflare
+- a healthy Traefik dashboard
+- multiple reverse-proxy containers running
+- a generated fallback file existing on disk
+- a peer being pingable or reachable over Tailscale
+- one service answering after manual operator nudging
+
+These are ingredients or local signals.
+They are not proof that the wrong healthy node can preserve request meaning
+under pressure.
+
+This page should stay hostile to ingredient inflation.
+The repo already has enough ingredients to sound almost finished to the wrong
+reader.
+The job here is to make that reader uncomfortable again.
 
 ## What a real ingress proof packet would have to contain
 
@@ -213,336 +455,48 @@ following together:
 - backend health or loss conditions during the test
 - operator-readable artifacts explaining why the route was valid
 
-If any of those are missing, the packet may still be useful debugging evidence,
-but it does not close the user's real ingress question.
+If any of those are missing, the packet may still help debug the system.
+It does not close the user's real ingress question.
 
-Many ecosystems would stop earlier.
-They would take partial packet quality, partial fallback behavior, or partial
-visibility and start upgrading the whole ingress story emotionally.
-This page exists to stop that drift.
-
-That is also why operator-readable artifacts are part of the proof packet.
+The operator-readable artifact matters especially.
 The user is not only asking for successful routing.
 They are asking for a system that can later explain why the route was valid
-without requiring the same operator to retell the story from memory.
+without requiring the operator to retell the topology from memory.
 
-## Evidence hierarchy for ingress claims
-
-Use this order every time.
-
-| Claim type | Highest authority | Why it outranks others | It still does not prove |
-| --- | --- | --- | --- |
-| What the repo wants ingress to become | `.github/copilot-instructions.md`, `README.md` | these define the architecture dream and honesty wall | that the root runtime already does it |
-| What the root stack actually ships today | `docker-compose.yml`, `compose/docker-compose.*.yml` | these are the priority implementation surface | distributed correctness under failure |
-| What the repo already knows is missing | `docs/INFRASTRUCTURE_MASTER_PLAN.md`, ingress research pages | these name the actual gaps | that the repair path is already live |
-| Why ordinary answers keep failing the user | source archive conversations | these restore the real complaint | runtime proof |
-
-If a paragraph blends more than one row, the docs should say which row is doing
-which work.
-
-## What the archive proves about the actual missing layer
-
-The archive is unusually explicit about the user's real question.
-
-### 1. The repo is not looking for "more Docker"
-
-`docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`
-opens with the exact shape of the problem:
-
-- "Can I just unify a bunch of Docker hosts with some clever networking +
-  load balancers, without introducing a cluster manager?"
-- requests need "some dynamic mechanism to update routing when containers
-  move/come/go"
-- if placement is manual and Cloudflare already handles entry, then "your real
-  challenge is service discovery/routing"
-
-That matters because it kills the most common bad summary:
-
-> the user wants multi-node Docker
-
-No.
-The user already has multi-node Docker.
-The missing thing is shared current-state truth that lets the receiving node
-behave correctly when locality is absent.
-
-That is the real ingress missing middle in plain language.
-Not another edge brand.
-Not another routing DSL.
-Shared current truth that the wrong node can actually use.
-
-### 2. The user states the desired wrong-node behavior directly
-
-The same archive file includes the clearest single sentence in the whole
-project:
-
-- "the nodes are setup in a way where if any service was requested on node1
-  but it doesn't exist on node1 ... it'll l7/l4 ... to the other nodes i own.
-  So all I really need is service discovery to be loadbalanced/unified."
-
-That sentence is more informative than a generic "high availability" label.
-It tells you exactly what the operator wants the receiving node to know.
-
-This is why ingress writing in this repo has to keep asking:
-
-- what runs where right now?
-- how does the receiving node know that?
-- what proves the receiving node is choosing a healthy, semantically valid
-  target?
-
-### 3. Familiar load balancer names are not the missing option
-
-`load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`
-shows the user asking for existing projects that really approximate the kind of
-behavior they want, and explicitly rejecting answers that stop at familiar
-reverse-proxy categories.
-
-That is critical context.
-It means docs in this repo should never sound impressed merely because Traefik,
-NGINX, or HAProxy appear in the stack.
-
-The presence of serious tools is not the same thing as the removal of the
-hidden burden.
-
-That sentence should outrank a lot of ordinary proxy advice.
-The user has already seen enough serious tools.
-The missing thing is not another respectable noun.
-It is one more truth the receiving node can own without private operator help.
-
-### 4. The user is resisting heavyweight orchestrators for a reason
-
-`distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md`
-captures the other side of the pressure:
-
-- there is no clean drop-in peer-equal Compose scaler
-- glue is likely unavoidable
-- the user still does not want to build a whole orchestration framework
-
-That does not prove the current stack works.
-It proves why the repo keeps circling a missing middle layer instead of just
-accepting Swarm or Kubernetes as the answer.
-
-### 5. Emotional pressure is part of the retrieval surface
-
-`docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md`
-contains the line:
-
-- "Docker feels gaslighting"
-
-That is not background color.
-It explains why the docs must not reward the same "many partial tools exist,
-therefore you have options" pattern the user is explicitly rejecting.
-
-The emotional pressure is evidence about the acceptance bar, not evidence that
-the runtime already crossed it.
-
-That distinction is easy to blur and expensive to lose.
-Once archive pressure starts feeling like runtime progress, the site starts
-rewarding empathy theater instead of proof.
-
-## What the live root runtime concretely proves
-
-The priority implementation is still the merged root graph centered on:
-
-- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-- [`compose/docker-compose.coolify-proxy.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.coolify-proxy.yml)
-- [`compose/docker-compose.docs.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.docs.yml)
-- [`compose/docker-compose.headscale.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.headscale.yml)
-- [`compose/docker-compose.metrics.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.metrics.yml)
-
-### 1. The ingress surface is real, not rhetorical
-
-The root runtime defines and uses:
-
-- `publicnet`
-- `backend`
-- `warp-nat-net`
-
-This proves the root stack already distinguishes public entry, internal service
-traffic, and specialized routing domains.
-
-It does **not** prove that the receiving node knows which peer currently hosts
-which service.
-
-That missing sentence matters more than most healthy-compose outputs.
-It is the boundary between:
-
-- "the edge exists"
-- and "the edge can preserve meaning under wrong-node entry"
-
-### 2. Traefik is already one of the stack's real control planes
-
-The edge fragment contains live components such as:
-
-- `traefik`
-- `tinyauth`
-- `nginx-traefik-extensions`
-- `crowdsec`
-- `cloudflare-ddns`
-- `docker-gen-failover`
-
-This proves:
-
-- request correctness already depends on policy and middleware surfaces
-- ingress is not just port exposure
-- the edge already has multiple cooperating control layers
-
-It still does not prove that those layers survive handoff together in the way
-the user actually wants.
-That stronger claim needs a proof packet, not a component list.
-
-It does **not** prove:
-
-- that those layers preserve behavior under peer-forward fallback
-- that route state survives local backend disappearance
-- that auth continuity remains the same when locality changes
-
-### 3. Protected HTTP routes are already a real stress class
-
-The root runtime clearly includes routes such as Dozzle that already depend on
-policy continuity, not just reachability.
-
-For example, the root Compose surface shows:
-
-- a `dozzle` service
-- Traefik route material for that service
-- middleware attachment through `nginx-auth@file`
-
-That matters because it makes the wrong-node problem harder and more concrete.
-The user is not asking whether an unprotected dummy upstream can be forwarded.
-They are asking whether the same protected service still exists after handoff.
-
-### 4. Raw TCP routes are already part of the same runtime
-
-The root runtime also clearly contains TCP exposure for services such as:
-
-- MongoDB
-- Redis
-
-That proves the ingress story cannot stay purely HTTP-centric.
-It also proves the docs must stay strict:
-
-- TCP route existence is real
-- TCP failover truth is still unproven
-- stateful correctness is stricter than TCP reachability
-
-### 5. Headscale makes the mesh assumption real, not hypothetical
-
-The current runtime already includes:
-
-- `headscale-server`
-- `headscale`
-
-That means the repo already depends on a real private-mesh worldview.
-But the planning layer also records that Headscale is single-node today.
-
-So the correct summary is:
-
-- mesh assumptions are real
-- mesh control-plane HA is not yet proved
-
-### 6. Cloudflare plurality is present, but the repo itself warns that it is
-not enough
-
-The stack includes `favonia/cloudflare-ddns`, but
-[`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-explicitly says current Cloudflare DDNS presence is not the same thing as full
-multi-node request failover.
-
-Without the planning layer, someone could say:
-
-- Cloudflare DDNS exists
-- therefore any-node ingress is basically handled
-
-The plan explicitly rejects that inflation.
-
-### 7. The current fallback helper is not trustworthy enough to narrate as solved
-
-The same plan calls out a very specific gap:
-
-- `docker-gen-failover` removes Traefik routes when containers stop
-- route persistence under local backend failure is still missing
-- automated service failover between nodes is still missing
-
-That is one of the most important live-reading constraints in the repo.
-
-The stack contains a fallback-looking subsystem.
-The strongest repo-native planning doc says that subsystem currently defeats
-the very property it was meant to provide.
-
-So the honest summary is:
-
-- fallback glue exists
-- fallback trust does not
-
-### 8. The root runtime still lacks tracked shared placement truth
-
-The intent surfaces repeatedly converge on lightweight current-state truth like
-`services.yaml` or equivalent shared discovery state.
-
-The README is explicit:
-
-- the repo keeps circling a lightweight `services.yaml` current-state registry
-- the tracked root implementation does not currently ship a live root
-  `services.yaml`
-
-That matters because the missing thing is not a better load balancer.
-It is shared current-state knowledge.
-
-## The exact claim boundaries this evidence supports
+## Exact claim boundaries this evidence supports
 
 This evidence stack supports all of these sentences:
 
 - the repo's any-node-entry and peer-forward dream is explicit
 - the current runtime already has a serious ingress surface
 - protected HTTP routes are a real present-tense concern
-- TCP routes are real present-tense concerns
+- TCP routes are a real present-tense concern
 - service discovery and placement truth are still the real sticking points
-- the repo already knows first-hop plurality is much weaker than preserved
-  request meaning
-- the current fallback helper is directionally relevant but not yet trustworthy
+- the repo already knows first-hop plurality is weaker than preserved request
+  meaning
+- the current fallback helper is directionally relevant but not yet
+  trustworthy
 
 This evidence stack does **not** support these sentences:
 
 - wrong-node requests already succeed generically
 - durable route persistence is solved
-- protected-route policy continuity is proven under peer handoff
+- protected-route policy continuity is proved under peer handoff
 - Cloudflare plus Traefik already gives end-to-end failover
 - a reachable peer is automatically an eligible peer
 - TCP or stateful failover is solved because HTTP ideas exist
 
-Those stronger claims need route- or topology-specific drills.
-
-## Why this page stays harder on language than normal proxy docs
-
-Ordinary proxy documentation is often happy to stop at:
-
-- route configured
-- backend healthy
-- wildcard DNS working
-- helper generated config
-
-That language is too weak for this repo because the user's actual complaint is
-that respectable layers keep getting stacked without the hidden operator burden
-really moving.
-
-So this page has to stay harder:
-
-- first hop is not enough
-- local proxy health is not enough
-- fallback-looking config is not enough
-- service discovery talked about in prose is not enough
-- a live mesh is not enough
-
-Only shared truth plus route-specific drills can close the gap.
+Those stronger claims need route-specific or topology-specific drills.
 
 ## Bottom line
 
-The ingress story in `bolabaden-infra` is already serious enough to deserve
-careful documentation.
-It is still too incomplete to deserve casual failover language.
+This repo does not lack ingress nouns.
+It lacks one more system-owned truth layer between:
 
-The live runtime proves a strong edge surface.
-The archive proves exactly why that is still not the same thing as a solved
-wrong-node request-preservation surface.
+- first-hop plurality
+- and preserved request meaning
 
-That distinction is the most important thing this page is protecting.
+Until the runtime can show that the wrong healthy node knows where the service
+actually lives, knows the target is semantically valid, preserves policy during
+handoff, and leaves behind an inspectable explanation artifact, the ingress
+story remains promising but incomplete.

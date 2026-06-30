@@ -2,25 +2,24 @@
 
 This page is the proof boundary for the repo's platform-choice story.
 
-It exists to stop one very specific documentation failure:
+It exists to stop one recurring documentation failure:
 
-the point where "there are several possible futures here" gets rewritten into
-"there is one obvious future and the docs are just slowly getting comfortable
+the point where
+"there are several possible futures here"
+gets rewritten into
+"there is one obvious future and the docs are just slowly getting honest
 enough to admit it."
 
-That smoother story is exactly what this repo has to resist unless the evidence
-really earns it.
+That smoother story is exactly what this repo has to resist unless the
+evidence really earns it.
 
-And the repo has to resist it even when the smoother story starts sounding
-more adult than the rough one.
-The user is explicitly pushing against an ecosystem where adulthood is too
-often faked by enlarging the worldview rather than actually relocating the
-hidden burden.
+The danger is not merely picking the wrong orchestrator.
+The danger is letting "more adult architecture" become another synonym for:
+
+> the same hidden burden still lands on the operator, but now the burden has
+> better branding and more prestigious nouns around it.
 
 That sentence should govern the whole page.
-The danger is not merely picking the wrong orchestrator.
-It is letting "more adult architecture" become another synonym for "the user
-will privately bridge the same gap, but with better branding."
 
 The real question is not:
 
@@ -31,8 +30,6 @@ It is:
 > Which extra layer of machinery is actually justified by the specific hidden
 > human SPOFs, wrong-node failures, convergence failures, and state-truth gaps
 > this stack is already carrying?
-
-That distinction is the whole page.
 
 ## Strongest honest current answer
 
@@ -53,17 +50,8 @@ The current worktree does **not** prove:
 - that "lighter than Kubernetes" is automatically a good answer
 - that keeping multiple futures alive is just indecision
 
-The real threshold is not which product sounds right.
-It is whether a candidate removes the specific hidden burden that currently
-keeps the operator acting as the control plane.
-
-That is why this page has to stay rude about prestige.
-Prestige is one of the easiest ways to make a future feel inevitable before it
-has actually earned one more truth-owning responsibility in this repo.
-
-That sentence should dominate the whole page.
-If a comparison sounds sophisticated but stops naming the surviving operator
-burden, it has already drifted back into product-literacy theater.
+The real threshold is whether a candidate removes one more specific hidden
+burden that currently keeps the operator acting as the control plane.
 
 ## What this page is and is not allowed to prove
 
@@ -74,9 +62,10 @@ This page is allowed to prove:
 3. the preserved alternatives map to different missing truth classes
 4. the user is refusing fake closure, not randomly hesitating
 5. the repo is already partway toward inventing a control plane around Compose
-6. no current evidence proves that one platform has already earned whole-stack
-   promotion
-7. the decision must stay tied to named failure classes, not platform prestige
+6. no current evidence proves that one platform has already earned
+   whole-stack promotion
+7. the decision must stay tied to named failure classes, not platform
+   prestige
 8. the real threshold is whether the missing middle layer stays narrow or
    silently grows into a scheduler in disguise
 
@@ -86,25 +75,90 @@ This page is not allowed to:
 - treat exploration artifacts as implementation
 - imply that all futures are equally justified
 
+## Retrieval contract for this page
+
+### Class 1: live implementation baseline
+
+Primary anchors:
+
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- active Compose fragments under
+  [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/)
+
+This class is allowed to prove:
+
+- what the repo currently ships
+- what the actual authoring surface still is
+
+It is not allowed to prove:
+
+- that Compose remains sufficient for every failure class
+
+### Class 2: intent and architecture dream
+
+Primary anchors:
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+
+This class is allowed to prove:
+
+- the repo wants multi-node Docker without immediate heavyweight capture
+- scheduler promotion is not the default emotional end state
+
+It is not allowed to prove:
+
+- that scheduler promotion is permanently off the table
+
+### Class 3: repo-native gap naming
+
+Primary anchors:
+
+- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
+- [`docs/osvc_ingress_ha.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/osvc_ingress_ha.md)
+- [`docs/stateful_ha_plan.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/stateful_ha_plan.md)
+
+This class is allowed to prove:
+
+- which missing truths are already painful enough to name
+- which present helper layers are still too weak
+
+It is not allowed to prove:
+
+- that one future has already won
+
+### Class 4: archive pressure
+
+Primary anchors:
+
+- archive comparison threads
+- archive frustration threads
+- archive orchestration threads
+
+This class is allowed to prove:
+
+- the user is refusing fake closure
+- platform comparison here is not an abstract product-literacy exercise
+
+It is not allowed to prove:
+
+- current runtime correctness
+
+If a paragraph moves from one class to another, the docs should say so.
+Otherwise dream force and archive force will quietly impersonate implementation
+force.
+
 ## Claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
 | --- | --- | --- | --- |
-| "Compose is still the live baseline" | Class 1 | `docker-compose.yml`, active Compose fragments | that Compose is sufficient for every failure class |
-| "the repo wants multi-node Docker without immediate heavyweight capture" | Class 2 | `.github/copilot-instructions.md`, `README.md` | that scheduler promotion is off the table forever |
-| "the repo already knows which missing capabilities hurt" | Class 3 | `docs/INFRASTRUCTURE_MASTER_PLAN.md`, `docs/osvc_ingress_ha.md`, `docs/stateful_ha_plan.md` | that one future has already earned promotion |
-| "the user keeps rejecting fake closure" | Class 4 | archive threads and archive-pressure pages | that hesitation is random or that all options deserve equal weight |
+| "Compose is still the live baseline" | live implementation | `docker-compose.yml`, active Compose fragments | that Compose is sufficient for every failure class |
+| "the repo wants multi-node Docker without immediate heavyweight capture" | intent | `.github/copilot-instructions.md`, `README.md` | that scheduler promotion is forbidden forever |
+| "the repo already knows which missing capabilities hurt" | repo-native gap naming | master plan and HA planning docs | that one future has already earned promotion |
+| "the user keeps rejecting fake closure" | archive pressure | archive threads and archive-pressure synthesis | that hesitation is random or unserious |
 
-This page should never allow "there are several futures" to become "all
-futures are equally justified."
-
-Nor should it allow "some futures are serious" to become "the repo is already
-basically waiting to bless one."
-The whole point is that seriousness is cheap compared with burden transfer.
-
-That is one of the softer lies advanced documentation likes to tell.
 Equal narratability is not equal justification.
-Some futures are still mostly atmosphere unless they can show one more truth
+Some futures are still mostly atmosphere until they can show one more truth
 becoming inspectably system-owned.
 
 ## What the live worktree concretely proves
@@ -129,12 +183,16 @@ It does **not** prove:
 
 The worktree already contains more than one future-facing direction:
 
-- serious edge behavior in `compose/docker-compose.coolify-proxy.yml`
-- mesh and control-plane pressure in `compose/docker-compose.headscale.yml`
-- observability and metrics surfaces in `compose/docker-compose.metrics.yml`
-- alternate orchestration exploration such as `compose/docker-compose.nomad.yml`
+- serious edge behavior in
+  [`compose/docker-compose.coolify-proxy.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.coolify-proxy.yml)
+- mesh and control-plane pressure in
+  [`compose/docker-compose.headscale.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.headscale.yml)
+- observability and metrics surfaces in
+  [`compose/docker-compose.metrics.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.metrics.yml)
+- alternate orchestration exploration such as
+  [`compose/docker-compose.nomad.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.nomad.yml)
 - additional routing/control fragments such as
-  `compose/docker-compose.warp-nat-routing.yml`
+  [`compose/docker-compose.warp-nat-routing.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.warp-nat-routing.yml)
 
 That proves:
 
@@ -148,8 +206,8 @@ It does **not** prove:
 
 ### 3. The repo is already inventing helper control-plane behavior around Compose
 
-The master plan names several missing truths that are not pure container-start
-problems:
+The planning layer names missing truths that are not pure
+"start this container" problems:
 
 - secret sync
 - compose sync
@@ -157,11 +215,10 @@ problems:
 - automated service failover
 - Headscale-assisted peer broadcast
 
-That matters because it means the repo is not debating control planes from
-outside.
+That matters because the repo is not debating control planes from outside.
 It is already partially building one around Compose.
 
-The real tradeoff is therefore not:
+So the real tradeoff is not simply:
 
 - Compose
 - versus orchestrator
@@ -171,22 +228,18 @@ It is:
 - which control-plane growth is narrow and honest
 - versus which growth silently becomes a scheduler in disguise
 
-That distinction is more important than "lightweight versus heavyweight."
-A heavyweight layer can still be more honest if it truly owns the right truth.
+That distinction matters more than "lightweight versus heavyweight."
+A heavyweight layer can still be the more honest answer if it truly owns the
+right truth.
 A lightweight layer can still be fake if it mostly preserves the operator's
-private settlement role under a gentler vocabulary.
-
-That is the real differentiator this repo cares about.
-Not only "lighter versus heavier,"
-but "does the new layer stay narrow enough to feel like an earned answer
-instead of another worldview tax pretending to be inevitable?"
+private settlement role under gentler vocabulary.
 
 ## What the planning layer says the real wounds are
 
-The planning docs are already unusually explicit about the actual burden set.
-
 [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-names all of these as still missing:
+is already unusually explicit about the real burden set.
+
+It names all of these as still missing:
 
 - universal wrong-node success
 - a live tracked root `services.yaml` current-state registry
@@ -205,19 +258,12 @@ The question becomes:
 
 - which candidate most honestly owns one or more of those missing truths?
 
-That wording has to stay this narrow.
-Otherwise the page slips back into capability envy and forgets that the user is
-not trying to buy more nouns.
-They are trying to stop being the last untracked dependency in the system.
-
-not:
+Not:
 
 - which candidate is most famous?
 
-This repo should keep saying that because fame is one of the most dangerous
-forms of false reassurance in the whole control-plane conversation.
-Famous platforms can still leave the user's actual accusation unanswered if
-the docs stop too early at capability language.
+This repo should keep saying that because fame is one of the easiest ways to
+turn capability language into false reassurance.
 
 ## What the archive contributes
 
@@ -227,68 +273,53 @@ The user is refusing fake closure.
 
 Important archive facts:
 
-- `docker-multi-node-without-swarm__...` repeatedly converges on service
-  discovery as the hard missing piece
+- `docker-multi-node-without-swarm__...` keeps converging on service discovery
+  as the hard missing piece
 - the same thread describes Nomad as lighter than Kubernetes but still frames
   the real issue as current placement truth
-- that thread also mentions Consul and gossip-based approaches, but keeps the
-  burden centered on "service name -> where is it running right now"
+- the same pressure repeatedly returns to "service name -> where is it running
+  right now"
 - `distributed-ha-orchestration__...` explicitly notes that K3s still uses
   leader election and Swarm still has manager nodes
 - `docker-compose-frustration__...` captures the "Docker feels gaslighting"
   pressure that explains why superficial option lists are not enough
 
-These sources do not pick the winner.
+These sources do not pick a winner.
 They do explain why the repo keeps several futures alive without that being
 mere indecision.
 
-That distinction is crucial because "indecision" flatters the surrounding
-market.
-The stronger reading is that the repo has not yet seen enough evidence to let
-one future legally impersonate relief.
+The stronger reading is:
 
-That matters because indecision is the lazy reading.
-The stronger reading is that the repo is refusing to award adulthood to a
-candidate before it can prove one more humiliating failure class has actually
-become less privately human.
+- the repo has not yet seen enough evidence to let one future legally
+  impersonate relief
 
 ## What still does not count as orchestration evidence here
 
-This repo needs a harsher evidence filter than ordinary platform-comparison
-docs.
-
-The following are still too weak to count as serious promotion evidence on
-their own:
+These are still too weak to count as promotion evidence on their own:
 
 - a cleaner deployment syntax
 - a smoother local demo
 - a broader feature matrix
 - a controller that can describe more nouns
 - a candidate that sounds "lighter than Kubernetes"
-- a candidate that makes the diagrams calmer while the operator still privately
-  closes the same route, placement, or failover gaps
+- calmer diagrams while the operator still privately closes the same route,
+  placement, or failover gaps
 
 Those things may matter later.
 They do not yet answer the user's real question.
 
-That question should keep sounding a little abrasive here.
-The user is not waiting for a prettier matrix.
-The user is waiting for some candidate to stop making "just accept a larger
-system" sound like a social threat instead of an earned technical answer.
+That real question should stay abrasive here:
 
-The real question is still:
+- which layer now owns more of the missing truth?
+- which hidden burden became inspectably less human?
+- which failure class became less humiliating on the bad day?
 
-- which layer now owns more of the missing truth
-- which hidden burden became inspectably less human
-- which failure class became less humiliating on the bad day
-
-If none of those changed, then this repo did not actually gain a more honest
-future.
+If none of those changed, the repo did not actually gain a more honest future.
 
 ## What a real promotion packet would have to contain
 
-No future path should get elevated just because it sounds increasingly
-coherent in docs.
+No future path should get elevated just because it sounds increasingly coherent
+in docs.
 
 For this repo, a serious promotion packet would need a bundle of evidence such
 as:
@@ -302,37 +333,28 @@ as:
 - operator-legibility proof showing where a human can inspect the decision path
 - an explicit statement of what the promoted layer still does not solve
 
-That packet does not need to prove whole-stack closure.
+That packet does not need whole-stack closure.
 It does need to prove that at least one hidden burden became materially less
 private.
 
-That is the minimum seriousness threshold for this whole page:
+That is the minimum seriousness threshold for this page:
 not which future feels most plausible,
 but which future can prove that one more bad-day explanation no longer depends
 on operator folklore.
 
-That is the whole bar.
-Not a better roadmap.
-Not a better ecosystem fit.
-Not a calmer explanation.
-One more important truth has to stop living as private operator folklore.
-
-If a candidate cannot leave that kind of artifact bundle behind, then it has
-not yet earned stronger language than "still being considered."
-
 ## Fake differentiation versus real differentiation
 
-This repo needs a stricter filter than ordinary platform comparison pages use.
+This repo needs a stricter filter than ordinary platform-comparison pages use.
 
 Two options are not meaningfully different here unless they reduce
 meaningfully different hidden burdens.
 
-That means:
+That means these are not enough on their own:
 
-- different deployment syntax is not enough
-- different ecosystem size is not enough
-- different controller branding is not enough
-- different HA vocabulary is not enough
+- different deployment syntax
+- different ecosystem size
+- different controller branding
+- different HA vocabulary
 
 The differentiators that actually matter are:
 
@@ -350,24 +372,20 @@ is named tightly enough to justify the bill.
 
 ## Candidate families already visible in the repo
 
-These are the main candidate families already present in planning or research.
-
 | Candidate family | What it might solve | Why it is still incomplete |
 | --- | --- | --- |
 | lightweight registry plus helper agents | placement truth, sync, redeploy, failover glue | still must prove durability, eligibility, and semantic preservation |
 | OpenSVC-shaped ingress or service supervision | stronger service ownership and failover semantics | still needs proof that it removes burden instead of renaming it |
 | Nomad-style promotion | scheduling and health-aware placement | must earn its worldview tax and not just widen the control plane |
-| k3s / Kubernetes promotion | broad cluster truth and scheduling machinery | may solve many layers, but the repo treats lost legibility and central worldview cost as real |
+| k3s / Kubernetes promotion | broad cluster truth and scheduling machinery | may solve many layers, but the repo treats lost legibility and worldview tax as real costs |
 | improved proxy automation alone | route generation and local edge behavior | not enough unless it owns placement, durability, and explanation too |
 
-## The success test
+## Success test
 
-A future path has only earned promotion when it makes at least one of the
-current hidden burdens materially less true in shared, inspectable system
-behavior.
+A future path has only earned promotion when it makes at least one current
+hidden burden materially less true in shared, inspectable system behavior.
 
-That means the path has to do more than sound plausible.
-It has to reduce one or more of these:
+That means the path has to reduce one or more of these:
 
 - wrong-node requests collapsing back into private operator memory
 - remembered placement still being the real registry
@@ -380,7 +398,9 @@ option, not a new answer.
 
 ## Bottom line
 
-This repo is not asking "which orchestrator is best?"
+This repo is not asking:
+
+> which orchestrator is best?
 
 It is asking:
 

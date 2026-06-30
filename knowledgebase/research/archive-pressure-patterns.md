@@ -13,25 +13,39 @@ the pressure that created it:
   exist
 - the ecosystem keeps offering either static glue or heavyweight platform
   migration
-- the user rejects those answers because the actual problem survives
+- the user rejects those answers because the actual wound survives
 - the same missing capabilities keep reappearing under different tool names
 
 Without this page, the knowledgebase drifts back toward generic infrastructure
 writing and starts forgetting why this repo is so dissatisfied in the first
 place.
 
-That forgetting is one of the main failure modes of the whole site.
+The danger is not only that the docs forget facts.
+The deeper danger is that they remember facts while forgetting the accusation.
 
-The danger is not just that the repo forgets facts.
-The bigger danger is that it remembers facts while forgetting the accusation.
-
-Once that happens, the docs start sounding informed, balanced, and mature
-while quietly reinstating the exact betrayal the user keeps reacting to:
+Once that happens, the docs start sounding informed, balanced, and mature while
+quietly reinstating the exact betrayal the user keeps reacting to:
 
 - plenty of nouns
 - plenty of options
 - plenty of architecture literacy
 - still no believable layer that removes the hidden human burden
+
+## Strongest honest current answer
+
+If a reader asks what the archive is really proving, the shortest defensible
+answer is:
+
+> the archive proves that the user keeps rediscovering the same hidden wound
+> under different tool names: self-hosting ecosystems keep offering answers
+> that sound dynamic or serious while leaving wrong-node humiliation, sacred
+> operator memory, and fake stateful confidence fundamentally intact.
+
+That is problem-shape proof, not runtime proof.
+
+It is also not winner proof.
+The archive can make the ecosystem's failures easier to name without making one
+local escape path more earned.
 
 ## What this page is and is not allowed to prove
 
@@ -51,8 +65,7 @@ It is not authoritative about:
 - proof that the priority implementation already satisfies those demands
 - which future option has already won
 
-The archive is authoritative about problem shape, not about shipped runtime
-truth.
+The archive is authoritative about problem shape, not shipped runtime truth.
 
 That distinction matters because the archive is unusually rich.
 It is tempting to let repeated pressure masquerade as proof of direction or
@@ -60,39 +73,73 @@ near-implementation.
 
 That would be the wrong lesson.
 
-The wrong lesson is not merely "archive pressure is not implementation."
-It is also:
+Archive richness is not understanding.
+Repeated tool comparisons are not genuine choice.
+Better language around HA is not one inch of transferred burden.
+A persuasive synthesis can still be a more elegant form of forgetting.
 
-- archive richness is not understanding
-- repeated tool comparisons are not genuine choice
-- better language around HA is not one inch of transferred burden
-- a persuasive synthesis can still be a more elegant form of forgetting
-- richer archive reconstruction is not closer relief
+## Retrieval contract for this page
 
-## Strongest honest current answer
+### Class 1: archive-native accusation
 
-If a reader asks what the archive is really proving, the shortest defensible
-answer is:
+Primary anchors:
 
-> the archive proves that the user keeps rediscovering the same hidden wound
-> under different tool names: self-hosting ecosystems keep offering answers
-> that sound dynamic or serious while leaving wrong-node humiliation, sacred
-> operator memory, and fake stateful confidence fundamentally intact.
+- archived frustration threads
+- archived failover threads
+- archived orchestration-comparison threads
 
-That is problem-shape proof, not runtime proof.
+This class is allowed to prove:
 
-It is also not option proof.
-The archive can make the ecosystem's failures easier to name without making one
-local escape path more earned.
+- what keeps hurting
+- what kinds of answers the user keeps rejecting
+- what standard the runtime must eventually satisfy
+
+It is not allowed to prove:
+
+- current runtime behavior
+
+### Class 2: repo-native direction constrained by archive pressure
+
+Primary anchors:
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+- architecture pages that preserve the same thresholds
+
+This class is allowed to prove:
+
+- the archive is actively constraining the repo's direction
+
+It is not allowed to prove:
+
+- that the runtime already obeys that direction completely
+
+### Class 3: live implementation
+
+Primary anchors:
+
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- active Compose fragments
+
+This class is allowed to prove:
+
+- what the priority implementation actually ships
+
+It is not allowed to prove:
+
+- that archive pressure has already been satisfied
+
+If a later page uses archive force to pretend the runtime is close, this page
+should make that feel illegal.
 
 ## Quick claim router
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
 | --- | --- | --- | --- |
-| "this frustration keeps recurring across tools and threads" | archive pressure | source archive and archive-derived synthesis pages | that recurrence itself proves implementation |
-| "the ecosystem keeps offering fake options" | archive pressure | repeated comparison and failover threads | that every explored option is equally fake forever |
-| "the repo's direction is constrained by this pressure" | archive pressure + repo-native intent | archive pages plus `.github/copilot-instructions.md` and `README.md` | that the current runtime already obeys that direction completely |
-| "a given capability threshold matters emotionally" | archive pressure | repeated refusal patterns in archive docs | that the threshold has already been crossed locally |
+| "this frustration keeps recurring across tools and threads" | archive-native accusation | archive threads and archive-derived synthesis | that recurrence itself proves implementation |
+| "the ecosystem keeps offering fake options" | archive-native accusation | repeated comparison and failover threads | that every explored option is equally fake forever |
+| "the repo's direction is constrained by this pressure" | archive pressure plus repo-native direction | archive pages plus `.github/copilot-instructions.md` and `README.md` | that the current runtime already obeys that direction completely |
+| "a given capability threshold matters emotionally" | archive-native accusation | repeated refusal patterns | that the threshold has already been crossed locally |
 
 The archive is best at restoring the user's standard, not at certifying that
 the repo has met it.
@@ -123,23 +170,21 @@ The archive keeps restating the same demand with different vocabulary because
 the ecosystem keeps answering adjacent questions instead of this one.
 
 That repetition is not noise.
-It is one of the strongest signals in the whole repo.
+It is one of the strongest signals in the repo.
 
 It is also not indecision.
-
 The user is not wandering because they cannot settle on vocabulary.
 They keep circling the same wound because most answer spaces keep performing
 the same dodge with different branding:
 
-- static truth, but dressed up as dynamic
-- sacred nodes, but wrapped in more respectable machinery
-- failover language, but without preserved request meaning
-- HA tone, but with operator memory still doing the real work
+- static truth, dressed up as dynamic
+- sacred nodes, wrapped in respectable machinery
+- failover language without preserved request meaning
+- HA tone while operator memory still does the real work
 
 ## High-signal archive clusters
 
-These are the archive bundles that most clearly reconstruct the user's actual
-standards.
+These archive bundles most clearly reconstruct the user's actual standard.
 
 ### Cluster A: Compose becomes humiliating at the exact moment distribution matters
 
@@ -150,7 +195,7 @@ Primary files:
 
 What this cluster shows:
 
-- the user's problem is not merely "Compose syntax is ugly"
+- the problem is not merely "Compose syntax is ugly"
 - Compose feels empowering while the topology is still local and obvious
 - the moment multiple hosts and hidden container state enter the picture,
   Docker's surface stops feeling causally legible
@@ -160,14 +205,14 @@ What this cluster shows:
   - one overlay mesh
   - one operator still stitching the truth together
 
-What this forces the docs to preserve:
+What this cluster should force the docs to preserve:
 
 - Compose readability is not nostalgia
 - the user is protecting operator legibility, not merely preferring YAML
 - a solution can sound lightweight while still leaving the same hidden burden
   intact
 
-### Cluster B: Wrong-node survival is the real threshold, not generic load balancing
+### Cluster B: wrong-node survival is the real threshold, not generic load balancing
 
 Primary files:
 
@@ -180,28 +225,26 @@ What this cluster shows:
 - mainstream answers like Traefik, NGINX, or HAProxy are often rejected not
   because they are bad tools, but because they stop short of the user-facing
   requirement
-- "field not found, node: failover" is not merely a syntax footgun; it exposes
-  how easily failover language outruns what the live router model really owns
+- syntax-level failover surprises are not just footguns; they expose how
+  easily failover language outruns what the live router model really owns
 - advanced origin selection, route durability, stickiness, circuit breaking,
   and fallback semantics are being treated as one missing capability family
-  rather than as optional proxy extras
 
-What this forces the docs to preserve:
+What this cluster should force the docs to preserve:
 
 - do not narrate "proxy present" as "failover solved"
 - do not narrate one generated file-provider trick as a real middle layer
 - the user cares about preserved service meaning after wrong-node entry, not
   just packet redirection
 
-What this cluster should also make harder to forget:
+What this cluster should make painful to forget:
 
 - a wrong-node answer that still needs a human explainer is still failure
 - a route that can be rescued only because the operator already knows the map
   is not real dignity
-- "almost there" language is one of the main ways the ecosystem keeps trying
-  to close this complaint without actually answering it
+- "almost there" language is one of the ecosystem's favorite dodges
 
-### Cluster C: The user keeps searching for peer-equal or narrow coordination, not just bigger names
+### Cluster C: the user keeps searching for peer-equal or narrow coordination, not just bigger names
 
 Primary files:
 
@@ -216,70 +259,29 @@ What this cluster shows:
 - they still do not want "build your own orchestrator" if an honest narrower
   layer already exists
 - even when Nomad appears as a candidate, the real question stays:
-  - does it remove the hidden burden
-  - or does it just provide a more respectable surface for similar burden
+  - does it remove the hidden burden?
+  - or does it merely provide a more respectable surface for similar burden?
 
-What this forces the docs to preserve:
+What this cluster should force the docs to preserve:
 
 - the repo is not anti-platform out of stubbornness
 - it is trying to prevent unjustified worldview capture
 - "mature orchestrator" is weaker than "owns the missing truth cleanly"
 
-This matters because the user's frustration is not solved by being offered
-larger and larger adulthood theater.
+## Core recurring patterns the archive keeps recovering
 
-The repeated complaint is:
+### Pattern 1: "There should already be a standard dynamic middle layer, but there never is"
 
-> why do so many "serious" answers only become serious by charging a giant
-> worldview tax before they have shown me one believable middle option?
-
-This page should therefore stay hostile to archive synthesis that becomes too
-satisfying.
-If the archive starts feeling like a complete explanation of the repo, the docs
-are in danger of turning recurring pain into one more polished object of study
-instead of a still-active demand on the runtime.
-
-## What this pressure is doing to the repo
-
-The archive is not just research.
-It is acting like a constraint generator.
-
-It keeps forcing the docs and the architecture to answer:
-
-- which truths are still implicit
-- which behaviors still depend on human memory
-- which resilience claims are overstated
-- which platform taxes are still unjustified
-
-That is why the archive matters so much.
-
-It is effectively acting like a negative benchmark engine.
-It keeps recovering the exact kinds of coherence the user no longer trusts:
-
-- a route that exists but dies when it matters
-- a platform that sounds distributed but still depends on one remembered host
-- an HA story that is really just ingress plurality
-- a control plane that is really just private human reconstruction with nicer
-  nouns
-
-The archive's job is to keep those failures vivid, not resolved.
-A better archive page is not one that merely makes the whole situation feel
-more comprehensible in the abstract.
-It is one that makes it harder to forget what exact kind of fake adulthood the
-user keeps encountering.
-
-## Pattern 1: "There should already be a standard dynamic middle layer, but there never is"
-
-This is one of the loudest repeating frustrations in the archive.
+This is one of the loudest frustrations in the archive.
 
 The user repeatedly collides with an ecosystem where:
 
-- Compose handles single-node service definition reasonably well
+- Compose handles single-node definition reasonably well
 - multi-node behavior becomes hand-built glue
 - "dynamic" often still means "you predeclared a lot of static truth"
 - every answer seems to require one more pile of integration ritual
 
-What the user is rejecting here is not YAML itself.
+What the user is rejecting is not YAML itself.
 
 They are rejecting the experience of having to reconstruct runtime truth
 through:
@@ -290,17 +292,12 @@ through:
 - undocumented conventions
 - manual peer knowledge
 
-That pressure is what keeps the repo searching for a middle layer between:
-
-- raw Compose sprawl
-- and full orchestrator worldview capture
-
-What this pattern forces the docs to say:
+What this pattern should force the docs to say:
 
 - do not describe the repo as if it is merely looking for better Compose
   hygiene
-- do not reduce this to "wants better service discovery"
-- do not reduce this to "wants less manual config"
+- do not reduce this to "better service discovery"
+- do not reduce this to "less manual config"
 
 Those are all true and all too small.
 
@@ -309,18 +306,15 @@ The deeper pattern is:
 the user wants the system to stop requiring private reconstruction of topology
 and recovery truth just to behave like one platform under stress.
 
-That sentence should be treated as the archive's most dangerous preservation
-target.
+If later docs paraphrase that into:
 
-If later documentation paraphrases it into:
-
-- "better service discovery"
-- "better failover ergonomics"
-- "less manual config"
+- better service discovery
+- better failover ergonomics
+- less manual config
 
 then the docs have already rounded off the edges that matter most.
 
-## Pattern 2: "Wrong-node requests should still work"
+### Pattern 2: "Wrong-node requests should still work"
 
 This is probably the single most important recurring demand in the archive.
 
@@ -336,8 +330,7 @@ They want something stricter:
 - the node forwards or falls back correctly
 - the operator does not manually wire every service or node permutation
 
-That is much stronger than ordinary load balancing.
-It quietly requires all of these things:
+That quietly requires all of these:
 
 - entry-node independence
 - current placement truth
@@ -346,30 +339,30 @@ It quietly requires all of these things:
 - middleware and auth continuity
 - convergence of secrets and deployment state
 
-Most ordinary answers in the archive solve one slice of that and then talk as
-if they solved the whole thing.
+Most ordinary answers in the archive solve one slice and then talk as if they
+solved the whole thing.
 
-What this pattern forces the docs to say:
+What this pattern should force the docs to say:
 
 - never collapse entry-node plurality, peer forwarding, route persistence,
-  request preservation, and semantic continuity into one vague phrase like "HA
-  routing"
+  request preservation, and semantic continuity into one vague phrase like
+  "HA routing"
 - keep wrong-node dignity as the real threshold instead of treating it like an
   optional advanced feature
 
-## Pattern 3: "Do not hardcode everything, but also do not immediately jump to Consul, Swarm, or Kubernetes"
+### Pattern 3: "Do not hardcode everything, but also do not immediately jump to Consul, Swarm, or Kubernetes"
 
 This is the central refusal pattern in the archive.
 
 The user repeatedly rejects both extremes.
 
-### Rejected extreme A: static glue everywhere
+Rejected extreme A:
 
 - hardcoded per-service upstream tables
 - hand-maintained peer lists
 - solutions that only stay dynamic if the operator edits every change
 
-### Rejected extreme B: heavyweight control-plane surrender
+Rejected extreme B:
 
 - "just use Kubernetes"
 - "just use Swarm"
@@ -383,29 +376,14 @@ The archive keeps forcing a narrower target:
 - lighter coordination
 - more direct ownership of what the system thinks is true
 
-This is one of the clearest places where the user's dream stops sounding like
-a normal product comparison.
-
-They are not only asking for lighter machinery.
-They are asking for machinery whose truth can still be inspected and whose
-benefit can still be named without hand-waving.
-
-That is why repo-native ideas keep reappearing:
-
-- `services.yaml`
-- sync-agent
-- failover-agent
-- file-generated Traefik config
-- Compose-first plus stronger truth layers
-
-What this pattern forces the docs to say:
+What this pattern should force the docs to say:
 
 - optionality is not indecision here
 - the repo is refusing both static pain and ideological platform capture
 - "keep exploring" is sometimes the honest answer when neither extreme has
   earned trust
 
-## Pattern 4: "DNS failover is not the whole story"
+### Pattern 4: "DNS failover is not the whole story"
 
 The archive repeatedly rejects the shallow version of resilience:
 
@@ -421,18 +399,13 @@ Why that keeps feeling insufficient:
 - DNS does not preserve auth or middleware semantics
 - DNS does not make a stateful service honest
 
-This is exactly why the repo keeps saying:
-
-first-hop plurality is real progress and still much weaker than preserved
-request meaning.
-
-What this pattern forces the docs to say:
+What this pattern should force the docs to say:
 
 - Cloudflare belongs in the anti-SPOF story
 - Cloudflare is not the final story
 - a multi-record ingress surface should not be narrated as distributed closure
 
-## Pattern 5: "Stateful honesty must stay harsher than stateless optimism"
+### Pattern 5: "Stateful honesty must stay harsher than stateless optimism"
 
 The archive repeatedly pushes toward resilience language.
 The repo keeps having to answer with a harsher distinction:
@@ -441,28 +414,18 @@ The repo keeps having to answer with a harsher distinction:
 - TCP is harder
 - stateful write authority is harder still
 
-This matters because many ecosystems quietly smuggle stateful optimism through
-network-level success:
-
-- the route answered
-- the socket connected
-- the replica promoted
-
-and then start implying the service is now "HA."
-
-The archive pressure in this repo refuses that move.
-It keeps restoring the question:
+The archive keeps restoring the question:
 
 > who owns truth, who can write, how is promotion decided, and what exactly
 > survives after the failure?
 
-What this pattern forces the docs to say:
+What this pattern should force the docs to say:
 
 - reachable is weaker than correct
 - correct is weaker than authoritative
 - authoritative is weaker than well-explained
 
-## What these patterns mean for documentation
+## What these patterns mean for the rest of the docs
 
 The archive is useful only if it makes the rest of the docs harder to flatter.
 
@@ -471,18 +434,15 @@ Every serious page should preserve all of these:
 - the user is not lacking products
 - the user is lacking honest closure
 - the real threshold is wrong-node dignity
-- route persistence under the relevant failure is more important than calm
+- route persistence under the relevant failure matters more than calm
   architecture prose
 - stateful services stay under a much harsher standard
 - larger control planes must earn their opacity
 
-If a page becomes easier to read by shrinking one of those things, it probably
-got less honest.
+If a page becomes easier to read by shrinking one of those, it probably became
+less honest.
 
 ## What archive pressure should force every other page to demand
-
-The archive is not just a memory aid.
-It is a standards escalator.
 
 If a later architecture or roadmap page claims a stronger future, archive
 pressure should force that page to answer all of these:
@@ -500,9 +460,6 @@ serious.
 
 ## What still does not count as respecting the archive
 
-Many documentation styles can sound responsive to the user's frustration while
-still preserving the same old dodge.
-
 These still do not count:
 
 - adding more option lists without naming what hidden burden each option would
@@ -515,55 +472,20 @@ These still do not count:
 - treating repeated archive frustration as if it proved the runtime is already
   close to satisfying it
 
-Archive respect is not emotional tone-matching.
+Archive respect is not tone matching.
 It is preserving the user's threshold tightly enough that weak answers keep
 failing in the docs too.
 
-## What archive-derived progress would actually look like
-
-The archive itself cannot prove runtime closure.
-It can, however, define what a meaningful response should eventually leave
-behind.
-
-The clearest archive-aligned progress artifacts would look like:
-
-- a shared placement source the system actually consumes
-- a documented wrong-node drill whose result is preserved request meaning rather
-  than merely another healthy first hop
-- a fallback path that keeps policy and route identity intact after backend loss
-- explicit stateful pages that say where authority stays singular and where it
-  genuinely stops being singular
-- a repo surface where a newcomer no longer has to infer the important missing
-  truth from scattered hints and private human lore
-
-Until artifacts like those exist, the archive should keep functioning as a
-negative benchmark, not as a consolation prize.
-
-It should also keep functioning as a hostility filter against polished
-ambiguity.
-
-If a future page is beautifully organized, richly cross-linked, and still
-cannot say exactly what new shared truth replaced private operator memory,
-archive pressure should count that page as another elegant near-miss.
-
 ## Bottom line
 
-The core archive complaint is not ambiguous.
+The archive is not here to make the repo sound well-researched.
+It is here to stop the repo from forgetting what kind of fake adulthood the
+user keeps encountering:
 
-It is:
+- answers that sound dynamic but still depend on private topology memory
+- answers that sound resilient but still break wrong-node dignity
+- answers that sound serious but still make the operator the final hidden
+  dependency
 
-> I keep getting offered answers that sound like options while leaving the same
-> hidden sacred-node burden intact.
-
-That line is the reason `bolabaden-infra` keeps circling Compose-first truth
-layers, peer-aware routing, `services.yaml`, helper agents, OpenSVC, Nomad,
-k3s, and stateful caution all at once.
-
-The repo is not being indecisive.
-It is trying to stop accepting fake closure.
-
-That is the real value of the archive.
-
-It keeps the docs from pretending that better wording, broader option sets, or
-calmer architecture diagrams are the same thing as one more important truth
-finally leaving the operator's head.
+If the runtime eventually kills those sentences, the docs can say so.
+Until then, the archive's job is to keep them alive and uncomfortable.
