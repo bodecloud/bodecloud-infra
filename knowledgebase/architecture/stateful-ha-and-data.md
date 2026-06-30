@@ -43,6 +43,22 @@ This page is not allowed to prove:
 - that future planning language makes the present runtime safe
 - that a route staying up means the truth stayed up
 
+## The failure mode this page is trying to stop
+
+The most dangerous flattering sentence in a repo like this is:
+
+> the service still worked
+
+That sentence can hide at least four very different realities:
+
+- the same node never actually failed
+- the same local writer restarted
+- a stale or secondary surface answered
+- the only truthful copy of data was still singular and lucky
+
+This page exists to stop stateful continuity from being narrated in transport
+language.
+
 ## The hard rule this page is defending
 
 For any state-bearing service, you do not honestly remove the SPOF merely by:
@@ -62,6 +78,27 @@ Those may improve:
 
 They do not, by themselves, prove preserved authority.
 
+## The private sentence stateful pages must kill
+
+For state-bearing systems, the hidden sentence is almost always some variant
+of:
+
+> I still personally know who the real writer is, which copy is authoritative,
+> and how the clients are supposed to recover.
+
+If that sentence survives untouched, the SPOF has not been removed in the way
+the user actually cares about.
+
+At best, the repo may have improved:
+
+- exposure
+- recovery speed
+- restart ergonomics
+- operator visibility
+
+Those are real gains.
+They are not yet authority transfer.
+
 ## Strongest honest current answer
 
 The strongest honest answer from the current worktree is:
@@ -74,6 +111,19 @@ The strongest honest answer from the current worktree is:
 That means the repo already knows many of the right future questions.
 It does not yet prove that the main stateful classes have crossed into
 trustworthy multi-node behavior.
+
+## The smallest honest stateful sentence versus the fake bigger sentence
+
+This page should force the distinction between these two:
+
+- smaller honest sentence:
+  `this service is durable, important, and currently singular in authority`
+- fake bigger sentence:
+  `this service is effectively HA because more than one node can expose or reach it`
+
+The first sentence may feel disappointing.
+It is still much more useful than the second if the second becomes false on the
+first real failure.
 
 ## What the live runtime already proves
 
@@ -105,6 +155,20 @@ Every serious stateful claim in this repo should answer all four:
 If those questions are still mainly answered by operator memory, the system is
 still socially carrying part of the control plane.
 
+## The stateful burden map
+
+These are the main hidden burdens the user is trying to remove at this layer:
+
+| Burden | What it really asks | What fake progress looks like |
+| --- | --- | --- |
+| Writer identity | who may safely accept writes right now? | a port answered |
+| Authority continuity | who owns truth after failure? | the service restarted |
+| Client rediscovery | how do dependents find the new truth? | DNS or TCP still points somewhere |
+| Fencing | what stops the old writer from still acting alive? | the old node is probably down |
+| Storage truth | did durable state move, replicate, or remain singular? | the compose file exists on more than one node |
+
+This map is the reason stateful docs must stay much meaner than ingress docs.
+
 ## Stateful inventory by service class
 
 ### 1. MongoDB in the root runtime
@@ -132,6 +196,11 @@ What it does not prove:
 - client topology rediscovery after failure
 - fencing or split-brain prevention
 
+Private sentence still surviving:
+
+> yes, but I still personally know MongoDB authority is basically where that
+> node and disk were
+
 ### 2. Redis in the root runtime
 
 Live evidence:
@@ -155,6 +224,10 @@ What it does not prove:
 - correct client reconnect behavior
 - resilient master discovery
 - state authority transfer under node loss
+
+Private sentence still surviving:
+
+> yes, but I still personally know Redis truth is still mostly one writer
 
 ### 3. Headscale in the active fragment
 
@@ -185,6 +258,11 @@ This is one of the sharpest examples in the repo of the difference between:
 - a valuable service
 - a resilient authority surface
 
+Private sentence still surviving:
+
+> yes, but I still personally know the mesh control plane still bottoms out in
+> one SQLite-backed authority node
+
 ### 4. Firecrawl subgraph
 
 Live evidence from
@@ -209,6 +287,11 @@ What it does not prove:
 - mirrored durable messaging semantics
 - promotion-safe topology across the subgraph
 - resilient multi-node truth for the whole application family
+
+Private sentence still surviving:
+
+> yes, but I still personally know this subgraph still depends on singular
+> durable authorities
 
 ### 5. LLM Postgres and vector-state surface
 
@@ -235,6 +318,11 @@ What it does not prove:
 - reconnect correctness after node loss
 - safe vector-store authority failover
 
+Private sentence still surviving:
+
+> yes, but I still personally know these AI-adjacent durable systems are still
+> node-local truth holders
+
 ## What the live runtime still shows clearly
 
 The live worktree still shows:
@@ -249,6 +337,26 @@ ingress claims.
 
 The edge can become more survivable earlier than the data can become more
 truth-owning.
+
+## Why stateful progress often feels slower than everything else
+
+The user is frustrated because many other layers offer partial relief quickly:
+
+- more public entry nodes
+- better proxy behavior
+- cleaner auth and middleware
+- nicer observability
+
+Stateful truth is slower because it asks for something uglier and more
+constraining:
+
+- explicit writer rules
+- explicit failure ownership
+- explicit replacement authority
+- explicit client reconvergence
+
+That slower pace is not bureaucracy.
+It is the cost of no longer lying about where truth lives.
 
 ## Why ingress progress and stateful progress diverge
 
@@ -286,6 +394,20 @@ These are still weak or fake progress signals here:
 
 Those may improve confidence.
 They do not yet prove preserved authority.
+
+## What a fake stateful upgrade usually sounds like
+
+These are the kinds of sentences this page should aggressively reject:
+
+- `MongoDB is redundant because Traefik can still forward TCP`
+- `Redis is resilient because another node can run the same service definition`
+- `Headscale is HA enough because the mesh usually works`
+- `Postgres is portable because the data directory is bind-mounted`
+- `RabbitMQ survived because the process came back`
+- `Qdrant is fine because the index directory persists`
+
+Every one of those may describe a nearby operational convenience.
+None of them, by themselves, answer the authority question.
 
 ## Service-class reality check
 
@@ -365,6 +487,22 @@ What is not enough:
 - a metrics target staying up
 - one process starting again
 
+## The proof packet each stateful class would need before stronger language
+
+The repo should expect at least this packet before graduating a stateful
+sentence:
+
+1. `Authority before failure:` who was the writer or leader?
+2. `Failure introduced:` what exactly died or was removed?
+3. `Authority after failure:` who became authoritative, by which mechanism?
+4. `Fencing:` what prevented stale authority from continuing to act?
+5. `Client rediscovery:` how did dependents find the new truth?
+6. `Storage truth:` what durable state replicated, moved, or remained singular?
+7. `Remaining forbidden sentence:` what stronger claim is still not earned?
+
+Without that packet, most stateful optimism in this repo should still be
+treated as architectural desire rather than proof.
+
 ## What the repo is allowed to say honestly today
 
 The repo is allowed to say:
@@ -422,3 +560,19 @@ What it does prove is where the pain already lives:
 
 That is enough to make stateful honesty mandatory.
 It is not yet enough to make stateful HA claims adult.
+
+## Bottom line
+
+The user is not demanding that every database magically become enterprise-grade
+today.
+The user is demanding that the docs stop pretending stateful dignity exists
+where only transport dignity exists.
+
+The strongest current honest sentence is still:
+
+> the repo has real stateful dependencies, real authority pressure, and real
+> node-local truth, but it does not yet broadly prove that authority survives
+> node loss without private operator completion.
+
+That sentence is harsher than normal infra prose.
+It is also much closer to what the user is actually trying to learn.

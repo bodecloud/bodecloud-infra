@@ -37,6 +37,24 @@ This page is not authoritative about:
 This is a method page.
 It is not a certificate page.
 
+## The real output of a serious runbook pass
+
+The real output of a pass in this repo is not:
+
+- a green terminal
+- a pile of commands
+- a more confident paragraph
+- a screenshot that one route answered
+
+The real output is:
+
+- one narrower honest sentence that became true
+- one stronger sentence that is still forbidden
+- one hidden operator burden that was either killed or exposed more clearly
+
+If the pass does not identify those three things, the operator probably learned
+something useful but did not yet reduce the social control plane.
+
 ## The real operator problem
 
 The user is not mainly short on commands.
@@ -59,6 +77,27 @@ If a command succeeds but the operator still has to privately know:
 - whether the stateful writer is still singular
 
 then the runbook has not yet reached the user's actual pain.
+
+## The private sentence test
+
+Every pass in this repo should be treated like a hunt for one surviving private
+sentence.
+
+Examples:
+
+- `I still personally know which node really owns this service.`
+- `I still personally know whether this node is serving locally or forwarding.`
+- `I still personally know which peer is merely reachable versus eligible.`
+- `I still personally know whether the forwarded request still means the same thing.`
+- `I still personally know which writer is authoritative.`
+
+The pass got stronger only if one of those sentences either:
+
+- died completely
+- shrank into a smaller surviving sentence
+- or was exposed more honestly than before
+
+If the sentence merely became harder to notice, that is infrastructure theater.
 
 ## Start every pass with one claim sentence
 
@@ -97,6 +136,22 @@ This repo needs a stricter evidence ladder than most homelab writeups.
 
 The operator should name the evidence class before running the first command.
 
+## The burden map behind the evidence ladder
+
+This is the more useful translation of the ladder:
+
+| Evidence class | Hidden sentence it can sometimes kill | Hidden sentence it usually leaves alive |
+| --- | --- | --- |
+| Authored shape | `I do not even know whether this service is declared.` | `I still do not know whether the runtime preserves requests under pressure.` |
+| Local runtime health | `I do not know whether this node is running the container at all.` | `I still do not know whether the node can rescue a wrong-node request.` |
+| Route behavior | `I do not know whether this hostname currently answers.` | `I still do not know whether the answer survives wrong-node entry or backend loss.` |
+| Wrong-node drill | `I do not know whether this route can preserve meaning from the wrong node.` | `I still do not know whether other routes, protected routes, or stateful routes inherited that property.` |
+| Backend-loss drill | `I do not know whether this named failure still preserves this named route.` | `I still do not know whether authority, state, or unrelated paths inherited that property.` |
+| Stateful correctness | `I do not know whether this stateful surface still knows who owns truth.` | `I still do not know whether the platform as a whole stopped being socially singular.` |
+
+This is why a green result at the wrong rung often feels insulting rather than
+helpful.
+
 ## The current runtime tells you what to inspect first
 
 The strongest current runtime anchors are still:
@@ -120,6 +175,30 @@ Concrete runtime facts worth remembering before any drill:
 
 Those facts matter because the runtime is broad enough that sloppy testing will
 over-upgrade very easily.
+
+## The route classes must stay separate during testing
+
+Do not run one pass and narrate it as if all route classes benefited equally.
+
+There are at least four materially different classes here:
+
+1. stateless public HTTP routes
+2. protected HTTP routes carrying auth and middleware meaning
+3. raw TCP reachability surfaces
+4. state-bearing services whose truth is not exhausted by successful transport
+
+The same output can mean very different things across those classes.
+
+For example:
+
+- a `200 OK` on `whoami` is an excellent early stateless signal
+- a `200 OK` on an authenticated admin surface is not enough unless auth and
+  middleware continuity are preserved too
+- a successful TCP connect is almost useless as an HA sentence by itself
+- a stateful writer answering one more time can still be the wrong kind of
+  success
+
+If the class is not named, the result is already too blurry.
 
 ## Operational sequence
 
@@ -152,6 +231,11 @@ Forbidden upgrade after success:
 
 Shape validation proves authored reality, not behavior under pressure.
 
+Private sentence that usually survives:
+
+> yes, but I still personally know whether the declared graph is more coherent
+> than the runtime under failure
+
 ### 2. Inspect local runtime health second
 
 Goal:
@@ -183,6 +267,11 @@ Forbidden upgrade after success:
 
 Local health remains local evidence.
 
+Private sentence that usually survives:
+
+> yes, but I still personally know that a healthy local container says almost
+> nothing about wrong-node rescue
+
 ### 3. Inspect route behavior third
 
 Goal:
@@ -210,6 +299,11 @@ Forbidden upgrade after success:
 > therefore wrong-node routing is solved
 
 Happy-path route success is not a wrong-node proof.
+
+Private sentence that usually survives:
+
+> yes, but I still personally know this may only work because the request hit
+> the lucky node on a good day
 
 ### 4. Only then run a wrong-node drill
 
@@ -244,6 +338,11 @@ Forbidden upgrade after success:
 
 One successful route is one successful route.
 
+Private sentence that usually survives:
+
+> yes, but I still personally know whether the rest of the platform would act
+> this coherent without me
+
 ### 5. Run backend-loss drills separately
 
 Goal:
@@ -267,6 +366,10 @@ The real sentence always has to be narrower:
 
 failover of what, under which exact failure, with which remaining human
 burden?
+
+Private sentence that usually survives:
+
+> yes, but I still personally know how much of the rescue path was still me
 
 ### 6. Treat stateful drills as a separate discipline
 
@@ -300,6 +403,11 @@ Forbidden upgrades after success:
 - `stateful SPOF is solved`
 
 Stateful claims stay the harshest claims in this repo.
+
+Private sentence that usually survives:
+
+> yes, but I still personally know who owns truth and how clients should
+> recover
 
 ## Weak, medium, and strong evidence in practice
 
@@ -341,6 +449,27 @@ Examples:
 Strong evidence is not green output.
 It is a proof packet with a named ceiling.
 
+## The fake-adult failure mode this page is trying to prevent
+
+The most common documentation failure in infra repos like this is:
+
+1. a route answers
+2. the prose becomes more mature
+3. the hidden human burden remains almost unchanged
+4. the repo starts sounding solved
+
+This page exists to break that pattern.
+
+The repo should never upgrade because:
+
+- the command list looked serious
+- the stack name sounded enterprise
+- the proxy logs were verbose
+- the operator now feels better oriented
+
+Orientation matters.
+It is not the same thing as burden transfer.
+
 ## Example claim packets
 
 These are the kinds of close-outs this repo actually needs.
@@ -375,6 +504,16 @@ These are the kinds of close-outs this repo actually needs.
 - `What is still forbidden:` saying protected routes, TCP routes, or stateful
   routes inherited that property.
 
+### Example: stateful honesty
+
+- `Claim tested:` MongoDB still answered after one failure.
+- `Evidence class:` local runtime health or route behavior, unless authority
+  transfer was explicitly shown.
+- `What this proves:` one node-local MongoDB surface remained reachable or
+  restarted.
+- `What is still forbidden:` saying MongoDB authority, election, or rediscovery
+  became multi-node safe.
+
 ## What still does not count as a serious runbook result
 
 These are still invalid outcomes:
@@ -387,6 +526,21 @@ These are still invalid outcomes:
 
 Those are exactly the outcomes that make the docs sound more adult while the
 platform remains socially manual.
+
+## What the user is actually asking the runbook to do
+
+The user is not begging for more checklists.
+The user is asking for a runbook that makes several ordinary Docker nodes feel
+less humiliatingly dependent on private operator memory.
+
+That means the runbook is only good if, after using it, the operator can say:
+
+- `the system now owns this smaller piece of truth`
+- `this stronger sentence is still forbidden`
+- `this is the next exact burden to externalize`
+
+Anything softer than that may still be useful operations writing.
+It is not yet aligned with the user's actual dream.
 
 ## Required close-out after every operational pass
 

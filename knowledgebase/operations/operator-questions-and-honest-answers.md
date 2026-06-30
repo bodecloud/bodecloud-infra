@@ -31,6 +31,30 @@ This page is not allowed to:
 This page is a burden ledger.
 It is not a confidence theater page.
 
+## The failure mode this page is trying to stop
+
+The repo already has plenty of nouns:
+
+- Traefik
+- Cloudflare
+- Headscale
+- `docker-gen-failover`
+- OpenSVC
+- Nomad
+- k3s
+- Kubernetes
+
+The user's frustration is not that these nouns do not exist.
+It is that too many answers stop at the noun and never state:
+
+- what exact hidden sentence that tool would kill
+- what truth it would actually own
+- what bad-day burden would still remain private
+
+That is why this page keeps sounding harsher than a normal comparison page.
+The user is not shopping.
+The user is trying to stop being the missing algorithm.
+
 ## The real question behind all the smaller questions
 
 The operator is not fundamentally asking:
@@ -64,6 +88,24 @@ Every serious answer here should leave behind five things:
 If an answer does not leave those five things behind, it is still too close to
 shopping advice.
 
+## The hidden sentence test for every answer
+
+Every answer should be read against this question:
+
+> after I accept this answer, what exact sentence do I still have to finish in
+> my own head when the request lands on the wrong node?
+
+Examples of surviving hidden sentences:
+
+- `I still personally know what runs where.`
+- `I still personally know which peer is eligible.`
+- `I still personally know whether the forwarded request still means the same thing.`
+- `I still personally know whether the service that answered is authoritative.`
+- `I still personally know whether this is only first-hop resilience.`
+
+If the answer leaves the same sentence alive and merely sounds more
+professional, it did not answer the real question.
+
 ## Strongest honest current summary
 
 The repo is not mainly suffering from lack of tooling.
@@ -73,6 +115,23 @@ forcing the whole system into Swarm, Nomad, k3s, Kubernetes, or another
 larger worldview that has not yet proved it deserves to hide that much truth.
 
 That is why the ecosystem can feel full while still failing to feel useful.
+
+## The strongest broad answer the repo can support today
+
+The repo can already support this broad answer:
+
+> the user wants the smallest possible added truth-owning layer that lets any
+> ordinary surviving node stop behaving stupidly under wrong-node entry,
+> backend loss, and anti-SPOF pressure while Compose remains the real authored
+> surface.
+
+The repo cannot yet support this broader answer:
+
+> the right tool has already been chosen and broadly proved.
+
+That boundary matters because many of the available options may be capable in
+principle while still not answering the user's humiliation test in the current
+worktree.
 
 ## Question 1: What is the user actually trying to make true?
 
@@ -122,6 +181,45 @@ The real target is harsher:
 
 > yes, but I still personally know what the request should have meant better
 > than the system does
+
+## Question 1A: What makes the current situation feel humiliating rather than merely incomplete?
+
+### Hidden burden
+
+The operator is still the quiet place where these truths meet:
+
+- public entry truth
+- placement truth
+- forwarding truth
+- middleware continuity truth
+- state authority truth
+
+### Strongest current evidence class
+
+- the repo already distinguishes first hop, wrong-node behavior, backend-loss
+  behavior, and stateful authority as separate questions
+- the docs and runtime both show that this separation is not theoretical
+
+### Why the nearby common answer is still too small
+
+`incomplete` sounds like a normal roadmap problem.
+
+`humiliating` is more specific:
+
+> a healthy node can still require one human to privately explain what should
+> happen next.
+
+That is the real insult the user is trying to get rid of.
+
+### What would allow a stronger answer
+
+- one route where the system, not the operator, is visibly making the correct
+  local-versus-peer decision
+
+### Private sentence still surviving today
+
+> yes, but I still personally know when the healthy-looking node is faking
+> coherence
 
 ## Question 2: Why do ordinary HA answers keep feeling fake here?
 
@@ -215,6 +313,46 @@ The repo is trying to stop privately narrating what that route means.
 
 > yes, but I still personally know whether Traefik's next hop is actually the
 > right peer
+
+## Question 3A: Why is "a real reverse proxy" still not the same thing as "a believable platform"?
+
+### Hidden burden
+
+Proxy execution is still being asked to stand in for system-owned truth.
+
+### Strongest current evidence class
+
+- Traefik is live
+- auth and middleware surfaces are live
+- generated dynamic config surfaces are live
+- TCP exposure is live
+
+### Why the nearby common answer is still too small
+
+A believable platform does not merely:
+
+- accept a request
+- choose some backend
+- return some response
+
+It has to preserve:
+
+- intended route meaning
+- backend eligibility
+- policy continuity
+- human-readable explanation of why the request still succeeded
+
+That is already bigger than `use a reverse proxy`.
+
+### What would allow a stronger answer
+
+- one side-by-side proof showing local handling and peer-forwarded handling
+  preserve the same route meaning and policy
+
+### Private sentence still surviving today
+
+> yes, but I still personally know when the proxy is executing topology I
+> have not actually externalized
 
 ## Question 4: Why is Cloudflare not the answer by itself?
 
@@ -323,6 +461,39 @@ undersized:
 
 > yes, but I still personally know what runs where better than the system does
 
+## Question 6A: Why does the repo keep circling "small control surfaces" instead of jumping straight to a heavyweight orchestrator?
+
+### Hidden burden
+
+The repo is trying to kill precise pieces of hidden human logic, not merely
+collect more platform machinery.
+
+### Strongest current evidence class
+
+- the docs repeatedly converge on smaller truth-owning additions such as a
+  placement registry, route-aware forwarding logic, and proof packets
+- the current runtime remains Compose-first in authoring shape
+
+### Why the nearby common answer is still too small
+
+`just adopt the bigger control plane` hides two unresolved questions:
+
+- which private sentence will that bigger layer actually kill?
+- which private sentence will merely move somewhere harder to inspect?
+
+The user does not want to trade one blind spot for a more fashionable blind
+spot.
+
+### What would allow a stronger answer
+
+- a burden-by-burden comparison that shows which exact human decisions each
+  candidate layer would actually own
+
+### Private sentence still surviving today
+
+> yes, but I still personally do not know whether the bigger platform would
+> remove the right burden or just rename it
+
 ## Question 7: Why are helpers like `docker-gen-failover` still potentially fake comfort?
 
 ### Hidden burden
@@ -358,6 +529,42 @@ absorb, then it did not move the real burden.
 
 > yes, but I still personally know the helper does not yet survive the exact
 > bad day I care about
+
+## Question 7A: How do you tell the difference between a useful helper and infrastructure theater?
+
+### Hidden burden
+
+The operator still needs to know whether the helper survives the one failure
+that justifies the helper existing.
+
+### Strongest current evidence class
+
+- the repo already records helper skepticism explicitly
+- the live runtime already contains helper-style generated surfaces
+
+### Why the nearby common answer is still too small
+
+A helper is not vindicated by:
+
+- reducing manual edits
+- generating dynamic config
+- reacting to lifecycle events
+
+It is vindicated only if:
+
+- the failure still leaves a valid rescue path
+- the rescue path still means the same thing
+- the operator no longer has to privately repair the missing logic
+
+### What would allow a stronger answer
+
+- one backend-loss packet where the helper remains useful exactly when the
+  preferred backend disappears
+
+### Private sentence still surviving today
+
+> yes, but I still personally know whether the helper remains truthful only on
+> the easy day
 
 ## Question 8: Why are stateful services treated so much more harshly?
 
@@ -473,6 +680,19 @@ The best next proof packet is still:
 > yes, but I still personally know the system has not yet passed the
 > humiliating wrong-node test
 
+## The real answer the user keeps trying to force out of the repo
+
+If all the smaller questions are compressed honestly, the answer they are
+trying to force is:
+
+> stop giving me platform nouns and show me the smallest truthful mechanism
+> that makes one surviving node behave correctly without me privately finishing
+> the topology sentence.
+
+That is why even reasonable tools can feel like non-answers here.
+The user is not mainly trying to decide between products.
+The user is trying to decide where truth should live.
+
 ## What still does not count as an honest answer
 
 These still do not count:
@@ -496,3 +716,21 @@ After reading any serious answer in this repo, the operator should know:
 - what sentence remains forbidden until that artifact exists
 
 If the answer leaves only a better shopping list, it failed.
+
+## Bottom line
+
+The repo is allowed to be undecided about the eventual control layer.
+It is not allowed to be vague about the actual burden.
+
+The current strongest honest answer is:
+
+- the user wants Compose to remain the authored surface
+- the user wants any surviving ordinary node to stop needing private operator
+  completion
+- the missing piece is not "more infra" in the abstract
+- the missing piece is smaller truthful ownership of placement, eligibility,
+  fallback meaning, and state authority
+
+Until a concrete mechanism kills one of those hidden sentences in the runtime,
+the right answer is still sharper documentation, narrower proofs, and harsher
+honesty rather than bigger claims.
