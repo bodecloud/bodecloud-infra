@@ -194,6 +194,58 @@ These sources do not pick the winner.
 They do explain why the repo keeps several futures alive without that being
 mere indecision.
 
+## What still does not count as orchestration evidence here
+
+This repo needs a harsher evidence filter than ordinary platform-comparison
+docs.
+
+The following are still too weak to count as serious promotion evidence on
+their own:
+
+- a cleaner deployment syntax
+- a smoother local demo
+- a broader feature matrix
+- a controller that can describe more nouns
+- a candidate that sounds "lighter than Kubernetes"
+- a candidate that makes the diagrams calmer while the operator still privately
+  closes the same route, placement, or failover gaps
+
+Those things may matter later.
+They do not yet answer the user's real question.
+
+The real question is still:
+
+- which layer now owns more of the missing truth
+- which hidden burden became inspectably less human
+- which failure class became less humiliating on the bad day
+
+If none of those changed, then this repo did not actually gain a more honest
+future.
+
+## What a real promotion packet would have to contain
+
+No future path should get elevated just because it sounds increasingly
+coherent in docs.
+
+For this repo, a serious promotion packet would need a bundle of evidence such
+as:
+
+- the exact failure class being narrowed or removed
+- the truth layer being promoted from operator memory into system-owned or
+  system-consumable state
+- the concrete artifact that carries that truth, such as a live placement
+  registry, stronger failover ownership, or inspectable peer-eligibility data
+- a wrong-node or backend-loss drill showing what the system actually does now
+- operator-legibility proof showing where a human can inspect the decision path
+- an explicit statement of what the promoted layer still does not solve
+
+That packet does not need to prove whole-stack closure.
+It does need to prove that at least one hidden burden became materially less
+private.
+
+If a candidate cannot leave that kind of artifact bundle behind, then it has
+not yet earned stronger language than "still being considered."
+
 ## Fake differentiation versus real differentiation
 
 This repo needs a stricter filter than ordinary platform comparison pages use.

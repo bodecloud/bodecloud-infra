@@ -405,6 +405,66 @@ Every serious page should preserve all of these:
 If a page becomes easier to read by shrinking one of those things, it probably
 got less honest.
 
+## What archive pressure should force every other page to demand
+
+The archive is not just a memory aid.
+It is a standards escalator.
+
+If a later architecture or roadmap page claims a stronger future, archive
+pressure should force that page to answer all of these:
+
+- what happens on wrong-node entry
+- where current placement truth actually lives
+- whether the fallback path survives backend disappearance
+- whether middleware, auth, and externally visible meaning survive the handoff
+- which part of the story still depends on private operator reconstruction
+- what stateful caveat keeps the claim from being flatter than reality
+
+If a page cannot answer those questions, then the archive says the page is
+still dodging the real complaint even if its architecture language sounds more
+serious.
+
+## What still does not count as respecting the archive
+
+Many documentation styles can sound responsive to the user's frustration while
+still preserving the same old dodge.
+
+These still do not count:
+
+- adding more option lists without naming what hidden burden each option would
+  actually remove
+- describing multiple public nodes while skipping what the wrong node does next
+- calling a route "dynamic" when the operator still hand-maintains the truth it
+  depends on
+- using calmer anti-SPOF or HA wording while stateful correctness remains
+  unspoken
+- treating repeated archive frustration as if it proved the runtime is already
+  close to satisfying it
+
+Archive respect is not emotional tone-matching.
+It is preserving the user's threshold tightly enough that weak answers keep
+failing in the docs too.
+
+## What archive-derived progress would actually look like
+
+The archive itself cannot prove runtime closure.
+It can, however, define what a meaningful response should eventually leave
+behind.
+
+The clearest archive-aligned progress artifacts would look like:
+
+- a shared placement source the system actually consumes
+- a documented wrong-node drill whose result is preserved request meaning rather
+  than merely another healthy first hop
+- a fallback path that keeps policy and route identity intact after backend loss
+- explicit stateful pages that say where authority stays singular and where it
+  genuinely stops being singular
+- a repo surface where a newcomer no longer has to infer the important missing
+  truth from scattered hints and private human lore
+
+Until artifacts like those exist, the archive should keep functioning as a
+negative benchmark, not as a consolation prize.
+
 ## Bottom line
 
 The core archive complaint is not ambiguous.

@@ -585,6 +585,58 @@ It does not automatically mean:
 In this project, unification only counts if it reduces fragmented truth
 without lying about what still remains split.
 
+## What still does not count as unification progress
+
+This page needs an explicit false-progress filter because the subject itself is
+dangerous.
+
+The following can all look like movement while still leaving the same sacred
+operator burden intact:
+
+- naming the fractures more elegantly
+- centralizing more docs while the runtime still depends on parallel truth
+- introducing a new helper layer whose authority is still partly social memory
+- making first-hop plurality broader while route meaning still collapses after
+  wrong-node entry or backend loss
+- adding more generated config while the operator is still the real settlement
+  layer for placement, failover, or stateful authority
+
+Those changes may still be useful.
+They just do not yet deserve the stronger sentence:
+
+> the system now owns more of the important truth than the operator does.
+
+That is the only kind of progress that really counts here.
+
+## What artifact bundle would prove unification is becoming real
+
+Because "unification" is so easy to flatter, this repo should demand a more
+concrete proof packet before using stronger language.
+
+A serious unification packet would need artifacts such as:
+
+- an explicit source of authority for at least one truth layer, with a clear
+  statement of who consumes it
+- evidence that the promoted truth is no longer mainly reconstructed from human
+  memory
+- a wrong-node or backend-loss exercise showing how that promoted truth changes
+  system behavior under stress
+- an operator-visible inspection path explaining why the system chose that path
+- a boundary statement naming which truth layers remain outside the promoted
+  layer
+
+Examples:
+
+- if placement truth is being unified, prove where the live placement authority
+  exists and how routing consumes it
+- if failover truth is being unified, prove the route survives backend loss and
+  preserves policy on the next hop
+- if convergence truth is being unified, prove peer substitution is not lying
+  about env, secrets, or helper-state parity
+
+Without artifact bundles like those, "unification" is still mostly a
+reconstruction story, not yet a runtime achievement.
+
 ## What future documentation must say explicitly
 
 If a future page uses the word "unified," it should answer:
