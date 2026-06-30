@@ -28,6 +28,65 @@ There is a second shrinkage this page has to keep resisting:
 That is how a bootstrap page can become more reassuring while becoming less
 honest.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove that the repo has a serious bootstrap coherence
+problem and that the CUE-shaped bootstrap idea is trying to push node join
+toward state-driven convergence instead of human-memory-driven ritual.
+
+It is not allowed to prove that a converged node-join engine already exists in
+the priority root runtime.
+
+It is also not allowed to quietly upgrade:
+
+- real bootstrap scripts
+- real cluster-prep pressure
+- real secret and env sprawl
+
+into:
+
+- one live bootstrap contract
+- one authoritative join pipeline
+- one system-owned answer to "this node is now safely in the cluster"
+
+If that upgrade happens, the page stops reconstructing the wound and starts
+describing a neighboring dream where the hard ownership problem is already
+mostly solved.
+
+## Quick claim router
+
+Use this page for claims like:
+
+- bootstrap is one of the repo's hidden SPOF classes
+- node join is still too dependent on operator reconstruction
+- the repo wants bootstrap, placement, identity, ingress, and secret hydration
+  to converge more coherently
+- the desired future join path is closer to stateful admission than ad hoc host
+  setup
+
+Do not use this page for claims like:
+
+- the root runtime already has one proven bootstrap engine
+- a newly joined node can already derive all relevant truth automatically
+- placement truth, ingress truth, and secret hydration are already unified under
+  one live workflow
+
+## Strongest honest current answer
+
+The strongest honest current answer is that the repo understands bootstrap as a
+coordination wound, not merely a provisioning annoyance.
+
+It also shows that bootstrap still remains fragmented across:
+
+- scripts
+- env and secret assumptions
+- planned registry and failover concepts
+- branch-specific stronger-control-layer experiments
+
+So the page proves the repo knows what a believable node-join contract should
+feel like, but it does not prove that the priority runtime has already earned
+that contract.
+
 ## The user's real bootstrap frustration
 
 The user is not complaining because a few shell commands are annoying.

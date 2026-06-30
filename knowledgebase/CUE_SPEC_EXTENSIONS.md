@@ -25,6 +25,55 @@ There is a second warning this page has to keep visible:
 
 That drift is one of the easiest ways for a schema page to overstate maturity.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove that the repo keeps reaching for coordination
+semantics that plain Compose cannot carry clearly enough by itself.
+
+It is not allowed to prove that `x-cue` already drives the live root runtime or
+that naming richer semantics has already reduced the amount of operator
+reconstruction required during failure.
+
+This page also has to resist a subtler overread:
+
+- richer metadata gets proposed
+- the proposal sounds well shaped
+- the shape starts sounding like runtime ownership
+
+That is exactly the kind of documentation drift the rewrite is trying to stop.
+
+## Quick claim router
+
+Use this page for claims like:
+
+- the repo wants to keep Compose as the human authoring surface while raising
+  its semantic ceiling
+- the stack needs durable ways to express placement, visibility, failover mode,
+  and stateful caution
+- the repo has not yet settled whether those meanings belong mainly in metadata,
+  code, or a hybrid contract
+
+Do not use this page for claims like:
+
+- the root runtime currently consumes `x-cue`
+- HA or failover policy is already enforceable because a field family was
+  designed for it
+- richer schema language has already closed the gap between intent and
+  runtime-owned truth
+
+## Strongest honest current answer
+
+The strongest honest current answer is that `x-cue` is evidence of semantic
+pressure, not evidence of solved execution.
+
+It shows the repo wants a stronger descriptive layer without abandoning
+Compose-first authoring, but it also shows the repo has not yet resolved where
+the missing meaning should actually live:
+
+- beside Compose as metadata
+- inside active coordination code
+- or across a hybrid contract that still must prove ownership at runtime
+
 ## What `x-cue` is actually trying to rescue
 
 The repo's problem is not that YAML is too short.

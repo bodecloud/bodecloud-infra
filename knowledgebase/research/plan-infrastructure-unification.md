@@ -94,6 +94,57 @@ The useful summary is harsher:
 
 If that summary is not obvious, this page is still too soft.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove that the repo's real unification problem is not
+tool sprawl by itself, but too many partial truths that still require sacred
+operator reconstruction.
+
+It is not allowed to prove that unification has already been achieved or that a
+single accepted control layer has already replaced those parallel truths.
+
+It also should not let analytical clarity impersonate closure.
+
+A page like this is especially dangerous because once the fractures are named
+cleanly, readers can start feeling as though the hardest part is merely picking
+which implementation to bless.
+
+That is not what the current evidence proves.
+
+## Quick claim router
+
+Use this page for claims like:
+
+- the repo's hidden SPOF is often operator reconstruction tax
+- unification here means reducing conflicting truth surfaces across convergence,
+  placement, ingress, failover, and statefulness
+- several candidate layers exist, but many still differ more in burden
+  placement than in genuine truth ownership
+
+Do not use this page for claims like:
+
+- the repo already has one unified control plane
+- the remaining problem is only packaging or cleanup
+- explicit documentation of the fractures means the runtime already owns those
+  truths
+
+## Strongest honest current answer
+
+The strongest honest current answer is that the repo already understands the
+shape of the wound unusually well.
+
+What it still lacks is one evidence-backed layer that reduces the operator's
+private reconstruction burden across all of these at once:
+
+- convergence
+- placement
+- ingress
+- failover
+- stateful correctness
+
+So this page is best read as a burden map and decision pressure document, not
+as proof that the burden has already been paid down.
+
 ## Why this repo has a unification problem at all
 
 On one node, fragmentation is irritating.

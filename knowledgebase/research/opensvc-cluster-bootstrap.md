@@ -25,6 +25,49 @@ It sits exactly in the psychological space the user wants to believe exists:
 So the docs have to be especially careful not to upgrade "serious candidate"
 into "earned answer" too early.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove that OpenSVC is a serious side-path in the repo
+and that it is materially tied to experiments around bootstrap, ingress, and a
+stronger middle coordination layer.
+
+It is not allowed to prove that OpenSVC already governs the main root runtime
+or that it has already become the repo's sovereign placement and failover
+authority.
+
+Because OpenSVC sits so close to the user's hoped-for middle layer, this page
+must be more suspicious than usual about upgrading serious experimentation into
+earned runtime trust.
+
+## Quick claim router
+
+Use this page for claims like:
+
+- the repo seriously explored OpenSVC as a narrower alternative to jumping
+  straight to Kubernetes
+- OpenSVC membership is already tied to the HTTP ingress generation experiment
+- the side-path is trying to reduce memory-driven coordination burden, not just
+  add one more helper script family
+
+Do not use this page for claims like:
+
+- OpenSVC already owns current placement truth for the root runtime
+- all routing generation is already driven uniformly by OpenSVC
+- the repo's anti-SPOF story is already resting on a proven OpenSVC cluster
+
+## Strongest honest current answer
+
+The strongest honest current answer is that OpenSVC is one of the clearest
+serious candidates for the missing middle layer.
+
+It has real install, bootstrap, deploy, and sync artifacts, and the HTTP path
+already expresses local-first then peer-fallback thinking through OpenSVC node
+membership.
+
+But it still remains a side-path whose scripts reveal ambition and useful
+implementation pressure more strongly than they prove sovereign runtime
+ownership.
+
 ## What problem OpenSVC is being asked to solve
 
 The repo is not asking OpenSVC to replace Docker.

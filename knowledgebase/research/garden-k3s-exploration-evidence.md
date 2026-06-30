@@ -39,6 +39,54 @@ current runtime truth actually supports.
 
 This page should keep resisting that drift.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to prove that the repo seriously tested Garden and
+k3s-shaped answers and that those efforts produced real implementation pressure,
+scripts, and lessons about scheduler-backed truth.
+
+It is not allowed to prove that Kubernetes-shaped tooling already replaced the
+Compose-first runtime or that this branch already solved the repo's real
+failover, ingress, and statefulness questions.
+
+This page also has to resist a very common overread:
+
+- many serious branch artifacts exist
+- several docs use strong HA language
+- therefore the branch must have been close enough that the rest is mostly
+  cleanup
+
+The current evidence does not support that jump.
+
+## Quick claim router
+
+Use this page for claims like:
+
+- the repo explored scheduler-backed and k3s-shaped answers seriously enough to
+  learn from them
+- the branch shows how cluster tooling can reduce some missing truths while
+  introducing new bootstrap, identity, and repair burdens
+- the repo did not reject Kubernetes-shaped options out of ignorance
+
+Do not use this page for claims like:
+
+- the Compose-first root runtime was already superseded by Garden or k3s
+- zero-SPOF architecture was already operationally achieved in this branch
+- cluster membership and stateful HA were already sufficiently settled that the
+  rest was just cleanup
+
+## Strongest honest current answer
+
+The strongest honest current answer is that this branch is valuable evidence,
+not closure.
+
+It proves a serious attempt to buy scheduler-owned truth with a lighter
+Kubernetes-shaped stack, and it also proves that cluster bootstrap, identity,
+repair, and storage truth become a major burden surface of their own.
+
+So the branch matters because it teaches what a stronger layer costs here, not
+because it has already delivered the user's full dream.
+
 ## Why this branch matters at all
 
 This exploration is not random noise.
