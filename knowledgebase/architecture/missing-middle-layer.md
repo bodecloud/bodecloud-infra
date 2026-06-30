@@ -79,6 +79,43 @@ That is why so many surrounding ideas still feel partial:
 but they do not necessarily remove the exact hidden burden the user is
 complaining about.
 
+## What still does not count as finding the middle
+
+This page needs to reject a very specific kind of fake progress.
+
+The following still do not count as having found the missing middle for this
+repo:
+
+- identifying several promising candidate families
+- finding something smaller than Kubernetes
+- finding something more dynamic than static Compose
+- giving helpers nicer names for placement, sync, or failover
+- building enough glue that the repo feels "cluster-ish"
+
+Those things may all be relevant.
+They still do not answer the only question that matters:
+
+> which hidden burden stops living in the operator after this layer exists?
+
+If that answer is still vague, the repo has found more machinery, not the
+middle.
+
+## What a real missing-middle proof packet would have to contain
+
+Before this page supports a stronger claim like "the middle is becoming real,"
+it should point to a concrete packet.
+
+That packet should contain:
+
+- the exact hidden burden being transferred
+- the artifact or runtime surface that now owns that burden
+- the route or service class where the transfer becomes visible
+- the failure condition or decision point that proves the burden moved
+- the explicit sentence naming which adjacent burdens still remain private
+
+Without that packet, the docs are still mostly describing an attractive shape
+instead of a transferred responsibility.
+
 ## Why this layer is needed at all
 
 The repo does not need a missing middle because clustering is fashionable.
@@ -174,6 +211,23 @@ and more by:
 - which truths remain private, stale, or guess-driven
 - whether operator legibility improves or decays
 
+## The easiest way this page can still fail
+
+The most common failure mode here is subtle:
+
+the page starts sounding like it has already narrowed the solution to a small
+respectable cluster of tool families, and that feeling of narrowed possibility
+gets mistaken for relief.
+
+That is still too soft for this repo.
+
+The user is not mainly asking for a curated shortlist.
+The user is asking for a system that stops quietly requiring remembered rescue
+knowledge on the bad day.
+
+If the shortlist still leaves that burden mostly intact, this page has
+organized the wound without treating it.
+
 ## What a real middle answer would have to leave behind in the repo
 
 The user is not only asking for a better idea.
@@ -198,6 +252,22 @@ The evidence classes are.
 If a proposal cannot name what new inspectable artifacts it would cause the
 repo to have, then it is still too abstract to count as a serious middle-layer
 answer here.
+
+## What still does not count as inspectable artifacts
+
+Even this page's artifact language needs a harsher filter.
+
+The following still do not count as the kind of inspectable evidence this repo
+needs:
+
+- a generated file with no documented consumer
+- a status page that repeats what the operator already had to infer
+- a peer list that shows reachability but not semantic eligibility
+- dynamic config that disappears under the failure it is meant to absorb
+- logs that explain only that forwarding happened, not why it was trustworthy
+
+The artifact has to make the system more authoritative, not merely more
+verbose.
 
 ## The wanted layer, stated as responsibilities instead of brands
 
