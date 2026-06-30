@@ -16,9 +16,20 @@ This site is not primarily:
 - a generic self-hosting handbook
 - a reverse-proxy cookbook
 - an orchestrator comparison catalog
-- a generic "modern homelab" set of notes
+- a generic `modern homelab` notebook
 
-Those topics matter only when they help answer the real question above.
+Those topics only matter when they help answer the real question above.
+
+## The accusation this site has to preserve
+
+The site only stays useful if it keeps the user's real accusation visible:
+
+> there seem to be endless options for multi-node Docker, failover, overlays,
+> service discovery, ingress, and orchestration, but too many of them solve
+> one visible layer and then quietly leave the operator as the hidden control
+> plane when reality gets sharp.
+
+If a page becomes more polished while losing that accusation, it got worse.
 
 ## The shortest correct reading
 
@@ -47,6 +58,17 @@ User -> Cloudflare DNS -> any surviving public node
 That is the dream.
 It is not the same thing as current proof.
 
+## The three-part checksum for the whole site
+
+Everything in this knowledgebase should keep this sentence intact:
+
+1. the dream is specific
+2. the runtime is real
+3. the truth-owning middle layer is still incomplete
+
+If a page loses one of those three, it starts lying in one direction or
+another.
+
 ## What the repo already proves
 
 The priority implementation is still rooted in:
@@ -59,7 +81,7 @@ That runtime already proves a serious Compose-first platform with:
 
 - a real Traefik and auth-bearing edge layer
 - public and private network segmentation
-- stateful services such as MongoDB and Redis
+- stateful services such as MongoDB, Redis, PostgreSQL, RabbitMQ, and Qdrant
 - observability and operator surfaces
 - Headscale and mesh pressure
 - alternate routing and egress experiments
@@ -74,11 +96,8 @@ What it still does **not** prove is the thing the user actually cares about:
 - that auth, middleware, and request semantics survive peer handoff
 - that stateful services are genuinely resilient rather than merely reachable
 
-The dream is clear.
-The stack is real.
-The missing truth-owning middle layer is still incomplete.
-
-That three-part sentence is the checksum for the whole site.
+The runtime is serious.
+The missing burden transfer is still brutally concrete.
 
 ## The hidden operator job the site has to keep naming
 
@@ -114,8 +133,8 @@ voice.
 
 ## The core architecture problem
 
-The repo is not just asking for "better HA."
-It is asking for a smaller, honest middle layer between:
+The repo is not just asking for `better HA`.
+It is asking for a smaller honest middle layer between:
 
 - static multi-node Docker glue that still depends on private folklore
 - and a heavyweight orchestrator worldview that has not yet earned the right to
@@ -133,19 +152,19 @@ system-owned:
 If a candidate does not move those truths into the system, it has not solved
 the user's real complaint, no matter how mature it sounds.
 
-## The decision pressure already visible in the archive
+## The pressure already visible in the archive
 
 The archive is consistent about where the real pain lives:
 
-- `docker-multi-node-without-swarm__...` keeps converging on service discovery
-  as the hard missing piece
-- `distributed-ha-orchestration__...` keeps showing that fully leaderless,
-  peer-equal orchestration is rare and usually requires custom glue
-- `load-balancer-failover-alternatives__...` shows that even rich failover
-  products often solve only one slice of the problem
-- `nomad-multi-node-failover__...` shows that stronger orchestrators can help,
-  but they bring a larger control-plane worldview and still need proof against
-  this repo's exact wound
+- multi-node Docker without Swarm keeps converging on service discovery as the
+  hard missing piece
+- distributed HA orchestration keeps showing that fully peer-equal behavior is
+  rare without custom glue
+- load-balancer and failover alternatives keep showing that many products
+  solve only one slice of the wound
+- Nomad, k3s, Kubernetes, and related explorations show that stronger control
+  planes may help, but they bring a larger worldview that still has to prove
+  it kills the right private burden
 
 That is why the user does not feel like they lack product names.
 They feel like they lack honest options.
@@ -159,8 +178,8 @@ If you want the shortest route through the knowledgebase:
 3. [HA, Failover, and Routing](architecture/ha-failover-routing.md)
 4. [The Missing Middle Layer](architecture/missing-middle-layer.md)
 5. [Stateful HA and Data](architecture/stateful-ha-and-data.md)
-6. [Orchestration Options](architecture/orchestration-options.md)
-7. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
+6. [Failure Model and Maturity Matrix](architecture/failure-model-and-maturity.md)
+7. [Orchestration Options](architecture/orchestration-options.md)
 8. [DevOps Runbook](operations/devops-runbook.md)
 
 If you want the proof pressure underneath those pages:
@@ -188,9 +207,9 @@ After reading a useful page here, a contributor should be able to answer:
 
 If a page leaves behind only:
 
-- "the architecture is clearer"
-- "the options are broader"
-- "the platform sounds more mature"
+- `the architecture is clearer`
+- `the options are broader`
+- `the platform sounds more mature`
 
 then it is still too weak for this repo.
 
@@ -198,12 +217,12 @@ then it is still too weak for this repo.
 
 This knowledgebase should keep several false conclusions illegal:
 
-- "there are multiple public nodes, so failover is basically solved"
-- "Traefik exists, so wrong-node forwarding must be close"
-- "a helper has failover in the name, so the platform owns fallback now"
-- "a route can be rendered, so it must survive the failure that made it
-  matter"
-- "the docs are clearer now, so the platform must be closer to adulthood"
+- `there are multiple public nodes, so failover is basically solved`
+- `Traefik exists, so wrong-node forwarding must be close`
+- `a helper has failover in the name, so the platform owns fallback now`
+- `a route can be rendered, so it must survive the failure that made it
+  matter`
+- `the docs are clearer now, so the platform must be closer to adulthood`
 
 Those are exactly the overreads this site exists to interrupt.
 

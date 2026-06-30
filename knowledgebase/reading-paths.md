@@ -23,13 +23,13 @@ This page is authoritative about:
 This page is not authoritative about:
 
 - whether the runtime already behaves correctly
-- whether one architecture path has already won
+- whether one architecture path already won
 - whether better retrieval means the implementation is more mature
 
-## Retrieval discipline
+## Start from the wound, not the folder
 
 Do not start from folder names.
-Start from the actual question.
+Start from the actual question and the actual wound.
 
 For each reading pass, identify:
 
@@ -45,7 +45,7 @@ If you cannot name those four things, the route is too loose.
 Use these deliberately:
 
 - Runtime truth:
-  root [`/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml),
+  root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml),
   active `compose/` fragments, and validation commands
 - Intent truth:
   [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
@@ -63,7 +63,7 @@ Use when you need the dream, not present-tense proof.
 Start with:
 
 1. [architecture/problem-and-goals.md](architecture/problem-and-goals.md)
-2. [architecture/operator-contract.md](architecture/operator-contract.md)
+2. [research/user-intent-and-dream.md](research/user-intent-and-dream.md)
 3. [architecture/design-tensions-and-contradictions.md](architecture/design-tensions-and-contradictions.md)
 
 Primary truth register:
@@ -72,7 +72,7 @@ Primary truth register:
 
 Do not upgrade into:
 
-- "the runtime already does this"
+- `the runtime already does this`
 
 ## Route 2: "What does the current Compose runtime materially contain?"
 
@@ -91,7 +91,7 @@ Primary truth register:
 
 Do not upgrade into:
 
-- "because the runtime is broad, the missing truth must already be system-owned"
+- `because the runtime is broad, the missing truth must already be system-owned`
 
 ## Route 3: "Why is wrong-node behavior the real benchmark?"
 
@@ -100,8 +100,8 @@ Use when a route or failover claim sounds too broad.
 Start with:
 
 1. [architecture/request-path-and-failure-walkthrough.md](architecture/request-path-and-failure-walkthrough.md)
-2. [architecture/failure-model-and-maturity.md](architecture/failure-model-and-maturity.md)
-3. [operations/proof-matrix-and-drills.md](operations/proof-matrix-and-drills.md)
+2. [architecture/ha-failover-routing.md](architecture/ha-failover-routing.md)
+3. [architecture/failure-model-and-maturity.md](architecture/failure-model-and-maturity.md)
 
 Primary truth registers:
 
@@ -110,7 +110,7 @@ Primary truth registers:
 
 Do not upgrade into:
 
-- "one local happy-path success means the platform is basically anti-SPOF"
+- `one local happy-path success means the platform is basically anti-SPOF`
 
 ## Route 4: "What still has to be proven before stronger claims become honest?"
 
@@ -118,8 +118,8 @@ Use when you need claim boundaries and drill classes.
 
 Start with:
 
-1. [operations/proof-matrix-and-drills.md](operations/proof-matrix-and-drills.md)
-2. [operations/devops-runbook.md](operations/devops-runbook.md)
+1. [operations/devops-runbook.md](operations/devops-runbook.md)
+2. [operations/operator-questions-and-honest-answers.md](operations/operator-questions-and-honest-answers.md)
 3. [research/evidence-ledger.md](research/evidence-ledger.md)
 4. [research/ingress-and-failover-evidence.md](research/ingress-and-failover-evidence.md)
 5. [research/stateful-ha-evidence.md](research/stateful-ha-evidence.md)
@@ -131,7 +131,7 @@ Primary truth registers:
 
 Do not upgrade into:
 
-- "the existence of a proof matrix means the implementation must be close"
+- `the existence of a disciplined proof language means the implementation must be close`
 
 ## Route 5: "Why do nearby options keep feeling fake?"
 
@@ -141,7 +141,7 @@ Start with:
 
 1. [architecture/missing-middle-layer.md](architecture/missing-middle-layer.md)
 2. [architecture/orchestration-options.md](architecture/orchestration-options.md)
-3. [operations/decision-paths-and-promotion-rules.md](operations/decision-paths-and-promotion-rules.md)
+3. [architecture/capability-gaps-and-roadmap.md](architecture/capability-gaps-and-roadmap.md)
 4. [research/orchestrator-tradeoffs-evidence.md](research/orchestrator-tradeoffs-evidence.md)
 
 Primary truth registers:
@@ -151,7 +151,7 @@ Primary truth registers:
 
 Do not upgrade into:
 
-- "a more famous controller is automatically a more honest answer"
+- `a more famous controller is automatically a more honest answer`
 
 ## Route 6: "What is the repo's harsh answer on stateful services?"
 
@@ -160,8 +160,9 @@ Use when availability language starts sounding too generous.
 Start with:
 
 1. [architecture/stateful-ha-and-data.md](architecture/stateful-ha-and-data.md)
-2. [research/stateful-ha-evidence.md](research/stateful-ha-evidence.md)
-3. [research/stateful-ha-plan.md](research/stateful-ha-plan.md)
+2. [architecture/failure-model-and-maturity.md](architecture/failure-model-and-maturity.md)
+3. [research/stateful-ha-evidence.md](research/stateful-ha-evidence.md)
+4. [research/stateful-ha-plan.md](research/stateful-ha-plan.md)
 
 Primary truth registers:
 
@@ -170,7 +171,7 @@ Primary truth registers:
 
 Do not upgrade into:
 
-- "reachable through Traefik" or "restartable elsewhere" equals HA
+- `reachable through Traefik` or `restartable elsewhere` equals HA
 
 ## Route 7: "What should I edit first if a page still feels vague?"
 
@@ -179,8 +180,8 @@ Start with:
 1. [index.md](index.md)
 2. [architecture/problem-and-goals.md](architecture/problem-and-goals.md)
 3. [architecture/current-compose-runtime.md](architecture/current-compose-runtime.md)
-4. [architecture/operator-contract.md](architecture/operator-contract.md)
-5. [operations/proof-matrix-and-drills.md](operations/proof-matrix-and-drills.md)
+4. [research/evidence-ledger.md](research/evidence-ledger.md)
+5. [operations/source-assimilation-index.md](operations/source-assimilation-index.md)
 
 Edit pages that still fail to leave behind:
 
@@ -189,21 +190,21 @@ Edit pages that still fail to leave behind:
 - the stronger sentence still forbidden
 - the next artifact or drill needed for a stronger claim
 
-## What a good first pass should leave behind
+## What a good reading pass should leave behind
 
 A good reading route should leave you with a small packet:
 
 - the request or failure class you are reasoning about
 - the strongest runtime artifact you relied on
-- the strongest intent or research artifact you relied on
+- the strongest intent, plan, or research artifact you relied on
 - the private burden still surviving afterward
 - the sentence still forbidden
 - the next proof packet required
 
 If you finish with only:
 
-- "the site is organized"
-- "the architecture is clearer"
-- "there are several plausible directions"
+- `the site is organized`
+- `the architecture is clearer`
+- `there are several plausible directions`
 
 then the route was too weak for this repo.

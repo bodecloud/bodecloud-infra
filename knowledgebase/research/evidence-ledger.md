@@ -29,7 +29,7 @@ This page is not allowed to:
 - serve as runtime proof for a specific route or drill
 - imply that disciplined narration equals fulfilled implementation
 - merge archive pressure, architecture intent, runtime artifacts, and plans
-  into one present-tense capability story
+  into one capability story
 - substitute honesty discipline for actual maturity
 
 This is a page about how to speak truthfully, not a page that proves the repo
@@ -51,6 +51,16 @@ That failure usually happens like this:
    maturity
 
 That fifth step is what this ledger exists to block.
+
+## The accusation every evidence packet must preserve
+
+The site should keep reconstructing this accusation:
+
+> too many infrastructure answers solve one visible layer and then quietly
+> leave the operator as the hidden control plane when reality gets sharp.
+
+If a page loses that accusation, it may become more disciplined while becoming
+less aligned with the repo's actual question.
 
 ## The four evidence classes
 
@@ -90,7 +100,7 @@ What Class 1 cannot prove by itself:
 - distributed behavior the runtime only gestures toward
 - future failover semantics from present components alone
 - backend-loss recovery
-- stateful authority correctness
+- stateful-authority correctness
 
 Presence is real.
 Presence is not closure.
@@ -154,7 +164,7 @@ What Class 3 can honestly prove:
 What Class 3 cannot prove by itself:
 
 - that the repair is already implemented
-- that a candidate has already earned promotion
+- that a candidate already earned promotion
 - that a planned registry or failover path is live
 
 Planning is real.
@@ -175,7 +185,7 @@ Typical questions:
 Strong anchors:
 
 - [`knowledgebase/source-archive/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/)
-- synthesis pages under [`research/`](../research/evidence-ledger.md)
+- synthesis pages under `knowledgebase/research/`
 
 What Class 4 can honestly prove:
 
@@ -198,10 +208,10 @@ Use this table before writing a strong sentence.
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
 | --- | --- | --- | --- |
-| "this component exists in the priority implementation" | Class 1 | root Compose files, active fragments, merged config | that the component already solves the larger distributed behavior |
-| "the repo wants any-node entry and peer-forward fallback" | Class 2 | copilot instructions, README, knowledgebase intent pages | that the runtime already does it |
-| "the repo has already identified the missing truths" | Class 3 | master plan, roadmap pages, promotion docs | that the repair has shipped |
-| "the user rejects ordinary answers because they preserve hidden operator burden" | Class 4 | archive threads, pressure pages, dream reconstruction pages | that current runtime proof exists |
+| `this component exists in the priority implementation` | Class 1 | root Compose files, active fragments, merged config | that the component already solves the larger distributed behavior |
+| `the repo wants any-node entry and peer-forward fallback` | Class 2 | copilot instructions, README, knowledgebase intent pages | that the runtime already does it |
+| `the repo already identified the missing truths` | Class 3 | master plan, roadmap pages, promotion docs | that the repair has shipped |
+| `the user rejects ordinary answers because they preserve hidden operator burden` | Class 4 | archive threads, pressure pages, dream reconstruction pages | that current runtime proof exists |
 
 If a paragraph blends more than one row, it should say which row is carrying
 which part of the claim.
@@ -218,7 +228,7 @@ Legal when:
 
 Illegal upgrade:
 
-- "therefore the platform owns the capability that component gestures toward"
+- `therefore the platform owns the capability that component gestures toward`
 
 ### Ceiling B: intent only
 
@@ -228,7 +238,7 @@ Legal when:
 
 Illegal upgrade:
 
-- "therefore the current runtime is already close enough to describe that way"
+- `therefore the current runtime is already close enough to describe that way`
 
 ### Ceiling C: plan only
 
@@ -238,7 +248,7 @@ Legal when:
 
 Illegal upgrade:
 
-- "therefore the gap is mostly solved except for polish"
+- `therefore the gap is mostly solved except for polish`
 
 ### Ceiling D: pressure only
 
@@ -248,7 +258,7 @@ Legal when:
 
 Illegal upgrade:
 
-- "therefore the runtime already behaves as the pressure suggests it should"
+- `therefore the runtime already behaves as the pressure suggests it should`
 
 ### Ceiling E: drill-backed proof
 
@@ -291,8 +301,8 @@ Any serious page in this site should leave behind a small auditable packet:
 - the private burden still left over after both were read
 - the stronger sentence that still stayed illegal
 
-If a page cannot produce that packet, then it may still be informative, but it
-has not fully earned the word "assimilated" in this repo.
+If a page cannot produce that packet, it may still be informative, but it has
+not fully earned the word `assimilated` in this repo.
 
 ## Bottom line
 
