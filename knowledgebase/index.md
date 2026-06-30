@@ -47,6 +47,40 @@ The site should also keep one harsher follow-up visible:
 That is the question that stops a polished knowledgebase from becoming one more
 beautifully organized version of the same old ambiguity.
 
+## What this site is and is not allowed to prove
+
+This site is allowed to:
+
+- reconstruct the user's real anti-fake-options dream from the repo and archive
+- separate runtime truth, intent truth, planning truth, and archive pressure
+- show where the current implementation is strong, partial, contradictory, or
+  still aspirational
+- help a reader stop answering the smaller neighboring question by accident
+
+This site is not allowed to:
+
+- turn documentation clarity into an implied completion claim
+- flatten competing futures into one falsely coherent platform story
+- use architecture intent as proof that the runtime already behaves that way
+- become easier to skim by quietly discarding contradiction, uneven maturity,
+  or missing proof
+
+## Quick site router
+
+Start here if you want:
+
+- the real benchmark and acceptance bar:
+  [Operator Contract and Success Criteria](architecture/operator-contract.md)
+- the literal wrong-node and degraded-backend request story:
+  [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md)
+- the real runtime authority surfaces:
+  [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
+  and [Current Compose Runtime](architecture/current-compose-runtime.md)
+- the archive-grounded reconstruction of the dream:
+  [User Intent and Dream](research/user-intent-and-dream.md)
+- the hard proof boundaries:
+  [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
+
 ## How to read this site without being fooled
 
 This site is only useful if the reader keeps several truth registers separate
@@ -121,6 +155,15 @@ normal:
 
 Those are all subproblems.
 They are not the full dream.
+
+## Strongest honest current answer
+
+This site is now much closer to a real reconstruction surface than to the
+earlier polished-but-useless summary layer, but it only stays truthful when the
+reader keeps the claim classes separate. The strongest honest answer for the
+whole knowledgebase is that the dream is now being named far more faithfully
+than before, while the runtime still only proves pieces of that dream unevenly
+across HTTP, TCP, and stateful classes.
 
 The full dream is closer to:
 

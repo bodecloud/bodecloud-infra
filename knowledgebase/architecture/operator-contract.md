@@ -21,6 +21,35 @@ next.
 This page is the higher-level acceptance contract that says what has to become
 true before the deeper frustration is honestly being solved.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- define the acceptance standard the rest of the knowledgebase must answer to
+- keep the user's real benchmark sharper than ordinary HA language
+- distinguish burden removal from architecture theater
+- state what "solved" has to feel like from an operator standpoint
+
+This page is not allowed to:
+
+- claim that the current runtime already satisfies the contract
+- use good acceptance language as substitute proof for good implementation
+- collapse stateless and stateful success criteria into one maturity claim
+- make the dream look cleaner by shrinking it into an easier neighboring goal
+
+## Quick claim router
+
+If the question is:
+
+- "What is the real success contract for this repo?" this page is a primary
+  answer.
+- "Does the current stack already meet that contract?" no. This page defines
+  the bar more than it proves the bar has been met.
+- "Why do the docs keep rejecting prettier but smaller interpretations?" this
+  page is one of the best answers.
+- "Can I cite this as runtime proof?" only indirectly. Use the request,
+  failure, and evidence pages for proof.
+
 ## What this page should make impossible to miss
 
 This page exists to stop a specific failure mode in the documentation itself.
@@ -108,6 +137,15 @@ request time and failure time.
 The key phrase there is "feel materially different."
 The user is not asking for a nicer explanation of the same hidden burden.
 They are asking for the burden itself to stop living in operator memory.
+
+## Strongest honest current answer
+
+The repo already has a much sharper operator contract than most self-hosting
+stacks ever write down, but that is still a contract, not a proof of
+fulfillment. The strongest honest answer is that the user's real benchmark is
+now explicit enough to police the rest of the docs, while the implementation is
+still only partially able to satisfy it without hidden topology memory,
+wrong-node ambiguity, or uneven service-class maturity.
 
 The failure mode to watch for here is subtle:
 

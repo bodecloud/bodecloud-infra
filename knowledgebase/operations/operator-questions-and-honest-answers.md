@@ -17,6 +17,37 @@ The real pain is:
 
 That is the question the user keeps asking even when the wording changes.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- restate the user's repeated questions in the sharper form the repo actually
+  needs
+- explain why many common answers keep feeling like fake options
+- distinguish useful machinery from real burden relocation
+- answer archive-shaped questions without collapsing them into generic FAQ tone
+
+This page is not allowed to:
+
+- imply that because the right questions are now visible, the stack is already
+  close to solved
+- treat a good critique of bad answers as proof of a good implementation
+- blur first-hop plurality into end-to-end request preservation
+- let product names, cluster labels, or proxy categories pretend they answer
+  the user's real benchmark by themselves
+
+## Quick claim router
+
+If the question is:
+
+- "What is the user actually asking across all these repeated infra questions?"
+  this page is a primary answer.
+- "Why do normal HA/load-balancing answers keep missing?" this page is meant to
+  answer that directly.
+- "Does this page prove the repo has already escaped sacred-node behavior?" no.
+- "Is this a runtime status page?" no. It is a pressure-pattern and
+  interpretation page first.
+
 ## The shortest possible answer
 
 The user is not asking for "better HA" in the abstract.
@@ -35,6 +66,15 @@ It is:
 > the request lands on a node that does not host the target service locally?
 
 Everything below is just a different angle on that one pressure.
+
+## Strongest honest current answer
+
+The ecosystem does offer many tools, but very few of them relocate the right
+truths out of operator memory without smuggling in a larger worldview or a new
+form of fake closure. The strongest honest answer is that this repo is not
+primarily suffering from lack of product categories. It is suffering from lack
+of options that preserve request meaning on the wrong node while keeping the
+system readable enough to trust.
 
 This page should therefore be read as a refusal to accept smaller substitute
 questions.
