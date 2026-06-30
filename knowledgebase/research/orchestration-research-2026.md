@@ -75,6 +75,18 @@ The point of the ranking is not to crown a winner.
 It is to stop the repo from buying a giant worldview to compensate for a
 smaller truth that was never named precisely enough.
 
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "the research is trying to buy missing truth, not prestige" | repo-direction + archive pressure | `.github/copilot-instructions.md`, `docs/INFRASTRUCTURE_MASTER_PLAN.md`, archive research pages | that the winning purchase has already been made |
+| "the live root runtime constrains the option space" | live-root evidence | root `docker-compose.yml`, active Compose fragments | that the current runtime already satisfies the desired behavior |
+| "the user rejects static glue and premature worldview capture" | archive pressure | archive-derived research pages | that no stronger control plane will ever be justified |
+| "a candidate family matters" | planning + exploration evidence | this page, option pages, exploratory artifacts | that the candidate is already promoted or production-trusted |
+
+If the page starts sounding like a product verdict without naming the burden
+being transferred, it has become too shallow for this repo.
+
 ## Evidence classes used here
 
 This page mixes four evidence classes.
@@ -136,6 +148,13 @@ The research has to hold all three at once:
 - what the user really wants
 - what the repo clearly intends
 - what the tracked runtime still does not prove
+
+That means this page should never let "good option" stand alone.
+The real sentence always has to be:
+
+- good for which missing truth
+- at what worldview cost
+- with what still left operator-owned
 
 ## What the user is actually rejecting
 
@@ -277,6 +296,11 @@ Every candidate family must survive these four questions:
 4. what part of the user's real dream still remains unowned even if it works
    exactly as advertised?
 
+A fifth question belongs here too:
+
+5. is the repo about to buy a control plane larger than the exact wound it is
+   healing?
+
 If a candidate cannot survive those four questions, it is still closer to
 platform theater than to a real answer for this repo.
 
@@ -316,6 +340,20 @@ Compose matters here because it is still one of the last places the operator
 can read the system directly.
 Any promotion away from that surface has to justify the epistemic loss, not
 just the operational gain.
+
+## Strongest honest current answer
+
+If a reader asks, "What is the orchestration research actually concluding right
+now?" the shortest defensible answer is:
+
+> The repo is not yet choosing a winner so much as ranking which missing truth
+> layers still force the operator to carry the platform privately. Compose
+> remains the live human contract, the archive keeps rejecting both static-glue
+> theater and premature worldview capture, and any stronger candidate still has
+> to prove that it transfers the right burden at an acceptable readability and
+> control-plane cost.
+
+That is a research conclusion, not a product endorsement.
 
 ### Strong proof: the stack has already outgrown naive single-node mental models
 

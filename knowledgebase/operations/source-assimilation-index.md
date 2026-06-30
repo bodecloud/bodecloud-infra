@@ -252,6 +252,22 @@ user actually cares about.
 
 That is the central trap in this repo.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- how retrieval should be routed
+- how source classes should be ordered
+- how to detect assimilation failure
+
+It is not authoritative about:
+
+- whether a given runtime claim is true
+- whether a future option has earned promotion
+- whether archive pressure has already become implementation
+
+This page governs method, not outcome.
+
 Another way to say the same thing is:
 
 the docs fail whenever they become satisfied with an answer the wider
@@ -318,6 +334,37 @@ source class before reading anything else.
 | stateful HA claims | current stateful topology evidence and stateful research pages | planning docs for future topology work | treating L4 reachability or public hostnames as durable correctness |
 
 This table exists because the repo's biggest retrieval failure is not usually
+
+## Assimilation failure checks
+
+Before accepting a rewritten page as "well assimilated," ask:
+
+1. Did the page answer the real question, or a safer neighboring question?
+2. Did runtime claims start from runtime artifacts, or from cleaner prose?
+3. Did intent claims start from the strongest intent witness?
+4. Did planning text get treated as if naming a repair means the repair is
+   nearly owned?
+5. Did archive pressure restore the user's standard without being mistaken for
+   shipped proof?
+6. Did the page preserve contradiction, or did it purchase coherence by
+   shrinking the dream?
+7. Can a reader leave the page knowing what still depends on private operator
+   reconstruction?
+
+If the answer to any of those is no, the assimilation pass is still incomplete.
+
+## Strongest honest current answer
+
+If a reader asks, "What does 'actually RAG this time' mean for this repo?" the
+shortest defensible answer is:
+
+> It means routing each claim to the highest-authority source for that claim
+> class, preserving the boundary between live runtime, intent, planning, and
+> archive pressure, and refusing to let a smoother story replace the user's
+> harsher benchmark about wrong-node honesty, sacred-node truth, and fake
+> options.
+
+Anything weaker than that is citation theater rather than source assimilation.
 "no relevant files were found."
 It is "the wrong file class answered the wrong part of the question first, and
 everything after that got bent around the wrong center of gravity."

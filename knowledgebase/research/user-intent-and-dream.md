@@ -63,6 +63,35 @@ Kubernetes."
 Plenty of things can sit between those nouns while still preserving the same
 hidden operator burden.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- the dream the repo is trying to preserve
+- the negative benchmark the user keeps applying
+- the kinds of answers that still fail even when they sound sophisticated
+
+This page is not authoritative about:
+
+- what the current root runtime already does successfully
+- whether any specific future control layer has already earned promotion
+- whether the tracked implementation already satisfies the dream
+
+That boundary matters because this page is meant to recover the real ask, not
+quietly bless the current state of the implementation.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this is the dream the repo is protecting" | repo-native intent + archive pressure | `.github/copilot-instructions.md`, `README.md`, archive-derived research pages | that the dream is already live |
+| "these are the user's anti-goals" | archive pressure + repo-native intent | `archive-pressure-patterns.md`, `README.md`, `.github/copilot-instructions.md` | that rejecting bad answers automatically identifies the winning good one |
+| "Compose readability matters for a deeper reason" | repo-native intent | `.github/copilot-instructions.md`, `AGENTS.md`, root runtime surface | that Compose alone already solves cross-node truth |
+| "this is what the platform should feel like on the bad day" | dream reconstruction | this page plus evidence-boundary pages | that the repo has already earned that feeling |
+
+If a sentence about the user's dream starts sounding like runtime proof, it has
+crossed the wrong boundary.
+
 The user's real test is harsher:
 
 > after the diagram is over and the bad day starts, does this still feel like
@@ -133,6 +162,14 @@ The user wants the system to feel like this:
 - operator surfaces remain readable instead of disappearing behind invisible
   control logic
 - stateful systems are described with much harsher honesty than stateless ones
+
+That feeling should be treated as a held-out evaluation surface.
+The docs should keep asking:
+
+- does a proposed answer reduce humiliation on the wrong node?
+- does it externalize truth, or just automate around hidden truth?
+- does it preserve causal legibility, or merely relocate it?
+- does it sound like relief only because it renamed the same burden?
 
 That runtime feeling is the real benchmark.
 If a design sounds clever but does not produce that feeling, it is still
@@ -264,6 +301,18 @@ operator.
 The ecosystem keeps offering mature-sounding answers that add surface machinery
 while leaving the same hidden sacred facts intact.
 This repo exists as a refusal of that bait-and-switch.
+
+## Strongest honest current answer
+
+If a reader asks, "What is this repo actually trying to achieve?" the shortest
+defensible answer is:
+
+> It is trying to build a Compose-readable personal cloud that can behave like
+> one resilient platform at request time, especially on the wrong node and on
+> the bad day, without accepting either brittle static glue or heavyweight
+> scheduler worldview tax before that tax has clearly earned itself.
+
+That is a dream statement, not a runtime-completion statement.
 
 ## The clearest repo-native expression of the dream
 

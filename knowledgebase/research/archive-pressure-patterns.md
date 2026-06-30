@@ -64,6 +64,18 @@ failing, and what kind of system they are really trying to call into
 existence.
 It does not tell us that the current runtime has already become that system.
 
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this frustration keeps recurring across tools and threads" | archive pressure | source archive and archive-derived synthesis pages | that recurrence itself proves implementation |
+| "the ecosystem keeps offering fake options" | archive pressure | repeated comparison and failover threads | that every explored option is equally fake forever |
+| "the repo's direction is constrained by this pressure" | archive pressure + repo-native intent | archive pages plus `.github/copilot-instructions.md` and `README.md` | that the current runtime already obeys that direction completely |
+| "a given capability threshold matters emotionally" | archive pressure | repeated refusal patterns in archive docs | that the threshold has already been crossed locally |
+
+The archive is best at restoring the user's standard, not at certifying that
+the repo has met it.
+
 ## The archive's core complaint
 
 Across the imported material, the user is not mainly asking for more services.
@@ -278,6 +290,32 @@ It is the result of the user refusing both:
 The archive repeatedly rejects the shallow version of resilience:
 
 - multiple A records
+
+## What this page should force every other page to remember
+
+Every serious page in the site should be able to say which one of these
+archive pressures it is actually answering:
+
+- "there should be a standard dynamic middle layer, but there never is"
+- "wrong-node requests should still work"
+- "do not hardcode everything, but do not jump straight to worldview capture"
+- "DNS failover is not the whole story"
+- "stateful honesty should remain harsher than stateless routing optimism"
+
+If a page cannot say which recurring wound it is helping answer, it is
+probably drifting back toward generic infrastructure prose.
+
+## Strongest honest current answer
+
+If a reader asks, "What is the archive really proving?" the shortest
+defensible answer is:
+
+> The archive proves that the user keeps rediscovering the same hidden wound
+> under different tool names: self-hosting ecosystems keep offering answers
+> that sound dynamic or serious while leaving wrong-node humiliation, sacred
+> operator memory, and fake stateful confidence fundamentally intact.
+
+That is a problem-shape proof, not a local-runtime proof.
 - some client-side redistribution
 - and then calling the problem solved
 
