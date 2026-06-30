@@ -8,144 +8,144 @@ overread.
 The master plan is detailed enough to sound half-implemented.
 That is dangerous.
 
-It is dangerous in a very specific way:
+The danger is very specific:
 
 - a module is named
 - a flow is described
 - the description sounds coherent
 - coherence gets mistaken for system-owned truth
 
-That is exactly the kind of documentation drift the rest of this knowledgebase
-is trying to stop.
+That is exactly the drift this knowledgebase is trying to stop.
 
-This is also one of the easiest files in the repo to sound deeply useful while
-quietly reintroducing the user's main frustration.
+This page therefore should not be read as a friendly roadmap summary.
+It is a corrective retrieval layer.
 
-The risk is:
-
-- the module names are good
-- the flows are coherent
-- the architecture sounds like adulthood
-- the hidden operator burden is still mostly waiting in the wings
-
-This page should therefore be read less like a summary and more like a
-corrective retrieval layer.
 Its job is not to make the master plan feel shorter.
 Its job is to stop the reader from remembering the wrong thing about the master
 plan after skimming it.
 
-It is also one of the easiest places to accidentally downgrade the user's real
-frustration into ordinary roadmap language.
-If this page turns into:
+## Strongest honest current answer
 
-- "here is the future platform"
-- "here are the modules"
-- "here is the migration path"
+If a reader asks what the master plan actually buys today, the shortest
+defensible answer is:
 
-then it has already lost the actual wound.
+> the master plan proves the repo understands that the real missing layer is
+> distributed truth ownership rather than lack of components, and it sketches a
+> thinner control layer intended to externalize placement, convergence,
+> failover, and portability burdens without immediately surrendering to a full
+> heavyweight orchestrator. It does not prove that those truth surfaces are
+> already live, trusted, or ownership-complete in the tracked runtime.
 
-The wound is that local Docker starts legible, multi-node life destroys that
-legibility, and most ecosystems answer by demanding a bigger worldview before
-the repo has named which missing truth actually justified the surrender.
-
-The actual question readers need answered first is:
-
-> what does the master plan prove about the user's dream and the repo's future
-> direction, and what does it still not prove in the live tracked runtime?
-
-That distinction matters because this project is already surrounded by
-infrastructure language that habitually upgrades good plans into implied
-capabilities.
-The docs here have to do the opposite.
-
-They also have to do something slightly harsher than ordinary roadmap hygiene:
-
-they have to keep saying whether the plan merely describes missing truth well,
-or whether the runtime already owns any of that truth directly.
-
-That distinction is not clerical.
-It is one of the main ways this site avoids becoming another polished retelling
-of the same hidden operator burden.
-
-That is why this page cannot act like a friendly roadmap summary.
-
-If it helps the reader feel calmer without making them more precise about what
-the runtime still does not own, then it is functioning as sedation, not
-retrieval.
-
-## The shortest honest reading
-
-The master plan proves that the repo has already stopped treating its problem
-as:
-
-- "we need more services"
-- "we need nicer proxy config"
-- "we need a cleaner deployment story"
-
-Instead, it proves that the repo understands the real missing layer is about
-distributed truth:
-
-- placement truth
-- convergence truth
-- peer-aware routing truth
-- failure-preserving route truth
-- restart and repair truth
-- bootstrap portability
-
-It does **not** prove those layers are live, battle-tested, or final.
-
-It also does **not** prove that the hidden operator reconstruction burden has
-already materially dropped just because the future layer is now legible on
-paper.
-
-That sentence is the main rule for reading the whole master plan.
-
-The stricter version is:
-
-- a better-described future is not yet a better-owned runtime
-- a coherent module is not yet a removed humiliation
-- a named control surface is not yet a shared truth surface
-
-The word "humiliation" matters here.
-
-The repo is not merely tracking implementation debt.
-It is tracking the recurring moment where the system still needs a private
-human interpreter right when it is supposed to be behaving like one platform.
+Anything calmer or stronger than that is probably overreading the plan.
 
 ## What this page is and is not allowed to prove
 
-This page is allowed to prove that the master plan is one of the strongest
-directional artifacts in the repo and that it already names the missing truth
-layers with unusual clarity.
+This page is allowed to prove:
 
-It is not allowed to prove that those layers are already runtime-owned in the
-tracked priority implementation.
+1. the master plan is one of the strongest directional artifacts in the repo
+2. the plan names the missing truth layers with unusual clarity
+3. the repo is deliberately searching for a thinner control layer before
+   heavyweight promotion
+4. the plan understands the dominant wound as hidden distributed truth, not
+   lack of infra nouns
+5. the plan treats request preservation, portability, and anti-private-ritual
+   operation as central
+
+This page is not allowed to prove:
+
+- that the planned layers are already runtime-owned
+- that named modules are already active
+- that a coherent sequence equals removed operator burden
+- that the thinner layer will certainly be sufficient forever
 
 It is also not allowed to let coherence impersonate ownership.
 
-The plan is detailed enough that a reader can easily start treating:
+## Retrieval contract for this page
 
-- a named module
-- a described flow
-- a plausible sequence
+### Class 1: master-plan directional evidence
 
-as if they were already live shared truth.
+Primary anchor:
 
-That is exactly the overread this page is supposed to block.
+- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 
-The overread usually sounds intelligent.
-That is what makes it dangerous.
+This class is allowed to prove:
 
-It says things like:
+- what the repo now understands clearly
+- what control surfaces it wants to add
+- what kinds of burden it is trying to move
 
-- "the architecture clearly intends X"
-- "the control loop will do Y"
-- "the helper layer provides Z"
+It is not allowed to prove:
 
-while skipping the real audit question:
+- that the live runtime already owns those truths
 
-> what exact piece of shared truth does the current runtime own now that it did
-> not own before?
+### Class 2: repo-direction context
+
+Primary anchors:
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+
+This class is allowed to prove:
+
+- the repo wants a thinner middle layer before heavyweight capture
+
+It is not allowed to prove:
+
+- that heavyweight promotion is permanently ruled out
+
+### Class 3: archive-pressure context
+
+Primary anchors:
+
+- archive-pressure synthesis pages
+- archive conversations about wrong-node pain and fake options
+
+This class is allowed to prove:
+
+- why the master plan had to become more explicit
+- what accusation the plan is trying to answer
+
+It is not allowed to prove:
+
+- that naming the accusation already removes it
+
+### Class 4: live runtime reality
+
+Primary anchors:
+
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- active Compose fragments
+
+This class is allowed to prove:
+
+- what the tracked runtime actually owns today
+
+It is not allowed to be silently replaced by Class 1 coherence.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "the repo understands the wound clearly" | master-plan directional evidence | `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that the live runtime already owns the planned truth surfaces |
+| "the repo wants a thinner middle layer before heavyweight promotion" | repo-direction plus master-plan evidence | `.github/copilot-instructions.md`, `README.md`, master plan | that heavyweight promotion is permanently ruled out |
+| "the hidden burden is distributed truth, not lack of tools" | master-plan plus archive pressure | master plan plus archive-pressure pages | that naming the burden already removes it |
+| "specific modules are promising" | master-plan directional evidence | `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that those modules are active, validated, or ownership-complete |
+
+If a paragraph cannot be mapped cleanly here, it is probably flattening the
+plan into a stronger present tense than the repo has earned.
+
+## The fastest correct reading of the master plan
+
+This page should let the reader recover the useful summary immediately:
+
+- the plan proves the repo understands the wound clearly
+- the wound is hidden distributed truth, not lack of infra nouns
+- the plan is strong evidence for direction
+- the plan is not runtime proof
+- the plan only matters if it eventually removes hidden operator
+  reconstruction burden rather than merely diagramming it better
+
+If that summary is not obvious, the plan is still too easy to overread.
 
 ## What still does not count as master-plan progress
 
@@ -162,116 +162,13 @@ They are not signs that the hidden operator burden has actually moved.
 
 This page should keep that asymmetry visible.
 
-Better planning is a real achievement.
-It is just not the same category of achievement as one more important runtime
-truth leaving the operator's memory.
-
-## Quick claim router
-
-| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
-| --- | --- | --- | --- |
-| "the repo understands the wound clearly" | Class 3 | `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that the live runtime already owns the planned truth surfaces |
-| "the repo wants a thinner middle layer before heavyweight promotion" | Class 2 + Class 3 | `.github/copilot-instructions.md`, `README.md`, `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that heavyweight promotion is permanently ruled out |
-| "the hidden burden is distributed truth, not lack of tools" | Class 3 + Class 4 | master plan plus archive-pressure pages | that naming the burden already removes it |
-| "specific modules are promising" | Class 3 | `docs/INFRASTRUCTURE_MASTER_PLAN.md` | that those modules are active, validated, or ownership-complete |
-
-If a paragraph cannot be mapped cleanly here, it is probably flattening the
-plan into a stronger present tense than the repo has earned.
-
-## The fastest correct reading of the master plan
-
-This page should let the reader recover the useful summary immediately:
-
-- the plan proves the repo understands the wound clearly
-- the wound is hidden distributed truth, not lack of infra nouns
-- the plan is strong evidence for direction
-- the plan is not runtime proof
-- the plan only matters if it eventually removes hidden operator
-  reconstruction burden rather than merely diagramming it better
-
-If that summary is not obvious, the master plan is still too easy to overread.
-
-If the summary becomes calmer by deleting the user's actual complaint, this
-page has failed too.
-The complaint is not optional background color.
-It is the calibration mechanism that stops planning language from outranking
-runtime truth.
-
-Without that calibration, the master plan becomes one more sophisticated way to
-sound like the repo has more options than it really does today.
-
-## What a real promotion packet for the master plan would need
-
-Before the master plan can be read as more than strong directional evidence, a
-promotion packet would need to show:
-
-- which planned truth surface is now live
-- which exact operator reconstruction burden it removed
-- which current root runtime artifact consumes that truth
-- which failure case is now handled without private human memory
-- what new burden the added layer introduced in exchange
-
-If that packet cannot be assembled, the correct reading stays:
-
-- the plan names the wound well
-- the plan may point toward the repair
-- the runtime still has to earn ownership
-
-## Why this page needs to exist at all
-
-The user's actual complaint is not just that docs have been too simple.
-It is that too many systems and explanations feel sophisticated while avoiding
-the real question:
-
-> what actually removes the hidden operator burden and wrong-node fragility,
-> instead of just renaming them?
-
-The master plan is one of the clearest places where that question gets asked
-seriously.
-It is also one of the easiest places for a reader to quietly hear:
-
-- "a named agent must already exist"
-- "a detailed failover flow must already be validated"
-- "a coherent architecture must already be operational"
-
-This page exists to block those mistakes.
-It also exists because the repo now contains enough serious planning language
-to perform coherence.
-That means the docs have to keep asking a harsher question:
-
-> what exact hidden human reconstruction burden is this planned module trying
-> to remove, and what burden is it still quietly leaving behind?
-
-That second half matters just as much as the first.
-
-Otherwise the master plan starts acting like a dignity substitute.
-
-It lets the repo say:
-
-- we see the missing layer
-- we named the modules
-- we know the flows
-
-while the user is still left asking:
-
-- yes, but what new truth stopped being private?
-- yes, but what wrong-node behavior became system-owned?
-- yes, but what exact burden stopped living in the operator?
-
-A plan can be excellent and still leave behind the one burden the user actually
-cares about most:
-
-the system still only works honestly because a human privately knows which node,
-which route, or which authority is real.
-
-That is the negative benchmark this page should keep reasserting.
-If a module description still cashes out as "an experienced operator would know
-what to do here," the plan may be smart, but the user's dream is still only
-partially served.
+Better planning is real progress.
+It is just not the same category of progress as one more runtime truth leaving
+the operator's memory.
 
 ## What the master plan clearly proves
 
-## 1. The repo is deliberately searching for a thinner control layer before promoting a heavyweight orchestrator
+### 1. The repo is deliberately searching for a thinner control layer before heavyweight promotion
 
 The master plan repeatedly returns to the same structure:
 
@@ -282,41 +179,27 @@ The master plan repeatedly returns to the same structure:
 
 That is not procrastination.
 It is architecture intent under pressure.
-It is the repo trying not to lose the last readable authoring surface before it
-has correctly identified which missing truths actually justify replacing it.
 
-This matters because the repo is not trying to preserve Compose out of nostalgia.
+The repo is not trying to preserve Compose out of nostalgia.
 It is trying to preserve the last directly inspectable layer until something
 else proves it can own the painful truths more honestly.
 
-That sentence is the adult version of the user's frustration.
-
-The repo is not anti-abstraction in the abstract.
-It is anti-unearned surrender.
-It wants the heavier layer to prove that it actually removes a named pain
-instead of merely sounding like the kind of thing serious platforms use.
-
-This matters because the user is not just skeptical of Kubernetes or Nomad as
-brands.
-They are skeptical of ecosystems that demand a giant worldview shift before
-earning the right to solve the actual local problem.
-
-### What this proves
+What this proves:
 
 - the repo is explicitly searching for a missing middle layer
 - it does not accept "just use Kubernetes" as a sufficient answer
 - orchestration promotion is supposed to be earned by demonstrated need, not by
   fashion
 
-### What this does not prove
+What this does not prove:
 
 - that the thinner layer will be sufficient forever
 - that the thinner layer is already implemented
-- that the thinner layer will remain thinner once it owns enough truth
+- that the thinner layer will remain thin once it owns enough truth
 
-## 2. The repo sees cross-node truth, not extra containers, as the dominant missing capability
+### 2. The repo sees cross-node truth, not extra containers, as the dominant missing capability
 
-This is one of the strongest signals in the entire master plan.
+This is one of the strongest signals in the master plan.
 
 The plan is not mainly:
 
@@ -336,34 +219,18 @@ The recurring missing duties are:
 - restart or redeploy semantics when truth changes
 - failover logic that follows current reality instead of stale assumptions
 
-That is the real center of gravity.
-The repo is not starving for "more components."
-It is starving for a system that stops forcing the operator to privately stitch
-together:
-
-- who is authoritative
-- what the wrong node should do
-- which peer is current
-- whether the route that exists now will still exist after failure
-
-That is also why the page should stay resistant to neat "module completion"
-interpretations.
-The hard part is not that the modules can be enumerated.
-The hard part is whether, taken together, they would move topology truth out of
-private memory and into inspectable shared surfaces.
-
-### What this proves
+What this proves:
 
 - the user's dominant pain is hidden coordination truth
 - the project already understands that human memory is currently one of the
   biggest SPOFs
 
-### What this does not prove
+What this does not prove:
 
 - that a sync-agent style layer is already trustworthy enough to own those
   responsibilities
 
-## 3. The plan treats request preservation as central, not decorative
+### 3. The plan treats request preservation as central, not decorative
 
 The master plan spends real energy on:
 
@@ -382,27 +249,17 @@ They are asking:
 > how do I keep the request alive, honest, and semantically coherent when it
 > lands on the wrong node or when the expected backend disappears?
 
-That is a much sharper requirement than "high availability."
-It is closer to:
-
-> preserve the meaning of the request without requiring the operator to become
-> the hidden routing oracle
-
-That phrase should stay central.
-The repo is not just trying to make more paths answer.
-It is trying to make the first healthy node less semantically embarrassing.
-
-### What this proves
+What this proves:
 
 - any future control layer that ignores wrong-node request preservation is
   misaligned
 - routing truth is part of the core problem, not a polish layer
 
-### What this does not prove
+What this does not prove:
 
 - that current failover generation already behaves correctly under failure
 
-## 4. The repo wants a portable personal-cloud system, not a private ritual stack
+### 4. The repo wants a portable personal-cloud system, not a private ritual stack
 
 The master plan keeps pushing toward:
 
@@ -416,26 +273,13 @@ That reveals another important part of the dream:
 the system should not only work for the original operator who already remembers
 every invisible fact.
 
-This matters because one of the user's deepest frustrations is hidden knowledge.
-A system that "works" only because one person privately remembers everything is
-already centralized in the worst possible place: a human head.
-That is not just a portability complaint.
-It is one of the repo's deepest anti-SPOF arguments.
-
-It is also why this page cannot treat "portable architecture" and "portable
-truth" as synonyms.
-
-The repo can describe a portable architecture long before it proves that the
-portable truth layer is strong enough to stop social reconstruction from being
-the real control plane.
-
-### What this proves
+What this proves:
 
 - documentation and control surfaces must survive portability pressure
 - "works for the author because the author remembers the ghosts" is not an
   acceptable end state
 
-### What this does not prove
+What this does not prove:
 
 - that portability or reproducibility are already solved
 
@@ -449,7 +293,7 @@ They should instead be judged by what hidden burden they are trying to remove.
 | Planned module or theme | Hidden burden it is trying to remove | What still remains unproven even if the plan is coherent |
 | --- | --- | --- |
 | env and secret sync | private operator memory about cross-node parity | whether forwarded requests actually land in semantically equivalent runtime |
-| Compose and file sync | silent drift between nodes | whether the resulting nodes still expose the same useful recovery behavior under failure |
+| compose and file sync | silent drift between nodes | whether the resulting nodes still expose the same useful recovery behavior under failure |
 | placement truth such as `services.yaml` | remembered service location | whether routing or eligibility logic actually consumes live placement truth |
 | failover-agent or routing repair logic | routes that only look dynamic while the primary is healthy | whether recovery paths survive the exact backend-loss event that made them necessary |
 | bootstrap portability | one operator remaining the only person who knows the ritual | whether portability also preserves readability rather than hiding truth behind automation |
@@ -457,20 +301,6 @@ They should instead be judged by what hidden burden they are trying to remove.
 
 That table matters because the user is not mainly asking for more architecture.
 They are asking for less private burden at request time and failure time.
-
-## Strongest honest current answer
-
-If a reader asks, "What does the master plan actually buy us today?" the
-shortest defensible answer is:
-
-> The master plan proves the repo understands that the real missing layer is
-> distributed truth ownership rather than lack of components, and it sketches a
-> thinner control layer intended to externalize placement, convergence,
-> failover, and portability burdens without immediately surrendering to a full
-> heavyweight orchestrator. It does not prove that those truth surfaces are
-> already live, trusted, or ownership-complete in the tracked runtime.
-
-Anything calmer or stronger than that is probably overreading the plan.
 
 ## What the master plan does not prove
 
@@ -490,16 +320,11 @@ runtime:
 This list should stay painful.
 If it becomes easy to forget, the plan will start impersonating runtime truth.
 
-It will also start impersonating reduced operator burden.
-
-Those are different failures, but they usually travel together in this repo.
-
 ## The main overreading risk this page is trying to stop
 
-The master plan is one of the few documents in the tree that is detailed
-enough to simulate settlement.
+The master plan is detailed enough to simulate settlement.
 
-That means it can accidentally create a false feeling that:
+That means it can create a false feeling that:
 
 - the missing layer is already mostly designed
 - therefore the missing layer is already mostly known
@@ -518,238 +343,29 @@ So the hard question after every planned module remains:
 
 If that question is not asked, the plan becomes too flattering.
 
-## What the master plan quietly assumes
+## What a real promotion packet for the master plan would need
 
-The plan is coherent, but it depends on several very large assumptions.
-Those assumptions have to stay visible rather than being smuggled into
-"future architecture."
-That is the discipline this page should model:
+Before the master plan can be read as more than strong directional evidence, a
+promotion packet would need to show:
 
-- do not erase contradiction to make the plan cleaner
-- do not erase uncertainty to make the plan sound stronger
-- do not erase partial truth to make the repo sound more finished
+- which planned truth surface is now live
+- which exact operator reconstruction burden it removed
+- which current root runtime artifact consumes that truth
+- which failure case is now handled without private human memory
+- what new burden the added layer introduced in exchange
 
-## Assumption 1: a lightweight agent layer can deliver a meaningful share of orchestrator value
+If that packet cannot be assembled, the correct reading stays:
 
-For that to be true, the future layer must reliably answer:
+- the plan names the wound well
+- the plan may point toward the repair
+- the runtime still has to earn ownership
 
-- what service belongs where
-- what changed
-- what must restart
-- what must remain untouched
-- which peer is healthy and eligible enough to receive forwarded traffic
+## Bottom line
 
-That is already dangerously close to building a control plane around Compose.
+The master plan matters because it names the wound precisely enough that the
+repo can stop pretending it merely needs more tools.
 
-This is not criticism.
-It is the actual cost model.
-The project is not avoiding orchestration logic entirely.
-It is trying to buy only the fragments that correspond to the exact wound.
-If those fragments eventually add up to "you built a control plane anyway,"
-the docs need to say that plainly.
-
-And if those fragments still leave the operator privately finishing the most
-important decisions, the docs need to say that plainly too.
-
-The repo's real question is not just whether a thin layer stays thin.
-It is whether the layer actually takes ownership of the truths it claims to
-purchase.
-
-### What this proves
-
-- the repo is not trying to avoid orchestration logic entirely
-- it is trying to decompose orchestration logic into narrower, more legible
-  parts
-
-### What this does not prove
-
-- that the decomposed form will remain cheaper or clearer than promoting some
-  domains into a stronger scheduler-backed platform
-
-## Assumption 2: ingress truth can be generated from runtime truth without becoming brittle again
-
-For that to work, generated routing needs:
-
-- stable placement input
-- stable health input
-- route persistence under backend disappearance
-- middleware and auth continuity across peer handoff
-
-That is a much harder requirement than "render a config file."
-
-### What this proves
-
-- the repo correctly treats route generation as a core answer, not a side task
-
-### What this does not prove
-
-- that the current generation path is already safe
-
-## Assumption 3: portability can coexist with operator readability
-
-The plan wants:
-
-- reproducible bootstrap
-- forkable infra
-- explicit control surfaces
-- bounded worldview tax
-
-Those goals are all good.
-They also pull against each other.
-
-The more portable and automated the system becomes, the easier it is to hide
-important truth behind the portability layer itself.
-
-### What this proves
-
-- portability here is not just a convenience feature
-- it is part of the structural pressure shaping the control layer
-
-### What this does not prove
-
-- that the tradeoffs are already resolved
-
-## The highest-signal modules in the plan
-
-The best way to read the master plan is not by module names alone.
-It is by asking:
-
-> what hidden burden is each proposed module trying to buy back from the
-> operator?
-
-## Secret and env sync
-
-This is not polish.
-It is an attempt to remove one of the quietest cross-node SPOFs:
-
-- the forwarded request reaches a node that does not actually share the same
-  env, secret, or auth assumptions
-
-### What this proves
-
-- the repo already understands convergence truth is central
-
-### What this does not prove
-
-- that the nodes are already equivalent enough to support trusted fallback
-
-## Compose and file sync
-
-This is the same pressure in another form:
-
-- a distributed stack is only as trustworthy as the degree to which each node
-  is running the same intended world
-
-### What this proves
-
-- the repo does not accept manual drift as a harmless inconvenience
-
-### What this does not prove
-
-- that sync semantics are already implemented safely
-
-## `services.yaml` and placement truth
-
-This is arguably the most important conceptual module in the entire plan.
-
-It is the repo's repeated answer to:
-
-> where does a receiving node learn what is local and what is remote right now?
-
-Without an answer to that question, wrong-node request preservation remains a
-wish.
-
-### What this proves
-
-- the repo understands that placement truth is the first real missing layer
-
-### What this does not prove
-
-- that the live root runtime already ships and consumes that truth surface
-
-## Failover-agent and routing repair logic
-
-This module exists because the user is tired of systems that look dynamic until
-the local backend actually dies.
-
-The plan is clearly trying to buy:
-
-- failure-aware regeneration
-- durable fallback paths
-- recovery logic that survives the event that triggered it
-
-### What this proves
-
-- the repo is targeting actual failure absorption, not just pretty routing
-  diagrams
-
-### What this does not prove
-
-- that the current fallback path survives backend-loss events in live runtime
-
-It also does not prove that the generated recovery path would preserve the same
-auth, middleware, and request meaning rather than merely producing some
-surviving answer.
-
-## Bootstrap protocol
-
-This module exists because the operator should not be the only place where the
-system still makes sense.
-
-That is not just convenience.
-It is an anti-hidden-knowledge requirement.
-
-### What this proves
-
-- the project wants less private ritual and more explicit reproducibility
-
-### What this does not prove
-
-- that bootstrap portability is already mature
-
-## What this page means for the rest of the knowledgebase
-
-Whenever another page cites the master plan, it should do so carefully:
-
-- cite it as strong future-direction evidence
-- cite it as proof that the user is searching for a missing middle layer
-- cite it as evidence that cross-node truth is the real problem
-- do not cite it as proof that the mechanisms are live
-
-That last rule matters the most.
-
-The master plan is valuable precisely because it sees the problem clearly.
-It becomes dangerous when clarity of diagnosis gets mistaken for proof of cure.
-
-## The most important maintenance rule for this page
-
-Whenever the runtime gains one new truth-owning surface that the master plan
-previously described only as future direction, this page should be updated in
-both directions:
-
-- upgrade the relevant sentence from "planned direction" to "partially live"
-  only if current evidence really supports that
-- keep naming what the new live surface still does not prove
-
-Without that second half, this page will drift back into the exact ambiguity
-the user is trying to get rid of.
-
-## The real takeaway
-
-The master plan proves that the repo is not confused about what hurts.
-
-It knows the pain is not "more YAML" or "more containers."
-It knows the pain is:
-
-- wrong-node fragility
-- hidden placement truth
-- hidden convergence truth
-- failure paths that disappear at the moment they matter
-- operator knowledge that still acts as the real cluster manager
-
-What the master plan does not prove is that those pains are already solved.
-
-That is exactly why it is one of the most important documents in the tree.
-It is valuable because it names the missing layer honestly.
-It should not be allowed to impersonate the presence of that layer before the
-runtime has earned it.
+But naming the wound is not the same thing as removing it.
+Until the tracked runtime can show that one more important truth has actually
+left private operator memory and become inspectable system-owned behavior, the
+master plan remains strong directional evidence rather than runtime proof.
