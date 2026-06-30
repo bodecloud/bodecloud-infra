@@ -56,6 +56,26 @@ The real contradictions are more exact:
 If the docs flatten those contradictions into generic architecture language,
 they stop describing the user's real complaint.
 
+## The contradictions are all downstream of one exact event
+
+The repo's real request contract is still:
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
+```
+
+Every contradiction on this page is a different way that contract can collapse
+back into private operator narration.
+
+That matters because the contradictions are not merely design tensions in the
+abstract.
+They are different versions of the same accusation:
+
+> the platform still looks coherent only because a human is privately joining
+> the missing truths.
+
 ## The contradiction packet standard
 
 Before the docs claim a contradiction is `getting better`, they should be able
@@ -92,6 +112,9 @@ That sentence requires the system to own several distinct truths:
 Single-node Docker lets one human blur those together.
 Wrong-node traffic forces them apart.
 
+That is why the user keeps sounding harsher than a normal infra planner.
+The wrong-node event is what makes the hidden human control plane visible.
+
 ## Contradiction matrix
 
 | Tension | What the repo wants to keep | What the live worktree already has | What is still missing | Why the nearby answer still feels fake | What would materially reduce the contradiction |
@@ -127,6 +150,17 @@ This is where almost every ecosystem cheats.
 Hostname stability, TCP reachability, and restartability are not ownership,
 promotion, or client rediscovery semantics.
 
+## What these contradictions are really measuring
+
+Each contradiction is really asking:
+
+- where does this truth live now?
+- who has to complete it when reality gets sharp?
+- what artifact would move it out of folklore?
+
+If the answer is still "the operator," then the contradiction is still active
+even if the surrounding stack looks more serious than before.
+
 ## What the docs must keep refusing
 
 Until the corresponding proof packet exists, the docs should keep refusing
@@ -160,3 +194,17 @@ That sequence is the difference between:
 and:
 
 - one less reason for the user to believe the ecosystem is still mostly fake
+
+Another way to say the same thing:
+
+- a real option is not just "another tool family"
+- a real option is one that kills one socially humiliating sentence
+
+Examples:
+
+- `the wrong node still needs me to explain locality`
+- `the reachable peer still needs me to explain safety`
+- `the fallback still needs me to explain whether it survives the failure`
+
+If those sentences survive, the option may still be interesting, but it has not
+yet become real in the way the user is demanding.

@@ -52,6 +52,20 @@ That failure usually happens like this:
 
 That fifth step is what this ledger exists to block.
 
+## The ledger is really about illegal confidence transfer
+
+This page is not only classifying sources.
+It is trying to catch the precise moment when:
+
+- runtime shape borrows force from intent
+- intent borrows force from archive pressure
+- planning borrows force from runtime presence
+- the final paragraph sounds stronger than any one source class earned
+
+That is why the ledger has to sound repetitive.
+The repo's main documentation failure mode is not lack of facts.
+It is overpowered synthesis.
+
 ## The accusation every evidence packet must preserve
 
 The site should keep reconstructing this accusation:
@@ -61,6 +75,14 @@ The site should keep reconstructing this accusation:
 
 If a page loses that accusation, it may become more disciplined while becoming
 less aligned with the repo's actual question.
+
+The shortest version of the accusation is:
+
+> the stack still works socially because one human is quietly the missing
+> controller.
+
+If a page becomes elegant while making that accusation harder to feel, the page
+is getting less useful for this repo.
 
 ## The four evidence classes
 
@@ -105,6 +127,13 @@ What Class 1 cannot prove by itself:
 Presence is real.
 Presence is not closure.
 
+For this repo, Class 1 has a special trap:
+
+> the runtime is now large enough that presence feels emotionally close to
+> capability.
+
+That feeling has to be treated as untrusted unless a narrower drill earns it.
+
 ### Class 2: architecture-intent and honesty evidence
 
 Use for claims about what the repo explicitly wants to become and what honesty
@@ -138,6 +167,10 @@ What Class 2 cannot prove by itself:
 Intent is real.
 Intent is not runtime proof.
 
+Class 2 is where the user's dream is preserved most clearly.
+It is also where many summaries go wrong, because they start using the clarity
+of the dream as if it were early delivery evidence.
+
 ### Class 3: planning and promotion evidence
 
 Use for claims about known gaps, candidate repair paths, sequencing, and
@@ -169,6 +202,11 @@ What Class 3 cannot prove by itself:
 
 Planning is real.
 Planning is not implementation.
+
+In this repo, Class 3 often carries some of the sharpest reasoning.
+That makes it especially tempting to overcredit.
+The sharper the plan sounds, the more explicitly pages need to say that the
+runtime may still be much dumber than the plan.
 
 ### Class 4: archive and pressure evidence
 
@@ -202,6 +240,11 @@ What Class 4 cannot prove by itself:
 Archive pressure is real.
 Archive pressure is not runtime evidence.
 
+Class 4 is what keeps the docs from shrinking the user's actual complaint into
+"better HA in general."
+It is the source class most likely to preserve the emotional accusation and the
+least allowed to impersonate live proof.
+
 ## Claim routing table
 
 Use this table before writing a strong sentence.
@@ -215,6 +258,11 @@ Use this table before writing a strong sentence.
 
 If a paragraph blends more than one row, it should say which row is carrying
 which part of the claim.
+
+That sentence is more important than it looks.
+This repo now needs source-custody language, not just source citation.
+The question is not only "what files did this page read?"
+It is "which file is allowed to carry which force?"
 
 ## Confidence ceilings
 
@@ -303,6 +351,26 @@ Any serious page in this site should leave behind a small auditable packet:
 
 If a page cannot produce that packet, it may still be informative, but it has
 not fully earned the word `assimilated` in this repo.
+
+## What "actually RAG" should mean in this repo
+
+For this knowledgebase, "actually RAG" should not mean:
+
+- more files quoted
+- more sources listed
+- more archives ingested
+- smoother synthesis across everything
+
+It should mean:
+
+- the accusation stayed alive
+- the source class boundaries stayed visible
+- the page can say which truth came from runtime, which came from intent, which
+  came from plans, and which came from archive pressure
+- the page can say what still remained privately completed after all of that
+
+If retrieval produces a broader page while making those distinctions blurrier,
+it is worse retrieval for this repo.
 
 ## Bottom line
 

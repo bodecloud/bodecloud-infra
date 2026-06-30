@@ -39,6 +39,11 @@ The real dream is harsher and more specific:
 - preserve the ability to reason about the system directly from the repo and
   runtime instead of trusting an opaque platform story
 
+The shortest version is still:
+
+> how does the healthy wrong node stop needing one human to finish the
+> topology sentence?
+
 ## The accusation the middle layer must survive
 
 The user's accusation against any candidate is still:
@@ -112,6 +117,16 @@ That means the middle is **not** defined by:
 It is defined by whether the system can now carry one more sentence that the
 operator previously had to finish by hand.
 
+That is why this page is not really about "what is between Compose and
+Kubernetes?"
+
+It is about:
+
+- where shared placement truth could live
+- where peer-validity truth could live
+- where fallback-durability truth could live
+- where inspectable explanation truth could live
+
 ## The exact wound the middle layer must remove
 
 Without a real middle layer, the user is still forced to be all of the
@@ -140,6 +155,9 @@ It is this:
 
 That is why the middle is not primarily an automation layer.
 It is a truth-custody layer.
+
+The repo can tolerate manual work longer than it can tolerate hidden truth.
+That is the key distinction many normal platform comparisons fail to keep.
 
 ## Why "middle" does not mean medium complexity
 
@@ -207,6 +225,11 @@ these and does not yet have a clean, current, inspectable place to hold them:
 These are not theoretical niceties.
 They are exactly the truths that turn a platform from "looks clustered" into
 "can survive embarrassment honestly."
+
+This table is the real heart of the page.
+If a candidate middle layer cannot name where these truths would live, how they
+would stay current, and how another operator could inspect them later, then it
+is still only a partial answer.
 
 ## Why these truths matter more than product categories
 
@@ -317,6 +340,21 @@ What this family is trying to do:
 - give every receiving node shared placement truth
 
 Why this family is emotionally aligned with the repo:
+
+- it keeps Compose as the visible authoring surface
+- it attacks the missing truth directly instead of replacing the whole world
+- it has a plausible path to killing the `I still personally know where it
+  lives` sentence first
+
+Why this family is still not automatically the answer:
+
+- a registry named in docs is not the same thing as runtime-consumed truth
+- a placement map is weaker than eligibility truth
+- eligibility truth is weaker than durable fallback truth
+- durable fallback truth is weaker than protected-route continuity
+
+That sequence matters because this family can feel extremely close to solved
+while still only removing the first layer of the wound.
 
 - it attacks the user's real wound directly
 - it keeps the system close to ordinary Docker
