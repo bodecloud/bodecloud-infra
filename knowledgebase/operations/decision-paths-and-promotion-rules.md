@@ -52,6 +52,35 @@ Every path below should answer:
 3. what proof class is still too weak
 4. what unchanged burden would reveal that the path is mostly theater
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- how next steps should be routed from pain class to layer choice
+- what conditions should trigger promotion instead of drift or sentimentality
+- which recommendation styles are still too weak for this repo
+
+This page is not authoritative about:
+
+- whether a specific path has already been proven enough to promote today
+- whether the whole repo should already adopt one global future
+- whether decision clarity should be confused with implementation completion
+
+This page is a promotion grammar and routing table.
+It is not a claim that the next promotion has already happened.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this is the current default path" | current strategy stance | this page, current runtime, proof pages, intent surfaces | that the default path is already sufficient |
+| "this pain class justifies a narrower promotion" | promotion-routing judgment | this page plus pain-specific evidence | that the narrower promotion solves the entire platform |
+| "this recommendation is still theater" | anti-option judgment | this page, archive pressure, proof pages | that it provides no partial value |
+| "promotion is now earned" | threshold judgment | this page plus concrete route, failure, or state evidence | that the rest of the stack has also been promoted implicitly |
+
+If a sentence starts treating roadmap clarity as proof that the promotion has
+already occurred, it has crossed beyond this page's authority.
+
 ## What a useful decision page has to prevent
 
 The user’s real frustration is not lack of information.
@@ -237,6 +266,17 @@ promote when a path becomes fake by leaving the same burden unnamed.
 Do not promote merely because a new platform lets the docs sound calmer.
 
 That is the decision rule most likely to preserve the real dream.
+
+## Strongest honest current answer
+
+If an operator asks, "What is the actual promotion rule here?" the shortest
+defensible answer is:
+
+> Stay Compose-first until a specific hidden burden becomes too socially held
+> to narrate honestly, then promote only the smallest next layer that clearly
+> owns that burden better under real proof, while refusing both premature
+> platform capture and sentimental defense of a current layer that has already
+> turned into a disguised control plane.
 
 Without it, "more options" quickly becomes another way of saying
 "more substitutes that do not actually answer the user's question."

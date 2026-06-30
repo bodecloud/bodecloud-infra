@@ -60,6 +60,34 @@ If a candidate layer still leaves the operator privately reconstructing the
 same bad-day answer, then from the user's point of view the option family has
 mostly changed costumes, not outcomes.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- how orchestration options should be judged in this repo
+- which burden a promoted layer would need to own to justify its existence
+- why respectable platform names are weaker than domain-specific truth ownership
+
+This page is not authoritative about:
+
+- whether one orchestration path has already won globally
+- whether the current runtime already demonstrates the promoted behavior
+- whether broader ecosystem prestige should override repo-specific evidence
+
+This page is a promotion filter, not a final platform verdict.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "Compose-first is still the default" | current strategy stance | this page, `.github/copilot-instructions.md`, current runtime pages | that Compose already solves the missing truths |
+| "a stronger layer has not yet earned itself" | promotion-threshold judgment | this page plus orchestrator evidence and proof pages | that stronger layers are forbidden in principle |
+| "this candidate owns a specific hidden burden better" | option-family evaluation | this page plus candidate evidence | that the candidate therefore solves the whole dream |
+| "prestige or maturity language is too weak" | anti-theater judgment | this page, archive pressure, proof matrix | that professional tooling has no place here |
+
+If a sentence starts sounding like "pick the most mature orchestrator," it has
+already left this page's decision surface.
+
 ## The shortest honest answer
 
 The current default stance is still:
@@ -139,6 +167,16 @@ If a new layer mostly improves:
 
 while still leaving the same sacred truths privately carried, then it has not
 become a real new option for this repo.
+
+## Strongest honest current answer
+
+If someone asks, "What is the shortest honest answer about orchestration
+options right now?" the answer is:
+
+> No broader orchestration family has yet earned default promotion for the repo
+> as a whole; the current evidence still supports staying Compose-first and
+> forcing any stronger layer to justify itself by owning a named hidden burden
+> better than the current stack, not by sounding more adult or more complete.
 
 ## What the user is actually trying to avoid
 

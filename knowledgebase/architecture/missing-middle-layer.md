@@ -53,6 +53,35 @@ It has to identify the smallest additional layer that would genuinely reduce
 the user's reconstruction burden instead of just relocating it behind nicer
 language.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- what category of answer the repo is searching for when it says "missing middle"
+- which burden that middle layer would need to relocate to count as real progress
+- why the current market binary still feels false to this user
+
+This page is not authoritative about:
+
+- whether the repo has already found and implemented that middle layer
+- whether a specific product or helper family has already earned promotion
+- whether the current runtime already satisfies the bad-day benchmark
+
+This page defines the shape of the wanted answer.
+It is not proof that the answer has already been found.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "the repo is searching for a middle category, not a brand" | strategy reconstruction | this page, dream pages, archive pressure, orchestrator evidence | that all products in that category are equivalent |
+| "the market binary is part of the problem" | problem-shape synthesis | this page, archive pressure, orchestrator tradeoff evidence | that heavyweight promotion is always wrong |
+| "a real middle layer would need these properties" | requirement synthesis | this page, problem-and-goals, proof pages | that any current helper stack already owns them |
+| "a candidate still relocates burden instead of removing it" | option-quality judgment | this page plus candidate evidence pages | that the candidate has zero value anywhere |
+
+If a sentence starts using the phrase "missing middle" as if the repo has
+already implemented one, this page has been overread.
+
 ## The real problem statement
 
 The project is not primarily asking:
@@ -222,6 +251,16 @@ That is the cleanest one-line definition on this page.
 If a future control layer routes better, schedules better, or self-heals better
 but still leaves the same sacred facts socially held, then it may be useful,
 but it is not yet the missing middle this repo is looking for.
+
+## Strongest honest current answer
+
+If someone asks, "What is the shortest honest meaning of the missing middle
+layer?" the answer is:
+
+> It is the smallest extra truth-owning layer that would make wrong-node,
+> fallback, and placement behavior more system-owned and inspectable without
+> forcing the operator to buy a whole heavier worldview before that worldview
+> has proved it owns a real pain the current stack still leaves socially held.
 
 ## Minimum properties of a real middle layer
 
