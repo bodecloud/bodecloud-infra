@@ -94,6 +94,25 @@ Every serious answer on this page should leave behind:
 If an answer does not leave those five things behind, it is still too close to
 shopping advice.
 
+## Operator questions must map to packets, not vibes
+
+The new proof-packet discipline means each operator question should eventually
+map to one inspectable packet field.
+
+| Operator question | Packet field it pressures | What the field must eventually prove |
+| --- | --- | --- |
+| What node received the request? | `entry_node` | The first hop is known, not inferred from memory. |
+| Was the service local there? | `locality_result` / `service_locality` | The receiving node can distinguish owner from first-hop node. |
+| Where did placement truth come from? | `placement_source` / `placement_truth.source` | The node consulted shared current truth, not operator folklore. |
+| Which peer was chosen? | `selected_peer` / `peer_eligibility.peer` | Peer choice was made by system-owned evidence. |
+| Why was that peer valid? | `peer_eligibility_reason` | Reachability was not mistaken for eligibility. |
+| Did policy survive? | `policy_chain` / `handoff.preserves_auth` | Auth, middleware, headers, and route meaning remained coherent. |
+| Did the rescue path survive damage? | `backend_condition` / `backend_loss` | Fallback was tested after the preferred path failed. |
+| Can another operator inspect it later? | `explanation_artifact` | The explanation moved out of one human head. |
+
+If a question cannot be mapped to a packet field, it may still be a useful
+concern, but it is not yet a concrete burden-transfer claim.
+
 ## The strongest broad answer the repo can support today
 
 The repo can support this broad answer:

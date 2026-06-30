@@ -353,6 +353,34 @@ If the drill still depends on private operator recollection of placement, say
 that explicitly.
 That means the hidden control plane is still human.
 
+Use this close-out shape even if most fields remain `unproven`:
+
+```yaml
+route_packet:
+  claim_tested: "wrong-node stateless HTTP request preservation"
+  route: "whoami.$DOMAIN"
+  route_class: stateless-http
+  entry_node: "<node that received request>"
+  expected_owner: "<node believed to host service>"
+  locality_result: local | remote | unproven
+  placement_source: "<shared truth source, or unproven>"
+  selected_peer: "<chosen peer, or unproven>"
+  peer_eligibility_reason: "<health/policy evidence, or unproven>"
+  policy_chain:
+    expected: []
+    observed: []
+    preserved: true | false | unproven
+  backend_condition: healthy
+  result: pass | fail | inconclusive
+  what_this_proves: "<narrow sentence only>"
+  what_is_still_forbidden: "<stronger sentence that remains illegal>"
+  surviving_private_sentence: "<operator-owned truth still alive>"
+```
+
+This template is allowed to expose failure.
+In this repo, an honest `unproven` field is better than a confident paragraph
+that smuggles the operator back in as the missing registry.
+
 Forbidden upgrade after success:
 
 > therefore any-node entry now works generically
@@ -378,6 +406,30 @@ Minimum proof packet:
   intervention
 - whether auth and middleware meaning stayed the same
 - what still remained human knowledge
+
+Use a separate packet because backend loss is not the same claim as wrong-node
+entry:
+
+```yaml
+backend_loss_packet:
+  claim_tested: "named route survives preferred-backend loss"
+  route: "whoami.$DOMAIN"
+  route_class: stateless-http
+  preferred_backend_before: "<node/service identity>"
+  failure_introduced: "<container stopped, node isolated, route removed, etc.>"
+  surviving_backend_after: "<node/service identity, or none>"
+  placement_source_after_failure: "<shared truth source, or unproven>"
+  policy_preserved: true | false | unproven
+  response_identity_preserved: true | false | unproven
+  operator_intervention_required: true | false
+  result: pass | fail | inconclusive
+  what_this_proves: "<narrow sentence only>"
+  what_is_still_forbidden: "<stronger sentence that remains illegal>"
+```
+
+If `operator_intervention_required` is `true`, the packet may still be useful
+debug evidence.
+It is not proof that fallback burden moved into the system.
 
 Forbidden upgrade after success:
 
@@ -415,6 +467,29 @@ Minimum packet:
 - what storage, replication, or election mechanism makes the claim honest
 - whether the outcome was true continuity, manual intervention, or singular
   restart
+
+Use a different packet again:
+
+```yaml
+stateful_authority_packet:
+  claim_tested: "stateful authority under failure"
+  service: "redis | mongodb | headscale | postgres | rabbitmq | qdrant"
+  authority_before: "<writer/leader/source of truth>"
+  failure_introduced: "<exact damage>"
+  authority_after: "<writer/leader/source of truth after failure>"
+  client_observation: "<what clients saw>"
+  rediscovery_mechanism: "<how clients found the valid authority>"
+  fencing_or_split_brain_guard: "<mechanism, or none>"
+  storage_truth: "<replication/snapshot/manual restore/singular disk>"
+  operator_intervention_required: true | false
+  result: pass | fail | honest-singularity | inconclusive
+  what_this_proves: "<narrow sentence only>"
+  what_is_still_forbidden: "<stronger stateful sentence still illegal>"
+```
+
+`honest-singularity` is a valid result.
+It means the runbook proved the service is still singular in the way that
+matters instead of pretending reachability was HA.
 
 Forbidden upgrades after success:
 

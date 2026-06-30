@@ -364,6 +364,21 @@ Required surviving warning:
 
 - `do not let operational clarity impersonate reduced burden`
 
+Operator pages should also name the packet field they are trying to externalize.
+
+Examples:
+
+| If the operator page asks... | It should point at... | Stronger claim still forbidden until... |
+| --- | --- | --- |
+| "Can the wrong node handle this?" | `entry_node`, `locality_result`, `placement_source` | a drill shows the wrong node used shared truth. |
+| "Can it forward to the right peer?" | `selected_peer`, `peer_eligibility_reason` | eligibility is demonstrated, not assumed from reachability. |
+| "Did auth survive?" | `policy_chain`, `handoff.preserves_auth` | local and wrong-node behavior are compared. |
+| "Did failover work?" | `backend_condition`, `backend_loss` | the preferred backend is actually removed or broken during the test. |
+| "Is this stateful service HA?" | authority, writer, recovery, fencing fields in a stateful packet | authority transfer or honest singularity is proven. |
+
+This keeps operator pages from turning into better explanations of the same
+private burden.
+
 ## The retrieval sequence that should happen before writing
 
 Before drafting, do this in order:
@@ -423,6 +438,27 @@ At minimum the packet should preserve:
 
 If a retrieval pass cannot produce that packet, then "we really read the repo
 this time" is still too congratulatory for this project.
+
+For pages about ingress, routing, or failover, the packet should be concrete
+enough to downgrade into the route-level schema:
+
+```yaml
+assimilation_packet:
+  accusation: "the operator is still the hidden control plane"
+  runtime_anchor: "docker-compose.yml + active compose fragments"
+  intent_anchor: ".github/copilot-instructions.md"
+  archive_anchor: "source-archive threads that preserve the frustration"
+  legal_sentence: "the stack has serious ingredients and a precise dream"
+  illegal_sentence: "the stack already proves generic wrong-node failover"
+  surviving_private_sentence: "I still personally know where this route lives"
+  next_runtime_packet:
+    route_packet_field: placement_source
+    required_upgrade: "receiving node consults shared current placement truth"
+```
+
+The exact values will change by page.
+The point is that retrieval should end with a next proof field, not a vague
+recommendation to "test more."
 
 ## The honest bottom line
 
