@@ -6,6 +6,12 @@ The core ambition is not "run some containers." It is:
 
 > make multiple ordinary Docker nodes behave like a resilient, operator-readable system without immediately paying the full tax of Swarm, Kubernetes, or another heavyweight orchestrator.
 
+There is a second sentence that matters just as much:
+
+> stop forcing the operator's private memory to act as the missing control
+> plane when traffic lands on the wrong node or when the expected backend
+> disappears.
+
 That ambition is why this repo keeps returning to the same pressure points:
 
 - no single node should be a mandatory public entrypoint
@@ -14,6 +20,19 @@ That ambition is why this repo keeps returning to the same pressure points:
 - health, middleware, auth, and observability should survive failover instead of silently changing behavior
 - stateful services should be treated honestly rather than declared "HA" by marketing vocabulary alone
 - the control plane should only become more complicated when the extra machinery solves a real pain that Compose alone cannot
+
+This README also has to preserve a blunt fact that the wider ecosystem keeps
+trying to blur:
+
+the repo is not short on product names, proxy names, or orchestration names.
+It is short on **real options** that still feel real after the first request
+lands on the wrong machine.
+
+That is why the docs here keep sounding harsher than ordinary self-hosting
+documentation.
+The user frustration is not "there are no tools."
+It is "too many supposed solutions stop one layer before truth actually moves
+out of my head."
 
 ## The shortest honest description
 
@@ -34,6 +53,13 @@ The gap matters. The repo clearly wants node-aware routing, fallback, and anti-S
 - cross-node convergence of secrets and environment
 - proven peer-aware fallback semantics
 - stateful failover that preserves correctness, not just liveness
+
+That list is the difference between:
+
+- a stack that can be described as distributed
+- and a stack that stops depending on sacred-node memory
+
+Those are not the same achievement.
 
 If you read nothing else, read that distinction correctly:
 
@@ -93,6 +119,20 @@ The repo is not only trying to host services. It is trying to answer a more spec
 
 > why does getting redundancy usually force operators to choose between raw Compose sprawl and a giant orchestration platform they do not actually want?
 
+That question should be read a little more aggressively than it first sounds.
+
+The complaint is not just that the market offers bad defaults.
+It is that many market answers improve one narrow slice while still leaving the
+operator to reconstruct:
+
+- where the service really lives
+- whether the wrong node knows that
+- whether the fallback path survives the relevant failure
+- whether auth and middleware continuity remain intact after handoff
+- whether a stateful backend is honestly resilient or merely still reachable
+
+That is the real option drought this repo is reacting to.
+
 ## What is live vs what is planned
 
 This repo now treats documentation in three layers because flattening them together is what made earlier docs ambiguous and misleading.
@@ -128,6 +168,20 @@ Examples:
 - the synthesized research pages under [`knowledgebase/research/`](knowledgebase/research)
 
 These layers are related, but they are not interchangeable. A planned control surface is not live proof. A research thread is not a shipped implementation. A parsed Compose graph is not resilience.
+
+That separation is not just documentation hygiene.
+It is the main defense against polished ambiguity.
+
+This repo has enough material to sound deeply understood while still silently
+shrinking the user's dream into something more normal, such as:
+
+- better HA
+- better routing
+- better service discovery
+- better orchestrator comparison
+
+Those are all subproblems.
+They are not the whole ask.
 
 ## The current architecture shape
 
@@ -194,6 +248,12 @@ HTTP routing through Traefik is far easier to reason about than TCP failover for
 ### Stateful HA is the real honesty wall
 
 Ingress cleverness can hide a lot. It cannot fake correct replication, election, quorum, reconnect behavior, or durable failover for stateful systems.
+
+This is also why the repo keeps feeling bigger than "Docker failover."
+
+The deeper problem is not lack of components.
+It is lack of a shared truth surface that can make the first healthy receiving
+node stop being a semantic gamble.
 
 ## Recommended reading
 
@@ -263,5 +323,8 @@ If you are contributing here, the most important discipline is not "use the righ
 It is this:
 
 > do not widen the architecture claim beyond the evidence.
+
+And do not narrow the user's dream into a cleaner neighboring question just
+because that cleaner question is easier to summarize.
 
 Keep the dream explicit, keep the proof boundaries honest, and make each change answer a real operator problem instead of adding abstract infrastructure theater.

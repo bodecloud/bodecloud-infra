@@ -16,6 +16,15 @@ This matters because earlier docs in this repo flattened too many things togethe
 
 The newer knowledgebase separates those layers explicitly.
 
+It also does something harsher than a normal docs index is expected to do:
+
+- it keeps the user's real dream large
+- it keeps the available options under suspicion
+- it refuses to let planning coherence impersonate runtime proof
+
+That is necessary because this repo has enough material to sound mature while
+still leaving the same hidden operator reconstruction burden in place.
+
 ## Start in the knowledgebase
 
 If you need to understand what the repo is actually trying to build, read these first:
@@ -33,9 +42,30 @@ Those pages are now the best explanation of the actual repo question:
 
 > how do you make multiple ordinary Docker nodes feel resilient, peer-aware, and low-bullshit without immediately falling into Swarm, Kubernetes, or another heavyweight control plane?
 
+There is a second question hiding under that one:
+
+> when the ecosystem seems to offer lots of products and patterns, which of
+> them are real options here and which are just better-dressed versions of the
+> same wound?
+
+If you skip that second question, the repo becomes much easier to summarize and
+much less useful to understand.
+
 ## What this `docs/` directory is still good for
 
 This directory still contains important repo artifacts. They just should not be mistaken for the whole story.
+
+That warning matters more than it usually would.
+
+Many files in this directory are detailed enough to sound like platform
+closure:
+
+- a master plan can sound like a control plane already exists
+- a failover plan can sound like failover already works
+- an orchestration comparison can sound like the future path is basically
+  chosen
+
+The knowledgebase exists precisely to stop those upgrades.
 
 ### Planning anchors
 
@@ -45,6 +75,14 @@ This directory still contains important repo artifacts. They just should not be 
 - [Orchestration Research 2026](orchestration_research_2026.md)
 
 These are valuable because they reveal where the repo wants to go. They are not the same thing as proof of current live behavior.
+
+They are also not automatically "real options" just because they are
+well-described.
+
+A real option in this repo is one that actually moves truth out of private
+operator memory.
+If a planning artifact cannot plausibly do that, it is still mostly a pressure
+map rather than a route to closure.
 
 ### Product- or subsystem-specific docs
 
@@ -88,6 +126,13 @@ If your question is "why not just pick Kubernetes, Swarm, Nomad, or OpenSVC?":
 - [`../knowledgebase/research/orchestrator-tradeoffs-evidence.md`](../knowledgebase/research/orchestrator-tradeoffs-evidence.md)
 - [Orchestration Research 2026](orchestration_research_2026.md)
 
+If your question is "why does this still feel like there are no real options
+even though there are plenty of nouns?":
+
+- [`../knowledgebase/operations/operator-questions-and-honest-answers.md`](../knowledgebase/operations/operator-questions-and-honest-answers.md)
+- [`../knowledgebase/architecture/problem-and-goals.md`](../knowledgebase/architecture/problem-and-goals.md)
+- [`../knowledgebase/architecture/missing-middle-layer.md`](../knowledgebase/architecture/missing-middle-layer.md)
+
 ## Important boundary
 
 Do not use this directory as evidence that the repo already has:
@@ -99,6 +144,14 @@ Do not use this directory as evidence that the repo already has:
 - one settled future control plane
 
 Those are exactly the kinds of overclaims the knowledgebase was rewritten to avoid.
+
+The docs fail again if they let a reader walk away thinking:
+
+- "there are plenty of options, we just need to pick one"
+- "the right proxy plus DNS probably already solves most of it"
+- "a more serious control plane will automatically remove the real burden"
+
+Those are the same adjacent answers the user is already reacting against.
 
 ## Bottom line
 
@@ -113,3 +166,6 @@ Use the knowledgebase as:
 - the current authoritative explanation
 - the honesty boundary
 - the place where live truth, planned truth, and research pressure are kept separate on purpose
+
+And use this `docs/` tree as a source archive of serious planning pressure, not
+as a calm summary that has already turned the pressure into closure.
