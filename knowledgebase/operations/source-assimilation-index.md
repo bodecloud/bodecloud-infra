@@ -247,6 +247,27 @@ This ordering is not optional.
 It is the only reliable way to stop the docs from sounding more complete than
 the repo actually is.
 
+## Fast source-routing table
+
+Start with the narrowest question you can name, then route it to the right
+source class before reading anything else.
+
+| If the claim is mainly about... | Start here first | Then check | Never upgrade into... |
+| --- | --- | --- | --- |
+| what the merged runtime currently includes | root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml), active [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose) files, and `docker compose config` output | helper scripts and architecture pages only after the runtime surface is understood | intent, planning, or proof of behavior under failure |
+| what the repo is trying to become | [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md) first | `README.md`, then `AGENTS.md`, then `.cursorrules` | current shipped runtime behavior |
+| why Compose is still central | root Compose files plus `AGENTS.md` for runtime anchoring | `.github/copilot-instructions.md` for the anti-heavy-orchestrator dream | proof that Compose already solves cross-node truth |
+| wrong-node, fallback, or semantic continuity proof | current worktree runtime artifacts and drill evidence first | architecture and operations pages to explain the evidence ceiling | generic platform resilience |
+| placement truth or convergence truth | current runtime artifacts, helper scripts, and negative facts about what is still missing | planning docs for intended next surfaces such as `services.yaml` | claiming the truth surface is already live because it is clearly wanted |
+| orchestrator promotion or helper-layer choice | capability-gap, roadmap, and decision-path pages plus the strongest planning docs | exploratory branches such as Garden, Nomad, or OpenSVC work | saying the explored path is already the repo's current operating contract |
+| what the user is really frustrated with | archive-derived research pages first | instruction surfaces that restate the same pressure more cleanly | runtime proof |
+| stateful HA claims | current stateful topology evidence and stateful research pages | planning docs for future topology work | treating L4 reachability or public hostnames as durable correctness |
+
+This table exists because the repo's biggest retrieval failure is not usually
+"no relevant files were found."
+It is "the wrong file class answered the wrong part of the question first, and
+everything after that got bent around the wrong center of gravity."
+
 ## Tier 1: live implementation truth
 
 Primary anchors:
@@ -372,6 +393,109 @@ Without this tier early, retrieval tends to sound like:
 - generic HA planning
 
 All three are too calm for what this repo is actually trying to solve.
+
+## Minimal source packs for recurring documentation tasks
+
+The knowledgebase keeps asking the same families of questions.
+Do not start from scratch every time.
+
+### 1. "What is live right now?"
+
+Read in this order:
+
+- root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- active [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose) fragments
+- `docker compose config --services`
+- `docker compose config --quiet` or failure output if it does not resolve
+- relevant helper scripts only after the merged runtime shape is understood
+
+Use this pack for:
+
+- runtime inventory claims
+- service presence claims
+- current authoring-surface claims
+
+Do not use it alone for:
+
+- wrong-node proof
+- route persistence
+- stateful resilience
+
+### 2. "What is the real dream?"
+
+Read in this order:
+
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+- [`knowledgebase/research/user-intent-and-dream.md`](../research/user-intent-and-dream.md)
+- archive-pressure pages when the motivational pressure matters
+
+Use this pack for:
+
+- intent framing
+- anti-fake-HA boundaries
+- local-first then peer-forward phrasing
+
+Do not use it alone for:
+
+- current runtime claims
+- proof of a live shared truth surface
+
+### 3. "What is still missing between the runtime and the dream?"
+
+Read in this order:
+
+- [`../architecture/current-compose-runtime.md`](../architecture/current-compose-runtime.md)
+- [`../architecture/missing-middle-layer.md`](../architecture/missing-middle-layer.md)
+- [`../architecture/capability-gaps-and-roadmap.md`](../architecture/capability-gaps-and-roadmap.md)
+- [`../operations/decision-paths-and-promotion-rules.md`](decision-paths-and-promotion-rules.md)
+
+Use this pack for:
+
+- gap analysis
+- helper-layer justification
+- promotion criteria
+
+Do not use it alone for:
+
+- asserting that the proposed layer is already live
+
+### 4. "What can we honestly claim to have proved?"
+
+Read in this order:
+
+- real drill output or current command evidence first
+- [`../operations/proof-matrix-and-drills.md`](proof-matrix-and-drills.md)
+- [`devops-runbook.md`](devops-runbook.md)
+- route or stateful architecture pages relevant to the exact proof class
+
+Use this pack for:
+
+- claim boundaries
+- drill writeups
+- proof-class language
+
+Do not use it alone for:
+
+- dreaming up stronger proof than the evidence actually supports
+
+### 5. "Should a stronger control layer be promoted?"
+
+Read in this order:
+
+- [`../operations/decision-paths-and-promotion-rules.md`](decision-paths-and-promotion-rules.md)
+- [`../architecture/orchestration-options.md`](../architecture/orchestration-options.md)
+- strongest relevant planning docs under [`docs/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs)
+- exploratory branch artifacts only after the current pain has been named
+
+Use this pack for:
+
+- Compose-first versus helper-layer decisions
+- OpenSVC, Nomad, k3s, or Kubernetes promotion questions
+
+Do not use it alone for:
+
+- claiming the explored control layer has already earned whole-stack capture
 
 ## Tier 3: planning and promotion truth
 
@@ -502,6 +626,28 @@ quietly changes:
 - "what is the smallest honest middle layer?" into "what tools exist?"
 
 This is the discipline the earlier docs were missing.
+
+## Negative-source rules
+
+These rules are here because this repo's retrieval failures are usually
+category mistakes, not search failures.
+
+- Do not let a planning document answer a runtime question unless you clearly
+  mark it as plan-only.
+- Do not let a side-path branch answer whether the priority root implementation
+  already behaves that way.
+- Do not let a healthy-looking component inventory answer whether a request is
+  preserved under wrong-node or backend-loss pressure.
+- Do not let the archive answer what is live.
+- Do not let the runtime answer what the user is frustrated with if the runtime
+  itself is one of the things failing to express that frustration.
+- Do not let one smooth synthesis page outrank the more stubborn artifact that
+  still contains the negative fact.
+
+That last rule matters more than it sounds.
+This knowledgebase will drift again the moment elegant synthesis is allowed to
+erase the artifact that still says "the route disappears here" or "this truth
+surface is still missing."
 
 ## What "comprehensive" really means here
 

@@ -116,6 +116,27 @@ as the wider ecosystem:
 - run enough commands to feel comforted
 - then narrate that comfort as resilience
 
+## Route the question to the right proof class first
+
+This runbook gets much easier once the operator stops asking one giant
+"is it working?" question.
+
+Use this routing table before running anything.
+
+| If the real question is... | Start with... | Next required proof if the first step passes | Do not upgrade into... |
+| --- | --- | --- | --- |
+| Does the priority merged root runtime still resolve? | `docker compose config --quiet` | `docker compose config --services` to inspect what actually merged | any claim about runtime behavior, routing, failover, or resilience |
+| What is actually in the current root runtime? | `docker compose config --services` | `docker compose ps` and local inspection for the specific service | any claim that the service works cross-node |
+| Did a local service start and stay healthy? | `docker compose ps` plus `docker inspect <service> --format='{{json .State.Health}}'` | route-targeted path proof if the service is publicly consumed | any claim that local health implies peer safety or distributed readiness |
+| Does one ingress path answer normally? | route-targeted request plus receiving-node logs | backend identity proof and, when relevant, auth or middleware proof | wrong-node success, backend-loss survival, or stateful correctness |
+| Does one wrong-node HTTP request still preserve the service? | intentional wrong-node request plus receiving-node and backend-node logs | backend-loss drill for that same route | generic multi-node success for all routes |
+| Does fallback survive when the preferred backend disappears? | known-good route plus backend-stop or backend-loss drill | semantic continuity comparison between local and peer-forwarded behavior | broad failover claims for the stack |
+| Is one stateful service actually resilient? | explicit topology inspection: owner, replica or peer, client reconnect story | real failure drill for that stateful class | "the platform is HA now" |
+
+The point of this table is not convenience.
+It is to stop the operator from burning time on the wrong command class and
+then trying to inflate its meaning afterward.
+
 ## The proof classes this runbook assumes
 
 This runbook is downstream of
@@ -419,6 +440,29 @@ Before saying a route "works," answer all of these:
 If you cannot answer those questions, you may have path proof for reachability,
 but not for request preservation.
 
+## Evidence bundle required before writing a stronger claim
+
+For any non-trivial runtime statement, capture an evidence bundle instead of
+one green command.
+
+Minimum bundle for a serious route claim:
+
+- the exact claim sentence you are trying to justify
+- the proof class you think the evidence belongs to
+- the hostname, route, or service identity under test
+- the first-hop node identity
+- the answering backend identity when backend identity matters
+- the command or request used
+- the logs or inspect output that prove what happened
+- one sentence naming what still remains unproven even if this bundle is valid
+
+This repo needs that last bullet because the main documentation failure is not
+usually "no evidence at all."
+It is "some evidence exists, so a stronger claim quietly got upgraded."
+
+If you cannot produce the last bullet, the claim is probably already trying to
+say too much.
+
 ## Wrong-node HTTP drill
 
 This is the most important drill shape in the whole repo.
@@ -448,6 +492,15 @@ What it does not automatically prove:
 - backend-loss recovery works
 - TCP classes are solved
 - stateful services are covered
+
+Additional honesty checks:
+
+- if the receiving node only succeeded because the operator privately chose the
+  hidden real host, the drill is weaker than it looks
+- if backend identity cannot be shown, the drill is closer to route
+  reachability than to request preservation
+- if auth or middleware semantics matter and were not checked, the drill is
+  not yet semantic continuity proof
 
 That distinction has to remain explicit because this repo is trying to escape
 exactly the habit of widening claims too cheaply.
@@ -496,6 +549,47 @@ of cautiously.
 
 That caution is not overkill.
 It is the difference between transport-level optimism and operator-grade truth.
+
+## Stop conditions that should interrupt narration
+
+The runbook should normalize stopping early when the proof ceiling is reached.
+
+Stop and downgrade the claim when:
+
+- the merged root Compose graph does not resolve
+- the service inventory cannot be rendered from the priority runtime
+- the receiving node cannot be identified
+- the answering backend cannot be identified for a backend-sensitive claim
+- the route answered, but the proof still depends on remembered unofficial
+  topology
+- the failure drill changed the request path, but no one verified whether the
+  same policy stack still applied
+- a stateful service is reachable, but ownership or client rediscovery is
+  still unclear
+
+These are not annoyances.
+They are the exact places where the repo drifts back toward polished ambiguity.
+
+## Default wording rules after a drill
+
+After any drill, write the result in this order:
+
+1. what exact route or service class was exercised
+2. what exact failure or non-failure condition was exercised
+3. what proof class was actually reached
+4. what stronger sentence is still forbidden
+
+Example shape:
+
+> One stateless HTTP route was intentionally sent to a wrong receiving node and
+> still completed through a healthy peer. That is wrong-node proof for that
+> exact route. It is not yet backend-loss proof, semantic continuity proof for
+> all protected routes, or any kind of stateful HA proof.
+
+That style may sound repetitive.
+It is supposed to.
+Repetition is one of the few reliable defenses against the exact inflation
+pattern the user keeps pushing back on.
 
 ## Stateful service drill boundary
 
