@@ -44,6 +44,12 @@ The user is explicitly rejecting that illusion.
 They want the retrieval process to rebuild the actual architecture pressure,
 not merely decorate it with many citations.
 
+This page therefore should not be read as an index in the ordinary sense.
+It is closer to a quality bar for reconstruction.
+Its job is to stop the knowledgebase from sounding well-sourced while still
+quietly retrieving a smaller, safer, more ordinary version of the user's real
+question.
+
 They are also rejecting a calmer but equally dangerous illusion:
 
 - the page cites the right files
@@ -53,6 +59,16 @@ They are also rejecting a calmer but equally dangerous illusion:
 
 That last step is where "good retrieval" quietly turns back into polished
 ambiguity.
+
+The sharper version is:
+
+- more citations are not necessarily more truth
+- more balance is not necessarily more fidelity
+- more composure is not necessarily more understanding
+
+In this repo, those can all be symptoms of the same failure: the system has
+remembered the right materials while forgetting what the user was actually
+forcing those materials to answer.
 
 ## What "actually RAG this time" means in this repo
 
@@ -94,6 +110,15 @@ Without that rule, a retrieval pass can correctly cite the runtime, the
 planning docs, and the archive and still miss the sharpest thing the user keeps
 asking for.
 
+There is also an implied tenth rule:
+
+10. keep the repo's negative benchmark alive, so the docs do not become
+    satisfied by an answer that would sound reasonable to generic self-hosting
+    culture but still feel insulting to this user
+
+That is what keeps retrieval here from collapsing into a broad but ordinary
+"infrastructure understanding" pass.
+
 ## The real question the retrieval stack is serving
 
 The docs are not ultimately trying to answer:
@@ -127,6 +152,11 @@ The pass is not done when it can tell a coherent story.
 It is done when it can say which parts of that story are owned by the runtime
 itself and which parts still live in the operator's head.
 
+That difference is the actual retrieval target.
+The repo is not only trying to retrieve facts.
+It is trying to retrieve the current boundary between shared truth and private
+operator folklore.
+
 This page also implies a held-out test for the knowledgebase as a whole:
 
 can a reader leave the site able to distinguish:
@@ -139,6 +169,11 @@ can a reader leave the site able to distinguish:
 without privately reconstructing that map themselves?
 
 If not, the assimilation pass has still failed, even if it cited many files.
+
+That held-out test matters more than page-level elegance.
+If the reader still has to mentally fuse several registers of truth after
+reading the site, then the site has only relocated the reconstruction burden,
+not removed it.
 
 The real system the user wants is only partially visible in any one artifact.
 Some files show the live runtime.
@@ -164,6 +199,10 @@ The knowledgebase regresses whenever it quietly merges these into one register:
 Each of those answers a different question.
 None of them are allowed to impersonate the others.
 
+That sentence should be treated as a hard anti-flattening rule.
+Most of the worst documentation failures in this repo happen when one of those
+registers borrows the confidence or emotional weight of another.
+
 This is the main anti-fog rule for the whole documentation set.
 
 It is also why top-level pages cannot be excused for being "just summaries."
@@ -183,6 +222,11 @@ A summary is not better just because it is:
 If those gains come from deleting ownership ambiguity or deleting the remaining
 reconstruction tax, the summary has become less truthful.
 
+This is why summary work in this repo should feel slightly over-corrective.
+The docs are not merely fighting clutter.
+They are fighting a repeated tendency to sound complete by quietly removing the
+very discomfort that tells the truth.
+
 ## The user's hidden demand this index must preserve
 
 The user is not simply asking for accuracy at the sentence level.
@@ -200,6 +244,11 @@ The hidden demand is:
 
 If a retrieval pass returns a technically correct but smaller question, it is
 still a bad retrieval pass.
+
+That is the most common near-miss this knowledgebase has to keep preventing.
+The repo already has enough material to answer many adjacent questions well.
+The difficulty is refusing to confuse that with answering the exact one the
+user actually cares about.
 
 That is the central trap in this repo.
 
@@ -223,6 +272,11 @@ than to retrieve:
 - what exact wrong-node behavior is still unproven
 - what kind of "option" is actually fake because it leaves the same operator
   burden intact
+
+That asymmetry is the real reason this page exists.
+It is easier to inventory, easier to compare, easier to summarize, and easier
+to narrate respectably than it is to preserve the user's real standard for
+what would count as relief.
 
 That asymmetry has to stay visible because it explains why so much seemingly
 competent documentation still misses the point.

@@ -10,6 +10,11 @@ The user's complaint is not mainly that earlier docs were too short.
 It is that they kept sounding more complete, more settled, and more proved than
 the repo had actually earned.
 
+This page therefore should not be read as a formal appendix.
+It is closer to an anti-inflation device for the entire knowledgebase.
+Its job is to keep the rest of the site from gaining confidence faster than the
+repo gains shared truth.
+
 There is a more specific version of that complaint underneath the wording:
 
 the docs kept reconstructing a smaller dream than the user actually has.
@@ -42,6 +47,11 @@ This ledger is therefore not an appendix.
 It is one of the main devices stopping the site from drifting back into
 "interesting architecture summary" mode.
 
+It also protects against a second failure mode:
+the docs correctly preserve the nouns, the plans, and the broad direction, but
+they quietly stop preserving the user's harsher benchmark for what would count
+as an actually satisfying answer.
+
 It is also one of the pages that most directly decides whether this docs set is
 actually doing retrieval-like reconstruction or merely polished summarization.
 
@@ -73,6 +83,12 @@ Examples:
 Those are not tiny wording differences.
 They are exactly the gaps the user keeps reacting to.
 
+This is why the ledger has to govern emotional equivalence, not just factual
+equivalence.
+Two claims can be adjacent in ordinary infrastructure language while being very
+far apart in terms of whether they actually cross one of the user's real
+negative benchmarks.
+
 This ledger exists so those gaps stay named instead of being smoothed into
 confidence.
 
@@ -96,6 +112,11 @@ is.
 
 The repo can survive imperfect implementation.
 It cannot survive docs that erase which parts are still imperfect.
+
+That sentence should be read literally.
+Implementation debt is expected here.
+Narrative overpayment is far more dangerous, because it makes the unresolved
+parts harder to see and therefore harder to remove honestly.
 
 The deeper failure being guarded against is:
 
@@ -122,6 +143,11 @@ If a page fuses those fragments into a single smooth present-tense story, it
 does not merely blur evidence classes.
 It erases the actual development pressure that makes the repo intelligible.
 
+This is one reason the ledger has to stay a little repetitive.
+Repeatedly restating where proof stops is not verbosity here.
+It is one of the only reliable ways to keep a fast-moving, archive-heavy repo
+from becoming retrospectively flatter than it really is.
+
 ## How to use this ledger
 
 Every serious page in the knowledgebase should be readable through five fields:
@@ -137,12 +163,20 @@ The last field is the most important one.
 This repo does not mainly need more confident prose.
 It needs prose that stops exactly where the evidence stops.
 
+And it needs prose that explains why that stop point is painful.
+Otherwise the docs can become technically disciplined while still emotionally
+missing the user's actual complaint.
+
 And it needs prose that says why stopping there matters.
 
 This repo is full of components, plans, and experiments that can make a page
 sound smarter simply by being mentioned together.
 The ledger is what prevents "mentioned together" from turning into "proved
 together."
+
+That anti-merger rule is one of the most important in the site.
+This repo has enough real moving parts that adjacency can easily masquerade as
+causality or proof.
 
 It also needs prose that preserves what kind of thing is being evidenced:
 
@@ -171,6 +205,10 @@ following as emotionally equivalent to the real ask:
 
 All of those may matter.
 None of them automatically satisfy the user's actual benchmark.
+
+That is why this page has to keep asking not only whether a claim is supported,
+but whether the supported claim is still the same claim the user actually cares
+about.
 
 The benchmark remains harsher:
 
@@ -212,6 +250,12 @@ Live components are real.
 In this repo, "real component exists" is usually only the beginning of the hard
 question, not the end of it.
 
+That warning matters because the repo contains a lot of real machinery that can
+sound like relief before it becomes relief.
+The problem is rarely absence of components.
+The problem is whether those components have actually displaced the sacred human
+truths they are often narrated as solving.
+
 That is because the user's complaint is rarely "the component is missing."
 It is usually one of these harsher complaints:
 
@@ -244,6 +288,9 @@ That question should often be followed immediately by another:
 That second question is crucial because this repo contains many real components
 whose presence increases sophistication faster than it increases honest
 cross-node truth.
+
+That asymmetry should remain front and center.
+It is one of the main reasons a repo like this can feel more solved than it is.
 
 ## Class 2: repo-native intent evidence
 
