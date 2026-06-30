@@ -21,6 +21,11 @@ That downgrade is not just a navigation mistake.
 It is one of the main ways the user's dream gets quietly reduced into something
 more discussable and less faithful to the real wound.
 
+This page therefore has one job:
+
+help a reader ask the right question first, instead of wandering through a
+folder tree until the repo starts sounding more solved than it really is.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -37,6 +42,25 @@ This page is not authoritative about:
 - deciding the winning future control layer
 - implying that strong navigation equals strong implementation maturity
 - turning a reading route into a completion claim
+
+## Start from the pain, not the folder
+
+Do not start with:
+
+- "architecture sounds close"
+- "operations sounds close"
+- "research sounds close"
+
+Start with one of these actual human questions:
+
+- what is the user really trying to make stop happening?
+- what does the root Compose runtime really own today?
+- why is wrong-node traffic still the deciding humiliation threshold?
+- what exact missing layer is the repo still searching for?
+- what still has to be proven before stronger language becomes honest?
+
+Folder browsing tends to reward adjacency.
+This repo needs routes that preserve the exact burden still left behind.
 
 ## Strongest honest current answer
 
@@ -73,6 +97,11 @@ But:
 - did the route preserve the exact remaining insult the user is still reacting
   to?
 
+That insult is usually some version of:
+
+the system still becomes socially manual again right when the topology
+question matters.
+
 ## The reading mistake this page is trying to stop
 
 Most bad retrieval in this repo follows the same pattern:
@@ -107,6 +136,26 @@ Better retrieval can create a dangerous illusion:
 - therefore the repo must now be much closer to solving the thing
 
 This page has to keep breaking that illusion on purpose.
+
+## What a good first pass should leave in your hands
+
+If the route is working, you should be able to leave the first pass with a
+small packet like this:
+
+- the request class or failure scene you are reasoning about
+- the strongest runtime artifact you relied on
+- the strongest dream or archive artifact you relied on
+- the hidden operator step that still remained afterward
+- the stronger sentence that still stayed illegal
+- the next proof packet you would need before saying it
+
+If your first pass only leaves you with:
+
+- "I understand the architecture better"
+- "there are several plausible directions"
+- "the docs seem organized now"
+
+then the route was too weak for this repo.
 
 ## What disciplined retrieval has to preserve
 
@@ -188,6 +237,27 @@ Retrieval can therefore fail in two opposite ways:
 The second failure is more dangerous here because it can sound thorough while
 still betraying the user's actual demand.
 
+## The three easiest bad summaries
+
+These are the most common failures a route should help you avoid:
+
+### 1. "The repo mainly needs better HA"
+
+Too small.
+The repo needs shared runtime truth that removes private reconstruction.
+
+### 2. "The repo mainly needs the right orchestrator"
+
+Too early.
+The repo first needs to prove what extra truth must exist and who should own
+it.
+
+### 3. "The repo mainly needs better docs"
+
+Too flattering.
+Better docs only matter here if they reconstruct the real burden more
+faithfully and stop weaker neighboring answers from taking over.
+
 ## Read by claim type first
 
 Before following a reading path, identify the class of sentence you are trying
@@ -214,6 +284,11 @@ That vagueness matters because it is exactly where:
 - archive pressure turns into false closure
 
 This page is supposed to interrupt that slide before it happens.
+
+If you want the shortest practical rule, use this:
+
+> pick the sentence you want to support first, then pick the smallest bundle
+> that can support it honestly.
 
 ## Question-first reading paths
 
@@ -277,6 +352,11 @@ hallucination:
 - the YAML is rich
 - the edge is serious
 - therefore the hard part must mostly be solved
+
+The real question this route should leave behind is:
+
+> what part of the request story is still being privately completed by the
+> operator even after all of this YAML exists?
 
 This path is for live truth, not wishful extrapolation.
 
@@ -402,6 +482,9 @@ This path protects against the weak misreading:
   have real options"
 
 Candidate richness is not the same thing as burden relief.
+
+It is especially not the same thing as dignity restoration under wrong-node
+entry.
 
 ### 7. "How do I keep my own summary from lying?"
 
@@ -547,6 +630,13 @@ A serious reading packet should preserve:
 
 If a reading packet only says "I read the right pages," it is still too weak
 for this repo.
+
+The packet should be good enough that another reader can ask:
+
+- which page let you say that?
+- which truth class was that page allowed to speak for?
+- what stronger sentence did you still refuse to say?
+- what burden was still left in operator memory afterward?
 
 ## Bottom line
 

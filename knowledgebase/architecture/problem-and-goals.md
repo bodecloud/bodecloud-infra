@@ -24,6 +24,10 @@ It is looking for a system that stops humiliating the operator by revealing,
 too late, that the operator is still the real keeper of placement and recovery
 truth.
 
+That sentence is not rhetorical decoration.
+It is the practical acceptance test behind almost every future architecture
+choice in this repo.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -53,6 +57,9 @@ the user:
 - the planning is serious
 - the surviving humiliation starts sounding like implementation residue instead
   of the central unsolved fact
+
+The more serious the stack looks, the easier it becomes to understate the
+remaining burden-transfer problem.
 
 ## Strongest honest current answer
 
@@ -131,6 +138,13 @@ They are still not the answer if the wrong-node scene still cashes out into:
 - remembered route meaning
 - remembered stateful caveats
 
+The whole point is to make fewer important sentences start with:
+
+- "well, privately we know..."
+- "in practice we remember..."
+- "normally that node actually..."
+- "as long as the operator knows..."
+
 ## The wound behind the problem statement
 
 The problem is not only architectural.
@@ -198,6 +212,26 @@ This project cannot afford either one by itself.
 The whole point is that the technical missing truths and the emotional insult
 of those missing truths are the same wound seen from two angles.
 
+## Three bars every future option has to clear
+
+Any future helper, registry, agent, scheduler, or orchestrator candidate has
+to clear all three of these bars:
+
+### 1. Honesty bar
+
+It must make the system easier to describe without inflating what is actually
+proven.
+
+### 2. Dignity bar
+
+It must remove a real bad-day private reconstruction step instead of merely
+making the surrounding machinery look more respectable.
+
+### 3. Legibility bar
+
+It must not charge so much control-plane worldview tax that the repo loses the
+directness that makes the root Compose surface valuable in the first place.
+
 This is one of the places where the knowledgebase most needs to "actually RAG"
 instead of merely summarize.
 
@@ -251,6 +285,10 @@ The repo has **not** solved the problem merely because:
 - a mesh network connects the nodes
 - a helper can generate routes on the happy path
 - a larger orchestrator can be demoed in isolation
+
+The repo also has not solved the problem merely because the docs can now state
+the requirement stack cleanly.
+Better diagnosis is still not the same thing as shared runtime ownership.
 
 Those may all be helpful ingredients.
 None of them, by themselves, prove that request meaning survives wrong-node
@@ -409,6 +447,22 @@ That is why the problem statement must stay stricter than generic anti-SPOF
 language.
 Without the full stack above, "resilience" becomes too easy to say and too hard
 to trust.
+
+## What progress would actually look like in this repo
+
+A real step forward would not just add components.
+It would make at least one previously private answer become system-readable.
+
+Examples of genuine progress would look like:
+
+- a request landing on the wrong node can now be explained from tracked
+  placement truth instead of memory
+- peer eligibility is now derived from a shared surface rather than inferred
+  socially
+- the rescue path survives the exact failure that used to delete it
+- forwarded requests can be shown to preserve auth and middleware meaning
+- stateful service claims get narrower, stricter, and more provable instead of
+  broader and more flattering
 
 ## Why generic options lists still fail
 

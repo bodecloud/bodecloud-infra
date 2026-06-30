@@ -11,6 +11,23 @@ This site exists for one hard question:
 
 That is the real question.
 
+If you are here because ordinary self-hosting or homelab answers keep sounding
+technically respectable and still somehow useless, that reaction is part of
+the point.
+
+The user is not mainly saying:
+
+- "I need more products to compare"
+- "I need a better-looking cluster story"
+- "I need a more fashionable platform label"
+
+The user is saying something much more specific:
+
+> every time the system becomes multi-node, the surrounding ecosystem offers
+> either static glue that still depends on private human reconstruction or a
+> much larger orchestrator worldview that has not yet earned the right to hide
+> that much truth.
+
 This repo is not mainly about:
 
 - generic self-hosting
@@ -43,6 +60,21 @@ This site is not authoritative about:
 
 The site should help a reader leave with the right map of reality, not the
 most optimistic story.
+
+It should also leave the reader with the right emotional conclusion.
+
+Not:
+
+- "there is a lot here, so the missing part must be small"
+- "the stack looks serious, so the hard part must mostly be solved"
+- "the docs are coherent now, so the platform must already own the truth"
+
+But:
+
+- the stack is serious
+- the dream is real
+- the remaining burden is still brutally specific
+- the missing burden transfer is still the center of the problem
 
 That means this front page is not allowed to become a high-gloss compression of
 the whole repo.
@@ -83,6 +115,37 @@ The stack is real.
 The missing truth-owning middle layer is still incomplete.
 
 That three-part sentence has to stay intact.
+
+In practical terms, the user is trying to stop this scene from being normal:
+
+1. a request hits a healthy public node
+2. the requested service is not local to that node
+3. the operator still has to privately know where the service really lives
+4. the operator still has to privately know whether forwarding is safe
+5. the operator still has to privately know whether auth, middleware, or data
+   semantics survive the handoff
+
+That is the hidden work the platform is supposed to absorb.
+
+## The specific hidden job the operator is still doing
+
+The shortest honest description of the current wound is:
+
+the operator is still acting like the missing control plane.
+
+That hidden job includes things like:
+
+- remembering what runs on which node right now
+- remembering which peer is actually safe to forward to
+- remembering whether the rescue path still exists under failure
+- remembering whether a "healthy" answer is only reachable or actually
+  semantically valid
+- remembering which stateful services are bluffing and which are really safe
+
+The docs only become genuinely useful when they keep asking:
+
+> which of those responsibilities has the system actually taken over, and
+> which ones are still secretly living in one person's head?
 
 Most weak summaries in this repo fail by dropping one clause:
 
@@ -156,6 +219,10 @@ still teaching the same lie the user is tired of hearing:
 
 > there are lots of options now, so the hidden burden must already be lower
 
+There really are many products, many guides, and many partial techniques.
+The issue is that too many of them stop one layer before shared runtime truth
+actually replaces private human reconstruction.
+
 ## The dream in one brutally concrete scene
 
 The dream is not abstract HA.
@@ -175,6 +242,20 @@ That is the scene.
 
 The repo only gets to call itself closer to the dream when that scene becomes
 more system-owned and less operator-owned.
+
+That is the real maturity test here.
+
+Not:
+
+- how many services are running
+- how many public nodes exist
+- how sophisticated the proxy layer looks
+- how many future orchestrators have been evaluated
+
+But:
+
+- how much of the bad-day explanation can now be read from shared tracked
+  truth instead of remembered privately
 
 If a page does not help a reader reason about that scene, it may still be
 technically useful, but it is not yet close enough to the actual wound.
@@ -212,6 +293,10 @@ It means:
 - a thinner truth-owning layer
 - that removes the specific hidden burden the operator currently carries
 - without charging more worldview tax than the burden is worth
+
+The repo is not begging for abstraction.
+It is begging for a small amount of additional truth ownership that actually
+changes what happens when the request lands on the wrong machine.
 
 That distinction is the center of the whole site.
 
@@ -252,6 +337,26 @@ The knowledgebase should not be optimized toward:
 
 unless those improvements also preserve the still-unmoved burden with equal
 clarity.
+
+## Start here if you want the shortest faithful route
+
+If you only want the smallest packet that still preserves the real problem,
+read these next:
+
+1. [User Intent and Dream](research/user-intent-and-dream.md)
+2. [Problem and Goals](architecture/problem-and-goals.md)
+3. [Operator Contract and Success Criteria](architecture/operator-contract.md)
+4. [Current Compose Runtime](architecture/current-compose-runtime.md)
+5. [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md)
+6. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
+7. [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
+
+That route should leave you with four concrete things:
+
+- the exact bad-day scene the user wants to make boring
+- the exact hidden operator work that still exists today
+- the exact stronger sentence the docs are still not allowed to say
+- the exact next proof packet the repo would need before sounding stronger
 
 ## The four truth registers you have to keep separate
 
