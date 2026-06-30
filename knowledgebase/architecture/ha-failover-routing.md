@@ -60,6 +60,24 @@ That is the dream.
 The rest of this page is about how much of that dream the tracked runtime
 actually earns.
 
+## The fake wins this page is supposed to reject
+
+This page exists partly to reject routing stories that sound close enough but
+still leave the wound alive.
+
+Examples of fake wins:
+
+- more than one public IP exists, therefore HA is basically present
+- Traefik has the route, therefore the wrong node can preserve it
+- `docker-gen-failover` wrote fallback-shaped config, therefore fallback is
+  solved
+- the protected page still answers, therefore the policy meaning survived
+- the TCP port is reachable, therefore the stateful service became resilient
+
+Those are not tiny wording mistakes.
+They are exactly how the repo would drift back into the same ambiguity that
+made the user angry in the first place.
+
 ## What the current runtime materially contains
 
 The routing story is not hypothetical.
@@ -242,6 +260,25 @@ It is this event:
 
 Every architecture choice in this repo is downstream of that event.
 
+## The route-level proof packet this repo actually needs
+
+For this repo, a routing claim only starts to become real when it can be
+reduced to one named proof packet:
+
+1. name one route
+2. name the node that receives the request
+3. show that the node does not host the target locally
+4. show what shared truth told it where to go
+5. show why the chosen peer was eligible rather than merely reachable
+6. show that the forwarded route still meant the same thing
+7. if failover is claimed, show the route after the preferred backend died
+8. show the resulting evidence without requiring private operator narration
+
+That packet is intentionally narrow.
+
+This repo does not need another hundred broad routing promises nearly as much
+as it needs one route-level packet that survives embarrassment honestly.
+
 ## Why Cloudflare is necessary but insufficient
 
 Cloudflare is a real part of the anti-SPOF story because it helps prevent one
@@ -366,6 +403,7 @@ The docs are **not** allowed to say:
 - Cloudflare plus Traefik removed the hidden operator SPOF
 - TCP routing implies stateful resilience
 - the platform already behaves like one cloud in the user's intended sense
+- the helper stack has already become a real distributed control plane
 
 ## What would materially change the routing story
 
