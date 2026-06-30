@@ -29,6 +29,11 @@ It also becomes dangerous in a more specific way:
 That is exactly how a blueprint can sound advanced while still preserving the
 same human SPOF under a more respectable vocabulary.
 
+That means a better blueprint is not an answer.
+More coherent orchestration language is not burden transfer.
+A cleaner control-layer story is not shared truth unless one more decisive
+runtime fact stops depending on remembered operator folklore.
+
 There is an even harsher standard underneath it:
 
 > can the documentation reconstruct the actual system the user is trying to
@@ -61,6 +66,10 @@ It also has to refuse a subtler failure mode:
 - coherence starts sounding like settlement
 - settlement starts sounding like a live operating model
 - the unresolved ownership question quietly disappears
+
+That failure mode gets more likely as the docs improve.
+This page can become much better at reconstructing the dream and still be
+dangerous if the reconstruction starts feeling like partial fulfillment.
 
 ## What this page is and is not allowed to prove
 
@@ -95,6 +104,14 @@ The following still do not count as a trustworthy blueprint in this repo:
 
 Those make the page easier to read.
 They do not yet make it a serious guide for promotion.
+
+This page should therefore keep one more boundary explicit:
+
+- better orchestration synthesis is not orchestration progress
+
+The repo is now capable of cleaner synthesis than before.
+That should not be mistaken for one more hidden human SPOF having already
+moved.
 
 ## Quick claim router
 
@@ -159,6 +176,10 @@ out of operator memory without destroying the Compose-first surface too early.
 This blueprint is useful only to the degree that it keeps asking which burden
 actually moves and which burden merely gets renamed behind cleaner
 architecture.
+
+If the page ever becomes a very intelligent explanation of why several control
+layers are plausible while making it harder to say which exact truth would
+move first, then the page got worse even if it also got more sophisticated.
 
 ## What a real blueprint-promotion packet would need
 

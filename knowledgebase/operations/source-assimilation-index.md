@@ -28,6 +28,11 @@ The user is not complaining about lack of summarization effort.
 The user is complaining about the way effort keeps getting spent on adjacent
 breadth while the decisive burden-transfer question quietly becomes less sharp.
 
+That means better assimilation language is not actual assimilation.
+More disciplined retrieval is not the same thing as one more truthful answer.
+Broader source coverage is not fidelity if the extra coverage makes the wound
+easier to blur.
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to prove:
@@ -52,6 +57,12 @@ And "sounding assimilated" is one of the most dangerous fake victories in this
 repo.
 The docs can become broader, denser, calmer, and more cross-linked while still
 failing to reconstruct the actual accusation driving the project.
+
+This page has to keep naming that because "now it finally feels organized" is
+one of the most dangerous fake victories available to the knowledgebase.
+Organization matters.
+It is still not the same thing as preserving the user's real benchmark through
+every page that follows.
 
 That is why this page has to stay suspicious of breadth itself.
 
@@ -112,6 +123,9 @@ So "actually RAG this time" in `bolabaden-infra` means:
 
 If the docs skip that sequence, they may become longer without becoming more
 truthful.
+
+They may also become more convincing without becoming more faithful.
+That is a worse failure here than being obviously incomplete.
 
 Length, breadth, and surface sophistication are unusually weak proxies for
 truthfulness here.
@@ -228,6 +242,11 @@ This page should keep treating that conversion as a real regression.
 If retrieval gets better at architecture summary while getting worse at burden
 reconstruction, the docs have become more impressive and less faithful at the
 same time.
+
+That sentence should be treated as a real regression test.
+If a revision makes the site feel more exhaustive but less able to state what
+the operator still privately knows, then the revision moved in the wrong
+direction even if it cites more source material.
 
 That conversion is also the documentation version of fake relief:
 

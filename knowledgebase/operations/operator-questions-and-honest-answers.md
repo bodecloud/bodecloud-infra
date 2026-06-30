@@ -53,6 +53,11 @@ acceptable while still leaving the same hidden question untouched:
 > what exact truth is still cashing out into the operator at the moment the
 > system should have carried it itself?
 
+That means better operator guidance is not operator relief.
+Better questions are not burden transfer.
+Better recommendations are not one more honest option if they still leave the
+same private completion step intact.
+
 ## Strongest honest current answer
 
 The repo is not mainly suffering from lack of tools.
@@ -141,6 +146,13 @@ Every serious answer here should be able to say four things plainly:
 If an answer cannot do those four things, it is still too close to tooling
 advice instead of burden-faithful reconstruction.
 
+That standard matters even more now that the repo is getting better at the
+genre.
+A strong answer on this page can start sounding like closure precisely because
+it is sharper than ordinary self-hosting advice.
+This page has to keep refusing that reward when the surviving burden has not
+actually narrowed.
+
 ## What this page must not let happen
 
 An operator FAQ page is one of the easiest places for the docs to get flatter
@@ -154,6 +166,16 @@ The main failure mode looks like this:
 - the actual burden is quietly shrunk into a smaller neighboring problem
 
 This page should keep refusing that move.
+
+It also has to refuse a subtler move:
+
+- the questions are now reconstructed faithfully
+- the answers now identify the smaller neighboring trap
+- the burden is now named more precisely
+- therefore the repo starts sounding like it is finally surrounded by real
+  options
+
+That is still too generous unless one more burden actually stops being private.
 
 Sympathy can substitute for specificity here if the page is not careful.
 The prose can sound more understanding while naming less of the surviving
@@ -256,6 +278,11 @@ becoming less faithful:
 
 If an answer looks more useful but is less able to identify the surviving
 private truth, it got worse.
+
+The inverse matters too:
+an answer can get much better at identifying the surviving private truth and
+still not prove that any current option relocates it.
+That is a documentation gain, not yet a platform gain.
 
 ## What a genuinely useful answer should leave behind
 
