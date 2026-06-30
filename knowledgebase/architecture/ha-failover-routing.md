@@ -77,6 +77,53 @@ That is the whole difference between:
 - a stack that can route many things locally
 - and a stack that stops gambling on node locality
 
+## What still does not count as HA or failover here
+
+This page should make the common overreads illegal.
+
+The following still do not count as meaningful HA or failover in this repo:
+
+- more than one public node can receive the first hop
+- Traefik is present and healthy
+- a helper generates fallback-shaped route material
+- a TCP router exists for a stateful service
+- a local protected route returns `200`
+- a mesh exists between nodes
+
+All of those may be real progress.
+None of them are yet the user's actual benchmark unless they also reduce the
+need for private placement memory, preserve request meaning on the wrong node,
+and survive the failure that made fallback necessary.
+
+That is why this page has to keep decomposing routing into narrower truths
+instead of letting "HA routing" sound like one solved category.
+
+## What a real routing proof packet would have to contain
+
+If this page ever supports stronger routing claims, it should be because an
+actual route-level proof packet exists.
+
+That packet should include:
+
+- the exact route class, such as stateless HTTP, protected HTTP, raw TCP, or a
+  named stateful surface
+- the entry node and backend node identities
+- the source of placement and peer truth used for the handoff
+- the failure condition introduced, if fallback is being claimed
+- the policy or middleware comparison, if semantic continuity is being claimed
+- the explicit statement of which stronger routing class is still unproven
+
+Examples:
+
+- a protected HTTP route can prove wrong-node dignity for that route class
+  without proving TCP or stateful correctness
+- a TCP route can prove transport continuity without proving write authority
+- a stateful drill can prove one exact topology without upgrading the whole
+  platform into generic HA
+
+Without packets like those, routing prose is still too easy to overread as
+stack-wide resilience.
+
 ## The current routing surface in the priority implementation
 
 The priority root runtime is the merged surface created by:

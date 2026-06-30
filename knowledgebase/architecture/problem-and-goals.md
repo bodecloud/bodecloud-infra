@@ -60,6 +60,26 @@ The repo is trying to solve this:
 The repo is therefore not only a hosting system.
 It is a search for a smaller honest control surface.
 
+## What still does not count as understanding the problem
+
+This page needs its own anti-flattening filter.
+
+The following still do not count as having reconstructed the user's actual
+problem:
+
+- rewriting "anti-SPOF" in more polished language
+- treating the problem as general self-hosting complexity
+- treating the problem as mostly about choosing between Compose and a scheduler
+- describing the topology pressure without naming private operator
+  reconstruction as the wound
+- assuming that more flexibility or more options are automatically relief
+
+Those readings all stay too generic.
+The user's complaint is narrower and harsher:
+
+> too many supposedly serious answers still leave the operator as the real
+> keeper of placement, fallback, and semantic continuity truth.
+
 ## What does not count as solving this problem
 
 The problem is specific enough that it needs an explicit false-solution filter.
@@ -117,6 +137,24 @@ Those are real strengths.
 
 They are still weaker than the final requirement stack because most of them are
 ingredients, not shared truth.
+
+## What a serious problem-definition proof packet would have to contain
+
+If this page ever supports the claim that the repo has correctly identified the
+real problem rather than a neighboring one, it should be because the
+documentation leaves behind a proof packet.
+
+That packet should include:
+
+- the exact hidden burden being named
+- the route or service class where that burden becomes visible
+- the system-owned truth that is missing today
+- the human reconstruction step that still fills the gap today
+- the narrower artifact or drill that would prove the burden has moved
+- the explicit statement of which stronger burdens still remain
+
+Without that packet, even a sharp problem statement can still drift back into
+"interesting infra essay" territory.
 
 ## Requirement stack implied by the dream
 

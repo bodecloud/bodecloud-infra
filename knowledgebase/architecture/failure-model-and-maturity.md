@@ -95,6 +95,34 @@ the docs can speak more strongly about it.
 
 At the moment, most important lanes are still below that last level.
 
+## What still does not count as maturity
+
+This page needs a direct filter against maturity theater.
+
+The following still do not count as a lane becoming materially more mature:
+
+- more labels, helper names, or route objects exist
+- more nodes can be named in the docs
+- a route works on the preferred node
+- a failure story sounds more plausible
+- one lane got sharper while another lane was silently upgraded with it
+
+In this repo, maturity only moves when a hidden reconstruction burden actually
+shrinks.
+
+## What a lane-specific maturity proof packet would have to contain
+
+Before any lane graduates to stronger wording, the docs should be able to
+point to a packet that contains:
+
+- the exact lane being upgraded
+- the previous hidden operator burden
+- the new system-owned truth or artifact
+- the failure condition or comparison that was exercised
+- the boundary sentence naming what the lane still does not prove
+
+Without that packet, "more mature now" is still mostly atmosphere.
+
 ## The matrix
 
 | Domain | What the current worktree materially proves | Current maturity | Hidden operator burden still present | Next honest maturity step |
@@ -194,3 +222,21 @@ The mature thing to say is:
 > the stack is getting better at naming the right problems and has real
 > machinery around them, but the most important truths are still maturing as
 > separate lanes rather than one platform-wide victory.
+
+## The most dangerous false upgrade
+
+The easiest false upgrade in this repo is:
+
+> one HTTP lane got clearer, therefore the platform is now broadly HA-shaped
+
+That sentence is still wrong here.
+
+Even if one protected or stateless HTTP path becomes trustworthy, the docs must
+still keep separate pressure on:
+
+- TCP transport versus service authority
+- backend-loss fallback versus wrong-node happy-path rescue
+- stateful ownership and promotion
+- singleton control-plane realities
+
+If those boundaries blur, this page stops serving its only job.

@@ -56,6 +56,40 @@ It still does **not** prove the hardest missing truths:
 
 That difference is the whole reason this page exists.
 
+## What still does not count as runtime evidence
+
+This page is where documentation inflation becomes especially tempting.
+
+The following still do not count as strong runtime evidence for the user's real
+goal:
+
+- a large number of active services
+- a sophisticated-looking edge stack
+- multiple fragments and networks
+- TCP labels on stateful services
+- observability breadth
+- helper presence with failover-shaped names
+
+Those facts prove the repo is serious and operationally dense.
+They still do not prove that the system, rather than the operator, owns the
+truth needed on the bad day.
+
+## What a runtime-backed progress packet would have to contain
+
+Before this page is used to support stronger "the runtime is moving toward the
+dream" language, it should point to a concrete packet.
+
+That packet should include:
+
+- the exact live component or path being credited
+- the narrower burden it really reduces
+- the artifact in the root runtime that proves the component is materially
+  present now
+- the adjacent burden it still does not reduce
+- the next drill or comparison required before stronger language is allowed
+
+Without that packet, inventory tends to impersonate relief.
+
 ## The root file is still a major infrastructure surface
 
 The root file is not just a launcher for fragments.
@@ -258,6 +292,22 @@ Without those distinctions, the docs can sound coherent while quietly
 flattening away the user's whole complaint.
 
 ## The most important negative evidence already named by the repo
+
+The current runtime already contains negative evidence that the docs must keep
+visible instead of smoothing over:
+
+- `docker-gen-failover` is present but already documented elsewhere as losing
+  routes under the exact failure condition where rescue should matter
+- Headscale is materially live but openly treated as effectively singleton
+  today
+- stateful surfaces are present in the root graph, but presence does not
+  settle write authority, promotion, or replica semantics
+- no live shared placement-truth artifact in the root runtime has yet earned
+  stronger routing language
+
+This matters because the current stack is not only defined by what is present.
+It is also defined by which present helpers and surfaces still fail the user's
+benchmark under stress.
 
 The live runtime has to be read next to the planning material, because the
 planning layer records several crucial gaps that affect how the runtime should

@@ -109,6 +109,52 @@ That does not make the candidate worthless.
 It means the candidate has not yet answered the repo's real benchmark strongly
 enough to deserve default status.
 
+## What still does not count as an orchestration decision here
+
+This page should also say more directly what fake decisiveness looks like.
+
+The following still do not count as a serious architecture decision:
+
+- concluding that a bigger platform is inevitable because the docs now describe
+  many moving parts
+- treating helper sprawl as proof that a scheduler has already earned itself
+- preferring the option with the broadest ecosystem without naming the exact
+  hidden burden it removes
+- picking the most inspectable option while skipping whether it actually owns
+  enough truth on the bad day
+- narrating "several good candidates remain" when most candidates still leave
+  the same private burden in different packaging
+
+This matters because the repo is not suffering from lack of reputable product
+families.
+It is suffering from lack of options that survive the user's actual benchmark.
+
+## What a default-promotion packet would have to contain
+
+Before any extra layer earns default status here, the docs should be able to
+point to a concrete promotion packet.
+
+That packet should include:
+
+- the named burden being transferred
+- the truth surface the candidate now owns
+- the artifact carrying that truth
+- the drill or failure condition that shows the burden moved
+- the operator-visible inspection path that keeps the new layer legible
+- the explicit statement of what still remains outside the candidate's reach
+
+Examples:
+
+- if a shared-truth helper layer wins, show where placement and peer eligibility
+  live and how the edge consumes them
+- if a service-supervision layer wins, show which fallback or takeover behavior
+  became less private under failure
+- if a full scheduler wins, show which narrower layer failed first and why the
+  worldview tax is now justified by named pain instead of prestige
+
+Without that packet, the page is still just warming the reader toward a product
+family.
+
 ## The shortest honest answer
 
 The current default stance is still:
@@ -130,27 +176,6 @@ Too much infrastructure advice effectively says:
 
 This repo exists because the user does not accept that as the only adult
 decision surface.
-
-## What still does not count as an orchestration decision here
-
-This repo has seen enough platform gravity that it needs a harder false-choice
-filter.
-
-The following still do **not** count as having made the orchestration decision:
-
-- proving that a candidate can boot
-- proving that a candidate can schedule something
-- proving that a candidate has richer health semantics on paper
-- proving that a candidate has an ecosystem around ingress, storage, or rollout
-- proving that a candidate feels more "serious" than helper glue
-
-Those facts may all be relevant.
-They still do not answer the only question that matters here:
-
-> which hidden burden would stop living in the operator after this layer was
-> promoted?
-
-If the answer is still mushy, the candidate is still mostly prestige pressure.
 
 ## The candidate families the repo is actually circling
 

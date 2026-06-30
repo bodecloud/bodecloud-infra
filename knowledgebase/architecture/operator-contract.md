@@ -113,6 +113,40 @@ That last clause matters.
 The user is not asking for a cleaner story about the same hidden burden.
 They are asking for the burden itself to move.
 
+## What still does not count as operator relief
+
+This page should say the quiet failure mode out loud.
+
+The following still do not count as the operator contract moving in the user's
+favor:
+
+- the docs sound more rigorous
+- the stack is easier to describe at a high level
+- several candidate solutions are compared respectfully
+- a helper reduces repetition but not bad-day ambiguity
+- a stronger controller is proposed without proving which burden leaves the
+  operator
+
+Those things may improve orientation.
+They do not yet change the lived moment where the operator still has to answer
+the real question from private memory.
+
+## What a real operator-relief proof bundle would have to contain
+
+Before the docs claim the contract is being met in any lane, they should point
+to a bundle that contains:
+
+- the exact route or service class exercised
+- the node where the request landed first
+- the truth source the receiving node used
+- the evidence that the next decision was system-owned rather than
+  operator-reconstructed
+- the evidence that the user-visible contract stayed the same after handoff
+- the explicit sentence naming which stronger contract clauses remain unmet
+
+Without that bundle, the docs may still be describing aspiration or
+orientation rather than relief.
+
 ## The negative benchmark
 
 Before listing acceptance criteria, keep the anti-benchmark visible.

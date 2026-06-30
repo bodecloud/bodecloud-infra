@@ -54,6 +54,43 @@ What the repo still does **not** prove is the hardest part of the path:
 
 That seam is the entire point of this page.
 
+## What still does not count as a request-path answer
+
+This repo needs a harsher standard than "the path sounds traceable."
+
+The following still do not count as a real answer to the user's request-path
+question:
+
+- naming the components in order
+- showing that the first hop can hit more than one node
+- proving the local happy path only
+- describing a plausible peer-forward story without a shared placement authority
+- assuming fallback semantics from helper presence alone
+- treating one forwarded request as enough without naming what still remained
+  operator-supplied
+
+Those things can make the walkthrough clearer.
+They do not yet prove the system has stopped depending on sacred-node or
+private-topology memory.
+
+## What a real request-path proof packet would have to contain
+
+If this page ever supports a stronger claim than "the repo understands the
+seam clearly," it should be because a real proof packet exists.
+
+For a stateless protected HTTP route, that packet would need artifacts like:
+
+- the exact hostname or route class exercised
+- the receiving-node identity
+- the backend-node identity
+- the source of locality or placement truth used for the decision
+- the evidence that policy and auth remained the same after handoff
+- the evidence that the route survived the failure condition being claimed
+- the explicit sentence about what broader route classes were still not proven
+
+Without a packet like that, a clean walkthrough is still analysis, not route
+ownership proof.
+
 ## Read this page with the correct standard
 
 The standard here is not:
