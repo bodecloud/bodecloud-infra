@@ -1,576 +1,251 @@
 # User Intent, Dream State, and Control-Plane Refusal
 
-This page exists because most infrastructure docs avoid the only question that
-actually decides whether they are useful for this repo:
+This page is the recovery surface for the question the rest of the site keeps
+trying to answer too politely:
 
-> what does the operator want to feel true at request time, and which kinds of
-> "solutions" already fail that standard even when they sound advanced?
+> what is the user actually trying to make feel normal, and what kinds of
+> "solutions" still fail that standard even when they sound professional?
 
-For `bolabaden-infra`, that is not a side question.
-It is the center of gravity of the entire documentation set.
+For `bolabaden-infra`, this is not flavor text.
+It is the center of the project.
 
-If this page gets too polite, the rest of the site drifts back toward generic
-DevOps narration.
-That would miss the user's real demand entirely.
+If this page gets watered down, the rest of the docs become technically
+organized while still missing the real point:
 
-## The shortest possible honest reading
+- the user is not lacking tools
+- the user is not lacking product categories
+- the user is not lacking diagrams
+- the user is lacking an option that still feels honest after the request lands
+  on the wrong node
+
+That last line is the whole reason this repository exists.
+
+## The shortest honest reading
 
 The user is not mainly trying to:
 
-- host some services
-- spread containers across a few nodes
-- add a reverse proxy
-- collect orchestration brands
-- or make the stack sound more "serious"
+- spread some containers across multiple machines
+- make the stack sound more distributed
+- collect one more reverse proxy, scheduler, or cluster product
+- upgrade from "small homelab" to "serious homelab" language
 
-The real goal is much sharper:
+The real ask is much sharper:
 
-> build a personal cloud that stays manually understandable and
-> Compose-readable, but behaves like one resilient distributed platform at
-> request time, without paying heavyweight orchestrator tax before that tax has
-> clearly justified itself
+> build a personal cloud that stays Compose-readable and operator-owned, but
+> behaves like one resilient system at request time, without paying a giant
+> scheduler tax before that scheduler has clearly earned itself.
 
-That is the dream the repo keeps circling.
+That sentence still needs one more cut.
 
-A more exact reading is:
+The user is not only asking for "something between Compose and Kubernetes."
+That summary is too soft.
+There are many things "between" those nouns that still preserve the same
+private burden:
 
-the user wants the system to become distributed without becoming emotionally
-unowned.
+- the operator still remembers where the service really lives
+- the operator still remembers which node is sacred
+- the operator still remembers which fallback is currently safe
+- the operator still remembers which stateful system is only pretending to be
+  resilient
 
-That is why Compose readability matters.
-That is why sacred-node memory is so offensive here.
-That is why giant orchestrator sermons read as non-answers.
+The dream is not "middleweight orchestration."
+The dream is:
 
-The user is not defending convenience for its own sake.
-They are defending the last surfaces where the system still feels directly
-legible and directly theirs.
+> remove sacred-node memory and wrong-node humiliation while preserving causal
+> legibility.
 
-That reading still needs one more layer of precision.
-
-The user is not merely asking for "lighter orchestration."
-That phrase is too weak and too easily co-opted by the same fake-option market
-the repo is reacting against.
-
-The sharper demand is:
-
-> find or build an option that keeps causal legibility, reduces sacred-node
-> dependence, reduces wrong-node humiliation, and exposes current truth without
-> importing a whole scheduler worldview before that worldview has clearly
-> earned trust
-
-That is why the dream cannot be summarized as "something between Compose and
-Kubernetes."
-Plenty of things can sit between those nouns while still preserving the same
-hidden operator burden.
+That is the real benchmark.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
-- the dream the repo is trying to preserve
-- the negative benchmark the user keeps applying
-- the kinds of answers that still fail even when they sound sophisticated
+- the dream the repository is trying to preserve
+- the anti-goals the user keeps rejecting
+- the emotional and operational benchmark future work has to cross
 
 This page is not authoritative about:
 
-- what the current root runtime already does successfully
-- whether any specific future control layer has already earned promotion
+- what the current root runtime already proves
+- whether any proposed control layer has already earned promotion
 - whether the tracked implementation already satisfies the dream
 
-That boundary matters because this page is meant to recover the real ask, not
-quietly bless the current state of the implementation.
+This page is a demand reconstruction surface.
+It is not a runtime proof page.
 
-## Quick claim router
+## Primary anchors for this page
 
-| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
-| --- | --- | --- | --- |
-| "this is the dream the repo is protecting" | repo-native intent + archive pressure | `.github/copilot-instructions.md`, `README.md`, archive-derived research pages | that the dream is already live |
-| "these are the user's anti-goals" | archive pressure + repo-native intent | `archive-pressure-patterns.md`, `README.md`, `.github/copilot-instructions.md` | that rejecting bad answers automatically identifies the winning good one |
-| "Compose readability matters for a deeper reason" | repo-native intent | `.github/copilot-instructions.md`, `AGENTS.md`, root runtime surface | that Compose alone already solves cross-node truth |
-| "this is what the platform should feel like on the bad day" | dream reconstruction | this page plus evidence-boundary pages | that the repo has already earned that feeling |
+Use these files in this order when reconstructing the dream:
 
-If a sentence about the user's dream starts sounding like runtime proof, it has
-crossed the wrong boundary.
+1. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+2. [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+3. [`archive-pressure-patterns.md`](archive-pressure-patterns.md)
+4. [`../architecture/instruction-surfaces-and-authority.md`](../architecture/instruction-surfaces-and-authority.md)
 
-The user's real test is harsher:
+Why this order matters:
 
-> after the diagram is over and the bad day starts, does this still feel like
-> a real option, or did it just rename the same dependence on private operator
-> interpretation?
+- `copilot-instructions.md` is the clearest statement of the dream
+- `README.md` keeps the repo-level honesty boundary around that dream
+- `archive-pressure-patterns.md` preserves what kinds of "answers" the user
+  already considers fake
+- the authority page explains why not every instruction surface should be read
+  as architecture proof
 
-For recurring archive patterns that reinforce this reading, also see
-[`archive-pressure-patterns.md`](archive-pressure-patterns.md).
-For the repo's instruction-surface authority order, also see
-[`../architecture/instruction-surfaces-and-authority.md`](../architecture/instruction-surfaces-and-authority.md).
+## The dream in one concrete scene
 
-## The documentation standard this dream requires
+The best way to reconstruct the user's intent is not with tooling names.
+It is with a literal bad-day request:
 
-This repo does not merely need "better docs."
-It needs a stronger reconstruction standard.
+1. Cloudflare sends a request to a healthy public node.
+2. That node does not host the target service locally.
+3. The receiving node still knows what service the request means.
+4. The receiving node still knows which healthy peer is eligible now.
+5. The request still preserves auth, middleware, and visible service meaning.
+6. The operator does not have to reconstruct the answer privately first.
 
-The closest useful analogy is:
+That is the dream.
 
-- ordinary infra docs act like a shallow summary over a messy archive
-- this repo needs something closer to authoritative retrieval over a messy
-  archive
+If a proposed architecture still fails that scene, the user will correctly
+experience it as the same old system wearing better clothes.
 
-That means the docs have to preserve things ordinary architecture writing tries
-to clean up:
+## What the user wants the platform to feel like
 
-- contradictions between dream and proof
-- shifts in confidence across different files
-- partial mechanisms that matter even though they do not yet compose into one
-  calm story
-- repeated archive pressure that reveals what the user is *actually* rejecting
+Most infrastructure writing stops at topology.
+This repo only makes sense if it also preserves desired runtime feeling.
 
-If a page feels cleaner because it silently dropped those things, the page got
-worse.
-
-This matters because the user is not complaining about tone.
-They are complaining about a deeper failure:
-
-systems and docs keep sounding flexible until the real topology still has to
-be reconstructed privately.
-
-So this page should be read as a rule for the rest of the site:
-
-> preserve the hidden negative benchmark, preserve the uneven evidence, and do
-> not answer a smaller neighboring problem just because it produces smoother
-> prose
-
-It also has to preserve the difference between:
-
-- a real option
-- a fake option
-- a future option that may earn reality later
-
-That distinction is one of the main ways the site avoids sounding more hopeful
-than the evidence supports.
-
-## What the user wants the system to feel like
-
-Most infrastructure docs stop at nouns.
-This project only makes sense if it also states the desired runtime feeling.
-
-The user wants the system to feel like this:
+The user wants the platform to feel like this:
 
 - traffic can land on any surviving node without that being a gamble
-- a local service stays local instead of being swallowed by fake cluster ritual
+- a local service stays local when that is honest
 - a remote service still works when the request lands on the wrong node
-- the route used during failure still feels like the same service, not a
-  semantically degraded fallback path
-- operator surfaces remain readable instead of disappearing behind invisible
-  control logic
-- stateful systems are described with much harsher honesty than stateless ones
+- fallback still feels like the same service, not a semantically degraded
+  workaround
+- middleware and auth do not silently disappear during fallback
+- operator surfaces stay inspectable instead of becoming invisible cluster
+  folklore
+- stateful systems are described much more harshly than stateless ones
 
-That feeling should be treated as a held-out evaluation surface.
-The docs should keep asking:
+That feeling is not sentimental.
+It is the held-out evaluation surface for the whole repo.
 
-- does a proposed answer reduce humiliation on the wrong node?
-- does it externalize truth, or just automate around hidden truth?
-- does it preserve causal legibility, or merely relocate it?
-- does it sound like relief only because it renamed the same burden?
+## What the user keeps rejecting
 
-That runtime feeling is the real benchmark.
-If a design sounds clever but does not produce that feeling, it is still
-missing the point.
+The user keeps rejecting two answer families.
 
-This matters because many answers can be technically competent and still feel
-wrong in the exact way the user is rebelling against:
+### Rejected family 1: static glue that still leaves truth in the operator's head
 
-- first hop is still a gamble
-- fallback still feels ceremonial
-- stateful HA still feels like branding
-- the operator still has to reconstruct the truth privately
+Examples:
 
-The benchmark here is not only topological.
-It is whether the platform stops behaving like a distributed illusion.
+- hand-maintained per-node upstream tables
+- hardcoded peer maps for every service
+- "dynamic" patterns that still require manual edits for each placement change
+- failover stories that only work while a specific person still remembers the
+  topology
 
-That means the dream is not satisfied by broader infrastructure language,
-cleaner diagrams, or more named alternatives.
-It is only satisfied when the wrong-node path, the fallback path, and the
-stateful honesty path stop depending on private repair knowledge.
+These answers fail because they preserve the hidden burden while improving the
+story around it.
 
-## The actual complaint
+### Rejected family 2: heavyweight worldview capture before it has earned trust
 
-The user's frustration follows a repeated pattern:
+Examples:
 
-1. Docker and Compose feel readable and empowering at small scale
-2. the moment multi-node routing, placement, and failover matter, that
-   readability mutates into manual glue and hidden truth
-3. the conventional answer becomes:
-   - just use Kubernetes
-   - just use Swarm
-   - just use a platform
-4. the operator is pushed into a rotten trade:
-   - keep brittle hand-maintained coordination
-   - or accept a heavyweight desired-state worldview that removes some pain
-     while importing a different class of complexity
+- "just use Kubernetes"
+- "just use Swarm"
+- "just use Nomad/Consul" without proving it preserves the desired operator
+  surface
+- platforms that solve one real pain while importing a much larger opaque
+  control plane
 
-This repo exists because the user does not accept that trade as the only adult
-answer.
+These answers fail because they often relocate the burden rather than making it
+more legible and more honestly owned.
 
-That is why the project should be read as a search for a missing middle:
+The dream refuses both extremes.
 
-- more dynamic than raw Compose
-- more readable than a controller empire
-- more honest than fake HA language
+## The real complaint under the architecture language
 
-That "missing middle" phrase matters, but it is still not enough on its own.
+The user's recurring complaint is not just "self-hosting is hard."
+It is more specific:
 
-The user is not mainly searching for:
+1. Docker and Compose feel empowering while the system is small.
+2. The moment multi-node routing and failover matter, truth starts leaking into
+   remembered host placement and ad hoc peer glue.
+3. The surrounding ecosystem offers either brittle hand wiring or a heavy
+   orchestrator worldview.
+4. Neither option feels like a real answer to the actual wound.
 
-- a market category
-- a respectable new tool family
-- a balanced-looking architecture diagram
+That wound is:
 
-The user is searching for a different honesty frontier.
+> the platform stops being directly legible at exactly the moment resilience is
+> supposed to become more real.
 
-They want more of the real topology burden to be carried by inspectable shared
-truth and less of it to be carried by remembered placement, remembered rescue
-rituals, and remembered sacred hosts.
+This is why the repo cares so much about Compose readability.
+Not because YAML is sacred.
+Because causal legibility is sacred.
 
-That is why so many conventional answers still feel insulting.
-They often do one of two things:
+## The hidden dependency the user is trying to kill
 
-- preserve the hidden burden while improving the story
-- or replace the story with a stronger worldview before proving the hidden
-  burden was actually removed
+Underneath most of the repo's frustration is one specific pain:
 
-The dream refuses both moves.
-
-## The deepest emotional center of the project
-
-Underneath the architecture vocabulary, this project is reacting to one very
-specific pain:
-
-self-hosting tools keep feeling empowering right up until the moment the system
-depends on things the operator privately remembers.
+self-hosting tools feel empowering right up until the system starts depending
+on things the operator privately remembers.
 
 That hidden dependency can look like:
 
-- one remembered machine
-- one remembered route
-- one remembered placement fact
-- one remembered secret-sync caveat
-- one remembered "do not restart that here" warning
-- one remembered topology truth the platform never exposed
+- one remembered public entrypoint
+- one remembered placement truth
+- one remembered "safe peer"
+- one remembered rescue ritual
+- one remembered warning about a stateful service that only looks portable
 
-That is why the repo keeps pushing so hard on:
+The user wants less of the system's truth to live there.
 
-- anti-sacred-node design
-- no-fake-failover language
-- lighter-than-Kubernetes coordination
-- operator-readable truth
+That is why many ordinary answers still feel insulting here.
+They improve:
 
-This is not just technical preference.
-It is a refusal to accept systems that only feel flexible until distribution or
-failure becomes real.
+- naming
+- automation
+- presentation
+- cluster vocabulary
 
-That is also why generic documentation styles fail here.
-They describe components and plans but not the psychological break where
-ownership turns into folklore.
+while leaving the same private truth burden intact.
 
-That break is central to the dream.
-If it is omitted, the repo gets misread.
+## What counts as a real option in this repo
 
-## The exact anti-goals
+For this project, an option is only real if it makes at least one of these
+things less true:
 
-To understand the dream, it helps to make the anti-goals explicit.
+- wrong-node entry still collapses back into private operator knowledge
+- fallback still depends on remembered placement
+- auth and middleware still become uncertain during handoff
+- stateful resilience is still mostly branding
+- the operator still cannot answer "what runs where right now?" from shared
+  inspectable truth
 
-The user does **not** want:
+If a proposed path does not materially reduce one of those burdens, then from
+the user's point of view it is mostly theater even if it is technically
+respectable.
 
-- a single reverse-proxy node that becomes the real sacred box while the docs
-  still say "multi-node"
-- static upstream tables that still depend on private operator memory
-- DNS redundancy narrated as if it were preserved service meaning
-- a route that technically answers while silently dropping auth, middleware, or
-  request identity
-- a giant controller surface adopted mainly because the ecosystem says that is
-  what "serious infrastructure" looks like
-- stateful services narrated by liveness symptoms instead of topology truth
-- a docs set that grants every proposed future equal emotional legitimacy just
-  because each one can be described in sophisticated language
+## What this page should force the rest of the site to do
 
-These refusals are not decorative.
-They are the negative shape of the desired platform.
+Every serious page in the knowledgebase should preserve all of the following:
 
-They also explain why the user sounds harsher than a typical self-hosting
-operator.
+- the real request-time benchmark
+- the distinction between live proof and dream reconstruction
+- the fact that wrong-node dignity is a first-class goal
+- the fact that stateful honesty is stricter than stateless continuity
+- the fact that larger control planes must earn their opacity
 
-The ecosystem keeps offering mature-sounding answers that add surface machinery
-while leaving the same hidden sacred facts intact.
-This repo exists as a refusal of that bait-and-switch.
+If a page becomes smoother by shrinking one of those things, it got worse.
 
 ## Strongest honest current answer
 
-If a reader asks, "What is this repo actually trying to achieve?" the shortest
-defensible answer is:
-
-> It is trying to build a Compose-readable personal cloud that can behave like
-> one resilient platform at request time, especially on the wrong node and on
-> the bad day, without accepting either brittle static glue or heavyweight
-> scheduler worldview tax before that tax has clearly earned itself.
-
-That is a dream statement, not a runtime-completion statement.
-
-## The clearest repo-native expression of the dream
-
-The highest-signal files remain:
-
-- [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
-- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-- [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
-- [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules)
-- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-
-They are not equal.
-
-The blunt authority order is:
-
-1. `copilot-instructions.md` names the dream most directly
-2. `README.md` keeps the repo-level honesty wall around that dream
-3. `AGENTS.md` anchors claims back to the live root runtime
-4. `.cursorrules` mostly constrains authoring discipline
-5. `INFRASTRUCTURE_MASTER_PLAN.md` names promoted future mechanisms
-
-If those surfaces are flattened into one voice, the dream immediately starts
-sounding more implemented than the worktree proves.
-
-It also starts sounding more settled than the repo's real argument allows.
-
-That matters because the docs are not only preserving "what the repo plans."
-They are preserving a live dispute inside the repo:
-
-- what the user actually refuses
-- what the runtime really proves
-- what the planning layer keeps trying to add
-- and which futures may still turn out to be fake options once they are tested
-  under wrong-node, fallback, and stateful pressure
-
-If that live dispute disappears, the site can still look comprehensive while
-quietly becoming much less faithful to the real ask.
-
-Taken together, they define a very recognizable desired shape:
-
-- no central orchestrator by default
-- multi-node Docker as the main world
-- Compose retained as the main authoring surface
-- Cloudflare as first-hop node-entry infrastructure
-- Traefik as the main L7 request surface
-- separate treatment for L4/TCP and stateful concerns
-- a lightweight current-state registry concept such as `services.yaml`
-- helper agents or narrow control surfaces before wholesale platform capture
-
-The sharpest language still lives in
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md),
-which explicitly describes:
-
-- services manually assigned to nodes
-- a current-state registry concept
-- local serve if present
-- peer proxy if remote
-
-The master plan turns that dream into named future mechanisms:
-
-- `bolabaden-sync-agent`
-- `bolabaden-failover-agent`
-- distributed placement truth
-- multi-record Cloudflare DNS
-- replacement of brittle failover generation
-
-So the dream is not vague.
-It is already implementation-shaped, even though the live runtime does not yet
-prove the whole thing.
-
-The docs fail whenever they blur those into one present-tense story:
-
-- the dream is sharper than a brainstorm
-- the plans are closer to the dream than the runtime is
-- the runtime is still weaker than the dream
-
-That unevenness is not a documentation defect.
-It is one of the most important surviving truths in the repo.
-
-## The behavior the user is actually asking for
-
-Across repo-native docs, plans, and the archive, the desired operating contract
-keeps converging on the same behavior.
-
-## 1. Any healthy node can be the first hop
-
-The system should not depend on one sacred public box.
-
-Cloudflare multi-record DNS matters, but only as the first hop.
-The deeper property is:
-
-- any surviving public node can receive the request
-
-That is the start of the dream, not the completion of it.
-
-## 2. Local service should stay local
-
-If the target service is already on the receiving node, the system should not
-pretend it needs a full cluster worldview to serve it.
-
-Why this matters:
-
-- the fast path stays fast
-- the mental model stays direct
-- debugging stays local when locality is real
-- the project avoids fake abstraction just to look modern
-
-This is one of the subtle parts of the user's demand.
-They are not asking for "distributed" as a performative aesthetic.
-They are asking for distribution that does not erase the clarity of locality.
-
-## 3. Wrong-node requests should still succeed
-
-This is the true center of gravity of the repo.
-
-The user keeps asking for a system where a request landing on the wrong node
-still works because the receiving node can:
-
-- determine that the target service is not local
-- know which peer currently hosts it
-- know that the peer is eligible now, not just in a stale config
-- preserve the route when local failure is the reason fallback is needed
-- preserve auth, middleware, headers, and policy continuity
-
-This is also the best compression of the user's real benchmark.
-
-Not:
-
-- "can the site answer from more than one box?"
-
-But:
-
-- "can the wrong node stop being semantically wrong?"
-
-That is the actual no-heavy-orchestrator distributed behavior the repo is
-trying to force into existence.
-
-This is also the place where ordinary docs begin cheating.
-They replace "wrong-node success" with easier claims like:
-
-- DNS reaches more than one box
-- the proxy is up
-- a peer is technically reachable
-- the route still exists in config
-
-The user is explicitly not asking for those watered-down versions.
-
-That sentence should govern the rest of the site.
-
-The watered-down versions are exactly the kinds of claims that sound useful
-while still failing the real benchmark:
-
-- more than one box can answer
-- a fallback route exists
-- the proxy is dynamic
-- the platform is HA-capable
-
-## 4. The operator surface stays readable
-
-The user is not asking for less automation because they enjoy manual chores.
-They are asking for readability because hidden control logic becomes its own
-kind of tax.
-
-The desired system should still be explainable in plain terms:
-
-- what runs where
-- what source of truth says that
-- how a node decides between local serve and peer forward
-- what disappears when a backend or node disappears
-- what layer of complexity is actually paying for itself
-
-That last point matters a lot.
-
-The dream is not "never introduce more structure."
-It is:
-
-> never introduce more structure without being able to explain which real pain
-> it is buying down
-
-The user can tolerate complexity that shows its work.
-They are rejecting complexity that arrives as branding, social pressure, or
-fashion instead of as an honest answer to a named missing truth.
-
-## 5. Stateful truth stays brutally honest
-
-The user is openly hostile to fake HA vocabulary.
-
-For state-bearing systems, the docs and architecture must answer:
-
-- who owns writes
-- what topology exists
-- how promotion or election works
-- how clients rediscover topology
-- what really survives node loss
-
-That is why this repo has to keep separating:
-
-- ingress continuity
-- request continuity
-- stateful correctness
-
-If those are flattened, the docs start sounding like every other stack that
-confuses reachability with resilience.
-
-## What the user is explicitly refusing
-
-The dream is only half the picture.
-The refusals matter just as much.
-
-The user is refusing:
-
-- sacred-node architectures that still cosplay as multi-node
-- static truth disguised as dynamic routing
-- DNS theater marketed as failover
-- opaque control planes that replace one hidden burden with another
-- platform adoption as a ritual act instead of a proven necessity
-- docs that smooth over the difference between stateless paths and stateful
-  ownership
-
-These refusals are not side preferences.
-They are the force shaping the whole repo.
-
-## The real category the user is trying to create
-
-What the user actually wants is not well-served by the usual categories.
-
-They are trying to force a more honest category into view:
-
-a personal cloud that:
-
-- stays Compose-readable
-- supports multi-node first-hop entry
-- preserves wrong-node requests without pretending that DNS solved everything
-- adds only the coordination truths that have truly earned their keep
-- refuses to narrate stateful systems with the same softness as stateless ones
-
-That is why "missing middle layer" is such a recurring concept.
-
-It is not just a tool gap.
-It is a category gap.
-
-The user is reacting to the fact that too much of the current ecosystem says:
-
-- local Docker is easy
-- real distributed behavior belongs to heavyweight orchestrators
-- therefore the space in between barely matters
-
-This repo exists precisely because that in-between space matters.
-
-## The simplest final summary
-
-If this page has to collapse into one sentence, it should be this:
-
-> the user is trying to build a personal cloud where multi-node Docker stops
-> turning into fake options and hidden operator burden the moment requests can
-> land on the wrong box, while also refusing to hand the whole problem to a
-> heavyweight orchestrator before that surrender has clearly earned itself
-
-That sentence should haunt every other page in the knowledgebase.
-
-If a page forgets it, the docs will start getting gentle and generic again.
+The dream is not ambiguous.
+The user wants a multi-node Docker system that behaves like one resilient
+platform at request time without defaulting to heavy orchestration, and they
+specifically want to stop acting as the hidden control plane when requests land
+on the wrong node or a backend disappears.
+
+The current repo absolutely preserves that dream.
+It does not yet prove the dream is live.
+
+That distinction has to stay visible everywhere.

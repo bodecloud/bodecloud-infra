@@ -30,52 +30,29 @@ This page is authoritative about:
 
 - why Compose remains the primary human contract
 - why the repo has not yet promoted a heavyweight orchestrator by default
-- which missing truths Compose still does not own cleanly
+- which important truths the current Compose surface still does not own
 
 This page is not authoritative about:
 
-- whether the current helper stack already closes those missing truths
+- whether the current helper stack already closes those truths
 - whether a future control layer has already earned promotion
 - whether the current runtime already behaves like the dream
 
-This page explains the authoring posture.
-It should not be used to overstate the runtime.
+This page explains the authoring posture, not the final runtime verdict.
 
-## Priority evidence stack for Compose-first claims
+## Strongest honest current answer
 
-When a sentence about Compose-first is being evaluated, it should be routed
-through this stack in order:
-
-1. root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-   and active fragments under
-   [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
-2. [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
-3. [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-4. contradiction and promotion pages elsewhere in the knowledgebase
-
-That sequence keeps this page from drifting into two opposite lies:
-
-- "Compose-first is just sentimental attachment"
-- "Compose-first already proves the runtime is close to the dream"
-
-The runtime has to anchor the claim first.
-Intent and future logic then explain why that anchor is still being defended.
-
-## Quick claim router
-
-| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
-| --- | --- | --- | --- |
-| "Compose is still the live human contract" | live runtime + repo-native intent | root `docker-compose.yml`, active `compose/` graph, `AGENTS.md`, `.github/copilot-instructions.md` | that Compose already owns distributed truth |
-| "the repo wants to delay heavyweight promotion" | repo-native intent | `.github/copilot-instructions.md`, `README.md` | that heavyweight promotion is permanently wrong |
-| "helper growth may be justified" | planning + contradiction analysis | architecture and research pages | that helper growth is already coherent enough to be trusted blindly |
-| "Compose-first is still honest" | synthesis judgment | this page plus current runtime and contradiction pages | that the bad-day intelligence is already system-owned |
-
-If a sentence about Compose-first starts sounding like broad runtime success,
-it has crossed out of the page's authority.
+Compose-first is still the least dishonest live authoring surface in the repo,
+but only because the missing distributed truths are still more honestly visible
+as missing than they would be if the repo pretended a bigger control plane had
+already earned itself. The important boundary is that Compose-first explains why
+the repo still leads with `docker-compose.yml`; it does not prove the current
+runtime already owns wrong-node truth, peer eligibility, backend-loss
+durability, or stateful correctness.
 
 ## What Compose-first is being forced to justify
 
-Compose-first is not just being defended against heavyweight orchestrators.
+Compose-first is not only being defended against heavyweight orchestrators.
 It is also being interrogated against a different threat:
 
 > the possibility that the helper pile becomes a shadow control plane while
@@ -91,638 +68,275 @@ continuing test:
   somewhere murkier?
 
 That second question is one of the most important anti-romantic checks in the
-entire knowledgebase.
+whole knowledgebase.
 
-Not:
-
-- "Compose solves clustering"
-- "the adult answer is obviously Kubernetes"
-- "distributed truth can stay implicit forever"
-
-It means the repo is refusing to replace the mental model before isolating the
-exact missing truths.
-
-That refusal is not caution for its own sake.
-It is a reaction to a repeated bait-and-switch:
-
-- local Docker feels legible
-- distribution turns that legibility into hidden operator glue
-- the ecosystem responds by offering a larger worldview
-- but the larger worldview often arrives before anyone has named which truth
-  actually went missing
-
-That history matters because this page is easy to misread in a very specific
-way:
-
-- Compose is still central
-- therefore the current helper strategy must be mostly working
-- therefore promotion questions are mostly aesthetic
-
-That reading is exactly what this page is supposed to prevent.
-Compose-first is not a quiet endorsement of the current state.
-It is a refusal to falsely declare that the missing middle has already been
-solved just because the repo has accumulated enough labels, proxies, helper
-scripts, and surrounding vocabulary to sound serious.
-
-## The real argument for Compose-first
-
-The real argument is not emotional attachment to YAML.
-
-It is also not nostalgia for simple tooling.
-The user is not trying to preserve Compose because stronger systems are scary in
-the abstract.
-The user is trying to preserve the last live authoring surface that still feels
-inspectable before complexity disappears behind a farther-away control plane.
-
-It is that the user is trying to preserve a very specific kind of operator
-control:
-
-- see what exists by reading the repo directly
-- see how ingress, auth, healthchecks, configs, networks, and secrets are
-  authored
-- know which capability is missing before replacing the whole operating model
-- avoid being trapped in a larger system whose abstractions answer different
-  problems than the one this repo is actually facing
-
-That is why "just use k3s" keeps reading as incomplete here.
-It may eventually be correct.
-It is not self-justifying.
-
-That distinction has to stay visible because this page is one of the easiest
-places for the site to become accidentally reassuring.
-
-If "Compose-first" gets read as:
-
-- the current stack is basically enough
-- helpers already close the important gaps
-- promotion is mostly preference
-
-then the page has failed.
-
-That is one of the most important distinctions in the repo:
-
-- a stronger platform may eventually be right
-- but "eventually right" is not the same as "already justified"
-
-The repo keeps demanding a harder question first:
-
-> which exact truth layer is missing, and can that layer be added without
-> immediately replacing Compose as the main surface the operator reads?
-
-That question is the entire point of Compose-first.
-
-The hidden companion question is harsher:
-
-> are we preserving Compose because it is still the least dishonest operator
-> surface, or because we have not yet admitted that the helper pile has become
-> its own opaque control plane?
-
-If this page does not keep that second question visible, it becomes too easy
-to romanticize the current architecture simply because it still looks
-Docker-native.
-
-That harsher question is the main anti-overread device for the page.
-Compose-first is only a virtue here if it remains the least dishonest operator
-surface, not if it simply delays admitting that truth ownership has already
-moved somewhere murkier.
-
-## What Compose-first does and does not mean
+## What Compose-first means in the priority implementation
 
 In `bolabaden-infra`, Compose-first means all of these are still true:
 
 - the root
   [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
   is the priority implementation surface
-- the files under
+- active behavior is decomposed through included fragments in
   [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
-  are the active modular decomposition of that surface
-- the live runtime should still be explainable from those files first
-- helper layers should wrap, validate, enrich, generate from, or synchronize
-  around that surface before replacing it
+- the merged runtime should still be explainable from those files first
+- helper layers should wrap, validate, generate from, or synchronize around
+  that surface before replacing it
 
-That last point is the real experiment.
-The repo is not merely "stuck on Compose."
-It is testing whether the missing truths can be added in a way that still keeps
-Compose as the main human contract instead of downgrading it into a vestigial
-artifact.
+The root graph already proves this is not decorative rhetoric:
 
-That experiment is still open.
-The docs should not let "Compose-first" read like the verdict came back
-positive.
-At this stage it is more honest to read it as:
+- it defines the shared networks `publicnet`, `backend`, and `warp-nat-net`
+- it includes the major runtime fragments rather than hiding them behind a
+  remote controller API
+- it already expresses heterogeneous workload classes directly
 
-- Compose is still the least dishonest readable surface
-- the helper and promotion story is still under cross-examination
-- the wrong-node and backend-loss contracts are still the real judge
+That matters because the user keeps rejecting systems that hide too much
+meaning behind a farther-away reconciliation layer before that hiding has
+earned its keep.
 
-It does **not** mean:
+## What Compose-first definitely does not mean
+
+It does not mean:
 
 - root Compose already expresses live cross-node placement truth
 - root Compose already proves wrong-node success
-- root Compose already proves failover, fallback, or stateful resilience
-- the repo has already solved distributed behavior and merely prefers friendlier
-  syntax
+- root Compose already proves fallback durability under backend loss
+- root Compose already proves protected-route semantic continuity
+- root Compose already proves stateful resilience
 - intended `services.yaml` behavior should be narrated as if it were already a
   shipped tracked root contract
 
-That distinction is one of the main reasons
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
-matters more architecturally than `AGENTS.md`.
-
-- `copilot-instructions.md` says what the runtime should feel like
-- `AGENTS.md` says how to inspect and validate the repo
-
-Both matter.
-They do not carry the same architectural weight.
-
 That distinction matters because earlier docs often blurred together:
 
-- the desired runtime feeling
-- the actual implementation surface
-- the proof boundary
+- desired runtime feeling
+- actual implementation surface
+- proof boundary
 
 Once those blur, the docs immediately start sounding more complete than the
 system actually is.
-
-This page therefore has to keep one harsh question visible:
-
-what exact missing truth is Compose still refusing to own, and what is the
-smallest extra layer that could own it without making Compose a decorative lie?
-
-And one harsher anti-benchmark:
-
-if the answer becomes "Compose is still the authoring surface, but the actual
-bad-day intelligence now lives in three helpers, one sync path, and operator
-intuition about which outputs matter," then Compose-first has failed on its own
-terms.
 
 ## Why Compose is still the least dishonest live surface
 
 Compose is still useful here for practical reasons, not nostalgic ones.
 
-## 1. It keeps authoring truth visible
+### 1. It keeps authoring truth visible
 
-Many important truths are still directly readable:
+Many important truths are still directly readable in the root graph:
 
 - service definitions
 - network attachments
+- labels
 - secrets references
 - inline configs
-- labels
-- restart policies
 - healthchecks
+- restart policies
 - mounts
-
-That matters because the user keeps rejecting systems that hide too much
-meaning behind a distant reconciliation layer before that hiding has earned its
-keep.
-
-Compose does not make distribution easy.
-It does keep the current authoring truth close to the human eye.
 
 That is not trivial.
 It is one of the last sane surfaces the repo still has.
 
-That sentence is blunt on purpose.
-The user is reacting against a tool ecosystem where many "better" answers buy
+The user is reacting against an ecosystem where many "better" answers buy
 coordination by making the real state harder to see until a new worldview has
 already been accepted.
 
-## 2. It handles heterogeneous workloads without inventing one giant worldview
+Compose does not make distribution easy.
+It does keep current authoring truth close to the human eye.
 
-The root runtime already spans several workload classes:
+### 2. It handles heterogeneous workloads without inventing one giant worldview
+
+The current root runtime already spans sharply different workload classes:
 
 - public ingress and auth
 - observability
 - operator dashboards
 - browser automation and crawling
 - AI tooling
+- mesh and identity surfaces
+- raw TCP services
 - state-bearing services
-- mesh and identity-adjacent surfaces
-- app and media workloads
 
-Compose is genuinely good at expressing this kind of heterogeneity.
+Compose is genuinely good at expressing this heterogeneity.
 
-Its weakness is not service diversity.
-Its weakness is distributed truth.
+Its weakness is not workload diversity.
+Its weakness is distributed truth ownership.
 
-That is one of the most useful corrections this page can make.
-Compose is not failing because the stack got broad or interesting.
-Compose is failing because broad and interesting stacks eventually demand shared
-truth that Compose does not naturally own.
-
-That distinction matters because it explains why the repo is not running away
-from Compose for authoring reasons.
+That distinction matters because it explains why the repo is not fleeing
+Compose for authoring reasons.
 It is searching beyond Compose for truth-ownership reasons.
 
-## 3. It preserves Docker-native operator ergonomics
+### 3. It preserves Docker-native operator ergonomics
 
-The repo still gets real value from:
+The repo still gets real value from being able to ask questions in a very
+direct way:
 
-- `docker compose config`
-- direct service inspection
-- label-driven Traefik wiring
-- local iteration without cluster bootstrap or reconciliation delay
+- what is in the merged graph?
+- which fragment introduced this service?
+- what networks is it on?
+- what auth or middleware labels exist?
+- what port or backend is being routed locally?
 
-That is not a side benefit.
-It is part of the design goal.
+That style of inspection still matters because the user does not want to lose
+the causal chain between authored config and live behavior unless the extra
+abstraction clearly buys something real.
 
-The user wants the system to become more resilient without immediately becoming
-less legible.
+### 4. It keeps the control-plane tax explicit
 
-This is the real meaning of Compose-first.
+As long as Compose remains primary, any extra helper layer has to justify
+itself against a readable baseline.
 
-## The four truths Compose does not collapse for you
+That is healthy.
+It forces harder questions:
 
-One reason earlier docs felt useless is that they kept calling several
-different problems "the platform."
+- what truth does this helper own?
+- is that truth already implicit in the operator's head?
+- does this helper remove a real hidden-human SPOF?
+- or does it mostly create a more respectable-looking story?
 
-That flattening hid the actual missing layer.
+This is one reason Compose-first is still useful even when it is not sufficient.
+It keeps the cost of promotion visible.
 
-These truths need to stay separate.
+## The exact truths Compose does not naturally own
 
-## 1. Authoring truth
+This page is pointless if it does not name the missing truths plainly.
 
-Questions answered:
+Compose is good at authored local intent.
+Compose does not naturally own:
 
-- what services exist?
-- what labels, networks, secrets, configs, and healthchecks are authored?
-- what does the root include graph activate?
+- distributed placement truth
+- convergence truth across nodes
+- peer eligibility truth
+- cross-node route persistence under backend loss
+- wrong-node request preservation
+- service-class-specific stateful authority
 
-This is where Compose is already strong.
+Those are not tiny caveats.
+They are the heart of the user's complaint.
 
-## 2. Placement truth
+This is why Compose-first cannot be read as a quiet endorsement of the current
+helper strategy.
+It is better read as:
 
-Questions answered:
+- Compose is still the least dishonest readable surface
+- the helper and promotion story is still under cross-examination
+- the wrong-node and backend-loss contracts are still the real judge
 
-- what runs where right now?
-- which node is local for a given service?
-- what source of truth should a wrong-node receiver consult before forwarding?
+## Where the priority runtime already shows this tension
 
-This is where the repo-native concept of `services.yaml` matters.
-The idea is clear across the README, instruction files, and planning docs.
+The current root runtime gives concrete examples of why Compose-first is both
+valuable and insufficient.
 
-But the tracked root implementation still does **not** ship a live root
-[`services.yaml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/services.yaml).
+### Example 1: serious edge execution, missing distributed truth
 
-That means placement truth is still much stronger as architecture intent than
-as runtime fact.
-
-This is one of the central reasons the docs must stay careful.
-The repo clearly knows it needs shared placement truth.
-It still has not promoted that truth into the tracked root runtime.
-
-That gap is exactly where the hidden human SPOF keeps surviving.
-If the system still needs an operator to privately complete the answer to
-"where does this service live right now?", then Compose-first has preserved
-readability without yet preserving distributed request truth.
-
-That distinction matters because it blocks a very common self-deception:
-
-- the runtime is still readable
-- the repo has a clear idea for shared placement truth
-- therefore the architecture is only one implementation step away from being
-  honest
-
-Maybe.
-But the user's frustration is specifically with systems that are always "one
-more glue layer away" from no longer requiring private reconstruction.
-This page should not help repeat that pattern.
-
-## Strongest honest current answer
-
-If a reader asks, "Why is this repo still Compose-first?" the shortest
-defensible answer is:
-
-> Because Compose is still the clearest live authoring truth the operator can
-> read directly, while the repo is still trying to identify the smallest honest
-> extra truth-owning layer that could externalize placement, routing, and
-> recovery burden without prematurely surrendering to a heavyweight scheduler
-> worldview. That is a posture, not proof that the bad-day problem is already
-> solved.
-
-Anything more reassuring than that is probably romanticizing the current
-surface.
-
-## 3. Traffic truth
-
-Questions answered:
-
-- how does a node expose services?
-- how do hostnames, middleware, auth, and proxy paths behave?
-- what logic is trying to preserve or regenerate routes?
-
-This is where the repo is already operationally serious.
-
-Live components already include:
+The edge stack is already real:
 
 - `traefik`
-- `crowdsec`
 - `tinyauth`
 - `nginx-traefik-extensions`
-- `dockerproxy-ro`
-- `dockerproxy-rw`
-- `docker-gen-failover`
+- `crowdsec`
 - `cloudflare-ddns`
+- `docker-gen-failover`
 
-This layer is closest to the dream of:
+That proves the repo is not doing toy ingress work.
+It also proves the danger:
 
-> any node can receive the request and still get it to the right place
+a serious local routing and policy surface can make distributed truth feel
+closer than it is.
 
-But "closest" is not "proved."
+### Example 2: real mesh and control-plane surfaces, still not shared placement truth
 
-It is also the easiest layer to over-credit emotionally.
-Once a stack has Traefik, auth, middleware, failover helpers, and multiple
-public nodes, readers start granting it missing truth by intuition.
-This page has to keep refusing that gift.
+Headscale is materially live through
+[`compose/docker-compose.headscale.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.headscale.yml).
 
-It also has to refuse a subtler lie:
+That means peer communication and identity are not hypothetical.
+But it still does not prove the receiving node has a trustworthy shared answer
+to:
 
-- if enough ingress machinery exists, then the remaining problem must mostly be
-  cleanup
+- where does the target service live right now?
+- which peer is eligible now?
 
-That is not what the evidence says.
-The remaining problem is still semantic ownership of the bad-day request path.
-That is a deeper problem than "proxy cleanup," and the docs should keep saying
-so.
+So even a live mesh does not settle the missing middle layer by itself.
 
-## 4. Failure truth
+### Example 3: helper growth already pressures the boundary
 
-Questions answered:
+The repo already contains or plans around helpers that smell like a partial
+control plane:
 
-- if the local backend disappears, does the route needed for recovery stay
-  alive?
-- if the request lands on the wrong node, does that node know enough to forward
-  correctly?
-- if peer forwarding happens, do auth and middleware semantics survive?
-- if a node disappears, is the system merely degraded or actually resilient?
+- `docker-gen-failover`
+- secret and compose sync concepts
+- peer broadcast concepts
+- `services.yaml` pressure
+- failover-agent and sync-agent ideas in the master plan
 
-This is the layer the user is least willing to let the docs fake.
+This is exactly why Compose-first must stay interrogative rather than
+celebratory.
 
-Compose-first only stays honest if this layer remains painfully visible.
+If the real bad-day intelligence migrates into these helpers without becoming
+more inspectable than a heavyweight controller, then Compose-first becomes a
+decorative comfort blanket instead of a real operator contract.
 
-That pain is part of the value of this page.
-If failure truth gets smoothed over, the repo starts sounding like all the
-other infrastructure writing the user already distrusts.
+## The real argument against premature promotion
 
-## What Compose is not solving
+The repo is not saying:
 
-Compose is strong at authoring truth and weak at distributed truth.
+- Kubernetes is bad
+- Nomad is wrong
+- OpenSVC is cheating
 
-It does not natively solve:
+The repo is saying:
 
-- cross-node placement truth
-- peer eligibility and health convergence
-- route persistence under backend loss
-- secret and env convergence across nodes
-- revision awareness between nodes
-- leader election or quorum
-- stateful topology correctness
+> do not import a larger worldview before you can name the exact missing truth
+> it would own and prove that smaller layers could not own it honestly
 
-This weakness is not a minor edge case.
-It is the central reason the repo keeps searching for more options.
+That is a much narrower and more defensible standard.
 
-And the options only count as real if they reduce this weakness without merely
-moving it into a more opaque place.
+It also explains why "just use k3s" keeps reading as incomplete here.
+It may eventually be right.
+It is not self-justifying.
 
-Put more bluntly:
+The user keeps demanding a harder question first:
 
-the user is not frustrated because Compose needs one more convenience wrapper.
-The user is frustrated because Compose alone does not answer the sacred-machine
-question:
+> which exact truth layer is missing, and can that layer be added without
+> immediately replacing Compose as the main surface the operator reads?
 
-> if traffic lands on the "wrong" box, what exact live truth lets that box stop
-> being the wrong one?
+That question is the entire point of Compose-first.
 
-That is the question Compose-first is trying to honor without cheating.
+## The anti-benchmark this page must keep visible
 
-That is also why the user keeps sounding dissatisfied with ordinary advice.
-Ordinary advice often solves an adjacent problem:
+If the answer becomes:
 
-- better packaging
-- better deployment ritual
-- better platform posture
+> Compose is still the authoring surface, but the actual bad-day intelligence
+> now lives in several helpers, some generated state, and operator intuition
+> about which outputs matter
 
-The user keeps returning to a stricter one:
+then Compose-first has failed on its own terms.
 
-- what concrete live truth lets the receiving node stop being semantically
-  wrong?
+The user is not trying to preserve Compose as a cultural artifact.
+They are trying to preserve a surface where the system still feels causally
+owned.
 
-That phrasing matters because it blocks a common downgrade.
-The user is not simply asking for a forwarding mechanism.
-They are asking for the removal of "wrongness" as a property that only a human
-can interpret away after the fact.
+If that ownership has already migrated somewhere murkier, the docs need to say
+so instead of romanticizing Docker-native syntax.
 
-## How the repo is stretching Compose without replacing it
+## What would actually justify moving beyond Compose-first
 
-The repo is not standing still.
-It is already trying to build the missing middle around Compose.
+The repo should promote a stronger control layer only when it can answer:
 
-That sentence should not be read as quiet reassurance.
-Building the missing middle around Compose is only a success if the resulting
-truth becomes:
+- which missing truth does this layer own directly?
+- what hidden-human SPOF does it remove?
+- what narrower alternatives were exhausted first?
+- how does it stay more inspectable or more honest than the burden it replaces?
 
-- current enough
-- inspectable enough
-- durable enough
-- system-owned enough
+That means promotion is not blocked forever.
+It is gated by honesty.
 
-to remove private operator completion from the normal request path.
+## The blunt reading
 
-If it merely spreads the same burden across more moving parts, then the repo is
-not converging on a solution.
-It is converging on a harder-to-audit version of the same problem.
-
-## 1. Modular includes instead of one impossible file
-
-The root file includes active fragments for:
-
-- proxying
-- docs
-- metrics
-- Headscale
-- firecrawl
-- LLM surfaces
-- media surfaces
-- warp routing
-- wishlist surfaces
-
-This keeps the live stack partitioned without pretending those partitions are
-already independent cluster domains.
-
-It is still one authored world.
-
-That matters because the repo is trying to push complexity outward only where it
-earns itself.
-The authored world should not be replaced merely because a cluster API would
-look more conventionally serious.
-
-## 2. Rich ingress behavior around Docker-native labels
-
-Traefik is not merely publishing ports here.
-It is carrying a large part of the repo's distributed ambition:
-
-- global names
-- node-scoped names
-- auth chaining
-- middleware chaining
-- failover generation pressure
-- entrypoint differentiation
-
-That matters because the repo is trying to make request-time behavior smarter
-without immediately replacing Docker-native authoring.
-
-## 3. Current-state-registry thinking without full scheduler promotion
-
-The repeated `services.yaml` concept matters because it shows the repo is
-trying to introduce one of the most important missing truths:
-
-- where things actually live now
-
-without immediately importing a full desired-state scheduler worldview.
-
-This is one of the clearest expressions of the user's dream:
-
-add the truth that has earned itself, not the whole empire surrounding that
-truth.
-
-It is also why Compose-first should not be misread as conservatism for its own
-sake.
-It is a demand that each added layer justify itself against a very specific
-pain:
-
-- hidden placement folklore
-- hidden peer-eligibility folklore
-- hidden bad-day reconstruction burden
-
-That sentence may be the cleanest summary of Compose-first in the entire
-knowledgebase.
-It explains why the repo keeps reaching for narrow truth-bearing layers instead
-of total platform replacement.
-
-## 4. Helper and generator pressure instead of immediate platform capture
-
-The repo has already explored ideas like:
-
-- sync-agent
-- failover-agent
-- route generation
-- OpenSVC-based ingress coordination
-- Constellation state surfaces
-- CUE-shaped control semantics
-
-That is not random experimentation.
-It is the repo repeatedly asking:
-
-> can we buy the missing truths narrowly enough that Compose stays the main
-> human contract?
-
-That question is the heart of the Compose-first strategy.
-
-## The real risk of Compose-first
-
-Compose-first is not automatically virtuous.
-
-It becomes dishonest the moment it is used as cover for unresolved burden.
-
-Its real danger is that the repo may gradually rebuild a control plane in small
-pieces while continuing to describe itself as "still just Compose."
-
-There is a second danger too:
-the repo may accumulate just enough helper intelligence that the docs start
-speaking as if the missing truth has already been externalized when it has only
-been spread across more components.
-
-There is a third danger:
-
-- the helper layer becomes good enough to sound platform-like
-- the docs start grading it on sophistication
-- the user is still asking the same wrong-node question in slightly cleaner
-  language
-
-That is how a Compose-first strategy can fail while still looking productive.
-The page has to stay hostile to that failure mode.
-
-That would be dishonest for exactly the same reason premature Kubernetes
-surrender can be dishonest:
-
-the actual tax would no longer match the story being told.
-
-So Compose-first only remains a credible strategy if the repo keeps asking:
-
-- which truth does this helper own?
-- how inspectable is that truth?
-- how much new operator burden did this add?
-- is this still a narrow helper, or have we quietly assembled a de facto
-  orchestrator?
-
-Those questions are not optional.
-They are the safety rails.
-
-Without them, Compose-first becomes one more fake option:
-
-- still speaking like local Docker
-- while secretly demanding cluster-grade reasoning from the operator
-
-## The real reason the user keeps resisting immediate orchestrator promotion
-
-The user is not just trying to avoid complexity.
-They are trying to avoid paying for the wrong complexity too early.
-
-What they want is not:
-
-- "never use a stronger platform"
-
-It is:
-
-> do not force me to adopt a giant worldview until the missing truths are clear
-> enough that I can say exactly what that worldview is buying me
-
-That is a much more rigorous standard than ordinary self-hosting advice uses.
-
-It is also the correct standard for this repo.
-
-The user is not refusing growth.
-They are refusing premature surrender to a worldview that cannot yet explain its
-exchange rate clearly enough.
-
-## Bottom line
-
-Compose-first in `bolabaden-infra` does not mean Compose is sufficient.
-
-It means Compose is still the least dishonest live authoring surface while the
-project isolates the exact missing truths required for:
-
-- wrong-node request preservation
-- peer-aware routing
-- convergence visibility
-- failure-path persistence
-- operator-readable distributed behavior
-
-The moment another control layer can prove it owns those truths with less net
-burden than the growing helper mesh around Compose, promotion becomes a serious
-question.
-
-Until then, Compose-first is not denial.
-It is the repo's way of refusing to hide the problem behind a larger ideology
-before the precise shape of the problem has been fully named.
-
-That is why this page should keep feeling slightly unsatisfied.
-Compose-first is only honest if it preserves the discomfort that the system
-still lacks one clean shared answer on the bad day.
-
-The most important phrase there is "one clean shared answer."
-Not:
-
-- one more helper
-- one more generated route
-- one more plausible recovery story
-
-If the system still needs multiple partial answers stitched together by someone
-who already knows how the architecture really works, then the repo is still on
-the wrong side of the user's complaint.
-
-That is why this page should not read like a defense of Compose as a forever
-answer.
-It should read like a defense of intellectual honesty while the repo is still
-trying to force a missing middle layer into existence.
+Compose-first is not the solution.
+It is the current least-dishonest authoring stance while the repo is still
+trying to identify the smallest extra truth-owning layer that would make
+wrong-node requests, backend-loss recovery, and hidden topology memory stop
+being the dominant failure mode.
+
+That is why the repo is still centered on `docker-compose.yml`.
+Not because Compose secretly solved the problem, but because the problem has
+not yet earned a bigger answer honestly enough.

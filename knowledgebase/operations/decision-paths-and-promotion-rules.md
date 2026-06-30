@@ -1,772 +1,277 @@
 # Decision Paths and Promotion Rules
 
-This page exists to answer the question that still gets left too loose even
-after the architecture is explained honestly:
-
-> given the user’s actual dream, what are the real paths forward, what does
-> each path genuinely buy, what does each path still refuse to solve, and when
-> has a stronger control plane actually earned promotion?
-
-Without this page, the repo can describe the dream and the gaps accurately and
+This page exists because the repository can describe the dream honestly and
 still leave the operator with the same old frustration:
 
-- lots of interesting pieces
-- no blunt mapping between pain and next layer
-- no clean rule for when Compose should stay central
-- no clean rule for when promotion is no longer optional
+- many products
+- many categories
+- many "reasonable options"
+- no blunt answer about which path actually removes the current hidden burden
 
-This page is supposed to fix that.
+That is the exact failure this page is meant to stop.
 
-It is also supposed to stop the repo from responding to the user's frustration
-the way the broader ecosystem keeps responding to it:
+The user is not asking for a product ranking.
+The user is asking:
 
-- by offering more categories
-- by offering more products
-- by offering more maturity theater
-- while leaving the same hidden burden intact
+> which next move makes the wrong-node, sacred-host, and private-topology
+> problem less true, and which moves merely rename the same pain?
 
-That last point is the whole reason this page must stay stricter than an
-ordinary architecture comparison.
-
-The user is not mainly frustrated by lack of names.
-The user is frustrated by being offered many names for paths that still do not
-answer the real wound.
-
-This page therefore has to do more than rank next steps.
-It has to stop the repo from repeating the broader ecosystem pattern:
-
-- rename the pain
-- package the pain differently
-- call the new package a serious option
-- leave the operator privately completing the architecture on the bad day
-
-If a path still ends there, then for this repo it is not a real option yet.
-
-This page therefore needs to behave less like an opinionated roadmap and more
-like a promotion gate.
-
-Every path below should answer:
-
-1. what hidden burden it is trying to relocate
-2. what proof class would justify choosing it
-3. what proof class is still too weak
-4. what unchanged burden would reveal that the path is mostly theater
+This page should behave like a promotion gate, not a shopping guide.
 
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
 
-- how next steps should be routed from pain class to layer choice
-- what conditions should trigger promotion instead of drift or sentimentality
-- which recommendation styles are still too weak for this repo
+- how to route the current pain toward the next layer choice
+- what counts as too weak a reason to promote
+- what a stronger control layer would have to genuinely own
 
 This page is not authoritative about:
 
-- whether a specific path has already been proven enough to promote today
-- whether the whole repo should already adopt one global future
-- whether decision clarity should be confused with implementation completion
+- whether the repo has already chosen its final architecture
+- whether a specific promotion is already complete
+- whether roadmap clarity should be confused with shipped capability
 
-This page is a promotion grammar and routing table.
-It is not a claim that the next promotion has already happened.
+This page defines promotion grammar.
+It does not declare promotion complete.
 
-## Quick claim router
+## The deepest rule of the page
 
-| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
-| --- | --- | --- | --- |
-| "this is the current default path" | current strategy stance | this page, current runtime, proof pages, intent surfaces | that the default path is already sufficient |
-| "this pain class justifies a narrower promotion" | promotion-routing judgment | this page plus pain-specific evidence | that the narrower promotion solves the entire platform |
-| "this recommendation is still theater" | anti-option judgment | this page, archive pressure, proof pages | that it provides no partial value |
-| "promotion is now earned" | threshold judgment | this page plus concrete route, failure, or state evidence | that the rest of the stack has also been promoted implicitly |
+Do not promote because a bigger tool exists.
+Promote because the current layer has become the hidden tax.
 
-If a sentence starts treating roadmap clarity as proof that the promotion has
-already occurred, it has crossed beyond this page's authority.
+That is the rule.
 
-## What a useful decision page has to prevent
+If the current layer still hurts but the next layer does not clearly relocate
+the hidden truth burden, then promotion is premature theater.
 
-The user’s real frustration is not lack of information.
-It is too many options that are not actually options.
+## The real burden this page is trying to relocate
 
-This page has to keep the repo from making that worse by offering paths that:
+The user is not mainly trying to relocate YAML.
+They are trying to relocate private truth.
 
-- sound distinct
-- use different tooling names
-- but still leave the same hidden sacred-node memory in place
+The current burdens that matter most are:
 
-If two paths leave the same truth gap unresolved, then for this repo they are
-much closer to the same path than to different ones.
-
-That means this page has to behave like a filter for fake options.
-
-Different packaging does not create a meaningfully different path if all of
-the following stay true:
-
-- placement truth still lives in human memory
-- wrong-node entry still depends on luck or ad hoc glue
-- peer eligibility is still socially reconstructed instead of runtime-legible
-- fallback still means "some response happened" rather than "the same service
+- placement truth still being remembered instead of shared
+- wrong-node entry still being embarrassing instead of routine
+- fallback still meaning "some response happened" rather than "the same service
   contract survived"
+- stateful resilience still being narrated harder than it is proved
+- operator confidence still depending on folklore about which node is sacred
 
-That rule is stricter than normal architecture comparison, and it needs to be.
+If a proposed layer does not materially reduce one of those burdens, it should
+not be treated as a meaningful promotion in this repo.
 
-The user is not lacking lists of tooling options.
-The user is trying to escape a world where many differently branded answers
-still collapse back into:
+## The default path this repo currently supports
 
-- one remembered placement truth
-- one sacred ingress truth
-- one operator-only failure narrative
+Right now the strongest evidence-aligned default is still:
 
-That collapse is the main anti-benchmark for this whole page.
-If a recommendation changes tooling, controller shape, or platform vocabulary
-without changing the hidden truth the operator still has to carry, then the
-recommendation is mostly theater from the user's point of view.
+1. stay Compose-first for authoring
+2. stop lying about what Compose alone does not own
+3. add the smallest shared-truth layer that makes placement and peer selection
+   less social
+4. prove one real wrong-node stateless HTTP path
+5. prove route persistence under backend loss
+6. only then promote specific pain domains that still remain fake or too
+   operator-dependent
 
-## Read this page correctly
-
-This is not a product ranking.
-
-It is a routing table for decisions.
-
-Each path below is organized around a pain class:
-
-- what hurts now
-- what layer should own that pain
-- what that layer really solves
-- what that layer still does not solve
-- what evidence would justify promoting to the next layer
-
-That keeps the repo from doing the usual thing:
-
-calling in a bigger platform before the exact missing truth has been isolated.
-
-This page therefore treats decision-making as an evidence-routing problem.
-
-The right question is not:
-
-> what is the most impressive next layer?
-
-It is:
-
-> what exact hidden burden is still not owned honestly enough by the current
-> layer, and what is the smallest promotion that would really own it?
-
-The key word is "really."
-This repo does not need more semi-answers that sound structurally different
-while preserving the same semantic gamble around wrong-node traffic, backend
-loss, or stateful authority.
-
-## The promotion grammar this repo should use
-
-Before any path gets recommended as the next serious move, the docs should be
-able to state four things plainly:
-
-- current dominant pain:
-  which specific truth burden is still too socially held
-- current layer ceiling:
-  what the present layer cannot honestly own without becoming fake
-- smallest honest promotion:
-  which narrower next layer directly owns that burden
-- non-solution warning:
-  what that promoted layer still does not solve and must not be credited for
-
-That question should be read together with the repo's strongest architecture
-intent surface:
-[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md).
-
-It is the clearest place where the dream is stated as:
-
-- Compose-first
-- multi-node
-- local-first then peer-forward
-- anti-SPOF pressure
-- without immediately collapsing into heavyweight scheduler capture
-
-That is why this page should not over-weight [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
-or [`.cursorrules`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.cursorrules)
-when deciding architectural promotion.
-
-Those files matter, but they are not the primary expression of the
-distributed-systems dream.
-
-## The shortest possible answer
-
-Right now the most evidence-aligned default still is:
-
-1. stay Compose-first
-2. close the middle-layer truth gaps
-3. prove one real wrong-node HTTP path
-4. prove backend-loss route persistence
-5. only then promote specific domains that still hurt in ways
-   Compose-plus-helpers cannot solve honestly
-
-That default is not caution for its own sake.
-It is the only path that matches the repo’s current state and the user’s real
-refusal pattern.
-
-The refusal pattern matters.
-
-The user is not refusing orchestration because orchestration is hard.
-The user is refusing premature worldview capture that renames the same old gap
-instead of closing it.
-
-That is why this page should feel biased against promotion theater.
-The user is not asking for the next step that sounds mature.
-The user is asking for the next step that makes the wrong-node and hidden-truth
-problem less true.
+This is not caution for its own sake.
+It is the smallest path that still respects the user's refusal pattern.
 
 ## What is too weak to justify promotion
 
-Do not promote a path just because:
+These are not enough:
 
-- the current helper layer is embarrassing to summarize cleanly
-- the surrounding ecosystem treats a larger platform as the default grown-up
-  answer
-- the stack already contains enough nouns to make a scheduler feel inevitable
-- a route worked once in a happy-path demo
-- a stateful service is reachable across the network
-- a generated config looks more dynamic than the old one
+- "the ecosystem standard is Kubernetes now"
+- "the helper layer is embarrassing to summarize"
+- "there are already enough moving parts that a scheduler feels inevitable"
+- "we can produce a clean diagram with a stronger control plane"
+- "one happy-path route demo worked once"
+- "the bigger system looks more dynamic"
 
-Those can all coincide with the same deeper failure:
+Why these are too weak:
 
-the operator still privately owns the truth the promoted layer claims to have
-relocated.
+- they can all be true while the operator still privately owns placement truth
+- they can all be true while wrong-node requests still remain unproved
+- they can all be true while stateful resilience remains mostly branding
 
-## The deepest decision rule
+The repo should resist all of those upgrade temptations.
 
-The repo should not promote because a bigger tool exists.
-It should promote because the current layer has become the hidden tax.
+## The promotion classes that actually matter
 
-That means:
+This repo does not need one grand promotion.
+It needs narrower promotions that correspond to real burden.
 
-- do not promote because cluster sounds more mature
-- do not promote because the edge stack is already sophisticated
-- do not promote because stateful systems feel scary in the abstract
-- do not promote because helper logic looks inelegant from a distance
+## Promotion Class 1: shared current truth before bigger scheduling
 
-Promote only when the current layer is now forcing the operator to carry too
-much hidden truth in their head, or is itself becoming a disguised controller
-without earning the honesty of naming that fact.
+Pain being targeted:
 
-That is the harshest and most useful decision rule in the repo:
+- nobody can answer "what runs where right now?" from a tracked shared source
+- wrong-node routing cannot become honest without shared placement truth
 
-promote when the current layer is lying by omission, not when a shinier layer
-exists.
+What this class should own:
 
-There is a companion rule:
+- current service placement
+- peer eligibility metadata
+- possibly route-class metadata such as HTTP vs TCP vs stateful
 
-do not preserve the current layer out of sentimentality either.
+What this class does not need to own yet:
 
-If Compose-plus-helpers stops being the least dishonest surface and becomes a
-socially maintained pseudo-control-plane that only still sounds simpler, then
-"staying Compose-first" can become just as fake as premature platform capture.
+- full declarative scheduling
+- automatic rescheduling of everything
+- global cluster worldview
 
-This can be phrased even more bluntly:
+Why this class matters:
 
-promote when a path becomes fake by leaving the same burden unnamed.
-Do not promote merely because a new platform lets the docs sound calmer.
+if the repo never externalizes current truth, every later promotion is partly
+theater because the operator still remains the hidden control plane.
 
-That is the decision rule most likely to preserve the real dream.
+## Promotion Class 2: request-preservation proof for one stateless HTTP route
+
+Pain being targeted:
+
+- wrong-node routing is still a story instead of a proved behavior
+
+What this class should own:
+
+- route correctness for one real route
+- peer selection from shared truth
+- auth and middleware continuity for that route
+- route persistence under the relevant backend-loss condition
+
+What this class does not solve:
+
+- raw TCP failover
+- stateful authority
+- full platform-wide anti-SPOF
+
+Why this class matters:
+
+until one real wrong-node HTTP path works, the repo is still missing its most
+important proof of concept.
+
+## Promotion Class 3: ingress control that survives backend loss
+
+Pain being targeted:
+
+- fallback generation disappears in the exact failure that makes fallback
+  relevant
+
+What this class should own:
+
+- durable route persistence when local backends die
+- clearer separation between static author intent and runtime failover truth
+
+What this class does not solve:
+
+- stateful replication
+- application-level correctness after handoff
+- broad cluster placement automation
+
+Why this class matters:
+
+the repo already knows `docker-gen-failover` is not strong enough.
+This is one of the clearest examples of a control surface sounding closer to
+done than it is.
+
+## Promotion Class 4: stateful authority, not just routed reachability
+
+Pain being targeted:
+
+- stateful services are present, exposed, and useful, but still fundamentally
+  tied to node-local authority
+
+What this class should own:
+
+- replication or quorum where relevant
+- leader or primary semantics
+- client rediscovery or reconnect behavior
+- storage portability or explicit single-writer honesty
+
+What this class does not automatically require:
+
+- a full general-purpose scheduler for the entire stack
+
+Why this class matters:
+
+stateful pain is real already in MongoDB, Redis, Headscale's SQLite posture,
+and other backend-heavy fragments.
+But it should not be "solved" by ingress rhetoric.
+
+## Promotion Class 5: heavier orchestration only after narrower promotions fail
+
+Pain being targeted:
+
+- the missing burden can no longer be honestly owned by Compose plus a smaller
+  shared-truth or service-discovery layer
+
+What this class might own:
+
+- rescheduling
+- richer health and placement control
+- stronger convergence guarantees
+- broader cluster truth surfaces
+
+Why this class should be late:
+
+the user is not refusing orchestration because orchestration is hard.
+The user is refusing premature worldview capture.
+
+A bigger control plane only earns itself when the repo can point to a specific
+burden that smaller truth-owning layers cannot honestly carry anymore.
+
+## The practical decision tree
+
+When choosing a next path, ask these questions in order.
+
+1. Is the dominant pain still that runtime truth lives in human memory?
+   If yes, promote shared current truth first, not full orchestration.
+2. Is the dominant pain that wrong-node HTTP requests are still unproved?
+   If yes, prove one route class end to end before making larger platform
+   commitments.
+3. Is the dominant pain that fallback disappears when the local backend dies?
+   If yes, strengthen ingress control and route persistence next.
+4. Is the dominant pain now clearly stateful authority rather than HTTP
+   routing?
+   If yes, promote service-specific data-plane work rather than generic cluster
+   branding.
+5. Has the current helper layer become so burdened that it is now the main
+   source of hidden truth?
+   If yes, only then consider a heavier orchestration jump.
+
+That ordering keeps the repo from importing a broad worldview before the narrow
+wound has been isolated.
+
+## What a fake option looks like in this repo
+
+An option is mostly fake if it changes:
+
+- product name
+- platform vocabulary
+- deployment story
+- dashboard aesthetics
+
+without changing:
+
+- who knows where the service really lives
+- how the wrong node discovers the right node
+- whether the fallback survives backend loss
+- whether stateful truth is still singular
+
+If those four questions are still answered socially, then the option is much
+closer to the old system than to a genuinely new one.
 
 ## Strongest honest current answer
 
-If an operator asks, "What is the actual promotion rule here?" the shortest
-defensible answer is:
-
-> Stay Compose-first until a specific hidden burden becomes too socially held
-> to narrate honestly, then promote only the smallest next layer that clearly
-> owns that burden better under real proof, while refusing both premature
-> platform capture and sentimental defense of a current layer that has already
-> turned into a disguised control plane.
-
-Without it, "more options" quickly becomes another way of saying
-"more substitutes that do not actually answer the user's question."
-
-## Path 1: Compose-first plus explicit truth helpers
-
-Use this path when:
-
-- manual service placement is still acceptable
-- Compose readability is still buying real value
-- the dominant pain is wrong-node routing and drift, not scheduler-scale churn
-- the operator wants to preserve direct file-level authorship
-
-This path means:
-
-- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-  and `compose/docker-compose.*.yml` remain the priority implementation
-- a narrow control surface is added behind them
-- that surface owns truth, routing generation, and convergence checks rather
-  than whole-platform scheduling
-
-This is the path most aligned with the user's deepest request:
-
-not "never build a control plane,"
-but "build the smallest truth-owning layer that actually stops the fake-option
-cycle."
-
-This page should therefore treat Path 1 as the baseline burden-relocation test
-for the whole repo.
-
-That last clause has to stay sharp.
-If this path produces a placement file, a sync helper, a route generator, and a
-convergence checker, but the operator still has to mentally decide which one is
-the real truth on the bad day, then the path has not escaped the fake-option
-cycle.
-It has only organized it better.
-
-### What this path must contain if it is going to stop being hand-wavy
-
-#### A. One explicit placement-truth surface
-
-The repo keeps pointing at `services.yaml` for a reason.
-
-That surface needs to answer:
-
-- which service identity exists
-- which node currently hosts it
-- whether it is node-local, replicated, or globally available
-- what ports and protocols matter
-
-#### B. One convergence-truth surface
-
-The repo needs auditable node state for at least:
-
-- Compose or repo revision
-- secret and env freshness
-- auth and middleware dependencies
-- deployment freshness
-
-#### C. One route-generation surface that survives failure
-
-The first-hop proxy cannot depend on route generation that disappears when the
-local backend disappears.
-
-That is why replacing or hardening `docker-gen-failover` matters so much.
-
-#### D. One explicit peer-eligibility model
-
-It must be possible to explain:
-
-- why a peer was eligible
-- why a peer was excluded
-- what health definition was actually applied
-
-#### E. One proof-first stateless HTTP drill
-
-This path is not real until one representative service proves:
-
-- any-node first hop
-- wrong-node forwarding
-- backend-loss route survival
-- middleware and auth continuity
-
-This requirement is deliberately narrow because the user is tired of vague
-“supports failover” claims.
-
-One route proven honestly is worth more in this repo than twenty abstract
-features that still leave the real path unexercised.
-
-That asymmetry matters here.
-A stack with more features is not ahead of the user's dream if the bad-day
-request path is still narratively stronger than operationally owned.
-
-### What this path solves well
-
-- keeps Compose central
-- preserves readability
-- solves the current truth gaps first
-- matches the repo’s strongest instruction surfaces
-
-### What this path still does not solve by itself
-
-- stateful election and write ownership semantics
-- generic auto-placement
-- large-scale reconciliation logic
-- universal rescheduling after node loss
-
-Those are not failures of the path.
-They are its honest boundaries.
-
-Those boundaries are valuable, because an honest partial answer is exactly what
-the repo is trying to preserve against ecosystems that oversell broad ones.
-
-### When this path stops being enough
-
-Promote beyond this path when one of these becomes the dominant pain:
-
-- manual placement itself is now a bigger tax than the helper layer
-- service churn is too high for explicit placement plus helper truth
-- the helper layer is silently becoming an orchestrator anyway
-- stateful failover needs deeper topology ownership than helper agents can
-  honestly provide
-
-If those are not true yet, stay here.
-
-This page should be read as slightly biased toward staying here until the pain
-becomes concrete.
-
-That bias is not conservatism for its own sake.
-It exists because the repo still has not fully earned a broader promotion, and
-because broad promotion too early would erase the exact missing layer the user
-is trying to isolate.
-
-That is why this path is not merely "the conservative option."
-It is the path most likely to preserve explanatory fidelity while the repo
-still learns what the actual missing truth layer has to do.
-
-But staying here is only justified while the path is still getting more
-truthful.
-If the helper layer keeps growing while the same core questions still resolve
-to operator reconstruction, then this path stops being disciplined and starts
-being evasive.
-
-## Path 2: infra-grade HA promotion for ingress or identity-critical pieces
-
-Use this path when:
-
-- the most painful problem is not app scheduling
-- the most painful problem is keeping a small number of critical edge or
-  identity surfaces alive
-- the operator wants boring HA primitives before broad platform capture
-
-Typical candidates:
-
-- ingress identity continuity
-- VIP-like behavior
-- critical reverse-proxy presence
-- tightly-scoped infra roles where failover logic is narrower than full app
-  scheduling
-
-This is where OpenSVC-, keepalived-, or HAProxy-style promotion becomes much
-more reasonable than full scheduler promotion.
-
-This path is important because it is one of the few honest “more tooling”
-answers that does not pretend every problem is an app-scheduling problem.
-
-It also matters psychologically.
-
-One source of the user's frustration is being forced into giant solution
-domains when the real pain may still be much narrower:
-
-- keep first-hop truth alive
-- keep identity surfaces boring
-- stop one small critical layer from staying sacred
-
-The limit is important:
-removing a sacred first hop is not the same as removing sacred application
-truth.
-This path earns itself when the narrow pain is actually narrow.
-It becomes fake when its first-hop improvements get narrated as if the whole
-service surface became request-preserving.
-
-That fake-upgrade warning is what keeps this path honest.
-
-### What this path solves well
-
-- strong first-hop or critical infra failover semantics
-- boring HA for narrow domains
-- explicit ownership of infra-grade liveness
-
-### What this path still does not solve by itself
-
-- application placement truth for the whole stack
-- generic wrong-node request preservation for every service
-- stateful application correctness
-- broad developer workflow unification
-
-This path is excellent when the repo needs infra-grade resilience for a narrow
-slice, not when it needs a universal application control plane.
-
-## Path 3: lighter scheduler promotion
-
-Use this path when:
-
-- the dominant pain has truly become placement, rescheduling, and deployment
-  automation
-- the operator still wants something lighter and more legible than Kubernetes
-- the repo is ready to pay some scheduler tax in exchange for real lifecycle
-  ownership
-
-This path says:
-
-- the middle layer taught us where the pain really is
-- now a real workload scheduler is justified for some or all stateless
-  services
-- the repo still wants a simpler operator contract than a full Kubernetes
-  ecosystem
-
-The key phrase is “for some or all stateless services.”
-
-If this path starts being narrated as a universal answer to stateful truth,
-shared storage, and protocol-specific failover, the docs are drifting again.
-
-This path also fails if it gets promoted mainly because the helper mesh became
-embarrassing to explain.
-Embarrassment is not evidence.
-The scheduler should be promoted because it owns a named pain more honestly,
-not because the existing story became hard to narrate cleanly.
-
-This is also where the repo should ask a harsher follow-up:
-
-- did the helper layer become complicated because it was genuinely paying down
-  the right truth burdens?
-- or did it become complicated because the repo kept refusing to name a real
-  scheduler pain until too late?
-
-### What this path solves well
-
-- workload placement automation
-- service lifecycle ownership
-- rescheduling after failure
-- a clearer answer to where should this run
-
-### What this path still does not solve automatically
-
-- stateful correctness
-- storage ownership
-- ingress semantics unless integrated carefully
-- honest multi-protocol failover policy
-
-The repo should only promote here after it can say:
-
-- the helper-layer truth gaps are understood
-- scheduler promotion is solving a named pain, not vaguely modernizing the
-  stack
-
-That last sentence is one of the main anti-theater rules in the repo.
-
-## Path 4: full desired-state platform promotion
-
-Use this path only when:
-
-- the repo truly wants desired-state reconciliation as a first-class contract
-- operator tax is justified by the ecosystem gained
-- service churn, controllers, storage operators, and platform-wide scheduling
-  genuinely outweigh the Compose-first legibility loss
-
-This path is not forbidden.
-It is just the highest-tax option in the repo’s universe.
-
-That tax is not only operational.
-It is also paid in:
-
-- lost directness
-- farther-away truth surfaces
-- more controller-shaped explanations
-- higher risk that the docs trust the platform story more than the bad-day
-  evidence
-
-### What this path solves well
-
-- desired-state scheduling and reconciliation
-- broad operator ecosystem
-- mature controller patterns
-- strong platform conventions
-
-### What this path still does not magically solve
-
-- the need for honest stateful topology design
-- cross-domain anti-SPOF storytelling
-- the difference between ingress continuity and application correctness
-- the need to define what the service still means under failure
-
-This repo should never promote here just because multi-node Docker feels
-annoying.
-That is not a sufficient reason.
-
-This is the highest-risk path for documentation fraud because it can absorb
-many unresolved burdens into broader platform rhetoric.
-
-The earned reason would have to sound much more specific:
-
-- explicit truth layers are understood
-- helper composition has already grown control-plane-sized
-- desired-state reconciliation is now solving a named dominant pain
-- the operator is actually getting clarity back, not just ecosystem gravity
-
-This page should keep treating "clarity back" as the key requirement.
-
-If promotion makes the stack more fashionable but not more self-explaining,
-then the user has not actually gained an option.
-
-That sentence should be treated as a hard gate, not a nice side effect.
-The user's complaint is fundamentally about hidden truth and fake options, not
-about lack of ecosystem prestige.
-
-## Path 5: service-class-specific stateful promotion
-
-Use this path when the real pain is not generic routing at all.
-
-Examples:
-
-- Redis needs Sentinel, Cluster, or protocol-aware proxying
-- MongoDB needs replica-set truth and client rediscovery
-- RabbitMQ needs explicit clustering or an honest single-node boundary
-- shared storage needs a real answer about locking, ownership, and durability
-
-This path matters because stateful systems are exactly where infrastructure
-language becomes most misleading.
-
-This is also where the repo most needs permission to be uneven.
-
-It is acceptable for:
-
-- stateless HTTP to mature first
-- Redis to get a sharper answer than RabbitMQ
-- MongoDB to be promoted differently from Postgres
-
-Uniformity is not the goal.
-Honest service-class-specific correctness is.
-
-That unevenness is not weak architecture discipline here.
-It is the repo refusing fake generalization before the proof and ownership
-semantics for each stateful class have actually diverged in public.
-
-This page should stay willing to look uneven if unevenness is the more honest
-state.
-The user wants a truthful map of what is real, weak, or still fictionalized,
-not a symmetrical platform story.
-
-This is one of the biggest places where generic platform language harms the
-repo.
-
-The user does not need every subsystem to mature at the same rate.
-The user needs each subsystem to stop pretending it is more solved than it is.
-
-The repo should prefer:
-
-- narrower honest promotion per stateful class
-
-over:
-
-- one universal claim that the platform is now HA
-
-## The actual decision map
-
-Use this blunt mapping.
-
-It is intentionally blunt because the user has already seen what happens when
-tooling guidance is too willing to blur adjacent pains together.
-
-### If the pain is:
-
-> requests land on the wrong node and the node cannot figure out where to send
-> them
-
-Use:
-
-- Path 1 first
-
-Do not jump directly to:
-
-- Path 4
-
-unless the missing truth layer has already proved too complex to keep narrow.
-
-### If the pain is:
-
-> one or two critical ingress or identity surfaces still feel sacred even
-> before app scheduling becomes the main problem
-
-Use:
-
-- Path 2
-
-This is exactly where infra-grade HA primitives can earn their keep without
-capturing the whole stack.
-
-### If the pain is:
-
-> stateless service placement and rescheduling are now a bigger tax than manual
-> placement plus helper truth
-
-Use:
-
-- Path 3
-
-This is the point where a lighter scheduler starts to solve a real problem
-instead of merely sounding modern.
-
-### If the pain is:
-
-> the repo genuinely wants a full desired-state platform with controller
-> semantics and ecosystem depth
-
-Use:
-
-- Path 4
-
-But only after saying explicitly which pain remained unsolved by Paths 1, 2,
-or 3.
-
-### If the pain is:
-
-> a specific stateful service still has fake HA language around it
-
-Use:
-
-- Path 5
-
-This repo should promote stateful truth per service class long before it claims
-stateful anti-SPOF globally.
-
-## The promotion rules
-
-The repo should only promote upward when the lower layer has become the hidden
-tax itself.
-
-That means:
-
-- do not promote because the bigger platform exists
-- do not promote because cluster language sounds cleaner than helper logic
-- do not promote because the edge stack is already sophisticated
-- do not promote because stateful systems are intimidating in the abstract
-
-Promote only when the current layer is now hiding too much truth or demanding
-too much manual compensation.
-
-If the helper layer becomes opaque, coordination-heavy, and difficult to audit,
-then the honest move may be to promote it into a named scheduler instead of
-pretending it is still somehow simpler because it has fewer logos.
-
-The inverse is also true.
-If a promoted platform still leaves the operator carrying the same private
-wrong-node, route-survival, or stateful-authority knowledge, then the platform
-has not actually earned its promotion in this repo even if it is powerful in
-general.
-
-That is another way of saying:
-
-- small is not automatically honest
-- big is not automatically dishonest
-- the real question is which layer now best exposes and owns the truth the
-  operator would otherwise have to carry privately
-
-## The honest current recommendation
-
-The current best recommendation is still:
-
-- keep Compose central
-- build the missing middle layer honestly
-- prove one real stateless HTTP wrong-node path
-- prove backend-loss route survival
-- keep stateful promotion narrower and later
-- let stronger control planes earn themselves by named pain class
-
-That is the route most aligned with the user’s actual dream.
-
-It is also the route least likely to destroy the evidence the repo still needs
-in order to understand itself honestly.
-
-## Bottom line
-
-The repo does not need a bigger answer first.
-It needs a more precise one first.
-
-The right promotion rule is:
-
-> strengthen only the layer that is currently forcing the operator to carry too
-> much hidden truth in their head
-
-That is how the repo avoids replacing one kind of architecture theater with a
-larger one.
+The repo should still treat Compose-first authoring plus a missing-middle
+truth-owning layer as the current default direction.
+The next honest promotions are not "pick Kubernetes or don't."
+They are:
+
+- externalize current placement and peer truth
+- prove one wrong-node stateless HTTP route
+- make fallback survive the backend failure that made fallback necessary
+- keep stateful HA on its own harsher track
+
+Anything broader than that may still become right later.
+It has not yet clearly earned itself from current evidence.
