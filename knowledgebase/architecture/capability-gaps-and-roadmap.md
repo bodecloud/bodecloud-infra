@@ -28,6 +28,11 @@ So the only roadmap worth keeping here is the roadmap that answers:
 
 That is what "roadmap" means in this repo.
 
+Another way to say it:
+
+- the roadmap is not a list of upgrades
+- it is a list of excuses the platform still needs to stop needing
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -48,6 +53,10 @@ This page is not authoritative about:
 
 This page is a sequencing contract.
 It is not an implementation victory lap.
+
+It is also not a morale document.
+If it starts sounding like one, it has probably stopped naming the exact hidden
+burden that still makes the stronger architecture story illegal.
 
 ## Strongest honest current answer
 
@@ -72,6 +81,9 @@ In the priority implementation today, that means:
 - protected-route continuity
 - keeping TCP and stateful promotion under separate honesty gates
 
+That list is best read as a list of places where the user's frustration is
+still objectively correct.
+
 ## What still does not count as sequencing well
 
 This page needs to reject roadmap theater, not only feature theater.
@@ -88,6 +100,11 @@ The following still do not count as strong sequencing:
 Those things may improve planning posture.
 They still do not prove the sequence is actually protecting the user from fake
 closure.
+
+This page has to care about that because fake closure is not an abstract risk
+here.
+It is one of the main ways the wider ecosystem keeps presenting "options"
+before the decisive burden actually moved.
 
 ## What a real roadmap-promotion packet would have to contain
 
@@ -122,6 +139,11 @@ The current best order remains:
 This is not motivational sequencing.
 It is the dependency chain between the dream and reality.
 
+It is also the difference between:
+
+- "the repo is exploring sophisticated things"
+- and "the repo has found the next thing that actually deserves trust"
+
 ## What still does not count as progress
 
 This repo has a specific problem, so it also needs a specific false-progress
@@ -143,6 +165,8 @@ themselves:
 That list exists because the user is explicitly frustrated by ecosystems that
 keep narrating partial machinery as if the burden has already moved.
 
+So the roadmap has to stay aggressively anti-theater, not just anti-chaos.
+
 ## Why the order has to stay this strict
 
 The project wants all of these at once:
@@ -155,6 +179,9 @@ The project wants all of these at once:
 
 That dream depends on a stack of truths.
 If the lower truths are weak, the upper ones become performance.
+
+That sentence is one of the most important ones on this page.
+It is the reason the roadmap keeps refusing to reward sophistication theater.
 
 The real dependency chain is:
 
@@ -177,6 +204,10 @@ It is protecting the user's real demand:
 > smaller honest answers have even been exhausted
 
 That is why the roadmap stays narrow and harsh.
+
+The repo is not allergic to bigger platforms.
+It is allergic to promoting them before they can point to a concrete removed
+humiliation threshold.
 
 The next thing to build is not the next thing that sounds advanced.
 It is the next thing whose absence still forces the stack to lie.
@@ -247,6 +278,11 @@ Unlocks:
 This priority sounds editorial.
 It is actually architectural, because dishonest docs make every next decision
 worse.
+
+The user keeps pressing this because the architecture problem is partly a
+problem of narrative honesty.
+If the docs speak like burden moved before burden moved, the platform starts
+planning from a lie.
 
 ## Priority 1: placement truth
 

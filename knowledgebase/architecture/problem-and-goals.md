@@ -18,6 +18,12 @@ The problem is:
 That question is stricter than generic HA language, and smaller than a
 "migrate to Kubernetes" story.
 
+It is also harsher than many self-hosting discussions are willing to be.
+This repo is not just looking for resilience.
+It is looking for a system that stops humiliating the operator by revealing,
+too late, that the operator is still the real keeper of placement and recovery
+truth.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -34,6 +40,10 @@ This page is not authoritative about:
 
 This page is the benchmark, not the completion report.
 
+It has to stay that way because the repo is already coherent enough to tempt
+readers into thinking the remaining gap is mostly execution.
+That temptation is part of the problem.
+
 ## Strongest honest current answer
 
 The repo already proves a serious Compose-first platform with a strong edge,
@@ -49,6 +59,12 @@ What it does not yet prove is the harder thing:
 
 That gap is the actual problem. Everything else is supporting detail.
 
+More bluntly:
+
+- the repo already has enough machinery to look serious
+- it still does not have enough system-owned truth to make that seriousness
+  fully trustworthy
+
 ## The shortest exact problem statement
 
 The repo is trying to solve this:
@@ -59,6 +75,11 @@ The repo is trying to solve this:
 
 The repo is therefore not only a hosting system.
 It is a search for a smaller honest control surface.
+
+The key word there is "honest."
+The user is not just searching for a smaller layer.
+They are searching for one that really carries burden instead of merely
+renaming it.
 
 ## The wound behind the problem statement
 
@@ -110,6 +131,8 @@ If a solution narrative removes only the first half, it becomes fantasy.
 If it removes only the second half, it becomes complaint without architecture.
 The real documentation has to preserve both.
 
+That balance is one of the central duties of the whole knowledgebase.
+
 ## What still does not count as understanding the problem
 
 This page needs its own anti-flattening filter.
@@ -130,6 +153,9 @@ The user's complaint is narrower and harsher:
 > too many supposedly serious answers still leave the operator as the real
 > keeper of placement, fallback, and semantic continuity truth.
 
+That sentence is the real anti-flattening rule for the page.
+If a future summary cannot survive it, the future summary is too small.
+
 ## What does not count as solving this problem
 
 The problem is specific enough that it needs an explicit false-solution filter.
@@ -146,6 +172,11 @@ The repo has **not** solved the problem merely because:
 Those may all be helpful ingredients.
 None of them, by themselves, prove that request meaning survives wrong-node
 entry without private operator reconstruction.
+
+That is why the repo keeps sounding unimpressed by things that would normally
+count as obvious progress.
+Progress is not denied.
+It is just being held against a much sharper held-out scene.
 
 ## The hidden enemy
 
@@ -173,6 +204,9 @@ This is the most important compression of the whole page:
 - it mainly lacks system-owned answers to the questions that become decisive on
   the bad day
 
+That is also why the user's frustration can coexist with a stack that already
+looks technically substantial.
+
 ## What the current stack already gives
 
 The repo already has meaningful assets:
@@ -193,6 +227,10 @@ Those are real strengths.
 
 They are still weaker than the final requirement stack because most of them are
 ingredients, not shared truth.
+
+That sentence is the correct posture for almost the whole current stack.
+Useful, real, often impressive, but still not the same thing as burden
+ownership.
 
 ## What a serious problem-definition proof packet would have to contain
 

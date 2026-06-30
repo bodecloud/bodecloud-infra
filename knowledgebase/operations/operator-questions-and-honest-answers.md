@@ -21,6 +21,20 @@ The central question is:
 
 Everything below should be read through that lens.
 
+The reason this page has to stay sharp is that operator Q&A is one of the
+easiest places for a repo to start sounding compassionate while still quietly
+answering a smaller problem.
+
+The user is not mainly asking for:
+
+- nicer explanations
+- better product comparisons
+- more realistic recommendations
+
+They are asking why the system still keeps cashing out into them at the exact
+moment a supposedly healthier node should have been able to carry more of the
+truth itself.
+
 ## Strongest honest current answer
 
 The repo is not mainly suffering from lack of tools.
@@ -32,6 +46,9 @@ operator memory without either:
 
 That is why the ecosystem can feel full of products and still feel empty of
 answers.
+
+What feels absent is not "tools."
+What feels absent is a believable handoff of burden.
 
 ## What this page is and is not allowed to prove
 
@@ -76,6 +93,12 @@ It should not let:
 
 If an answer gets easier by making the question smaller, it got less faithful.
 
+That is one of the recurring dangers this page is trying to block:
+
+- a question about hidden truth ownership
+- gets answered as a question about tool choice
+- then gets narrated as if the operator had received a real option
+
 ## What still does not count as an honest answer here
 
 This page exists partly because the repo has already seen too many answers that
@@ -96,6 +119,9 @@ The user's frustration is not a lack of terminology.
 It is the recurring experience of being offered adjacent answers that stop one
 layer too early.
 
+This page should keep saying that in plain language because that pattern is the
+real through-line of the archive.
+
 If an answer does not name that pattern, it is probably still participating in
 it.
 
@@ -113,6 +139,11 @@ It should leave behind:
 
 That final item matters because otherwise the page still behaves like a better
 shopping guide instead of a burden-faithful operator surface.
+
+And "shopping guide" is exactly the downgrade the user keeps rejecting.
+The repo is not trying to shop for dignity by brand name.
+It is trying to identify which specific truths still fail to move out of the
+operator's head.
 
 ## What a real answer packet would have to contain
 
@@ -150,6 +181,9 @@ In repo-native terms that means all of the following:
 Anything smaller than that may still be useful engineering.
 It is not the full ask.
 
+That distinction matters because the ecosystem is full of useful engineering
+that still does not produce a satisfying option in this repo's sense.
+
 ## Question 2: Why do ordinary HA answers keep feeling fake here?
 
 Because they usually solve one slice while leaving the hidden burden where it
@@ -176,6 +210,9 @@ unresolved:
 If the hidden burden survives, the answer is still in the rejected family for
 this repo.
 
+That is true even when the answer is technically respectable.
+Technical respectability and burden relocation are not the same achievement.
+
 ## Question 3: Why does the repo sometimes act like there are "no real options" even though there are many tools?
 
 Because the scarcity is not tool scarcity.
@@ -198,6 +235,11 @@ The missing thing is narrower:
 > an option that makes any-node entry, wrong-node forwarding, policy
 > continuity, and service-class honesty more system-owned and less
 > operator-reconstructed
+
+That is why this repo can sound unusually unforgiving.
+It is not denying that many tools are real.
+It is denying that many of them deserve to be called a real answer to this
+particular wound.
 
 ## Question 4: Is Traefik the answer to the multi-node problem here?
 
@@ -227,6 +269,11 @@ That is why the repo keeps treating Traefik as:
 
 - a routing execution surface
 - not the missing middle layer by itself
+
+That distinction is important because tools that become central often acquire
+accidental narrative authority.
+The repo has to keep refusing the move where a strong edge surface gets spoken
+about as if it had already become shared truth ownership.
 
 ## Question 5: Then what is Traefik actually buying us?
 
