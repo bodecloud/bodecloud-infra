@@ -2,40 +2,16 @@
 
 This page is the claim governor for the whole knowledgebase.
 
-It exists because the main documentation failure in this repo is no longer
-missing information.
-It is information being narrated at the wrong confidence level.
+Its job is simple:
 
-The repo has enough:
+- stop runtime presence from turning into capability proof
+- stop intent from turning into present-tense behavior
+- stop planning from turning into implementation
+- stop archive pressure from turning into runtime evidence
 
-- real ingress machinery
-- real multi-node pressure
-- real planning depth
-- real archive frustration
-- real implementation complexity
-
-to sound mature long before it is trustworthy.
-
+The repo now has enough live machinery, enough planning depth, and enough
+archive frustration to sound mature long before it is trustworthy.
 This ledger exists to stop that overpayment.
-
-It also exists because the repo is now sophisticated enough that disciplined
-classification alone can start sounding like maturity.
-This page has to keep reminding the reader that better evidence grammar is not
-the same thing as one more important truth actually leaving operator memory.
-
-That line matters because this repo is now sophisticated enough to fake
-progress with classification itself.
-
-The danger is:
-
-- the sources are separated correctly
-- the caveats are worded responsibly
-- the confidence levels sound disciplined
-- the reader still walks away feeling more closure than the runtime earned
-
-That is why evidence grammar has to stay subordinate to burden truth.
-Better claim classification is good.
-It is not itself one more shared system-owned fact.
 
 ## What this page is and is not allowed to prove
 
@@ -59,100 +35,22 @@ This page is not allowed to:
 This is a page about how to speak truthfully, not a page that proves the repo
 is done.
 
-It also cannot let stronger evidence hygiene impersonate stronger evidence.
+## The main failure this ledger is trying to stop
 
-This is one of the easiest traps in a repo at this stage:
+Most weak summaries in this repo are not wrong because they invent facts.
+They are wrong because several weaker truths get emotionally combined into a
+stronger claim than any one source actually proves.
 
-- the evidence classes are rigorous
-- the caveats are conservative
-- the source routing is careful
-- the reader starts feeling like the platform must therefore be close to trust
-
-No.
-That is still documentation discipline, not route-specific maturity.
-
-## Strongest honest current answer
-
-The biggest remaining documentation risk is not false facts.
-It is adjacency masquerading as proof.
-
-That usually happens in this order:
+That failure usually happens like this:
 
 1. archive pressure names the wound clearly
 2. instruction files name the dream clearly
 3. live Compose files show serious components
 4. planning docs propose sharp repairs
-5. the docs quietly fuse those into one present-tense feeling of maturity
+5. the docs quietly fuse all of that into one present-tense feeling of
+   maturity
 
-That fusion is exactly what this ledger exists to block.
-
-And that fusion is not just an intellectual error.
-It is the mechanism by which the docs start becoming emotionally more
-satisfying than the runtime has actually earned.
-
-That is why this ledger has to stay a little hostile to elegance.
-
-A very elegant synthesis can still be the wrong artifact if it lets:
-
-- archive pressure donate emotional force
-- planning docs donate seriousness
-- runtime presence donate concreteness
-- instruction files donate direction
-
-and then quietly turns that blended feeling into pseudo-proof
-
-## The hidden mistake this ledger is trying to stop
-
-Most weak summaries in this repo are not wrong because they invented facts.
-They are wrong because they let several weaker truths emotionally combine into
-a stronger claim than any one source actually proves.
-
-That is how documentation starts sounding like this:
-
-- "the stack is basically anti-SPOF now"
-- "the system already has a distributed control story"
-- "failover is mostly there, it just needs polish"
-- "the remaining work is mostly automation"
-
-Those are the kinds of sentences this ledger is supposed to make illegal
-unless there is route-specific proof strong enough to survive them.
-
-That illegality should stay a little aggressive.
-The repo is no longer mainly threatened by ignorance.
-It is threatened by respectable-seeming adjacency becoming socially accepted as
-if it were proof.
-
-This page should therefore make a reader slightly less comfortable, not more.
-
-If the ledger is functioning correctly, it should keep interrupting the
-instinct to say:
-
-- "close enough"
-- "basically there"
-- "the architecture is clear"
-- "the rest is mostly automation"
-
-Those are exactly the kinds of sentences that let the docs mature faster than
-the underlying truth moved.
-
-This page has to interrupt one more sentence too:
-
-- "at least the repo now knows how to evaluate itself, so the rest is mostly
-  execution"
-
-That is still a counterfeit upgrade if the same wrong-node, fallback, semantic
-continuity, and stateful truth gaps remain where they were.
-
-This ledger is here to keep that speed mismatch visible:
-
-- the site can get better at explanation quickly
-- the runtime may move much slower
-- the docs are only honest if they keep those clocks separate
-
-That separation should be treated as a hard documentation invariant, not a
-stylistic preference.
-If a page becomes more satisfying by letting those clocks drift together, the
-page got more persuasive and less trustworthy.
+That fifth step is what this ledger exists to block.
 
 ## The four evidence classes
 
@@ -193,30 +91,9 @@ What Class 1 cannot prove by itself:
 - future failover semantics from present components alone
 - backend-loss recovery
 - stateful authority correctness
-- that a helper surface with failover-shaped naming has actually inherited the
-  same service meaning the operator thinks it has
 
 Presence is real.
 Presence is not closure.
-
-That two-line rule should feel harsher than it looks.
-Presence is exactly where a serious-looking stack starts trying to borrow
-trust from components that have not yet passed the bad-day test.
-
-And once presence starts borrowing trust, the repo becomes vulnerable to one of
-its oldest wounds:
-
-- a component exists
-- therefore a capability starts sounding adult
-- therefore the operator burden sounds partially removed
-- therefore the remaining gap starts being narrated as polish
-
-This ledger exists to break that chain.
-
-That anti-chain rule should be treated as a site-wide checksum.
-If a page points at live components but becomes less able to say which private
-completion step still survives, the page is probably laundering presence into
-premature maturity.
 
 ### Class 2: architecture-intent and honesty evidence
 
@@ -233,13 +110,14 @@ Strong anchors:
 
 - [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
 - [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
+- [`knowledgebase/AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/AGENTS.md)
 
 What Class 2 can honestly prove:
 
 - the dream
 - the anti-goals
-- the repo's intended operating contract
-- the repo's own honesty wall
+- the intended operating contract
+- the repo's honesty wall
 
 What Class 2 cannot prove by itself:
 
@@ -250,314 +128,180 @@ What Class 2 cannot prove by itself:
 Intent is real.
 Intent is not runtime proof.
 
-And in this repo, intent can become dangerously persuasive because it is
-already unusually clear.
-The clearer the dream gets, the easier it becomes for weak summaries to sound
-like the runtime is "basically on its way there" when the hard proof still has
-not moved.
-
-That is one of the paradoxes this page has to preserve:
-
-the repo's clarity about the dream is a strength, but it is also one of the
-main ways the docs can accidentally overpay confidence.
-
-The same paradox appears at the ledger level.
-The cleaner the evidence taxonomy gets, the easier it becomes for a reader to
-mistake disciplined evaluation for partial completion.
-This page has to keep separating those two feelings on purpose.
-
-That is why intent pages should make the dream sharper, not make runtime
-claims easier.
-
-They should also make one sentence easier to resist:
-
-- "because the repo finally says exactly what it wants, the implementation
-  must be most of the way there"
-
-That sentence is one of the main counterfeit upgrades this ledger exists to
-keep illegal.
-
 ### Class 3: planning and promotion evidence
 
-Use for claims about known gaps, proposed repairs, explicit capability holes,
-and possible future promotion logic.
+Use for claims about known gaps, candidate repair paths, sequencing, and
+promotion thresholds.
 
 Typical questions:
 
-- what does the repo already know is missing?
-- what repair paths are being seriously explored?
-- which helper layers are already called out as untrustworthy?
+- what missing truths has the repo already named?
+- which future layers are under evaluation?
+- what would justify promoting a stronger control plane?
 
 Strong anchors:
 
 - [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
-- [`docs/stateful_ha_plan.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/stateful_ha_plan.md)
-- [`docs/osvc_ingress_ha.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/osvc_ingress_ha.md)
-- research pages under
-  [`knowledgebase/research/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/)
+- planning pages under `docs/`
+- architecture roadmap and promotion pages in the knowledgebase
 
 What Class 3 can honestly prove:
 
-- the repo already sees the gap
-- the gap is not being ignored
-- a future path is being considered seriously
-- a current helper is already distrusted for a named reason
+- what the repo already knows is missing
+- what candidate repair families exist
+- what promotion criteria are being proposed
 
 What Class 3 cannot prove by itself:
 
-- that the repair is live
-- that the current runtime already inherited the planned behavior
-- that a proposed helper has earned trust just because the plan is detailed
+- that the repair is already implemented
+- that a candidate has already earned promotion
+- that a planned registry or failover path is live
 
-Detailed plans are still plans.
+Planning is real.
+Planning is not implementation.
 
-That sentence matters because the planning layer often contains the most adult
-voice in the repo.
-Without a page like this, the future starts impersonating the present while
-still sounding perfectly responsible.
+### Class 4: archive and pressure evidence
 
-That is one of the main social risks in this knowledgebase:
-the better the future is described, the easier it becomes to feel like the
-present is already partly vindicated.
-
-And "perfectly responsible" is not a defense here.
-
-The docs can become more balanced, more precise, and more roadmap-literate
-while still performing the same old softness:
-
-- the missing truth is named
-- the repair path is named
-- the surviving burden is no longer named hard enough
-
-### Class 4: archive-pressure evidence
-
-Use for claims about what the user keeps rejecting, what pain keeps recurring,
-and which answer families still feel fake.
+Use for claims about why the user keeps rejecting ordinary answers, which
+patterns recur, and what emotional or technical accusation the docs must keep
+preserving.
 
 Typical questions:
 
-- why does "just use X" keep failing here?
-- what exactly is the user rebelling against?
-- why does the repo keep talking about wrong-node dignity and sacred-node
-  memory?
+- why do normal option lists still feel fake here?
+- what exact burden is the user complaining about?
+- which recurring pressures keep showing up across conversations?
 
 Strong anchors:
 
-- [Archive Pressure Patterns](archive-pressure-patterns.md)
-- [User Intent and Dream](user-intent-and-dream.md)
-- source archive files under
-  [`knowledgebase/source-archive/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/)
+- [`knowledgebase/source-archive/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/)
+- synthesis pages under [`research/`](../research/evidence-ledger.md)
 
 What Class 4 can honestly prove:
 
-- the standard the user is holding the system to
-- the kinds of answers that should not satisfy the docs
-- the recurring shape of the user's disappointment
+- the shape of the complaint
+- recurring pressure patterns
+- why adjacent answers keep failing
 
 What Class 4 cannot prove by itself:
 
-- that the local repo already solved the pain
-- that one future technical choice has already been earned
-- that the runtime is close just because the archive pressure is clear
+- current runtime behavior
+- route-specific failover success
+- that an explored option is live now
 
-Archive pressure tells us what counts.
-It does not certify completion.
+Archive pressure is real.
+Archive pressure is not runtime evidence.
 
-This is one of the most important retrieval protections in the site.
-The archive can tell us exactly why the user feels insulted by adjacent
-answers.
-It cannot tell us that the current stack has finally stopped being one.
+## Claim routing table
 
-That boundary matters because archive-rich writing can easily start sounding
-like deep understanding.
-
-Sometimes it is.
-Sometimes it is just a more literate version of the same miss:
-
-- the user's accusation is reconstructed beautifully
-- the current burden location is still not audited tightly enough
-
-## Claim routing matrix
-
-Use this before writing any substantial paragraph.
+Use this table before writing a strong sentence.
 
 | If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
 | --- | --- | --- | --- |
-| "this exists in the current priority runtime" | Class 1 | root Compose runtime | that it survives the relevant failure |
-| "this is the dream or operating contract" | Class 2 | `copilot-instructions.md`, `README.md` | that the worktree already earned it |
-| "the repo already knows this is missing or broken" | Class 3 | planning docs and gap pages | that the repair is active |
-| "the user rejects this whole answer family" | Class 4 | archive-pressure and source archive | that rejection alone proves the better design |
-| "this lane is getting closer but still unsafe" | Class 1 + 3 | runtime plus named gap | that "closer" is the same as proven |
-| "this helper matters but is not yet trustworthy" | Class 1 + 3 | live helper presence plus explicit distrust in plans | that helper presence equals route durability |
+| "this component exists in the priority implementation" | Class 1 | root Compose files, active fragments, merged config | that the component already solves the larger distributed behavior |
+| "the repo wants any-node entry and peer-forward fallback" | Class 2 | copilot instructions, README, knowledgebase intent pages | that the runtime already does it |
+| "the repo has already identified the missing truths" | Class 3 | master plan, roadmap pages, promotion docs | that the repair has shipped |
+| "the user rejects ordinary answers because they preserve hidden operator burden" | Class 4 | archive threads, pressure pages, dream reconstruction pages | that current runtime proof exists |
 
-If a sentence cannot be routed cleanly, it is usually too vague or doing too
-much work at once.
+If a paragraph blends more than one row, it should say which row is carrying
+which part of the claim.
 
-## The anti-merger rule
+## Confidence ceilings
 
-This is the most important rule on the page:
+The safest way to stop overclaiming is to use explicit confidence ceilings.
 
-do not let several weaker evidence classes emotionally combine into a stronger
-claim than any one of them actually proves.
+### Ceiling A: presence only
 
-That means:
+Legal when:
 
-- Class 1 plus Class 2 does not equal shipped capability
-- Class 2 plus Class 3 does not equal near-complete behavior
-- Class 1 plus Class 3 does not equal working failover
-- Class 1 plus Class 4 does not equal the user's dream being met
-- Class 2 plus Class 4 does not equal justified orchestrator promotion
+- the worktree clearly shows a service, network, middleware, or helper
 
-This repo is especially vulnerable to this because it has:
+Illegal upgrade:
 
-- strong architecture intent
-- a serious live edge stack
-- many explored control-plane directions
-- a very clear archive of dissatisfaction
+- "therefore the platform owns the capability that component gestures toward"
 
-Put together, those can sound like completion.
-This ledger exists to stop "sounds like completion" from replacing proof.
+### Ceiling B: intent only
 
-That phrase should almost be read as the entire mission statement for the
-knowledgebase.
-The docs are not just trying to be accurate.
-They are trying to stop aesthetic maturity from outrunning real burden
-transfer.
+Legal when:
 
-## What still does not count as evidence discipline
+- the repo clearly states the target operating contract
 
-This page should also make a second failure mode impossible:
+Illegal upgrade:
 
-the docs acting as though careful caveats by themselves are a substitute for
-real burden transfer.
+- "therefore the current runtime is already close enough to describe that way"
 
-The following still do not count as strong evidence discipline:
+### Ceiling C: plan only
 
-- naming all four evidence classes and then writing a paragraph that quietly
-  fuses them anyway
-- admitting uncertainty while still implying that the runtime is "basically"
-  close
-- writing a polished contradiction summary without saying what artifact would
-  have to exist to resolve the contradiction
-- calling a lane "promising" without naming what hidden burden it would
-  materially remove
-- narrating pressure, plans, and live components together until the reader feels
-  the system is more mature than any inspected drill actually proves
+Legal when:
 
-Good evidence discipline does not just sound careful.
-It forces the prose to stop where the strongest surviving artifact stops.
+- the planning docs name a gap and propose a repair
 
-## What every strong page should leave behind
+Illegal upgrade:
 
-If a page in this knowledgebase is genuinely doing retrieval instead of calm
-summary theater, it should leave behind a recoverable proof packet.
+- "therefore the gap is mostly solved except for polish"
 
-That packet should include:
+### Ceiling D: pressure only
 
-- the main claim being made
-- the evidence class or classes carrying that claim
-- the exact confidence ceiling
-- the strongest artifact or source anchor
-- the strongest statement of what remains unproven
-- the next artifact that would have to exist for a stronger sentence to become
-  legal
+Legal when:
 
-That last item is especially important in `bolabaden-infra`.
+- the archive repeatedly reconstructs the same accusation or failure pattern
 
-This repo does not mostly suffer from missing summaries.
-It suffers when a page reconstructs the wound clearly but does not tell the
-reader what concrete evidence would move the claim one level higher.
+Illegal upgrade:
 
-## The five fields every serious page should make recoverable
+- "therefore the runtime already behaves as the pressure suggests it should"
 
-If a page is behaving like a retrieval surface rather than a polished essay, a
-reader should be able to recover all five of these quickly:
+### Ceiling E: drill-backed proof
 
-1. the claim
-2. the evidence class
-3. the confidence ceiling
-4. what the evidence genuinely proves
-5. what it still does not prove
+Legal when:
 
-The fifth field is the most important.
+- a specific route, failure path, or stateful claim has passed a named drill
+  with operator-readable artifacts
 
-This repo does not mainly need more confident prose.
-It needs prose that stops exactly where the evidence stops and explains why
-that stop point is still painful.
+Required caution:
 
-## Common inflation patterns this ledger should block
+- the drill scope must match the claim scope
 
-The ledger should stop all of these:
+One HTTP route passing one wrong-node drill does not prove generic platform
+failover.
 
-- live-runtime claims made from planning text
-- failover claims made from proxy presence alone
-- distributed-truth claims made from modular Compose authoring
-- stateful HA claims made from ingress cleverness
-- architecture-closure claims made from exploration artifacts
-- smooth wording upgrades where "dynamic," "multi-node," or "resilient" begin
-  to mean more than the evidence supports
-- emotional satisfaction with the dream being mistaken for progress in the
-  worktree
+## Contradiction handling
 
-Those are not minor wording bugs.
-They are how the docs become satisfying for the wrong reason.
+This repo gets worse when contradiction is cleaned away too early.
 
-## Practical examples
+Common contradiction pairs:
 
-### Correct
+- the dream is clear, the runtime is incomplete
+- the edge stack is serious, shared truth is still weak
+- a candidate family sounds plausible, promotion is still unearned
+- fallback language exists, post-failure durability is still unproven
 
-- "the repo wants any-node entry plus peer forwarding"
-- "the root runtime already has a substantial Traefik/auth/CrowdSec edge"
-- "the master plan explicitly records service failover as still missing"
-- "the archive shows the user rejects answers that preserve sacred-node
-  memory"
-- "the current stack has fallback-shaped glue, but the plans explicitly record
-  that it can lose routes under container stop"
+Pages should preserve those contradictions instead of ironing them out into a
+more satisfying narrative.
 
-### Incorrect
+If a contradiction disappears, the page should explain why.
+If it cannot explain why, the contradiction should stay visible.
 
-- "the stack already has resilient multi-node service failover"
-- "the system already behaves like one distributed platform"
-- "stateful HA is mostly in place because the services are routed"
-- "the missing middle layer is effectively solved"
-- "because several sources all point the same way, the runtime is close"
+## Minimal evidence packet for any serious page
 
-The difference is not tone.
-It is evidence-class discipline.
+Any serious page in this site should leave behind a small auditable packet:
 
-## What the ledger should make the rest of the docs do
+- the exact user-facing accusation being reconstructed
+- the strongest runtime artifact consulted
+- the strongest intent, plan, or archive artifact consulted
+- the private burden still left over after both were read
+- the stronger sentence that still stayed illegal
 
-Every serious page should be forced to answer:
+If a page cannot produce that packet, then it may still be informative, but it
+has not fully earned the word "assimilated" in this repo.
 
-1. what question is this page really answering?
-2. which source class is doing the heavy lifting?
-3. what nearby stronger sentence would still be a lie?
-4. where does the current answer still depend on operator reconstruction?
-5. what would have to be observed next before the stronger sentence becomes
-   legal?
+## Bottom line
 
-That fourth question matters because the user's complaint is not only about
-missing features.
-It is about private operator memory still doing system work.
+The main risk in `bolabaden-infra` is not lack of facts.
+It is illegal confidence transfer between source classes.
 
-If the docs cannot say where that hidden burden still lives, they have not
-really assimilated the repo.
+This ledger exists to stop that transfer and keep one blunt question alive:
 
-## The bottom-line test
+> what exact truth moved out of operator memory, and what exact truth did not?
 
-The knowledgebase now has enough material to sound convincing almost
-everywhere.
-That makes this ledger more important, not less.
-
-The main threat is no longer missing nouns.
-It is:
-
-- runtime
-- plus dream
-- plus plan
-- plus archive pressure
-
-being emotionally read as one present capability story.
-
-This page exists to keep those joins explicit and to stop the docs from
-becoming more coherent by becoming less faithful.
+If a page becomes more elegant while making that question easier to dodge, the
+page got worse even if it also became broader, denser, and more disciplined.
