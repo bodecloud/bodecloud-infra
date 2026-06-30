@@ -65,6 +65,14 @@ More bluntly:
 - it still does not have enough system-owned truth to make that seriousness
   fully trustworthy
 
+That distinction is one of the main reasons ordinary summaries keep failing the
+user.
+
+They keep summarizing the repo as if its main problem were insufficient
+machinery.
+The harder truth is that the repo already has enough machinery to make false
+closure sound plausible.
+
 ## The shortest exact problem statement
 
 The repo is trying to solve this:
@@ -80,6 +88,16 @@ The key word there is "honest."
 The user is not just searching for a smaller layer.
 They are searching for one that really carries burden instead of merely
 renaming it.
+
+That last clause has to stay literal.
+
+The repo is not searching for:
+
+- a cleaner abstraction
+- a calmer story
+- a more modern control plane
+
+unless one of those also changes who owns the truth on the bad day.
 
 ## The wound behind the problem statement
 
@@ -131,6 +149,16 @@ If a solution narrative removes only the first half, it becomes fantasy.
 If it removes only the second half, it becomes complaint without architecture.
 The real documentation has to preserve both.
 
+This is one of the places where the knowledgebase most needs to "actually RAG"
+instead of merely summarize.
+
+A shallow summary can preserve the nouns while dropping the pressure.
+A faithful reconstruction has to preserve:
+
+- the technical missing truths
+- the emotional reason those missing truths still feel insulting
+- the fact that many nearby answers fail by sounding complete one layer too soon
+
 That balance is one of the central duties of the whole knowledgebase.
 
 ## What still does not count as understanding the problem
@@ -156,6 +184,12 @@ The user's complaint is narrower and harsher:
 That sentence is the real anti-flattening rule for the page.
 If a future summary cannot survive it, the future summary is too small.
 
+It is also the sentence that should veto most "good enough" interpretations.
+
+The user is not asking for an architecture that is broadly respectable.
+The user is asking for one that stops cashing out into private truth custody at
+the exact moments that currently expose the fake option problem.
+
 ## What does not count as solving this problem
 
 The problem is specific enough that it needs an explicit false-solution filter.
@@ -177,6 +211,18 @@ That is why the repo keeps sounding unimpressed by things that would normally
 count as obvious progress.
 Progress is not denied.
 It is just being held against a much sharper held-out scene.
+
+That sharper held-out scene is what keeps this page from collapsing into a
+generic roadmap preface.
+
+Without it, the page would quietly become:
+
+- an inventory of pain points
+- an inventory of candidate layers
+- an inventory of next steps
+
+All three would be technically useful.
+None would yet be faithful enough to the user's actual benchmark.
 
 ## The hidden enemy
 
@@ -231,6 +277,12 @@ ingredients, not shared truth.
 That sentence is the correct posture for almost the whole current stack.
 Useful, real, often impressive, but still not the same thing as burden
 ownership.
+
+That sentence should be treated as the posture for most of the current stack.
+
+The repo does not need to apologize for having real assets.
+It needs to stop mistaking real assets for proof that the decisive truth has
+already left the operator's head.
 
 ## What a serious problem-definition proof packet would have to contain
 

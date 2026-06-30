@@ -84,6 +84,12 @@ In the priority implementation today, that means:
 That list is best read as a list of places where the user's frustration is
 still objectively correct.
 
+It is also the list of places where a cleaner architecture story would still be
+cheating if it skipped ahead.
+
+The roadmap in this repo does not mainly exist to prioritize effort.
+It exists to prevent narrative overpayment.
+
 ## What still does not count as sequencing well
 
 This page needs to reject roadmap theater, not only feature theater.
@@ -100,6 +106,18 @@ The following still do not count as strong sequencing:
 Those things may improve planning posture.
 They still do not prove the sequence is actually protecting the user from fake
 closure.
+
+This page has to stay unusually hostile to tidy planning aesthetics.
+
+A roadmap can look disciplined, dependency-aware, and technically sober while
+still quietly rewarding the wrong emotional conclusion:
+
+- the hard part is named
+- the phases are clear
+- the experiments are sensible
+- therefore the repo must finally have real options
+
+The user is explicitly telling the repo not to take that shortcut.
 
 This page has to care about that because fake closure is not an abstract risk
 here.
@@ -144,6 +162,12 @@ It is also the difference between:
 - "the repo is exploring sophisticated things"
 - and "the repo has found the next thing that actually deserves trust"
 
+That difference should govern every future promotion sentence.
+
+The repo is already rich in sophisticated things.
+What it is still starved for is proof that one of those things actually moved a
+truth boundary instead of merely enriching the story around it.
+
 ## What still does not count as progress
 
 This repo has a specific problem, so it also needs a specific false-progress
@@ -166,6 +190,16 @@ That list exists because the user is explicitly frustrated by ecosystems that
 keep narrating partial machinery as if the burden has already moved.
 
 So the roadmap has to stay aggressively anti-theater, not just anti-chaos.
+
+That phrase matters because anti-chaos is too easy.
+
+Almost any serious tool stack can help reduce chaos.
+The narrower demand here is anti-theater:
+
+- no more route sophistication that disappears under failure
+- no more eligibility stories that cash out into reachability plus hope
+- no more platform seriousness that still needs remembered topology to close the
+  loop
 
 ## Why the order has to stay this strict
 
@@ -284,6 +318,12 @@ problem of narrative honesty.
 If the docs speak like burden moved before burden moved, the platform starts
 planning from a lie.
 
+That also means Priority 0 is not a warm-up task.
+It is the first operational gate.
+
+If the docs cannot keep the burden model honest, then every later priority can
+be "completed" in language long before it is completed in the worktree.
+
 ## Priority 1: placement truth
 
 Class:
@@ -335,6 +375,17 @@ Unlocks:
 This is why placement truth comes before almost every glamorous proposal.
 Without it, later options differ mostly in presentation while still depending
 on the same private reconstruction.
+
+That sentence is the beginning of the anti-fake-option roadmap.
+
+Before placement truth exists, many candidates only differ in:
+
+- how polished the control plane feels
+- how dynamic the helper layer sounds
+- how serious the architecture diagram looks
+
+The user is tired of those differences being sold as if they were already a new
+class of relief.
 
 ## Priority 2: convergence truth
 

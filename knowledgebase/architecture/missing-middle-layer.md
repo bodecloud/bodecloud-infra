@@ -114,6 +114,17 @@ That is why so many surrounding ideas still feel partial:
 but they do not necessarily remove the exact hidden burden the user is
 complaining about.
 
+That is why the missing middle cannot be treated as a branding exercise.
+
+The repo is not trying to discover:
+
+- the most elegant cluster helper
+- the most modern halfway platform
+- the most ergonomic route generator
+
+It is trying to discover which added layer, if any, can survive contact with
+the exact humiliation threshold the archive keeps returning to.
+
 ## What still does not count as finding the middle
 
 This page needs to reject a very specific kind of fake progress.
@@ -134,6 +145,12 @@ They still do not answer the only question that matters:
 
 If that answer is still vague, the repo has found more machinery, not the
 middle.
+
+This is the page where "option abundance" has to stay under suspicion.
+
+A shortlist of plausible helpers can still be psychologically false if all of
+them leave the operator doing the same decisive reconstruction work under a new
+interface.
 
 ## What a real missing-middle proof packet would have to contain
 
@@ -181,6 +198,19 @@ That is the anti-SPOF accusation hiding underneath almost every question in
 this repo.
 One human head can be the most dangerous single point of failure in the whole
 system.
+
+That sentence is not metaphorical decoration.
+It is the deepest anti-SPOF accusation in the repository.
+
+If a candidate layer still needs one human to explain:
+
+- what really runs where
+- which peer is actually safe
+- whether the rescue route is still trustworthy
+- whether the forwarded request still means the same thing
+
+then the layer may have improved the experience, but it has not yet removed the
+repo's most dangerous single point of failure.
 
 ## Why DNS and proxy sophistication are still not enough
 
@@ -230,6 +260,13 @@ The master plan also records:
 - secret sync and Compose sync are still manual
 
 That list is basically a proof that the middle layer has not been earned yet.
+
+It is also a warning against overreading conceptual convergence as practical
+convergence.
+
+The repo already knows the shape of the gap unusually well.
+Knowing the shape of the gap is not the same thing as possessing a layer that
+actually closes it.
 
 ## The burden-transfer test
 
@@ -282,6 +319,17 @@ knowledge on the bad day.
 If the shortlist still leaves that burden mostly intact, this page has
 organized the wound without treating it.
 
+That is one of the clearest failure modes remaining in the site.
+
+A page can become more impressive by:
+
+- naming candidate families precisely
+- comparing them more thoughtfully
+- compressing the search space more cleanly
+
+and still fail if it does not keep asking which exact remembered explanation
+the operator is now finally allowed to stop supplying.
+
 ## What a real middle answer would have to leave behind in the repo
 
 The user is not only asking for a better idea.
@@ -322,6 +370,12 @@ needs:
 
 The artifact has to make the system more authoritative, not merely more
 verbose.
+
+That distinction matters because verbose helper layers are common.
+
+What this repo needs is not more surfaces that narrate state.
+It needs surfaces that actually become the reason state can be trusted during
+wrong-node and fallback decisions.
 
 ## The wanted layer, stated as responsibilities instead of brands
 
