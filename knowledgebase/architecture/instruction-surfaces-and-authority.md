@@ -72,6 +72,33 @@ It is also a useful test for the rest of the knowledgebase:
 if another page cannot preserve that unevenness, it is probably smoothing the
 repo into a more coherent story than the evidence supports.
 
+## The false-convergence problem this page has to stop
+
+This repo now has several instruction surfaces that are much better aligned
+than they used to be.
+
+That improvement is real.
+It is also dangerous.
+
+Alignment across instruction files can too easily be overread as:
+
+- the repo knows what it wants
+- therefore the missing layer is basically designed
+- therefore the runtime gap is mostly implementation work
+
+That sequence is exactly the kind of false convergence this page exists to
+interrupt.
+
+The right conclusion is narrower:
+
+- the repo's dream is easier to reconstruct
+- the authority boundaries are clearer
+- the runtime still has not earned the stronger behavior claims those files are
+  aiming at
+
+If that last line disappears, this page starts helping the docs become calm,
+ordered, and wrong again.
+
 It is important because people naturally want to say:
 
 - "all three files point in the same direction"
@@ -133,6 +160,11 @@ It should also be read as a defense against a specific temptation:
 - treat repeated repo language as proof
 - treat repo-wide agreement as implementation
 - treat service-authoring rules as distributed-systems semantics
+
+It should also be read as a defense against one subtler temptation:
+
+- treat a clean authority hierarchy as proof that the future control surface is
+  mostly settled
 
 The user keeps asking this because they are not really ranking docs.
 They are checking whether the repo itself knows where its truth lives.
@@ -268,6 +300,11 @@ The repo already has enough parts to sound ambitious.
 The harder job is preserving a truthful compression of what those parts do not
 yet buy.
 
+It does **not** say that the repo has already resolved which truth-owning
+layer will ultimately earn promotion.
+A README can be extremely clear about the wound while the cure is still
+genuinely unsettled.
+
 ## `AGENTS.md`
 
 `AGENTS.md` matters because it drags the conversation back to the real worktree.
@@ -374,6 +411,16 @@ Compose rigor.
 
 If you read them in the right order, the repo becomes much less ambiguous.
 
+That sentence needs an explicit warning attached to it:
+
+- less ambiguous is not the same thing as more implemented
+- coherent reading order is not the same thing as settled control-plane choice
+- conceptual agreement is not the same thing as runtime-owned distributed truth
+
+This page should help the reader recover a cleaner map of the repo's internal
+argument.
+It should not make that argument sound more finished than it is.
+
 ## 1. `copilot-instructions.md` names the dream
 
 It defines the desired operating contract:
@@ -420,6 +467,19 @@ It keeps service definitions from degenerating into:
 
 This file says how service authoring should behave while the project is still
 Compose-first.
+
+## The single most important reading rule for these files together
+
+When these instruction surfaces agree, the right conclusion is usually:
+
+- the repo has a sharper and more internally consistent dream than before
+
+The wrong conclusion is:
+
+- the missing truth layer is therefore mostly known, mostly chosen, or mostly
+  operational
+
+That wrong conclusion is what this page should keep making harder.
 
 ## What this means for the rest of the knowledgebase
 
