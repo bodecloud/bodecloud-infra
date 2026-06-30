@@ -180,6 +180,49 @@ The packet should also answer one socially important question:
 If the packet cannot answer that, it is probably still a technical anecdote
 instead of real burden transfer.
 
+## Source packets versus proof packets
+
+This knowledgebase uses two related packet types.
+They should not be blended.
+
+`source_assimilation_packet` answers:
+
+> what did a source make sharper, and which stronger claim did it keep illegal?
+
+`route_packet`, `placement_decision_packet`, and
+`stateful_authority_packet` answer:
+
+> what did the current system actually do under a named request or failure
+> scene?
+
+The first type can recover the user's accusation.
+The second type can earn runtime claims.
+
+That distinction matters because archive pressure is often emotionally and
+architecturally correct while still being weaker than implementation proof.
+A source can prove that a failure mode is real, recurring, and important.
+It cannot prove that this worktree has eliminated that failure mode.
+
+Use this translation rule:
+
+| If a source says... | It may pressure... | It still cannot prove... |
+| --- | --- | --- |
+| non-Swarm Docker needs shared service knowledge | `placement_source` | the receiving node consumed shared truth |
+| a fallback helper can look correct until backend loss | `backend_loss` | the current helper survived backend loss |
+| proxy handoff can change auth or middleware meaning | `policy_chain` / `handoff.preserves_auth` | a protected route preserved policy here |
+| Redis, MongoDB, or Postgres need workload-native authority semantics | `stateful_authority_packet` | the service became HA because routing exists |
+| a heavier orchestrator might own more truth | promotion criteria | that the heavier layer is justified in this repo |
+
+If a page has source packets but no proof packets, the honest ceiling is:
+
+> the repo understands the pressure and has named the required proof.
+
+It is not:
+
+> the repo has proved the behavior.
+
+This keeps "actually RAG" from becoming a softer form of overclaiming.
+
 ## Route proof packet template
 
 Use this template when a drill touches HTTP routing, peer forwarding, or

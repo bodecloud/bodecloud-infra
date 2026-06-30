@@ -138,6 +138,91 @@ Assimilation only starts when the answer also states:
 
 Without that, the answer may be better sourced and still badly assimilated.
 
+## Source-to-packet assimilation
+
+Archive material should not enter the knowledgebase as atmospheric context.
+It should enter as pressure on a specific claim.
+
+The useful question is not:
+
+> what did this source talk about?
+
+The useful question is:
+
+> which packet field, forbidden upgrade, or surviving private sentence did this
+> source make sharper?
+
+Use this shape when assimilating any archive conversation, exported chat,
+research note, or plan fragment:
+
+```yaml
+source_assimilation_packet:
+  source: "knowledgebase/source-archive/<provider>/conversations/<file>.md"
+  source_family: "wrong-node-routing | fallback | protected-http | raw-tcp | stateful-authority | orchestrator-promotion | operator-frustration"
+  claim_class: "intent | runtime | plan | archive-pressure | proof"
+  claim_pressure: "<the narrow claim this source pressures>"
+  packet_field_pressured:
+    - "entry_node | locality_result | placement_source | selected_peer | peer_eligibility | policy_chain | backend_loss | stateful_authority | forbidden_claim"
+  strongest_sentence_supported: "<one sentence this source can support>"
+  still_forbidden: "<the stronger sentence this source cannot support>"
+  surviving_private_sentence: "<what the operator still has to know alone>"
+  page_destination: "<page that absorbed this pressure>"
+```
+
+This packet does not have to be stored literally for every source.
+But the page that uses the source should leave those answers visible enough
+that a later contributor can reconstruct the custody chain.
+
+If a source cannot be mapped to a packet field, it may still be useful
+background.
+It is not yet a burden-transfer source.
+
+### Examples of correct assimilation
+
+Correct:
+
+- a Redis load-balancing archive pressures `raw-tcp` and
+  `stateful-authority` fields
+- it supports "Redis is TCP and can be routed with TCP routers"
+- it forbids "Traefik TCP labels across non-Swarm Docker hosts make Redis HA"
+- it leaves "I still personally know who the writer is" as the surviving
+  private sentence
+
+Correct:
+
+- a multi-node Docker without Swarm archive pressures `placement_source`,
+  `selected_peer`, and `peer_eligibility`
+- it supports "the repo wants ordinary Docker nodes to share enough current
+  truth for wrong-node routing"
+- it forbids "manual multi-host Compose has already become a distributed
+  control plane"
+- it leaves "I still personally know what runs where" as the surviving private
+  sentence
+
+Incorrect:
+
+- citing several failover conversations and then writing "the repo has a broad
+  HA strategy"
+
+That is not assimilation.
+That is source laundering.
+
+## Assimilation ledger rule
+
+When a page uses archive pressure to justify a stronger reading, it should also
+name the ledger transition:
+
+| Source pressure | Packet field moved | Stronger sentence still illegal |
+| --- | --- | --- |
+| Archive says non-Swarm hosts need explicit shared truth | `placement_source` | wrong-node routing is solved |
+| Archive says a fallback helper can disappear under backend loss | `backend_loss` | generated config proves failover |
+| Archive says auth/middleware behavior can change across proxy handoff | `policy_chain` | protected route answered, so policy survived |
+| Archive says Redis or MongoDB are TCP/stateful | `stateful_authority` | TCP reachability proves stateful HA |
+
+This is the bridge between "RAG" and useful infrastructure documentation.
+The archive is allowed to recover the wound.
+It is not allowed to impersonate the runtime.
+
 ## Priority source map
 
 Use this map when reconstructing the repo's actual architecture problem.
