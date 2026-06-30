@@ -31,6 +31,12 @@ This page is not authoritative about:
 This is the strongest current inventory.
 It is not a distributed-systems completion certificate.
 
+It also cannot be allowed to become a comfort certificate.
+The user's complaint is not that too little exists.
+The complaint is that a lot already exists and still too much of the important
+truth can collapse back into private operator explanation once the bad day
+arrives.
+
 ## Strongest honest current answer
 
 The current runtime is already serious enough that shallow language becomes
@@ -56,6 +62,16 @@ It still does **not** prove the hardest missing truths:
 
 That difference is the whole reason this page exists.
 
+The runtime is already rich enough to tempt the reader into the wrong
+conclusion:
+
+- the stack is broad
+- the edge is serious
+- the helpers are real
+- therefore the options must be becoming real too
+
+This page exists to stop that jump.
+
 ## What still does not count as runtime evidence
 
 This page is where documentation inflation becomes especially tempting.
@@ -74,6 +90,11 @@ Those facts prove the repo is serious and operationally dense.
 They still do not prove that the system, rather than the operator, owns the
 truth needed on the bad day.
 
+That is why partial presence is more dangerous here than simple absence.
+Absence tells the truth faster.
+Partial presence is how a stack starts sounding complete before it has actually
+removed the humiliation threshold the user keeps pointing at.
+
 ## What a runtime-backed progress packet would have to contain
 
 Before this page is used to support stronger "the runtime is moving toward the
@@ -89,6 +110,14 @@ That packet should include:
 - the next drill or comparison required before stronger language is allowed
 
 Without that packet, inventory tends to impersonate relief.
+
+That line should be read literally.
+Inventory is one of the oldest ways infra docs accidentally overpay
+confidence:
+
+- they show how much is present
+- presence gets mistaken for burden transfer
+- burden transfer gets narrated before it exists
 
 ## The root file is still a major infrastructure surface
 
@@ -112,6 +141,10 @@ That read is false.
 The root `docker-compose.yml` is still a major truth surface.
 Any future middle layer or orchestrator promotion has to respect that instead
 of treating the root file as a leftover artifact.
+
+That matters because the user is explicitly resisting systems that demote the
+last readable surface before proving the new hidden surface has earned the
+trust being demanded.
 
 ## Root-owned networks
 
@@ -148,6 +181,12 @@ The missing problem is not "how do we stop being toy-scale?"
 The missing problem is "how do we stop being toy-scale without lying about
 distributed truth?"
 
+That second sentence is the more important one.
+The repo is not begging to become serious.
+It is already surrounded by serious-sounding options.
+What it still lacks is an option that remains believable after wrong-node
+entry, backend loss, and stateful consequences stop being hypothetical.
+
 ## The live edge stack already present
 
 The edge fragment already includes:
@@ -178,6 +217,9 @@ accidentally narrate "serious ingress" as "solved cross-node request
 preservation."
 
 This runtime does not justify that leap.
+
+That leap is one of the main things the knowledgebase is trying to outlaw:
+serious ingress is not the same thing as request-preserving truth ownership.
 
 ## The live mesh surface already present
 
@@ -225,6 +267,11 @@ It is also a warning:
 The system can be richly monitored and still fail the user's real benchmark if
 wrong-node forwarding, placement truth, or stateful authority remain socially
 reconstructed.
+
+Observability can explain the pain after the fact while still doing nothing to
+move who had to privately know the truth before the fact.
+That is exactly the kind of impressive-but-insufficient option the user keeps
+rejecting.
 
 ## Root-owned direct services
 
@@ -274,6 +321,11 @@ Second, the stack already spans:
 Third, every claim about "one unified platform" has to survive all of those
 service classes, not just the easiest HTTP examples.
 
+That is why this page cannot be satisfied by sounding comprehensive.
+The user has already seen too many comprehensive stories that quietly borrow
+their confidence from the easiest route class and then spread that tone over
+everything else.
+
 ## Why the runtime already creates documentation pressure
 
 This runtime is complicated enough that simple summaries become misleading.
@@ -290,6 +342,10 @@ A useful docs pass now has to answer at least these questions:
 
 Without those distinctions, the docs can sound coherent while quietly
 flattening away the user's whole complaint.
+
+That complaint is not abstract.
+It is the repeated experience that "we have a stack for that" keeps turning
+into "you still have to be the actual cross-node interpreter for that."
 
 ## The most important negative evidence already named by the repo
 
@@ -330,6 +386,10 @@ Those gaps matter because they keep the runtime honest.
 The stack is already rich.
 The repo itself still says the middle control-plane truths are incomplete.
 
+That incompleteness is not a minor implementation detail.
+It is the reason the runtime can already look more option-rich than it really
+is under stress.
+
 ## What the runtime clearly proves
 
 The current root runtime clearly proves:
@@ -360,3 +420,6 @@ That distinction is the key reading rule for the entire site:
 
 the current runtime is already real, but the shared-truth layer is still
 incomplete.
+
+If that sentence ever gets softened, the whole site starts telling a smaller
+and safer story than the one the user is actually forcing the repo to face.

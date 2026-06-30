@@ -54,6 +54,12 @@ This page is not authoritative about:
 This is a routing decomposition page.
 It is not a route-success report.
 
+It also cannot become a reassurance page.
+The user is not mainly asking for cleaner routing terminology.
+The user is asking why so many HA and failover stories keep sounding credible
+until the request lands on the wrong healthy node and the operator is still
+the only thing bridging the missing truth.
+
 ## Strongest honest current answer
 
 The root runtime already has a serious edge stack and enough moving parts to
@@ -83,6 +89,11 @@ That is the whole difference between:
 - a stack that can route many things locally
 - and a stack that stops gambling on node locality
 
+That second line is closer to the user's dream than ordinary HA vocabulary is.
+The dream is not just more reachability.
+The dream is that wrong-node entry stops being the moment where the system
+reveals it was still counting on human folklore.
+
 ## What still does not count as HA or failover here
 
 This page should make the common overreads illegal.
@@ -108,6 +119,12 @@ They also do not satisfy the deeper complaint:
 
 That is why this page has to keep decomposing routing into narrower truths
 instead of letting "HA routing" sound like one solved category.
+
+The ecosystem habit this page is resisting is simple:
+
+- solve one visible routing layer
+- let the label "HA" drift upward
+- leave the next layer as the user's private job
 
 ## What a real routing proof packet would have to contain
 
@@ -135,6 +152,10 @@ Examples:
 Without packets like those, routing prose is still too easy to overread as
 stack-wide resilience.
 
+The packet requirement is stricter here because the user is already surrounded
+by too many plausible routing stories that fail exactly when they finally
+matter.
+
 ## The current routing surface in the priority implementation
 
 The priority root runtime is the merged surface created by:
@@ -155,6 +176,10 @@ surfaces:
 That alone does not prove resilience.
 It does prove the routing problem is already materially encoded in the runtime,
 not just imagined in planning docs.
+
+The repo is not theorizing from an empty lab.
+It is already carrying enough live routing complexity that the missing burden
+feels offensive rather than hypothetical.
 
 Within the edge fragment, the current routing surface includes:
 
@@ -180,6 +205,12 @@ routing differently:
   is already openly acknowledged in the planning layer
 
 That matters because "routing" here is not one problem.
+
+It is also why ordinary "best HA proxy" or "best failover tool" advice is too
+small for this repo.
+The user is not short on proxies.
+The user is short on options that preserve meaning instead of merely
+redirecting packets.
 
 ## The routing layers that must stay separate
 
@@ -223,6 +254,11 @@ This is why "multiple A records" is not even close to the final answer.
 It is often the first place people feel tempted to stop thinking because it
 looks distributed enough to market.
 
+That temptation is one of the exact pressures this knowledgebase is fighting.
+The user has already seen enough marketed distribution.
+What is being demanded here is distribution that still tells the truth after
+the landing node is wrong.
+
 ### 2. Local edge-stack health
 
 Question:
@@ -261,6 +297,11 @@ This is a recurring pattern across the repo:
 - a healthy local edge is impressive
 - a healthy local edge is still not the same thing as wrong-node rescue
 
+This distinction is one of the repo's most important anti-fake-option rules.
+Many systems become locally impressive enough that the user gets told the
+remaining gap is small.
+The user's whole point is that the remaining gap is the actual problem.
+
 ### 3. Locality truth
 
 Question:
@@ -287,6 +328,11 @@ It is about stopping "the operator remembers where the service really lives"
 from being the real control plane.
 
 Without locality truth, a wrong-node request cannot become an honest decision.
+
+That is why `services.yaml` keeps haunting the repo.
+Not because YAML is fashionable, but because some externalized present truth
+has to exist somewhere before the system can stop pretending the operator's
+memory is not the real control plane.
 
 ### 4. Peer-selection truth
 
@@ -320,6 +366,10 @@ That difference is where many "peer-aware" stacks keep cheating.
 Peer contact is not peer judgment.
 A reachable peer is not yet a peer the receiving node can honestly trust for
 this route right now.
+
+That last sentence is one of the main reasons so many "peer-aware" options
+still feel fake to the user.
+Contact keeps getting sold as if contact had already become judgment.
 
 ### 5. Fallback-route persistence
 
@@ -355,6 +405,14 @@ The repo is criticizing solutions that advertise adaptability until the bad
 event arrives and then discard the very route that was supposed to preserve
 dignity.
 
+This is not just a technical annoyance.
+It is one of the betrayal patterns the user keeps reacting to:
+
+- the option sounds dynamic
+- the option sounds modern
+- the option sounds like failover
+- the exact failure reveals the option never fully owned the promise
+
 ### 6. Policy continuity
 
 Question:
@@ -382,6 +440,11 @@ The route has to stay meaningfully the same route.
 Otherwise the stack has not preserved the service contract.
 It has only preserved enough surface behavior to sound successful in a shallow
 status update.
+
+That is why protected-route routing has to stay this severe.
+The user is not asking for a success report that can survive on status codes.
+They are asking whether the system still deserves to say "this request worked"
+without smuggling in a human who already knows what silently changed.
 
 ### 7. Stateful truth
 
@@ -411,6 +474,10 @@ They cannot be broadly discussed in HA terms unless the repo also answers:
 That is why this page refuses to let TCP and stateful surfaces inherit success
 from one HTTP drill.
 
+This repo is not anti-HTTP proof.
+It just refuses to let one HTTP proof become a laundering mechanism for much
+harsher service classes.
+
 ## What the repo can already say without lying
 
 The repo can already say all of these honestly:
@@ -427,6 +494,11 @@ The repo can already say all of these honestly:
 That is already meaningful.
 It is still far from generic closure.
 
+That gap between meaningful progress and believable option is one of the
+hardest things the docs need to preserve.
+Too many infrastructure discussions erase that gap the moment enough machinery
+appears.
+
 ## What the repo still cannot say honestly
 
 The repo still cannot say all of these without stronger route-specific proof:
@@ -440,6 +512,17 @@ The repo still cannot say all of these without stronger route-specific proof:
 
 Those sentences are exactly the kind of overpayment this knowledgebase is
 trying to stop.
+
+The user has already paid that overpayment too many times in the surrounding
+space:
+
+- a component exists
+- a helper exists
+- a route exists
+- therefore the burden must have moved
+
+This page is here to keep saying that last step is exactly what remains
+unproven.
 
 ## The real pressure this page must preserve
 
@@ -459,6 +542,10 @@ The real routing pressure in this repo is:
 - rescue routes should not evaporate under the bad day
 - protected routes should stay semantically coherent
 - stateful services should stay under harsher truth rules
+
+That list is not only a technical decomposition.
+It is a record of the ways the available options keep becoming smaller than
+they first sound.
 
 If any of those get blurred together under "HA," the docs regress.
 
@@ -480,3 +567,7 @@ Another way to say the same thing:
 - the repo is not starved for components
 - it is starved for options that remain honest after wrong-node entry, backend
   loss, and stateful consequences are all allowed into the same sentence
+
+That sentence is close to the center of the whole documentation effort.
+If the site fully internalizes it, the rest of the pages can stay honest.
+If the site forgets it, the docs keep regressing into polished ambiguity.

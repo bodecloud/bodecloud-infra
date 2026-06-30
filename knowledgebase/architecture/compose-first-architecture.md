@@ -40,6 +40,13 @@ This page is not authoritative about:
 
 This page explains the authoring posture, not the final runtime verdict.
 
+It also has to explain why Compose-first is not nostalgia.
+The repo is not clinging to Compose because the user is scared of more capable
+systems.
+It is staying Compose-first only as long as Compose remains the least
+dishonest place where cause, effect, and configuration meaning are still
+visible.
+
 ## Strongest honest current answer
 
 Compose-first is still the least dishonest live authoring surface in the repo,
@@ -49,6 +56,16 @@ already earned itself. The important boundary is that Compose-first explains why
 the repo still leads with `docker-compose.yml`; it does not prove the current
 runtime already owns wrong-node truth, peer eligibility, backend-loss
 durability, or stateful correctness.
+
+That distinction matters because the ecosystem keeps trying to force a fake
+binary:
+
+- either Compose is enough
+- or the user should stop asking whether anything narrower than a full control
+  plane could ever have been honest
+
+This repo exists because that binary itself feels like evidence of missing
+options.
 
 ## What still does not count as justifying Compose-first
 
@@ -71,6 +88,11 @@ They still do not answer the only defensible question:
 
 If the answer becomes no, sentimentality is not a valid defense.
 
+That sentence protects against a subtle failure mode:
+Compose-first can sound pragmatic and grounded while still becoming just
+another ideology if it stops asking whether the bad-day intelligence has
+already migrated somewhere murkier.
+
 ## What a real Compose-first retention packet would have to contain
 
 Before the docs use stronger "Compose-first is still right here" language, they
@@ -87,6 +109,10 @@ That packet should contain:
 
 Without that packet, Compose-first can quietly turn from honest restraint into
 unexamined attachment.
+
+This page has to be strict about that because "Compose-first" is exactly the
+kind of phrase that can start sounding adult, disciplined, and reasonable even
+after it has stopped answering the user's real question.
 
 ## What Compose-first is being forced to justify
 
@@ -107,6 +133,12 @@ continuing test:
 
 That second question is one of the most important anti-romantic checks in the
 whole knowledgebase.
+
+It is also an empathy check.
+The user is not simply saying "I dislike complexity."
+They are saying "why do so many complexity increases still leave me holding
+the same explanatory burden, and why do so many simpler answers stop being
+honest as soon as distribution matters?"
 
 ## What Compose-first means in the priority implementation
 
@@ -132,6 +164,12 @@ That matters because the user keeps rejecting systems that hide too much
 meaning behind a farther-away reconciliation layer before that hiding has
 earned its keep.
 
+That rejection is not only taste.
+It is a substantive architecture position:
+
+> a farther-away control surface should not become the default answer until it
+> owns a named truth better than the readable surface it is replacing
+
 ## What Compose-first definitely does not mean
 
 It does not mean:
@@ -152,6 +190,9 @@ That distinction matters because earlier docs often blurred together:
 
 Once those blur, the docs immediately start sounding more complete than the
 system actually is.
+
+That is exactly the documentation habit the user is pushing back on across the
+whole repo.
 
 ## Why Compose is still the least dishonest live surface
 
@@ -179,6 +220,10 @@ already been accepted.
 
 Compose does not make distribution easy.
 It does keep current authoring truth close to the human eye.
+
+That is why Compose-first still carries moral weight here.
+Not because YAML is sacred, but because hidden state and hidden decisions have
+to earn themselves instead of arriving pre-forgiven.
 
 ### 2. It handles heterogeneous workloads without inventing one giant worldview
 
@@ -233,6 +278,11 @@ It forces harder questions:
 This is one reason Compose-first is still useful even when it is not sufficient.
 It keeps the cost of promotion visible.
 
+Keeping the cost visible is part of how the repo refuses fake options.
+If every larger layer arrived already coated in inevitability, the user would
+lose the last meaningful place from which to ask whether the new tax actually
+buys the right truth.
+
 ## The exact truths Compose does not naturally own
 
 This page is pointless if it does not name the missing truths plainly.
@@ -250,6 +300,11 @@ Compose does not naturally own:
 Those are not tiny caveats.
 They are the heart of the user's complaint.
 
+The missing truths are not peripheral gaps around an otherwise complete
+platform.
+They are the reason the platform still does not feel like it offers the kind
+of believable option the user keeps searching for.
+
 This is why Compose-first cannot be read as a quiet endorsement of the current
 helper strategy.
 It is better read as:
@@ -257,6 +312,10 @@ It is better read as:
 - Compose is still the least dishonest readable surface
 - the helper and promotion story is still under cross-examination
 - the wrong-node and backend-loss contracts are still the real judge
+
+That is why Compose-first remains honest only while it remains conditional.
+The moment it becomes identity rather than interrogation, it becomes another
+smaller and safer story than the user asked for.
 
 ## Where the priority runtime already shows this tension
 
@@ -294,6 +353,11 @@ to:
 
 So even a live mesh does not settle the missing middle layer by itself.
 
+The ecosystem is full of steps that feel like progress while still leaving the
+final judgment trapped in a human brain.
+Compose-first is only worth preserving if it helps prevent those half-solutions
+from being over-credited.
+
 ### Example 3: helper growth already pressures the boundary
 
 The repo already contains or plans around helpers that smell like a partial
@@ -311,6 +375,11 @@ celebratory.
 If the real bad-day intelligence migrates into these helpers without becoming
 more inspectable than a heavyweight controller, then Compose-first becomes a
 decorative comfort blanket instead of a real operator contract.
+
+That sentence should stay harsh.
+The user is not asking to be comforted by readable syntax.
+They are asking for a system where readable syntax still points at the place
+where the truth actually lives.
 
 ## The real argument against premature promotion
 
@@ -337,6 +406,9 @@ The user keeps demanding a harder question first:
 > immediately replacing Compose as the main surface the operator reads?
 
 That question is the entire point of Compose-first.
+
+If the repo ever loses sight of that, "Compose-first" will become a polished
+but much less honest phrase.
 
 ## The anti-benchmark this page must keep visible
 
@@ -378,3 +450,9 @@ being the dominant failure mode.
 That is why the repo is still centered on `docker-compose.yml`.
 Not because Compose secretly solved the problem, but because the problem has
 not yet earned a bigger answer honestly enough.
+
+Another way to say the same thing:
+
+- Compose-first is not the dream
+- Compose-first is the refusal to pretend the dream has already justified a
+  larger concealment layer
