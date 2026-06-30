@@ -45,6 +45,14 @@ That is the rule.
 If the current layer still hurts but the next layer does not clearly relocate
 the hidden truth burden, then promotion is premature theater.
 
+That means every promotion decision should be expressible in one harsh sentence:
+
+> after this promotion, what exact sentence does the operator no longer need to
+> finish privately for the system?
+
+If that sentence cannot be written concretely, then the promotion is still too
+prestige-shaped and not burden-shaped enough for this repo.
+
 ## What still does not count as a serious promotion decision
 
 This page should also say more bluntly what fake decisiveness still looks like.
@@ -179,6 +187,26 @@ while leaving unchanged:
 That is the whole point of this repo's harsher evaluation standard.
 It is not anti-tool.
 It is anti-renamed burden.
+
+## The humiliation threshold a promotion has to cross
+
+This repo should also preserve a stronger phrase for what "earned promotion"
+actually means.
+
+A promotion is real only if it lowers the humiliation threshold.
+
+In this repo, that threshold is the moment where the system looks adult right
+up until the operator still has to privately know one of the following:
+
+- where the service really lives now
+- whether the candidate peer is actually acceptable now
+- whether the fallback route really survives backend loss
+- whether the same protected-service meaning survives handoff
+- whether the stateful owner is still secretly singular
+
+If a new layer changes the diagram, the ergonomics, or the vocabulary while
+leaving those private completions mostly intact, then the promotion did not
+cross the threshold.
 
 ## The promotion classes that actually matter
 

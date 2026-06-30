@@ -216,6 +216,28 @@ The user is not asking to be guided more gently through the product space.
 The user is asking which pieces of the product space are still fake comfort
 once the hidden burden test is applied.
 
+## The private sentence test
+
+Every answer on this page should also survive one direct operator test.
+
+After reading the answer, could the operator still end up privately saying
+something like:
+
+- "yes, but I still personally know which node really has it"
+- "yes, but I still personally know which peer is actually safe"
+- "yes, but I still personally know the fallback route disappears if the wrong
+  thing dies"
+- "yes, but I still personally know this only sounds HA because the write owner
+  is still singular"
+
+If the answer leaves that sentence mostly intact, then the answer may still be
+useful, but it has not yet described a real option.
+
+That test matters because the archive is full of answers that become
+substantially better at explanation without becoming substantially better at
+burden transfer.
+This page should keep making that distinction painfully obvious.
+
 ## What a real answer packet would have to contain
 
 Every serious answer in this page family should leave behind a reusable packet,
