@@ -6,6 +6,45 @@ could honestly claim low-SPOF behavior for stateful systems.
 
 It is not proof that the current runtime already provides this.
 
+## What this page is and is not allowed to prove
+
+This legacy planning page is allowed to:
+
+- explain why stateful HA is a different category from HTTP fallback
+- describe the minimum replication, quorum, and storage truths the repo would
+  need before using stronger HA language
+- preserve the user's refusal to call reachability alone stateful resilience
+
+This page is not allowed to:
+
+- imply that current Compose fragments already deliver zero-SPOF stateful
+  behavior
+- treat L4 routing experiments as proof of datastore correctness
+- let topology plausibility masquerade as replicated-write safety
+- narrate Redis, Mongo, or Postgres plans as if the underlying replication
+  contracts are already proven in this repo
+
+## What still does not count as stateful HA progress here
+
+The following still do not count as honest stateful progress:
+
+- moving a container between nodes
+- routing TCP to a reachable backend
+- placing a proxy in front of a single datastore
+- having a replication topology that has not been drilled under failure
+- making node-local volumes feel interchangeable through documentation tone
+
+Stateful HA only becomes real when the write path, failover path, and data
+survival path are all owned strongly enough to survive a bad day.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that this page correctly identifies the
+minimum classes of truth required before the repo can stop lying about
+stateful resilience. It remains a plan. It does not prove that the current
+priority implementation already owns replicated datastore truth, quorum
+survival, or shared-volume correctness.
+
 You can’t get “zero SPOF including stateful services” by *only* moving containers between nodes.
 
 Stateful HA requires **replication + quorum** (or replicated block storage) so that losing one node does not lose the data and does not stop writes.
@@ -109,4 +148,3 @@ still impossible no matter how polished the ingress story sounds.
   - per-node wildcard records (`*.node.domain`)
   - optional global wildcard (`*.domain`) via LB/VIP
   - optional Mongo SRV records for replica set discovery
-

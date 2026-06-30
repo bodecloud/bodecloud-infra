@@ -14,6 +14,47 @@
 
 # Why This Exists
 
+## What this page is and is not allowed to prove
+
+This legacy page is allowed to:
+
+- explain why OpenSVC keeps reappearing as a possible missing-middle layer
+- describe the bootstrap guarantees OpenSVC would need before it earns trust
+- preserve the difference between infra-grade membership truth and whole-stack
+  runtime ownership
+
+This page is not allowed to:
+
+- imply that a bootstrapped OpenSVC cluster already governs the live root
+  runtime
+- treat cluster membership as proof of wrong-node correctness
+- flatten OpenSVC exploration into a settled platform verdict
+- narrate bootstrap ritual as if it already removed the operator's private
+  reconstruction burden
+
+## What still does not count as OpenSVC bootstrap progress here
+
+The following still do not count as serious closure:
+
+- a few nodes joining a cluster
+- bootstrap scripts existing cleanly in the repo
+- route generation consuming membership data once
+- an OpenSVC surface sounding more explicit than ad hoc scripts
+- a cluster diagram making the stack feel calmer
+
+Those are signs of useful direction.
+They are not proof that membership truth, ingress truth, or stateful safety
+have actually moved into shared runtime ownership.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that OpenSVC remains one of the most
+serious explored candidates for strengthening membership and narrow failover
+without forcing immediate orchestrator capture. This page does not prove that
+the priority Compose-first runtime is already OpenSVC-governed, nor that
+bootstrap alone solves the wrong-node or stateful burden the user actually
+cares about.
+
 OpenSVC keeps reappearing in this repo because it may be one of the few
 serious candidates for strengthening cluster membership and narrow failover
 logic **without** forcing the whole stack to stop being Compose-first.
