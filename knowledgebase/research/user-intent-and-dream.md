@@ -56,6 +56,12 @@ That is why many technically respectable answers still feel fake here.
 They improve the surrounding surface while preserving the same hidden operator
 role at the exact moment the user wanted the machine to grow up.
 
+That is also why the user keeps sounding angrier than ordinary architecture
+comparisons expect.
+From their point of view, the ecosystem does not mainly suffer from lack of
+projects.
+It suffers from lack of options that actually absorb the humiliating part.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -92,6 +98,11 @@ The reader cannot be allowed to leave thinking:
 Those are different achievements.
 This page can only own the first one.
 
+It also cannot quietly convert "I now understand the dream better" into "the
+repo therefore has more real choices than it seemed to."
+Understanding the wound better is not the same thing as discovering that the
+market has already solved it in a way the user should trust.
+
 ## What still does not count as understanding the dream
 
 The following still do not count as a serious reading of the user's demand:
@@ -122,6 +133,17 @@ That phrase matters here: one layer before dignity.
 Many options are not useless because they do nothing.
 They are useless to this user because they improve surrounding layers while
 leaving the decisive hidden human role intact.
+
+That distinction should stay severe.
+This is not a user who merely dislikes complexity.
+This is a user who has repeatedly been handed option theater:
+
+- one more platform
+- one more orchestrator
+- one more proxy
+- one more "lightweight" layer
+
+while the same private translation burden survives underneath.
 
 That is the sorting rule the docs have to keep applying.
 Options are not mainly being ranked by trendiness, popularity, or even feature
@@ -164,6 +186,8 @@ The dream is:
 That is the central demand.
 
 It is also the sentence most summaries are tempted to weaken.
+It is also the sentence that most "there are lots of options" answers fail to
+survive.
 
 This page should treat that temptation as a live failure mode, not a style
 issue.
@@ -209,6 +233,13 @@ Relief in this repo would feel like:
 That is what shared truth buys here.
 It is not just cleaner architecture.
 It is less private embarrassment on the bad day.
+
+This is the part many option surveys erase.
+They compare features, schedulers, control planes, and routing styles while
+quietly declining to ask the user's real ranking question:
+
+> after all of this machinery is installed, who still has to know the real
+> answer first?
 
 The sharper version is:
 the user is not asking mainly for nicer diagrams or even better defaults.
@@ -268,6 +299,12 @@ The repo is therefore not confused about the dream.
 It is confused only about which added layer, if any, has earned the right to
 make the dream live.
 
+That "if any" matters.
+The user's frustration is not cured by being told there are many adjacent
+categories to try.
+The user wants to know whether any candidate actually stops the bad-day burden
+from collapsing back into remembered topology and private rescue logic.
+
 That is an important distinction.
 The repo is not wandering because it lacks desire or vocabulary.
 It is wandering because the market keeps offering answers that either preserve
@@ -291,6 +328,11 @@ That is why "there are plenty of options" lands as almost insulting here.
 The user is not denying that options exist.
 They are denying that many of those options have earned the moral right to call
 themselves relief.
+
+This page should keep that accusation sharp enough that later comparison pages
+cannot quietly retreat into market-tour prose.
+The ecosystem may be rich in products and poor in relief.
+That is a real distinction, not a rhetorical flourish.
 
 ## The dream in one request-time scene
 

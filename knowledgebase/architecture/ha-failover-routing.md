@@ -50,6 +50,12 @@ The user is asking:
 
 That is the routing question here.
 
+It is also the reason "there are lots of HA options" is not a satisfying
+answer in this repo.
+Many options can improve one routing layer.
+Far fewer deserve to be called relief once the wrong-node scene is forced all
+the way through.
+
 That also means a better routing map is not routing relief.
 A sharper HA taxonomy is not failover.
 A more disciplined separation between HTTP, TCP, and stateful stories is not
@@ -95,6 +101,11 @@ victory.
 Explaining the routing lanes more clearly is useful.
 It is not itself one more lane of burden transfer.
 
+It also cannot let the reader confuse option abundance with burden transfer.
+The user is not starved for nouns.
+The user is starved for routing surfaces that stop collapsing back into hidden
+operator settlement at the exact moment locality fails.
+
 That warning matters because this repo is now capable of much better routing
 honesty than before.
 If that honesty starts sounding like partial resolution, then the page becomes
@@ -130,6 +141,12 @@ buy:
 - durable fallback-route persistence
 - proof that the request keeps meaning the same thing after wrong-node handoff
 - proof that stateful authority survives any routing story being told
+
+That list is why the repo should stay suspicious of "available options"
+language.
+An option only counts in the user's moral accounting if it actually helps move
+one of those truths into the system.
+Otherwise it is still mostly another way to decorate the same burden.
 
 That is the whole difference between:
 
@@ -197,6 +214,11 @@ The repo has to keep asking the harsher follow-up:
 
 - yes, but who still had to know the real answer first?
 
+That follow-up is also the quickest filter for routing option theater.
+If a proposal still depends on one human privately knowing who should serve,
+who is eligible, or whether the handoff preserved the same service meaning,
+then the option may be real software and still fake relief.
+
 That follow-up also applies to the docs.
 If a revision makes the routing story feel more serious but makes it harder to
 say who still had to know the real answer first, then the revision moved in
@@ -254,6 +276,12 @@ What the user is starved for is not another routing recipe.
 It is one believable packet that proves the request remained the same service
 after locality failed, and that the explanation for that survival lived in the
 system rather than in one operator's head.
+
+That is why this page should prefer one severe, narrow, honest proof over ten
+respectable routing categories.
+The user is not asking to be told the ecosystem is rich.
+The user is asking whether any part of that ecosystem has actually crossed the
+burden-transfer line for the specific held-out scene.
 
 This is also why route-class separation matters so much.
 
