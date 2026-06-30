@@ -87,6 +87,28 @@ The repo is not merely comparing products.
 It is watching for the moment when its own "smaller" solution stops being small
 in any honest sense.
 
+## What this page should let a reader answer immediately
+
+After reading this page, a reader should not still be wondering:
+
+- are these paths genuinely different?
+- what exact hidden burden does each one remove?
+- which ones are only different in branding or worldview?
+
+Those answers need to be explicit.
+
+The quickest useful summary is:
+
+- Compose-first is still the live baseline
+- helper growth is real and may already be approaching shadow-control-plane
+  territory
+- infra-grade HA promotion and scheduler promotion solve different wounds
+- stateful truth remains separate from both
+- no current evidence proves that one whole-stack future has already earned
+  promotion over the others
+
+If that summary cannot be recovered quickly, the page is still too soft.
+
 It is also watching for a second threshold:
 
 the point where "keeping options open" stops being evidence discipline and
@@ -133,6 +155,31 @@ already failed.
 
 That is not indecision.
 It is discipline.
+
+## Fake differentiation versus real differentiation
+
+This repo needs a stricter filter than normal platform comparisons use.
+
+Two options are not meaningfully different here unless they reduce
+meaningfully different hidden burdens.
+
+That means:
+
+- different deployment syntax is not enough
+- different ecosystem size is not enough
+- different controller branding is not enough
+- different HA vocabulary is not enough
+
+The differentiator that matters is:
+
+- who now owns placement truth?
+- who now owns convergence truth?
+- who now owns peer eligibility?
+- who now owns route persistence?
+- who now owns stateful authority?
+
+If two futures answer those with roughly the same "still mostly the operator,"
+then they are much closer to one fake choice than to two real ones.
 
 That is why this page should read less like a buyer's guide and more like an
 evidence ledger for when control-plane growth has actually earned itself.
@@ -253,6 +300,21 @@ The current worktree is best read as:
 - helper pressure is real
 - control-plane pressure is real
 - platform closure is still unresolved
+
+## What each broad family is actually buying in burden terms
+
+This page needs this map because otherwise tradeoff language drifts back into
+feature language.
+
+| Family | Hidden burden it is mainly trying to remove | Burden it still leaves behind if oversold |
+| --- | --- | --- |
+| Compose-first plus helpers | remembered placement, remembered failover glue, some convergence work | helper sprawl can still leave private peer judgment and route semantics in the operator's head |
+| Infra-grade HA substrate | sacred ingress or identity surfaces, first-hop fragility | ordinary service wrong-node preservation and stateful truth may still remain separate problems |
+| Scheduler promotion | remembered placement and rescheduling burden for selected workloads | ingress meaning, stateful authority, and service-class-specific truth can still remain unresolved |
+| Full desired-state platform | broad lifecycle, reconciliation, and ecosystem burden | the user can still be left with a harder-to-read system whose real stateful and semantic truths are not magically solved |
+
+That table matters because it makes one recurring doc mistake harder:
+pretending all "stronger" futures are buying the same kind of relief.
 
 That unresolved closure is not an embarrassment.
 It is one of the most faithful facts the docs can preserve.
@@ -517,6 +579,11 @@ That is one of the most important anti-fake-option observations in the repo.
 If the helper path keeps expanding, then "we avoided orchestration" may become
 less honest than "we built our own control plane slowly and do not want to name
 it yet."
+
+That sentence should remain one of the main promotion tripwires in the repo.
+It is not anti-helper rhetoric.
+It is the exact point where the docs have to stop pretending the burden
+transfer is still cheap.
 
 ### OpenSVC or other infra-grade HA tooling
 

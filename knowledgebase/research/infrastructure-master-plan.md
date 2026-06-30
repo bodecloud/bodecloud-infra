@@ -74,6 +74,19 @@ paper.
 
 That sentence is the main rule for reading the whole master plan.
 
+## The fastest correct reading of the master plan
+
+This page should let the reader recover the useful summary immediately:
+
+- the plan proves the repo understands the wound clearly
+- the wound is hidden distributed truth, not lack of infra nouns
+- the plan is strong evidence for direction
+- the plan is not runtime proof
+- the plan only matters if it eventually removes hidden operator
+  reconstruction burden rather than merely diagramming it better
+
+If that summary is not obvious, the master plan is still too easy to overread.
+
 ## Why this page needs to exist at all
 
 The user's actual complaint is not just that docs have been too simple.
@@ -256,6 +269,25 @@ the real control plane.
 
 - that portability or reproducibility are already solved
 
+## The burden-transfer scorecard for the planned modules
+
+The master plan is easiest to overread when modules are treated as inherently
+good because they are specific and coherent.
+
+They should instead be judged by what hidden burden they are trying to remove.
+
+| Planned module or theme | Hidden burden it is trying to remove | What still remains unproven even if the plan is coherent |
+| --- | --- | --- |
+| env and secret sync | private operator memory about cross-node parity | whether forwarded requests actually land in semantically equivalent runtime |
+| Compose and file sync | silent drift between nodes | whether the resulting nodes still expose the same useful recovery behavior under failure |
+| placement truth such as `services.yaml` | remembered service location | whether routing or eligibility logic actually consumes live placement truth |
+| failover-agent or routing repair logic | routes that only look dynamic while the primary is healthy | whether recovery paths survive the exact backend-loss event that made them necessary |
+| bootstrap portability | one operator remaining the only person who knows the ritual | whether portability also preserves readability rather than hiding truth behind automation |
+| repair and restart semantics | private judgment about what should restart or stay stable | whether the automation can make those decisions without quietly becoming a larger controller |
+
+That table matters because the user is not mainly asking for more architecture.
+They are asking for less private burden at request time and failure time.
+
 ## What the master plan does not prove
 
 The master plan is strong planning evidence.
@@ -277,6 +309,30 @@ If it becomes easy to forget, the plan will start impersonating runtime truth.
 It will also start impersonating reduced operator burden.
 
 Those are different failures, but they usually travel together in this repo.
+
+## The main overreading risk this page is trying to stop
+
+The master plan is one of the few documents in the tree that is detailed
+enough to simulate settlement.
+
+That means it can accidentally create a false feeling that:
+
+- the missing layer is already mostly designed
+- therefore the missing layer is already mostly known
+- therefore the remaining gap is mostly implementation effort
+
+That sequence is dangerous here.
+
+The user's real frustration is not that no one ever drew the missing layer.
+It is that many drawn layers still do not prove they would move enough truth
+out of human memory to become a real option.
+
+So the hard question after every planned module remains:
+
+- if this module existed tomorrow, what exact hidden burden would still remain
+  socially reconstructed?
+
+If that question is not asked, the plan becomes too flattering.
 
 ## What the master plan quietly assumes
 
@@ -447,6 +503,10 @@ The plan is clearly trying to buy:
 
 - that the current fallback path survives backend-loss events in live runtime
 
+It also does not prove that the generated recovery path would preserve the same
+auth, middleware, and request meaning rather than merely producing some
+surviving answer.
+
 ## Bootstrap protocol
 
 This module exists because the operator should not be the only place where the
@@ -476,6 +536,19 @@ That last rule matters the most.
 
 The master plan is valuable precisely because it sees the problem clearly.
 It becomes dangerous when clarity of diagnosis gets mistaken for proof of cure.
+
+## The most important maintenance rule for this page
+
+Whenever the runtime gains one new truth-owning surface that the master plan
+previously described only as future direction, this page should be updated in
+both directions:
+
+- upgrade the relevant sentence from "planned direction" to "partially live"
+  only if current evidence really supports that
+- keep naming what the new live surface still does not prove
+
+Without that second half, this page will drift back into the exact ambiguity
+the user is trying to get rid of.
 
 ## The real takeaway
 

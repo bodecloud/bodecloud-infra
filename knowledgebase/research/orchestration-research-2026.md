@@ -263,6 +263,37 @@ The object is:
 the smallest additional truth-owning layer that stops the system from
 functioning as a distributed illusion.
 
+## The four questions every orchestration answer must survive
+
+This page should not require the reader to reconstruct the evaluation criteria
+from the rest of the site.
+
+Every candidate family must survive these four questions:
+
+1. what hidden burden moves out of the operator's head if this layer becomes
+   real?
+2. what part of the wrong-node problem does it actually solve?
+3. what new worldview or control-plane tax does it import?
+4. what part of the user's real dream still remains unowned even if it works
+   exactly as advertised?
+
+If a candidate cannot survive those four questions, it is still closer to
+platform theater than to a real answer for this repo.
+
+## The orchestration anti-benchmark
+
+The repo is not evaluating candidates against a fantasy perfect platform.
+It is evaluating them against a harsher anti-benchmark:
+
+- the request still only works if it lands on the unofficial right node
+- the operator still privately remembers where the service really lives
+- fallback still looks real only while the preferred backend is healthy
+- stateful systems still gain a nicer edge story without gaining trustworthy
+  authority or replication truth
+
+If a candidate mostly preserves those conditions, then even a very respectable
+platform is still a weak answer in this repo's terms.
+
 ## What the current worktree already proves before any platform promotion
 
 Before comparing option families, the repo already proves several important
@@ -422,6 +453,21 @@ It is about too many invisible truths still living in their head:
 
 The orchestration research is trying to buy back that mental rent.
 
+## What the research should make impossible to miss
+
+The most important finding is not "there are several plausible futures."
+It is:
+
+- several futures exist
+- but they are not equally different
+- many of them only become real options once they relocate a genuinely
+  different hidden burden
+
+That is why this page has to be stricter than a normal comparison.
+The user is not short on paths that differ in packaging.
+They are short on paths that differ in where the truth actually lives on a bad
+day.
+
 ## Option families, but in repo terms
 
 The right question is not:
@@ -469,6 +515,22 @@ Because it promises the closest thing to the user's ideal:
 This family is attractive because it resists premature worldview tax.
 It is dangerous because it can accidentally rebuild a scheduler in fragments.
 
+### The real test for this family
+
+This family only stays honest while it remains narrower than the burden it is
+trying to remove.
+
+The moment it owns all of these at once:
+
+- placement truth
+- convergence truth
+- peer eligibility
+- route persistence
+- repair decisions
+
+the repo has to stop flattering itself with "still just Compose" language and
+compare the helper surface honestly against stronger named control planes.
+
 ## Family 2: HA substrate plus Compose-facing runtime
 
 OpenSVC and adjacent substrate ideas live here.
@@ -494,6 +556,19 @@ This family says:
 This family matters because it might be the real missing middle for some
 domains, especially where helper sprawl starts approaching control-plane size.
 
+### The real test for this family
+
+This family is only a real answer when the repo's dominant pain is genuinely
+infra-grade:
+
+- sacred ingress
+- sacred identity
+- sacred first-hop behavior
+
+If the real pain remains wrong-node application request preservation for
+ordinary services, then this family can still be valuable without being the
+whole answer.
+
 ## Family 3: scheduler promotion
 
 Nomad, k3s, and Kubernetes live here.
@@ -518,6 +593,23 @@ This family says:
 - a more explicit control plane with more ritual and abstraction
 
 The repo's stance is not "never."
+It is "prove which hidden burden is large enough to deserve this tax."
+
+### The real test for this family
+
+This family becomes real once manual placement plus helper truth is clearly
+the bigger burden than scheduler worldview cost.
+
+Until then, this family remains vulnerable to the same problem the user keeps
+rejecting:
+
+- a larger platform gets introduced
+- the docs feel calmer
+- but the exact missing truth that earned the promotion is still not named
+  concretely enough
+
+That is not maturity.
+It is a cleaner version of the same ambiguity.
 It is:
 
 > not before the need is proven by the failure of smaller honest answers
