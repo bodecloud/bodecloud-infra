@@ -1,203 +1,248 @@
 # Stateful HA and Data Ownership
 
 For the evidence boundary behind this page, start with
-[`../research/stateful-ha-evidence.md`](../research/stateful-ha-evidence.md).
+[Stateful HA Evidence](../research/stateful-ha-evidence.md).
 
-This page exists because the user is not merely asking whether hostnames still
-answer.
-They are asking something harsher:
+This page exists because the user's real stateful question is harsher than:
 
-> if one node dies, does the system still know where authoritative state lives,
-> who may write, how clients rediscover the valid topology, and whether the
-> surviving path is actually trustworthy?
+> does the service still answer?
 
-That is where most infrastructure writing starts cheating.
-It celebrates:
+It is:
 
-- a still-routed hostname
-- a reachable standby
-- a restarted container
-- a proxy that still accepts connections
+> if the current node dies, where does authoritative truth live, who is still
+> allowed to write, how do clients rediscover that truth, and which parts of
+> the answer are still secretly being carried by one operator?
 
-while skipping the only question that matters:
+The neighboring smaller question this page must not collapse into is:
 
-> did the system preserve authority, or only the appearance of continuity?
+> which databases do we run?
 
-That distinction is why this page has to stay blunt.
-
-Stateful pages are where otherwise good docs most easily become deceptive in
-this repo.
-The edge can keep looking adult while the authority model underneath remains
-social, singular, and privately repaired.
-
-That means a better stateful explanation is not stateful relief.
-A cleaner service-class taxonomy is not preserved authority.
-A more comprehensive account of why stateful HA is hard is not one more
-service becoming trustworthy under failure.
-Better authority vocabulary is not authority transfer.
-Better failure prose is not one more write path becoming system-owned.
+That smaller question is not enough.
+The user is not just inventorying stateful services.
+They are checking whether "multi-node" is still mostly edge theater once data
+authority matters.
 
 ## What this page is and is not allowed to prove
 
-This page is allowed to:
+This page is allowed to prove:
 
-- define the boundary between ingress progress and real stateful correctness
-- explain why stateful HA is much stricter than "reachable from more places"
-- identify which capabilities still block honest stateful claims
-- keep the rest of the docs from over-crediting routing progress
+- the live priority runtime already depends on real stateful services
+- those services still lean heavily on node-local authority and storage
+- the repo already distinguishes ingress progress from stateful correctness
+- the current worktree still falls far short of generic stateful anti-SPOF
 
-This page is not allowed to:
+This page is not allowed to prove:
 
-- imply that TCP proxying equals stateful HA
-- treat replicated access paths as replicated authority
-- upgrade a stable hostname into write-path correctness
-- pretend the repo has already solved leader truth, storage portability, or
-  failover reconciliation unless the current worktree proves it
+- that TCP exposure equals HA
+- that restartability equals authority preservation
+- that one more node or one more bind mount equals failover dignity
+- that future plans make the present runtime safe
 
-## The hard rule this repo is defending
+## The hard rule this page is defending
 
 For any state-bearing service, you do not honestly remove the SPOF merely by:
 
-- exposing it through Traefik
+- routing it through Traefik
 - giving it a stable hostname
-- copying the service definition to another node
-- teaching one node to TCP-forward to another node
-- showing that another box can answer on the same port
+- copying its service definition to another node
+- restarting it elsewhere later
+- proving that the port still answers
 
-Those things may improve:
+Those may improve:
 
 - reachability
 - operator ergonomics
-- restartability
-- demo quality
+- demo smoothness
+- recovery options
 
-They do not, by themselves, produce stateful HA.
+They do not, by themselves, prove preserved authority.
 
-## What still does not count as stateful progress
+## The strongest honest current answer
 
-Because stateful language gets abused so easily, this page needs an explicit
-false-progress filter.
+The strongest honest answer from the current worktree is:
 
-The repo has **not** made meaningful stateful HA progress merely because:
+- stateful risk is already live and significant
+- authority is still mostly singular per service
+- durability is still heavily node-local
+- planning pressure is much sharper than live proof
 
-- the same hostname still resolves
-- a TCP proxy path still answers
-- a standby container can start
-- a bind mount exists on another machine
-- a service can be redeployed elsewhere eventually
-- a liveness check still passes after the original node dies
-
-Those may all improve operator confidence or demo smoothness.
-They are still weaker than proving preserved authority.
-
-Real stateful HA requires some combination of:
-
-- replicated data across failure domains
-- explicit authority or election semantics
-- client rediscovery or reconnect behavior that survives promotion
-- storage semantics that do not strand truth on one dead node
-- recovery behavior that does not collapse back into improvised operator rescue
-
-That last line matters especially here.
-The user is exhausted with systems whose real failover procedure is:
-
-1. remember which node used to be primary
-2. decide which survivor should win now
-3. remember which clients must move
-4. remember which hostname is suddenly lying
-
-That is not HA.
-That is human failover wearing system language.
+That means the repo already knows many of the right future questions.
+It does not yet prove that the main stateful classes have crossed into
+trustworthy multi-node behavior.
 
 ## What the live runtime already proves
 
-The current priority runtime already proves real stateful risk exists.
+The current priority runtime already depends on all of the following stateful
+classes:
 
-From the root runtime and active fragments, the repo already depends on:
+- MongoDB in the root runtime
+- Redis in the root runtime
+- Headscale with SQLite in the active Headscale fragment
+- Postgres and RabbitMQ in the active Firecrawl fragment
+- Postgres in the active LLM fragment
+- multiple bind-mounted volume paths under `${CONFIG_PATH:-./volumes}/...`
 
-- MongoDB
-- Redis
-- Headscale with SQLite in the active headscale fragment
-- Postgres in additional active subsystems such as Firecrawl and other service
-  fragments
-- multiple node-local bind-mount durability assumptions
+That matters because stateful pain is not speculative future architecture pain.
+It is already present in the live stack.
 
-That means stateful pain is not hypothetical future architecture pain.
-It is already part of the live stack.
+## Stateful inventory by class
+
+### 1. MongoDB in the root runtime
+
+Live evidence:
+
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+  declares `mongodb`
+- persistent data is bind-mounted at
+  `${CONFIG_PATH:-./volumes}/mongodb/data:/data/db`
+- the service is exposed through Traefik TCP labels
+
+What this proves:
+
+- MongoDB is a real dependency of the priority implementation
+- durability is still tied to a node-local path
+- exposure and healthchecks already exist
+
+What it does not prove:
+
+- replica-set semantics
+- election behavior
+- write authority promotion
+- client topology rediscovery after failure
+
+### 2. Redis in the root runtime
+
+Live evidence:
+
+- [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+  declares `redis`
+- persistent data is bind-mounted at
+  `${CONFIG_PATH:-./volumes}/redis:/data`
+- the service is exposed through Traefik TCP labels
+
+What this proves:
+
+- Redis is a live stateful dependency, not just a helper idea
+- the root runtime still looks like a single durable Redis instance story
+
+What it does not prove:
+
+- Sentinel
+- replica promotion
+- correct client reconnect behavior
+- resilient master discovery
+
+### 3. Headscale in the active fragment
+
+Live evidence:
+
+- [`compose/docker-compose.headscale.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.headscale.yml)
+  sets `database.type: sqlite`
+- the database path is `/var/lib/headscale/db.sqlite`
+- WAL mode is enabled
+- the config itself notes that Postgres is discouraged upstream for current
+  Headscale development
+
+What this proves:
+
+- the private mesh control plane is currently anchored to a local SQLite file
+- Headscale is a singleton authority concern today, even if the service is
+  highly useful
+
+What it does not prove:
+
+- shared control-plane authority
+- automatic leader replacement
+- cluster-safe promotion
+- mesh continuity after authority-node loss
+
+This is one of the sharpest examples in the repo of the difference between:
+
+- a live service
+- a valuable service
+- a resilient authority surface
+
+### 4. Firecrawl subgraph
+
+Live evidence from
+[`compose/docker-compose.firecrawl.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.firecrawl.yml):
+
+- application dependencies include:
+  - `redis`
+  - `nuq-postgres`
+  - `rabbitmq`
+- `nuq-postgres` persists under
+  `${CONFIG_PATH:-./volumes}/nuq-postgres/data:/var/lib/postgresql/data`
+- `rabbitmq` is a real live runtime service, not just a planned future
+
+What this proves:
+
+- the stateful surface is wider than just the obvious root databases
+- application continuity already depends on a small graph of durable backends
+
+What it does not prove:
+
+- HA Postgres
+- mirrored durable messaging semantics
+- promotion-safe topology across the subgraph
+- resilient multi-node truth for the whole application cluster
+
+### 5. LLM Postgres surface
+
+Live evidence from
+[`compose/docker-compose.llm.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.llm.yml):
+
+- `litellm-postgres` is live
+- its data persists under
+  `${CONFIG_PATH:-./volumes}/litellm/pgdata:/var/lib/postgresql/data`
+
+What this proves:
+
+- more than one Postgres-backed application surface already exists
+- node-local persistence assumptions are repeating, not isolated
+
+What it does not prove:
+
+- HA Postgres for LLM-facing services
+- promotion semantics
+- reconnect correctness after node loss
 
 ## What the live runtime still shows clearly
 
-The strongest honest reading of the current runtime is:
+The live worktree still shows:
 
-- persistence is still heavily node-local
-- authority is still mostly singular per service
-- replication is not yet the default reality
-- client topology correctness is not yet a generally proved surface
+- persistence is mostly node-local
+- writer authority is mostly singular
+- replicated authority is not the default reality
+- client rediscovery behavior is not yet a generally proven surface
 
-That is the shortest honest answer to why stateful language has to stay
-harsher here than ingress language.
-The repo can improve user-visible continuity earlier than it can improve data
-authority.
+That is the shortest honest reason stateful claims must stay much harsher than
+ingress claims.
 
-That is visible in concrete ways:
+The edge can become more survivable earlier than the data can become more
+truth-owning.
 
-- MongoDB still binds data locally
-- Redis still behaves like a single durable instance, not a proved Sentinel
-  or promoted topology
-- Headscale's active config still uses SQLite and explicitly notes Postgres is
-  discouraged upstream for current Headscale development
-- other services depend on Postgres or RabbitMQ but are not yet documented as
-  replicated authority models
+## Why ingress progress and stateful progress diverge
 
-That is why this page has to refuse flattering summaries.
+This repo can improve user-visible continuity before it earns honest stateful
+HA.
 
-It also has to refuse a more intellectualized trap:
+That asymmetry is useful because:
 
-- ingress progress and authority progress are now separated cleanly
-- the stateful caveats are now explicit
-- the docs can now name singular authority honestly
-- therefore the remaining gap starts sounding like implementation labor rather
-  than a still-unmet platform contract
+- wrong-node HTTP recovery can remove real operator pain early
+- some services are mostly request-routing problems
+- the edge stack already carries real policy, auth, and observability meaning
 
-That reading is still too soft.
-The docs can become much sharper here while the live authority model remains
-just as socially repaired as before.
+That asymmetry is dangerous because:
 
-That is the trap this page is written to prevent.
-The user is not asking for a more mature-sounding explanation of singular
-authority.
-They are asking for a world where singular authority either becomes explicit
-and honest, or is actually moved into system-owned replication, promotion, and
-rediscovery behavior.
-
-## Why ingress progress and stateful progress diverge so sharply
-
-This repo can honestly improve ingress before it earns honest stateful HA.
-
-That asymmetry is useful and dangerous.
-
-Useful because:
-
-- better ingress can improve user-visible survivability early
-- wrong-node HTTP recovery can remove real operator pain before stateful HA is
-  solved
-- some services really are closer to stateless routing problems than to
-  authority problems
-
-Dangerous because:
-
-- a service can still look "up" while its only real copy of data lives on the
+- the hostname can still work while the only real copy of data lived on the
   dead node
-- peer forwarding can preserve the appearance of continuity while truth remains
-  singular
-- a convincing demo can hide the most important unresolved failure
+- a proxy path can preserve appearance while authority remains singular
+- a convincing demo can hide the fact that one disk and one writer still
+  mattered more than the rest of the topology
 
-That is why "the hostname still works" can be an actively misleading sentence
-for this layer.
-
-For stateless HTTP it may be real progress.
-For stateful systems it can mean the edge stayed pretty while correctness did
-not survive.
+That is why "the hostname still works" is almost meaningless by itself for this
+layer.
 
 ## The three questions every stateful claim must answer
 
@@ -211,40 +256,28 @@ Every serious stateful claim in this repo should answer all three:
 If any of those questions is still mainly answered by operator memory, then the
 system is still socially carrying part of the control plane.
 
-That is why stateful claims should be treated as the hardest anti-theater
-surface in the whole site.
-They are the place where "something still answers" and "the system still owns
-truth" diverge most violently.
+## What still does not count as stateful progress
 
-That is the phrase to keep in mind:
+These are still weak or fake progress signals here:
 
-social control plane.
+- the same hostname still resolves
+- the TCP port still answers
+- the container restarts on the same node
+- the service could be redeployed elsewhere later
+- a second machine could theoretically mount similar storage
+- a liveness check still passes
 
-It explains why many "HA-looking" answers still fail the user's standard.
-
-Keep the corollary explicit:
-
-- better stateful humility is not stateful HA
-- better stateful warnings are not stateful HA
-- better stateful evidence routing is not stateful HA
-
-Those changes stop the repo from lying.
-They still do not move authority, promotion, or rediscovery into the system.
-They also do not reduce the private burden if the real failover procedure still
-depends on one human remembering who is allowed to win, what storage is real,
-and which clients are now attached to a lie.
+Those may all improve confidence.
+They do not yet prove preserved authority.
 
 ## Service-class reality check
-
-Stateful services should be read by class, not with one generic resilience
-label.
 
 ### Redis-class systems
 
 What matters:
 
-- master or primary truth
-- promotion semantics
+- primary truth
+- promotion rules
 - client reconnect behavior
 - storage durability
 
@@ -259,141 +292,81 @@ What matters:
 
 - replica-set semantics
 - election behavior
-- consistency and client topology awareness
-- data locality across failure domains
+- consistency model
+- client topology awareness
 
 What is not enough:
 
 - TCP exposure through Traefik
 - a local healthcheck
 
-### SQLite-backed control-plane services such as current Headscale
+### SQLite-backed control-plane services
+
+Headscale is the active example here.
 
 What matters:
 
-- whether the database is still fundamentally local to one node
-- how leadership or singleton truth is represented
-- whether a replacement node can become authoritative without manual rescue
+- whether the SQLite file is still fundamentally local authority
+- whether a replacement node can become authoritative without operator rescue
+- whether leadership is represented by a real system-owned rule
 
 What is not enough:
 
-- the service being reachable through the edge
 - the admin surface responding
+- the mesh working on a normal day
 
 ### Postgres-backed application subsystems
 
 What matters:
 
-- fencing and promotion semantics
+- single-writer honesty versus actual HA
+- promotion/fencing semantics
 - storage portability
 - reconnect behavior
-- which subsystem actually needs HA versus explicit single-writer honesty
 
 What is not enough:
 
 - healthchecks
-- a restart policy
-- "could be moved elsewhere later"
+- restart policy
+- future portability language
 
-That last phrase matters because "could be moved elsewhere later" is one of
-the main ways modern infra asks the operator to subsidize a fake present tense.
-Potential portability is not current authority survivability.
-Future promotion playbooks are not present failover dignity.
-Future clusterability is not current anti-SPOF adulthood.
+## What the repo is allowed to say honestly today
 
-## What the user actually wants from the stateful story
+The repo is allowed to say:
 
-The user is not asking for stateful services to sound more distributed.
-They are asking for a stricter answer:
+- stateful dependencies are real and already central
+- stateful SPOF pressure is not theoretical
+- the docs now separate ingress continuity from authority continuity
+- some services may still deserve explicit single-writer honesty rather than
+  fake resilience language
+
+The repo is not yet allowed to say:
+
+- stateful zero-SPOF is solved
+- routed TCP equals HA
+- the current stack generally survives authority-node loss without private
+  operator completion
+
+## Bottom line
+
+The user does not want stateful services to sound more distributed.
+The user wants a stricter answer to one brutal question:
 
 > if this node dies, does the system still know who owns truth, and can it act
 > on that truth without me being the missing algorithm?
 
-That is the stateful benchmark.
+The current worktree answers that question honestly in only one broad way:
 
-It is why the docs should sometimes prefer explicit single-writer honesty over
-fake resilience language.
+not yet.
 
-A clearly described single-node authority model is more honest than a routed
-multi-node illusion that still depends on remembered rescue steps.
+What it *does* prove is where the pain already lives:
 
-That sentence should govern every future promotion discussion for data-bearing
-services.
-False distribution is worse than admitted singularity here because it trains
-the reader to trust continuity that still depends on private folklore.
+- MongoDB
+- Redis
+- Headscale SQLite
+- Firecrawl Postgres and RabbitMQ
+- LLM Postgres
+- node-local bind-mounted durability assumptions
 
-This repo should keep defending a deliberately unfashionable rule:
-
-- an admitted singleton is honest
-- an unreplicated service behind a pretty hostname is not suddenly resilient
-- a standby that still needs private operator arbitration is not yet a peer
-- a moved write path that still depends on remembered rescue steps is not yet
-  stateful dignity
-
-That is an especially important rule in this repo:
-
-- explicit single-writer truth is a valid honest state
-- fake "multi-node enough" wording is not
-
-If the platform has not yet earned replicated authority, the docs should say so
-plainly.
-
-## What would count as real progress here
-
-Real progress in this layer would look like:
-
-1. service-class-specific authority models, not generic "stateful HA" slogans
-2. explicit replication or single-writer honesty per critical service
-3. storage and promotion semantics that survive node loss
-4. client rediscovery behavior that does not depend on operator folklore
-5. drills that prove correctness, not just liveness
-
-Until then, the repo should keep saying:
-
-- ingress may improve earlier
-- stateful truth remains harsher
-
-That unevenness is not a docs flaw here.
-Pretending it has already been smoothed away would be the flaw.
-The user does not need the docs to smooth that tension.
-The user needs the docs to preserve the tension so nobody can spend elegance as
-if it were resilience.
-
-## What a real stateful proof packet would need
-
-For this repo, a serious stateful claim should eventually be backed by a proof
-packet that includes:
-
-- the named service class and concrete service
-- the current authority model before failure
-- the failure being tested
-- the promotion, election, or single-writer outcome after failure
-- the client rediscovery or reconnect behavior
-- the storage truth that makes the post-failure authority trustworthy
-- the explicit limits on what was **not** proven
-
-Without those elements, "stateful progress" is too easy to confuse with:
-
-- routed reachability
-- successful restart
-- or operator-guided rescue that still leaves the human as the missing
-  algorithm
-
-That final clause is the one that matters most.
-The user's real stateful complaint is not merely "a node can die."
-It is:
-
-> if the node dies and I still have to remember who owns truth, who may be
-> promoted, what clients now need to distrust, and what storage is still real,
-> then the platform has not absorbed the burden I was trying to escape.
-
-## Strongest honest current answer
-
-The live stack already carries meaningful stateful risk across multiple service
-domains, and the repo is unusually honest about the difference between routed
-reachability and replicated authority.
-
-What it does not yet prove is the thing that matters most:
-
-that truth itself has stopped living in one brittle place, with the operator
-acting as the missing failover logic when that place disappears.
+That is enough to make stateful honesty mandatory.
+It is not yet enough to make stateful HA claims adult.
