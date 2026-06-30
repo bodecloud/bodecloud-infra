@@ -1,5 +1,5 @@
 site_name: bolabaden Infrastructure Knowledgebase
-site_description: Operations and architecture docs for bolabaden.org — a multi-node, Docker-based homelab.
+site_description: Evidence-heavy docs for bolabaden.org — a Compose-first, multi-node Docker stack chasing wrong-node survival without fake HA language.
 site_author: bolabaden
 docs_dir: knowledgebase
 site_dir: /tmp/mkdocs-site
@@ -74,7 +74,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Start Here:
+  - Dream, Runtime, Proof:
     - Reading Paths and Retrieval Routes: reading-paths.md
     - User Intent and Dream: research/user-intent-and-dream.md
     - Operator Contract and Success Criteria: architecture/operator-contract.md

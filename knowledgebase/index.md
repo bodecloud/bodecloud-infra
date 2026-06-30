@@ -1,155 +1,241 @@
 # bolabaden Infrastructure Knowledgebase
 
-This site is for one question:
+This site exists for one hard question:
 
-> how do you keep `docker-compose.yml` as the real center of gravity, spread
-> services across multiple ordinary Docker nodes, and still make wrong-node
-> traffic, fallback, and anti-SPOF behavior feel like one coherent platform
-> instead of one operator remembering the real topology?
+> how do you keep
+> [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+> as the real human control surface, spread services across multiple ordinary
+> Docker nodes, and still make wrong-node traffic, fallback, and anti-SPOF
+> behavior feel like one coherent platform instead of one operator secretly
+> remembering the real topology?
 
-That is the real question. The repo is not mainly about:
+That is the real question.
 
-- general self-hosting
-- generic high availability
-- "which orchestrator is best?"
-- "how do I make Compose prettier?"
+This repo is not mainly about:
 
-Those are adjacent questions. They are not the core problem this repo is trying
-to solve.
+- generic self-hosting
+- generic "high availability"
+- tidy orchestrator comparison
+- prettier Compose patterns
+- collecting more modern infrastructure nouns
+
+Those are all adjacent.
+They are not the main wound this repo is trying to close.
 
 ## What this site is and is not allowed to prove
 
 This site is authoritative about:
 
-- the repo's actual architecture dream
+- the repo's actual dream
 - the current root Compose implementation surface
-- the difference between live runtime truth, intent truth, and planning truth
-- the concrete gaps between today's stack and real wrong-node recovery
+- the difference between live runtime truth, repo-native intent, planning
+  pressure, and archive pressure
+- the concrete gaps between today's stack and genuine wrong-node recovery
+- which claims still require proof before stronger language becomes legal
 
 This site is not authoritative about:
 
 - claiming that the current runtime already behaves like the dream
-- turning a clean explanation into proof of failover
-- promoting research or planning docs into shipped behavior
+- turning a clear architecture explanation into failover proof
+- promoting research or plans into shipped behavior
+- narrating a larger control plane as already justified just because the
+  current stack is uncomfortable
 
-The site should help a reader leave with the right map of reality, not the most
-optimistic story.
+The site should help a reader leave with the right map of reality, not the
+most optimistic story.
 
 ## Strongest honest current answer
 
 `bolabaden-infra` already contains a serious Compose-first platform:
 
-- a real root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
-- active includes under [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
-- a substantial Traefik, CrowdSec, TinyAuth, and nginx-auth edge layer
-- observability and maintenance surfaces
-- private-mesh work through Headscale
-- repeated planning pressure toward any-node entry, peer-aware routing, and
-  anti-SPOF behavior
+- a real root
+  [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+- active includes under
+  [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
+- a substantial Traefik, CrowdSec, TinyAuth, and nginx-auth edge stack
+- observability, maintenance, and operator surfaces
+- private-mesh pressure through Headscale
+- repeated architecture pressure toward any-node entry, peer-aware routing,
+  and anti-SPOF behavior
 
-What it does **not** yet prove is the part the user actually cares about most:
+What it still does **not** prove is the part the user actually cares about
+most:
 
-- that any healthy node can accept a request and preserve it correctly when the
-  service is remote
+- that any healthy node can accept a request and preserve it correctly when
+  the service is remote
 - that placement truth is shared explicitly instead of remembered
+- that peer eligibility is system-owned rather than guessed from reachability
 - that fallback routes survive the failure they are meant to absorb
 - that middleware, auth, and request semantics survive peer handoff
 - that stateful services are truly resilient rather than merely reachable
 
-The dream is clear. The stack is real. The missing middle truth layer is still
-incomplete.
+The dream is clear.
+The stack is real.
+The missing truth-owning middle layer is still incomplete.
 
-## Read this site in the right order
+## What kind of site this is
 
-If you only have time for one serious pass, use this route:
+This is not a normal architecture site.
 
-1. [User Intent and Dream](research/user-intent-and-dream.md)
-2. [Problem and Goals](architecture/problem-and-goals.md)
-3. [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
-4. [Current Compose Runtime](architecture/current-compose-runtime.md)
-5. [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md)
-6. [HA, Failover, and Routing](architecture/ha-failover-routing.md)
-7. [The Missing Middle Layer](architecture/missing-middle-layer.md)
-8. [Stateful HA and Data](architecture/stateful-ha-and-data.md)
-9. [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
+Normal architecture sites try to:
 
-That route preserves:
+- smooth contradictions
+- merge intent and implementation into one calm voice
+- present options as if the option space itself were proof of progress
+- reward coherence even when the worktree still depends on hidden operator
+  memory
 
-- what the user wants
-- what the repo already is
-- what still depends on private operator memory
-- what still lacks proof
+This site has to do the opposite.
 
-## Fast site router
+It has to preserve:
 
-Use these shortcuts when you already know the question.
+- the user's frustration with fake options
+- the difference between a first hop and preserved request meaning
+- the difference between a serious edge stack and a solved distributed system
+- the difference between planning a registry and the runtime actually owning
+  current placement truth
+- the difference between reachable TCP and honest stateful authority
 
-| If you need to know... | Start here |
-| --- | --- |
-| what the user is actually trying to make true | [User Intent and Dream](research/user-intent-and-dream.md) |
-| what the root runtime really contains today | [Current Compose Runtime](architecture/current-compose-runtime.md) |
-| which file has the strongest authority for the multi-node no-Swarm dream | [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md) |
-| why wrong-node entry is still the humiliating threshold | [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md) |
-| why Cloudflare plus Traefik is still weaker than real failover | [HA, Failover, and Routing](architecture/ha-failover-routing.md) |
-| what helper/control layer the repo is actually searching for | [The Missing Middle Layer](architecture/missing-middle-layer.md) |
-| why Redis, MongoDB, Headscale, and other stateful services need harsher language | [Stateful HA and Data](architecture/stateful-ha-and-data.md) |
-| what still needs proof before stronger claims are legal | [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md) |
+If those distinctions disappear, the site can sound broad and useful while
+still teaching the same lie the user is tired of hearing:
 
-## The three truth registers that matter most
+> there are lots of options now, so the hidden burden must already be lower
+
+## The four truth registers you have to keep separate
+
+Most documentation drift in this repo happens when these get flattened into
+one blended narrative.
 
 ### 1. Live runtime truth
 
-Use this when the claim is "what is actually implemented right now?"
+Use this when the claim is:
 
-Primary sources:
+> what actually exists in the priority implementation today?
 
-- root [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+Primary anchors:
+
+- root
+  [`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
 - active include fragments under
   [`compose/`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose)
 - [`AGENTS.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/AGENTS.md)
 
-### 2. Repo-native intent truth
+### 2. Repo-native dream and honesty truth
 
-Use this when the claim is "what is the platform trying to become?"
+Use this when the claim is:
 
-Primary sources:
+> what is the platform trying to become, and what honesty wall is the repo
+> already insisting on?
+
+Primary anchors:
 
 - [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
 - [`README.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/README.md)
 
-### 3. Planning and pressure truth
+### 3. Planning and promotion truth
 
-Use this when the claim is "what missing layer is being explored or promoted?"
+Use this when the claim is:
 
-Primary sources:
+> which missing layer has already been named, explored, or proposed?
+
+Primary anchors:
 
 - [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docs/INFRASTRUCTURE_MASTER_PLAN.md)
 - [Ingress and Failover Evidence](research/ingress-and-failover-evidence.md)
 - [Orchestrator Tradeoffs Evidence](research/orchestrator-tradeoffs-evidence.md)
 - [Stateful HA Evidence](research/stateful-ha-evidence.md)
+
+### 4. Archive-pressure truth
+
+Use this when the claim is:
+
+> what is the user actually rebelling against, and why do normal answers keep
+> feeling fake?
+
+Primary anchors:
+
+- [User Intent and Dream](research/user-intent-and-dream.md)
+- [Archive Pressure Patterns](research/archive-pressure-patterns.md)
+- [Evidence Ledger](research/evidence-ledger.md)
 - [Source Assimilation Index](operations/source-assimilation-index.md)
 
-These registers overlap. They are not interchangeable.
+These registers overlap.
+They are not interchangeable.
+
+## The shortest serious reading route
+
+If you only have time for one pass and do not want to be fooled by calm
+architecture language, use this order:
+
+1. [User Intent and Dream](research/user-intent-and-dream.md)
+2. [Problem and Goals](architecture/problem-and-goals.md)
+3. [Operator Contract and Success Criteria](architecture/operator-contract.md)
+4. [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md)
+5. [Current Compose Runtime](architecture/current-compose-runtime.md)
+6. [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md)
+7. [HA, Failover, and Routing](architecture/ha-failover-routing.md)
+8. [The Missing Middle Layer](architecture/missing-middle-layer.md)
+9. [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md)
+10. [Stateful HA and Data](architecture/stateful-ha-and-data.md)
+11. [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
+
+That route keeps all of these visible at once:
+
+- what the user actually wants
+- what the repo really contains
+- where the hidden burden still lives
+- what the missing layer actually is
+- what still lacks proof
+- why stateful surfaces stay under harsher rules
+
+## Fast routes by real question
+
+Use these when you already know what you need and want to avoid folder
+browsing.
+
+| If you need to know... | Start here |
+| --- | --- |
+| what the user is actually trying to make true | [User Intent and Dream](research/user-intent-and-dream.md) |
+| what the root runtime really contains today | [Current Compose Runtime](architecture/current-compose-runtime.md) |
+| which file most clearly states the multiple-node, no-Swarm-by-default dream | [Instruction Surfaces and Authority](architecture/instruction-surfaces-and-authority.md) |
+| why wrong-node entry is still the humiliating threshold | [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md) |
+| why Cloudflare plus Traefik is still weaker than real failover | [HA, Failover, and Routing](architecture/ha-failover-routing.md) |
+| what helper or control surface the repo is actually searching for | [The Missing Middle Layer](architecture/missing-middle-layer.md) |
+| what success would actually have to mean | [Operator Contract and Success Criteria](architecture/operator-contract.md) |
+| what still has to become system-owned before stronger claims are legal | [Capability Gaps and Roadmap](architecture/capability-gaps-and-roadmap.md) |
+| why Redis, MongoDB, Headscale, and similar services need harsher language | [Stateful HA and Data](architecture/stateful-ha-and-data.md) |
+| what proof is still missing before the docs can speak more strongly | [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md) |
 
 ## The easiest bad read
 
 The easiest way to misunderstand this repo is:
 
-1. see Cloudflare and multiple public nodes
+1. see Cloudflare and more than one public node
 2. see Traefik, CrowdSec, TinyAuth, dashboards, helpers, and many services
-3. see Nomad, k3s, and OpenSVC exploration
-4. conclude that the remaining problem is mostly polish or automation
+3. see OpenSVC, Nomad, and k3s exploration
+4. conclude that the remaining problem is mostly automation or polish
 
 That reading is wrong.
 
 The remaining problem is still the hard one:
 
 - current placement truth
+- convergence truth
 - peer eligibility truth
 - fallback-route durability
 - cross-node semantic parity
 - stateful honesty
-- getting those truths out of one operator's head
+- moving those truths out of one operator's head
 
 This site is only useful if it keeps those gaps visible instead of smoothing
 them away.
+
+## The anti-cheat rule for the whole site
+
+Before trusting any confident sentence in this knowledgebase, ask:
+
+> is this sentence describing a real truth the current worktree owns, or is it
+> describing a future layer, a research pressure, or an archive-derived
+> complaint as if they were already one thing?
+
+If the answer is unclear, the sentence is still too weak.

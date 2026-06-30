@@ -82,28 +82,30 @@ Then follow this order:
 
 - [`reading-paths.md`](reading-paths.md)
 - [`research/user-intent-and-dream.md`](research/user-intent-and-dream.md)
-- [`architecture/instruction-surfaces-and-authority.md`](architecture/instruction-surfaces-and-authority.md)
-- [`operations/operator-questions-and-honest-answers.md`](operations/operator-questions-and-honest-answers.md)
-- [`architecture/request-path-and-failure-walkthrough.md`](architecture/request-path-and-failure-walkthrough.md)
-- [`architecture/operator-contract.md`](architecture/operator-contract.md)
 - [`architecture/problem-and-goals.md`](architecture/problem-and-goals.md)
+- [`architecture/operator-contract.md`](architecture/operator-contract.md)
+- [`architecture/instruction-surfaces-and-authority.md`](architecture/instruction-surfaces-and-authority.md)
 - [`architecture/current-compose-runtime.md`](architecture/current-compose-runtime.md)
+- [`architecture/failure-model-and-maturity.md`](architecture/failure-model-and-maturity.md)
+- [`architecture/request-path-and-failure-walkthrough.md`](architecture/request-path-and-failure-walkthrough.md)
+- [`architecture/ha-failover-routing.md`](architecture/ha-failover-routing.md)
+- [`operations/operator-questions-and-honest-answers.md`](operations/operator-questions-and-honest-answers.md)
 - [`architecture/compose-first-architecture.md`](architecture/compose-first-architecture.md)
 - [`architecture/missing-middle-layer.md`](architecture/missing-middle-layer.md)
-- [`architecture/ha-failover-routing.md`](architecture/ha-failover-routing.md)
+- [`architecture/capability-gaps-and-roadmap.md`](architecture/capability-gaps-and-roadmap.md)
 - [`architecture/stateful-ha-and-data.md`](architecture/stateful-ha-and-data.md)
 - [`operations/decision-paths-and-promotion-rules.md`](operations/decision-paths-and-promotion-rules.md)
-- [`architecture/capability-gaps-and-roadmap.md`](architecture/capability-gaps-and-roadmap.md)
 - [`research/evidence-ledger.md`](research/evidence-ledger.md)
 - [`operations/proof-matrix-and-drills.md`](operations/proof-matrix-and-drills.md)
 - [`operations/devops-runbook.md`](operations/devops-runbook.md)
 
 That order is intentional.
-It starts with the question-first reading map, then the dream, then clarifies
-which repo files actually own the dream versus the runtime anchor, then forces
-the operator’s pain and request path back into view, then explains the live
-runtime, then names the missing middle layer, then rebuilds the proof
-boundaries.
+It starts with the question-first reading map, then the dream, then the actual
+problem statement, then the success contract, then clarifies which repo files
+own the dream versus the runtime anchor, then forces the live runtime and its
+uneven maturity back into view, then rebuilds the wrong-node and failover
+pressure, then names the missing middle layer, then closes on evidence and
+proof boundaries.
 
 That sequence matters because this repo is easiest to misunderstand when read
 in the opposite order.
@@ -116,6 +118,16 @@ If someone starts from:
 without first understanding the user's hidden negative benchmark, they will
 almost always flatten the problem into "wants better HA" or "needs a cluster."
 Those readings are too weak.
+
+There is also a second-order reading failure this sequence is trying to stop:
+
+- the docs are now broad
+- broad docs feel like convergence
+- convergence feels like the repo must already be mostly settled
+
+That is also too weak.
+The site is getting better at reconstructing the pressure.
+That does not mean the runtime has already paid down the pressure.
 
 ## Fast question-first routes
 
@@ -135,6 +147,7 @@ Read:
 Read:
 
 - [`research/user-intent-and-dream.md`](research/user-intent-and-dream.md)
+- [`architecture/problem-and-goals.md`](architecture/problem-and-goals.md)
 - [`architecture/operator-contract.md`](architecture/operator-contract.md)
 
 ### "What does the root runtime actually prove?"
@@ -143,6 +156,7 @@ Read:
 
 - [`architecture/current-compose-runtime.md`](architecture/current-compose-runtime.md)
 - [`architecture/compose-fragment-map.md`](architecture/compose-fragment-map.md)
+- [`architecture/failure-model-and-maturity.md`](architecture/failure-model-and-maturity.md)
 
 ### "Why is wrong-node entry still the humiliating threshold?"
 
@@ -156,6 +170,7 @@ Read:
 Read:
 
 - [`architecture/missing-middle-layer.md`](architecture/missing-middle-layer.md)
+- [`architecture/capability-gaps-and-roadmap.md`](architecture/capability-gaps-and-roadmap.md)
 - [`research/orchestrator-tradeoffs-evidence.md`](research/orchestrator-tradeoffs-evidence.md)
 - [`research/orchestration-research-2026.md`](research/orchestration-research-2026.md)
 
@@ -180,6 +195,13 @@ This README should make one thing obvious before any contributor goes deeper:
 
 if a page answers a calmer neighboring question than the one the user is
 actually asking, it may still be useful, but it is not sufficient.
+
+The practical test is simple:
+
+- does the page help explain what burden became system-owned?
+- or does it mostly explain the available tools more elegantly?
+
+If the second answer is stronger, the page is still too weak for this repo.
 
 ## What this rewrite is trying to fix
 

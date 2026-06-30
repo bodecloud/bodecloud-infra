@@ -27,16 +27,19 @@ still leaving the same hidden operator reconstruction burden in place.
 
 ## Start in the knowledgebase
 
-If you need to understand what the repo is actually trying to build, read these first:
+If you need to understand what the repo is actually trying to build, read these
+first:
 
 1. [`../knowledgebase/index.md`](../knowledgebase/index.md)
-2. [`../knowledgebase/architecture/problem-and-goals.md`](../knowledgebase/architecture/problem-and-goals.md)
-3. [`../knowledgebase/architecture/current-compose-runtime.md`](../knowledgebase/architecture/current-compose-runtime.md)
-4. [`../knowledgebase/architecture/compose-first-architecture.md`](../knowledgebase/architecture/compose-first-architecture.md)
-5. [`../knowledgebase/architecture/ha-failover-routing.md`](../knowledgebase/architecture/ha-failover-routing.md)
-6. [`../knowledgebase/architecture/stateful-ha-and-data.md`](../knowledgebase/architecture/stateful-ha-and-data.md)
-7. [`../knowledgebase/architecture/capability-gaps-and-roadmap.md`](../knowledgebase/architecture/capability-gaps-and-roadmap.md)
-8. [`../knowledgebase/operations/devops-runbook.md`](../knowledgebase/operations/devops-runbook.md)
+2. [`../knowledgebase/research/user-intent-and-dream.md`](../knowledgebase/research/user-intent-and-dream.md)
+3. [`../knowledgebase/architecture/problem-and-goals.md`](../knowledgebase/architecture/problem-and-goals.md)
+4. [`../knowledgebase/architecture/operator-contract.md`](../knowledgebase/architecture/operator-contract.md)
+5. [`../knowledgebase/architecture/current-compose-runtime.md`](../knowledgebase/architecture/current-compose-runtime.md)
+6. [`../knowledgebase/architecture/request-path-and-failure-walkthrough.md`](../knowledgebase/architecture/request-path-and-failure-walkthrough.md)
+7. [`../knowledgebase/architecture/missing-middle-layer.md`](../knowledgebase/architecture/missing-middle-layer.md)
+8. [`../knowledgebase/architecture/capability-gaps-and-roadmap.md`](../knowledgebase/architecture/capability-gaps-and-roadmap.md)
+9. [`../knowledgebase/architecture/stateful-ha-and-data.md`](../knowledgebase/architecture/stateful-ha-and-data.md)
+10. [`../knowledgebase/operations/proof-matrix-and-drills.md`](../knowledgebase/operations/proof-matrix-and-drills.md)
 
 Those pages are now the best explanation of the actual repo question:
 
@@ -50,6 +53,17 @@ There is a second question hiding under that one:
 
 If you skip that second question, the repo becomes much easier to summarize and
 much less useful to understand.
+
+There is a third hidden reading failure this page also has to interrupt:
+
+- the planning artifacts are detailed
+- detail feels like convergence
+- convergence feels like the runtime must already be close
+
+That is also wrong.
+This directory contains a lot of serious thinking.
+The knowledgebase exists to stop that thinking from being mistaken for runtime
+closure.
 
 ## What this `docs/` directory is still good for
 
