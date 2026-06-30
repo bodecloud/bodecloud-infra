@@ -358,6 +358,81 @@ Sequence:
 If you skip the contrast route, the answer usually becomes too smooth.
 That is one of the main reasons the earlier docs felt useless.
 
+## Route 9: "How do I turn one source or idea into real roadmap work?"
+
+Use this when the starting point is not a page category, but a concrete source,
+candidate, or repeated frustration.
+
+Examples:
+
+- a newly imported conversation about Docker multi-node failover
+- a Traefik fallback helper idea
+- a `services.yaml` current-state registry idea
+- a Nomad, OpenSVC, k3s, or Kubernetes promotion argument
+- a Redis or MongoDB HA claim
+
+Start with:
+
+1. [operations/source-assimilation-index.md](operations/source-assimilation-index.md)
+2. [architecture/capability-gaps-and-roadmap.md](architecture/capability-gaps-and-roadmap.md)
+3. [architecture/current-state-registry-and-peer-eligibility.md](architecture/current-state-registry-and-peer-eligibility.md)
+4. [operations/proof-matrix-and-drills.md](operations/proof-matrix-and-drills.md)
+5. [operations/devops-runbook.md](operations/devops-runbook.md)
+
+Primary truth registers:
+
+- archive pressure
+- plan truth
+- proof discipline
+
+Question this route is allowed to answer:
+
+- what exact packet must this source or idea produce before it becomes
+  implementation priority?
+
+Smaller neighboring question it must refuse:
+
+- is this source interesting, plausible, or aligned with the vibe?
+
+Stronger sentence still forbidden afterward:
+
+- `because a source or candidate maps to the dream, it deserves promotion`
+
+Private sentence likely still surviving:
+
+- `I still personally know whether this idea kills a burden or only sounds like it should.`
+
+Minimum output:
+
+```yaml
+source_to_roadmap_packet:
+  exact_source_or_candidate: "<archive file, instruction file, runtime artifact, or proposed helper>"
+  source_assimilation:
+    source_family: "<from Source Assimilation Index>"
+    pressured_packet_fields:
+      - "<placement_source | selected_peer | peer_eligibility | backend_loss | policy_chain | stateful_authority>"
+    strongest_sentence_supported: "<one legal sentence>"
+    still_forbidden: "<one illegal stronger sentence>"
+    surviving_private_sentence: "<operator-private burden still alive>"
+  roadmap_promotion:
+    candidate_family: "<current-state-registry | fallback-runtime | orchestrator-promotion | stateful-authority | other>"
+    private_sentence_to_kill: "<sentence this work must make less true>"
+    minimum_v1_scope: "<one narrow route, transport, or service class>"
+    required_proof_packet: "<placement_decision_packet | route_packet | backend_loss_packet | policy_parity_packet | stateful_authority_packet>"
+  next_page_or_artifact:
+    destination: "<doc page, runtime file, drill, or backlog item>"
+    reason: "<why this is the correct destination instead of a broader summary>"
+```
+
+If the packet cannot name `required_proof_packet`, the idea should not become a
+roadmap priority yet.
+
+If it cannot name `private_sentence_to_kill`, it should not be described as
+burden-removal work.
+
+If it cannot name `still_forbidden`, it is likely about to become another
+polished overclaim.
+
 ## Recommended route pairs for common questions
 
 Use these pairings when the answer is likely to drift into overclaiming.
@@ -369,6 +444,7 @@ Use these pairings when the answer is likely to drift into overclaiming.
 | `Does the repo actually solve failover?` | Route 3 | Route 6 | stops HTTP-looking answers from hiding stateful and L4 gaps |
 | `Do we need Nomad, k3s, Swarm, or something else?` | Route 5 | Route 2 | stops controller discussion from ignoring the current Compose burden |
 | `What should be documented next?` | Route 7 | Route 4 | stops cleanup edits from losing proof discipline |
+| `Can this source or idea become real work?` | Route 9 | Route 4 | stops source pressure or tool plausibility from skipping proof packets |
 
 ## What a good reading pass must leave behind
 
