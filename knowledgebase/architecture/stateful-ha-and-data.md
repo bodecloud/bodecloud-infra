@@ -202,6 +202,25 @@ That means the correct present tense is:
 > Redis is singular enough that a human can still know where the real writer is
 > better than the system itself can express it.
 
+The Redis archive pressure adds one more practical boundary:
+
+- Redis is TCP, not HTTP
+- Traefik can expose it through TCP routing
+- ordinary non-Swarm Traefik Docker providers only see local Docker containers
+- identical labels on several independent hosts do not become global service
+  discovery
+
+So the repo must not let this sentence sneak in:
+
+> Redis is multi-node because every host can declare the same Traefik TCP
+> labels.
+
+The stronger honest sentence is:
+
+> Redis may eventually be routed through a registry-backed L4 path, but Redis
+> authority still requires writer identity, promotion, client rediscovery, and
+> fencing proof.
+
 ### Headscale
 
 Current honest reading:

@@ -158,6 +158,49 @@ The hidden sentence still surviving is:
 
 > I still privately know Redis truth is basically where the current writer is.
 
+Archive-derived boundary:
+
+- `redis-url-and-load-balancing__68a914f8-d47c-8324-8734-bc1f17507bac.md`
+  separates three things that infrastructure docs often blur:
+  - `redis://` is raw Redis protocol over TCP, not HTTP
+  - Traefik can route Redis only through TCP routers, not HTTP routers
+  - Traefik's Docker provider on ordinary non-Swarm Docker sees only the local
+    Docker daemon
+
+That source matters because it is not merely saying "Redis is stateful."
+It is identifying a practical false shortcut:
+
+> if every node has the same Docker labels, Traefik will discover and balance
+> Redis globally across non-Swarm hosts.
+
+That shortcut is false.
+Identical labels across independent Docker daemons do not create global backend
+truth.
+They create repeated local declarations unless some other registry, file
+provider, Consul/etcd surface, generated config, or orchestrator-grade provider
+supplies cross-node knowledge.
+
+Even if cross-node TCP forwarding is later implemented, the stateful claim
+still stays narrow.
+TCP forwarding can prove transport reachability.
+It cannot prove:
+
+- which Redis instance is the current writer
+- whether a replica was promoted
+- whether clients rediscovered the promoted master
+- whether independent Redis servers accidentally diverged
+- whether stale writers were fenced
+
+The legal sentence is:
+
+> Redis can be exposed as a TCP service, and a future registry-backed forwarding
+> layer could route Redis connections to a selected peer.
+
+The illegal sentence is:
+
+> Traefik TCP labels across ordinary non-Swarm Docker hosts make Redis
+> multi-node HA.
+
 ### 3. Qdrant is live and persistent, but persistence is not authority transfer
 
 Verified runtime evidence:
