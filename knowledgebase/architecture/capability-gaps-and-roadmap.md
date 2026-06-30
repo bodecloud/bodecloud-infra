@@ -62,6 +62,26 @@ This page is not authoritative about:
 
 This is a sequencing contract, not a confidence artifact.
 
+## The failure mode this roadmap has to prevent
+
+A normal infra roadmap can afford to sound like:
+
+- phase 1
+- phase 2
+- future improvements
+- scale-out later
+
+That tone is too weak for this repo.
+
+The real failure mode here is:
+
+1. the roadmap sounds mature
+2. the system still depends on private operator completion
+3. the burden is merely pushed further down the page
+4. the docs become a prettier version of the same bluff
+
+This roadmap exists to stop that progression.
+
 ## Strongest honest current answer
 
 The next work is not:
@@ -98,6 +118,21 @@ That list is not merely technical.
 It is a list of places where the user's frustration is still objectively
 correct.
 
+## The roadmap is really a list of hidden sentences that still survive
+
+Each gap below matters because one humiliating hidden sentence is still alive.
+
+Examples:
+
+- `I still personally know what runs where.`
+- `I still personally know which peer is truly safe.`
+- `I still personally know whether the fallback survives the failure that made it matter.`
+- `I still personally know whether this protected route still means the same thing after handoff.`
+- `I still personally know who owns truth for this stateful surface.`
+
+The roadmap is only good if each step kills one of those sentences or narrows
+it into something smaller and more honest.
+
 ## The filter every candidate step must survive
 
 Every helper, registry, orchestrator, sync loop, mesh trick, or middle layer
@@ -117,6 +152,16 @@ If the answer is:
 - "it feels more like a cluster"
 
 then the hidden burden probably did not move.
+
+## The accusation each roadmap item must survive
+
+Every candidate next step should be read against the same accusation:
+
+> after this lands, am I still the person who privately explains what the
+> healthy-looking node should do?
+
+If the answer is yes, the step may still be useful, but it is not yet the next
+truth-owning step.
 
 That filter is necessary because the ecosystem is full of answers that improve
 terminology, automation, or elegance while still leaving the same human SPOF in
@@ -140,6 +185,20 @@ this:
 
 That order is not motivational sequencing.
 It is the dependency chain between the dream and reality.
+
+## Why the roadmap starts by being mean to the docs
+
+Starting with documentation honesty can sound like procrastination unless the
+real wound is understood.
+
+It comes first because:
+
+- this repo is already large enough to flatter itself accidentally
+- broad platform nouns are already available everywhere
+- one false stronger sentence can contaminate every later decision
+
+If the map lies first, even technically good implementation work becomes
+harder to judge honestly.
 
 ## Why this order is strict
 
@@ -206,6 +265,11 @@ Why it matters first:
 - once the docs become more certain than the runtime, the repo loses the only
   reliable map it has for future decisions
 
+Private sentence still surviving before closure:
+
+> yes, but I still personally know which parts of the docs are stronger than
+> the runtime they describe
+
 ## Gap 2: placement truth
 
 This is still the first major runtime gap.
@@ -238,6 +302,11 @@ What still remains illegal after partial progress:
 - peer-forward continuity claims
 - protected-route continuity claims
 - stateful HA language
+
+Private sentence still surviving before closure:
+
+> yes, but I still personally know the receiving node still needs my memory to
+> know where the service really is
 
 ## Gap 3: convergence truth
 
@@ -275,6 +344,11 @@ What still remains illegal after closure:
 - protected-route continuity claims
 - stateful recovery language
 
+Private sentence still surviving before closure:
+
+> yes, but I still personally know whether the shared truth is current or only
+> recently plausible
+
 ## Gap 4: route durability under failure
 
 This is where many respectable-looking stacks collapse.
@@ -305,6 +379,11 @@ What still remains illegal after partial closure:
 - TCP equivalence claims
 - stateful promotion
 
+Private sentence still surviving before closure:
+
+> yes, but I still personally know whether the fallback route survives the
+> exact failure that justified it
+
 ## Gap 5: peer eligibility truth
 
 Peer reachability is too weak.
@@ -330,6 +409,11 @@ What still remains illegal after closure:
 - protected-route continuity claims without semantic comparison
 - TCP and stateful substitution claims
 
+Private sentence still surviving before closure:
+
+> yes, but I still personally know that the reachable peer is not the same
+> thing as the right peer
+
 ## Gap 6: one wrong-node stateless HTTP proof
 
 The roadmap needs one brutally narrow success packet before broader language
@@ -349,6 +433,11 @@ This is intentionally narrow.
 One honest narrow proof is more valuable here than ten architecture-shaped
 options because it demonstrates one piece of burden transfer the system can
 actually own.
+
+Private sentence that should die here:
+
+> the system only got this right because I already knew which node really
+> owned the service
 
 What still remains illegal after closure:
 
@@ -389,6 +478,11 @@ What still remains illegal after closure:
 - stateful equivalence claims
 - whole-platform "one cloud" language
 
+Private sentence still surviving before closure:
+
+> yes, but I still personally know the protected route that answered is no
+> longer semantically the same route
+
 ## Gap 8: keeping TCP and stateful services on harsher tracks
 
 This repo becomes dishonest very quickly if HTTP success bleeds into TCP or
@@ -420,6 +514,10 @@ What closure would mean:
   rediscovery semantics
 - the docs say what is merely reachable versus what is actually recoverable
 
+Private sentence still surviving before closure:
+
+> yes, but I still personally know the hostname survived while truth did not
+
 What still remains illegal before that:
 
 - "HA" language for stateful surfaces based only on ingress or TCP exposure
@@ -448,6 +546,10 @@ It only earns promotion if it can prove:
 - the bad-day story is more honest, not merely more automatic-looking
 - the worldview tax is justified by the burden transfer
 
+Private sentence that should die before promotion:
+
+> we only promoted this because it sounded like the next serious thing to do
+
 ## The current bottom line
 
 The strongest current roadmap sentence is:
@@ -458,3 +560,23 @@ The strongest current roadmap sentence is:
 > handoff, or stateful recovery
 
 That is the roadmap this repo is allowed to keep.
+
+## Bottom line
+
+The user is not really asking for a roadmap full of tasks.
+The user is asking for a burden-removal sequence that stays honest under
+humiliation.
+
+The current best sequencing answer is still:
+
+- fix the map first
+- externalize placement truth
+- keep that truth current
+- prove one route survives the failure that makes fallback matter
+- prove peer choice means more than reachability
+- prove one wrong-node route really stopped depending on private operator
+  completion
+- only then talk about stronger promotion
+
+Anything broader may still sound strategic.
+It is not yet as truthful as the user is asking for.

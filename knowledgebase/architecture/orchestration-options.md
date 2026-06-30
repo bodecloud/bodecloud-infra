@@ -38,6 +38,16 @@ They are trying to decide whether the dream can be preserved:
 The orchestration decision only becomes interesting when one of those dreams
 starts colliding with truths the current stack cannot own by itself.
 
+## The user's accusation against every option
+
+Every candidate here should be read under the same accusation:
+
+> are you actually removing the hidden human SPOF, or are you just replacing
+> it with a more respectable story?
+
+If the answer is the second one, the option may still be powerful.
+It is not yet the right answer for this repo.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -58,6 +68,17 @@ This page is not authoritative about:
 
 This is a promotion filter, not a winner declaration.
 
+## The failure mode this page is trying to stop
+
+The easiest way for a page like this to become dishonest is:
+
+1. the option list gets more sophisticated
+2. the controllers sound more grown up
+3. the operator still privately carries the same decisive truth
+4. the docs quietly call that progress
+
+This page exists to stop prestige from masquerading as burden transfer.
+
 ## The current default stance
 
 The current default stance in this repo is:
@@ -77,6 +98,20 @@ It is anti-unearned-orchestrator:
 - anti "more clustered must be better"
 - anti "industry standard" as a substitute for proof
 - anti replacing one hidden human dependency with one hidden controller myth
+
+## What "worldview tax" really means here
+
+`Worldview tax` is not just a dramatic phrase.
+It means the option demands some combination of:
+
+- more abstraction distance
+- more invisible cluster state
+- more controller trust
+- more operational doctrine
+- less direct reasoning from `docker-compose.yml` plus the runtime
+
+That tax may be worth paying.
+It is only worth paying when a real hidden burden moved in return.
 
 ## The non-negotiable questions every option must answer
 
@@ -115,6 +150,27 @@ Examples of the sentences this repo wants to kill:
 If the layer cannot kill at least one such sentence cleanly, it has not yet
 justified its existence.
 
+## The private-sentence benchmark
+
+The useful benchmark is not:
+
+- how many features does this system have?
+- how standard is it?
+- how complete is its cluster story?
+- how easy is it to compare in generic infra discourse?
+
+The useful benchmark is:
+
+> what exact sentence should stop being true after we adopt it?
+
+Examples:
+
+- `I still personally know which node really hosts this service.`
+- `I still personally know which peer is valid rather than merely alive.`
+- `I still personally know the fallback disappears when the preferred backend dies.`
+- `I still personally know the protected route changed meaning after handoff.`
+- `I still personally know the stateful writer is singular.`
+
 ## The main candidate families
 
 ### 1. Stay Compose-first and harden a shared-truth layer
@@ -151,6 +207,11 @@ What it still must prove:
 This is the family most emotionally aligned with the repo.
 It is also the family most vulnerable to fake closure through clever glue.
 
+Private sentence still likely to survive unless proved otherwise:
+
+> yes, but I still personally know whether the shared registry is current
+> enough to trust
+
 ### 2. Compose plus gossip or event-driven coordination
 
 Examples from the archive:
@@ -180,6 +241,11 @@ This family is often the closest answer to:
 
 It still usually needs another truth-owning layer on top of the event flow.
 
+Private sentence still likely to survive unless proved otherwise:
+
+> yes, but I still personally know hearing the event is not the same thing as
+> knowing the right backend
+
 ### 3. Compose plus registry and dynamic proxy/control-plane helpers
 
 Examples:
@@ -204,6 +270,11 @@ What it may still leave behind:
 
 This family becomes a real candidate only if the receiving node can explain its
 choice from shared truth rather than cultural memory.
+
+Private sentence still likely to survive unless proved otherwise:
+
+> yes, but I still personally know whether the registry or helper became the
+> new sacred component
 
 ### 4. Stronger orchestrators or cluster managers
 
@@ -232,6 +303,11 @@ What they charge:
 These systems are not too big in the abstract.
 They are only too expensive if they do not remove a repo-specific hidden burden
 that smaller layers failed to remove honestly.
+
+Private sentence still likely to survive unless proved otherwise:
+
+> yes, but I still personally do not know whether the larger controller solved
+> my wound or just made it harder to inspect
 
 ## What the archive pressure means for these choices
 
@@ -270,6 +346,17 @@ The uncomfortable answer it keeps surfacing is:
 
 That matters because it stops the docs from promising an off-the-shelf miracle
 where the archive never actually found one.
+
+## Why "just use the stronger orchestrator" is still too small
+
+That answer is still too small because it skips the repo's actual decision:
+
+- which truth is missing now?
+- could a smaller layer own it honestly?
+- if not, which larger layer owns it in a visibly better way?
+- what exact sentence dies after the migration?
+
+Without those answers, the recommendation is still mostly aesthetic.
 
 ### `nomad-multi-node-failover__...`
 
@@ -325,6 +412,18 @@ That does not make the candidate worthless.
 It means the candidate has not yet answered the repo's real benchmark strongly
 enough to deserve default status.
 
+## What would actually count as orchestration progress
+
+This repo should only narrate orchestration progress when at least one of these
+becomes true in a provable way:
+
+- the wrong node no longer needs private placement folklore
+- peer choice no longer depends on remembered safety
+- a fallback survives the failure that used to erase it
+- a protected route preserves meaning after handoff
+- a stateful surface now has explicit authority ownership and rediscovery
+  semantics the runtime can explain
+
 ## What a real winner would look like
 
 A winner in this repo would not merely be:
@@ -356,3 +455,16 @@ If an orchestration layer wins, it will not win by prestige.
 
 It will win because one more previously private bad-day sentence stopped being
 true.
+
+## Bottom line
+
+The user is not starving for orchestrator names.
+The user is starving for one option that can survive the accusation:
+
+> if I stop privately finishing the topology sentence, does the platform still
+> know what to do?
+
+That is why this page has to stay harsher than a normal comparison page.
+The right orchestrator, if there is one, will not merely be more capable.
+It will be the first one that removes a specific humiliation instead of merely
+describing it better.
