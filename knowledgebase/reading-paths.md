@@ -26,6 +26,11 @@ This page therefore has one job:
 help a reader ask the right question first, instead of wandering through a
 folder tree until the repo starts sounding more solved than it really is.
 
+That matters even more now that the knowledgebase is bigger.
+Large sites create a new failure mode:
+the reader can hit enough adjacent correct pages to feel oriented while still
+never quite reconstructing the exact accusation driving the repo.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -97,6 +102,11 @@ But:
 - did the route preserve the exact remaining insult the user is still reacting
   to?
 
+That word "insult" is not decorative.
+It names the social failure the user keeps reacting to:
+serious technology is present, but the real control plane still has to be a
+human when topology truth matters.
+
 That insult is usually some version of:
 
 the system still becomes socially manual again right when the topology
@@ -137,6 +147,13 @@ Better retrieval can create a dangerous illusion:
 
 This page has to keep breaking that illusion on purpose.
 
+The site can get better at explaining the repo faster than the repo gets
+better at owning the truth itself.
+Every reading route should therefore keep two separate scores alive:
+
+- how well does the repo explain the pressure?
+- how much of that pressure has the live system actually paid down?
+
 ## What a good first pass should leave in your hands
 
 If the route is working, you should be able to leave the first pass with a
@@ -156,6 +173,11 @@ If your first pass only leaves you with:
 - "the docs seem organized now"
 
 then the route was too weak for this repo.
+
+Add one more failed outcome:
+
+- "I understand the option space better, but I can no longer say what exact
+  private burden still survives"
 
 ## What disciplined retrieval has to preserve
 
@@ -228,6 +250,11 @@ then it is still incomplete.
 
 The enemy here is not only irrelevance.
 It is relevance that still shrinks the problem.
+
+That is why the routes in this page are intentionally question-first rather
+than stack-first.
+The repo already has enough stack to distract the reader.
+The routes are here to stop the distraction from becoming the answer.
 
 Retrieval can therefore fail in two opposite ways:
 

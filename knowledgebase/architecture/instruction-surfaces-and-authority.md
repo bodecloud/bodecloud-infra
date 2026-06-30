@@ -28,6 +28,27 @@ That is not a minor editorial risk in this repo.
 It is one of the main ways the user's dream gets quietly normalized into
 something weaker and more familiar.
 
+The dream does not have to be inferred from vibes.
+It is stated directly in
+[`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md),
+restated under pressure in the archive, and then bounded by the README and the
+runtime-facing files.
+
+The archive matters here because it restores the tone of the accusation.
+In
+[`docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md),
+the user says the real remaining problem is service discovery and unified
+request preservation once DNS plurality and manual placement already exist.
+In
+[`load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md),
+the user explicitly rejects being handed another respectable proxy noun as if
+that solved the wound.
+
+That means authority mapping here is not just about repo files talking to other
+repo files.
+It is about protecting the repo from slowly forgetting what the user was
+actually rebelling against.
+
 ## The exact question this page answers
 
 This page answers the recurring question:
@@ -130,6 +151,13 @@ Alignment is not closure.
 Alignment is also one of the easiest ways for a repo like this to start
 looking more mature than its live wrong-node and fallback truth actually are.
 
+Another way to say the same thing:
+repo coherence is cheap compared to truth custody.
+The danger is not that the files disagree wildly.
+The danger is that they agree enough for a reader to stop noticing which file
+is carrying dream truth, which file is carrying honesty pressure, and which
+file is still dragging the story back onto the live runtime.
+
 ## What still does not count as understanding authority here
 
 This page also needs to block a softer misread.
@@ -193,6 +221,11 @@ It is also about who is tasked with blocking which specific kind of lie.
 If a contributor cannot say what overclaim a file is there to stop, they have
 not fully assimilated that file's role yet.
 
+That test should be treated literally.
+If someone says ".cursorrules explains the distributed architecture" or
+"AGENTS.md is where the anti-SPOF dream really lives," the repo has already
+started flattening authority across the wrong surfaces.
+
 ## What a real authority-mapping packet would have to contain
 
 Before this page supports a stronger claim like "the repo's guidance surfaces
@@ -213,6 +246,11 @@ voice.
 And a merged voice is exactly what becomes dangerous here.
 The more unified the repo sounds, the easier it becomes to spend emotional
 confidence that only a live runtime should be allowed to spend.
+
+The packet is especially important because this repo now has enough strong
+language that a reader can accidentally become more convinced by cross-file
+agreement than by live proof.
+This page exists to keep those two forms of confidence separate on purpose.
 
 ## The ranking that should govern the whole knowledgebase
 

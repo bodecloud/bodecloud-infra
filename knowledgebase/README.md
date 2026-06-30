@@ -13,6 +13,12 @@ thing the user is actually mad about:
 the stack keeps looking flexible until the real topology still has to live in
 one human head.
 
+That line is not a flourish.
+It is the practical doorway test for this whole directory.
+If a reader can walk through the knowledgebase and still leave mainly thinking
+"this is a nice Compose homelab with some future HA ideas," then the doorway
+already failed before the deeper pages had a chance to help.
+
 ## Read this directory correctly
 
 This directory is not here to provide generic infrastructure prose.
@@ -49,6 +55,11 @@ The user is not asking for a mellow orientation guide.
 They are asking for docs that can withstand frustration, contradiction, and
 the feeling that every apparent option secretly preserves the same hidden tax.
 
+That hidden tax is not generic complexity.
+It is the moment where the request lands on the wrong node, a backend
+disappears, or a stateful claim gets serious, and the system quietly needs the
+operator to finish the sentence anyway.
+
 ## The shortest honest reconstruction of the wound
 
 The wound is not merely "multi-node Docker is hard."
@@ -60,6 +71,15 @@ on the wrong node and the truth suddenly collapses back into:
 - sacred-node folklore
 - unclear peer eligibility
 - a fallback story that may exist only as architecture narration
+
+The archive is useful here because it restores how plainly the user stated the
+dream.
+The user already accepted manual placement and already had Cloudflare plurality.
+The thing they kept asking for was the missing service-discovery and
+wrong-node-preservation layer.
+That is why this site cannot keep drifting back to gentler questions like
+"which orchestrator feels right?" without first naming what specific burden is
+supposed to move.
 
 That is why these docs cannot behave like ordinary repo docs.
 
@@ -98,6 +118,12 @@ A documentation pass is not strong here because it:
 
 It is strong only if it makes the repo harder to overread and easier to map to
 the exact burden the user is trying to eliminate.
+
+That means the doorway should leave the reader with one uncomfortable sentence
+still active in their head:
+
+> if the system still needs a human to privately know what node, peer, route,
+> or owner is really authoritative, then the main wound is still here.
 
 ## What this page is and is not allowed to prove
 
@@ -153,6 +179,12 @@ If that distinction disappears, the docs can sound comprehensive while still
 teaching the same lie the user is tired of hearing:
 
 the stack is flexible now, so the operator burden must already be lower.
+
+That lie is exactly what this doorway is trying to break before the reader even
+clicks into architecture or operations pages.
+The user is not short on flexible-looking stacks.
+They are short on options that stay honest when the topology question stops
+being theoretical.
 
 In this repo, a page can be technically informative and still fail if it lets
 the reader walk away thinking:

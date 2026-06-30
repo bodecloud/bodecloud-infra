@@ -83,6 +83,17 @@ The user is asking for a knowledgebase that actually reconstructs:
 - where the docs must stay harsh because state, routing, and failover are still
   incomplete
 
+The most common bad substitution is this:
+
+- the user asks how the hidden control plane stops living in one human head
+- retrieval answers with a broader architecture story about clustering,
+  routing, or orchestrator choices
+
+That broader story may still be relevant.
+It is not the same question.
+This page exists because the docs in this repo have to keep protecting that
+difference.
+
 So "actually RAG this time" in `bolabaden-infra` means:
 
 1. recover the real dream before writing
@@ -163,6 +174,10 @@ extra material makes it easier to stop asking:
 
 > what exact truth moved out of operator memory, and what exact truth did not?
 
+That question is the center of the repository's retrieval discipline.
+If a page grows broader while making that question easier to dodge, the page
+got worse even if the page also became denser and more cross-linked.
+
 ## What still does not count as real retrieval here
 
 The following still do not count as "actually RAG this time" in this repo:
@@ -173,6 +188,12 @@ The following still do not count as "actually RAG this time" in this repo:
 - producing a calm answer that edits the wound down into a smaller question
 - summarizing related technologies without reconstructing the user's benchmark
 - removing contradiction because it makes the docs cleaner
+
+Add one more failure mode here because it is easy to hide inside competent
+research:
+
+- recovering the ecosystem around the wound while leaving the wound itself
+  under-described
 
 That kind of retrieval can sound thorough while still answering the wrong
 question.
@@ -200,6 +221,11 @@ Examples include:
 - which peer is actually valid now
 - whether the fallback route still survives the bad day
 - whether the stateful owner is still singular
+
+That list is not just a debugging checklist.
+It is the repository's anti-slop checksum.
+If a retrieval pass cannot still name one of those surviving private burdens at
+the end, it probably answered a smoother question than the one the user asked.
 
 If retrieval broadens the answer while making that question harder to see, then
 retrieval got worse, not better.
@@ -252,6 +278,12 @@ It has to preserve which file gave us:
 - the honesty wall
 - the runtime anchor
 - the authoring discipline
+
+It also has to preserve which source class gave us the emotional shape of the
+complaint.
+That is what the archive-pressure class is for.
+Without it, the docs can stay technically correct while becoming socially
+deaf.
 
 If those origins blur together, later pages start speaking with confidence
 borrowed from the wrong source class.
