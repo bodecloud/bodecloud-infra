@@ -70,6 +70,35 @@ In this repo, those can all be symptoms of the same failure: the system has
 remembered the right materials while forgetting what the user was actually
 forcing those materials to answer.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- how documentation claims should be routed through source classes
+- which evidence layers outrank others for different kinds of questions
+- what "actual assimilation" requires in this repo beyond citation density
+
+This page is not authoritative about:
+
+- whether a specific runtime or route claim is already true
+- whether one well-sourced summary has solved the reconstruction problem
+- whether archive pressure can substitute for live runtime evidence
+
+This page defines the retrieval contract.
+It is not itself proof that the contract has been perfectly satisfied.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this claim should start from live worktree evidence" | source-ordering rule | this page, runtime anchor pages, root Compose surfaces | that archive or intent evidence is worthless |
+| "this claim belongs to dream or pressure reconstruction" | retrieval-routing rule | this page, dream pages, archive-pressure pages | that dream evidence equals runtime proof |
+| "the docs cited many files but still failed" | assimilation-quality judgment | this page's rules, offending summary page, source mix | that citation breadth has no value |
+| "human reconstruction is still the real join layer" | retrieval and proof synthesis | this page, runbook, proof pages, archive pressure | that no system-owned truth exists anywhere |
+
+If a sentence starts using "well sourced" as a substitute for "correctly
+routed and bounded," this page is being violated.
+
 ## What "actually RAG this time" means in this repo
 
 In this repo, real retrieval does **not** mean:
@@ -174,6 +203,16 @@ That held-out test matters more than page-level elegance.
 If the reader still has to mentally fuse several registers of truth after
 reading the site, then the site has only relocated the reconstruction burden,
 not removed it.
+
+## Strongest honest current answer
+
+If an operator asks, "What is the job of this index?" the shortest defensible
+answer is:
+
+> Its job is to force every important page to recover the real dream from
+> uneven evidence without letting live runtime, intent, planning, exploration,
+> and archive pressure collapse into one calmer voice that sounds complete
+> while still outsourcing the real join work to the reader.
 
 The real system the user wants is only partially visible in any one artifact.
 Some files show the live runtime.

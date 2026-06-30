@@ -65,6 +65,35 @@ and [`../research/archive-pressure-patterns.md`](../research/archive-pressure-pa
 For the repo's instruction-surface hierarchy, read
 [`instruction-surfaces-and-authority.md`](instruction-surfaces-and-authority.md).
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- what problem the repo is actually trying to solve
+- which hidden burdens define success more accurately than generic HA language
+- what the dream requires before it counts as real progress
+
+This page is not authoritative about:
+
+- whether the current runtime already satisfies those requirements
+- whether one future control-plane path has already won
+- whether naming the problem cleanly means the implementation gap is small
+
+This page is the benchmark and requirement frame.
+It is not a claim that the benchmark has been met.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "this is the actual problem, not an adjacent one" | problem reconstruction | this page, dream pages, archive pressure | that the runtime already answers it |
+| "the dream implies these requirements" | benchmark synthesis | this page plus dream and evidence pages | that all requirements mature together |
+| "generic options lists are still too small" | negative-benchmark synthesis | this page, archive-pressure pages, orchestrator evidence | that no partial option can still help |
+| "operator memory is still the hidden control plane" | requirement-pressure judgment | this page, runbook, proof matrix, runtime pages | that nothing meaningful has been externalized yet |
+
+If a sentence starts using a clear requirement frame as if it were proof of
+delivery, it has outrun this page's authority.
+
 ## The actual problem statement
 
 The user is not primarily trying to solve:
@@ -258,6 +287,17 @@ distributed without hidden sacred-node memory.
 That sentence explains why so many superficially relevant answers still fail.
 
 It also explains why the user is not satisfied by generic “options” lists.
+
+## Strongest honest current answer
+
+If someone asks, "What is the shortest honest way to state the repo's goal?"
+the answer is:
+
+> Make several ordinary Docker nodes behave like one request-preserving,
+> operator-readable personal cloud by moving more of the wrong-node, fallback,
+> policy, and state truth out of private operator memory and into explicit,
+> inspectable system-owned behavior, without paying more control-plane tax than
+> the real pain has earned.
 Most option lists quietly assume one of the following is fine:
 
 - one machine is still the real ingress node

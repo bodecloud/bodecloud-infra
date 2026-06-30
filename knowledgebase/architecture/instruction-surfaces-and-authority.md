@@ -40,6 +40,35 @@ It is not narrow.
 
 If the authority map is wrong, every other page drifts.
 
+## What this page is and is not allowed to prove
+
+This page is authoritative about:
+
+- which instruction surfaces carry which class of truth
+- how to route architecture, runtime, and authoring questions to the right file
+- why aligned repo language must not be mistaken for implemented distributed truth
+
+This page is not authoritative about:
+
+- whether the runtime already satisfies the dream those files describe
+- whether the missing middle layer is already implemented or settled
+- whether repeated language across files should be narrated as proof
+
+This page is an authority map.
+It is not a runtime verdict.
+
+## Quick claim router
+
+| If the sentence is really claiming... | Primary class | Strongest anchors | It still must not imply... |
+| --- | --- | --- | --- |
+| "the dream is clearly named in-repo" | repo-native intent | `.github/copilot-instructions.md`, `README.md`, this page | that the runtime already behaves that way |
+| "the current runtime anchor lives here" | live-repo validation surface | `AGENTS.md`, root `docker-compose.yml`, compose fragments | that validation guidance equals architecture closure |
+| "this authoring rule supports honesty" | authoring-discipline reasoning | `.cursorrules`, Compose files, this page | that authoring discipline proves cross-node behavior |
+| "these files are aligned but unequal" | authority synthesis | this page plus the named files | that aligned language is therefore implementation proof |
+
+If an authority sentence starts sounding like a system-completion sentence, it
+has crossed out of this page's jurisdiction.
+
 ## The shortest honest answer
 
 If someone asks:
@@ -245,6 +274,16 @@ That is why the order has to stay explicit:
 This is not just a neat table.
 It is the boundary between honest docs and docs that start sounding like sales
 material.
+
+## Strongest honest current answer
+
+If someone asks, "What is the most important thing this page proves?" the
+shortest defensible answer is:
+
+> The repo now names the dream, the honesty walls, the runtime anchor, and the
+> authoring discipline much more clearly than before, but those are still
+> different truth classes, and treating their agreement as runtime proof would
+> recreate exactly the same polished ambiguity the user keeps rejecting.
 
 It is also a defense against a specific flattening error:
 
