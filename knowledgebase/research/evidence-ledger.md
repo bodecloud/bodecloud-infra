@@ -255,6 +255,50 @@ This repo is especially vulnerable to this because it has:
 Put together, those can sound like completion.
 This ledger exists to stop "sounds like completion" from replacing proof.
 
+## What still does not count as evidence discipline
+
+This page should also make a second failure mode impossible:
+
+the docs acting as though careful caveats by themselves are a substitute for
+real burden transfer.
+
+The following still do not count as strong evidence discipline:
+
+- naming all four evidence classes and then writing a paragraph that quietly
+  fuses them anyway
+- admitting uncertainty while still implying that the runtime is "basically"
+  close
+- writing a polished contradiction summary without saying what artifact would
+  have to exist to resolve the contradiction
+- calling a lane "promising" without naming what hidden burden it would
+  materially remove
+- narrating pressure, plans, and live components together until the reader feels
+  the system is more mature than any inspected drill actually proves
+
+Good evidence discipline does not just sound careful.
+It forces the prose to stop where the strongest surviving artifact stops.
+
+## What every strong page should leave behind
+
+If a page in this knowledgebase is genuinely doing retrieval instead of calm
+summary theater, it should leave behind a recoverable proof packet.
+
+That packet should include:
+
+- the main claim being made
+- the evidence class or classes carrying that claim
+- the exact confidence ceiling
+- the strongest artifact or source anchor
+- the strongest statement of what remains unproven
+- the next artifact that would have to exist for a stronger sentence to become
+  legal
+
+That last item is especially important in `bolabaden-infra`.
+
+This repo does not mostly suffer from missing summaries.
+It suffers when a page reconstructs the wound clearly but does not tell the
+reader what concrete evidence would move the claim one level higher.
+
 ## The five fields every serious page should make recoverable
 
 If a page is behaving like a retrieval surface rather than a polished essay, a

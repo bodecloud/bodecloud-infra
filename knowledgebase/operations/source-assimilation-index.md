@@ -215,6 +215,50 @@ Use this table before writing any page or paragraph that sounds confident.
 If a sentence cannot be routed through this table, it is probably still too
 vague to trust.
 
+## What retrieval still does not count in this repo
+
+Because the user explicitly asked for the docs to "actually RAG this time,"
+this page needs to say what false retrieval still looks like.
+
+These still do not count as good retrieval:
+
+- reading many files but collapsing them into a calmer, smaller question than
+  the user actually asked
+- retrieving architecture intent and then talking as though it were runtime
+  proof
+- retrieving runtime presence and then narrating backend-loss or wrong-node
+  behavior that was never actually shown
+- retrieving archive frustration and then using it as a shortcut to claim the
+  repo is already near closure
+- retrieving many options and technologies without naming which hidden burden
+  each one is supposed to remove
+
+The user is not asking for broad thematic relevance.
+The user is asking for burden-faithful reconstruction.
+
+If retrieval does not preserve the exact wound, it is still a downgrade even if
+it looks comprehensive.
+
+## What a successful retrieval packet should leave behind
+
+In this repo, retrieval should leave behind more than a summary.
+
+A successful packet should let a later reader recover all of these:
+
+- the real question being answered
+- the source classes that were consulted
+- the strongest artifact for the runtime-facing portion of the answer
+- the strongest archive or intent source for the pressure-facing portion
+- the contradiction that was preserved instead of blended away
+- the next missing artifact that would be required to upgrade the claim
+
+That final item matters because otherwise retrieval becomes archival fluency
+without architectural consequence.
+
+The docs should not merely remember what the user wants.
+They should also remember what proof would have to exist before stronger claims
+about that dream become honest.
+
 ## Retrieval packs for the most common real questions
 
 Broad archive scans produce volume faster than understanding.
