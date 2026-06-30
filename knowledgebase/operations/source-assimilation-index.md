@@ -53,6 +53,17 @@ repo.
 The docs can become broader, denser, calmer, and more cross-linked while still
 failing to reconstruct the actual accusation driving the project.
 
+That is why this page has to stay suspicious of breadth itself.
+
+Breadth is not bad.
+But in this repo, breadth is often the exact place where the real wound starts
+getting diluted:
+
+- more adjacent tools
+- more surrounding context
+- more comparative nuance
+- less pressure on the one burden the user is actually screaming about
+
 ## The dream retrieval has to protect
 
 The user is not asking for:
@@ -101,6 +112,20 @@ In `bolabaden-infra`, that inference fails constantly unless the retrieval
 still knows exactly which truth class it is carrying and exactly which part of
 the user's complaint it is trying not to soften.
 
+That last clause should stay central.
+
+Actual assimilation here is not:
+
+- "we saw the ecosystem"
+- "we grouped the options"
+- "we covered the topic"
+
+It is:
+
+- we preserved the accusation
+- we did not let runtime, intent, plan, and archive trade confidence illegally
+- we kept naming what still stayed operator-owned
+
 ## Strongest honest current answer
 
 The repository has four major evidence classes:
@@ -130,6 +155,13 @@ They are asking for evidence custody:
 That custody question is more important than generic completeness.
 The repo is already full enough that undifferentiated completeness starts
 becoming another way to launder weak claims through volume.
+
+This is one of the hardest habits the docs need to keep.
+
+A page can cite more, quote more, link more, and still be less faithful if the
+extra material makes it easier to stop asking:
+
+> what exact truth moved out of operator memory, and what exact truth did not?
 
 ## What still does not count as real retrieval here
 
@@ -195,6 +227,15 @@ It has to preserve disagreement between truth classes on purpose.
 Smoothness is cheap.
 Truth custody is the scarce part.
 
+And smoothness is especially dangerous because it often feels like progress.
+
+The page reads better.
+The reader feels more oriented.
+The docs look more integrated.
+
+Meanwhile the repo may have quietly lost the rough edges that were the only
+things preventing fake closure.
+
 ## Source class 2: live root runtime surfaces
 
 These are the strongest sources for:
@@ -244,6 +285,13 @@ That three-line rule should govern more of the site than it currently feels
 like it does.
 Many bad summaries fail precisely because they let presence borrow emotional
 weight from trust language it has not yet earned.
+
+That borrowing move is one of the main reasons the user keeps saying "actually
+RAG this time."
+
+The complaint is not just that too little was read.
+It is that what was read got arranged in a way that let the answer feel more
+resolved than the strongest source class justified.
 
 ## Source class 3: planning and promotion surfaces
 

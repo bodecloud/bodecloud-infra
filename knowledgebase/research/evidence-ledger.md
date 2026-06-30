@@ -23,6 +23,16 @@ classification alone can start sounding like maturity.
 This page has to keep reminding the reader that better evidence grammar is not
 the same thing as one more important truth actually leaving operator memory.
 
+That line matters because this repo is now sophisticated enough to fake
+progress with classification itself.
+
+The danger is:
+
+- the sources are separated correctly
+- the caveats are worded responsibly
+- the confidence levels sound disciplined
+- the reader still walks away feeling more closure than the runtime earned
+
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
@@ -64,6 +74,17 @@ And that fusion is not just an intellectual error.
 It is the mechanism by which the docs start becoming emotionally more
 satisfying than the runtime has actually earned.
 
+That is why this ledger has to stay a little hostile to elegance.
+
+A very elegant synthesis can still be the wrong artifact if it lets:
+
+- archive pressure donate emotional force
+- planning docs donate seriousness
+- runtime presence donate concreteness
+- instruction files donate direction
+
+and then quietly turns that blended feeling into pseudo-proof
+
 ## The hidden mistake this ledger is trying to stop
 
 Most weak summaries in this repo are not wrong because they invented facts.
@@ -84,6 +105,19 @@ That illegality should stay a little aggressive.
 The repo is no longer mainly threatened by ignorance.
 It is threatened by respectable-seeming adjacency becoming socially accepted as
 if it were proof.
+
+This page should therefore make a reader slightly less comfortable, not more.
+
+If the ledger is functioning correctly, it should keep interrupting the
+instinct to say:
+
+- "close enough"
+- "basically there"
+- "the architecture is clear"
+- "the rest is mostly automation"
+
+Those are exactly the kinds of sentences that let the docs mature faster than
+the underlying truth moved.
 
 ## The four evidence classes
 
@@ -132,6 +166,16 @@ That two-line rule should feel harsher than it looks.
 Presence is exactly where a serious-looking stack starts trying to borrow
 trust from components that have not yet passed the bad-day test.
 
+And once presence starts borrowing trust, the repo becomes vulnerable to one of
+its oldest wounds:
+
+- a component exists
+- therefore a capability starts sounding adult
+- therefore the operator burden sounds partially removed
+- therefore the remaining gap starts being narrated as polish
+
+This ledger exists to break that chain.
+
 ### Class 2: architecture-intent and honesty evidence
 
 Use for claims about what the repo explicitly wants to become and what honesty
@@ -169,6 +213,11 @@ already unusually clear.
 The clearer the dream gets, the easier it becomes for weak summaries to sound
 like the runtime is "basically on its way there" when the hard proof still has
 not moved.
+
+That is one of the paradoxes this page has to preserve:
+
+the repo's clarity about the dream is a strength, but it is also one of the
+main ways the docs can accidentally overpay confidence.
 
 ### Class 3: planning and promotion evidence
 
@@ -209,6 +258,15 @@ voice in the repo.
 Without a page like this, the future starts impersonating the present while
 still sounding perfectly responsible.
 
+And "perfectly responsible" is not a defense here.
+
+The docs can become more balanced, more precise, and more roadmap-literate
+while still performing the same old softness:
+
+- the missing truth is named
+- the repair path is named
+- the surviving burden is no longer named hard enough
+
 ### Class 4: archive-pressure evidence
 
 Use for claims about what the user keeps rejecting, what pain keeps recurring,
@@ -247,6 +305,15 @@ This is one of the most important retrieval protections in the site.
 The archive can tell us exactly why the user feels insulted by adjacent
 answers.
 It cannot tell us that the current stack has finally stopped being one.
+
+That boundary matters because archive-rich writing can easily start sounding
+like deep understanding.
+
+Sometimes it is.
+Sometimes it is just a more literate version of the same miss:
+
+- the user's accusation is reconstructed beautifully
+- the current burden location is still not audited tightly enough
 
 ## Claim routing matrix
 

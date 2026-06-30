@@ -40,6 +40,15 @@ If the prose becomes too calm, too explanatory, or too recommendation-shaped,
 the page will start sounding like it understands the frustration while still
 quietly shrinking it into a normal architecture support question.
 
+That is a real danger because operator Q and A is one of the genres most
+likely to reward tone over fidelity.
+
+The answer can become kinder, clearer, more actionable, and more socially
+acceptable while still leaving the same hidden question untouched:
+
+> what exact truth is still cashing out into the operator at the moment the
+> system should have carried it itself?
+
 ## Strongest honest current answer
 
 The repo is not mainly suffering from lack of tools.
@@ -65,6 +74,16 @@ remembered service-class caveats.
 What feels absent is not ingenuity.
 It is the moment where the system becomes adult enough to stop turning back
 toward the operator for one more private completion step.
+
+That sentence should not be softened into "better automation."
+
+The user is not asking for convenience alone.
+They are asking for one more humiliating dependency to stop being private:
+
+- remembered placement
+- remembered peer safety
+- remembered fallback meaning
+- remembered stateful caveats
 
 ## What this page is and is not allowed to prove
 
@@ -151,6 +170,16 @@ it.
 
 And if it only names the pattern without naming the surviving burden, it is
 still too easy on itself.
+
+That is the line this page has to keep defending.
+
+A smart answer that says "yes, many tools stop one layer early" is still not
+good enough if it does not also say:
+
+- which layer
+- which truth
+- which surviving burden
+- which next artifact would actually move it
 
 That is also why operator Q and A is such a dangerous genre here.
 
