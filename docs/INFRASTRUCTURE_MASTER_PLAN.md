@@ -44,6 +44,50 @@ TOC convention: top-level entries use numbered list items, nested entries use bu
 
 ## 1. Executive Summary
 
+## What this page is and is not allowed to prove
+
+This legacy planning page is allowed to:
+
+- preserve the full pressure map behind the repo's multi-node no-Swarm dream
+- describe which hidden burdens each proposed module is trying to remove
+- show how the repo was already converging on distributed truth as the real
+  missing layer
+- remain emotionally accurate about why the user is dissatisfied with fake
+  options
+
+This page is not allowed to:
+
+- imply the current tracked root runtime already owns the planned truth
+  surfaces
+- let coherence, completeness, or sequence masquerade as live capability
+- describe wrong-node recovery, peer forwarding, or service failover as if
+  they are already generally proven
+- turn the user's wound into a calmer generic roadmap about "modernizing the
+  stack"
+
+## What still does not count as master-plan progress here
+
+The following still do not count as meaningful completion signals:
+
+- a module being named convincingly
+- a deploy or sync flow sounding operationally plausible
+- a future control surface looking cleaner than the current one
+- a roadmap feeling emotionally relieving to read
+- a plan making the repo sound more adult, more clustered, or more
+  orchestrated
+
+Those are signs that the repo is thinking harder.
+They are not proof that the wrong-node humiliation, hidden placement memory,
+or fake failover burden have actually moved.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that this file remains one of the best
+legacy pressure maps in the repo. It clearly identifies the missing truth
+surfaces the user actually cares about, but it is still a planning artifact.
+It does not prove that the priority implementation centered on the root
+`docker-compose.yml` already owns those truths directly.
+
 Bolabaden is a multi-node Docker infrastructure whose **intended direction** is
 to let multiple Compose-managed VPS nodes behave more like one resilient
 personal cloud without defaulting to Kubernetes or Docker Swarm.

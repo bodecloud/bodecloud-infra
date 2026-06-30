@@ -45,6 +45,47 @@ to describe the exact thing the user is still asking for.
 If this file is reduced to a calmer survey of options, it starts preserving the
 same nouns while losing the actual question.
 
+## What this page is and is not allowed to prove
+
+This legacy research page is allowed to:
+
+- show that the orchestration search is really a search for the smallest
+  honest owner of missing distributed truth
+- preserve the user's refusal of fake options and premature worldview capture
+- compare candidate families by the burden they would remove and the tax they
+  would charge
+
+This page is not allowed to:
+
+- collapse into a generic product comparison
+- imply that any candidate family has already earned promotion in the tracked
+  root runtime
+- flatten the user's frustration into ordinary platform indecision
+- let "lighter than Kubernetes" or "cleaner than Compose sprawl" stand in for
+  burden ownership
+
+## What still does not count as orchestration research here
+
+The following still do not count as useful orchestration conclusions in this
+repo:
+
+- generic feature matrices
+- benchmark or popularity rankings
+- a platform sounding mature or fashionable
+- templated static glue being described as shared truth
+- centralization alone being treated as proof of progress
+
+This research only stays honest when each candidate is tied to the exact
+hidden burden it would remove and the worldview tax it would still charge.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that this page captures why the repo
+keeps searching for a missing middle between raw Compose pain and total
+orchestrator capture. It does not prove that the search is resolved or that
+the current priority implementation has already promoted one of those
+candidate layers into authoritative runtime ownership.
+
 ## The Pressure That Keeps Producing Orchestration Research
 
 The repo keeps returning to orchestration questions because plain Compose,

@@ -12,6 +12,45 @@ This document describes the approach implemented in:
 - `scripts/osvc_ingress_sync.py` (generates Traefik file-provider config)
 - `scripts/osvc_ingress_sync.sh` (wrapper that loads `.env`)
 
+## What this page is and is not allowed to prove
+
+This legacy page is allowed to:
+
+- explain the exact OpenSVC ingress bet this branch is making
+- clarify how generated Traefik fallback config is supposed to reduce
+  hand-written node/service folklore
+- distinguish runtime-derived routing data from static per-node route files
+
+This page is not allowed to:
+
+- claim universal wrong-node success
+- imply OpenSVC already governs the live root runtime
+- treat generated fallback YAML as proof that peer forwarding survives real
+  backend loss
+- blur the difference between HTTP route generation and stateful or TCP
+  correctness
+
+## What still does not count as OpenSVC ingress proof here
+
+The following still do not count as real closure:
+
+- a fallback file being generated successfully
+- peer hostnames appearing in that file
+- one successful happy-path handoff
+- local container labels being discoverable
+- OpenSVC membership being queryable
+
+Generated config can be strategically interesting and still leave the deepest
+truths unowned.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that this page describes a serious
+attempt to move fallback routing out of handwritten folklore and toward
+runtime-derived config. That is real progress. It is still not proof that the
+priority Compose-first runtime already preserves wrong-node requests with full
+middleware, auth, and backend correctness.
+
 ---
 
 ### What this enables
@@ -102,4 +141,3 @@ To get:
 That last point is the real honesty wall:
 
 HTTP failover experimentation is not proof of stateful HA.
-
