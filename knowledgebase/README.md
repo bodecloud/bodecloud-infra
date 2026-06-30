@@ -115,6 +115,62 @@ without first understanding the user's hidden negative benchmark, they will
 almost always flatten the problem into "wants better HA" or "needs a cluster."
 Those readings are too weak.
 
+## Fast question-first routes
+
+If you are not trying to read the whole site, do not browse by folder.
+Browse by the actual question you need answered.
+
+### "What is the dream, really?"
+
+Read:
+
+- [`research/user-intent-and-dream.md`](research/user-intent-and-dream.md)
+- [`architecture/operator-contract.md`](architecture/operator-contract.md)
+
+### "What does the root runtime actually prove?"
+
+Read:
+
+- [`architecture/current-compose-runtime.md`](architecture/current-compose-runtime.md)
+- [`architecture/compose-fragment-map.md`](architecture/compose-fragment-map.md)
+
+### "Why is wrong-node entry still the humiliating threshold?"
+
+Read:
+
+- [`architecture/request-path-and-failure-walkthrough.md`](architecture/request-path-and-failure-walkthrough.md)
+- [`research/ingress-and-failover-evidence.md`](research/ingress-and-failover-evidence.md)
+
+### "Why do most apparent options still feel fake?"
+
+Read:
+
+- [`architecture/missing-middle-layer.md`](architecture/missing-middle-layer.md)
+- [`research/orchestrator-tradeoffs-evidence.md`](research/orchestrator-tradeoffs-evidence.md)
+- [`research/orchestration-research-2026.md`](research/orchestration-research-2026.md)
+
+### "What is still missing even if the proxy story gets better?"
+
+Read:
+
+- [`architecture/stateful-ha-and-data.md`](architecture/stateful-ha-and-data.md)
+- [`research/stateful-ha-evidence.md`](research/stateful-ha-evidence.md)
+
+## Anti-cheat reading rules
+
+Do not treat these as equivalent:
+
+- route reachability and request preservation
+- multiple public nodes and no sacred node
+- a rendered stack and a distributed truth layer
+- a clean future plan and a live ownership surface
+- a stronger-sounding platform and a genuinely different burden transfer
+
+This README should make one thing obvious before any contributor goes deeper:
+
+if a page answers a calmer neighboring question than the one the user is
+actually asking, it may still be useful, but it is not sufficient.
+
 ## What this rewrite is trying to fix
 
 Earlier docs were not mainly too short.

@@ -149,6 +149,28 @@ discipline:
 - edit [`AGENTS.md`](AGENTS.md)
 - edit [`operations/source-assimilation-index.md`](operations/source-assimilation-index.md)
 
+## Retrieval workflow for contributors
+
+Before writing or revising a page, stop and fill in this mental checklist:
+
+1. What is the real question this page is supposed to answer?
+2. What smaller neighboring question would be easier to answer but would miss
+   the user's real frustration?
+3. Which truth layer actually supports the answer?
+4. Which evidence only supports pressure, comparison, or future direction?
+5. What would count as overclaiming on this page?
+
+Examples of the wrong substitution:
+
+- "What is the best orchestrator?" instead of "Which layer would own the
+  specific missing truth without charging too much worldview tax?"
+- "Can traffic hit more than one node?" instead of "Has the wrong healthy node
+  stopped being semantically wrong?"
+- "Can the service restart?" instead of "Did truth stop living in one brittle
+  place?"
+
+If you cannot answer the checklist cleanly, do not start drafting yet.
+
 ## Evidence expectations
 
 Use the smallest honest claim your evidence supports.
@@ -168,6 +190,14 @@ Also apply this test:
   the right answer during or after the fact
 
 When in doubt, narrow the claim rather than widening the evidence.
+
+Also use this test:
+
+- if the page sounds more mature after your rewrite, did the evidence get
+  stronger, or did the narration merely get smoother?
+
+In this repo, smoother narration without stronger evidence is usually a
+regression.
 
 ## Writing rules
 

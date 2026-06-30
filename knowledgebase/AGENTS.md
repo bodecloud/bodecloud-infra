@@ -87,6 +87,35 @@ Also do not let them collapse into one voice.
 In this repo, a calm unified voice is often a warning sign that one of the
 truth layers has been allowed to impersonate the others.
 
+## Retrieval workflow before writing
+
+Before editing a page, do this explicitly:
+
+1. name the real question the page is supposed to answer
+2. name the neighboring smaller question it might accidentally answer instead
+3. identify which truth layer is allowed to carry the answer
+4. identify which truth layers can only supply pressure, context, or contrast
+5. state what the page must not silently upgrade into a completion claim
+
+If you skip that workflow, the most likely failure is not a factual mistake.
+It is a truthful-sounding narrowing of the user's actual demand.
+
+That kind of narrowing is one of the main documentation regressions in this
+repo.
+
+## Assimilation standard
+
+Do not merely summarize what several files say.
+Reconstruct:
+
+- what problem each file thinks it is solving
+- which hidden burden it is trying to relocate
+- which burden it still quietly leaves operator-owned
+- which contradictions are evidence rather than clutter
+
+This directory should be handled more like retrieval and reconstruction than
+like ordinary explanatory writing.
+
 ## Pages with the highest leverage
 
 When in doubt, prefer improving these pages:

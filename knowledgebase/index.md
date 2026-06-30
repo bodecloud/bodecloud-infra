@@ -81,6 +81,68 @@ Start here if you want:
 - the hard proof boundaries:
   [Proof Matrix and Drill Catalog](operations/proof-matrix-and-drills.md)
 
+## Read by question, not by topic
+
+This site is easier to misuse if it is read like a normal taxonomy.
+
+Do not start by asking:
+
+- which orchestrator page looks most relevant
+- which proxy page sounds closest
+- which HA page sounds most complete
+
+Start by asking which hard question you are actually trying to answer.
+
+Use this map:
+
+- "What is the user really trying to build, underneath all the tool talk?"
+  Start with [User Intent and Dream](research/user-intent-and-dream.md) and
+  [Operator Contract and Success Criteria](architecture/operator-contract.md).
+- "What does the priority runtime actually prove right now?"
+  Start with [Current Compose Runtime](architecture/current-compose-runtime.md)
+  and [Compose Fragment Map](architecture/compose-fragment-map.md).
+- "Why does wrong-node traffic still feel humiliating?"
+  Start with [Request Path and Failure Walkthrough](architecture/request-path-and-failure-walkthrough.md)
+  and [Ingress and Failover Evidence](research/ingress-and-failover-evidence.md).
+- "Why are multi-node and anti-SPOF still not the same thing here?"
+  Start with [Failure Model and Maturity](architecture/failure-model-and-maturity.md)
+  and [Stateful HA and Data](architecture/stateful-ha-and-data.md).
+- "Which future paths are real options versus renamed burden?"
+  Start with [Orchestrator and Control-Plane Tradeoffs Evidence](research/orchestrator-tradeoffs-evidence.md),
+  [Orchestration Research 2026](research/orchestration-research-2026.md), and
+  [Missing Middle Layer](architecture/missing-middle-layer.md).
+
+## Most dangerous misreads
+
+This site should actively block these conclusions:
+
+- "There are many pages now, so the runtime must already be close to settled."
+- "Cloudflare plus Traefik plus healthchecks probably means failover is mostly handled."
+- "A named future agent or registry is basically present because it is described clearly."
+- "A path that sounds more enterprise is probably the real answer."
+- "The docs are now broad enough that the remaining gap must just be implementation effort."
+
+If a reading path leaves those conclusions feeling more natural, it is the
+wrong path for this repo.
+
+## Site retrieval discipline
+
+The whole site is built around a simple retrieval rule:
+
+1. identify the real question
+2. identify the truth register that can answer it
+3. only then read across neighboring pages
+
+The truth registers are:
+
+- live runtime truth
+- repo-native intent truth
+- planning and promotion truth
+- archive-pressure truth
+
+The site becomes misleading when a reader starts with step 3 and skips the
+other two.
+
 ## How to read this site without being fooled
 
 This site is only useful if the reader keeps several truth registers separate
