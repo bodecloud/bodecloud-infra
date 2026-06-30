@@ -51,6 +51,15 @@ It should not be used as a substitute for route-specific drills.
 If a routing sentence starts sounding like a passed failover drill, it has
 left this page's authority.
 
+## Strongest honest current answer
+
+The strongest honest current answer is that the repo has a sharply defined
+routing problem and some real edge machinery, but that is still weaker than
+proven wrong-node request preservation. The site can now explain why first-hop
+plurality, local proxy health, peer eligibility, route persistence, and policy
+continuity must stay separate. It still cannot honestly pretend those layers
+have all already converged into generic failover truth.
+
 ## What the user is actually rebelling against
 
 The repo archive keeps circling the same frustration from different angles:

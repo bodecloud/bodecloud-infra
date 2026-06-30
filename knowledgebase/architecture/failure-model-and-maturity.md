@@ -88,6 +88,15 @@ level or topology-level proof.
 If a maturity sentence starts sounding like a global resilience verdict, this
 page is being overread.
 
+## Strongest honest current answer
+
+The strongest honest current answer is that the repo does not mature as one
+platform. It matures as several uneven truth lanes that can easily be confused
+for one another. HTTP ingress, wrong-node recovery, peer-selection truth,
+operator reconstruction burden, and stateful correctness are progressing at
+different rates. Any maturity story that compresses them into one comfort level
+is already flatter than the evidence.
+
 ## What this page is really measuring
 
 This is not a generic infrastructure maturity matrix.

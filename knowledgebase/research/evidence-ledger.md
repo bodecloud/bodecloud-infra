@@ -56,6 +56,36 @@ This ledger is therefore not an appendix.
 It is one of the main devices stopping the site from drifting back into
 "interesting architecture summary" mode.
 
+## What this page is and is not allowed to prove
+
+This page is allowed to:
+
+- define the evidence classes the rest of the knowledgebase must respect
+- route major claim types to the right authority surfaces
+- state where confidence ceilings stop even when the broader story sounds
+  persuasive
+- preserve contradiction and adjacency gaps instead of smoothing them away
+
+This page is not allowed to:
+
+- serve as direct runtime proof for a specific route, workload, or drill
+- imply that a well-governed claim is already a fulfilled claim
+- merge archive pressure, architecture intent, runtime artifacts, and planning
+  text into one present-tense capability story
+- substitute confidence discipline for implementation maturity
+
+## Quick claim router
+
+If the question is:
+
+- "What kind of evidence is this claim actually using?" this page is a primary
+  answer.
+- "Can a page say that more strongly yet?" this page helps answer that.
+- "Does the existence of several supporting sources prove the stronger claim?"
+  often no, and this page is here to explain why.
+- "Is this the page that proves a concrete route works?" no. Use the narrower
+  evidence and drill pages for that.
+
 It also protects against a second failure mode:
 the docs correctly preserve the nouns, the plans, and the broad direction, but
 they quietly stop preserving the user's harsher benchmark for what would count
@@ -179,6 +209,16 @@ This is one reason the ledger has to stay a little repetitive.
 Repeatedly restating where proof stops is not verbosity here.
 It is one of the only reliable ways to keep a fast-moving, archive-heavy repo
 from becoming retrospectively flatter than it really is.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that the knowledgebase now has enough
+material to sound convincing almost everywhere, which makes evidence discipline
+more important, not less. The real threat is no longer missing nouns or missing
+pages. It is adjacency masquerading as proof: runtime plus intent plus archive
+plus planning getting emotionally interpreted as present capability. This page
+exists to keep those joins explicit and to stop the docs from becoming more
+coherent by becoming less faithful.
 
 ## How to use this ledger
 

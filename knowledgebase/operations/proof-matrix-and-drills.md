@@ -99,6 +99,15 @@ It is not the proof result itself.
 If a sentence starts using a proof class as if it were a stack-wide verdict, it
 has already exceeded this page's authority.
 
+## Strongest honest current answer
+
+The strongest honest current answer is that this repo needs proof discipline
+more than it needs more confident language. A passed drill only matters if it
+makes one specific fragment of the dream more true and keeps the next
+unclosed ceiling visible. The real danger is not missing tests. It is green or
+serious-looking evidence being silently promoted into broader architecture
+closure than it actually earned.
+
 ## What a good proof page has to do here
 
 A normal checklist asks whether a feature works.
