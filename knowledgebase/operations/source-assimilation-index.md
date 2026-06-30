@@ -55,6 +55,10 @@ failing to reconstruct the actual accusation driving the project.
 
 That is why this page has to stay suspicious of breadth itself.
 
+This repo is now deep enough that "I read a lot" can become camouflage.
+The answer can look exhaustive while still cashing out into the wrong
+question.
+
 Breadth is not bad.
 But in this repo, breadth is often the exact place where the real wound starts
 getting diluted:
@@ -137,6 +141,11 @@ It is:
 - we did not let runtime, intent, plan, and archive trade confidence illegally
 - we kept naming what still stayed operator-owned
 
+That last clause is the checksum.
+If a page becomes more cross-linked, more source-aware, and more
+ecosystem-rich while becoming less able to name the surviving operator-owned
+truth, the page got worse.
+
 ## Strongest honest current answer
 
 The repository has four major evidence classes:
@@ -207,6 +216,18 @@ If retrieval gets better at architecture summary while getting worse at burden
 reconstruction, the docs have become more impressive and less faithful at the
 same time.
 
+That conversion is also the documentation version of fake relief:
+
+- many relevant nouns
+- many adjacent options
+- many serious-looking comparisons
+- one less clear sentence about the hidden burden still left behind
+
+This is why the user keeps demanding "actually RAG this time."
+The complaint is not just "please read more."
+It is "please stop spending the extra reading budget on everything except the
+exact burden I keep pointing at."
+
 ## The private burden question retrieval must preserve
 
 Every serious retrieval pass in this repo should leave one question intact all
@@ -234,6 +255,12 @@ That is one of the most important anti-slop rules in this knowledgebase.
 This repo is already full of adjacent context.
 The hard part is keeping that context from laundering the decisive burden into a
 smaller neighboring question.
+
+The more material gets assimilated, the more that laundering risk rises.
+This page should therefore make one rule feel normal:
+
+> more source coverage only counts as progress if the exact surviving
+> operator-owned burden becomes easier to state, not harder.
 
 ## Source class 1: architecture-intent and honesty surfaces
 

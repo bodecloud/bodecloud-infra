@@ -95,6 +95,11 @@ This repo cannot.
 Here, a page fails if it makes the system sound more coherent than the burden
 transfer really is.
 
+That is the main doorway discipline contributors have to keep in mind.
+The repo no longer mainly risks underselling itself.
+It risks explaining itself so well that the remaining wound starts sounding
+like cleanup instead of the still-central unsolved fact.
+
 ## The real standard a reader needs to carry
 
 The practical test for almost every page in this site is:
@@ -119,6 +124,14 @@ A documentation pass is not strong here because it:
 It is strong only if it makes the repo harder to overread and easier to map to
 the exact burden the user is trying to eliminate.
 
+That burden should keep being named in repo-facing prose, not treated as a
+detail already handled elsewhere:
+
+- wrong-node truth custody
+- peer eligibility custody
+- fallback meaning custody
+- stateful honesty custody
+
 That means the doorway should leave the reader with one uncomfortable sentence
 still active in their head:
 
@@ -142,6 +155,13 @@ This page is not allowed to prove:
 
 This is a doorway contract, not a runtime proof page.
 
+It is also not allowed to become a contributor-comfort page.
+Comfort is cheap in this repo.
+The user already has plenty of calm surrounding explanations available
+elsewhere.
+The missing thing is a doorway that keeps one exact discomfort alive long
+enough for the rest of the site to matter.
+
 ## What still does not count as a useful repo-facing doorway
 
 This README should also say more explicitly what fake helpfulness still looks
@@ -163,6 +183,15 @@ reader even reaches the deeper pages.
 
 If this file helps someone browse but still leaves them with a smaller, calmer,
 or more product-shaped question, then it is still too weak.
+
+That includes leaving them with:
+
+- "this is mainly a Compose versus orchestrator repo"
+- "this is mainly a multi-node homelab design repo"
+- "this is mainly a serious edge-stack repo with some HA gaps"
+
+All three are adjacent.
+None is the full question.
 
 That means the doorway pages have to do more than orient.
 They have to keep a reader from leaving with the wrong calm conclusion.
@@ -239,6 +268,11 @@ If someone starts from:
 without first understanding the user's hidden negative benchmark, they will
 almost always flatten the problem into "wants better HA" or "needs a cluster."
 Those readings are too weak.
+
+They are too weak because they let the reader acquire implementation detail
+before they acquire the user's held-out negative benchmark:
+
+> does the system still need a human to privately finish the request story?
 
 There is also a second-order reading failure this sequence is trying to stop:
 

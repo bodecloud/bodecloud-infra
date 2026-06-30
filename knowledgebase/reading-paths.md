@@ -26,6 +26,11 @@ This page therefore has one job:
 help a reader ask the right question first, instead of wandering through a
 folder tree until the repo starts sounding more solved than it really is.
 
+That "sounds more solved" clause is not a side warning.
+It is one of the main failure modes this page exists to fight.
+The site is now broad enough that a reader can become sincerely well-oriented
+and still answer a smaller question than the one the user is actually asking.
+
 That matters even more now that the knowledgebase is bigger.
 Large sites create a new failure mode:
 the reader can hit enough adjacent correct pages to feel oriented while still
@@ -102,6 +107,12 @@ But:
 - did the route preserve the exact remaining insult the user is still reacting
   to?
 
+That insult should keep being stated plainly:
+
+- a healthy wrong node still risks not knowing enough
+- a fallback story still risks collapsing back into the operator
+- a serious stack still risks requiring private topology completion
+
 That word "insult" is not decorative.
 It names the social failure the user keeps reacting to:
 serious technology is present, but the real control plane still has to be a
@@ -137,6 +148,11 @@ The knowledgebase can become more coherent faster than the platform becomes
 more self-owning.
 This page exists partly to keep readers from mistaking that coherence for
 burden transfer.
+
+That distinction should remain active in every route summary:
+
+- "better explanation" is one score
+- "less operator-owned truth" is a different score
 
 That warning matters even more now that the site is broader.
 
@@ -179,6 +195,11 @@ Add one more failed outcome:
 - "I understand the option space better, but I can no longer say what exact
   private burden still survives"
 
+And one more:
+
+- "I understand the site better, but the user's actual accusation feels less
+  sharp than when I started"
+
 ## What disciplined retrieval has to preserve
 
 A good reading route in this repo should not merely get you to relevant pages.
@@ -200,6 +221,11 @@ This is why "actually RAG this time" matters so much in this repo.
 The failure mode is not only missing documents.
 It is retrieving the right documents, then compressing them into a summary that
 is smoother, safer, and less faithful than the source pressure really was.
+
+That smoothing pressure gets stronger as the site gets larger.
+Large knowledgebases reward synthesis.
+This repo needs synthesis that preserves contradiction, custody, and the
+surviving hidden burden instead of ironing them out.
 
 That is why retrieval discipline matters so much here.
 The site is no longer small enough that "read around until it clicks" is safe.
@@ -250,6 +276,9 @@ then it is still incomplete.
 
 The enemy here is not only irrelevance.
 It is relevance that still shrinks the problem.
+
+That is why question-first retrieval is not just a navigation preference here.
+It is the only reliable way to stop the stack from hijacking the question.
 
 That is why the routes in this page are intentionally question-first rather
 than stack-first.

@@ -71,6 +71,11 @@ The danger is a quieter drift:
 
 This page exists to stop that drift.
 
+It also exists because this repo is now coherent enough that agreement itself
+can become a trap.
+Several aligned files can make the project sound settled before the runtime
+has actually earned the stronger sentence the files are all circling.
+
 It also exists because the user keeps asking variants of the same question as
 a stress test:
 
@@ -102,6 +107,11 @@ This page is not authoritative about:
 This is an authority map.
 It is not a completion report.
 
+It is also not allowed to become a repo-coherence celebration page.
+Coherence is useful here.
+Coherence is also one of the easiest ways to smuggle in confidence the live
+system has not paid for yet.
+
 ## Strongest honest current answer
 
 The shortest honest answer is:
@@ -126,6 +136,17 @@ Several files saying adjacent true things does not upgrade the runtime into a
 stronger state.
 It only means the repo has become more explicit about what it wants and what it
 refuses to fake.
+
+That boundary should stay almost annoyingly explicit because this repo now has
+enough aligned language to create counterfeit maturity:
+
+- the dream is clear
+- the warnings are clear
+- the constraints are clear
+- therefore the runtime must be close
+
+No.
+Those are different forms of clarity, not the same thing as runtime closure.
 
 That sentence is one of the most important authority boundaries in the whole
 knowledgebase.
@@ -158,6 +179,9 @@ The danger is that they agree enough for a reader to stop noticing which file
 is carrying dream truth, which file is carrying honesty pressure, and which
 file is still dragging the story back onto the live runtime.
 
+That is the authority-mapping version of the same hidden burden problem:
+truth custody gets socially smoothed over before it gets technically moved.
+
 ## What still does not count as understanding authority here
 
 This page also needs to block a softer misread.
@@ -170,6 +194,8 @@ surfaces correctly:
 - using repeated wording as if it were runtime corroboration
 - treating stricter style rules as distributed-systems maturity evidence
 - treating implementation-anchor files as if they were the architecture thesis
+- treating archive-restored accusation as if it were merely emotional garnish
+  instead of a corrective against polite architectural reduction
 
 Those are exactly the moves that let the docs become smoother and less honest
 at the same time.
@@ -225,6 +251,9 @@ That test should be treated literally.
 If someone says ".cursorrules explains the distributed architecture" or
 "AGENTS.md is where the anti-SPOF dream really lives," the repo has already
 started flattening authority across the wrong surfaces.
+
+And if someone says "they all basically say the same thing," that is usually a
+sign the custody lines have already been blurred.
 
 ## What a real authority-mapping packet would have to contain
 

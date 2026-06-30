@@ -85,6 +85,11 @@ If this page ever becomes the place where the repo starts sounding more solved
 than it really is, then the nicest-looking page in the site will also be the
 most misleading one.
 
+That is the front-page danger in this repo.
+The stack is already serious enough that a polished overview can start
+borrowing closure from sophistication alone.
+This page has to keep breaking that reflex.
+
 ## Strongest honest current answer
 
 `bolabaden-infra` already contains a serious Compose-first platform:
@@ -115,6 +120,13 @@ The stack is real.
 The missing truth-owning middle layer is still incomplete.
 
 That three-part sentence has to stay intact.
+
+If one clause disappears, the page becomes misleading in a different way:
+
+- remove the dream and the repo sounds like generic self-hosting
+- remove the stack and the repo sounds thinner than it is
+- remove the missing middle and the repo sounds closer to relief than the
+  evidence allows
 
 In practical terms, the user is trying to stop this scene from being normal:
 
@@ -156,6 +168,10 @@ Most weak summaries in this repo fail by dropping one clause:
 
 This front page should keep all three clauses visible at once.
 
+That is also why this page cannot behave like a normal polished landing page.
+Normal landing pages compress tension.
+This one has to preserve it.
+
 ## What still does not count as a good front door for this repo
 
 This page should also say more bluntly what fake orientation still looks like.
@@ -180,6 +196,12 @@ the evidence allows, then it is still part of the problem.
 That danger is not hypothetical.
 Polished ambiguity is one of the easiest ways infrastructure docs become
 misleading without ever containing a single obviously false sentence.
+
+That sentence should be read almost as a warning label for the whole site:
+
+- broader is not automatically more faithful
+- cleaner is not automatically more honest
+- better organized is not automatically closer to the user's dream
 
 A front page can stay technically accurate while still producing the wrong
 emotional conclusion:
@@ -244,6 +266,12 @@ The repo only gets to call itself closer to the dream when that scene becomes
 more system-owned and less operator-owned.
 
 That is the real maturity test here.
+
+The site should keep forcing that ownership question even when the answer is
+uncomfortable:
+
+> what exact truth stopped living in one person's head, and what exact truth
+> still has not?
 
 Not:
 
