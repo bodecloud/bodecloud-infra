@@ -1,36 +1,33 @@
 # Operator Questions and Honest Answers
 
-This page turns the recurring operator questions in the repo into burden-faithful
-answers.
+This page exists because the repo is not mainly short on components.
+It is short on answers that still feel true after the request lands on the
+wrong node and the operator has to decide whether the system actually knows
+what to do.
 
-It does not exist to recommend products politely.
-It exists to answer the sharper version of the question:
-
-> which truth is still privately owned at the exact moment the platform is
-> supposed to act coherent?
-
-That is the standard that keeps this page useful.
+That is the standard for every answer here.
 
 ## What this page is and is not allowed to prove
 
 This page is allowed to:
 
-- restate recurring questions in the sharper form the repo actually needs
-- explain why common answers still stop one layer too early
-- tie answers to current repo evidence
-- say what artifact or drill would be required before a stronger answer
-  becomes legal
+- restate recurring operator questions in the sharper form the repo actually
+  needs
+- answer those questions using current repo evidence
+- say why common nearby answers still stop one layer too early
+- name the next artifact or drill required before a stronger answer becomes
+  legal
 
 This page is not allowed to:
 
-- imply the runtime is nearly solved just because the questions are sharper
-- replace burden transfer with better tooling advice
+- imply the runtime is almost solved because the questions are better framed
+- replace burden transfer with better shopping advice
 - blur first-hop plurality into request preservation
-- use orchestration nouns as if they answered the benchmark by themselves
+- use orchestration nouns as if they answer the benchmark by themselves
 
-## Answer format used on this page
+## The answer format used here
 
-Each serious answer on this page should leave behind:
+Every serious answer on this page should leave behind five things:
 
 1. the hidden burden the operator is actually talking about
 2. the strongest current evidence class behind the answer
@@ -38,39 +35,62 @@ Each serious answer on this page should leave behind:
 4. the next artifact or drill that would allow a stronger sentence
 5. the private sentence the operator still has to finish today
 
-Without those five pieces, the answer is still too close to shopping advice.
+Without those five things, the answer is still too close to product advice.
 
 ## Strongest honest current answer
 
-The repo is not mainly suffering from lack of tools.
-It is suffering from lack of options that relocate the right truths out of
-operator memory without either:
+The repo is not mainly suffering from lack of tooling.
+It is suffering from lack of options that relocate the right truths out of the
+operator's head without either:
 
-- stopping one layer early
+- stopping one layer too early
 - or importing a much heavier worldview than has actually proved it pays for
   itself
 
-That is why the ecosystem can feel full of products and still empty of real
-answers.
+That is why the ecosystem can feel full of projects and still empty of real
+relief.
 
 ## Question 1: What is the user actually trying to make true?
 
-The user is trying to make several ordinary Docker nodes behave like one
-request-preserving personal cloud without immediately paying full Swarm,
-Kubernetes, or similar controller tax.
+### Hidden burden
 
-In repo-native terms, that means all of the following:
+The operator is still the hidden registry, hidden placement memory, hidden
+peer evaluator, and hidden fallback explainer.
 
-- any healthy public node can take the first hop
-- a local service stays local when that is honest
-- a wrong-node request still completes correctly
-- the receiving node has current truth about placement and peer eligibility
-- fallback survives real backend loss
-- protected routes preserve auth and middleware meaning after handoff
-- stateful services are treated far more harshly than stateless ones
+### Strongest current evidence class
 
-Smaller goals may still be useful.
-They are not the full ask.
+- [`.github/copilot-instructions.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/.github/copilot-instructions.md)
+  states the target operating contract directly
+- the current runtime already proves multiple public-looking nodes, a real edge
+  stack, real stateful services, and real private mesh assumptions
+- the knowledgebase now keeps first hop, wrong-node, backend-loss, and
+  stateful truth separated explicitly
+
+### Why the nearby common answer is still too small
+
+The user is not merely asking for:
+
+- more load balancing
+- better HA
+- more modern clustering
+- fewer Compose files
+
+The actual target is harsher:
+
+> multiple ordinary Docker nodes should start behaving like one
+> request-preserving personal cloud, without immediately forcing a full Swarm,
+> Kubernetes, or similar worldview.
+
+### What would allow a stronger answer
+
+- one shared placement-truth surface actually consumed by routing
+- one narrow wrong-node HTTP proof
+- one backend-loss proof
+
+### Private sentence still surviving today
+
+> yes, but I still personally know what the request should mean better than the
+> system does
 
 ## Question 2: Why do ordinary HA answers keep feeling fake here?
 
@@ -81,73 +101,72 @@ The operator still has to privately know one or more of:
 - where the service really lives
 - which peer is actually safe
 - whether the rescue route survives backend loss
-- whether a forwarded protected route still means the same thing
-- whether a stateful surface only looks movable from the outside
+- whether a protected forwarded request still means the same thing
+- whether a stateful surface is merely reachable rather than honestly movable
 
 ### Strongest current evidence class
 
-- `.github/copilot-instructions.md` states the real target contract
-- root `docker-compose.yml` and active fragments prove a serious live edge and
-  service surface
-- knowledgebase/runtime pages now separate first hop, wrong-node, backend-loss,
-  and stateful lanes explicitly
+- the runtime already contains Traefik, TinyAuth, CrowdSec,
+  `docker-gen-failover`, Headscale, WARP routing, metrics, and stateful
+  services
+- the archive-pressure pages show the recurring complaint is not lack of
+  products, but lack of burden-transferring options
 
 ### Why the nearby common answer is still too small
 
 Common answers such as:
 
-- "point Cloudflare at more nodes"
-- "just use Traefik"
-- "add more healthchecks"
-- "use service discovery"
-- "use Kubernetes"
+- `point Cloudflare at more nodes`
+- `just use Traefik`
+- `add healthchecks`
+- `use service discovery`
+- `move to Kubernetes`
 
-often solve one slice while leaving the decisive truth privately carried.
+often solve one visible layer while leaving the decisive truth privately owned.
 
 ### What would allow a stronger answer
 
-- one shared placement-truth surface consumed by routing or peer-selection logic
-- one wrong-node stateless HTTP drill
-- one backend-loss drill
+- one route-specific proof showing what truth has actually moved into the
+  system
 
 ### Private sentence still surviving today
 
-> yes, but I still personally know which node really has it
+> yes, but I still personally know the real answer when the system is supposed
+> to act coherent
 
 ## Question 3: Is Traefik the answer to the multi-node problem here?
 
 ### Hidden burden
 
-The operator needs shared current truth, not only routing execution.
+Routing execution is being confused with routing truth.
 
 ### Strongest current evidence class
 
-Traefik is materially live through the priority runtime and already fronts real
-HTTP and TCP surfaces.
-It works with:
+Traefik is materially live in the priority runtime and fronts real surfaces.
+It already sits beside:
 
 - `tinyauth`
 - `nginx-traefik-extensions`
 - `crowdsec`
 - file-provider config
-- TCP routers for services such as `mongodb` and `redis`
+- TCP routing for services such as `mongodb`
 
 ### Why the nearby common answer is still too small
 
-Traefik buys:
+Traefik absolutely buys real things:
 
-- local routing execution
 - TLS termination
+- HTTP routing
 - middleware execution
 - auth integration
-- HTTP and TCP exposure
+- TCP exposure
 
-It does not, by itself, buy:
+It does **not** by itself buy:
 
 - shared current placement truth
-- shared peer eligibility truth
-- route persistence under backend loss
-- stateful authority semantics
+- shared peer-eligibility truth
+- backend-loss route persistence
+- honest stateful authority transfer
 
 ### What would allow a stronger answer
 
@@ -163,32 +182,32 @@ It does not, by itself, buy:
 
 ### Hidden burden
 
-Plural first-hop reachability is not the same as preserved request meaning.
+Plural first-hop reachability is being confused with preserved request meaning.
 
 ### Strongest current evidence class
 
-- Cloudflare is part of the repo's explicit public-entry philosophy
-- `cloudflare-ddns` is live in the edge stack
+- Cloudflare is part of the explicit public-entry philosophy
+- `cloudflare-ddns` is live in the current edge stack
+- multiple A-record thinking is clearly part of the repo's anti-SPOF pressure
 
 ### Why the nearby common answer is still too small
 
-Cloudflare can help:
+Cloudflare can help with:
 
-- multiple public records
+- more than one public record
 - first-hop resilience
 - public exposure management
 
 It cannot, by itself, tell the receiving node:
 
-- whether the target service is local
-- where it actually lives now
-- which peer is eligible now
-- whether the rescue path survives the relevant failure
+- whether the service is local
+- where the real backend lives now
+- which peer is actually eligible
+- whether the rescue path still survives the failure you care about
 
 ### What would allow a stronger answer
 
-- one wrong-node route proven after intentionally landing traffic on a non-owner
-  node
+- one wrong-node route proven after intentionally landing on a non-owner node
 
 ### Private sentence still surviving today
 
@@ -199,32 +218,32 @@ It cannot, by itself, tell the receiving node:
 
 ### Hidden burden
 
-Reachability and identity are being mistaken for peer validity and current
-placement truth.
+Reachability and identity are being mistaken for placement truth and peer
+validity.
 
 ### Strongest current evidence class
 
-- Headscale is materially live through
+- Headscale is materially live in
   [`compose/docker-compose.headscale.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/compose/docker-compose.headscale.yml)
-- the active config still uses SQLite at `/var/lib/headscale/db.sqlite`
+- the active fragment still uses SQLite at `/var/lib/headscale/db.sqlite`
 
 ### Why the nearby common answer is still too small
 
-Headscale can help the repo with:
+Headscale can give the repo:
 
 - private-node connectivity
-- stable node identity
-- mesh assumptions becoming real instead of imaginary
+- stable identity
+- a real mesh foundation
 
 It does not by itself answer:
 
 - which node currently owns the requested service
-- which peer is eligible for this exact route
-- whether the control plane itself has ceased to be singular
+- which peer is valid for this exact route
+- whether the control plane itself has stopped being socially singular
 
 ### What would allow a stronger answer
 
-- a routing or eligibility surface that consumes peer identity plus current
+- a routing or placement surface that consumes peer identity plus current
   service ownership
 
 ### Private sentence still surviving today
@@ -232,40 +251,75 @@ It does not by itself answer:
 > yes, but I still personally know that a reachable peer is not yet a proven
 > valid backend
 
-## Question 6: Why does `services.yaml` keep reappearing in the docs?
+## Question 6: Why does `services.yaml` keep reappearing?
 
 ### Hidden burden
 
-The operator keeps being the safest current-state registry.
+The operator keeps acting as the safest current-state registry.
 
 ### Strongest current evidence class
 
-- repeated knowledgebase references to `services.yaml`
+- the knowledgebase repeatedly converges on `services.yaml`
 - `.github/copilot-instructions.md` explicitly names lightweight
   current-state-registry philosophy
-- current runtime still does not prove a live tracked root `services.yaml`
-  consumed by routing
+- the current runtime still does not prove a tracked root `services.yaml`
+  consumed by route selection logic
 
 ### Why the nearby common answer is still too small
 
-Without some shared placement-truth surface, every other answer stays weaker:
+Without some shared placement-truth surface, every other answer remains
+undersized:
 
 - Cloudflare only gets traffic onto a node
-- Traefik only executes local routing decisions
+- Traefik only executes the routing graph it already knows
 - Headscale only makes peers reachable
-- helpers only look plausible until the wrong-node question gets asked
+- helpers only look convincing until the wrong-node question is asked
 
 ### What would allow a stronger answer
 
-- one tracked placement registry or equivalent truth surface, visibly consumed
-  by some routing or selection logic in the priority runtime
+- one tracked placement registry or equivalent truth surface consumed by some
+  routing, forwarding, or selection logic in the priority runtime
 
 ### Private sentence still surviving today
 
 > yes, but I still personally know what runs where right now better than the
 > system does
 
-## Question 7: Why are stateful services treated so much more harshly?
+## Question 7: Why are helpers like `docker-gen-failover` still potentially fake comfort?
+
+### Hidden burden
+
+A helper can reduce repetition without absorbing the exact failure that makes
+it matter.
+
+### Strongest current evidence class
+
+- `docker-gen-failover` is materially present in the live edge fragment
+- the docs already record that helper-generated routes can disappear when the
+  backend disappears
+
+### Why the nearby common answer is still too small
+
+A helper often looks like relief because it:
+
+- generates config
+- reduces manual edits
+- reacts to events
+
+But if the helper fails during the exact backend-loss condition it is meant to
+absorb, then it did not move the real burden.
+
+### What would allow a stronger answer
+
+- a backend-loss drill showing that the rescue route still exists and still
+  means the same thing after the failure
+
+### Private sentence still surviving today
+
+> yes, but I still personally know the helper does not yet survive the exact
+> bad day I care about
+
+## Question 8: Why are stateful services treated so much more harshly?
 
 ### Hidden burden
 
@@ -277,11 +331,12 @@ still the real failure domains.
 The live runtime already contains:
 
 - root `mongodb`
-- root `redis`
-- `headscale` SQLite
-- Firecrawl `nuq-postgres`
-- `rabbitmq`
+- `redis`
+- Headscale SQLite
+- `nuq-postgres`
 - `litellm-postgres`
+- `rabbitmq`
+- `qdrant`
 
 ### Why the nearby common answer is still too small
 
@@ -291,98 +346,103 @@ The following do not answer the real question:
 - TCP exposure
 - successful healthchecks
 - restartability
-- "we can move it later"
+- `we can move it later`
 
 Those can improve reachability and operations without changing who owns truth.
 
 ### What would allow a stronger answer
 
-- per service class: explicit write owner, replica model, promotion flow,
+- for each stateful class: explicit write owner, replica model, promotion flow,
   reconnect expectations, and rediscovery behavior
 
 ### Private sentence still surviving today
 
 > yes, but I still personally know the real writer is singular
 
-## Question 8: Why can a helper still be fake comfort?
+## Question 9: Why is "just use Nomad / Swarm / k3s / Kubernetes" still not a complete answer?
 
 ### Hidden burden
 
-A helper can reduce repetition without removing bad-day ambiguity.
+The repo needs burden transfer, not merely a more adult-sounding control plane.
 
 ### Strongest current evidence class
 
-`docker-gen-failover` is materially present, and the repo already records that
-it can delete routes when the backend stops.
+- the archive-pressure material repeatedly explores Swarm, Nomad, k3s, and
+  related options
+- the repo's own honesty surfaces explicitly say heavier control layers must
+  earn themselves
 
 ### Why the nearby common answer is still too small
 
-A helper often looks like progress because it:
+A stronger orchestrator might eventually deserve adoption.
+But the repo is not asking:
 
-- generates config
-- reduces manual edits
-- reacts to events
+- which orchestrator exists
+- which orchestrator is popular
+- which orchestrator is technically capable in the abstract
 
-But if it fails during the exact failure it is meant to absorb, then it did
-not move the real burden.
+It is asking:
+
+> which option removes the humiliating moment where a healthy node still needs
+> a human to explain what the request should have meant?
+
+If the answer does not name that transferred burden, it is still too broad.
 
 ### What would allow a stronger answer
 
-- backend-loss drill showing the rescue route still exists and still means the
-  same thing
+- a burden-by-burden promotion matrix showing what truth a candidate layer
+  would actually own
 
 ### Private sentence still surviving today
 
-> yes, but I still personally know that the helper fails on the exact bad day
-> I cared about
+> yes, but I still do not know whether this is solving my problem or just
+> replacing it with a bigger worldview
 
-## Question 9: What is the most useful next proof to chase?
+## Question 10: What is the most useful next proof to chase?
 
 ### Hidden burden
 
-The repo still lacks one narrow, humiliatingly concrete proof that a receiving
-node can act correctly without private operator completion.
+The repo still lacks one humiliatingly concrete proof that a receiving node can
+act correctly without private operator completion.
 
 ### Strongest current evidence class
 
 The runtime already has:
 
-- good stateless HTTP candidates such as `whoami` and `wishlist`
+- simple stateless HTTP candidates such as `whoami`, `wishlist`, and `mkdocs`
 - real edge policy surfaces
 - real wrong-node architectural pressure
 
 ### Why the nearby common answer is still too small
 
-"Pick a more mature platform" is too broad until the repo first proves what
+`pick a more mature platform` is too broad until the repo first proves what
 burden is actually being moved.
 
 ### What would allow a stronger answer
 
-The best next proof packet is:
+The best next proof packet is still:
 
 1. expose one shared placement-truth surface
-2. intentionally land a request on the wrong healthy node
+2. intentionally land traffic on the wrong healthy node
 3. prove one stateless HTTP route still completes correctly
 4. then kill the preferred backend and prove whether the same route survives
 
 ### Private sentence still surviving today
 
-> yes, but I still personally know the system has not yet passed the humiliating
-> wrong-node test
+> yes, but I still personally know the system has not yet passed the
+> humiliating wrong-node test
 
 ## What still does not count as an honest answer
 
 These still do not count:
 
-- naming a more mature product category without naming which burden it would
-  actually own
-- answering "why are there no real options?" with a list of tools
+- naming a product without naming which burden it would actually own
+- answering `why are there no real options?` with a list of tools
 - treating first-hop plurality as request preservation
 - treating clearer prose as stronger evidence
-- recommending a controller without also saying which private sentence it would
-  kill
+- recommending a controller without naming which private sentence it would kill
 
-That is the whole protection mechanism for this page.
+That is the protection mechanism for this page.
 
 ## What a genuinely useful answer should leave behind
 
