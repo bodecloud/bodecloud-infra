@@ -20,6 +20,11 @@ plane.
 This page exists so green-looking evidence does not quietly upgrade itself
 into broader closure than it actually earned.
 
+That danger has to stay emotionally explicit.
+The repo is no longer at risk of only looking too primitive.
+It is now equally at risk of looking mature enough that narrow evidence starts
+getting socially promoted into a larger feeling of completion.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -49,6 +54,12 @@ The danger is not missing tests.
 The danger is serious-looking evidence being quietly promoted into broader
 architecture closure than it actually earned.
 
+That is why this page cannot read like a standard QA matrix.
+The user is not just asking whether routes can be exercised.
+The user is asking whether the proof discipline is strong enough to resist the
+ecosystem's favorite lie: one convincing success signal equals one meaningful
+option.
+
 ## The thing this page is trying to stop
 
 Most fake closure in this repo follows a repeating pattern:
@@ -60,6 +71,10 @@ Most fake closure in this repo follows a repeating pattern:
 5. the operator's hidden burden remains almost unchanged
 
 This page exists to break that sequence.
+
+It also exists to make the break a little uncomfortable.
+If a drill result feels satisfying before it has named the next still-closed
+ceiling, then the page is already helping fake closure along.
 
 It forces every claimed success to answer:
 
@@ -90,6 +105,10 @@ The dream is:
 > control plane
 
 Each proof class below should be read against that standard.
+
+That means the matrix is not primarily measuring technical cleverness.
+It is measuring how much of the operator's private explanatory burden the
+system has really taken over, one narrow lane at a time.
 
 ## The proof classes
 
@@ -225,6 +244,10 @@ Examples:
 If a page stops naming the next still-closed ceiling, it is already starting to
 overpay the evidence.
 
+That overpayment is exactly what most surrounding infrastructure discourse
+rewards.
+This repo has to keep being ruder than that on purpose.
+
 ## What still does not count as proof in this repo
 
 This page should also make the false-proof patterns explicit.
@@ -243,12 +266,22 @@ Those may all be useful ingredients.
 They are still weaker than proof that the system owns more of the important
 truth on the bad day.
 
+That last phrase is the real retrieval target for the page.
+Not "did the route answer?"
+Not "did the topology look plausible?"
+But "did the system itself own more of the decisive truth after this drill than
+it owned before?"
+
 This matters because the whole repo is vulnerable to one specific lie:
 
 - a path worked once
 - therefore the platform feels distributed
 
 That is exactly the lie this page is meant to prevent.
+
+And it is a tempting lie precisely because the repo is now rich enough to make
+partial success feel emotionally expensive to keep qualifying.
+This page exists so the repo keeps qualifying it anyway.
 
 ## What a passing drill should leave behind
 

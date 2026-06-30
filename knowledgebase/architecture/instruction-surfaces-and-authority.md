@@ -56,6 +56,12 @@ a stress test:
 > does the repo itself still know where its truth lives, or has it started
 > borrowing confidence from adjacent files again?
 
+That stress test should stay visible in the tone of the page.
+The user is not just asking for citation hygiene.
+They are checking whether the repo has started to sound more complete by
+letting adjacent truthful files impersonate one stronger truth than the
+runtime has actually earned.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -100,6 +106,12 @@ stronger state.
 It only means the repo has become more explicit about what it wants and what it
 refuses to fake.
 
+That sentence is one of the most important authority boundaries in the whole
+knowledgebase.
+The repo now has enough aligned language that coherence itself can start
+performing as counterfeit proof.
+This page has to keep breaking that spell.
+
 If a contributor comes away thinking "they all basically say the same thing,"
 then this page has failed.
 
@@ -111,6 +123,12 @@ of custody:
 - one keeps the honesty wall around the dream
 - one drags claims back onto the real runtime surface
 - one prevents bad Compose habits from making the truth even harder to assess
+
+That is why the page cannot sound too pleased with repo alignment.
+Alignment is useful.
+Alignment is not closure.
+Alignment is also one of the easiest ways for a repo like this to start
+looking more mature than its live wrong-node and fallback truth actually are.
 
 ## What still does not count as understanding authority here
 
@@ -141,6 +159,11 @@ The repo can be in strong agreement about:
 while still being far from runtime closure on the held-out scene that actually
 matters.
 
+Another way to say it:
+the instruction surfaces can all be doing their jobs correctly and the repo
+can still be far away from the moment where the operator no longer has to
+privately complete the story under real failure conditions.
+
 They are also the moves that make the repo sound more mature than the current
 runtime has actually earned.
 
@@ -160,6 +183,10 @@ That packet should contain:
 
 Without that packet, the reader can still mistake aligned files for one merged
 voice.
+
+And a merged voice is exactly what becomes dangerous here.
+The more unified the repo sounds, the easier it becomes to spend emotional
+confidence that only a live runtime should be allowed to spend.
 
 ## The ranking that should govern the whole knowledgebase
 
@@ -207,6 +234,14 @@ It should also be treated as a warning against overpromotion.
 The repo now has enough repeated language that a casual reader can mistake
 coherence for completion.
 
+That is not a minor wording issue.
+It is one of the main ways fake adulthood gets into technical documentation:
+
+- the files get sharper
+- the ranking gets clearer
+- the language gets more consistent
+- then the missing proof starts feeling socially embarrassing to keep naming
+
 This is why the user keeps asking this question again in slightly different
 forms.
 
@@ -217,6 +252,11 @@ It is a stress test against a real repo failure mode:
 - the files sound more aligned
 - contributors start acting as if alignment itself proved the hard part was
   nearly settled
+
+This page should keep making that failure mode feel a little hostile.
+The user is right to keep re-asking the question.
+The repo is exactly sophisticated enough now that borrowed authority is one of
+the main remaining ways it can lie.
 
 ## File-by-file authority
 

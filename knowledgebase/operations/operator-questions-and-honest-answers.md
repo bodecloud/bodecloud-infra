@@ -35,6 +35,11 @@ They are asking why the system still keeps cashing out into them at the exact
 moment a supposedly healthier node should have been able to carry more of the
 truth itself.
 
+That accusation should stay active on this page.
+If the prose becomes too calm, too explanatory, or too recommendation-shaped,
+the page will start sounding like it understands the frustration while still
+quietly shrinking it into a normal architecture support question.
+
 ## Strongest honest current answer
 
 The repo is not mainly suffering from lack of tools.
@@ -56,6 +61,10 @@ The repo is not asking for a handoff of responsibility in the abstract.
 It is asking for a believable handoff of the exact truths that currently live
 as remembered placement, remembered peer safety, remembered fallback logic, and
 remembered service-class caveats.
+
+What feels absent is not ingenuity.
+It is the moment where the system becomes adult enough to stop turning back
+toward the operator for one more private completion step.
 
 ## What this page is and is not allowed to prove
 
@@ -100,6 +109,10 @@ It should not let:
 
 If an answer gets easier by making the question smaller, it got less faithful.
 
+That rule should govern every answer on the page.
+This repo is full of smaller neighboring questions that can be answered very
+well while still betraying the real one.
+
 That is one of the recurring dangers this page is trying to block:
 
 - a question about hidden truth ownership
@@ -126,11 +139,18 @@ The user's frustration is not a lack of terminology.
 It is the recurring experience of being offered adjacent answers that stop one
 layer too early.
 
+That "one layer too early" pattern is close to the whole wound.
+The page should keep naming it because that is what distinguishes this repo's
+operator questions from generic self-hosting Q and A.
+
 This page should keep saying that in plain language because that pattern is the
 real through-line of the archive.
 
 If an answer does not name that pattern, it is probably still participating in
 it.
+
+And if it only names the pattern without naming the surviving burden, it is
+still too easy on itself.
 
 That is also why operator Q and A is such a dangerous genre here.
 
@@ -161,6 +181,11 @@ And "shopping guide" is exactly the downgrade the user keeps rejecting.
 The repo is not trying to shop for dignity by brand name.
 It is trying to identify which specific truths still fail to move out of the
 operator's head.
+
+That is why this page should stay harsher than a normal FAQ.
+The user is not asking to be guided more gently through the product space.
+The user is asking which pieces of the product space are still fake comfort
+once the hidden burden test is applied.
 
 ## What a real answer packet would have to contain
 
@@ -204,6 +229,11 @@ that still does not produce a satisfying option in this repo's sense.
 This page should not let "useful engineering" turn into a euphemism for
 "close enough."
 
+That euphemism is one of the main enemies here.
+The ecosystem has plenty of useful engineering.
+What it keeps failing to provide is useful engineering that also knows exactly
+which piece of private operator truth it has actually displaced.
+
 The user is frustrated precisely because the world is already full of things
 that are useful, respectable, half-true, and still not burden-faithful enough.
 
@@ -236,6 +266,10 @@ this repo.
 That is true even when the answer is technically respectable.
 Technical respectability and burden relocation are not the same achievement.
 
+That sentence should keep more authority than any product recommendation.
+The user has already seen too many respectable answers that still leave the
+same reality privately carried.
+
 That sentence is one of the main honesty rails for the whole knowledgebase.
 
 The site should keep forcing readers to distinguish:
@@ -245,6 +279,11 @@ The site should keep forcing readers to distinguish:
 - a better present-tense burden owner
 
 Only the third one changes the user's actual answer space.
+
+That is the real selection rule for the whole repo:
+not "is the component better?"
+not "is the design more mature?"
+but "did one more important truth actually move out of the operator's head?"
 
 ## Question 3: Why does the repo sometimes act like there are "no real options" even though there are many tools?
 
