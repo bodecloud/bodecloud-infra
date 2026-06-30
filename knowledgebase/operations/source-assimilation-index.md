@@ -223,6 +223,52 @@ This is the bridge between "RAG" and useful infrastructure documentation.
 The archive is allowed to recover the wound.
 It is not allowed to impersonate the runtime.
 
+## Priority archive source map
+
+Use this table when pulling imported conversations into a page.
+It is deliberately source-level rather than topic-level.
+The point is to keep each file attached to the exact burden it sharpens before
+any prose tries to synthesize it.
+
+| Source | Source family | Packet fields pressured | Strongest sentence supported | Stronger sentence still forbidden | Surviving private sentence |
+| --- | --- | --- | --- | --- | --- |
+| `source-archive/chatgpt-exports/conversations/docker-multi-node-without-swarm__68a916ef-b554-832a-aa13-dee8b95de50f.md` | wrong-node-routing, placement truth | `entry_node`, `placement_source`, `selected_peer`, `peer_eligibility` | The user accepts manual placement but needs any receiving node to discover where the requested service currently lives. | Cloudflare DNS plurality plus per-node forwarding proves no-SPOF service routing. | I still personally know which node hosts the service and why that peer is eligible. |
+| `source-archive/chatgpt-exports/conversations/docker-compose-frustration__695af0ff-0f74-8326-a73f-adcb574fa3b3.md` | operator-frustration, Compose legibility | `placement_source`, `forbidden_claim`, `operator_burden` | Compose opacity becomes painful when Docker hides lifecycle and ownership state behind project names, stopped containers, and global name conflicts. | Better Compose command hygiene solves the multi-node control-plane wound. | I still personally reconstruct what Docker really owns versus what Compose thinks it owns. |
+| `source-archive/chatgpt-exports/conversations/docker-compose-multi-server-setup__67f73c50-150c-8006-8408-c03db2d8d287.md` | Compose distribution, remote-host glue | `placement_source`, `selected_peer`, `forbidden_claim` | Multi-server Compose patterns usually become remote sockets, sync scripts, or proxy glue unless a separate layer owns current truth. | A multi-server Compose recipe is already a distributed platform. | I still personally know which host is authoritative for each service. |
+| `source-archive/chatgpt-exports/conversations/load-balancer-failover-alternatives__68252e5b-7218-8006-8857-2e46d731e299.md` | fallback, advanced origin selection | `backend_loss`, `selected_peer`, `peer_eligibility`, `forbidden_claim` | The desired load balancer behavior includes health-aware origin choice, stickiness, circuit breaking, and fallback semantics beyond ordinary proxy presence. | A proxy or load-balancer-shaped service proves preserved request meaning under backend loss. | I still personally know what failover behavior should happen and whether it happened. |
+| `source-archive/chatgpt-exports/conversations/traefik-service-failover-setup__689d5598-9720-832e-a891-ff57340bcd9c.md` | Traefik fallback, route durability | `backend_loss`, `policy_chain`, `selected_peer` | Traefik can express routing and fallback-shaped configuration, but syntax and runtime semantics are easy to overread. | A Traefik failover stanza proves route meaning, middleware, auth, and backend-loss behavior survived. | I still personally know whether the fallback path preserved the same service contract. |
+| `source-archive/chatgpt-exports/conversations/distributed-ha-orchestration__685f4402-f304-8006-afcc-4802fd494bcc.md` | orchestrator-promotion, peer-equal coordination | `placement_source`, `peer_eligibility`, `forbidden_claim` | The user is looking for narrow coordination or peer-equal failure action before accepting a full orchestration worldview. | Mentioning Serf, Raft, Nomad, or gossip proves the repo should promote a new control plane. | I still personally know whether the candidate kills a specific hidden burden or only renames it. |
+| `source-archive/chatgpt-exports/conversations/redis-url-and-load-balancing__68a914f8-d47c-8324-8734-bc1f17507bac.md` | raw-tcp, stateful-authority | `stateful_authority`, `backend_loss`, `forbidden_claim` | Redis is raw TCP and can be proxied at L4, but stateful authority is a stricter claim than reachability. | TCP forwarding proves Redis HA, writer safety, client rediscovery, or split-brain avoidance. | I still personally know who the writer is and whether failover is safe. |
+| `source-archive/identity-exports/grok/conversations/traefik-ha-failover-without-swarm__b07a47ad-7c7a-4d7b-91f4-f5603dbf093a.md` | no-Swarm Traefik HA, wrong-node routing | `entry_node`, `selected_peer`, `policy_chain`, `forbidden_claim` | The same no-Swarm Traefik question recurs across providers, which makes the problem shape stronger but does not add runtime proof. | Cross-provider agreement proves current implementation maturity. | I still personally know which repeated advice was merely plausible versus locally proven. |
+
+Do not treat this table as an exhaustive index of the archive.
+Treat it as the current priority map for the repo's central wound.
+If a new source matters more, add it by naming the packet field it pressures and
+the stronger sentence it still forbids.
+
+### How to read the table without laundering the source
+
+Each row has to be read in both directions.
+
+Forward reading:
+
+- source file to source family
+- source family to packet field
+- packet field to page destination
+- page destination to next proof requirement
+
+Reverse reading:
+
+- proposed page claim back to packet field
+- packet field back to source family
+- source family back to exact source file
+- exact source file back to the forbidden upgrade it still cannot support
+
+If only the forward direction exists, the page can cite sources while still
+laundering them.
+The reverse direction is what lets a later contributor downgrade a sentence
+from proof back to pressure when it got too strong.
+
 ## Priority source map
 
 Use this map when reconstructing the repo's actual architecture problem.
