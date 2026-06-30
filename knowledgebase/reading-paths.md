@@ -62,6 +62,19 @@ form of burden transfer.
 The docs can become excellent at reconstructing the wound while the live system
 still leaves the same wound in place.
 
+That warning has to get even sharper as retrieval improves.
+Better routes can create a false feeling of runtime adulthood:
+
+- the site finds the right packet faster
+- the packet preserves the contradiction more cleanly
+- the summary sounds more precise and less generic
+- therefore the platform must now be meaningfully less dependent on operator
+  folklore
+
+That does not follow.
+Better retrieval can reduce interpretive loss while leaving the exact same
+wrong-node, peer-eligibility, and fallback burden untouched in the runtime.
+
 ## Start from the pain, not the folder
 
 Do not start with:
@@ -189,6 +202,10 @@ Every reading route should therefore keep two separate scores alive:
 - how well does the repo explain the pressure?
 - how much of that pressure has the live system actually paid down?
 
+Those two scores must not be allowed to merge.
+This page fails if it makes the second score feel improved simply because the
+first one is now much stronger.
+
 ## What a good first pass should leave in your hands
 
 If the route is working, you should be able to leave the first pass with a
@@ -256,6 +273,12 @@ That is the real retrieval standard here:
 not "summarize more,"
 but "summarize without laundering the unresolved burden into cleaner prose."
 
+That is also why "actually RAG this time" has teeth here.
+The failure mode is not merely weak retrieval coverage.
+It is retrieval that finds the right materials, produces a sharper packet, and
+still accidentally convinces the reader that sharper reconstruction equals
+smaller remaining runtime burden.
+
 That is why retrieval discipline matters so much here.
 The site is no longer small enough that "read around until it clicks" is safe.
 
@@ -305,6 +328,11 @@ then it is still incomplete.
 
 The enemy here is not only irrelevance.
 It is relevance that still shrinks the problem.
+
+That includes routes that become too satisfying.
+If a route feels beautifully complete while still making it difficult to say
+which exact private step the operator must perform after the reading is over,
+then the route has become a polished evasion.
 
 That is why question-first retrieval is not just a navigation preference here.
 It is the only reliable way to stop the stack from hijacking the question.
@@ -369,6 +397,19 @@ That vagueness matters because it is exactly where:
 - archive pressure turns into false closure
 
 This page is supposed to interrupt that slide before it happens.
+
+The same warning applies to route quality itself.
+A route can become:
+
+- more intuitive
+- more complete
+- more navigable
+- more AI-retrievable
+
+without the platform becoming any less dependent on human topology
+reconstruction.
+This page has to keep naming that distinction so the site's own quality does
+not impersonate system maturity.
 
 If you want the shortest practical rule, use this:
 
@@ -722,6 +763,14 @@ The packet should be good enough that another reader can ask:
 - which truth class was that page allowed to speak for?
 - what stronger sentence did you still refuse to say?
 - what burden was still left in operator memory afterward?
+
+Add one more audit question:
+
+- did this route only improve reconstruction, or did it also prove any real
+  burden transfer?
+
+If that answer is "reconstruction only," that is still valuable.
+It just is not allowed to dress itself up as runtime progress.
 
 ## Bottom line
 

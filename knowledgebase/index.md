@@ -103,6 +103,19 @@ The stack is already serious enough that a polished overview can start
 borrowing closure from sophistication alone.
 This page has to keep breaking that reflex.
 
+It also has to resist a newer trap created by the site itself improving.
+The knowledgebase can become better at:
+
+- organization
+- retrieval
+- explanation
+- archive assimilation
+
+while the runtime still leaves the same wrong-node and hidden-operator burden
+in place.
+If the page lets those documentation gains masquerade as runtime burden
+transfer, then it is quietly teaching the same lie in a more articulate form.
+
 It should almost feel a little impolite for a landing page.
 That is appropriate here.
 Politeness is one of the ways infrastructure summaries quietly stop naming the
@@ -200,6 +213,13 @@ That is also why this page cannot behave like a normal polished landing page.
 Normal landing pages compress tension.
 This one has to preserve it.
 
+And preserving it is not just a tone preference.
+It is a custody rule.
+If a landing page makes the repo easier to approach while making it harder to
+name which bad-day sentence still depends on private operator memory, then the
+page improved orientation while degrading truth custody.
+That is failure here, not success.
+
 That is because the user's actual dream is itself tension-shaped.
 They want Compose to remain legible and local while wrong-node behavior stops
 being humiliating, without being forced too early into a larger worldview that
@@ -246,6 +266,19 @@ emotional conclusion:
 
 This page is not allowed to produce that conclusion.
 
+It is also not allowed to produce the more flattering cousin of that
+conclusion:
+
+- the site now explains the wound very well
+- therefore the platform must now be substantially closer to owning it
+
+That second move is especially dangerous because it can arise from real
+documentation progress.
+The site can absolutely become much better at reconstructing the dream, the
+archive pressure, and the proof wall.
+That still does not mean the live system now owns the runtime truth the
+operator used to carry alone.
+
 ## What kind of site this is
 
 This is not a normal architecture site.
@@ -277,6 +310,19 @@ still teaching the same lie the user is tired of hearing:
 There really are many products, many guides, and many partial techniques.
 The issue is that too many of them stop one layer before shared runtime truth
 actually replaces private human reconstruction.
+
+That is why "more options" remains such a dangerous phrase in this repo.
+The user's frustration is not that too few nouns exist.
+It is that many of the offered nouns still stop before the platform itself can
+answer:
+
+- who should receive the request right now?
+- why is that peer safe right now?
+- what survives if the first plan is unavailable right now?
+- which policy and middleware survive the handoff right now?
+
+If those answers still require private reconstruction, then the option space
+got broader without the dignity gap actually closing.
 
 ## The dream in one brutally concrete scene
 
@@ -398,6 +444,17 @@ The knowledgebase should not be optimized toward:
 
 unless those improvements also preserve the still-unmoved burden with equal
 clarity.
+
+The same rule applies to the site's own success metrics.
+This knowledgebase does not become genuinely better merely because it is:
+
+- easier to browse
+- easier to summarize
+- easier to cite
+- easier to RAG against
+
+It becomes better only if those gains make it harder, not easier, to forget
+which exact runtime truth is still not system-owned.
 
 ## Start here if you want the shortest faithful route
 
