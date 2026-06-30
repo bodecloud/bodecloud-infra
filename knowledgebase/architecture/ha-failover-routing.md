@@ -28,6 +28,12 @@ The user is asking:
 
 That is the routing question here.
 
+The reason the wording has to stay that severe is that the user is not merely
+frustrated with downtime.
+They are frustrated with how many respectable infrastructure options solve one
+routing layer loudly while quietly leaving the operator as the hidden
+cross-node interpreter.
+
 ## What this page is and is not allowed to prove
 
 This page is authoritative about:
@@ -94,6 +100,11 @@ All of those may be real progress.
 None of them are yet the user's actual benchmark unless they also reduce the
 need for private placement memory, preserve request meaning on the wrong node,
 and survive the failure that made fallback necessary.
+
+They also do not satisfy the deeper complaint:
+
+> I am tired of options that solve one routing layer and leave the next layer
+> as my private job.
 
 That is why this page has to keep decomposing routing into narrower truths
 instead of letting "HA routing" sound like one solved category.
@@ -175,6 +186,9 @@ That matters because "routing" here is not one problem.
 If these layers get collapsed into one sentence called "HA," the docs become
 decorative again.
 
+They also become emotionally false.
+They start describing reassurance instead of burden movement.
+
 ### 1. Public node-entry reachability
 
 Question:
@@ -205,6 +219,9 @@ What this layer does not buy:
 - stateful correctness
 
 This is why "multiple A records" is not even close to the final answer.
+
+It is often the first place people feel tempted to stop thinking because it
+looks distributed enough to market.
 
 ### 2. Local edge-stack health
 
@@ -237,6 +254,12 @@ What it does not buy:
 
 If this layer is broken, distributed entry above it is useless.
 If this layer is healthy, the distributed problem is still not solved.
+
+This is a recurring pattern across the repo:
+
+- a healthy local edge is necessary
+- a healthy local edge is impressive
+- a healthy local edge is still not the same thing as wrong-node rescue
 
 ### 3. Locality truth
 
@@ -293,6 +316,11 @@ What the repo does not yet prove:
 Mesh reachability is helpful.
 Mesh reachability is not current truth ownership.
 
+That difference is where many "peer-aware" stacks keep cheating.
+Peer contact is not peer judgment.
+A reachable peer is not yet a peer the receiving node can honestly trust for
+this route right now.
+
 ### 5. Fallback-route persistence
 
 Question:
@@ -322,6 +350,11 @@ dangerous:
 - dangerous because the current generation model is recorded as losing routes
   at the wrong moment
 
+That "wrong moment" language should be read literally.
+The repo is criticizing solutions that advertise adaptability until the bad
+event arrives and then discard the very route that was supposed to preserve
+dignity.
+
 ### 6. Policy continuity
 
 Question:
@@ -345,6 +378,10 @@ That means a forwarded route is not proven merely because:
 - some `200` exists
 
 The route has to stay meaningfully the same route.
+
+Otherwise the stack has not preserved the service contract.
+It has only preserved enough surface behavior to sound successful in a shallow
+status update.
 
 ### 7. Stateful truth
 
@@ -410,6 +447,10 @@ The user is not frustrated because there are no tools.
 They are frustrated because too many respectable tools answer only one routing
 layer at a time and then let documentation speak as if the whole burden moved.
 
+That last clause matters.
+The real enemy here is not only missing functionality.
+It is partial functionality plus overconfident narration.
+
 The real routing pressure in this repo is:
 
 - first hop should not be sacred
@@ -433,3 +474,9 @@ The difference is exactly this:
 
 Everything in `bolabaden-infra` keeps circling that gap because it is the real
 one.
+
+Another way to say the same thing:
+
+- the repo is not starved for components
+- it is starved for options that remain honest after wrong-node entry, backend
+  loss, and stateful consequences are all allowed into the same sentence

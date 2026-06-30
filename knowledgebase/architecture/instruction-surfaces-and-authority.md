@@ -24,6 +24,10 @@ that are talking about different truth classes:
 If those become interchangeable, the docs become smoother and less honest at
 the same time.
 
+That is not a minor editorial risk in this repo.
+It is one of the main ways the user's dream gets quietly normalized into
+something weaker and more familiar.
+
 ## The exact question this page answers
 
 This page answers the recurring question:
@@ -45,6 +49,12 @@ The danger is a quieter drift:
   already settled
 
 This page exists to stop that drift.
+
+It also exists because the user keeps asking variants of the same question as
+a stress test:
+
+> does the repo itself still know where its truth lives, or has it started
+> borrowing confidence from adjacent files again?
 
 ## What this page is and is not allowed to prove
 
@@ -86,6 +96,15 @@ They are not equal.
 If a contributor comes away thinking "they all basically say the same thing,"
 then this page has failed.
 
+Because they do not.
+They are aligned around the same wound, but each one carries a different kind
+of custody:
+
+- one names the dream
+- one keeps the honesty wall around the dream
+- one drags claims back onto the real runtime surface
+- one prevents bad Compose habits from making the truth even harder to assess
+
 ## What still does not count as understanding authority here
 
 This page also needs to block a softer misread.
@@ -101,6 +120,9 @@ surfaces correctly:
 
 Those are exactly the moves that let the docs become smoother and less honest
 at the same time.
+
+They are also the moves that make the repo sound more mature than the current
+runtime has actually earned.
 
 ## What a real authority-mapping packet would have to contain
 
@@ -161,6 +183,10 @@ the correct short answer is:
 
 That answer should be treated as the default compression of the authority map.
 
+It should also be treated as a warning against overpromotion.
+The repo now has enough repeated language that a casual reader can mistake
+coherence for completion.
+
 ## File-by-file authority
 
 ## `.github/copilot-instructions.md`
@@ -209,6 +235,10 @@ It is request-contract-shaped.
 This file is high-authority intent.
 It is not live runtime proof.
 
+It is the strongest place to learn what the repo is trying to become.
+It is also the easiest place to accidentally overread if the reader is hungry
+for closure.
+
 ## `README.md`
 
 The root README is the strongest repo-facing synthesis and honesty wall.
@@ -243,6 +273,10 @@ It is the best file for claims like:
 
 The README should be treated as the strongest public "do not lie to yourself"
 surface in the repo.
+
+That makes it unusually important.
+Most READMEs try to sell competence.
+This one also has to prevent competence theater.
 
 ## `AGENTS.md`
 
@@ -279,6 +313,11 @@ runtime.
 
 `AGENTS.md` is the implementation anchor.
 It is not the architecture thesis.
+
+That distinction matters because implementation-anchor files often acquire
+accidental charisma.
+They mention real commands, real paths, and real runtime surfaces, which can
+make them sound like they implicitly prove more architecture than they do.
 
 ## `.cursorrules`
 
@@ -319,6 +358,10 @@ runtime assessment harder.
 - the repo's full architectural dream
 
 This file is supportive discipline, not the main truth surface.
+
+It is valuable precisely because it is narrower.
+When it is overpromoted, the repo starts mistaking strict Compose hygiene for a
+distributed answer.
 
 ## Question-to-source map
 
@@ -361,6 +404,13 @@ start with
 That map matters because bad documentation rarely lies in one sentence.
 It usually lies by answering a good question from the wrong authority surface.
 
+That is the exact failure mode this page is trying to make harder:
+
+- a reader asks an architecture question
+- the repo answers from an implementation or discipline surface
+- the answer sounds concrete enough to feel satisfying
+- the missing truth layer stays missing anyway
+
 ## Illegal promotions
 
 These are the promotions this page should make harder:
@@ -384,6 +434,9 @@ get collapsed into one calm story.
 The user keeps pressing this question because they are not merely ranking docs.
 They are checking whether the repo itself knows where its truth lives.
 
+That is why authority has to be handled as custody, not just convenience.
+Each file is protecting the repo from a different kind of self-deception.
+
 ## Bottom line
 
 The most important thing this page proves is not that the repo now has a tidy
@@ -404,3 +457,9 @@ That is why the order has to stay explicit:
 - authoring discipline fourth
 
 If that order fades, the repo starts remembering itself wrong.
+
+And "remembering itself wrong" is serious here.
+This project is explicitly trying to build systems that no longer require the
+operator's private memory to finish the platform's story.
+If the docs themselves start leaning on blurred memory and borrowed authority,
+they reenact the same failure at the documentation layer.
