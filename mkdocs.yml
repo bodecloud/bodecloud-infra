@@ -104,6 +104,7 @@ nav:
     - Decision Paths and Promotion Rules: operations/decision-paths-and-promotion-rules.md
     - DevOps Runbook: operations/devops-runbook.md
     - Source Assimilation Index: operations/source-assimilation-index.md
+    - Curated Site Source Map: operations/curated-site-source-map.md
 
   - Futures, Tradeoffs, and Plans:
     - Orchestration Options: architecture/orchestration-options.md

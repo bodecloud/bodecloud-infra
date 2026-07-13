@@ -286,6 +286,43 @@ TCP reachability should never be used as a shortcut for this packet.
 | TCP route is reachable | Connect to a TCP-exposed service such as `mongodb` or `redis` through the intended entrypoint | Transport path is real | Stateful resilience or authority transfer is solved |
 | One stateful service owns authority correctly under failure | Define and exercise writer, replica, promotion, and rediscovery behavior | This exact authority model is real | The general stateful lane is now anti-SPOF |
 
+## Current evidence-debt register
+
+This register is the current "what is still missing?" view.
+It is deliberately narrower than the dream and harsher than the roadmap.
+
+The point is not to list every possible future improvement.
+The point is to name the exact proof debt that prevents the docs from saying
+the first honest v1 boundary has been earned.
+
+| Evidence debt | Why it matters to the dream | Current supporting pressure | Packet or drill that would retire the debt | Still illegal until retired |
+| --- | --- | --- | --- | --- |
+| First-hop plurality is separated from request preservation | Cloudflare/DDNS plurality can reduce sacred-node pressure while still sending a request to a node that does not own the service. | `.github/copilot-instructions.md` names any-node entry but explicitly forbids treating it as generic wrong-node success. | A first-hop packet showing at least two public nodes can receive traffic, followed by a route packet showing the non-owner path still completed correctly. | "DNS failover solved service failover." |
+| A consumed placement source is still unproven | The user's actual hard problem is not manual placement; it is how the receiving node knows where the requested service lives right now. | The `docker-multi-node-without-swarm` archive narrows the user's stated pain to service discovery/routing after manual placement and DNS plurality are accepted. | `placement_decision_packet` for one stateless HTTP route showing `placement_source`, `entry_node`, `owner_node`, `selected_peer`, freshness, and peer eligibility. | "The repo has a shared registry" or "the wrong node knows where to send traffic." |
+| Wrong-node stateless HTTP is not yet earned | This is the first drill that tests dignity under wrong-node entry instead of local service health. | Current Compose labels prove many local Traefik routes exist, but local labels do not show a non-owner node selecting a peer. | Route packet for a boring route such as `whoami`, `mkdocs`, or `wishlist` where the first hop is intentionally a healthy non-owner node. | "Ordinary Docker nodes behave like one request-preserving platform." |
+| Backend-loss fallback has not been shown after damage | A fallback helper is only meaningful if it survives the failure that made fallback necessary. | The failover archive and the Cloudflare-alternative archive both pressure health checks, origin pools, fallback order, and circuit-breaker behavior, but they do not prove this worktree survived backend loss. | Backend-loss drill for the same route used in the wrong-node test, with preferred backend removal and observed rescue path. | "Fallback works" as a broad route claim. |
+| Protected-route policy parity is unproven | A forwarded admin/protected route can load while silently losing auth, middleware, headers, or trust-boundary meaning. | Current Compose includes protected routes such as `dozzle`, `portainer`, `prometheus`, `cadvisor`, and `alertmanager` using `nginx-auth@file`, but label presence is not policy-parity proof. | Local-versus-peer policy comparison packet for one protected route, including auth challenge, middleware chain, headers, status, and content identity. | "Protected routes survive peer handoff." |
+| TCP reachability is not stateful authority | Redis and MongoDB can have reachable ports while still having no proven writer, promotion, fencing, or rediscovery model. | Root Compose exposes `mongodb` and `redis` through Traefik TCP labels; the stateful lane docs keep those labels below HA proof. | `stateful_authority_packet` for one service class, or an explicit `honest-singularity` packet saying authority is intentionally singular. | "Redis/MongoDB are HA because the port is routed." |
+| Compose frustration remains an operator-burden signal | Compose can be the right authoring surface and still impose confusing hidden state, project-name, env, and container lifecycle tax. | The `docker-compose-frustration` archive shows that even local Compose actions can hide decisive state from the operator. | Runbook evidence that the selected proof route can be validated from documented commands without requiring private reconstruction of Compose project/container state. | "Compose-first already means operator-readable." |
+
+The first retireable cluster of debt is intentionally small:
+
+1. choose one boring stateless HTTP route
+2. write down its owner node and non-owner entry node
+3. create or generate one placement/eligibility truth surface
+4. force wrong-node entry
+5. break the preferred backend
+6. leave packets behind
+
+If that cluster passes, the repo earns one narrow sentence:
+
+> one named stateless HTTP route can survive one wrong-node and backend-loss
+> scene using inspectable placement truth.
+
+It still would not earn:
+
+> bolabaden-infra is HA.
+
 ## The matrix is really an anti-bluff device
 
 This matrix exists because this repo is especially easy to overread in three

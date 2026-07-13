@@ -116,6 +116,24 @@ These are still useful, but they sit beside the larger infrastructure question r
 
 These files help explain decisions, but they should not be treated as current runtime truth unless a live implementation page or verification artifact proves the same claim.
 
+### Repository guidance archive
+
+The `.github/` markdown surfaces have been mirrored into `docs/github/` for
+repository-local reading and archival organization. The authoritative
+technical priority still belongs to:
+
+- [`INFRASTRUCTURE_MASTER_PLAN.md`](INFRASTRUCTURE_MASTER_PLAN.md)
+- [`../knowledgebase/architecture/instruction-surfaces-and-authority.md`](../knowledgebase/architecture/instruction-surfaces-and-authority.md)
+
+Start here if you need the mirrored instruction and prompt files:
+
+- [`github/README.md`](github/README.md)
+- [`github/SECURITY.md`](github/SECURITY.md)
+- [`github/copilot-instructions.md`](github/copilot-instructions.md)
+- [`github/agents/autonomous-implementation-finisher.agent.md`](github/agents/autonomous-implementation-finisher.agent.md)
+- [`github/prompts/infra-article-expansion.prompt.md`](github/prompts/infra-article-expansion.prompt.md)
+- [`github/prompts/plan-infrastructureMasterPlan.prompt.md`](github/prompts/plan-infrastructureMasterPlan.prompt.md)
+
 ## Reading guide by question
 
 If your question is "what is actually running now?":
