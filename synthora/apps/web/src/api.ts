@@ -237,6 +237,22 @@ export const api = {
       (d) => d.pipelines,
     ),
   listProviders: () => request<Providers>("/api/v1/providers"),
+  listSettings: () =>
+    request<{
+      settings: Array<{ key: string; value: Record<string, unknown> }>;
+    }>("/api/v1/settings").then((d) => d.settings),
+  getSetting: (key: string) =>
+    request<{ key: string; value: Record<string, unknown> }>(
+      `/api/v1/settings/${encodeURIComponent(key)}`,
+    ),
+  putSetting: (key: string, value: Record<string, unknown>) =>
+    request<{ key: string; value: Record<string, unknown> }>(
+      `/api/v1/settings/${encodeURIComponent(key)}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ value }),
+      },
+    ),
   listRuns: (sessionId?: string) => {
     const q = sessionId
       ? `?session_id=${encodeURIComponent(sessionId)}`

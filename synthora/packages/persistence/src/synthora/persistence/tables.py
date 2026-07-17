@@ -13,6 +13,7 @@ from sqlalchemy import (
     Integer,
     String,
     Text,
+    UniqueConstraint,
 )
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -188,6 +189,9 @@ class DocumentChunkRow(Base):
 
 class ProviderSettingRow(Base):
     __tablename__ = "provider_settings"
+    __table_args__ = (
+        UniqueConstraint("workspace_id", "key", name="uq_provider_settings_ws_key"),
+    )
 
     id: Mapped[str] = mapped_column(String(32), primary_key=True)
     workspace_id: Mapped[str] = mapped_column(String(64), default="default", index=True)

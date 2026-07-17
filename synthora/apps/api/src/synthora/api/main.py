@@ -87,7 +87,7 @@ async def _warm_document_index(db: Database) -> None:
 async def lifespan(app: FastAPI):
     settings.assert_secure_for_auth()
     db = Database(settings.database_url)
-    await db.create_all()
+    await db.ensure_schema()
     redis = aioredis.from_url(settings.redis_url)
     app.state.db = db
     app.state.redis = redis

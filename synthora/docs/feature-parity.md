@@ -63,7 +63,7 @@ See also [parity-audit.md](parity-audit.md).
 | Docker Compose self-host | ✅ | `docker-compose.yml` |
 | Python SDK | ✅ | `packages/sdk` |
 | Document library + RAG (`collection` engine) | ✅ | documents API + `document_index` |
-| Provider settings persistence | ✅ | `/api/v1/settings` |
+| Provider settings persistence | ✅ | `/api/v1/settings` + Settings UI; resolvers prefer workspace overlay then env |
 | MCP server exposing Synthora tools | ✅ | `/api/v1/mcp/tools/*` |
 | News / subscriptions | ✅ | `/api/v1/news/*` + worker poller |
 | Metrics / usage tracking | ✅ | `RunMetrics` + API |
@@ -82,7 +82,7 @@ Verified by `tests/test_isolation.py`.
 | WebSocket auth (token query param or header; 4401/4403/4404 closes) | ✅ | `events_ws` in `apps/api/main.py`; web client appends `?token=` |
 | MCP outbound SSRF guard (allowlist for remote hosts) | ✅ | `validate_mcp_url()` in `adapters/mcp_client.py` + `SYNTHORA_MCP_ALLOWLIST` |
 | Insecure secret-key boot refusal (session auth) | ✅ | `settings.assert_secure_for_auth()` at lifespan |
-| Durable Postgres LangGraph checkpointer (cross-worker resume) | ✅ | `orchestration/checkpoint.py`; opt-in `SYNTHORA_CHECKPOINT_BACKEND=postgres` |
+| Durable Postgres LangGraph checkpointer (cross-worker resume) | ✅ | `orchestration/checkpoint.py`; compose default `SYNTHORA_CHECKPOINT_BACKEND=postgres` |
 
 ## Multi-pipeline requirement
 
@@ -95,17 +95,9 @@ Verified by `tests/test_isolation.py`.
 
 ## Residual gaps (known, deliberate)
 
-- Provider settings API (`/api/v1/settings`) persists values but LLM resolvers
-  do not yet consume them — env vars remain the source of truth at runtime.
-- Alembic migrations are scaffolded but unused; schema comes from
-  `create_all()` on boot.
-- News polling (`SYNTHORA_NEWS_POLL`) is off by default; subscriptions only
-  refresh when the worker poller is explicitly enabled.
-- The in-memory checkpointer remains the compose default; durable resume
-  requires opting in with `SYNTHORA_CHECKPOINT_BACKEND=postgres` +
-  `SYNTHORA_CHECKPOINT_URL`.
 - Docker compose smoke against SearxNG + Ollama is a manual follow-up (not run
-  in CI).
+  in CI). Provider settings, Alembic-on-boot, news polling, and durable
+  Postgres checkpointer are all enabled by default in compose.
 
 ## Explicit non-goals
 

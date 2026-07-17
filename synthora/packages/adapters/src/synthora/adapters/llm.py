@@ -11,13 +11,18 @@ Most third-party providers are thin aliases of
 
 from __future__ import annotations
 
-import os
 from typing import Callable, Optional
 
 import httpx
 from synthora.core.ports import ChatModel
 
 ProviderFactory = Callable[[str], ChatModel]
+
+
+def _env(*names: str, default: str = "") -> str:
+    from synthora.adapters.provider_settings_context import resolve_credential
+
+    return resolve_credential(*names, default=default)
 
 
 class OpenAICompatibleModel:
@@ -33,11 +38,9 @@ class OpenAICompatibleModel:
         timeout: float = 120.0,
     ) -> None:
         self.model = model
-        self.api_key = api_key or os.environ.get("OPENAI_API_KEY", "")
+        self.api_key = api_key or _env("OPENAI_API_KEY")
         self.base_url = (
-            base_url
-            or os.environ.get("OPENAI_BASE_URL")
-            or "https://api.openai.com/v1"
+            base_url or _env("OPENAI_BASE_URL", default="https://api.openai.com/v1")
         ).rstrip("/")
         self.timeout = timeout
 
@@ -76,7 +79,7 @@ class OllamaModel:
     ) -> None:
         self.model = model
         self.base_url = (
-            base_url or os.environ.get("OLLAMA_BASE_URL") or "http://localhost:11434"
+            base_url or _env("OLLAMA_BASE_URL", default="http://localhost:11434")
         ).rstrip("/")
         self.timeout = timeout
 
@@ -113,14 +116,6 @@ def strip_think_tags(text: str) -> str:
     return re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
 
 
-def _env(*names: str, default: str = "") -> str:
-    for name in names:
-        value = os.environ.get(name)
-        if value:
-            return value
-    return default
-
-
 class LLMProviderRegistry:
     def __init__(self) -> None:
         self._factories: dict[str, ProviderFactory] = {}
@@ -147,7 +142,7 @@ llm_registry = LLMProviderRegistry()
 llm_registry.register("openai", lambda m: OpenAICompatibleModel(m))
 llm_registry.register(
     "openai-compatible",
-    lambda m: OpenAICompatibleModel(m, base_url=os.environ.get("OPENAI_BASE_URL")),
+    lambda m: OpenAICompatibleModel(m, base_url=_env("OPENAI_BASE_URL")),
 )
 llm_registry.register("ollama", lambda m: OllamaModel(m))
 llm_registry.register(

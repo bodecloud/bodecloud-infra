@@ -277,16 +277,57 @@ def test_provider_settings_roundtrip(platform):
     assert client.get("/api/v1/settings").json()["settings"] == []
     put = client.put(
         "/api/v1/settings/openai",
-        json={"value": {"model": "gpt-4o-mini", "enabled": True}},
+        json={
+            "value": {
+                "model": "gpt-4o-mini",
+                "enabled": True,
+                "api_key": "sk-test",
+            }
+        },
     )
     assert put.status_code == 200
     assert put.json()["value"]["model"] == "gpt-4o-mini"
     got = client.get("/api/v1/settings/openai").json()
     assert got["key"] == "openai"
     assert got["value"]["enabled"] is True
+    assert got["value"]["api_key"] == "sk-test"
     listed = client.get("/api/v1/settings").json()["settings"]
     assert len(listed) == 1
 
+
+def test_provider_settings_overlay_feeds_llm_resolve(platform, monkeypatch):
+    """Workspace settings must win over env when resolving credentials."""
+    from synthora.adapters.llm import OpenAICompatibleModel
+    from synthora.adapters.provider_settings_context import (
+        reset_provider_settings,
+        set_provider_settings,
+    )
+    from synthora.persistence import ProviderSettingsRepository
+
+    client, app = platform
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    client.put(
+        "/api/v1/settings/openai",
+        json={
+            "value": {
+                "api_key": "from-workspace",
+                "base_url": "https://example.test/v1",
+            }
+        },
+    )
+
+    async def load():
+        rows = await ProviderSettingsRepository(app.state.db).list_settings("default")
+        return {r.key: dict(r.value or {}) for r in rows}
+
+    overlay = client.portal.call(load)
+    token = set_provider_settings(overlay)
+    try:
+        model = OpenAICompatibleModel("gpt-test")
+        assert model.api_key == "from-workspace"
+        assert model.base_url == "https://example.test/v1"
+    finally:
+        reset_provider_settings(token)
 
 def test_mcp_tools_list_and_call(platform):
     client, app = platform

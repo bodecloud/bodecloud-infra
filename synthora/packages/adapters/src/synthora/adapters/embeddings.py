@@ -19,11 +19,9 @@ EmbeddingFactory = Callable[[str], EmbeddingModel]
 
 
 def _env(*names: str, default: str = "") -> str:
-    for name in names:
-        value = os.environ.get(name)
-        if value:
-            return value
-    return default
+    from synthora.adapters.provider_settings_context import resolve_credential
+
+    return resolve_credential(*names, default=default)
 
 
 class OpenAIEmbeddings:

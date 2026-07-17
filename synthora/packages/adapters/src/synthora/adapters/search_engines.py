@@ -22,11 +22,9 @@ EngineFactory = Callable[[], SearchEngine]
 
 
 def _env(*names: str, default: str = "") -> str:
-    for name in names:
-        value = os.environ.get(name)
-        if value:
-            return value
-    return default
+    from synthora.adapters.provider_settings_context import resolve_credential
+
+    return resolve_credential(*names, default=default)
 
 
 def _truncate(text: str, n: int = 500) -> str:
@@ -44,7 +42,7 @@ class SearxngEngine:
 
     def __init__(self, base_url: Optional[str] = None, timeout: float = 20.0) -> None:
         self.base_url = (
-            base_url or os.environ.get("SEARXNG_URL") or "http://localhost:8080"
+            base_url or _env("SEARXNG_URL", default="http://localhost:8080")
         ).rstrip("/")
         self.timeout = timeout
 

@@ -50,7 +50,7 @@ async def main() -> None:
     max_concurrent = int(os.environ.get("SYNTHORA_MAX_CONCURRENT_RESEARCHES", "3"))
 
     db = Database(database_url)
-    await db.create_all()
+    await db.ensure_schema()
     redis = aioredis.from_url(redis_url)
     queue = RedisJobQueue(redis)
     executor = RunExecutor(db, queue)

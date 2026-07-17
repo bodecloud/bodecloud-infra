@@ -28,6 +28,7 @@ from synthora.persistence import (
     EventRepository,
     KnowledgeRepository,
     MetricsRepository,
+    ProviderSettingsRepository,
     RunRepositorySQL,
 )
 from synthora.persistence.database import Database
@@ -163,19 +164,38 @@ class RunExecutor:
             run, "Research resumed" if resume_value is not None else "Research started"
         )
 
-        ctx = ctx or self.build_context(run)
-        if not ctx.mcp_tools and (run.config.extra or {}).get("mcp"):
-            from synthora.adapters.mcp_client import load_mcp_tools
+        from synthora.adapters.provider_settings_context import (
+            reset_provider_settings,
+            set_provider_settings,
+        )
 
-            try:
-                ctx.mcp_tools = await load_mcp_tools(run.config.extra.get("mcp"))
-            except Exception:
-                logger.exception("failed to load MCP tools for run %s", run.id)
-                ctx.mcp_tools = []
-        graph = pipeline_registry.build(run.pipeline_id)
-        config = self._graph_config(run, ctx)
+        # Load workspace provider settings before resolving models/engines.
+        try:
+            rows = await ProviderSettingsRepository(self.db).list_settings(
+                run.workspace_id or "default"
+            )
+            overlay = {r.key: dict(r.value or {}) for r in rows}
+        except Exception:
+            logger.exception(
+                "failed to load provider settings for workspace %s",
+                run.workspace_id,
+            )
+            overlay = {}
+
+        settings_token = set_provider_settings(overlay)
         ws_token = set_workspace_id(run.workspace_id or "default")
         try:
+            ctx = ctx or self.build_context(run)
+            if not ctx.mcp_tools and (run.config.extra or {}).get("mcp"):
+                from synthora.adapters.mcp_client import load_mcp_tools
+
+                try:
+                    ctx.mcp_tools = await load_mcp_tools(run.config.extra.get("mcp"))
+                except Exception:
+                    logger.exception("failed to load MCP tools for run %s", run.id)
+                    ctx.mcp_tools = []
+            graph = pipeline_registry.build(run.pipeline_id)
+            config = self._graph_config(run, ctx)
             try:
                 if resume_value is not None:
                     result = await graph.ainvoke(
@@ -248,6 +268,7 @@ class RunExecutor:
             return run
         finally:
             reset_workspace_id(ws_token)
+            reset_provider_settings(settings_token)
 
     async def resume(self, run_id: str, answer: str) -> ResearchRun:
         """Resume a run paused at AWAITING_INPUT."""
