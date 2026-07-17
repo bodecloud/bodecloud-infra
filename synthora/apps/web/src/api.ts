@@ -79,6 +79,33 @@ export interface DiscourseTurn {
   created_at: string;
 }
 
+export interface NewsSubscription {
+  id: string;
+  workspace_id: string;
+  query: string;
+  cadence: string;
+  last_run_at: string | null;
+  created_at: string;
+}
+
+export interface NewsItem {
+  id: string;
+  subscription_id: string;
+  title: string;
+  url: string;
+  summary: string;
+  created_at: string;
+}
+
+export interface RunMetrics {
+  run_id: string;
+  llm_calls: number;
+  prompt_chars: number;
+  completion_chars: number;
+  search_calls: number;
+  created_at: string;
+}
+
 export interface Providers {
   llm_providers: string[];
   search_engines: string[];
@@ -273,6 +300,75 @@ export const api = {
     request<{ turns: DiscourseTurn[] }>(
       `/api/v1/research/${id}/discourse`,
     ).then((d) => d.turns),
+
+  followupResearch: (runId: string, question: string, pipelineId?: string) =>
+    request<{
+      run_id: string;
+      status: string;
+      session_id: string | null;
+      parent_run_id: string;
+    }>(`/api/v1/research/${runId}/followup`, {
+      method: "POST",
+      body: JSON.stringify({
+        question,
+        pipeline_id: pipelineId ?? null,
+      }),
+    }),
+
+  getRunMetrics: (id: string) =>
+    request<RunMetrics>(`/api/v1/research/${id}/metrics`),
+  metricsSummary: () =>
+    request<{
+      runs: number;
+      llm_calls: number;
+      prompt_chars: number;
+      completion_chars: number;
+      search_calls: number;
+    }>("/api/v1/metrics/summary"),
+
+  chat: (message: string, sessionId?: string | null) =>
+    request<{ run_id: string; status: string; session_id: string }>(
+      "/api/v1/chat",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          message,
+          session_id: sessionId ?? null,
+        }),
+      },
+    ),
+
+  listNewsSubscriptions: () =>
+    request<{ subscriptions: NewsSubscription[] }>(
+      "/api/v1/news/subscriptions",
+    ).then((d) => d.subscriptions),
+  createNewsSubscription: (query: string, cadence = "daily") =>
+    request<NewsSubscription>("/api/v1/news/subscriptions", {
+      method: "POST",
+      body: JSON.stringify({ query, cadence }),
+    }),
+  deleteNewsSubscription: (id: string) =>
+    request<{ deleted: boolean; id: string }>(
+      `/api/v1/news/subscriptions/${id}`,
+      { method: "DELETE" },
+    ),
+  fetchNewsSubscription: (id: string) =>
+    request<{
+      subscription_id: string;
+      fetched: number;
+      items: NewsItem[];
+    }>(`/api/v1/news/subscriptions/${id}/fetch`, {
+      method: "POST",
+      body: "{}",
+    }),
+  listNewsItems: (subscriptionId?: string) => {
+    const q = subscriptionId
+      ? `?subscription_id=${encodeURIComponent(subscriptionId)}`
+      : "";
+    return request<{ items: NewsItem[] }>(`/api/v1/news/items${q}`).then(
+      (d) => d.items,
+    );
+  },
 };
 
 export function eventsSocketUrl(runId: string): string {

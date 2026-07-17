@@ -1,6 +1,10 @@
 """U8: export endpoint snapshot behavior."""
 
-from synthora.api.export import markdown_to_html, render_html_document
+from synthora.api.export import (
+    markdown_to_html,
+    markdown_to_pdf_bytes,
+    render_html_document,
+)
 
 SAMPLE = """# Report Title
 
@@ -36,3 +40,9 @@ def test_html_escapes_injected_markup():
     html = markdown_to_html("evil <img src=x onerror=alert(1)> text")
     assert "<img" not in html
     assert "&lt;img" in html
+
+
+def test_markdown_to_pdf_bytes():
+    pdf = markdown_to_pdf_bytes(SAMPLE, title="Report Title")
+    assert pdf[:4] == b"%PDF"
+    assert len(pdf) > 100

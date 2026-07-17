@@ -258,8 +258,118 @@ def test_export_markdown_and_html(platform):
     assert "<h1>Integration Report</h1>" in html.text
     assert "export test" in html.text  # question used as document title
 
+    pdf = client.get(f"/api/v1/research/{run_id}/export?format=pdf")
+    assert pdf.status_code == 200
+    assert pdf.headers["content-type"].startswith("application/pdf")
+    assert pdf.content[:4] == b"%PDF"
+    arts = client.get(f"/api/v1/research/{run_id}/report").json()["artifacts"]
+    assert any(a["kind"] == "export_pdf" for a in arts)
+
     bad = client.get(f"/api/v1/research/{run_id}/export?format=docx")
     assert bad.status_code == 422
+
+
+# ------------------------------------------------------------------ settings / mcp / sessions
+
+
+def test_provider_settings_roundtrip(platform):
+    client, _ = platform
+    assert client.get("/api/v1/settings").json()["settings"] == []
+    put = client.put(
+        "/api/v1/settings/openai",
+        json={"value": {"model": "gpt-4o-mini", "enabled": True}},
+    )
+    assert put.status_code == 200
+    assert put.json()["value"]["model"] == "gpt-4o-mini"
+    got = client.get("/api/v1/settings/openai").json()
+    assert got["key"] == "openai"
+    assert got["value"]["enabled"] is True
+    listed = client.get("/api/v1/settings").json()["settings"]
+    assert len(listed) == 1
+
+
+def test_mcp_tools_list_and_call(platform):
+    client, app = platform
+    tools = client.post("/api/v1/mcp/tools/list").json()["tools"]
+    names = {t["name"] for t in tools}
+    assert names == {
+        "start_research",
+        "get_run_status",
+        "get_report",
+        "search_documents",
+    }
+
+    started = client.post(
+        "/api/v1/mcp/tools/call",
+        json={
+            "name": "start_research",
+            "arguments": {
+                "question": "What is MCP?",
+                "pipeline_id": "fast_research",
+                "config": fake_run_config(),
+            },
+        },
+    )
+    assert started.status_code == 200
+    payload = json.loads(started.json()["content"])
+    run_id = payload["run_id"]
+
+    status = client.post(
+        "/api/v1/mcp/tools/call",
+        json={"name": "get_run_status", "arguments": {"run_id": run_id}},
+    )
+    assert json.loads(status.json()["content"])["status"] == "queued"
+
+    executor = make_executor(app)
+    client.portal.call(executor.execute, run_id)
+    report = client.post(
+        "/api/v1/mcp/tools/call",
+        json={"name": "get_report", "arguments": {"run_id": run_id}},
+    )
+    assert "Integration Report" in report.json()["content"]
+
+    docs = client.post(
+        "/api/v1/mcp/tools/call",
+        json={
+            "name": "search_documents",
+            "arguments": {"query": "nothing-here-yet", "max_results": 2},
+        },
+    )
+    assert docs.status_code == 200
+    assert "results" in json.loads(docs.json()["content"])
+
+
+def test_sessions_and_resume_api(platform):
+    client, app = platform
+    session = client.post(
+        "/api/v1/sessions",
+        json={"title": "Clarify session", "tags": ["test"]},
+    )
+    assert session.status_code == 201
+    session_id = session.json()["id"]
+    assert client.get("/api/v1/sessions").json()["sessions"][0]["id"] == session_id
+
+    # resume rejected unless awaiting_input
+    run_id = client.post(
+        "/api/v1/research",
+        json={
+            "question": "resume without interrupt",
+            "pipeline_id": "fast_research",
+            "session_id": session_id,
+            "config": fake_run_config(),
+        },
+    ).json()["run_id"]
+    assert (
+        client.post(
+            f"/api/v1/research/{run_id}/resume", json={"answer": "nope"}
+        ).status_code
+        == 409
+    )
+
+    detail = client.get(f"/api/v1/sessions/{session_id}").json()
+    assert detail["runs"][0]["id"] == run_id
+
+    assert client.delete(f"/api/v1/sessions/{session_id}").json()["deleted"] is True
 
 
 # ------------------------------------------------------------------ auth
@@ -314,3 +424,68 @@ def test_auth_endpoints_disabled_in_none_mode(platform):
         "/api/v1/auth/register", json={"username": "bob", "password": "password123"}
     )
     assert resp.status_code == 400
+
+
+# ------------------------------------------------------------------ follow-up / chat
+
+
+def test_followup_links_session_and_parent_extra(platform):
+    client, app = platform
+    parent_id = client.post(
+        "/api/v1/research",
+        json={
+            "question": "What is quantum computing?",
+            "pipeline_id": "fast_research",
+            "config": fake_run_config(),
+        },
+    ).json()["run_id"]
+    executor = make_executor(app)
+    client.portal.call(executor.execute, parent_id)
+
+    parent = client.get(f"/api/v1/research/{parent_id}").json()
+    assert parent["session_id"] is None
+
+    follow = client.post(
+        f"/api/v1/research/{parent_id}/followup",
+        json={"question": "How does entanglement work?", "pipeline_id": "fast_research"},
+    )
+    assert follow.status_code == 202
+    body = follow.json()
+    assert body["parent_run_id"] == parent_id
+    assert body["session_id"]
+    child_id = body["run_id"]
+
+    # parent now shares the session
+    parent_after = client.get(f"/api/v1/research/{parent_id}").json()
+    assert parent_after["session_id"] == body["session_id"]
+
+    child = client.get(f"/api/v1/research/{child_id}").json()
+    assert child["session_id"] == body["session_id"]
+    extra = child["config"]["extra"]
+    assert extra["parent_run_id"] == parent_id
+    assert "parent_brief" in extra
+    assert extra["parent_brief"]  # seeded from completed parent brief
+
+    # worker can execute the follow-up like any other run
+    child_run = client.portal.call(executor.execute, child_id)
+    assert child_run.status.value == "completed"
+
+
+def test_chat_creates_fast_research_run(platform):
+    client, _ = platform
+    resp = client.post("/api/v1/chat", json={"message": "Hello research"})
+    assert resp.status_code == 202
+    body = resp.json()
+    assert body["run_id"]
+    assert body["session_id"]
+    detail = client.get(f"/api/v1/research/{body['run_id']}").json()
+    assert detail["pipeline_id"] == "fast_research"
+    assert detail["question"] == "Hello research"
+    assert detail["session_id"] == body["session_id"]
+
+    again = client.post(
+        "/api/v1/chat",
+        json={"message": "Follow the thread", "session_id": body["session_id"]},
+    )
+    assert again.status_code == 202
+    assert again.json()["session_id"] == body["session_id"]

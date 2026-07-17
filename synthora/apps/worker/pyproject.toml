@@ -7,6 +7,7 @@ dependencies = [
     "synthora-core",
     "synthora-persistence",
     "synthora-orchestration",
+    "synthora-adapters",
     "redis>=5.0",
     "pydantic-settings>=2.4",
 ]
@@ -15,6 +16,7 @@ dependencies = [
 synthora-core = { workspace = true }
 synthora-persistence = { workspace = true }
 synthora-orchestration = { workspace = true }
+synthora-adapters = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

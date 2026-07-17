@@ -9,6 +9,7 @@ import os
 import pathlib
 
 import redis.asyncio as aioredis
+from synthora.persistence import NewsRepository
 from synthora.persistence.database import Database
 from synthora.worker.executor import RunExecutor
 from synthora.worker.queue import RedisJobQueue
@@ -23,6 +24,22 @@ async def heartbeat_loop() -> None:
     while True:
         HEARTBEAT.touch()
         await asyncio.sleep(30)
+
+
+async def news_poll_loop(db: Database) -> None:
+    """Optionally poll due news subscriptions when SYNTHORA_NEWS_POLL=1."""
+    from synthora.worker.news import poll_due_subscriptions
+
+    interval = int(os.environ.get("SYNTHORA_NEWS_POLL_INTERVAL", "300"))
+    repo = NewsRepository(db)
+    while True:
+        try:
+            n = await poll_due_subscriptions(repo)
+            if n:
+                logger.info("news poll: fetched %d due subscription(s)", n)
+        except Exception:
+            logger.exception("news poll failed")
+        await asyncio.sleep(max(30, interval))
 
 
 async def main() -> None:
@@ -41,6 +58,9 @@ async def main() -> None:
     tasks: set[asyncio.Task] = set()
 
     asyncio.create_task(heartbeat_loop())
+    if os.environ.get("SYNTHORA_NEWS_POLL", "").strip() in ("1", "true", "yes"):
+        asyncio.create_task(news_poll_loop(db))
+        logger.info("news poll enabled")
     logger.info("worker started (max_concurrent=%d)", max_concurrent)
 
     async def run_job(job: dict) -> None:

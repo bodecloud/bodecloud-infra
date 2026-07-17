@@ -172,6 +172,20 @@ class DocumentRow(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
+class DocumentChunkRow(Base):
+    __tablename__ = "document_chunks"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    document_id: Mapped[str] = mapped_column(
+        String(32), ForeignKey("documents.id"), index=True
+    )
+    workspace_id: Mapped[str] = mapped_column(String(64), default="default", index=True)
+    chunk_index: Mapped[int] = mapped_column(Integer, default=0)
+    text: Mapped[str] = mapped_column(Text, default="")
+    embedding: Mapped[list] = mapped_column(JSON, default=list)
+    meta: Mapped[dict] = mapped_column(JSON, default=dict)
+
+
 class ProviderSettingRow(Base):
     __tablename__ = "provider_settings"
 
@@ -179,3 +193,42 @@ class ProviderSettingRow(Base):
     workspace_id: Mapped[str] = mapped_column(String(64), default="default", index=True)
     key: Mapped[str] = mapped_column(String(255))
     value: Mapped[dict] = mapped_column(JSON, default=dict)
+
+
+class NewsSubscriptionRow(Base):
+    __tablename__ = "news_subscriptions"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    workspace_id: Mapped[str] = mapped_column(String(64), default="default", index=True)
+    query: Mapped[str] = mapped_column(Text)
+    cadence: Mapped[str] = mapped_column(String(32), default="daily")
+    last_run_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class NewsItemRow(Base):
+    __tablename__ = "news_items"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    subscription_id: Mapped[str] = mapped_column(
+        String(32), ForeignKey("news_subscriptions.id"), index=True
+    )
+    title: Mapped[str] = mapped_column(Text, default="")
+    url: Mapped[str] = mapped_column(Text, default="")
+    summary: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class RunMetricsRow(Base):
+    __tablename__ = "run_metrics"
+
+    run_id: Mapped[str] = mapped_column(
+        String(32), ForeignKey("research_runs.id"), primary_key=True
+    )
+    llm_calls: Mapped[int] = mapped_column(Integer, default=0)
+    prompt_chars: Mapped[int] = mapped_column(Integer, default=0)
+    completion_chars: Mapped[int] = mapped_column(Integer, default=0)
+    search_calls: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)

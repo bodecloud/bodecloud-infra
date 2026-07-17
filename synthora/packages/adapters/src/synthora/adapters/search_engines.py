@@ -915,11 +915,40 @@ class CollectionEngine:
                 self.documents = []
 
     async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
+        # Prefer the shared RAG index when populated.
+        try:
+            from synthora.adapters.document_index import document_index
+
+            indexed = document_index.search("default", query, max_results=max_results)
+            if indexed:
+                return indexed
+            # also try any workspace that has chunks or docs
+            workspaces = set(getattr(document_index, "_chunks", {}) or {})
+            workspaces.update((getattr(document_index, "_docs", {}) or {}).keys())
+            for ws in workspaces:
+                if ws == "default":
+                    continue
+                indexed = document_index.search(ws, query, max_results=max_results)
+                if indexed:
+                    return indexed
+        except Exception:
+            pass
         q = query.lower().strip()
         if not q:
             return []
         results: list[SearchResult] = []
-        for doc in self.documents:
+        try:
+            from synthora.adapters.document_index import document_index as _idx
+
+            docs = list(self.documents) + _idx.documents()
+        except Exception:
+            docs = list(self.documents)
+        seen: set[str] = set()
+        for doc in docs:
+            key = str(doc.get("id") or doc.get("url") or id(doc))
+            if key in seen:
+                continue
+            seen.add(key)
             title = str(doc.get("title") or "")
             content = str(doc.get("content") or doc.get("text") or "")
             url = str(doc.get("url") or doc.get("id") or f"collection://{len(results)}")

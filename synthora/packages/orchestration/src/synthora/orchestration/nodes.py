@@ -96,13 +96,22 @@ async def write_research_brief(state: AgentState, config: RunnableConfig) -> dic
 
 
 async def researcher_step(state: ResearcherState, config: RunnableConfig) -> dict:
-    """One ReAct step: decide next search or finish."""
+    """One ReAct step: decide next search, MCP tool call, or finish."""
     ctx = get_ctx(config)
     topic = state["topic"]
     calls = state.get("tool_calls", 0)
     findings_summary = "\n".join(
         f"- {r.title}: {r.snippet[:150]}" for r in state.get("findings", [])[-8:]
     )
+    mcp_tools = list(getattr(ctx, "mcp_tools", None) or [])
+    tool_names = [getattr(t, "name", str(t)) for t in mcp_tools]
+    tool_hint = ""
+    if tool_names:
+        tool_hint = (
+            f"\nMCP tools available: {', '.join(tool_names)}. "
+            'To call one reply JSON: {"action": "tool", "tool": "<name>", '
+            '"args": {...}, "reflection": "..."}.'
+        )
     raw = await ctx.researcher.complete(
         [
             {
@@ -112,7 +121,7 @@ async def researcher_step(state: ResearcherState, config: RunnableConfig) -> dic
                     "findings so far, either issue the next search or finish.\n"
                     'Reply JSON: {"action": "search", "query": "...", '
                     '"reflection": "..."} or {"action": "complete", '
-                    '"reflection": "..."}.'
+                    f'"reflection": "..."}}.{tool_hint}'
                 ),
             },
             {
@@ -126,6 +135,42 @@ async def researcher_step(state: ResearcherState, config: RunnableConfig) -> dic
     decision = parse_json_response(raw) or {"action": "search", "query": topic}
     if decision.get("action") == "complete" and calls > 0:
         return {"done": True}
+
+    if decision.get("action") == "tool" and mcp_tools:
+        tool_name = str(decision.get("tool") or decision.get("name") or "")
+        args = decision.get("args") or decision.get("arguments") or {}
+        if not isinstance(args, dict):
+            args = {}
+        matched = next(
+            (t for t in mcp_tools if getattr(t, "name", "") == tool_name), None
+        )
+        content = f"unknown tool: {tool_name}"
+        if matched is not None and hasattr(matched, "ainvoke"):
+            try:
+                content = await matched.ainvoke(args)
+            except Exception as exc:  # noqa: BLE001
+                content = f"tool error: {exc}"
+        result = SearchResult(
+            url=f"mcp://{tool_name}",
+            title=f"MCP:{tool_name}",
+            snippet=str(content)[:500],
+            content=str(content),
+            engine="mcp",
+            score=1.0,
+            metadata={"tool": tool_name, "args": args},
+        )
+        note = decision.get("reflection", "")
+        await ctx.emit(
+            RunEventType.SOURCE_FOUND,
+            result.title,
+            node="researcher",
+            payload={"url": result.url, "tool": tool_name},
+        )
+        return {
+            "tool_calls": calls + 1,
+            "findings": [result],
+            "researcher_notes": [note] if note else [],
+        }
 
     query = decision.get("query") or topic
     await ctx.emit(

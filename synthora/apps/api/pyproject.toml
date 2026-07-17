@@ -7,18 +7,21 @@ dependencies = [
     "synthora-core",
     "synthora-persistence",
     "synthora-orchestration",
+    "synthora-adapters",
     "synthora-worker",
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
     "redis>=5.0",
     "pyjwt>=2.9",
     "pydantic-settings>=2.4",
+    "fpdf2>=2.8",
 ]
 
 [tool.uv.sources]
 synthora-core = { workspace = true }
 synthora-persistence = { workspace = true }
 synthora-orchestration = { workspace = true }
+synthora-adapters = { workspace = true }
 synthora-worker = { workspace = true }
 
 [build-system]

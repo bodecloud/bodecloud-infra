@@ -1,5 +1,4 @@
-"""Report export (R-LDR-5): Markdown download and a self-contained,
-print-ready HTML document (browser print covers PDF)."""
+"""Report export (R-LDR-5): Markdown, self-contained HTML, and PDF bytes."""
 
 from __future__ import annotations
 
@@ -78,3 +77,52 @@ def render_html_document(markdown: str, *, title: str) -> str:
     return HTML_TEMPLATE.format(
         title=html_lib.escape(title), body=markdown_to_html(markdown)
     )
+
+
+def _plain_from_markdown(markdown: str) -> str:
+    """Strip common markdown markers for PDF core fonts."""
+    text = re.sub(r"^#{1,6}\s+", "", markdown, flags=re.MULTILINE)
+    text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)
+    text = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"\1", text)
+    text = re.sub(r"`([^`]+)`", r"\1", text)
+    text = re.sub(r"\[([^\]]+)\]\((https?://[^)]+)\)", r"\1 (\2)", text)
+    return text
+
+
+def _pdf_safe(text: str) -> str:
+    return text.encode("latin-1", "replace").decode("latin-1")
+
+
+def markdown_to_pdf_bytes(markdown: str, *, title: str = "Report") -> bytes:
+    """Render markdown to PDF bytes using fpdf2 (no network)."""
+    from fpdf import FPDF
+    from fpdf.enums import XPos, YPos
+
+    pdf = FPDF()
+    pdf.set_auto_page_break(auto=True, margin=15)
+    pdf.set_margins(15, 15, 15)
+    pdf.add_page()
+    pdf.set_font("Helvetica", "B", 16)
+    pdf.multi_cell(
+        0,
+        10,
+        _pdf_safe(title or "Report"),
+        new_x=XPos.LMARGIN,
+        new_y=YPos.NEXT,
+    )
+    pdf.ln(4)
+    pdf.set_font("Helvetica", size=11)
+    body = _plain_from_markdown(markdown or "")
+    for line in body.splitlines() or [""]:
+        if not line.strip():
+            pdf.ln(6)
+            continue
+        pdf.multi_cell(
+            0,
+            6,
+            _pdf_safe(line),
+            new_x=XPos.LMARGIN,
+            new_y=YPos.NEXT,
+        )
+    out = pdf.output()
+    return bytes(out)

@@ -13,14 +13,17 @@ from fastapi import Depends, FastAPI, HTTPException, WebSocket, WebSocketDisconn
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from synthora.adapters import llm_registry, search_engine_registry, strategy_registry
+from synthora.adapters.document_index import document_index
 from synthora.api.auth import (
     current_identity,
     hash_password,
     issue_token,
     verify_password,
 )
+from synthora.api.routes_extra import extra_router
 from synthora.api.settings import settings
 from synthora.core.models import (
+    Artifact,
     ArtifactKind,
     ResearchRun,
     RunConfig,
@@ -33,6 +36,7 @@ from synthora.persistence import (
     ArtifactRepository,
     CitationRepository,
     DiscourseRepository,
+    DocumentRepository,
     EventRepository,
     KnowledgeRepository,
     RunRepositorySQL,
@@ -44,6 +48,42 @@ from synthora.persistence.database import Database
 from synthora.worker.queue import RedisJobQueue, events_channel
 
 
+async def _warm_document_index(db: Database) -> None:
+    """Load persisted documents into the in-process collection index."""
+    document_index.clear()
+    repo = DocumentRepository(db)
+    # Warm default workspace; other workspaces load on first API touch.
+    docs = await repo.list_documents("default")
+    for doc in docs:
+        document_index.upsert(
+            doc.workspace_id,
+            {
+                "id": doc.id,
+                "title": doc.title,
+                "url": doc.url,
+                "content": doc.content,
+            },
+        )
+        chunks = await repo.list_chunks(
+            workspace_id=doc.workspace_id, document_id=doc.id
+        )
+        if chunks:
+            document_index.upsert_chunks(
+                doc.workspace_id,
+                doc.id,
+                [
+                    {
+                        "chunk_index": c.chunk_index,
+                        "text": c.text,
+                        "embedding": c.embedding,
+                    }
+                    for c in chunks
+                ],
+                title=doc.title,
+                url=doc.url or f"collection://{doc.id}",
+            )
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     db = Database(settings.database_url)
@@ -53,6 +93,10 @@ async def lifespan(app: FastAPI):
     app.state.redis = redis
     app.state.queue = RedisJobQueue(redis)
     await WorkspaceRepository(db).ensure_default()
+    try:
+        await _warm_document_index(db)
+    except Exception:
+        pass
     yield
     await redis.aclose()
     await db.dispose()
@@ -66,6 +110,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(extra_router)
 
 
 def get_db() -> Database:
@@ -421,11 +466,12 @@ async def export_report(
 ):
     """Export the report as a downloadable file (R-LDR-5).
 
-    ``format=markdown`` returns the raw report; ``format=html`` returns a
-    self-contained printable document (use the browser's print-to-PDF).
+    ``format=markdown`` / ``html`` / ``pdf``.
     """
+    import base64
+
     from fastapi.responses import Response
-    from synthora.api.export import render_html_document
+    from synthora.api.export import markdown_to_pdf_bytes, render_html_document
 
     run = await _get_run_checked(run_id, identity)
     artifacts = await ArtifactRepository(get_db()).list_for_run(run_id)
@@ -450,7 +496,26 @@ async def export_report(
                 "Content-Disposition": f'attachment; filename="synthora-{run_id}.html"'
             },
         )
-    raise HTTPException(status_code=422, detail="format must be markdown or html")
+    if format == "pdf":
+        pdf_bytes = markdown_to_pdf_bytes(report.content, title=run.question)
+        await ArtifactRepository(get_db()).save(
+            Artifact(
+                run_id=run_id,
+                kind=ArtifactKind.EXPORT_PDF,
+                content=base64.b64encode(pdf_bytes).decode("ascii"),
+                metadata={"bytes": len(pdf_bytes), "title": run.question},
+            )
+        )
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f'attachment; filename="synthora-{run_id}.pdf"'
+            },
+        )
+    raise HTTPException(
+        status_code=422, detail="format must be markdown, html, or pdf"
+    )
 
 
 @app.get("/api/v1/research/{run_id}/knowledge-map")
@@ -481,7 +546,6 @@ async def get_events(
     await _get_run_checked(run_id, identity)
     events = await EventRepository(get_db()).list_events(run_id)
     return {"events": [e.to_wire() for e in events]}
-
 
 # ---------------------------------------------------------------- catalog
 

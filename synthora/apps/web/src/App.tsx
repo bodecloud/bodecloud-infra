@@ -4,8 +4,10 @@ import {
   getToken,
   loadStoredToken,
 } from "./api";
+import { Chat } from "./components/Chat";
 import { History } from "./components/History";
 import { Login } from "./components/Login";
+import { News } from "./components/News";
 import { NewResearch } from "./components/NewResearch";
 import { RunView } from "./components/RunView";
 import { Settings } from "./components/Settings";
@@ -15,6 +17,8 @@ type View =
   | { name: "history" }
   | { name: "settings" }
   | { name: "login" }
+  | { name: "news" }
+  | { name: "chat" }
   | { name: "run"; runId: string };
 
 export function App() {
@@ -43,6 +47,18 @@ export function App() {
             onClick={() => setView({ name: "new" })}
           >
             New research
+          </button>
+          <button
+            className={view.name === "chat" ? "active" : ""}
+            onClick={() => setView({ name: "chat" })}
+          >
+            Chat
+          </button>
+          <button
+            className={view.name === "news" ? "active" : ""}
+            onClick={() => setView({ name: "news" })}
+          >
+            News
           </button>
           <button
             className={view.name === "history" ? "active" : ""}
@@ -74,6 +90,10 @@ export function App() {
         {view.name === "new" && (
           <NewResearch onStarted={(runId) => setView({ name: "run", runId })} />
         )}
+        {view.name === "chat" && (
+          <Chat onStarted={(runId) => setView({ name: "run", runId })} />
+        )}
+        {view.name === "news" && <News />}
         {view.name === "history" && (
           <History onOpen={(runId) => setView({ name: "run", runId })} />
         )}
@@ -90,6 +110,7 @@ export function App() {
           <RunView
             runId={view.runId}
             onDeleted={() => setView({ name: "history" })}
+            onFollowup={(runId) => setView({ name: "run", runId })}
           />
         )}
       </main>

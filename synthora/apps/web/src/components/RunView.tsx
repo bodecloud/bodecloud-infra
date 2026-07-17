@@ -17,9 +17,11 @@ import { KnowledgeMapView } from "./KnowledgeMapView";
 export function RunView({
   runId,
   onDeleted,
+  onFollowup,
 }: {
   runId: string;
   onDeleted?: () => void;
+  onFollowup?: (runId: string) => void;
 }) {
   const [run, setRun] = useState<RunDetail | null>(null);
   const [report, setReport] = useState<string | null>(null);
@@ -31,6 +33,7 @@ export function RunView({
   } | null>(null);
   const [steer, setSteer] = useState("");
   const [clarifyAnswer, setClarifyAnswer] = useState("");
+  const [followup, setFollowup] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { events, finished } = useRunEvents(runId);
@@ -106,6 +109,21 @@ export function RunView({
       await downloadExport(runId, format);
     } catch (e) {
       setError(String(e));
+    }
+  }
+
+  async function submitFollowup() {
+    if (!followup.trim()) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const result = await api.followupResearch(runId, followup.trim());
+      setFollowup("");
+      onFollowup?.(result.run_id);
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setBusy(false);
     }
   }
 
@@ -207,6 +225,26 @@ export function RunView({
               </button>
             </div>
           </>
+        )}
+
+        {run?.status === "completed" && (
+          <div className="steer-row" style={{ marginTop: "1rem" }}>
+            <input
+              type="text"
+              placeholder="Ask a follow-up question…"
+              value={followup}
+              onChange={(e) => setFollowup(e.target.value)}
+              aria-label="follow-up question"
+            />
+            <button
+              className="primary"
+              type="button"
+              disabled={busy || !followup.trim()}
+              onClick={submitFollowup}
+            >
+              Follow up
+            </button>
+          </div>
         )}
       </section>
 

@@ -186,4 +186,69 @@ class Artifact(BaseModel):
     created_at: datetime = Field(default_factory=utcnow)
 
 
+class Document(BaseModel):
+    """Workspace document in the local library (RAG source)."""
+
+    id: str = Field(default_factory=new_id)
+    workspace_id: str = "default"
+    title: str = ""
+    url: Optional[str] = None
+    path: Optional[str] = None
+    content: str = ""
+    meta: dict[str, Any] = Field(default_factory=dict)
+    created_at: datetime = Field(default_factory=utcnow)
+
+
+class DocumentChunk(BaseModel):
+    """Embedded text chunk belonging to a library document."""
+
+    id: str = Field(default_factory=new_id)
+    document_id: str
+    workspace_id: str = "default"
+    chunk_index: int = 0
+    text: str = ""
+    embedding: list[float] = Field(default_factory=list)
+    meta: dict[str, Any] = Field(default_factory=dict)
+
+
+class ProviderSetting(BaseModel):
+    """Persisted provider/config knobs keyed per workspace."""
+
+    id: str = Field(default_factory=new_id)
+    workspace_id: str = "default"
+    key: str
+    value: dict[str, Any] = Field(default_factory=dict)
+
+
+class NewsSubscription(BaseModel):
+    """LDR-inspired news query subscription (simplified)."""
+
+    id: str = Field(default_factory=new_id)
+    workspace_id: str = "default"
+    query: str
+    cadence: str = "daily"  # hourly | daily | weekly
+    last_run_at: Optional[datetime] = None
+    created_at: datetime = Field(default_factory=utcnow)
+
+
+class NewsItem(BaseModel):
+    id: str = Field(default_factory=new_id)
+    subscription_id: str
+    title: str = ""
+    url: str = ""
+    summary: str = ""
+    created_at: datetime = Field(default_factory=utcnow)
+
+
+class RunMetrics(BaseModel):
+    """Lightweight cost/usage counters for one research run."""
+
+    run_id: str
+    llm_calls: int = 0
+    prompt_chars: int = 0
+    completion_chars: int = 0
+    search_calls: int = 0
+    created_at: datetime = Field(default_factory=utcnow)
+
+
 OutlineNode.model_rebuild()

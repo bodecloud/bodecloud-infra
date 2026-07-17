@@ -27,6 +27,7 @@ from synthora.persistence import (
     DiscourseRepository,
     EventRepository,
     KnowledgeRepository,
+    MetricsRepository,
     RunRepositorySQL,
 )
 from synthora.persistence.database import Database
@@ -81,6 +82,7 @@ class RunExecutor:
         self.citations = CitationRepository(db)
         self.knowledge = KnowledgeRepository(db)
         self.discourse = DiscourseRepository(db)
+        self.metrics = MetricsRepository(db)
 
     def build_context(self, run: ResearchRun) -> ResearchContext:
         cfg = run.config
@@ -105,6 +107,7 @@ class RunExecutor:
             strategy=self._resolve_strategy(cfg.search_strategy),
             event_sink=sink,
         )
+        ctx.wrap_providers()
         return ctx
 
     def _graph_config(self, run: ResearchRun, ctx: ResearchContext) -> dict:
@@ -156,6 +159,14 @@ class RunExecutor:
         )
 
         ctx = ctx or self.build_context(run)
+        if not ctx.mcp_tools and (run.config.extra or {}).get("mcp"):
+            from synthora.adapters.mcp_client import load_mcp_tools
+
+            try:
+                ctx.mcp_tools = await load_mcp_tools(run.config.extra.get("mcp"))
+            except Exception:
+                logger.exception("failed to load MCP tools for run %s", run.id)
+                ctx.mcp_tools = []
         graph = pipeline_registry.build(run.pipeline_id)
         config = self._graph_config(run, ctx)
         try:
@@ -189,6 +200,10 @@ class RunExecutor:
                 await self.events.append(event)
                 await self.queue.publish_event(run.id, event.to_wire())
                 await self._emit_status(run, "Awaiting clarification")
+                try:
+                    await self.metrics.save(ctx.to_metrics())
+                except Exception:
+                    logger.exception("failed to persist metrics for run %s", run.id)
                 return run
 
             await self._persist_result(run, result)
@@ -200,6 +215,10 @@ class RunExecutor:
             logger.exception("run %s failed", run.id)
             run.error = f"{type(exc).__name__}: {exc}"
             run.status = RunStatus.FAILED
+        try:
+            await self.metrics.save(ctx.to_metrics())
+        except Exception:
+            logger.exception("failed to persist metrics for run %s", run.id)
         run.finished_at = utcnow()
         await self.runs.update(run)
         final_type = (
