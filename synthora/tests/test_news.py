@@ -6,8 +6,8 @@ from synthora.adapters import search_engine_registry
 from synthora.core.models import SearchResult
 
 from tests.conftest import FakeSearchEngine
-from tests.test_platform import platform  # noqa: F401
 
+pytest_plugins = ("tests.test_platform",)
 
 def test_news_subscription_crud_and_fetch(platform):
     client, _ = platform

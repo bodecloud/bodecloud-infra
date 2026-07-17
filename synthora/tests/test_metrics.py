@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from tests.test_platform import fake_run_config, make_executor, platform  # noqa: F401
+from tests.test_platform import fake_run_config, make_executor
 
+pytest_plugins = ("tests.test_platform",)
 
 def test_run_metrics_persisted_and_summary(platform):
     client, app = platform
