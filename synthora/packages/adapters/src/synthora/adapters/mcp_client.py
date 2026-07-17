@@ -3,17 +3,59 @@
 Preferred path uses ``langchain-mcp-adapters`` when installed. Otherwise a
 minimal HTTP JSON-RPC stub talks to MCP-ish ``tools/list`` / ``tools/call``
 endpoints (including Synthora's own REST MCP surface).
+
+Remote MCP URLs are gated by ``SYNTHORA_MCP_ALLOWLIST`` (comma-separated hosts)
+to prevent SSRF from run configs. Localhost is always allowed for local dev.
 """
 
 from __future__ import annotations
 
+import ipaddress
 import logging
+import os
 from dataclasses import dataclass, field
 from typing import Any, Optional
+from urllib.parse import urlparse
 
 import httpx
 
 logger = logging.getLogger("synthora.adapters.mcp")
+
+_LOCAL_HOSTS = frozenset({"localhost", "127.0.0.1", "::1"})
+
+
+def validate_mcp_url(url: str) -> str:
+    """Reject unsafe MCP URLs (SSRF guard). Returns the normalized URL."""
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise ValueError("MCP URL must use http or https")
+    host = (parsed.hostname or "").lower()
+    if not host:
+        raise ValueError("MCP URL missing host")
+
+    allowlist = {
+        h.strip().lower()
+        for h in os.environ.get("SYNTHORA_MCP_ALLOWLIST", "").split(",")
+        if h.strip()
+    }
+    if host in _LOCAL_HOSTS or host in allowlist:
+        return url.rstrip("/")
+
+    try:
+        ip = ipaddress.ip_address(host)
+    except ValueError:
+        ip = None
+    if ip is not None and (
+        ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved
+    ):
+        raise ValueError(f"MCP URL blocked (private/reserved host): {host}")
+
+    if not allowlist:
+        raise ValueError(
+            "Remote MCP hosts require SYNTHORA_MCP_ALLOWLIST "
+            f"(got {host!r})"
+        )
+    raise ValueError(f"MCP host {host!r} not in SYNTHORA_MCP_ALLOWLIST")
 
 
 @dataclass
@@ -57,9 +99,14 @@ async def load_mcp_tools(mcp_config: Optional[dict[str, Any]]) -> list[MCPTool]:
     for server in servers:
         if not isinstance(server, dict):
             continue
-        url = str(server.get("url") or "").rstrip("/")
+        raw_url = str(server.get("url") or "").rstrip("/")
         transport = str(server.get("transport") or "http")
-        if not url:
+        if not raw_url:
+            continue
+        try:
+            url = validate_mcp_url(raw_url)
+        except ValueError as exc:
+            logger.warning("MCP URL rejected: %s", exc)
             continue
         try:
             listed = await _http_tools_list(url)
@@ -87,8 +134,13 @@ async def _load_via_langchain(servers: list[dict]) -> list[MCPTool]:
 
     connections: dict[str, dict[str, Any]] = {}
     for i, server in enumerate(servers):
-        url = str(server.get("url") or "").rstrip("/")
-        if not url:
+        raw_url = str(server.get("url") or "").rstrip("/")
+        if not raw_url:
+            continue
+        try:
+            url = validate_mcp_url(raw_url)
+        except ValueError as exc:
+            logger.warning("MCP URL rejected: %s", exc)
             continue
         transport = str(server.get("transport") or "sse")
         key = str(server.get("name") or f"server_{i}")

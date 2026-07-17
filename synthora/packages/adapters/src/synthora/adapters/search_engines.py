@@ -915,22 +915,18 @@ class CollectionEngine:
                 self.documents = []
 
     async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
-        # Prefer the shared RAG index when populated.
+        from synthora.adapters.workspace_context import get_workspace_id
+
+        workspace_id = get_workspace_id()
+        # Prefer the shared RAG index for *this* workspace only (no cross-tenant scan).
         try:
             from synthora.adapters.document_index import document_index
 
-            indexed = document_index.search("default", query, max_results=max_results)
+            indexed = document_index.search(
+                workspace_id, query, max_results=max_results
+            )
             if indexed:
                 return indexed
-            # also try any workspace that has chunks or docs
-            workspaces = set(getattr(document_index, "_chunks", {}) or {})
-            workspaces.update((getattr(document_index, "_docs", {}) or {}).keys())
-            for ws in workspaces:
-                if ws == "default":
-                    continue
-                indexed = document_index.search(ws, query, max_results=max_results)
-                if indexed:
-                    return indexed
         except Exception:
             pass
         q = query.lower().strip()
@@ -940,7 +936,7 @@ class CollectionEngine:
         try:
             from synthora.adapters.document_index import document_index as _idx
 
-            docs = list(self.documents) + _idx.documents()
+            docs = list(self.documents) + _idx.documents(workspace_id)
         except Exception:
             docs = list(self.documents)
         seen: set[str] = set()

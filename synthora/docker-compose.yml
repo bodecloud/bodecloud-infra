@@ -69,6 +69,10 @@ services:
       SYNTHORA_REDIS_URL: redis://redis:6379/0
       SYNTHORA_AUTH_MODE: ${SYNTHORA_AUTH_MODE:-none}
       SYNTHORA_SECRET_KEY: ${SYNTHORA_SECRET_KEY:-change-me}
+      # Use postgres checkpointer for multi-worker / restart-safe resume.
+      SYNTHORA_CHECKPOINT_BACKEND: ${SYNTHORA_CHECKPOINT_BACKEND:-memory}
+      SYNTHORA_CHECKPOINT_URL: ${SYNTHORA_CHECKPOINT_URL:-postgresql://${POSTGRES_USER:-synthora}:${POSTGRES_PASSWORD:-synthora}@postgres:5432/${POSTGRES_DB:-synthora}}
+      SYNTHORA_MCP_ALLOWLIST: ${SYNTHORA_MCP_ALLOWLIST:-}
       SEARXNG_URL: http://searxng:8080
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       OPENAI_BASE_URL: ${OPENAI_BASE_URL:-}

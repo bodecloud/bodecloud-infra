@@ -47,16 +47,14 @@ def decode_token(token: str) -> dict:
     return jwt.decode(token, settings.secret_key, algorithms=["HS256"])
 
 
-async def current_identity(request: Request) -> dict:
-    """Resolve the caller. In ``none`` mode everyone shares the default
-    workspace; in ``session`` mode a valid Bearer token is required."""
+def identity_from_token(token: Optional[str]) -> dict:
+    """Resolve identity from a raw JWT (WebSocket query param or Bearer)."""
     if settings.auth_mode != "session":
         return {"user_id": None, "username": "anonymous", "workspace_id": "default"}
-    header = request.headers.get("Authorization", "")
-    if not header.startswith("Bearer "):
+    if not token:
         raise HTTPException(status_code=401, detail="missing bearer token")
     try:
-        payload = decode_token(header.removeprefix("Bearer ").strip())
+        payload = decode_token(token.strip())
     except jwt.PyJWTError as exc:
         raise HTTPException(status_code=401, detail=f"invalid token: {exc}") from exc
     return {
@@ -64,6 +62,18 @@ async def current_identity(request: Request) -> dict:
         "username": payload["username"],
         "workspace_id": payload["sub"],  # one workspace per user
     }
+
+
+async def current_identity(request: Request) -> dict:
+    """Resolve the caller. In ``none`` mode everyone shares the default
+    workspace; in ``session`` mode a valid Bearer token is required."""
+    header = request.headers.get("Authorization", "")
+    token = (
+        header.removeprefix("Bearer ").strip()
+        if header.startswith("Bearer ")
+        else None
+    )
+    return identity_from_token(token)
 
 
 Identity = Depends(current_identity)

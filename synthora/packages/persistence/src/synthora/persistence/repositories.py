@@ -44,6 +44,7 @@ from synthora.persistence.tables import (
     SessionRow,
     UserRow,
     WorkspaceRow,
+    utcnow,
 )
 
 
@@ -83,18 +84,51 @@ class WorkspaceRepository:
         self.db = db
 
     async def ensure_default(self) -> Workspace:
+        """Ensure the shared anonymous workspace exists with stable id ``default``.
+
+        Identity in ``AUTH_MODE=none`` always uses ``workspace_id="default"``,
+        so the row primary key must match (not a random UUID).
+        """
         async with self.db.session() as s:
-            row = (
-                await s.execute(
-                    select(WorkspaceRow).where(WorkspaceRow.name == "default")
-                )
-            ).scalar_one_or_none()
+            row = await s.get(WorkspaceRow, "default")
             if row is None:
-                ws = Workspace(name="default")
-                s.add(WorkspaceRow(id=ws.id, name=ws.name, created_at=ws.created_at))
-                return ws
+                s.add(
+                    WorkspaceRow(
+                        id="default",
+                        name="default",
+                        created_at=utcnow(),
+                    )
+                )
+                return Workspace(id="default", name="default")
             return Workspace(
-                id=row.id, name=row.name, owner_id=row.owner_id, created_at=row.created_at
+                id=row.id,
+                name=row.name,
+                owner_id=row.owner_id,
+                created_at=row.created_at,
+            )
+
+    async def ensure_for_owner(
+        self, user_id: str, *, name: Optional[str] = None
+    ) -> Workspace:
+        """Ensure a per-user workspace whose id equals the user id (session auth)."""
+        async with self.db.session() as s:
+            row = await s.get(WorkspaceRow, user_id)
+            if row is None:
+                ws_name = name or f"user-{user_id[:8]}"
+                s.add(
+                    WorkspaceRow(
+                        id=user_id,
+                        name=ws_name,
+                        owner_id=user_id,
+                        created_at=utcnow(),
+                    )
+                )
+                return Workspace(id=user_id, name=ws_name, owner_id=user_id)
+            return Workspace(
+                id=row.id,
+                name=row.name,
+                owner_id=row.owner_id,
+                created_at=row.created_at,
             )
 
 
@@ -592,6 +626,22 @@ class DocumentRepository:
             )
         return [_doc_from_row(r) for r in rows]
 
+    async def list_all_documents(self, limit: int = 5000) -> list[Document]:
+        """Return documents across all workspaces (index warm / admin)."""
+        async with self.db.session() as s:
+            rows = (
+                (
+                    await s.execute(
+                        select(DocumentRow)
+                        .order_by(DocumentRow.created_at.desc())
+                        .limit(limit)
+                    )
+                )
+                .scalars()
+                .all()
+            )
+        return [_doc_from_row(r) for r in rows]
+
     async def get(self, document_id: str) -> Optional[Document]:
         async with self.db.session() as s:
             row = await s.get(DocumentRow, document_id)
@@ -878,15 +928,21 @@ class NewsRepository:
         subscription_id: Optional[str] = None,
         limit: int = 100,
     ) -> list[NewsItem]:
+        """List news items, always scoped by workspace when provided (no IDOR)."""
         async with self.db.session() as s:
-            q = select(NewsItemRow).order_by(NewsItemRow.created_at.desc()).limit(limit)
-            if subscription_id:
-                q = q.where(NewsItemRow.subscription_id == subscription_id)
-            elif workspace_id:
-                q = q.join(
+            q = (
+                select(NewsItemRow)
+                .join(
                     NewsSubscriptionRow,
                     NewsItemRow.subscription_id == NewsSubscriptionRow.id,
-                ).where(NewsSubscriptionRow.workspace_id == workspace_id)
+                )
+                .order_by(NewsItemRow.created_at.desc())
+                .limit(limit)
+            )
+            if workspace_id:
+                q = q.where(NewsSubscriptionRow.workspace_id == workspace_id)
+            if subscription_id:
+                q = q.where(NewsItemRow.subscription_id == subscription_id)
             rows = (await s.execute(q)).scalars().all()
         return [
             NewsItem(

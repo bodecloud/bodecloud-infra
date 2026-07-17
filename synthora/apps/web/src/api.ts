@@ -373,7 +373,13 @@ export const api = {
 
 export function eventsSocketUrl(runId: string): string {
   const proto = window.location.protocol === "https:" ? "wss" : "ws";
-  return `${proto}://${window.location.host}/api/v1/research/${runId}/events/ws`;
+  const token =
+    authToken ||
+    (typeof localStorage !== "undefined"
+      ? localStorage.getItem(TOKEN_KEY)
+      : null);
+  const q = token ? `?token=${encodeURIComponent(token)}` : "";
+  return `${proto}://${window.location.host}/api/v1/research/${runId}/events/ws${q}`;
 }
 
 export const TERMINAL_STATUSES = ["completed", "failed", "cancelled"];

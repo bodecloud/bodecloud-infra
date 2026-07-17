@@ -52,8 +52,7 @@ async def _warm_document_index(db: Database) -> None:
     """Load persisted documents into the in-process collection index."""
     document_index.clear()
     repo = DocumentRepository(db)
-    # Warm default workspace; other workspaces load on first API touch.
-    docs = await repo.list_documents("default")
+    docs = await repo.list_all_documents()
     for doc in docs:
         document_index.upsert(
             doc.workspace_id,
@@ -86,6 +85,7 @@ async def _warm_document_index(db: Database) -> None:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    settings.assert_secure_for_auth()
     db = Database(settings.database_url)
     await db.create_all()
     redis = aioredis.from_url(settings.redis_url)
@@ -187,6 +187,9 @@ async def register(body: RegisterRequest) -> dict:
         raise HTTPException(status_code=409, detail="username taken")
     user = User(username=body.username, password_hash=hash_password(body.password))
     await users.create(user)
+    await WorkspaceRepository(get_db()).ensure_for_owner(
+        user.id, name=user.username
+    )
     return {"token": issue_token(user), "user_id": user.id}
 
 
@@ -578,8 +581,41 @@ async def list_providers() -> dict:
 
 
 @app.websocket("/api/v1/research/{run_id}/events/ws")
-async def events_ws(websocket: WebSocket, run_id: str) -> None:
-    """Replay persisted events, then stream live ones from Redis pub/sub."""
+async def events_ws(
+    websocket: WebSocket, run_id: str, token: Optional[str] = None
+) -> None:
+    """Replay persisted events, then stream live ones from Redis pub/sub.
+
+    Under ``AUTH_MODE=session``, clients must pass ``?token=<jwt>`` (browsers
+    cannot set Authorization on WebSocket). The run must belong to the
+    caller's workspace.
+    """
+    from synthora.api.auth import identity_from_token
+
+    try:
+        # Prefer query token; fall back to Authorization header if present.
+        auth_header = websocket.headers.get("authorization") or ""
+        bearer = (
+            auth_header.removeprefix("Bearer ").strip()
+            if auth_header.lower().startswith("bearer ")
+            else None
+        )
+        identity = identity_from_token(token or bearer)
+    except HTTPException:
+        await websocket.close(code=4401)
+        return
+
+    run = await RunRepositorySQL(app.state.db).get(run_id)
+    if run is None:
+        await websocket.close(code=4404)
+        return
+    if (
+        settings.auth_mode == "session"
+        and run.workspace_id != identity["workspace_id"]
+    ):
+        await websocket.close(code=4403)
+        return
+
     await websocket.accept()
     events = EventRepository(app.state.db)
     try:

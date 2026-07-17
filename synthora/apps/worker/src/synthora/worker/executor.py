@@ -138,6 +138,11 @@ class RunExecutor:
         When ``resume_value`` is set, continues a previously interrupted run via
         LangGraph ``Command(resume=...)``.
         """
+        from synthora.adapters.workspace_context import (
+            reset_workspace_id,
+            set_workspace_id,
+        )
+
         run = await self.runs.get(run_id)
         if run is None:
             raise KeyError(f"run {run_id} not found")
@@ -169,72 +174,80 @@ class RunExecutor:
                 ctx.mcp_tools = []
         graph = pipeline_registry.build(run.pipeline_id)
         config = self._graph_config(run, ctx)
+        ws_token = set_workspace_id(run.workspace_id or "default")
         try:
-            if resume_value is not None:
-                result = await graph.ainvoke(Command(resume=resume_value), config=config)
-            else:
-                result = await graph.ainvoke(
-                    {"question": run.question},
-                    config=config,
-                )
-
-            if _has_interrupt(result):
-                payload = _interrupt_payload(result)
-                await self.artifacts.save(
-                    Artifact(
-                        run_id=run.id,
-                        kind=ArtifactKind.INTERRUPT_PAYLOAD,
-                        content=json.dumps(payload),
-                        metadata=payload,
+            try:
+                if resume_value is not None:
+                    result = await graph.ainvoke(
+                        Command(resume=resume_value), config=config
                     )
-                )
-                run.status = RunStatus.AWAITING_INPUT
-                run.finished_at = None
-                await self.runs.update(run)
-                event = ProgressEvent(
-                    run_id=run.id,
-                    type=RunEventType.INTERRUPT,
-                    message=str(payload.get("question", "")),
-                    payload=payload,
-                )
-                await self.events.append(event)
-                await self.queue.publish_event(run.id, event.to_wire())
-                await self._emit_status(run, "Awaiting clarification")
-                try:
-                    await self.metrics.save(ctx.to_metrics())
-                except Exception:
-                    logger.exception("failed to persist metrics for run %s", run.id)
-                return run
+                else:
+                    result = await graph.ainvoke(
+                        {"question": run.question},
+                        config=config,
+                    )
 
-            await self._persist_result(run, result)
-            run.brief = result.get("brief")
-            run.status = RunStatus.COMPLETED
-        except RunCancelled:
-            run.status = RunStatus.CANCELLED
-        except Exception as exc:
-            logger.exception("run %s failed", run.id)
-            run.error = f"{type(exc).__name__}: {exc}"
-            run.status = RunStatus.FAILED
-        try:
-            await self.metrics.save(ctx.to_metrics())
-        except Exception:
-            logger.exception("failed to persist metrics for run %s", run.id)
-        run.finished_at = utcnow()
-        await self.runs.update(run)
-        final_type = (
-            RunEventType.DONE
-            if run.status == RunStatus.COMPLETED
-            else RunEventType.ERROR
-        )
-        event = ProgressEvent(
-            run_id=run.id,
-            type=final_type,
-            message=run.error or run.status.value,
-            payload={"status": run.status.value},
-        )
-        await self.events.append(event)
-        await self.queue.publish_event(run.id, event.to_wire())
-        return run
+                if _has_interrupt(result):
+                    payload = _interrupt_payload(result)
+                    await self.artifacts.save(
+                        Artifact(
+                            run_id=run.id,
+                            kind=ArtifactKind.INTERRUPT_PAYLOAD,
+                            content=json.dumps(payload),
+                            metadata=payload,
+                        )
+                    )
+                    run.status = RunStatus.AWAITING_INPUT
+                    run.finished_at = None
+                    await self.runs.update(run)
+                    event = ProgressEvent(
+                        run_id=run.id,
+                        type=RunEventType.INTERRUPT,
+                        message=str(payload.get("question", "")),
+                        payload=payload,
+                    )
+                    await self.events.append(event)
+                    await self.queue.publish_event(run.id, event.to_wire())
+                    await self._emit_status(run, "Awaiting clarification")
+                    try:
+                        await self.metrics.save(ctx.to_metrics())
+                    except Exception:
+                        logger.exception(
+                            "failed to persist metrics for run %s", run.id
+                        )
+                    return run
+
+                await self._persist_result(run, result)
+                run.brief = result.get("brief")
+                run.status = RunStatus.COMPLETED
+            except RunCancelled:
+                run.status = RunStatus.CANCELLED
+            except Exception as exc:
+                logger.exception("run %s failed", run.id)
+                run.error = f"{type(exc).__name__}: {exc}"
+                run.status = RunStatus.FAILED
+            try:
+                await self.metrics.save(ctx.to_metrics())
+            except Exception:
+                logger.exception("failed to persist metrics for run %s", run.id)
+            run.finished_at = utcnow()
+            await self.runs.update(run)
+            final_type = (
+                RunEventType.DONE
+                if run.status == RunStatus.COMPLETED
+                else RunEventType.ERROR
+            )
+            event = ProgressEvent(
+                run_id=run.id,
+                type=final_type,
+                message=run.error or run.status.value,
+                payload={"status": run.status.value},
+            )
+            await self.events.append(event)
+            await self.queue.publish_event(run.id, event.to_wire())
+            return run
+        finally:
+            reset_workspace_id(ws_token)
 
     async def resume(self, run_id: str, answer: str) -> ResearchRun:
         """Resume a run paused at AWAITING_INPUT."""

@@ -51,6 +51,26 @@ Research. Updated on `feat/synthora-full-parity`.
 | Metrics | done |
 | Chat / follow-up research | done |
 
+## Security & isolation (verified by `tests/test_isolation.py`)
+
+| Capability | Status |
+|---|---|
+| Per-user workspaces on register (session auth) | done |
+| News list scoped to caller workspace (IDOR fix) | done |
+| RAG collection engine scoped to run workspace (contextvar) | done |
+| WebSocket auth: token required in session mode, foreign runs rejected | done |
+| MCP outbound URL SSRF guard (`SYNTHORA_MCP_ALLOWLIST`) | done |
+| Boot refusal on insecure secret key in session mode | done |
+| Durable Postgres checkpointer (opt-in `SYNTHORA_CHECKPOINT_BACKEND=postgres`) | done |
+
+## Residual gaps (deliberate, not silent)
+
+- Settings API values not yet consumed by LLM resolvers (env vars win)
+- Alembic present but unused; `create_all()` manages schema
+- `SYNTHORA_NEWS_POLL` off by default
+- Memory checkpointer is the compose default; Postgres is opt-in
+- Compose smoke (SearxNG + Ollama) is a manual step
+
 ## Explicit non-goals
 
 - Vendoring upstream source trees as disconnected apps

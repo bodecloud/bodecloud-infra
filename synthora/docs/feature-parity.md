@@ -54,7 +54,7 @@ See also [parity-audit.md](parity-audit.md).
 | Persistence: runs, sessions, artifacts, citations, maps, discourse | ✅ | `packages/persistence` |
 | Background jobs + lifecycle + resume | ✅ | Redis + worker |
 | REST API + cancel / report / events / delete / clear | ✅ | `apps/api` |
-| Real-time progress (WebSocket) | ✅ | Redis pub/sub |
+| Real-time progress (WebSocket, authenticated) | ✅ | Redis pub/sub; WS requires `?token=`/header in session mode |
 | User management + optional auth + web login | ✅ | JWT + Login UI |
 | Search strategy abstraction (5 strategies + aliases) | ✅ | `strategy_registry` |
 | Search engine abstraction (full catalog) | ✅ | 29 registered engines |
@@ -70,6 +70,20 @@ See also [parity-audit.md](parity-audit.md).
 | Follow-up / chat research | ✅ | `/followup`, `/chat` + web views |
 | Per-user SQLCipher encrypted DBs | ⬜ | non-goal (shared Postgres + optional auth) |
 
+## Security & multi-tenancy hardening
+
+Verified by `tests/test_isolation.py`.
+
+| Capability | Status | Synthora module |
+|---|---|---|
+| Per-user workspace on register (session auth) | ✅ | `WorkspaceRepository.ensure_for_owner` + register endpoint |
+| Workspace-scoped runs / sessions / documents / news (IDOR-safe) | ✅ | `NewsRepository.list_items` joins subscriptions + ANDs workspace filter |
+| RAG `collection` engine scoped to caller workspace | ✅ | `adapters/workspace_context.py` contextvar; worker sets it per run |
+| WebSocket auth (token query param or header; 4401/4403/4404 closes) | ✅ | `events_ws` in `apps/api/main.py`; web client appends `?token=` |
+| MCP outbound SSRF guard (allowlist for remote hosts) | ✅ | `validate_mcp_url()` in `adapters/mcp_client.py` + `SYNTHORA_MCP_ALLOWLIST` |
+| Insecure secret-key boot refusal (session auth) | ✅ | `settings.assert_secure_for_auth()` at lifespan |
+| Durable Postgres LangGraph checkpointer (cross-worker resume) | ✅ | `orchestration/checkpoint.py`; opt-in `SYNTHORA_CHECKPOINT_BACKEND=postgres` |
+
 ## Multi-pipeline requirement
 
 | Pipeline | Status |
@@ -78,6 +92,20 @@ See also [parity-audit.md](parity-audit.md).
 | `deep_research` | ✅ |
 | `academic_research` | ✅ |
 | `autonomous_research` | ✅ |
+
+## Residual gaps (known, deliberate)
+
+- Provider settings API (`/api/v1/settings`) persists values but LLM resolvers
+  do not yet consume them — env vars remain the source of truth at runtime.
+- Alembic migrations are scaffolded but unused; schema comes from
+  `create_all()` on boot.
+- News polling (`SYNTHORA_NEWS_POLL`) is off by default; subscriptions only
+  refresh when the worker poller is explicitly enabled.
+- The in-memory checkpointer remains the compose default; durable resume
+  requires opting in with `SYNTHORA_CHECKPOINT_BACKEND=postgres` +
+  `SYNTHORA_CHECKPOINT_URL`.
+- Docker compose smoke against SearxNG + Ollama is a manual follow-up (not run
+  in CI).
 
 ## Explicit non-goals
 

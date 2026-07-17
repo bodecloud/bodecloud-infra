@@ -28,7 +28,15 @@ async def test_workspace_default(db):
     repo = WorkspaceRepository(db)
     ws1 = await repo.ensure_default()
     ws2 = await repo.ensure_default()
-    assert ws1.id == ws2.id
+    assert ws1.id == ws2.id == "default"
+
+
+async def test_workspace_for_owner(db):
+    repo = WorkspaceRepository(db)
+    ws = await repo.ensure_for_owner("user-abc", name="alice")
+    again = await repo.ensure_for_owner("user-abc")
+    assert ws.id == again.id == "user-abc"
+    assert ws.owner_id == "user-abc"
 
 
 async def test_user_roundtrip(db):

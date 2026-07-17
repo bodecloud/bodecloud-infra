@@ -615,7 +615,9 @@ async def put_setting(
 
 
 @extra_router.post("/api/v1/mcp/tools/list")
-async def mcp_tools_list() -> dict:
+async def mcp_tools_list(
+    identity: dict = Depends(current_identity),
+) -> dict:
     return {
         "tools": [
             {
