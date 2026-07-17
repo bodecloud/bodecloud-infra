@@ -63,7 +63,7 @@ See also [parity-audit.md](parity-audit.md).
 | Docker Compose self-host | ✅ | `docker-compose.yml` |
 | Python SDK | ✅ | `packages/sdk` |
 | Document library + RAG (`collection` engine) | ✅ | documents API + `document_index` |
-| Provider settings persistence | ✅ | `/api/v1/settings` + Settings UI; resolvers prefer workspace overlay then env |
+| Provider settings persistence | ✅ | `/api/v1/settings` + Settings UI; resolvers prefer workspace overlay then env; GET responses redact secrets |
 | MCP server exposing Synthora tools | ✅ | `/api/v1/mcp/tools/*` |
 | News / subscriptions | ✅ | `/api/v1/news/*` + worker poller |
 | Metrics / usage tracking | ✅ | `RunMetrics` + API |
@@ -82,7 +82,7 @@ Verified by `tests/test_isolation.py`.
 | WebSocket auth (token query param or header; 4401/4403/4404 closes) | ✅ | `events_ws` in `apps/api/main.py`; web client appends `?token=` |
 | MCP outbound SSRF guard (allowlist for remote hosts) | ✅ | `validate_mcp_url()` in `adapters/mcp_client.py` + `SYNTHORA_MCP_ALLOWLIST` |
 | Insecure secret-key boot refusal (session auth) | ✅ | `settings.assert_secure_for_auth()` at lifespan |
-| Durable Postgres LangGraph checkpointer (cross-worker resume) | ✅ | `orchestration/checkpoint.py`; compose default `SYNTHORA_CHECKPOINT_BACKEND=postgres` |
+| Durable Postgres LangGraph checkpointer (cross-worker resume) | ✅ | `orchestration/checkpoint.py` + `psycopg[binary]`; compose default `SYNTHORA_CHECKPOINT_BACKEND=postgres`; smoke asserts `checkpoint_*` tables |
 
 ## Multi-pipeline requirement
 

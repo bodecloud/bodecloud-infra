@@ -28,6 +28,21 @@ build context (`.venv` / `node_modules` included).
 - Add `synthora/.dockerignore` excluding `.venv`, `node_modules`, caches.
 - Prefer a slim context (~310KB) and re-run `scripts/smoke.sh`.
 
+## Follow-up (2026-07-17): Postgres checkpointer needs psycopg-binary
+
+With `SYNTHORA_CHECKPOINT_BACKEND=postgres`, smoke failed importing
+`langgraph.checkpoint.postgres` inside the worker:
+
+`ImportError: no pq wrapper available` / `libpq library not found`.
+
+Slim bookworm images have no system `libpq`, and `langgraph-checkpoint-postgres`
+only pulls pure `psycopg` (no binary extra). Fix: add
+`psycopg[binary]>=3.2` to `synthora-orchestration` so the wheel bundles libpq.
+
+Smoke now also runs a minimal `PostgresSaver.setup()` and asserts checkpoint
+tables exist.
+
 ## Verification
 
-`bash scripts/smoke.sh` → health/ready/pipelines + web UI probe passed.
+`SYNTHORA_CHECKPOINT_BACKEND=postgres bash scripts/smoke.sh` → health/ready/
+pipelines + web + postgres checkpointer tables.

@@ -92,7 +92,7 @@ async def load_mcp_tools(mcp_config: Optional[dict[str, Any]]) -> list[MCPTool]:
         tools = await _load_via_langchain(servers)
         if tools:
             return tools
-    except Exception as exc:  # noqa: BLE001 — fall back to stub
+    except Exception as exc:  # noqa: BLE001 — fall back to HTTP list/call
         logger.debug("langchain-mcp-adapters unavailable: %s", exc)
 
     tools: list[MCPTool] = []

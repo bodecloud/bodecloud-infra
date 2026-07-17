@@ -1,25 +1,12 @@
-name: CI
+# Kept for local discovery; GitHub Actions only loads workflows from the
+# repository root. See `/.github/workflows/synthora-ci.yml`.
+name: Synthora CI (local pointer)
 
 on:
-  push:
-    paths: ["synthora/**"]
-  pull_request:
-    paths: ["synthora/**"]
+  workflow_dispatch:
 
 jobs:
-  test:
+  point-to-root:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: synthora
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v4
-        with:
-          python-version: "3.12"
-      - name: Sync workspace
-        run: uv sync
-      - name: Lint
-        run: uv run ruff check .
-      - name: Test
-        run: uv run pytest -q
+      - run: echo "Use /.github/workflows/synthora-ci.yml"

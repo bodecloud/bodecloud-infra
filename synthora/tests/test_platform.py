@@ -273,7 +273,7 @@ def test_export_markdown_and_html(platform):
 
 
 def test_provider_settings_roundtrip(platform):
-    client, _ = platform
+    client, app = platform
     assert client.get("/api/v1/settings").json()["settings"] == []
     put = client.put(
         "/api/v1/settings/openai",
@@ -287,13 +287,30 @@ def test_provider_settings_roundtrip(platform):
     )
     assert put.status_code == 200
     assert put.json()["value"]["model"] == "gpt-4o-mini"
+    assert put.json()["value"]["api_key"] == "***"
     got = client.get("/api/v1/settings/openai").json()
     assert got["key"] == "openai"
     assert got["value"]["enabled"] is True
-    assert got["value"]["api_key"] == "sk-test"
+    assert got["value"]["api_key"] == "***"
     listed = client.get("/api/v1/settings").json()["settings"]
     assert len(listed) == 1
 
+    # Masked PUT must not clobber the stored secret.
+    client.put(
+        "/api/v1/settings/openai",
+        json={"value": {"api_key": "***", "model": "gpt-4o"}},
+    )
+    assert client.get("/api/v1/settings/openai").json()["value"]["model"] == "gpt-4o"
+
+    from synthora.persistence import ProviderSettingsRepository
+
+    async def load():
+        row = await ProviderSettingsRepository(app.state.db).get("default", "openai")
+        return row.value if row else {}
+
+    stored = client.portal.call(load)
+    assert stored["api_key"] == "sk-test"
+    assert stored["model"] == "gpt-4o"
 
 def test_provider_settings_overlay_feeds_llm_resolve(platform, monkeypatch):
     """Workspace settings must win over env when resolving credentials."""

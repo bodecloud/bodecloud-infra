@@ -569,6 +569,36 @@ async def search_documents(
 # ---------------------------------------------------------------- provider settings
 
 
+_SECRET_VALUE_FIELDS = frozenset(
+    {"api_key", "key", "token", "password", "secret", "access_token"}
+)
+
+
+def _redact_setting_value(value: dict) -> dict:
+    """Mask secret fields in API responses (storage remains plaintext in DB)."""
+    out: dict = {}
+    for k, v in (value or {}).items():
+        if str(k).lower() in _SECRET_VALUE_FIELDS and v:
+            out[k] = "***"
+        else:
+            out[k] = v
+    return out
+
+
+def _merge_setting_value(existing: dict | None, incoming: dict) -> dict:
+    """Merge PUT payload; ignore masked placeholders so secrets are not clobbered."""
+    merged = dict(existing or {})
+    for k, v in (incoming or {}).items():
+        if (
+            str(k).lower() in _SECRET_VALUE_FIELDS
+            and isinstance(v, str)
+            and v.strip() in ("", "***", "********")
+        ):
+            continue
+        merged[k] = v
+    return merged
+
+
 @extra_router.get("/api/v1/settings")
 async def list_settings(
     request: Request, identity: dict = Depends(current_identity)
@@ -578,7 +608,11 @@ async def list_settings(
     )
     return {
         "settings": [
-            {"key": r.key, "value": r.value, "workspace_id": r.workspace_id}
+            {
+                "key": r.key,
+                "value": _redact_setting_value(r.value or {}),
+                "workspace_id": r.workspace_id,
+            }
             for r in rows
         ]
     }
@@ -595,7 +629,11 @@ async def get_setting(
     )
     if row is None:
         raise HTTPException(status_code=404, detail="setting not found")
-    return {"key": row.key, "value": row.value, "workspace_id": row.workspace_id}
+    return {
+        "key": row.key,
+        "value": _redact_setting_value(row.value or {}),
+        "workspace_id": row.workspace_id,
+    }
 
 
 @extra_router.put("/api/v1/settings/{key}")
@@ -605,10 +643,17 @@ async def put_setting(
     request: Request,
     identity: dict = Depends(current_identity),
 ) -> dict:
-    row = await ProviderSettingsRepository(get_db(request)).upsert(
-        identity["workspace_id"], key, body.value
+    repo = ProviderSettingsRepository(get_db(request))
+    existing = await repo.get(identity["workspace_id"], key)
+    merged = _merge_setting_value(
+        existing.value if existing else None, body.value or {}
     )
-    return {"key": row.key, "value": row.value, "workspace_id": row.workspace_id}
+    row = await repo.upsert(identity["workspace_id"], key, merged)
+    return {
+        "key": row.key,
+        "value": _redact_setting_value(row.value or {}),
+        "workspace_id": row.workspace_id,
+    }
 
 
 # ---------------------------------------------------------------- MCP tools (REST)
