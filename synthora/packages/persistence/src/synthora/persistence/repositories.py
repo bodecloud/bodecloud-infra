@@ -10,6 +10,7 @@ from synthora.core.models import (
     Artifact,
     ArtifactKind,
     Citation,
+    DiscourseTurn,
     KnowledgeEdge,
     KnowledgeNode,
     ResearchRun,
@@ -23,6 +24,7 @@ from synthora.persistence.database import Database
 from synthora.persistence.tables import (
     ArtifactRow,
     CitationRow,
+    DiscourseTurnRow,
     KnowledgeEdgeRow,
     KnowledgeNodeRow,
     ResearchRunRow,
@@ -126,6 +128,27 @@ class SessionRepository:
             for r in rows
         ]
 
+    async def get(self, session_id: str) -> Optional[Session]:
+        async with self.db.session() as s:
+            row = await s.get(SessionRow, session_id)
+        if row is None:
+            return None
+        return Session(
+            id=row.id,
+            workspace_id=row.workspace_id,
+            title=row.title,
+            tags=list(row.tags or []),
+            created_at=row.created_at,
+        )
+
+    async def delete(self, session_id: str) -> bool:
+        async with self.db.session() as s:
+            row = await s.get(SessionRow, session_id)
+            if row is None:
+                return False
+            await s.delete(row)
+        return True
+
 
 def _run_from_row(row: ResearchRunRow) -> ResearchRun:
     return ResearchRun(
@@ -189,14 +212,28 @@ class RunRepositorySQL:
         return run
 
     async def list_runs(
-        self, *, workspace_id: Optional[str] = None, limit: int = 50
+        self,
+        *,
+        workspace_id: Optional[str] = None,
+        session_id: Optional[str] = None,
+        limit: int = 50,
     ) -> list[ResearchRun]:
         async with self.db.session() as s:
             q = select(ResearchRunRow).order_by(ResearchRunRow.created_at.desc()).limit(limit)
             if workspace_id:
                 q = q.where(ResearchRunRow.workspace_id == workspace_id)
+            if session_id:
+                q = q.where(ResearchRunRow.session_id == session_id)
             rows = (await s.execute(q)).scalars().all()
         return [_run_from_row(r) for r in rows]
+
+    async def delete(self, run_id: str) -> bool:
+        async with self.db.session() as s:
+            row = await s.get(ResearchRunRow, run_id)
+            if row is None:
+                return False
+            await s.delete(row)
+        return True
 
 
 class EventRepository:
@@ -412,3 +449,51 @@ class KnowledgeRepository:
             for r in edge_rows
         ]
         return nodes, edges
+
+
+class DiscourseRepository:
+    def __init__(self, db: Database) -> None:
+        self.db = db
+
+    async def save_many(self, turns: list[DiscourseTurn]) -> None:
+        async with self.db.session() as s:
+            for t in turns:
+                s.add(
+                    DiscourseTurnRow(
+                        id=t.id,
+                        run_id=t.run_id,
+                        speaker=t.speaker,
+                        role=t.role,
+                        utterance=t.utterance,
+                        intent=t.intent,
+                        citations=[c.model_dump(mode="json") for c in t.citations],
+                        created_at=t.created_at,
+                    )
+                )
+
+    async def list_for_run(self, run_id: str) -> list[DiscourseTurn]:
+        async with self.db.session() as s:
+            rows = (
+                (
+                    await s.execute(
+                        select(DiscourseTurnRow)
+                        .where(DiscourseTurnRow.run_id == run_id)
+                        .order_by(DiscourseTurnRow.created_at.asc())
+                    )
+                )
+                .scalars()
+                .all()
+            )
+        return [
+            DiscourseTurn(
+                id=r.id,
+                run_id=r.run_id,
+                speaker=r.speaker,
+                role=r.role,
+                utterance=r.utterance,
+                intent=r.intent,
+                citations=[Citation.model_validate(c) for c in (r.citations or [])],
+                created_at=r.created_at,
+            )
+            for r in rows
+        ]

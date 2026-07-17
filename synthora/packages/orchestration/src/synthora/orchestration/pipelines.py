@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from langchain_core.runnables import RunnableConfig
 from langgraph.graph import END, START, StateGraph
+from synthora.orchestration.checkpoint import get_checkpointer
 from synthora.orchestration.context import get_ctx
 from synthora.orchestration.intelligence_nodes import (
     autonomous_should_continue,
@@ -23,6 +24,7 @@ from synthora.orchestration.intelligence_nodes import (
 )
 from synthora.orchestration.nodes import (
     build_citations,
+    clarify_interrupt,
     clarify_with_user,
     final_report_generation,
     write_research_brief,
@@ -41,9 +43,16 @@ async def single_researcher(state: AgentState, config: RunnableConfig) -> dict:
 
     ctx = get_ctx(config)
     graph = build_researcher_graph()
+    nested_cfg = {
+        **config,
+        "configurable": {
+            **(config.get("configurable") or {}),
+            "thread_id": f"{(config.get('configurable') or {}).get('thread_id', 'run')}:researcher",
+        },
+    }
     result = await graph.ainvoke(
         {"topic": state.get("brief", state["question"]), "tool_calls": 0},
-        config=config,
+        config=nested_cfg,
     )
     sources = result.get("findings", [])
     return {
@@ -56,15 +65,17 @@ async def single_researcher(state: AgentState, config: RunnableConfig) -> dict:
 def build_fast_research():
     g = StateGraph(AgentState)
     g.add_node("clarify", clarify_with_user)
+    g.add_node("clarify_wait", clarify_interrupt)
     g.add_node("brief", write_research_brief)
     g.add_node("research", single_researcher)
     g.add_node("report", final_report_generation)
     g.add_edge(START, "clarify")
-    g.add_edge("clarify", "brief")
+    g.add_edge("clarify", "clarify_wait")
+    g.add_edge("clarify_wait", "brief")
     g.add_edge("brief", "research")
     g.add_edge("research", "report")
     g.add_edge("report", END)
-    return g.compile()
+    return g.compile(checkpointer=get_checkpointer())
 
 
 # ---------------------------------------------------------------------------
@@ -77,6 +88,7 @@ def build_deep_research():
 
     g = StateGraph(AgentState)
     g.add_node("clarify", clarify_with_user)
+    g.add_node("clarify_wait", clarify_interrupt)
     g.add_node("brief", write_research_brief)
     g.add_node("research", run_supervisor_phase)
     g.add_node("perspectives", perspective_pass)
@@ -87,7 +99,8 @@ def build_deep_research():
     g.add_node("critic", critic_node)
     g.add_node("report", final_report_generation)
     g.add_edge(START, "clarify")
-    g.add_edge("clarify", "brief")
+    g.add_edge("clarify", "clarify_wait")
+    g.add_edge("clarify_wait", "brief")
     g.add_edge("brief", "research")
     g.add_edge("research", "perspectives")
     g.add_edge("perspectives", "discourse")
@@ -97,7 +110,7 @@ def build_deep_research():
     g.add_edge("section_write", "critic")
     g.add_edge("critic", "report")
     g.add_edge("report", END)
-    return g.compile()
+    return g.compile(checkpointer=get_checkpointer())
 
 
 # ---------------------------------------------------------------------------
@@ -190,7 +203,7 @@ def build_academic_research():
     g.add_edge("peer_review", "report")
     g.add_edge("report", "bibliography")
     g.add_edge("bibliography", END)
-    return g.compile()
+    return g.compile(checkpointer=get_checkpointer())
 
 
 # ---------------------------------------------------------------------------
@@ -217,7 +230,7 @@ def build_autonomous_research():
     )
     g.add_edge("knowledge_map", "report")
     g.add_edge("report", END)
-    return g.compile()
+    return g.compile(checkpointer=get_checkpointer())
 
 
 # ---------------------------------------------------------------------------

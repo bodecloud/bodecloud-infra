@@ -40,6 +40,20 @@ class SynthoraClient:
         self.token = data["token"]
         return self.token
 
+    # -- sessions ------------------------------------------------------------
+
+    def create_session(self, title: str = "Untitled research", tags: Optional[list[str]] = None) -> dict:
+        return self._post("/api/v1/sessions", {"title": title, "tags": tags or []})
+
+    def list_sessions(self) -> list[dict]:
+        return self._get("/api/v1/sessions")["sessions"]
+
+    def get_session(self, session_id: str) -> dict:
+        return self._get(f"/api/v1/sessions/{session_id}")
+
+    def delete_session(self, session_id: str) -> dict:
+        return self._delete(f"/api/v1/sessions/{session_id}")
+
     # -- research ------------------------------------------------------------
 
     def start_research(
@@ -47,22 +61,39 @@ class SynthoraClient:
         question: str,
         *,
         pipeline_id: str = "deep_research",
+        session_id: Optional[str] = None,
         config: Optional[dict[str, Any]] = None,
     ) -> str:
-        data = self._post(
-            "/api/v1/research",
-            {"question": question, "pipeline_id": pipeline_id, "config": config},
-        )
+        body: dict[str, Any] = {
+            "question": question,
+            "pipeline_id": pipeline_id,
+            "config": config,
+        }
+        if session_id:
+            body["session_id"] = session_id
+        data = self._post("/api/v1/research", body)
         return data["run_id"]
 
     def get_run(self, run_id: str) -> dict:
         return self._get(f"/api/v1/research/{run_id}")
 
-    def list_runs(self) -> list[dict]:
-        return self._get("/api/v1/research")["runs"]
+    def list_runs(self, *, session_id: Optional[str] = None) -> list[dict]:
+        path = "/api/v1/research"
+        if session_id:
+            path = f"{path}?session_id={session_id}"
+        return self._get(path)["runs"]
+
+    def delete_run(self, run_id: str) -> dict:
+        return self._delete(f"/api/v1/research/{run_id}")
+
+    def clear_history(self) -> dict:
+        return self._post("/api/v1/research/clear", {})
 
     def cancel(self, run_id: str) -> dict:
         return self._post(f"/api/v1/research/{run_id}/cancel", {})
+
+    def resume(self, run_id: str, answer: str) -> dict:
+        return self._post(f"/api/v1/research/{run_id}/resume", {"answer": answer})
 
     def steer(self, run_id: str, message: str) -> dict:
         return self._post(f"/api/v1/research/{run_id}/steer", {"message": message})
@@ -76,6 +107,12 @@ class SynthoraClient:
     def get_knowledge_map(self, run_id: str) -> dict:
         return self._get(f"/api/v1/research/{run_id}/knowledge-map")
 
+    def get_discourse(self, run_id: str) -> list[dict]:
+        return self._get(f"/api/v1/research/{run_id}/discourse")["turns"]
+
+    def export_url(self, run_id: str, fmt: str = "markdown") -> str:
+        return f"{self.base_url}/api/v1/research/{run_id}/export?format={fmt}"
+
     def list_pipelines(self) -> list[dict]:
         return self._get("/api/v1/pipelines")["pipelines"]
 
@@ -88,11 +125,16 @@ class SynthoraClient:
         deadline = time.monotonic() + timeout
         while time.monotonic() < deadline:
             run = self.get_run(run_id)
-            if run["status"] == "completed":
+            status = run["status"]
+            if status == "completed":
                 return self.get_report(run_id)
-            if run["status"] in ("failed", "cancelled"):
+            if status == "awaiting_input":
                 raise RuntimeError(
-                    f"run {run_id} {run['status']}: {run.get('error')}"
+                    f"run {run_id} is awaiting_input; call resume() with an answer"
+                )
+            if status in ("failed", "cancelled"):
+                raise RuntimeError(
+                    f"run {run_id} {status}: {run.get('error')}"
                 )
             time.sleep(poll_seconds)
         raise TimeoutError(f"run {run_id} did not finish within {timeout}s")
@@ -109,6 +151,11 @@ class SynthoraClient:
 
     def _post(self, path: str, body: dict) -> dict:
         resp = self._client.post(path, json=body, headers=self._headers())
+        resp.raise_for_status()
+        return resp.json()
+
+    def _delete(self, path: str) -> dict:
+        resp = self._client.delete(path, headers=self._headers())
         resp.raise_for_status()
         return resp.json()
 

@@ -2,9 +2,20 @@
 
 from __future__ import annotations
 
+import uuid
+
 import pytest
 from synthora.core.models import SearchResult
+from synthora.orchestration.checkpoint import reset_checkpointer
 from synthora.persistence.database import Database
+
+
+@pytest.fixture(autouse=True)
+def _fresh_checkpointer():
+    """Isolate LangGraph MemorySaver state between tests."""
+    reset_checkpointer()
+    yield
+    reset_checkpointer()
 
 
 @pytest.fixture

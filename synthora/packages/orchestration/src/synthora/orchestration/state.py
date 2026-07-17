@@ -25,6 +25,7 @@ class AgentState(TypedDict, total=False):
 
     question: str
     clarification: Optional[str]
+    pending_clarification: Optional[str]
     brief: str
     # research phase output
     notes: Annotated[list[str], operator.add]

@@ -10,6 +10,7 @@ from langchain_core.runnables import RunnableConfig
 from langgraph.types import interrupt
 from synthora.core.events import RunEventType
 from synthora.core.models import Citation, SearchResult
+from synthora.orchestration.token_limits import complete_with_retry
 from synthora.orchestration.context import get_ctx, parse_json_response
 from synthora.orchestration.state import (
     AgentState,
@@ -23,9 +24,15 @@ from synthora.orchestration.state import (
 
 
 async def clarify_with_user(state: AgentState, config: RunnableConfig) -> dict:
-    """Optionally interrupt to ask one clarifying question (R-ODR-2)."""
+    """Decide whether clarification is needed (R-ODR-2).
+
+    Split from the interrupt itself so LangGraph resume re-entry does not
+    re-call the planner (nodes re-run from the top on ``Command(resume=...)``).
+    """
     ctx = get_ctx(config)
     if not ctx.config.allow_clarification or state.get("clarification"):
+        return {}
+    if state.get("pending_clarification"):
         return {}
     raw = await ctx.planner.complete(
         [
@@ -43,11 +50,18 @@ async def clarify_with_user(state: AgentState, config: RunnableConfig) -> dict:
     parsed = parse_json_response(raw) or {"clear": True}
     if parsed.get("clear", True):
         return {}
-    await ctx.emit(
-        RunEventType.INTERRUPT, parsed.get("question", ""), node="clarify"
-    )
-    answer = interrupt({"question": parsed.get("question", "")})
-    return {"clarification": str(answer)}
+    question = str(parsed.get("question", "") or "Can you clarify your research goal?")
+    await ctx.emit(RunEventType.INTERRUPT, question, node="clarify")
+    return {"pending_clarification": question}
+
+
+async def clarify_interrupt(state: AgentState, config: RunnableConfig) -> dict:
+    """Pause for the user's answer when ``pending_clarification`` is set."""
+    question = state.get("pending_clarification")
+    if not question or state.get("clarification"):
+        return {}
+    answer = interrupt({"question": question})
+    return {"clarification": str(answer), "pending_clarification": None}
 
 
 async def write_research_brief(state: AgentState, config: RunnableConfig) -> dict:
@@ -167,7 +181,8 @@ async def compress_research(state: ResearcherState, config: RunnableConfig) -> d
         f"[{i + 1}] {r.title}\nURL: {r.url}\n{(r.content or r.snippet)[: ctx.config.max_content_length // 10]}"
         for i, r in enumerate(state.get("findings", [])[:20])
     )
-    compressed = await ctx.compressor.complete(
+    compressed = await complete_with_retry(
+        ctx.compressor,
         [
             {
                 "role": "system",
@@ -181,7 +196,8 @@ async def compress_research(state: ResearcherState, config: RunnableConfig) -> d
                 "role": "user",
                 "content": f"Topic: {state['topic']}\n\n{corpus or '(no findings)'}",
             },
-        ]
+        ],
+        truncate_user_to=ctx.config.max_content_length,
     )
     return {"compressed": compressed.strip()}
 
@@ -270,9 +286,19 @@ async def supervisor_tools(state: SupervisorState, config: RunnableConfig) -> di
     results = await asyncio.gather(
         *(
             researcher_graph.ainvoke(
-                {"topic": topic, "tool_calls": 0}, config=config
+                {"topic": topic, "tool_calls": 0},
+                config={
+                    **config,
+                    "configurable": {
+                        **(config.get("configurable") or {}),
+                        "thread_id": (
+                            f"{(config.get('configurable') or {}).get('thread_id', 'run')}"
+                            f":researcher:{i}"
+                        ),
+                    },
+                },
             )
-            for topic in topics
+            for i, topic in enumerate(topics)
         ),
         return_exceptions=True,
     )
@@ -329,15 +355,19 @@ async def final_report_generation(state: AgentState, config: RunnableConfig) -> 
     notes_block = "\n\n".join(state.get("notes", []))
     sections_block = "\n\n".join(state.get("sections", []))
     critique = state.get("critique", "")
+    polished_draft = state.get("report", "")
     prompt_parts = [f"Research brief:\n{state.get('brief', state['question'])}"]
-    if sections_block:
+    if polished_draft:
+        prompt_parts.append(f"Polished draft to refine:\n{polished_draft[:ctx.config.max_content_length]}")
+    elif sections_block:
         prompt_parts.append(f"Drafted sections:\n{sections_block}")
     if notes_block:
         prompt_parts.append(f"Research notes:\n{notes_block[:ctx.config.max_content_length]}")
     if critique:
         prompt_parts.append(f"Reviewer critique to address:\n{critique}")
     prompt_parts.append(f"Available sources:\n{sources_block}")
-    report = await ctx.writer.complete(
+    report = await complete_with_retry(
+        ctx.writer,
         [
             {
                 "role": "system",
@@ -351,6 +381,7 @@ async def final_report_generation(state: AgentState, config: RunnableConfig) -> 
             {"role": "user", "content": "\n\n".join(prompt_parts)},
         ],
         temperature=0.4,
+        truncate_user_to=ctx.config.max_content_length,
     )
     await ctx.emit(RunEventType.NODE_FINISHED, "Report complete", node="report")
     # citations is an operator.add channel: only add ones not already in state

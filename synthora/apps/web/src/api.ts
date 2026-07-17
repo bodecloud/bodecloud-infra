@@ -1,5 +1,7 @@
 // Typed client for the Synthora REST + WebSocket API.
 
+const TOKEN_KEY = "synthora_token";
+
 export interface PipelineSpec {
   id: string;
   name: string;
@@ -7,10 +9,19 @@ export interface PipelineSpec {
   tags: string[];
 }
 
+export interface SessionSummary {
+  id: string;
+  title: string;
+  tags: string[];
+  workspace_id: string;
+  created_at: string;
+}
+
 export interface RunSummary {
   id: string;
   question: string;
   pipeline_id: string;
+  session_id: string | null;
   status: string;
   created_at: string;
   finished_at: string | null;
@@ -57,15 +68,65 @@ export interface KnowledgeEdge {
   relation: string;
 }
 
+export interface DiscourseTurn {
+  id: string;
+  run_id: string | null;
+  speaker: string;
+  role: string;
+  utterance: string;
+  intent: string;
+  citations: Citation[];
+  created_at: string;
+}
+
 export interface Providers {
   llm_providers: string[];
   search_engines: string[];
   search_strategies: string[];
 }
 
+export interface ResearchConfig {
+  search_engines?: string[];
+  search_strategy?: string;
+  allow_clarification?: boolean;
+  planner_model?: string;
+  researcher_model?: string;
+  compressor_model?: string;
+  writer_model?: string;
+  critic_model?: string;
+  [key: string]: unknown;
+}
+
+export interface StartResearchOptions {
+  session_id?: string | null;
+  config?: ResearchConfig;
+}
+
 let authToken: string | null = null;
+
+/** Set the in-memory Bearer token and persist (or clear) localStorage. */
 export function setToken(token: string | null) {
   authToken = token;
+  if (typeof localStorage !== "undefined") {
+    if (token) localStorage.setItem(TOKEN_KEY, token);
+    else localStorage.removeItem(TOKEN_KEY);
+  }
+}
+
+/** Load a previously stored token into memory and return it. */
+export function loadStoredToken(): string | null {
+  if (typeof localStorage === "undefined") return null;
+  const token = localStorage.getItem(TOKEN_KEY);
+  authToken = token;
+  return token;
+}
+
+export function getToken(): string | null {
+  return authToken;
+}
+
+export function clearToken() {
+  setToken(null);
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -79,26 +140,113 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     const body = await resp.text();
     throw new Error(`${resp.status}: ${body}`);
   }
-  return resp.json() as Promise<T>;
+  if (resp.status === 204) return undefined as T;
+  const text = await resp.text();
+  if (!text) return undefined as T;
+  return JSON.parse(text) as T;
+}
+
+export function exportUrl(
+  runId: string,
+  format: "markdown" | "html" = "markdown",
+): string {
+  return `/api/v1/research/${runId}/export?format=${format}`;
+}
+
+/** Fetch an export file with auth and trigger a browser download. */
+export async function downloadExport(
+  runId: string,
+  format: "markdown" | "html",
+): Promise<void> {
+  const headers: Record<string, string> = {};
+  if (authToken) headers["Authorization"] = `Bearer ${authToken}`;
+  const resp = await fetch(exportUrl(runId, format), { headers });
+  if (!resp.ok) {
+    const body = await resp.text();
+    throw new Error(`${resp.status}: ${body}`);
+  }
+  const blob = await resp.blob();
+  const ext = format === "html" ? "html" : "md";
+  const objectUrl = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = objectUrl;
+  a.download = `synthora-${runId}.${ext}`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(objectUrl);
 }
 
 export const api = {
+  register: (username: string, password: string) =>
+    request<{ token: string; user_id: string }>("/api/v1/auth/register", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    }),
+  login: (username: string, password: string) =>
+    request<{ token: string; user_id: string }>("/api/v1/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    }),
+
+  listSessions: () =>
+    request<{ sessions: SessionSummary[] }>("/api/v1/sessions").then(
+      (d) => d.sessions,
+    ),
+  createSession: (title: string, tags: string[] = []) =>
+    request<SessionSummary>("/api/v1/sessions", {
+      method: "POST",
+      body: JSON.stringify({ title, tags }),
+    }),
+  getSession: (id: string) =>
+    request<SessionSummary & { runs: RunSummary[] }>(`/api/v1/sessions/${id}`),
+  deleteSession: (id: string) =>
+    request<{ deleted: boolean; id: string }>(`/api/v1/sessions/${id}`, {
+      method: "DELETE",
+    }),
+
   listPipelines: () =>
     request<{ pipelines: PipelineSpec[] }>("/api/v1/pipelines").then(
       (d) => d.pipelines,
     ),
   listProviders: () => request<Providers>("/api/v1/providers"),
-  listRuns: () =>
-    request<{ runs: RunSummary[] }>("/api/v1/research").then((d) => d.runs),
+  listRuns: (sessionId?: string) => {
+    const q = sessionId
+      ? `?session_id=${encodeURIComponent(sessionId)}`
+      : "";
+    return request<{ runs: RunSummary[] }>(`/api/v1/research${q}`).then(
+      (d) => d.runs,
+    );
+  },
   getRun: (id: string) => request<RunDetail>(`/api/v1/research/${id}`),
   startResearch: (
     question: string,
     pipelineId: string,
-    config?: Record<string, unknown>,
+    options?: StartResearchOptions,
   ) =>
-    request<{ run_id: string; status: string }>("/api/v1/research", {
-      method: "POST",
-      body: JSON.stringify({ question, pipeline_id: pipelineId, config }),
+    request<{ run_id: string; status: string; session_id: string | null }>(
+      "/api/v1/research",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          question,
+          pipeline_id: pipelineId,
+          session_id: options?.session_id ?? null,
+          config: options?.config,
+        }),
+      },
+    ),
+  resumeResearch: (id: string, answer: string) =>
+    request<{ run_id: string; status: string; resumed: boolean }>(
+      `/api/v1/research/${id}/resume`,
+      {
+        method: "POST",
+        body: JSON.stringify({ answer }),
+      },
+    ),
+  deleteRun: (id: string) =>
+    request<{ deleted: boolean; id: string }>(`/api/v1/research/${id}`, {
+      method: "DELETE",
     }),
   cancelRun: (id: string) =>
     request(`/api/v1/research/${id}/cancel`, { method: "POST", body: "{}" }),
@@ -121,6 +269,10 @@ export const api = {
     request<{ nodes: KnowledgeNode[]; edges: KnowledgeEdge[] }>(
       `/api/v1/research/${id}/knowledge-map`,
     ),
+  getDiscourse: (id: string) =>
+    request<{ turns: DiscourseTurn[] }>(
+      `/api/v1/research/${id}/discourse`,
+    ).then((d) => d.turns),
 };
 
 export function eventsSocketUrl(runId: string): string {

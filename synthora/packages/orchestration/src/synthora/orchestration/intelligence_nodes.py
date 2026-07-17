@@ -22,43 +22,81 @@ from synthora.orchestration.state import AgentState
 
 
 async def perspective_pass(state: AgentState, config: RunnableConfig) -> dict:
-    """Discover expert perspectives from the brief (R-STORM-1)."""
+    """Discover expert perspectives and seed guided questions (R-STORM-1)."""
     ctx = get_ctx(config)
     await ctx.emit(RunEventType.NODE_STARTED, "Discovering perspectives", node="perspectives")
     context = "\n".join(state.get("notes", [])[:3])
     engine = PerspectiveEngine(ctx.planner)
-    perspectives = await engine.discover(
-        state.get("brief", state["question"]),
-        count=ctx.config.num_perspectives,
-        context=context[:3000],
+    brief = state.get("brief", state["question"])
+    has_wikipedia = any(
+        getattr(e, "name", "") == "wikipedia" for e in (ctx.engines or [])
     )
+    if has_wikipedia:
+        perspectives = await engine.mine_from_wikipedia_toc(
+            brief,
+            count=ctx.config.num_perspectives,
+        )
+    else:
+        perspectives = await engine.discover(
+            brief,
+            count=ctx.config.num_perspectives,
+            context=context[:3000],
+        )
+    guided: dict[str, list[str]] = {}
     for p in perspectives:
+        questions = await engine.generate_questions(p, brief, count=3)
+        guided[p.name] = questions
         await ctx.emit(
             RunEventType.PERSPECTIVE_CREATED,
             p.name,
             node="perspectives",
-            payload={"focus": p.focus},
+            payload={"focus": p.focus, "questions": questions},
         )
-    return {"perspectives": perspectives}
+    meta = {
+        **state.get("metadata", {}),
+        "guided_questions": guided,
+        "perspective_source": "wikipedia_toc" if has_wikipedia else "discover",
+    }
+    return {"perspectives": perspectives, "metadata": meta}
 
 
 async def discourse_pass(state: AgentState, config: RunnableConfig) -> dict:
     """Run the Co-STORM roundtable seeded with research sources (R-STORM-4)."""
     ctx = get_ctx(config)
     await ctx.emit(RunEventType.NODE_STARTED, "Expert roundtable", node="discourse")
+    from synthora.intelligence.embeddings import make_embedding_similarity
+
     manager = DiscourseManager(
         ctx.researcher,
         engines=ctx.engines,
         experts_per_round=2,
         alpha=ctx.config.moderator_alpha,
+        similarity=make_embedding_similarity(),
     )
+    topic = state.get("brief", state["question"])
+    perspectives = state.get("perspectives", [])
+    if state.get("sources"):
+        manager.add_evidence(state.get("sources", []))
+
+    notes = state.get("notes") or []
+    extra = ctx.config.extra or {}
+    # Warm-start when notes are empty, or whenever extra.warm_start is True (default).
+    if not notes or extra.get("warm_start", True):
+        warm_questions = await manager.warm_start(topic, perspectives)
+        for q in warm_questions:
+            manager.inject_user_turn(f"[warm-start] {q}")
+    if extra.get("pure_rag"):
+        await manager.pure_rag_turn(topic)
+
+    guided = (state.get("metadata") or {}).get("guided_questions") or {}
     for msg in ctx.steering:
         manager.inject_user_turn(msg)
     turns = await manager.run_discourse(
-        state.get("brief", state["question"]),
-        state.get("perspectives", []),
+        topic,
+        perspectives,
         max_turns=ctx.config.max_discourse_turns,
         seed_evidence=state.get("sources", []),
+        guided_questions=guided,
     )
     for t in turns:
         await ctx.emit(
@@ -76,9 +114,12 @@ async def mind_map_upsert(state: AgentState, config: RunnableConfig) -> dict:
     overloaded nodes (R-STORM-3)."""
     ctx = get_ctx(config)
     await ctx.emit(RunEventType.NODE_STARTED, "Building knowledge map", node="knowledge_map")
+    from synthora.intelligence.embeddings import make_embedding_similarity
+
     kmap = KnowledgeMap(
         state.get("brief", state["question"])[:80],
         capacity=ctx.config.knowledge_node_capacity,
+        similarity=make_embedding_similarity(),
     )
     citations = state.get("citations") or build_citations(
         state.get("sources", []), ctx.run_id
@@ -123,19 +164,22 @@ async def outline_node(state: AgentState, config: RunnableConfig) -> dict:
 
 
 async def section_write(state: AgentState, config: RunnableConfig) -> dict:
-    """Section-by-section cited writing (R-STORM-5)."""
+    """Section-by-section cited writing + polish pass (R-STORM-5)."""
     ctx = get_ctx(config)
     outline = state.get("outline") or OutlineNode(title=state["question"])
     citations = state.get("citations") or build_citations(
         state.get("sources", []), ctx.run_id
     )
-    writer = SectionWriter(ctx.writer)
+    from synthora.intelligence.embeddings import default_hash_embeddings
+
+    writer = SectionWriter(ctx.writer, embeddings=default_hash_embeddings())
     notes = "\n\n".join(state.get("notes", []))
+    brief = state.get("brief", state["question"])
     sections: list[str] = []
     for section in flatten_sections(outline):
         text = await writer.write_section(
             section,
-            brief=state.get("brief", state["question"]),
+            brief=brief,
             citations=citations,
             notes=notes,
         )
@@ -143,7 +187,14 @@ async def section_write(state: AgentState, config: RunnableConfig) -> dict:
         await ctx.emit(
             RunEventType.SECTION_WRITTEN, section.title, node="section_write"
         )
-    return {"sections": sections, "citations": citations}
+    draft = "\n\n".join(sections)
+    polished = await writer.polish(draft, brief=brief)
+    await ctx.emit(RunEventType.NODE_FINISHED, "Polished report draft", node="polish")
+    return {
+        "sections": sections,
+        "citations": citations,
+        "report": polished,
+    }
 
 
 async def critic_node(state: AgentState, config: RunnableConfig) -> dict:
@@ -306,12 +357,19 @@ async def investigate_hypotheses(state: AgentState, config: RunnableConfig) -> d
     brief = state.get("brief", state["question"])
     focus = "\n".join(f"- {h}" for h in current)
     supervisor_graph = build_supervisor_graph()
+    nested_cfg = {
+        **config,
+        "configurable": {
+            **(config.get("configurable") or {}),
+            "thread_id": f"{(config.get('configurable') or {}).get('thread_id', 'run')}:auto-sup",
+        },
+    }
     result = await supervisor_graph.ainvoke(
         {
             "brief": f"{brief}\n\nInvestigate specifically:\n{focus}",
             "research_iterations": 0,
         },
-        config=config,
+        config=nested_cfg,
     )
     return {
         "notes": result.get("notes", []),

@@ -43,10 +43,12 @@ async def main() -> None:
     asyncio.create_task(heartbeat_loop())
     logger.info("worker started (max_concurrent=%d)", max_concurrent)
 
-    async def run_job(run_id: str) -> None:
+    async def run_job(job: dict) -> None:
         async with semaphore:
+            run_id = job["run_id"]
+            resume_value = job.get("resume_value")
             try:
-                run = await executor.execute(run_id)
+                run = await executor.execute(run_id, resume_value=resume_value)
                 logger.info("run %s finished: %s", run_id, run.status.value)
             except Exception:
                 logger.exception("run %s crashed", run_id)
@@ -55,7 +57,7 @@ async def main() -> None:
         job = await queue.dequeue(timeout=5.0)
         if job is None:
             continue
-        task = asyncio.create_task(run_job(job["run_id"]))
+        task = asyncio.create_task(run_job(job))
         tasks.add(task)
         task.add_done_callback(tasks.discard)
 

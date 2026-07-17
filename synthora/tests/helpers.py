@@ -17,11 +17,13 @@ def make_ctx(
     critic: FakeChatModel | None = None,
     engines: list | None = None,
     config: RunConfig | None = None,
-    run_id: str = "test-run",
+    run_id: str | None = None,
 ) -> ResearchContext:
+    import uuid
+
     default = FakeChatModel()
     return ResearchContext(
-        run_id=run_id,
+        run_id=run_id or f"test-{uuid.uuid4().hex[:12]}",
         config=config or RunConfig(),
         planner=planner or default,
         researcher=researcher or default,
@@ -33,5 +35,11 @@ def make_ctx(
     )
 
 
-def graph_config(ctx: ResearchContext) -> dict:
-    return {"configurable": {"synthora_ctx": ctx}, "recursion_limit": 100}
+def graph_config(ctx: ResearchContext, *, thread_id: str | None = None) -> dict:
+    return {
+        "configurable": {
+            "synthora_ctx": ctx,
+            "thread_id": thread_id or ctx.run_id,
+        },
+        "recursion_limit": 100,
+    }

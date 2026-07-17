@@ -203,3 +203,142 @@ async def test_section_writer_offers_relevant_citations():
 def test_jaccard_bounds():
     assert jaccard("", "anything") == 0.0
     assert jaccard("alpha beta", "alpha beta") == 1.0
+
+
+# ---------------------------------------------------------------- embeddings / wiki / co-storm
+
+
+def test_hash_embedding_similarity_ranks_related_higher():
+    from synthora.intelligence.embeddings import (
+        cosine_similarity,
+        default_hash_embeddings,
+        make_embedding_similarity,
+    )
+
+    emb = default_hash_embeddings()
+    encode = emb.embed_one if hasattr(emb, "embed_one") else emb._one
+    a = encode("quantum error correction codes")
+    b = encode("quantum error correction threshold")
+    c = encode("pasta cooking recipes tomatoes")
+    assert cosine_similarity(a, b) > cosine_similarity(a, c)
+
+    sim = make_embedding_similarity(emb)
+    assert sim(
+        "quantum error correction codes",
+        "quantum error correction threshold",
+    ) > sim(
+        "quantum error correction codes",
+        "pasta cooking recipes tomatoes",
+    )
+    # SimilarityFn plugs into KnowledgeMap without error
+    kmap = KnowledgeMap("Root", similarity=sim)
+    kmap.add_node("quantum error correction")
+    placed = kmap.insert(_cite("surface code quantum error correction"))
+    assert placed is not None
+
+
+async def test_mine_from_wikipedia_toc_uses_sections(monkeypatch):
+    llm = FakeChatModel(
+        responses=[
+            json.dumps(
+                [
+                    {"name": "Historian", "description": "d", "focus": "History"},
+                    {"name": "Engineer", "description": "d", "focus": "Applications"},
+                ]
+            )
+        ]
+    )
+    engine = PerspectiveEngine(llm)
+
+    async def fake_toc(self, topic, *, lang="en", timeout=20.0):
+        return ["History", "Applications", "Criticism"]
+
+    monkeypatch.setattr(PerspectiveEngine, "_fetch_wikipedia_toc", fake_toc)
+    perspectives = await engine.mine_from_wikipedia_toc("quantum computing", count=2)
+    assert [p.name for p in perspectives] == ["Historian", "Engineer"]
+    # LLM prompt included TOC context
+    user_msg = llm.calls[0][1]["content"]
+    assert "History" in user_msg and "Applications" in user_msg
+
+
+async def test_mine_from_wikipedia_toc_falls_back_when_empty(monkeypatch):
+    llm = FakeChatModel(
+        responses=[
+            json.dumps([{"name": "Fallback Expert", "description": "d", "focus": "f"}])
+        ]
+    )
+    engine = PerspectiveEngine(llm)
+
+    async def empty_toc(self, topic, *, lang="en", timeout=20.0):
+        return []
+
+    monkeypatch.setattr(PerspectiveEngine, "_fetch_wikipedia_toc", empty_toc)
+    perspectives = await engine.mine_from_wikipedia_toc("obscure topic", count=1)
+    assert perspectives[0].name == "Fallback Expert"
+
+
+async def test_section_writer_prefers_embedding_cosine():
+    from synthora.core.models import OutlineNode
+    from synthora.intelligence.embeddings import HashEmbeddings
+
+    citations = [
+        Citation(
+            url="https://a",
+            title="quantum error correction codes",
+            snippet="stabilizer codes",
+            index=1,
+        ),
+        Citation(
+            url="https://b",
+            title="unrelated cooking pasta",
+            snippet="tomato sauce",
+            index=2,
+        ),
+    ]
+    llm = FakeChatModel(default="## Section\n\nText [1].")
+    writer = SectionWriter(llm, embeddings=HashEmbeddings())
+    await writer.write_section(
+        OutlineNode(title="quantum error correction"),
+        brief="b",
+        citations=citations,
+    )
+    prompt = llm.calls[0][1]["content"]
+    assert prompt.index("[1]") < prompt.index("[2]")
+
+
+async def test_warm_start_returns_outline_questions():
+    llm = FakeChatModel(responses=["What is X?\nHow does Y work?\nWhy Z matters?"])
+    manager = DiscourseManager(llm)
+    experts = [Perspective(name="A", description="d", focus="origins")]
+    questions = await manager.warm_start("topic", experts)
+    assert questions == ["What is X?", "How does Y work?", "Why Z matters?"]
+    assert manager.turns == []  # warm_start does not append turns
+
+
+async def test_pure_rag_turn_answers_from_evidence():
+    llm = FakeChatModel(default="ANSWER: grounded claim [1]")
+    manager = DiscourseManager(llm)
+    manager.add_evidence(
+        [
+            SearchResult(
+                url="https://e.com",
+                title="Evidence",
+                snippet="fact",
+                content="fact detail",
+            )
+        ]
+    )
+    turn = await manager.pure_rag_turn("topic")
+    assert turn.role == "rag" and turn.speaker == "PureRAG"
+    assert turn.intent == "answer"
+    assert turn.citations and turn.citations[0].url == "https://e.com"
+
+
+async def test_simulated_user_turn_asks_followup():
+    llm = FakeChatModel(default="What about edge cases?")
+    manager = DiscourseManager(llm)
+    manager.inject_user_turn("prior steer")
+    turn = await manager.simulated_user_turn("topic")
+    assert turn.role == "user" and turn.intent == "question"
+    assert "edge cases" in turn.utterance
+    assert manager.turns[-1] is turn

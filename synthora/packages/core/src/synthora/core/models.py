@@ -34,6 +34,9 @@ class ArtifactKind(str, Enum):
     KNOWLEDGE_MAP = "knowledge_map"
     EXPORT_PDF = "export_pdf"
     RAW_NOTES = "raw_notes"
+    DISCOURSE_LOG = "discourse_log"
+    URL_TO_INFO = "url_to_info"
+    INTERRUPT_PAYLOAD = "interrupt_payload"
 
 
 class User(BaseModel):

@@ -25,15 +25,18 @@ from synthora.core.models import (
     ResearchRun,
     RunConfig,
     RunStatus,
+    Session,
     User,
 )
 from synthora.orchestration.registry import pipeline_registry
 from synthora.persistence import (
     ArtifactRepository,
     CitationRepository,
+    DiscourseRepository,
     EventRepository,
     KnowledgeRepository,
     RunRepositorySQL,
+    SessionRepository,
     UserRepository,
     WorkspaceRepository,
 )
@@ -89,11 +92,21 @@ class LoginRequest(BaseModel):
 class StartResearchRequest(BaseModel):
     question: str = Field(min_length=3)
     pipeline_id: str = "deep_research"
+    session_id: Optional[str] = None
     config: Optional[dict] = None
 
 
 class SteerRequest(BaseModel):
     message: str = Field(min_length=1)
+
+
+class ResumeRequest(BaseModel):
+    answer: str = Field(min_length=1)
+
+
+class CreateSessionRequest(BaseModel):
+    title: str = "Untitled research"
+    tags: list[str] = Field(default_factory=list)
 
 
 # ---------------------------------------------------------------- health
@@ -143,6 +156,93 @@ async def login(body: LoginRequest) -> dict:
     return {"token": issue_token(user), "user_id": user.id}
 
 
+# ---------------------------------------------------------------- sessions
+
+
+@app.post("/api/v1/sessions", status_code=201)
+async def create_session(
+    body: CreateSessionRequest, identity: dict = Depends(current_identity)
+) -> dict:
+    session = Session(
+        workspace_id=identity["workspace_id"],
+        title=body.title,
+        tags=body.tags,
+    )
+    await SessionRepository(get_db()).create(session)
+    return {
+        "id": session.id,
+        "title": session.title,
+        "tags": session.tags,
+        "workspace_id": session.workspace_id,
+        "created_at": session.created_at.isoformat(),
+    }
+
+
+@app.get("/api/v1/sessions")
+async def list_sessions(identity: dict = Depends(current_identity)) -> dict:
+    sessions = await SessionRepository(get_db()).list_sessions(
+        identity["workspace_id"]
+    )
+    return {
+        "sessions": [
+            {
+                "id": s.id,
+                "title": s.title,
+                "tags": s.tags,
+                "workspace_id": s.workspace_id,
+                "created_at": s.created_at.isoformat(),
+            }
+            for s in sessions
+        ]
+    }
+
+
+@app.get("/api/v1/sessions/{session_id}")
+async def get_session(
+    session_id: str, identity: dict = Depends(current_identity)
+) -> dict:
+    session = await SessionRepository(get_db()).get(session_id)
+    if session is None or (
+        settings.auth_mode == "session"
+        and session.workspace_id != identity["workspace_id"]
+    ):
+        raise HTTPException(status_code=404, detail="session not found")
+    runs = await RunRepositorySQL(get_db()).list_runs(
+        workspace_id=identity["workspace_id"], session_id=session_id
+    )
+    return {
+        "id": session.id,
+        "title": session.title,
+        "tags": session.tags,
+        "workspace_id": session.workspace_id,
+        "created_at": session.created_at.isoformat(),
+        "runs": [
+            {
+                "id": r.id,
+                "question": r.question,
+                "pipeline_id": r.pipeline_id,
+                "status": r.status.value,
+                "created_at": r.created_at.isoformat(),
+            }
+            for r in runs
+        ],
+    }
+
+
+@app.delete("/api/v1/sessions/{session_id}")
+async def delete_session(
+    session_id: str, identity: dict = Depends(current_identity)
+) -> dict:
+    session = await SessionRepository(get_db()).get(session_id)
+    if session is None or (
+        settings.auth_mode == "session"
+        and session.workspace_id != identity["workspace_id"]
+    ):
+        raise HTTPException(status_code=404, detail="session not found")
+    await SessionRepository(get_db()).delete(session_id)
+    return {"deleted": True, "id": session_id}
+
+
 # ---------------------------------------------------------------- research
 
 
@@ -154,6 +254,13 @@ async def start_research(
         pipeline_registry.get(body.pipeline_id)
     except KeyError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    if body.session_id:
+        session = await SessionRepository(get_db()).get(body.session_id)
+        if session is None or (
+            settings.auth_mode == "session"
+            and session.workspace_id != identity["workspace_id"]
+        ):
+            raise HTTPException(status_code=404, detail="session not found")
     config = RunConfig.model_validate(
         {**(body.config or {}), "pipeline_id": body.pipeline_id}
     )
@@ -161,17 +268,21 @@ async def start_research(
         question=body.question,
         pipeline_id=body.pipeline_id,
         workspace_id=identity["workspace_id"],
+        session_id=body.session_id,
         config=config,
     )
     await RunRepositorySQL(get_db()).create(run)
     await get_queue().enqueue(run.id, {"pipeline_id": run.pipeline_id})
-    return {"run_id": run.id, "status": run.status.value}
+    return {"run_id": run.id, "status": run.status.value, "session_id": run.session_id}
 
 
 @app.get("/api/v1/research")
-async def list_research(identity: dict = Depends(current_identity)) -> dict:
+async def list_research(
+    session_id: Optional[str] = None,
+    identity: dict = Depends(current_identity),
+) -> dict:
     runs = await RunRepositorySQL(get_db()).list_runs(
-        workspace_id=identity["workspace_id"]
+        workspace_id=identity["workspace_id"], session_id=session_id
     )
     return {
         "runs": [
@@ -179,6 +290,7 @@ async def list_research(identity: dict = Depends(current_identity)) -> dict:
                 "id": r.id,
                 "question": r.question,
                 "pipeline_id": r.pipeline_id,
+                "session_id": r.session_id,
                 "status": r.status.value,
                 "created_at": r.created_at.isoformat(),
                 "finished_at": r.finished_at.isoformat() if r.finished_at else None,
@@ -207,6 +319,7 @@ async def get_research(
         "question": run.question,
         "brief": run.brief,
         "pipeline_id": run.pipeline_id,
+        "session_id": run.session_id,
         "status": run.status.value,
         "error": run.error,
         "config": run.config.model_dump(mode="json"),
@@ -216,15 +329,56 @@ async def get_research(
     }
 
 
+@app.delete("/api/v1/research/{run_id}")
+async def delete_research(
+    run_id: str, identity: dict = Depends(current_identity)
+) -> dict:
+    await _get_run_checked(run_id, identity)
+    await RunRepositorySQL(get_db()).delete(run_id)
+    return {"deleted": True, "id": run_id}
+
+
+@app.post("/api/v1/research/clear")
+async def clear_research(identity: dict = Depends(current_identity)) -> dict:
+    runs = await RunRepositorySQL(get_db()).list_runs(
+        workspace_id=identity["workspace_id"], limit=1000
+    )
+    deleted = 0
+    for run in runs:
+        if await RunRepositorySQL(get_db()).delete(run.id):
+            deleted += 1
+    return {"deleted": deleted}
+
+
 @app.post("/api/v1/research/{run_id}/cancel")
 async def cancel_research(
     run_id: str, identity: dict = Depends(current_identity)
 ) -> dict:
     run = await _get_run_checked(run_id, identity)
-    if run.status in (RunStatus.COMPLETED, RunStatus.FAILED, RunStatus.CANCELLED):
+    if run.status in (
+        RunStatus.COMPLETED,
+        RunStatus.FAILED,
+        RunStatus.CANCELLED,
+    ):
         raise HTTPException(status_code=409, detail=f"run already {run.status.value}")
     await get_queue().request_cancel(run_id)
     return {"run_id": run_id, "cancel_requested": True}
+
+
+@app.post("/api/v1/research/{run_id}/resume", status_code=202)
+async def resume_research(
+    run_id: str, body: ResumeRequest, identity: dict = Depends(current_identity)
+) -> dict:
+    run = await _get_run_checked(run_id, identity)
+    if run.status != RunStatus.AWAITING_INPUT:
+        raise HTTPException(
+            status_code=409,
+            detail=f"run is {run.status.value}, expected awaiting_input",
+        )
+    await get_queue().enqueue(
+        run_id, {"pipeline_id": run.pipeline_id, "resume_value": body.answer}
+    )
+    return {"run_id": run_id, "status": "queued", "resumed": True}
 
 
 @app.post("/api/v1/research/{run_id}/steer")
@@ -309,6 +463,15 @@ async def get_knowledge_map(
         "nodes": [n.model_dump(mode="json") for n in nodes],
         "edges": [e.model_dump(mode="json") for e in edges],
     }
+
+
+@app.get("/api/v1/research/{run_id}/discourse")
+async def get_discourse(
+    run_id: str, identity: dict = Depends(current_identity)
+) -> dict:
+    await _get_run_checked(run_id, identity)
+    turns = await DiscourseRepository(get_db()).list_for_run(run_id)
+    return {"turns": [t.model_dump(mode="json") for t in turns]}
 
 
 @app.get("/api/v1/research/{run_id}/events")

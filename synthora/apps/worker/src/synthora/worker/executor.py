@@ -4,9 +4,12 @@ integration tests)."""
 
 from __future__ import annotations
 
+import json
 import logging
 from datetime import datetime, timezone
+from typing import Any, Optional
 
+from langgraph.types import Command
 from synthora.adapters import llm_registry, search_engine_registry, strategy_registry
 from synthora.core.events import ProgressEvent, RunEventType
 from synthora.core.models import (
@@ -21,6 +24,7 @@ from synthora.orchestration.registry import pipeline_registry
 from synthora.persistence import (
     ArtifactRepository,
     CitationRepository,
+    DiscourseRepository,
     EventRepository,
     KnowledgeRepository,
     RunRepositorySQL,
@@ -37,6 +41,23 @@ class RunCancelled(Exception):
 
 def utcnow() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def _has_interrupt(result: Any) -> bool:
+    if not isinstance(result, dict):
+        return False
+    return bool(result.get("__interrupt__"))
+
+
+def _interrupt_payload(result: dict) -> dict:
+    interrupts = result.get("__interrupt__") or []
+    if not interrupts:
+        return {}
+    first = interrupts[0]
+    value = getattr(first, "value", first)
+    if isinstance(value, dict):
+        return value
+    return {"question": str(value)}
 
 
 class RunExecutor:
@@ -59,15 +80,14 @@ class RunExecutor:
         self.artifacts = ArtifactRepository(db)
         self.citations = CitationRepository(db)
         self.knowledge = KnowledgeRepository(db)
+        self.discourse = DiscourseRepository(db)
 
     def build_context(self, run: ResearchRun) -> ResearchContext:
         cfg = run.config
 
         async def sink(event: ProgressEvent) -> None:
-            # cancellation checkpoint on every event boundary
             if await self.queue.is_cancelled(run.id):
                 raise RunCancelled(run.id)
-            # absorb steering messages pushed mid-run (R-STORM-6)
             for msg in await self.queue.drain_steering(run.id):
                 ctx.steering.append(msg)
             await self.events.append(event)
@@ -87,6 +107,12 @@ class RunExecutor:
         )
         return ctx
 
+    def _graph_config(self, run: ResearchRun, ctx: ResearchContext) -> dict:
+        return {
+            "configurable": {"synthora_ctx": ctx, "thread_id": run.id},
+            "recursion_limit": 150,
+        }
+
     async def _emit_status(self, run: ResearchRun, message: str = "") -> None:
         event = ProgressEvent(
             run_id=run.id,
@@ -97,10 +123,17 @@ class RunExecutor:
         await self.events.append(event)
         await self.queue.publish_event(run.id, event.to_wire())
 
-    async def execute(self, run_id: str, *, ctx: ResearchContext | None = None) -> ResearchRun:
-        """Execute one research run to completion (or failure/cancellation).
+    async def execute(
+        self,
+        run_id: str,
+        *,
+        ctx: ResearchContext | None = None,
+        resume_value: Optional[str] = None,
+    ) -> ResearchRun:
+        """Execute one research run to completion, interrupt, failure, or cancel.
 
-        ``ctx`` can be injected for tests; production builds it from config.
+        When ``resume_value`` is set, continues a previously interrupted run via
+        LangGraph ``Command(resume=...)``.
         """
         run = await self.runs.get(run_id)
         if run is None:
@@ -113,26 +146,57 @@ class RunExecutor:
             return run
 
         run.status = RunStatus.RUNNING
-        run.started_at = utcnow()
+        if run.started_at is None:
+            run.started_at = utcnow()
+        run.finished_at = None
+        run.error = None
         await self.runs.update(run)
-        await self._emit_status(run, "Research started")
+        await self._emit_status(
+            run, "Research resumed" if resume_value is not None else "Research started"
+        )
 
         ctx = ctx or self.build_context(run)
         graph = pipeline_registry.build(run.pipeline_id)
+        config = self._graph_config(run, ctx)
         try:
-            result = await graph.ainvoke(
-                {"question": run.question},
-                config={
-                    "configurable": {"synthora_ctx": ctx, "thread_id": run.id},
-                    "recursion_limit": 150,
-                },
-            )
+            if resume_value is not None:
+                result = await graph.ainvoke(Command(resume=resume_value), config=config)
+            else:
+                result = await graph.ainvoke(
+                    {"question": run.question},
+                    config=config,
+                )
+
+            if _has_interrupt(result):
+                payload = _interrupt_payload(result)
+                await self.artifacts.save(
+                    Artifact(
+                        run_id=run.id,
+                        kind=ArtifactKind.INTERRUPT_PAYLOAD,
+                        content=json.dumps(payload),
+                        metadata=payload,
+                    )
+                )
+                run.status = RunStatus.AWAITING_INPUT
+                run.finished_at = None
+                await self.runs.update(run)
+                event = ProgressEvent(
+                    run_id=run.id,
+                    type=RunEventType.INTERRUPT,
+                    message=str(payload.get("question", "")),
+                    payload=payload,
+                )
+                await self.events.append(event)
+                await self.queue.publish_event(run.id, event.to_wire())
+                await self._emit_status(run, "Awaiting clarification")
+                return run
+
             await self._persist_result(run, result)
             run.brief = result.get("brief")
             run.status = RunStatus.COMPLETED
         except RunCancelled:
             run.status = RunStatus.CANCELLED
-        except Exception as exc:  # surface real failures to the user
+        except Exception as exc:
             logger.exception("run %s failed", run.id)
             run.error = f"{type(exc).__name__}: {exc}"
             run.status = RunStatus.FAILED
@@ -152,6 +216,15 @@ class RunExecutor:
         await self.events.append(event)
         await self.queue.publish_event(run.id, event.to_wire())
         return run
+
+    async def resume(self, run_id: str, answer: str) -> ResearchRun:
+        """Resume a run paused at AWAITING_INPUT."""
+        run = await self.runs.get(run_id)
+        if run is None:
+            raise KeyError(f"run {run_id} not found")
+        if run.status != RunStatus.AWAITING_INPUT:
+            raise ValueError(f"run is {run.status.value}, not awaiting_input")
+        return await self.execute(run_id, resume_value=answer)
 
     async def _persist_result(self, run: ResearchRun, result: dict) -> None:
         report = result.get("report", "")
@@ -180,6 +253,19 @@ class RunExecutor:
             for c in unique:
                 c.run_id = run.id
             await self.citations.save_many(unique)
+            url_map = {
+                str(c.index): {"url": c.url, "title": c.title, "snippet": c.snippet}
+                for c in unique
+                if c.index is not None
+            }
+            await self.artifacts.save(
+                Artifact(
+                    run_id=run.id,
+                    kind=ArtifactKind.URL_TO_INFO,
+                    content=json.dumps(url_map),
+                    metadata=url_map,
+                )
+            )
         nodes = result.get("knowledge_nodes") or []
         edges = result.get("knowledge_edges") or []
         if nodes:
@@ -191,5 +277,21 @@ class RunExecutor:
                     run_id=run.id,
                     kind=ArtifactKind.RAW_NOTES,
                     content="\n\n".join(notes),
+                )
+            )
+        discourse = result.get("discourse") or []
+        if discourse:
+            for turn in discourse:
+                turn.run_id = run.id
+            await self.discourse.save_many(discourse)
+            log = "\n\n".join(
+                f"**{t.speaker}** ({t.role}/{t.intent}): {t.utterance}"
+                for t in discourse
+            )
+            await self.artifacts.save(
+                Artifact(
+                    run_id=run.id,
+                    kind=ArtifactKind.DISCOURSE_LOG,
+                    content=log,
                 )
             )

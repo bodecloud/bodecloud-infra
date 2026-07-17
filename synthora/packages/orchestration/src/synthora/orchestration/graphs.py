@@ -3,11 +3,11 @@ ODR-style deep researcher core (R-ODR-1, R-ODR-7)."""
 
 from __future__ import annotations
 
-from functools import lru_cache
-
 from langchain_core.runnables import RunnableConfig
 from langgraph.graph import END, START, StateGraph
+from synthora.orchestration.checkpoint import get_checkpointer
 from synthora.orchestration.nodes import (
+    clarify_interrupt,
     clarify_with_user,
     compress_research,
     final_report_generation,
@@ -25,7 +25,6 @@ from synthora.orchestration.state import (
 )
 
 
-@lru_cache(maxsize=1)
 def build_researcher_graph():
     """Isolated researcher: ReAct search loop -> compression."""
     g = StateGraph(ResearcherState)
@@ -38,10 +37,9 @@ def build_researcher_graph():
         {"researcher_step": "researcher_step", "compress": "compress"},
     )
     g.add_edge("compress", END)
-    return g.compile()
+    return g.compile(checkpointer=get_checkpointer())
 
 
-@lru_cache(maxsize=1)
 def build_supervisor_graph():
     """Supervisor loop: plan -> delegate (parallel researchers) -> iterate."""
     g = StateGraph(SupervisorState)
@@ -58,14 +56,22 @@ def build_supervisor_graph():
         },
     )
     g.add_edge("supervisor_tools", "supervisor")
-    return g.compile()
+    return g.compile(checkpointer=get_checkpointer())
 
 
 async def run_supervisor_phase(state: AgentState, config: RunnableConfig) -> dict:
     """Adapter node: runs the supervisor subgraph from the top-level state."""
     supervisor_graph = build_supervisor_graph()
+    # Nested graphs need distinct thread ids under the parent checkpointer.
+    nested_cfg = {
+        **config,
+        "configurable": {
+            **(config.get("configurable") or {}),
+            "thread_id": f"{(config.get('configurable') or {}).get('thread_id', 'run')}:supervisor",
+        },
+    }
     result = await supervisor_graph.ainvoke(
-        {"brief": state["brief"], "research_iterations": 0}, config=config
+        {"brief": state["brief"], "research_iterations": 0}, config=nested_cfg
     )
     return {
         "notes": result.get("notes", []),
@@ -80,11 +86,13 @@ def build_deep_researcher_core() -> StateGraph:
     """
     g = StateGraph(AgentState)
     g.add_node("clarify", clarify_with_user)
+    g.add_node("clarify_wait", clarify_interrupt)
     g.add_node("brief", write_research_brief)
     g.add_node("research", run_supervisor_phase)
     g.add_node("report", final_report_generation)
     g.add_edge(START, "clarify")
-    g.add_edge("clarify", "brief")
+    g.add_edge("clarify", "clarify_wait")
+    g.add_edge("clarify_wait", "brief")
     g.add_edge("brief", "research")
     g.add_edge("research", "report")
     g.add_edge("report", END)

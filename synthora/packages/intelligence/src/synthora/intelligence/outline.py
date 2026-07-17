@@ -11,8 +11,9 @@ from typing import Optional
 
 from synthora.core.models import Citation, OutlineNode
 from synthora.core.parsing import parse_json_response
-from synthora.core.ports import ChatModel
-from synthora.intelligence.knowledge_map import KnowledgeMap, jaccard
+from synthora.core.ports import ChatModel, EmbeddingModel
+from synthora.intelligence.embeddings import cosine_similarity
+from synthora.intelligence.knowledge_map import KnowledgeMap, SimilarityFn, jaccard
 
 
 def _outline_from_json(data) -> Optional[OutlineNode]:
@@ -108,8 +109,44 @@ class OutlineBuilder:
 
 
 class SectionWriter:
-    def __init__(self, llm: ChatModel) -> None:
+    def __init__(
+        self,
+        llm: ChatModel,
+        *,
+        embeddings: Optional[EmbeddingModel] = None,
+        similarity: SimilarityFn = jaccard,
+    ) -> None:
         self.llm = llm
+        self.embeddings = embeddings
+        self.similarity = similarity
+
+    async def _rank_citations(
+        self, section_title: str, citations: list[Citation]
+    ) -> list[Citation]:
+        """Prefer embedding cosine when an embedder is available; else lexical."""
+        if self.embeddings is not None and citations:
+            texts = [section_title] + [
+                f"{c.title} {c.snippet}" for c in citations
+            ]
+            try:
+                vectors = await self.embeddings.embed(texts)
+            except Exception:
+                vectors = []
+            if len(vectors) == len(texts):
+                query_vec = vectors[0]
+                scored = [
+                    (citations[i], cosine_similarity(query_vec, vectors[i + 1]))
+                    for i in range(len(citations))
+                ]
+                scored.sort(key=lambda pair: pair[1], reverse=True)
+                return [c for c, _ in scored][:12]
+        return sorted(
+            citations,
+            key=lambda c: self.similarity(
+                section_title, f"{c.title} {c.snippet}"
+            ),
+            reverse=True,
+        )[:12]
 
     async def write_section(
         self,
@@ -121,11 +158,7 @@ class SectionWriter:
     ) -> str:
         """Write one section with [n] citation markers (semantic retrieval:
         the most relevant citations for this section title are offered)."""
-        relevant = sorted(
-            citations,
-            key=lambda c: jaccard(section.title, f"{c.title} {c.snippet}"),
-            reverse=True,
-        )[:12]
+        relevant = await self._rank_citations(section.title, citations)
         sources_block = "\n".join(
             f"[{c.index}] {c.title}: {c.snippet[:200]}" for c in relevant if c.index
         )

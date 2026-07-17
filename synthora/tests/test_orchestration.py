@@ -24,9 +24,43 @@ def test_parse_json_response_variants():
 
 
 def test_graphs_compile():
+    from synthora.orchestration.checkpoint import get_checkpointer
+
     assert build_researcher_graph() is not None
     assert build_supervisor_graph() is not None
-    assert build_deep_researcher_core().compile() is not None
+    assert build_deep_researcher_core().compile(checkpointer=get_checkpointer()) is not None
+
+
+async def test_clarify_interrupt_and_resume():
+    from langgraph.types import Command
+    from synthora.orchestration.checkpoint import get_checkpointer
+
+    planner = FakeChatModel(
+        responses=[
+            '{"clear": false, "question": "Which aspect of X?"}',
+            "Detailed research brief about X.",
+            json.dumps({"action": "research_complete", "reason": "done"}),
+        ]
+    )
+    researcher = FakeChatModel(
+        responses=[
+            json.dumps({"action": "complete", "reflection": "done"}),
+        ]
+    )
+    ctx = make_ctx(
+        planner=planner,
+        researcher=researcher,
+        config=RunConfig(allow_clarification=True, max_react_tool_calls=1),
+        run_id="clarify-run-1",
+    )
+    graph = build_deep_researcher_core().compile(checkpointer=get_checkpointer())
+    cfg = graph_config(ctx)
+    paused = await graph.ainvoke({"question": "Tell me about X"}, config=cfg)
+    assert "__interrupt__" in paused
+    resumed = await graph.ainvoke(Command(resume="Focus on history"), config=cfg)
+    assert resumed.get("clarification") == "Focus on history"
+    assert "brief" in resumed and resumed["brief"]
+    assert resumed.get("report")
 
 
 async def test_researcher_loop_searches_then_completes():

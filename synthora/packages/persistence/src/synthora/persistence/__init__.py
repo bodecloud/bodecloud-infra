@@ -4,6 +4,7 @@ from synthora.persistence.database import Database
 from synthora.persistence.repositories import (
     ArtifactRepository,
     CitationRepository,
+    DiscourseRepository,
     EventRepository,
     KnowledgeRepository,
     RunRepositorySQL,
@@ -16,6 +17,7 @@ __all__ = [
     "ArtifactRepository",
     "CitationRepository",
     "Database",
+    "DiscourseRepository",
     "EventRepository",
     "KnowledgeRepository",
     "RunRepositorySQL",

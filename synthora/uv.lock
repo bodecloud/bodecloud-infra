@@ -1308,12 +1308,14 @@ name = "synthora-intelligence"
 version = "0.1.0"
 source = { editable = "packages/intelligence" }
 dependencies = [
+    { name = "httpx" },
     { name = "synthora-adapters" },
     { name = "synthora-core" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "httpx", specifier = ">=0.27" },
     { name = "synthora-adapters", editable = "packages/adapters" },
     { name = "synthora-core", editable = "packages/core" },
 ]

@@ -37,6 +37,13 @@ class SearchEngine(Protocol):
 
 
 @runtime_checkable
+class EmbeddingModel(Protocol):
+    """Dense embedding provider used for similarity / knowledge-map insert."""
+
+    async def embed(self, texts: list[str]) -> list[list[float]]: ...
+
+
+@runtime_checkable
 class SearchStrategy(Protocol):
     """How multiple queries/engines are combined for one research topic."""
 

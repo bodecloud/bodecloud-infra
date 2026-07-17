@@ -97,12 +97,135 @@ class DiscourseManager:
         self.turns.append(turn)
         return turn
 
+    async def warm_start(
+        self, topic: str, perspectives: list[Perspective]
+    ) -> list[str]:
+        """Generate quick outline questions before discourse begins.
+
+        Returns question strings (does not append turns); callers typically
+        inject them via ``inject_user_turn``.
+        """
+        persona_block = "\n".join(
+            f"- {p.name}: {p.focus or p.description}" for p in perspectives
+        ) or "(no personas yet)"
+        raw = await self.llm.complete(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "You warm-start a research roundtable. Propose 3-5 short "
+                        "outline questions that structure the upcoming discussion "
+                        "across the listed expert angles. Return one question per "
+                        "line, no numbering."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"Topic: {topic}\n\nExpert angles:\n{persona_block}"
+                    ),
+                },
+            ]
+        )
+        questions = [
+            q.strip("-• ").strip()
+            for q in raw.splitlines()
+            if q.strip() and not q.strip().startswith("{")
+        ]
+        return questions[:5] or [f"What are the key open questions about {topic}?"]
+
+    async def pure_rag_turn(self, topic: str) -> DiscourseTurn:
+        """Answer from the evidence pool only — no expert persona (PureRAG)."""
+        evidence = self.evidence_pool[:6]
+        evidence_block = "\n".join(
+            f"[{i + 1}] {r.title}: {(r.content or r.snippet)[:250]}"
+            for i, r in enumerate(evidence)
+        )
+        raw = await self.llm.complete(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a neutral PureRAG synthesizer (no expert persona). "
+                        "Answer the topic using ONLY the evidence below. Cite claims "
+                        "with [n] markers. If evidence is insufficient, say what is "
+                        "missing. Prefix with 'ANSWER:'."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"Topic: {topic}\n\nEvidence:\n{evidence_block or '(none)'}"
+                    ),
+                },
+            ]
+        )
+        text = raw.strip()
+        utterance = text.split(":", 1)[1].strip() if ":" in text[:12] else text
+        citations = []
+        for i, r in enumerate(evidence):
+            marker = f"[{i + 1}]"
+            if marker in utterance:
+                citations.append(
+                    Citation(url=r.url, title=r.title, snippet=r.snippet[:300])
+                )
+                self.used_urls.add(r.url.rstrip("/"))
+        turn = DiscourseTurn(
+            speaker="PureRAG",
+            role="rag",
+            utterance=utterance,
+            intent="answer",
+            citations=citations,
+        )
+        self.turns.append(turn)
+        return turn
+
+    async def simulated_user_turn(self, topic: str) -> DiscourseTurn:
+        """LLM plays a curious user asking a follow-up (vs real ``inject_user_turn``)."""
+        raw = await self.llm.complete(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a curious learner in a research roundtable. Ask "
+                        "ONE concrete follow-up question that probes a gap or "
+                        "clarifies a claim from the discussion so far. Reply with "
+                        "the question only."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"Topic: {topic}\n\nDiscussion so far:\n"
+                        f"{self.discussion_text() or '(just starting)'}"
+                    ),
+                },
+            ]
+        )
+        turn = DiscourseTurn(
+            speaker="user",
+            role="user",
+            utterance=raw.strip(),
+            intent="question",
+        )
+        self.turns.append(turn)
+        return turn
+
     # -- expert turn -----------------------------------------------------------
 
     async def expert_turn(
-        self, expert: Perspective, topic: str
+        self,
+        expert: Perspective,
+        topic: str,
+        *,
+        guided_questions: Optional[list[str]] = None,
     ) -> DiscourseTurn:
-        query_hint = self.turns[-1].utterance[:200] if self.turns else topic
+        questions = guided_questions or []
+        query_hint = (
+            questions[0]
+            if questions
+            else (self.turns[-1].utterance[:200] if self.turns else topic)
+        )
         fresh: list[SearchResult] = []
         for engine in self.engines:
             try:
@@ -118,6 +241,7 @@ class DiscourseManager:
             f"[{i + 1}] {r.title}: {(r.content or r.snippet)[:250]}"
             for i, r in enumerate(evidence)
         )
+        guided_block = "\n".join(f"- {q}" for q in questions[:3])
         raw = await self.llm.complete(
             [
                 {
@@ -134,7 +258,9 @@ class DiscourseManager:
                 {
                     "role": "user",
                     "content": (
-                        f"Topic: {topic}\n\nDiscussion so far:\n"
+                        f"Topic: {topic}\n\n"
+                        f"Your prepared research questions:\n{guided_block or '(none)'}\n\n"
+                        f"Discussion so far:\n"
                         f"{self.discussion_text() or '(opening turn)'}\n\n"
                         f"Evidence:\n{evidence_block or '(none)'}"
                     ),
@@ -239,14 +365,20 @@ class DiscourseManager:
         *,
         max_turns: int = 12,
         seed_evidence: Optional[list[SearchResult]] = None,
+        guided_questions: Optional[dict[str, list[str]]] = None,
     ) -> list[DiscourseTurn]:
         if seed_evidence:
             self.add_evidence(seed_evidence)
+        guided = guided_questions or {}
         expert_map = {e.name: e for e in experts}
         for _ in range(max_turns):
             speaker = self.next_speaker(experts)
             if speaker == "moderator":
                 await self.moderator_turn(topic)
             else:
-                await self.expert_turn(expert_map[speaker], topic)
+                await self.expert_turn(
+                    expert_map[speaker],
+                    topic,
+                    guided_questions=guided.get(speaker, []),
+                )
         return self.turns

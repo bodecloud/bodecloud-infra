@@ -3,6 +3,8 @@ import ReactMarkdown from "react-markdown";
 import {
   api,
   Citation,
+  DiscourseTurn,
+  downloadExport,
   KnowledgeEdge,
   KnowledgeNode,
   RunDetail,
@@ -12,20 +14,36 @@ import { useRunEvents } from "../hooks/useRunEvents";
 import { EventFeed } from "./EventFeed";
 import { KnowledgeMapView } from "./KnowledgeMapView";
 
-export function RunView({ runId }: { runId: string }) {
+export function RunView({
+  runId,
+  onDeleted,
+}: {
+  runId: string;
+  onDeleted?: () => void;
+}) {
   const [run, setRun] = useState<RunDetail | null>(null);
   const [report, setReport] = useState<string | null>(null);
   const [citations, setCitations] = useState<Citation[]>([]);
+  const [discourse, setDiscourse] = useState<DiscourseTurn[]>([]);
   const [kmap, setKmap] = useState<{
     nodes: KnowledgeNode[];
     edges: KnowledgeEdge[];
   } | null>(null);
   const [steer, setSteer] = useState("");
+  const [clarifyAnswer, setClarifyAnswer] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { events, finished } = useRunEvents(runId);
 
   const refresh = useCallback(async () => {
     const detail = await api.getRun(runId);
     setRun(detail);
+    try {
+      const turns = await api.getDiscourse(runId);
+      setDiscourse(turns);
+    } catch {
+      /* discourse optional */
+    }
     if (detail.status === "completed") {
       try {
         const r = await api.getReport(runId);
@@ -44,10 +62,52 @@ export function RunView({ runId }: { runId: string }) {
   }, [runId]);
 
   useEffect(() => {
-    refresh();
+    refresh().catch((e) => setError(String(e)));
   }, [refresh, finished]);
 
-  const running = run != null && !TERMINAL_STATUSES.includes(run.status);
+  const awaitingInput = run?.status === "awaiting_input";
+  const running =
+    run != null &&
+    !TERMINAL_STATUSES.includes(run.status) &&
+    !awaitingInput;
+
+  async function submitClarification() {
+    if (!clarifyAnswer.trim()) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await api.resumeResearch(runId, clarifyAnswer.trim());
+      setClarifyAnswer("");
+      await refresh();
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleDelete() {
+    if (!window.confirm("Delete this research run?")) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await api.deleteRun(runId);
+      onDeleted?.();
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleExport(format: "markdown" | "html") {
+    setError(null);
+    try {
+      await downloadExport(runId, format);
+    } catch (e) {
+      setError(String(e));
+    }
+  }
 
   return (
     <>
@@ -59,10 +119,69 @@ export function RunView({ runId }: { runId: string }) {
               {run.status}
             </span>{" "}
             <code>{run.pipeline_id}</code>
+            {run.session_id && (
+              <>
+                {" "}
+                · session <code>{run.session_id}</code>
+              </>
+            )}
           </p>
         )}
         {run?.brief && <p>{run.brief}</p>}
         {run?.error && <p className="error-text">{run.error}</p>}
+        {error && <p className="error-text">{error}</p>}
+
+        <div className="action-row">
+          <button
+            className="ghost"
+            type="button"
+            onClick={() => handleExport("markdown")}
+          >
+            Export Markdown
+          </button>
+          <button
+            className="ghost"
+            type="button"
+            onClick={() => handleExport("html")}
+          >
+            Export HTML
+          </button>
+          <button
+            className="ghost danger"
+            type="button"
+            disabled={busy}
+            onClick={handleDelete}
+          >
+            Delete run
+          </button>
+        </div>
+
+        {awaitingInput && (
+          <div className="clarify-box">
+            <h3>Clarification needed</h3>
+            <p className="muted">
+              The pipeline is waiting for your answer before continuing.
+            </p>
+            <div className="steer-row">
+              <input
+                type="text"
+                placeholder="Your clarification answer"
+                value={clarifyAnswer}
+                onChange={(e) => setClarifyAnswer(e.target.value)}
+                aria-label="clarification answer"
+              />
+              <button
+                className="primary"
+                type="button"
+                disabled={busy || !clarifyAnswer.trim()}
+                onClick={submitClarification}
+              >
+                {busy ? "Submitting…" : "Resume"}
+              </button>
+            </div>
+          </div>
+        )}
+
         {running && (
           <>
             <button className="ghost" onClick={() => api.cancelRun(runId)}>
@@ -95,6 +214,26 @@ export function RunView({ runId }: { runId: string }) {
         <h2>Progress</h2>
         <EventFeed events={events} />
       </section>
+
+      {discourse.length > 0 && (
+        <section className="panel">
+          <h2>Discourse</h2>
+          <ol className="discourse-list">
+            {discourse.map((t) => (
+              <li key={t.id} className="discourse-turn">
+                <div className="discourse-meta">
+                  <strong>{t.speaker}</strong>
+                  <span className="muted">
+                    {" "}
+                    · {t.role} · {t.intent}
+                  </span>
+                </div>
+                <p>{t.utterance}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
 
       {report && (
         <section className="panel">

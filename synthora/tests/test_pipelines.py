@@ -86,7 +86,9 @@ async def test_deep_research_golden_path():
     )
     assert result["brief"] == "the brief"
     assert [p.name for p in result["perspectives"]] == ["Historian", "Engineer"]
-    assert len(result["discourse"]) == 3
+    # discourse includes optional warm-start user turn + max_discourse_turns
+    assert len(result["discourse"]) >= 3
+    assert any(t.role == "expert" for t in result["discourse"])
     assert result["knowledge_nodes"]
     assert result["outline"].title == "Report"
     assert len(result["sections"]) == 2

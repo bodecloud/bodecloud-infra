@@ -39,6 +39,7 @@ function jsonResponse(body: unknown) {
   return Promise.resolve({
     ok: true,
     json: () => Promise.resolve(body),
+    text: () => Promise.resolve(JSON.stringify(body)),
   } as Response);
 }
 
@@ -49,15 +50,37 @@ const PIPELINES = {
   ],
 };
 
+const PROVIDERS = {
+  llm_providers: ["openai", "anthropic"],
+  search_engines: ["searxng", "tavily"],
+  search_strategies: ["source_based", "planning"],
+};
+
+const SESSIONS = {
+  sessions: [
+    {
+      id: "sess-1",
+      title: "My session",
+      tags: [],
+      workspace_id: "default",
+      created_at: new Date().toISOString(),
+    },
+  ],
+};
+
 describe("NewResearch", () => {
   it("lists pipelines and starts a run", async () => {
     fetchMock.mockImplementation((url: string, init?: RequestInit) => {
       if (url === "/api/v1/pipelines") return jsonResponse(PIPELINES);
+      if (url === "/api/v1/providers") return jsonResponse(PROVIDERS);
+      if (url === "/api/v1/sessions") return jsonResponse(SESSIONS);
       if (url === "/api/v1/research" && init?.method === "POST") {
         const body = JSON.parse(String(init.body));
         expect(body.question).toBe("What is X?");
         expect(body.pipeline_id).toBe("fast_research");
-        return jsonResponse({ run_id: "r1", status: "queued" });
+        expect(body.config).toBeTruthy();
+        expect(body.config.allow_clarification).toBe(false);
+        return jsonResponse({ run_id: "r1", status: "queued", session_id: null });
       }
       throw new Error(`unexpected ${url}`);
     });
@@ -78,7 +101,12 @@ describe("NewResearch", () => {
   });
 
   it("disables start until a question is typed", async () => {
-    fetchMock.mockImplementation(() => jsonResponse(PIPELINES));
+    fetchMock.mockImplementation((url: string) => {
+      if (url === "/api/v1/pipelines") return jsonResponse(PIPELINES);
+      if (url === "/api/v1/providers") return jsonResponse(PROVIDERS);
+      if (url === "/api/v1/sessions") return jsonResponse(SESSIONS);
+      throw new Error(`unexpected ${url}`);
+    });
     render(<NewResearch onStarted={() => {}} />);
     const button = await screen.findByRole("button", {
       name: /start research/i,
@@ -97,6 +125,7 @@ describe("RunView lifecycle", () => {
           question: "Deep question?",
           brief: "the brief",
           pipeline_id: "deep_research",
+          session_id: null,
           status,
           error: null,
           config: {},
@@ -104,6 +133,8 @@ describe("RunView lifecycle", () => {
           started_at: null,
           finished_at: null,
         });
+      if (url === "/api/v1/research/r1/discourse")
+        return jsonResponse({ turns: [] });
       if (url === "/api/v1/research/r1/report")
         return jsonResponse({
           report_markdown: "# Final Report",
@@ -128,6 +159,8 @@ describe("RunView lifecycle", () => {
     render(<RunView runId="r1" />);
     await screen.findByText("Deep question?");
     expect(screen.getByText("running")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /export markdown/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /export html/i })).toBeInTheDocument();
 
     const socket = MockWebSocket.instances[0];
     socket.emit({
@@ -164,6 +197,7 @@ describe("RunView lifecycle", () => {
           question: "q",
           brief: null,
           pipeline_id: "fast_research",
+          session_id: null,
           status: "running",
           error: null,
           config: {},
@@ -171,6 +205,8 @@ describe("RunView lifecycle", () => {
           started_at: null,
           finished_at: null,
         });
+      if (url === "/api/v1/research/r2/discourse")
+        return jsonResponse({ turns: [] });
       if (url === "/api/v1/research/r2/steer" && init?.method === "POST") {
         expect(JSON.parse(String(init.body)).message).toBe("focus on cost");
         return jsonResponse({ steered: true });
@@ -188,6 +224,69 @@ describe("RunView lifecycle", () => {
     );
     await user.click(screen.getByRole("button", { name: "Steer" }));
   });
+
+  it("shows clarification form and resumes when awaiting_input", async () => {
+    let status = "awaiting_input";
+    fetchMock.mockImplementation((url: string, init?: RequestInit) => {
+      if (url === "/api/v1/research/r3")
+        return jsonResponse({
+          id: "r3",
+          question: "Clarify me?",
+          brief: null,
+          pipeline_id: "deep_research",
+          session_id: "sess-1",
+          status,
+          error: null,
+          config: { allow_clarification: true },
+          created_at: new Date().toISOString(),
+          started_at: null,
+          finished_at: null,
+        });
+      if (url === "/api/v1/research/r3/discourse")
+        return jsonResponse({
+          turns: [
+            {
+              id: "t1",
+              run_id: "r3",
+              speaker: "moderator",
+              role: "moderator",
+              utterance: "Which region matters most?",
+              intent: "question",
+              citations: [],
+              created_at: new Date().toISOString(),
+            },
+          ],
+        });
+      if (url === "/api/v1/research/r3/resume" && init?.method === "POST") {
+        expect(JSON.parse(String(init.body)).answer).toBe("North America");
+        status = "queued";
+        return jsonResponse({ run_id: "r3", status: "queued", resumed: true });
+      }
+      throw new Error(`unexpected ${url}`);
+    });
+
+    render(<RunView runId="r3" />);
+    await screen.findByText("Clarification needed");
+    expect(screen.getByText("awaiting_input")).toBeInTheDocument();
+    expect(screen.getByText("Which region matters most?")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /export markdown/i }),
+    ).toBeInTheDocument();
+
+    const user = userEvent.setup();
+    await user.type(
+      screen.getByLabelText("clarification answer"),
+      "North America",
+    );
+    await user.click(screen.getByRole("button", { name: /resume/i }));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith(
+        "/api/v1/research/r3/resume",
+        expect.objectContaining({ method: "POST" }),
+      );
+    });
+  });
 });
 
 describe("History", () => {
@@ -199,6 +298,7 @@ describe("History", () => {
             id: "r9",
             question: "old research",
             pipeline_id: "fast_research",
+            session_id: "sess-abc",
             status: "completed",
             created_at: new Date().toISOString(),
             finished_at: new Date().toISOString(),
@@ -209,6 +309,7 @@ describe("History", () => {
     const onOpen = vi.fn();
     render(<History onOpen={onOpen} />);
     const row = await screen.findByText("old research");
+    expect(screen.getByText(/sess-abc/)).toBeInTheDocument();
     const user = userEvent.setup();
     await user.click(row);
     expect(onOpen).toHaveBeenCalledWith("r9");

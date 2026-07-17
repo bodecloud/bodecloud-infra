@@ -11,31 +11,43 @@ export function Settings() {
 
   return (
     <section className="panel">
-      <h2>Providers</h2>
+      <h2>Provider catalogs</h2>
       {error && <p className="error-text">{error}</p>}
       {providers && (
         <>
           <h3>LLM providers</h3>
-          <div className="provider-list">
+          <div className="provider-list" aria-label="llm providers">
+            {providers.llm_providers.length === 0 && (
+              <span className="muted">None registered</span>
+            )}
             {providers.llm_providers.map((p) => (
               <code key={p}>{p}</code>
             ))}
           </div>
+
           <h3>Search engines</h3>
-          <div className="provider-list">
+          <div className="provider-list" aria-label="search engines">
+            {providers.search_engines.length === 0 && (
+              <span className="muted">None registered</span>
+            )}
             {providers.search_engines.map((p) => (
               <code key={p}>{p}</code>
             ))}
           </div>
+
           <h3>Search strategies</h3>
-          <div className="provider-list">
+          <div className="provider-list" aria-label="search strategies">
+            {providers.search_strategies.length === 0 && (
+              <span className="muted">None registered</span>
+            )}
             {providers.search_strategies.map((p) => (
               <code key={p}>{p}</code>
             ))}
           </div>
-          <p>
+
+          <p className="muted">
             Model and engine defaults are set per deployment via environment
-            variables, and per run via the API <code>config</code> payload.
+            variables, and per run via the New research config panel.
           </p>
         </>
       )}

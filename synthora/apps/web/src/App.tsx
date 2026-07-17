@@ -1,5 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  clearToken,
+  getToken,
+  loadStoredToken,
+} from "./api";
 import { History } from "./components/History";
+import { Login } from "./components/Login";
 import { NewResearch } from "./components/NewResearch";
 import { RunView } from "./components/RunView";
 import { Settings } from "./components/Settings";
@@ -8,10 +14,22 @@ type View =
   | { name: "new" }
   | { name: "history" }
   | { name: "settings" }
+  | { name: "login" }
   | { name: "run"; runId: string };
 
 export function App() {
   const [view, setView] = useState<View>({ name: "new" });
+  const [authed, setAuthed] = useState(() => Boolean(loadStoredToken()));
+
+  useEffect(() => {
+    setAuthed(Boolean(getToken()));
+  }, [view]);
+
+  function signOut() {
+    clearToken();
+    setAuthed(false);
+    setView({ name: "login" });
+  }
 
   return (
     <>
@@ -38,6 +56,18 @@ export function App() {
           >
             Settings
           </button>
+          {authed ? (
+            <button className="ghost" onClick={signOut}>
+              Sign out
+            </button>
+          ) : (
+            <button
+              className={view.name === "login" ? "active" : ""}
+              onClick={() => setView({ name: "login" })}
+            >
+              Login
+            </button>
+          )}
         </nav>
       </header>
       <main>
@@ -48,7 +78,20 @@ export function App() {
           <History onOpen={(runId) => setView({ name: "run", runId })} />
         )}
         {view.name === "settings" && <Settings />}
-        {view.name === "run" && <RunView runId={view.runId} />}
+        {view.name === "login" && (
+          <Login
+            onAuthed={() => {
+              setAuthed(true);
+              setView({ name: "new" });
+            }}
+          />
+        )}
+        {view.name === "run" && (
+          <RunView
+            runId={view.runId}
+            onDeleted={() => setView({ name: "history" })}
+          />
+        )}
       </main>
     </>
   );
