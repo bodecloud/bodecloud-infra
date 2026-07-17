@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/api.ts","./src/main.tsx","./src/test-setup.ts","./src/__tests__/run-lifecycle.test.tsx","./src/components/EventFeed.tsx","./src/components/History.tsx","./src/components/KnowledgeMapView.tsx","./src/components/NewResearch.tsx","./src/components/RunView.tsx","./src/components/Settings.tsx","./src/hooks/useRunEvents.ts"],"version":"5.9.3"}
