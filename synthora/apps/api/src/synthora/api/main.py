@@ -259,6 +259,46 @@ async def get_report(
     }
 
 
+@app.get("/api/v1/research/{run_id}/export")
+async def export_report(
+    run_id: str,
+    format: str = "markdown",
+    identity: dict = Depends(current_identity),
+):
+    """Export the report as a downloadable file (R-LDR-5).
+
+    ``format=markdown`` returns the raw report; ``format=html`` returns a
+    self-contained printable document (use the browser's print-to-PDF).
+    """
+    from fastapi.responses import Response
+    from synthora.api.export import render_html_document
+
+    run = await _get_run_checked(run_id, identity)
+    artifacts = await ArtifactRepository(get_db()).list_for_run(run_id)
+    report = next(
+        (a for a in artifacts if a.kind == ArtifactKind.REPORT_MARKDOWN), None
+    )
+    if report is None:
+        raise HTTPException(status_code=404, detail="report not ready")
+    if format == "markdown":
+        return Response(
+            content=report.content,
+            media_type="text/markdown",
+            headers={
+                "Content-Disposition": f'attachment; filename="synthora-{run_id}.md"'
+            },
+        )
+    if format == "html":
+        return Response(
+            content=render_html_document(report.content, title=run.question),
+            media_type="text/html",
+            headers={
+                "Content-Disposition": f'attachment; filename="synthora-{run_id}.html"'
+            },
+        )
+    raise HTTPException(status_code=422, detail="format must be markdown or html")
+
+
 @app.get("/api/v1/research/{run_id}/knowledge-map")
 async def get_knowledge_map(
     run_id: str, identity: dict = Depends(current_identity)

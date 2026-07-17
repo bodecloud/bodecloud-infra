@@ -234,6 +234,34 @@ def test_failed_run_reports_error(platform):
     assert detail["status"] == "failed"
 
 
+def test_export_markdown_and_html(platform):
+    client, app = platform
+    run_id = client.post(
+        "/api/v1/research",
+        json={
+            "question": "export test",
+            "pipeline_id": "fast_research",
+            "config": fake_run_config(),
+        },
+    ).json()["run_id"]
+    executor = make_executor(app)
+    client.portal.call(executor.execute, run_id)
+
+    md = client.get(f"/api/v1/research/{run_id}/export?format=markdown")
+    assert md.status_code == 200
+    assert md.headers["content-type"].startswith("text/markdown")
+    assert "attachment" in md.headers["content-disposition"]
+    assert md.text.startswith("# Integration Report")
+
+    html = client.get(f"/api/v1/research/{run_id}/export?format=html")
+    assert html.status_code == 200
+    assert "<h1>Integration Report</h1>" in html.text
+    assert "export test" in html.text  # question used as document title
+
+    bad = client.get(f"/api/v1/research/{run_id}/export?format=docx")
+    assert bad.status_code == 422
+
+
 # ------------------------------------------------------------------ auth
 
 
