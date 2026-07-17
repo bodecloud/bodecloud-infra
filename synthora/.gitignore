@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+dist/
+build/
+node_modules/
+apps/web/dist/
+.env
+*.db
+*.sqlite3
+agentdecompile_projects/
