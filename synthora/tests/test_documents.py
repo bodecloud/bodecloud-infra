@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import os
-
 import fakeredis.aioredis
 import pytest
 import synthora.api.main as api_main

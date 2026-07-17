@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import uuid
-
 import pytest
 from synthora.core.models import SearchResult
 from synthora.orchestration.checkpoint import reset_checkpointer

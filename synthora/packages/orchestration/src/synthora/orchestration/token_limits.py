@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from typing import Optional
 
-
 _TOKEN_LIMIT_PATTERNS = (
     re.compile(r"context.?length", re.I),
     re.compile(r"maximum.?context", re.I),

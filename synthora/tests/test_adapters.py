@@ -26,7 +26,6 @@ from synthora.core.models import SearchResult
 
 from tests.conftest import FakeChatModel, FakeSearchEngine
 
-
 # ---------------------------------------------------------------------------
 # LLM providers
 # ---------------------------------------------------------------------------
