@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from synthora.core.models import RunConfig
 from synthora.orchestration.context import ResearchContext
+
 from tests.conftest import FakeChatModel, FakeSearchEngine
 
 

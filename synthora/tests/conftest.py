@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pytest
-
 from synthora.core.models import SearchResult
 from synthora.persistence.database import Database
 

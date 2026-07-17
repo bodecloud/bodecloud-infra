@@ -9,6 +9,7 @@ from synthora.orchestration.graphs import (
     build_researcher_graph,
     build_supervisor_graph,
 )
+
 from tests.conftest import FakeChatModel, FakeSearchEngine
 from tests.helpers import graph_config, make_ctx
 

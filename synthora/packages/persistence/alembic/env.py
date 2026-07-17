@@ -8,7 +8,6 @@ from alembic import context
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy.pool import NullPool
-
 from synthora.persistence.tables import Base
 
 config = context.config

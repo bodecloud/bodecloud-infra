@@ -11,7 +11,6 @@ import os
 from typing import Callable, Optional
 
 import httpx
-
 from synthora.core.ports import ChatModel
 
 ProviderFactory = Callable[[str], ChatModel]

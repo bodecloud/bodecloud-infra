@@ -12,7 +12,6 @@ from typing import Callable, Optional
 
 import httpx
 from defusedxml import ElementTree
-
 from synthora.core.models import SearchResult
 from synthora.core.ports import SearchEngine
 

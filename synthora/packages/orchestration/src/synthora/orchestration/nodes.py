@@ -8,10 +8,9 @@ import asyncio
 
 from langchain_core.runnables import RunnableConfig
 from langgraph.types import interrupt
-
 from synthora.core.events import RunEventType
 from synthora.core.models import Citation, SearchResult
-from synthora.orchestration.context import ResearchContext, get_ctx, parse_json_response
+from synthora.orchestration.context import get_ctx, parse_json_response
 from synthora.orchestration.state import (
     AgentState,
     ResearcherState,

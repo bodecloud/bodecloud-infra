@@ -7,7 +7,6 @@ from functools import lru_cache
 
 from langchain_core.runnables import RunnableConfig
 from langgraph.graph import END, START, StateGraph
-
 from synthora.orchestration.nodes import (
     clarify_with_user,
     compress_research,

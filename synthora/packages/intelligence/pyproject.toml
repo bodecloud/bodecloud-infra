@@ -6,7 +6,6 @@ requires-python = ">=3.11"
 dependencies = [
     "synthora-core",
     "synthora-adapters",
-    "langchain-core>=0.3",
 ]
 
 [tool.uv.sources]

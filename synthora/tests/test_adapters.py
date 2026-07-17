@@ -1,7 +1,6 @@
 """U2: adapter registries, strategies with fakes."""
 
 import pytest
-
 from synthora.adapters import llm_registry, search_engine_registry, strategy_registry
 from synthora.adapters.llm import OpenAICompatibleModel, strip_think_tags
 from synthora.adapters.strategies import (
@@ -10,6 +9,7 @@ from synthora.adapters.strategies import (
     dedupe_results,
 )
 from synthora.core.models import SearchResult
+
 from tests.conftest import FakeChatModel, FakeSearchEngine
 
 

@@ -1306,14 +1306,12 @@ name = "synthora-intelligence"
 version = "0.1.0"
 source = { editable = "packages/intelligence" }
 dependencies = [
-    { name = "langchain-core" },
     { name = "synthora-adapters" },
     { name = "synthora-core" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "langchain-core", specifier = ">=0.3" },
     { name = "synthora-adapters", editable = "packages/adapters" },
     { name = "synthora-core", editable = "packages/core" },
 ]

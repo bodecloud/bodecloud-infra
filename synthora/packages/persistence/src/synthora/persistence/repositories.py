@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Optional
 
 from sqlalchemy import select
-
 from synthora.core.events import ProgressEvent, RunEventType
 from synthora.core.models import (
     Artifact,
