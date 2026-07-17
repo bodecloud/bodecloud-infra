@@ -321,9 +321,8 @@ async def final_report_generation(state: AgentState, config: RunnableConfig) -> 
     """One-shot report from brief + notes (ODR write phase, R-ODR-1)."""
     ctx = get_ctx(config)
     await ctx.emit(RunEventType.NODE_STARTED, "Writing final report", node="report")
-    citations = state.get("citations") or build_citations(
-        state.get("sources", []), ctx.run_id
-    )
+    existing = state.get("citations") or []
+    citations = existing or build_citations(state.get("sources", []), ctx.run_id)
     sources_block = "\n".join(
         f"[{c.index}] {c.title} — {c.url}" for c in citations[:40]
     )
@@ -354,4 +353,8 @@ async def final_report_generation(state: AgentState, config: RunnableConfig) -> 
         temperature=0.4,
     )
     await ctx.emit(RunEventType.NODE_FINISHED, "Report complete", node="report")
-    return {"report": report.strip(), "citations": citations}
+    # citations is an operator.add channel: only add ones not already in state
+    update: dict = {"report": report.strip()}
+    if not existing:
+        update["citations"] = citations
+    return update

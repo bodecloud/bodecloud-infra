@@ -1275,6 +1275,7 @@ dependencies = [
     { name = "synthora-core" },
     { name = "synthora-orchestration" },
     { name = "synthora-persistence" },
+    { name = "synthora-worker" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
@@ -1287,6 +1288,7 @@ requires-dist = [
     { name = "synthora-core", editable = "packages/core" },
     { name = "synthora-orchestration", editable = "packages/orchestration" },
     { name = "synthora-persistence", editable = "packages/persistence" },
+    { name = "synthora-worker", editable = "apps/worker" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.30" },
 ]
 

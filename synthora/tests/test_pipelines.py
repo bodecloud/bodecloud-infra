@@ -122,11 +122,7 @@ async def test_academic_research_verifies_and_appends_bibliography():
 
 
 async def test_autonomous_research_respects_cycle_bound():
-    planner = FakeChatModel(
-        responses=["auto brief"],
-        default="hypothesis A\nhypothesis B",
-    )
-    # planner also drives supervisor; make supervisor complete instantly
+    # planner drives brief, hypotheses, and the supervisor; route by system prompt
     class RoutingPlanner:
         def __init__(self):
             self.calls = []

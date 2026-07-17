@@ -1,0 +1,64 @@
+"""Worker entrypoint: consumes the research queue with a concurrency cap
+(R-LDR-2) and writes a heartbeat file for the container healthcheck."""
+
+from __future__ import annotations
+
+import asyncio
+import logging
+import os
+import pathlib
+
+import redis.asyncio as aioredis
+from synthora.persistence.database import Database
+from synthora.worker.executor import RunExecutor
+from synthora.worker.queue import RedisJobQueue
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("synthora.worker")
+
+HEARTBEAT = pathlib.Path(os.environ.get("SYNTHORA_HEARTBEAT_FILE", "/tmp/synthora-worker-heartbeat"))
+
+
+async def heartbeat_loop() -> None:
+    while True:
+        HEARTBEAT.touch()
+        await asyncio.sleep(30)
+
+
+async def main() -> None:
+    database_url = os.environ.get(
+        "SYNTHORA_DATABASE_URL", "sqlite+aiosqlite:///./synthora.db"
+    )
+    redis_url = os.environ.get("SYNTHORA_REDIS_URL", "redis://localhost:6379/0")
+    max_concurrent = int(os.environ.get("SYNTHORA_MAX_CONCURRENT_RESEARCHES", "3"))
+
+    db = Database(database_url)
+    await db.create_all()
+    redis = aioredis.from_url(redis_url)
+    queue = RedisJobQueue(redis)
+    executor = RunExecutor(db, queue)
+    semaphore = asyncio.Semaphore(max_concurrent)
+    tasks: set[asyncio.Task] = set()
+
+    asyncio.create_task(heartbeat_loop())
+    logger.info("worker started (max_concurrent=%d)", max_concurrent)
+
+    async def run_job(run_id: str) -> None:
+        async with semaphore:
+            try:
+                run = await executor.execute(run_id)
+                logger.info("run %s finished: %s", run_id, run.status.value)
+            except Exception:
+                logger.exception("run %s crashed", run_id)
+
+    while True:
+        job = await queue.dequeue(timeout=5.0)
+        if job is None:
+            continue
+        task = asyncio.create_task(run_job(job["run_id"]))
+        tasks.add(task)
+        task.add_done_callback(tasks.discard)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
