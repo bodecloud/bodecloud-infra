@@ -13,3 +13,7 @@ apps/web/dist/
 *.db
 *.sqlite3
 agentdecompile_projects/
+
+apps/web/test-results/
+apps/web/playwright-report/
+*.tsbuildinfo

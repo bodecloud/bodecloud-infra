@@ -65,7 +65,8 @@ Research. Updated on `feat/synthora-full-parity`.
 
 ## Residual gaps (deliberate, not silent)
 
-- Compose smoke (SearxNG + Ollama) is a manual step
+None remaining for in-scope functionality. Compose smoke and Playwright
+API-mock e2e are verified.
 
 ## Explicit non-goals
 

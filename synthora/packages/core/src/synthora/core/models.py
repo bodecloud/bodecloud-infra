@@ -221,7 +221,7 @@ class ProviderSetting(BaseModel):
 
 
 class NewsSubscription(BaseModel):
-    """LDR-inspired news query subscription (simplified)."""
+    """News query subscription with cadence-based polling."""
 
     id: str = Field(default_factory=new_id)
     workspace_id: str = "default"

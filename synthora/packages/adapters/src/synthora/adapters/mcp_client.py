@@ -1,8 +1,8 @@
 """MCP client bridge: load tools from servers listed in RunConfig.extra["mcp"].
 
-Preferred path uses ``langchain-mcp-adapters`` when installed. Otherwise a
-minimal HTTP JSON-RPC stub talks to MCP-ish ``tools/list`` / ``tools/call``
-endpoints (including Synthora's own REST MCP surface).
+Preferred path uses ``langchain-mcp-adapters``. If that import or connection
+fails, a minimal HTTP JSON-RPC fallback talks to MCP-ish ``tools/list`` /
+``tools/call`` endpoints (including Synthora's own REST MCP surface).
 
 Remote MCP URLs are gated by ``SYNTHORA_MCP_ALLOWLIST`` (comma-separated hosts)
 to prevent SSRF from run configs. Localhost is always allowed for local dev.

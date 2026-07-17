@@ -559,13 +559,14 @@ def _cosine(a: list[float], b: list[float]) -> float:
 
 def _doc_from_row(row: DocumentRow) -> Document:
     meta = dict(row.meta or {})
+    content = getattr(row, "content", None) or str(meta.get("content") or "")
     return Document(
         id=row.id,
         workspace_id=row.workspace_id,
         title=row.title,
         url=row.url,
         path=row.path,
-        content=str(meta.get("content") or ""),
+        content=content,
         meta=meta,
         created_at=row.created_at,
     )
@@ -579,7 +580,8 @@ class DocumentRepository:
         self, document: Document, chunks: list[DocumentChunk] | None = None
     ) -> Document:
         meta = dict(document.meta or {})
-        if document.content and "content" not in meta:
+        # Keep content in both the dedicated column and meta for older readers.
+        if document.content:
             meta["content"] = document.content
         async with self.db.session() as s:
             s.add(
@@ -589,6 +591,7 @@ class DocumentRepository:
                     title=document.title,
                     url=document.url,
                     path=document.path,
+                    content=document.content or "",
                     meta=meta,
                     created_at=document.created_at,
                 )

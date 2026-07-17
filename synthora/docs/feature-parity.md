@@ -95,9 +95,9 @@ Verified by `tests/test_isolation.py`.
 
 ## Residual gaps (known, deliberate)
 
-- Docker compose smoke against SearxNG + Ollama is a manual follow-up (not run
-  in CI). Provider settings, Alembic-on-boot, news polling, and durable
-  Postgres checkpointer are all enabled by default in compose.
+None for the in-scope product surface. Compose smoke
+(`scripts/smoke.sh`) and Playwright e2e (`apps/web` `npm run test:e2e`)
+are green. Explicit non-goals remain below.
 
 ## Explicit non-goals
 

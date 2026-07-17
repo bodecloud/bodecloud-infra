@@ -1,4 +1,4 @@
-"""News subscription fetch helpers (LDR-inspired, simplified)."""
+"""News subscription fetch helpers (LDR-inspired)."""
 
 from __future__ import annotations
 
