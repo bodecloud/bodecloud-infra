@@ -645,8 +645,39 @@ services:
       context: ../projects/genai/gpt-researcher  # :/frontend/nextjs
       dockerfile: Dockerfile.fullstack
     image: docker.io/bolabaden/ai-researchwizard-aio-fullstack:master
+    # Prefer local image when present; `docker compose build gptr` refreshes from source.
+    pull_policy: missing
     container_name: gptr
     hostname: gptr
+    # Published Hub image ships langchain 0.3 with langchain-core 1.x — broken.
+    # Realign core to the 0.3 line, and materialize *_FILE secrets into env vars
+    # so gptr-mcp (which only reads OPENAI_API_KEY etc.) can start.
+    command:
+      - /bin/bash
+      - -lc
+      - |
+        if ! python -c 'from langchain.prompts import PromptTemplate; from langchain.callbacks.manager import CallbackManagerForRetrieverRun'; then
+          echo "gptr: pinning langchain-core<1 for published image compatibility"
+          pip install --no-cache-dir 'langchain-core>=0.3.0,<1.0.0' -q
+        else
+          echo "gptr: langchain imports OK"
+        fi
+        # Map Docker secret files to plain env vars expected by gptr-mcp / libs.
+        for secret_path in /run/secrets/*; do
+          [ -f "$$secret_path" ] || continue
+          base=$$(basename "$$secret_path")
+          case "$$base" in
+            openai-api-key) export OPENAI_API_KEY="$$(cat "$$secret_path")" ;;
+            tavily-api-key) export TAVILY_API_KEY="$$(cat "$$secret_path")" ;;
+            anthropic-api-key) export ANTHROPIC_API_KEY="$$(cat "$$secret_path")" ;;
+            gemini-api-key) export GEMINI_API_KEY="$$(cat "$$secret_path")" ;;
+            groq-api-key) export GROQ_API_KEY="$$(cat "$$secret_path")" ;;
+            langchain-api-key) export LANGCHAIN_API_KEY="$$(cat "$$secret_path")"; export LANGSMITH_API_KEY="$$(cat "$$secret_path")" ;;
+            openrouter-api-key) export OPENROUTER_API_KEY="$$(cat "$$secret_path")" ;;
+            firecrawl-api-key) export FIRECRAWL_API_KEY="$$(cat "$$secret_path")"; export FIRE_CRAWL_API_KEY="$$(cat "$$secret_path")" ;;
+          esac
+        done
+        exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
     extra_hosts:
       - host.docker.internal:host-gateway
     networks:
@@ -722,6 +753,7 @@ services:
       LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT:-https://api.smith.langchain.com}
       LANGSMITH_API_KEY_FILE: /run/secrets/langchain-api-key
     labels:
+      deunhealth.restart.on.unhealthy: "true"
       traefik.enable: true
       traefik.http.routers.gptr-nextjs.service: gptr-nextjs@docker
       traefik.http.routers.gptr-nextjs.rule: Host(`gptr-nextjs.$DOMAIN`) || Host(`gptr-nextjs.$TS_HOSTNAME.$DOMAIN`)
