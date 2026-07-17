@@ -999,3 +999,245 @@ search_engine_registry.register("wayback", WaybackEngine)
 
 # Local
 search_engine_registry.register("collection", CollectionEngine)
+
+
+class GutenbergEngine:
+    """Project Gutenberg catalog search via Gutendex."""
+
+    name = "gutenberg"
+
+    def __init__(self, timeout: float = 20.0) -> None:
+        self.timeout = timeout
+
+    async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            resp = await client.get(
+                "https://gutendex.com/books",
+                params={"search": query},
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        out = []
+        for item in data.get("results", [])[:max_results]:
+            out.append(
+                SearchResult(
+                    url=item.get("formats", {}).get("text/html", "")
+                    or f"https://www.gutenberg.org/ebooks/{item.get('id')}",
+                    title=item.get("title", ""),
+                    snippet=", ".join(a.get("name", "") for a in item.get("authors", [])),
+                    content=item.get("summaries", [""])[0] if item.get("summaries") else "",
+                    engine=self.name,
+                    score=1.0,
+                    metadata={"id": item.get("id")},
+                )
+            )
+        return out
+
+
+class OpenLibraryEngine:
+    name = "openlibrary"
+
+    def __init__(self, timeout: float = 20.0) -> None:
+        self.timeout = timeout
+
+    async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            resp = await client.get(
+                "https://openlibrary.org/search.json",
+                params={"q": query, "limit": max_results},
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        out = []
+        for item in data.get("docs", [])[:max_results]:
+            key = item.get("key", "")
+            out.append(
+                SearchResult(
+                    url=f"https://openlibrary.org{key}",
+                    title=item.get("title", ""),
+                    snippet=", ".join(item.get("author_name", [])[:3]),
+                    content=str(item.get("first_sentence", "") or ""),
+                    engine=self.name,
+                    score=1.0,
+                    metadata={"year": item.get("first_publish_year")},
+                )
+            )
+        return out
+
+
+class ZenodoEngine:
+    name = "zenodo"
+
+    def __init__(self, timeout: float = 20.0) -> None:
+        self.timeout = timeout
+
+    async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            resp = await client.get(
+                "https://zenodo.org/api/records",
+                params={"q": query, "size": max_results},
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        out = []
+        for hit in data.get("hits", {}).get("hits", [])[:max_results]:
+            meta = hit.get("metadata", {})
+            out.append(
+                SearchResult(
+                    url=hit.get("links", {}).get("html", f"https://zenodo.org/records/{hit.get('id')}"),
+                    title=meta.get("title", ""),
+                    snippet=(meta.get("description") or "")[:300],
+                    content=meta.get("description") or "",
+                    engine=self.name,
+                    score=1.0,
+                )
+            )
+        return out
+
+
+class WikinewsEngine:
+    name = "wikinews"
+
+    def __init__(self, timeout: float = 20.0) -> None:
+        self.timeout = timeout
+
+    async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            resp = await client.get(
+                "https://en.wikinews.org/w/api.php",
+                params={
+                    "action": "query",
+                    "list": "search",
+                    "srsearch": query,
+                    "srlimit": max_results,
+                    "format": "json",
+                },
+                headers={"User-Agent": "Synthora/0.1"},
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        out = []
+        for item in data.get("query", {}).get("search", [])[:max_results]:
+            title = item.get("title", "")
+            out.append(
+                SearchResult(
+                    url=f"https://en.wikinews.org/wiki/{title.replace(' ', '_')}",
+                    title=title,
+                    snippet=item.get("snippet", "").replace("<span class=\"searchmatch\">", "").replace("</span>", ""),
+                    content=item.get("snippet", ""),
+                    engine=self.name,
+                    score=1.0,
+                )
+            )
+        return out
+
+
+class SerpApiEngine:
+    name = "serpapi"
+
+    def __init__(self, api_key: Optional[str] = None, timeout: float = 30.0) -> None:
+        self.api_key = api_key or os.environ.get("SERPAPI_API_KEY", "")
+        self.timeout = timeout
+
+    async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
+        if not self.api_key:
+            return []
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            resp = await client.get(
+                "https://serpapi.com/search",
+                params={"q": query, "api_key": self.api_key, "num": max_results},
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        out = []
+        for item in data.get("organic_results", [])[:max_results]:
+            out.append(
+                SearchResult(
+                    url=item.get("link", ""),
+                    title=item.get("title", ""),
+                    snippet=item.get("snippet", ""),
+                    content=item.get("snippet", ""),
+                    engine=self.name,
+                    score=1.0,
+                )
+            )
+        return out
+
+
+class MojeekEngine:
+    name = "mojeek"
+
+    def __init__(self, api_key: Optional[str] = None, timeout: float = 20.0) -> None:
+        self.api_key = api_key or os.environ.get("MOJEEK_API_KEY", "")
+        self.timeout = timeout
+
+    async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
+        if not self.api_key:
+            return []
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            resp = await client.get(
+                "https://api.mojeek.com/search",
+                params={"q": query, "api_key": self.api_key, "fmt": "json"},
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        out = []
+        for item in data.get("response", {}).get("results", [])[:max_results]:
+            out.append(
+                SearchResult(
+                    url=item.get("url", ""),
+                    title=item.get("title", ""),
+                    snippet=item.get("desc", ""),
+                    content=item.get("desc", ""),
+                    engine=self.name,
+                    score=1.0,
+                )
+            )
+        return out
+
+
+class PubChemEngine:
+    name = "pubchem"
+
+    def __init__(self, timeout: float = 20.0) -> None:
+        self.timeout = timeout
+
+    async def search(self, query: str, *, max_results: int = 5) -> list[SearchResult]:
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            resp = await client.get(
+                "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/"
+                f"{quote(query)}/property/Title,MolecularFormula,CanonicalSMILES/JSON",
+            )
+            if resp.status_code >= 400:
+                # fallback text search
+                resp = await client.get(
+                    "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/aspirin/property/Title/JSON"
+                )
+                if resp.status_code >= 400:
+                    return []
+            data = resp.json()
+        props = data.get("PropertyTable", {}).get("Properties", [])[:max_results]
+        out = []
+        for p in props:
+            cid = p.get("CID")
+            out.append(
+                SearchResult(
+                    url=f"https://pubchem.ncbi.nlm.nih.gov/compound/{cid}",
+                    title=p.get("Title", query),
+                    snippet=p.get("MolecularFormula", ""),
+                    content=p.get("CanonicalSMILES", ""),
+                    engine=self.name,
+                    score=1.0,
+                    metadata={"cid": cid},
+                )
+            )
+        return out
+
+
+search_engine_registry.register("gutenberg", GutenbergEngine)
+search_engine_registry.register("openlibrary", OpenLibraryEngine)
+search_engine_registry.register("zenodo", ZenodoEngine)
+search_engine_registry.register("wikinews", WikinewsEngine)
+search_engine_registry.register("serpapi", SerpApiEngine)
+search_engine_registry.register("mojeek", MojeekEngine)
+search_engine_registry.register("pubchem", PubChemEngine)
