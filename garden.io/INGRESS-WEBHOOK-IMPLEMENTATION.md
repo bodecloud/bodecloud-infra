@@ -1,6 +1,19 @@
 # Ingress Controller Admission Webhook - Implementation Complete
 
-## Status: ✅ FULLY IMPLEMENTED
+## Reality check
+
+This file records a branch-local implementation claim about an ingress webhook.
+Even if the webhook objects were created successfully, that does not by itself
+prove the broader Garden or Kubernetes direction is now the repo's settled or
+fully verified path.
+
+Treat it as one solved subproblem inside the branch, not as repo-wide closure.
+
+For the broader branch synthesis, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
+## Status: branch-local implementation claim
 
 All components of the ingress controller admission webhook have been successfully created and configured.
 
@@ -154,4 +167,3 @@ All requested components have been implemented:
 - ✅ Webhook infrastructure fully configured
 
 The webhook is ready to function once the ingress controller pod becomes healthy. The implementation is complete and correct.
-

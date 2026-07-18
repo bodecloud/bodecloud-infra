@@ -1,0 +1,19 @@
+#cloud-config
+package_update: true
+packages:
+  - docker.io
+  - docker-compose-v2
+  - curl
+  - wget
+  - dnsutils
+  - jq
+  - python3
+  - ca-certificates
+  - apt-transport-https
+  - gnupg
+runcmd:
+  - systemctl enable --now docker
+  - usermod -aG docker ubuntu || true
+  - usermod -aG docker root || true
+  - mkdir -p /opt/my-media-stack /opt/failover-ci /root/.docker
+  - echo '{}' > /root/.docker/config.json

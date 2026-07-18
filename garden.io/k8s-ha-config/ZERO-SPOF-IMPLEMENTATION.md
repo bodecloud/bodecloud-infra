@@ -1,5 +1,25 @@
 # Zero SPOF Implementation Plan
 
+This file is a plan, not proof.
+
+That distinction matters because the broader `garden.io/` branch contains many
+status documents that use stronger language than the current evidence supports.
+
+This document is one of the corrective anchors inside that same branch because
+it still openly records:
+
+- single-instance control-plane reality
+- non-HA components
+- Tailscale and IP-mismatch blockers
+- unfinished bootstrap steps
+
+Read it as evidence that the branch understood the unsolved work, not as
+evidence that zero-SPOF had already been achieved.
+
+For the knowledgebase synthesis of this branch, see:
+
+- [`../../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
 ## Overview
 Complete high-availability setup with zero single points of failure across all components.
 
@@ -125,4 +145,3 @@ All scripts are in `garden.io/k8s-ha-config/`:
 1. **Node failure tests** - Kill nodes, verify failover
 2. **Pod failure tests** - Kill pods, verify recreation
 3. **Storage failure tests** - Kill storage nodes, verify data availability
-

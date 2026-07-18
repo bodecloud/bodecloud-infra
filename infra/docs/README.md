@@ -1,129 +1,73 @@
-# Constellation Agent Documentation
+# Constellation Agent Docs: Read This Subtree Carefully
 
-Welcome to the Constellation Agent documentation. This guide will help you understand, deploy, and use Constellation Agent effectively.
+This subtree documents the Go-based `infra/` experiment usually referred to as
+"Constellation Agent."
 
-## Getting Started
+Historically, many files here were written as if Constellation were already a
+fully proven, production-ready, zero-SPOF orchestration layer for the whole
+repo.
 
-New to Constellation? Start here:
+That is too strong.
 
-1. **[Quickstart Guide](QUICKSTART.md)** - Get up and running in minutes
-2. **[Architecture Overview](ARCHITECTURE.md)** - Understand how it works
-3. **[Deployment Guide](DEPLOYMENT_GUIDE.md)** - Deploy to your infrastructure
+## What this subtree is useful for
 
-## Core Documentation
+Use `infra/docs/` to understand:
 
-### Architecture and Design
+- what the Go control-plane effort is trying to become
+- which architectural jobs it is meant to own
+- what components have been coded
+- how the experiment differs from the root Compose-first runtime
 
-* **[Architecture Guide](ARCHITECTURE.md)** - Deep dive into system design, components, and data flow
-* **[Component Guide](COMPONENTS.md)** - Detailed documentation for each component
-* **[API Reference](API.md)** - Complete API documentation
+This subtree is valuable as:
 
-### Configuration and Usage
+- implementation direction
+- codebase orientation
+- architectural pressure evidence
 
-* **[Configuration Guide](CONFIGURATION.md)** - All configuration options explained
-* **[Examples](EXAMPLES.md)** - Practical examples and use cases
-* **[Roadmap](ROADMAP.md)** - Planned features and improvements
+## What this subtree does not prove by itself
 
-### Operations
+Reading these docs does **not** prove that:
 
-* **[Deployment Guide](DEPLOYMENT_GUIDE.md)** - Step-by-step deployment instructions
-* **[Verification Guide](VERIFICATION.md)** - How to verify your installation
-* **[Troubleshooting](DEPLOYMENT_GUIDE.md#troubleshooting)** - Common issues and solutions
+- Constellation is the adopted runtime for `bolabaden-infra`
+- the repo has already achieved zero-SPOF behavior
+- cross-node failover is fully validated in real deployment conditions
+- stateful backends are operationally proven under this control plane
+- the root `docker-compose.yml` implementation has been replaced
 
-## Documentation Structure
+Those claims require live runtime evidence, not just internal design docs.
 
-### For Users
+## Current relationship to the rest of the repo
 
-If you're deploying or using Constellation:
+The priority implementation of `bolabaden-infra` is still rooted in the top
+level [`docker-compose.yml`](../docker-compose.yml) and its include set.
 
-1. Read the [Quickstart Guide](QUICKSTART.md) to get started
-2. Review the [Configuration Guide](CONFIGURATION.md) for your setup
-3. Check [Examples](EXAMPLES.md) for common patterns
-4. Refer to [Troubleshooting](DEPLOYMENT_GUIDE.md#troubleshooting) if you have issues
+Constellation should currently be read as:
 
-### For Developers
+- a serious attempt to build a stronger coordination layer around Docker
+- a candidate answer to placement truth, routing truth, and failover truth
+- an experiment that still needs explicit proof boundaries
 
-If you're contributing or extending Constellation:
+## Recommended reading order
 
-1. Read the [Architecture Guide](ARCHITECTURE.md) to understand the design
-2. Review the [Component Guide](COMPONENTS.md) for implementation details
-3. Check the [API Reference](API.md) for integration points
-4. See the [Roadmap](ROADMAP.md) for areas that need work
+1. [`../../README.md`](../../README.md)
+2. [`../../STRATEGY.md`](../../STRATEGY.md)
+3. [`../../knowledgebase/architecture/compose-first-architecture.md`](../../knowledgebase/architecture/compose-first-architecture.md)
+4. [`PROJECT_SUMMARY.md`](PROJECT_SUMMARY.md)
+5. [`ARCHITECTURE.md`](ARCHITECTURE.md)
+6. [`ROADMAP.md`](ROADMAP.md)
 
-### For Operators
+## Reading rule for this subtree
 
-If you're running Constellation in production:
+Unless a document explicitly cites verified runtime evidence, treat it as one
+of:
 
-1. Follow the [Deployment Guide](DEPLOYMENT_GUIDE.md) for setup
-2. Review the [Configuration Guide](CONFIGURATION.md) for tuning
-3. Use the [Verification Guide](VERIFICATION.md) to validate
-4. Monitor using the [Architecture Guide](ARCHITECTURE.md#monitoring-and-observability)
+- intended design
+- coded capability
+- planned capability
+- experimental claim
 
-## Quick Reference
+Do not automatically upgrade it to:
 
-### Common Tasks
-
-**Deploy Services**
-
-```bash
-cd infra
-go run main.go
-```
-
-**Start Agent**
-
-```bash
-systemctl start constellation-agent
-```
-
-**Check Status**
-
-```bash
-systemctl status constellation-agent
-```
-
-**View Logs**
-
-```bash
-journalctl -u constellation-agent -f
-```
-
-**Verify Installation**
-
-```bash
-./scripts/verify.sh
-```
-
-### Key Concepts
-
-* **Gossip Protocol**: Decentralized service discovery
-* **Raft Consensus**: Strong consistency for critical operations
-* **HTTP Provider**: Dynamic Traefik configuration
-* **DNS Controller**: Automatic DNS management
-* **Service Monitor**: Health checking and broadcasting
-
-### Important Files
-
-* `services*.go`: Service definitions
-* `cmd/agent/main.go`: Agent entry point
-* `cluster/gossip/`: Gossip protocol
-* `cluster/raft/`: Raft consensus
-* `traefik/`: Traefik HTTP provider
-* `dns/`: DNS management
-
-## Documentation Updates
-
-Documentation is updated as features are added and improved. Check the [Roadmap](ROADMAP.md) to see what's coming next.
-
-If you find errors or have suggestions, please open an issue or submit a pull request.
-
-## Additional Resources
-
-* **Main README**: [../README.md](../README.md) - Project overview
-* **Main README**: [Project README](https://github.com/bolabaden/bolabaden-infra/blob/main/README.md) - Project overview
-* **Source Code**: [Infra source tree](https://github.com/bolabaden/bolabaden-infra/tree/main/infra) - Browse the codebase
-* **Scripts**: [Infra scripts](https://github.com/bolabaden/bolabaden-infra/tree/main/infra/scripts) - Installation and utility scripts
-
-***
-
-*Last updated: 2024*
+- production proof
+- global repo truth
+- complete HA verification

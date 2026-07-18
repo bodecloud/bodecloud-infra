@@ -1,6 +1,16 @@
 # Garden.io Deployment Progress
 
-## Current Status: Docker Compose Deployment ✅
+## Reality check
+
+This is a historical progress snapshot for the `garden.io/` branch.
+It does not supersede the current Compose-first root runtime, and it should not
+be read as a stable proof surface for HA, parity, or migration completion.
+
+For the evidence-led branch interpretation, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
+## Current Status: historical branch snapshot
 
 **Date:** $(date)
 
@@ -63,4 +73,3 @@
 - Core infrastructure is fully operational
 - Services are being deployed in dependency order
 - Health checks are comprehensive and matching docker-compose exactly
-

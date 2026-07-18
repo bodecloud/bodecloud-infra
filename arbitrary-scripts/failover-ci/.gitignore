@@ -1,0 +1,4 @@
+# Runtime CI state (node IPs, logs, preauth keys)
+state/
+env/test.env
+*.log

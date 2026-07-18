@@ -2,7 +2,10 @@
 
 ## ✅ Conversion Verification Checklist
 
-Use this checklist to verify the conversion is complete and ready for deployment.
+Use this checklist as a branch-local verification target for the Nomad
+conversion work.
+It should not be mistaken for proof that the Nomad path is already the
+repo-wide settled or fully validated answer.
 
 ### File Structure
 - [x] `nomad.hcl` - Main job file (5,628 lines)
@@ -172,9 +175,11 @@ Use this checklist to verify the conversion is complete and ready for deployment
 
 ## 🎯 Deployment Readiness Score: 100%
 
-**Status**: ✅ READY FOR PRODUCTION DEPLOYMENT
+**Status**: branch-local readiness target
 
-All services converted, all configs present, all secrets separated and protected, all documentation complete.
+The branch recorded all services as converted and documented.
+That statement should now be read as a branch-local milestone, not as a
+repo-wide production verdict.
 
 ---
 
@@ -227,7 +232,6 @@ Before deploying to production:
 ---
 
 **Conversion Date**: 2025-10-16  
-**Total Lines Converted**: 6,571 lines of production-ready HCL  
+**Total Lines Converted**: 6,571 lines of branch-local HCL conversion work  
 **Services**: 52 tasks across 9 service groups  
-**Quality**: 100% 1:1 parity with Docker Compose  
-
+**Quality Goal**: intended close parity with Docker Compose  

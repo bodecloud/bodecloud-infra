@@ -1,6 +1,17 @@
 # HA Kubernetes Cluster Implementation Status
 
-## Current Status: Configuration Complete, Ready for Deployment
+## Reality check
+
+This file is one of the useful corrective anchors in the branch because it
+still shows that deployment work remained in progress.
+It should be read as an implementation-progress artifact, not as evidence that
+the Kubernetes path already replaced the root Compose-first runtime.
+
+For the broader evidence-led reading, see:
+
+- [`../../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
+## Current Status: historical branch progress snapshot
 
 ### ✅ Completed
 
@@ -117,4 +128,5 @@ Test scenarios:
 3. Stop etcd on one node → Cluster maintains quorum
 4. Stop storage node → Data available on replicas
 
-All configurations are ready for deployment!
+The branch considered these configurations ready for later deployment work.
+That should not be mistaken for proof that the cluster path is finished.

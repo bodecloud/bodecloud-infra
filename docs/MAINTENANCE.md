@@ -2,6 +2,10 @@
 
 This document describes the automated maintenance system that prevents disk space issues and keeps your media stack running smoothly.
 
+The repository security-policy mirror lives at [`github/SECURITY.md`](github/SECURITY.md).
+Where maintenance guidance and security policy overlap, the
+[Infrastructure Master Plan](INFRASTRUCTURE_MASTER_PLAN.md) Appendix E wins.
+
 ## 🎯 Problem This Solves
 
 Docker-based media stacks can accumulate disk space through:
@@ -361,4 +365,3 @@ If you encounter issues:
 ## 📝 License
 
 Same as parent project.
-

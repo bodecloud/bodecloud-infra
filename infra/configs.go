@@ -980,9 +980,8 @@ func ensureConfigFilesFromCompose(rootPath, configPath string) error {
 			"warp-nat-setup.sh": "warp-nat-routing/warp-nat-setup.sh",
 			"warp-monitor.sh":   "warp-nat-routing/warp-monitor.sh",
 			// Coolify-proxy configs
-			"traefik-dynamic.yaml":            "traefik/dynamic/core.yaml",
-			"traefik-failover-dynamic.conf.tmpl": "traefik/dynamic/failover-fallbacks.yaml",
-			"nginx-traefik-extensions.conf":   "traefik/nginx-middlewares/nginx.conf",
+			"traefik-dynamic.yaml":          "traefik/dynamic/core.yaml",
+			"nginx-traefik-extensions.conf": "traefik/nginx-middlewares/nginx.conf",
 			// Authentik configs (file reference, skip for now)
 			// "authentik-secret-key": "",
 			// Headscale configs

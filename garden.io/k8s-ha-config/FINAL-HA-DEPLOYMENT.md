@@ -101,4 +101,5 @@ kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 5. Test failover scenarios
 6. Monitor and maintain
 
-All configurations are ready for deployment!
+The branch treated these configurations as prepared for later deployment work.
+That is not proof of completed HA behavior.

@@ -1,313 +1,116 @@
 # Constellation Agent Roadmap
 
-This document tracks planned improvements, enhancements, and new features for Constellation Agent. Items are organized by priority and status.
-
-## Core Features
-
-### Completed ✅
-
-- [x] Gossip-based service discovery using HashiCorp Memberlist
-- [x] Raft consensus for leader election and lease management
-- [x] Dynamic Traefik configuration via HTTP provider API
-- [x] Cloudflare DNS automation with lease-based coordination
-- [x] Service health monitoring and broadcasting
-- [x] WARP network health monitoring
-- [x] Multi-network support (backend, publicnet, warp-nat-net)
-- [x] Tailscale integration for secure mesh networking
-- [x] Stateful service orchestration (MongoDB replica sets, Redis Sentinel)
-- [x] Smart failover proxy with circuit breakers
-- [x] 57+ service definitions ported from Docker Compose
-- [x] Systemd service integration
-- [x] Comprehensive health checks
-- [x] Automatic service restart on health failure
-
-### In Progress 🚧
-
-- [ ] Metrics collection and Prometheus integration
-- [ ] Distributed tracing support
-- [ ] Advanced load balancing algorithms (least connections, geographic)
-- [ ] Service mesh integration (Istio/Linkerd compatibility)
-
-### Planned 📋
-
-- [ ] Web UI for cluster management and monitoring
-- [ ] REST API for external integrations
-- [ ] Service autoscaling based on metrics
-- [ ] Blue-green deployment support
-- [ ] Canary deployment support
-- [ ] Service dependency graph visualization
-- [ ] Automated chaos testing framework
-- [ ] Multi-region support with latency-based routing
-- [ ] Service versioning and rollback
-- [ ] Configuration validation and dry-run mode
-
-## Performance Improvements
-
-### Completed ✅
-
-- [x] Efficient gossip state serialization
-- [x] Config caching in HTTP provider
-- [x] Rate limiting for DNS updates
-- [x] Optimized network assignment logic
-
-### Planned 📋
-
-- [ ] Gossip compression for large state
-- [ ] Incremental state updates (deltas)
-- [ ] Connection pooling for DNS API
-- [ ] Parallel service health checks
-- [ ] Config generation optimization
-- [ ] Memory usage optimization for large clusters
-
-## Reliability Enhancements
-
-### Completed ✅
-
-- [x] Thread-safe cluster state management
-- [x] Graceful error handling throughout
-- [x] Automatic retry with backoff
-- [x] Data race fixes in node metadata updates
-- [x] JSON truncation fixes in gossip protocol
-
-### Planned 📋
-
-- [ ] Circuit breakers for external API calls
-- [ ] Health check aggregation and smoothing
-- [ ] Automatic node recovery procedures
-- [ ] Split-brain detection and prevention
-- [ ] Network partition recovery strategies
-- [ ] Service dependency health tracking
-- [ ] Automatic failback when services recover
-
-## Security Improvements
-
-### Completed ✅
-
-- [x] Secure secret management
-- [x] Tailscale encryption for inter-node communication
-- [x] Read-only secret mounts
-- [x] Network isolation
-
-### Planned 📋
-
-- [ ] mTLS for HTTP provider communication
-- [ ] API authentication and authorization
-- [ ] Audit logging for all operations
-- [ ] Secret rotation automation
-- [ ] RBAC for cluster operations
-- [ ] Network policy enforcement
-- [ ] Vulnerability scanning integration
-
-## Developer Experience
-
-### Completed ✅
-
-- [x] Comprehensive documentation
-- [x] Installation scripts
-- [x] Verification scripts
-- [x] Systemd integration
-- [x] Clear error messages
-
-### Planned 📋
-
-- [ ] Development mode with hot reload
-- [ ] Local testing environment
-- [ ] Integration test suite
-- [ ] Performance benchmarking tools
-- [ ] Debug mode with verbose logging
-- [ ] Configuration validation tool
-- [ ] Service definition linter
-- [ ] Migration guides from Docker Compose
-
-## Observability
-
-### Completed ✅
-
-- [x] Structured logging
-- [x] Health check endpoints
-- [x] Service status tracking
-
-### Planned 📋
-
-- [ ] Prometheus metrics export
-- [ ] Grafana dashboards
-- [ ] Distributed tracing (OpenTelemetry)
-- [ ] Log aggregation and search
-- [ ] Alerting rules
-- [ ] Performance profiling tools
-- [ ] Cluster state visualization
-- [ ] Service dependency graph
-
-## Integration
-
-### Completed ✅
-
-- [x] Traefik HTTP provider
-- [x] Cloudflare DNS API
-- [x] Docker API
-- [x] Tailscale CLI
-- [x] Systemd
-
-### Planned 📋
-
-- [ ] Kubernetes operator mode
-- [ ] Nomad integration
-- [ ] Consul service discovery
-- [ ] etcd backend option
-- [ ] Terraform provider
-- [ ] Ansible playbooks
-- [ ] Pulumi integration
-- [ ] CI/CD pipeline templates
-
-## Service Support
-
-### Completed ✅
-
-- [x] 57+ services ported from Docker Compose
-- [x] MongoDB replica set orchestration
-- [x] Redis Sentinel orchestration
-- [x] Traefik reverse proxy
-- [x] Authentik identity provider
-- [x] Monitoring stack (Prometheus, Grafana, Loki)
-- [x] Media services (Stremio, Prowlarr, etc.)
-- [x] LLM services (LiteLLM, GPT-R, etc.)
-
-### Planned 📋
-
-- [ ] PostgreSQL HA (Patroni/Stolon)
-- [ ] Elasticsearch cluster orchestration
-- [ ] Kafka cluster management
-- [ ] RabbitMQ cluster support
-- [ ] MinIO distributed mode
-- [ ] Service templates library
-- [ ] Community service definitions
-
-## Network Features
-
-### Completed ✅
-
-- [x] Multi-network support
-- [x] Network assignment based on labels
-- [x] Tailscale mesh integration
-- [x] WARP network monitoring
-
-### Planned 📋
+This roadmap is now written to distinguish between:
 
-- [ ] Network policy enforcement
-- [ ] Service-to-service encryption
-- [ ] Network performance monitoring
-- [ ] Bandwidth limiting per service
-- [ ] Network isolation groups
-- [ ] VPN integration options
+- **implemented code direction**
+- **plausible but unverified capability**
+- **future work**
 
-## Deployment
+That distinction matters because older versions mixed "exists in the tree" with
+"operationally proven."
 
-### Completed ✅
+## What Constellation is trying to become
 
-- [x] Single-node deployment
-- [x] Multi-node cluster deployment
-- [x] Systemd service files
-- [x] Installation scripts
+Constellation is the repo's attempt to build a Docker-native coordination layer
+that can reduce:
 
-### Planned 📋
+- hidden placement knowledge
+- brittle node-local routing assumptions
+- manual failover reconstruction
+- some of the operator rent imposed by multi-node Compose
 
-- [ ] Docker Compose deployment option
-- [ ] Kubernetes Helm charts
-- [ ] Ansible playbooks
-- [ ] Terraform modules
-- [ ] Cloud-init templates
-- [ ] Automated cluster bootstrap
-- [ ] Rolling update support
-- [ ] Zero-downtime deployments
+## Implemented direction visible in the tree
 
-## Documentation
+These items appear to have real implementation effort behind them and are fair
+to discuss as coded project direction:
 
-### Completed ✅
+- gossip-oriented cluster state exchange
+- Raft-backed coordination for leadership-style operations
+- dynamic Traefik configuration generation
+- Cloudflare DNS control logic
+- service health monitoring
+- Tailscale-aware peer discovery assumptions
+- stateful service handling attempts
+- install, verify, and deployment helper surfaces
 
-- [x] Architecture documentation
-- [x] API reference
-- [x] Deployment guide
-- [x] Quickstart guide
-- [x] Configuration guide
-- [x] Troubleshooting guide
+## Direction that still needs stronger verification
 
-### Planned 📋
+These may be partly coded or locally testable, but should not be narrated as
+operationally settled without stronger evidence:
 
-- [ ] Video tutorials
-- [ ] Interactive examples
-- [ ] Best practices guide
-- [ ] Performance tuning guide
-- [ ] Security hardening guide
-- [ ] Migration guides
-- [ ] FAQ expansion
-- [ ] Community contributions guide
+- universal automatic failover
+- zero-SPOF behavior
+- production-grade stateful HA
+- reliable wrong-node service resolution
+- full repo-wide replacement of Compose-managed truth
 
-## Testing
+## Near-term roadmap
 
-### Completed ✅
+### 1. Clarify runtime authority
 
-- [x] Basic verification scripts
-- [x] Chaos testing framework (basic)
+Constellation needs a crisper answer to:
 
-### Planned 📋
+- what truth it owns
+- what the root Compose runtime still owns
+- where coexistence ends and takeover begins
 
-- [ ] Unit test suite
-- [ ] Integration test suite
-- [ ] End-to-end test scenarios
-- [ ] Performance benchmarks
-- [ ] Load testing scenarios
-- [ ] Failure injection testing
-- [ ] Network partition testing
-- [ ] Continuous testing pipeline
+### 2. Prove representative failover paths
 
-## Community
+Focus on evidence, not slogans:
 
-### Planned 📋
+- a small set of stateless HTTP services
+- wrong-node entry behavior
+- route survival after backend loss
+- health-aware convergence after recovery
 
-- [ ] Contribution guidelines
-- [ ] Code of conduct
-- [ ] Issue templates
-- [ ] Pull request templates
-- [ ] Release process documentation
-- [ ] Community forum/discord
-- [ ] Regular community calls
-- [ ] Feature request process
+### 3. Separate stateless and stateful proof
 
-## Long-term Vision
+Do not let ingress success stand in for database resilience.
 
-### Future Considerations
+Needed:
 
-- [ ] Edge computing support
-- [ ] IoT device integration
-- [ ] Multi-cloud deployment
-- [ ] Hybrid cloud support
-- [ ] Serverless function orchestration
-- [ ] AI/ML workload optimization
-- [ ] Blockchain integration (if needed)
-- [ ] Quantum-safe encryption (when available)
+- explicit stateful-service test plans
+- topology-specific recovery expectations
+- honest limits where stateful HA is still incomplete
 
-## How to Contribute
+### 4. Reduce documentation overclaim
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines on contributing to Constellation Agent.
+The docs should keep marking the difference between:
 
-## Requesting Features
+- intended architecture
+- coded implementation
+- verified behavior
 
-To request a new feature:
+### 5. Decide promotion thresholds
 
-1. Check if it's already in the roadmap
-2. Open an issue with the `enhancement` label
-3. Describe the use case and expected behavior
-4. Community discussion will determine priority
+Constellation should justify itself against other options by explicit pain
+removed:
 
-## Status Legend
+- placement truth
+- convergence truth
+- ingress truth
+- failover truth
 
-- ✅ **Completed**: Feature is implemented and tested
-- 🚧 **In Progress**: Feature is actively being developed
-- 📋 **Planned**: Feature is planned but not yet started
-- 🔄 **On Hold**: Feature is temporarily paused
-- ❌ **Cancelled**: Feature is no longer planned
+If it cannot do that cleanly, the repo should keep other coordination options
+open.
 
----
+## Medium-term roadmap
 
-*Last updated: 2024*
+- stronger operational verification tooling
+- clearer cluster bootstrap story
+- lower secret and env convergence ambiguity
+- better explanation of direct-node vs global routing semantics
+- more explicit boundaries around what services are safe candidates for
+  Constellation-managed failover
 
+## Longer-term decision point
+
+The long-term question is not "can more features be added?"
+
+It is:
+
+> does Constellation earn the right to become a trusted control layer for the
+> repo's real multi-node dream, or should some responsibilities be promoted into
+> another platform?
+
+That remains open.

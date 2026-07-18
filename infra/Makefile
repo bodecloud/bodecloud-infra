@@ -24,6 +24,7 @@ build:
 	@mkdir -p bin
 	go build -o bin/config-tool ./cmd/config
 	go build -o bin/config-init ./cmd/config-init
+	go build -o bin/failover-agent ./cmd/failover-agent
 	@echo "✓ Build complete"
 
 # Run all tests

@@ -307,6 +307,33 @@ configs:
           || $$DOCKER inspect -f '{{ index .Config.Labels "com.docker.compose.project" }}' "$$WARP_CONTAINER_NAME" 2>/dev/null \
           || echo ""
       )"
+      echo "STACK_NAME: $$STACK_NAME"
+      echo "ROUTER_CONTAINER_NAME: $$ROUTER_CONTAINER_NAME"
+      echo "WARP_CONTAINER_NAME: $$WARP_CONTAINER_NAME"
+      
+      # Get router container PID
+      router_pid="$$($$DOCKER inspect -f '{{.State.Pid}}' $$ROUTER_CONTAINER_NAME 2>/dev/null || echo \"\")"
+      if [[ -z "$$router_pid" || "$$router_pid" == "0" ]]; then
+          echo "Error: $$ROUTER_CONTAINER_NAME container not found or not running"
+      fi
+      
+      if [[ ! -e "/proc/$$router_pid/ns/net" ]]; then
+          echo "Error: $$ROUTER_CONTAINER_NAME container network namespace not ready"
+      fi
+      
+      echo "Found router container PID: $$router_pid"
+      
+      # Get warp container PID
+      warp_pid="$$($$DOCKER inspect -f '{{.State.Pid}}' $$WARP_CONTAINER_NAME 2>/dev/null || echo \"\")"
+      if [[ -z "$$warp_pid" || "$$warp_pid" == "0" ]]; then
+          echo "Error: $$WARP_CONTAINER_NAME container not found or not running"
+      fi
+      
+      if [[ ! -e "/proc/$$warp_pid/ns/net" ]]; then
+          echo "Error: $$WARP_CONTAINER_NAME container network namespace not ready"
+      fi
+      
+      echo "Found warp container PID: $$warp_pid"
       
       # NETWORK DISCOVERY (Non-Destructive Approach)
       # ================================================

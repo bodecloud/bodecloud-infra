@@ -1,8 +1,50 @@
 # Brainstorm: Module 4 — Service Failover & Auto-Redeploy (Next-Gen)
 
-> **Status**: Phase 1.1 (Exploration)\
-> **Date**: 2026-06-04\
-> **Topic**: Replacing the broken `docker-gen-failover` with a robust, Go-based `bolabaden-failover-agent` (Constellation integration).
+> **Status**: Code landed — **runtime whoami proof pending**; do **not** claim Track 2 closed\
+> **Date**: 2026-06-04 (updated 2026-07-18)\
+> **Feasibility**: Conditional (see `/tmp/compound-engineering/failover-feasibility/` or repo notes below)\
+> **Topic**: Replacing the broken `docker-gen-failover` with a registry-backed Go `failover-agent`.
+
+## Live pointer
+
+| Piece | Path |
+|---|---|
+| Agent daemon | [`infra/cmd/failover-agent/main.go`](../../infra/cmd/failover-agent/main.go) |
+| Registry + Traefik writer | [`infra/failover/`](../../infra/failover/) |
+| Compose service | [`compose/docker-compose.failover-agent.yml`](../../compose/docker-compose.failover-agent.yml) |
+| Example registry | [`placement/services.yaml.example`](../../placement/services.yaml.example) |
+| Env contract | `.env.example` (`FAILOVER_*`) |
+| 4-VM dual-DNS CI | [`arbitrary-scripts/failover-ci/`](../../arbitrary-scripts/failover-ci/) |
+| Module 5 CF DDNS (deferred) | [`docs/brainstorms/20260718-module5-cloudflare-ddns-followup.md`](20260718-module5-cloudflare-ddns-followup.md) |
+
+`docker-gen-failover` has been removed from Compose. The agent writes `${CONFIG_PATH}/traefik/dynamic/failover-fallbacks.yaml` from the placement registry and never drops routes on crash/unhealthy.
+
+**4-VM CI driver:** [`arbitrary-scripts/failover-ci/`](../../arbitrary-scripts/failover-ci/) — CoreDNS (not Cloudflare), dual DNS (MagicDNS → CoreDNS → Google), Headscale on two nodes, heterogeneous whoami/ci-probe placement. Run `./run-all.sh` then `prove-dns.sh` + `prove-failover.sh` before claiming Track 2 closed.
+
+**Sole file owner:** do not run `scripts/osvc_ingress_sync.py` against the same `failover-fallbacks.yaml` on the same node.
+
+**Peer replica ensure** (`FAILOVER_REPLICA_ENSURE`) is enabled on **CI main (`ci-node1`) only**; prod `.env.example` stays `false` until Tailscale Docker API is standard. Image-based ensure works without local ContainerID.
+
+## Feasibility verdict (2026-07-18)
+
+**Conditional** against STRATEGY Track 2 / `.github/copilot-instructions.md`:
+
+| Met | Gap |
+|---|---|
+| Registry-backed routes survive crash (direction correct) | Whoami kill proof not run |
+| Local + `service.node.domain` peer URLs | Always-on replicas gated off / fragile ExportContainerConfig |
+| Compose-first, no Swarm | Dual-writer conflict documented; agent now sole owner |
+| Intentional stop ≠ crash (exit 0) | Middleware copied from labels when present; auth continuity still peer-parity dependent |
+
+## Verification (whoami) — required before claiming success
+
+On main host (`FAILOVER_MAIN_HOST=micklethefickle`) with peers configured:
+
+1. Confirm agent healthy and file present: inspect `failover-fallbacks.yaml` for `whoami` + peer URLs.
+2. Crash: `docker kill whoami` → registry status `crashed`, YAML still lists `https://whoami.<peer>.$DOMAIN` → `curl -k https://whoami.$DOMAIN` should succeed via peer.
+3. Intentional stop: `docker compose stop whoami` → status `intentionally_stopped`; no peer redeploy.
+
+After step 2 is proven in production, capture the learning with `/ce-compound`.
 
 ## 1. Diagnosis (The "Why")
 
@@ -12,37 +54,21 @@
 * **The Gap**: There is no mechanism to "hand off" a service to a peer node if the local instance stays down.
 * **The Constraint**: We MUST maintain the "No Orchestrator" philosophy. No K8s control plane, no Swarm.
 
-## 2. Approach (The "How")
+## 2. Approach (The "How") — v1 shipped shape
 
-### 2.1 Transition to Constellation
+1. **Persistence**: Traefik routes come from `placement/services.yaml`; crash only changes status.
+2. **Ordered servers**: local `http://svc:port` first + peer `https://svc.peer.$DOMAIN` (osvc-aligned; healthCheck drops dead).
+3. **Optional replicas**: `FAILOVER_REPLICA_ENSURE=true` on main for HA-eligible services (default off).
+4. **Stateful opt-out**: `failover.replica=false` or deny-list (`redis`, `mongo*`, `postgres*`, `rabbitmq`, `headscale*`).
 
-* **Service Registry**: A central `services.yaml` (already conceptually in the Master Plan) that tracks service-to-node mapping.
+Constellation gossip remains a future upgrade path; v1 does not require it.
 
-* **Active Health Checking**: Constellation agents on each node will ping local services via Traefik/HTTP and report status.
+## 3. Product Pressure Test (still open)
 
-* **Desired vs. Actual State (Lightweight)**: Since we are "no-cluster," we don't have a global state, but we can have "Preferred Nodes."
-
-### 2.2 Core Mechanisms
-
-1. **Persistence**: Traefik routes for a service are *never* deleted unless explicitly removed from `services.yaml`.
-2. **Weighted Routing**: Traefik `weighted-round-robin` will point to all nodes. Healthy local nodes get weight `100`, remote nodes get weight `1` (or vice versa depending on proxy costs), but health checks in Traefik handle the actual traffic shift.
-3. **Auto-Redeploy (The "Hero" Move)**: If Node A goes down and Node B hears about it (or detects it via health check), Node B can run the `docker compose` command for the missing service using the shared Git repo.
-
-## 3. Product Pressure Test (Brainstorming Questions)
-
-* **Q1 (Conflict)**: If Node B starts Node A's service, how do we prevent a "Split Brain" where both eventually run it once Node A recovers?
-* **Q2 (Security)**: How does Node B get the secrets to run Node A's service if secrets are local? (Master Plan Module 1: Secret Sync is a hard dependency).
-* **Q3 (Storage)**: What happens to persistent data (Volume sync)? (Master Plan Module 11: Meditation Wizard / Storage? No, we need a Module for Rclone/Sync).
-
-## 4. Proposed Solution Canvas (Draft)
-
-* **Component**: `infra/failover/agent.go`
-* **Trigger**: Docker Engine API Event `die` or `health_status: unhealthy`.
-* **Action**:
-  1. Local Restart: `docker compose restart <service>`.
-  2. Escalation: If `unhealthy` persists for 3 retries, update `services.yaml` status and "Request Peer Pickup."
-  3. Peer Logic: Peers listen on a gossip/Headscale port. First available peer takes a Redis/File lock and starts the container.
+* **Q1 (Conflict)**: Split-brain after main recovers — acceptable for stateless HA; singletons use `failover.replica=false`.
+* **Q2 (Security)**: Peer secret availability still depends on Module 1 secret sync.
+* **Q3 (Storage)**: Stateful volume HA is out of scope for this agent.
 
 ***
 
-*This document is the output of Phase 1.1 of the ce-brainstorm workflow.*
+*Originally Phase 1.1 ce-brainstorm; Compose `failover-agent` code landed under Conditional feasibility.*

@@ -35,6 +35,8 @@ networks:
         gateway: ${BACKEND_GATEWAY:-10.0.7.1}
 include:
 - compose/docker-compose.coolify-proxy.yml
+- compose/docker-compose.failover-agent.yml
+- compose/docker-compose.cloudflare-multi-ddns.yml
 - compose/docker-compose.docs.yml
 - compose/docker-compose.firecrawl.yml
 - compose/docker-compose.headscale.yml
@@ -353,6 +355,7 @@ services:
       start_period: 30s
     restart: always
   bolabaden-nextjs:
+    # 🔹🔹 bolabaden.org nextJS main website 🔹🔹
     build:
       context: https://github.com/bolabaden/bolabaden-site.git
       #context: ${SRC_PATH:-./projects}/website/bolabaden-site

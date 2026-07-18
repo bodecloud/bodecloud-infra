@@ -1,0 +1,21 @@
+# Example placement registry consumed by failover-agent.
+# Live path: ${CONFIG_PATH}/placement/services.yaml (written by the agent).
+# Routes are NEVER deleted on crash/unhealthy — only status changes.
+services: {}
+# Example entry after discovery:
+#   whoami:
+#     name: whoami
+#     port: 80
+#     health_path: /
+#     replica_eligible: true
+#     compose_service: whoami
+#     status: running
+#     nodes:
+#       micklethefickle:
+#         status: running
+#         last_seen: "2026-07-18T00:00:00Z"
+#         priority: 1
+#       peerhost:
+#         status: running
+#         last_seen: "2026-07-18T00:00:00Z"
+#         priority: 2

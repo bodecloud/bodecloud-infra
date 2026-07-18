@@ -1,13 +1,19 @@
 site_name: bolabaden Infrastructure Knowledgebase
-site_description: Operations and architecture docs for bolabaden.org — a multi-node, Docker-based homelab.
+site_description: Evidence-heavy docs for bolabaden.org — a Compose-first, multi-node Docker stack chasing wrong-node survival without fake HA language.
 site_author: bolabaden
 docs_dir: knowledgebase
 site_dir: /tmp/mkdocs-site
 # Keep non-site artifacts out of the rendered Knowledgebase.
 # Patterns are evaluated relative to docs_dir (knowledgebase).
 exclude_docs: |
-  docs/plans/**
-  docs/residual-review-findings/**
+  source-archive/**
+  docs/**
+  infra/**
+  AGENTS.md
+  CONTRIBUTING.md
+  DOCKER_SECRETS_README.md
+  README.md
+  alt_design.md
 
 theme:
   name: material
@@ -67,65 +73,66 @@ markdown_extensions:
   - md_in_html
 
 nav:
-  - Home: docs/index.md
+  - Home: index.md
+  - Dream, Runtime, Proof:
+    - Reading Paths and Retrieval Routes: reading-paths.md
+    - User Intent and Dream: research/user-intent-and-dream.md
+    - Operator Contract and Success Criteria: architecture/operator-contract.md
+    - Instruction Surfaces and Authority: architecture/instruction-surfaces-and-authority.md
+    - Current Compose Runtime: architecture/current-compose-runtime.md
+    - Proof Matrix and Drill Catalog: operations/proof-matrix-and-drills.md
 
-  - Getting Started:
-    - Project Overview: README.md
-    - Quick Start (5 min): infra/docs/QUICKSTART.md
-    - Secrets & Credentials: DOCKER_SECRETS_README.md
-    - Security Status: SECURITY_STATUS.md
+  - Request-Time Truth:
+    - Request Path and Failure Walkthrough: architecture/request-path-and-failure-walkthrough.md
+    - HA, Failover, and Routing: architecture/ha-failover-routing.md
+    - Current-State Registry and Peer Eligibility: architecture/current-state-registry-and-peer-eligibility.md
+    - Ingress and Failover Evidence: research/ingress-and-failover-evidence.md
+    - Stateful HA and Data: architecture/stateful-ha-and-data.md
+    - Stateful HA Evidence: research/stateful-ha-evidence.md
 
   - Architecture:
+    - Orchestration Overview: orchestration/README.md
+    - Orchestration Model: orchestration/orchestration-model.md
+    - Orchestration Concept Mapping: orchestration/concept-mapping.md
+    - Constellation Control Layer: orchestration/constellation-control-layer.md
     - Infrastructure Master Plan: docs/INFRASTRUCTURE_MASTER_PLAN.md
     - Multi-Node Philosophy: plan-infrastructure-unification.md
     - Orchestration Research 2026: docs/orchestration_research_2026.md
     - Alternative Designs: alt_design.md
 
-  - Constellation Agent:
-    - Top-Level Overview: infra/README.md
-    - Top-Level Contributing: infra/CONTRIBUTING.md
-    - Overview: infra/docs/README.md
-    - Architecture: infra/docs/ARCHITECTURE.md
-    - Components: infra/docs/COMPONENTS.md
-    - Configuration: infra/docs/CONFIGURATION.md
-    - Deployment Guide: infra/docs/DEPLOYMENT_GUIDE.md
-    - API Reference: infra/docs/API.md
-    - Code Examples: infra/docs/EXAMPLES.md
-    - Integration Guide: infra/docs/CONSTELLATION_INTEGRATION.md
-    - Best Practices: infra/docs/BEST_PRACTICES.md
-    - Cheat Sheet: infra/docs/CHEAT_SHEET.md
-    - Troubleshooting: infra/docs/TROUBLESHOOTING.md
-    - Migration Guide: infra/docs/MIGRATION_GUIDE.md
-    - Refactoring Guide: infra/docs/REFACTORING_GUIDE.md
-    - Integration Examples: infra/docs/INTEGRATION_EXAMPLES.md
-    - System Status: infra/docs/SYSTEM_STATUS.md
-    - Roadmap: infra/docs/ROADMAP.md
-    - vs Constellation Comparison: infra/docs/INFRA_VS_CONSTELLATION_COMPARISON.md
-    - Project Summary: infra/docs/PROJECT_SUMMARY.md
-    - Canonical Refactoring Summary: infra/docs/CANONICAL_REFACTORING_SUMMARY.md
-    - Complete Refactoring Summary: infra/docs/COMPLETE_REFACTORING_SUMMARY.md
-    - Completion Summary: infra/docs/COMPLETION_SUMMARY.md
-    - Implementation Status: infra/docs/IMPLEMENTATION_STATUS.md
-    - Implementation Complete: infra/docs/IMPLEMENTATION_COMPLETE.md
-    - Final Summary: infra/docs/FINAL_SUMMARY.md
-    - Verification: infra/docs/VERIFICATION.md
-    - Test Completion Report: infra/docs/TEST_COMPLETION_REPORT.md
-    - Quick Start (Canonical): infra/docs/QUICK_START.md
+  - Runtime and Authority:
+    - Problem and Goals: architecture/problem-and-goals.md
+    - Compose Fragment Map: architecture/compose-fragment-map.md
+    - Compose-first Architecture: architecture/compose-first-architecture.md
+    - Design Tensions and Contradictions: architecture/design-tensions-and-contradictions.md
+    - Failure Model and Maturity: architecture/failure-model-and-maturity.md
 
-  - High Availability:
-    - Stateful HA Plan: docs/stateful_ha_plan.md
-    - Ingress HA (OpenSVC): docs/osvc_ingress_ha.md
-    - OpenSVC Cluster Bootstrap: docs/opensvc_cluster_bootstrap.md
+  - Hidden Burden and Promotion:
+    - The Missing Middle Layer: architecture/missing-middle-layer.md
+    - Capability Gaps and Roadmap: architecture/capability-gaps-and-roadmap.md
+    - Operator Questions and Honest Answers: operations/operator-questions-and-honest-answers.md
+    - Decision Paths and Promotion Rules: operations/decision-paths-and-promotion-rules.md
+    - DevOps Runbook: operations/devops-runbook.md
+    - Source Assimilation Index: operations/source-assimilation-index.md
+    - Curated Site Source Map: operations/curated-site-source-map.md
 
-  - Operations:
-    - Maintenance Guide: docs/MAINTENANCE.md
-    - OTLP Quickstart: docs/OTLP_QUICKSTART.md
+  - Futures, Tradeoffs, and Plans:
+    - Orchestration Options: architecture/orchestration-options.md
+    - Orchestrator Tradeoffs Evidence: research/orchestrator-tradeoffs-evidence.md
+    - Orchestration Research 2026: research/orchestration-research-2026.md
+    - Infrastructure Master Plan: research/infrastructure-master-plan.md
+    - Multi-node Philosophy: research/plan-infrastructure-unification.md
+    - OpenSVC Ingress HA: research/osvc-ingress-ha.md
+    - OpenSVC Cluster Bootstrap: research/opensvc-cluster-bootstrap.md
+    - Garden and k3s Exploration: research/garden-k3s-exploration-evidence.md
+    - Nomad Exploration: research/nomad-exploration-evidence.md
+    - Stateful HA Plan: research/stateful-ha-plan.md
 
-  - KotorModSync Integration:
-    - Telemetry Setup: docs/KOTORMODSYNC_TELEMETRY_SETUP.md
-    - Client Integration: docs/KOTORMODSYNC_CLIENT_INTEGRATION.md
-    - Security Summary: docs/KOTORMODSYNC_SECURITY_SUMMARY.md
+  - Evidence and Reconstruction:
+    - Evidence Ledger: research/evidence-ledger.md
+    - Archive Pressure Patterns: research/archive-pressure-patterns.md
 
-  - Contributing:
-    - Guidelines: CONTRIBUTING.md
-    - Agent Instructions: AGENTS.md
+  - CUE Blueprint:
+    - Unified Orchestration Blueprint: UNIFIED_ORCHESTRATION_BLUEPRINT.md
+    - Bootstrap Protocol: CUE_BOOTSTRAP_PROTOCOL.md
+    - Compose Spec Extensions: CUE_SPEC_EXTENSIONS.md

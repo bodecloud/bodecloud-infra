@@ -1,6 +1,19 @@
 # Final HA Implementation Status
 
-## ✅ Complete: All HA Infrastructure Configured
+## Reality check
+
+This file describes a branch's prepared HA configuration state.
+Its internal language is stronger than the repo's verified evidence allows.
+
+The document itself still distinguishes configuration completion from cluster
+setup and service deployment, which is the key reason it should not be treated
+as proof of delivered zero-SPOF behavior.
+
+For the broader synthesis, see:
+
+- [`../../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
+## Historical branch claim: HA configuration work prepared
 
 ### Created Components
 
@@ -71,4 +84,5 @@
 ✅ **Networking**: HA CNI with BGP
 ✅ **DNS**: 3+ CoreDNS replicas
 
-All configurations are complete and ready for deployment!
+The branch considered these configurations prepared for later deployment work.
+That is not the same as demonstrated HA or zero-SPOF operation.

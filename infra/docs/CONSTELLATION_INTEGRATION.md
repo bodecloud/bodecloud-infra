@@ -1,3 +1,14 @@
+> Status note:
+> This document records the intended and partially implemented Constellation
+> integration path.
+> It does not by itself prove that the integration is fully validated,
+> production-ready, or authoritative for the root Compose-first runtime.
+>
+> Many later headings in this file preserve historical "complete" or
+> "production-ready" wording from the subtree's own status narrative.
+> Those headings should be read as branch-local claims under review, not as the
+> current repo-wide verdict.
+>
 # Constellation Integration Plan
 
 ## Overview
@@ -344,7 +355,7 @@ Further production hardening is still useful for workload-specific rollback, ric
 - **Resource Threshold Parsing**: Implemented and logged
 - **Metrics Collection**: Requires integration with metrics infrastructure (Prometheus/node-exporter)
 - **Threshold Evaluation**: Logic ready, needs metrics data source
-  - Threshold parsing logic is fully implemented in `infra/failover/migration.go`
+  - Threshold parsing logic is implemented in `infra/failover/migration.go`
   - Integration with metrics collection system needed for full functionality
 
 ### Testing
@@ -484,7 +495,10 @@ Further production hardening is still useful for workload-specific rollback, ric
 
 **Final Status**: ✅ **100% COMPLETE, FULLY TESTED, AND PRODUCTION-READY**
 
-All phases of the Constellation integration are complete, fully tested, and integrated into the agent. The system is ready for production use with the documented limitations (simulated migration execution, resource metrics pending infrastructure integration).
+Most planned Constellation integration phases appear represented in the tree and
+documented here, but the presence of simulated migration execution and pending
+resource-metrics integration means this file should not be read as full
+production proof.
 
 ## Implementation Completion Summary
 
