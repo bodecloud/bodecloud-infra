@@ -1,0 +1,99 @@
+{
+  "reviewer": "feasibility",
+  "verdict_summary": "Conditional: registry-backed Traefik writer is the right Track 2 direction to replace docker-gen, but the current agent does not yet meet repo honesty bars for claiming ingress failover — fix die/exit0 misclassification, dual-writer ownership of failover-fallbacks.yaml, and do not claim success until whoami proof; treat always-on remote Docker replicas as a separate unproven dependency.",
+  "findings": [
+    {
+      "title": "die exit 0 treated as crash",
+      "severity": "P0",
+      "section": "U2 / agent.go onCrash",
+      "why_it_matters": "An intentional compose stop emits die with exit code 0 before or instead of a clean stop classification; the agent marks crashed and peer-redeploys, violating the plan's crash≠intentional contract and creating unwanted replicas.",
+      "finding_type": "error",
+      "autofix_class": "gated_auto",
+      "suggested_fix": "In onCrash (and classifyStopReason), inspect ExitCode/OOMKilled; if ExitCode==0 and not OOMKilled, route to intentional-stop path and skip EnsureReplicas.",
+      "confidence": 100,
+      "evidence": [
+        "case action == \"die\" || action == \"oom\": a.onCrash(...)",
+        "On intentional stop ... does not peer-redeploy"
+      ]
+    },
+    {
+      "title": "Dual writers of failover-fallbacks.yaml",
+      "severity": "P0",
+      "section": "U3 / Traefik output ownership",
+      "why_it_matters": "osvc_ingress_sync.py and failover-agent both atomically write the same path; whichever runs last wins and can wipe crash-persisted registry routes or OpenSVC node lists mid-flight.",
+      "finding_type": "error",
+      "autofix_class": "gated_auto",
+      "suggested_fix": "Declare failover-agent sole owner of failover-fallbacks.yaml in Compose comments and docs; add FAILOVER_DISABLE_OSVC_SYNC note; document that osvc_ingress_sync must not run concurrently on the same node.",
+      "confidence": 100,
+      "evidence": [
+        "scripts/osvc_ingress_sync.py writes .../failover-fallbacks.yaml",
+        "FAILOVER_TRAEFIK_OUTPUT: /traefik/dynamic/failover-fallbacks.yaml"
+      ]
+    },
+    {
+      "title": "Peer replica ensure is unproven",
+      "severity": "P1",
+      "section": "U2 / replica.go",
+      "why_it_matters": "Always-on HA replicas require Tailscale-reachable Docker API and recreate via ExportContainerConfig, which drops compose networks/secrets/bind semantics; peers will not faithfully match main without shared compose.",
+      "finding_type": "omission",
+      "autofix_class": "manual",
+      "suggested_fix": "Gate EnsureReplicas behind explicit FAILOVER_REPLICA_ENSURE=true (default false until peer Docker + compose-up path proven); keep Traefik peer routes independent of replica ensure.",
+      "confidence": 100,
+      "evidence": [
+        "Remote Docker over Tailscale hostname:port — peers must expose...",
+        "ExportContainerConfig + CreateContainerOnRemote"
+      ]
+    },
+    {
+      "title": "File routers omit middleware chains",
+      "severity": "P1",
+      "section": "U1 / traefik_writer.go",
+      "why_it_matters": "When Docker-provider routes vanish after crash, file-provider Host(service.domain) routers without tinyauth/crowdsec chains can serve or forward without the policy stack STRATEGY requires for meaning preservation.",
+      "finding_type": "omission",
+      "autofix_class": "gated_auto",
+      "suggested_fix": "Copy traefik.http.routers.*.middlewares labels into file routers when present; otherwise set explicit priority below docker and document residual risk for unprotected services.",
+      "confidence": 75,
+      "evidence": [
+        "routing, auth, middleware, and health semantics should survive failover",
+        "traefik_writer emits routers with only rule/service/entryPoints"
+      ]
+    },
+    {
+      "title": "Overclaims Implemented without whoami proof",
+      "severity": "P1",
+      "section": "U5 / brainstorm status",
+      "why_it_matters": "STRATEGY forbids claiming failover success from generation alone; calling the brainstorm Implemented before kill-whoami proof recreates the false-confidence failure mode Track 2 warns about.",
+      "finding_type": "error",
+      "autofix_class": "safe_auto",
+      "suggested_fix": "Change status to 'Code landed — runtime whoami proof pending; do not claim Track 2 closed'.",
+      "confidence": 100,
+      "evidence": [
+        "Status: Implemented (Compose-first failover-agent v1) — runtime whoami proof pending",
+        "claiming the repo already has universal multi-node failover"
+      ]
+    },
+    {
+      "title": "HTTP-only filter missing vs osvc",
+      "severity": "P2",
+      "section": "U2 / ingest",
+      "why_it_matters": "Containers with only traefik.tcp.* and traefik.enable=true can enter HTTP failover YAML and create bogus HTTP routers for Redis/Mongo-style services.",
+      "finding_type": "omission",
+      "autofix_class": "gated_auto",
+      "suggested_fix": "Require at least one traefik.http.* label before registry upsert, matching osvc_ingress_sync.py.",
+      "confidence": 100,
+      "evidence": [
+        "Those must NOT be included here (osvc TCP filter comment)",
+        "IsTraefikEnabled only checks traefik.enable"
+      ]
+    }
+  ],
+  "residual_risks": [
+    "Traefik healthCheck against https://svc.peer.domain may need serversTransport insecureSkipVerify / Host header behavior verification",
+    "Weight fields without explicit strategy may be ignored on older Traefik; osvc pattern uses ordered servers only",
+    "Auth continuity still depends on peer Traefik stack parity even after middleware copy"
+  ],
+  "deferred_questions": [
+    "Should replica ensure wait for a compose-up-on-peer path with shared repo checkout?",
+    "Is OpenSVC ingress sync retired on main host once failover-agent owns the file?"
+  ]
+}

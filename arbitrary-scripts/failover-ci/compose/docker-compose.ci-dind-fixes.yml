@@ -1,0 +1,69 @@
+# DinD-only overrides for full root compose.
+# dockerd already listens on :2375 inside the DinD node; dockerproxy-rw must not
+# also publish 127.0.0.1:2375.
+configs:
+  # Replace plugin-based crowdsec/error middlewares with no-ops.
+  # DinD CoreDNS often cannot resolve plugins.traefik.io, which disables ALL
+  # Traefik plugins and leaves every router that references crowdsec@file disabled (404).
+  traefik-dynamic.yaml:
+    content: |
+      # yaml-language-server: $$schema=https://www.schemastore.org/traefik-v3-file-provider.json
+      http:
+        routers:
+          catchall:
+            entryPoints:
+              - web
+              - websecure
+            service: noop@internal
+            rule: Host(`${DOMAIN}`) || Host(`${TS_HOSTNAME}.${DOMAIN}`) || HostRegexp(`^(.+)$$`)
+            priority: 1
+        services:
+          nginx-traefik-extensions:
+            loadBalancer:
+              servers:
+                - url: http://nginx-traefik-extensions:80
+          bolabaden-nextjs:
+            loadBalancer:
+              servers:
+                - url: http://bolabaden-nextjs:3000
+        middlewares:
+          traefikerrorreplace:
+            headers:
+              customResponseHeaders:
+                X-CI-TraefikErrorReplace: bypass
+          bolabaden-error-pages:
+            headers:
+              customResponseHeaders:
+                X-CI-ErrorPages: bypass
+          nginx-auth:
+            headers:
+              customResponseHeaders:
+                X-CI-NginxAuth: bypass
+          strip-www:
+            redirectRegex:
+              regex: '^(http|https)?://www\.(.+)$$'
+              replacement: '$$1://$$2'
+              permanent: false
+          crowdsec:
+            headers:
+              customResponseHeaders:
+                X-CI-Crowdsec: bypass
+
+services:
+  dockerproxy-rw:
+    ports: !reset
+      - 127.0.0.1:12375:2375
+  headscale-server:
+    # Peers join via http://ci-node1:8081 on failover-ci-net
+    ports:
+      - "8081:8081"
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+  traefik:
+    # Prod compose pins DOCKER_API_VERSION=1.52; DinD 27 only speaks ≤1.47
+    environment:
+      DOCKER_API_VERSION: "1.47"
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1

@@ -309,33 +309,48 @@ func defineServicesCoolifyProxy(config *Config) []Service {
 		},
 	})
 
-	// docker-gen-failover
+	// failover-agent (replaces docker-gen-failover)
+	// Host networking so peer inventory / replica ensure can reach Tailscale peer Docker APIs.
 	services = append(services, Service{
-		Name:          "docker-gen-failover",
-		Image:         "docker.io/nginxproxy/docker-gen",
-		ContainerName: "docker-gen-failover",
-		Hostname:      "docker-gen-failover",
-		Networks:      []string{"backend", "default"},
-		Configs: []ConfigMount{
-			{Source: "traefik-failover-dynamic.conf.tmpl", Target: "/templates/traefik-failover-dynamic.conf.tmpl", Mode: "0400"},
-		},
+		Name:          "failover-agent",
+		Image:         "docker.io/bolabaden/failover-agent:latest",
+		ContainerName: "failover-agent",
+		Hostname:      "failover-agent",
+		Networks:      []string{}, // network_mode: host (see compose/docker-compose.failover-agent.yml)
 		Volumes: []VolumeMount{
 			{Source: fmt.Sprintf("%s/traefik/dynamic", configPath), Target: "/traefik/dynamic", Type: "bind"},
+			{Source: fmt.Sprintf("%s/placement", configPath), Target: "/placement", Type: "bind"},
+			{Source: "/var/run/docker.sock", Target: "/var/run/docker.sock", Type: "bind"},
 		},
-		Command: []string{
-			"-endpoint", "tcp://dockerproxy-rw:2375",
-			"-only-exposed",
-			"-include-stopped",
-			"-event-filter", "event=start",
-			"-event-filter", "event=create",
-			"-event-filter", "event=expose",
-			"-event-filter", "event=update",
-			"-event-filter", "event=connect",
-			"-event-filter", "label=traefik.enable=true",
-			"-container-filter", "label=traefik.enable=true",
-			"-watch", "/templates/traefik-failover-dynamic.conf.tmpl", "/traefik/dynamic/failover-fallbacks.yaml",
+		Environment: map[string]string{
+			"DOMAIN":                      domain,
+			"TS_HOSTNAME":                 getEnv("TS_HOSTNAME", ""),
+			"CONFIG_PATH":                 "/placement",
+			"PLACEMENT_REGISTRY":          "/placement/services.yaml",
+			"FAILOVER_TRAEFIK_OUTPUT":     "/traefik/dynamic/failover-fallbacks.yaml",
+			"FAILOVER_ENABLED":            getEnv("FAILOVER_ENABLED", "true"),
+			"FAILOVER_MAIN_HOST":          getEnv("FAILOVER_MAIN_HOST", "micklethefickle"),
+			"FAILOVER_PEER_HOSTS":         getEnv("FAILOVER_PEER_HOSTS", ""),
+			"FAILOVER_REMOTE_DOCKER_PORT": getEnv("FAILOVER_REMOTE_DOCKER_PORT", "2375"),
+			"FAILOVER_REPLICA_ENSURE":     getEnv("FAILOVER_REPLICA_ENSURE", "false"),
+			"DOCKER_HOST":                 "unix:///var/run/docker.sock",
+			"FAILOVER_HEALTH_ADDR":        ":8082",
 		},
-		Restart: "no",
+		Labels: map[string]string{
+			"deunhealth.restart.on.unhealthy": "true",
+		},
+		Healthcheck: &Healthcheck{
+			Test:        []string{"CMD-SHELL", "wget --no-verbose --tries=1 --spider http://127.0.0.1:8082/healthz || exit 1"},
+			Interval:    "30s",
+			Timeout:     "10s",
+			Retries:     3,
+			StartPeriod: "30s",
+		},
+		Restart: "always",
+		Build: &BuildConfig{
+			Context:    fmt.Sprintf("%s/infra", getEnv("ROOT_PATH", ".")),
+			Dockerfile: "Dockerfile.failover-agent",
+		},
 	})
 
 	// autokuma

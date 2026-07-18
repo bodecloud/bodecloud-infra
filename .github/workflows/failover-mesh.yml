@@ -1,0 +1,113 @@
+name: Failover Mesh CI
+
+# Thin wrapper around arbitrary-scripts/failover-ci/.
+# Every PR: unit tests + validate-local (no VMs).
+# Full 4-node mesh: workflow_dispatch on ubuntu-latest (DinD) or self-hosted.
+
+on:
+  pull_request:
+    paths:
+      - "infra/failover/**"
+      - "infra/cmd/failover-agent/**"
+      - "infra/Dockerfile.failover-agent"
+      - "compose/docker-compose.failover-agent.yml"
+      - "compose/docker-compose.cloudflare-multi-ddns.yml"
+      - "scripts/cloudflare_multi_record_ddns.py"
+      - "arbitrary-scripts/failover-ci/**"
+      - ".github/workflows/failover-mesh.yml"
+  push:
+    branches: [main]
+    paths:
+      - "infra/failover/**"
+      - "infra/cmd/failover-agent/**"
+      - "scripts/cloudflare_multi_record_ddns.py"
+      - "arbitrary-scripts/failover-ci/**"
+      - ".github/workflows/failover-mesh.yml"
+  workflow_dispatch:
+    inputs:
+      run_full_mesh:
+        description: "Run 4-node mesh prove"
+        type: boolean
+        default: false
+      mesh_runner:
+        description: "Where to run the full mesh"
+        type: choice
+        options:
+          - dind-ubuntu-latest
+          - self-hosted
+        default: dind-ubuntu-latest
+      ci_minimal:
+        description: "Use CI-minimal compose (1) or full root compose (0)"
+        type: choice
+        options:
+          - "0"
+          - "1"
+        default: "0"
+
+jobs:
+  failover-unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+      - name: validate-local (tests, Module5 dry-run, image builds, CoreDNS smoke)
+        working-directory: arbitrary-scripts/failover-ci
+        run: |
+          chmod +x *.sh
+          ./validate-local.sh
+
+  failover-mesh-dind:
+    needs: failover-unit
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      inputs.run_full_mesh == true &&
+      inputs.mesh_runner == 'dind-ubuntu-latest'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+      - name: Ensure Docker config for watchtower
+        run: |
+          mkdir -p ~/.docker
+          echo '{}' > ~/.docker/config.json
+      - name: Run full DinD mesh prove
+        working-directory: arbitrary-scripts/failover-ci
+        env:
+          FAILOVER_CI_BACKEND: dind
+          FAILOVER_CI_MINIMAL: ${{ inputs.ci_minimal }}
+        run: |
+          chmod +x *.sh
+          cp -n env/test.env.example env/test.env || true
+          ./run-all.sh
+      - name: Teardown
+        if: always()
+        working-directory: arbitrary-scripts/failover-ci
+        env:
+          FAILOVER_CI_BACKEND: dind
+        run: ./teardown.sh || true
+
+  failover-mesh-self-hosted:
+    needs: failover-unit
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      inputs.run_full_mesh == true &&
+      inputs.mesh_runner == 'self-hosted'
+    runs-on: [self-hosted, failover-mesh]
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run full mesh prove
+        working-directory: arbitrary-scripts/failover-ci
+        env:
+          FAILOVER_CI_MINIMAL: ${{ inputs.ci_minimal }}
+        run: |
+          chmod +x *.sh
+          cp -n env/test.env.example env/test.env || true
+          ./run-all.sh
+      - name: Teardown
+        if: always()
+        working-directory: arbitrary-scripts/failover-ci
+        run: ./teardown.sh || true

@@ -1,0 +1,232 @@
+# Failover CI minimal stack — Traefik + whoami + headscale + failover-agent.
+# Used on DinD / constrained hosts instead of the full media compose.
+# Project name MUST equal STACK_NAME so Traefik's docker network is ${STACK_NAME}_publicnet.
+
+networks:
+  publicnet:
+    attachable: true
+  backend:
+    attachable: true
+
+configs:
+  headscale-ci-config:
+    content: |
+      server_url: http://${EXTERNAL_IP:?}:8081
+      listen_addr: 0.0.0.0:8081
+      metrics_listen_addr: 127.0.0.1:8080
+      grpc_listen_addr: 0.0.0.0:50443
+      grpc_allow_insecure: true
+      private_key_path: /var/lib/headscale/private.key
+      noise:
+        private_key_path: /var/lib/headscale/noise_private.key
+      prefixes:
+        v4: 100.64.0.0/10
+        v6: fd7a:115c:a1e0::/48
+        allocation: sequential
+      derp:
+        server:
+          enabled: false
+        urls:
+          - https://controlplane.tailscale.com/derpmap/default
+        paths: []
+        auto_update_enabled: true
+        update_frequency: 24h
+      database:
+        type: sqlite
+        sqlite:
+          path: /var/lib/headscale/db.sqlite
+      dns:
+        magic_dns: true
+        base_domain: ${DOMAIN}
+        nameservers:
+          global:
+            - 1.1.1.1
+            - 8.8.8.8
+      unix_socket: /var/run/headscale/headscale.sock
+      unix_socket_permission: "0770"
+      log:
+        level: info
+      logtail:
+        enabled: false
+  headscale-ci-derp:
+    content: |
+      {
+        "Regions": {
+          "900": {
+            "RegionID": 900,
+            "RegionCode": "ci",
+            "RegionName": "failover-ci",
+            "Nodes": [
+              {
+                "Name": "ci900",
+                "RegionID": 900,
+                "HostName": "127.0.0.1",
+                "IPv4": "127.0.0.1",
+                "DERPPort": 3478,
+                "STUNPort": 3478
+              }
+            ]
+          }
+        }
+      }
+
+services:
+  traefik:
+    image: docker.io/traefik:v3.3
+    container_name: traefik
+    hostname: traefik
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - publicnet
+      - backend
+    dns:
+      - ${COREDNS_1:-1.1.1.1}
+      - ${COREDNS_2:-8.8.8.8}
+      - 8.8.8.8
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock:ro
+      - ${CONFIG_PATH:-./volumes}/traefik/dynamic:/traefik/dynamic
+      - ${CONFIG_PATH:-./volumes}/traefik/certs:/certs
+    command:
+      - "--ping=true"
+      - "--log.level=INFO"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entryPoints.websecure.address=:443"
+      - "--entryPoints.websecure.http.tls=true"
+      - "--providers.docker=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.network=${STACK_NAME:?}_publicnet"
+      - "--providers.docker.exposedByDefault=false"
+      - "--providers.file.directory=/traefik/dynamic/"
+      - "--providers.file.watch=true"
+      - "--serversTransport.insecureSkipVerify=true"
+    labels:
+      traefik.enable: "false"
+      deunhealth.restart.on.unhealthy: "true"
+    healthcheck:
+      test: ["CMD-SHELL", "traefik healthcheck --ping || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+    restart: always
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+
+  whoami:
+    image: docker.io/traefik/whoami:v1.10.3
+    container_name: whoami
+    hostname: whoami
+    networks:
+      - backend
+      - publicnet
+    expose:
+      - "80"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.whoami.service: whoami@docker
+      traefik.http.routers.whoami.rule: Host(`whoami.${DOMAIN}`) || Host(`whoami.${TS_HOSTNAME}.${DOMAIN}`)
+      traefik.http.services.whoami.loadBalancer.server.port: 80
+      failover.replica: "true"
+      deunhealth.restart.on.unhealthy: "true"
+    restart: always
+
+  headscale-server:
+    image: docker.io/headscale/headscale:0.25.1
+    container_name: headscale-server
+    hostname: headscale-server
+    networks:
+      - backend
+      - publicnet
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    ports:
+      - "8081:8081"
+    configs:
+      - source: headscale-ci-config
+        target: /etc/headscale/config.yaml
+        mode: 0644
+      - source: headscale-ci-derp
+        target: /etc/headscale/derp.yaml
+        mode: 0644
+    volumes:
+      - ${CONFIG_PATH:-./volumes}/headscale/lib:/var/lib/headscale
+      - ${CONFIG_PATH:-./volumes}/headscale/run:/var/run/headscale
+    command: ["serve", "--config", "/etc/headscale/config.yaml"]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.headscale-server.service: headscale-server@docker
+      traefik.http.routers.headscale-server.rule: Host(`headscale-server.${DOMAIN}`) || Host(`headscale-server.${TS_HOSTNAME}.${DOMAIN}`) || Host(`headscale.${DOMAIN}`) || Host(`headscale.${TS_HOSTNAME}.${DOMAIN}`)
+      traefik.http.services.headscale-server.loadbalancer.server.port: 8081
+      deunhealth.restart.on.unhealthy: "true"
+    restart: always
+
+  headscale:
+    depends_on:
+      - headscale-server
+    image: ghcr.io/gurucomputing/headscale-ui:latest
+    container_name: headscale
+    hostname: headscale
+    networks:
+      - backend
+      - publicnet
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.headscale.service: headscale@docker
+      traefik.http.routers.headscale.rule: (Host(`headscale.${DOMAIN}`) || Host(`headscale.${TS_HOSTNAME}.${DOMAIN}`)) && PathPrefix(`/web`)
+      traefik.http.services.headscale.loadbalancer.server.port: 8080
+    restart: always
+
+  failover-agent:
+    build:
+      context: ${ROOT_PATH:-.}/infra
+      dockerfile: Dockerfile.failover-agent
+    image: local/failover-agent:ci
+    container_name: failover-agent
+    hostname: failover-agent
+    # Image USER is nobody; docker.sock is root:docker 660 (esp. DinD)
+    user: "0:0"
+    network_mode: host
+    volumes:
+      - ${CONFIG_PATH:-./volumes}/traefik/dynamic:/traefik/dynamic
+      - ${CONFIG_PATH:-./volumes}/placement:/placement
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      TZ: ${TZ:-UTC}
+      DOMAIN: ${DOMAIN:?}
+      TS_HOSTNAME: ${TS_HOSTNAME:?}
+      CONFIG_PATH: /placement
+      PLACEMENT_REGISTRY: /placement/services.yaml
+      FAILOVER_TRAEFIK_OUTPUT: /traefik/dynamic/failover-fallbacks.yaml
+      FAILOVER_ENABLED: ${FAILOVER_ENABLED:-true}
+      FAILOVER_MAIN_HOST: ${FAILOVER_MAIN_HOST:-ci-node1}
+      FAILOVER_PEER_HOSTS: ${FAILOVER_PEER_HOSTS:-}
+      FAILOVER_REMOTE_DOCKER_PORT: ${FAILOVER_REMOTE_DOCKER_PORT:-2375}
+      FAILOVER_REMOTE_DOCKER_TLS: "false"
+      FAILOVER_REPLICA_ENSURE: ${FAILOVER_REPLICA_ENSURE:-false}
+      FAILOVER_MAX_LOCAL_RESTARTS: "3"
+      FAILOVER_RECONCILE_SECONDS: "15"
+      FAILOVER_HEALTH_ADDR: ":8082"
+      DOCKER_HOST: unix:///var/run/docker.sock
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget --no-verbose --tries=1 --spider http://127.0.0.1:8082/healthz || exit 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: always

@@ -1,0 +1,41 @@
+# Module 5 — Cloudflare multi-record DDNS (global FQDNs only).
+# Runs on main host. Node-direct records stay with favonia cloudflare-ddns.
+services:
+  cloudflare-multi-ddns:
+    image: docker.io/library/python:3.12-slim
+    container_name: cloudflare-multi-ddns
+    profiles: ["multi-ddns"]
+    network_mode: host
+    read_only: true
+    working_dir: /app
+    volumes:
+      - ${ROOT_PATH:-.}/scripts/cloudflare_multi_record_ddns.py:/app/cloudflare_multi_record_ddns.py:ro
+      - ${CONFIG_PATH:-./volumes}/placement/node-ips.json:/app/node-ips.json:ro
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      DOMAIN: ${DOMAIN:?}
+      CF_API_TOKEN_FILE: /run/secrets/cloudflare-api-token
+      CF_ZONE_ID: ${CLOUDFLARE_ZONE_ID:-}
+      MULTI_DDNS_NAMES: ${MULTI_DDNS_NAMES:-whoami.${DOMAIN}}
+      NODE_IPS_FILE: /app/node-ips.json
+      MULTI_DDNS_INTERVAL: ${MULTI_DDNS_INTERVAL:-60}
+    secrets:
+      - cloudflare-api-token
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        export CF_API_TOKEN="$$(cat /run/secrets/cloudflare-api-token 2>/dev/null || true)"
+        exec python3 /app/cloudflare_multi_record_ddns.py --loop
+    healthcheck:
+      test: ["CMD-SHELL", "python3 /app/cloudflare_multi_record_ddns.py --health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      traefik.enable: "false"
+    restart: always
+    cpus: 0.25
+    mem_limit: 128M
