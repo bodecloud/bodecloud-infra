@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path/filepath"
 	"strings"
 
 	"github.com/your-org/my-media-stack/paas"
@@ -13,16 +12,17 @@ import (
 
 func main() {
 	var (
-		inputFile    = flag.String("input", "", "Input file to load")
-		outputFile   = flag.String("output", "", "Output file to save")
-		fromPlatform = flag.String("from", "", "Source platform (docker-compose, nomad, kubernetes)")
-		toPlatform   = flag.String("to", "", "Target platform (docker-compose, nomad, kubernetes)")
-		validate     = flag.Bool("validate", false, "Validate the loaded application")
-		listServices = flag.Bool("list-services", false, "List all services in the application")
-		mergeFiles   = flag.String("merge", "", "Comma-separated list of files to merge")
-		workDir      = flag.String("workdir", "/tmp/paas", "Working directory for temporary files")
-		deploy       = flag.Bool("deploy", false, "Deploy to infra Go code")
-		infraPath    = flag.String("infra-path", "../infra", "Path to infra directory for deployment")
+		inputFile     = flag.String("input", "", "Input file to load")
+		outputFile    = flag.String("output", "", "Output file to save")
+		fromPlatform  = flag.String("from", "", "Source platform (docker-compose, docker-swarm, nomad, kubernetes, helm)")
+		toPlatform    = flag.String("to", "", "Target platform (docker-compose, docker-swarm, nomad, kubernetes, helm)")
+		restoreFormat = flag.String("restore-format", "", "Restore preserved source instead of generating converted output (docker-compose, docker-swarm, nomad, kubernetes, helm)")
+		validate      = flag.Bool("validate", false, "Validate the loaded application")
+		listServices  = flag.Bool("list-services", false, "List all services in the application")
+		mergeFiles    = flag.String("merge", "", "Comma-separated list of files to merge")
+		workDir       = flag.String("workdir", "/tmp/paas", "Working directory for temporary files")
+		deploy        = flag.Bool("deploy", false, "Deploy to infra Go code")
+		infraPath     = flag.String("infra-path", "../infra", "Path to infra directory for deployment")
 	)
 
 	flag.Usage = func() {
@@ -33,6 +33,8 @@ func main() {
 		fmt.Fprintf(os.Stderr, "\nExamples:\n")
 		fmt.Fprintf(os.Stderr, "  # Convert docker-compose.yml to nomad.hcl\n")
 		fmt.Fprintf(os.Stderr, "  %s -input docker-compose.yml -output nomad.hcl -from docker-compose -to nomad\n\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "  # Restore preserved source instead of generating converted output\n")
+		fmt.Fprintf(os.Stderr, "  %s -input app.yml -restore-format kubernetes -output restored.yaml\n\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "  # Validate a docker-compose file\n")
 		fmt.Fprintf(os.Stderr, "  %s -input docker-compose.yml -validate\n\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "  # List services in a nomad file\n")
@@ -118,6 +120,22 @@ func main() {
 
 	fmt.Printf("Loaded %s with %d services\n", *inputFile, len(app.Services))
 
+	if *restoreFormat != "" {
+		if *outputFile == "" {
+			content, err := paas.RestoreSourceContent(app, *restoreFormat)
+			if err != nil {
+				log.Fatalf("Failed to restore source: %v", err)
+			}
+			fmt.Println(content)
+			return
+		}
+		if err := restoreSource(app, *restoreFormat, *outputFile); err != nil {
+			log.Fatalf("Failed to restore source: %v", err)
+		}
+		fmt.Printf("Restored %s source to %s\n", *restoreFormat, *outputFile)
+		return
+	}
+
 	// Validate if requested
 	if *validate {
 		if err := paasInstance.Validate(app); err != nil {
@@ -137,11 +155,18 @@ func main() {
 
 	// Handle conversion
 	if *toPlatform != "" {
-		from := detectPlatform(*inputFile)
+		from := paas.DetectPlatformFromFilename(*inputFile, paas.PlatformDockerCompose)
 		if *fromPlatform != "" {
-			from = parsePlatform(*fromPlatform)
+			parsed, err := paas.ParsePlatform(*fromPlatform)
+			if err != nil {
+				log.Fatalf("Unknown source platform %q: %v", *fromPlatform, err)
+			}
+			from = parsed
 		}
-		to := parsePlatform(*toPlatform)
+		to, err := paas.ParsePlatform(*toPlatform)
+		if err != nil {
+			log.Fatalf("Unknown target platform %q: %v", *toPlatform, err)
+		}
 
 		fmt.Printf("Converting %s -> %s...\n", from, to)
 
@@ -177,34 +202,6 @@ func main() {
 	}
 }
 
-func detectPlatform(filename string) paas.Platform {
-	ext := strings.ToLower(filepath.Ext(filename))
-
-	switch ext {
-	case ".yml", ".yaml":
-		if strings.Contains(filename, "k8s") || strings.Contains(filename, "kubernetes") {
-			return paas.PlatformKubernetes
-		}
-		return paas.PlatformDockerCompose
-	case ".hcl":
-		return paas.PlatformNomad
-	default:
-		return paas.PlatformDockerCompose
-	}
-}
-
-func parsePlatform(platform string) paas.Platform {
-	switch strings.ToLower(platform) {
-	case "docker-compose", "docker", "compose":
-		return paas.PlatformDockerCompose
-	case "nomad", "hcl":
-		return paas.PlatformNomad
-	case "kubernetes", "k8s", "k8":
-		return paas.PlatformKubernetes
-	case "helm":
-		return paas.PlatformHelm
-	default:
-		log.Fatalf("Unknown platform: %s", platform)
-		return paas.PlatformDockerCompose
-	}
+func restoreSource(app *paas.Application, format, outputPath string) error {
+	return paas.RestoreSource(app, format, outputPath)
 }

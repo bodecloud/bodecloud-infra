@@ -1,10 +1,18 @@
+> Status note:
+> This comparison reflects the repo's exploration of orchestration options.
+> Claims about maturity or production readiness inside the document should be
+> treated as historical assertions unless separately verified against the
+> current worktree and runtime evidence.
+>
 # Comprehensive Comparison: infra vs constellation
 
 ## Executive Summary
 
-This document provides an exhaustive comparison between two distributed container orchestration systems:
+This document provides a comparison between two distributed container
+orchestration efforts:
 
-- **`infra/`**: A production-ready Go-based distributed orchestration system using HashiCorp Memberlist (gossip) and Raft (consensus)
+- **`infra/`**: A substantial Go-based distributed orchestration effort using
+  HashiCorp Memberlist (gossip) and Raft (consensus)
 - **`projects/orchestration/constellation/`**: An experimental Python-based orchestration system using FastAPI and async patterns
 
 Both systems share similar goals (distributed orchestration, high availability, automatic failover) but differ significantly in implementation, maturity, and approach.
@@ -15,13 +23,14 @@ Both systems share similar goals (distributed orchestration, high availability, 
 
 ### infra (Go)
 
-**Status**: Production Ready ✅  
-**Purpose**: Production-grade distributed orchestration system that eliminates single points of failure using gossip protocols and consensus algorithms.
+**Status**: Advanced implementation effort with incomplete proof  
+**Purpose**: Distributed orchestration attempt aimed at reducing single points
+of failure using gossip protocols and consensus algorithms.
 
 **Key Characteristics**:
-- Mature, battle-tested implementation
-- Zero single points of failure architecture
-- Designed for real-world production deployments
+- Significant implementation depth
+- Explicit anti-SPOF direction
+- Intended for real-world multi-node experimentation and eventual deployment
 - 57+ pre-defined services
 - Comprehensive documentation and tooling
 
@@ -633,7 +642,7 @@ logging:
 **Comparison**:
 - **infra** has extensive library of pre-configured services
 - **constellation** requires manual service definition
-- **infra** provides production-ready service configurations
+- **infra** provides more mature service-configuration machinery
 - **constellation** is more of a framework for defining services
 
 ---
@@ -843,7 +852,7 @@ class NodeRegistry:
 - No operational guides
 
 **Comparison**:
-- **infra** has production-ready deployment with systemd
+- **infra** has a more developed systemd-oriented deployment path
 - **constellation** is development-oriented
 - **infra** has comprehensive operational tooling
 - **constellation** requires manual setup and operation

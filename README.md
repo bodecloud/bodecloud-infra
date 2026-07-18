@@ -1,611 +1,429 @@
-# bolabaden.org: how the "no-swarm, no-cluster" multi-node setup works
+# bolabaden-infra
 
-## Table of Contents
+`bolabaden-infra` is a Compose-first infrastructure repo for `bolabaden.org`.
 
-- [Overview](#overview)
-- [The Core Idea](#the-core-idea)
-- [Components at a glance](#components)
-- [Request Flow](#what-happens-when-someone-visits-bolabadenorg)
-- [Multi-Node Layout](#1-multi-node-layout)
-- [DNS and Failover](#2-dns-and-failover)
-- [Service Discovery](#3-service-discovery)
-- [Internal Failover & Routing](#4-internal-failover--routing)
-- [Configuration Management](#how-config-actually-becomes-live-behavior)
-- [Observability](#observability)
-- [Maintenance & Disk Management](#maintenance--disk-management) 🆕
-- [Hosting bolabaden.org](#hosting-bolabadenorg-specifically)
-- [Problems I expect, and how I'm handling them](#problems-i-expect-and-how-im-handling-them)
-- [Failure Scenarios](#failure-stories-on-purpose)
-- [Trade-offs](#where-im-okay-with-tradeoffs)
-- [Implementation Details](#what-still-needs-real-values-placeholders-to-fill)
-- [Testing Checklist](#sanity-checklist-before-i-call-it-done-enough)
-- [Complete Flow](#5-the-complete-flow-for-bolabadenorg)
-- [Remaining Considerations](#6-remaining-considerations)
-- [Summary](#-summary)
+The core ambition is not "run some containers." It is:
 
----
+> make multiple ordinary Docker nodes behave like a resilient, operator-readable system without immediately paying the full tax of Swarm, Kubernetes, or another heavyweight orchestrator.
 
-## Overview {#overview}
+There is a second sentence that matters just as much:
 
-When I set out to host **bolabaden.org** across multiple nodes, I had one guiding principle: **unification without a central orchestrator, and zero single points of failure**. I didn’t want Swarm, Kubernetes, or anything heavy-handed. I just wanted things to work reliably, even if a node went offline. Here’s how the flow looks, the challenges at each step, and how I solved them.
+> stop forcing the operator's private memory to act as the missing control
+> plane when traffic lands on the wrong node or when the expected backend
+> disappears.
 
-I’ve got a handful of Docker hosts (call them `node1`, `node2`, `node3`). I don’t want Kubernetes, I don’t want Swarm. I’m fine manually deciding where a container runs. I just want requests to land anywhere and still find the right service—even if that service lives on a different node.
+That ambition is why this repo keeps returning to the same pressure points:
 
-At the DNS tier I use Cloudflare with multiple A records for `*.bolabaden.org`, one per node (each node updates its own A record via DDNS). That gives me basic scatter/gather: a client hits any node. After that, it becomes each node’s job to either serve the request locally or bounce it—cleanly—to a peer that actually has the service.
+- no single node should be a mandatory public entrypoint
+- requests should prefer local service instances when possible
+- a node that receives traffic should be able to forward intelligently when the target service is elsewhere
+- health, middleware, auth, and observability should survive failover instead of silently changing behavior
+- stateful services should be treated honestly rather than declared "HA" by marketing vocabulary alone
+- the control plane should only become more complicated when the extra machinery solves a real pain that Compose alone cannot
 
-## The core idea {#the-core-idea}
+This README also has to preserve a blunt fact that the wider ecosystem keeps
+trying to blur:
 
-### Components at a glance {#components}
+the repo is not short on product names, proxy names, or orchestration names.
+It is short on **real options** that still feel real after the first request
+lands on the wrong machine.
 
-Every node runs the same “edge” stack:
+That is why the docs here keep sounding harsher than ordinary self-hosting
+documentation.
+The user frustration is not "there are no tools."
+It is "too many supposed solutions stop one layer before truth actually moves
+out of my head."
 
-* **L7 reverse proxy** for HTTP(S): Traefik v3 (file provider) with health-checked primary+fallback failover.
-* **L4 proxy** for raw TCP stuff like Redis.
-* A tiny **service registry** (just a file, seriously) that lists which services exist and which nodes claim to host them.
-* A lightweight **watcher** that turns that registry into live proxy config and reloads the proxy without dropping connections.
-* Health checks so dead targets get pulled out automatically.
+## Read this repo with the right negative benchmark
 
-No schedulers. No leaders. No replicas knob. Just: *if you ask this node for `X` and `X` isn’t here, we’ll forward you to a node that has `X`.*
+The user is not mainly asking:
 
----
+- how do I make the docs cleaner?
+- which orchestrator is best?
+- what is the modern HA stack?
 
-## What happens when someone visits bolabaden.org {#what-happens-when-someone-visits-bolabadenorg}
+The user is asking a harsher question:
 
-**Flow (HTTP):**
+> which options are real once traffic lands on the wrong node, and which
+> options still secretly depend on me remembering the real topology?
 
-```
-User -> DNS (Cloudflare) -> node2 (picked by DNS)
-  node2: edge proxy sees Host: bolabaden.org
-    - If local container exists: serve it (fast path)
-    - Else: look up bolabaden.org in the service registry:
-        -> has backends on node1 and node3
-        -> pick one that's healthy and forward (L7 proxy, keep TLS intact)
-```
+That negative benchmark should shape every architectural reading of this repo.
 
-**Flow (Redis / TCP):**
+If a solution still requires the operator to privately remember:
 
-```
-Client -> DNS -> node1
-  node1: L4 proxy for "redis-main"
-    - If local port is bound: connect locally
-    - Else: pick a healthy remote redis endpoint from registry and TCP proxy
-```
+- which node really hosts the service
+- which peer is safe now
+- which route survives backend loss
+- which database path still owns truth
 
-If the request lands on the “wrong” node, it still succeeds. That’s the entire trick.
+then for this repo it is still much closer to a fake option than a solved
+platform capability.
 
----
+## The shortest honest description
 
-## The only hard part: service discovery (but small) {#the-only-hard-part-service-discovery-but-small}
+Today this repo is a serious, modular, multi-service Docker Compose stack with:
 
-I’m not deploying a service mesh. I’m not standing up etcd or a big gossip ring. I’m using a single **YAML file** as the source of truth, synced to every node. Updating that file is not the price I pay for not running an orchestrator: it simplifies the mental model. When the file gets too large we simply use docker compose's `include:` functionality. A tiny daemon watches the file, templates the proxy configs, and reloads. See [Service discovery](#3-service-discovery) for the full breakdown.
+- a real root [`docker-compose.yml`](docker-compose.yml)
+- a large set of included fragments under [`compose/`](compose)
+- a real Traefik-centered ingress surface
+- real auth, middleware, observability, and maintenance components
+- clear evidence that the repo wants multi-node current-state routing and failover
 
-With that in mind, here’s how the nodes are laid out and how requests traverse them.
+It is **not yet** a finished, proven multi-node control plane.
 
-## 1. Multi-node layout {#1-multi-node-layout}
+The gap matters. The repo clearly wants node-aware routing, fallback, and anti-SPOF behavior, but current evidence still shows missing or incomplete pieces around:
 
-I have multiple servers — let’s call them `node1`, `node2`, `node3`. Each node can run any service, from web apps to Redis instances. I wanted a setup where any request hitting **any node** would always find the service it needs.
+- live placement truth
+- trustworthy failover generation
+- cross-node convergence of secrets and environment
+- proven peer-aware fallback semantics
+- stateful failover that preserves correctness, not just liveness
 
-**Problem:** If a user hits `dozzle.bolabaden.org` on `node1`, and that service isn’t running there, I still need the request to succeed.
+That list is the difference between:
 
-**Solution:** L4/L7 failover across nodes.
+- a stack that can be described as distributed
+- and a stack that stops depending on sacred-node memory
 
-* For HTTP: each node runs Traefik v3 (L7) with primary+fallback failover. If the request hits a local service, it’s served immediately; otherwise it forwards to a healthy backend on another node.
-* For TCP/Redis: each node runs an L4 load balancer that can forward requests to the node hosting the desired service.
+Those are not the same achievement.
 
-**Flow example:**
+If you read nothing else, read that distinction correctly:
 
-```
-User → node1 (HTTP request for dozzle.bolabaden.org)
-  ├─ if service exists locally → serve
-  └─ else → L7 forward → node2/node3
-       └─ request served
-```
+- the dream is clear
+- the direction is serious
+- the proof is still partial
 
-* Distribution can be Git + pull, `rsync`, Syncthing—pick your poison.
-* Each node keeps a **last-known-good** copy; if distribution hiccups, the world doesn’t end.
-* Health checks run locally, so even if the registry says “node3 has `dozzle`,” it won’t be used if `node3` fails checks.
+## The fastest way to misread this repo
 
-**Registry sketch (placeholder):**
+The fastest bad reading is:
 
-```yaml
-# /etc/bolabaden/services.yaml
-version: 1
-http:
-  bolabaden.org:
-    backends:
-      - host: node1.bolabaden.org
-        port: 8080
-      - host: node2.bolabaden.org
-        port: 8080
-  dozzle.bolabaden.org:
-    backends:
-      - host: node3.bolabaden.org
-        port: 9999
-tcp:
-  redis-main:
-    port: 6379
-    backends:
-      - host: node1.bolabaden.org
-        port: 6379
-      - host: node2.bolabaden.org
-        port: 6379
-# add more services here
-```
+1. see Cloudflare multi-node entry
+2. see Traefik, auth, middleware, and observability
+3. see orchestration side paths like OpenSVC, Nomad, or k3s
+4. assume the remaining problem is mainly polish, automation, or platform
+   choice
 
-**Notes:**
+That reading is wrong.
 
-* This file describes *where services live*, not where they *should* live. I place services manually by starting containers on the nodes I choose.
-* Health checks + weights live in the proxy layer; the registry stays simple.
+The remaining problem is still missing truth ownership:
 
----
+- current placement truth
+- peer eligibility truth
+- convergence truth
+- route persistence under the relevant failure
+- stateful correctness truth
 
- 
+That is why the repo can look sophisticated and still feel unsolved in exactly
+the way the user keeps complaining about.
 
-## 2. DNS and failover {#2-dns-and-failover}
+## Which repo files actually explain that dream
 
-**Problem:** How to avoid downtime if a node goes completely offline?
+This repo has several instruction surfaces, but they are not equal.
 
-**Solution:** Cloudflare with multiple A records. Each node’s public IP is in DNS for `*.bolabaden.org`.
+If you are trying to understand the multi-node Docker, no-Swarm,
+local-first-then-peer-forward idea, the order is:
 
-* If `node1` is down, DNS will resolve to `node2` or `node3`.
-* Combined with the L4/L7 forwarding on each node, users rarely ever hit a dead end.
+1. [`.github/copilot-instructions.md`](.github/copilot-instructions.md)
+2. [`README.md`](README.md)
+3. [`AGENTS.md`](AGENTS.md)
+4. [`.cursorrules`](.cursorrules)
 
-**Placeholder for configuration:**
+The blunt summary is:
 
-```
-*.bolabaden.org → node1_public_ip
-*.bolabaden.org → node2_public_ip
-*.bolabaden.org → node3_public_ip
-TTL: [your TTL]
-```
+- `copilot-instructions.md` names the architecture dream directly
+- `README.md` keeps the repo-level honesty wall around that dream
+- `AGENTS.md` tells you where current implementation truth must be checked
+- `.cursorrules` mostly governs service-authoring discipline, not distributed
+  semantics
 
-This gives me **multi-node failover at the network level**, without relying on a central orchestrator. Application-layer failover is handled by Traefik at the service level (primary + fallback).
+That distinction matters because one of the easiest ways to misunderstand this
+repo is to treat repeated wording across several files as if it were proof that
+the runtime already behaves the way the dream is described.
 
----
+## What the repo is really trying to build
 
-## 3. Service discovery {#3-service-discovery}
+The strongest repo-native statement of intent is [`.github/copilot-instructions.md`](.github/copilot-instructions.md).
 
-Here’s where it gets tricky. With DNS and failover handling node-level downtime, I still need to know **which node has which service**.
+That file explicitly describes:
 
-**Problem:** A request might hit `node1`, but `dozzle` is only running on `node3`. How do I dynamically know where to send it?
+- multi-node Docker without Kubernetes or Swarm by default
+- no central orchestrator
+- distributed failover
+- a lightweight `services.yaml` current-state registry
+- L7 routing through Traefik
+- separate L4 handling for raw TCP workloads
+- Cloudflare multi-A DNS for node-level failover
 
-**Solution:** Lightweight, node-aware service registry.
+Its request model is simple and important:
 
-* Could be a simple JSON/YAML file shared across nodes, listing services and which node they are on.
-* Could also be a gossip-based system (Serf, lightweight Consul).
-* Each node’s L7 proxy (Traefik v3 file provider) reads generated dynamic config that defines primary+fallback per service and forwards accordingly.
-
-### 6) Observability so I’m not guessing {#6-observability-so-im-not-guessing}
-
-Per-node metrics + logs go to a small stack (Loki + Promtail, or just filebeat to Elasticsearch, whatever). I want to see:
-
-* health check failures,
-* upstream latencies,
-* request rates per service,
-* and which node is actually serving what.
-
-**Placeholder: scrape config**
-
-```yaml
-# observability.yaml (placeholder)
-metrics:
-  prometheus_scrape_targets:
-    - node1:9100
-    - node2:9100
-    - node3:9100
-  proxy_exporter: ":9113"
-logs:
-  shipper: promtail
-  targets:
-    - /var/log/nginx/*.log
-    - /var/log/haproxy.log
+```text
+User -> Cloudflare DNS -> any node
+  local service exists -> serve locally
+  service is remote    -> forward to peer that has it
 ```
 
----
+That is the architectural dream.
 
-## Maintenance & Disk Management {#maintenance--disk-management}
+The repo is not only trying to host services. It is trying to answer a more specific frustration:
 
-**🛡️ Automated maintenance is critical for VPS longevity.** Without it, Docker overlay2, container logs, and application caches will silently fill your disk until services fail.
+> why does getting redundancy usually force operators to choose between raw Compose sprawl and a giant orchestration platform they do not actually want?
 
-### The Problem
+That question should be read a little more aggressively than it first sounds.
 
-Common disk space killers:
-- **Docker overlay2:** 97GB from a single stopped container's `/tmp` directory
-- **Container logs:** Grow unbounded without rotation
-- **Prometheus WAL:** Accumulates write-ahead logs
-- **Stremio cache:** Can grow to 10GB+
-- **VictoriaMetrics data:** Long retention periods
-- **System logs:** `/var/log` accumulation
+The complaint is not just that the market offers bad defaults.
+It is that many market answers improve one narrow slice while still leaving the
+operator to reconstruct:
 
-### The Solution
+- where the service really lives
+- whether the wrong node knows that
+- whether the fallback path survives the relevant failure
+- whether auth and middleware continuity remain intact after handoff
+- whether a stateful backend is honestly resilient or merely still reachable
 
-This repository includes a complete automated maintenance system:
+That is the real option drought this repo is reacting to.
 
-#### 📦 Quick Install
+## The repo's real question is smaller than Kubernetes and bigger than Compose
+
+This is one of the most important framing rules in the tree.
+
+The repo is not asking:
+
+- should we stay on raw Compose forever?
+- should we just bite the bullet and move to Kubernetes?
+
+It is asking:
+
+> what is the smallest added truth-owning layer that makes wrong-node requests,
+> backend-loss recovery, and hidden human topology memory stop being the
+> dominant failure mode?
+
+That is why this repo keeps circling helper agents, `services.yaml`,
+OpenSVC-shaped ingress work, schema-first ideas, Nomad comparisons, and k3s
+exploration at the same time.
+
+Those are not random side quests.
+They are different attempts to locate the missing middle layer without paying
+ full scheduler tax before it is clearly earned.
+
+## What is live vs what is planned
+
+This repo now treats documentation in three layers because flattening them together is what made earlier docs ambiguous and misleading.
+
+### 1. Live implementation truth
+
+This is what is actually present in the worktree and the merged root Compose surface.
+
+Examples:
+
+- root [`docker-compose.yml`](docker-compose.yml)
+- included fragments under [`compose/`](compose)
+- services visible via `docker compose config`
+- live Traefik labels, networks, secrets, and service definitions
+
+### 2. Planned architecture truth
+
+This is where the repo is clearly trying to go, based on planning and design docs.
+
+Examples:
+
+- [`docs/INFRASTRUCTURE_MASTER_PLAN.md`](docs/INFRASTRUCTURE_MASTER_PLAN.md)
+- [`docs/stateful_ha_plan.md`](docs/stateful_ha_plan.md)
+- [`docs/osvc_ingress_ha.md`](docs/osvc_ingress_ha.md)
+
+### 3. Research-pressure truth
+
+This is the archive of repeated questions, experiments, comparisons, and frustrations that explain why the repo keeps exploring Compose, OpenSVC, Nomad, k3s, Cloudflare, Traefik, L4/L7 failover, and anti-SPOF patterns at the same time.
+
+Examples:
+
+- [`knowledgebase/source-archive/`](knowledgebase/source-archive)
+- the synthesized research pages under [`knowledgebase/research/`](knowledgebase/research)
+
+These layers are related, but they are not interchangeable. A planned control surface is not live proof. A research thread is not a shipped implementation. A parsed Compose graph is not resilience.
+
+That separation is not just documentation hygiene.
+It is the main defense against polished ambiguity.
+
+This repo has enough material to sound deeply understood while still silently
+shrinking the user's dream into something more normal, such as:
+
+- better HA
+- better routing
+- better service discovery
+- better orchestrator comparison
+
+Those are all subproblems.
+They are not the whole ask.
+
+## The current architecture shape
+
+At a high level, the root stack is built around these surfaces:
+
+- public ingress and edge controls
+  - Traefik
+  - TinyAuth
+  - CrowdSec
+  - nginx-based request extensions
+  - Cloudflare/DDNS integration
+- observability
+  - Prometheus
+  - VictoriaMetrics
+  - Grafana
+  - Loki
+  - Alertmanager
+- app and media services
+  - site, docs, dashboards, APIs, media and support services
+- state-bearing services
+  - Redis
+  - MongoDB
+  - RabbitMQ
+  - Postgres variants
+- network and egress experiments
+  - WARP-related routing components
+
+The key point is that the root stack already has a broad and real runtime surface.
+
+The harder point is that broad runtime surface does **not** automatically imply:
+
+- trustworthy node-aware forwarding
+- trustworthy failover preservation
+- trustworthy route persistence under backend disappearance
+- trustworthy stateful continuity
+
+## Known architectural pressure points
+
+The repo's current decision surface is dominated by a handful of real issues.
+
+### Missing tracked placement truth
+
+The repo repeatedly describes a lightweight `services.yaml` registry, but the tracked root implementation does not currently ship a live root `services.yaml`.
+
+That means the idea is central, but the live source of truth is still incomplete.
+
+### Failover generation is present but not proven trustworthy
+
+`docker-gen-failover` exists in the proxy layer, but repo planning explicitly records that it can remove routes when containers stop. That is the opposite of what a failover mechanism must do.
+
+### DNS is only the first layer
+
+Cloudflare multi-A DNS can help clients hit a surviving node, but it does not prove that the surviving node:
+
+- knows where the target service lives
+- forwards correctly
+- preserves middleware/auth semantics
+- preserves stateful correctness
+
+### HTTP and TCP are different problems
+
+HTTP routing through Traefik is far easier to reason about than TCP failover for Redis, MongoDB, and other state-sensitive services. The repo has to keep those classes separate or the docs become dishonest.
+
+### Stateful HA is the real honesty wall
+
+Ingress cleverness can hide a lot. It cannot fake correct replication, election, quorum, reconnect behavior, or durable failover for stateful systems.
+
+This is also why the repo keeps feeling bigger than "Docker failover."
+
+The deeper problem is not lack of components.
+It is lack of a shared truth surface that can make the first healthy receiving
+node stop being a semantic gamble.
+
+## Real options vs fake options
+
+This repo needs a blunter filter than normal infrastructure READMEs use.
+
+| Option class | Real only if... | Still fake if... |
+| --- | --- | --- |
+| Multi-node DNS entry | the receiving node can still preserve the request meaningfully | the request only works when it lands on the right node by luck |
+| Proxy-centered failover | fallback survives the failure that made fallback necessary | the route vanishes when the preferred backend disappears |
+| Placement registry | routing or eligibility logic actually consumes live placement truth | the registry is only architecture intent or planning rhetoric |
+| Heavier orchestrator promotion | it removes a named truth gap the current layer cannot own honestly | it mostly renames the same burden while adding worldview tax |
+| Stateful HA story | authority, replication, promotion, and client behavior are defined and proven | a service is merely reachable through a stable hostname or TCP path |
+
+The user is frustrated precisely because the ecosystem offers many answers that
+look like the left column while behaving like the right column.
+
+## Recommended reading
+
+If you want the real operator-grade explanation instead of the old flattened story, start in the knowledgebase:
+
+- [`knowledgebase/index.md`](knowledgebase/index.md)
+- [`knowledgebase/architecture/problem-and-goals.md`](knowledgebase/architecture/problem-and-goals.md)
+- [`knowledgebase/architecture/current-compose-runtime.md`](knowledgebase/architecture/current-compose-runtime.md)
+- [`knowledgebase/architecture/compose-first-architecture.md`](knowledgebase/architecture/compose-first-architecture.md)
+- [`knowledgebase/architecture/ha-failover-routing.md`](knowledgebase/architecture/ha-failover-routing.md)
+- [`knowledgebase/architecture/stateful-ha-and-data.md`](knowledgebase/architecture/stateful-ha-and-data.md)
+- [`knowledgebase/architecture/capability-gaps-and-roadmap.md`](knowledgebase/architecture/capability-gaps-and-roadmap.md)
+- [`knowledgebase/operations/devops-runbook.md`](knowledgebase/operations/devops-runbook.md)
+
+If you want the shortest route through the real problem, use this order:
+
+1. [`knowledgebase/research/user-intent-and-dream.md`](knowledgebase/research/user-intent-and-dream.md)
+2. [`knowledgebase/operations/operator-questions-and-honest-answers.md`](knowledgebase/operations/operator-questions-and-honest-answers.md)
+3. [`knowledgebase/architecture/request-path-and-failure-walkthrough.md`](knowledgebase/architecture/request-path-and-failure-walkthrough.md)
+4. [`knowledgebase/architecture/current-compose-runtime.md`](knowledgebase/architecture/current-compose-runtime.md)
+5. [`knowledgebase/architecture/missing-middle-layer.md`](knowledgebase/architecture/missing-middle-layer.md)
+6. [`knowledgebase/operations/decision-paths-and-promotion-rules.md`](knowledgebase/operations/decision-paths-and-promotion-rules.md)
+7. [`knowledgebase/research/evidence-ledger.md`](knowledgebase/research/evidence-ledger.md)
+
+That order forces the dream, the wound, the live runtime, the missing layer,
+and the proof ceiling to stay in view at the same time.
+
+Those pages are the current authoritative explanation because they explicitly separate:
+
+- what exists now
+- what the repo is aiming for
+- what remains unproven
+
+## Validation commands
+
+This repo is not a single-app project, so "it builds" is not enough.
+
+Use these commands as the minimum baseline:
 
 ```bash
-cd /home/ubuntu/my-media-stack
-./scripts/install-maintenance-system.sh
+docker compose config --quiet
+docker compose config --services
+python3 -m mkdocs build -f mkdocs.yml --strict
 ```
 
-This installs:
-- ✅ Docker daemon log rotation (10MB × 3 files, compressed)
-- ✅ Weekly full cleanup (Sundays at 2 AM)
-- ✅ Daily light cleanup (Every day at 3 AM)
-- ✅ Daily disk monitoring (Every day at 4 AM)
-- ✅ Logrotate for maintenance logs
-- ✅ Emergency cleanup script
-
-#### 📖 Full Documentation
-
-See **[docs/MAINTENANCE.md](docs/MAINTENANCE.md)** for complete details on:
-- What gets cleaned and when
-- How to customize retention periods
-- Monitoring and troubleshooting
-- Emergency procedures
-- Cloud-init bootstrap
-
-#### 🚀 Key Features
-
-1. **Docker Log Rotation:** Configured in `/etc/docker/daemon.json`
-2. **Automated Cleanup:** `scripts/docker-maintenance.sh` removes:
-   - Stopped containers (>7 days)
-   - Unused images (>30 days)
-   - Unused volumes, networks, build cache
-   - Application caches (Prometheus, Stremio, Open-WebUI)
-   - System logs (keep 30 days)
-3. **Resource Limits:** `compose/docker-compose.maintenance.yml` adds memory limits and logging to all services
-4. **Environment Tuning:** `.env.maintenance` contains recommended retention settings
-
-#### 🔧 Usage
+For infra tooling under `infra/`:
 
 ```bash
-# Include maintenance overlay in your compose stack
-docker compose -f docker-compose.yml -f compose/docker-compose.maintenance.yml up -d
-
-# Or add to docker-compose.yml:
-include:
-  - compose/docker-compose.maintenance.yml
-
-# Manual cleanup
-sudo ./scripts/docker-maintenance.sh
-
-# Emergency cleanup (interactive)
-./scripts/emergency-cleanup.sh
-
-# Check disk usage
-df -h /
-docker system df
+cd infra
+make build
+make test
+go vet ./...
 ```
 
-#### 📊 Monitoring
+Important environment assumptions:
 
-```bash
-# View maintenance logs
-tail -f /var/log/docker-maintenance.log
+- many env vars are required for Compose interpolation
+- placeholder secret files under `${SECRETS_PATH}` may be required
+- `~/.docker/config.json` must exist, even if it is just `{}`
+- Go 1.24+ is required for the `infra/` module
 
-# View disk alerts
-tail -f /var/log/disk-usage.log
+## What this README is intentionally not doing
 
-# Check cron jobs
-crontab -l
-```
+It is not trying to present the repo as already finished.
 
-#### 🆕 New VPS Setup
+It is also not trying to bury the dream under generic best-practice language.
 
-For fresh VPS deployments, use the cloud-init script:
+The right way to read `bolabaden-infra` is:
 
-```bash
-sudo bash scripts/cloud-init-maintenance.sh
-```
+- the user wants genuine multi-node flexibility and resilience
+- they do not want to be bullied into heavyweight orchestration before it earns its keep
+- they are trying to discover the smallest control surface that removes fake HA and obvious SPOFs without destroying the directness of Compose
 
-Or in cloud-init user-data:
-```yaml
-#cloud-config
-runcmd:
-  - curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/my-media-stack/main/scripts/cloud-init-maintenance.sh | bash
-```
+That is the problem this repo exists to solve.
 
----
+## Bottom line
 
-## Hosting bolabaden.org specifically {#hosting-bolabadenorg-specifically}
+If you are contributing here, the most important discipline is not "use the right YAML syntax."
 
-`bolabaden.org` is the main website. I want it up even if only one node has the container.
+It is this:
 
-The website is built with Next.JS. Until I plan to do server-side routing or anything that requires the docker socket/redis implementation in nodejs specifically, I have zero reason to host this on my docker nodes. So currently, it's running on GitHub Pages.
+> do not widen the architecture claim beyond the evidence.
 
-* The **container** for the site runs on whichever node(s) I choose (at least one).
-* All nodes terminate TLS for `bolabaden.org`.
-* If a node without the container receives the request, it forwards to a node that does.
+And do not narrow the user's dream into a cleaner neighboring question just
+because that cleaner question is easier to summarize.
 
-I have two ways to keep it fast:
-
-1. **Run the site container on 2+ nodes** so most requests are served locally. (Forwarding still covers me if one of those nodes is missing or down.)
-2. **Edge caching** for static assets (Cloudflare can help, or the L7 proxy can cache for a bit). That way forwarding doesn’t hurt perceived performance for images/CSS/JS.
-
-**Placeholder: site entry**
-
-```yaml
-http:
-  bolabaden.org:
-    cache: "static, 10m" # edge cache policy (placeholder)
-    backends:
-      - host: node1.bolabaden.org
-        port: 8080
-      - host: node2.bolabaden.org
-        port: 8080
-```
-
----
-
-## How config actually becomes live behavior {#how-config-actually-becomes-live-behavior}
-
-There’s a tiny watcher on each node that does:
-
-1. Parse `/etc/bolabaden/services.yaml`.
-2. Render proxy configs from templates.
-3. Reload the proxy safely (graceful, no dropped connections).
-4. Run health checks continuously and update backend weights or mark them down.
-
-**Placeholder: watcher settings**
-
-```yaml
-# /etc/bolabaden/watcher.yaml (placeholder)
-source: /etc/bolabaden/services.yaml
-templates:
-  - input: /etc/bolabaden/templates/traefik-http.tmpl
-    output: /etc/traefik/dynamic/bolabaden.yaml
-    reload: ["systemctl", "reload", "traefik"]
-  - input: /etc/bolabaden/templates/tcp.tmpl
-    output: /etc/haproxy/haproxy.d/bolabaden.cfg
-    reload: ["systemctl", "reload", "haproxy"]
-health_checks:
-  interval: 2s
-  timeout: 500ms
-  consecutive_failures: 3
-  recovery: 2
-```
-
-I can test changes locally (dry-run render), then ship the registry file to all nodes. If something goes sideways, the last-known-good config stays in place.
-
----
-
-## Observability (so I’m not guessing) {#observability}
-
-Per-node metrics + logs go to a small stack (Loki + Promtail, or just filebeat to Elasticsearch, whatever). I want to see:
-
-* health check failures,
-* upstream latencies,
-* request rates per service,
-* and which node is actually serving what.
-
-**Placeholder: scrape config**
-
-```yaml
-# observability.yaml (placeholder)
-metrics:
-  prometheus_scrape_targets:
-    - node1:9100
-    - node2:9100
-    - node3:9100
-  proxy_exporter: ":9113"
-logs:
-  shipper: promtail
-  targets:
-    - /var/log/nginx/*.log
-    - /var/log/haproxy.log
-```
-
----
-
-## Problems I expect, and how I’m handling them {#problems-i-expect-and-how-im-handling-them}
-
-### 1) “But isn’t Cloudflare a SPOF?” {#1-but-isnt-cloudflare-a-spof}
-
-It’s a dependency, yes, but I’m not using Cloudflare as a control plane—just DNS. Multiple A records spread load; clients cache results; if one node dies, health checks at the edge stop sending to it. If I wanted to be extra-paranoid, I could add a secondary DNS provider, but that’s not today’s problem.
-
-### 2) “What if the registry is stale?” {#2-what-if-the-registry-is-stale}
-
-Each edge does active health checks. If the registry says “node3 has `dozzle`” but node3 is down, traffic won’t go there. Worst case, a brand-new service takes a minute to be recognized (until the registry syncs), which is acceptable.
-
-### 3) TLS and certificates {#3-tls-and-certificates}
-
-Terminating TLS at the edge node that receives traffic is easiest. For cross-node proxying I keep TLS to the backend (or use trusted internal certs) so I avoid mixed-content headaches and keep things private over the inter-node network.
-
----
-
-## Failure stories (on purpose) {#failure-stories-on-purpose}
-
-* **Node dies:** DNS still points to it, but clients also hit other nodes. On the dead node, nothing answers; on the live nodes, health checks have already removed the dead backends from upstream pools, so forwarded requests avoid the corpse. When DNS TTL rolls, fewer clients pick the dead IP.
-
-* **Service moves from node3 to node1:** I update `services.yaml`, distribute it, watcher reloads, traffic starts flowing to node1. If I’m late updating the file, forwarding still works via the old mapping (worst case, a few 502s during the cutover if I get the order wrong—so I drain before stopping).
-
-* **Registry stops syncing:** Nothing blows up. Proxies keep the last config. Health checks keep things safe.
-
----
-
-## Where I’m okay with tradeoffs {#where-im-okay-with-tradeoffs}
-
-* **Yes, there’s coordination,** but it’s a small file and local health checks—not a full control plane.
-* **Yes, a request might hop nodes,** but TLS stays intact and the hop is (relatively) fast, especially when used on LAN.
-* **Yes, Redis isn’t magically multi-primary,** but I prefer explicit primary/standby to mystery replication.
-
----
-
-## What still needs real values (placeholders to fill) {#what-still-needs-real-values-placeholders-to-fill}
-
-* Cloudflare DNS creds and ACME DNS-01 details.
-* Proxy choices: Traefik v3 for HTTP (file/docker/redis provider and tcp), and the corresponding templates.
-* Health check endpoints/ports per service (`/_healthz` or whatever).
-* The distribution mechanism for `services.yaml` (Git repo URL or Syncthing config).
-* Redis failover story (manual runbook or Sentinel config).
-
-**Drop-in spots for those:**
-
-```yaml
-# /etc/bolabaden/secrets.env (placeholder)
-CF_API_TOKEN=...
-CF_ZONE_ID=...
-
-# /etc/bolabaden/services.yaml (fill me)
-# /etc/bolabaden/templates/http.tmpl (fill me)
-# /etc/bolabaden/templates/tcp.tmpl (fill me)
-
-# /etc/bolabaden/distribution.yaml (pick one)
-method: git
-repo: git@github.com:me/bolabaden-infra.git
-branch: main
-```
-
----
-
-## Sanity checklist before I call it “done enough” {#sanity-checklist-before-i-call-it-done-enough}
-
-* [ ] `curl -H "Host: bolabaden.org" http://<each node>` returns the site.
-* [ ] `curl -H "Host: dozzle.bolabaden.org" http://<each node>` returns Dozzle from whichever node actually runs it.
-* [ ] Kill a backend container → edge removes it after N failures → traffic shifts.
-* [ ] Stop the registry sync → no traffic outage.
-* [ ] TLS renews via DNS-01 with no downtime.
-* [ ] Redis primary restart → either sentinel/manual failover works and L4 proxy follows.
-
-
-**Flow example:**
-
-```
-User → node1 (HTTP request for dozzle.bolabaden.org)
-  ├─ node1 checks registry → dozzle is on node3
-  └─ node1 forwards request → node3
-       └─ node3 serves request
-```
-
-This ensures **unified service discovery** without a “master node” that could fail.
-
----
-
-## 4. Internal failover & routing {#4-internal-failover--routing}
-
-Even if DNS resolves to a node that’s alive, the requested service might still be unavailable on that node. That’s why the **L4/L7 forwarding layer** is critical.
-
-* For HTTP: Traefik v3 uses registry-generated dynamic config with a primary service and a fallback pool per service.
-* For TCP/Redis: HAProxy (or equivalent) checks which node is live for the requested port/service, then forwards.
-* Health checks: each node regularly verifies its peers’ services and updates the registry dynamically.
-
-This **eliminates single points of failure**:
-
-* No single orchestrator node.
-* No single service node.
-* DNS + proxies + registry together handle failover.
-
----
-
-## 5. The complete flow for bolabaden.org {#5-the-complete-flow-for-bolabadenorg}
-
-1. **User visits `bolabaden.org`**
-2. DNS resolves to one of the nodes (say, node1).
-3. node1’s reverse proxy receives the request:
-
-   * Checks if the requested service exists locally.
-   * If yes → serves it.
-   * If no → looks up registry → forwards to correct node (node2 or node3).
-4. The node hosting the service responds.
-5. If that node fails mid-request, health checks update the registry and next requests are forwarded to surviving nodes.
-
-At every layer, there’s **redundancy**:
-
-* DNS provides multi-node entry points.
-* L4/L7 forwarding ensures cross-node routing.
-* Registry ensures dynamic awareness of services.
-
----
-
-## 6. Remaining considerations {#6-remaining-considerations}
-
-* **Redis clustering:** Need replication or sharding to avoid losing data if a node dies.
-* **Registry updates:** Must propagate quickly to prevent stale routing.
-* **Certificates / TLS:** Must be synced across nodes for HTTPS.
-* **Load balancing policies:** Round-robin vs least connections depending on service type.
-
-**Placeholders for final configurations:**
-
-```
-# L7 proxy config example (Traefik v3 file provider)
-# yaml-language-server: $schema=https://www.schemastore.org/traefik-v3-file-provider.json
-http:
-  routers:
-    catchall:
-      service: noop@internal
-      rule: Host(`bolabaden.org`) || Host(`beatapostapita.bolabaden.org`) || HostRegexp(`^(.+)$`)  # Note: leave the Host() rules for bolabaden.org || beatapostapita.bolabaden.org here! otherwise traefik spams an annoying warning. Doesn't affect functionality though.
-      priority: 0
-      middlewares:
-        - strip-www@file
-        - http-to-https-redirect-simple@file
-    whoami-with-failover:
-      service: whoami-with-failover@file
-      rule: Host(`whoami.bolabaden.org`)
-    whoami-direct:
-      service: whoami-direct@file
-      rule: Host(`whoami.beatapostapita.bolabaden.org`)
-  services:
-    whoami-with-failover:
-      failover:
-        service: whoami-direct@file
-        fallback: whoami-servers@file
-    whoami-direct:
-      loadBalancer:
-        servers:
-          - url: http://whoami:80
-        healthCheck:
-          path: "/"
-          interval: "15s"
-          timeout: "5s"
-    whoami-servers:
-      loadBalancer:
-        servers:
-          - url: http://whoami:80
-          - url: https://whoami.beatapostapita.bolabaden.org
-          - url: https://whoami.beatapostapita.bolabaden.org
-          - url: https://whoami.vractormania.bolabaden.org
-          - url: https://whoami.arnialtrashlid.bolabaden.org
-          - url: https://whoami.cloudserver1.bolabaden.org
-          - url: https://whoami.cloudserver2.bolabaden.org
-          - url: https://whoami.cloudserver3.bolabaden.org
-        healthCheck:
-          path: "/"
-          interval: "15s"
-          timeout: "5s"
-  middlewares:
-    strip-www:
-      redirectRegex:
-        regex: '^(http|https)?://www\.(.+)$'
-        replacement: '${1}://${2}'
-        permanent: false
-    http-to-https-redirect-simple:
-      redirectScheme:
-        scheme: https
-        permanent: false
-
-# L4 proxy for Redis
-frontend redis_front
-    bind *:6379
-    default_backend redis_back
-
-backend redis_back
-    server redis_node2 node2_ip:6379 check
-    server redis_node3 node3_ip:6379 check
-```
-
----
-
-### ✅ Summary {#-summary}
-
-I plan to build a **multi-node, fully unified hosting environment** with:
-
-* Manual scheduling, where I will decide where services run
-* Node-level failover via DNS
-* L4/L7 forwarding for cross-node routing
-* A lightweight service discovery registry
-* No single points of failure for access, service routing, or DNS
-
-The next step will be **finalizing registry automation and proxy configs**, so that bolabaden.org can become truly unified and resilient.
-
-
+Keep the dream explicit, keep the proof boundaries honest, and make each change answer a real operator problem instead of adding abstract infrastructure theater.

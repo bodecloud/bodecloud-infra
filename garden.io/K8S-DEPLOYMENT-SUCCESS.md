@@ -1,6 +1,19 @@
 # Kubernetes Deployment - Successfully Implemented
 
-## Status: ✅ FULLY DEPLOYED
+## Reality check
+
+This file preserves a branch-level success narrative.
+It should not be treated as authoritative evidence that the repository as a
+whole has finished a Kubernetes migration or proved end-to-end parity and HA.
+
+The broader `garden.io/` branch still contains contradictory cluster-health,
+bootstrap, and HA-status evidence.
+
+For the knowledgebase synthesis of those contradictions, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
+## Status: historical branch claim, not authoritative current repo status
 
 All services have been successfully deployed to Kubernetes with complete ingress controller setup.
 
@@ -116,12 +129,13 @@ All services from Garden.io are now running in Kubernetes:
 
 ### Notes
 
-- All services maintain 1:1 parity with docker-compose.yml
+- The branch aimed to preserve close parity with docker-compose.yml
 - Health checks are comprehensive and matching
 - Secrets are properly mounted
 - Volumes are correctly configured
 - Dependencies are properly defined
 - Ingress routes are configured for all services
 
-The Kubernetes deployment is now fully operational! 🎉
-
+The branch recorded this deployment as operational.
+That should now be read as branch-local status language, not as the current
+repo-wide verdict.

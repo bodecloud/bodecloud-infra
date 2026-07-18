@@ -1,107 +1,164 @@
 # Kubernetes Deployment - Configuration Complete
 
-## Status: ✅ CONFIGURATION COMPLETE
+## Reality check
 
-All Garden.io configurations have been successfully validated and are ready for Kubernetes deployment.
+This document records branch-level configuration validation work.
+It is useful, but it is not proof that the repo's Kubernetes path is fully
+deployed, healthy, equal to the root Compose-first runtime, or proven under
+failure.
 
-### Completed Tasks
+Read it as a configuration-progress artifact, not as closure.
 
-✅ **YAML Syntax Fixes**
-- Fixed all command array syntax errors with `||` operators
-- Converted inline arrays to multi-line format for better YAML parsing
-- Fixed nested template string issues
+For the assimilated branch reading, see:
 
-✅ **API Version Corrections**
-- Updated all `apiVersion: garden.io/v2` to `apiVersion: garden.io/v0` for Deploy and Build resources
-- Fixed 59 configuration files
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
 
-✅ **Configuration Validation**
-- All Garden.io configurations validate successfully
-- Only deprecation warnings remain (hostPort usage)
+## What this file can and cannot establish
 
-✅ **Kubernetes Cluster Setup**
-- Created local kind cluster
-- Installed kubectl (arm64)
-- Installed Garden CLI (arm64)
-- Configured cluster access
+This file can establish:
 
-### Known Issue
+- that the branch spent real effort fixing Garden YAML and API-version issues
+- that the branch reached a configuration state it considered ready for a
+  deployment attempt
+- which known blockers still remained visible at that moment
 
-⚠️ **Ingress Controller Admission Webhook**
-- The ingress controller requires an admission webhook secret
-- This is a known limitation with kind clusters
-- The secret can be manually created or the webhook can be disabled
+This file cannot establish:
 
-### Next Steps
+- that a full cluster deployment succeeded
+- that ingress worked cleanly after deployment
+- that branch validation translated into runtime parity
+- that the broader anti-SPOF problem was solved by this milestone
 
-1. **Resolve Ingress Controller Issue:**
-   ```bash
-   # Option 1: Manually create the admission secret
-   kubectl create secret tls ingress-nginx-admission \
-     --cert=/path/to/cert.pem \
-     --key=/path/to/key.pem \
-     -n garden-system
-   
-   # Option 2: Disable admission webhook in ingress controller config
-   ```
+That boundary is important because "configuration complete" can easily be read
+as "architecture problem solved," which would be false here.
 
-2. **Deploy Services:**
-   ```bash
-   cd garden.io
-   export KUBECONFIG=/tmp/kubeconfig
-   export PATH="/tmp/garden-install:$PATH"
-   garden deploy --env k8s
-   ```
+## Status: historical branch claim
 
-3. **Monitor Deployment:**
-   ```bash
-   kubectl get pods --all-namespaces
-   kubectl get deployments --all-namespaces
-   kubectl get services --all-namespaces
-   ```
+The original file framed the result as:
 
-### Configuration Files
+> all Garden.io configurations validated and ready for Kubernetes deployment
 
-All 66 Garden.io configuration files are validated and ready:
-- Core infrastructure services
-- Reverse proxy services
-- Application services
-- LLM services
-- Stremio services
-- Metrics services
-- WARP services
-- Authentication services
+That is still useful as a branch statement.
+It should now be read more carefully:
 
-### Commands Reference
+- the branch believed the configuration layer was mostly ready
+- the branch still documented at least one ingress-related blocker
+- readiness to deploy is not the same thing as proof after deployment
 
-**Validate Configuration:**
+## Historical completed tasks
+
+### YAML syntax fixes
+
+The branch reported:
+
+- command-array syntax fixes around `||`
+- conversion of inline arrays to multi-line format
+- nested template-string fixes
+
+### API version corrections
+
+The branch reported:
+
+- `apiVersion` corrections from `garden.io/v2` to `garden.io/v0`
+- fixes across 59 configuration files
+
+### Configuration validation
+
+The branch reported:
+
+- successful validation of all Garden.io configurations
+- only deprecation warnings remaining
+
+### Local cluster setup
+
+The branch reported:
+
+- local `kind` cluster creation
+- `kubectl` installation
+- Garden CLI installation
+- configured cluster access
+
+These details still matter because they show the branch was not imaginary.
+They do not prove the repo should narrate the Kubernetes path as promoted.
+
+## Historical known issue
+
+The original page called out an ingress-controller admission-webhook issue.
+
+That point matters more than it may seem.
+It is one of the branch clues that "configuration complete" was still not the
+same thing as "runtime done."
+
+The branch described:
+
+- admission webhook secret required
+- kind-cluster limitation or manual setup burden
+- possible need for manual secret creation or webhook disablement
+
+This is exactly the kind of detail that prevents a clean triumphant reading.
+
+## Historical next steps
+
+The branch proposed:
+
+1. resolve the ingress-controller issue
+2. deploy services
+3. monitor the cluster
+
+That should now be read as evidence that the branch still had a meaningful
+distance between validated config and trustworthy runtime.
+
+## Historical command reference
+
+### Validate configuration
+
 ```bash
 garden validate --env k8s
 ```
 
-**Deploy to Kubernetes:**
+### Deploy to Kubernetes
+
 ```bash
 garden deploy --env k8s
 ```
 
-**Check Cluster Status:**
+### Check cluster status
+
 ```bash
 kubectl cluster-info
 kubectl get nodes
 ```
 
-**View Pods:**
+### View pods
+
 ```bash
 kubectl get pods --all-namespaces
 ```
 
-### Notes
+## What the parity notes should now mean
 
-- All services maintain 1:1 parity with docker-compose.yml
-- Health checks are comprehensive and matching
-- Secrets are properly configured
-- Volumes are mapped correctly
-- All dependencies are defined
+The original page closed with claims like:
 
-The deployment is ready to proceed once the ingress controller issue is resolved.
+- health checks are comprehensive and matching
+- secrets are properly configured
+- volumes are mapped correctly
+- dependencies are defined
 
+The safer reading is:
+
+- the branch believed it had achieved strong configuration alignment
+- that alignment is meaningful as preparation evidence
+- it is still weaker than runtime proof, failure proof, or repo-wide
+  architecture closure
+
+## Why preserve this file
+
+Because the repo's real story includes partial readiness claims that were
+stronger than "nothing worked" but weaker than "the path is now settled."
+
+This file is one of those middle artifacts.
+
+The docs get worse if they delete it and pretend the branch never approached
+readiness.
+They also get worse if they preserve it and quietly let "configuration
+complete" impersonate "problem complete."

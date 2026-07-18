@@ -1,251 +1,91 @@
-# Containerized HA Cluster for *.bolabaden.org
+# Alternative Design Note: Containerized HA Cluster Exploration
 
-A fully containerized high-availability load balancing solution that provides automatic failover and load balancing for `*.bolabaden.org` without any host-level modifications.
+This file used to read like a finished HA deployment guide.
+That was misleading.
 
-## 🎯 Overview
+It is **not** the current priority implementation.
+It is **not** a validated runtime.
+It is **not** proof that `bolabaden-infra` already has true anycast, VIP-based
+multi-node failover, or host-independent HA.
 
-This solution implements your original design with **true VIP anycast routing** and **implicit request-driven failover** using:
+The priority implementation for this repo is still the root
+[`docker-compose.yml`](docker-compose.yml) plus its active include set.
 
-- **Headscale** (self-hosted Tailscale alternative) for mesh networking
-- **CoreDNS** for custom domain resolution
-- **Traefik** for load balancing and TLS termination
-- **Containerized VIP routing** for anycast functionality
-- **Automatic health checking** and failover
+## What this file actually is
 
-## 🏗️ Architecture
+This is a record of one stronger-clustering direction the repo explored while
+searching for a middle ground between:
 
-```mermaid
-                    ┌────────  Public Internet  ────────┐
-                    │                                    │
-             Anycast 443 ► Traefik Load Balancer (L7 TLS)
-                    │   • Automatic health checks        │
-                    │   • Request-driven failover        │
-                    └────────────────────────────────────┘
-                                  │  (encrypted WireGuard)
-          ┌────────────────────────────────────────────────────────────────┐
-          │  Headscale Mesh Network (automatic fail-over, 2-3 s)          │
-          │  ┌───────────┐      ┌───────────┐      ┌───────────┐          │
-          │  │ server-A  │      │ server-B  │      │ server-C  │  …       │
-          │  │  coolify  │      │  coolify  │      │  coolify  │          │
-          │  │  VIP NAT  │◄───► │  VIP NAT  │◄───► │  VIP NAT  │          │
-          └────────────────────────────────────────────────────────────────┘
-```
+- raw multi-node Docker Compose sprawl
+- and full orchestrator capture
 
-## 🚀 Quick Start
+The explored ingredients here were:
 
-### Prerequisites
+- Headscale for mesh identity and node connectivity
+- CoreDNS for custom routing behavior
+- Traefik for ingress and backend selection
+- a shared VIP idea for "any node can answer" behavior
+- health-aware failover inside a more opinionated cluster shape
 
-- Docker and Docker Compose installed
-- Ports 53, 80, 443, 50443, 50444 available
-- Your `*.bolabaden.org` DNS pointing to your server
+That makes this file useful as **design pressure evidence**, not as live ops
+guidance.
 
-### Installation
+## Why it was attractive
 
-1. **Clone and setup:**
-   ```bash
-   chmod +x setup.sh
-   ./setup.sh
-   ```
+This design was trying to solve a real pain:
 
-2. **Generate Headscale auth key:**
-   ```bash
-   docker-compose exec headscale headscale apikeys create
-   ```
+- requests may hit the wrong node
+- DNS-only failover is too weak
+- operator-maintained upstream lists do not scale well
+- the repo wants local-first serving with peer-aware fallback
 
-3. **Update .env file:**
-   ```bash
-   # Edit .env and add your auth key
-   HEADSCALE_AUTHKEY=your_generated_key_here
-   ```
+In other words, the design was trying to buy stronger entry-node independence
+than the current Compose-first runtime can honestly guarantee.
 
-4. **On each backend server:**
-   ```bash
-   # Install Tailscale
-   curl -fsSL https://tailscale.com/install.sh | sh
-   
-   # Connect to Headscale
-   tailscale up \
-     --login-server=http://YOUR_HEADSCALE_IP:50443 \
-     --authkey=YOUR_AUTH_KEY \
-     --advertise-routes=100.100.10.10/32
-   ```
+## Why it is not the adopted answer
 
-5. **Approve routes in Headscale:**
-   ```bash
-   docker-compose exec headscale headscale routes list
-   docker-compose exec headscale headscale routes enable --route=100.100.10.10/32
-   ```
+Even if the individual technologies are real, this document overreached in
+several ways:
 
-## 📁 File Structure
+- it spoke as if the cluster already existed
+- it implied validated request-driven failover
+- it implied the VIP and routing behavior were deployment-ready
+- it hid the operational tax of introducing a stronger control surface
+- it blurred "interesting architecture direction" with "current repo truth"
 
-```
-.
-├── docker-compose.ha-cluster.yml  # Main orchestration
-├── setup.sh                       # Setup script
-├── .env                          # Environment variables
-├── headscale/
-│   └── config.yaml              # Headscale configuration
-├── dns/
-│   ├── Corefile                 # CoreDNS configuration
-│   └── zones/                   # DNS zone files
-├── scripts/
-│   ├── vip-router.sh           # VIP routing container
-│   └── health-checker.sh       # Health monitoring
-├── config/
-│   └── servers.conf            # Server list for health checks
-├── traefik/
-│   ├── traefik.yml             # Traefik configuration
-│   └── dynamic.yml             # Dynamic load balancing rules
-└── certs/                      # SSL certificates
-```
+That is exactly the kind of documentation drift this repo is trying to stop.
 
-## 🔧 Configuration
+## What this exploration still contributes
 
-### Environment Variables (.env)
+This alternative design still matters because it clarifies the user's real
+demand:
 
-```bash
-HEADSCALE_AUTHKEY=your_auth_key_here
-SERVICE_VIP=100.100.10.10/32
-LOCAL_PORT=8443
-CHECK_INTERVAL=30
-FAILURE_THRESHOLD=3
-LETS_ENCRYPT_EMAIL=boden.crouch@gmail.com
-```
+> any node should be able to receive traffic, serve locally when possible, and
+> forward intelligently when not, without lying about resilience.
 
-### Server Configuration (config/servers.conf)
+That demand remains active even if this specific cluster design is not the
+chosen path.
 
-```bash
-# Format: server_ip port protocol
-172.20.0.2 443 https
-172.20.0.3 443 https
-# ... add all your servers
-```
+## How to read it now
 
-## 🌐 How It Works
+Read this file as:
 
-### 1. **Request-Driven Failover**
-- No periodic health checks
-- Failover happens when requests actually fail
-- Automatic detection of unhealthy servers
-- 2-3 second failover time
+- a stronger-cluster exploration
+- evidence that the repo has seriously considered more opinionated HA layers
+- a contrast against the current Compose-first approach
 
-### 2. **VIP Anycast Routing**
-- All servers advertise the same VIP (`100.100.10.10/32`)
-- Headscale automatically routes to healthy servers
-- Local NAT hairpinning redirects to actual services
+Do **not** read it as:
 
-### 3. **Load Balancing**
-- Traefik provides L7 load balancing
-- Round-robin distribution across healthy servers
-- Automatic health checks on each request
-- TLS termination and certificate management
+- current deployment instructions
+- a proven HA recipe
+- an adopted architecture decision
 
-### 4. **DNS Resolution**
-- CoreDNS handles `*.bolabaden.org` resolution
-- Dynamic updates based on health status
-- No DNS caching delays
+## Where to look instead
 
-## 🔍 Monitoring
+For the current repo-grounded interpretation, use:
 
-### Service Status
-```bash
-# Check all services
-docker-compose -f docker-compose.ha-cluster.yml ps
-
-# View logs
-docker-compose -f docker-compose.ha-cluster.yml logs -f
-```
-
-### Health Checks
-```bash
-# Test load balancer
-curl -H "Host: test.bolabaden.org" http://localhost/health
-
-# Check individual services
-curl -H "Host: test.bolabaden.org" http://localhost:8080/api/health
-```
-
-### Dashboards
-- **Traefik Dashboard:** http://localhost:8080
-- **Headscale Admin:** http://localhost:50443
-- **CoreDNS Metrics:** http://localhost:9153/metrics
-
-## 🛠️ Troubleshooting
-
-### Common Issues
-
-1. **Headscale connection fails:**
-   ```bash
-   # Check Headscale logs
-   docker-compose logs headscale
-   
-   # Verify auth key
-   docker-compose exec headscale headscale apikeys list
-   ```
-
-2. **VIP routing not working:**
-   ```bash
-   # Check VIP router logs
-   docker-compose logs vip-router
-   
-   # Verify route advertisement
-   docker-compose exec headscale headscale routes list
-   ```
-
-3. **DNS resolution issues:**
-   ```bash
-   # Test DNS
-   dig @localhost test.bolabaden.org
-   
-   # Check CoreDNS logs
-   docker-compose logs dns-server
-   ```
-
-### Debug Commands
-
-```bash
-# Check network connectivity
-docker-compose exec vip-router ping 100.100.10.10
-
-# Test VIP routing
-docker-compose exec vip-router curl -H "Host: test.bolabaden.org" http://100.100.10.10/health
-
-# View routing tables
-docker-compose exec vip-router ip route show table 100
-```
-
-## 🔒 Security
-
-- **Encrypted mesh network** (WireGuard)
-- **TLS termination** with Let's Encrypt
-- **Security headers** via Traefik
-- **Rate limiting** protection
-- **Container isolation** with minimal privileges
-
-## 📈 Scaling
-
-### Adding New Servers
-
-1. Add server to `config/servers.conf`
-2. Install Tailscale on new server
-3. Connect to Headscale with same VIP route
-4. Approve route in Headscale admin
-
-### Performance Tuning
-
-- Adjust `CHECK_INTERVAL` for faster/slower failover
-- Modify `FAILURE_THRESHOLD` for sensitivity
-- Tune Traefik load balancing algorithm
-- Optimize CoreDNS caching settings
-
-## 🤝 Contributing
-
-This solution is designed to be:
-- **Fully containerized** (no host modifications)
-- **Self-contained** (minimal external dependencies)
-- **Automated** (minimal manual intervention)
-- **Scalable** (easy to add/remove servers)
-
-## 📄 License
-
-This solution is provided as-is for educational and deployment purposes.
+- [`README.md`](README.md)
+- [`STRATEGY.md`](STRATEGY.md)
+- [`knowledgebase/architecture/compose-first-architecture.md`](knowledgebase/architecture/compose-first-architecture.md)
+- [`knowledgebase/architecture/ha-failover-routing.md`](knowledgebase/architecture/ha-failover-routing.md)
+- [`knowledgebase/research/orchestration-research-2026.md`](knowledgebase/research/orchestration-research-2026.md)

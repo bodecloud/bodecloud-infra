@@ -1,16 +1,16 @@
 name: Deploy Compose2HCL Web Interface
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'src/compose2hcl/**'
-      - '.github/workflows/deploy-compose2hcl.yml'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'src/compose2hcl/**'
-      - '.github/workflows/deploy-compose2hcl.yml'
+#  push:
+#    branches: [ main ]
+#    paths:
+#      - 'src/compose2hcl/**'
+#      - '.github/workflows/deploy-compose2hcl.yml'
+#  pull_request:
+#    branches: [ main ]
+#    paths:
+#      - 'src/compose2hcl/**'
+#      - '.github/workflows/deploy-compose2hcl.yml'
   workflow_dispatch:
 
 # Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
@@ -30,14 +30,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        
+        uses: actions/checkout@v6
+        with:
+          submodules: false
+                     
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: 'src/compose2hcl/package-lock.json'
           
       - name: Install dependencies
         run: |
@@ -50,7 +51,7 @@ jobs:
           npm run build
           
       - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: 'src/compose2hcl/dist'
 

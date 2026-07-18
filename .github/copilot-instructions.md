@@ -1,40 +1,181 @@
-# Copilot Instructions for bolabaden-infra
+# Copilot Instructions for `bolabaden-infra`
 
-## Overview
-This codebase powers **bolabaden.org**, a multi-node Docker-based infrastructure designed for high availability WITHOUT orchestrators like Kubernetes or Docker Swarm. Understanding the "no-cluster" philosophy and distributed service architecture is critical for effective contributions.
+## Read This Repo Correctly
 
-## Architecture Philosophy
+This codebase powers `bolabaden.org` as a **Compose-first, multi-node Docker
+infrastructure repo**.
 
-### Multi-Node Without Orchestration
-- **No central orchestrator**: Services are manually assigned to nodes; the system reflects current state, not desired state
-- **Distributed failover**: Each node can independently serve requests or forward to peers
-- **Service registry**: Simple YAML file (`services.yaml`) synced across nodes lists what services run where
-- **L7 Reverse Proxy**: Traefik v3 with file provider handles HTTP(S) routing with health checks and primary+fallback configs
-- **L4 Proxy**: For raw TCP services (Redis, MongoDB, etc.)
-- **DNS failover**: Cloudflare with multiple A records provides node-level failover
+The important phrase is not merely "multi-node."
+It is:
 
-### Request Flow Pattern
+> multi-node Docker infrastructure that is trying to become anti-SPOF and
+> peer-aware without immediately collapsing into Kubernetes, Docker Swarm, or
+> another heavyweight orchestrator.
+
+If you read the repo as "just a bunch of Compose files," you will miss the
+actual goal.
+If you read it as "already a finished distributed control plane," you will lie
+about what the worktree currently proves.
+
+## The Architecture Dream
+
+The intended direction is:
+
+- no central orchestrator by default
+- services manually assigned to nodes
+- current-state truth preferred over scheduler-declared desired state
+- local-first serving when the requested service is already on the receiving
+  node
+- peer-forward fallback when the request lands on a healthy node that does not
+  host the target service locally
+- explicit separation between L7 HTTP behavior and L4 or raw TCP behavior
+- anti-SPOF pressure without fake HA language
+
+The core desired request model is:
+
+```text
+User -> Cloudflare DNS -> any surviving node
+  service is local  -> serve locally
+  service is remote -> forward to healthy peer that currently hosts it
 ```
-User → Cloudflare DNS → Any Node
-  ├─ Service exists locally? → Serve directly (fast path)
-  └─ Service on another node? → Proxy via Traefik → Serve from peer node
+
+That is the **target operating contract**.
+Do not silently upgrade that target into "already proven runtime behavior."
+
+## What Is Intent vs What Is Live
+
+This file is one of the strongest **intent** surfaces in the repo.
+It can support claims like:
+
+- the repo wants multi-node Docker without Kubernetes or Docker Swarm by
+  default
+- the repo wants a lightweight current-state registry concept such as
+  `services.yaml`
+- the repo wants local-first then peer-forward request behavior
+- the repo wants Cloudflare to support any-node entry rather than one sacred
+  public box
+- the repo wants Traefik and related edge tooling to preserve policy and
+  middleware across routed services
+
+This file does **not** prove:
+
+- that the tracked root runtime currently ships a live root `services.yaml`
+- that wrong-node requests already succeed generically
+- that peer-forward fallback survives backend-loss conditions
+- that middleware or auth continuity under peer fallback is fully proven
+- that TCP failover is solved
+- that stateful services are honestly HA just because they are reachable
+
+If you need live proof, start with:
+
+- `docker-compose.yml`
+- `compose/docker-compose.*.yml`
+- `docker compose config`
+- the knowledgebase pages under `knowledgebase/architecture/`
+
+## Current-State Registry Philosophy
+
+The repo repeatedly converges on a lightweight current-state registry such as
+`services.yaml`.
+
+The intended meaning is:
+
+- the system records where services actually live
+- routing can consume current placement truth
+- operators keep a readable source of placement knowledge
+- the repo avoids a heavyweight scheduler unless it truly earns its keep
+
+Example target shape:
+
+```yaml
+http:
+  dozzle.bolabaden.org:
+    backends:
+      - host: node1.bolabaden.org
+        port: 8080
+      - host: node3.bolabaden.org
+        port: 8080
+
+tcp:
+  redis-main:
+    port: 6379
+    backends:
+      - host: node1.bolabaden.org
+        port: 6379
 ```
 
-This ensures requests always succeed regardless of which node they hit.
+Important boundary:
 
-## Critical File Structure
+- treat `services.yaml` as architecture intent unless the tracked runtime
+  actually ships and consumes it
 
-### Docker Compose Organization
-- **Main file**: `docker-compose.yml` - Core services (MongoDB, Redis, Dozzle, Homepage, etc.)
-- **Compose includes**: `compose/docker-compose.*.yml` - Modular service groups
-  - `compose/docker-compose.metrics.yml` - Complete monitoring stack (Grafana, Prometheus, VictoriaMetrics, Loki)
-  - `compose/docker-compose.stremio-group.yml` - Media services
-  - `compose/docker-compose.llm.yml` - AI/LLM services
-  - `compose/docker-compose.coolify-proxy.yml` - Coolify integration
-  
-### Configuration Patterns
+## Routing Philosophy
 
-#### ALWAYS Inline Configs (Preferred)
+### L7 / HTTP(S)
+
+The intended HTTP stack centers on:
+
+- Traefik v3
+- health-aware routing
+- auth continuity
+- middleware continuity
+- primary versus fallback behavior that remains visible to operators
+
+The proxy layer is not supposed to merely expose containers.
+It is supposed to preserve the meaning of a request path even when locality is
+not available.
+
+### L4 / TCP
+
+Raw TCP services such as Redis or MongoDB are a different class.
+
+Do not assume:
+
+- HTTP failover logic automatically solves TCP forwarding
+- node reachability equals stateful correctness
+- a proxy path equals trustworthy failover
+
+L4 and stateful systems require stricter language and stronger proof.
+
+## Public Entry Philosophy
+
+Cloudflare is part of the anti-SPOF story, but only as the first hop.
+
+The intended node-entry model is:
+
+- multiple public A or AAAA records
+- any healthy public node can receive the first request
+- no single reverse-proxy machine should quietly become the sacred public
+  entrypoint
+
+Do not confuse:
+
+- DNS can hit more than one box
+
+with:
+
+- the request will be preserved correctly all the way to the right service
+
+Those are different claims.
+
+## Compose Authoring Expectations
+
+### Root implementation priority
+
+The priority implementation still centers on:
+
+- `docker-compose.yml`
+- `compose/docker-compose.*.yml`
+
+This is a Compose-first repo in actual authoring shape, not just in rhetoric.
+
+### Inline configs preferred
+
+Prefer inline Compose `configs:` content over external mounted config-file
+sprawl whenever practical.
+
+Preferred:
+
 ```yaml
 configs:
   example-config:
@@ -44,60 +185,51 @@ configs:
       content
 ```
 
-**Why inline?**
-- Single source of truth
-- Easier git diffs and reviews
-- No file path resolution issues
-- Simpler deployments
+Avoid when a simpler inline config is possible:
 
-#### Dollar Sign Escaping in Configs
+```yaml
+configs:
+  example-config:
+    file: ./path/to/file.conf
+```
+
+and especially:
+
+```yaml
+services:
+  example:
+    volumes:
+      - ./path/to/file.conf:/etc/example/file.conf:ro
+```
+
+### Dollar signs in inline configs
+
+In `configs:` content:
+
+- `${VAR}` means Compose interpolation
+- `$$` means a literal `$` should survive into the rendered config
+
+Example:
+
 ```yaml
 configs:
   grafana.ini:
     content: |
-      # Double $$ = literal $ in output
       instance_name = $$HOSTNAME
-      # Single $ = Docker Compose variable substitution
       port = ${GRAFANA_PORT:-3000}
 ```
 
-### Networks Architecture
-- **publicnet**: Public-facing services (Traefik, Grafana, etc.)
-- **backend**: Internal communication (databases, message queues)
-- **warp-nat-net**: Special network for Cloudflare WARP routing
+### Healthchecks are mandatory
 
-### Service Naming Conventions
-- Container names match hostnames: `container_name: grafana` → `hostname: grafana`
-- Services expose internal ports (not published to host) and rely on Traefik for external access
-- Traefik labels define routing: `traefik.http.routers.grafana.rule: Host(\`grafana.$DOMAIN\`)`
+Never "fix" a service by removing or weakening its healthcheck.
 
-## Developer Workflows
+Bad patterns:
 
-### Building and Testing
-```bash
-# Build and start all services
-docker compose up -d --remove-orphans --force-recreate --pull=always --build
+- disabled healthchecks
+- commented-out healthchecks
+- TCP-only checks like `nc -z`
 
-# Start specific service group
-docker compose -f docker-compose.yml -f compose/docker-compose.metrics.yml up -d
-
-# Check service health
-docker ps --format "table {{.Names}}\t{{.Status}}"
-```
-
-### Adding New Services
-1. Choose appropriate compose file (`docker-compose.yml` or a modular `compose/*.yml`)
-2. Define service with:
-   - Proper network attachments (`publicnet` and/or `backend`)
-   - Traefik labels if web-accessible
-   - Comprehensive healthcheck (REQUIRED - see below)
-   - Homepage labels for dashboard integration
-   - Prometheus scrape labels if applicable
-3. Update `services.yaml` registry if multi-node
-4. Test locally before deploying
-
-### Healthcheck Requirements (MANDATORY)
-**NEVER disable or remove healthchecks.** Every service MUST have:
+Preferred pattern:
 
 ```yaml
 healthcheck:
@@ -107,199 +239,64 @@ healthcheck:
   retries: 3
   start_period: 30s
 labels:
-  deunhealth.restart.on.unhealthy: "true"  # Auto-restart on failure
+  deunhealth.restart.on.unhealthy: "true"
 ```
 
-**Bad healthchecks to avoid:**
-- TCP-only checks (`nc -z`)
-- Disabled healthchecks
-- Missing `start_period` (causes false failures during startup)
+Healthchecks are part of the no-fake-HA discipline.
+They still do not prove cross-node resilience by themselves.
 
-### Debugging Common Issues
+## Working Rules for Contributors and Agents
 
-#### Service Not Accessible
-1. Check Traefik dashboard: `https://traefik.bolabaden.org`
-2. Verify service is healthy: `docker ps | grep <service>`
-3. Check Traefik labels on service: `docker inspect <service> | grep traefik`
-4. Review Traefik logs: `docker logs traefik`
+When making changes, preserve these reading rules:
 
-#### Container Keeps Restarting
-1. Check healthcheck status: `docker inspect <service> --format='{{.State.Health.Status}}'`
-2. View container logs: `docker logs <service> --tail=100`
-3. Check resource limits: Service may be OOM killed
-4. Review startup timing: Increase `start_period` if needed
+- do not let target architecture language masquerade as current proof
+- do not describe DNS redundancy as end-to-end failover
+- do not describe a proxy surface as stateful HA
+- do not assume local health implies peer-forward eligibility
+- do not claim wrong-node success unless the route, peer choice, middleware,
+  auth, and application behavior have actually been shown to survive it
 
-#### Disk Space Issues
-This repo includes automated maintenance (`scripts/docker-maintenance.sh`):
+When in doubt, prefer these stronger questions:
+
+- what runs where right now?
+- how would the receiving node know that?
+- what survives if the local backend dies?
+- what stays true if the request lands on the wrong node?
+- what class of service am I talking about: stateless HTTP, TCP, or
+  state-bearing?
+
+## Practical Validation Baseline
+
+Use these as the minimum validation surface:
+
 ```bash
-# Manual cleanup
-sudo ./scripts/docker-maintenance.sh
-
-# Emergency cleanup (interactive)
-./scripts/emergency-cleanup.sh
-
-# Check disk usage
-df -h /
-docker system df
+docker compose config --quiet
+docker compose config --services
+python3 -m mkdocs build -f mkdocs.yml --strict
 ```
 
-Common space hogs:
-- Docker overlay2 (use `docker system prune -a`)
-- Container logs (configured in `/etc/docker/daemon.json`)
-- Prometheus WAL, Stremio cache, application data
+Remember:
 
-## Project-Specific Patterns
+- Compose validation requires a prepared env and secret surface
+- `~/.docker/config.json` may need to exist even if it contains only `{}`
+- passing validation proves authored shape, not distributed correctness
 
-### Monitoring Stack (compose/docker-compose.metrics.yml)
-- **Grafana**: Dashboards inlined as configs (see `alert-overview.json`, `container-monitoring.json`, etc.)
-- **VictoriaMetrics**: Drop-in Prometheus replacement with better performance
-- **Loki**: Log aggregation
-- **Alertmanager**: Alert routing and notification
-- All dashboards provisioned via configs, not external files
+## Bottom Line
 
-### Service Discovery Pattern
-```yaml
-# services.yaml (distributed to all nodes)
-http:
-  dozzle.bolabaden.org:
-    backends:
-      - host: node1.bolabaden.org
-        port: 8080
-      - host: node3.bolabaden.org
-        port: 8080
-tcp:
-  redis-main:
-    port: 6379
-    backends:
-      - host: node1.bolabaden.org
-        port: 6379
-```
+The repo's central question is not:
 
-### Traefik Integration
-Services use labels for auto-discovery:
-```yaml
-labels:
-  traefik.enable: true
-  traefik.http.routers.myservice.rule: Host(`myservice.$DOMAIN`)
-  traefik.http.services.myservice.loadbalancer.server.port: 8080
-  # Health check (Traefik pings this to verify service health)
-  traefik.http.services.myservice.loadbalancer.healthcheck.path: /health
-  traefik.http.services.myservice.loadbalancer.healthcheck.interval: 30s
-```
+> how do we host more services?
 
-### Homepage Dashboard Integration
-```yaml
-labels:
-  homepage.group: Infrastructure
-  homepage.name: My Service
-  homepage.icon: myservice.png
-  homepage.href: https://myservice.$DOMAIN
-  homepage.description: Service description
-```
+It is:
 
-### Secrets Management
-- Secrets stored in `${SECRETS_PATH}/` (environment variable)
-- Declared in compose:
-```yaml
-secrets:
-  my-secret:
-    file: ${SECRETS_PATH:?}/my-secret.txt
-services:
-  myservice:
-    secrets:
-      - my-secret
-```
+> how do we keep the directness of Compose while making multiple ordinary
+> Docker nodes behave less stupidly under wrong-node entry, backend loss, and
+> anti-SPOF pressure?
 
-## Integration Points
+Every contribution should either:
 
-### DNS Configuration
-- **Provider**: Cloudflare
-- **Pattern**: Multiple A records for `*.bolabaden.org` pointing to each node
-- **DDNS**: Each node updates its own A record via Cloudflare API
+- make that dream more true
+- make the proof boundary more honest
+- or make the operator surface more readable
 
-### External Dependencies
-- **Cloudflare**: DNS and CDN
-- **Tailscale**: Secure node-to-node communication (optional)
-- **Coolify**: Self-hosted PaaS integration for some services
-
-### Cross-Component Communication
-- Services communicate via Docker networks (no hardcoded IPs)
-- Use container/service names as hostnames: `redis://redis:6379`
-- Traefik provides service mesh-like routing without complexity
-
-## Common Pitfalls & Solutions
-
-### Don't: Hardcode IPs or Ports
-```yaml
-# ❌ Bad
-environment:
-  DATABASE_URL: "postgres://10.0.7.5:5432/db"
-
-# ✅ Good
-environment:
-  DATABASE_URL: "postgres://postgres:5432/db"
-```
-
-### Don't: Skip Healthchecks
-Every service needs proper health validation. If a service lacks `curl` or `wget`:
-```yaml
-healthcheck:
-  test: ["CMD-SHELL", "apk add --no-cache wget && wget --spider http://127.0.0.1:8080/health || exit 1"]
-```
-
-### Don't: Use External Config Files
-Inline everything in compose configs sections - makes the setup portable and reviewable.
-
-### Do: Use Environment Variables
-```yaml
-environment:
-  PORT: ${SERVICE_PORT:-8080}
-  LOG_LEVEL: ${LOG_LEVEL:-info}
-```
-
-### Do: Tag Services for Observability
-```yaml
-labels:
-  prometheus.io/scrape: "true"
-  prometheus.io/port: "8080"
-  prometheus.io/path: "/metrics"
-  kuma.myservice.http.name: "myservice.$DOMAIN"
-  kuma.myservice.http.url: "https://myservice.$DOMAIN"
-```
-
-## Testing Checklist
-
-Before considering changes complete:
-- [ ] All services have comprehensive healthchecks
-- [ ] Service accessible via Traefik (if web service)
-- [ ] Healthcheck passes: `docker ps` shows "(healthy)"
-- [ ] Logs show no errors: `docker logs <service>`
-- [ ] Service appears in Homepage dashboard
-- [ ] Prometheus scraping works (if applicable)
-- [ ] Changes committed to git with conventional commit message
-- [ ] `docker compose config` validates without errors
-
-## Git Workflow (MANDATORY)
-
-Every change MUST be committed:
-```bash
-git add <files>
-git commit -m "type: description"
-```
-
-Use conventional commit types:
-- `feat:` - New features
-- `fix:` - Bug fixes
-- `refactor:` - Code refactoring
-- `docs:` - Documentation
-- `chore:` - Maintenance
-
-## Summary
-
-This infrastructure prioritizes:
-1. **Simplicity**: No orchestrators, just Docker Compose
-2. **Resilience**: Multi-node with automatic failover
-3. **Observability**: Comprehensive monitoring and logging
-4. **Maintainability**: Everything in version control, configs inlined
-
-When in doubt, follow existing patterns in the compose files. The system is designed to be understandable by reading the compose definitions alone.
+Anything else is infrastructure theater.

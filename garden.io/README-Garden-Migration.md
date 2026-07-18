@@ -1,6 +1,53 @@
 # Docker Compose to Garden Migration
 
-This project has been migrated from Docker Compose to Garden for better Kubernetes-native development and deployment.
+This file should no longer be read as a statement of finished repo truth.
+
+The priority implementation for `bolabaden-infra` is still the root
+[`docker-compose.yml`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/docker-compose.yml)
+plus its included Compose fragments.
+
+`garden.io/` is an exploratory branch that captures a serious attempt to test a
+Garden and Kubernetes-shaped future.
+It does **not** prove that the root runtime has been fully migrated away from
+Compose.
+
+The older version of this file spoke as if the migration had already happened.
+That is too strong for the current worktree.
+
+The more honest summary is:
+
+- Garden was explored as a stronger deployment layer
+- Kubernetes and k3s were explored as possible answers to placement and HA pain
+- the branch contains useful assets and scripts
+- the branch also contains contradictory "complete" and "still in progress"
+  status documents
+- none of that supersedes the Compose-first root runtime today
+
+For the rendered knowledgebase assimilation of this branch, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
+## What this directory is actually for
+
+Treat this directory as a preserved exploration of:
+
+- Garden-based service authoring
+- Kubernetes-native deployment structure
+- k3s cluster bootstrap and HA experiments
+- ingress, storage, and replica concepts that might one day earn promotion
+
+Do not treat it as proof that:
+
+- the migration is complete
+- the cluster path is healthy
+- zero-SPOF has been demonstrated
+- the user's wrong-node and stateful failover requirements are solved
+
+## Historical exploration snapshot
+
+The remainder of this file is preserved as a historical branch description.
+It describes what the branch was trying to become, not what the repo has fully
+proved today.
 
 ## Project Structure
 

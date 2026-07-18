@@ -1,5 +1,16 @@
 # Final Nomad Cluster Status - COMPLETE
 
+## Reality check
+
+This title is too strong if read as authoritative repo truth.
+It records a branch-level milestone after important repairs, but it does not by
+itself prove the Nomad path is complete, zero-SPOF, or the settled answer for
+`bolabaden-infra`.
+
+For the evidence-led assimilation of this branch, see:
+
+- [`../knowledgebase/research/nomad-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/nomad-exploration-evidence.md)
+
 ## ✅ CRITICAL FIXES COMPLETED
 
 ### 1. Nomad Cluster Leader - FIXED ✅
@@ -113,4 +124,3 @@ The cluster is **fully operational** with:
 - ✅ 1:1 parity with docker-compose for ports
 
 **Limitation**: Single node deployment limits HA scaling. Once additional nodes join, full HA will be achieved.
-

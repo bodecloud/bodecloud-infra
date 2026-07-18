@@ -1,8 +1,23 @@
+> Status note:
+> This is a legacy internal summary from the Constellation effort.
+> It should be read as a refactoring/composition report, not as proof that the
+> repo has already achieved mature multi-node HA or a trusted zero-SPOF runtime.
+>
 # Complete Refactoring Summary
 
-## Mission Accomplished ✅
+## What This Summary Actually Claims
 
-The infrastructure codebase has been completely transformed from a hardcoded, project-specific system to a canonical, modular, and reusable configuration system.
+This document is strongest when read as a summary of configuration and
+refactoring work inside `infra/`.
+
+It may support claims like:
+
+- hardcoded values were reduced or abstracted
+- configuration handling became more reusable
+- helper and validation layers were added
+
+It should not be upgraded into a broader claim that the whole repo is now
+operationally complete or production-trusted.
 
 ## Transformation Overview
 
@@ -294,7 +309,8 @@ make prod-setup        # Setup production configuration
 
 ## Next Steps (Optional)
 
-The system is complete and production-ready. Optional future enhancements:
+The refactoring and configuration work appears broadly complete in intent.
+Optional future enhancements:
 
 1. JSON Schema validation
 2. Configuration file watching
@@ -313,4 +329,5 @@ The infrastructure codebase transformation is **complete**. The system is:
 - ✅ **Reusable** - Works for any infrastructure
 - ✅ **Production-ready** - All features implemented and tested
 
-**The codebase is ready for production use and can be easily adapted for any infrastructure setup.**
+**The codebase appears substantially generalized and more reusable, but broad
+production-readiness claims still require runtime-specific verification.**

@@ -1,6 +1,18 @@
 # Nomad Cluster - COMPLETE STATUS
 
-**Status**: ✅ **FULLY OPERATIONAL**
+## Reality check
+
+This is historical status language from the Nomad branch.
+It should not be treated as final repo truth because the same branch preserves
+evidence of remaining node, quorum, Consul, and scaling limits.
+
+Read it as a strong-progress snapshot, not as closure.
+
+For the knowledgebase synthesis, see:
+
+- [`../knowledgebase/research/nomad-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/nomad-exploration-evidence.md)
+
+**Status**: historical branch snapshot
 
 ## ✅ ALL CRITICAL FIXES COMPLETED
 
@@ -87,4 +99,3 @@ The Nomad cluster is **fully operational**:
 - ✅ HA services running at capacity where possible
 
 **Ready for production use!**
-
