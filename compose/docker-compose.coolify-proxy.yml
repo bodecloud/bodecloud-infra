@@ -379,6 +379,86 @@ configs:
         level: full
         listen_addr: 0.0.0.0
         listen_port: ${PROMETHEUS_PORT:-6060}
+  traefik-failover-dynamic.conf.tmpl:
+    content: |
+      # yaml-language-server: $$schema=https://www.schemastore.org/traefik-v3-file-provider.json
+      http:
+        routers:
+      {{- range $$c := . }}
+        {{- if eq (index $$c.Labels "traefik.enable") "true" }}
+          {{- $$name := trimPrefix "/" $$c.Name }}
+          {{ $$name }}-with-failover:
+            service: {{ $$name }}-with-failover@file
+            rule: Host(`{{ $$name }}.$DOMAIN`)
+          {{ $$name }}-direct:
+            service: {{ $$name }}-direct@file
+            rule: Host(`{{ $$name }}.$TS_HOSTNAME.$DOMAIN`)
+        {{- end }}
+      {{- end }}
+
+        services:
+      {{- range $$c := . }}
+        {{- if eq (index $$c.Labels "traefik.enable") "true" }}
+          {{- $$name := trimPrefix "/" $$c.Name }}
+          {{- /* Get healthcheck path from container labels */}}
+          {{- $$healthPath := "/" }}
+          {{- if index $$c.Labels "kuma.healthcheck.path" }}
+            {{- $$healthPath = index $$c.Labels "kuma.healthcheck.path" }}
+          {{- end }}
+
+          {{- /* Get healthcheck interval from container labels */}}
+          {{- $$healthInterval := "5m" }}
+          {{- if index $$c.Labels "kuma.healthcheck.interval" }}
+            {{- $$healthInterval = index $$c.Labels "kuma.healthcheck.interval" }}
+          {{- end }}
+
+          {{- /* Get healthcheck timeout from container labels */}}
+          {{- $$healthTimeout := "15s" }}
+          {{- if index $$c.Labels "kuma.healthcheck.timeout" }}
+            {{- $$healthTimeout = index $$c.Labels "kuma.healthcheck.timeout" }}
+          {{- end }}
+
+          {{- /* Prefer Traefik service port label for this compose service.
+               Addresses[0] is often STUN/metrics (e.g. headscale-server:3478). */}}
+          {{- $$port := "" }}
+          {{- $$svcName := index $$c.Labels "com.docker.compose.service" }}
+          {{- if not $$svcName }}
+            {{- $$svcName = trimPrefix "/" $$c.Name }}
+          {{- end }}
+          {{- $$portLabel := printf "traefik.http.services.%s.loadbalancer.server.port" $$svcName }}
+          {{- if index $$c.Labels $$portLabel }}
+            {{- $$port = index $$c.Labels $$portLabel }}
+          {{- else }}
+            {{- range $$k, $$v := $$c.Labels }}
+              {{- if and (eq $$port "") (contains "loadbalancer.server.port" $$k) }}
+                {{- $$port = $$v }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- if eq $$port "" }}
+            {{- if $$c.Addresses }}
+              {{- $$port = (index $$c.Addresses 0).Port }}
+            {{- else }}
+              {{- $$port = "80" }}
+            {{- end }}
+          {{- end }}
+
+          {{ $$name }}-direct:
+            loadBalancer:
+              servers:
+                - url: http://{{ $$name }}:{{ $$port }}
+
+          {{ $$name }}-with-failover:
+            loadBalancer:
+              servers:
+                - url: http://{{ $$name }}:{{ $$port }}
+              healthCheck:
+                path: "{{ $$healthPath }}"
+                interval: "{{ $$healthInterval }}"
+                timeout: "{{ $$healthTimeout }}"
+        {{- end }}
+      {{- end }}
+
   traefik-dynamic.yaml:
     content: |
       # yaml-language-server: $$schema=https://www.schemastore.org/traefik-v3-file-provider.json
@@ -798,7 +878,15 @@ services:
       NGINX_ACCESS_LOG: /dev/stdout
       NGINX_ERROR_LOG: /dev/stderr
       NGINX_LOG_LEVEL: debug
+    healthcheck:
+      # test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/health > /dev/null 2>&1 && wget -qO- https://127.0.0.1:443/health > /dev/null 2>&1 || exit 1"]
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/health > /dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
     labels:
+      deunhealth.restart.on.unhealthy: "true"
       # https://doc.traefik.io/traefik/reference/routing-configuration/http/middlewares/forwardauth/
       # 'nginx-auth@docker' traefik middleware
       traefik.http.middlewares.nginx-auth.forwardAuth.address: http://nginx-traefik-extensions:80/auth"
@@ -807,13 +895,6 @@ services:
     cpus: 1
     mem_limit: 1G
     mem_reservation: 6M
-    healthcheck:
-      # test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/health > /dev/null 2>&1 && wget -qO- https://127.0.0.1:443/health > /dev/null 2>&1 || exit 1"]
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/health > /dev/null 2>&1 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 20s
     restart: always
   tinyauth:
     # 🔹🔹 TinyAuth 🔹🔹
@@ -1148,6 +1229,55 @@ services:
       kuma.whoami.http.url: https://whoami.$DOMAIN
       kuma.whoami.http.interval: 60
     restart: always
+  docker-gen-failover:
+    image: docker.io/nginxproxy/docker-gen
+    container_name: docker-gen-failover
+    networks:
+      - backend
+      - default
+    configs:
+      - source: traefik-failover-dynamic.conf.tmpl
+        target: /templates/traefik-failover-dynamic.conf.tmpl
+        mode: 0400
+    volumes:
+    #  - ${DOCKER_SOCKET:-/var/run/docker.sock}:/tmp/docker.sock:ro
+      - ${CONFIG_PATH:-./volumes}/traefik/dynamic:/traefik/dynamic
+    # Bypass image entrypoint: with set -e it exits 127 when argv[0] is a flag
+    # (command -v -- -endpoint fails before docker-gen is prepended).
+    entrypoint: ["docker-gen"]
+    command:
+      - -endpoint
+      - tcp://dockerproxy-rw:2375
+      - -only-exposed
+      - -include-stopped
+      - -event-filter
+      - event=start
+      - -event-filter
+      - event=create
+      - -event-filter
+      - event=expose
+      - -event-filter
+      - event=update
+      - -event-filter
+      - event=connect
+      - -event-filter
+      - label=traefik.enable=true
+      - -container-filter
+      - label=traefik.enable=true
+      - -watch
+      - /templates/traefik-failover-dynamic.conf.tmpl
+      - /traefik/dynamic/failover-fallbacks.yaml
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - test -f /templates/traefik-failover-dynamic.conf.tmpl && pgrep -f docker-gen >/dev/null && test -s /traefik/dynamic/failover-fallbacks.yaml || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 45s
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+    restart: unless-stopped
   logrotate-traefik:
     # 🔹🔹 Logrotate for Traefik logs 🔹🔹
     build: ${SRC_PATH:-./projects}/reverse_proxy/logrotate-traefik

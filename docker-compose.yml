@@ -126,7 +126,6 @@ services:
       retries: 5
       start_period: 40s
     restart: always
-
   dcef:
     image: docker.io/slada/dcef:main
     container_name: dcef
@@ -141,14 +140,25 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ~:${CONFIG_PATH:-./volumes}/dcef/exports
+      - ${CONFIG_PATH:-./volumes}/dcef/exports:/dcef/exports
       - ${CONFIG_PATH:-./volumes}/dcef/cache:/dcef/cache
+    labels:
+      traefik.enable: true
+      traefik.http.routers.dcef.rule: Host(`dcef.$DOMAIN`) || Host(`dcef.$TS_HOSTNAME.$DOMAIN`)
+      traefik.http.services.dcef.loadbalancer.server.port: 21011
+      traefik.http.routers.dcef.middlewares: nginx-auth@file
     restart: always
   chat-analytics:
+    # Upstream Hub image is amd64-only; this host is aarch64 and has no working
+    # qemu binfmt, so we must build locally for linux/arm64.
+    platform: linux/arm64
     build:
       context: https://github.com/mlomb/chat-analytics.git
       dockerfile: Dockerfile
+      platforms:
+        - linux/arm64
     image: docker.io/mlomb/chat-analytics:latest
+    pull_policy: build
     container_name: chat-analytics
     hostname: chat-analytics
     extra_hosts:
@@ -170,6 +180,14 @@ services:
       kuma.chat-analytics.http.name: chat-analytics.TS_HOSTNAME.$DOMAIN
       kuma.chat-analytics.http.url: https://chat-analytics.DOMAIN
       kuma.chat-analytics.http.interval: 30
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - wget --no-verbose --tries=1 --spider http://127.0.0.1:80/ || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
     restart: always
   searxng:
     image: docker.io/searxng/searxng
@@ -383,19 +401,28 @@ services:
     container_name: dockerproxy-ro
     hostname: dockerproxy-ro
     networks:
-    - default
+      default:
+        # Avoid .2 — a stale docker0 raw PREROUTING drop for 172.17.0.2 has
+        # historically black-holed inter-container traffic to this proxy.
+        ipv4_address: ${DOCKERPROXY_RO_IP:-172.17.0.250}
     privileged: true
     userns_mode: host
+    # Mount the parent dir (not the sock inode) so dockerd recreates of
+    # docker.sock remain reachable without recreating this container.
     volumes:
-    - ${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock
+    - ${DOCKER_SOCKET_DIR:-/var/run}:/host/run:ro
     environment:
       TZ: ${TZ:-America/Chicago}
       PUID: ${PUID:-1001}
       PGID: ${PGID:-999}
       UMASK: ${UMASK:-002}
+      SOCKET_PATH: ${SOCKET_PATH:-/host/run/docker.sock}
       CONTAINERS: 1
       EVENTS: 1
       INFO: 1
+      NETWORKS: 1
+      PING: 1
+      VERSION: 1
       DISABLE_IPV6: ${DISABLE_IPV6:-0}
     labels:
       deunhealth.restart.on.unhealthy: 'true'
@@ -410,7 +437,8 @@ services:
     restart: always
   dozzle:
     depends_on:
-    - dockerproxy-ro
+      dockerproxy-ro:
+        condition: service_healthy
     image: docker.io/amir20/dozzle
     container_name: dozzle
     hostname: dozzle
@@ -555,6 +583,8 @@ services:
       WATCHTOWER_RUN_ONCE: ${WATCHTOWER_RUN_ONCE:-false}
       WATCHTOWER_NO_STARTUP_MESSAGE: ${WATCHTOWER_NO_STARTUP_MESSAGE:-false}
       WATCHTOWER_WARN_ON_HEAD_FAILURE: ${WATCHTOWER_WARN_ON_HEAD_FAILURE:-auto}
+      # HTTP API needs a non-empty token when enabled; keep it off and use
+      # the binary's built-in `--health-check` probe instead.
       WATCHTOWER_HTTP_API_UPDATE: ${WATCHTOWER_HTTP_API_UPDATE:-false}
       WATCHTOWER_HTTP_API_TOKEN: ${WATCHTOWER_HTTP_API_TOKEN:-}
       WATCHTOWER_HTTP_API_PERIODIC_POLLS: ${WATCHTOWER_HTTP_API_PERIODIC_POLLS:-false}
@@ -576,7 +606,20 @@ services:
         \ {{.Name}} ({{.ImageName}}): {{.State}}: {{.Error}}\n      {{- end -}}\n\
         \    {{- end -}}\n  {{- end -}}\n{{- else -}}\n  {{range .Entries -}}{{.Message}}{{\"\
         \\n\"}}{{- end -}}\n{{- end -}}\n"
-      restart: always
+    # NOTE: restart was previously mis-indented under environment:, so the
+    # container had no restart policy and stayed down after exit 255.
+    expose:
+    - ${WATCHTOWER_HTTP_API_PORT:-8080}
+    healthcheck:
+      # Distroless image — use the binary's built-in probe (no shell/wget).
+      test: ["CMD", "/watchtower", "--health-check"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    labels:
+      deunhealth.restart.on.unhealthy: 'true'
+    restart: always
   dockerproxy-rw:
     image: lscr.io/linuxserver/socket-proxy
     container_name: dockerproxy-rw
@@ -589,13 +632,16 @@ services:
     privileged: true
     ports:
     - 127.0.0.1:2375:2375
+    # Mount the parent dir (not the sock inode) so dockerd recreates of
+    # docker.sock remain reachable without recreating this container.
     volumes:
-    - ${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock
+    - ${DOCKER_SOCKET_DIR:-/var/run}:/host/run:ro
     environment:
       TZ: ${TZ:-America/Chicago}
       PUID: ${PUID:-1001}
       PGID: ${PGID:-999}
       UMASK: ${UMASK:-002}
+      SOCKET_PATH: ${SOCKET_PATH:-/host/run/docker.sock}
       ALLOW_START: 1
       ALLOW_STOP: 1
       ALLOW_RESTARTS: 1
@@ -838,6 +884,8 @@ services:
       deunhealth.restart.on.unhealthy: 'true'
     restart: always
   biodecompwarehouse-bsim-server:
+    profiles:
+      - disabled
     build:
       context: https://github.com/bolabaden/agentdecompile.git#master
       dockerfile: Dockerfile.ghidra-bsim-server
@@ -919,3 +967,7 @@ services:
       traefik.http.routers.biodecompwarehouse-aio.entrypoints: websecure
       deunhealth.restart.on.unhealthy: 'true'
     restart: always
+volumes:
+  dcef_cache:
+    external: true
+    name: dcef_cache
