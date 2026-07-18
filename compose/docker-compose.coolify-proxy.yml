@@ -1186,9 +1186,7 @@ services:
     restart: no
   logrotate-traefik:
     # 🔹🔹 Logrotate for Traefik logs 🔹🔹
-    build:
-      context: ${SRC_PATH:-./projects}/reverse_proxy/logrotate-traefik
-      dockerfile: Dockerfile
+    build: ${SRC_PATH:-./projects}/reverse_proxy/logrotate-traefik
     image: docker.io/bolabaden/logrotate-traefik
     container_name: logrotate-traefik
     network_mode: none

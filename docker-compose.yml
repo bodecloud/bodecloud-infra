@@ -644,9 +644,7 @@ services:
 
   bolabaden-nextjs:
     # 🔹🔹 bolabaden.org nextJS main website 🔹🔹
-    build:
-      context: ${SRC_PATH:-./projects}/website/bolabaden-site
-      dockerfile: Dockerfile
+    build: ${SRC_PATH:-./projects}/website/bolabaden-site
     image: docker.io/bolabaden/bolabaden-nextjs
     container_name: bolabaden-nextjs
     hostname: bolabaden-nextjs
