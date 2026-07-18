@@ -23,7 +23,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 COMMENT_PREFIX = "failover-multi-ddns"
 CF_API = "https://api.cloudflare.com/client/v4"
