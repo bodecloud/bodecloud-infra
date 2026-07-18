@@ -3201,7 +3201,7 @@ configs:
               - https://warp_router.$DOMAIN
               - https://ip-checker-warp.$DOMAIN
               - https://headscale-server.$DOMAIN
-              - https://docker-gen-failover.$DOMAIN
+              - https://failover-agent.$DOMAIN
           relabel_configs:
             - source_labels: [__address__]
               target_label: __param_target
@@ -4114,8 +4114,8 @@ configs:
             summary: "Headscale Server is down"
             description: "Headscale Server has been down for more than 5 minutes."
 
-        - alert: DockerGenFailoverDown
-          expr: up{job="cadvisor",container="docker-gen-failover"} == 0
+        - alert: FailoverAgentDown
+          expr: up{job="cadvisor",container="failover-agent"} == 0
           for: 5m
           labels:
             severity: warning
@@ -9818,7 +9818,7 @@ configs:
         "uid": "headscale_server_monitoring",
         "version": 1
       }
-  docker-gen-failover-dashboard.json:
+  failover-agent-dashboard.json:
     content: |
       {
         "annotations": {"list": [{"builtIn": 1, "datasource": {"type": "datasource", "uid": "grafana"}, "enable": true, "hide": true, "iconColor": "rgba(0, 211, 255, 1)", "name": "Annotations & Alerts", "type": "dashboard"}]},
@@ -9833,8 +9833,8 @@ configs:
             "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
             "id": 1,
             "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto", "wideLayout": true},
-            "targets": [{"datasource": {"type": "prometheus", "uid": "victoriametrics_uid"}, "editorMode": "code", "expr": "up{job=\"cadvisor\",container=\"docker-gen-failover\"}", "refId": "A"}],
-            "title": "Docker Gen Failover Status",
+            "targets": [{"datasource": {"type": "prometheus", "uid": "victoriametrics_uid"}, "editorMode": "code", "expr": "up{job=\"cadvisor\",container=\"failover-agent\"}", "refId": "A"}],
+            "title": "Failover Agent Status",
             "type": "stat"
           },
           {
@@ -9843,7 +9843,7 @@ configs:
             "gridPos": {"h": 8, "w": 12, "x": 6, "y": 0},
             "id": 2,
             "options": {"legend": {"calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"hideZeros": false, "mode": "multi", "sort": "desc"}},
-            "targets": [{"datasource": {"type": "prometheus", "uid": "victoriametrics_uid"}, "editorMode": "code", "expr": "rate(container_cpu_usage_seconds_total{container=\"docker-gen-failover\"}[5m])", "legendFormat": "CPU Usage", "refId": "A"}],
+            "targets": [{"datasource": {"type": "prometheus", "uid": "victoriametrics_uid"}, "editorMode": "code", "expr": "rate(container_cpu_usage_seconds_total{container=\"failover-agent\"}[5m])", "legendFormat": "CPU Usage", "refId": "A"}],
             "title": "CPU Usage",
             "type": "timeseries"
           },
@@ -9853,7 +9853,7 @@ configs:
             "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
             "id": 3,
             "options": {"legend": {"calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"hideZeros": false, "mode": "multi", "sort": "desc"}},
-            "targets": [{"datasource": {"type": "prometheus", "uid": "victoriametrics_uid"}, "editorMode": "code", "expr": "container_memory_usage_bytes{container=\"docker-gen-failover\"}", "legendFormat": "Memory Usage", "refId": "A"}],
+            "targets": [{"datasource": {"type": "prometheus", "uid": "victoriametrics_uid"}, "editorMode": "code", "expr": "container_memory_usage_bytes{container=\"failover-agent\"}", "legendFormat": "Memory Usage", "refId": "A"}],
             "title": "Memory Usage",
             "type": "timeseries"
           },
@@ -9863,7 +9863,7 @@ configs:
             "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
             "id": 4,
             "options": {"legend": {"calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true}, "tooltip": {"hideZeros": false, "mode": "multi", "sort": "desc"}},
-            "targets": [{"datasource": {"type": "prometheus", "uid": "victoriametrics_uid"}, "editorMode": "code", "expr": "probe_success{instance=~\"https://docker-gen-failover.$DOMAIN\"}", "legendFormat": "Health Check", "refId": "A"}],
+            "targets": [{"datasource": {"type": "prometheus", "uid": "victoriametrics_uid"}, "editorMode": "code", "expr": "probe_success{instance=~\"https://failover-agent.$DOMAIN\"}", "legendFormat": "Health Check", "refId": "A"}],
             "title": "Health Check",
             "type": "timeseries"
           }
@@ -15981,7 +15981,7 @@ configs:
               target_label: "container_id"
             # Parse JSON logs
             - source_labels: ["__meta_docker_container_label_com_docker_compose_service"]
-              regex: "(watchtower|rabbitmq|stremio|telemetry-auth|jackett|prowlarr|aiostreams|stremthru|firecrawl|playwright-service|litellm|mcpo|gptr|open-webui|headscale|headscale-server|grafana|prometheus|victoriametrics|loki|promtail|traefik|crowdsec|flaresolverr|redis|mongodb|homepage|portainer|searxng|code-server|dozzle|bolabaden-nextjs|dockerproxy-ro|dockerproxy-rw|dns-server|biodecompwarehouse|rclone|rclone-init|autokuma|tinyauth|whoami|cloudflare-ddns|logrotate-traefik|nginx-traefik-extensions|warp-nat-gateway|warp_router|ip-checker-warp|docker-gen-failover|litellm-postgres|nuq-postgres|warp-net-init)"
+              regex: "(watchtower|rabbitmq|stremio|telemetry-auth|jackett|prowlarr|aiostreams|stremthru|firecrawl|playwright-service|litellm|mcpo|gptr|open-webui|headscale|headscale-server|grafana|prometheus|victoriametrics|loki|promtail|traefik|crowdsec|flaresolverr|redis|mongodb|homepage|portainer|searxng|code-server|dozzle|bolabaden-nextjs|dockerproxy-ro|dockerproxy-rw|dns-server|biodecompwarehouse|rclone|rclone-init|autokuma|tinyauth|whoami|cloudflare-ddns|logrotate-traefik|nginx-traefik-extensions|warp-nat-gateway|warp_router|ip-checker-warp|failover-agent|litellm-postgres|nuq-postgres|warp-net-init)"
               target_label: "service_type"
               replacement: "$$1"
           pipeline_stages:
@@ -16758,8 +16758,8 @@ services:
       - source: headscale-server-dashboard.json
         target: /var/lib/grafana/dashboards/infrastructure/headscale-server-dashboard.json
         mode: 0777
-      - source: docker-gen-failover-dashboard.json
-        target: /var/lib/grafana/dashboards/infrastructure/docker-gen-failover-dashboard.json
+      - source: failover-agent-dashboard.json
+        target: /var/lib/grafana/dashboards/infrastructure/failover-agent-dashboard.json
         mode: 0777
       - source: litellm-postgres-dashboard.json
         target: /var/lib/grafana/dashboards/infrastructure/litellm-postgres-dashboard.json
