@@ -36,9 +36,9 @@ runtime fact stops depending on remembered operator folklore.
 
 There is an even harsher standard underneath it:
 
-> can the documentation reconstruct the actual system the user is trying to
-> build, including the parts they have not named cleanly yet, without flattening
-> that system into a safer adjacent question?
+* **The Database Layer (Kine-Backended)**: CUE replaces heavy, distributed `etcd` arrays with Rancher's `kine`, translating the complete Kubernetes API state into a lightweight SQL transaction stream (stored natively in SQLite or a shared PostgreSQL database).
+* **The Execution Engine (`containerd` & `podman` Core)**: Rather than running containers via a bloated Docker daemon, CUE interacts directly with the standard `containerd` API via OCI containers, or mimics daemonless execution namespaces using `podman`. This ensures extremely low idle CPU and memory consumption.
+* **The State Synchronization Layer**: Utilizing our proven Go-based orchestration primitives from [Constellation Agent Architecture](infra/docs/ARCHITECTURE.md), CUE synchronizes service health and local node capabilities across the server cluster using Gossip protocols (HashiCorp Memberlist) and Raft consensus for atomic updates.
 
 That matters because the orchestration problem in this repo is not just a tool
 problem.
@@ -102,12 +102,14 @@ The following still do not count as a trustworthy blueprint in this repo:
 - one proposed architecture looking calmer than the current pain
 - a candidate seeming "balanced" without proving which burden it actually owns
 
-Those make the page easier to read.
-They do not yet make it a serious guide for promotion.
+As documented in [CUE Specification Extensions](CUE_SPEC_EXTENSIONS.md), CUE's true power lies in its **Recursive Capability**. We prioritize the work in existing `compose/` files and `docker-compose.yml` by treating them as the **Primary Declarative Manifest**.
 
 This page should therefore keep one more boundary explicit:
 
-- better orchestration synthesis is not orchestration progress
+1.  **Definitions remain human-readable.**
+2.  **No manual K8s/Nomad boilerplate is required.**
+3.  **The system remains portable.** (Standard Docker just ignores the `x-cue` keys).
+4.  **Implicit Hardware Intelligence.** Porting the logic from `infra/services.go`, CUE automatically adds GPU passthrough and transcoding optimizations based on service identity.
 
 The repo is now capable of cleaner synthesis than before.
 That should not be mistaken for one more hidden human SPOF having already
@@ -213,7 +215,7 @@ It needs a much harsher filter:
 > failure, or a real convergence failure, and which layer merely renames the
 > problem while charging more worldview tax?
 
-That is the only orchestration question worth keeping.
+To eliminate configuration drift, human error, and manual steps (detailed in [Docker Secrets Setup](DOCKER_SECRETS_README.md)), CUE introduces a fully integrated, zero-configuration bootstrap command.
 
 Another way to say the same thing is:
 
@@ -230,8 +232,7 @@ one blunt question:
 > what hidden burden moves out of the operator's head if this layer becomes
 > real?
 
-If the honest answer is "not much," the layer is still mostly theater for this
-repo.
+Server B automatically installs CUE, connects to the existing private VPN mesh over Tailscale, downloads system configuration secrets securely, and joins the cluster database. Within seconds, it begins running applications scheduled across the cluster, completely eliminating the manual VPS setups highlighted in `cloud-init-bootstrap.sh`.
 
 The main burdens to track are:
 
@@ -248,8 +249,10 @@ Not how mature the diagrams look afterward.
 
 The hidden corollary is important:
 
-if the truth still has to be privately carried, then the layer did not win just
-because it reduced the number of boxes or made the diagram look more modern.
+* **Role**: Standard border router, L7 load balancer, and TLS termination manager.
+* **Embedded Config**: Configured out-of-the-box with a dynamic Let's Encrypt Acme client integrated with the cluster's Cloudflare verification layer.
+* **Automatic Wildcards**: Routes external queries for `*.bolabaden.org` to local container endpoints, querying the cluster's internal state directory dynamically (replaces static files via Traefik.go's implementation in [Constellation Agent Configuration](infra/docs/CONFIGURATION.md)).
+* **L4 Routing**: Exposes dynamic HAProxy tunnels (modeled on `compose/docker-compose.l4-ingress.yml`) using Traefik's native TCP routers for database services.
 
 ## The dream this blueprint is trying to protect
 
@@ -318,8 +321,9 @@ Cloudflare and multi-record public entry matter because they allow:
 - more than one node to receive the first request
 - node loss without immediate public dead-end
 
-But the blueprint must not stop there.
-First-hop plurality is only the start of the story.
+* Move all 57+ docker-compose stacks (`docker-compose.yml`) to run natively on CUE.
+* Test geographical node outages, connection packet drops, and automatic failover times.
+* Release stable 1.0.0 distribution templates for the community.
 
 ### 3. Local-first service is part of the dream, not an optimization detail
 

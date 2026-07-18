@@ -22,6 +22,19 @@ It also does something harsher than a normal docs index is expected to do:
 - it keeps the available options under suspicion
 - it refuses to let planning coherence impersonate runtime proof
 
+
+| I want to… | Go to |
+|---|---|
+| Understand the overall roadmap | [Infrastructure Master Plan](INFRASTRUCTURE_MASTER_PLAN.md) |
+| Understand the orchestration direction | [Orchestration Overview](../orchestration/README.md) |
+| Deploy a new node or service | [Constellation Agent → Deployment Guide](../infra/docs/DEPLOYMENT_GUIDE.md) |
+| Configure secrets | [Docker Secrets Setup](../DOCKER_SECRETS_README.md) |
+| Troubleshoot a service | [Constellation Agent → Troubleshooting](../infra/docs/TROUBLESHOOTING.md) |
+| Understand HA patterns | [Stateful HA Plan](stateful_ha_plan.md) |
+| Run maintenance / clean up disk | [Maintenance Guide](MAINTENANCE.md) |
+| Set up telemetry / metrics | [OTLP Quickstart](OTLP_QUICKSTART.md) |
+| Contribute code or docs | [Contributing Guidelines](../CONTRIBUTING.md) |
+
 That is necessary because this repo has enough material to sound mature while
 still leaving the same hidden operator reconstruction burden in place.
 
@@ -74,10 +87,15 @@ That warning matters more than it usually would.
 Many files in this directory are detailed enough to sound like platform
 closure:
 
-- a master plan can sound like a control plane already exists
-- a failover plan can sound like failover already works
-- an orchestration comparison can sound like the future path is basically
-  chosen
+| Document | Status | Last Updated |
+|---|---|---|
+| [Infrastructure Master Plan](INFRASTRUCTURE_MASTER_PLAN.md) | Active | 2026-03-03 |
+| [Orchestration Overview](../orchestration/README.md) | Active | 2026-06-04 |
+| [Constellation Agent Docs](../infra/docs/README.md) | Active | Ongoing |
+| [Orchestration Research 2026](orchestration_research_2026.md) | Research/Reference | 2026 |
+| [Stateful HA Plan](stateful_ha_plan.md) | Planning | Active |
+| [Maintenance Guide](MAINTENANCE.md) | Active | Ongoing |
+| [KotorModSync Telemetry](KOTORMODSYNC_TELEMETRY_SETUP.md) | Active | Ongoing |
 
 The knowledgebase exists precisely to stop those upgrades.
 

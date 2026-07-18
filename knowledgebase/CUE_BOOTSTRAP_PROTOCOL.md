@@ -45,9 +45,12 @@ It is also not allowed to quietly upgrade:
 
 into:
 
-- one live bootstrap contract
-- one authoritative join pipeline
-- one system-owned answer to "this node is now safely in the cluster"
+1. **Global Registry Fetch**: Pulls the current `services.yaml` and global secrets.
+2. **Local Schema Provisioning**:
+   * Creates `/opt/cue/volumes` for local persistence.
+   * Sets up `/run/secrets` as a `tmpfs` (RAM) mount.
+3. **System Plane Deployment**: Automatically pulls and starts core system pods (Traefik, Dozzle, Watchtower) if they are designated for this node.
+4. **Recursive Spec Application**: CUE executes the `cue up` cycle on the `docker-compose.yml` manifest, applying all `x-cue` extensions (see [CUE Specification Extensions](CUE_SPEC_EXTENSIONS.md)) to the local containerd instance.
 
 If that upgrade happens, the page stops reconstructing the wound and starts
 describing a neighboring dream where the hard ownership problem is already
