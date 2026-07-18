@@ -1,0 +1,29 @@
+# CI-only lightweight probe (merged via compose -f on nodes).
+# Kept only on ci-node4 by shape-placement.sh.
+services:
+  ci-probe:
+    build:
+      context: arbitrary-scripts/failover-ci/compose
+      dockerfile: Dockerfile.ci-probe
+    image: local/failover-ci-probe:latest
+    container_name: ci-probe
+    hostname: ci-probe
+    networks:
+      - backend
+      - publicnet
+    expose:
+      - 80
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.ci-probe.service: ci-probe@docker
+      traefik.http.routers.ci-probe.rule: Host(`ci-probe.${DOMAIN}`) || Host(`ci-probe.${TS_HOSTNAME}.${DOMAIN}`)
+      traefik.http.services.ci-probe.loadBalancer.server.port: 80
+      failover.replica: "false"
+      deunhealth.restart.on.unhealthy: "true"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:80/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: always

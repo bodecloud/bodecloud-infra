@@ -1,0 +1,19 @@
+# CoreDNS for failover-ci — placeholders replaced by provision-coredns.sh
+# __DOMAIN__  e.g. ci.bolabaden.test
+# __GOOGLE_DNS_1__ __GOOGLE_DNS_2__
+
+.:53 {
+    errors
+    health :8080
+    ready
+    forward . __GOOGLE_DNS_1__ __GOOGLE_DNS_2__
+    cache 30
+    loop
+    reload
+}
+
+__DOMAIN__:53 {
+    errors
+    file /etc/coredns/zones/__DOMAIN__.db
+    cache 10
+}

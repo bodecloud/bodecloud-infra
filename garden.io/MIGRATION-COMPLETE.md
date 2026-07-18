@@ -1,8 +1,25 @@
 # Garden.io Migration - Complete ✅
 
+## Reality check
+
+This title is historical branch language, not authoritative current repo
+truth.
+
+The root `bolabaden-infra` runtime is still Compose-first.
+This file preserves one branch's migration claim and asset inventory, but it
+does **not** prove that the repository has fully migrated away from Compose or
+achieved verified 1:1 parity in a production-grade sense.
+
+For the evidence-led reading of this branch, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
 ## Summary
 
-All services from `docker-compose.yml` and included compose files have been successfully migrated to Garden.io with **1:1 parity**.
+This branch recorded a successful migration claim and attempted close parity
+with the Compose configuration.
+That should now be read as branch-local status language rather than proven
+repo-wide truth.
 
 **Migration Date:** $(date)
 
@@ -206,7 +223,8 @@ Key variables include:
 - **Profiles:** Some services use profiles (`extras`, `extra-addons`, `experimental`) to enable optional functionality
 - **Build Actions:** Services with custom Dockerfiles have separate Build actions for better caching
 - **Run Actions:** One-time initialization tasks use Run actions instead of Deploy
-- **Health Checks:** All services include comprehensive healthchecks matching docker-compose exactly
+- **Health Checks:** The branch aimed to carry over comprehensive healthchecks
+  closely matching docker-compose
 - **Secrets:** All secrets are mounted as read-only files from `${config-path}/secrets/`
 
 ## Next Steps
@@ -219,5 +237,7 @@ Key variables include:
 
 ## Migration Complete ✅
 
-All services have been successfully migrated with 1:1 parity to docker-compose.yml. The configuration is ready for deployment and testing.
-
+The branch concluded that services had been migrated with close parity to
+docker-compose.yml and were ready for further deployment and testing.
+That conclusion remains historical branch language, not the current repo-wide
+verdict.

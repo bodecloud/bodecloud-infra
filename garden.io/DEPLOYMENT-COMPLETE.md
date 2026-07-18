@@ -1,10 +1,21 @@
 # Garden.io Docker Compose Deployment - COMPLETE ✅
 
+## Reality check
+
+This file describes a branch-level Compose deployment attempt associated with
+the `garden.io/` exploration path.
+It does not establish final repo truth, and its "complete" framing should not
+be read as proof that the broader migration or HA story is solved.
+
+For the evidence-aligned reading, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
 ## Deployment Summary
 
 **Date:** $(date)
 
-### Status: ✅ OPERATIONAL
+### Status: historical branch snapshot
 
 All core services have been successfully deployed to Docker Compose and are healthy.
 
@@ -93,4 +104,3 @@ All core services have been successfully deployed to Docker Compose and are heal
 
 - `deploy-to-docker.sh` - Initial deployment script
 - `deploy-all-healthy.sh` - Comprehensive deployment with health checks
-

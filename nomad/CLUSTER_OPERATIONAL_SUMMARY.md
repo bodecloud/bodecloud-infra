@@ -1,7 +1,20 @@
 # Nomad Cluster - OPERATIONAL STATUS
 
+## Reality check
+
+This document captures a positive Nomad cluster snapshot.
+It should not be read as authoritative proof that the Nomad branch fully solved
+HA, SPOF removal, or repo-wide promotion questions.
+
+The same branch still contains documents showing quorum, membership, and Consul
+limitations that keep the final story open.
+
+For the evidence-led branch synthesis, see:
+
+- [`../knowledgebase/research/nomad-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/nomad-exploration-evidence.md)
+
 **Date**: 2025-12-23
-**Status**: ✅ **FULLY OPERATIONAL**
+**Status**: historical branch snapshot
 
 ## ✅ COMPLETED FIXES
 
@@ -90,4 +103,3 @@ The Nomad cluster is **fully operational** and ready for production use:
 - ✅ HA services running at capacity where possible
 
 **Next Step**: Get additional nodes to join for full HA across all services.
-

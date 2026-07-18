@@ -1,5 +1,77 @@
 ### Stateful HA (Zero-SPOF) Plan
 
+This page is a planning document.
+It describes the minimum kinds of topology truth the repo would need before it
+could honestly claim low-SPOF behavior for stateful systems.
+
+It is not proof that the current runtime already provides this.
+
+## What this page is and is not allowed to prove
+
+This legacy planning page is allowed to:
+
+- explain why stateful HA is a different category from HTTP fallback
+- describe the minimum replication, quorum, and storage truths the repo would
+  need before using stronger HA language
+- preserve the user's refusal to call reachability alone stateful resilience
+
+This page is not allowed to:
+
+- imply that current Compose fragments already deliver zero-SPOF stateful
+  behavior
+- treat L4 routing experiments as proof of datastore correctness
+- let topology plausibility masquerade as replicated-write safety
+- narrate Redis, Mongo, or Postgres plans as if the underlying replication
+  contracts are already proven in this repo
+
+## What still does not count as stateful HA progress here
+
+The following still do not count as honest stateful progress:
+
+- moving a container between nodes
+- routing TCP to a reachable backend
+- placing a proxy in front of a single datastore
+- having a replication topology that has not been drilled under failure
+- making node-local volumes feel interchangeable through documentation tone
+
+Stateful HA only becomes real when the write path, failover path, and data
+survival path are all owned strongly enough to survive a bad day.
+
+## Required proof packet before stronger language
+
+Any future Redis, MongoDB, Postgres, RabbitMQ, Headscale, Qdrant, or
+filesystem-backed claim needs a packet like this before the docs should call it
+statefully resilient:
+
+```yaml
+stateful_authority_packet:
+  claim_tested: "stateful authority under failure"
+  service: "<one exact service>"
+  authority_before: "<writer/leader/source of truth before failure>"
+  failure_introduced: "<exact node, process, disk, network, or backend failure>"
+  authority_after: "<writer/leader/source of truth after failure>"
+  client_observation: "<what clients saw before/during/after>"
+  rediscovery_mechanism: "<DNS, seed list, Sentinel, driver, registry, manual, none>"
+  fencing_or_split_brain_guard: "<mechanism, or none>"
+  storage_truth: "<replication, backup, snapshot, shared storage, singular disk>"
+  operator_intervention_required: true
+  result: "pass | fail | honest-singularity | inconclusive"
+  what_this_proves: "<one narrow sentence>"
+  what_is_still_forbidden: "<larger HA sentence still illegal>"
+```
+
+This page is allowed to propose Redis Sentinel, MongoDB Replica Sets, Patroni,
+DRBD, CephFS, or similar options.
+It is not allowed to let those nouns stand in for a recorded authority packet.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that this page correctly identifies the
+minimum classes of truth required before the repo can stop lying about
+stateful resilience. It remains a plan. It does not prove that the current
+priority implementation already owns replicated datastore truth, quorum
+survival, or shared-volume correctness.
+
 You can’t get “zero SPOF including stateful services” by *only* moving containers between nodes.
 
 Stateful HA requires **replication + quorum** (or replicated block storage) so that losing one node does not lose the data and does not stop writes.
@@ -10,16 +82,23 @@ This document is the pragmatic plan for this repo.
 
 ### 0) Ingress reality check (TCP vs hostname)
 
-- **HTTP(S)** can be routed by hostname (Host header/SNI) and we already generate dynamic failover config for Traefik.
+- **HTTP(S)** can be routed by hostname (Host header/SNI), and the repo already
+  experiments with dynamic Traefik failover config generation.
 - **Plain TCP** (like `redis://…`) cannot be routed by hostname unless you terminate TLS and use SNI.
   - So for TCP we load-balance by **port** (ex: 6379) and rely on DNS/LB to land you on any node.
   - See `scripts/osvc_l4_sync.py` + `compose/docker-compose.l4-ingress.yml`.
+
+That does **not** mean the repo already has full TCP failover correctness.
+It means the repo already knows that plain TCP and stateful HA cannot be faked
+with the same story used for HTTP.
 
 ---
 
 ### 1) Redis (recommendation: Redis Sentinel + HAProxy master routing)
 
-**Goal**: `redis://redis.<node>.bolabaden.org:6379` and `redis://redis.bolabaden.org:6379` always connect to the *current master*.
+**Goal**: `redis://redis.<node>.bolabaden.org:6379` and
+`redis://redis.bolabaden.org:6379` connect to the *current master* once this
+topology exists and is actually verified.
 
 Minimum topology (3 nodes):
 - 1 Redis master
@@ -44,6 +123,10 @@ Minimum topology (3 nodes):
 
 Client behavior:
 - Drivers handle failover if they can see multiple members.
+
+That conditional matters.
+Mongo resilience is not created by putting Traefik or DNS in front of a single
+Mongo container.
 
 Two ways to make it “one hostname”:
 - **Best**: Mongo SRV records (`mongodb+srv://…`) with records generated from cluster membership.
@@ -78,6 +161,11 @@ For this stack, the minimal workable path is:
 - Make only the truly critical datastores replicated (Redis/Mongo).
 - Promote shared volumes later once ingress + scheduling are stable.
 
+This is one of the most important anti-fantasy sections in the repo.
+
+If volumes stay node-local, then some forms of node interchangeability are
+still impossible no matter how polished the ingress story sounds.
+
 ---
 
 ### 5) What we will do next in this repo
@@ -87,5 +175,3 @@ For this stack, the minimal workable path is:
   - per-node wildcard records (`*.node.domain`)
   - optional global wildcard (`*.domain`) via LB/VIP
   - optional Mongo SRV records for replica set discovery
-
-

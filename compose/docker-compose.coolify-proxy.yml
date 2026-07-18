@@ -379,61 +379,6 @@ configs:
         level: full
         listen_addr: 0.0.0.0
         listen_port: ${PROMETHEUS_PORT:-6060}
-  traefik-failover-dynamic.conf.tmpl:
-    content: |
-      # yaml-language-server: $$schema=https://www.schemastore.org/traefik-v3-file-provider.json
-      http:
-        routers:
-      {{- range $$c := . }}
-        {{- if eq (index $$c.Labels "traefik.enable") "true" }}
-          {{- $$name := trimPrefix "/" $$c.Name }}
-          {{ $$name }}-with-failover:
-            service: {{ $$name }}-with-failover@file
-            rule: Host(`{{ $$name }}.$DOMAIN`)
-          {{ $$name }}-direct:
-            service: {{ $$name }}-direct@file
-            rule: Host(`{{ $$name }}.$TS_HOSTNAME.$DOMAIN`)
-        {{- end }}
-      {{- end }}
-
-        services:
-      {{- range $$c := . }}
-        {{- if eq (index $$c.Labels "traefik.enable") "true" }}
-          {{- $$name := trimPrefix "/" $$c.Name }}
-          {{- /* Get healthcheck path from container labels */}}
-          {{- $$healthPath := "/" }}
-          {{- if index $$c.Labels "kuma.healthcheck.path" }}
-            {{- $$healthPath = index $$c.Labels "kuma.healthcheck.path" }}
-          {{- end }}
-
-          {{- /* Get healthcheck interval from container labels */}}
-          {{- $$healthInterval := "5m" }}
-          {{- if index $$c.Labels "kuma.healthcheck.interval" }}
-            {{- $$healthInterval = index $$c.Labels "kuma.healthcheck.interval" }}
-          {{- end }}
-
-          {{- /* Get healthcheck timeout from container labels */}}
-          {{- $$healthTimeout := "15s" }}
-          {{- if index $$c.Labels "kuma.healthcheck.timeout" }}
-            {{- $$healthTimeout = index $$c.Labels "kuma.healthcheck.timeout" }}
-          {{- end }}
-
-          {{ $$name }}-direct:
-            loadBalancer:
-              servers:
-                - url: http://{{ $$name }}:{{ (index $$c.Addresses 0).Port }}
-
-          {{ $$name }}-with-failover:
-            loadBalancer:
-              servers:
-                - url: http://{{ $$name }}:{{ (index $$c.Addresses 0).Port }}
-              healthCheck:
-                path: "{{ $$healthPath }}"
-                interval: "{{ $$healthInterval }}"
-                timeout: "{{ $$healthTimeout }}"
-        {{- end }}
-      {{- end }}
-
   traefik-dynamic.yaml:
     content: |
       # yaml-language-server: $$schema=https://www.schemastore.org/traefik-v3-file-provider.json
@@ -1203,37 +1148,9 @@ services:
       kuma.whoami.http.url: https://whoami.$DOMAIN
       kuma.whoami.http.interval: 60
     restart: always
-  docker-gen-failover:
-    image: docker.io/nginxproxy/docker-gen
-    container_name: docker-gen-failover
-    networks:
-      - backend
-      - default
-    configs:
-      - source: traefik-failover-dynamic.conf.tmpl
-        target: /templates/traefik-failover-dynamic.conf.tmpl
-        mode: 0400
-    volumes:
-    #  - ${DOCKER_SOCKET:-/var/run/docker.sock}:/tmp/docker.sock:ro
-      - ${CONFIG_PATH:-./volumes}/traefik/dynamic:/traefik/dynamic
-    command: |
-      -endpoint tcp://dockerproxy-rw:2375
-      -only-exposed
-      -include-stopped
-      -event-filter event=start
-      -event-filter event=create
-      -event-filter event=expose
-      -event-filter event=update
-      -event-filter event=connect
-      -event-filter label=traefik.enable=true
-      -container-filter label=traefik.enable=true
-      -watch /templates/traefik-failover-dynamic.conf.tmpl /traefik/dynamic/failover-fallbacks.yaml
-    restart: no
   logrotate-traefik:
     # 🔹🔹 Logrotate for Traefik logs 🔹🔹
-    build:
-      context: ${SRC_PATH:-./projects}/reverse_proxy/logrotate-traefik
-      dockerfile: Dockerfile
+    build: ${SRC_PATH:-./projects}/reverse_proxy/logrotate-traefik
     image: docker.io/bolabaden/logrotate-traefik
     container_name: logrotate-traefik
     network_mode: none

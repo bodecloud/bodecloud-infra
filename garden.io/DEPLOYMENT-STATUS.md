@@ -1,8 +1,19 @@
 # Garden.io Deployment Status
 
+## Reality check
+
+This document is useful as a deployment-progress snapshot for the `garden.io/`
+exploration branch.
+It is not authoritative current repo status, and it does not override the
+Compose-first root runtime as the priority implementation.
+
+For the current evidence-led interpretation of this branch, see:
+
+- [`../knowledgebase/research/garden-k3s-exploration-evidence.md`](/run/media/brunner56/MyBook/Workspaces/bolabaden-infra/knowledgebase/research/garden-k3s-exploration-evidence.md)
+
 ## Current Deployment Phase: Docker Compose Testing
 
-**Status:** ✅ Core services deployed and healthy
+**Status:** historical branch snapshot
 
 ### Deployment Progress
 
@@ -60,4 +71,3 @@ Services are being deployed in dependency order:
 - All services have comprehensive healthchecks
 - Services are verified healthy before proceeding
 - Kubernetes deployment will only occur after full Docker Compose validation
-

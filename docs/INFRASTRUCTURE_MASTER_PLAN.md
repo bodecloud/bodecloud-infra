@@ -3,7 +3,16 @@
 > **Version**: 1.0.0\
 > **Date**: 2026-03-03\
 > **Status**: Design & Planning\
-> **Goal**: Turn a multi-VPS Docker Compose stack into a fully automated, self-healing, horizontally-scalable personal cloud that anyone can template for their own domain.
+> **Goal**: Define one planning path for turning a multi-VPS Docker Compose
+> stack into something more automated, less operator-memory-dependent, and more
+> resilient at request time, without pretending that this planning document is
+> itself proof that the current runtime already behaves that way.
+
+> **Important reading boundary**: this file is a planning artifact, not proof
+> that the runtime already behaves this way. For the current evidence-first
+> reading, start with [`../knowledgebase/index.md`](../knowledgebase/index.md)
+> and especially the architecture pages under
+> [`../knowledgebase/architecture/`](../knowledgebase/architecture/).
 
 ***
 
@@ -35,20 +44,181 @@ TOC convention: top-level entries use numbered list items, nested entries use bu
 
 ## 1. Executive Summary
 
-Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compose.yml` and `cloud-init-bootstrap.sh` across multiple VPSes. Each node can independently serve requests or proxy to peers via Traefik. Cloudflare DNS with multiple A records provides node-level failover.
+## What this page is and is not allowed to prove
 
-**This plan addresses 11 capability gaps** to transform the stack from a manually-synchronized multi-VPS setup into a fully automated, self-healing, horizontally-scalable platform.
+This legacy planning page is allowed to:
+
+- preserve the full pressure map behind the repo's multi-node no-Swarm dream
+- describe which hidden burdens each proposed module is trying to remove
+- show how the repo was already converging on distributed truth as the real
+  missing layer
+- remain emotionally accurate about why the user is dissatisfied with fake
+  options
+
+This page is not allowed to:
+
+- imply the current tracked root runtime already owns the planned truth
+  surfaces
+- let coherence, completeness, or sequence masquerade as live capability
+- describe wrong-node recovery, peer forwarding, or service failover as if
+  they are already generally proven
+- turn the user's wound into a calmer generic roadmap about "modernizing the
+  stack"
+
+## What still does not count as master-plan progress here
+
+The following still do not count as meaningful completion signals:
+
+- a module being named convincingly
+- a deploy or sync flow sounding operationally plausible
+- a future control surface looking cleaner than the current one
+- a roadmap feeling emotionally relieving to read
+- a plan making the repo sound more adult, more clustered, or more
+  orchestrated
+
+Those are signs that the repo is thinking harder.
+They are not proof that the wrong-node humiliation, hidden placement memory,
+or fake failover burden have actually moved.
+
+## Strongest honest current answer
+
+The strongest honest current answer is that this file remains one of the best
+legacy pressure maps in the repo. It clearly identifies the missing truth
+surfaces the user actually cares about, but it is still a planning artifact.
+It does not prove that the priority implementation centered on the root
+`docker-compose.yml` already owns those truths directly.
+
+Bolabaden is a multi-node Docker infrastructure whose **intended direction** is
+to let multiple Compose-managed VPS nodes behave more like one resilient
+personal cloud without defaulting to Kubernetes or Docker Swarm.
+
+This file is useful only if it is read with the right amount of skepticism.
+
+It is not the repo's final answer.
+It is one of the places where the repo argues with itself about what kind of
+extra control surface might actually earn the right to exist.
+
+That matters because the user is not asking for a plan that sounds complete.
+The user is asking for the smallest honest path out of fake HA, wrong-node
+humiliation, and sacred remembered placement.
+
+So this plan should be read as:
+
+- a serious pressure map
+- a serious promotion candidate list
+- not a claim that the repo has already crossed those thresholds
+
+It should also be read as a defense against fake-option drift.
+
+This repo is not short on products, tutorials, or cluster stories.
+It is short on options that still feel real after the request lands on the
+wrong node, the local backend disappears, or the operator has to answer
+"what actually runs where right now?" without reconstructing it from memory.
+
+That means the plan is not just a to-do list.
+It is also an anti-self-deception device.
+
+Each module only matters if it changes where the truth actually lives.
+If a module merely improves the story around the same private operator burden,
+it is not a real step toward the user's dream.
+
+### What this plan is actually trying to make feel normal
+
+This plan should keep one concrete user-facing scene in view:
+
+1. a request reaches a healthy public node
+2. that node does not happen to host the target service locally
+3. the node still knows what the request means
+4. it can still preserve the request by handing it to the right healthy peer
+5. the operator does not have to mentally reconstruct the answer first
+
+If a module does not make that scene more believable, it is probably not
+attacking the central pain yet.
+
+That is also why this plan should not quietly substitute neighboring goals such
+as:
+
+- more automation
+- more clustering
+- better deployment hygiene
+- cleaner diagrams
+
+Those may still matter.
+They are not the same thing as removing the humiliation of wrong-node entry,
+private placement knowledge, and fake failover confidence.
+
+The current live repo already proves:
+
+- a serious root `docker-compose.yml` entrypoint
+- modular `compose/` includes
+- a substantial Traefik/CrowdSec/auth edge layer
+- Cloudflare DNS participation
+- strong planning pressure toward any-node entry and peer-aware routing
+
+The current live repo does **not** yet prove:
+
+- universal wrong-node success
+- a live tracked root `services.yaml` current-state registry
+- trustworthy route persistence under local backend failure
+- automated service failover between nodes
+- stateful zero-SPOF correctness merely because a service is present
+
+This plan exists because those gaps are still real.
+
+This plan groups the stack's known pressure into 11 capability gaps.
+That does **not** mean every gap is equally mature, equally urgent, or equally
+deserving of a heavyweight solution.
+
+It means the repo already knows many of the places where hidden operator labor
+is still substituting for explicit shared truth.
+
+That is the more useful reading of "master plan" here.
+
+It does not mean:
+
+- the repo already picked its final platform
+- the modules all deserve implementation as written
+- each named gap implies a separate product or subsystem should exist
+
+It means the repo can at least name where the hidden labor is still leaking
+through.
 
 ### Core Principles
 
 | Principle | Description |
 |-----------|-------------|
-| **No Orchestrator** | No Kubernetes, no Docker Swarm. Automation via lightweight agents. |
-| **Git as Source of Truth** | All config lives in the bolabaden-infra repo. Changes flow through git. |
+| **No Orchestrator by Default** | No Kubernetes or Docker Swarm by default. Stronger control layers must earn themselves by removing a concrete pain. |
+| **Git as Authoring Source** | Repo files are authoritative for authored intent, but git history is not the same thing as current runtime truth. |
 | **Idempotent Everything** | Every script, every sync, every deploy can run N times safely. |
 | **Headscale Mesh** | All nodes communicate via Tailscale/Headscale private network. |
 | **Inline Configs** | Docker Compose configs are inline YAML, not external files. |
-| **Template-Ready** | Anyone can fork, set their domain/secrets, and deploy their own cloud. |
+| **Current-State Truth Matters** | Plans and templates must not outrun the question of what nodes actually know at request time. |
+| **Template-Ready Later** | Forkability matters, but only after the real control and proof boundaries are understood honestly. |
+
+### How to read the rest of this file without lying to yourself
+
+For every module below, keep four questions attached:
+
+1. what burden is this module actually trying to remove?
+2. what truth would the system own directly if it worked?
+3. what truth would still remain socially reconstructed by the operator?
+4. what proof would be required before the module counts as more than a nice
+   plan?
+
+If those questions disappear, the plan can start sounding complete simply
+because it is detailed.
+That is exactly the failure mode this repo keeps trying to escape.
+
+It is also why the plan has to preserve the user's frustration instead of
+editing it out for tone.
+The frustration is not rhetorical excess.
+It is accurate feedback about a category of infra advice that keeps sounding
+helpful while reducing real options back to:
+
+- private human glue
+- or a large orchestrator worldview
+
+If the plan forgets that accusation, it becomes more readable and less honest.
 
 ***
 
@@ -63,7 +233,7 @@ Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compo
 | Modular compose includes | ✅ 7 includes | `compose/docker-compose.*.yml` |
 | Traefik v3 reverse proxy | ✅ With CrowdSec, ACME | `compose/docker-compose.coolify-proxy.yml` |
 | Headscale | ✅ Single-node | `compose/docker-compose.headscale.yml` |
-| Cloudflare DDNS | ✅ Single-record | `compose/docker-compose.coolify-proxy.yml` (favonia/cloudflare-ddns) |
+| Cloudflare DDNS | ✅ Present, but not yet the same thing as full multi-node request failover | `compose/docker-compose.coolify-proxy.yml` (favonia/cloudflare-ddns) |
 | CrowdSec WAF | ✅ Working | Bouncer plugin + LAPI |
 | TinyAuth | ✅ OAuth (Google/GitHub) | Forward auth middleware |
 | nginx-traefik-extensions | ✅ API key + IP whitelist + TinyAuth fallback | Nginx forward auth |
@@ -73,7 +243,7 @@ Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compo
 | Nomad/Consul | ⚠️ Installed by bootstrap, not integrated | Bootstrap installs binaries |
 | Secret sync | ❌ Manual | `.secrets` file, `generate-secrets.sh` |
 | Compose sync | ❌ Manual git pull | Bootstrap does `git pull --ff-only` |
-| Service failover | ❌ Not automated | Only Cloudflare DNS failover |
+| Service failover | ❌ Not automated | Cloudflare DNS can shift entry, but service-level peer failover is not proven |
 
 ### Identified Bugs
 
@@ -87,6 +257,25 @@ Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compo
 ## 3. Architecture Overview
 
 ### Target Architecture
+
+This diagram is an intended target shape, not a statement that the current
+tracked runtime already behaves this way end to end.
+
+It is also not automatically a real option just because the diagram is
+internally coherent.
+
+One of the recurring traps in this repo is that a future can look elegant long
+before it has earned the right to replace the current burden with something
+better.
+
+So every box in this section should be read with a second question attached:
+
+> which hidden human burden would this actually remove, and which one would it
+> still leave socially reconstructed?
+
+If the answer is "most of the hard parts would still be socially
+reconstructed," then the box is still mostly architecture theater no matter
+how coherent the drawing looks.
 
 ```
                     ┌─────────────────────────────────────┐
@@ -118,6 +307,10 @@ Bolabaden is a multi-node Docker infrastructure that runs the same `docker-compo
 
 ### DNS Routing Pattern
 
+This section describes the naming and routing pattern the repo wants.
+It should not be read as proof that every global hostname already preserves
+wrong-node success today.
+
 ```
 bolabaden.org                  → All VPS IPs (round-robin)
 *.bolabaden.org                → All VPS IPs (round-robin)
@@ -128,6 +321,10 @@ grafana.vractormania.bolabaden.org   → VPS1 only (grafana on vractormania)
 ```
 
 ### Internal DNS (Tailscale/Headscale MagicDNS)
+
+This is also target-shape material.
+It describes how private naming could support the no-cluster, any-node dream
+more coherently once the missing placement and failover truth layers exist.
 
 ```
 vractormania.myscale.bolabaden.org                → Tailscale IP of VPS1
@@ -148,7 +345,8 @@ docker run --rm -v "$PWD:/docs" -w /docs squidfunk/mkdocs-material:latest build 
 
 Expected behavior:
 
-* `docker compose config --quiet` may print environment-variable warnings but should not fail.
+* `docker compose config --quiet` may print environment-variable warnings and
+  may still require a prepared env/secrets surface depending on the machine.
 * Strict MkDocs builds should complete with `Documentation built`.
 * The Material image may print an upstream warning banner that is informational when strict build still succeeds.
 
@@ -448,6 +646,20 @@ See the [Failover Agent Brainstorm](brainstorms/20260604-failover-agent-explorat
 
 When a service/container fails on one node, there's no automatic failover to another node. The `docker-gen-failover` approach has a critical bug: it deletes Traefik routes when containers stop.
 
+That bug matters because it is not just one implementation defect.
+It is the exact shape of the user's complaint:
+
+- the system sounds peer-aware
+- the route looks present while the happy path is intact
+- the fallback semantics evaporate at the moment they are actually needed
+
+If this module is narrated as ordinary service-healing work, it becomes much
+smaller than the pressure it is really carrying.
+It is one of the main places where the repo is trying to answer:
+
+> can the first healthy node preserve the meaning of the request without the
+> operator quietly preserving the architecture first?
+
 ### Current Implementation (Broken)
 
 ```yaml
@@ -497,6 +709,21 @@ docker-gen-failover:
 ```
 
 #### Service Registry (`services.yaml`)
+
+This registry idea only matters if it stops the operator from being the hidden
+registry.
+
+If `services.yaml` becomes:
+
+- stale enough to require human override
+- partial enough to require human fusion with other signals
+- trusted only because an expert operator already knows the answer
+
+then the repo has reintroduced the same sacred human control plane in a more
+documented format.
+
+So this section should be read as a truth-ownership requirement, not merely as
+"yet another config file we should probably have."
 
 ```yaml
 # Distributed to all nodes via sync-agent
@@ -567,6 +794,17 @@ Traefik's built-in health checking will automatically route around failed backen
 
 The weighting above keeps local service preference while still distributing failover traffic across healthy peers.
 
+But this is still not the full answer by itself.
+Even a very good Traefik dynamic configuration can still leave unanswered:
+
+- who decides which peer is semantically eligible
+- which runtime assumptions still have to match before peer pickup is honest
+- whether the route remains trustworthy after the registry drifts
+
+This module should therefore avoid narrating Traefik as the whole solution.
+Traefik is part of the preservation surface.
+It is not automatically the owner of every truth required for preservation.
+
 #### Failover Sequence
 
 ```
@@ -591,6 +829,21 @@ Container fails on Node A:
          └── Traefik health check detects healthy
          └── Traffic gradually returns to Node A
 ```
+
+This sequence should be read as a target discipline, not as proof that the
+repo already owns this story.
+
+What would make it real is not that the steps are plausible.
+What would make it real is that the operator no longer has to privately answer
+questions like:
+
+- which peer is safe to pick up this service right now
+- whether that peer has matching auth, env, and middleware assumptions
+- whether the fallback route survived long enough to matter
+- whether success now means semantic continuity or merely reachability
+
+If those questions still live outside the system, then this sequence is still a
+design story about future relief, not current relief itself.
 
 ***
 

@@ -1,0 +1,63 @@
+# Failover agent — registry-backed Traefik failover (Compose-first Track 2)
+# Replaces docker-gen-failover (which deletes routes on container crash/stop).
+#
+# OWNERSHIP: this service is the sole writer of
+#   ${CONFIG_PATH}/traefik/dynamic/failover-fallbacks.yaml
+# Do NOT run scripts/osvc_ingress_sync.py against the same path on this node.
+#
+# Host networking is required so peer inventory / replica ensure can reach
+# Tailscale-resolved peer Docker APIs (FAILOVER_PEER_HOSTS:2375).
+services:
+  failover-agent:
+    build:
+      context: ${ROOT_PATH:-.}/infra
+      dockerfile: Dockerfile.failover-agent
+    image: docker.io/bolabaden/failover-agent:latest
+    container_name: failover-agent
+    hostname: failover-agent
+    # Image USER is nobody; docker.sock is root:docker 660 (esp. DinD)
+    user: "0:0"
+    network_mode: host
+    volumes:
+      - ${CONFIG_PATH:-./volumes}/traefik/dynamic:/traefik/dynamic
+      - ${CONFIG_PATH:-./volumes}/placement:/placement
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      DOMAIN: ${DOMAIN:?}
+      TS_HOSTNAME: ${TS_HOSTNAME:?}
+      CONFIG_PATH: /placement
+      PLACEMENT_REGISTRY: /placement/services.yaml
+      FAILOVER_TRAEFIK_OUTPUT: /traefik/dynamic/failover-fallbacks.yaml
+      FAILOVER_ENABLED: ${FAILOVER_ENABLED:-true}
+      FAILOVER_MAIN_HOST: ${FAILOVER_MAIN_HOST:-micklethefickle}
+      FAILOVER_PEER_HOSTS: ${FAILOVER_PEER_HOSTS:-}
+      FAILOVER_REMOTE_DOCKER_PORT: ${FAILOVER_REMOTE_DOCKER_PORT:-2375}
+      FAILOVER_REMOTE_DOCKER_TLS: ${FAILOVER_REMOTE_DOCKER_TLS:-false}
+      FAILOVER_REPLICA_ENSURE: ${FAILOVER_REPLICA_ENSURE:-false}
+      FAILOVER_MAX_LOCAL_RESTARTS: ${FAILOVER_MAX_LOCAL_RESTARTS:-3}
+      FAILOVER_RECONCILE_SECONDS: ${FAILOVER_RECONCILE_SECONDS:-30}
+      FAILOVER_STOP_REPLICAS_ON_INTENTIONAL_STOP: ${FAILOVER_STOP_REPLICAS_ON_INTENTIONAL_STOP:-false}
+      FAILOVER_HEALTH_ADDR: ":8082"
+      DOCKER_HOST: unix:///var/run/docker.sock
+    labels:
+      deunhealth.restart.on.unhealthy: "true"
+      homepage.group: Infrastructure
+      homepage.name: Failover Agent
+      homepage.icon: mdi-backup-restore
+      homepage.href: https://failover-agent.${DOMAIN}
+      homepage.description: Placement registry + Traefik peer failover (replaces docker-gen)
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget --no-verbose --tries=1 --spider http://127.0.0.1:8082/healthz || exit 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: always
+    cpus: 0.5
+    mem_limit: 256M
+    mem_reservation: 64M
