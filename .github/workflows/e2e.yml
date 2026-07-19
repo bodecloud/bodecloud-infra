@@ -31,7 +31,7 @@ jobs:
 
       - name: Set up Node
         if: steps.check.outputs.ready == 'true'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
 
@@ -129,7 +129,7 @@ jobs:
 
       - name: Set up Node
         if: steps.check.outputs.ready == 'true'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
 
