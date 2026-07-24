@@ -304,11 +304,7 @@ use_ci_minimal() {
 # Echo compose -f args (relative to VM_REPO_PATH)
 compose_f_args() {
   if use_ci_minimal; then
-    local args="-f compose/docker-compose.ci-stack.yml -f compose/docker-compose.ci-probes.yml -f compose/docker-compose.ci-tier-a.yml -f compose/docker-compose.ci-extra-hosts.yml"
-    if [[ "$(backend)" == "dind" ]]; then
-      args+=" -f compose/docker-compose.ci-dind-fixes.yml"
-    fi
-    echo "$args"
+    echo "-f compose/docker-compose.ci-stack.yml -f compose/docker-compose.ci-probes.yml -f compose/docker-compose.ci-tier-a.yml -f compose/docker-compose.ci-extra-hosts.yml"
   else
     local args="-f docker-compose.yml -f compose/docker-compose.ci-probes.yml -f compose/docker-compose.ci-extra-hosts.yml"
     if [[ "$(backend)" == "dind" ]]; then
