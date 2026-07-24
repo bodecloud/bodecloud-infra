@@ -14,9 +14,9 @@ configs:
       server_url: http://${EXTERNAL_IP:?}:8081
       listen_addr: 0.0.0.0:8081
       metrics_listen_addr: 127.0.0.1:8080
-      grpc_listen_addr: 0.0.0.0:50443
-      grpc_allow_insecure: true
-      private_key_path: /var/lib/headscale/private.key
+      trusted_proxies:
+        - 127.0.0.1/32
+        - 172.16.0.0/12
       noise:
         private_key_path: /var/lib/headscale/noise_private.key
       prefixes:
@@ -26,11 +26,16 @@ configs:
       derp:
         server:
           enabled: false
+          verify_clients: true
         urls:
           - https://controlplane.tailscale.com/derpmap/default
         paths: []
         auto_update_enabled: true
-        update_frequency: 24h
+        update_frequency: 3h
+      node:
+        expiry: 0
+        ephemeral:
+          inactivity_timeout: 30m
       database:
         type: sqlite
         sqlite:
@@ -38,15 +43,21 @@ configs:
       dns:
         magic_dns: true
         base_domain: myscale.${DOMAIN}
+        override_local_dns: true
         nameservers:
           global:
             - 1.1.1.1
             - 8.8.8.8
+          split: {}
       unix_socket: /var/run/headscale/headscale.sock
       unix_socket_permission: "0770"
       log:
         level: info
       logtail:
+        enabled: false
+      taildrop:
+        enabled: true
+      auto_update:
         enabled: false
   headscale-ci-derp:
     content: |

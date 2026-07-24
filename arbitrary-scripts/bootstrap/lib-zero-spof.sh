@@ -27,6 +27,8 @@ ZERO_SPOF_DEFAULT_SERVICES=(
   watchtower
   cloudflare-ddns
   failover-agent
+  headscale-server
+  headscale
 )
 
 zero_spof_log() {
