@@ -14,7 +14,12 @@ FAIL=0
 pass() { log "PASS: $*"; }
 fail() { log "FAIL: $*"; FAIL=1; }
 
-NODE_IPS_JSON="$(cat "${STATE_DIR}/node-ips.json")"
+NODE_IPS_FIXTURE='{"ci-node1":"10.0.3.2","ci-node2":"10.0.3.3","ci-node3":"10.0.3.4","ci-node4":"10.0.3.5"}'
+if [[ -f "${STATE_DIR}/node-ips.json" ]]; then
+  NODE_IPS_JSON="$(cat "${STATE_DIR}/node-ips.json")"
+else
+  NODE_IPS_JSON="$NODE_IPS_FIXTURE"
+fi
 [[ -f "${STATE_DIR}/coredns-ips.txt" ]] && CD1="$(head -1 "${STATE_DIR}/coredns-ips.txt")" || CD1=""
 
 OUT="$(python3 "$SYNC" --dry-run --domain "${DOMAIN}" --names "whoami.${DOMAIN}" --node-ips "$NODE_IPS_JSON")"
@@ -57,7 +62,7 @@ fi
 if [[ -n "${CF_API_TOKEN:-}" && -n "${CF_ZONE_ID:-}" && "${CF_LIVE_MULTI_DDNS:-}" == "1" ]]; then
   log "live CF upsert under ci-multi.${DOMAIN}"
   python3 "$SYNC" --domain "${DOMAIN}" --names "ci-multi.${DOMAIN}" \
-    --node-ips "$FIXTURE" --token "$CF_API_TOKEN" --zone-id "$CF_ZONE_ID" \
+    --node-ips "$NODE_IPS_JSON" --token "$CF_API_TOKEN" --zone-id "$CF_ZONE_ID" \
     && pass "live multi-A upsert" || fail "live upsert failed"
 else
   log "skip live CF (set CF_LIVE_MULTI_DDNS=1 with token+zone to enable)"
