@@ -166,10 +166,23 @@ vm_transfer() {
   esac
 }
 
+# Ensure image exists on host Docker (GHA DinD seed path; avoids Hub pull inside nested docker).
+ensure_host_image() {
+  local ref="$1" cand
+  for cand in "$ref" "docker.io/${ref}" "${ref#docker.io/}"; do
+    if docker image inspect "$cand" >/dev/null 2>&1; then
+      return 0
+    fi
+  done
+  log "pulling $ref on host for DinD seed"
+  docker pull "$ref"
+}
+
 # Load an image from the host Docker into a DinD node's inner docker (Hub 429 workaround).
 dind_seed_image_from_host() {
   local node="$1" ref="$2"
   [[ "$(backend)" == "dind" ]] || return 0
+  ensure_host_image "$ref" || return 1
   local cand ref_found=""
   for cand in "$ref" "docker.io/${ref}" "${ref#docker.io/}"; do
     if docker image inspect "$cand" >/dev/null 2>&1; then

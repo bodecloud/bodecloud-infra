@@ -81,6 +81,8 @@ jobs:
         run: |
           mkdir -p ~/.docker
           echo '{}' > ~/.docker/config.json
+      - name: Pre-pull host seed images for DinD
+        run: docker pull coredns/coredns:1.11.3
       - name: Run DinD mesh prove (HA-critical curated set + Headscale SPOF)
         working-directory: arbitrary-scripts/failover-ci
         env:
