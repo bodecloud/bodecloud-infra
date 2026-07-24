@@ -51,7 +51,10 @@ zero_spof_ensure_dir \
   "${CONFIG_PATH}/traefik/crowdsec/var/log" \
   "${CONFIG_PATH}/traefik/crowdsec/data" \
   "${CONFIG_PATH}/traefik/crowdsec/etc/crowdsec" \
-  "${CONFIG_PATH}/traefik/crowdsec/plugins"
+  "${CONFIG_PATH}/traefik/crowdsec/plugins" \
+  "${CONFIG_PATH}/headscale/config" \
+  "${CONFIG_PATH}/headscale/lib" \
+  "${CONFIG_PATH}/headscale/run"
 
 touch "${CONFIG_PATH}/traefik/crowdsec/var/log/auth.log" \
       "${CONFIG_PATH}/traefik/crowdsec/var/log/syslog"
@@ -66,6 +69,27 @@ mkdir -p "${CONFIG_PATH}/placement"
 cat >"${CONFIG_PATH}/placement/node-ips.json" <<EOF
 {"${TS_HOSTNAME}":"${EXTERNAL_IP}"}
 EOF
+
+# Merge CoreDNS IPs from failover-ci state or operator file (implicit split-DNS).
+COREDNS_IPS_FILE="${COREDNS_IPS_FILE:-${CONFIG_PATH}/placement/coredns-ips.txt}"
+if [[ -z "${COREDNS_IPS:-}" && -f "${COREDNS_IPS_FILE}" ]]; then
+  COREDNS_IPS="$(grep -v '^#' "${COREDNS_IPS_FILE}" | paste -sd, - || true)"
+fi
+HEADSCALE_MAGIC_BASE_DOMAIN="${HEADSCALE_MAGIC_BASE_DOMAIN:-myscale.${DOMAIN}}"
+HEADSCALE_SERVER_URL="${HEADSCALE_SERVER_URL:-https://headscale.${DOMAIN}}"
+HEADSCALE_POLICY_PATH="${HEADSCALE_POLICY_PATH:-/etc/headscale/acl.hujson}"
+
+# --- Headscale config (implicit DNS / ACL / extra records) -------------------
+export DOMAIN TS_HOSTNAME CONFIG_PATH EXTERNAL_IP COREDNS_IPS COREDNS_IPS_FILE \
+  HEADSCALE_MAGIC_BASE_DOMAIN HEADSCALE_SERVER_URL HEADSCALE_POLICY_PATH \
+  HEADSCALE_HTTP_PORT="${HEADSCALE_HTTP_PORT:-8081}" \
+  HEADSCALE_METRICS_PORT="${HEADSCALE_METRICS_PORT:-8080}" \
+  HEADSCALE_STUN_PORT="${HEADSCALE_STUN_PORT:-3478}" \
+  HEADSCALE_PREFIX_ALLOCATION="${HEADSCALE_PREFIX_ALLOCATION:-sequential}" \
+  HEADSCALE_MAGIC_DNS="${HEADSCALE_MAGIC_DNS:-true}" \
+  HEADSCALE_OVERRIDE_LOCAL_DNS="${HEADSCALE_OVERRIDE_LOCAL_DNS:-true}"
+python3 "${SCRIPT_DIR}/render-headscale-config.py" "${CONFIG_PATH}/headscale/config/config.yaml"
+zero_spof_log_ok "Wrote Headscale config ${CONFIG_PATH}/headscale/config/config.yaml"
 
 # --- Secrets: discover compose references + ensure files -------------------
 mapfile -t SECRET_NAMES < <(python3 - "$REPO_ROOT" <<'PY'
@@ -163,12 +187,21 @@ CROWDSEC_BOUNCER_ENABLED=${CROWDSEC_BOUNCER_ENABLED:-true}
 CROWDSEC_LAPI_KEY=${CROWDSEC_LAPI_KEY:-$(cat "${SECRETS_DIR}/crowdsec-lapi-key.txt" 2>/dev/null || zero_spof_rand 32)}
 
 TAILSCALE_LOGIN_SERVER=${TAILSCALE_LOGIN_SERVER}
+HEADSCALE_SERVER_URL=${HEADSCALE_SERVER_URL}
+HEADSCALE_MAGIC_BASE_DOMAIN=${HEADSCALE_MAGIC_BASE_DOMAIN}
+HEADSCALE_HTTP_PORT=${HEADSCALE_HTTP_PORT:-8081}
+HEADSCALE_METRICS_PORT=${HEADSCALE_METRICS_PORT:-8080}
+HEADSCALE_STUN_PORT=${HEADSCALE_STUN_PORT:-3478}
+HEADSCALE_POLICY_PATH=${HEADSCALE_POLICY_PATH}
+HEADSCALE_MAGIC_DNS=${HEADSCALE_MAGIC_DNS:-true}
+HEADSCALE_OVERRIDE_LOCAL_DNS=${HEADSCALE_OVERRIDE_LOCAL_DNS:-true}
+COREDNS_IPS=${COREDNS_IPS:-}
 EOF
 } >"${ENV_FILE}.generated"
 
 # Preserve operator overrides from existing .env when keys are non-empty,
 # except explicit keys which always reflect the current run.
-EXPLICIT_ENV_KEYS="DOMAIN TS_HOSTNAME STACK_NAME ACME_RESOLVER_EMAIL TAILSCALE_LOGIN_SERVER FAILOVER_MAIN_HOST FAILOVER_PEER_HOSTS FAILOVER_REPLICA_ENSURE"
+EXPLICIT_ENV_KEYS="DOMAIN TS_HOSTNAME STACK_NAME ACME_RESOLVER_EMAIL TAILSCALE_LOGIN_SERVER HEADSCALE_SERVER_URL HEADSCALE_MAGIC_BASE_DOMAIN FAILOVER_MAIN_HOST FAILOVER_PEER_HOSTS FAILOVER_REPLICA_ENSURE"
 if [[ -f "${ENV_FILE}" ]]; then
   python3 - "${ENV_FILE}" "${ENV_FILE}.generated" "$EXPLICIT_ENV_KEYS" <<'PY'
 import sys

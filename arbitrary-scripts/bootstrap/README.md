@@ -35,7 +35,7 @@ sudo docker compose --env-file ../../.env -f ../../docker-compose.yml up -d trae
 
 **Default services** started by `start-zero-spof-stack.sh`:
 
-`traefik`, `autokuma`, `watchtower`, `crowdsec`, `tinyauth`, `nginx-traefik-extensions`, `logrotate-traefik`, `cloudflare-ddns`, `failover-agent`, `dockerproxy-ro`, `dockerproxy-rw`
+`traefik`, `autokuma`, `watchtower`, `crowdsec`, `tinyauth`, `nginx-traefik-extensions`, `logrotate-traefik`, `cloudflare-ddns`, `failover-agent`, `headscale-server`, `headscale`, `dockerproxy-ro`, `dockerproxy-rw`
 
 **Explicit vs implicit contract**
 
@@ -45,6 +45,7 @@ sudo docker compose --env-file ../../.env -f ../../docker-compose.yml up -d trae
 | `CLOUDFLARE_API_TOKEN` | `.env` paths, `SUDO_PASSWORD`, CrowdSec LAPI key |
 | `TAILSCALE_AUTH_KEY` | `FAILOVER_PEER_HOSTS` (Tailscale discovery) |
 | | `FAILOVER_MAIN_HOST`, `node-ips.json`, Constellation YAML |
+| | Headscale `config.yaml`, `acl.hujson`, `extra-records.json` (MagicDNS) |
 | | ACME email, timezone, external IP |
 
 Constellation agent is installed/started when run as root (`ENABLE_CONSTELLATION=true` by default). It runs **alongside** Compose + failover-agent; it does not replace them.
