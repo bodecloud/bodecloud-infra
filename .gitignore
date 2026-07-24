@@ -35,7 +35,6 @@
 /compose/docker-compose.vpn.yml
 /configs/
 /docker
-arbitrary-scripts/bootstrap/dont-run-directly.sh
 arbitrary-scripts/bootstrap/various_pvt_logins.sh
 arbitrary-scripts/various_pvt_logins.sh
 certs/

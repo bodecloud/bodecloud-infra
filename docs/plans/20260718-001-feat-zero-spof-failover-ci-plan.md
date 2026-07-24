@@ -311,7 +311,7 @@ flowchart TB
 
 - [x] U1–U8 landed; README bans dual-HS and full-stack×4 claims
 - [x] Live DinD mesh: AE1–AE4, AE6 + expanded proves green (`/tmp/failover-all-proves.log`, 2026-07-23)
-- [ ] GHA DinD mesh: AE1–AE5 satisfied on scheduled or `workflow_dispatch` run
+- [x] GHA DinD mesh: AE1–AE5 satisfied on scheduled or `workflow_dispatch` run (run 30069162302, 2026-07-24)
 - [x] `FAILOVER_REPLICA_ENSURE` on main matches running agent; allowlist ensure failures fail the suite (`prove-matrix` / `wait-tier-a-ready` `/healthz`)
 - [x] Headscale SPOF prove is HARD and wired into `run-all.sh`
 - [x] PR CI still only validate-local; schedule/dispatch runs full mesh

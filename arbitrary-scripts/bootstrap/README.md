@@ -14,14 +14,49 @@ An idempotent, flexible, and configuration-driven bootstrap script for setting u
 
 ## Quick Start
 
-### Basic Usage (with defaults)
+### Zero-SPOF stack (recommended)
+
+Minimal explicit config; everything else is auto-generated (secrets, peers, Constellation config, placement paths).
+
+```bash
+# 1. Copy and fill ONLY the required explicit values
+sudo cp required-explicit.env.example /etc/required-explicit.env
+sudo nano /etc/required-explicit.env
+# Required: DOMAIN, TS_HOSTNAME, CLOUDFLARE_API_TOKEN, TAILSCALE_AUTH_KEY
+
+# 2. Validate + generate + start default HA edge stack
+sudo ./start-zero-spof-stack.sh
+
+# Or step-by-step:
+./validate-explicit-config.sh
+./generate-implicit-env.sh
+sudo docker compose --env-file ../../.env -f ../../docker-compose.yml up -d traefik autokuma
+```
+
+**Default services** started by `start-zero-spof-stack.sh`:
+
+`traefik`, `autokuma`, `watchtower`, `crowdsec`, `tinyauth`, `nginx-traefik-extensions`, `logrotate-traefik`, `cloudflare-ddns`, `failover-agent`, `dockerproxy-ro`, `dockerproxy-rw`
+
+**Explicit vs implicit contract**
+
+| You must set (explicit) | Auto-generated (implicit) |
+|-------------------------|---------------------------|
+| `DOMAIN`, `TS_HOSTNAME` | All `secrets/*.txt` files referenced by compose |
+| `CLOUDFLARE_API_TOKEN` | `.env` paths, `SUDO_PASSWORD`, CrowdSec LAPI key |
+| `TAILSCALE_AUTH_KEY` | `FAILOVER_PEER_HOSTS` (Tailscale discovery) |
+| | `FAILOVER_MAIN_HOST`, `node-ips.json`, Constellation YAML |
+| | ACME email, timezone, external IP |
+
+Constellation agent is installed/started when run as root (`ENABLE_CONSTELLATION=true` by default). It runs **alongside** Compose + failover-agent; it does not replace them.
+
+### Basic host bootstrap only
 
 ```bash
 # Run with all defaults
 sudo ./dont-run-directly.sh
 
-# Specify custom hostname
-sudo ./dont-run-directly.sh myserver
+# Host bootstrap + stack in one shot
+sudo ENABLE_ZERO_SPOF_STACK=true ./dont-run-directly.sh myserver
 ```
 
 ### Using Configuration File
