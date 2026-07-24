@@ -68,7 +68,7 @@ Teardown: `./teardown.sh`
 
 **Default:** root [`docker-compose.yml`](../../docker-compose.yml) (+ ci-probes / extra_hosts overlays). Success criterion for peers is the **HA-critical curated set**, not every media service healthy.
 
-**Fast debug:** `FAILOVER_CI_MINIMAL=1` uses [`compose/docker-compose.ci-stack.yml`](compose/docker-compose.ci-stack.yml) (lean Traefik/whoami/HS/agent/ci-probe).
+**Fast debug:** `FAILOVER_CI_MINIMAL=1` uses [`compose/docker-compose.ci-stack.yml`](compose/docker-compose.ci-stack.yml) plus [`compose/docker-compose.ci-tier-a.yml`](compose/docker-compose.ci-tier-a.yml) (Tier-A stubs) and ci-probe overlay.
 
 ```bash
 FAILOVER_CI_MINIMAL=1 ./compose-up-all.sh   # lean stack

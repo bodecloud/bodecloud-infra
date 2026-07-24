@@ -17,6 +17,7 @@ for s in prove-headscale-spof.sh prove-failover.sh prove-dns.sh prove-matrix.sh 
   [[ -f "${CI_DIR}/${s}" ]] || { echo "FAIL: missing ${s}"; exit 1; }
   bash -n "${CI_DIR}/${s}"
 done
+[[ -f "${CI_DIR}/compose/docker-compose.ci-tier-a.yml" ]] || { echo "FAIL: missing ci-tier-a overlay"; exit 1; }
 
 echo "======== honesty contract (README) ========"
 # Require explicit bans (wording that documents what we do NOT claim)

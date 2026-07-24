@@ -52,6 +52,9 @@ fi
 if [[ -f arbitrary-scripts/failover-ci/compose/docker-compose.ci-stack.yml ]]; then
   cp -f arbitrary-scripts/failover-ci/compose/docker-compose.ci-stack.yml compose/docker-compose.ci-stack.yml
 fi
+if [[ -f arbitrary-scripts/failover-ci/compose/docker-compose.ci-tier-a.yml ]]; then
+  cp -f arbitrary-scripts/failover-ci/compose/docker-compose.ci-tier-a.yml compose/docker-compose.ci-tier-a.yml
+fi
 if [[ -f arbitrary-scripts/failover-ci/compose/docker-compose.ci-dind-fixes.yml ]]; then
   cp -f arbitrary-scripts/failover-ci/compose/docker-compose.ci-dind-fixes.yml compose/docker-compose.ci-dind-fixes.yml
 fi
@@ -89,8 +92,15 @@ USE_MINIMAL=${USE_MINIMAL}
 if [[ "\$USE_MINIMAL" == "1" ]]; then
   docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
     build failover-agent ci-probe
+  for crit in ${CRIT_SVCS}; do
+    docker rm -f "\$crit" 2>/dev/null || true
+  done
   docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
-    up -d --remove-orphans --pull=missing ${CRIT_SVCS}
+    up -d --remove-orphans --force-recreate --pull=missing ${CRIT_SVCS}
+  for crit in ${MUST_RUN}; do
+    docker inspect -f '{{.State.Running}}' "\$crit" 2>/dev/null | grep -qx true \
+      || { echo "[failover-ci] ERROR: HA-critical \$crit not running on ${name}" >&2; exit 1; }
+  done
 else
   # Tear down prior CI-minimal project containers so fixed bridge names can bind
   docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env \

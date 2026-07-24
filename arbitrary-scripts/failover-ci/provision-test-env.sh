@@ -157,6 +157,7 @@ EOF
   vm_exec "$name" "mkdir -p ${VM_REPO_PATH}/compose ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose
     cp ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/docker-compose.ci-probes.yml ${VM_REPO_PATH}/compose/ 2>/dev/null || true
     cp ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/docker-compose.ci-stack.yml ${VM_REPO_PATH}/compose/ 2>/dev/null || true
+    cp ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/docker-compose.ci-tier-a.yml ${VM_REPO_PATH}/compose/ 2>/dev/null || true
     cp ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/Dockerfile.ci-probe ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/ 2>/dev/null || true"
 done
 

@@ -1,0 +1,58 @@
+# Tier-A stubs for CI-minimal mesh (bolabaden + Autokuma).
+# Full root compose uses real images; this overlay keeps GHA DinD feasible.
+services:
+  bolabaden-nextjs:
+    image: docker.io/hashicorp/http-echo:0.2.3
+    container_name: bolabaden-nextjs
+    hostname: bolabaden-nextjs
+    networks:
+      - backend
+      - publicnet
+    command: ["-listen", ":3000", "-text", "bolabaden Next.js CI stub"]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.bolabaden-nextjs.rule: >-
+        Host(`${DOMAIN}`) || Host(`${TS_HOSTNAME}.${DOMAIN}`)
+        || Host(`bolabaden-nextjs.${DOMAIN}`) || Host(`bolabaden-nextjs.${TS_HOSTNAME}.${DOMAIN}`)
+      traefik.http.services.bolabaden-nextjs.loadbalancer.server.port: "3000"
+      failover.replica: "true"
+      deunhealth.restart.on.unhealthy: "true"
+    restart: always
+
+  autokuma:
+    image: docker.io/alpine:3.20
+    container_name: autokuma
+    hostname: autokuma
+    networks:
+      - backend
+      - publicnet
+    expose:
+      - "8080"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        apk add --no-cache perl >/dev/null
+        perl -MIO::Socket::INET -e '
+          my $$s = IO::Socket::INET->new(LocalAddr=>"0.0.0.0", LocalPort=>8080, Proto=>"tcp", Reuse=>1, Listen=>32) or die $$!;
+          while (my $$c = $$s->accept()) {
+            print $$c "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 9\r\nConnection: close\r\n\r\nautokuma\n";
+            close $$c;
+          }
+        '
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.autokuma.rule: Host(`autokuma.${DOMAIN}`) || Host(`autokuma.${TS_HOSTNAME}.${DOMAIN}`)
+      traefik.http.services.autokuma.loadbalancer.server.port: "8080"
+      failover.replica: "true"
+      deunhealth.restart.on.unhealthy: "true"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:8080/ | grep -qi autokuma || exit 1",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: always
