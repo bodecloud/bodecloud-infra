@@ -77,6 +77,9 @@ if [[ -n "$TS_IP" ]]; then
   MDNS_HOST="ci-node3.${HEADSCALE_BASE_DOMAIN}"
   MDNS_ANS="$(run_dig "@100.100.100.100" "${MDNS_HOST}" A || true)"
   if [[ -z "$MDNS_ANS" ]]; then
+    MDNS_ANS="$(run_dig "@100.100.100.100" "ci-node3.${DOMAIN}" A || true)"
+  fi
+  if [[ -z "$MDNS_ANS" ]]; then
     MDNS_ANS="$(run_dig "@100.100.100.100" "ci-node3" A || true)"
   fi
   if [[ -n "$MDNS_ANS" ]]; then
