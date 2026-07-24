@@ -42,17 +42,17 @@ Sources: `STRATEGY.md`, `.github/copilot-instructions.md`, `knowledgebase/archit
 | Criterion | Score | Notes |
 |---|---|---|
 | Replace docker-gen | PASS | Removed from coolify-proxy; agent added |
-| Route persistence on crash | PARTIAL | Registry keeps entries; **die+exit0 misclassified as crash** |
+| Route persistence on crash | PASS | Registry keeps entries; `ClassifyExit` treats exit 0 as intentional stop |
 | Local + peer URL shape | PASS | Matches osvc / DNS contract |
-| Placement registry | PARTIAL | Writes `placement/services.yaml`; not yet operator-proven |
+| Placement registry | PASS (CI) | `services.yaml` + shape marker; `prove-matrix` R4 gate |
 | Compose-first / no Swarm | PASS | |
 | Stateful opt-out | PASS | Deny-list + labels |
-| Always-on peer replicas | FAIL/UNKNOWN | Needs peer `:2375`; uses ExportContainerConfig not compose-up; secrets/networks fragile |
-| Auth/middleware continuity | FAIL | File routers omit middlewares (same gap as osvc sync) |
-| Dual writer safety | FAIL | Agent + osvc_ingress_sync share `failover-fallbacks.yaml` |
-| Whoami runtime proof | FAIL | Unit tests only; brainstorm overclaims "Implemented" |
-| Honesty vs STRATEGY | PARTIAL | Scope outs correct; status language too strong |
+| Always-on peer replicas | PASS (Tier-A) | Compose ensure allowlist on peers; ExportContainerConfig fallback for non-allowlist only |
+| Auth/middleware continuity | FAIL | File routers omit middlewares (deferred; DinD stubs crowdsec) |
+| Dual writer safety | PARTIAL | CI sets `OSVC_INGRESS_SYNC_DISABLE=1`; prod agent + osvc still share file |
+| Whoami runtime proof | PASS (CI) | DinD `prove-matrix`, `prove-failover`, `prove-chaos-random` |
+| Honesty vs STRATEGY | PASS | README + GHA summaries ban overclaims; Tier-A gates hard |
 
 ## Verdict
 
-**Conditional** for Track 2 near-term: direction is correct (registry-backed Traefik writer replacing docker-gen). Not yet criteria-complete due to intentional-stop bug, dual-writer conflict, unproven replicas, missing runtime proof, and middleware gap.
+**Conditional → CI-ready for Tier-A scope:** registry-backed Traefik writer + expanded DinD prove suite. Track 2 **not** closed for middleware continuity, prod dual-writer, or stateful HA. Do not claim generic wrong-node success beyond Tier-A allowlist.

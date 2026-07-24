@@ -1,6 +1,6 @@
 # Brainstorm: Module 4 — Service Failover & Auto-Redeploy (Next-Gen)
 
-> **Status**: Code landed — **runtime whoami proof pending**; do **not** claim Track 2 closed\
+> **Status**: Code landed — **DinD CI proves Tier-A**; do **not** claim full Track 2 / middleware HA closed\
 > **Date**: 2026-06-04 (updated 2026-07-18)\
 > **Feasibility**: Conditional (see `/tmp/compound-engineering/failover-feasibility/` or repo notes below)\
 > **Topic**: Replacing the broken `docker-gen-failover` with a registry-backed Go `failover-agent`.
@@ -19,32 +19,31 @@
 
 `docker-gen-failover` has been removed from Compose. The agent writes `${CONFIG_PATH}/traefik/dynamic/failover-fallbacks.yaml` from the placement registry and never drops routes on crash/unhealthy.
 
-**4-VM CI driver:** [`arbitrary-scripts/failover-ci/`](../../arbitrary-scripts/failover-ci/) — CoreDNS (not Cloudflare), dual DNS (MagicDNS → CoreDNS → Google), Headscale on two nodes, heterogeneous whoami/ci-probe placement. Run `./run-all.sh` then `prove-dns.sh` + `prove-failover.sh` before claiming Track 2 closed.
+**4-VM CI driver:** [`arbitrary-scripts/failover-ci/`](../../arbitrary-scripts/failover-ci/) — CoreDNS (not Cloudflare), dual DNS (MagicDNS → CoreDNS → Google), Headscale admitted SPOF, heterogeneous whoami/ci-probe placement, production DNS parity, seeded random chaos.
+
+Run `./run-all.sh` (or GHA `Failover Mesh CI` schedule/dispatch) before claiming Tier-A ingress HA. Prove scripts: `prove-matrix`, `prove-dns`, `prove-production-dns`, `prove-failover`, `prove-chaos-random`, `prove-headscale-spof`, `prove-module5-ddns`.
 
 **Sole file owner:** do not run `scripts/osvc_ingress_sync.py` against the same `failover-fallbacks.yaml` on the same node.
 
 **Peer replica ensure** (`FAILOVER_REPLICA_ENSURE`) is enabled on **CI main (`ci-node1`) only**; prod `.env.example` stays `false` until Tailscale Docker API is standard. Image-based ensure works without local ContainerID.
 
-## Feasibility verdict (2026-07-18)
+## Feasibility verdict (2026-07-18, updated 2026-07-23)
 
-**Conditional** against STRATEGY Track 2 / `.github/copilot-instructions.md`:
+**Conditional → CI-ready for Tier-A scope** against STRATEGY Track 2 / `.github/copilot-instructions.md`:
 
 | Met | Gap |
 |---|---|
-| Registry-backed routes survive crash (direction correct) | Whoami kill proof not run |
-| Local + `service.node.domain` peer URLs | Always-on replicas gated off / fragile ExportContainerConfig |
-| Compose-first, no Swarm | Dual-writer conflict documented; agent now sole owner |
-| Intentional stop ≠ crash (exit 0) | Middleware copied from labels when present; auth continuity still peer-parity dependent |
+| Registry-backed routes survive crash | Middleware/auth continuity not proven (deferred) |
+| Local + `service.node.domain` peer URLs | Prod dual-writer (agent + osvc) still open |
+| Compose-first, no Swarm | Self-hosted / GHA DinD mesh not yet green on CI |
+| Tier-A DinD runtime proof (matrix, failover, chaos, HS SPOF) | Stateful HA, TCP failover still out of scope |
+| Compose ensure allowlist for bolabaden + Autokuma on peers | ExportContainerConfig fallback for non-allowlist services |
 
-## Verification (whoami) — required before claiming success
+## Verification — DinD CI (required before claiming Tier-A ingress HA)
 
-On main host (`FAILOVER_MAIN_HOST=micklethefickle`) with peers configured:
+Run [`arbitrary-scripts/failover-ci/run-all.sh`](../../arbitrary-scripts/failover-ci/run-all.sh) or GHA **Failover Mesh CI** (schedule / `workflow_dispatch`). All proves must pass, including Headscale SPOF (`prove-headscale-spof.sh`).
 
-1. Confirm agent healthy and file present: inspect `failover-fallbacks.yaml` for `whoami` + peer URLs.
-2. Crash: `docker kill whoami` → registry status `crashed`, YAML still lists `https://whoami.<peer>.$DOMAIN` → `curl -k https://whoami.$DOMAIN` should succeed via peer.
-3. Intentional stop: `docker compose stop whoami` → status `intentionally_stopped`; no peer redeploy.
-
-After step 2 is proven in production, capture the learning with `/ce-compound`.
+Production whoami kill drill (below) remains recommended before claiming prod Track 2 closure.
 
 ## 1. Diagnosis (The "Why")
 

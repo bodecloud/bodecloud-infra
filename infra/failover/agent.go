@@ -30,17 +30,21 @@ type AgentConfig struct {
 	ReconcileInterval           time.Duration
 	StopReplicasOnIntentional   bool
 	ReplicaEnsure               bool // FAILOVER_REPLICA_ENSURE — off until peer Docker proven
+	ReplicaPullNever            bool // FAILOVER_REPLICA_PULL=never — skip ImagePull on peers
+	ReplicaEnsureStrict         bool // fail /healthz when allowlist ensure errors
+	ComposeEnsureServices       []string // FAILOVER_COMPOSE_ENSURE_SERVICES — minimal recreate path
 	HealthListenAddr            string
 }
 
 // Agent is the Compose-first failover/replica maintenance loop.
 type Agent struct {
-	cfg      AgentConfig
-	docker   *client.Client
-	registry *Registry
-	restarts map[string]int
-	mu       sync.Mutex
-	log      *log.Logger
+	cfg              AgentConfig
+	docker           *client.Client
+	registry         *Registry
+	restarts         map[string]int
+	mu               sync.Mutex
+	log              *log.Logger
+	allowlistEnsureErr string
 }
 
 // NewAgent constructs an Agent.
@@ -348,16 +352,61 @@ func (a *Agent) Reconcile(ctx context.Context) error {
 	}
 
 	if a.IsMainHost() && a.cfg.ReplicaEnsure {
+		var allowErrs []string
 		for _, e := range a.registry.List() {
 			if !ShouldEnsurePeers(e.Status, e.ReplicaEligible) {
 				continue
 			}
 			if err := a.EnsureReplicas(ctx, e); err != nil {
 				a.log.Printf("ensure replicas %s: %v", e.Name, err)
+				if a.inComposeEnsureAllowlist(e.Name, e.ComposeService) {
+					allowErrs = append(allowErrs, fmt.Sprintf("%s: %v", e.Name, err))
+				}
+			}
+		}
+		a.mu.Lock()
+		if len(allowErrs) > 0 {
+			a.allowlistEnsureErr = strings.Join(allowErrs, "; ")
+		} else {
+			a.allowlistEnsureErr = ""
+		}
+		a.mu.Unlock()
+	}
+	return nil
+}
+
+// AllowlistEnsureError returns the last allowlist ensure failure (empty if healthy).
+func (a *Agent) AllowlistEnsureError() string {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+	return a.allowlistEnsureErr
+}
+
+// HealthOK is false when ReplicaEnsureStrict and an allowlist ensure failed.
+func (a *Agent) HealthOK() bool {
+	if !a.cfg.ReplicaEnsureStrict {
+		return true
+	}
+	return a.AllowlistEnsureError() == ""
+}
+
+func (a *Agent) inComposeEnsureAllowlist(name, composeService string) bool {
+	if len(a.cfg.ComposeEnsureServices) == 0 {
+		return false
+	}
+	candidates := []string{sanitizeName(name), sanitizeName(composeService)}
+	for _, want := range a.cfg.ComposeEnsureServices {
+		want = sanitizeName(want)
+		if want == "" {
+			continue
+		}
+		for _, c := range candidates {
+			if c == want {
+				return true
 			}
 		}
 	}
-	return nil
+	return false
 }
 
 func (a *Agent) ingestContainer(ctx context.Context, id string) error {

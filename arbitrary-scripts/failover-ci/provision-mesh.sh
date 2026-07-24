@@ -129,11 +129,11 @@ for name in "${NODES[@]}"; do
     start_tailscaled_dind "$name"
     # Hard timeout — hung auth was the main DinD failure mode
     if ! docker exec "$name" sh -lc \
-      "timeout 75 /usr/local/bin/tailscale up --login-server='${LOGIN_SERVER}' --authkey='${KEY}' --hostname='${name}' --accept-dns=false --reset"; then
+      "timeout 75 /usr/local/bin/tailscale up --login-server='${LOGIN_SERVER}' --authkey='${KEY}' --hostname='${name}' --accept-dns=true --reset"; then
       warn "tailscale up failed/timed out on $name — retry once"
       start_tailscaled_dind "$name"
       docker exec "$name" sh -lc \
-        "timeout 75 /usr/local/bin/tailscale up --login-server='${LOGIN_SERVER}' --authkey='${KEY}' --hostname='${name}' --accept-dns=false --reset" \
+        "timeout 75 /usr/local/bin/tailscale up --login-server='${LOGIN_SERVER}' --authkey='${KEY}' --hostname='${name}' --accept-dns=true --reset" \
         || die "tailscale up failed on $name"
     fi
   else

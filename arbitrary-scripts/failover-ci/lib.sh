@@ -35,6 +35,7 @@ load_env() {
   VM_DISK="${VM_DISK:-40G}"
   MULTIPASS_IMAGE="${MULTIPASS_IMAGE:-22.04}"
   HEADSCALE_MAGICDNS="${HEADSCALE_MAGICDNS:-100.100.100.100}"
+  HEADSCALE_BASE_DOMAIN="${HEADSCALE_BASE_DOMAIN:-myscale.${DOMAIN}}"
   GOOGLE_DNS_1="${GOOGLE_DNS_1:-8.8.8.8}"
   GOOGLE_DNS_2="${GOOGLE_DNS_2:-8.8.4.4}"
   if [[ -z "${COMPOSE_UP_FLAGS+x}" || -z "${COMPOSE_UP_FLAGS}" ]]; then
@@ -165,6 +166,27 @@ vm_transfer() {
   esac
 }
 
+# Load an image from the host Docker into a DinD node's inner docker (Hub 429 workaround).
+dind_seed_image_from_host() {
+  local node="$1" ref="$2"
+  [[ "$(backend)" == "dind" ]] || return 0
+  local cand ref_found=""
+  for cand in "$ref" "docker.io/${ref}" "${ref#docker.io/}"; do
+    if docker image inspect "$cand" >/dev/null 2>&1; then
+      ref_found="$cand"
+      break
+    fi
+  done
+  [[ -n "$ref_found" ]] || { warn "host missing image $ref — DinD inner docker may pull from Hub"; return 1; }
+  if docker exec "$node" docker image inspect "$ref" >/dev/null 2>&1; then
+    log "DinD $node already has $ref"
+    return 0
+  fi
+  log "seeding $ref from host → DinD $node (via $ref_found)"
+  docker save "$ref_found" | docker exec -i "$node" docker load
+  docker exec "$node" sh -c "docker image inspect '$ref' >/dev/null 2>&1 || docker tag '$ref_found' '$ref' 2>/dev/null || true"
+}
+
 peers_csv_for() {
   local self="$1"
   local out=()
@@ -279,6 +301,51 @@ compose_f_args() {
   fi
 }
 
+# HA-critical curated peer set (NOT full media stack — honesty contract).
+# Used by sync-images, compose-up-critical, and prove gates.
+ha_critical_services() {
+  echo "traefik whoami headscale-server headscale failover-agent ci-probe bolabaden-nextjs autokuma"
+}
+
+# Per-node HA-critical compose services — must match shape-placement.sh roles.
+ha_critical_services_for_node() {
+  local node="$1"
+  case "$node" in
+    ci-node1) echo "traefik headscale-server headscale failover-agent bolabaden-nextjs autokuma" ;;
+    ci-node2) echo "traefik headscale failover-agent whoami bolabaden-nextjs autokuma" ;;
+    ci-node3) echo "traefik failover-agent whoami bolabaden-nextjs autokuma" ;;
+    ci-node4) echo "traefik failover-agent ci-probe bolabaden-nextjs autokuma" ;;
+    *) ha_critical_services ;;
+  esac
+}
+
+# Hard-fail if any of these are not running after critical compose up on a node.
+ha_critical_must_run_on_node() {
+  local node="$1"
+  case "$node" in
+    ci-node1) echo "traefik headscale-server failover-agent bolabaden-nextjs autokuma" ;;
+    ci-node2) echo "traefik headscale whoami failover-agent bolabaden-nextjs autokuma" ;;
+    ci-node3) echo "traefik whoami failover-agent bolabaden-nextjs autokuma" ;;
+    ci-node4) echo "traefik ci-probe failover-agent bolabaden-nextjs autokuma" ;;
+    *) echo "traefik failover-agent bolabaden-nextjs autokuma" ;;
+  esac
+}
+
+# Images that must sync even when FAILOVER_CI_IMAGE_MAX_MB would skip them.
+ha_critical_images() {
+  cat <<'EOF'
+traefik:latest
+traefik/whoami:latest
+bolabaden/failover-agent:latest
+local/failover-ci-probe:latest
+headscale/headscale:latest
+ghcr.io/gurucomputing/headscale-ui:latest
+coredns/coredns:1.11.3
+docker.io/bolabaden/bolabaden-nextjs:latest
+ghcr.io/bigboot/autokuma:latest
+EOF
+}
+
 # Traefik (bridge) cannot resolve peer FQDNs via CoreDNS from nested nets;
 # pin svc.<node>.$DOMAIN → node IP so peer HTTPS URLs work.
 write_ci_extra_hosts_compose() {
@@ -289,7 +356,7 @@ write_ci_extra_hosts_compose() {
 import json, sys
 out, domain, path = sys.argv[1], sys.argv[2], sys.argv[3]
 ips = json.load(open(path))
-svcs = ("whoami", "ci-probe", "headscale", "headscale-server", "traefik", "failover-agent")
+svcs = ("whoami", "ci-probe", "headscale", "headscale-server", "traefik", "failover-agent", "bolabaden-nextjs", "autokuma")
 lines = [
     "# Generated — peer FQDN → DinD node IP for Traefik peer-forward",
     "services:",

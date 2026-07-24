@@ -29,6 +29,7 @@ log "wrote peer extra_hosts overlay → ${EXTRA_HOSTS_FILE}"
 
 if [[ "$(backend)" == "dind" ]]; then
   cleanup_stale_dind_bridge_filters
+  bash "${SCRIPT_DIR}/seed-dind-images-from-host.sh"
 fi
 
 for name in "${NODES[@]}"; do
@@ -37,6 +38,8 @@ for name in "${NODES[@]}"; do
   if [[ "$name" == "${MAIN_HOST:-ci-node1}" ]]; then
     replica_ensure=true
   fi
+  CRIT_SVCS="$(ha_critical_services_for_node "$name")"
+  MUST_RUN="$(ha_critical_must_run_on_node "$name")"
   vm_transfer "$name" "${EXTRA_HOSTS_FILE}" "${VM_REPO_PATH}/compose/docker-compose.ci-extra-hosts.yml"
   vm_exec "$name" "bash -s" <<EOS
 set -euo pipefail
@@ -58,6 +61,15 @@ if grep -q '^FAILOVER_REPLICA_ENSURE=' .env 2>/dev/null; then
 else
   echo "FAILOVER_REPLICA_ENSURE=${replica_ensure}" >> .env
 fi
+grep -q '^FAILOVER_REPLICA_PULL=' .env 2>/dev/null \
+  && sed -i 's/^FAILOVER_REPLICA_PULL=.*/FAILOVER_REPLICA_PULL=never/' .env \
+  || echo "FAILOVER_REPLICA_PULL=never" >> .env
+grep -q '^FAILOVER_REPLICA_ENSURE_STRICT=' .env 2>/dev/null \
+  && sed -i "s/^FAILOVER_REPLICA_ENSURE_STRICT=.*/FAILOVER_REPLICA_ENSURE_STRICT=${replica_ensure}/" .env \
+  || echo "FAILOVER_REPLICA_ENSURE_STRICT=${replica_ensure}" >> .env
+grep -q '^FAILOVER_COMPOSE_ENSURE_SERVICES=' .env 2>/dev/null \
+  && sed -i 's/^FAILOVER_COMPOSE_ENSURE_SERVICES=.*/FAILOVER_COMPOSE_ENSURE_SERVICES=bolabaden-nextjs,autokuma/' .env \
+  || echo "FAILOVER_COMPOSE_ENSURE_SERVICES=bolabaden-nextjs,autokuma" >> .env
 grep -q '^COREDNS_1=' .env 2>/dev/null && sed -i 's/^COREDNS_1=.*/COREDNS_1=${CD1}/' .env || echo "COREDNS_1=${CD1}" >> .env
 grep -q '^COREDNS_2=' .env 2>/dev/null && sed -i 's/^COREDNS_2=.*/COREDNS_2=${CD2}/' .env || echo "COREDNS_2=${CD2}" >> .env
 grep -q '^COMPOSE_PROJECT_NAME=' .env 2>/dev/null && sed -i "s/^COMPOSE_PROJECT_NAME=.*/COMPOSE_PROJECT_NAME=${name}/" .env || echo "COMPOSE_PROJECT_NAME=${name}" >> .env
@@ -78,7 +90,7 @@ if [[ "\$USE_MINIMAL" == "1" ]]; then
   docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
     build failover-agent ci-probe
   docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
-    up -d --remove-orphans --pull=missing traefik whoami headscale-server headscale failover-agent ci-probe
+    up -d --remove-orphans --pull=missing ${CRIT_SVCS}
 else
   # Tear down prior CI-minimal project containers so fixed bridge names can bind
   docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env \
@@ -95,10 +107,28 @@ else
       warp-nat-net
   fi
 
-  # Skip rebuild when images already present (avoids Docker Hub 429 in DinD mesh)
-  if docker image inspect bolabaden/failover-agent:latest >/dev/null 2>&1 \
+  # Rebuild agent when forced or when local test image tag missing (branch code drift)
+  FORCE_BUILD=${FAILOVER_CI_FORCE_AGENT_BUILD:-0}
+  if [[ "\$FORCE_BUILD" == "1" ]] || ! docker image inspect local/failover-agent:ci-test >/dev/null 2>&1; then
+    if docker image inspect bolabaden/failover-agent:latest >/dev/null 2>&1 \
+      && docker image inspect local/failover-ci-probe:latest >/dev/null 2>&1; then
+      echo "[failover-ci] using host-seeded failover-agent + ci-probe (skip inner build)"
+      docker tag bolabaden/failover-agent:latest local/failover-agent:ci-test 2>/dev/null || true
+    else
+    echo "[failover-ci] building failover-agent (FORCE=\$FORCE_BUILD)"
+    for _try in 1 2 3 4 5; do
+      if docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
+        build failover-agent ci-probe; then
+        docker tag bolabaden/failover-agent:latest local/failover-agent:ci-test 2>/dev/null || true
+        break
+      fi
+      echo "[failover-ci] build retry \$_try after registry throttle..." >&2
+      sleep \$((_try * 20))
+    done
+    fi
+  elif docker image inspect bolabaden/failover-agent:latest >/dev/null 2>&1 \
     && docker image inspect local/failover-ci-probe:latest >/dev/null 2>&1; then
-    echo "[failover-ci] using preloaded failover-agent + ci-probe images"
+    echo "[failover-ci] using preloaded failover-agent + ci-probe images (set FAILOVER_CI_FORCE_AGENT_BUILD=1 to rebuild)"
   else
     for _try in 1 2 3 4 5; do
       if docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
@@ -173,10 +203,15 @@ for section in ("configs", "secrets"):
             ensure_path(item["file"], force_file=True)
 PY
 
-  # Full stack — best-effort; non-critical health failures are OK for prove gates
+  # Full stack — best-effort; non-critical health failures are OK for prove gates.
+  # Peers prefer --pull=never after image sync from MAIN (avoids Hub 429).
+  PULL_POLICY=missing
+  if [[ "${name}" != "${MAIN_HOST:-ci-node1}" && "$(backend)" == "dind" ]]; then
+    PULL_POLICY=never
+  fi
   set +e
   docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
-    up -d --remove-orphans --pull=missing
+    up -d --remove-orphans --pull=\$PULL_POLICY
   up_rc=$?
   set -e
   if [[ "\$up_rc" -ne 0 ]]; then
@@ -187,17 +222,33 @@ PY
         --opt com.docker.network.bridge.enable_ip_masquerade=false \
         --subnet 10.0.2.0/24 --gateway 10.0.2.1 warp-nat-net
   fi
-  # Prove-critical path must be up even if rabbitmq/etc are unhealthy
-  docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
-    up -d --no-deps --remove-orphans --pull=missing \
-    traefik whoami headscale-server headscale failover-agent ci-probe
-  for crit in traefik whoami headscale-server failover-agent; do
-    docker inspect -f '{{.State.Running}}' "\$crit" 2>/dev/null | grep -qx true \
-      || { echo "[failover-ci] ERROR: critical \$crit not running on ${name}" >&2; exit 1; }
+  # HA-critical curated set aligned with shape-placement (not full media stack)
+  # Full-stack up may leave Created/conflicting containers on peers — recreate cleanly.
+  for crit in ${CRIT_SVCS}; do
+    st="$(docker inspect -f '{{.State.Status}}' "\$crit" 2>/dev/null || true)"
+    if [[ "\$st" == "created" || "\$st" == "exited" ]]; then
+      docker rm -f "\$crit" 2>/dev/null || true
+    fi
   done
+  docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
+    up -d --no-deps --remove-orphans --force-recreate --pull=\$PULL_POLICY \
+    ${CRIT_SVCS}
+  for crit in ${MUST_RUN}; do
+    docker inspect -f '{{.State.Running}}' "\$crit" 2>/dev/null | grep -qx true \
+      || { echo "[failover-ci] ERROR: HA-critical \$crit not running on ${name}" >&2; exit 1; }
+  done
+  echo "[failover-ci] peer/main HA-critical path done on ${name} (curated set, not full stack ×4)"
 fi
 docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} ps || true
 EOS
+
+  # After MAIN is up on DinD, seed peer image caches (Hub 429 workaround)
+  if [[ "$USE_MINIMAL" != "1" && "$(backend)" == "dind" && "$name" == "${MAIN_HOST:-ci-node1}" ]]; then
+    if [[ "${FAILOVER_CI_SYNC_IMAGES:-1}" == "1" ]]; then
+      log "syncing images from ${name} → peers before peer compose-up"
+      bash "${SCRIPT_DIR}/sync-images-from-main.sh" || warn "image sync failed — peers may hit registry 429"
+    fi
+  fi
 
   # Host-side headroom between sequential DinD nodes
   if [[ "$USE_MINIMAL" != "1" ]]; then

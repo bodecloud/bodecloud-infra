@@ -1176,8 +1176,24 @@ services:
       - host.docker.internal:host-gateway
     networks:
       - backend
+      - publicnet
+    expose:
+      - 8080
     volumes:
       - ${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock:ro  # Read-only access to Docker
+    # Serve a tiny HTTP 200 on :8080 for Traefik Host HA proves (Autokuma itself is not an HTTP API).
+    # Real Autokuma process still runs; Uptime Kuma may be stubbed/unreachable on DinD.
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        perl -MIO::Socket::INET -e '
+          my $$s = IO::Socket::INET->new(LocalAddr=>"0.0.0.0", LocalPort=>8080, Proto=>"tcp", Reuse=>1, Listen=>32) or die $$!;
+          while (my $$c = $$s->accept()) {
+            print $$c "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 9\r\nConnection: close\r\n\r\nautokuma\n";
+            close $$c;
+          }
+        ' &
+        exec /usr/local/bin/autokuma
     environment:
       # --- Uptime Kuma connection settings ---
       AUTOKUMA__KUMA__URL: https://uptimekuma.$DOMAIN  # kuma.url: The URL AutoKuma should use to connect to Uptime Kuma
@@ -1185,4 +1201,20 @@ services:
       AUTOKUMA__KUMA__PASSWORD: ${AUTOKUMA__KUMA__PASSWORD:?}  # kuma.password: The password for logging into Uptime Kuma (required unless auth is disabled)
       AUTOKUMA__KUMA__CALL_TIMEOUT: ${AUTOKUMA__KUMA__CALL_TIMEOUT:-5}  # kuma.call_timeout: The timeout for executing calls to the Uptime Kuma server
       AUTOKUMA__KUMA__CONNECT_TIMEOUT: ${AUTOKUMA__KUMA__CONNECT_TIMEOUT:-5}  # kuma.connect_timeout: The timeout for the initial connection to Uptime Kuma
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.autokuma.rule: Host(`autokuma.$DOMAIN`) || Host(`autokuma.$TS_HOSTNAME.$DOMAIN`)
+      traefik.http.services.autokuma.loadbalancer.server.port: 8080
+      failover.replica: "true"
+      deunhealth.restart.on.unhealthy: "true"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "perl -MIO::Socket::INET -e 'exit(IO::Socket::INET->new(PeerAddr=>\"127.0.0.1:8080\") ? 0 : 1)'",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
     restart: always

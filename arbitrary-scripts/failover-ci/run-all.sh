@@ -23,11 +23,16 @@ if [[ "$SKIP_COMPOSE" != "1" ]]; then
   run ./shape-placement.sh
   run ./provision-mesh.sh
   run ./configure-resolvers.sh
+  run ./wait-tier-a-ready.sh
 fi
 
 if [[ "$SKIP_PROVE" != "1" ]]; then
+  run ./prove-matrix.sh
   run ./prove-dns.sh
+  run ./prove-production-dns.sh
   run ./prove-failover.sh
+  run ./prove-chaos-random.sh
+  run ./prove-headscale-spof.sh
   run ./prove-module5-ddns.sh
 fi
 

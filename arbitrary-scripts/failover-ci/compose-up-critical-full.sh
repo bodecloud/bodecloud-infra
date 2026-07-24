@@ -23,6 +23,8 @@ for name in "${TARGETS[@]}"; do
   log "critical full-compose up on $name (pull=never)"
   replica_ensure=false
   [[ "$name" == "${MAIN_HOST:-ci-node1}" ]] && replica_ensure=true
+  CRIT_SVCS="$(ha_critical_services_for_node "$name")"
+  MUST_RUN="$(ha_critical_must_run_on_node "$name")"
   vm_transfer "$name" "${EXTRA_HOSTS_FILE}" "${VM_REPO_PATH}/compose/docker-compose.ci-extra-hosts.yml"
   vm_transfer "$name" "${FAILOVER_CI_ROOT}/compose/docker-compose.ci-dind-fixes.yml" \
     "${VM_REPO_PATH}/compose/docker-compose.ci-dind-fixes.yml"
@@ -36,6 +38,15 @@ cp -f arbitrary-scripts/failover-ci/compose/docker-compose.ci-dind-fixes.yml com
 grep -q '^FAILOVER_REPLICA_ENSURE=' .env 2>/dev/null \
   && sed -i 's/^FAILOVER_REPLICA_ENSURE=.*/FAILOVER_REPLICA_ENSURE=${replica_ensure}/' .env \
   || echo "FAILOVER_REPLICA_ENSURE=${replica_ensure}" >> .env
+grep -q '^FAILOVER_REPLICA_PULL=' .env 2>/dev/null \
+  && sed -i 's/^FAILOVER_REPLICA_PULL=.*/FAILOVER_REPLICA_PULL=never/' .env \
+  || echo "FAILOVER_REPLICA_PULL=never" >> .env
+grep -q '^FAILOVER_REPLICA_ENSURE_STRICT=' .env 2>/dev/null \
+  && sed -i "s/^FAILOVER_REPLICA_ENSURE_STRICT=.*/FAILOVER_REPLICA_ENSURE_STRICT=${replica_ensure}/" .env \
+  || echo "FAILOVER_REPLICA_ENSURE_STRICT=${replica_ensure}" >> .env
+grep -q '^FAILOVER_COMPOSE_ENSURE_SERVICES=' .env 2>/dev/null \
+  && sed -i 's/^FAILOVER_COMPOSE_ENSURE_SERVICES=.*/FAILOVER_COMPOSE_ENSURE_SERVICES=bolabaden-nextjs,autokuma/' .env \
+  || echo "FAILOVER_COMPOSE_ENSURE_SERVICES=bolabaden-nextjs,autokuma" >> .env
 grep -q '^COMPOSE_PROJECT_NAME=' .env 2>/dev/null \
   && sed -i "s/^COMPOSE_PROJECT_NAME=.*/COMPOSE_PROJECT_NAME=${name}/" .env \
   || echo "COMPOSE_PROJECT_NAME=${name}" >> .env
@@ -115,15 +126,15 @@ docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.e
 set -e
 # Clear name conflicts from prior CI-minimal / foreign project labels
 docker rm -f traefik whoami headscale-server headscale failover-agent ci-probe \
-  coolify-proxy 2>/dev/null || true
+  bolabaden-nextjs autokuma coolify-proxy 2>/dev/null || true
+# HA-critical curated set — per-node roles match shape-placement
 docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env \$CF \
-  up -d --no-deps --remove-orphans --pull=never \
-  traefik whoami headscale-server headscale failover-agent ci-probe
-for crit in traefik whoami headscale-server failover-agent; do
+  up -d --no-deps --remove-orphans --pull=never ${CRIT_SVCS} || true
+for crit in ${MUST_RUN}; do
   docker inspect -f '{{.State.Running}}' "\$crit" 2>/dev/null | grep -qx true \
-    || { echo "ERROR: \$crit not running on ${name}" >&2; docker ps -a --format '{{.Names}} {{.Status}}' | head -30; exit 1; }
+    || { echo "ERROR: HA-critical \$crit not running on ${name}" >&2; docker ps -a --format '{{.Names}} {{.Status}}' | head -30; exit 1; }
 done
-echo "[failover-ci] critical OK on ${name} containers=\$(docker ps -q | wc -l)"
+echo "[failover-ci] HA-critical OK on ${name} containers=\$(docker ps -q | wc -l) (curated set, not full stack)"
 EOS
 done
-log "compose-up-critical-full complete"
+log "compose-up-critical-full complete (HA-critical curated set)"

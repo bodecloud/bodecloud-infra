@@ -18,6 +18,17 @@ func TestIsReplicaEligible(t *testing.T) {
 		{"deny headscale", "headscale-server", nil, false},
 		{"managed false", "whoami", map[string]string{"failover.managed": "false"}, false},
 		{"rabbitmq deny", "rabbitmq", nil, false},
+		{"bolabaden default eligible", "bolabaden-nextjs", map[string]string{
+			"traefik.enable": "true",
+			"traefik.http.routers.bolabaden-nextjs.rule": "Host(`example`)",
+		}, true},
+		{"bolabaden label true", "bolabaden-nextjs", map[string]string{"failover.replica": "true"}, true},
+		{"autokuma label true", "autokuma", map[string]string{
+			"traefik.enable": "true",
+			"traefik.http.routers.autokuma.rule": "Host(`autokuma.example`)",
+			"failover.replica": "true",
+		}, true},
+		{"headscale never via label true blocked by deny? label wins", "headscale-server", map[string]string{"failover.replica": "true"}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

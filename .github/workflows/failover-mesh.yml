@@ -2,7 +2,8 @@ name: Failover Mesh CI
 
 # Thin wrapper around arbitrary-scripts/failover-ci/.
 # Every PR: unit tests + validate-local (no VMs).
-# Full 4-node mesh: workflow_dispatch on ubuntu-latest (DinD) or self-hosted.
+# Full 4-node mesh: schedule + workflow_dispatch (DinD or self-hosted).
+# Honesty: does not claim Headscale HA or full-stack ×4.
 
 on:
   pull_request:
@@ -11,6 +12,7 @@ on:
       - "infra/cmd/failover-agent/**"
       - "infra/Dockerfile.failover-agent"
       - "compose/docker-compose.failover-agent.yml"
+      - "compose/docker-compose.coolify-proxy.yml"
       - "compose/docker-compose.cloudflare-multi-ddns.yml"
       - "scripts/cloudflare_multi_record_ddns.py"
       - "arbitrary-scripts/failover-ci/**"
@@ -20,15 +22,20 @@ on:
     paths:
       - "infra/failover/**"
       - "infra/cmd/failover-agent/**"
+      - "compose/docker-compose.coolify-proxy.yml"
+      - "compose/docker-compose.failover-agent.yml"
       - "scripts/cloudflare_multi_record_ddns.py"
       - "arbitrary-scripts/failover-ci/**"
       - ".github/workflows/failover-mesh.yml"
+  schedule:
+    # Weekly DinD mesh — catch drift without PR tax
+    - cron: "17 6 * * 1"
   workflow_dispatch:
     inputs:
       run_full_mesh:
-        description: "Run 4-node mesh prove"
+        description: "Run 4-node mesh prove (Tier-A + Headscale SPOF; not full-stack×4)"
         type: boolean
-        default: false
+        default: true
       mesh_runner:
         description: "Where to run the full mesh"
         type: choice
@@ -62,9 +69,10 @@ jobs:
   failover-mesh-dind:
     needs: failover-unit
     if: >-
-      github.event_name == 'workflow_dispatch' &&
-      inputs.run_full_mesh == true &&
-      inputs.mesh_runner == 'dind-ubuntu-latest'
+      (github.event_name == 'schedule') ||
+      (github.event_name == 'workflow_dispatch' &&
+       inputs.run_full_mesh == true &&
+       inputs.mesh_runner == 'dind-ubuntu-latest')
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
@@ -73,15 +81,19 @@ jobs:
         run: |
           mkdir -p ~/.docker
           echo '{}' > ~/.docker/config.json
-      - name: Run full DinD mesh prove
+      - name: Run DinD mesh prove (HA-critical curated set + Headscale SPOF)
         working-directory: arbitrary-scripts/failover-ci
         env:
           FAILOVER_CI_BACKEND: dind
-          FAILOVER_CI_MINIMAL: ${{ inputs.ci_minimal }}
+          FAILOVER_CI_MINIMAL: ${{ inputs.ci_minimal || '0' }}
         run: |
           chmod +x *.sh
           cp -n env/test.env.example env/test.env || true
           ./run-all.sh
+          echo "## Failover mesh (DinD)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Proved Tier-A Traefik HA + Headscale **admitted SPOF** (not HS HA)." >> "$GITHUB_STEP_SUMMARY"
+          echo "- Peers use **HA-critical curated set** (not full-stack ×4)." >> "$GITHUB_STEP_SUMMARY"
+          echo "- Production DNS parity (CF multi-A + favonia node-direct + Docker DNS) + random chaos rounds." >> "$GITHUB_STEP_SUMMARY"
       - name: Teardown
         if: always()
         working-directory: arbitrary-scripts/failover-ci
@@ -99,7 +111,7 @@ jobs:
     timeout-minutes: 180
     steps:
       - uses: actions/checkout@v6
-      - name: Run full mesh prove
+      - name: Run full mesh prove (HA-critical curated set + Headscale SPOF)
         working-directory: arbitrary-scripts/failover-ci
         env:
           FAILOVER_CI_MINIMAL: ${{ inputs.ci_minimal }}
@@ -107,6 +119,10 @@ jobs:
           chmod +x *.sh
           cp -n env/test.env.example env/test.env || true
           ./run-all.sh
+          echo "## Failover mesh (self-hosted)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Proved Tier-A Traefik HA + Headscale **admitted SPOF** (not HS HA)." >> "$GITHUB_STEP_SUMMARY"
+          echo "- Peers use **HA-critical curated set** (not full-stack ×4)." >> "$GITHUB_STEP_SUMMARY"
+          echo "- Production DNS parity (CF multi-A + favonia node-direct + Docker DNS) + random chaos rounds." >> "$GITHUB_STEP_SUMMARY"
       - name: Teardown
         if: always()
         working-directory: arbitrary-scripts/failover-ci

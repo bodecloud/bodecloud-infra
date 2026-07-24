@@ -89,18 +89,29 @@ func (a *Agent) ensureReplicaOnPeer(ctx context.Context, entry *ServiceEntry, pe
 		return nil
 	}
 
-	cfg, err := a.buildReplicaConfig(ctx, entry)
-	if err != nil {
-		return err
+	// Allowlisted Tier-A services: prefer registry/image recreate with generic
+	// compose networks (backend/publicnet) instead of ExportContainerConfig, which
+	// carries main-project network names (ci-node1_*) that do not exist on peers.
+	var cfg *ContainerConfig
+	if a.inComposeEnsureAllowlist(entry.Name, entry.ComposeService) {
+		cfg = ConfigFromRegistryEntry(entry)
+		a.log.Printf("compose-ensure allowlist: minimal config for %s on %s (pull=never path)", entry.Name, peer)
+	} else {
+		cfg, err = a.buildReplicaConfig(ctx, entry)
+		if err != nil {
+			return err
+		}
 	}
 
-	if cfg.Image != "" {
+	if cfg.Image != "" && !a.cfg.ReplicaPullNever && !a.inComposeEnsureAllowlist(entry.Name, entry.ComposeService) {
 		reader, err := remote.ImagePull(ctx, cfg.Image, types.ImagePullOptions{})
 		if err != nil {
 			a.log.Printf("image pull on %s for %s: %v (continuing)", peer, cfg.Image, err)
 		} else {
 			_ = reader.Close()
 		}
+	} else if cfg.Image != "" {
+		a.log.Printf("skipping ImagePull for %s on %s (pull=never / allowlist)", cfg.Image, peer)
 	}
 
 	id, err := CreateContainerOnRemote(ctx, remote, cfg)

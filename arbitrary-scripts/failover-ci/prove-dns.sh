@@ -35,6 +35,28 @@ else
   fail "whoami.ci-node3.${DOMAIN} expected ${N3}, got: $ANS3"
 fi
 
+# Tier-A DNS plurality (node-direct wildcards cover bolabaden/autokuma)
+for svc in bolabaden-nextjs autokuma; do
+  GANS_TIER="$(run_dig "@${CD1}" "${svc}.${DOMAIN}" A || true)"
+  if echo "$GANS_TIER" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'; then
+    pass "CoreDNS answers ${svc}.${DOMAIN} → $GANS_TIER"
+  else
+    fail "CoreDNS did not answer ${svc}.${DOMAIN} (got: $GANS_TIER)"
+  fi
+  for node in ci-node1 ci-node2 ci-node3; do
+    nip="$(node_ip_from_state "$node")"
+    # Only require node-direct when the service is running on that node
+    if vm_exec "$node" "docker inspect -f '{{.State.Running}}' ${svc} 2>/dev/null | grep -qx true"; then
+      NANS="$(run_dig "@${CD1}" "${svc}.${node}.${DOMAIN}" A || true)"
+      if echo "$NANS" | grep -q "$nip"; then
+        pass "${svc}.${node}.${DOMAIN} → ${nip}"
+      else
+        fail "${svc}.${node}.${DOMAIN} expected ${nip}, got: $NANS"
+      fi
+    fi
+  done
+done
+
 GANS="$(run_dig "@${GOOGLE_DNS_1}" google.com A || true)"
 if echo "$GANS" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'; then
   pass "Google ${GOOGLE_DNS_1} resolves google.com"
@@ -52,17 +74,23 @@ fi
 
 TS_IP="$(vm_exec ci-node1 "tailscale ip -4 2>/dev/null | head -1" || true)"
 if [[ -n "$TS_IP" ]]; then
-  MDNS_ANS="$(run_dig "@100.100.100.100" "ci-node3" A 2>/dev/null || true)"
+  MDNS_HOST="ci-node3.${HEADSCALE_BASE_DOMAIN}"
+  MDNS_ANS="$(run_dig "@100.100.100.100" "${MDNS_HOST}" A || true)"
   if [[ -z "$MDNS_ANS" ]]; then
-    MDNS_ANS="$(run_dig "@100.100.100.100" "ci-node3.${DOMAIN}" A || true)"
+    MDNS_ANS="$(run_dig "@100.100.100.100" "ci-node3" A || true)"
   fi
   if [[ -n "$MDNS_ANS" ]]; then
     pass "MagicDNS @100.100.100.100 answered → $MDNS_ANS"
   else
-    fail "Tailscale is up but MagicDNS did not answer ci-node3 (priority gate)"
+    fail "Tailscale is up but MagicDNS did not answer ci-node3 (priority gate — no soft-skip)"
   fi
 else
-  log "WARN: tailscale not up — skipping MagicDNS hard gate"
+  # DinD mesh requires Tailscale; soft-skip only when backend is not DinD
+  if [[ "$(backend)" == "dind" ]]; then
+    fail "DinD requires Tailscale — MagicDNS hard gate cannot soft-skip"
+  else
+    log "WARN: tailscale not up — skipping MagicDNS hard gate (non-DinD)"
+  fi
 fi
 
 DEF="$(vm_exec ci-node1 "getent hosts google.com 2>/dev/null | head -1 || dig +short google.com A | head -1" || true)"

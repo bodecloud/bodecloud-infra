@@ -12,6 +12,24 @@ echo "======== bash -n failover-ci scripts ========"
 for s in "${CI_DIR}"/*.sh; do
   bash -n "$s"
 done
+# Explicitly cover new prove scripts (also matched by *.sh above)
+for s in prove-headscale-spof.sh prove-failover.sh prove-dns.sh prove-matrix.sh prove-production-dns.sh prove-chaos-random.sh wait-tier-a-ready.sh sync-images-from-main.sh; do
+  [[ -f "${CI_DIR}/${s}" ]] || { echo "FAIL: missing ${s}"; exit 1; }
+  bash -n "${CI_DIR}/${s}"
+done
+
+echo "======== honesty contract (README) ========"
+# Require explicit bans (wording that documents what we do NOT claim)
+grep -Eqi 'Banned' "${CI_DIR}/README.md" \
+  || { echo "FAIL: README missing Banned honesty rows"; exit 1; }
+grep -Eq 'admitted SPOF|HA-critical curated' "${CI_DIR}/README.md" \
+  || { echo "FAIL: README missing honesty contract language"; exit 1; }
+# Affirmative overclaims (outside the honesty table) are banned
+if grep -Eni 'we (run|prove|provide).*(dual-primary headscale|full stack ×4|full-stack ×4)' "${CI_DIR}/README.md"; then
+  echo "FAIL: README contains affirmative overclaim"
+  exit 1
+fi
+echo "README honesty contract OK"
 
 echo "======== py_compile Module 5 syncer ========"
 python3 -m py_compile "${ROOT}/scripts/cloudflare_multi_record_ddns.py"
@@ -64,4 +82,5 @@ echo "CoreDNS dual-DNS smoke OK (whoami=$ANS node3=$N3 google=$G)"
 
 echo ""
 echo "[failover-ci] validate-local ALL PASSED"
+echo "Note: Tier-A chaos / Headscale SPOF / DinD mesh gates require ./run-all.sh (not this script)."
 echo "Next (on a virt-capable host): ./run-all.sh"

@@ -50,12 +50,20 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		if !agent.HealthOK() {
+			http.Error(w, "allowlist replica ensure failed: "+agent.AllowlistEnsureError(), http.StatusServiceUnavailable)
+			return
+		}
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte("ok"))
 	})
 	mux.HandleFunc("/readyz", func(w http.ResponseWriter, r *http.Request) {
 		if _, err := cli.Ping(r.Context()); err != nil {
 			http.Error(w, "docker unavailable", http.StatusServiceUnavailable)
+			return
+		}
+		if !agent.HealthOK() {
+			http.Error(w, "allowlist replica ensure failed: "+agent.AllowlistEnsureError(), http.StatusServiceUnavailable)
 			return
 		}
 		w.WriteHeader(http.StatusOK)
@@ -100,6 +108,9 @@ func loadConfig() failover.AgentConfig {
 	maxRestarts, _ := strconv.Atoi(envOr("FAILOVER_MAX_LOCAL_RESTARTS", "3"))
 	reconcileSec, _ := strconv.Atoi(envOr("FAILOVER_RECONCILE_SECONDS", "30"))
 
+	pullNever := strings.EqualFold(strings.TrimSpace(envOr("FAILOVER_REPLICA_PULL", "")), "never")
+	composeEnsure := splitCSV(envOr("FAILOVER_COMPOSE_ENSURE_SERVICES", "bolabaden-nextjs,autokuma"))
+
 	return failover.AgentConfig{
 		Enabled:                   envBool("FAILOVER_ENABLED", true),
 		Domain:                    os.Getenv("DOMAIN"),
@@ -114,6 +125,9 @@ func loadConfig() failover.AgentConfig {
 		ReconcileInterval:         time.Duration(reconcileSec) * time.Second,
 		StopReplicasOnIntentional: envBool("FAILOVER_STOP_REPLICAS_ON_INTENTIONAL_STOP", false),
 		ReplicaEnsure:             envBool("FAILOVER_REPLICA_ENSURE", false),
+		ReplicaPullNever:          pullNever,
+		ReplicaEnsureStrict:       envBool("FAILOVER_REPLICA_ENSURE_STRICT", false),
+		ComposeEnsureServices:     composeEnsure,
 		HealthListenAddr:          envOr("FAILOVER_HEALTH_ADDR", ":8082"),
 	}
 }
