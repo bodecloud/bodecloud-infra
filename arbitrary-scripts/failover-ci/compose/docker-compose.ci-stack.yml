@@ -37,7 +37,7 @@ configs:
           path: /var/lib/headscale/db.sqlite
       dns:
         magic_dns: true
-        base_domain: ${DOMAIN}
+        base_domain: myscale.${DOMAIN}
         nameservers:
           global:
             - 1.1.1.1

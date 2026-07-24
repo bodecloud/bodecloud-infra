@@ -97,6 +97,9 @@ FAILOVER_MAIN_HOST=${MAIN_HOST}
 FAILOVER_PEER_HOSTS=${peers}
 FAILOVER_REMOTE_DOCKER_PORT=${FAILOVER_REMOTE_DOCKER_PORT:-2375}
 FAILOVER_REPLICA_ENSURE=$([ "$name" = "${MAIN_HOST}" ] && echo true || echo false)
+FAILOVER_REPLICA_PULL=never
+FAILOVER_REPLICA_ENSURE_STRICT=$([ "$name" = "${MAIN_HOST}" ] && echo true || echo false)
+FAILOVER_COMPOSE_ENSURE_SERVICES=bolabaden-nextjs,autokuma
 OSVC_INGRESS_SYNC_DISABLE=1
 CLOUDFLARE_DDNS_ENABLED=false
 DISABLE_CLOUDFLARE_DDNS=true
@@ -154,6 +157,7 @@ EOF
   vm_exec "$name" "mkdir -p ${VM_REPO_PATH}/compose ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose
     cp ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/docker-compose.ci-probes.yml ${VM_REPO_PATH}/compose/ 2>/dev/null || true
     cp ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/docker-compose.ci-stack.yml ${VM_REPO_PATH}/compose/ 2>/dev/null || true
+    cp ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/docker-compose.ci-tier-a.yml ${VM_REPO_PATH}/compose/ 2>/dev/null || true
     cp ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/Dockerfile.ci-probe ${VM_REPO_PATH}/arbitrary-scripts/failover-ci/compose/ 2>/dev/null || true"
 done
 

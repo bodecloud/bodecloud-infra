@@ -32,6 +32,10 @@ ns1     IN A ${N1}
 ns2     IN A ${N2}
 
 ; Wildcard global → all Traefik entry IPs (any-node + peer-forward)
+@       IN A ${N1}
+@       IN A ${N2}
+@       IN A ${N3}
+@       IN A ${N4}
 *       IN A ${N1}
 *       IN A ${N2}
 *       IN A ${N3}
@@ -58,6 +62,11 @@ sed \
 
 for name in "${COREDNS_NODES[@]}"; do
   log "deploying CoreDNS on $name"
+  if [[ "$(backend)" == "dind" ]]; then
+    dind_seed_image_from_host "$name" "coredns/coredns:1.11.3" \
+      || dind_seed_image_from_host "$name" "docker.io/coredns/coredns:1.11.3" \
+      || die "CoreDNS image missing on host — run: docker pull coredns/coredns:1.11.3"
+  fi
   vm_exec "$name" "sudo mkdir -p /opt/coredns/zones && sudo chown -R \$(whoami):\$(whoami) /opt/coredns"
   vm_transfer "$name" "${COREFILE}" "/opt/coredns/Corefile"
   vm_transfer "$name" "${ZONE_DIR}/${DOMAIN}.db" "/opt/coredns/zones/${DOMAIN}.db"
@@ -66,7 +75,9 @@ for name in "${COREDNS_NODES[@]}"; do
       -p 53:53/udp -p 53:53/tcp -p 8181:8080 \
       -v /opt/coredns/Corefile:/Corefile:ro \
       -v /opt/coredns/zones:/etc/coredns/zones:ro \
-      docker.io/coredns/coredns:1.11.3 -conf /Corefile"
+      coredns/coredns:1.11.3 -conf /Corefile"
+  vm_exec "$name" "docker inspect -f '{{.State.Running}}' coredns-ci | grep -qx true" \
+    || die "CoreDNS failed to start on $name"
 done
 
 # Persist CoreDNS IPs for resolver config

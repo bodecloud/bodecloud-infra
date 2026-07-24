@@ -54,27 +54,49 @@ done
 
 vm_exec ci-node1 'bash -s' <<'EOS'
 set -euo pipefail
-# Headscale 0.29+ preauthkeys --user wants a numeric user id (not the name).
-docker exec headscale-server headscale users list -o json 2>/dev/null \
-  | python3 -c 'import sys,json; u=json.load(sys.stdin); sys.exit(0 if any((x.get("name") or "")=="failover-ci" for x in (u if isinstance(u,list) else [])) else 1)' \
-  || docker exec headscale-server headscale users create failover-ci
-HS_UID=$(docker exec headscale-server headscale users list -o json \
-  | python3 -c 'import sys,json; u=json.load(sys.stdin);
-print(next(str(x.get("id")) for x in (u if isinstance(u,list) else []) if (x.get("name") or "")=="failover-ci"))')
+create_user() {
+  docker exec headscale-server headscale users list -o json 2>/dev/null \
+    | python3 -c 'import sys,json; u=json.load(sys.stdin); sys.exit(0 if any((x.get("name") or "")=="failover-ci" for x in (u if isinstance(u,list) else [])) else 1)' \
+    || docker exec headscale-server headscale users create failover-ci
+  sleep 1
+}
+create_user
+HS_UID=""
+for _ in 1 2 3 4 5; do
+  HS_UID=$(docker exec headscale-server headscale users list -o json 2>/dev/null \
+    | python3 -c 'import sys,json; u=json.load(sys.stdin);
+print(next((str(x.get("id")) for x in (u if isinstance(u,list) else []) if (x.get("name") or "")=="failover-ci"), ""))' || true)
+  [[ -n "${HS_UID}" ]] && break
+  sleep 1
+done
 [[ -n "${HS_UID}" ]] || { echo "failed to resolve headscale user id" >&2; exit 1; }
+
+extract_key() {
+  local json="$1"
+  local k
+  k=$(printf '%s' "$json" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("key") or "")' 2>/dev/null || true)
+  [[ -n "$k" ]] && { printf '%s' "$k"; return 0; }
+  k=$(printf '%s' "$json" | jq -r '.key // empty' 2>/dev/null || true)
+  [[ -n "$k" ]] && { printf '%s' "$k"; return 0; }
+  printf '%s' "$json" | sed -n 's/.*"key"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1
+}
+
+create_preauth() {
+  local who="$1"
+  docker exec headscale-server headscale preauthkeys create --user "$who" --reusable --expiration 24h -o json 2>/dev/null
+}
+
 KEY=""
-if KEY_JSON=$(docker exec headscale-server headscale preauthkeys create --user "$HS_UID" --reusable --expiration 24h -o json 2>/dev/null); then
-  KEY=$(printf '%s' "$KEY_JSON" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("key") or "")' 2>/dev/null || true)
-  if [[ -z "$KEY" ]]; then
-    KEY=$(printf '%s' "$KEY_JSON" | jq -r '.key // empty' 2>/dev/null || true)
+KEY_JSON=""
+# Headscale 0.25.x expects username; 0.29+ expects numeric id — try both.
+for who in failover-ci "$HS_UID"; do
+  if KEY_JSON=$(create_preauth "$who"); then
+    KEY=$(extract_key "$KEY_JSON" || true)
+    [[ -n "$KEY" ]] && break
   fi
-fi
-if [[ -z "$KEY" ]]; then
-  # Last resort: never use awk on table output (picks the wrong column)
-  KEY=$(docker exec headscale-server headscale preauthkeys create --user "$HS_UID" --reusable --expiration 24h -o json \
-    | sed -n 's/.*"key"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)
-fi
-[[ -n "$KEY" ]] || { echo "failed to create preauth key" >&2; exit 1; }
+  sleep 1
+done
+[[ -n "$KEY" ]] || { echo "failed to create preauth key (uid=${HS_UID})" >&2; exit 1; }
 mkdir -p /opt/failover-ci
 printf '%s' "$KEY" > /opt/failover-ci/headscale-preauth.key
 chmod 600 /opt/failover-ci/headscale-preauth.key
@@ -129,11 +151,11 @@ for name in "${NODES[@]}"; do
     start_tailscaled_dind "$name"
     # Hard timeout — hung auth was the main DinD failure mode
     if ! docker exec "$name" sh -lc \
-      "timeout 75 /usr/local/bin/tailscale up --login-server='${LOGIN_SERVER}' --authkey='${KEY}' --hostname='${name}' --accept-dns=false --reset"; then
+      "timeout 75 /usr/local/bin/tailscale up --login-server='${LOGIN_SERVER}' --authkey='${KEY}' --hostname='${name}' --accept-dns=true --reset"; then
       warn "tailscale up failed/timed out on $name — retry once"
       start_tailscaled_dind "$name"
       docker exec "$name" sh -lc \
-        "timeout 75 /usr/local/bin/tailscale up --login-server='${LOGIN_SERVER}' --authkey='${KEY}' --hostname='${name}' --accept-dns=false --reset" \
+        "timeout 75 /usr/local/bin/tailscale up --login-server='${LOGIN_SERVER}' --authkey='${KEY}' --hostname='${name}' --accept-dns=true --reset" \
         || die "tailscale up failed on $name"
     fi
   else
