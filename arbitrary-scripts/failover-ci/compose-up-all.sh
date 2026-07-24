@@ -223,12 +223,9 @@ PY
         --subnet 10.0.2.0/24 --gateway 10.0.2.1 warp-nat-net
   fi
   # HA-critical curated set aligned with shape-placement (not full media stack)
-  # Full-stack up may leave Created/conflicting containers on peers — recreate cleanly.
+  # Full-stack up may leave conflicting containers on peers — always recreate cleanly.
   for crit in ${CRIT_SVCS}; do
-    st="$(docker inspect -f '{{.State.Status}}' "\$crit" 2>/dev/null || true)"
-    if [[ "\$st" == "created" || "\$st" == "exited" ]]; then
-      docker rm -f "\$crit" 2>/dev/null || true
-    fi
+    docker rm -f "\$crit" 2>/dev/null || true
   done
   docker compose --project-directory ${VM_REPO_PATH} --env-file ${VM_REPO_PATH}/.env ${CF_ARGS} \
     up -d --no-deps --remove-orphans --force-recreate --pull=\$PULL_POLICY \

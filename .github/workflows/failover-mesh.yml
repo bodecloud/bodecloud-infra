@@ -87,7 +87,7 @@ jobs:
         working-directory: arbitrary-scripts/failover-ci
         env:
           FAILOVER_CI_BACKEND: dind
-          FAILOVER_CI_MINIMAL: ${{ inputs.ci_minimal || '0' }}
+          FAILOVER_CI_MINIMAL: ${{ inputs.ci_minimal || '1' }}
         run: |
           chmod +x *.sh
           cp -n env/test.env.example env/test.env || true
